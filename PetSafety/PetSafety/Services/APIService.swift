@@ -30,7 +30,7 @@ class APIService {
     static let shared = APIService()
 
     // MARK: - Configuration
-    private let baseURL = "https://your-backend-url.com/api" // TODO: Update with actual backend URL
+    private let baseURL = "https://pet-er.app/api"
     private var authToken: String? {
         get { UserDefaults.standard.string(forKey: "auth_token") }
         set { UserDefaults.standard.set(newValue, forKey: "auth_token") }
@@ -107,7 +107,7 @@ class APIService {
     // MARK: - Authentication
     func login(email: String) async throws -> LoginResponse {
         let request = try buildRequest(
-            endpoint: "/auth/login",
+            endpoint: "/auth/send-otp",
             method: "POST",
             body: LoginRequest(email: email),
             requiresAuth: false

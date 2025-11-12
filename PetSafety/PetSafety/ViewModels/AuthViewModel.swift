@@ -33,7 +33,7 @@ class AuthViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            let response = try await apiService.login(email: email)
+            _ = try await apiService.login(email: email)
             isLoading = false
             // OTP sent successfully
         } catch {

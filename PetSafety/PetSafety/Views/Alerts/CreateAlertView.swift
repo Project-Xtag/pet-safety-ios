@@ -15,7 +15,7 @@ struct CreateAlertView: View {
 
     var body: some View {
         Form {
-            Section("Select Pet") {
+            Section(header: Text("Select Pet")) {
                 if petsViewModel.pets.isEmpty {
                     Text("No pets available. Please add a pet first.")
                         .foregroundColor(.secondary)
@@ -29,7 +29,7 @@ struct CreateAlertView: View {
                 }
             }
 
-            Section("Last Seen Location") {
+            Section(header: Text("Last Seen Location")) {
                 Toggle("Use Current Location", isOn: $useCurrentLocation)
 
                 if !useCurrentLocation {
@@ -41,7 +41,7 @@ struct CreateAlertView: View {
                 }
             }
 
-            Section("Additional Information") {
+            Section(header: Text("Additional Information")) {
                 TextEditor(text: $additionalInfo)
                     .frame(minHeight: 100)
                     .overlay(alignment: .topLeading) {
@@ -91,7 +91,7 @@ struct CreateAlertView: View {
                 let coordinate = useCurrentLocation ? locationManager.location : nil
                 let locationText = useCurrentLocation ? nil : (location.isEmpty ? nil : location)
 
-                try await viewModel.createAlert(
+                _ = try await viewModel.createAlert(
                     petId: pet.id,
                     location: locationText,
                     coordinate: coordinate,

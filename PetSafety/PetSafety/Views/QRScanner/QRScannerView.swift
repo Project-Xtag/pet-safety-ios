@@ -235,9 +235,7 @@ struct ScannedPetView: View {
                             .font(.headline)
 
                         VStack(spacing: 8) {
-                            if let name = scanResult.owner.displayName {
-                                Label(name, systemImage: "person.fill")
-                            }
+                            Label(scanResult.owner.displayName, systemImage: "person.fill")
 
                             if let phone = scanResult.owner.phone {
                                 Link(destination: URL(string: "tel:\(phone)")!) {

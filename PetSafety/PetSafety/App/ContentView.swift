@@ -63,7 +63,7 @@ struct MainTabView: View {
                 Label("Profile", systemImage: "person.fill")
             }
         }
-        .accentColor(Color("PrimaryColor"))
+        .accentColor(Color("BrandColor"))
     }
 }
 

@@ -14,7 +14,7 @@ struct ProfileView: View {
                         Image(systemName: "person.circle.fill")
                             .resizable()
                             .frame(width: 80, height: 80)
-                            .foregroundColor(Color("PrimaryColor"))
+                            .foregroundColor(Color("BrandColor"))
 
                         VStack(spacing: 4) {
                             if !user.fullName.isEmpty {
@@ -71,7 +71,7 @@ struct ProfileView: View {
                 }
 
                 // Service Provider Info
-                if user.isServiceProvider {
+                if user.isServiceProvider == true {
                     Section("Service Provider") {
                         if let type = user.serviceProviderType {
                             InfoRow(label: "Type", value: type.capitalized)
@@ -88,8 +88,8 @@ struct ProfileView: View {
                         HStack {
                             Text("Verified")
                             Spacer()
-                            Image(systemName: user.isVerified ? "checkmark.circle.fill" : "xmark.circle.fill")
-                                .foregroundColor(user.isVerified ? .green : .red)
+                            Image(systemName: (user.isVerified == true) ? "checkmark.circle.fill" : "xmark.circle.fill")
+                                .foregroundColor((user.isVerified == true) ? .green : .red)
                         }
                     }
                 }

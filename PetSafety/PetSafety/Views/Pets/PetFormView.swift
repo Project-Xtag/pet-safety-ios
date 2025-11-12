@@ -186,7 +186,7 @@ struct PetFormView: View {
 
                     // Upload photo if selected
                     if let image = selectedImage {
-                        try await viewModel.uploadPhoto(for: newPet.id, image: image)
+                        _ = try await viewModel.uploadPhoto(for: newPet.id, image: image)
                     }
 
                     appState.showSuccess("Pet added successfully!")
@@ -207,7 +207,7 @@ struct PetFormView: View {
 
                     // Upload photo if selected
                     if let image = selectedImage {
-                        try await viewModel.uploadPhoto(for: pet.id, image: image)
+                        _ = try await viewModel.uploadPhoto(for: pet.id, image: image)
                     }
 
                     appState.showSuccess("Pet updated successfully!")

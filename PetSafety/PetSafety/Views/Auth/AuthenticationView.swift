@@ -17,7 +17,7 @@ struct AuthenticationView: View {
                     Image(systemName: "pawprint.circle.fill")
                         .resizable()
                         .frame(width: 100, height: 100)
-                        .foregroundColor(Color("PrimaryColor"))
+                        .foregroundColor(Color("BrandColor"))
 
                     Text("Pet Safety")
                         .font(.system(size: 36, weight: .bold))
@@ -145,7 +145,7 @@ struct PrimaryButtonStyle: ButtonStyle {
         configuration.label
             .frame(maxWidth: .infinity)
             .padding()
-            .background(configuration.isPressed ? Color("PrimaryColor").opacity(0.8) : Color("PrimaryColor"))
+            .background(configuration.isPressed ? Color("BrandColor").opacity(0.8) : Color("BrandColor"))
             .foregroundColor(.white)
             .cornerRadius(10)
             .fontWeight(.semibold)
