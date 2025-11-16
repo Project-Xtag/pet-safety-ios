@@ -333,6 +333,16 @@ class APIService {
         )
         return try await performRequest(request, responseType: ReplacementOrderResponse.self)
     }
+
+    func createTagOrder(_ orderData: CreateTagOrderRequest) async throws -> CreateTagOrderResponse {
+        let request = try buildRequest(
+            endpoint: "/orders",
+            method: "POST",
+            body: orderData,
+            requiresAuth: false
+        )
+        return try await performRequest(request, responseType: CreateTagOrderResponse.self)
+    }
 }
 
 // MARK: - Helper Types
@@ -432,4 +442,32 @@ struct ReplacementOrderResponse: Codable {
     let success: Bool
     let order: Order
     let message: String?
+}
+
+// MARK: - Order More Tags Types
+struct CreateTagOrderRequest: Codable {
+    let petNames: [String]
+    let ownerName: String
+    let email: String
+    let shippingAddress: ShippingAddressDetails
+    let billingAddress: ShippingAddressDetails?
+    let paymentMethod: String?
+    let shippingCost: Double?
+}
+
+struct ShippingAddressDetails: Codable {
+    let street1: String
+    let street2: String?
+    let city: String
+    let province: String?
+    let postCode: String
+    let country: String
+}
+
+struct CreateTagOrderResponse: Codable {
+    let success: Bool
+    let order: Order
+    let userCreated: Bool?
+    let userId: String?
+    let message: String
 }

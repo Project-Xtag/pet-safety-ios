@@ -4,6 +4,7 @@ struct OrderMoreTagsView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
     @State private var isLoading = false
+    @State private var orderComplete = false
 
     // Pet names
     @State private var petNames: [String] = [""]
@@ -20,16 +21,74 @@ struct OrderMoreTagsView: View {
     @State private var postCode = ""
     @State private var country = "ES"
 
-    // Pricing
-    private let pricePerTag: Double = 14.99
+    // Pricing - tags are free, only shipping cost
     private let shippingCost: Double = 3.99
 
     var totalCost: Double {
-        let tagCount = petNames.filter { !$0.isEmpty }.count
-        return Double(tagCount) * pricePerTag + shippingCost
+        return shippingCost
     }
 
     var body: some View {
+        Group {
+            if orderComplete {
+                orderCompleteView
+            } else {
+                orderFormView
+            }
+        }
+        .navigationTitle("Order More Tags")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Cancel") {
+                    dismiss()
+                }
+                .foregroundColor(.white)
+            }
+        }
+        .task {
+            await loadUserInfo()
+        }
+    }
+
+    private var orderCompleteView: some View {
+        VStack(spacing: 24) {
+            Spacer()
+
+            Image(systemName: "checkmark.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80, height: 80)
+                .foregroundColor(.green)
+
+            Text("Order Complete!")
+                .font(.system(size: 32, weight: .bold))
+
+            Text("Your tags have been ordered! You'll receive a confirmation email shortly with tracking information.")
+                .font(.body)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+
+            Spacer()
+
+            VStack(spacing: 12) {
+                Button(action: { dismiss() }) {
+                    Text("Done")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .fontWeight(.semibold)
+                }
+            }
+            .padding(.horizontal, 40)
+            .padding(.bottom, 40)
+        }
+    }
+
+    private var orderFormView: some View {
         Form {
             Section(header: Text("Pet Names"), footer: Text("Enter the names of pets you want tags for")) {
                 ForEach(petNames.indices, id: \.self) { index in
@@ -78,7 +137,9 @@ struct OrderMoreTagsView: View {
                 HStack {
                     Text("Tags (\(validPetCount))")
                     Spacer()
-                    Text(String(format: "€%.2f", Double(validPetCount) * pricePerTag))
+                    Text("FREE")
+                        .foregroundColor(.green)
+                        .fontWeight(.semibold)
                 }
 
                 HStack {
@@ -97,16 +158,16 @@ struct OrderMoreTagsView: View {
             }
 
             Section {
-                Button(action: { proceedToPayment() }) {
+                Button(action: { submitOrder() }) {
                     HStack {
                         Spacer()
                         if isLoading {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            Text("Processing...")
+                            Text("Creating Order...")
                                 .foregroundColor(.white)
                         } else {
-                            Text("Proceed to Payment")
+                            Text("Place Order")
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                         }
@@ -116,19 +177,6 @@ struct OrderMoreTagsView: View {
                 .listRowBackground(Color.blue)
                 .disabled(isLoading || !isFormValid)
             }
-        }
-        .navigationTitle("Order More Tags")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
-                    dismiss()
-                }
-                .foregroundColor(.white)
-            }
-        }
-        .task {
-            await loadUserInfo()
         }
     }
 
@@ -188,15 +236,47 @@ struct OrderMoreTagsView: View {
         }
     }
 
-    private func proceedToPayment() {
-        // Note: This is a simplified version. In a production app, you would:
-        // 1. Create the order on the backend
-        // 2. Get a payment intent
-        // 3. Show Stripe payment sheet
-        // 4. Confirm payment
-        // 5. Show success
+    private func submitOrder() {
+        Task {
+            isLoading = true
 
-        appState.showError("Payment integration is not yet implemented. This feature will allow you to order tags through Stripe payment.")
+            do {
+                // Filter out empty pet names
+                let validPetNames = petNames.filter { !$0.isEmpty }
+
+                let shippingAddress = ShippingAddressDetails(
+                    street1: street1,
+                    street2: street2.isEmpty ? nil : street2,
+                    city: city,
+                    province: province.isEmpty ? nil : province,
+                    postCode: postCode,
+                    country: country
+                )
+
+                let orderRequest = CreateTagOrderRequest(
+                    petNames: validPetNames,
+                    ownerName: ownerName,
+                    email: email,
+                    shippingAddress: shippingAddress,
+                    billingAddress: nil,
+                    paymentMethod: "free",
+                    shippingCost: shippingCost
+                )
+
+                let response = try await APIService.shared.createTagOrder(orderRequest)
+
+                isLoading = false
+
+                if response.success {
+                    orderComplete = true
+                } else {
+                    appState.showError(response.message)
+                }
+            } catch {
+                isLoading = false
+                appState.showError(error.localizedDescription)
+            }
+        }
     }
 }
 
