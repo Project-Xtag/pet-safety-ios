@@ -2,9 +2,9 @@ import Foundation
 import CoreLocation
 
 struct MissingPetAlert: Codable, Identifiable {
-    let id: Int
-    let petId: Int
-    let userId: Int
+    let id: String
+    let petId: String
+    let userId: String
     let status: String
     let lastSeenLocation: String?
     let lastSeenLatitude: Double?
@@ -36,7 +36,7 @@ struct MissingPetAlert: Codable, Identifiable {
 }
 
 struct CreateAlertRequest: Codable {
-    let petId: Int
+    let petId: String
     let lastSeenLocation: String?
     let lastSeenLatitude: Double?
     let lastSeenLongitude: Double?
@@ -52,8 +52,8 @@ struct CreateAlertRequest: Codable {
 }
 
 struct Sighting: Codable, Identifiable {
-    let id: Int
-    let alertId: Int
+    let id: String
+    let alertId: String
     let reporterName: String?
     let reporterPhone: String?
     let reporterEmail: String?

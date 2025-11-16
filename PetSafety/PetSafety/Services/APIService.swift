@@ -58,7 +58,16 @@ class APIService {
         }
 
         if let body = body {
-            request.httpBody = try JSONEncoder().encode(body)
+            let encoder = JSONEncoder()
+            let bodyData = try encoder.encode(body)
+            request.httpBody = bodyData
+
+            // Log the request body for debugging
+            if let jsonString = String(data: bodyData, encoding: .utf8) {
+                print("📤 API Request to \(endpoint):")
+                print("Method: \(method)")
+                print("Body: \(jsonString)")
+            }
         }
 
         return request
@@ -83,7 +92,27 @@ class APIService {
                     decoder.dateDecodingStrategy = .iso8601
                     return try decoder.decode(T.self, from: data)
                 } catch {
-                    print("Decoding error: \(error)")
+                    print("❌ DECODING ERROR:")
+                    print("Error: \(error)")
+                    if let decodingError = error as? DecodingError {
+                        switch decodingError {
+                        case .keyNotFound(let key, let context):
+                            print("Key '\(key.stringValue)' not found: \(context.debugDescription)")
+                            print("Coding path: \(context.codingPath)")
+                        case .typeMismatch(let type, let context):
+                            print("Type mismatch for type \(type): \(context.debugDescription)")
+                            print("Coding path: \(context.codingPath)")
+                        case .valueNotFound(let type, let context):
+                            print("Value not found for type \(type): \(context.debugDescription)")
+                            print("Coding path: \(context.codingPath)")
+                        case .dataCorrupted(let context):
+                            print("Data corrupted: \(context.debugDescription)")
+                            print("Coding path: \(context.codingPath)")
+                        @unknown default:
+                            print("Unknown decoding error")
+                        }
+                    }
+                    print("Response data as string: \(String(data: data, encoding: .utf8) ?? "Unable to decode")")
                     throw APIError.decodingError
                 }
 
@@ -149,12 +178,14 @@ class APIService {
     // MARK: - Pets
     func getPets() async throws -> [Pet] {
         let request = try buildRequest(endpoint: "/pets")
-        return try await performRequest(request, responseType: [Pet].self)
+        let response = try await performRequest(request, responseType: PetsResponse.self)
+        return response.pets
     }
 
-    func getPet(id: Int) async throws -> Pet {
+    func getPet(id: String) async throws -> Pet {
         let request = try buildRequest(endpoint: "/pets/\(id)")
-        return try await performRequest(request, responseType: Pet.self)
+        let response = try await performRequest(request, responseType: PetResponse.self)
+        return response.pet
     }
 
     func createPet(_ petData: CreatePetRequest) async throws -> Pet {
@@ -163,19 +194,21 @@ class APIService {
             method: "POST",
             body: petData
         )
-        return try await performRequest(request, responseType: Pet.self)
+        let response = try await performRequest(request, responseType: PetResponse.self)
+        return response.pet
     }
 
-    func updatePet(id: Int, _ updates: UpdatePetRequest) async throws -> Pet {
+    func updatePet(id: String, _ updates: UpdatePetRequest) async throws -> Pet {
         let request = try buildRequest(
             endpoint: "/pets/\(id)",
             method: "PUT",
             body: updates
         )
-        return try await performRequest(request, responseType: Pet.self)
+        let response = try await performRequest(request, responseType: PetResponse.self)
+        return response.pet
     }
 
-    func deletePet(id: Int) async throws {
+    func deletePet(id: String) async throws {
         let request = try buildRequest(
             endpoint: "/pets/\(id)",
             method: "DELETE"
@@ -183,10 +216,16 @@ class APIService {
         let _: EmptyResponse = try await performRequest(request, responseType: EmptyResponse.self)
     }
 
-    func uploadPetPhoto(petId: Int, imageData: Data) async throws -> Pet {
-        guard let url = URL(string: baseURL + "/pets/\(petId)/photo") else {
+    func uploadPetPhoto(petId: String, imageData: Data) async throws -> Pet {
+        // Backend expects /image not /photo
+        let endpoint = "/pets/\(petId)/image"
+        guard let url = URL(string: baseURL + endpoint) else {
             throw APIError.invalidURL
         }
+
+        print("📸 Uploading image to: \(url.absoluteString)")
+        print("📸 Pet ID: \(petId)")
+        print("📸 Image size: \(imageData.count) bytes")
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -200,14 +239,21 @@ class APIService {
 
         var body = Data()
         body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"photo.jpg\"\r\n".data(using: .utf8)!)
+        // Backend expects field name 'image' not 'photo'
+        body.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
         body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
         body.append(imageData)
         body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
 
         request.httpBody = body
 
-        return try await performRequest(request, responseType: Pet.self)
+        print("📸 Sending multipart request with field name 'image'...")
+        let response = try await performRequest(request, responseType: ImageUploadResponse.self)
+        print("✅ Image upload successful! URL: \(response.imageUrl)")
+
+        // Need to fetch the full updated pet since backend only returns partial data
+        print("📥 Fetching updated pet data...")
+        return try await getPet(id: petId)
     }
 
     // MARK: - Alerts
@@ -225,7 +271,7 @@ class APIService {
         return try await performRequest(request, responseType: MissingPetAlert.self)
     }
 
-    func updateAlertStatus(id: Int, status: String) async throws -> MissingPetAlert {
+    func updateAlertStatus(id: String, status: String) async throws -> MissingPetAlert {
         let request = try buildRequest(
             endpoint: "/alerts/\(id)/status",
             method: "PUT",
@@ -234,7 +280,7 @@ class APIService {
         return try await performRequest(request, responseType: MissingPetAlert.self)
     }
 
-    func reportSighting(alertId: Int, sighting: ReportSightingRequest) async throws -> Sighting {
+    func reportSighting(alertId: String, sighting: ReportSightingRequest) async throws -> Sighting {
         let request = try buildRequest(
             endpoint: "/alerts/\(alertId)/sightings",
             method: "POST",
@@ -276,6 +322,16 @@ class APIService {
         let request = try buildRequest(endpoint: "/orders")
         return try await performRequest(request, responseType: [Order].self)
     }
+
+    func createReplacementOrder(petId: String, shippingAddress: ShippingAddress) async throws -> ReplacementOrderResponse {
+        let request = try buildRequest(
+            endpoint: "/orders/replacement/\(petId)",
+            method: "POST",
+            body: CreateReplacementOrderRequest(shippingAddress: shippingAddress),
+            requiresAuth: true
+        )
+        return try await performRequest(request, responseType: ReplacementOrderResponse.self)
+    }
 }
 
 // MARK: - Helper Types
@@ -284,6 +340,30 @@ struct ErrorResponse: Codable {
 }
 
 struct EmptyResponse: Codable {}
+
+struct PetsResponse: Codable {
+    let success: Bool
+    let pets: [Pet]
+}
+
+struct PetResponse: Codable {
+    let success: Bool
+    let pet: Pet
+}
+
+struct ImageUploadResponse: Codable {
+    let success: Bool
+    let imageUrl: String
+    let pet: PartialPet
+
+    struct PartialPet: Codable {
+        let profileImage: String?
+
+        enum CodingKeys: String, CodingKey {
+            case profileImage = "profile_image"
+        }
+    }
+}
 
 struct DynamicBody: Encodable {
     let dictionary: [String: Any]
@@ -321,4 +401,29 @@ struct DynamicCodingKey: CodingKey {
         self.intValue = intValue
         self.stringValue = "\(intValue)"
     }
+}
+
+// MARK: - Shipping Address Types
+struct ShippingAddress: Codable {
+    let street1: String
+    let street2: String?
+    let city: String
+    let province: String?
+    let postCode: String
+    let country: String
+
+    enum CodingKeys: String, CodingKey {
+        case street1, street2, city, province, country
+        case postCode = "postCode"
+    }
+}
+
+struct CreateReplacementOrderRequest: Codable {
+    let shippingAddress: ShippingAddress
+}
+
+struct ReplacementOrderResponse: Codable {
+    let success: Bool
+    let order: Order
+    let message: String?
 }

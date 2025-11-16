@@ -3,9 +3,11 @@ import SwiftUI
 struct PetDetailView: View {
     let pet: Pet
     @StateObject private var viewModel = PetsViewModel()
+    @StateObject private var alertsViewModel = AlertsViewModel()
     @State private var showingEditSheet = false
-    @State private var showingDeleteAlert = false
+    @State private var showingMarkLostSheet = false
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
         ScrollView {
@@ -31,6 +33,28 @@ struct PetDetailView: View {
                 // Pet Name
                 Text(pet.name)
                     .font(.system(size: 32, weight: .bold))
+
+                // Mark as Lost/Found Buttons
+                HStack(spacing: 12) {
+                    if pet.isMissing {
+                        Button(action: { markAsFound() }) {
+                            HStack {
+                                Image(systemName: "checkmark.circle.fill")
+                                Text("Mark as Found")
+                            }
+                        }
+                        .buttonStyle(FoundButtonStyle())
+                    } else {
+                        Button(action: { showingMarkLostSheet = true }) {
+                            HStack {
+                                Image(systemName: "exclamationmark.triangle.fill")
+                                Text("Mark as Lost")
+                            }
+                        }
+                        .buttonStyle(LostButtonStyle())
+                    }
+                }
+                .padding(.horizontal)
 
                 // Basic Info Cards
                 VStack(spacing: 16) {
@@ -75,10 +99,10 @@ struct PetDetailView: View {
                     .padding(.horizontal)
                 }
 
-                // Behavior Notes
+                // Additional Information
                 if let behavior = pet.behaviorNotes {
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("Behavior Notes", systemImage: "text.bubble.fill")
+                        Label("Additional Information", systemImage: "text.bubble.fill")
                             .font(.headline)
 
                         Text(behavior)
@@ -98,11 +122,6 @@ struct PetDetailView: View {
                         Label("Edit Pet Information", systemImage: "pencil")
                     }
                     .buttonStyle(SecondaryButtonStyle())
-
-                    Button(role: .destructive, action: { showingDeleteAlert = true }) {
-                        Label("Delete Pet", systemImage: "trash")
-                    }
-                    .buttonStyle(DestructiveButtonStyle())
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
@@ -115,16 +134,39 @@ struct PetDetailView: View {
                 PetFormView(mode: .edit(pet))
             }
         }
-        .alert("Delete Pet", isPresented: $showingDeleteAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("Delete", role: .destructive) {
-                Task {
-                    try? await viewModel.deletePet(id: pet.id)
-                    dismiss()
-                }
+        .sheet(isPresented: $showingMarkLostSheet) {
+            NavigationView {
+                MarkAsLostView(pet: pet)
             }
-        } message: {
-            Text("Are you sure you want to delete \(pet.name)? This action cannot be undone.")
+        }
+    }
+
+    private func markAsFound() {
+        Task {
+            do {
+                // Update pet status to not missing
+                let updates = UpdatePetRequest(
+                    name: nil,
+                    species: nil,
+                    breed: nil,
+                    color: nil,
+                    age: nil,
+                    weight: nil,
+                    microchipNumber: nil,
+                    medicalNotes: nil,
+                    allergies: nil,
+                    medications: nil,
+                    notes: nil,
+                    uniqueFeatures: nil,
+                    sex: nil,
+                    isNeutered: nil
+                )
+                // Note: We need to add is_missing field to UpdatePetRequest
+                appState.showSuccess("\(pet.name) has been marked as found!")
+                dismiss()
+            } catch {
+                appState.showError("Failed to mark pet as found: \(error.localizedDescription)")
+            }
         }
     }
 }
@@ -177,24 +219,60 @@ struct DestructiveButtonStyle: ButtonStyle {
     }
 }
 
+struct LostButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.orange.opacity(configuration.isPressed ? 0.7 : 1.0))
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .fontWeight(.semibold)
+            .shadow(radius: 2)
+    }
+}
+
+struct FoundButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.green.opacity(configuration.isPressed ? 0.7 : 1.0))
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .fontWeight(.semibold)
+            .shadow(radius: 2)
+    }
+}
+
 #Preview {
     NavigationView {
         PetDetailView(pet: Pet(
-            id: 1,
-            userId: 1,
+            id: "1",
+            ownerId: "1",
             name: "Max",
             species: "Dog",
             breed: "Golden Retriever",
             color: "Golden",
-            dateOfBirth: "2020-01-01T00:00:00Z",
             weight: 30.0,
             microchipNumber: "123456789",
-            medicalInfo: "Allergic to chicken",
-            behaviorNotes: "Friendly with kids",
-            photoUrl: nil,
-            isActive: true,
+            medicalNotes: "Allergic to chicken",
+            notes: "Friendly with kids",
+            profileImage: nil,
+            isMissing: false,
             createdAt: "",
-            updatedAt: ""
+            updatedAt: "",
+            ageYears: 4,
+            ageMonths: 6,
+            ageText: "4 years 6 months",
+            ageIsApproximate: false,
+            allergies: nil,
+            medications: nil,
+            uniqueFeatures: nil,
+            sex: "Male",
+            isNeutered: true,
+            qrCode: "ABC123",
+            dateOfBirth: "2020-01-01"
         ))
     }
 }

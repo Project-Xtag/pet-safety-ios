@@ -38,7 +38,7 @@ class PetsViewModel: ObservableObject {
         }
     }
 
-    func updatePet(id: Int, updates: UpdatePetRequest) async throws -> Pet {
+    func updatePet(id: String, updates: UpdatePetRequest) async throws -> Pet {
         isLoading = true
         errorMessage = nil
 
@@ -56,7 +56,7 @@ class PetsViewModel: ObservableObject {
         }
     }
 
-    func deletePet(id: Int) async throws {
+    func deletePet(id: String) async throws {
         isLoading = true
         errorMessage = nil
 
@@ -71,7 +71,7 @@ class PetsViewModel: ObservableObject {
         }
     }
 
-    func uploadPhoto(for petId: Int, image: UIImage) async throws -> Pet {
+    func uploadPhoto(for petId: String, image: UIImage) async throws -> Pet {
         isLoading = true
         errorMessage = nil
 

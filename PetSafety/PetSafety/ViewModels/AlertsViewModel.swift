@@ -23,7 +23,7 @@ class AlertsViewModel: ObservableObject {
     }
 
     func createAlert(
-        petId: Int,
+        petId: String,
         location: String?,
         coordinate: CLLocationCoordinate2D?,
         additionalInfo: String?
@@ -51,7 +51,7 @@ class AlertsViewModel: ObservableObject {
         }
     }
 
-    func updateAlertStatus(id: Int, status: String) async throws {
+    func updateAlertStatus(id: String, status: String) async throws {
         isLoading = true
         errorMessage = nil
 
@@ -69,7 +69,7 @@ class AlertsViewModel: ObservableObject {
     }
 
     func reportSighting(
-        alertId: Int,
+        alertId: String,
         reporterName: String?,
         reporterPhone: String?,
         reporterEmail: String?,

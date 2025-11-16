@@ -227,7 +227,7 @@ struct SightingCard: View {
 }
 
 struct ReportSightingView: View {
-    let alertId: Int
+    let alertId: String
     @StateObject private var viewModel = AlertsViewModel()
     @StateObject private var locationManager = LocationManager()
     @Environment(\.dismiss) private var dismiss
@@ -315,9 +315,9 @@ struct ReportSightingView: View {
 #Preview {
     NavigationView {
         AlertDetailView(alert: MissingPetAlert(
-            id: 1,
-            petId: 1,
-            userId: 1,
+            id: "1",
+            petId: "1",
+            userId: "1",
             status: "active",
             lastSeenLocation: "Central Park, NYC",
             lastSeenLatitude: 40.7829,
