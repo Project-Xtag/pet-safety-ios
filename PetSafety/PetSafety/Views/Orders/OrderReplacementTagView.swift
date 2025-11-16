@@ -25,6 +25,14 @@ struct OrderReplacementTagView: View {
         }
         .navigationTitle("Order Replacement Tag")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Cancel") {
+                    dismiss()
+                }
+                .foregroundColor(.white)
+            }
+        }
         .task {
             await loadUserAddress()
         }
@@ -164,20 +172,23 @@ struct OrderReplacementTagView: View {
             let user = try await APIService.shared.getCurrentUser()
 
             // Pre-fill address fields from user profile
-            if let address = user.address {
-                street1 = address
-            }
-            if let userCity = user.city {
-                city = userCity
-            }
-            if let postal = user.postalCode {
-                postCode = postal
-            }
-            if let userCountry = user.country {
-                country = userCountry
+            await MainActor.run {
+                if let address = user.address {
+                    street1 = address
+                }
+                if let userCity = user.city {
+                    city = userCity
+                }
+                if let postal = user.postalCode {
+                    postCode = postal
+                }
+                if let userCountry = user.country {
+                    country = userCountry
+                }
             }
         } catch {
-            print("Failed to load user profile: \(error)")
+            // Silently fail - user can fill in the fields manually
+            print("Could not pre-fill address: \(error.localizedDescription)")
         }
     }
 

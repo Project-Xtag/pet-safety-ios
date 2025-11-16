@@ -162,13 +162,14 @@ class APIService {
 
     // MARK: - User
     func getCurrentUser() async throws -> User {
-        let request = try buildRequest(endpoint: "/users/profile")
-        return try await performRequest(request, responseType: User.self)
+        let request = try buildRequest(endpoint: "/users/me")
+        let response = try await performRequest(request, responseType: UserResponse.self)
+        return response.user
     }
 
     func updateUser(_ updates: [String: Any]) async throws -> User {
         let request = try buildRequest(
-            endpoint: "/users/profile",
+            endpoint: "/users/me",
             method: "PUT",
             body: DynamicBody(updates)
         )
@@ -340,6 +341,11 @@ struct ErrorResponse: Codable {
 }
 
 struct EmptyResponse: Codable {}
+
+struct UserResponse: Codable {
+    let success: Bool
+    let user: User
+}
 
 struct PetsResponse: Codable {
     let success: Bool

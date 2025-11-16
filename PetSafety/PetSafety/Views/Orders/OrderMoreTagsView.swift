@@ -119,6 +119,14 @@ struct OrderMoreTagsView: View {
         }
         .navigationTitle("Order More Tags")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Cancel") {
+                    dismiss()
+                }
+                .foregroundColor(.white)
+            }
+        }
         .task {
             await loadUserInfo()
         }
@@ -151,29 +159,32 @@ struct OrderMoreTagsView: View {
             let user = try await APIService.shared.getCurrentUser()
 
             // Pre-fill user information
-            email = user.email
+            await MainActor.run {
+                email = user.email
 
-            if let firstName = user.firstName, let lastName = user.lastName {
-                ownerName = "\(firstName) \(lastName)"
-            } else if let firstName = user.firstName {
-                ownerName = firstName
-            }
+                if let firstName = user.firstName, let lastName = user.lastName {
+                    ownerName = "\(firstName) \(lastName)"
+                } else if let firstName = user.firstName {
+                    ownerName = firstName
+                }
 
-            // Pre-fill address
-            if let address = user.address {
-                street1 = address
-            }
-            if let userCity = user.city {
-                city = userCity
-            }
-            if let postal = user.postalCode {
-                postCode = postal
-            }
-            if let userCountry = user.country {
-                country = userCountry
+                // Pre-fill address
+                if let address = user.address {
+                    street1 = address
+                }
+                if let userCity = user.city {
+                    city = userCity
+                }
+                if let postal = user.postalCode {
+                    postCode = postal
+                }
+                if let userCountry = user.country {
+                    country = userCountry
+                }
             }
         } catch {
-            print("Failed to load user profile: \(error)")
+            // Silently fail - user can fill in the fields manually
+            print("Could not pre-fill user info: \(error.localizedDescription)")
         }
     }
 
