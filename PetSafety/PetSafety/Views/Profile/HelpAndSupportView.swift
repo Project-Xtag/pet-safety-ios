@@ -20,19 +20,6 @@ struct HelpAndSupportView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-
-                Link(destination: URL(string: "mailto:support@pet-er.app")!) {
-                    HStack {
-                        Image(systemName: "at")
-                            .foregroundColor(.cyan)
-                            .frame(width: 24)
-                        Text("Email Us")
-                        Spacer()
-                        Image(systemName: "arrow.up.right")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
             }
 
             Section(header: Text("Resources")) {
@@ -51,15 +38,6 @@ struct HelpAndSupportView: View {
                             .foregroundColor(.cyan)
                             .frame(width: 24)
                         Text("User Guides")
-                    }
-                }
-
-                NavigationLink(destination: VideoTutorialsView()) {
-                    HStack {
-                        Image(systemName: "play.rectangle.fill")
-                            .foregroundColor(.cyan)
-                            .frame(width: 24)
-                        Text("Video Tutorials")
                     }
                 }
             }
@@ -289,34 +267,6 @@ struct GuideDetailView: View {
             .padding()
         }
         .navigationTitle(title)
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-// MARK: - Video Tutorials View
-struct VideoTutorialsView: View {
-    let tutorials = [
-        "App Overview (2:30)",
-        "Activating Your QR Tag (1:45)",
-        "Creating a Pet Profile (3:00)",
-        "Reporting a Missing Pet (2:15)",
-        "Using the Alert System (3:30)"
-    ]
-
-    var body: some View {
-        List(tutorials, id: \.self) { tutorial in
-            Button(action: {}) {
-                HStack {
-                    Image(systemName: "play.circle.fill")
-                        .font(.title2)
-                        .foregroundColor(.cyan)
-                    Text(tutorial)
-                        .foregroundColor(.primary)
-                    Spacer()
-                }
-            }
-        }
-        .navigationTitle("Video Tutorials")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

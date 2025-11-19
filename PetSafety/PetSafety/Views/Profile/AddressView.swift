@@ -7,8 +7,8 @@ struct AddressView: View {
     @State private var isEditing = false
     @State private var isLoading = false
 
-    // Form fields
-    @State private var address = ""
+    // Comprehensive form fields
+    @State private var streetAddress = ""      // Main street address
     @State private var city = ""
     @State private var postalCode = ""
     @State private var country = ""
@@ -22,26 +22,27 @@ struct AddressView: View {
                         Text("Street Address")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        TextField("123 Main Street", text: $address)
+                        TextField("e.g., 123 Main Street, Apartment 4B", text: $streetAddress)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                     .padding(.vertical, 4)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("City")
+                        Text("City / Town")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        TextField("London", text: $city)
+                        TextField("e.g., London", text: $city)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                     .padding(.vertical, 4)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Postal Code")
+                        Text("Postal Code / ZIP Code")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        TextField("SW1A 1AA", text: $postalCode)
+                        TextField("e.g., SW1A 1AA", text: $postalCode)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(.allCharacters)
                     }
                     .padding(.vertical, 4)
 
@@ -49,7 +50,7 @@ struct AddressView: View {
                         Text("Country")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        TextField("United Kingdom", text: $country)
+                        TextField("e.g., United Kingdom", text: $country)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                     .padding(.vertical, 4)
@@ -70,7 +71,7 @@ struct AddressView: View {
                             Spacer()
                         }
                     }
-                    .disabled(isLoading || !hasChanges)
+                    .disabled(isLoading || !hasChanges || !isFormValid)
 
                     Button(action: { cancelEditing() }) {
                         HStack {
@@ -84,34 +85,37 @@ struct AddressView: View {
                 }
             } else {
                 // View Mode
-                Section(header: Text("Current Address")) {
-                    if !address.isEmpty || !city.isEmpty || !postalCode.isEmpty || !country.isEmpty {
-                        if !address.isEmpty {
-                            DetailRow(label: "Street Address", value: address)
-                        }
+                Section(header: Text("Registered Address")) {
+                    if !streetAddress.isEmpty || !city.isEmpty || !postalCode.isEmpty || !country.isEmpty {
+                        VStack(alignment: .leading, spacing: 16) {
+                            if !streetAddress.isEmpty {
+                                AddressFieldView(label: "Street Address", value: streetAddress)
+                            }
 
-                        if !city.isEmpty {
-                            DetailRow(label: "City", value: city)
-                        }
+                            if !city.isEmpty {
+                                AddressFieldView(label: "City / Town", value: city)
+                            }
 
-                        if !postalCode.isEmpty {
-                            DetailRow(label: "Postal Code", value: postalCode)
-                        }
+                            if !postalCode.isEmpty {
+                                AddressFieldView(label: "Postal Code", value: postalCode)
+                            }
 
-                        if !country.isEmpty {
-                            DetailRow(label: "Country", value: country)
+                            if !country.isEmpty {
+                                AddressFieldView(label: "Country", value: country)
+                            }
                         }
+                        .padding(.vertical, 8)
                     } else {
                         VStack(spacing: 12) {
                             Image(systemName: "house.circle")
                                 .font(.system(size: 50))
                                 .foregroundColor(.secondary)
 
-                            Text("No address set")
+                            Text("No address registered")
                                 .font(.headline)
                                 .foregroundColor(.secondary)
 
-                            Text("Add your address to enable shipping and delivery")
+                            Text("Add your address to enable shipping and delivery of QR tags")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .multilineTextAlignment(.center)
@@ -125,7 +129,7 @@ struct AddressView: View {
                     Button(action: { startEditing() }) {
                         HStack {
                             Spacer()
-                            Text(address.isEmpty && city.isEmpty ? "Add Address" : "Edit Address")
+                            Text(streetAddress.isEmpty && city.isEmpty ? "Add Address" : "Edit Address")
                                 .fontWeight(.semibold)
                             Spacer()
                         }
@@ -150,7 +154,7 @@ struct AddressView: View {
                         saveChanges()
                     }
                     .foregroundColor(.white)
-                    .disabled(isLoading || !hasChanges)
+                    .disabled(isLoading || !hasChanges || !isFormValid)
                 }
             }
         }
@@ -159,9 +163,15 @@ struct AddressView: View {
         }
     }
 
+    private var isFormValid: Bool {
+        // At least street address and city should be filled
+        !streetAddress.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !city.trimmingCharacters(in: .whitespaces).isEmpty
+    }
+
     private var hasChanges: Bool {
         guard let user = authViewModel.currentUser else { return false }
-        return address != (user.address ?? "") ||
+        return streetAddress != (user.address ?? "") ||
                city != (user.city ?? "") ||
                postalCode != (user.postalCode ?? "") ||
                country != (user.country ?? "")
@@ -169,7 +179,7 @@ struct AddressView: View {
 
     private func loadAddressData() {
         guard let user = authViewModel.currentUser else { return }
-        address = user.address ?? ""
+        streetAddress = user.address ?? ""
         city = user.city ?? ""
         postalCode = user.postalCode ?? ""
         country = user.country ?? ""
@@ -190,10 +200,10 @@ struct AddressView: View {
 
             do {
                 let updates: [String: Any] = [
-                    "address": address,
-                    "city": city,
-                    "postal_code": postalCode,
-                    "country": country
+                    "address": streetAddress.trimmingCharacters(in: .whitespaces),
+                    "city": city.trimmingCharacters(in: .whitespaces),
+                    "postal_code": postalCode.trimmingCharacters(in: .whitespaces),
+                    "country": country.trimmingCharacters(in: .whitespaces)
                 ]
 
                 try await authViewModel.updateProfile(updates: updates)
@@ -214,19 +224,20 @@ struct AddressView: View {
 }
 
 // MARK: - Supporting Views
-struct DetailRow: View {
+struct AddressFieldView: View {
     let label: String
     let value: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 6) {
             Text(label)
                 .font(.caption)
+                .fontWeight(.medium)
                 .foregroundColor(.secondary)
+                .textCase(.uppercase)
             Text(value)
                 .font(.body)
         }
-        .padding(.vertical, 2)
     }
 }
 

@@ -7,7 +7,6 @@ struct NotificationSettingsView: View {
 
     // Alert Types
     @AppStorage("notifyMissingPetAlerts") private var notifyMissingPetAlerts = true
-    @AppStorage("notifyPetSightings") private var notifyPetSightings = true
     @AppStorage("notifyNearbyAlerts") private var notifyNearbyAlerts = true
 
     // Updates
@@ -24,9 +23,8 @@ struct NotificationSettingsView: View {
                 Toggle("SMS Notifications", isOn: $smsNotificationsEnabled)
             }
 
-            Section(header: Text("Pet Alerts"), footer: Text("Notifications about missing pets and sightings")) {
+            Section(header: Text("Pet Alerts"), footer: Text("Notifications about missing pets in your area")) {
                 Toggle("Missing Pet Alerts", isOn: $notifyMissingPetAlerts)
-                Toggle("Pet Sighting Reports", isOn: $notifyPetSightings)
                 Toggle("Nearby Alerts (10km)", isOn: $notifyNearbyAlerts)
             }
 
