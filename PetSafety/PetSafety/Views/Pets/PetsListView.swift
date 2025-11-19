@@ -5,7 +5,6 @@ struct PetsListView: View {
     @State private var showingAddPet = false
     @State private var showingMarkLostSheet = false
     @State private var showingOrderMoreTags = false
-    @State private var showingOrderReplacementTag = false
     @State private var showingPetSelection = false
     @State private var selectedPetForReplacement: Pet?
     @EnvironmentObject var appState: AppState
@@ -102,12 +101,10 @@ struct PetsListView: View {
                     .environmentObject(appState)
             }
         }
-        .sheet(isPresented: $showingOrderReplacementTag) {
-            if let pet = selectedPetForReplacement {
-                NavigationView {
-                    OrderReplacementTagView(pet: pet)
-                        .environmentObject(appState)
-                }
+        .sheet(item: $selectedPetForReplacement) { pet in
+            NavigationView {
+                OrderReplacementTagView(pet: pet)
+                    .environmentObject(appState)
             }
         }
         .sheet(isPresented: $showingPetSelection) {
@@ -115,9 +112,11 @@ struct PetsListView: View {
                 PetSelectionView(
                     pets: viewModel.pets,
                     onPetSelected: { pet in
-                        selectedPetForReplacement = pet
                         showingPetSelection = false
-                        showingOrderReplacementTag = true
+                        // Delay slightly to ensure sheet dismisses before opening new one
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            selectedPetForReplacement = pet
+                        }
                     }
                 )
             }
@@ -153,7 +152,6 @@ struct PetsListView: View {
         // If only one pet, go directly to replacement order
         if viewModel.pets.count == 1 {
             selectedPetForReplacement = viewModel.pets[0]
-            showingOrderReplacementTag = true
         } else {
             // If multiple pets, show selection sheet
             showingPetSelection = true
