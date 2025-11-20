@@ -8,6 +8,7 @@ struct PetsListView: View {
     @State private var showingPetSelection = false
     @State private var selectedPetForReplacement: Pet?
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var authViewModel: AuthViewModel
 
     var hasMissingPets: Bool {
         viewModel.pets.contains(where: { $0.isMissing })
@@ -99,12 +100,14 @@ struct PetsListView: View {
             NavigationView {
                 OrderMoreTagsView()
                     .environmentObject(appState)
+                    .environmentObject(authViewModel)
             }
         }
         .sheet(item: $selectedPetForReplacement) { pet in
             NavigationView {
                 OrderReplacementTagView(pet: pet)
                     .environmentObject(appState)
+                    .environmentObject(authViewModel)
             }
         }
         .sheet(isPresented: $showingPetSelection) {
@@ -339,5 +342,6 @@ struct PetSelectionView: View {
     NavigationView {
         PetsListView()
             .environmentObject(AppState())
+            .environmentObject(AuthViewModel())
     }
 }

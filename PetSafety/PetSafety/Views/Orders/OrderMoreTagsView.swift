@@ -3,6 +3,7 @@ import SwiftUI
 struct OrderMoreTagsView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var isLoading = false
     @State private var orderComplete = false
 
@@ -245,43 +246,35 @@ struct OrderMoreTagsView: View {
     }
 
     private func loadUserInfo() async {
-        do {
-            // Check if user is authenticated first
-            guard UserDefaults.standard.string(forKey: "auth_token") != nil else {
-                print("⚠️ No auth token found - user can fill form manually")
-                return
+        // Use cached user data from AuthViewModel instead of making API call
+        guard let user = authViewModel.currentUser else {
+            print("⚠️ No user data available - user can fill form manually")
+            return
+        }
+
+        // Pre-fill user information
+        await MainActor.run {
+            email = user.email
+
+            if let firstName = user.firstName, let lastName = user.lastName {
+                ownerName = "\(firstName) \(lastName)"
+            } else if let firstName = user.firstName {
+                ownerName = firstName
             }
 
-            let user = try await APIService.shared.getCurrentUser()
-
-            // Pre-fill user information
-            await MainActor.run {
-                email = user.email
-
-                if let firstName = user.firstName, let lastName = user.lastName {
-                    ownerName = "\(firstName) \(lastName)"
-                } else if let firstName = user.firstName {
-                    ownerName = firstName
-                }
-
-                // Pre-fill address
-                if let address = user.address {
-                    street1 = address
-                }
-                if let userCity = user.city {
-                    city = userCity
-                }
-                if let postal = user.postalCode {
-                    postCode = postal
-                }
-                if let userCountry = user.country {
-                    country = userCountry
-                }
+            // Pre-fill address
+            if let address = user.address {
+                street1 = address
             }
-        } catch {
-            // Silently fail - user can fill in the fields manually
-            print("⚠️ Could not pre-fill user info: \(error.localizedDescription)")
-            print("   Users can still complete the form manually")
+            if let userCity = user.city {
+                city = userCity
+            }
+            if let postal = user.postalCode {
+                postCode = postal
+            }
+            if let userCountry = user.country {
+                country = userCountry
+            }
         }
     }
 
@@ -333,5 +326,6 @@ struct OrderMoreTagsView: View {
     NavigationView {
         OrderMoreTagsView()
             .environmentObject(AppState())
+            .environmentObject(AuthViewModel())
     }
 }
