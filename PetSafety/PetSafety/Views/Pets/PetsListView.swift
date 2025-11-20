@@ -25,56 +25,71 @@ struct PetsListView: View {
                     action: { showingAddPet = true }
                 )
             } else {
-                List {
-                    Section(header: Text("My Pets")) {
-                        ForEach(viewModel.pets) { pet in
-                            NavigationLink(destination: PetDetailView(pet: pet)) {
-                                PetRowView(pet: pet)
-                            }
-                        }
-                        .onDelete(perform: deletePet)
-                    }
+                ScrollView {
+                    VStack(spacing: 20) {
+                        // Pets Grid Section
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("My Pets")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .padding(.horizontal, 20)
+                                .padding(.top, 8)
 
-                    // Quick Actions Section - shown at bottom
-                    Section(header: Text("Quick Actions")) {
-                        Button(action: { showingMarkLostSheet = true }) {
-                            HStack {
-                                Image(systemName: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
-                                Text(hasMissingPets ? "Report Missing / Mark Found" : "Report Missing")
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                            if viewModel.pets.count == 1 {
+                                // Center single pet card
+                                HStack {
+                                    Spacer()
+                                    PetCardView(pet: viewModel.pets[0])
+                                        .frame(width: 160)
+                                    Spacer()
+                                }
+                                .padding(.horizontal, 20)
+                            } else {
+                                // Grid layout for multiple pets
+                                LazyVGrid(columns: [
+                                    GridItem(.flexible(), spacing: 16),
+                                    GridItem(.flexible(), spacing: 16)
+                                ], spacing: 16) {
+                                    ForEach(viewModel.pets) { pet in
+                                        PetCardView(pet: pet)
+                                    }
+                                }
+                                .padding(.horizontal, 20)
                             }
                         }
-                        .buttonStyle(QuickActionButtonStyle())
 
-                        Button(action: { showingOrderMoreTags = true }) {
-                            HStack {
-                                Image(systemName: "cart.badge.plus")
-                                Text("Order More Tags")
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .buttonStyle(QuickActionButtonStyle())
+                        // Quick Actions Section
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Quick Actions")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .padding(.horizontal, 20)
+                                .padding(.top, 8)
 
-                        Button(action: { showOrderReplacementMenu() }) {
-                            HStack {
-                                Image(systemName: "arrow.triangle.2.circlepath")
-                                Text("Order Replacement Tag")
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                            VStack(spacing: 12) {
+                                QuickActionButton(
+                                    icon: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill",
+                                    title: hasMissingPets ? "Report Missing / Mark Found" : "Report Missing",
+                                    action: { showingMarkLostSheet = true }
+                                )
+
+                                QuickActionButton(
+                                    icon: "cart.badge.plus",
+                                    title: "Order More Tags",
+                                    action: { showingOrderMoreTags = true }
+                                )
+
+                                QuickActionButton(
+                                    icon: "arrow.triangle.2.circlepath",
+                                    title: "Order Replacement Tag",
+                                    action: { showOrderReplacementMenu() }
+                                )
                             }
+                            .padding(.horizontal, 20)
                         }
-                        .buttonStyle(QuickActionButtonStyle())
+                        .padding(.bottom, 20)
                     }
                 }
-                .listStyle(.insetGrouped)
             }
         }
         .navigationTitle("My Pets")
@@ -137,14 +152,6 @@ struct PetsListView: View {
         }
     }
 
-    private func deletePet(at offsets: IndexSet) {
-        for index in offsets {
-            let pet = viewModel.pets[index]
-            Task {
-                try? await viewModel.deletePet(id: pet.id)
-            }
-        }
-    }
 
     private func showOrderReplacementMenu() {
         if viewModel.pets.isEmpty {
@@ -162,56 +169,68 @@ struct PetsListView: View {
     }
 }
 
-struct PetRowView: View {
+// MARK: - Pet Card View
+struct PetCardView: View {
     let pet: Pet
 
     var body: some View {
-        HStack(spacing: 16) {
-            // Pet Photo
-            AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                Image(systemName: pet.species.lowercased() == "dog" ? "dog.fill" : "cat.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.secondary)
-                    .padding(16)
-            }
-            .frame(width: 70, height: 70)
-            .background(Color(.systemGray6))
-            .cornerRadius(12)
-
-            // Pet Info
-            VStack(alignment: .leading, spacing: 4) {
-                Text(pet.name)
-                    .font(.headline)
-
-                HStack(spacing: 8) {
-                    Text(pet.species.capitalized)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-
-                    if let breed = pet.breed {
-                        Text("•")
-                            .foregroundColor(.secondary)
-                        Text(breed)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+        NavigationLink(destination: PetDetailView(pet: pet)) {
+            VStack(spacing: 0) {
+                // Pet Photo - upper 2/3
+                ZStack {
+                    if let photoUrl = pet.photoUrl, !photoUrl.isEmpty {
+                        AsyncImage(url: URL(string: photoUrl)) { phase in
+                            switch phase {
+                            case .empty:
+                                ZStack {
+                                    Color(.systemGray6)
+                                    ProgressView()
+                                }
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            case .failure:
+                                placeholderImage
+                            @unknown default:
+                                placeholderImage
+                            }
+                        }
+                    } else {
+                        placeholderImage
                     }
                 }
+                .frame(height: 160)
+                .clipped()
 
-                if let age = pet.age {
-                    Text(age)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                // Pet Name - lower 1/3
+                VStack(spacing: 4) {
+                    Text(pet.name)
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                        .lineLimit(1)
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .background(Color(.systemBackground))
             }
-
-            Spacer()
+            .frame(height: 220)
+            .background(Color(.systemGray6))
+            .cornerRadius(16)
+            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
         }
-        .padding(.vertical, 8)
+        .buttonStyle(PlainButtonStyle())
+    }
+
+    private var placeholderImage: some View {
+        ZStack {
+            Color(.systemGray6)
+            Image(systemName: pet.species.lowercased() == "dog" ? "dog.fill" : "cat.fill")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .foregroundColor(.secondary)
+                .padding(40)
+        }
     }
 }
 
@@ -267,11 +286,36 @@ struct EmptyStateView: View {
     }
 }
 
-struct QuickActionButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.body)
-            .foregroundColor(.primary)
+// MARK: - Quick Action Button
+struct QuickActionButton: View {
+    let icon: String
+    let title: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.title3)
+                    .foregroundColor(.cyan)
+                    .frame(width: 30)
+
+                Text(title)
+                    .font(.body)
+                    .foregroundColor(.primary)
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(Color(.systemBackground))
+            .cornerRadius(12)
+            .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+        }
     }
 }
 
