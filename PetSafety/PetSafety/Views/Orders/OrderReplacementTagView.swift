@@ -210,6 +210,12 @@ struct OrderReplacementTagView: View {
 
     private func loadUserAddress() async {
         do {
+            // Check if user is authenticated first
+            guard UserDefaults.standard.string(forKey: "auth_token") != nil else {
+                print("⚠️ No auth token found - user can fill form manually")
+                return
+            }
+
             let user = try await APIService.shared.getCurrentUser()
 
             // Pre-fill address fields from user profile
@@ -229,7 +235,8 @@ struct OrderReplacementTagView: View {
             }
         } catch {
             // Silently fail - user can fill in the fields manually
-            print("Could not pre-fill address: \(error.localizedDescription)")
+            print("⚠️ Could not pre-fill address: \(error.localizedDescription)")
+            print("   Users can still complete the form manually")
         }
     }
 

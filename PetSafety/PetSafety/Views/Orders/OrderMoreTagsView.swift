@@ -246,6 +246,12 @@ struct OrderMoreTagsView: View {
 
     private func loadUserInfo() async {
         do {
+            // Check if user is authenticated first
+            guard UserDefaults.standard.string(forKey: "auth_token") != nil else {
+                print("⚠️ No auth token found - user can fill form manually")
+                return
+            }
+
             let user = try await APIService.shared.getCurrentUser()
 
             // Pre-fill user information
@@ -274,7 +280,8 @@ struct OrderMoreTagsView: View {
             }
         } catch {
             // Silently fail - user can fill in the fields manually
-            print("Could not pre-fill user info: \(error.localizedDescription)")
+            print("⚠️ Could not pre-fill user info: \(error.localizedDescription)")
+            print("   Users can still complete the form manually")
         }
     }
 
