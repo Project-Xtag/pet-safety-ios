@@ -31,7 +31,6 @@ struct PetFormView: View {
     @State private var breed = ""
     @State private var color = ""
     @State private var dateOfBirth = Date()
-    @State private var weight = ""
     @State private var microchipNumber = ""
     @State private var medicalInfo = ""
     @State private var behaviorNotes = ""
@@ -248,9 +247,6 @@ struct PetFormView: View {
            let dob = ISO8601DateFormatter().date(from: dobString) {
             dateOfBirth = dob
         }
-        if let w = pet.weight {
-            weight = "\(w)"
-        }
         microchipNumber = pet.microchipNumber ?? ""
         medicalInfo = pet.medicalInfo ?? ""
         behaviorNotes = pet.behaviorNotes ?? ""
@@ -285,7 +281,6 @@ struct PetFormView: View {
                 switch mode {
                 case .create:
                     print("📝 Creating new pet")
-                    let weightValue = weight.isEmpty ? nil : Double(weight)
 
                     let request = CreatePetRequest(
                         name: name,
@@ -293,7 +288,7 @@ struct PetFormView: View {
                         breed: breed.isEmpty ? nil : breed,
                         color: color.isEmpty ? nil : color,
                         age: nil, // Age will be calculated from date of birth by backend
-                        weight: weightValue,
+                        weight: nil,
                         microchipNumber: microchipNumber.isEmpty ? nil : microchipNumber,
                         medicalNotes: medicalInfo.isEmpty ? nil : medicalInfo,
                         allergies: nil,

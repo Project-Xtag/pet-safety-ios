@@ -72,10 +72,6 @@ struct PetDetailView: View {
                         InfoCard(title: "Age", value: age, icon: "calendar")
                     }
 
-                    if let weight = pet.weight {
-                        InfoCard(title: "Weight", value: "\(weight) kg", icon: "scalemass.fill")
-                    }
-
                     if let microchip = pet.microchipNumber {
                         InfoCard(title: "Microchip", value: microchip, icon: "number")
                     }
