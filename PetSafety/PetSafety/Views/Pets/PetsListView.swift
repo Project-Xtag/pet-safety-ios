@@ -26,32 +26,43 @@ struct PetsListView: View {
                 )
             } else {
                 ScrollView {
-                    VStack(spacing: 20) {
+                    VStack(spacing: 16) {
                         // Pets Grid Section
-                        VStack(alignment: .leading, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 10) {
                             Text("My Pets")
                                 .font(.title2)
                                 .fontWeight(.bold)
                                 .padding(.horizontal, 20)
-                                .padding(.top, 8)
+                                .padding(.top, 4)
 
                             if viewModel.pets.count == 1 {
                                 // Center single pet card
                                 HStack {
                                     Spacer()
                                     PetCardView(pet: viewModel.pets[0])
-                                        .frame(width: 160)
+                                        .frame(width: 140)
                                     Spacer()
                                 }
                                 .padding(.horizontal, 20)
                             } else {
-                                // Grid layout for multiple pets
+                                // Grid layout for multiple pets with centered odd items
                                 LazyVGrid(columns: [
-                                    GridItem(.flexible(), spacing: 16),
-                                    GridItem(.flexible(), spacing: 16)
-                                ], spacing: 16) {
-                                    ForEach(viewModel.pets) { pet in
-                                        PetCardView(pet: pet)
+                                    GridItem(.flexible(), spacing: 12),
+                                    GridItem(.flexible(), spacing: 12)
+                                ], spacing: 12) {
+                                    ForEach(Array(viewModel.pets.enumerated()), id: \.element.id) { index, pet in
+                                        if viewModel.pets.count % 2 != 0 && index == viewModel.pets.count - 1 {
+                                            // Last item in odd count - center it
+                                            HStack {
+                                                Spacer()
+                                                PetCardView(pet: pet)
+                                                    .frame(maxWidth: 140)
+                                                Spacer()
+                                            }
+                                            .gridCellColumns(2)
+                                        } else {
+                                            PetCardView(pet: pet)
+                                        }
                                     }
                                 }
                                 .padding(.horizontal, 20)
@@ -59,12 +70,11 @@ struct PetsListView: View {
                         }
 
                         // Quick Actions Section
-                        VStack(alignment: .leading, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 10) {
                             Text("Quick Actions")
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .padding(.horizontal, 20)
-                                .padding(.top, 8)
 
                             HStack(spacing: 12) {
                                 QuickActionButton(
@@ -90,7 +100,7 @@ struct PetsListView: View {
                             }
                             .padding(.horizontal, 20)
                         }
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 16)
                     }
                 }
             }
@@ -203,24 +213,25 @@ struct PetCardView: View {
                         placeholderImage
                     }
                 }
-                .frame(height: 160)
+                .frame(height: 115)
                 .clipped()
 
                 // Pet Name - lower 1/3
-                VStack(spacing: 4) {
+                VStack(spacing: 2) {
                     Text(pet.name)
-                        .font(.headline)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
                         .foregroundColor(.primary)
                         .lineLimit(1)
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
+                .padding(.vertical, 10)
                 .background(Color(.systemBackground))
             }
-            .frame(height: 220)
+            .frame(height: 165)
             .background(Color(.systemGray6))
-            .cornerRadius(16)
-            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+            .cornerRadius(14)
+            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
         }
         .buttonStyle(PlainButtonStyle())
     }
@@ -232,7 +243,7 @@ struct PetCardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(.secondary)
-                .padding(40)
+                .padding(30)
         }
     }
 }
@@ -298,11 +309,11 @@ struct QuickActionButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 12) {
+            VStack(spacing: 8) {
                 Image(systemName: icon)
-                    .font(.system(size: 28))
+                    .font(.system(size: 26))
                     .foregroundColor(color)
-                    .frame(height: 32)
+                    .frame(height: 28)
 
                 Text(title)
                     .font(.caption)
@@ -313,11 +324,11 @@ struct QuickActionButton: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .padding(.horizontal, 8)
+            .padding(.vertical, 14)
+            .padding(.horizontal, 6)
             .background(Color(.systemBackground))
-            .cornerRadius(16)
-            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+            .cornerRadius(14)
+            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
         }
     }
 }
