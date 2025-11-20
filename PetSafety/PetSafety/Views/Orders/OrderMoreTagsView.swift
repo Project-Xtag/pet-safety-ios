@@ -19,7 +19,7 @@ struct OrderMoreTagsView: View {
     @State private var city = ""
     @State private var province = ""
     @State private var postCode = ""
-    @State private var country = "ES"
+    @State private var country = ""
 
     // Pricing - tags are free, only shipping cost
     private let shippingCost: Double = 3.99
@@ -118,19 +118,60 @@ struct OrderMoreTagsView: View {
             }
 
             Section(header: Text("Shipping Address")) {
-                TextField("Street Address Line 1", text: $street1)
-                TextField("Street Address Line 2 (optional)", text: $street2)
-
-                HStack {
-                    TextField("City", text: $city)
-                    TextField("Province/State", text: $province)
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Street Address")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    TextField("e.g., 123 Main Street, Apartment 4B", text: $street1)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
+                .padding(.vertical, 4)
 
-                HStack {
-                    TextField("Post Code", text: $postCode)
-                    TextField("Country", text: $country)
-                        .disabled(true)
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Street Address Line 2 (Optional)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    TextField("e.g., Building, Floor, Suite", text: $street2)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
+                .padding(.vertical, 4)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("City")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    TextField("e.g., London", text: $city)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding(.vertical, 4)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Province / State (Optional)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    TextField("e.g., Greater London", text: $province)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding(.vertical, 4)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Postal Code")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    TextField("e.g., SW1A 1AA", text: $postCode)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .autocapitalization(.allCharacters)
+                }
+                .padding(.vertical, 4)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Country")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    TextField("e.g., United Kingdom", text: $country)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding(.vertical, 4)
             }
 
             Section(header: Text("Order Summary")) {
@@ -191,7 +232,8 @@ struct OrderMoreTagsView: View {
         email.contains("@") &&
         !street1.isEmpty &&
         !city.isEmpty &&
-        !postCode.isEmpty
+        !postCode.isEmpty &&
+        !country.isEmpty
     }
 
     private func addPetName() {
