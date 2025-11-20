@@ -66,22 +66,25 @@ struct PetsListView: View {
                                 .padding(.horizontal, 20)
                                 .padding(.top, 8)
 
-                            VStack(spacing: 12) {
+                            HStack(spacing: 12) {
                                 QuickActionButton(
                                     icon: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill",
-                                    title: hasMissingPets ? "Report Missing / Mark Found" : "Report Missing",
+                                    title: hasMissingPets ? "Mark Found" : "Report Missing",
+                                    color: .red,
                                     action: { showingMarkLostSheet = true }
                                 )
 
                                 QuickActionButton(
                                     icon: "cart.badge.plus",
-                                    title: "Order More Tags",
+                                    title: "Order Tags",
+                                    color: .blue,
                                     action: { showingOrderMoreTags = true }
                                 )
 
                                 QuickActionButton(
                                     icon: "arrow.triangle.2.circlepath",
-                                    title: "Order Replacement Tag",
+                                    title: "Replace Tag",
+                                    color: .orange,
                                     action: { showOrderReplacementMenu() }
                                 )
                             }
@@ -290,31 +293,31 @@ struct EmptyStateView: View {
 struct QuickActionButton: View {
     let icon: String
     let title: String
+    let color: Color
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 12) {
+            VStack(spacing: 12) {
                 Image(systemName: icon)
-                    .font(.title3)
-                    .foregroundColor(.cyan)
-                    .frame(width: 30)
+                    .font(.system(size: 28))
+                    .foregroundColor(color)
+                    .frame(height: 32)
 
                 Text(title)
-                    .font(.body)
-                    .foregroundColor(.primary)
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 14)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .padding(.horizontal, 8)
             .background(Color(.systemBackground))
-            .cornerRadius(12)
-            .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+            .cornerRadius(16)
+            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
         }
     }
 }
