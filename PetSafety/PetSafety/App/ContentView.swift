@@ -36,13 +36,6 @@ struct MainTabView: View {
             }
 
             NavigationView {
-                OrdersView()
-            }
-            .tabItem {
-                Label("Orders", systemImage: "cart.fill")
-            }
-
-            NavigationView {
                 QRScannerView()
             }
             .tabItem {
