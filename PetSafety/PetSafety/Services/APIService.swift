@@ -294,18 +294,49 @@ class APIService {
     func scanQRCode(_ code: String) async throws -> ScanResponse {
         let request = try buildRequest(
             endpoint: "/qr-tags/scan/\(code)",
+            method: "GET",
             requiresAuth: false
         )
         return try await performRequest(request, responseType: ScanResponse.self)
     }
 
-    func activateTag(_ activation: ActivateTagRequest) async throws -> QRTag {
+    func activateTag(qrCode: String, petId: String) async throws -> QRTag {
+        struct ActivateRequest: Codable {
+            let qrCode: String
+            let petId: String
+        }
+
+        struct ActivateResponse: Codable {
+            let success: Bool
+            let tag: QRTag
+            let message: String?
+        }
+
         let request = try buildRequest(
             endpoint: "/qr-tags/activate",
             method: "POST",
-            body: activation
+            body: ActivateRequest(qrCode: qrCode, petId: petId),
+            requiresAuth: true
         )
-        return try await performRequest(request, responseType: QRTag.self)
+        let response = try await performRequest(request, responseType: ActivateResponse.self)
+        return response.tag
+    }
+
+    // Get active tag for a pet
+    func getActiveTag(petId: String) async throws -> QRTag? {
+        struct GetTagResponse: Codable {
+            let success: Bool
+            let tag: QRTag?
+            let message: String?
+        }
+
+        let request = try buildRequest(
+            endpoint: "/qr-tags/pet/\(petId)",
+            method: "GET",
+            requiresAuth: true
+        )
+        let response = try await performRequest(request, responseType: GetTagResponse.self)
+        return response.tag
     }
 
     // MARK: - Orders
