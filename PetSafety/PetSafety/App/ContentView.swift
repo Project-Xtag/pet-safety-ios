@@ -42,12 +42,10 @@ struct MainTabView: View {
                 Label("Scan QR", systemImage: "qrcode.viewfinder")
             }
 
-            NavigationView {
-                AlertsListView()
-            }
-            .tabItem {
-                Label("Alerts", systemImage: "exclamationmark.triangle.fill")
-            }
+            AlertsTabView()
+                .tabItem {
+                    Label("Alerts", systemImage: "exclamationmark.triangle.fill")
+                }
 
             NavigationView {
                 ProfileView()

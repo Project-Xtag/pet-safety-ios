@@ -284,6 +284,27 @@ class APIService {
         return try await performRequest(request, responseType: [MissingPetAlert].self)
     }
 
+    func getNearbyAlerts(
+        latitude: Double,
+        longitude: Double,
+        radiusKm: Double = 10
+    ) async throws -> [MissingPetAlert] {
+        struct NearbyAlertsResponse: Codable {
+            let success: Bool
+            let alerts: [MissingPetAlert]
+            let count: Int
+        }
+
+        let endpoint = "/alerts/nearby?lat=\(latitude)&lng=\(longitude)&radius=\(radiusKm)"
+        let request = try buildRequest(
+            endpoint: endpoint,
+            method: "GET",
+            requiresAuth: false
+        )
+        let response = try await performRequest(request, responseType: NearbyAlertsResponse.self)
+        return response.alerts
+    }
+
     func createAlert(_ alertData: CreateAlertRequest) async throws -> MissingPetAlert {
         let request = try buildRequest(
             endpoint: "/alerts",

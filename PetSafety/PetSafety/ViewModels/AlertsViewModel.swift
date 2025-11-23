@@ -4,6 +4,8 @@ import CoreLocation
 @MainActor
 class AlertsViewModel: ObservableObject {
     @Published var alerts: [MissingPetAlert] = []
+    @Published var missingAlerts: [MissingPetAlert] = []
+    @Published var foundAlerts: [MissingPetAlert] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
 
@@ -15,6 +17,32 @@ class AlertsViewModel: ObservableObject {
 
         do {
             alerts = try await apiService.getAlerts()
+            isLoading = false
+        } catch {
+            isLoading = false
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func fetchNearbyAlerts(
+        latitude: Double,
+        longitude: Double,
+        radiusKm: Double = 10
+    ) async {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            let allAlerts = try await apiService.getNearbyAlerts(
+                latitude: latitude,
+                longitude: longitude,
+                radiusKm: radiusKm
+            )
+
+            // Separate missing and found alerts
+            missingAlerts = allAlerts.filter { $0.status == "active" }
+            foundAlerts = allAlerts.filter { $0.status == "resolved" }
+
             isLoading = false
         } catch {
             isLoading = false
