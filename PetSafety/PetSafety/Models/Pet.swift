@@ -31,6 +31,11 @@ struct Pet: Codable, Identifiable, Hashable {
     let qrCode: String?
     let dateOfBirth: String?
 
+    // Public profile fields (only present when scanning QR code)
+    let ownerName: String?
+    let ownerPhone: String?
+    let ownerEmail: String?
+
     // Computed property for displaying age
     var age: String? {
         if let text = ageText, !text.isEmpty {
@@ -76,6 +81,9 @@ struct Pet: Codable, Identifiable, Hashable {
         case isNeutered = "is_neutered"
         case qrCode = "qr_code"
         case dateOfBirth = "date_of_birth"
+        case ownerName = "owner_name"
+        case ownerPhone = "owner_phone"
+        case ownerEmail = "owner_email"
     }
 
     // Memberwise initializer for creating Pet instances (e.g., in previews)
@@ -104,7 +112,10 @@ struct Pet: Codable, Identifiable, Hashable {
         sex: String? = nil,
         isNeutered: Bool? = nil,
         qrCode: String? = nil,
-        dateOfBirth: String? = nil
+        dateOfBirth: String? = nil,
+        ownerName: String? = nil,
+        ownerPhone: String? = nil,
+        ownerEmail: String? = nil
     ) {
         self.id = id
         self.ownerId = ownerId
@@ -131,6 +142,9 @@ struct Pet: Codable, Identifiable, Hashable {
         self.isNeutered = isNeutered
         self.qrCode = qrCode
         self.dateOfBirth = dateOfBirth
+        self.ownerName = ownerName
+        self.ownerPhone = ownerPhone
+        self.ownerEmail = ownerEmail
     }
 
     // Custom decoder to handle weight as either String or Double
@@ -171,6 +185,9 @@ struct Pet: Codable, Identifiable, Hashable {
         isNeutered = try container.decodeIfPresent(Bool.self, forKey: .isNeutered)
         qrCode = try container.decodeIfPresent(String.self, forKey: .qrCode)
         dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth)
+        ownerName = try container.decodeIfPresent(String.self, forKey: .ownerName)
+        ownerPhone = try container.decodeIfPresent(String.self, forKey: .ownerPhone)
+        ownerEmail = try container.decodeIfPresent(String.self, forKey: .ownerEmail)
     }
 }
 

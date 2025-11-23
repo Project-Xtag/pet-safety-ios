@@ -176,6 +176,27 @@ class APIService {
         return try await performRequest(request, responseType: User.self)
     }
 
+    func updateContactPreferences(
+        showPhonePublicly: Bool?,
+        showEmailPublicly: Bool?
+    ) async throws -> User {
+        var updates: [String: Any] = [:]
+        if let showPhone = showPhonePublicly {
+            updates["show_phone_publicly"] = showPhone
+        }
+        if let showEmail = showEmailPublicly {
+            updates["show_email_publicly"] = showEmail
+        }
+
+        let request = try buildRequest(
+            endpoint: "/users/me",
+            method: "PATCH",
+            body: DynamicBody(updates)
+        )
+        let response = try await performRequest(request, responseType: UserResponse.self)
+        return response.user
+    }
+
     // MARK: - Pets
     func getPets() async throws -> [Pet] {
         let request = try buildRequest(endpoint: "/pets")
@@ -337,6 +358,37 @@ class APIService {
         )
         let response = try await performRequest(request, responseType: GetTagResponse.self)
         return response.tag
+    }
+
+    // Share finder's location with pet owner (no auth required)
+    func shareLocation(
+        qrCode: String,
+        latitude: Double,
+        longitude: Double,
+        address: String? = nil
+    ) async throws -> ShareLocationResponse {
+        struct LocationData: Codable {
+            let lat: Double
+            let lng: Double
+        }
+
+        struct ShareLocationRequest: Codable {
+            let qrCode: String
+            let location: LocationData
+            let address: String?
+        }
+
+        let request = try buildRequest(
+            endpoint: "/qr-tags/share-location",
+            method: "POST",
+            body: ShareLocationRequest(
+                qrCode: qrCode,
+                location: LocationData(lat: latitude, lng: longitude),
+                address: address
+            ),
+            requiresAuth: false
+        )
+        return try await performRequest(request, responseType: ShareLocationResponse.self)
     }
 
     // MARK: - Orders
@@ -501,4 +553,13 @@ struct CreateTagOrderResponse: Codable {
     let userCreated: Bool?
     let userId: String?
     let message: String
+}
+
+// MARK: - Location Sharing Types
+struct ShareLocationResponse: Codable {
+    let success: Bool
+    let message: String
+    let sightingId: String
+    let sentSMS: Bool
+    let sentEmail: Bool
 }

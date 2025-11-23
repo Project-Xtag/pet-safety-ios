@@ -169,7 +169,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
 struct ScannedPetView: View {
     let scanResult: ScanResponse
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var alertsViewModel = AlertsViewModel()
+    @State private var showingShareLocation = false
 
     var body: some View {
         NavigationView {
@@ -190,68 +190,92 @@ struct ScannedPetView: View {
                     .clipShape(Circle())
 
                     // Pet Name
-                    Text(scanResult.pet.name)
-                        .font(.system(size: 32, weight: .bold))
+                    Text("Hello! I'm \(scanResult.pet.name)")
+                        .font(.system(size: 28, weight: .bold))
+                        .multilineTextAlignment(.center)
+
+                    Text("You've just scanned my tag. Thank you for helping me!")
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
 
                     Text("\(scanResult.pet.species) • \(scanResult.pet.breed ?? "Unknown")")
                         .font(.title3)
                         .foregroundColor(.secondary)
 
-                    // Missing Alert (if any)
-                    if let alert = scanResult.alert {
-                        VStack(spacing: 16) {
-                            HStack {
-                                Image(systemName: "exclamationmark.triangle.fill")
-                                    .foregroundColor(.red)
-                                Text("THIS PET IS MISSING!")
-                                    .font(.headline)
-                                    .foregroundColor(.red)
-                            }
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.red.opacity(0.1))
-                            .cornerRadius(12)
-
-                            if let info = alert.additionalInfo {
-                                Text(info)
-                                    .font(.body)
-                                    .foregroundColor(.secondary)
-                                    .padding()
-                                    .background(Color(.systemGray6))
-                                    .cornerRadius(12)
-                            }
-
-                            NavigationLink(destination: ReportSightingView(alertId: alert.id)) {
-                                Label("Report Sighting", systemImage: "location.fill")
-                            }
-                            .buttonStyle(PrimaryButtonStyle())
+                    // Scan notification
+                    VStack(spacing: 8) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.green)
+                            Text("My owner has been automatically notified that you found me")
+                                .font(.subheadline)
+                                .foregroundColor(.green)
                         }
-                        .padding()
-                    }
-
-                    // Owner Info
-                    VStack(spacing: 12) {
-                        Text("Contact Owner")
-                            .font(.headline)
-
-                        VStack(spacing: 8) {
-                            Label(scanResult.owner.displayName, systemImage: "person.fill")
-
-                            if let phone = scanResult.owner.phone {
-                                Link(destination: URL(string: "tel:\(phone)")!) {
-                                    Label(phone, systemImage: "phone.fill")
-                                }
-                            }
-
-                            Link(destination: URL(string: "mailto:\(scanResult.owner.email)")!) {
-                                Label(scanResult.owner.email, systemImage: "envelope.fill")
-                            }
-                        }
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(12)
                     }
                     .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.green.opacity(0.1))
+                    .cornerRadius(12)
+                    .padding(.horizontal)
+
+                    // Share Location Button
+                    if scanResult.pet.qrCode != nil {
+                        Button(action: {
+                            showingShareLocation = true
+                        }) {
+                            Label("Share My Location with Owner", systemImage: "location.fill")
+                                .font(.headline)
+                        }
+                        .buttonStyle(PrimaryButtonStyle())
+                        .padding(.horizontal)
+
+                        Text("\(scanResult.pet.name)'s owner will receive an SMS and email with your location to help reunite them quickly")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                    }
+
+                    // Contact Owner Section (only if phone or email are public)
+                    if scanResult.pet.ownerPhone != nil || scanResult.pet.ownerEmail != nil {
+                        VStack(spacing: 12) {
+                            Text("Contact Owner")
+                                .font(.headline)
+
+                            Text("Please let my owner know that you have found me. Tap on the share location button or call them on the phone number below.")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal)
+
+                            VStack(spacing: 12) {
+                                if let phone = scanResult.pet.ownerPhone {
+                                    Link(destination: URL(string: "tel:\(phone)")!) {
+                                        Label("Call: \(phone)", systemImage: "phone.fill")
+                                            .frame(maxWidth: .infinity)
+                                            .padding()
+                                            .background(Color(.systemGray6))
+                                            .foregroundColor(.primary)
+                                            .cornerRadius(10)
+                                    }
+                                }
+
+                                if let email = scanResult.pet.ownerEmail {
+                                    Link(destination: URL(string: "mailto:\(email)")!) {
+                                        Label("Email: \(email)", systemImage: "envelope.fill")
+                                            .frame(maxWidth: .infinity)
+                                            .padding()
+                                            .background(Color(.systemGray6))
+                                            .foregroundColor(.primary)
+                                            .cornerRadius(10)
+                                    }
+                                }
+                            }
+                        }
+                        .padding()
+                    }
 
                     // Pet Info
                     if let color = scanResult.pet.color {
@@ -278,13 +302,18 @@ struct ScannedPetView: View {
                 }
                 .padding(.vertical)
             }
-            .navigationTitle("Found Pet")
+            .navigationTitle("Found \(scanResult.pet.name)!")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
                         dismiss()
                     }
+                }
+            }
+            .sheet(isPresented: $showingShareLocation) {
+                if let qrCode = scanResult.pet.qrCode {
+                    ShareLocationView(qrCode: qrCode, petName: scanResult.pet.name)
                 }
             }
         }

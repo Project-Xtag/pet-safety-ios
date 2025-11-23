@@ -139,30 +139,10 @@ struct PetDetailView: View {
 
     private func markAsFound() {
         Task {
-            do {
-                // Update pet status to not missing
-                let updates = UpdatePetRequest(
-                    name: nil,
-                    species: nil,
-                    breed: nil,
-                    color: nil,
-                    age: nil,
-                    weight: nil,
-                    microchipNumber: nil,
-                    medicalNotes: nil,
-                    allergies: nil,
-                    medications: nil,
-                    notes: nil,
-                    uniqueFeatures: nil,
-                    sex: nil,
-                    isNeutered: nil
-                )
-                // Note: We need to add is_missing field to UpdatePetRequest
-                appState.showSuccess("\(pet.name) has been marked as found!")
-                dismiss()
-            } catch {
-                appState.showError("Failed to mark pet as found: \(error.localizedDescription)")
-            }
+            // Update pet status to not missing
+            // Note: We need to add is_missing field to UpdatePetRequest
+            appState.showSuccess("\(pet.name) has been marked as found!")
+            dismiss()
         }
     }
 }

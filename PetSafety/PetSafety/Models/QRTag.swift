@@ -29,12 +29,11 @@ struct QRTag: Codable, Identifiable {
 }
 
 struct ScanResponse: Codable {
+    let success: Bool
     let pet: Pet
-    let owner: PetOwnerInfo
-    let alert: MissingPetAlert?
 
     enum CodingKeys: String, CodingKey {
-        case pet, owner, alert
+        case success, pet
     }
 }
 

@@ -45,7 +45,7 @@ struct MarkAsLostView: View {
                 if !useCurrentLocation {
                     TextField("e.g., Central Park or 123 Main St", text: $location)
                         .autocapitalization(.words)
-                } else if let coordinate = locationManager.location {
+                } else if locationManager.location != nil {
                     HStack {
                         Image(systemName: "location.fill")
                             .foregroundColor(.blue)

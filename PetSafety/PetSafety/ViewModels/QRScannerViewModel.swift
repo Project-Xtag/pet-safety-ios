@@ -40,14 +40,12 @@ class QRScannerViewModel: ObservableObject {
         }
     }
 
-    func activateTag(code: String, petId: Int) async throws {
+    func activateTag(code: String, petId: String) async throws {
         isLoading = true
         errorMessage = nil
 
-        let request = ActivateTagRequest(tagCode: code, petId: petId)
-
         do {
-            _ = try await apiService.activateTag(request)
+            _ = try await apiService.activateTag(qrCode: code, petId: petId)
             isLoading = false
         } catch {
             isLoading = false
