@@ -85,9 +85,29 @@ class AlertsViewModel: ObservableObject {
 
         do {
             let updatedAlert = try await apiService.updateAlertStatus(id: id, status: status)
+
+            // Update the main alerts array
             if let index = alerts.firstIndex(where: { $0.id == id }) {
                 alerts[index] = updatedAlert
             }
+
+            // Move alert between missing and found arrays based on new status
+            if status == "resolved" {
+                // Remove from missing alerts
+                missingAlerts.removeAll { $0.id == id }
+                // Add to found alerts if not already there
+                if !foundAlerts.contains(where: { $0.id == id }) {
+                    foundAlerts.insert(updatedAlert, at: 0)
+                }
+            } else if status == "active" {
+                // Remove from found alerts
+                foundAlerts.removeAll { $0.id == id }
+                // Add to missing alerts if not already there
+                if !missingAlerts.contains(where: { $0.id == id }) {
+                    missingAlerts.insert(updatedAlert, at: 0)
+                }
+            }
+
             isLoading = false
         } catch {
             isLoading = false

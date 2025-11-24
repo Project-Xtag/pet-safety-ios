@@ -5,7 +5,10 @@ struct AlertDetailView: View {
     let alert: MissingPetAlert
     @StateObject private var viewModel = AlertsViewModel()
     @State private var showingReportSighting = false
+    @State private var isMarkingFound = false
     @State private var mapRegion: MKCoordinateRegion
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var appState: AppState
 
     init(alert: MissingPetAlert) {
         self.alert = alert
@@ -67,11 +70,17 @@ struct AlertDetailView: View {
                     Spacer()
 
                     if alert.status == "active" {
-                        Button("Mark as Found") {
-                            markAsFound()
+                        Button(action: { markAsFound() }) {
+                            if isMarkingFound {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            } else {
+                                Text("Mark as Found")
+                            }
                         }
                         .buttonStyle(.borderedProminent)
                         .tint(.green)
+                        .disabled(isMarkingFound)
                     }
                 }
                 .padding()
@@ -164,7 +173,23 @@ struct AlertDetailView: View {
 
     private func markAsFound() {
         Task {
-            try? await viewModel.updateAlertStatus(id: alert.id, status: "resolved")
+            isMarkingFound = true
+
+            do {
+                try await viewModel.updateAlertStatus(id: alert.id, status: "resolved")
+
+                await MainActor.run {
+                    isMarkingFound = false
+                    appState.showSuccess("\(alert.pet?.name ?? "Pet") has been marked as found! 🎉")
+                    // Dismiss the detail view to return to the refreshed list
+                    dismiss()
+                }
+            } catch {
+                await MainActor.run {
+                    isMarkingFound = false
+                    appState.showError("Failed to mark as found: \(error.localizedDescription)")
+                }
+            }
         }
     }
 }
