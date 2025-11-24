@@ -4,11 +4,12 @@ import MapKit
 struct AlertDetailView: View {
     let alert: MissingPetAlert
     @StateObject private var viewModel = AlertsViewModel()
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var appState: AppState
+    @Environment(\.dismiss) private var dismiss
     @State private var showingReportSighting = false
     @State private var isMarkingFound = false
     @State private var mapRegion: MKCoordinateRegion
-    @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var appState: AppState
 
     init(alert: MissingPetAlert) {
         self.alert = alert
@@ -23,6 +24,13 @@ struct AlertDetailView: View {
                 span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
             ))
         }
+    }
+
+    // Check if current user is the pet owner
+    private var isOwner: Bool {
+        guard let currentUserId = authViewModel.currentUser?.id else { return false }
+        // Check if the alert belongs to the current user
+        return alert.userId == currentUserId
     }
 
     var body: some View {
@@ -69,7 +77,8 @@ struct AlertDetailView: View {
 
                     Spacer()
 
-                    if alert.status == "active" {
+                    // Only show "Mark as Found" button to the pet owner
+                    if alert.status == "active" && isOwner {
                         Button(action: { markAsFound() }) {
                             if isMarkingFound {
                                 ProgressView()
