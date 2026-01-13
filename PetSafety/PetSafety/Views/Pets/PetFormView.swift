@@ -331,7 +331,8 @@ struct PetFormView: View {
                         notes: behaviorNotes.isEmpty ? nil : behaviorNotes,
                         uniqueFeatures: nil,  // Not in form
                         sex: nil,  // Not in form
-                        isNeutered: nil  // Not in form
+                        isNeutered: nil,  // Not in form
+                        isMissing: nil  // Not in form - use mark lost/found feature
                     )
 
                     print("Updating pet with: name=\(name), breed=\(breed), color=\(color)")

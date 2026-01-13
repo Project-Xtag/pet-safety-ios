@@ -20,6 +20,8 @@ class AuthViewModel: ObservableObject {
                 do {
                     currentUser = try await apiService.getCurrentUser()
                     isAuthenticated = true
+                    // Connect to SSE for real-time notifications
+                    SSEService.shared.connect()
                 } catch {
                     // Token might be invalid, log out
                     logout()
@@ -52,6 +54,9 @@ class AuthViewModel: ObservableObject {
             currentUser = response.user
             isAuthenticated = true
             isLoading = false
+
+            // Connect to SSE for real-time notifications
+            SSEService.shared.connect()
         } catch {
             isLoading = false
             errorMessage = error.localizedDescription
@@ -63,6 +68,9 @@ class AuthViewModel: ObservableObject {
         apiService.logout()
         currentUser = nil
         isAuthenticated = false
+
+        // Disconnect from SSE
+        SSEService.shared.disconnect()
     }
 
     func updateProfile(updates: [String: Any]) async throws {

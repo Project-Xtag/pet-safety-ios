@@ -32,11 +32,20 @@ class APIService {
     // MARK: - Configuration
     private let baseURL = "https://pet-er.app/api"
     private var authToken: String? {
-        get { UserDefaults.standard.string(forKey: "auth_token") }
-        set { UserDefaults.standard.set(newValue, forKey: "auth_token") }
+        get { KeychainService.shared.getAuthToken() }
+        set {
+            if let token = newValue {
+                KeychainService.shared.saveAuthToken(token)
+            } else {
+                KeychainService.shared.deleteAuthToken()
+            }
+        }
     }
 
-    private init() {}
+    private init() {
+        // Migrate existing tokens from UserDefaults to Keychain (one-time migration)
+        KeychainService.shared.migrateFromUserDefaults()
+    }
 
     // MARK: - Request Builder
     private func buildRequest(
@@ -62,12 +71,14 @@ class APIService {
             let bodyData = try encoder.encode(body)
             request.httpBody = bodyData
 
+            #if DEBUG
             // Log the request body for debugging
             if let jsonString = String(data: bodyData, encoding: .utf8) {
                 print("📤 API Request to \(endpoint):")
                 print("Method: \(method)")
                 print("Body: \(jsonString)")
             }
+            #endif
         }
 
         return request
@@ -92,6 +103,7 @@ class APIService {
                     decoder.dateDecodingStrategy = .iso8601
                     return try decoder.decode(T.self, from: data)
                 } catch {
+                    #if DEBUG
                     print("❌ DECODING ERROR:")
                     print("Error: \(error)")
                     if let decodingError = error as? DecodingError {
@@ -113,6 +125,7 @@ class APIService {
                         }
                     }
                     print("Response data as string: \(String(data: data, encoding: .utf8) ?? "Unable to decode")")
+                    #endif
                     throw APIError.decodingError
                 }
 
@@ -238,6 +251,72 @@ class APIService {
         let _: EmptyResponse = try await performRequest(request, responseType: EmptyResponse.self)
     }
 
+    /// Mark pet as missing and optionally create alert
+    /// - Parameters:
+    ///   - petId: Pet ID
+    ///   - location: Optional last seen location coordinates
+    ///   - address: Optional last seen address
+    ///   - description: Optional additional details
+    ///   - rewardAmount: Optional reward amount
+    func markPetMissing(
+        petId: String,
+        location: LocationCoordinate? = nil,
+        address: String? = nil,
+        description: String? = nil,
+        rewardAmount: Double? = nil
+    ) async throws -> MarkMissingResponse {
+        struct MarkMissingRequest: Codable {
+            let lastSeenLocation: LocationCoordinate?
+            let lastSeenAddress: String?
+            let description: String?
+            let rewardAmount: Double?
+        }
+
+        let requestBody = MarkMissingRequest(
+            lastSeenLocation: location,
+            lastSeenAddress: address,
+            description: description,
+            rewardAmount: rewardAmount
+        )
+
+        let request = try buildRequest(
+            endpoint: "/pets/\(petId)/mark-missing",
+            method: "POST",
+            body: requestBody
+        )
+        let response = try await performRequest(request, responseType: MarkMissingResponse.self)
+        return response
+    }
+
+    /// Mark pet as found (updates is_missing to false)
+    func markPetFound(petId: String) async throws -> Pet {
+        let updates = UpdatePetRequest(
+            name: nil,
+            species: nil,
+            breed: nil,
+            color: nil,
+            age: nil,
+            weight: nil,
+            microchipNumber: nil,
+            medicalNotes: nil,
+            allergies: nil,
+            medications: nil,
+            notes: nil,
+            uniqueFeatures: nil,
+            sex: nil,
+            isNeutered: nil,
+            isMissing: false
+        )
+
+        let request = try buildRequest(
+            endpoint: "/pets/\(petId)",
+            method: "PUT",
+            body: updates
+        )
+        let response = try await performRequest(request, responseType: PetResponse.self)
+        return response.pet
+    }
+
     func uploadPetPhoto(petId: String, imageData: Data) async throws -> Pet {
         // Backend expects /image not /photo
         let endpoint = "/pets/\(petId)/image"
@@ -245,9 +324,11 @@ class APIService {
             throw APIError.invalidURL
         }
 
+        #if DEBUG
         print("📸 Uploading image to: \(url.absoluteString)")
         print("📸 Pet ID: \(petId)")
         print("📸 Image size: \(imageData.count) bytes")
+        #endif
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -269,12 +350,18 @@ class APIService {
 
         request.httpBody = body
 
+        #if DEBUG
         print("📸 Sending multipart request with field name 'image'...")
+        #endif
+
         let response = try await performRequest(request, responseType: ImageUploadResponse.self)
+
+        #if DEBUG
         print("✅ Image upload successful! URL: \(response.imageUrl)")
+        print("📥 Fetching updated pet data...")
+        #endif
 
         // Need to fetch the full updated pet since backend only returns partial data
-        print("📥 Fetching updated pet data...")
         return try await getPet(id: petId)
     }
 
@@ -583,4 +670,120 @@ struct ShareLocationResponse: Codable {
     let sightingId: String
     let sentSMS: Bool
     let sentEmail: Bool
+}
+
+// MARK: - Mark Missing/Found Types
+struct LocationCoordinate: Codable {
+    let lat: Double
+    let lng: Double
+}
+
+struct MarkMissingResponse: Codable {
+    let success: Bool
+    let pet: Pet
+    let alert: AlertInfo?
+    let message: String
+}
+
+struct AlertInfo: Codable {
+    let id: String
+}
+
+// MARK: - Notification Preferences Extension
+extension APIService {
+    /// Get user's notification preferences
+    func getNotificationPreferences() async throws -> NotificationPreferences {
+        #if DEBUG
+        print("📡 API: Getting notification preferences...")
+        #endif
+
+        let request = try buildRequest(
+            endpoint: "/users/me/notification-preferences",
+            method: "GET"
+        )
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw APIError.invalidResponse
+        }
+
+        #if DEBUG
+        print("📡 API: Response status: \(httpResponse.statusCode)")
+        #endif
+
+        guard httpResponse.statusCode == 200 else {
+            if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                throw APIError.serverError(errorResponse.error)
+            }
+            throw APIError.serverError("Failed to get notification preferences")
+        }
+
+        let decoder = JSONDecoder()
+        let preferencesResponse = try decoder.decode(NotificationPreferencesResponse.self, from: data)
+
+        #if DEBUG
+        print("✅ API: Notification preferences retrieved")
+        #endif
+
+        return preferencesResponse.preferences
+    }
+
+    /// Update user's notification preferences
+    func updateNotificationPreferences(_ preferences: NotificationPreferences) async throws -> NotificationPreferences {
+        #if DEBUG
+        print("📡 API: Updating notification preferences...")
+        #endif
+
+        // Validate preferences before sending
+        guard preferences.isValid else {
+            throw APIError.serverError("At least one notification method must be enabled")
+        }
+
+        let body: [String: Any] = [
+            "notifyByEmail": preferences.notifyByEmail,
+            "notifyBySms": preferences.notifyBySms,
+            "notifyByPush": preferences.notifyByPush
+        ]
+
+        let request = try buildRequest(
+            endpoint: "/users/me/notification-preferences",
+            method: "PUT",
+            body: body
+        )
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw APIError.invalidResponse
+        }
+
+        #if DEBUG
+        print("📡 API: Response status: \(httpResponse.statusCode)")
+        #endif
+
+        if httpResponse.statusCode == 400 {
+            // Handle validation error
+            if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                throw APIError.serverError(errorResponse.error)
+            }
+            throw APIError.serverError("Invalid preferences: At least one notification method must be enabled")
+        }
+
+        guard httpResponse.statusCode == 200 else {
+            if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                throw APIError.serverError(errorResponse.error)
+            }
+            throw APIError.serverError("Failed to update notification preferences")
+        }
+
+        let decoder = JSONDecoder()
+        let preferencesResponse = try decoder.decode(NotificationPreferencesResponse.self, from: data)
+
+        #if DEBUG
+        print("✅ API: Notification preferences updated")
+        #endif
+
+        return preferencesResponse.preferences
+    }
 }

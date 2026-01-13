@@ -76,10 +76,13 @@ struct QuickMarkFoundView: View {
 
     private func markAsFound(pet: Pet) {
         Task {
-            // Update pet status to not missing
-            // Note: We need to add an API endpoint to mark pets as found
-            appState.showSuccess("\(pet.name) has been marked as found! 🎉")
-            dismiss()
+            do {
+                _ = try await viewModel.markPetFound(petId: pet.id)
+                appState.showSuccess("\(pet.name) has been marked as found! 🎉")
+                dismiss()
+            } catch {
+                appState.showError("Failed to mark \(pet.name) as found: \(error.localizedDescription)")
+            }
         }
     }
 }

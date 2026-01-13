@@ -3,7 +3,7 @@ import MapKit
 
 struct MarkAsLostView: View {
     let pet: Pet
-    @StateObject private var alertsViewModel = AlertsViewModel()
+    @StateObject private var petsViewModel = PetsViewModel()
     @StateObject private var locationManager = LocationManager()
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
@@ -96,7 +96,7 @@ struct MarkAsLostView: View {
                     reportMissing()
                 }
                 .foregroundColor(.white)
-                .disabled(alertsViewModel.isLoading || (!useCurrentLocation && location.isEmpty))
+                .disabled(petsViewModel.isLoading || (!useCurrentLocation && location.isEmpty))
             }
         }
         .task {
@@ -114,17 +114,30 @@ struct MarkAsLostView: View {
     private func reportMissing() {
         Task {
             do {
-                let coordinate = useCurrentLocation ? locationManager.location : nil
-                let locationText = useCurrentLocation ? nil : (location.isEmpty ? nil : location)
+                // Build location coordinate from current location
+                let coordinate: LocationCoordinate? = if let loc = locationManager.location {
+                    LocationCoordinate(lat: loc.latitude, lng: loc.longitude)
+                } else {
+                    nil
+                }
 
-                _ = try await alertsViewModel.createAlert(
+                // Use address text if not using current location
+                let addressText = useCurrentLocation ? nil : (location.isEmpty ? nil : location)
+
+                let response = try await petsViewModel.markPetMissing(
                     petId: pet.id,
-                    location: locationText,
-                    coordinate: coordinate,
-                    additionalInfo: additionalInfo.isEmpty ? nil : additionalInfo
+                    location: coordinate,
+                    address: addressText,
+                    description: additionalInfo.isEmpty ? nil : additionalInfo
                 )
 
-                appState.showSuccess("\(pet.name) has been reported as missing. Alerts are being sent to nearby users, vets, and shelters.")
+                // Show appropriate success message based on whether alert was created
+                if response.alert != nil {
+                    appState.showSuccess("\(pet.name) has been reported as missing. Alerts are being sent to nearby users, vets, and shelters.")
+                } else {
+                    appState.showSuccess("\(pet.name) has been marked as missing. Add location to send community alerts.")
+                }
+
                 dismiss()
             } catch {
                 appState.showError(error.localizedDescription)

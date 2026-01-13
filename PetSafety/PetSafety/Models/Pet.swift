@@ -233,6 +233,7 @@ struct UpdatePetRequest: Codable {
     let uniqueFeatures: String?
     let sex: String?
     let isNeutered: Bool?
+    let isMissing: Bool?
 
     enum CodingKeys: String, CodingKey {
         case name, species, breed, color, weight, age
@@ -242,5 +243,6 @@ struct UpdatePetRequest: Codable {
         case uniqueFeatures = "unique_features"
         case sex
         case isNeutered = "is_neutered"
+        case isMissing = "is_missing"
     }
 }

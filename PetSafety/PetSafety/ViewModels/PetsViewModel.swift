@@ -93,4 +93,60 @@ class PetsViewModel: ObservableObject {
             throw error
         }
     }
+
+    /// Mark pet as missing and optionally create alert
+    func markPetMissing(
+        petId: String,
+        location: LocationCoordinate? = nil,
+        address: String? = nil,
+        description: String? = nil,
+        rewardAmount: Double? = nil
+    ) async throws -> MarkMissingResponse {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            let response = try await apiService.markPetMissing(
+                petId: petId,
+                location: location,
+                address: address,
+                description: description,
+                rewardAmount: rewardAmount
+            )
+
+            // Update local pet list
+            if let index = pets.firstIndex(where: { $0.id == petId }) {
+                pets[index] = response.pet
+            }
+
+            isLoading = false
+            return response
+        } catch {
+            isLoading = false
+            errorMessage = error.localizedDescription
+            throw error
+        }
+    }
+
+    /// Mark pet as found
+    func markPetFound(petId: String) async throws -> Pet {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            let updatedPet = try await apiService.markPetFound(petId: petId)
+
+            // Update local pet list
+            if let index = pets.firstIndex(where: { $0.id == petId }) {
+                pets[index] = updatedPet
+            }
+
+            isLoading = false
+            return updatedPet
+        } catch {
+            isLoading = false
+            errorMessage = error.localizedDescription
+            throw error
+        }
+    }
 }

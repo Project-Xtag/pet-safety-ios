@@ -139,10 +139,13 @@ struct PetDetailView: View {
 
     private func markAsFound() {
         Task {
-            // Update pet status to not missing
-            // Note: We need to add is_missing field to UpdatePetRequest
-            appState.showSuccess("\(pet.name) has been marked as found!")
-            dismiss()
+            do {
+                _ = try await viewModel.markPetFound(petId: pet.id)
+                appState.showSuccess("\(pet.name) has been marked as found! 🎉")
+                dismiss()
+            } catch {
+                appState.showError("Failed to mark \(pet.name) as found: \(error.localizedDescription)")
+            }
         }
     }
 }
