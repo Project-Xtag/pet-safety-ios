@@ -114,6 +114,17 @@ struct PetDetailView: View {
 
                 // Action Buttons
                 VStack(spacing: 12) {
+                    // Photo Gallery Button
+                    NavigationLink(destination: PhotoGalleryView(pet: pet)) {
+                        Label("View Photo Gallery", systemImage: "photo.on.rectangle")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.accentColor.opacity(0.1))
+                            .foregroundColor(.accentColor)
+                            .cornerRadius(10)
+                            .fontWeight(.semibold)
+                    }
+
                     Button(action: { showingEditSheet = true }) {
                         Label("Edit Pet Information", systemImage: "pencil")
                     }

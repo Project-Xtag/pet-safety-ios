@@ -365,6 +365,86 @@ class APIService {
         return try await getPet(id: petId)
     }
 
+    // MARK: - Pet Photos
+
+    /// Get all photos for a pet
+    func getPetPhotos(petId: String) async throws -> PetPhotosResponse {
+        let request = try buildRequest(endpoint: "/pets/\(petId)/photos")
+        return try await performRequest(request, responseType: PetPhotosResponse.self)
+    }
+
+    /// Upload a new photo for a pet
+    func uploadPetPhotoToGallery(petId: String, imageData: Data, isPrimary: Bool = false) async throws -> PhotoUploadResponse {
+        let endpoint = "/pets/\(petId)/photos"
+        guard let url = URL(string: baseURL + endpoint) else {
+            throw APIError.invalidURL
+        }
+
+        #if DEBUG
+        print("📸 Uploading photo to gallery: \(url.absoluteString)")
+        print("📸 Pet ID: \(petId), Primary: \(isPrimary)")
+        print("📸 Image size: \(imageData.count) bytes")
+        #endif
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+
+        if let token = authToken {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        var body = Data()
+
+        // Add photo file
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"photo.jpg\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        body.append(imageData)
+        body.append("\r\n".data(using: .utf8)!)
+
+        // Add isPrimary field
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"isPrimary\"\r\n\r\n".data(using: .utf8)!)
+        body.append("\(isPrimary)".data(using: .utf8)!)
+        body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+
+        request.httpBody = body
+
+        return try await performRequest(request, responseType: PhotoUploadResponse.self)
+    }
+
+    /// Set a photo as primary
+    func setPrimaryPhoto(petId: String, photoId: String) async throws -> PhotoOperationResponse {
+        let request = try buildRequest(
+            endpoint: "/pets/\(petId)/photos/\(photoId)/primary",
+            method: "PUT",
+            body: EmptyBody()
+        )
+        return try await performRequest(request, responseType: PhotoOperationResponse.self)
+    }
+
+    /// Delete a photo
+    func deletePetPhoto(petId: String, photoId: String) async throws -> PhotoOperationResponse {
+        let request = try buildRequest(
+            endpoint: "/pets/\(petId)/photos/\(photoId)",
+            method: "DELETE"
+        )
+        return try await performRequest(request, responseType: PhotoOperationResponse.self)
+    }
+
+    /// Reorder photos
+    func reorderPetPhotos(petId: String, photoIds: [String]) async throws -> PhotoReorderResponse {
+        let request = try buildRequest(
+            endpoint: "/pets/\(petId)/photos/reorder",
+            method: "PUT",
+            body: PhotoReorderRequest(photoOrder: photoIds)
+        )
+        return try await performRequest(request, responseType: PhotoReorderResponse.self)
+    }
+
     // MARK: - Alerts
     func getAlerts() async throws -> [MissingPetAlert] {
         let request = try buildRequest(endpoint: "/alerts")
@@ -542,6 +622,8 @@ struct ErrorResponse: Codable {
 }
 
 struct EmptyResponse: Codable {}
+
+struct EmptyBody: Codable {}
 
 struct UserResponse: Codable {
     let success: Bool
