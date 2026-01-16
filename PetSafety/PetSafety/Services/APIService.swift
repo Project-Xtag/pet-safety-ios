@@ -975,5 +975,3 @@ private struct GenericResponse<T: Decodable>: Decodable {
     let success: Bool
     let data: T
 }
-
-private struct EmptyResponse: Decodable {}
