@@ -8,19 +8,41 @@ class AlertsViewModel: ObservableObject {
     @Published var foundAlerts: [MissingPetAlert] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var isOfflineMode = false
 
     private let apiService = APIService.shared
+    private let offlineManager = OfflineDataManager.shared
+    private let networkMonitor = NetworkMonitor.shared
+    private let syncService = SyncService.shared
 
     func fetchAlerts() async {
         isLoading = true
         errorMessage = nil
+        isOfflineMode = !networkMonitor.isConnected
 
         do {
-            alerts = try await apiService.getAlerts()
+            if networkMonitor.isConnected {
+                // Fetch from API when online
+                alerts = try await apiService.getAlerts()
+                // Cache the data locally
+                for alert in alerts {
+                    try? offlineManager.saveAlert(alert)
+                }
+            } else {
+                // Load from local cache when offline
+                alerts = try offlineManager.fetchAlerts()
+                errorMessage = "Showing cached data (offline)"
+            }
             isLoading = false
         } catch {
             isLoading = false
-            errorMessage = error.localizedDescription
+            // Try to load from cache if API fails
+            do {
+                alerts = try offlineManager.fetchAlerts()
+                errorMessage = "Showing cached data (failed to connect)"
+            } catch {
+                errorMessage = error.localizedDescription
+            }
         }
     }
 
@@ -127,6 +149,36 @@ class AlertsViewModel: ObservableObject {
     ) async throws {
         isLoading = true
         errorMessage = nil
+
+        // If offline, queue the action
+        if !networkMonitor.isConnected {
+            var actionData: [String: Any] = ["alertId": alertId]
+            if let reporterName = reporterName {
+                actionData["reporterName"] = reporterName
+            }
+            if let reporterPhone = reporterPhone {
+                actionData["reporterPhone"] = reporterPhone
+            }
+            if let reporterEmail = reporterEmail {
+                actionData["reporterEmail"] = reporterEmail
+            }
+            if let location = location {
+                actionData["sightingLocation"] = location
+            }
+            if let coordinate = coordinate {
+                actionData["sightingLatitude"] = coordinate.latitude
+                actionData["sightingLongitude"] = coordinate.longitude
+            }
+            if let notes = notes {
+                actionData["sightingNotes"] = notes
+            }
+
+            _ = try await syncService.queueAction(type: .reportSighting, data: actionData)
+
+            isLoading = false
+            errorMessage = "Sighting report queued. Will sync when online."
+            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
+        }
 
         let request = ReportSightingRequest(
             reporterName: reporterName,

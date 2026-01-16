@@ -6,19 +6,39 @@ class PetsViewModel: ObservableObject {
     @Published var pets: [Pet] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var isOfflineMode = false
 
     private let apiService = APIService.shared
+    private let offlineManager = OfflineDataManager.shared
+    private let networkMonitor = NetworkMonitor.shared
+    private let syncService = SyncService.shared
 
     func fetchPets() async {
         isLoading = true
         errorMessage = nil
+        isOfflineMode = !networkMonitor.isConnected
 
         do {
-            pets = try await apiService.getPets()
+            if networkMonitor.isConnected {
+                // Fetch from API when online
+                pets = try await apiService.getPets()
+                // Cache the data locally
+                try offlineManager.savePets(pets)
+            } else {
+                // Load from local cache when offline
+                pets = try offlineManager.fetchPets()
+                errorMessage = "Showing cached data (offline)"
+            }
             isLoading = false
         } catch {
             isLoading = false
-            errorMessage = error.localizedDescription
+            // Try to load from cache if API fails
+            do {
+                pets = try offlineManager.fetchPets()
+                errorMessage = "Showing cached data (failed to connect)"
+            } catch {
+                errorMessage = error.localizedDescription
+            }
         }
     }
 
@@ -95,6 +115,7 @@ class PetsViewModel: ObservableObject {
     }
 
     /// Mark pet as missing and optionally create alert
+    /// Queues action if offline
     func markPetMissing(
         petId: String,
         location: LocationCoordinate? = nil,
@@ -105,6 +126,66 @@ class PetsViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
 
+        // If offline, queue the action
+        if !networkMonitor.isConnected {
+            var actionData: [String: Any] = ["petId": petId]
+            if let location = location {
+                actionData["lastSeenLatitude"] = location.lat
+                actionData["lastSeenLongitude"] = location.lng
+            }
+            if let address = address {
+                actionData["lastSeenLocation"] = address
+            }
+            if let description = description {
+                actionData["additionalInfo"] = description
+            }
+
+            _ = try await syncService.queueAction(type: .markPetLost, data: actionData)
+
+            // Update local pet status
+            if let index = pets.firstIndex(where: { $0.id == petId }) {
+                var updatedPet = pets[index]
+                // Create a new Pet instance with updated isMissing status
+                let newPet = Pet(
+                    id: updatedPet.id,
+                    ownerId: updatedPet.ownerId,
+                    name: updatedPet.name,
+                    species: updatedPet.species,
+                    breed: updatedPet.breed,
+                    color: updatedPet.color,
+                    weight: updatedPet.weight,
+                    microchipNumber: updatedPet.microchipNumber,
+                    medicalNotes: updatedPet.medicalNotes,
+                    notes: updatedPet.notes,
+                    profileImage: updatedPet.profileImage,
+                    isMissing: true,
+                    createdAt: updatedPet.createdAt,
+                    updatedAt: updatedPet.updatedAt,
+                    ageYears: updatedPet.ageYears,
+                    ageMonths: updatedPet.ageMonths,
+                    ageText: updatedPet.ageText,
+                    ageIsApproximate: updatedPet.ageIsApproximate,
+                    allergies: updatedPet.allergies,
+                    medications: updatedPet.medications,
+                    uniqueFeatures: updatedPet.uniqueFeatures,
+                    sex: updatedPet.sex,
+                    isNeutered: updatedPet.isNeutered,
+                    qrCode: updatedPet.qrCode,
+                    dateOfBirth: updatedPet.dateOfBirth,
+                    ownerName: updatedPet.ownerName,
+                    ownerPhone: updatedPet.ownerPhone,
+                    ownerEmail: updatedPet.ownerEmail
+                )
+                pets[index] = newPet
+                try offlineManager.savePet(newPet)
+            }
+
+            isLoading = false
+            errorMessage = "Action queued. Will sync when online."
+            // Return a mock response for offline mode
+            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
+        }
+
         do {
             let response = try await apiService.markPetMissing(
                 petId: petId,
@@ -114,9 +195,10 @@ class PetsViewModel: ObservableObject {
                 rewardAmount: rewardAmount
             )
 
-            // Update local pet list
+            // Update local pet list and cache
             if let index = pets.firstIndex(where: { $0.id == petId }) {
                 pets[index] = response.pet
+                try? offlineManager.savePet(response.pet)
             }
 
             isLoading = false
@@ -129,16 +211,69 @@ class PetsViewModel: ObservableObject {
     }
 
     /// Mark pet as found
+    /// Queues action if offline
     func markPetFound(petId: String) async throws -> Pet {
         isLoading = true
         errorMessage = nil
 
+        // If offline, queue the action
+        if !networkMonitor.isConnected {
+            let actionData: [String: Any] = [
+                "petId": petId,
+                "alertId": "" // Will need to lookup alert ID during sync
+            ]
+
+            _ = try await syncService.queueAction(type: .markPetFound, data: actionData)
+
+            // Update local pet status
+            if let index = pets.firstIndex(where: { $0.id == petId }) {
+                var updatedPet = pets[index]
+                let newPet = Pet(
+                    id: updatedPet.id,
+                    ownerId: updatedPet.ownerId,
+                    name: updatedPet.name,
+                    species: updatedPet.species,
+                    breed: updatedPet.breed,
+                    color: updatedPet.color,
+                    weight: updatedPet.weight,
+                    microchipNumber: updatedPet.microchipNumber,
+                    medicalNotes: updatedPet.medicalNotes,
+                    notes: updatedPet.notes,
+                    profileImage: updatedPet.profileImage,
+                    isMissing: false,
+                    createdAt: updatedPet.createdAt,
+                    updatedAt: updatedPet.updatedAt,
+                    ageYears: updatedPet.ageYears,
+                    ageMonths: updatedPet.ageMonths,
+                    ageText: updatedPet.ageText,
+                    ageIsApproximate: updatedPet.ageIsApproximate,
+                    allergies: updatedPet.allergies,
+                    medications: updatedPet.medications,
+                    uniqueFeatures: updatedPet.uniqueFeatures,
+                    sex: updatedPet.sex,
+                    isNeutered: updatedPet.isNeutered,
+                    qrCode: updatedPet.qrCode,
+                    dateOfBirth: updatedPet.dateOfBirth,
+                    ownerName: updatedPet.ownerName,
+                    ownerPhone: updatedPet.ownerPhone,
+                    ownerEmail: updatedPet.ownerEmail
+                )
+                pets[index] = newPet
+                try offlineManager.savePet(newPet)
+            }
+
+            isLoading = false
+            errorMessage = "Action queued. Will sync when online."
+            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
+        }
+
         do {
             let updatedPet = try await apiService.markPetFound(petId: petId)
 
-            // Update local pet list
+            // Update local pet list and cache
             if let index = pets.firstIndex(where: { $0.id == petId }) {
                 pets[index] = updatedPet
+                try? offlineManager.savePet(updatedPet)
             }
 
             isLoading = false

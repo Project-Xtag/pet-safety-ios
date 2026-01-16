@@ -6,8 +6,12 @@ struct AlertsListView: View {
     @State private var showingCreateAlert = false
 
     var body: some View {
-        ZStack {
-            if viewModel.alerts.isEmpty && !viewModel.isLoading {
+        VStack(spacing: 0) {
+            // Offline indicator at the top
+            OfflineIndicator()
+
+            ZStack {
+                if viewModel.alerts.isEmpty && !viewModel.isLoading {
                 EmptyStateView(
                     icon: "exclamationmark.triangle.fill",
                     title: "No Active Alerts",
@@ -25,7 +29,8 @@ struct AlertsListView: View {
                 }
                 .listStyle(.inset)
             }
-        }
+        } // end of ZStack
+        } // end of VStack with OfflineIndicator
         .navigationTitle("Missing Pet Alerts")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

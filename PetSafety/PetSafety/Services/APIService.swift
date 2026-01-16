@@ -822,7 +822,7 @@ extension APIService {
             throw APIError.serverError("At least one notification method must be enabled")
         }
 
-        let body: [String: Any] = [
+        let body = [
             "notifyByEmail": preferences.notifyByEmail,
             "notifyBySms": preferences.notifyBySms,
             "notifyByPush": preferences.notifyByPush
@@ -868,4 +868,112 @@ extension APIService {
 
         return preferencesResponse.preferences
     }
+
+    // MARK: - Success Stories
+
+    /// Get public success stories near a location
+    func getPublicSuccessStories(
+        latitude: Double,
+        longitude: Double,
+        radiusKm: Double = 10,
+        page: Int = 1,
+        limit: Int = 10
+    ) async throws -> SuccessStoriesResponse {
+        #if DEBUG
+        print("📡 API: Fetching public success stories...")
+        #endif
+
+        let endpoint = "/success-stories?lat=\(latitude)&lng=\(longitude)&radius=\(radiusKm)&page=\(page)&limit=\(limit)"
+        let request = try buildRequest(endpoint: endpoint, requiresAuth: false)
+
+        return try await performRequest(request, responseType: SuccessStoriesResponse.self)
+    }
+
+    /// Get success stories for a specific pet
+    func getSuccessStoriesForPet(petId: String) async throws -> [SuccessStory] {
+        #if DEBUG
+        print("📡 API: Fetching success stories for pet \(petId)...")
+        #endif
+
+        let request = try buildRequest(endpoint: "/success-stories/pet/\(petId)")
+        let response = try await performRequest(request, responseType: GenericResponse<[SuccessStory]>.self)
+        return response.data
+    }
+
+    /// Create a new success story
+    func createSuccessStory(_ story: CreateSuccessStoryRequest) async throws -> SuccessStory {
+        #if DEBUG
+        print("📡 API: Creating success story...")
+        #endif
+
+        let request = try buildRequest(endpoint: "/success-stories", method: "POST", body: story)
+        let response = try await performRequest(request, responseType: GenericResponse<SuccessStory>.self)
+        return response.data
+    }
+
+    /// Update a success story
+    func updateSuccessStory(id: String, updates: UpdateSuccessStoryRequest) async throws -> SuccessStory {
+        #if DEBUG
+        print("📡 API: Updating success story \(id)...")
+        #endif
+
+        let request = try buildRequest(endpoint: "/success-stories/\(id)", method: "PATCH", body: updates)
+        let response = try await performRequest(request, responseType: GenericResponse<SuccessStory>.self)
+        return response.data
+    }
+
+    /// Delete a success story
+    func deleteSuccessStory(id: String) async throws {
+        #if DEBUG
+        print("📡 API: Deleting success story \(id)...")
+        #endif
+
+        let request = try buildRequest(endpoint: "/success-stories/\(id)", method: "DELETE")
+        let response = try await performRequest(request, responseType: GenericResponse<EmptyResponse>.self)
+
+        #if DEBUG
+        print("✅ API: Success story deleted")
+        #endif
+    }
+
+    /// Upload a photo for a success story
+    func uploadSuccessStoryPhoto(storyId: String, imageData: Data) async throws -> SuccessStoryPhoto {
+        #if DEBUG
+        print("📡 API: Uploading success story photo...")
+        #endif
+
+        guard let url = URL(string: baseURL + "/success-stories/\(storyId)/photos") else {
+            throw APIError.invalidURL
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+
+        if let token = authToken {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        var body = Data()
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"photo.jpg\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        body.append(imageData)
+        body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+
+        request.httpBody = body
+
+        let response = try await performRequest(request, responseType: GenericResponse<SuccessStoryPhoto>.self)
+        return response.data
+    }
 }
+
+// MARK: - Supporting Types
+private struct GenericResponse<T: Decodable>: Decodable {
+    let success: Bool
+    let data: T
+}
+
+private struct EmptyResponse: Decodable {}

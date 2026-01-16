@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import UserNotifications
 
 /// Service for managing Server-Sent Events (SSE) connections
 /// Provides real-time notifications for tag scans, sightings, and pet updates
@@ -12,6 +13,7 @@ class SSEService: NSObject, ObservableObject {
     @Published var lastEvent: String?
 
     // MARK: - Private Properties
+    private let baseURL = "https://pet-er.app"
     private var urlSession: URLSession?
     private var dataTask: URLSessionDataTask?
     private var buffer = ""
@@ -50,7 +52,7 @@ class SSEService: NSObject, ObservableObject {
             return
         }
 
-        guard let url = URL(string: "\(AppConfig.baseURL)/api/sse/events") else {
+        guard let url = URL(string: "\(baseURL)/api/sse/events") else {
             #if DEBUG
             print("❌ SSEService: Invalid URL")
             #endif

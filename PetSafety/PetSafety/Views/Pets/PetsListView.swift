@@ -15,96 +15,100 @@ struct PetsListView: View {
     }
 
     var body: some View {
-        ZStack {
-            if viewModel.pets.isEmpty && !viewModel.isLoading {
-                EmptyStateView(
-                    icon: "pawprint.fill",
-                    title: "No Pets Yet",
-                    message: "Add your first pet to get started with Pet Safety",
-                    actionTitle: "Add Pet",
-                    action: { showingAddPet = true }
-                )
-            } else {
-                ScrollView {
-                    VStack(spacing: 16) {
-                        // Pets Grid Section
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("My Pets")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                .padding(.horizontal, 20)
-                                .padding(.top, 4)
+        return VStack(spacing: 0) {
+            OfflineIndicator()
 
-                            if viewModel.pets.count == 1 {
-                                // Center single pet card
-                                HStack {
-                                    Spacer()
-                                    PetCardView(pet: viewModel.pets[0])
-                                        .frame(width: 140)
-                                    Spacer()
-                                }
-                                .padding(.horizontal, 20)
-                            } else {
-                                // Grid layout for multiple pets with centered odd items
-                                LazyVGrid(columns: [
-                                    GridItem(.flexible(), spacing: 12),
-                                    GridItem(.flexible(), spacing: 12)
-                                ], spacing: 12) {
-                                    ForEach(Array(viewModel.pets.enumerated()), id: \.element.id) { index, pet in
-                                        if viewModel.pets.count % 2 != 0 && index == viewModel.pets.count - 1 {
-                                            // Last item in odd count - center it
-                                            HStack {
-                                                Spacer()
+            ZStack {
+                if viewModel.pets.isEmpty && !viewModel.isLoading {
+                    EmptyStateView(
+                        icon: "pawprint.fill",
+                        title: "No Pets Yet",
+                        message: "Add your first pet to get started with Pet Safety",
+                        actionTitle: "Add Pet",
+                        action: { showingAddPet = true }
+                    )
+                } else {
+                    ScrollView {
+                        VStack(spacing: 16) {
+                            // Pets Grid Section
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("My Pets")
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                    .padding(.horizontal, 20)
+                                    .padding(.top, 4)
+
+                                if viewModel.pets.count == 1 {
+                                    // Center single pet card
+                                    HStack {
+                                        Spacer()
+                                        PetCardView(pet: viewModel.pets[0])
+                                            .frame(width: 140)
+                                        Spacer()
+                                    }
+                                    .padding(.horizontal, 20)
+                                } else {
+                                    // Grid layout for multiple pets with centered odd items
+                                    LazyVGrid(columns: [
+                                        GridItem(.flexible(), spacing: 12),
+                                        GridItem(.flexible(), spacing: 12)
+                                    ], spacing: 12) {
+                                        ForEach(Array(viewModel.pets.enumerated()), id: \.element.id) { index, pet in
+                                            if viewModel.pets.count % 2 != 0 && index == viewModel.pets.count - 1 {
+                                                // Last item in odd count - center it
+                                                HStack {
+                                                    Spacer()
+                                                    PetCardView(pet: pet)
+                                                        .frame(maxWidth: 140)
+                                                    Spacer()
+                                                }
+                                                .gridCellColumns(2)
+                                            } else {
                                                 PetCardView(pet: pet)
-                                                    .frame(maxWidth: 140)
-                                                Spacer()
                                             }
-                                            .gridCellColumns(2)
-                                        } else {
-                                            PetCardView(pet: pet)
                                         }
                                     }
+                                    .padding(.horizontal, 20)
+                                }
+                            }
+
+                            // Quick Actions Section
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("Quick Actions")
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                    .padding(.horizontal, 20)
+
+                                HStack(spacing: 12) {
+                                    QuickActionButton(
+                                        icon: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill",
+                                        title: hasMissingPets ? "Mark Found" : "Report Missing",
+                                        color: .red,
+                                        action: { showingMarkLostSheet = true }
+                                    )
+
+                                    QuickActionButton(
+                                        icon: "cart.badge.plus",
+                                        title: "Order Tags",
+                                        color: .blue,
+                                        action: { showingOrderMoreTags = true }
+                                    )
+
+                                    QuickActionButton(
+                                        icon: "arrow.triangle.2.circlepath",
+                                        title: "Replace Tag",
+                                        color: .orange,
+                                        action: { showOrderReplacementMenu() }
+                                    )
                                 }
                                 .padding(.horizontal, 20)
                             }
+                            .padding(.bottom, 16)
                         }
-
-                        // Quick Actions Section
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Quick Actions")
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                                .padding(.horizontal, 20)
-
-                            HStack(spacing: 12) {
-                                QuickActionButton(
-                                    icon: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill",
-                                    title: hasMissingPets ? "Mark Found" : "Report Missing",
-                                    color: .red,
-                                    action: { showingMarkLostSheet = true }
-                                )
-
-                                QuickActionButton(
-                                    icon: "cart.badge.plus",
-                                    title: "Order Tags",
-                                    color: .blue,
-                                    action: { showingOrderMoreTags = true }
-                                )
-
-                                QuickActionButton(
-                                    icon: "arrow.triangle.2.circlepath",
-                                    title: "Replace Tag",
-                                    color: .orange,
-                                    action: { showOrderReplacementMenu() }
-                                )
-                            }
-                            .padding(.horizontal, 20)
-                        }
-                        .padding(.bottom, 16)
                     }
                 }
             }
-        }
+        } // <--- THIS WAS THE MISSING BRACE
         .navigationTitle("My Pets")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -164,7 +168,6 @@ struct PetsListView: View {
             }
         }
     }
-
 
     private func showOrderReplacementMenu() {
         if viewModel.pets.isEmpty {

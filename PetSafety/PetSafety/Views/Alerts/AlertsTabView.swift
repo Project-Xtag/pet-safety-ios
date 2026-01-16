@@ -15,6 +15,7 @@ struct AlertsTabView: View {
                 Picker("Alerts Type", selection: $selectedTab) {
                     Text("Missing").tag(0)
                     Text("Found").tag(1)
+                    Text("Success").tag(2)
                 }
                 .pickerStyle(.segmented)
                 .padding()
@@ -29,6 +30,9 @@ struct AlertsTabView: View {
 
                         FoundAlertsView(viewModel: viewModel)
                             .tag(1)
+
+                        SuccessStoriesView()
+                            .tag(2)
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))
                 }

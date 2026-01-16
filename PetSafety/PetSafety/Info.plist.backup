@@ -54,9 +54,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>We need access to your camera to scan QR codes on pet tags</string>
+	<string>We need access to your camera to take photos of your pet and scan QR codes on pet tags</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need access to your photo library to select pet photos</string>
+	<string>We need access to your photo library to select photos of your pet</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to help find missing pets and show nearby alerts</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

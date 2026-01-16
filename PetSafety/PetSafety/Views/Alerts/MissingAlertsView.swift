@@ -11,6 +11,9 @@ struct MissingAlertsView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            // Offline indicator at the top
+            OfflineIndicator()
+
             // Segmented Control
             Picker("View Mode", selection: $viewMode) {
                 Label("List", systemImage: "list.bullet").tag(ViewMode.list)
