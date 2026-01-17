@@ -46,12 +46,11 @@ struct LoginRequest: Codable {
 }
 
 struct LoginResponse: Codable {
-    let success: Bool
     let message: String
     let expiresIn: Int?
 
     enum CodingKeys: String, CodingKey {
-        case success, message
+        case message
         case expiresIn = "expiresIn"
     }
 }

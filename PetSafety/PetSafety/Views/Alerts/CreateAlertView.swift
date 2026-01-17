@@ -103,7 +103,13 @@ struct CreateAlertView: View {
                 appState.showSuccess("Missing pet alert created successfully!")
                 dismiss()
             } catch {
-                appState.showError(error.localizedDescription)
+                let nsError = error as NSError
+                if nsError.domain == "Offline" {
+                    appState.showSuccess("Alert queued. Will sync when online.")
+                    dismiss()
+                } else {
+                    appState.showError(error.localizedDescription)
+                }
             }
         }
     }

@@ -134,22 +134,27 @@ struct FoundAlertRowView: View {
 // MARK: - Map View
 struct FoundAlertsMapView: View {
     let alerts: [MissingPetAlert]
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
-        span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+    @State private var mapPosition: MapCameraPosition = .region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
+            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        )
     )
     @State private var selectedAlert: MissingPetAlert?
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            Map(coordinateRegion: $region, annotationItems: alerts) { alert in
-                MapAnnotation(coordinate: alert.coordinate ?? CLLocationCoordinate2D()) {
-                    FoundPetMapMarker(alert: alert, isSelected: selectedAlert?.id == alert.id)
-                        .onTapGesture {
-                            withAnimation(.spring(response: 0.3)) {
-                                selectedAlert = alert
+            Map(position: $mapPosition) {
+                ForEach(alerts) { alert in
+                    let coordinate = alert.coordinate ?? CLLocationCoordinate2D()
+                    Annotation("Found Alert", coordinate: coordinate) {
+                        FoundPetMapMarker(alert: alert, isSelected: selectedAlert?.id == alert.id)
+                            .onTapGesture {
+                                withAnimation(.spring(response: 0.3)) {
+                                    selectedAlert = alert
+                                }
                             }
-                        }
+                    }
                 }
             }
             .ignoresSafeArea(edges: .bottom)
@@ -166,9 +171,14 @@ struct FoundAlertsMapView: View {
         }
         .onAppear {
             // Center map on first alert or use default location
+            var region = MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
+                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+            )
             if let firstCoord = alerts.first?.coordinate {
                 region.center = firstCoord
             }
+            mapPosition = .region(region)
         }
     }
 }

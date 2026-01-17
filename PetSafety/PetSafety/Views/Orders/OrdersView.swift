@@ -154,7 +154,7 @@ struct OrderDetailView: View {
 
                             HStack {
                                 Text(item.qrTagId == nil ? "QR Tag pending" : "QR Tag assigned")
-                                    .font(.caption)
+                                        .font(.caption)
                                     .foregroundColor(item.qrTagId == nil ? .orange : .blue)
 
                                 Spacer()

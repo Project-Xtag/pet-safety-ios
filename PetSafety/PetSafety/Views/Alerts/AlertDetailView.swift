@@ -9,21 +9,23 @@ struct AlertDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showingReportSighting = false
     @State private var isMarkingFound = false
-    @State private var mapRegion: MKCoordinateRegion
+    @State private var mapPosition: MapCameraPosition
 
     init(alert: MissingPetAlert) {
         self.alert = alert
+        let region: MKCoordinateRegion
         if let coordinate = alert.coordinate {
-            _mapRegion = State(initialValue: MKCoordinateRegion(
+            region = MKCoordinateRegion(
                 center: coordinate,
                 span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            ))
+            )
         } else {
-            _mapRegion = State(initialValue: MKCoordinateRegion(
+            region = MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
                 span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            ))
+            )
         }
+        _mapPosition = State(initialValue: .region(region))
     }
 
     // Check if current user is the pet owner
@@ -103,8 +105,8 @@ struct AlertDetailView: View {
                         Label("Last Seen Location", systemImage: "location.fill")
                             .font(.headline)
 
-                        Map(coordinateRegion: $mapRegion, annotationItems: [alert]) { item in
-                            MapAnnotation(coordinate: coordinate) {
+                        Map(position: $mapPosition) {
+                            Annotation("Last Seen", coordinate: coordinate) {
                                 VStack {
                                     Image(systemName: "mappin.circle.fill")
                                         .font(.system(size: 40))

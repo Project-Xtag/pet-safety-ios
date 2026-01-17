@@ -21,7 +21,7 @@ class KeychainService {
 
     private let serviceName = "com.petsafety.app"
 
-    enum KeychainKey: String {
+    enum KeychainKey: String, CaseIterable {
         case authToken = "auth_token"
         case refreshToken = "refresh_token"
         case userId = "user_id"
@@ -128,22 +128,22 @@ class KeychainService {
 
     /// Delete all items for this app
     func deleteAll() -> Bool {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: serviceName
-        ]
-
-        let status = SecItemDelete(query as CFDictionary)
-
-        if status == errSecSuccess || status == errSecItemNotFound {
-            #if DEBUG
-            print("✅ KeychainService: Deleted all items")
-            #endif
-            return true
-        } else {
-            print("❌ KeychainService: Failed to delete all items - Status: \(status)")
-            return false
+        var allDeleted = true
+        for key in KeychainKey.allCases {
+            if delete(key) == false {
+                allDeleted = false
+            }
         }
+
+        #if DEBUG
+        if allDeleted {
+            print("✅ KeychainService: Deleted all items")
+        } else {
+            print("❌ KeychainService: Failed to delete one or more items")
+        }
+        #endif
+
+        return allDeleted
     }
 
     /// Check if a key exists in Keychain

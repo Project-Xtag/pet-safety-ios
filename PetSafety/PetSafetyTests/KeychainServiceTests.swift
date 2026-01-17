@@ -16,7 +16,7 @@ struct KeychainServiceTests {
 
     // Clean up after each test
     func cleanup() {
-        keychainService.deleteAll()
+        _ = keychainService.deleteAll()
     }
 
     @Test func testSaveAndRetrieveAuthToken() async throws {

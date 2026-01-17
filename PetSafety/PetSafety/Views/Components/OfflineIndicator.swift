@@ -58,7 +58,7 @@ struct OfflineIndicator: View {
                         }
 
                         // Last sync time
-                        if let lastSync = syncService.lastSyncDate {
+                        if syncService.lastSyncDate != nil {
                             HStack {
                                 Image(systemName: "clock")
                                     .foregroundColor(.secondary)

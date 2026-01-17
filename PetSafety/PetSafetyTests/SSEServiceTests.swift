@@ -19,6 +19,7 @@ struct SSEServiceTests {
     @Test("SSEService should initialize with disconnected state")
     func testInitialState() {
         let service = SSEService.shared
+        service.resetForTesting()
         #expect(service.isConnected == false)
         #expect(service.connectionError == nil)
         #expect(service.lastEvent == nil)
@@ -27,9 +28,10 @@ struct SSEServiceTests {
     @Test("SSEService connect requires auth token")
     func testConnectWithoutToken() {
         // Clear any existing token
-        KeychainService.shared.deleteAuthToken()
+        _ = KeychainService.shared.deleteAuthToken()
 
         let service = SSEService.shared
+        service.resetForTesting()
         service.connect()
 
         // Should set connection error
@@ -40,6 +42,7 @@ struct SSEServiceTests {
     @Test("SSEService disconnect should clear connection state")
     func testDisconnect() {
         let service = SSEService.shared
+        service.resetForTesting()
         service.disconnect()
 
         #expect(service.isConnected == false)

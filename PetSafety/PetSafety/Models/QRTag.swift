@@ -27,11 +27,10 @@ struct QRTag: Codable, Identifiable {
 }
 
 struct ScanResponse: Codable {
-    let success: Bool
     let pet: Pet
 
     enum CodingKeys: String, CodingKey {
-        case success, pet
+        case pet
     }
 }
 

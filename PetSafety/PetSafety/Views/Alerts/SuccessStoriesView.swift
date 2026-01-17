@@ -301,23 +301,29 @@ struct SuccessStoriesMapView: View {
     let userLocation: CLLocationCoordinate2D?
     let onShare: (SuccessStory) -> Void
 
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
-        span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+    @State private var mapPosition: MapCameraPosition = .region(
+        MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
+            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        )
     )
     @State private var selectedStory: SuccessStory?
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            Map(coordinateRegion: $region, annotationItems: stories.filter { $0.coordinate != nil }) { story in
-                MapAnnotation(coordinate: story.coordinate!) {
-                    SuccessStoryMapMarker(
-                        story: story,
-                        isSelected: selectedStory?.id == story.id
-                    )
-                    .onTapGesture {
-                        withAnimation(.spring(response: 0.3)) {
-                            selectedStory = story
+            Map(position: $mapPosition) {
+                ForEach(stories) { story in
+                    if let coordinate = story.coordinate {
+                        Annotation("Success Story", coordinate: coordinate) {
+                            SuccessStoryMapMarker(
+                                story: story,
+                                isSelected: selectedStory?.id == story.id
+                            )
+                            .onTapGesture {
+                                withAnimation(.spring(response: 0.3)) {
+                                    selectedStory = story
+                                }
+                            }
                         }
                     }
                 }
@@ -336,11 +342,16 @@ struct SuccessStoriesMapView: View {
         }
         .onAppear {
             // Center map on user location or first story
+            var region = MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
+                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+            )
             if let userLoc = userLocation {
                 region.center = userLoc
             } else if let firstStory = stories.first, let coord = firstStory.coordinate {
                 region.center = coord
             }
+            mapPosition = .region(region)
         }
     }
 }

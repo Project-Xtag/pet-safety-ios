@@ -144,7 +144,7 @@ class PetsViewModel: ObservableObject {
 
             // Update local pet status
             if let index = pets.firstIndex(where: { $0.id == petId }) {
-                var updatedPet = pets[index]
+                let updatedPet = pets[index]
                 // Create a new Pet instance with updated isMissing status
                 let newPet = Pet(
                     id: updatedPet.id,
@@ -227,7 +227,7 @@ class PetsViewModel: ObservableObject {
 
             // Update local pet status
             if let index = pets.firstIndex(where: { $0.id == petId }) {
-                var updatedPet = pets[index]
+                let updatedPet = pets[index]
                 let newPet = Pet(
                     id: updatedPet.id,
                     ownerId: updatedPet.ownerId,

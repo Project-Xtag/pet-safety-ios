@@ -10,10 +10,22 @@ class AlertsViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var isOfflineMode = false
 
-    private let apiService = APIService.shared
-    private let offlineManager = OfflineDataManager.shared
-    private let networkMonitor = NetworkMonitor.shared
-    private let syncService = SyncService.shared
+    private let apiService: APIServiceProtocol
+    private let offlineManager: OfflineDataManager
+    private let networkMonitor: NetworkMonitoring
+    private let syncService: SyncService
+
+    init(
+        apiService: APIServiceProtocol = APIService.shared,
+        offlineManager: OfflineDataManager = OfflineDataManager.shared,
+        networkMonitor: NetworkMonitoring = NetworkMonitor.shared,
+        syncService: SyncService = SyncService.shared
+    ) {
+        self.apiService = apiService
+        self.offlineManager = offlineManager
+        self.networkMonitor = networkMonitor
+        self.syncService = syncService
+    }
 
     func fetchAlerts() async {
         isLoading = true
@@ -80,6 +92,51 @@ class AlertsViewModel: ObservableObject {
     ) async throws -> MissingPetAlert {
         isLoading = true
         errorMessage = nil
+        isOfflineMode = !networkMonitor.isConnected
+
+        if !networkMonitor.isConnected {
+            var actionData: [String: Any] = ["petId": petId]
+            if let coordinate = coordinate {
+                actionData["latitude"] = coordinate.latitude
+                actionData["longitude"] = coordinate.longitude
+            }
+            if let location = location {
+                actionData["lastSeenAddress"] = location
+            }
+            if let additionalInfo = additionalInfo {
+                actionData["description"] = additionalInfo
+            }
+
+            let localAlertId = "offline-\(UUID().uuidString)"
+            actionData["localAlertId"] = localAlertId
+
+            _ = try await syncService.queueAction(type: .createAlert, data: actionData)
+
+            let now = ISO8601DateFormatter().string(from: Date())
+            let userId = KeychainService.shared.getString(for: .userId) ?? "unknown"
+            let localAlert = MissingPetAlert(
+                id: localAlertId,
+                petId: petId,
+                userId: userId,
+                status: "pending-sync",
+                lastSeenLocation: location,
+                lastSeenLatitude: coordinate?.latitude,
+                lastSeenLongitude: coordinate?.longitude,
+                additionalInfo: additionalInfo,
+                createdAt: now,
+                updatedAt: now
+            )
+
+            alerts.insert(localAlert, at: 0)
+            if !missingAlerts.contains(where: { $0.id == localAlertId }) {
+                missingAlerts.insert(localAlert, at: 0)
+            }
+            try? offlineManager.saveAlert(localAlert)
+
+            isLoading = false
+            errorMessage = "Alert queued. Will sync when online."
+            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
+        }
 
         let request = CreateAlertRequest(
             petId: petId,

@@ -82,6 +82,20 @@ class NetworkMonitor: ObservableObject {
     }
 }
 
+// MARK: - Protocols
+@MainActor
+protocol NetworkMonitoring {
+    var isConnected: Bool { get }
+    var isConnectedPublisher: AnyPublisher<Bool, Never> { get }
+}
+
+@MainActor
+extension NetworkMonitor: NetworkMonitoring {
+    var isConnectedPublisher: AnyPublisher<Bool, Never> {
+        $isConnected.eraseToAnyPublisher()
+    }
+}
+
 // MARK: - Notification Names
 extension Notification.Name {
     static let networkStatusChanged = Notification.Name("networkStatusChanged")

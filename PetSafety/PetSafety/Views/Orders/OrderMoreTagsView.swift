@@ -309,11 +309,7 @@ struct OrderMoreTagsView: View {
 
                 isLoading = false
 
-                if response.success {
-                    orderComplete = true
-                } else {
-                    appState.showError(response.message)
-                }
+                orderComplete = true
             } catch {
                 isLoading = false
                 appState.showError(error.localizedDescription)

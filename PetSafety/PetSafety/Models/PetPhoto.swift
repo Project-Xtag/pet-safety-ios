@@ -21,28 +21,24 @@ struct PetPhoto: Codable, Identifiable, Hashable {
 
 /// Response from photo list API
 struct PetPhotosResponse: Codable {
-    let success: Bool
     let photos: [PetPhoto]
     // NOTE: Subscription info removed - unlimited photos for all users
 }
 
 /// Response from single photo upload
 struct PhotoUploadResponse: Codable {
-    let success: Bool
     let photo: PetPhoto
     let message: String?
 }
 
 /// Response from photo operations (delete, set primary, etc.)
 struct PhotoOperationResponse: Codable {
-    let success: Bool
     let message: String?
     let photo: PetPhoto?
 }
 
 /// Response from reorder operation
 struct PhotoReorderResponse: Codable {
-    let success: Bool
     let message: String?
     let photos: [PetPhoto]?
 }

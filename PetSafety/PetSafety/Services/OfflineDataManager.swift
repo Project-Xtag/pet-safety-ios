@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import os
 
 /// Manages offline data persistence using Core Data
 /// Provides thread-safe CRUD operations for offline entities
@@ -9,6 +10,14 @@ class OfflineDataManager {
 
     /// Main persistent container for Core Data stack
     private let container: NSPersistentContainer
+
+    /// Indicates whether the persistent SQLite store is available
+    private(set) var isPersistentStoreAvailable: Bool = true
+
+    /// Stores the last persistent store load error (if any)
+    private(set) var storeLoadError: Error?
+
+    private let logger = Logger(subsystem: "com.petsafety.app", category: "OfflineDataManager")
 
     /// View context for UI operations (main thread)
     var viewContext: NSManagedObjectContext {
@@ -20,24 +29,72 @@ class OfflineDataManager {
         container.newBackgroundContext()
     }
 
-    private init() {
-        container = NSPersistentContainer(name: "PetSafety")
+    init(storeType: String = NSSQLiteStoreType) {
+        let storeName = "PetSafety"
 
-        // Enable automatic migration
-        let description = container.persistentStoreDescriptions.first
-        description?.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
-        description?.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+        do {
+            container = try Self.loadContainer(name: storeName, storeType: storeType)
+        } catch {
+            logger.error("Core Data store failed to load: \(error.localizedDescription)")
+            storeLoadError = error
 
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                // In production, handle this error gracefully
-                fatalError("Core Data store failed to load: \(error.localizedDescription)")
+            if storeType == NSSQLiteStoreType, let storeURL = Self.defaultStoreURL(for: storeName) {
+                do {
+                    try Self.destroyPersistentStore(at: storeURL, name: storeName)
+                    container = try Self.loadContainer(name: storeName, storeType: NSSQLiteStoreType)
+                    logger.warning("Core Data store was reset and reloaded successfully")
+                } catch {
+                    logger.error("Core Data store recovery failed: \(error.localizedDescription)")
+                    storeLoadError = error
+                    isPersistentStoreAvailable = false
+                    container = (try? Self.loadContainer(name: storeName, storeType: NSInMemoryStoreType))
+                        ?? NSPersistentContainer(name: storeName)
+                }
+            } else {
+                isPersistentStoreAvailable = false
+                container = (try? Self.loadContainer(name: storeName, storeType: NSInMemoryStoreType))
+                    ?? NSPersistentContainer(name: storeName)
             }
         }
 
         // Configure view context
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+    }
+
+    private static func loadContainer(name: String, storeType: String) throws -> NSPersistentContainer {
+        let container = NSPersistentContainer(name: name)
+
+        if let description = container.persistentStoreDescriptions.first {
+            description.type = storeType
+            description.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
+            description.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+        }
+
+        var loadError: Error?
+        let group = DispatchGroup()
+        group.enter()
+        container.loadPersistentStores { _, error in
+            loadError = error
+            group.leave()
+        }
+        group.wait()
+
+        if let loadError = loadError {
+            throw loadError
+        }
+
+        return container
+    }
+
+    private static func defaultStoreURL(for name: String) -> URL? {
+        NSPersistentContainer(name: name).persistentStoreDescriptions.first?.url
+    }
+
+    private static func destroyPersistentStore(at url: URL, name: String) throws {
+        let model = NSPersistentContainer(name: name).managedObjectModel
+        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
+        try coordinator.destroyPersistentStore(at: url, ofType: NSSQLiteStoreType, options: nil)
     }
 
     // MARK: - Pet Operations

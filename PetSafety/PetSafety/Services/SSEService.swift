@@ -116,6 +116,17 @@ class SSEService: NSObject, ObservableObject {
         connect()
     }
 
+    #if DEBUG
+    /// Reset state for tests to avoid cross-test contamination.
+    func resetForTesting() {
+        disconnect()
+        connectionError = nil
+        lastEvent = nil
+        shouldReconnect = true
+        reconnectAttempts = 0
+    }
+    #endif
+
     // MARK: - Private Methods
 
     private func scheduleReconnect() {

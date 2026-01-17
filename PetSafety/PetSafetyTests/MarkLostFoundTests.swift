@@ -78,32 +78,34 @@ struct MarkLostFoundTests {
         let jsonString = """
         {
             "success": true,
-            "pet": {
-                "id": "pet_123",
-                "owner_id": "user_123",
-                "name": "Max",
-                "species": "Dog",
-                "is_missing": true,
-                "created_at": "2026-01-01T00:00:00Z",
-                "updated_at": "2026-01-12T10:00:00Z"
-            },
-            "alert": {
-                "id": "alert_456"
-            },
-            "message": "Pet marked as missing. Alerts are being sent."
+            "data": {
+                "pet": {
+                    "id": "pet_123",
+                    "owner_id": "user_123",
+                    "name": "Max",
+                    "species": "Dog",
+                    "is_missing": true,
+                    "created_at": "2026-01-01T00:00:00Z",
+                    "updated_at": "2026-01-12T10:00:00Z"
+                },
+                "alert": {
+                    "id": "alert_456"
+                },
+                "message": "Pet marked as missing. Alerts are being sent."
+            }
         }
         """
 
         let data = jsonString.data(using: .utf8)!
         let decoder = JSONDecoder()
 
-        let response = try decoder.decode(MarkMissingResponse.self, from: data)
+        let response = try decoder.decode(ApiEnvelope<MarkMissingResponse>.self, from: data)
 
         #expect(response.success == true)
-        #expect(response.pet.name == "Max")
-        #expect(response.pet.isMissing == true)
-        #expect(response.alert?.id == "alert_456")
-        #expect(response.message == "Pet marked as missing. Alerts are being sent.")
+        #expect(response.data?.pet.name == "Max")
+        #expect(response.data?.pet.isMissing == true)
+        #expect(response.data?.alert?.id == "alert_456")
+        #expect(response.data?.message == "Pet marked as missing. Alerts are being sent.")
     }
 
     // Test MarkMissingResponse without alert (location not provided)
@@ -111,28 +113,30 @@ struct MarkLostFoundTests {
         let jsonString = """
         {
             "success": true,
-            "pet": {
-                "id": "pet_123",
-                "owner_id": "user_123",
-                "name": "Max",
-                "species": "Dog",
-                "is_missing": true,
-                "created_at": "2026-01-01T00:00:00Z",
-                "updated_at": "2026-01-12T10:00:00Z"
-            },
-            "alert": null,
-            "message": "Pet marked as missing. Add location to send community alerts."
+            "data": {
+                "pet": {
+                    "id": "pet_123",
+                    "owner_id": "user_123",
+                    "name": "Max",
+                    "species": "Dog",
+                    "is_missing": true,
+                    "created_at": "2026-01-01T00:00:00Z",
+                    "updated_at": "2026-01-12T10:00:00Z"
+                },
+                "alert": null,
+                "message": "Pet marked as missing. Add location to send community alerts."
+            }
         }
         """
 
         let data = jsonString.data(using: .utf8)!
         let decoder = JSONDecoder()
 
-        let response = try decoder.decode(MarkMissingResponse.self, from: data)
+        let response = try decoder.decode(ApiEnvelope<MarkMissingResponse>.self, from: data)
 
         #expect(response.success == true)
-        #expect(response.pet.isMissing == true)
-        #expect(response.alert == nil, "Alert should be nil when no location provided")
+        #expect(response.data?.pet.isMissing == true)
+        #expect(response.data?.alert == nil, "Alert should be nil when no location provided")
     }
 
     // Test PetsViewModel has mark lost/found methods

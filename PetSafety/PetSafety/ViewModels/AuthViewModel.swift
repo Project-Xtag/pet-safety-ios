@@ -55,6 +55,9 @@ class AuthViewModel: ObservableObject {
             isAuthenticated = true
             isLoading = false
 
+            _ = KeychainService.shared.save(response.user.id, for: .userId)
+            _ = KeychainService.shared.save(response.user.email, for: .userEmail)
+
             // Connect to SSE for real-time notifications
             SSEService.shared.connect()
         } catch {
@@ -68,6 +71,9 @@ class AuthViewModel: ObservableObject {
         apiService.logout()
         currentUser = nil
         isAuthenticated = false
+
+        _ = KeychainService.shared.delete(.userId)
+        _ = KeychainService.shared.delete(.userEmail)
 
         // Disconnect from SSE
         SSEService.shared.disconnect()

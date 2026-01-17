@@ -128,14 +128,10 @@ struct ShareLocationView: View {
                 )
 
                 await MainActor.run {
-                    if result.success {
-                        shared = true
-                        // Auto-dismiss after 2 seconds
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            dismiss()
-                        }
-                    } else {
-                        errorMessage = "Failed to share location. Please try again."
+                    shared = true
+                    // Auto-dismiss after 2 seconds
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        dismiss()
                     }
                     isSharing = false
                 }

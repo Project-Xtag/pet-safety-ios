@@ -44,6 +44,7 @@ class PetPhotosViewModel: ObservableObject {
         isUploading = true
         uploadProgress = 0.0
         errorMessage = nil
+        defer { isUploading = false }
 
         do {
             let response = try await apiService.uploadPetPhotoToGallery(
@@ -53,22 +54,17 @@ class PetPhotosViewModel: ObservableObject {
             )
 
             // Add new photo to the list
-            if response.success {
-                photos.append(response.photo)
-                // Sort by display order
-                photos.sort { $0.displayOrder < $1.displayOrder }
+            photos.append(response.photo)
+            // Sort by display order
+            photos.sort { $0.displayOrder < $1.displayOrder }
 
-                uploadProgress = 1.0
+            uploadProgress = 1.0
 
-                #if DEBUG
-                print("✅ Photo uploaded successfully: \(response.photo.id)")
-                #endif
+            #if DEBUG
+            print("✅ Photo uploaded successfully: \(response.photo.id)")
+            #endif
 
-                return true
-            } else {
-                errorMessage = "Upload failed"
-                return false
-            }
+            return true
         } catch {
             errorMessage = error.localizedDescription
             #if DEBUG
@@ -77,7 +73,6 @@ class PetPhotosViewModel: ObservableObject {
             return false
         }
 
-        isUploading = false
     }
 
     /// Upload multiple photos with progress tracking
@@ -115,27 +110,23 @@ class PetPhotosViewModel: ObservableObject {
         do {
             let response = try await apiService.setPrimaryPhoto(petId: petId, photoId: photoId)
 
-            if response.success {
-                // Update local photos array
-                for index in photos.indices {
-                    photos[index] = PetPhoto(
-                        id: photos[index].id,
-                        petId: photos[index].petId,
-                        photoUrl: photos[index].photoUrl,
-                        isPrimary: photos[index].id == photoId,
-                        displayOrder: photos[index].displayOrder,
-                        uploadedAt: photos[index].uploadedAt
-                    )
-                }
-
-                #if DEBUG
-                print("✅ Set photo \(photoId) as primary")
-                #endif
-
-                return true
+            // Update local photos array
+            for index in photos.indices {
+                photos[index] = PetPhoto(
+                    id: photos[index].id,
+                    petId: photos[index].petId,
+                    photoUrl: photos[index].photoUrl,
+                    isPrimary: photos[index].id == photoId,
+                    displayOrder: photos[index].displayOrder,
+                    uploadedAt: photos[index].uploadedAt
+                )
             }
 
-            return false
+            #if DEBUG
+            print("✅ Set photo \(photoId) as primary")
+            #endif
+
+            return true
         } catch {
             errorMessage = error.localizedDescription
             #if DEBUG
@@ -154,18 +145,14 @@ class PetPhotosViewModel: ObservableObject {
         do {
             let response = try await apiService.deletePetPhoto(petId: petId, photoId: photoId)
 
-            if response.success {
-                // Remove from local array
-                photos.removeAll { $0.id == photoId }
+            // Remove from local array
+            photos.removeAll { $0.id == photoId }
 
-                #if DEBUG
-                print("✅ Deleted photo \(photoId)")
-                #endif
+            #if DEBUG
+            print("✅ Deleted photo \(photoId)")
+            #endif
 
-                return true
-            }
-
-            return false
+            return true
         } catch {
             errorMessage = error.localizedDescription
             #if DEBUG
@@ -187,7 +174,7 @@ class PetPhotosViewModel: ObservableObject {
         do {
             let response = try await apiService.reorderPetPhotos(petId: petId, photoIds: photoIds)
 
-            if response.success, let updatedPhotos = response.photos {
+            if let updatedPhotos = response.photos {
                 photos = updatedPhotos.sorted { $0.displayOrder < $1.displayOrder }
 
                 #if DEBUG

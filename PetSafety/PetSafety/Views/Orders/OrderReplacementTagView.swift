@@ -254,11 +254,7 @@ struct OrderReplacementTagView: View {
 
                 isLoading = false
 
-                if response.success {
-                    orderComplete = true
-                } else {
-                    appState.showError(response.message ?? "Failed to create replacement order")
-                }
+                orderComplete = true
             } catch {
                 isLoading = false
                 appState.showError(error.localizedDescription)

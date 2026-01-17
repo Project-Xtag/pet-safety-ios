@@ -34,7 +34,6 @@ struct NotificationPreferences: Codable {
 
 // API Response wrapper
 struct NotificationPreferencesResponse: Codable {
-    let success: Bool
     let preferences: NotificationPreferences
     let message: String?
 }

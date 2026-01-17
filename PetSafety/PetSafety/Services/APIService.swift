@@ -26,6 +26,17 @@ enum APIError: Error, LocalizedError {
     }
 }
 
+protocol APIServiceProtocol: AnyObject {
+    func createAlert(_ request: CreateAlertRequest) async throws -> MissingPetAlert
+    func getPets() async throws -> [Pet]
+    func getAlerts() async throws -> [MissingPetAlert]
+    func getNearbyAlerts(latitude: Double, longitude: Double, radiusKm: Double) async throws -> [MissingPetAlert]
+    func updateAlertStatus(id: String, status: String) async throws -> MissingPetAlert
+    func markPetFound(petId: String) async throws -> Pet
+    func updatePet(id: String, _ request: UpdatePetRequest) async throws -> Pet
+    func reportSighting(alertId: String, sighting: ReportSightingRequest) async throws -> Sighting
+}
+
 class APIService {
     static let shared = APIService()
 
@@ -35,9 +46,9 @@ class APIService {
         get { KeychainService.shared.getAuthToken() }
         set {
             if let token = newValue {
-                KeychainService.shared.saveAuthToken(token)
+                _ = KeychainService.shared.saveAuthToken(token)
             } else {
-                KeychainService.shared.deleteAuthToken()
+                _ = KeychainService.shared.deleteAuthToken()
             }
         }
     }
@@ -96,12 +107,31 @@ class APIService {
                 throw APIError.invalidResponse
             }
 
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+
             switch httpResponse.statusCode {
             case 200...299:
                 do {
-                    let decoder = JSONDecoder()
-                    decoder.dateDecodingStrategy = .iso8601
-                    return try decoder.decode(T.self, from: data)
+                    let envelope = try decoder.decode(ApiEnvelope<T>.self, from: data)
+                    if envelope.success {
+                        if let payload = envelope.data {
+                            return payload
+                        }
+                        if T.self == EmptyResponse.self {
+                            return EmptyResponse() as! T
+                        }
+                        throw APIError.decodingError
+                    }
+
+                    let message = envelope.error ?? "Server error"
+                    let detailsText = formatErrorDetails(envelope.details)
+                    if let detailsText {
+                        throw APIError.serverError("\(message) (\(detailsText))")
+                    }
+                    throw APIError.serverError(message)
+                } catch let apiError as APIError {
+                    throw apiError
                 } catch {
                     #if DEBUG
                     print("❌ DECODING ERROR:")
@@ -134,7 +164,11 @@ class APIService {
                 throw APIError.unauthorized
 
             default:
-                if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                if let errorResponse = try? decoder.decode(ErrorResponse.self, from: data) {
+                    let detailsText = formatErrorDetails(errorResponse.details)
+                    if let detailsText {
+                        throw APIError.serverError("\(errorResponse.error) (\(detailsText))")
+                    }
                     throw APIError.serverError(errorResponse.error)
                 }
                 throw APIError.serverError("Server error: \(httpResponse.statusCode)")
@@ -144,6 +178,15 @@ class APIService {
         } catch {
             throw APIError.networkError(error)
         }
+    }
+
+    private func formatErrorDetails(_ details: [String: JSONValue]?) -> String? {
+        guard let details else { return nil }
+        if let data = try? JSONEncoder().encode(details),
+           let string = String(data: data, encoding: .utf8) {
+            return string
+        }
+        return nil
     }
 
     // MARK: - Authentication
@@ -459,7 +502,6 @@ class APIService {
         radiusKm: Double = 10
     ) async throws -> [MissingPetAlert] {
         struct NearbyAlertsResponse: Codable {
-            let success: Bool
             let alerts: [MissingPetAlert]
             let count: Int
         }
@@ -524,7 +566,6 @@ class APIService {
         }
 
         struct ActivateResponse: Codable {
-            let success: Bool
             let tag: QRTag
             let message: String?
         }
@@ -542,7 +583,6 @@ class APIService {
     // Get active tag for a pet
     func getActiveTag(petId: String) async throws -> QRTag? {
         struct GetTagResponse: Codable {
-            let success: Bool
             let tag: QRTag?
             let message: String?
         }
@@ -625,9 +665,70 @@ class APIService {
     }
 }
 
+extension APIService: APIServiceProtocol {}
+
 // MARK: - Helper Types
 struct ErrorResponse: Codable {
     let error: String
+    let code: String?
+    let details: [String: JSONValue]?
+}
+
+struct ApiEnvelope<T: Decodable>: Decodable {
+    let success: Bool
+    let data: T?
+    let error: String?
+    let code: String?
+    let details: [String: JSONValue]?
+}
+
+enum JSONValue: Codable {
+    case string(String)
+    case number(Double)
+    case bool(Bool)
+    case object([String: JSONValue])
+    case array([JSONValue])
+    case null
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if container.decodeNil() {
+            self = .null
+        } else if let value = try? container.decode(String.self) {
+            self = .string(value)
+        } else if let value = try? container.decode(Double.self) {
+            self = .number(value)
+        } else if let value = try? container.decode(Bool.self) {
+            self = .bool(value)
+        } else if let value = try? container.decode([String: JSONValue].self) {
+            self = .object(value)
+        } else if let value = try? container.decode([JSONValue].self) {
+            self = .array(value)
+        } else {
+            throw DecodingError.typeMismatch(
+                JSONValue.self,
+                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Unsupported JSON value")
+            )
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .string(let value):
+            try container.encode(value)
+        case .number(let value):
+            try container.encode(value)
+        case .bool(let value):
+            try container.encode(value)
+        case .object(let value):
+            try container.encode(value)
+        case .array(let value):
+            try container.encode(value)
+        case .null:
+            try container.encodeNil()
+        }
+    }
 }
 
 struct EmptyResponse: Codable {}
@@ -635,44 +736,36 @@ struct EmptyResponse: Codable {}
 struct EmptyBody: Codable {}
 
 struct UserResponse: Codable {
-    let success: Bool
     let user: User
 }
 
 struct PetsResponse: Codable {
-    let success: Bool
     let pets: [Pet]
 }
 
 struct PetResponse: Codable {
-    let success: Bool
     let pet: Pet
 }
 
 struct AlertsResponse: Codable {
-    let success: Bool
     let alerts: [MissingPetAlert]
 }
 
 struct AlertResponse: Codable {
-    let success: Bool
     let alert: MissingPetAlert
     let message: String?
 }
 
 struct SightingResponse: Codable {
-    let success: Bool
     let sighting: Sighting
     let message: String?
 }
 
 struct OrdersResponse: Codable {
-    let success: Bool
     let orders: [Order]
 }
 
 struct ImageUploadResponse: Codable {
-    let success: Bool
     let imageUrl: String
     let pet: PartialPet
 
@@ -743,7 +836,6 @@ struct CreateReplacementOrderRequest: Codable {
 }
 
 struct ReplacementOrderResponse: Codable {
-    let success: Bool
     let order: Order
     let message: String?
 }
@@ -769,7 +861,6 @@ struct ShippingAddressDetails: Codable {
 }
 
 struct CreateTagOrderResponse: Codable {
-    let success: Bool
     let order: Order
     let userCreated: Bool?
     let userId: String?
@@ -778,7 +869,6 @@ struct CreateTagOrderResponse: Codable {
 
 // MARK: - Location Sharing Types
 struct ShareLocationResponse: Codable {
-    let success: Bool
     let message: String
     let sightingId: String
     let sentSMS: Bool
@@ -792,7 +882,6 @@ struct LocationCoordinate: Codable {
 }
 
 struct MarkMissingResponse: Codable {
-    let success: Bool
     let pet: Pet
     let alert: AlertInfo?
     let message: String
@@ -825,21 +914,32 @@ extension APIService {
         print("📡 API: Response status: \(httpResponse.statusCode)")
         #endif
 
-        guard httpResponse.statusCode == 200 else {
-            if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
-                throw APIError.serverError(errorResponse.error)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        if (200...299).contains(httpResponse.statusCode) {
+            let envelope = try decoder.decode(ApiEnvelope<NotificationPreferencesResponse>.self, from: data)
+            if let preferences = envelope.data?.preferences {
+                #if DEBUG
+                print("✅ API: Notification preferences retrieved")
+                #endif
+                return preferences
             }
-            throw APIError.serverError("Failed to get notification preferences")
+            throw APIError.decodingError
         }
 
-        let decoder = JSONDecoder()
-        let preferencesResponse = try decoder.decode(NotificationPreferencesResponse.self, from: data)
+        if httpResponse.statusCode == 401 {
+            throw APIError.unauthorized
+        }
 
-        #if DEBUG
-        print("✅ API: Notification preferences retrieved")
-        #endif
-
-        return preferencesResponse.preferences
+        if let errorResponse = try? decoder.decode(ErrorResponse.self, from: data) {
+            let detailsText = formatErrorDetails(errorResponse.details)
+            if let detailsText {
+                throw APIError.serverError("\(errorResponse.error) (\(detailsText))")
+            }
+            throw APIError.serverError(errorResponse.error)
+        }
+        throw APIError.serverError("Failed to get notification preferences")
     }
 
     /// Update user's notification preferences
@@ -875,29 +975,43 @@ extension APIService {
         print("📡 API: Response status: \(httpResponse.statusCode)")
         #endif
 
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        if (200...299).contains(httpResponse.statusCode) {
+            let envelope = try decoder.decode(ApiEnvelope<NotificationPreferencesResponse>.self, from: data)
+            if let preferences = envelope.data?.preferences {
+                #if DEBUG
+                print("✅ API: Notification preferences updated")
+                #endif
+                return preferences
+            }
+            throw APIError.decodingError
+        }
+
         if httpResponse.statusCode == 400 {
-            // Handle validation error
-            if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+            if let errorResponse = try? decoder.decode(ErrorResponse.self, from: data) {
+                let detailsText = formatErrorDetails(errorResponse.details)
+                if let detailsText {
+                    throw APIError.serverError("\(errorResponse.error) (\(detailsText))")
+                }
                 throw APIError.serverError(errorResponse.error)
             }
             throw APIError.serverError("Invalid preferences: At least one notification method must be enabled")
         }
 
-        guard httpResponse.statusCode == 200 else {
-            if let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
-                throw APIError.serverError(errorResponse.error)
-            }
-            throw APIError.serverError("Failed to update notification preferences")
+        if httpResponse.statusCode == 401 {
+            throw APIError.unauthorized
         }
 
-        let decoder = JSONDecoder()
-        let preferencesResponse = try decoder.decode(NotificationPreferencesResponse.self, from: data)
-
-        #if DEBUG
-        print("✅ API: Notification preferences updated")
-        #endif
-
-        return preferencesResponse.preferences
+        if let errorResponse = try? decoder.decode(ErrorResponse.self, from: data) {
+            let detailsText = formatErrorDetails(errorResponse.details)
+            if let detailsText {
+                throw APIError.serverError("\(errorResponse.error) (\(detailsText))")
+            }
+            throw APIError.serverError(errorResponse.error)
+        }
+        throw APIError.serverError("Failed to update notification preferences")
     }
 
     // MARK: - Success Stories
@@ -927,8 +1041,7 @@ extension APIService {
         #endif
 
         let request = try buildRequest(endpoint: "/success-stories/pet/\(petId)")
-        let response = try await performRequest(request, responseType: GenericResponse<[SuccessStory]>.self)
-        return response.data
+        return try await performRequest(request, responseType: [SuccessStory].self)
     }
 
     /// Create a new success story
@@ -938,8 +1051,7 @@ extension APIService {
         #endif
 
         let request = try buildRequest(endpoint: "/success-stories", method: "POST", body: story)
-        let response = try await performRequest(request, responseType: GenericResponse<SuccessStory>.self)
-        return response.data
+        return try await performRequest(request, responseType: SuccessStory.self)
     }
 
     /// Update a success story
@@ -949,8 +1061,7 @@ extension APIService {
         #endif
 
         let request = try buildRequest(endpoint: "/success-stories/\(id)", method: "PATCH", body: updates)
-        let response = try await performRequest(request, responseType: GenericResponse<SuccessStory>.self)
-        return response.data
+        return try await performRequest(request, responseType: SuccessStory.self)
     }
 
     /// Delete a success story
@@ -960,7 +1071,7 @@ extension APIService {
         #endif
 
         let request = try buildRequest(endpoint: "/success-stories/\(id)", method: "DELETE")
-        let response = try await performRequest(request, responseType: GenericResponse<EmptyResponse>.self)
+        _ = try await performRequest(request, responseType: EmptyResponse.self)
 
         #if DEBUG
         print("✅ API: Success story deleted")
@@ -996,13 +1107,6 @@ extension APIService {
 
         request.httpBody = body
 
-        let response = try await performRequest(request, responseType: GenericResponse<SuccessStoryPhoto>.self)
-        return response.data
+        return try await performRequest(request, responseType: SuccessStoryPhoto.self)
     }
-}
-
-// MARK: - Supporting Types
-private struct GenericResponse<T: Decodable>: Decodable {
-    let success: Bool
-    let data: T
 }

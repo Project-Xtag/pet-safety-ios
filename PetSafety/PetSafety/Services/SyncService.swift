@@ -20,9 +20,9 @@ class SyncService: ObservableObject {
     /// Published property for sync status message
     @Published private(set) var syncStatus: String = ""
 
-    private let offlineManager = OfflineDataManager.shared
-    private let networkMonitor = NetworkMonitor.shared
-    private let apiService = APIService.shared
+    private let offlineManager: OfflineDataManager
+    private let networkMonitor: NetworkMonitoring
+    private let apiService: APIServiceProtocol
 
     private var cancellables = Set<AnyCancellable>()
     private var syncTimer: Timer?
@@ -36,19 +36,30 @@ class SyncService: ObservableObject {
         case updatePet = "updatePet"
     }
 
-    private init() {
+    init(
+        offlineManager: OfflineDataManager = OfflineDataManager.shared,
+        networkMonitor: NetworkMonitoring = NetworkMonitor.shared,
+        apiService: APIServiceProtocol = APIService.shared,
+        autoSync: Bool = true
+    ) {
+        self.offlineManager = offlineManager
+        self.networkMonitor = networkMonitor
+        self.apiService = apiService
+
         setupNetworkObserver()
         loadLastSyncDate()
         updatePendingCount()
 
-        // Auto-sync every 5 minutes when online
-        startAutoSync()
+        if autoSync {
+            // Auto-sync every 5 minutes when online
+            startAutoSync()
+        }
     }
 
     // MARK: - Network Observation
 
     private func setupNetworkObserver() {
-        networkMonitor.$isConnected
+        networkMonitor.isConnectedPublisher
             .dropFirst() // Ignore initial value
             .sink { [weak self] isConnected in
                 if isConnected {
@@ -156,7 +167,7 @@ class SyncService: ObservableObject {
 
         switch actionType {
         case .markPetLost:
-            try await processMarkPetLost(action)
+            _ = try await processMarkPetLost(action)
 
         case .markPetFound:
             try await processMarkPetFound(action)
@@ -174,7 +185,7 @@ class SyncService: ObservableObject {
 
     // MARK: - Action Processors
 
-    private func processMarkPetLost(_ action: QueuedAction) async throws {
+    private func processMarkPetLost(_ action: QueuedAction) async throws -> MissingPetAlert {
         guard let petId = action.data["petId"] as? String else {
             throw SyncError.missingData("petId")
         }
@@ -195,7 +206,7 @@ class SyncService: ObservableObject {
             alertRadiusKm: nil
         )
 
-        _ = try await apiService.createAlert(request)
+        return try await apiService.createAlert(request)
     }
 
     private func processMarkPetFound(_ action: QueuedAction) async throws {
@@ -231,7 +242,13 @@ class SyncService: ObservableObject {
     }
 
     private func processCreateAlert(_ action: QueuedAction) async throws {
-        try await processMarkPetLost(action)
+        let createdAlert = try await processMarkPetLost(action)
+
+        if let localAlertId = action.data["localAlertId"] as? String {
+            try? offlineManager.deleteAlert(withId: localAlertId)
+        }
+
+        try? offlineManager.saveAlert(createdAlert)
     }
 
     private func processUpdatePet(_ action: QueuedAction) async throws {

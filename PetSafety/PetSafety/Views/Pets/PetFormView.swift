@@ -181,7 +181,7 @@ struct PetFormView: View {
             }
 
             // Delete Pet button - only show in edit mode
-            if case .edit(let pet) = mode {
+            if case .edit = mode {
                 Section {
                     Button(action: { showingDeleteAlert = true }) {
                         HStack {

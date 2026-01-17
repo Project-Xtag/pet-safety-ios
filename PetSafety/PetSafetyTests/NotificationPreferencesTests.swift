@@ -144,16 +144,20 @@ struct NotificationPreferencesTests {
     // MARK: - ViewModel Tests
 
     @Test("NotificationPreferencesViewModel should initialize with loading state")
+    @MainActor
     func testViewModelInitialState() {
         let viewModel = NotificationPreferencesViewModel()
 
         #expect(viewModel.isLoading == false)
+        #expect(viewModel.isSaving == false)
+        #expect(viewModel.showError == false)
+        #expect(viewModel.showSuccess == false)
         #expect(viewModel.errorMessage == nil)
-        #expect(viewModel.successMessage == nil)
         #expect(viewModel.hasChanges == false)
     }
 
     @Test("NotificationPreferencesViewModel should detect changes")
+    @MainActor
     func testViewModelDetectsChanges() {
         let viewModel = NotificationPreferencesViewModel()
 
@@ -174,6 +178,7 @@ struct NotificationPreferencesTests {
     }
 
     @Test("NotificationPreferencesViewModel should prevent disabling last method")
+    @MainActor
     func testViewModelPreventsDisablingLast() {
         let viewModel = NotificationPreferencesViewModel()
 
@@ -184,12 +189,17 @@ struct NotificationPreferencesTests {
             notifyByPush: false
         )
 
-        #expect(viewModel.canDisableEmail == false)
-        #expect(viewModel.canDisableSms == true)
-        #expect(viewModel.canDisablePush == true)
+        let emailToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByEmail
+        let smsToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyBySms
+        let pushToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByPush
+
+        #expect(emailToggleDisabled == true)
+        #expect(smsToggleDisabled == false)
+        #expect(pushToggleDisabled == false)
     }
 
     @Test("NotificationPreferencesViewModel should allow disabling when multiple enabled")
+    @MainActor
     func testViewModelAllowsDisablingWhenMultiple() {
         let viewModel = NotificationPreferencesViewModel()
 
@@ -200,12 +210,17 @@ struct NotificationPreferencesTests {
             notifyByPush: true
         )
 
-        #expect(viewModel.canDisableEmail == true)
-        #expect(viewModel.canDisableSms == true)
-        #expect(viewModel.canDisablePush == true)
+        let emailToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByEmail
+        let smsToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyBySms
+        let pushToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByPush
+
+        #expect(emailToggleDisabled == false)
+        #expect(smsToggleDisabled == false)
+        #expect(pushToggleDisabled == false)
     }
 
     @Test("NotificationPreferencesViewModel should track enabled count")
+    @MainActor
     func testViewModelEnabledCount() {
         let viewModel = NotificationPreferencesViewModel()
 
@@ -215,15 +230,15 @@ struct NotificationPreferencesTests {
             notifyByPush: false
         )
 
-        #expect(viewModel.enabledCount == 2)
+        #expect(viewModel.preferences.enabledCount == 2)
 
         viewModel.preferences.notifyByPush = true
 
-        #expect(viewModel.enabledCount == 3)
+        #expect(viewModel.preferences.enabledCount == 3)
 
         viewModel.preferences.notifyByEmail = false
 
-        #expect(viewModel.enabledCount == 2)
+        #expect(viewModel.preferences.enabledCount == 2)
     }
 
     // MARK: - API Response Tests
@@ -233,22 +248,24 @@ struct NotificationPreferencesTests {
         let jsonString = """
         {
             "success": true,
-            "preferences": {
-                "notifyByEmail": true,
-                "notifyBySms": false,
-                "notifyByPush": true
+            "data": {
+                "preferences": {
+                    "notifyByEmail": true,
+                    "notifyBySms": false,
+                    "notifyByPush": true
+                }
             }
         }
         """
 
         let data = jsonString.data(using: .utf8)!
         let decoder = JSONDecoder()
-        let response = try decoder.decode(NotificationPreferencesResponse.self, from: data)
+        let response = try decoder.decode(ApiEnvelope<NotificationPreferencesResponse>.self, from: data)
 
         #expect(response.success == true)
-        #expect(response.preferences.notifyByEmail == true)
-        #expect(response.preferences.notifyBySms == false)
-        #expect(response.preferences.notifyByPush == true)
+        #expect(response.data?.preferences.notifyByEmail == true)
+        #expect(response.data?.preferences.notifyBySms == false)
+        #expect(response.data?.preferences.notifyByPush == true)
     }
 
     @Test("NotificationPreferencesResponse should handle error response")
@@ -256,23 +273,19 @@ struct NotificationPreferencesTests {
         let jsonString = """
         {
             "success": false,
-            "error": "At least one notification method must be enabled"
+            "error": "At least one notification method must be enabled",
+            "details": {
+                "field": "preferences"
+            }
         }
         """
 
         let data = jsonString.data(using: .utf8)!
         let decoder = JSONDecoder()
 
-        // Should still decode the basic structure
-        // In real implementation, error would be handled at API layer
-        do {
-            _ = try decoder.decode(NotificationPreferencesResponse.self, from: data)
-            // If we get here, the preferences field is optional in response
-            #expect(true)
-        } catch {
-            // Expected if preferences field is required
-            #expect(true)
-        }
+        let response = try decoder.decode(ErrorResponse.self, from: data)
+        #expect(response.error.contains("At least one notification method must be enabled"))
+        #expect(response.details?["field"] != nil)
     }
 
     @Test("UpdatePreferencesRequest should encode correctly")
@@ -439,6 +452,7 @@ struct NotificationPreferencesTests {
     // MARK: - UI State Tests
 
     @Test("Should determine correct UI state for buttons")
+    @MainActor
     func testUIButtonStates() {
         let viewModel = NotificationPreferencesViewModel()
 
@@ -448,9 +462,13 @@ struct NotificationPreferencesTests {
             notifyBySms: true,
             notifyByPush: true
         )
-        #expect(viewModel.canDisableEmail == true)
-        #expect(viewModel.canDisableSms == true)
-        #expect(viewModel.canDisablePush == true)
+        var emailToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByEmail
+        var smsToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyBySms
+        var pushToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByPush
+
+        #expect(emailToggleDisabled == false)
+        #expect(smsToggleDisabled == false)
+        #expect(pushToggleDisabled == false)
 
         // Only email - cannot disable
         viewModel.preferences = NotificationPreferences(
@@ -458,9 +476,13 @@ struct NotificationPreferencesTests {
             notifyBySms: false,
             notifyByPush: false
         )
-        #expect(viewModel.canDisableEmail == false)
-        #expect(viewModel.canDisableSms == true)
-        #expect(viewModel.canDisablePush == true)
+        emailToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByEmail
+        smsToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyBySms
+        pushToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByPush
+
+        #expect(emailToggleDisabled == true)
+        #expect(smsToggleDisabled == false)
+        #expect(pushToggleDisabled == false)
 
         // Only SMS - cannot disable
         viewModel.preferences = NotificationPreferences(
@@ -468,9 +490,13 @@ struct NotificationPreferencesTests {
             notifyBySms: true,
             notifyByPush: false
         )
-        #expect(viewModel.canDisableEmail == true)
-        #expect(viewModel.canDisableSms == false)
-        #expect(viewModel.canDisablePush == true)
+        emailToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByEmail
+        smsToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyBySms
+        pushToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByPush
+
+        #expect(emailToggleDisabled == false)
+        #expect(smsToggleDisabled == true)
+        #expect(pushToggleDisabled == false)
 
         // Only push - cannot disable
         viewModel.preferences = NotificationPreferences(
@@ -478,12 +504,17 @@ struct NotificationPreferencesTests {
             notifyBySms: false,
             notifyByPush: true
         )
-        #expect(viewModel.canDisableEmail == true)
-        #expect(viewModel.canDisableSms == true)
-        #expect(viewModel.canDisablePush == false)
+        emailToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByEmail
+        smsToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyBySms
+        pushToggleDisabled = viewModel.preferences.enabledCount == 1 && viewModel.preferences.notifyByPush
+
+        #expect(emailToggleDisabled == false)
+        #expect(smsToggleDisabled == false)
+        #expect(pushToggleDisabled == true)
     }
 
     @Test("Should show/hide save button based on changes")
+    @MainActor
     func testSaveButtonVisibility() {
         let viewModel = NotificationPreferencesViewModel()
 
@@ -507,6 +538,7 @@ struct NotificationPreferencesTests {
     }
 
     @Test("Should clear error messages on successful save")
+    @MainActor
     func testErrorMessageClearing() {
         let viewModel = NotificationPreferencesViewModel()
 
@@ -516,9 +548,9 @@ struct NotificationPreferencesTests {
 
         // On successful save, error should clear
         viewModel.errorMessage = nil
-        viewModel.successMessage = "Preferences saved"
+        viewModel.showSuccess = true
 
         #expect(viewModel.errorMessage == nil)
-        #expect(viewModel.successMessage != nil)
+        #expect(viewModel.showSuccess == true)
     }
 }
