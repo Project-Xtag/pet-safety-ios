@@ -130,14 +130,14 @@ class PetsViewModel: ObservableObject {
         if !networkMonitor.isConnected {
             var actionData: [String: Any] = ["petId": petId]
             if let location = location {
-                actionData["lastSeenLatitude"] = location.lat
-                actionData["lastSeenLongitude"] = location.lng
+                actionData["latitude"] = location.lat
+                actionData["longitude"] = location.lng
             }
             if let address = address {
-                actionData["lastSeenLocation"] = address
+                actionData["lastSeenAddress"] = address
             }
             if let description = description {
-                actionData["additionalInfo"] = description
+                actionData["description"] = description
             }
 
             _ = try await syncService.queueAction(type: .markPetLost, data: actionData)

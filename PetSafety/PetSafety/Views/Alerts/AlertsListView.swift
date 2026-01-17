@@ -59,7 +59,7 @@ struct AlertRowView: View {
     var statusColor: Color {
         switch alert.status {
         case "active": return .red
-        case "resolved": return .green
+        case "found": return .green
         default: return .gray
         }
     }

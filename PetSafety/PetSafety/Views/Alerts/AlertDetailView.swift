@@ -185,7 +185,7 @@ struct AlertDetailView: View {
             isMarkingFound = true
 
             do {
-                try await viewModel.updateAlertStatus(id: alert.id, status: "resolved")
+                try await viewModel.updateAlertStatus(id: alert.id, status: "found")
 
                 await MainActor.run {
                     isMarkingFound = false

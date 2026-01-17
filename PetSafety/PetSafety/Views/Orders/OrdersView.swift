@@ -41,7 +41,7 @@ struct OrderRowView: View {
     let order: Order
 
     var statusColor: Color {
-        switch order.status {
+        switch order.orderStatus {
         case "completed": return .green
         case "pending": return .orange
         case "failed": return .red
@@ -68,7 +68,7 @@ struct OrderRowView: View {
                     .fill(statusColor)
                     .frame(width: 8, height: 8)
 
-                Text(order.status.capitalized)
+                Text(order.orderStatus.capitalized)
                     .font(.subheadline)
                     .foregroundColor(statusColor)
 
@@ -80,7 +80,8 @@ struct OrderRowView: View {
             }
 
             if let items = order.items, !items.isEmpty {
-                Text("\(items.count) item\(items.count == 1 ? "" : "s")")
+                let totalItems = items.reduce(0) { $0 + $1.quantity }
+                Text("\(totalItems) item\(totalItems == 1 ? "" : "s")")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -120,7 +121,7 @@ struct OrderDetailView: View {
                         Circle()
                             .fill(statusColor)
                             .frame(width: 8, height: 8)
-                        Text(order.status.capitalized)
+                Text(order.orderStatus.capitalized)
                             .foregroundColor(statusColor)
                     }
                 }
@@ -144,27 +145,21 @@ struct OrderDetailView: View {
                 Section("Items") {
                     ForEach(items) { item in
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(item.petName)
+                            Text(item.itemType.capitalized)
                                 .font(.headline)
 
-                            Text("\(item.petSpecies) • \(item.petBreed ?? "Unknown")")
+                            Text("Quantity: \(item.quantity)")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
 
                             HStack {
-                                if let tag = item.qrTag {
-                                    Text("QR Tag: \(tag.tagCode)")
-                                        .font(.caption)
-                                        .foregroundColor(.blue)
-                                } else {
-                                    Text("QR Tag pending")
-                                        .font(.caption)
-                                        .foregroundColor(.orange)
-                                }
+                                Text(item.qrTagId == nil ? "QR Tag pending" : "QR Tag assigned")
+                                    .font(.caption)
+                                    .foregroundColor(item.qrTagId == nil ? .orange : .blue)
 
                                 Spacer()
 
-                                Text(formatCurrency(item.price, currency: order.currency))
+                                Text(formatCurrency(item.price))
                                     .font(.subheadline)
                                     .fontWeight(.medium)
                             }
@@ -179,7 +174,7 @@ struct OrderDetailView: View {
     }
 
     private var statusColor: Color {
-        switch order.status {
+        switch order.orderStatus {
         case "completed": return .green
         case "pending": return .orange
         case "failed": return .red
@@ -200,11 +195,11 @@ struct OrderDetailView: View {
         return displayFormatter.string(from: date)
     }
 
-    private func formatCurrency(_ amount: Double, currency: String) -> String {
+    private func formatCurrency(_ amount: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencyCode = currency
-        return formatter.string(from: NSNumber(value: amount)) ?? "\(currency) \(amount)"
+        formatter.currencyCode = "GBP"
+        return formatter.string(from: NSNumber(value: amount)) ?? "GBP \(amount)"
     }
 }
 

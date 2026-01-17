@@ -15,7 +15,7 @@ class AuthViewModel: ObservableObject {
 
     func checkAuthStatus() {
         // Check if we have a valid token
-        if UserDefaults.standard.string(forKey: "auth_token") != nil {
+        if KeychainService.shared.isAuthenticated {
             Task {
                 do {
                     currentUser = try await apiService.getCurrentUser()

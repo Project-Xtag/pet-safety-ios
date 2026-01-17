@@ -68,6 +68,7 @@ struct Pet: Codable, Identifiable, Hashable {
         case medicalNotes = "medical_notes"
         case notes
         case profileImage = "profile_image"
+        case photoUrl = "photo_url"
         case isMissing = "is_missing"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
@@ -170,7 +171,9 @@ struct Pet: Codable, Identifiable, Hashable {
         microchipNumber = try container.decodeIfPresent(String.self, forKey: .microchipNumber)
         medicalNotes = try container.decodeIfPresent(String.self, forKey: .medicalNotes)
         notes = try container.decodeIfPresent(String.self, forKey: .notes)
-        profileImage = try container.decodeIfPresent(String.self, forKey: .profileImage)
+        let profileImageValue = try container.decodeIfPresent(String.self, forKey: .profileImage)
+        let photoUrlValue = try container.decodeIfPresent(String.self, forKey: .photoUrl)
+        profileImage = profileImageValue ?? photoUrlValue
         isMissing = try container.decode(Bool.self, forKey: .isMissing)
         createdAt = try container.decode(String.self, forKey: .createdAt)
         updatedAt = try container.decode(String.self, forKey: .updatedAt)
@@ -188,6 +191,40 @@ struct Pet: Codable, Identifiable, Hashable {
         ownerName = try container.decodeIfPresent(String.self, forKey: .ownerName)
         ownerPhone = try container.decodeIfPresent(String.self, forKey: .ownerPhone)
         ownerEmail = try container.decodeIfPresent(String.self, forKey: .ownerEmail)
+    }
+
+    // Custom encoder to handle photoUrl key (only used for decoding legacy API responses)
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(id, forKey: .id)
+        try container.encode(ownerId, forKey: .ownerId)
+        try container.encode(name, forKey: .name)
+        try container.encode(species, forKey: .species)
+        try container.encodeIfPresent(breed, forKey: .breed)
+        try container.encodeIfPresent(color, forKey: .color)
+        try container.encodeIfPresent(weight, forKey: .weight)
+        try container.encodeIfPresent(microchipNumber, forKey: .microchipNumber)
+        try container.encodeIfPresent(medicalNotes, forKey: .medicalNotes)
+        try container.encodeIfPresent(notes, forKey: .notes)
+        try container.encodeIfPresent(profileImage, forKey: .profileImage)
+        try container.encode(isMissing, forKey: .isMissing)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(updatedAt, forKey: .updatedAt)
+        try container.encodeIfPresent(ageYears, forKey: .ageYears)
+        try container.encodeIfPresent(ageMonths, forKey: .ageMonths)
+        try container.encodeIfPresent(ageText, forKey: .ageText)
+        try container.encodeIfPresent(ageIsApproximate, forKey: .ageIsApproximate)
+        try container.encodeIfPresent(allergies, forKey: .allergies)
+        try container.encodeIfPresent(medications, forKey: .medications)
+        try container.encodeIfPresent(uniqueFeatures, forKey: .uniqueFeatures)
+        try container.encodeIfPresent(sex, forKey: .sex)
+        try container.encodeIfPresent(isNeutered, forKey: .isNeutered)
+        try container.encodeIfPresent(qrCode, forKey: .qrCode)
+        try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
+        try container.encodeIfPresent(ownerName, forKey: .ownerName)
+        try container.encodeIfPresent(ownerPhone, forKey: .ownerPhone)
+        try container.encodeIfPresent(ownerEmail, forKey: .ownerEmail)
     }
 }
 

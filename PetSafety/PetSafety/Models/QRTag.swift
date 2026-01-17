@@ -1,30 +1,28 @@
 import Foundation
 
 struct QRTag: Codable, Identifiable {
-    let id: Int
-    let tagCode: String
-    let petId: Int?
-    let isActivated: Bool
+    let id: String
+    let qrCode: String
+    let petId: String?
+    let status: String
     let createdAt: String
-    let updatedAt: String
-    let pet: Pet?
+    let updatedAt: String?
 
     var qrCodeURL: String {
-        "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=\(tagCode)"
+        "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=\(qrCode)"
     }
 
     var deepLink: String {
-        "petsafety://tag/\(tagCode)"
+        "petsafety://tag/\(qrCode)"
     }
 
     enum CodingKeys: String, CodingKey {
         case id
-        case tagCode = "tag_code"
+        case qrCode = "qr_code"
         case petId = "pet_id"
-        case isActivated = "is_activated"
+        case status
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case pet
     }
 }
 
@@ -62,11 +60,11 @@ struct PetOwnerInfo: Codable {
 }
 
 struct ActivateTagRequest: Codable {
-    let tagCode: String
-    let petId: Int
+    let qrCode: String
+    let petId: String
 
     enum CodingKeys: String, CodingKey {
-        case tagCode = "tag_code"
-        case petId = "pet_id"
+        case qrCode = "qrCode"
+        case petId = "petId"
     }
 }

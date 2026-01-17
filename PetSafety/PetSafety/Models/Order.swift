@@ -1,27 +1,30 @@
 import Foundation
 
 struct Order: Codable, Identifiable {
-    let id: Int
-    let userId: Int?
-    let guestEmail: String?
-    let status: String
+    let id: String
+    let userId: String?
+    let petName: String
     let totalAmount: Double
-    let currency: String
+    let shippingCost: Double
+    let shippingAddress: AddressDetails?
+    let billingAddress: AddressDetails?
+    let paymentMethod: String
+    let paymentStatus: String
     let paymentIntentId: String?
+    let orderStatus: String
     let createdAt: String
     let updatedAt: String
     let items: [OrderItem]?
-    let user: User?
 
     var formattedAmount: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencyCode = currency
-        return formatter.string(from: NSNumber(value: totalAmount)) ?? "\(currency) \(totalAmount)"
+        formatter.currencyCode = "GBP"
+        return formatter.string(from: NSNumber(value: totalAmount)) ?? "GBP \(totalAmount)"
     }
 
     var statusColor: String {
-        switch status {
+        switch orderStatus {
         case "completed": return "green"
         case "pending": return "orange"
         case "failed": return "red"
@@ -31,64 +34,58 @@ struct Order: Codable, Identifiable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case id, status, currency, items, user
+        case id, items
         case userId = "user_id"
-        case guestEmail = "guest_email"
+        case petName = "pet_name"
         case totalAmount = "total_amount"
+        case shippingCost = "shipping_cost"
+        case shippingAddress = "shipping_address"
+        case billingAddress = "billing_address"
+        case paymentMethod = "payment_method"
+        case paymentStatus = "payment_status"
         case paymentIntentId = "payment_intent_id"
+        case orderStatus = "order_status"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }
 }
 
 struct OrderItem: Codable, Identifiable {
-    let id: Int
-    let orderId: Int
-    let petName: String
-    let petSpecies: String
-    let petBreed: String?
-    let qrTagId: Int?
+    let id: String
+    let orderId: String
+    let itemType: String
+    let quantity: Int
     let price: Double
+    let petId: String?
+    let qrTagId: String?
     let createdAt: String
-    let qrTag: QRTag?
 
     enum CodingKeys: String, CodingKey {
         case id, price
         case orderId = "order_id"
-        case petName = "pet_name"
-        case petSpecies = "pet_species"
-        case petBreed = "pet_breed"
+        case itemType = "item_type"
+        case quantity
+        case petId = "pet_id"
         case qrTagId = "qr_tag_id"
         case createdAt = "created_at"
-        case qrTag = "qr_tag"
     }
 }
 
 struct CreateOrderRequest: Codable {
-    let guestEmail: String?
-    let items: [OrderItemRequest]
+    let petNames: [String]
+    let ownerName: String
+    let email: String
+    let shippingAddress: AddressDetails
+    let billingAddress: AddressDetails?
+    let paymentMethod: String?
+    let shippingCost: Double?
 }
 
-struct OrderItemRequest: Codable {
-    let petName: String
-    let petSpecies: String
-    let petBreed: String?
-    let price: Double
-
-    enum CodingKeys: String, CodingKey {
-        case price
-        case petName = "pet_name"
-        case petSpecies = "pet_species"
-        case petBreed = "pet_breed"
-    }
-}
-
-struct PaymentIntentResponse: Codable {
-    let clientSecret: String
-    let orderId: Int
-
-    enum CodingKeys: String, CodingKey {
-        case clientSecret = "client_secret"
-        case orderId = "order_id"
-    }
+struct AddressDetails: Codable {
+    let street1: String
+    let street2: String?
+    let city: String
+    let province: String?
+    let postCode: String
+    let country: String
 }

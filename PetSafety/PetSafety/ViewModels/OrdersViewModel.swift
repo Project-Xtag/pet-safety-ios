@@ -21,17 +21,12 @@ class OrdersViewModel: ObservableObject {
         }
     }
 
-    func createOrder(
-        guestEmail: String?,
-        items: [OrderItemRequest]
-    ) async throws -> PaymentIntentResponse {
+    func createOrder(_ orderData: CreateOrderRequest) async throws -> CreateTagOrderResponse {
         isLoading = true
         errorMessage = nil
 
-        let request = CreateOrderRequest(guestEmail: guestEmail, items: items)
-
         do {
-            let response = try await apiService.createOrder(request)
+            let response = try await apiService.createOrder(orderData)
             isLoading = false
             return response
         } catch {

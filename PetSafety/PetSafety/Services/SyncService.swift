@@ -179,17 +179,20 @@ class SyncService: ObservableObject {
             throw SyncError.missingData("petId")
         }
 
-        let lastSeenLocation = action.data["lastSeenLocation"] as? String
-        let lastSeenLatitude = action.data["lastSeenLatitude"] as? Double
-        let lastSeenLongitude = action.data["lastSeenLongitude"] as? Double
-        let additionalInfo = action.data["additionalInfo"] as? String
+        let lastSeenAddress = action.data["lastSeenAddress"] as? String
+        let lastSeenLatitude = action.data["latitude"] as? Double
+        let lastSeenLongitude = action.data["longitude"] as? Double
+        let additionalInfo = action.data["description"] as? String
 
         let request = CreateAlertRequest(
             petId: petId,
-            lastSeenLocation: lastSeenLocation,
-            lastSeenLatitude: lastSeenLatitude,
-            lastSeenLongitude: lastSeenLongitude,
-            additionalInfo: additionalInfo
+            lastSeenLocation: (lastSeenLatitude != nil && lastSeenLongitude != nil)
+                ? LocationCoordinate(lat: lastSeenLatitude!, lng: lastSeenLongitude!)
+                : nil,
+            lastSeenAddress: lastSeenAddress,
+            description: additionalInfo,
+            rewardAmount: nil,
+            alertRadiusKm: nil
         )
 
         _ = try await apiService.createAlert(request)
@@ -208,14 +211,20 @@ class SyncService: ObservableObject {
             throw SyncError.missingData("alertId")
         }
 
+        let latitude = action.data["latitude"] as? Double
+        let longitude = action.data["longitude"] as? Double
+
         let request = ReportSightingRequest(
             reporterName: action.data["reporterName"] as? String,
             reporterPhone: action.data["reporterPhone"] as? String,
             reporterEmail: action.data["reporterEmail"] as? String,
-            sightingLocation: action.data["sightingLocation"] as? String,
-            sightingLatitude: action.data["sightingLatitude"] as? Double,
-            sightingLongitude: action.data["sightingLongitude"] as? Double,
-            sightingNotes: action.data["sightingNotes"] as? String
+            location: (latitude != nil && longitude != nil)
+                ? LocationCoordinate(lat: latitude!, lng: longitude!)
+                : nil,
+            address: action.data["address"] as? String,
+            description: action.data["description"] as? String,
+            photoUrl: nil,
+            sightedAt: nil
         )
 
         _ = try await apiService.reportSighting(alertId: alertId, sighting: request)
@@ -226,8 +235,46 @@ class SyncService: ObservableObject {
     }
 
     private func processUpdatePet(_ action: QueuedAction) async throws {
-        // Implementation depends on your update pet API endpoint
-        throw SyncError.notImplemented
+        guard let petId = action.data["petId"] as? String else {
+            throw SyncError.missingData("petId")
+        }
+
+        // Extract optional update fields from action data
+        let name = action.data["name"] as? String
+        let species = action.data["species"] as? String
+        let breed = action.data["breed"] as? String
+        let color = action.data["color"] as? String
+        let age = action.data["age"] as? String
+        let weight = action.data["weight"] as? Double
+        let microchipNumber = action.data["microchipNumber"] as? String
+        let medicalNotes = action.data["medicalNotes"] as? String
+        let allergies = action.data["allergies"] as? String
+        let medications = action.data["medications"] as? String
+        let notes = action.data["notes"] as? String
+        let uniqueFeatures = action.data["uniqueFeatures"] as? String
+        let sex = action.data["sex"] as? String
+        let isNeutered = action.data["isNeutered"] as? Bool
+        let isMissing = action.data["isMissing"] as? Bool
+
+        let request = UpdatePetRequest(
+            name: name,
+            species: species,
+            breed: breed,
+            color: color,
+            age: age,
+            weight: weight,
+            microchipNumber: microchipNumber,
+            medicalNotes: medicalNotes,
+            allergies: allergies,
+            medications: medications,
+            notes: notes,
+            uniqueFeatures: uniqueFeatures,
+            sex: sex,
+            isNeutered: isNeutered,
+            isMissing: isMissing
+        )
+
+        _ = try await apiService.updatePet(id: petId, request)
     }
 
     // MARK: - Remote Data Fetching

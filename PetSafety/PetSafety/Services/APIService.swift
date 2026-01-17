@@ -183,10 +183,11 @@ class APIService {
     func updateUser(_ updates: [String: Any]) async throws -> User {
         let request = try buildRequest(
             endpoint: "/users/me",
-            method: "PUT",
+            method: "PATCH",
             body: DynamicBody(updates)
         )
-        return try await performRequest(request, responseType: User.self)
+        let response = try await performRequest(request, responseType: UserResponse.self)
+        return response.user
     }
 
     func updateContactPreferences(
@@ -448,7 +449,8 @@ class APIService {
     // MARK: - Alerts
     func getAlerts() async throws -> [MissingPetAlert] {
         let request = try buildRequest(endpoint: "/alerts")
-        return try await performRequest(request, responseType: [MissingPetAlert].self)
+        let response = try await performRequest(request, responseType: AlertsResponse.self)
+        return response.alerts
     }
 
     func getNearbyAlerts(
@@ -474,20 +476,25 @@ class APIService {
 
     func createAlert(_ alertData: CreateAlertRequest) async throws -> MissingPetAlert {
         let request = try buildRequest(
-            endpoint: "/alerts",
+            endpoint: "/alerts/missing",
             method: "POST",
             body: alertData
         )
-        return try await performRequest(request, responseType: MissingPetAlert.self)
+        let response = try await performRequest(request, responseType: AlertResponse.self)
+        return response.alert
     }
 
     func updateAlertStatus(id: String, status: String) async throws -> MissingPetAlert {
+        guard status == "found" else {
+            throw APIError.serverError("Only 'found' status is supported")
+        }
         let request = try buildRequest(
-            endpoint: "/alerts/\(id)/status",
-            method: "PUT",
-            body: ["status": status]
+            endpoint: "/alerts/\(id)/found",
+            method: "POST",
+            body: EmptyBody()
         )
-        return try await performRequest(request, responseType: MissingPetAlert.self)
+        let response = try await performRequest(request, responseType: AlertResponse.self)
+        return response.alert
     }
 
     func reportSighting(alertId: String, sighting: ReportSightingRequest) async throws -> Sighting {
@@ -496,7 +503,8 @@ class APIService {
             method: "POST",
             body: sighting
         )
-        return try await performRequest(request, responseType: Sighting.self)
+        let response = try await performRequest(request, responseType: SightingResponse.self)
+        return response.sighting
     }
 
     // MARK: - QR Tags
@@ -580,19 +588,20 @@ class APIService {
     }
 
     // MARK: - Orders
-    func createOrder(_ orderData: CreateOrderRequest) async throws -> PaymentIntentResponse {
+    func createOrder(_ orderData: CreateOrderRequest) async throws -> CreateTagOrderResponse {
         let request = try buildRequest(
             endpoint: "/orders",
             method: "POST",
             body: orderData,
             requiresAuth: false
         )
-        return try await performRequest(request, responseType: PaymentIntentResponse.self)
+        return try await performRequest(request, responseType: CreateTagOrderResponse.self)
     }
 
     func getOrders() async throws -> [Order] {
         let request = try buildRequest(endpoint: "/orders")
-        return try await performRequest(request, responseType: [Order].self)
+        let response = try await performRequest(request, responseType: OrdersResponse.self)
+        return response.orders
     }
 
     func createReplacementOrder(petId: String, shippingAddress: ShippingAddress) async throws -> ReplacementOrderResponse {
@@ -638,6 +647,28 @@ struct PetsResponse: Codable {
 struct PetResponse: Codable {
     let success: Bool
     let pet: Pet
+}
+
+struct AlertsResponse: Codable {
+    let success: Bool
+    let alerts: [MissingPetAlert]
+}
+
+struct AlertResponse: Codable {
+    let success: Bool
+    let alert: MissingPetAlert
+    let message: String?
+}
+
+struct SightingResponse: Codable {
+    let success: Bool
+    let sighting: Sighting
+    let message: String?
+}
+
+struct OrdersResponse: Codable {
+    let success: Bool
+    let orders: [Order]
 }
 
 struct ImageUploadResponse: Codable {

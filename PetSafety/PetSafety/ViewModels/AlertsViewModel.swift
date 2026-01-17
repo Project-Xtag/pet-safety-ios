@@ -62,8 +62,8 @@ class AlertsViewModel: ObservableObject {
             )
 
             // Separate missing and found alerts
-            missingAlerts = allAlerts.filter { $0.status == "active" }
-            foundAlerts = allAlerts.filter { $0.status == "resolved" }
+        missingAlerts = allAlerts.filter { $0.status == "active" }
+        foundAlerts = allAlerts.filter { $0.status == "found" }
 
             isLoading = false
         } catch {
@@ -83,10 +83,11 @@ class AlertsViewModel: ObservableObject {
 
         let request = CreateAlertRequest(
             petId: petId,
-            lastSeenLocation: location,
-            lastSeenLatitude: coordinate?.latitude,
-            lastSeenLongitude: coordinate?.longitude,
-            additionalInfo: additionalInfo
+            lastSeenLocation: coordinate.map { LocationCoordinate(lat: $0.latitude, lng: $0.longitude) },
+            lastSeenAddress: location,
+            description: additionalInfo,
+            rewardAmount: nil,
+            alertRadiusKm: nil
         )
 
         do {
@@ -114,14 +115,14 @@ class AlertsViewModel: ObservableObject {
             }
 
             // Move alert between missing and found arrays based on new status
-            if status == "resolved" {
+        if status == "found" {
                 // Remove from missing alerts
                 missingAlerts.removeAll { $0.id == id }
                 // Add to found alerts if not already there
                 if !foundAlerts.contains(where: { $0.id == id }) {
                     foundAlerts.insert(updatedAlert, at: 0)
                 }
-            } else if status == "active" {
+        } else if status == "active" {
                 // Remove from found alerts
                 foundAlerts.removeAll { $0.id == id }
                 // Add to missing alerts if not already there
@@ -163,14 +164,14 @@ class AlertsViewModel: ObservableObject {
                 actionData["reporterEmail"] = reporterEmail
             }
             if let location = location {
-                actionData["sightingLocation"] = location
+                actionData["address"] = location
             }
             if let coordinate = coordinate {
-                actionData["sightingLatitude"] = coordinate.latitude
-                actionData["sightingLongitude"] = coordinate.longitude
+                actionData["latitude"] = coordinate.latitude
+                actionData["longitude"] = coordinate.longitude
             }
             if let notes = notes {
-                actionData["sightingNotes"] = notes
+                actionData["description"] = notes
             }
 
             _ = try await syncService.queueAction(type: .reportSighting, data: actionData)
@@ -184,10 +185,11 @@ class AlertsViewModel: ObservableObject {
             reporterName: reporterName,
             reporterPhone: reporterPhone,
             reporterEmail: reporterEmail,
-            sightingLocation: location,
-            sightingLatitude: coordinate?.latitude,
-            sightingLongitude: coordinate?.longitude,
-            sightingNotes: notes
+            location: coordinate.map { LocationCoordinate(lat: $0.latitude, lng: $0.longitude) },
+            address: location,
+            description: notes,
+            photoUrl: nil,
+            sightedAt: nil
         )
 
         do {
