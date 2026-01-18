@@ -6,6 +6,8 @@ struct OrderMoreTagsView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var isLoading = false
     @State private var orderComplete = false
+    @State private var paymentPending = false
+    @State private var paymentIntentId: String?
 
     // Pet names
     @State private var petNames: [String] = [""]
@@ -65,11 +67,19 @@ struct OrderMoreTagsView: View {
             Text("Order Complete!")
                 .font(.system(size: 32, weight: .bold))
 
-            Text("Your tags have been ordered! You'll receive a confirmation email shortly with tracking information.")
-                .font(.body)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
+            if paymentPending {
+                Text("Your order is placed and payment is pending. We'll guide you through payment soon.")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+            } else {
+                Text("Your tags have been ordered! You'll receive a confirmation email shortly with tracking information.")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+            }
 
             Spacer()
 
@@ -306,6 +316,19 @@ struct OrderMoreTagsView: View {
                 )
 
                 let response = try await APIService.shared.createTagOrder(orderRequest)
+
+                // Kick off payment intent creation for shipping
+                let paymentResponse = try await APIService.shared.createPaymentIntent(
+                    orderId: response.order.id,
+                    amount: response.order.totalAmount,
+                    email: email,
+                    paymentMethod: "card",
+                    currency: "gbp",
+                    requiresAuth: authViewModel.isAuthenticated
+                )
+
+                paymentIntentId = paymentResponse.paymentIntent.id
+                paymentPending = true
 
                 isLoading = false
 

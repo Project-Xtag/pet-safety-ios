@@ -663,6 +663,38 @@ class APIService {
         )
         return try await performRequest(request, responseType: CreateTagOrderResponse.self)
     }
+
+    func createPaymentIntent(
+        orderId: String,
+        amount: Double,
+        email: String?,
+        paymentMethod: String? = nil,
+        currency: String? = nil,
+        requiresAuth: Bool = true
+    ) async throws -> PaymentIntentResponse {
+        let request = try buildRequest(
+            endpoint: "/payments/intent",
+            method: "POST",
+            body: CreatePaymentIntentRequest(
+                orderId: orderId,
+                amount: amount,
+                paymentMethod: paymentMethod,
+                currency: currency,
+                email: email
+            ),
+            requiresAuth: requiresAuth
+        )
+        return try await performRequest(request, responseType: PaymentIntentResponse.self)
+    }
+
+    func getPaymentIntent(paymentIntentId: String) async throws -> PaymentIntentStatusResponse {
+        let request = try buildRequest(
+            endpoint: "/payments/intent/\(paymentIntentId)",
+            method: "GET",
+            requiresAuth: true
+        )
+        return try await performRequest(request, responseType: PaymentIntentStatusResponse.self)
+    }
 }
 
 extension APIService: APIServiceProtocol {}

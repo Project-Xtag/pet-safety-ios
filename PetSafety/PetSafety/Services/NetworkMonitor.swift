@@ -21,6 +21,18 @@ class NetworkMonitor: ObservableObject {
     private let monitor: NWPathMonitor
     private let queue = DispatchQueue(label: "com.petsafety.networkmonitor")
 
+    #if DEBUG
+    enum NetworkOverrideMode: String, CaseIterable, Identifiable {
+        case system
+        case offline
+        case online
+
+        var id: String { rawValue }
+    }
+
+    @Published var overrideMode: NetworkOverrideMode = .system
+    #endif
+
     private init() {
         monitor = NWPathMonitor()
         startMonitoring()
@@ -31,6 +43,13 @@ class NetworkMonitor: ObservableObject {
         monitor.pathUpdateHandler = { [weak self] path in
             Task { @MainActor [weak self] in
                 guard let self = self else { return }
+
+                #if DEBUG
+                if self.overrideMode != .system {
+                    self.isConnected = self.overrideMode == .online
+                    return
+                }
+                #endif
 
                 self.isConnected = path.status == .satisfied
                 self.isExpensive = path.isExpensive

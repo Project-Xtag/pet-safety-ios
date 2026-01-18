@@ -3,6 +3,9 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var showingLogoutAlert = false
+    #if DEBUG
+    @StateObject private var networkMonitor = NetworkMonitor.shared
+    #endif
 
     var body: some View {
         List {
@@ -95,6 +98,21 @@ struct ProfileView: View {
                         )
                     }
                 }
+
+                #if DEBUG
+                Section(header: Text("Developer")) {
+                    Picker("Network", selection: $networkMonitor.overrideMode) {
+                        Text("System").tag(NetworkMonitor.NetworkOverrideMode.system)
+                        Text("Offline").tag(NetworkMonitor.NetworkOverrideMode.offline)
+                        Text("Online").tag(NetworkMonitor.NetworkOverrideMode.online)
+                    }
+                    .pickerStyle(.segmented)
+
+                    Text("Current: \(networkMonitor.connectionDescription)")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                }
+                #endif
 
                 // Logout
                 Section {
