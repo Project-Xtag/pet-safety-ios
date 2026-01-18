@@ -97,6 +97,7 @@ struct PersonalInformationView: View {
             }
         }
         .navigationTitle("Personal Information")
+        .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(isEditing)
         .toolbar {

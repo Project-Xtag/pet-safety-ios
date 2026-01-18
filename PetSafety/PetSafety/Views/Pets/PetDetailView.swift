@@ -140,6 +140,7 @@ struct PetDetailView: View {
             NavigationView {
                 PetFormView(mode: .edit(pet))
             }
+            .adaptiveContainer()
         }
         .sheet(isPresented: $showingMarkLostSheet) {
             NavigationView {

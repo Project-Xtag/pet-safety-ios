@@ -230,6 +230,7 @@ struct OrderMoreTagsView: View {
                 .disabled(isLoading || !isFormValid)
             }
         }
+        .adaptiveList()
     }
 
     private var validPetCount: Int {

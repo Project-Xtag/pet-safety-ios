@@ -105,6 +105,7 @@ struct PetsListView: View {
                             }
                             .padding(.bottom, 16)
                         }
+                        .adaptiveContainer()
                     }
                 }
             }

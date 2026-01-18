@@ -195,6 +195,7 @@ struct PetFormView: View {
                 }
             }
         }
+        .adaptiveList()
         .navigationTitle(mode.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

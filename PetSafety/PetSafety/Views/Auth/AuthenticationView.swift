@@ -103,7 +103,9 @@ struct AuthenticationView: View {
                     .padding(.bottom, 20)
             }
             .navigationBarHidden(true)
+            .adaptiveContainer()
         }
+        .navigationViewStyle(.stack)
     }
 
     private func sendOTP() {

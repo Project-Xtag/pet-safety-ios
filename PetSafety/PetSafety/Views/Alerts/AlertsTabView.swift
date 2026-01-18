@@ -45,7 +45,9 @@ struct AlertsTabView: View {
             .refreshable {
                 await loadNearbyAlerts()
             }
+            .adaptiveContainer(maxWidth: 900)
         }
+        .navigationViewStyle(.stack)
     }
 
     // MARK: - Helper Methods

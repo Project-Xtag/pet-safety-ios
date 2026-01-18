@@ -54,6 +54,7 @@ struct NotificationSettingsView: View {
             }
         }
         .navigationTitle("Notifications")
+        .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
     }
 

@@ -62,6 +62,7 @@ struct QuickMarkLostView: View {
             }
         }
         .navigationTitle("Report Missing Pet")
+        .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

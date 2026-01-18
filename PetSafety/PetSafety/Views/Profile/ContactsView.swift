@@ -51,6 +51,7 @@ struct ContactsView: View {
             .padding(.bottom, 40)
         }
         .navigationTitle("Contacts")
+        .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
     }
 }

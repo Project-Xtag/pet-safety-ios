@@ -96,6 +96,7 @@ struct NotificationPreferencesView: View {
                     }
                 }
             }
+            .adaptiveList()
             .navigationTitle("Notification Settings")
             .navigationBarTitleDisplayMode(.inline)
             .task {

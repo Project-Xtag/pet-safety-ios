@@ -31,6 +31,7 @@ struct MainTabView: View {
             NavigationView {
                 PetsListView()
             }
+            .navigationViewStyle(.stack)
             .tabItem {
                 Label("My Pets", systemImage: "pawprint.fill")
             }
@@ -38,6 +39,7 @@ struct MainTabView: View {
             NavigationView {
                 QRScannerView()
             }
+            .navigationViewStyle(.stack)
             .tabItem {
                 Label("Scan QR", systemImage: "qrcode.viewfinder")
             }
@@ -50,6 +52,7 @@ struct MainTabView: View {
             NavigationView {
                 ProfileView()
             }
+            .navigationViewStyle(.stack)
             .tabItem {
                 Label("Profile", systemImage: "person.fill")
             }
@@ -70,6 +73,22 @@ struct LoadingView: View {
                 .background(Color.white)
                 .cornerRadius(10)
         }
+    }
+}
+
+// MARK: - Adaptive Layout Helpers (iPad-friendly)
+extension View {
+    func adaptiveContainer(maxWidth: CGFloat = 700) -> some View {
+        self
+            .frame(maxWidth: maxWidth)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.horizontal, 24)
+    }
+
+    func adaptiveList(maxWidth: CGFloat = 700) -> some View {
+        self
+            .frame(maxWidth: maxWidth)
+            .frame(maxWidth: .infinity, alignment: .center)
     }
 }
 

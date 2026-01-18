@@ -195,6 +195,7 @@ struct OrderReplacementTagView: View {
                 .disabled(isLoading || !isFormValid)
             }
         }
+        .adaptiveList()
         .overlay {
             if isLoading {
                 Color.black.opacity(0.3)

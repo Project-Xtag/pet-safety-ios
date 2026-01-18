@@ -138,6 +138,7 @@ struct AddressView: View {
             }
         }
         .navigationTitle("Address")
+        .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(isEditing)
         .toolbar {

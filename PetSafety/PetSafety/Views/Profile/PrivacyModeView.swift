@@ -46,6 +46,7 @@ struct PrivacyModeView: View {
             }
         }
         .navigationTitle("Privacy Mode")
+        .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
     }
 }

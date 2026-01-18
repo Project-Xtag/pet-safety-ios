@@ -130,6 +130,7 @@ struct ProfileView: View {
             }
         }
         .navigationTitle("Profile")
+        .adaptiveList()
         .alert("Log Out", isPresented: $showingLogoutAlert) {
             Button("Cancel", role: .cancel) { }
             Button("Log Out", role: .destructive) {

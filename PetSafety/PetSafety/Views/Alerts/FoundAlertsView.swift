@@ -53,6 +53,7 @@ struct FoundAlertsListView: View {
             }
         }
         .listStyle(.plain)
+        .adaptiveList()
     }
 }
 

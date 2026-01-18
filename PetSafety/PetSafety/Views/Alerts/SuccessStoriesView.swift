@@ -172,6 +172,7 @@ struct SuccessStoriesListView: View {
             }
         }
         .listStyle(.plain)
+        .adaptiveList()
     }
 }
 

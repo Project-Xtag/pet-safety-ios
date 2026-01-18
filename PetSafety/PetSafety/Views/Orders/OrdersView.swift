@@ -20,6 +20,7 @@ struct OrdersView: View {
                     }
                 }
                 .listStyle(.inset)
+                .adaptiveList()
             }
         }
         .navigationTitle("Orders")
@@ -171,6 +172,7 @@ struct OrderDetailView: View {
         }
         .navigationTitle("Order Details")
         .navigationBarTitleDisplayMode(.inline)
+        .adaptiveList()
     }
 
     private var statusColor: Color {

@@ -56,6 +56,7 @@ struct MissingAlertsListView: View {
             }
         }
         .listStyle(.plain)
+        .adaptiveList()
     }
 }
 

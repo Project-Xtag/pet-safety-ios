@@ -64,6 +64,7 @@ struct QuickMarkFoundView: View {
             }
         }
         .navigationTitle("Mark Pet as Found")
+        .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

@@ -54,6 +54,7 @@ struct CreateAlertView: View {
                     }
             }
         }
+        .adaptiveList()
         .navigationTitle("Report Missing Pet")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

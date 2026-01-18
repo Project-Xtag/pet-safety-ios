@@ -81,6 +81,7 @@ struct MarkAsLostView: View {
                 .foregroundColor(.secondary)
             }
         }
+        .adaptiveList()
         .navigationTitle("Report Missing Pet")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
