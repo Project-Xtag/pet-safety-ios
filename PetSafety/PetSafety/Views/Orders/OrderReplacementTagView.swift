@@ -32,7 +32,7 @@ struct OrderReplacementTagView: View {
                 Button("Cancel") {
                     dismiss()
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.brandOrange)
             }
         }
         .task {

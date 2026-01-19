@@ -116,22 +116,29 @@ struct PetDetailView: View {
                 VStack(spacing: 12) {
                     // Photo Gallery Button
                     NavigationLink(destination: PhotoGalleryView(pet: pet)) {
-                        Label("View Photo Gallery", systemImage: "photo.on.rectangle")
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.accentColor.opacity(0.1))
-                            .foregroundColor(.accentColor)
-                            .cornerRadius(10)
-                            .fontWeight(.semibold)
+                        HStack {
+                            Image(systemName: "photo.on.rectangle")
+                            Text("View \(pet.name)'s Photos")
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.tealAccent.opacity(0.1))
+                        .foregroundColor(.tealAccent)
+                        .cornerRadius(14)
+                        .font(.system(size: 15, weight: .semibold))
                     }
 
                     Button(action: { showingEditSheet = true }) {
-                        Label("Edit Pet Information", systemImage: "pencil")
+                        HStack {
+                            Image(systemName: "pencil")
+                            Text("Edit \(pet.name)'s Profile")
+                        }
                     }
-                    .buttonStyle(SecondaryButtonStyle())
+                    .buttonStyle(BrandButtonStyle())
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
+                .padding(.bottom, 100) // Add padding to prevent button from being hidden under tab bar
             }
             .padding(.vertical)
         }
@@ -183,18 +190,6 @@ struct InfoCard: View {
         .padding()
         .background(Color(.systemGray6))
         .cornerRadius(12)
-    }
-}
-
-struct SecondaryButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color(.systemGray6))
-            .foregroundColor(.primary)
-            .cornerRadius(10)
-            .fontWeight(.semibold)
     }
 }
 

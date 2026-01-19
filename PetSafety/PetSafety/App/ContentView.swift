@@ -47,7 +47,7 @@ struct ContentView: View {
 
     private func handleDeepLink(_ url: URL) {
         #if DEBUG
-        print("🔗 ContentView: Received URL: \(url.absoluteString)")
+        print("Received URL: \(url.absoluteString)")
         #endif
 
         // Let the DeepLinkService handle the URL
@@ -65,38 +65,42 @@ struct DeepLinkLoginPromptView: View {
             VStack(spacing: 24) {
                 Spacer()
 
-                Image(systemName: "person.crop.circle.badge.exclamationmark")
-                    .font(.system(size: 60))
-                    .foregroundColor(.orange)
+                ZStack {
+                    Circle()
+                        .fill(Color.brandOrange.opacity(0.1))
+                        .frame(width: 100, height: 100)
+                    Image(systemName: "person.crop.circle.badge.exclamationmark")
+                        .font(.system(size: 48))
+                        .foregroundColor(.brandOrange)
+                }
 
                 Text("Login Required")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.system(size: 22, weight: .bold))
+                    .foregroundColor(.primary)
 
                 Text("Please log in to activate this tag for your pet")
-                    .font(.body)
-                    .foregroundColor(.secondary)
+                    .font(.system(size: 15))
+                    .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
 
                 VStack(spacing: 8) {
                     Text("Tag Code")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.mutedText)
 
                     Text(tagCode)
-                        .font(.system(.title3, design: .monospaced))
-                        .fontWeight(.semibold)
+                        .font(.system(size: 18, weight: .semibold, design: .monospaced))
                         .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
+                        .padding(.vertical, 10)
                         .background(Color(UIColor.systemGray6))
-                        .cornerRadius(8)
+                        .cornerRadius(10)
                 }
                 .padding(.vertical)
 
                 Text("After logging in, scan the tag again or go to My Pets to activate it")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .font(.system(size: 13))
+                    .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
 
@@ -104,13 +108,8 @@ struct DeepLinkLoginPromptView: View {
 
                 Button(action: onDismiss) {
                     Text("OK")
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color("BrandColor"))
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
                 }
+                .buttonStyle(BrandButtonStyle())
                 .padding(.horizontal, 24)
                 .padding(.bottom, 40)
             }
@@ -127,39 +126,114 @@ struct DeepLinkLoginPromptView: View {
     }
 }
 
+// MARK: - Main Tab View
 struct MainTabView: View {
+    @State private var selectedTab = 0
+
     var body: some View {
-        TabView {
-            NavigationView {
-                PetsListView()
-            }
-            .navigationViewStyle(.stack)
-            .tabItem {
-                Label("My Pets", systemImage: "pawprint.fill")
-            }
-
-            NavigationView {
-                QRScannerView()
-            }
-            .navigationViewStyle(.stack)
-            .tabItem {
-                Label("Scan QR", systemImage: "qrcode.viewfinder")
-            }
-
-            AlertsTabView()
-                .tabItem {
-                    Label("Alerts", systemImage: "exclamationmark.triangle.fill")
+        ZStack(alignment: .bottom) {
+            // Content
+            Group {
+                switch selectedTab {
+                case 0:
+                    NavigationView {
+                        PetsListView()
+                    }
+                    .navigationViewStyle(.stack)
+                case 1:
+                    NavigationView {
+                        QRScannerView()
+                    }
+                    .navigationViewStyle(.stack)
+                case 2:
+                    AlertsTabView()
+                case 3:
+                    NavigationView {
+                        ProfileView()
+                    }
+                    .navigationViewStyle(.stack)
+                default:
+                    EmptyView()
                 }
+            }
 
-            NavigationView {
-                ProfileView()
-            }
-            .navigationViewStyle(.stack)
-            .tabItem {
-                Label("Profile", systemImage: "person.fill")
-            }
+            // Custom Tab Bar
+            CustomTabBar(selectedTab: $selectedTab)
         }
-        .accentColor(Color("BrandColor"))
+        .ignoresSafeArea(.keyboard)
+    }
+}
+
+// MARK: - Custom Tab Bar
+struct CustomTabBar: View {
+    @Binding var selectedTab: Int
+
+    var body: some View {
+        HStack(spacing: 0) {
+            TabBarItem(
+                icon: "pawprint.fill",
+                title: "My Pets",
+                isSelected: selectedTab == 0,
+                action: { selectedTab = 0 }
+            )
+
+            TabBarItem(
+                icon: "qrcode.viewfinder",
+                title: "Scan QR",
+                isSelected: selectedTab == 1,
+                action: { selectedTab = 1 }
+            )
+
+            TabBarItem(
+                icon: "exclamationmark.triangle.fill",
+                title: "Alerts",
+                isSelected: selectedTab == 2,
+                action: { selectedTab = 2 }
+            )
+
+            TabBarItem(
+                icon: "person.fill",
+                title: "Account",
+                isSelected: selectedTab == 3,
+                action: { selectedTab = 3 }
+            )
+        }
+        .padding(.horizontal, 8)
+        .padding(.top, 8)
+        .padding(.bottom, 24)
+        .background(
+            Color(UIColor.systemBackground)
+                .shadow(color: Color.black.opacity(0.08), radius: 20, x: 0, y: -5)
+        )
+    }
+}
+
+// MARK: - Tab Bar Item
+struct TabBarItem: View {
+    let icon: String
+    let title: String
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Image(systemName: icon)
+                    .font(.system(size: 20))
+                Text(title)
+                    .font(.system(size: 10, weight: .medium))
+            }
+            .foregroundColor(isSelected ? .brandOrange : .mutedText)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
+            .padding(.horizontal, 4)
+            .background(
+                isSelected
+                    ? Color.peachBackground.opacity(0.8)
+                    : Color.clear
+            )
+            .cornerRadius(16)
+        }
     }
 }
 
@@ -169,11 +243,15 @@ struct LoadingView: View {
             Color.black.opacity(0.3)
                 .ignoresSafeArea()
 
-            ProgressView()
-                .scaleEffect(1.5)
-                .frame(width: 100, height: 100)
-                .background(Color.white)
-                .cornerRadius(10)
+            VStack(spacing: 16) {
+                ProgressView()
+                    .scaleEffect(1.2)
+                    .tint(.brandOrange)
+            }
+            .frame(width: 100, height: 100)
+            .background(Color(UIColor.systemBackground))
+            .cornerRadius(16)
+            .shadow(color: Color.black.opacity(0.1), radius: 20, x: 0, y: 10)
         }
     }
 }

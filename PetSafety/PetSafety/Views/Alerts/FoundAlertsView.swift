@@ -3,40 +3,25 @@ import MapKit
 
 struct FoundAlertsView: View {
     @ObservedObject var viewModel: AlertsViewModel
-    @State private var viewMode: ViewMode = .list
-
-    enum ViewMode {
-        case list, map
-    }
 
     var body: some View {
         VStack(spacing: 0) {
-            // Segmented Control
-            Picker("View Mode", selection: $viewMode) {
-                Label("List", systemImage: "list.bullet").tag(ViewMode.list)
-                Label("Map", systemImage: "map").tag(ViewMode.map)
-            }
-            .pickerStyle(.segmented)
-            .padding()
-
             // Content
             if viewModel.isLoading {
-                ProgressView("Loading alerts...")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if viewModel.foundAlerts.isEmpty {
-                EmptyStateView(
-                    icon: "checkmark.circle.fill",
-                    title: "No Found Pets Nearby",
-                    message: "There are no recently found pets within 10km of your location",
-                    actionTitle: nil,
-                    action: nil
-                )
-            } else {
-                if viewMode == .list {
-                    FoundAlertsListView(alerts: viewModel.foundAlerts)
-                } else {
-                    FoundAlertsMapView(alerts: viewModel.foundAlerts)
+                VStack(spacing: 16) {
+                    Spacer()
+                    ProgressView()
+                        .scaleEffect(1.2)
+                    Text("Loading alerts...")
+                        .font(.system(size: 15))
+                        .foregroundColor(.mutedText)
+                    Spacer()
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if viewModel.foundAlerts.isEmpty {
+                EmptyAlertsStateView(alertType: "Found")
+            } else {
+                FoundAlertsListView(alerts: viewModel.foundAlerts)
             }
         }
     }

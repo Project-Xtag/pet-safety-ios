@@ -62,14 +62,14 @@ struct CreateAlertView: View {
                 Button("Cancel") {
                     dismiss()
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.brandOrange)
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Create Alert") {
                     createAlert()
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.brandOrange)
                 .disabled(selectedPet == nil || viewModel.isLoading)
             }
         }

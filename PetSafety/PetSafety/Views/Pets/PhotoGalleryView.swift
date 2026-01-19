@@ -28,13 +28,13 @@ struct PhotoGalleryView: View {
                     // Header with pet info
                     VStack(spacing: 8) {
                         Text("\(pet.name)'s Photos")
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(.primary)
 
                         if viewModel.hasPhotos {
                             Text("\(viewModel.photoCount) photo\(viewModel.photoCount == 1 ? "" : "s")")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                                .font(.system(size: 15))
+                                .foregroundColor(.mutedText)
                         }
                     }
                     .padding(.top)
@@ -45,13 +45,8 @@ struct PhotoGalleryView: View {
                             Image(systemName: "photo.badge.plus")
                             Text("Add Photos")
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.accentColor)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
-                        .fontWeight(.semibold)
                     }
+                    .buttonStyle(BrandButtonStyle(isDisabled: viewModel.isUploading))
                     .padding(.horizontal)
                     .disabled(viewModel.isUploading)
 
@@ -105,19 +100,29 @@ struct PhotoGalleryView: View {
                             .foregroundColor(.secondary)
                             .padding()
                     } else {
-                        VStack(spacing: 16) {
-                            Image(systemName: "photo.on.rectangle")
-                                .font(.system(size: 60))
-                                .foregroundColor(.secondary)
+                        VStack(spacing: 20) {
+                            Spacer()
+
+                            ZStack {
+                                Circle()
+                                    .fill(Color(UIColor.systemGray6))
+                                    .frame(width: 100, height: 100)
+                                Image(systemName: "photo.on.rectangle")
+                                    .font(.system(size: 44))
+                                    .foregroundColor(.tealAccent)
+                            }
 
                             Text("No photos yet")
-                                .font(.headline)
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundColor(.primary)
 
                             Text("Add photos to create a gallery for \(pet.name)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                                .font(.system(size: 15))
+                                .foregroundColor(.mutedText)
                                 .multilineTextAlignment(.center)
-                                .padding(.horizontal)
+                                .padding(.horizontal, 32)
+
+                            Spacer()
                         }
                         .padding(.top, 50)
                     }
@@ -330,7 +335,7 @@ struct PhotoGridItem: View {
                 }
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .background(Color.accentColor)
+                .background(Color.brandOrange)
                 .foregroundColor(.white)
                 .cornerRadius(8)
                 .padding(8)

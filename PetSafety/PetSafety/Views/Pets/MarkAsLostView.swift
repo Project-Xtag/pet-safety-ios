@@ -89,14 +89,14 @@ struct MarkAsLostView: View {
                 Button("Cancel") {
                     dismiss()
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.brandOrange)
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Report Missing") {
                     reportMissing()
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.brandOrange)
                 .disabled(petsViewModel.isLoading || (!useCurrentLocation && location.isEmpty))
             }
         }

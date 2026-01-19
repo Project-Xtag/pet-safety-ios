@@ -25,55 +25,78 @@ struct QRScannerView: View {
                 VStack {
                     Spacer()
 
-                    VStack(spacing: 12) {
-                        Image(systemName: "qrcode.viewfinder")
-                            .font(.system(size: 60))
-                            .foregroundColor(.white)
+                    VStack(spacing: 16) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.white.opacity(0.2))
+                                .frame(width: 80, height: 80)
+                            Image(systemName: "qrcode.viewfinder")
+                                .font(.system(size: 40))
+                                .foregroundColor(.white)
+                        }
 
                         Text("Scan QR Code")
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(.system(size: 22, weight: .bold))
                             .foregroundColor(.white)
 
                         Text("Point your camera at a pet's QR tag")
-                            .font(.subheadline)
+                            .font(.system(size: 15))
                             .foregroundColor(.white.opacity(0.8))
                     }
-                    .padding()
-                    .background(Color.black.opacity(0.7))
-                    .cornerRadius(20)
-                    .padding()
+                    .padding(.horizontal, 32)
+                    .padding(.vertical, 28)
+                    .background(
+                        RoundedRectangle(cornerRadius: 28)
+                            .fill(Color.black.opacity(0.7))
+                            .background(.ultraThinMaterial)
+                            .cornerRadius(28)
+                    )
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 120)
 
                     Spacer()
                 }
             } else {
-                VStack(spacing: 20) {
-                    Image(systemName: "camera.fill")
-                        .font(.system(size: 60))
-                        .foregroundColor(.secondary)
+                // Camera Permission Required
+                VStack(spacing: 24) {
+                    Spacer()
 
-                    Text("Camera Access Required")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                    ZStack {
+                        Circle()
+                            .fill(Color(UIColor.systemGray6))
+                            .frame(width: 100, height: 100)
+                        Image(systemName: "camera.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.tealAccent)
+                    }
 
-                    Text("Please enable camera access in Settings to scan QR codes")
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 40)
+                    VStack(spacing: 12) {
+                        Text("Camera Access Required")
+                            .font(.system(size: 22, weight: .bold))
+                            .foregroundColor(.primary)
 
-                    Button("Open Settings") {
+                        Text("Please enable camera access in Settings to scan QR codes")
+                            .font(.system(size: 15))
+                            .foregroundColor(.mutedText)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 40)
+                    }
+
+                    Button(action: {
                         if let url = URL(string: UIApplication.openSettingsURLString) {
                             UIApplication.shared.open(url)
                         }
+                    }) {
+                        Text("Open Settings")
                     }
-                    .buttonStyle(PrimaryButtonStyle())
-                    .padding(.horizontal, 40)
+                    .buttonStyle(BrandButtonStyle())
+                    .padding(.horizontal, 60)
+
+                    Spacer()
                 }
             }
         }
-        .navigationTitle("QR Scanner")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
         .sheet(isPresented: $showingScannedPet) {
             if let result = viewModel.scanResult {
                 ScannedPetView(scanResult: result)
@@ -184,126 +207,148 @@ struct ScannedPetView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                     } placeholder: {
-                        Image(systemName: "pawprint.fill")
-                            .font(.system(size: 60))
-                            .foregroundColor(.white)
-                    }
-                    .frame(width: 150, height: 150)
-                    .background(Color.blue.opacity(0.2))
-                    .clipShape(Circle())
-
-                    // Pet Name
-                    Text("Hello! I'm \(scanResult.pet.name)")
-                        .font(.system(size: 28, weight: .bold))
-                        .multilineTextAlignment(.center)
-
-                    Text("You've just scanned my tag. Thank you for helping me!")
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-
-                    Text("\(scanResult.pet.species) • \(scanResult.pet.breed ?? "Unknown")")
-                        .font(.title3)
-                        .foregroundColor(.secondary)
-
-                    // Scan notification
-                    VStack(spacing: 8) {
-                        HStack(spacing: 8) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.green)
-                            Text("My owner has been automatically notified that you found me")
-                                .font(.subheadline)
-                                .foregroundColor(.green)
+                        ZStack {
+                            Circle()
+                                .fill(Color.tealAccent.opacity(0.2))
+                            Image(systemName: "pawprint.fill")
+                                .font(.system(size: 50))
+                                .foregroundColor(.tealAccent)
                         }
                     }
-                    .padding()
+                    .frame(width: 140, height: 140)
+                    .clipShape(Circle())
+                    .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
+
+                    // Pet Name
+                    VStack(spacing: 8) {
+                        Text("Hello! I'm \(scanResult.pet.name)")
+                            .font(.system(size: 26, weight: .bold))
+                            .multilineTextAlignment(.center)
+
+                        Text("You've just scanned my tag. Thank you for helping me!")
+                            .font(.system(size: 15))
+                            .foregroundColor(.mutedText)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 24)
+
+                        Text("\(scanResult.pet.species) \(scanResult.pet.breed.map { "• \($0)" } ?? "")")
+                            .font(.system(size: 15))
+                            .foregroundColor(.mutedText)
+                    }
+
+                    // Scan notification
+                    HStack(spacing: 10) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.green)
+                        Text("My owner has been automatically notified")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.green)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
                     .frame(maxWidth: .infinity)
                     .background(Color.green.opacity(0.1))
-                    .cornerRadius(12)
-                    .padding(.horizontal)
+                    .cornerRadius(14)
+                    .padding(.horizontal, 24)
 
                     // Share Location Button
                     if scanResult.pet.qrCode != nil {
-                        Button(action: {
-                            showingShareLocation = true
-                        }) {
-                            Label("Share My Location with Owner", systemImage: "location.fill")
-                                .font(.headline)
-                        }
-                        .buttonStyle(PrimaryButtonStyle())
-                        .padding(.horizontal)
+                        VStack(spacing: 12) {
+                            Button(action: {
+                                showingShareLocation = true
+                            }) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "location.fill")
+                                    Text("Share My Location with Owner")
+                                }
+                            }
+                            .buttonStyle(BrandButtonStyle())
+                            .padding(.horizontal, 24)
 
-                        Text("\(scanResult.pet.name)'s owner will receive an SMS and email with your location to help reunite them quickly")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
+                            Text("\(scanResult.pet.name)'s owner will receive an SMS and email with your location")
+                                .font(.system(size: 12))
+                                .foregroundColor(.mutedText)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 32)
+                        }
                     }
 
-                    // Contact Owner Section (only if phone or email are public)
+                    // Contact Owner Section
                     if scanResult.pet.ownerPhone != nil || scanResult.pet.ownerEmail != nil {
-                        VStack(spacing: 12) {
+                        VStack(spacing: 16) {
                             Text("Contact Owner")
-                                .font(.headline)
+                                .font(.system(size: 18, weight: .bold))
 
-                            Text("Please let my owner know that you have found me. Tap on the share location button or call them on the phone number below.")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                            Text("Please let my owner know that you have found me")
+                                .font(.system(size: 14))
+                                .foregroundColor(.mutedText)
                                 .multilineTextAlignment(.center)
-                                .padding(.horizontal)
 
                             VStack(spacing: 12) {
                                 if let phone = scanResult.pet.ownerPhone {
                                     Link(destination: URL(string: "tel:\(phone)")!) {
-                                        Label("Call: \(phone)", systemImage: "phone.fill")
-                                            .frame(maxWidth: .infinity)
-                                            .padding()
-                                            .background(Color(.systemGray6))
-                                            .foregroundColor(.primary)
-                                            .cornerRadius(10)
+                                        HStack(spacing: 12) {
+                                            Image(systemName: "phone.fill")
+                                                .foregroundColor(.tealAccent)
+                                            Text("Call: \(phone)")
+                                                .font(.system(size: 15, weight: .medium))
+                                                .foregroundColor(.primary)
+                                            Spacer()
+                                        }
+                                        .padding()
+                                        .background(Color(UIColor.systemGray6))
+                                        .cornerRadius(14)
                                     }
                                 }
 
                                 if let email = scanResult.pet.ownerEmail {
                                     Link(destination: URL(string: "mailto:\(email)")!) {
-                                        Label("Email: \(email)", systemImage: "envelope.fill")
-                                            .frame(maxWidth: .infinity)
-                                            .padding()
-                                            .background(Color(.systemGray6))
-                                            .foregroundColor(.primary)
-                                            .cornerRadius(10)
+                                        HStack(spacing: 12) {
+                                            Image(systemName: "envelope.fill")
+                                                .foregroundColor(.tealAccent)
+                                            Text("Email: \(email)")
+                                                .font(.system(size: 15, weight: .medium))
+                                                .foregroundColor(.primary)
+                                            Spacer()
+                                        }
+                                        .padding()
+                                        .background(Color(UIColor.systemGray6))
+                                        .cornerRadius(14)
                                     }
                                 }
                             }
                         }
-                        .padding()
+                        .padding(.horizontal, 24)
                     }
 
-                    // Pet Info
+                    // Pet Info Cards
                     if let color = scanResult.pet.color {
-                        InfoCard(title: "Color", value: color, icon: "paintpalette.fill")
-                            .padding(.horizontal)
+                        ScannedPetInfoCard(title: "Color", value: color, icon: "paintpalette.fill")
+                            .padding(.horizontal, 24)
                     }
 
                     if let medical = scanResult.pet.medicalInfo {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Label("Medical Information", systemImage: "cross.case.fill")
-                                .font(.headline)
-                                .foregroundColor(.red)
+                        VStack(alignment: .leading, spacing: 10) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "cross.case.fill")
+                                    .foregroundColor(.red)
+                                Text("Medical Information")
+                                    .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(.red)
+                            }
 
                             Text(medical)
-                                .font(.body)
-                                .foregroundColor(.secondary)
+                                .font(.system(size: 14))
+                                .foregroundColor(.primary)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                         .background(Color.red.opacity(0.1))
-                        .cornerRadius(12)
-                        .padding(.horizontal)
+                        .cornerRadius(14)
+                        .padding(.horizontal, 24)
                     }
                 }
-                .padding(.vertical)
+                .padding(.vertical, 24)
             }
             .navigationTitle("Found \(scanResult.pet.name)!")
             .navigationBarTitleDisplayMode(.inline)
@@ -312,6 +357,8 @@ struct ScannedPetView: View {
                     Button("Done") {
                         dismiss()
                     }
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.brandOrange)
                 }
             }
             .sheet(isPresented: $showingShareLocation) {
@@ -320,6 +367,36 @@ struct ScannedPetView: View {
                 }
             }
         }
+    }
+}
+
+// MARK: - Scanned Pet Info Card
+struct ScannedPetInfoCard: View {
+    let title: String
+    let value: String
+    let icon: String
+
+    var body: some View {
+        HStack(spacing: 14) {
+            Image(systemName: icon)
+                .font(.system(size: 20))
+                .foregroundColor(.tealAccent)
+                .frame(width: 24)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.mutedText)
+                Text(value)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(.primary)
+            }
+
+            Spacer()
+        }
+        .padding()
+        .background(Color(UIColor.systemGray6))
+        .cornerRadius(14)
     }
 }
 

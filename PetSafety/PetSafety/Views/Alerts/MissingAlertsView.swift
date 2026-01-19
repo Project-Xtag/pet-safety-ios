@@ -3,43 +3,28 @@ import MapKit
 
 struct MissingAlertsView: View {
     @ObservedObject var viewModel: AlertsViewModel
-    @State private var viewMode: ViewMode = .list
-
-    enum ViewMode {
-        case list, map
-    }
 
     var body: some View {
         VStack(spacing: 0) {
             // Offline indicator at the top
             OfflineIndicator()
 
-            // Segmented Control
-            Picker("View Mode", selection: $viewMode) {
-                Label("List", systemImage: "list.bullet").tag(ViewMode.list)
-                Label("Map", systemImage: "map").tag(ViewMode.map)
-            }
-            .pickerStyle(.segmented)
-            .padding()
-
             // Content
             if viewModel.isLoading {
-                ProgressView("Loading alerts...")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if viewModel.missingAlerts.isEmpty {
-                EmptyStateView(
-                    icon: "checkmark.circle.fill",
-                    title: "No Missing Pets Nearby",
-                    message: "There are no active missing pet alerts within 10km of your location",
-                    actionTitle: nil,
-                    action: nil
-                )
-            } else {
-                if viewMode == .list {
-                    MissingAlertsListView(alerts: viewModel.missingAlerts)
-                } else {
-                    MissingAlertsMapView(alerts: viewModel.missingAlerts)
+                VStack(spacing: 16) {
+                    Spacer()
+                    ProgressView()
+                        .scaleEffect(1.2)
+                    Text("Loading alerts...")
+                        .font(.system(size: 15))
+                        .foregroundColor(.mutedText)
+                    Spacer()
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if viewModel.missingAlerts.isEmpty {
+                EmptyAlertsStateView(alertType: "Missing")
+            } else {
+                MissingAlertsListView(alerts: viewModel.missingAlerts)
             }
         }
     }

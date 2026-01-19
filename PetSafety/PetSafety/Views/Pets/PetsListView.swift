@@ -15,10 +15,13 @@ struct PetsListView: View {
     }
 
     var body: some View {
-        return VStack(spacing: 0) {
-            OfflineIndicator()
+        ZStack {
+            Color(UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
 
-            ZStack {
+            VStack(spacing: 0) {
+                OfflineIndicator()
+
                 if viewModel.pets.isEmpty && !viewModel.isLoading {
                     EmptyStateView(
                         icon: "pawprint.fill",
@@ -29,95 +32,22 @@ struct PetsListView: View {
                     )
                 } else {
                     ScrollView {
-                        VStack(spacing: 16) {
-                            // Pets Grid Section
-                            VStack(alignment: .leading, spacing: 10) {
-                                Text("My Pets")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                    .padding(.horizontal, 20)
-                                    .padding(.top, 4)
+                        VStack(spacing: 24) {
+                            // Header Section
+                            headerSection
 
-                                if viewModel.pets.count == 1 {
-                                    // Center single pet card
-                                    HStack {
-                                        Spacer()
-                                        PetCardView(pet: viewModel.pets[0])
-                                            .frame(width: 140)
-                                        Spacer()
-                                    }
-                                    .padding(.horizontal, 20)
-                                } else {
-                                    // Grid layout for multiple pets with centered odd items
-                                    LazyVGrid(columns: [
-                                        GridItem(.flexible(), spacing: 12),
-                                        GridItem(.flexible(), spacing: 12)
-                                    ], spacing: 12) {
-                                        ForEach(Array(viewModel.pets.enumerated()), id: \.element.id) { index, pet in
-                                            if viewModel.pets.count % 2 != 0 && index == viewModel.pets.count - 1 {
-                                                // Last item in odd count - center it
-                                                HStack {
-                                                    Spacer()
-                                                    PetCardView(pet: pet)
-                                                        .frame(maxWidth: 140)
-                                                    Spacer()
-                                                }
-                                                .gridCellColumns(2)
-                                            } else {
-                                                PetCardView(pet: pet)
-                                            }
-                                        }
-                                    }
-                                    .padding(.horizontal, 20)
-                                }
-                            }
+                            // My Pets Section
+                            petsSection
 
                             // Quick Actions Section
-                            VStack(alignment: .leading, spacing: 10) {
-                                Text("Quick Actions")
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
-                                    .padding(.horizontal, 20)
-
-                                HStack(spacing: 12) {
-                                    QuickActionButton(
-                                        icon: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill",
-                                        title: hasMissingPets ? "Mark Found" : "Report Missing",
-                                        color: .red,
-                                        action: { showingMarkLostSheet = true }
-                                    )
-
-                                    QuickActionButton(
-                                        icon: "cart.badge.plus",
-                                        title: "Order Tags",
-                                        color: .blue,
-                                        action: { showingOrderMoreTags = true }
-                                    )
-
-                                    QuickActionButton(
-                                        icon: "arrow.triangle.2.circlepath",
-                                        title: "Replace Tag",
-                                        color: .orange,
-                                        action: { showOrderReplacementMenu() }
-                                    )
-                                }
-                                .padding(.horizontal, 20)
-                            }
-                            .padding(.bottom, 16)
+                            quickActionsSection
                         }
-                        .adaptiveContainer()
+                        .padding(.bottom, 100)
                     }
                 }
             }
-        } // <--- THIS WAS THE MISSING BRACE
-        .navigationTitle("My Pets")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { showingAddPet = true }) {
-                    Image(systemName: "plus")
-                }
-            }
         }
+        .navigationBarHidden(true)
         .sheet(isPresented: $showingAddPet) {
             NavigationView {
                 PetFormView(mode: .create)
@@ -149,7 +79,6 @@ struct PetsListView: View {
                     pets: viewModel.pets,
                     onPetSelected: { pet in
                         showingPetSelection = false
-                        // Delay slightly to ensure sheet dismisses before opening new one
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                             selectedPetForReplacement = pet
                         }
@@ -170,17 +99,105 @@ struct PetsListView: View {
         }
     }
 
+    // MARK: - Header Section
+    private var headerSection: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Welcome back,")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(.mutedText)
+                Text(authViewModel.currentUser?.firstName ?? "Pet Owner")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(.primary)
+            }
+
+            Spacer()
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 16)
+        .padding(.bottom, 8)
+        .background(Color.peachBackground)
+    }
+
+    // MARK: - Pets Section
+    private var petsSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Text("My Pets")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.primary)
+                Spacer()
+                if viewModel.pets.count > 4 {
+                    Button("View All") {
+                        // Show all pets
+                    }
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.brandOrange)
+                }
+            }
+            .padding(.horizontal, 24)
+
+            // Pet Cards Grid
+            LazyVGrid(columns: [
+                GridItem(.flexible(), spacing: 16),
+                GridItem(.flexible(), spacing: 16)
+            ], spacing: 16) {
+                ForEach(viewModel.pets.prefix(4)) { pet in
+                    PetCardView(pet: pet)
+                }
+
+                // Add Pet Card (if less than 4 pets)
+                if viewModel.pets.count < 4 {
+                    AddPetCard(action: { showingAddPet = true })
+                }
+            }
+            .padding(.horizontal, 24)
+        }
+    }
+
+    // MARK: - Quick Actions Section
+    private var quickActionsSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Quick Actions")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.primary)
+                .padding(.horizontal, 24)
+
+            HStack(spacing: 12) {
+                QuickActionButton(
+                    icon: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill",
+                    title: hasMissingPets ? "Mark Found" : "Report Missing",
+                    color: .red,
+                    action: { showingMarkLostSheet = true }
+                )
+
+                QuickActionButton(
+                    icon: "cart.badge.plus",
+                    title: "Order Tags",
+                    color: .tealAccent,
+                    action: { showingOrderMoreTags = true }
+                )
+
+                QuickActionButton(
+                    icon: "arrow.triangle.2.circlepath",
+                    title: "Replace Tag",
+                    color: .brandOrange,
+                    action: { showOrderReplacementMenu() }
+                )
+            }
+            .padding(.horizontal, 24)
+        }
+    }
+
     private func showOrderReplacementMenu() {
         if viewModel.pets.isEmpty {
             appState.showError("You don't have any pets yet. Add a pet first to order a replacement tag.")
             return
         }
 
-        // If only one pet, go directly to replacement order
         if viewModel.pets.count == 1 {
             selectedPetForReplacement = viewModel.pets[0]
         } else {
-            // If multiple pets, show selection sheet
             showingPetSelection = true
         }
     }
@@ -193,14 +210,14 @@ struct PetCardView: View {
     var body: some View {
         NavigationLink(destination: PetDetailView(pet: pet)) {
             VStack(spacing: 0) {
-                // Pet Photo - upper 2/3
+                // Pet Photo
                 ZStack {
                     if let photoUrl = pet.photoUrl, !photoUrl.isEmpty {
                         AsyncImage(url: URL(string: photoUrl)) { phase in
                             switch phase {
                             case .empty:
                                 ZStack {
-                                    Color(.systemGray6)
+                                    Color(UIColor.systemGray6)
                                     ProgressView()
                                 }
                             case .success(let image):
@@ -217,37 +234,59 @@ struct PetCardView: View {
                         placeholderImage
                     }
                 }
-                .frame(height: 115)
+                .frame(height: 120)
                 .clipped()
+                .cornerRadius(16, corners: [.topLeft, .topRight])
 
-                // Pet Name - lower 1/3
-                VStack(spacing: 2) {
-                    Text(pet.name)
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.primary)
-                        .lineLimit(1)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 10)
-                .background(Color(.systemBackground))
+                // Pet Name
+                Text(pet.name)
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.primary)
+                    .lineLimit(1)
+                    .padding(.vertical, 12)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(UIColor.systemBackground))
             }
-            .frame(height: 165)
-            .background(Color(.systemGray6))
-            .cornerRadius(14)
-            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
+            .background(Color(UIColor.systemBackground))
+            .cornerRadius(16)
+            .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 4)
         }
         .buttonStyle(PlainButtonStyle())
     }
 
     private var placeholderImage: some View {
         ZStack {
-            Color(.systemGray6)
+            Color(UIColor.systemGray6)
             Image(systemName: pet.species.lowercased() == "dog" ? "dog.fill" : "cat.fill")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .foregroundColor(.secondary)
-                .padding(30)
+                .foregroundColor(.mutedText)
+                .padding(35)
+        }
+    }
+}
+
+// MARK: - Add Pet Card
+struct AddPetCard: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 8) {
+                Image(systemName: "plus.circle")
+                    .font(.system(size: 32))
+                    .foregroundColor(.mutedText)
+                Text("Add Pet")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(.mutedText)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 165)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [8]))
+                    .foregroundColor(Color(UIColor.systemGray4))
+            )
         }
     }
 }
@@ -274,21 +313,24 @@ struct EmptyStateView: View {
     }
 
     var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: icon)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 80, height: 80)
-                .foregroundColor(.secondary)
+        VStack(spacing: 24) {
+            ZStack {
+                Circle()
+                    .fill(Color(UIColor.systemGray6))
+                    .frame(width: 100, height: 100)
+                Image(systemName: icon)
+                    .font(.system(size: 40))
+                    .foregroundColor(.tealAccent)
+            }
 
             VStack(spacing: 8) {
                 Text(title)
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.primary)
 
                 Text(message)
-                    .font(.body)
-                    .foregroundColor(.secondary)
+                    .font(.system(size: 15))
+                    .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
             }
@@ -297,10 +339,11 @@ struct EmptyStateView: View {
                 Button(action: action) {
                     Text(actionTitle)
                 }
-                .buttonStyle(PrimaryButtonStyle())
-                .padding(.horizontal, 40)
+                .buttonStyle(BrandButtonStyle())
+                .padding(.horizontal, 60)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
@@ -313,27 +356,50 @@ struct QuickActionButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 8) {
-                Image(systemName: icon)
-                    .font(.system(size: 26))
-                    .foregroundColor(color)
-                    .frame(height: 28)
+            VStack(spacing: 10) {
+                ZStack {
+                    Circle()
+                        .fill(color.opacity(0.1))
+                        .frame(width: 48, height: 48)
+                    Image(systemName: icon)
+                        .font(.system(size: 20))
+                        .foregroundColor(color)
+                }
 
-                Text(title)
-                    .font(.caption)
-                    .fontWeight(.medium)
-                    .foregroundColor(.primary)
+                Text(title.uppercased())
+                    .font(.system(size: 9, weight: .bold))
+                    .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .tracking(0.5)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 14)
-            .padding(.horizontal, 6)
-            .background(Color(.systemBackground))
-            .cornerRadius(14)
-            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
+            .padding(.vertical, 16)
+            .background(Color(UIColor.systemBackground))
+            .cornerRadius(20)
+            .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 4)
         }
+    }
+}
+
+// MARK: - Corner Radius Extension
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners))
+    }
+}
+
+struct RoundedCorner: Shape {
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(
+            roundedRect: rect,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius)
+        )
+        return Path(path.cgPath)
     }
 }
 
@@ -350,7 +416,6 @@ struct PetSelectionView: View {
                         onPetSelected(pet)
                     }) {
                         HStack(spacing: 16) {
-                            // Pet Photo
                             AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                                 image
                                     .resizable()
@@ -363,10 +428,9 @@ struct PetSelectionView: View {
                                     .padding(16)
                             }
                             .frame(width: 50, height: 50)
-                            .background(Color(.systemGray6))
+                            .background(Color(UIColor.systemGray6))
                             .cornerRadius(8)
 
-                            // Pet Info
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(pet.name)
                                     .font(.headline)

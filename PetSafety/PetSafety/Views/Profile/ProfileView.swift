@@ -3,134 +3,29 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var showingLogoutAlert = false
-    #if DEBUG
-    @StateObject private var networkMonitor = NetworkMonitor.shared
-    #endif
 
     var body: some View {
-        List {
-            if let user = authViewModel.currentUser {
-                // Profile Header with Subscription Badge
-                Section {
-                    VStack(spacing: 12) {
-                        Image(systemName: "person.circle.fill")
-                            .resizable()
-                            .frame(width: 80, height: 80)
-                            .foregroundColor(Color("BrandColor"))
+        ZStack {
+            Color(UIColor.systemGroupedBackground)
+                .ignoresSafeArea()
 
-                        VStack(spacing: 4) {
-                            if !user.fullName.isEmpty {
-                                Text(user.fullName)
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                            }
+            ScrollView {
+                VStack(spacing: 0) {
+                    // Header Section
+                    headerSection
 
-                            Text(user.email)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
+                    // Menu Section
+                    menuSection
+                        .padding(.top, 24)
 
-                        // Subscription Badge (placeholder)
-                        HStack(spacing: 8) {
-                            Image(systemName: "crown.fill")
-                                .font(.caption)
-                                .foregroundColor(.orange)
-                            Text("Premium Member")
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 6)
-                        .background(Color.orange.opacity(0.1))
-                        .cornerRadius(16)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 8)
-                }
-
-                // Menu Items
-                Section {
-                    NavigationLink(destination: PersonalInformationView()) {
-                        MenuItemRow(
-                            icon: "person.fill",
-                            title: "Personal Information",
-                            iconColor: .blue
-                        )
-                    }
-
-                    NavigationLink(destination: AddressView()) {
-                        MenuItemRow(
-                            icon: "house.fill",
-                            title: "Address",
-                            iconColor: .green
-                        )
-                    }
-
-                    NavigationLink(destination: ContactsView()) {
-                        MenuItemRow(
-                            icon: "person.2.fill",
-                            title: "Contacts",
-                            iconColor: .purple
-                        )
-                    }
-
-                    NavigationLink(destination: PrivacyModeView()) {
-                        MenuItemRow(
-                            icon: "lock.shield.fill",
-                            title: "Privacy Mode",
-                            iconColor: .indigo
-                        )
-                    }
-
-                    NavigationLink(destination: NotificationSettingsView()) {
-                        MenuItemRow(
-                            icon: "bell.fill",
-                            title: "Notifications",
-                            iconColor: .orange
-                        )
-                    }
-
-                    NavigationLink(destination: HelpAndSupportView()) {
-                        MenuItemRow(
-                            icon: "questionmark.circle.fill",
-                            title: "Help & Support",
-                            iconColor: .cyan
-                        )
-                    }
-                }
-
-                #if DEBUG
-                Section(header: Text("Developer")) {
-                    Picker("Network", selection: $networkMonitor.overrideMode) {
-                        Text("System").tag(NetworkMonitor.NetworkOverrideMode.system)
-                        Text("Offline").tag(NetworkMonitor.NetworkOverrideMode.offline)
-                        Text("Online").tag(NetworkMonitor.NetworkOverrideMode.online)
-                    }
-                    .pickerStyle(.segmented)
-
-                    Text("Current: \(networkMonitor.connectionDescription)")
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                }
-                #endif
-
-                // Logout
-                Section {
-                    Button(action: { showingLogoutAlert = true }) {
-                        HStack {
-                            Image(systemName: "arrow.right.square.fill")
-                                .foregroundColor(.red)
-                                .frame(width: 24)
-                            Text("Log Out")
-                                .foregroundColor(.red)
-                            Spacer()
-                        }
-                    }
+                    // Logout Button
+                    logoutSection
+                        .padding(.top, 24)
+                        .padding(.bottom, 100)
                 }
             }
         }
-        .navigationTitle("Profile")
-        .adaptiveList()
+        .navigationBarHidden(true)
         .alert("Log Out", isPresented: $showingLogoutAlert) {
             Button("Cancel", role: .cancel) { }
             Button("Log Out", role: .destructive) {
@@ -140,9 +35,161 @@ struct ProfileView: View {
             Text("Are you sure you want to log out?")
         }
     }
+
+    // MARK: - Header Section
+    private var headerSection: some View {
+        VStack(spacing: 16) {
+            // Title
+            Text("Account")
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(.primary)
+                .padding(.top, 60)
+
+            // Avatar and Info
+            VStack(spacing: 16) {
+                ZStack(alignment: .bottomTrailing) {
+                    // Avatar
+                    ZStack {
+                        Circle()
+                            .fill(Color.tealAccent)
+                            .frame(width: 96, height: 96)
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.white)
+                    }
+                    .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 4)
+
+                    // Edit Button
+                    Button(action: {
+                        // Edit profile photo
+                    }) {
+                        Image(systemName: "pencil")
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundColor(.white)
+                            .frame(width: 28, height: 28)
+                            .background(Color.brandOrange)
+                            .clipShape(Circle())
+                            .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 2)
+                    }
+                }
+
+                // User Info
+                if let user = authViewModel.currentUser {
+                    VStack(spacing: 6) {
+                        if !user.fullName.isEmpty {
+                            Text(user.fullName)
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(.primary)
+                        }
+
+                        Text(user.email)
+                            .font(.system(size: 14))
+                            .foregroundColor(.mutedText)
+                    }
+
+                    // Premium Badge
+                    HStack(spacing: 6) {
+                        Image(systemName: "crown.fill")
+                            .font(.system(size: 12))
+                            .foregroundColor(.tealAccent)
+                        Text("PREMIUM MEMBER")
+                            .font(.system(size: 11, weight: .bold))
+                            .foregroundColor(.tealAccent)
+                            .tracking(1)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .background(Color.tealAccent.opacity(0.1))
+                    .cornerRadius(20)
+                }
+            }
+            .padding(.bottom, 24)
+        }
+        .frame(maxWidth: .infinity)
+        .background(Color.peachBackground)
+    }
+
+    // MARK: - Menu Section
+    private var menuSection: some View {
+        VStack(spacing: 2) {
+            NavigationLink(destination: PersonalInformationView()) {
+                ProfileMenuRow(icon: "person", title: "Personal Information")
+            }
+
+            NavigationLink(destination: AddressView()) {
+                ProfileMenuRow(icon: "house", title: "Address")
+            }
+
+            NavigationLink(destination: ContactsView()) {
+                ProfileMenuRow(icon: "person.2", title: "Contacts")
+            }
+
+            NavigationLink(destination: PrivacyModeView()) {
+                ProfileMenuRow(icon: "lock.shield", title: "Privacy Mode")
+            }
+
+            NavigationLink(destination: NotificationSettingsView()) {
+                ProfileMenuRow(icon: "bell", title: "Notifications")
+            }
+
+            NavigationLink(destination: HelpAndSupportView()) {
+                ProfileMenuRow(icon: "questionmark.circle", title: "Help & Support")
+            }
+        }
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(16)
+        .padding(.horizontal, 24)
+    }
+
+    // MARK: - Logout Section
+    private var logoutSection: some View {
+        Button(action: { showingLogoutAlert = true }) {
+            HStack(spacing: 12) {
+                Image(systemName: "rectangle.portrait.and.arrow.right")
+                    .font(.system(size: 18))
+                Text("Log Out")
+                    .font(.system(size: 16, weight: .semibold))
+            }
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .background(Color.brandOrange)
+            .cornerRadius(16)
+            .shadow(color: Color.brandOrange.opacity(0.3), radius: 8, x: 0, y: 4)
+        }
+        .padding(.horizontal, 24)
+    }
 }
 
-// MARK: - Menu Item Row Component
+// MARK: - Profile Menu Row
+struct ProfileMenuRow: View {
+    let icon: String
+    let title: String
+
+    var body: some View {
+        HStack(spacing: 16) {
+            Image(systemName: icon)
+                .font(.system(size: 18))
+                .foregroundColor(.mutedText)
+                .frame(width: 24)
+
+            Text(title)
+                .font(.system(size: 15, weight: .medium))
+                .foregroundColor(.primary)
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(Color(UIColor.systemGray3))
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 16)
+        .background(Color(UIColor.systemBackground))
+    }
+}
+
+// Keep the original MenuItemRow for backward compatibility
 struct MenuItemRow: View {
     let icon: String
     let title: String

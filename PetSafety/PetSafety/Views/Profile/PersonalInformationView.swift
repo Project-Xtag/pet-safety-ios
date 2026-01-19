@@ -54,8 +54,9 @@ struct PersonalInformationView: View {
                             Spacer()
                             if isLoading {
                                 ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle())
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
                                 Text("Saving...")
+                                    .foregroundColor(.white)
                             } else {
                                 Text("Save Changes")
                                     .fontWeight(.semibold)
@@ -63,7 +64,10 @@ struct PersonalInformationView: View {
                             Spacer()
                         }
                     }
+                    .buttonStyle(BrandButtonStyle(isDisabled: isLoading || !hasChanges))
                     .disabled(isLoading || !hasChanges)
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(Color.clear)
 
                     Button(action: { cancelEditing() }) {
                         HStack {
@@ -72,8 +76,10 @@ struct PersonalInformationView: View {
                             Spacer()
                         }
                     }
-                    .foregroundColor(.secondary)
+                    .buttonStyle(SecondaryButtonStyle())
                     .disabled(isLoading)
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(Color.clear)
                 }
             } else {
                 // View Mode
@@ -86,13 +92,11 @@ struct PersonalInformationView: View {
 
                 Section {
                     Button(action: { startEditing() }) {
-                        HStack {
-                            Spacer()
-                            Text("Edit Information")
-                                .fontWeight(.semibold)
-                            Spacer()
-                        }
+                        Text("Edit Information")
                     }
+                    .buttonStyle(BrandButtonStyle())
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(Color.clear)
                 }
             }
         }
@@ -106,14 +110,14 @@ struct PersonalInformationView: View {
                     Button("Cancel") {
                         cancelEditing()
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(.brandOrange)
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         saveChanges()
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(.brandOrange)
                     .disabled(isLoading || !hasChanges)
                 }
             }

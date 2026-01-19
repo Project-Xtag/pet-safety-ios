@@ -47,7 +47,7 @@ struct OrderMoreTagsView: View {
                 Button("Cancel") {
                     dismiss()
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.brandOrange)
             }
         }
         .task {

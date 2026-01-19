@@ -5,50 +5,34 @@ struct SuccessStoriesView: View {
     @StateObject private var viewModel = SuccessStoriesViewModel()
     @StateObject private var locationManager = LocationManager()
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State private var viewMode: ViewMode = .list
     @State private var showShareSheet = false
     @State private var selectedStoryForShare: SuccessStory?
     @State private var userLocation: CLLocationCoordinate2D?
 
-    enum ViewMode {
-        case list, map
-    }
-
     var body: some View {
         VStack(spacing: 0) {
-            // Segmented Control for View Mode
-            Picker("View Mode", selection: $viewMode) {
-                Label("List", systemImage: "list.bullet").tag(ViewMode.list)
-                Label("Map", systemImage: "map").tag(ViewMode.map)
-            }
-            .pickerStyle(.segmented)
-            .padding()
-
             // Content
             if viewModel.isLoading && viewModel.stories.isEmpty {
-                ProgressView("Loading success stories...")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack(spacing: 16) {
+                    Spacer()
+                    ProgressView()
+                        .scaleEffect(1.2)
+                    Text("Loading success stories...")
+                        .font(.system(size: 15))
+                        .foregroundColor(.mutedText)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if viewModel.stories.isEmpty {
                 EmptySuccessStoriesView()
             } else {
-                if viewMode == .list {
-                    SuccessStoriesListView(
-                        viewModel: viewModel,
-                        onShare: { story in
-                            selectedStoryForShare = story
-                            showShareSheet = true
-                        }
-                    )
-                } else {
-                    SuccessStoriesMapView(
-                        stories: viewModel.stories,
-                        userLocation: userLocation,
-                        onShare: { story in
-                            selectedStoryForShare = story
-                            showShareSheet = true
-                        }
-                    )
-                }
+                SuccessStoriesListView(
+                    viewModel: viewModel,
+                    onShare: { story in
+                        selectedStoryForShare = story
+                        showShareSheet = true
+                    }
+                )
             }
         }
         .task {
@@ -474,18 +458,23 @@ struct EmptySuccessStoriesView: View {
         VStack(spacing: 24) {
             Spacer()
 
-            Image(systemName: "heart.circle.fill")
-                .font(.system(size: 80))
-                .foregroundColor(.green.opacity(0.6))
+            ZStack {
+                Circle()
+                    .fill(Color(UIColor.systemGray6))
+                    .frame(width: 100, height: 100)
+                Image(systemName: "heart.circle.fill")
+                    .font(.system(size: 48))
+                    .foregroundColor(.tealAccent)
+            }
 
             VStack(spacing: 12) {
                 Text("No Success Stories Nearby")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.primary)
 
                 Text("Be the first to share a happy reunion in your area!")
-                    .font(.body)
-                    .foregroundColor(.secondary)
+                    .font(.system(size: 15))
+                    .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
             }
@@ -493,7 +482,6 @@ struct EmptySuccessStoriesView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemGroupedBackground))
     }
 }
 

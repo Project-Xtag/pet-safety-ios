@@ -5,63 +5,126 @@ struct AlertsTabView: View {
     @StateObject private var viewModel = AlertsViewModel()
     @StateObject private var locationManager = LocationManager()
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State private var selectedTab = 0
+    @State private var selectedAlertType = 0
+    @State private var selectedViewMode = 0
     @State private var showAddressRequiredMessage = false
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                // Custom Tab Bar
-                Picker("Alerts Type", selection: $selectedTab) {
-                    Text("Missing").tag(0)
-                    Text("Found").tag(1)
-                    Text("Success").tag(2)
-                }
-                .pickerStyle(.segmented)
-                .padding()
+            ZStack {
+                Color(UIColor.systemGroupedBackground)
+                    .ignoresSafeArea()
 
-                // Tab Content
-                if showAddressRequiredMessage {
-                    AddressRequiredView()
-                } else {
-                    TabView(selection: $selectedTab) {
-                        MissingAlertsView(viewModel: viewModel)
-                            .tag(0)
+                VStack(spacing: 0) {
+                    // Header
+                    headerSection
 
-                        FoundAlertsView(viewModel: viewModel)
-                            .tag(1)
+                    // Content
+                    VStack(spacing: 20) {
+                        // Alert Type Segmented Control
+                        segmentedControl(
+                            options: ["Missing", "Found", "Success"],
+                            selection: $selectedAlertType
+                        )
+                        .padding(.horizontal, 24)
 
-                        SuccessStoriesView()
-                            .tag(2)
+                        // View Mode Segmented Control
+                        segmentedControl(
+                            options: ["List", "Map"],
+                            selection: $selectedViewMode
+                        )
+                        .padding(.horizontal, 24)
+
+                        // Content Area
+                        if showAddressRequiredMessage {
+                            AddressRequiredView()
+                        } else {
+                            contentView
+                        }
                     }
-                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .padding(.top, 24)
                 }
             }
-            .navigationTitle("Nearby Alerts")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarHidden(true)
             .task {
                 await loadNearbyAlerts()
             }
             .refreshable {
                 await loadNearbyAlerts()
             }
-            .adaptiveContainer(maxWidth: 900)
         }
         .navigationViewStyle(.stack)
     }
 
+    // MARK: - Header Section
+    private var headerSection: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("Nearby Alerts")
+                .font(.system(size: 28, weight: .bold))
+                .foregroundColor(.primary)
+                .padding(.horizontal, 24)
+                .padding(.top, 60)
+                .padding(.bottom, 24)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.peachBackground)
+    }
+
+    // MARK: - Segmented Control
+    private func segmentedControl(options: [String], selection: Binding<Int>) -> some View {
+        HStack(spacing: 0) {
+            ForEach(options.indices, id: \.self) { index in
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        selection.wrappedValue = index
+                    }
+                }) {
+                    Text(options[index])
+                        .font(.system(size: 14, weight: selection.wrappedValue == index ? .bold : .medium))
+                        .foregroundColor(selection.wrappedValue == index ? .white : .mutedText)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(
+                            selection.wrappedValue == index
+                                ? Color.brandOrange
+                                : Color.clear
+                        )
+                        .cornerRadius(14)
+                }
+            }
+        }
+        .padding(4)
+        .background(Color.black.opacity(0.05))
+        .cornerRadius(18)
+    }
+
+    // MARK: - Content View
+    @ViewBuilder
+    private var contentView: some View {
+        if selectedViewMode == 0 {
+            // List View
+            switch selectedAlertType {
+            case 0:
+                MissingAlertsView(viewModel: viewModel)
+            case 1:
+                FoundAlertsView(viewModel: viewModel)
+            case 2:
+                SuccessStoriesView()
+            default:
+                EmptyView()
+            }
+        } else {
+            // Map View
+            AlertsMapPlaceholder()
+        }
+    }
+
     // MARK: - Helper Methods
-
-    /// Load nearby alerts using device location or registered address
     private func loadNearbyAlerts() async {
-        // First, try to get device location
         locationManager.requestLocation()
-
-        // Wait a bit for location to be obtained
-        try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
 
         if let location = locationManager.location {
-            // Use device location
             showAddressRequiredMessage = false
             await viewModel.fetchNearbyAlerts(
                 latitude: location.latitude,
@@ -70,7 +133,6 @@ struct AlertsTabView: View {
             )
         } else if let user = authViewModel.currentUser,
                   let addressCoordinate = await geocodeUserAddress(user: user) {
-            // Use registered address
             showAddressRequiredMessage = false
             await viewModel.fetchNearbyAlerts(
                 latitude: addressCoordinate.latitude,
@@ -78,14 +140,11 @@ struct AlertsTabView: View {
                 radiusKm: 10
             )
         } else {
-            // No location available - show message to complete registration
             showAddressRequiredMessage = true
         }
     }
 
-    /// Geocode user's registered address to coordinates
     private func geocodeUserAddress(user: User) async -> CLLocationCoordinate2D? {
-        // Build address string from user's registered address
         let addressComponents = [
             user.address,
             user.city,
@@ -98,13 +157,10 @@ struct AlertsTabView: View {
         }
 
         let addressString = addressComponents.joined(separator: ", ")
-
-        // Use CLGeocoder to convert address to coordinates
         let geocoder = CLGeocoder()
 
         do {
             let placemarks = try await geocoder.geocodeAddressString(addressString)
-
             if let location = placemarks.first?.location {
                 return location.coordinate
             }
@@ -116,48 +172,121 @@ struct AlertsTabView: View {
     }
 }
 
+// MARK: - Alerts Map Placeholder
+struct AlertsMapPlaceholder: View {
+    var body: some View {
+        VStack(spacing: 16) {
+            Spacer()
+            Image(systemName: "map")
+                .font(.system(size: 48))
+                .foregroundColor(.mutedText)
+            Text("Map View")
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundColor(.primary)
+            Text("Coming soon")
+                .font(.system(size: 14))
+                .foregroundColor(.mutedText)
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+// MARK: - Empty Alerts State
+struct EmptyAlertsStateView: View {
+    let alertType: String
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Spacer()
+
+            ZStack {
+                Circle()
+                    .fill(Color(UIColor.systemGray6))
+                    .frame(width: 96, height: 96)
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 48))
+                    .foregroundColor(.tealAccent)
+            }
+
+            VStack(spacing: 8) {
+                Text("No \(alertType) Pets Nearby")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.primary)
+
+                Text("There are no active \(alertType.lowercased()) pet alerts within 10km of your location")
+                    .font(.system(size: 14))
+                    .foregroundColor(.mutedText)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+            }
+
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
 // MARK: - Address Required View
 struct AddressRequiredView: View {
     var body: some View {
         VStack(spacing: 24) {
             Spacer()
 
-            Image(systemName: "location.slash.circle.fill")
-                .font(.system(size: 80))
-                .foregroundColor(.orange)
+            ZStack {
+                Circle()
+                    .fill(Color.brandOrange.opacity(0.1))
+                    .frame(width: 100, height: 100)
+                Image(systemName: "location.slash.circle.fill")
+                    .font(.system(size: 48))
+                    .foregroundColor(.brandOrange)
+            }
 
             VStack(spacing: 12) {
                 Text("Location Required")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.primary)
 
                 Text("To view nearby alerts, we need to know your location")
-                    .font(.body)
-                    .foregroundColor(.secondary)
+                    .font(.system(size: 15))
+                    .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
             }
 
             VStack(spacing: 16) {
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: 16) {
                     HStack(spacing: 12) {
-                        Image(systemName: "1.circle.fill")
-                            .foregroundColor(.blue)
+                        ZStack {
+                            Circle()
+                                .fill(Color.tealAccent.opacity(0.1))
+                                .frame(width: 32, height: 32)
+                            Text("1")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.tealAccent)
+                        }
                         Text("Enable location services in Settings")
-                            .font(.subheadline)
+                            .font(.system(size: 14))
+                            .foregroundColor(.primary)
                     }
 
                     Text("OR")
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.secondary)
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(.mutedText)
                         .frame(maxWidth: .infinity, alignment: .center)
 
                     HStack(spacing: 12) {
-                        Image(systemName: "2.circle.fill")
-                            .foregroundColor(.blue)
+                        ZStack {
+                            Circle()
+                                .fill(Color.tealAccent.opacity(0.1))
+                                .frame(width: 32, height: 32)
+                            Text("2")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.tealAccent)
+                        }
                         Text("Add your registered address in Profile")
-                            .font(.subheadline)
+                            .font(.system(size: 14))
+                            .foregroundColor(.primary)
                     }
                 }
                 .padding(.horizontal, 32)
@@ -168,20 +297,15 @@ struct AddressRequiredView: View {
                         Text("Add My Address")
                             .fontWeight(.semibold)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
                 }
-                .padding(.horizontal, 32)
+                .buttonStyle(BrandButtonStyle())
+                .padding(.horizontal, 48)
                 .padding(.top, 8)
             }
 
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemGroupedBackground))
     }
 }
 

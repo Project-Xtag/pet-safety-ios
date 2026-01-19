@@ -15,24 +15,27 @@ struct PetSafetyApp: App {
             ContentView()
                 .environmentObject(authViewModel)
                 .environmentObject(appState)
-                .accentColor(.white)
+                .tint(Color(red: 1.0, green: 0.569, blue: 0.302)) // Brand Orange #FF914D
         }
     }
 
     private func setupAppearance() {
-        // Configure navigation bar appearance
+        // Brand orange color: #FF914D
+        let brandOrange = UIColor(red: 1.0, green: 0.569, blue: 0.302, alpha: 1.0)
+
+        // Configure navigation bar appearance - clean light style
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 0.2, green: 0.5, blue: 0.8, alpha: 1.0)
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.backgroundColor = UIColor.systemBackground
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.label]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
 
-        // Make back button visible and white
+        // Back button indicator
         appearance.setBackIndicatorImage(UIImage(systemName: "chevron.left"), transitionMaskImage: UIImage(systemName: "chevron.left"))
 
-        // Configure button appearance (including back button)
+        // Configure button appearance with brand orange
         let buttonAppearance = UIBarButtonItemAppearance()
-        buttonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
+        buttonAppearance.normal.titleTextAttributes = [.foregroundColor: brandOrange]
         appearance.buttonAppearance = buttonAppearance
         appearance.backButtonAppearance = buttonAppearance
 
@@ -40,8 +43,8 @@ struct PetSafetyApp: App {
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
 
-        // Make back button tint color white
-        UINavigationBar.appearance().tintColor = .white
+        // Make back button and bar buttons use brand orange
+        UINavigationBar.appearance().tintColor = brandOrange
     }
 }
 

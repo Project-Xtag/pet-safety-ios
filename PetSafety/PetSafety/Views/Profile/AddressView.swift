@@ -147,14 +147,14 @@ struct AddressView: View {
                     Button("Cancel") {
                         cancelEditing()
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(.brandOrange)
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         saveChanges()
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(.brandOrange)
                     .disabled(isLoading || !hasChanges || !isFormValid)
                 }
             }
