@@ -15,6 +15,7 @@ struct OrderMoreTagsView: View {
     // Owner information
     @State private var ownerName = ""
     @State private var email = ""
+    @State private var phone = ""
 
     // Shipping address
     @State private var street1 = ""
@@ -25,7 +26,7 @@ struct OrderMoreTagsView: View {
     @State private var country = ""
 
     // Pricing - tags are free, only shipping cost
-    private let shippingCost: Double = 3.99
+    private let shippingCost: Double = 3.90
 
     var totalCost: Double {
         return shippingCost
@@ -126,6 +127,9 @@ struct OrderMoreTagsView: View {
                     .keyboardType(.emailAddress)
                     .textContentType(.emailAddress)
                     .autocapitalization(.none)
+                TextField("Phone", text: $phone)
+                    .keyboardType(.phonePad)
+                    .textContentType(.telephoneNumber)
             }
 
             Section(header: Text("Shipping Address")) {
@@ -266,6 +270,9 @@ struct OrderMoreTagsView: View {
         // Pre-fill user information
         await MainActor.run {
             email = user.email
+            if let userPhone = user.phone {
+                phone = userPhone
+            }
 
             if let firstName = user.firstName, let lastName = user.lastName {
                 ownerName = "\(firstName) \(lastName)"
@@ -303,7 +310,8 @@ struct OrderMoreTagsView: View {
                     city: city,
                     province: province.isEmpty ? nil : province,
                     postCode: postCode,
-                    country: country
+                    country: country,
+                    phone: phone.isEmpty ? nil : phone
                 )
 
                 let orderRequest = CreateTagOrderRequest(

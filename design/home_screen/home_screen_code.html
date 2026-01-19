@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Pets Dashboard V2</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF914D", // Orange accent
+              secondary: "#6FB2B2", // Teal icons
+              header: "#FDEDD8", // Peach header
+              "background-light": "#FFFFFF",
+              "background-dark": "#121212",
+              "card-light": "#FFFFFF",
+              "card-dark": "#1E1E1E",
+              "nav-inactive": "#737373",
+            },
+            fontFamily: {
+              display: ["Plus Jakarta Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "1.25rem",
+              "xl": "1.5rem",
+              "2xl": "2rem",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      .custom-shadow {
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      }.no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }.no-scrollbar {
+        -ms-overflow-style: none;scrollbar-width: none;}
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex justify-center">
+<div class="w-full max-w-md bg-background-light dark:bg-background-dark min-h-screen relative flex flex-col shadow-2xl overflow-hidden border-x border-slate-100 dark:border-slate-800">
+<header class="bg-header dark:bg-slate-900 px-6 pt-12 pb-8 rounded-b-[2.5rem]">
+<div class="flex justify-between items-center mb-6">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400">Welcome back,</span>
+<h1 class="text-2xl font-bold text-slate-900 dark:text-white">Alex Johnson</h1>
+</div>
+<button class="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center shadow-sm text-primary transition-transform active:scale-95">
+<span class="material-icons-outlined">add</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-6 -mt-4 overflow-y-auto no-scrollbar pb-32">
+<section class="mb-8">
+<div class="flex justify-between items-center mb-4">
+<h2 class="text-xl font-bold text-slate-800 dark:text-slate-100">My Pets</h2>
+<button class="text-sm font-semibold text-primary">View All</button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-card-light dark:bg-card-dark rounded-2xl p-4 custom-shadow flex flex-col items-center border border-slate-50 dark:border-slate-800">
+<div class="w-full aspect-square bg-slate-50 dark:bg-slate-800 rounded-xl mb-3 flex items-center justify-center overflow-hidden">
+<img alt="Bubu the Golden Retriever" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsDnkEplizxSZ0iCEGyMgc2bAa4Yu7fWLvSDtYqnwcjzbeNjvY8n2LjiJfgkvz2IZoesy4mSMYFcNb-IeCdZb1D2V5OtX1IPsiL9eoj_5csEh7Pd9C8S6vwe328t6d3OPRgHYTlLSZPVXqNewh1-OL23nUPyNlLksczi5iWb5K7RG6G6ivOEMReqz33F6K440b_NUAuHMmx5sQZMSSi-HmOYw8mlfvH3KOZAeNy6jDTVwuR0YwtA4HJz5wvm2t0GMGDvSdgYIMdvV"/>
+</div>
+<span class="font-bold text-slate-800 dark:text-slate-200">Bubu</span>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-2xl p-4 custom-shadow flex flex-col items-center border border-slate-50 dark:border-slate-800">
+<div class="w-full aspect-square bg-slate-50 dark:bg-slate-800 rounded-xl mb-3 flex items-center justify-center overflow-hidden">
+<img alt="Buddy the Frenchie" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATFtzpU6xcYzc9zFn-5XDO_dQ6Jpno7dCboKUzK3pt8TF-7BkcV42BkTeaYa6JwjX1rOhHL9aRzGt2SCQts1Yb4dknGLsz5ScJTbs9wN5UDJG0Z-Hz3LlNxaGeTORYEsNui0mtFBgOVGjfJ-2MmXd5mM0aLSw8ecXYQ4O5gcke_Y0BghLRnW5z1-2Rcvu2cLNzuHireE7aDJx-VhY7S_lVKEEiNHm6CHPdvdY9yBA4xF8qYTmyTkhF2D3jkhBPGK-DXjTezLBfIi6o"/>
+</div>
+<span class="font-bold text-slate-800 dark:text-slate-200">Buddy 2</span>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-2xl p-4 custom-shadow flex flex-col items-center border border-slate-50 dark:border-slate-800">
+<div class="w-full aspect-square bg-slate-50 dark:bg-slate-800 rounded-xl mb-3 flex items-center justify-center">
+<span class="material-icons-outlined text-slate-300 dark:text-slate-600 text-6xl">pets</span>
+</div>
+<span class="font-bold text-slate-800 dark:text-slate-200">Buddy</span>
+</div>
+<div class="bg-dashed border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl p-4 flex flex-col items-center justify-center opacity-60">
+<span class="material-icons-outlined text-slate-400 mb-1">add_circle_outline</span>
+<span class="text-sm font-medium text-slate-500">Add Pet</span>
+</div>
+</div>
+</section>
+<section class="mb-8">
+<h2 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">Quick Actions</h2>
+<div class="grid grid-cols-3 gap-3">
+<button class="bg-card-light dark:bg-card-dark rounded-2xl p-4 custom-shadow flex flex-col items-center justify-center border border-slate-50 dark:border-slate-800 transition-transform active:scale-95">
+<div class="w-12 h-12 rounded-full bg-red-50 dark:bg-red-950/30 flex items-center justify-center mb-2">
+<span class="material-icons-outlined text-red-500">error_outline</span>
+</div>
+<span class="text-[10px] font-bold text-center uppercase tracking-wider text-slate-600 dark:text-slate-400">Report Missing</span>
+</button>
+<button class="bg-card-light dark:bg-card-dark rounded-2xl p-4 custom-shadow flex flex-col items-center justify-center border border-slate-50 dark:border-slate-800 relative transition-transform active:scale-95">
+<div class="w-12 h-12 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center mb-2">
+<span class="material-icons-outlined text-secondary">shopping_cart</span>
+</div>
+<span class="text-[10px] font-bold text-center uppercase tracking-wider text-slate-600 dark:text-slate-400">Order Tags</span>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-primary rounded-full flex items-center justify-center text-[10px] text-white font-bold border-2 border-white dark:border-slate-900">
+                            +
+                        </div>
+</button>
+<button class="bg-card-light dark:bg-card-dark rounded-2xl p-4 custom-shadow flex flex-col items-center justify-center border border-slate-50 dark:border-slate-800 transition-transform active:scale-95">
+<div class="w-12 h-12 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center mb-2">
+<span class="material-icons-outlined text-primary">autorenew</span>
+</div>
+<span class="text-[10px] font-bold text-center uppercase tracking-wider text-slate-600 dark:text-slate-400">Replace Tag</span>
+</button>
+</div>
+</section>
+</main>
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-[360px] bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg rounded-[2rem] px-2 py-2 flex justify-between items-center shadow-2xl border border-slate-100 dark:border-slate-800 z-50">
+<button class="flex items-center gap-2 bg-primary/10 text-primary px-4 py-2.5 rounded-full transition-all">
+<span class="material-icons-outlined">pets</span>
+<span class="text-sm font-bold">My Pets</span>
+</button>
+<button class="p-3 text-nav-inactive dark:text-slate-400 hover:text-slate-900 transition-colors">
+<span class="material-icons-outlined">qr_code_scanner</span>
+</button>
+<button class="p-3 text-nav-inactive dark:text-slate-400 hover:text-slate-900 transition-colors relative">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="p-3 text-nav-inactive dark:text-slate-400 hover:text-slate-900 transition-colors">
+<span class="material-icons-outlined">person_outline</span>
+</button>
+</nav>
+</div>
+<div class="fixed top-4 right-4">
+<button class="p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg text-slate-600 dark:text-slate-300" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-outlined">dark_mode</span>
+</button>
+</div>
+
+</body></html>

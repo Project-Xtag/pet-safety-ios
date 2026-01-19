@@ -13,7 +13,7 @@ struct PaymentIntentTests {
             "paymentIntent": {
               "id": "pi_test_123",
               "client_secret": "secret_abc",
-              "amount": 3.99,
+              "amount": 3.90,
               "currency": "gbp"
             }
           }
@@ -25,7 +25,7 @@ struct PaymentIntentTests {
         #expect(response.success == true)
         #expect(response.data?.paymentIntent.id == "pi_test_123")
         #expect(response.data?.paymentIntent.clientSecret == "secret_abc")
-        #expect(response.data?.paymentIntent.amount == 3.99)
+        #expect(response.data?.paymentIntent.amount == 3.90)
         #expect(response.data?.paymentIntent.currency == "gbp")
     }
 }

@@ -856,9 +856,10 @@ struct ShippingAddress: Codable {
     let province: String?
     let postCode: String
     let country: String
+    let phone: String?
 
     enum CodingKeys: String, CodingKey {
-        case street1, street2, city, province, country
+        case street1, street2, city, province, country, phone
         case postCode = "postCode"
     }
 }
@@ -890,6 +891,7 @@ struct ShippingAddressDetails: Codable {
     let province: String?
     let postCode: String
     let country: String
+    let phone: String?
 }
 
 struct CreateTagOrderResponse: Codable {

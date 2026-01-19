@@ -9,7 +9,10 @@ struct QRScannerView: View {
         ZStack {
             if viewModel.cameraPermissionGranted {
                 QRCodeScannerRepresentable(
-                    onCodeScanned: { code in
+                    onCodeScanned: { scannedValue in
+                        // Extract the tag code from the scanned value
+                        // It could be a full URL or just the code
+                        let code = DeepLinkService.extractTagCode(from: scannedValue)
                         Task {
                             await viewModel.scanQRCode(code)
                             showingScannedPet = true

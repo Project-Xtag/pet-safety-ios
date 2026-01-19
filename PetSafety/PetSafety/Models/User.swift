@@ -3,6 +3,7 @@ import Foundation
 struct User: Codable, Identifiable {
     let id: String
     let email: String
+    let role: String?
     let firstName: String?
     let lastName: String?
     let phone: String?
@@ -21,7 +22,7 @@ struct User: Codable, Identifiable {
     let showEmailPublicly: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case id, email, phone, address, city, country
+        case id, email, role, phone, address, city, country
         case firstName = "first_name"
         case lastName = "last_name"
         case postalCode = "postal_code"

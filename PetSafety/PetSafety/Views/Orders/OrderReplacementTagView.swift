@@ -15,6 +15,7 @@ struct OrderReplacementTagView: View {
     @State private var province = ""
     @State private var postCode = ""
     @State private var country = ""
+    @State private var phone = ""
 
     var body: some View {
         Group {
@@ -172,6 +173,17 @@ struct OrderReplacementTagView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Phone Number (Optional)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    TextField("e.g., +44 7700 900123", text: $phone)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.phonePad)
+                        .textContentType(.telephoneNumber)
+                }
+                .padding(.vertical, 4)
             }
 
             Section {
@@ -222,6 +234,9 @@ struct OrderReplacementTagView: View {
             if let address = user.address {
                 street1 = address
             }
+            if let userPhone = user.phone {
+                phone = userPhone
+            }
             if let userCity = user.city {
                 city = userCity
             }
@@ -245,7 +260,8 @@ struct OrderReplacementTagView: View {
                     city: city,
                     province: province.isEmpty ? nil : province,
                     postCode: postCode,
-                    country: country
+                    country: country,
+                    phone: phone.isEmpty ? nil : phone
                 )
 
                 let response = try await APIService.shared.createReplacementOrder(

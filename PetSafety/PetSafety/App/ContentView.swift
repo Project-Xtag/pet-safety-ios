@@ -1,8 +1,10 @@
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var appState: AppState
+    @StateObject private var deepLinkService = DeepLinkService.shared
 
     var body: some View {
         Group {
@@ -20,6 +22,106 @@ struct ContentView: View {
         .overlay {
             if appState.isLoading {
                 LoadingView()
+            }
+        }
+        // Handle deep links for tag activation
+        .sheet(isPresented: $deepLinkService.showTagActivation) {
+            if let tagCode = deepLinkService.pendingTagCode {
+                if authViewModel.isAuthenticated {
+                    TagActivationView(tagCode: tagCode) {
+                        deepLinkService.clearPendingLink()
+                    }
+                    .environmentObject(appState)
+                } else {
+                    // User not logged in - show message
+                    DeepLinkLoginPromptView(tagCode: tagCode) {
+                        deepLinkService.clearPendingLink()
+                    }
+                }
+            }
+        }
+        .onOpenURL { url in
+            handleDeepLink(url)
+        }
+    }
+
+    private func handleDeepLink(_ url: URL) {
+        #if DEBUG
+        print("🔗 ContentView: Received URL: \(url.absoluteString)")
+        #endif
+
+        // Let the DeepLinkService handle the URL
+        deepLinkService.handleURL(url)
+    }
+}
+
+// MARK: - Deep Link Login Prompt
+struct DeepLinkLoginPromptView: View {
+    let tagCode: String
+    let onDismiss: () -> Void
+
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 24) {
+                Spacer()
+
+                Image(systemName: "person.crop.circle.badge.exclamationmark")
+                    .font(.system(size: 60))
+                    .foregroundColor(.orange)
+
+                Text("Login Required")
+                    .font(.title2)
+                    .fontWeight(.bold)
+
+                Text("Please log in to activate this tag for your pet")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+
+                VStack(spacing: 8) {
+                    Text("Tag Code")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+
+                    Text(tagCode)
+                        .font(.system(.title3, design: .monospaced))
+                        .fontWeight(.semibold)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(Color(UIColor.systemGray6))
+                        .cornerRadius(8)
+                }
+                .padding(.vertical)
+
+                Text("After logging in, scan the tag again or go to My Pets to activate it")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+
+                Spacer()
+
+                Button(action: onDismiss) {
+                    Text("OK")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color("BrandColor"))
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 40)
+            }
+            .navigationTitle("Activate Tag")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Close") {
+                        onDismiss()
+                    }
+                }
             }
         }
     }
