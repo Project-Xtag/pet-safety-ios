@@ -1,4 +1,5 @@
 import Foundation
+import Sentry
 
 @MainActor
 class AuthViewModel: ObservableObject {
@@ -20,6 +21,11 @@ class AuthViewModel: ObservableObject {
                 do {
                     currentUser = try await apiService.getCurrentUser()
                     isAuthenticated = true
+                    // Set Sentry user context for error tracking
+                    if let user = currentUser {
+                        let sentryUser = Sentry.User(userId: user.id)
+                        SentrySDK.setUser(sentryUser)
+                    }
                     // Connect to SSE for real-time notifications
                     SSEService.shared.connect()
                 } catch {
@@ -58,6 +64,10 @@ class AuthViewModel: ObservableObject {
             _ = KeychainService.shared.save(response.user.id, for: .userId)
             _ = KeychainService.shared.save(response.user.email, for: .userEmail)
 
+            // Set Sentry user context for error tracking
+            let sentryUser = Sentry.User(userId: response.user.id)
+            SentrySDK.setUser(sentryUser)
+
             // Connect to SSE for real-time notifications
             SSEService.shared.connect()
         } catch {
@@ -74,6 +84,9 @@ class AuthViewModel: ObservableObject {
 
         _ = KeychainService.shared.delete(.userId)
         _ = KeychainService.shared.delete(.userEmail)
+
+        // Clear Sentry user context
+        SentrySDK.setUser(nil)
 
         // Disconnect from SSE
         SSEService.shared.disconnect()

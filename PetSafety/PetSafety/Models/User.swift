@@ -8,6 +8,7 @@ struct User: Codable, Identifiable {
     let lastName: String?
     let phone: String?
     let address: String?
+    let addressLine2: String?
     let city: String?
     let postalCode: String?
     let country: String?
@@ -25,6 +26,7 @@ struct User: Codable, Identifiable {
         case id, email, role, phone, address, city, country
         case firstName = "first_name"
         case lastName = "last_name"
+        case addressLine2 = "address_line_2"
         case postalCode = "postal_code"
         case isServiceProvider = "is_service_provider"
         case serviceProviderType = "service_provider_type"

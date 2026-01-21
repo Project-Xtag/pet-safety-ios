@@ -30,6 +30,21 @@ struct PetDetailView: View {
                 .cornerRadius(20)
                 .padding(.horizontal)
 
+                // View Photos Button (under profile picture)
+                NavigationLink(destination: PhotoGalleryView(pet: pet)) {
+                    HStack {
+                        Image(systemName: "photo.on.rectangle")
+                        Text("View \(pet.name)'s Photos")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.tealAccent.opacity(0.1))
+                    .foregroundColor(.tealAccent)
+                    .cornerRadius(14)
+                    .font(.system(size: 15, weight: .semibold))
+                }
+                .padding(.horizontal)
+
                 // Pet Name
                 Text(pet.name)
                     .font(.system(size: 32, weight: .bold))
@@ -114,16 +129,16 @@ struct PetDetailView: View {
 
                 // Action Buttons
                 VStack(spacing: 12) {
-                    // Photo Gallery Button
-                    NavigationLink(destination: PhotoGalleryView(pet: pet)) {
+                    // View Public Profile Button
+                    NavigationLink(destination: PetPublicProfileView(pet: pet)) {
                         HStack {
-                            Image(systemName: "photo.on.rectangle")
-                            Text("View \(pet.name)'s Photos")
+                            Image(systemName: "eye")
+                            Text("View \(pet.name)'s Public Profile")
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.tealAccent.opacity(0.1))
-                        .foregroundColor(.tealAccent)
+                        .background(Color.green.opacity(0.1))
+                        .foregroundColor(.green)
                         .cornerRadius(14)
                         .font(.system(size: 15, weight: .semibold))
                     }

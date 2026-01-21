@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct PetsListView: View {
     @StateObject private var viewModel = PetsViewModel()
@@ -6,6 +7,7 @@ struct PetsListView: View {
     @State private var showingMarkLostSheet = false
     @State private var showingOrderMoreTags = false
     @State private var showingPetSelection = false
+    @State private var showingSuccessStories = false
     @State private var selectedPetForReplacement: Pet?
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -41,6 +43,9 @@ struct PetsListView: View {
 
                             // Quick Actions Section
                             quickActionsSection
+
+                            // Success Stories Section
+                            successStoriesSection
                         }
                         .padding(.bottom, 100)
                     }
@@ -84,6 +89,12 @@ struct PetsListView: View {
                         }
                     }
                 )
+            }
+        }
+        .sheet(isPresented: $showingSuccessStories) {
+            NavigationView {
+                SuccessStoriesTabView()
+                    .environmentObject(authViewModel)
             }
         }
         .task {
@@ -145,11 +156,6 @@ struct PetsListView: View {
                 ForEach(viewModel.pets.prefix(4)) { pet in
                     PetCardView(pet: pet)
                 }
-
-                // Add Pet Card (if less than 4 pets)
-                if viewModel.pets.count < 4 {
-                    AddPetCard(action: { showingAddPet = true })
-                }
             }
             .padding(.horizontal, 24)
         }
@@ -163,7 +169,15 @@ struct PetsListView: View {
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
 
+            // First row of quick actions
             HStack(spacing: 12) {
+                QuickActionButton(
+                    icon: "plus.circle.fill",
+                    title: "Add Pet",
+                    color: .tealAccent,
+                    action: { showingAddPet = true }
+                )
+
                 QuickActionButton(
                     icon: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill",
                     title: hasMissingPets ? "Mark Found" : "Report Missing",
@@ -185,6 +199,54 @@ struct PetsListView: View {
                     action: { showOrderReplacementMenu() }
                 )
             }
+            .padding(.horizontal, 24)
+        }
+    }
+
+    // MARK: - Success Stories Section
+    private var successStoriesSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Success Stories")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.primary)
+                .padding(.horizontal, 24)
+
+            // Found Pets Card
+            Button(action: { showingSuccessStories = true }) {
+                HStack(spacing: 16) {
+                    // Icon
+                    ZStack {
+                        Circle()
+                            .fill(Color.green.opacity(0.15))
+                            .frame(width: 60, height: 60)
+                        Image(systemName: "heart.circle.fill")
+                            .font(.system(size: 30))
+                            .foregroundColor(.green)
+                    }
+
+                    // Text
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Found Pets")
+                            .font(.system(size: 17, weight: .semibold))
+                            .foregroundColor(.primary)
+                        Text("See happy reunions near you")
+                            .font(.system(size: 14))
+                            .foregroundColor(.mutedText)
+                    }
+
+                    Spacer()
+
+                    // Chevron
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.mutedText)
+                }
+                .padding(16)
+                .background(Color(UIColor.systemBackground))
+                .cornerRadius(16)
+                .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 4)
+            }
+            .buttonStyle(PlainButtonStyle())
             .padding(.horizontal, 24)
         }
     }
@@ -211,37 +273,55 @@ struct PetCardView: View {
         NavigationLink(destination: PetDetailView(pet: pet)) {
             VStack(spacing: 0) {
                 // Pet Photo
-                ZStack {
-                    if let photoUrl = pet.photoUrl, !photoUrl.isEmpty {
-                        AsyncImage(url: URL(string: photoUrl)) { phase in
-                            switch phase {
-                            case .empty:
-                                ZStack {
-                                    Color(UIColor.systemGray6)
-                                    ProgressView()
+                ZStack(alignment: .topTrailing) {
+                    ZStack {
+                        if let photoUrl = pet.photoUrl, !photoUrl.isEmpty {
+                            AsyncImage(url: URL(string: photoUrl)) { phase in
+                                switch phase {
+                                case .empty:
+                                    ZStack {
+                                        Color(UIColor.systemGray6)
+                                        ProgressView()
+                                    }
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                case .failure:
+                                    placeholderImage
+                                @unknown default:
+                                    placeholderImage
                                 }
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                            case .failure:
-                                placeholderImage
-                            @unknown default:
-                                placeholderImage
                             }
+                        } else {
+                            placeholderImage
                         }
-                    } else {
-                        placeholderImage
+                    }
+                    .frame(height: 120)
+                    .clipped()
+
+                    // Missing Badge
+                    if pet.isMissing {
+                        HStack(spacing: 4) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .font(.system(size: 10))
+                            Text("MISSING")
+                                .font(.system(size: 10, weight: .bold))
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.red)
+                        .cornerRadius(8)
+                        .padding(8)
                     }
                 }
-                .frame(height: 120)
-                .clipped()
                 .cornerRadius(16, corners: [.topLeft, .topRight])
 
                 // Pet Name
                 Text(pet.name)
                     .font(.system(size: 15, weight: .bold))
-                    .foregroundColor(.primary)
+                    .foregroundColor(pet.isMissing ? .red : .primary)
                     .lineLimit(1)
                     .padding(.vertical, 12)
                     .frame(maxWidth: .infinity)
@@ -250,6 +330,12 @@ struct PetCardView: View {
             .background(Color(UIColor.systemBackground))
             .cornerRadius(16)
             .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 4)
+            .overlay(
+                pet.isMissing ?
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.red, lineWidth: 2)
+                    : nil
+            )
         }
         .buttonStyle(PlainButtonStyle())
     }

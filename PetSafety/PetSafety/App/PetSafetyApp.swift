@@ -1,4 +1,5 @@
 import SwiftUI
+import Sentry
 
 @main
 struct PetSafetyApp: App {
@@ -6,8 +7,54 @@ struct PetSafetyApp: App {
     @StateObject private var appState = AppState()
 
     init() {
+        // Initialize Sentry for error tracking
+        initializeSentry()
+
         // Configure appearance
         setupAppearance()
+    }
+
+    private func initializeSentry() {
+        // Sentry DSN for error tracking
+        let dsn = "https://59598f05268ea6c3d56f1af280001bf3@o4510743830724608.ingest.de.sentry.io/4510743841669200"
+
+        SentrySDK.start { options in
+            options.dsn = dsn
+            options.environment = {
+                #if DEBUG
+                return "development"
+                #else
+                return "production"
+                #endif
+            }()
+
+            // Performance monitoring - 10% of transactions
+            options.tracesSampleRate = 0.1
+
+            // Attach screenshots and view hierarchy for debugging
+            options.attachScreenshot = true
+            options.attachViewHierarchy = true
+
+            // Enable automatic instrumentation
+            options.enableSwizzling = true
+            options.enableCaptureFailedRequests = true
+
+            // Filter out expected errors (4xx client errors)
+            options.beforeSend = { event in
+                // Check if the error is a client error (4xx)
+                if let exceptionValue = event.exceptions?.first?.value,
+                   exceptionValue.contains("unauthorized") || exceptionValue.contains("401") ||
+                   exceptionValue.contains("400") || exceptionValue.contains("404") ||
+                   exceptionValue.contains("403") {
+                    return nil // Don't send client errors
+                }
+                return event
+            }
+        }
+
+        #if DEBUG
+        print("✅ Sentry initialized for error tracking")
+        #endif
     }
 
     var body: some Scene {

@@ -9,9 +9,23 @@ struct AddressView: View {
 
     // Comprehensive form fields
     @State private var streetAddress = ""      // Main street address
+    @State private var addressLine2 = ""       // Apartment, suite, unit, etc.
     @State private var city = ""
     @State private var postalCode = ""
     @State private var country = ""
+    @State private var showCountryPicker = false
+
+    // Common countries list
+    private let countries = [
+        "Hungary",
+        "Slovakia",
+        "Czechia",
+        "Austria",
+        "Romania",
+        "Croatia",
+        "Spain",
+        "Portugal"
+    ]
 
     var body: some View {
         List {
@@ -22,7 +36,16 @@ struct AddressView: View {
                         Text("Street Address")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        TextField("e.g., 123 Main Street, Apartment 4B", text: $streetAddress)
+                        TextField("e.g., 123 Main Street", text: $streetAddress)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    .padding(.vertical, 4)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Address Line 2 (Optional)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        TextField("Apartment, suite, unit, building, floor, etc.", text: $addressLine2)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                     .padding(.vertical, 4)
@@ -50,8 +73,19 @@ struct AddressView: View {
                         Text("Country")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        TextField("e.g., United Kingdom", text: $country)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        Button(action: { showCountryPicker = true }) {
+                            HStack {
+                                Text(country.isEmpty ? "Select country" : country)
+                                    .foregroundColor(country.isEmpty ? .secondary : .primary)
+                                Spacer()
+                                Image(systemName: "chevron.down")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding()
+                            .background(Color(UIColor.systemGray6))
+                            .cornerRadius(8)
+                        }
                     }
                     .padding(.vertical, 4)
                 }
@@ -90,6 +124,10 @@ struct AddressView: View {
                         VStack(alignment: .leading, spacing: 16) {
                             if !streetAddress.isEmpty {
                                 AddressFieldView(label: "Street Address", value: streetAddress)
+                            }
+
+                            if !addressLine2.isEmpty {
+                                AddressFieldView(label: "Address Line 2", value: addressLine2)
                             }
 
                             if !city.isEmpty {
@@ -162,6 +200,9 @@ struct AddressView: View {
         .onAppear {
             loadAddressData()
         }
+        .sheet(isPresented: $showCountryPicker) {
+            CountryPickerView(selectedCountry: $country, countries: countries)
+        }
     }
 
     private var isFormValid: Bool {
@@ -173,6 +214,7 @@ struct AddressView: View {
     private var hasChanges: Bool {
         guard let user = authViewModel.currentUser else { return false }
         return streetAddress != (user.address ?? "") ||
+               addressLine2 != (user.addressLine2 ?? "") ||
                city != (user.city ?? "") ||
                postalCode != (user.postalCode ?? "") ||
                country != (user.country ?? "")
@@ -181,6 +223,7 @@ struct AddressView: View {
     private func loadAddressData() {
         guard let user = authViewModel.currentUser else { return }
         streetAddress = user.address ?? ""
+        addressLine2 = user.addressLine2 ?? ""
         city = user.city ?? ""
         postalCode = user.postalCode ?? ""
         country = user.country ?? ""
@@ -202,6 +245,7 @@ struct AddressView: View {
             do {
                 let updates: [String: Any] = [
                     "address": streetAddress.trimmingCharacters(in: .whitespaces),
+                    "address_line_2": addressLine2.trimmingCharacters(in: .whitespaces),
                     "city": city.trimmingCharacters(in: .whitespaces),
                     "postal_code": postalCode.trimmingCharacters(in: .whitespaces),
                     "country": country.trimmingCharacters(in: .whitespaces)
@@ -218,6 +262,45 @@ struct AddressView: View {
                 await MainActor.run {
                     isLoading = false
                     appState.showError(error.localizedDescription)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Country Picker View
+struct CountryPickerView: View {
+    @Binding var selectedCountry: String
+    let countries: [String]
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(countries, id: \.self) { country in
+                    Button(action: {
+                        selectedCountry = country
+                        dismiss()
+                    }) {
+                        HStack {
+                            Text(country)
+                                .foregroundColor(.primary)
+                            Spacer()
+                            if selectedCountry == country {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.tealAccent)
+                            }
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Select Country")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
                 }
             }
         }

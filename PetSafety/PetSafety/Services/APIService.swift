@@ -1,4 +1,5 @@
 import Foundation
+import Sentry
 
 enum APIError: Error, LocalizedError {
     case invalidURL
@@ -100,6 +101,11 @@ class APIService {
         _ request: URLRequest,
         responseType: T.Type
     ) async throws -> T {
+        // Add Sentry breadcrumb for API request tracking
+        let crumb = Breadcrumb(level: .info, category: "http")
+        crumb.message = "\(request.httpMethod ?? "GET") \(request.url?.path ?? "")"
+        SentrySDK.addBreadcrumb(crumb)
+
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
 
@@ -164,6 +170,11 @@ class APIService {
                 throw APIError.unauthorized
 
             default:
+                // Capture 5xx server errors to Sentry
+                if httpResponse.statusCode >= 500 {
+                    SentrySDK.capture(message: "Server error \(httpResponse.statusCode): \(request.url?.path ?? "")")
+                }
+
                 if let errorResponse = try? decoder.decode(ErrorResponse.self, from: data) {
                     let detailsText = formatErrorDetails(errorResponse.details)
                     if let detailsText {

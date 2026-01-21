@@ -22,7 +22,14 @@ class PetsViewModel: ObservableObject {
             if networkMonitor.isConnected {
                 // Fetch from API when online
                 pets = try await apiService.getPets()
-                // Cache the data locally
+                // Sync cache: remove pets not in API response, then save current pets
+                let cachedPets = (try? offlineManager.fetchPets()) ?? []
+                let apiPetIds = Set(pets.map { $0.id })
+                for cachedPet in cachedPets {
+                    if !apiPetIds.contains(cachedPet.id) {
+                        try? offlineManager.deletePet(withId: cachedPet.id)
+                    }
+                }
                 try offlineManager.savePets(pets)
             } else {
                 // Load from local cache when offline
@@ -83,6 +90,8 @@ class PetsViewModel: ObservableObject {
         do {
             try await apiService.deletePet(id: id)
             pets.removeAll { $0.id == id }
+            // Also remove from offline cache
+            try? offlineManager.deletePet(withId: id)
             isLoading = false
         } catch {
             isLoading = false
