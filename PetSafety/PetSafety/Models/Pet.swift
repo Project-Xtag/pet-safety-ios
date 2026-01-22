@@ -34,7 +34,14 @@ struct Pet: Codable, Identifiable, Hashable {
     // Public profile fields (only present when scanning QR code)
     let ownerName: String?
     let ownerPhone: String?
+    let ownerSecondaryPhone: String?
     let ownerEmail: String?
+    let ownerSecondaryEmail: String?
+    let ownerAddress: String?
+    let ownerAddressLine2: String?
+    let ownerCity: String?
+    let ownerPostalCode: String?
+    let ownerCountry: String?
 
     // Computed property for displaying age
     var age: String? {
@@ -84,7 +91,14 @@ struct Pet: Codable, Identifiable, Hashable {
         case dateOfBirth = "date_of_birth"
         case ownerName = "owner_name"
         case ownerPhone = "owner_phone"
+        case ownerSecondaryPhone = "owner_secondary_phone"
         case ownerEmail = "owner_email"
+        case ownerSecondaryEmail = "owner_secondary_email"
+        case ownerAddress = "owner_address"
+        case ownerAddressLine2 = "owner_address_line_2"
+        case ownerCity = "owner_city"
+        case ownerPostalCode = "owner_postal_code"
+        case ownerCountry = "owner_country"
     }
 
     // Memberwise initializer for creating Pet instances (e.g., in previews)
@@ -116,7 +130,14 @@ struct Pet: Codable, Identifiable, Hashable {
         dateOfBirth: String? = nil,
         ownerName: String? = nil,
         ownerPhone: String? = nil,
-        ownerEmail: String? = nil
+        ownerSecondaryPhone: String? = nil,
+        ownerEmail: String? = nil,
+        ownerSecondaryEmail: String? = nil,
+        ownerAddress: String? = nil,
+        ownerAddressLine2: String? = nil,
+        ownerCity: String? = nil,
+        ownerPostalCode: String? = nil,
+        ownerCountry: String? = nil
     ) {
         self.id = id
         self.ownerId = ownerId
@@ -145,7 +166,14 @@ struct Pet: Codable, Identifiable, Hashable {
         self.dateOfBirth = dateOfBirth
         self.ownerName = ownerName
         self.ownerPhone = ownerPhone
+        self.ownerSecondaryPhone = ownerSecondaryPhone
         self.ownerEmail = ownerEmail
+        self.ownerSecondaryEmail = ownerSecondaryEmail
+        self.ownerAddress = ownerAddress
+        self.ownerAddressLine2 = ownerAddressLine2
+        self.ownerCity = ownerCity
+        self.ownerPostalCode = ownerPostalCode
+        self.ownerCountry = ownerCountry
     }
 
     // Custom decoder to handle weight as either String or Double
@@ -190,7 +218,14 @@ struct Pet: Codable, Identifiable, Hashable {
         dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth)
         ownerName = try container.decodeIfPresent(String.self, forKey: .ownerName)
         ownerPhone = try container.decodeIfPresent(String.self, forKey: .ownerPhone)
+        ownerSecondaryPhone = try container.decodeIfPresent(String.self, forKey: .ownerSecondaryPhone)
         ownerEmail = try container.decodeIfPresent(String.self, forKey: .ownerEmail)
+        ownerSecondaryEmail = try container.decodeIfPresent(String.self, forKey: .ownerSecondaryEmail)
+        ownerAddress = try container.decodeIfPresent(String.self, forKey: .ownerAddress)
+        ownerAddressLine2 = try container.decodeIfPresent(String.self, forKey: .ownerAddressLine2)
+        ownerCity = try container.decodeIfPresent(String.self, forKey: .ownerCity)
+        ownerPostalCode = try container.decodeIfPresent(String.self, forKey: .ownerPostalCode)
+        ownerCountry = try container.decodeIfPresent(String.self, forKey: .ownerCountry)
     }
 
     // Custom encoder to handle photoUrl key (only used for decoding legacy API responses)
@@ -224,7 +259,14 @@ struct Pet: Codable, Identifiable, Hashable {
         try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
         try container.encodeIfPresent(ownerName, forKey: .ownerName)
         try container.encodeIfPresent(ownerPhone, forKey: .ownerPhone)
+        try container.encodeIfPresent(ownerSecondaryPhone, forKey: .ownerSecondaryPhone)
         try container.encodeIfPresent(ownerEmail, forKey: .ownerEmail)
+        try container.encodeIfPresent(ownerSecondaryEmail, forKey: .ownerSecondaryEmail)
+        try container.encodeIfPresent(ownerAddress, forKey: .ownerAddress)
+        try container.encodeIfPresent(ownerAddressLine2, forKey: .ownerAddressLine2)
+        try container.encodeIfPresent(ownerCity, forKey: .ownerCity)
+        try container.encodeIfPresent(ownerPostalCode, forKey: .ownerPostalCode)
+        try container.encodeIfPresent(ownerCountry, forKey: .ownerCountry)
     }
 }
 

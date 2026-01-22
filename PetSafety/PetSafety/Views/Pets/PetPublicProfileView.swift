@@ -84,6 +84,7 @@ struct PetPublicProfileView: View {
                         .multilineTextAlignment(.center)
 
                     VStack(spacing: 12) {
+                        // Primary phone
                         if let phone = pet.ownerPhone {
                             HStack(spacing: 12) {
                                 Image(systemName: "phone.fill")
@@ -98,6 +99,22 @@ struct PetPublicProfileView: View {
                             .cornerRadius(14)
                         }
 
+                        // Secondary phone
+                        if let secondaryPhone = pet.ownerSecondaryPhone {
+                            HStack(spacing: 12) {
+                                Image(systemName: "phone")
+                                    .foregroundColor(.tealAccent)
+                                Text("Alt: \(secondaryPhone)")
+                                    .font(.system(size: 15, weight: .medium))
+                                    .foregroundColor(.primary)
+                                Spacer()
+                            }
+                            .padding()
+                            .background(Color(UIColor.systemGray6))
+                            .cornerRadius(14)
+                        }
+
+                        // Primary email
                         if let email = pet.ownerEmail {
                             HStack(spacing: 12) {
                                 Image(systemName: "envelope.fill")
@@ -112,6 +129,22 @@ struct PetPublicProfileView: View {
                             .cornerRadius(14)
                         }
 
+                        // Secondary email
+                        if let secondaryEmail = pet.ownerSecondaryEmail {
+                            HStack(spacing: 12) {
+                                Image(systemName: "envelope")
+                                    .foregroundColor(.tealAccent)
+                                Text("Alt: \(secondaryEmail)")
+                                    .font(.system(size: 15, weight: .medium))
+                                    .foregroundColor(.primary)
+                                Spacer()
+                            }
+                            .padding()
+                            .background(Color(UIColor.systemGray6))
+                            .cornerRadius(14)
+                        }
+
+                        // No contact info message
                         if pet.ownerPhone == nil && pet.ownerEmail == nil {
                             HStack(spacing: 12) {
                                 Image(systemName: "info.circle.fill")
@@ -128,6 +161,46 @@ struct PetPublicProfileView: View {
                     }
                 }
                 .padding(.horizontal, 24)
+
+                // Owner Address Section (if publicly visible)
+                if let address = pet.ownerAddress {
+                    VStack(spacing: 12) {
+                        Text("Owner Location")
+                            .font(.system(size: 18, weight: .bold))
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 12) {
+                                Image(systemName: "location.fill")
+                                    .foregroundColor(.tealAccent)
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(address)
+                                        .font(.system(size: 15, weight: .medium))
+                                    if let line2 = pet.ownerAddressLine2, !line2.isEmpty {
+                                        Text(line2)
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.secondary)
+                                    }
+                                    let cityLine = [pet.ownerCity, pet.ownerPostalCode].compactMap { $0 }.joined(separator: ", ")
+                                    if !cityLine.isEmpty {
+                                        Text(cityLine)
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.secondary)
+                                    }
+                                    if let country = pet.ownerCountry {
+                                        Text(country)
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                                Spacer()
+                            }
+                            .padding()
+                            .background(Color(UIColor.systemGray6))
+                            .cornerRadius(14)
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                }
 
                 // Pet Info Cards
                 VStack(spacing: 12) {
