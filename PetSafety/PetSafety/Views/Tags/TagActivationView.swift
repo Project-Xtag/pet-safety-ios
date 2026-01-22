@@ -14,6 +14,7 @@ struct TagActivationView: View {
     @State private var isActivating = false
     @State private var activationSuccess = false
     @State private var errorMessage: String?
+    @State private var showPlanSelection = false
 
     private let grayBackground = Color(UIColor.systemGray6)
 
@@ -91,7 +92,7 @@ struct TagActivationView: View {
                 .clipShape(Circle())
             }
 
-            Text("When someone scans this tag, they'll see \(selectedPet?.name ?? "your pet")'s profile and can help reunite you if needed.")
+            Text("Choose a subscription plan to unlock all features like lost pet alerts and SMS notifications.")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -100,14 +101,27 @@ struct TagActivationView: View {
             Spacer()
 
             Button {
-                onDismiss()
+                showPlanSelection = true
             } label: {
-                Text("Done")
+                Text("Choose Plan")
                     .fontWeight(.semibold)
             }
             .buttonStyle(TagPrimaryButtonStyle())
             .padding(.horizontal, 24)
+
+            Button {
+                onDismiss()
+            } label: {
+                Text("Skip for now")
+                    .fontWeight(.medium)
+                    .foregroundColor(.secondary)
+            }
             .padding(.bottom, 40)
+        }
+        .fullScreenCover(isPresented: $showPlanSelection) {
+            PlanSelectionView(fromActivation: true) {
+                onDismiss()
+            }
         }
     }
 

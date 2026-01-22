@@ -1099,6 +1099,41 @@ extension APIService {
         return try await performRequest(request, responseType: SuccessStory.self)
     }
 
+    /// Create a success story with simple parameters (for SuccessStoryPromptView)
+    func createSuccessStorySimple(
+        petId: String,
+        alertId: String? = nil,
+        storyText: String?,
+        reunionCity: String?,
+        isPublic: Bool
+    ) async throws -> SuccessStory {
+        #if DEBUG
+        print("📡 API: Creating success story for pet \(petId)...")
+        #endif
+
+        var requestBody: [String: Any] = [
+            "pet_id": petId,
+            "is_public": isPublic
+        ]
+
+        if let alertId = alertId {
+            requestBody["alert_id"] = alertId
+        }
+        if let storyText = storyText {
+            requestBody["story_text"] = storyText
+        }
+        if let reunionCity = reunionCity {
+            requestBody["reunion_city"] = reunionCity
+        }
+
+        let request = try buildRequest(
+            endpoint: "/success-stories",
+            method: "POST",
+            body: DynamicBody(requestBody)
+        )
+        return try await performRequest(request, responseType: SuccessStory.self)
+    }
+
     /// Update a success story
     func updateSuccessStory(id: String, updates: UpdateSuccessStoryRequest) async throws -> SuccessStory {
         #if DEBUG
@@ -1153,5 +1188,86 @@ extension APIService {
         request.httpBody = body
 
         return try await performRequest(request, responseType: SuccessStoryPhoto.self)
+    }
+
+    // MARK: - Subscriptions
+
+    /// Get available subscription plans
+    func getSubscriptionPlans() async throws -> [SubscriptionPlan] {
+        #if DEBUG
+        print("📡 API: Fetching subscription plans...")
+        #endif
+
+        let request = try buildRequest(endpoint: "/subscriptions/plans", requiresAuth: false)
+        let response = try await performRequest(request, responseType: SubscriptionPlansResponse.self)
+        return response.plans
+    }
+
+    /// Get user's current subscription
+    func getMySubscription() async throws -> UserSubscription? {
+        #if DEBUG
+        print("📡 API: Fetching user subscription...")
+        #endif
+
+        let request = try buildRequest(endpoint: "/subscriptions/my-subscription")
+        let response = try await performRequest(request, responseType: MySubscriptionResponse.self)
+        return response.subscription
+    }
+
+    /// Create Stripe checkout session for subscription
+    func createSubscriptionCheckout(
+        planName: String,
+        billingPeriod: String = "monthly"
+    ) async throws -> SubscriptionCheckoutResponse {
+        #if DEBUG
+        print("📡 API: Creating subscription checkout for \(planName) (\(billingPeriod))...")
+        #endif
+
+        let request = try buildRequest(
+            endpoint: "/subscriptions/checkout",
+            method: "POST",
+            body: CreateCheckoutRequest(planName: planName, billingPeriod: billingPeriod)
+        )
+        return try await performRequest(request, responseType: SubscriptionCheckoutResponse.self)
+    }
+
+    /// Upgrade to Starter plan (free, no payment required)
+    func upgradeToStarter() async throws -> UserSubscription {
+        #if DEBUG
+        print("📡 API: Upgrading to Starter plan...")
+        #endif
+
+        let request = try buildRequest(
+            endpoint: "/subscriptions/upgrade",
+            method: "POST",
+            body: UpgradeRequest(planName: "starter")
+        )
+        let response = try await performRequest(request, responseType: UpgradeResponse.self)
+        return response.subscription
+    }
+
+    /// Get subscription features for current plan
+    func getSubscriptionFeatures() async throws -> SubscriptionFeatures {
+        #if DEBUG
+        print("📡 API: Fetching subscription features...")
+        #endif
+
+        let request = try buildRequest(endpoint: "/subscriptions/features")
+        return try await performRequest(request, responseType: SubscriptionFeatures.self)
+    }
+
+    /// Cancel subscription
+    func cancelSubscription() async throws -> UserSubscription {
+        #if DEBUG
+        print("📡 API: Cancelling subscription...")
+        #endif
+
+        let request = try buildRequest(
+            endpoint: "/subscriptions/cancel",
+            method: "POST",
+            body: EmptyBody()
+        )
+        let response = try await performRequest(request, responseType: CancelSubscriptionResponse.self)
+        return response.subscription
     }
 }

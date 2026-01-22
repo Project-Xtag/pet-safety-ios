@@ -6,6 +6,10 @@ struct QuickMarkFoundView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
 
+    @State private var isProcessing = false
+    @State private var showSuccessStoryPrompt = false
+    @State private var foundPet: Pet?
+
     var body: some View {
         List {
             Section(header: Text("Select Pet to Mark as Found")) {
@@ -47,10 +51,15 @@ struct QuickMarkFoundView: View {
 
                             Spacer()
 
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.green)
+                            if isProcessing && foundPet?.id == pet.id {
+                                ProgressView()
+                            } else {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
+                            }
                         }
                     }
+                    .disabled(isProcessing)
                 }
             }
 
@@ -71,19 +80,41 @@ struct QuickMarkFoundView: View {
                 Button("Cancel") {
                     dismiss()
                 }
+                .disabled(isProcessing)
+            }
+        }
+        .fullScreenCover(isPresented: $showSuccessStoryPrompt) {
+            if let pet = foundPet {
+                SuccessStoryPromptView(
+                    pet: pet,
+                    onDismiss: {
+                        showSuccessStoryPrompt = false
+                        dismiss()
+                    },
+                    onStorySubmitted: {
+                        showSuccessStoryPrompt = false
+                        dismiss()
+                    }
+                )
+                .environmentObject(appState)
             }
         }
     }
 
     private func markAsFound(pet: Pet) {
+        isProcessing = true
+        foundPet = pet
+
         Task {
             do {
                 _ = try await viewModel.markPetFound(petId: pet.id)
-                appState.showSuccess("\(pet.name) has been marked as found! 🎉")
-                dismiss()
+                // Show success story prompt instead of dismissing immediately
+                showSuccessStoryPrompt = true
             } catch {
                 appState.showError("Failed to mark \(pet.name) as found: \(error.localizedDescription)")
+                foundPet = nil
             }
+            isProcessing = false
         }
     }
 }

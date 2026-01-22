@@ -423,6 +423,105 @@ class OfflineDataManager {
         return try context.count(for: fetchRequest)
     }
 
+    /// Fetch all failed actions from queue
+    func fetchFailedActions() throws -> [QueuedAction] {
+        let context = viewContext
+        let fetchRequest: NSFetchRequest<ActionQueueEntity> = ActionQueueEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "status == %@", "failed")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+
+        let entities = try context.fetch(fetchRequest)
+        return entities.compactMap { entity -> QueuedAction? in
+            guard let id = entity.id,
+                  let type = entity.actionType,
+                  let dataString = entity.actionData,
+                  let data = dataString.data(using: .utf8),
+                  let actionData = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let createdAt = entity.createdAt,
+                  let status = entity.status else {
+                return nil
+            }
+
+            return QueuedAction(
+                id: id,
+                type: type,
+                data: actionData,
+                createdAt: createdAt,
+                status: status,
+                retryCount: Int(entity.retryCount),
+                errorMessage: entity.errorMessage
+            )
+        }
+    }
+
+    /// Get count of failed actions
+    func getFailedActionCount() throws -> Int {
+        let context = viewContext
+        let fetchRequest: NSFetchRequest<ActionQueueEntity> = ActionQueueEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "status == %@", "failed")
+        return try context.count(for: fetchRequest)
+    }
+
+    /// Reset a failed action to pending for retry
+    func retryAction(withId id: UUID) throws {
+        let context = backgroundContext
+        try context.performAndWait {
+            let fetchRequest: NSFetchRequest<ActionQueueEntity> = ActionQueueEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+
+            if let entity = try context.fetch(fetchRequest).first {
+                entity.status = "pending"
+                entity.errorMessage = nil
+                try context.save()
+            }
+        }
+    }
+
+    /// Dismiss (delete) a failed action
+    func dismissAction(withId id: UUID) throws {
+        let context = backgroundContext
+        try context.performAndWait {
+            let fetchRequest: NSFetchRequest<ActionQueueEntity> = ActionQueueEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+
+            if let entity = try context.fetch(fetchRequest).first {
+                context.delete(entity)
+                try context.save()
+            }
+        }
+    }
+
+    /// Retry all failed actions (reset to pending)
+    func retryAllFailedActions() throws {
+        let context = backgroundContext
+        try context.performAndWait {
+            let fetchRequest: NSFetchRequest<ActionQueueEntity> = ActionQueueEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "status == %@", "failed")
+
+            let entities = try context.fetch(fetchRequest)
+            for entity in entities {
+                entity.status = "pending"
+                entity.errorMessage = nil
+            }
+            try context.save()
+        }
+    }
+
+    /// Dismiss all failed actions
+    func dismissAllFailedActions() throws {
+        let context = backgroundContext
+        try context.performAndWait {
+            let fetchRequest: NSFetchRequest<ActionQueueEntity> = ActionQueueEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "status == %@", "failed")
+
+            let entities = try context.fetch(fetchRequest)
+            for entity in entities {
+                context.delete(entity)
+            }
+            try context.save()
+        }
+    }
+
     // MARK: - Conversion Helpers
 
     private func convertPetEntityToPet(_ entity: PetEntity) -> Pet? {

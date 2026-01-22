@@ -136,9 +136,4 @@ struct SuccessStoriesResponse: Codable {
     let hasMore: Bool
     let page: Int
     let limit: Int
-
-    enum CodingKeys: String, CodingKey {
-        case stories, total, page, limit
-        case hasMore = "has_more"
-    }
 }

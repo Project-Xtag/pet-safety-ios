@@ -247,14 +247,18 @@ struct ContactsView: View {
     private func loadContactData() {
         guard let user = authViewModel.currentUser else { return }
 
-        // Load from user profile
+        // Load primary contacts from user profile
         primaryEmail = user.email
         primaryPhone = user.phone ?? ""
         showPrimaryEmail = user.showEmailPublicly ?? true
         showPrimaryPhone = user.showPhonePublicly ?? true
 
-        // TODO: Load secondary contacts from backend when endpoint is available
-        // For now, secondary contacts are stored locally
+        // Load secondary contacts from user profile
+        secondaryEmail = user.secondaryEmail ?? ""
+        secondaryPhone = user.secondaryPhone ?? ""
+        // Secondary contacts default to hidden if not explicitly set
+        showSecondaryEmail = !secondaryEmail.isEmpty
+        showSecondaryPhone = !secondaryPhone.isEmpty
     }
 
     private func cancelEditing() {
@@ -267,16 +271,22 @@ struct ContactsView: View {
             isLoading = true
 
             do {
-                // Update user profile with contact preferences
-                let updates: [String: Any] = [
+                // Update user profile with all contact information
+                var updates: [String: Any] = [
                     "phone": primaryPhone.trimmingCharacters(in: .whitespaces),
                     "show_email_publicly": showPrimaryEmail,
                     "show_phone_publicly": showPrimaryPhone
                 ]
 
-                try await authViewModel.updateProfile(updates: updates)
+                // Add secondary contacts (trim whitespace, empty strings become nil on backend)
+                let trimmedSecondaryPhone = secondaryPhone.trimmingCharacters(in: .whitespaces)
+                let trimmedSecondaryEmail = secondaryEmail.trimmingCharacters(in: .whitespaces)
 
-                // TODO: Save secondary contacts to backend when endpoint is available
+                // Send secondary_phone and secondary_email to backend
+                updates["secondary_phone"] = trimmedSecondaryPhone.isEmpty ? "" : trimmedSecondaryPhone
+                updates["secondary_email"] = trimmedSecondaryEmail.isEmpty ? "" : trimmedSecondaryEmail
+
+                try await authViewModel.updateProfile(updates: updates)
 
                 appState.showSuccess("Contact details updated successfully!")
 

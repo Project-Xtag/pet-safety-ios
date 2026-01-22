@@ -113,7 +113,7 @@ struct PetFormView: View {
                 HStack {
                     Text("Breed")
                         .frame(width: 80, alignment: .leading)
-                    TextField("Breed (optional)", text: $breed)
+                    BreedPickerButton(breed: $breed, species: species)
                 }
 
                 HStack {

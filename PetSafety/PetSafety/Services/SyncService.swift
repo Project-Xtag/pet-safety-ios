@@ -17,6 +17,12 @@ class SyncService: ObservableObject {
     /// Published property for pending action count
     @Published private(set) var pendingActionsCount: Int = 0
 
+    /// Published property for failed action count
+    @Published private(set) var failedActionsCount: Int = 0
+
+    /// Published property for failed actions list
+    @Published private(set) var failedActions: [QueuedAction] = []
+
     /// Published property for sync status message
     @Published private(set) var syncStatus: String = ""
 
@@ -49,6 +55,7 @@ class SyncService: ObservableObject {
         setupNetworkObserver()
         loadLastSyncDate()
         updatePendingCount()
+        updateFailedActions()
 
         if autoSync {
             // Auto-sync every 5 minutes when online
@@ -108,6 +115,7 @@ class SyncService: ObservableObject {
 
         isSyncing = false
         updatePendingCount()
+        updateFailedActions()
     }
 
     /// Sync when coming back online
@@ -338,6 +346,85 @@ class SyncService: ObservableObject {
 
     private func updatePendingCount() {
         pendingActionsCount = (try? offlineManager.getPendingActionCount()) ?? 0
+    }
+
+    private func updateFailedActions() {
+        failedActionsCount = (try? offlineManager.getFailedActionCount()) ?? 0
+        failedActions = (try? offlineManager.fetchFailedActions()) ?? []
+    }
+
+    // MARK: - Failed Action Management
+
+    /// Retry a specific failed action
+    func retryFailedAction(_ action: QueuedAction) async {
+        do {
+            try offlineManager.retryAction(withId: action.id)
+            updateFailedActions()
+            updatePendingCount()
+
+            // Trigger sync if online
+            if networkMonitor.isConnected {
+                await performFullSync()
+            }
+        } catch {
+            print("❌ Failed to retry action: \(error.localizedDescription)")
+        }
+    }
+
+    /// Dismiss (delete) a specific failed action
+    func dismissFailedAction(_ action: QueuedAction) {
+        do {
+            try offlineManager.dismissAction(withId: action.id)
+            updateFailedActions()
+            print("🗑️ Dismissed failed action: \(action.type)")
+        } catch {
+            print("❌ Failed to dismiss action: \(error.localizedDescription)")
+        }
+    }
+
+    /// Retry all failed actions
+    func retryAllFailedActions() async {
+        do {
+            try offlineManager.retryAllFailedActions()
+            updateFailedActions()
+            updatePendingCount()
+
+            // Trigger sync if online
+            if networkMonitor.isConnected {
+                await performFullSync()
+            }
+        } catch {
+            print("❌ Failed to retry all actions: \(error.localizedDescription)")
+        }
+    }
+
+    /// Dismiss all failed actions
+    func dismissAllFailedActions() {
+        do {
+            try offlineManager.dismissAllFailedActions()
+            updateFailedActions()
+            print("🗑️ Dismissed all failed actions")
+        } catch {
+            print("❌ Failed to dismiss all actions: \(error.localizedDescription)")
+        }
+    }
+
+    /// Get human-readable description for action type
+    func actionTypeDescription(_ type: String) -> String {
+        switch type {
+        case "markPetLost":
+            return "Mark pet as lost"
+        case "markPetFound":
+            return "Mark pet as found"
+        case "reportSighting":
+            return "Report sighting"
+        case "createAlert":
+            return "Create alert"
+        case "updatePet":
+            return "Update pet"
+        default:
+            return type
+        }
     }
 
     /// Get time since last sync in human-readable format

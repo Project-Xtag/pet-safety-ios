@@ -5,6 +5,7 @@ struct PetsListView: View {
     @StateObject private var viewModel = PetsViewModel()
     @State private var showingAddPet = false
     @State private var showingMarkLostSheet = false
+    @State private var showingMarkFoundSheet = false
     @State private var showingOrderMoreTags = false
     @State private var showingPetSelection = false
     @State private var showingSuccessStories = false
@@ -14,6 +15,10 @@ struct PetsListView: View {
 
     var hasMissingPets: Bool {
         viewModel.pets.contains(where: { $0.isMissing })
+    }
+
+    var missingPets: [Pet] {
+        viewModel.pets.filter { $0.isMissing }
     }
 
     var body: some View {
@@ -61,6 +66,12 @@ struct PetsListView: View {
         .sheet(isPresented: $showingMarkLostSheet) {
             NavigationView {
                 QuickMarkLostView(pets: viewModel.pets)
+                    .environmentObject(appState)
+            }
+        }
+        .sheet(isPresented: $showingMarkFoundSheet) {
+            NavigationView {
+                QuickMarkFoundView(pets: missingPets)
                     .environmentObject(appState)
             }
         }
@@ -181,8 +192,14 @@ struct PetsListView: View {
                 QuickActionButton(
                     icon: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill",
                     title: hasMissingPets ? "Mark Found" : "Report Missing",
-                    color: .red,
-                    action: { showingMarkLostSheet = true }
+                    color: hasMissingPets ? .green : .red,
+                    action: {
+                        if hasMissingPets {
+                            showingMarkFoundSheet = true
+                        } else {
+                            showingMarkLostSheet = true
+                        }
+                    }
                 )
 
                 QuickActionButton(

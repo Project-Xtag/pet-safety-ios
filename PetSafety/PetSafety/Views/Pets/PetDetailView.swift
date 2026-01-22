@@ -6,6 +6,9 @@ struct PetDetailView: View {
     @StateObject private var alertsViewModel = AlertsViewModel()
     @State private var showingEditSheet = false
     @State private var showingMarkLostSheet = false
+    @State private var showingDeleteConfirmation = false
+    @State private var showingCannotDeleteAlert = false
+    @State private var isDeleting = false
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
 
@@ -150,6 +153,21 @@ struct PetDetailView: View {
                         }
                     }
                     .buttonStyle(BrandButtonStyle())
+
+                    // Delete Button
+                    Button(action: { attemptDelete() }) {
+                        HStack {
+                            if isDeleting {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .red))
+                            } else {
+                                Image(systemName: "trash")
+                            }
+                            Text("Delete \(pet.name)")
+                        }
+                    }
+                    .buttonStyle(DestructiveButtonStyle())
+                    .disabled(isDeleting)
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
@@ -168,6 +186,45 @@ struct PetDetailView: View {
             NavigationView {
                 MarkAsLostView(pet: pet)
             }
+        }
+        .alert("Delete \(pet.name)?", isPresented: $showingDeleteConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Delete", role: .destructive) {
+                performDelete()
+            }
+        } message: {
+            Text("This action cannot be undone. All data for \(pet.name) will be permanently deleted.")
+        }
+        .alert("Cannot Delete Missing Pet", isPresented: $showingCannotDeleteAlert) {
+            Button("Mark as Found") {
+                markAsFound()
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("\(pet.name) is currently marked as missing. Please mark them as found before deleting.")
+        }
+    }
+
+    private func attemptDelete() {
+        // Block deletion if pet is missing
+        if pet.isMissing {
+            showingCannotDeleteAlert = true
+        } else {
+            showingDeleteConfirmation = true
+        }
+    }
+
+    private func performDelete() {
+        isDeleting = true
+        Task {
+            do {
+                try await viewModel.deletePet(id: pet.id)
+                appState.showSuccess("\(pet.name) has been deleted")
+                dismiss()
+            } catch {
+                appState.showError("Failed to delete \(pet.name): \(error.localizedDescription)")
+            }
+            isDeleting = false
         }
     }
 
