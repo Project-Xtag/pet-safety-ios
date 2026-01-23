@@ -53,9 +53,32 @@ struct PetPublicProfileView: View {
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 24)
 
-                    Text("\(pet.species.capitalized) \(pet.breed.map { "• \($0)" } ?? "")")
-                        .font(.system(size: 15))
-                        .foregroundColor(.mutedText)
+                    // Pet details row (matching web design)
+                    HStack(spacing: 16) {
+                        if !pet.species.isEmpty {
+                            Text("**Species:** \(pet.species.capitalized)")
+                                .font(.system(size: 14))
+                                .foregroundColor(.mutedText)
+                        }
+                        if let breed = pet.breed {
+                            Text("**Breed:** \(breed)")
+                                .font(.system(size: 14))
+                                .foregroundColor(.mutedText)
+                        }
+                    }
+
+                    HStack(spacing: 16) {
+                        if let age = pet.age {
+                            Text("**Age:** \(age)")
+                                .font(.system(size: 14))
+                                .foregroundColor(.mutedText)
+                        }
+                        if let color = pet.color {
+                            Text("**Color:** \(color)")
+                                .font(.system(size: 14))
+                                .foregroundColor(.mutedText)
+                        }
+                    }
                 }
 
                 // Owner Notification Notice
@@ -73,94 +96,96 @@ struct PetPublicProfileView: View {
                 .cornerRadius(14)
                 .padding(.horizontal, 24)
 
-                // Contact Owner Section
-                VStack(spacing: 16) {
-                    Text("Contact Owner")
-                        .font(.system(size: 18, weight: .bold))
+                // Share Location Button (placeholder - shown in preview)
+                VStack(spacing: 8) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "location.fill")
+                        Text("Share My Location with Owner")
+                    }
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .background(Color.tealAccent)
+                    .cornerRadius(14)
+                    .padding(.horizontal, 24)
 
-                    Text("If found, please contact my owner")
-                        .font(.system(size: 14))
+                    Text("\(pet.name)'s owner will receive an SMS and email with your location")
+                        .font(.system(size: 12))
                         .foregroundColor(.mutedText)
                         .multilineTextAlignment(.center)
+                        .padding(.horizontal, 32)
+                }
 
-                    VStack(spacing: 12) {
-                        // Primary phone
-                        if let phone = pet.ownerPhone {
-                            HStack(spacing: 12) {
-                                Image(systemName: "phone.fill")
-                                    .foregroundColor(.tealAccent)
-                                Text("Call: \(phone)")
-                                    .font(.system(size: 15, weight: .medium))
-                                    .foregroundColor(.primary)
-                                Spacer()
-                            }
-                            .padding()
-                            .background(Color(UIColor.systemGray6))
-                            .cornerRadius(14)
-                        }
+                // Contact Owner Section
+                if pet.ownerPhone != nil || pet.ownerEmail != nil {
+                    VStack(spacing: 16) {
+                        Text("Contact Owner")
+                            .font(.system(size: 18, weight: .bold))
 
-                        // Secondary phone
-                        if let secondaryPhone = pet.ownerSecondaryPhone {
-                            HStack(spacing: 12) {
-                                Image(systemName: "phone")
-                                    .foregroundColor(.tealAccent)
-                                Text("Alt: \(secondaryPhone)")
-                                    .font(.system(size: 15, weight: .medium))
-                                    .foregroundColor(.primary)
-                                Spacer()
-                            }
-                            .padding()
-                            .background(Color(UIColor.systemGray6))
-                            .cornerRadius(14)
-                        }
+                        Text("Please let my owner know that you have found me. Tap on the share location button or call them on the phone number below.")
+                            .font(.system(size: 14))
+                            .foregroundColor(.mutedText)
+                            .multilineTextAlignment(.center)
 
-                        // Primary email
-                        if let email = pet.ownerEmail {
-                            HStack(spacing: 12) {
-                                Image(systemName: "envelope.fill")
-                                    .foregroundColor(.tealAccent)
-                                Text("Email: \(email)")
-                                    .font(.system(size: 15, weight: .medium))
-                                    .foregroundColor(.primary)
-                                Spacer()
+                        VStack(spacing: 12) {
+                            // Phone (tappable to call)
+                            if let phone = pet.ownerPhone {
+                                Link(destination: URL(string: "tel:\(phone.replacingOccurrences(of: " ", with: ""))")!) {
+                                    HStack(spacing: 12) {
+                                        Image(systemName: "phone.fill")
+                                            .foregroundColor(.tealAccent)
+                                        Text("Call: \(phone)")
+                                            .font(.system(size: 15, weight: .medium))
+                                            .foregroundColor(.primary)
+                                        Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.mutedText)
+                                    }
+                                    .padding()
+                                    .background(Color(.systemGray6))
+                                    .cornerRadius(14)
+                                }
                             }
-                            .padding()
-                            .background(Color(UIColor.systemGray6))
-                            .cornerRadius(14)
-                        }
 
-                        // Secondary email
-                        if let secondaryEmail = pet.ownerSecondaryEmail {
-                            HStack(spacing: 12) {
-                                Image(systemName: "envelope")
-                                    .foregroundColor(.tealAccent)
-                                Text("Alt: \(secondaryEmail)")
-                                    .font(.system(size: 15, weight: .medium))
-                                    .foregroundColor(.primary)
-                                Spacer()
+                            // Email (tappable to send email)
+                            if let email = pet.ownerEmail {
+                                Link(destination: URL(string: "mailto:\(email)")!) {
+                                    HStack(spacing: 12) {
+                                        Image(systemName: "envelope.fill")
+                                            .foregroundColor(.tealAccent)
+                                        Text("Email: \(email)")
+                                            .font(.system(size: 15, weight: .medium))
+                                            .foregroundColor(.primary)
+                                        Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.mutedText)
+                                    }
+                                    .padding()
+                                    .background(Color(.systemGray6))
+                                    .cornerRadius(14)
+                                }
                             }
-                            .padding()
-                            .background(Color(UIColor.systemGray6))
-                            .cornerRadius(14)
-                        }
-
-                        // No contact info message
-                        if pet.ownerPhone == nil && pet.ownerEmail == nil {
-                            HStack(spacing: 12) {
-                                Image(systemName: "info.circle.fill")
-                                    .foregroundColor(.orange)
-                                Text("Contact info not set up yet")
-                                    .font(.system(size: 15, weight: .medium))
-                                    .foregroundColor(.orange)
-                                Spacer()
-                            }
-                            .padding()
-                            .background(Color.orange.opacity(0.1))
-                            .cornerRadius(14)
                         }
                     }
+                    .padding(.horizontal, 24)
+                } else {
+                    // No contact info message
+                    HStack(spacing: 12) {
+                        Image(systemName: "info.circle.fill")
+                            .foregroundColor(.orange)
+                        Text("Contact info not set up yet")
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundColor(.orange)
+                        Spacer()
+                    }
+                    .padding()
+                    .background(Color.orange.opacity(0.1))
+                    .cornerRadius(14)
+                    .padding(.horizontal, 24)
                 }
-                .padding(.horizontal, 24)
 
                 // Owner Address Section (if publicly visible)
                 if let address = pet.ownerAddress {
@@ -168,105 +193,107 @@ struct PetPublicProfileView: View {
                         Text("Owner Location")
                             .font(.system(size: 18, weight: .bold))
 
-                        VStack(alignment: .leading, spacing: 8) {
-                            HStack(spacing: 12) {
-                                Image(systemName: "location.fill")
-                                    .foregroundColor(.tealAccent)
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(address)
-                                        .font(.system(size: 15, weight: .medium))
-                                    if let line2 = pet.ownerAddressLine2, !line2.isEmpty {
-                                        Text(line2)
-                                            .font(.system(size: 14))
-                                            .foregroundColor(.secondary)
-                                    }
-                                    let cityLine = [pet.ownerCity, pet.ownerPostalCode].compactMap { $0 }.joined(separator: ", ")
-                                    if !cityLine.isEmpty {
-                                        Text(cityLine)
-                                            .font(.system(size: 14))
-                                            .foregroundColor(.secondary)
-                                    }
-                                    if let country = pet.ownerCountry {
-                                        Text(country)
-                                            .font(.system(size: 14))
-                                            .foregroundColor(.secondary)
-                                    }
+                        HStack(alignment: .top, spacing: 12) {
+                            Image(systemName: "house.fill")
+                                .foregroundColor(.mutedText)
+                                .frame(width: 20)
+
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(address)
+                                    .font(.system(size: 15, weight: .medium))
+                                if let line2 = pet.ownerAddressLine2, !line2.isEmpty {
+                                    Text(line2)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.mutedText)
                                 }
-                                Spacer()
+                                let cityLine = [pet.ownerCity, pet.ownerPostalCode].compactMap { $0 }.joined(separator: ", ")
+                                if !cityLine.isEmpty {
+                                    Text(cityLine)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.mutedText)
+                                }
+                                if let country = pet.ownerCountry {
+                                    Text(country)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.mutedText)
+                                }
                             }
-                            .padding()
-                            .background(Color(UIColor.systemGray6))
-                            .cornerRadius(14)
+
+                            Spacer()
                         }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(14)
                     }
                     .padding(.horizontal, 24)
                 }
 
-                // Pet Info Cards
-                VStack(spacing: 12) {
-                    if let color = pet.color {
-                        PublicProfileInfoCard(title: "Color", value: color, icon: "paintpalette.fill")
+                // How It Works Card
+                VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("How It Works")
+                            .font(.system(size: 18, weight: .bold))
+                        Text("Help reunite \(pet.name) with their owner safely")
+                            .font(.system(size: 14))
+                            .foregroundColor(.mutedText)
                     }
 
-                    if let age = pet.age {
-                        PublicProfileInfoCard(title: "Age", value: age, icon: "calendar")
-                    }
-
-                    if let uniqueFeatures = pet.uniqueFeatures {
-                        PublicProfileInfoCard(title: "Unique Features", value: uniqueFeatures, icon: "star.fill")
+                    VStack(alignment: .leading, spacing: 12) {
+                        HowItWorksStep(number: "1", title: "Share Your Location", description: "Click the button above to share where you found \(pet.name)")
+                        HowItWorksStep(number: "2", title: "Owner Gets Notified", description: "The owner receives an SMS with your location on Google Maps")
+                        HowItWorksStep(number: "3", title: "Quick Reunion", description: "Stay near the location so the owner can find you and \(pet.name)")
                     }
                 }
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(14)
                 .padding(.horizontal, 24)
 
-                // Medical Information (Important!)
-                if let medical = pet.medicalInfo {
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack(spacing: 8) {
-                            Image(systemName: "cross.case.fill")
-                                .foregroundColor(.red)
-                            Text("Medical Information")
-                                .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(.red)
-                        }
-
-                        Text(medical)
-                            .font(.system(size: 14))
-                            .foregroundColor(.primary)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .background(Color.red.opacity(0.1))
-                    .cornerRadius(14)
-                    .padding(.horizontal, 24)
+                // Privacy Notice
+                HStack(spacing: 8) {
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 12))
+                        .foregroundColor(.mutedText)
+                    Text("Your privacy matters. We'll only share your location with \(pet.name)'s owner with your explicit consent.")
+                        .font(.system(size: 12))
+                        .foregroundColor(.mutedText)
                 }
-
-                // Allergies
-                if let allergies = pet.allergies {
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack(spacing: 8) {
-                            Image(systemName: "exclamationmark.triangle.fill")
-                                .foregroundColor(.orange)
-                            Text("Allergies")
-                                .font(.system(size: 16, weight: .bold))
-                                .foregroundColor(.orange)
-                        }
-
-                        Text(allergies)
-                            .font(.system(size: 14))
-                            .foregroundColor(.primary)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .background(Color.orange.opacity(0.1))
-                    .cornerRadius(14)
-                    .padding(.horizontal, 24)
-                }
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(14)
+                .padding(.horizontal, 24)
             }
             .padding(.top, 24)
-            .padding(.bottom, 120) // Add padding to prevent content from being hidden under tab bar
+            .padding(.bottom, 120)
         }
         .navigationTitle("Public Profile Preview")
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// MARK: - How It Works Step
+struct HowItWorksStep: View {
+    let number: String
+    let title: String
+    let description: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Text(number)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(.tealAccent)
+                .frame(width: 28, height: 28)
+                .background(Color.tealAccent.opacity(0.1))
+                .clipShape(Circle())
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.system(size: 15, weight: .medium))
+                Text(description)
+                    .font(.system(size: 13))
+                    .foregroundColor(.mutedText)
+            }
+        }
     }
 }
 
@@ -295,7 +322,7 @@ struct PublicProfileInfoCard: View {
             Spacer()
         }
         .padding()
-        .background(Color(UIColor.systemGray6))
+        .background(Color(.systemGray6))
         .cornerRadius(14)
     }
 }
@@ -313,7 +340,6 @@ struct PublicProfileInfoCard: View {
             microchipNumber: "123456789",
             medicalNotes: "Allergic to chicken",
             notes: "Friendly with kids",
-            profileImage: nil,
             isMissing: false,
             createdAt: "",
             updatedAt: "",
@@ -322,7 +348,6 @@ struct PublicProfileInfoCard: View {
             ageText: "4 years 6 months",
             ageIsApproximate: false,
             allergies: "Chicken, Beef",
-            medications: nil,
             uniqueFeatures: "White spot on chest",
             sex: "Male",
             isNeutered: true,
@@ -330,7 +355,12 @@ struct PublicProfileInfoCard: View {
             dateOfBirth: "2020-01-01",
             ownerName: "John Doe",
             ownerPhone: "+44 7700 900000",
-            ownerEmail: "john@example.com"
+            ownerEmail: "john@example.com",
+            ownerAddress: "123 Oak Street",
+            ownerAddressLine2: "Flat 4B",
+            ownerCity: "London",
+            ownerPostalCode: "SW1A 1AA",
+            ownerCountry: "United Kingdom"
         ))
     }
 }
