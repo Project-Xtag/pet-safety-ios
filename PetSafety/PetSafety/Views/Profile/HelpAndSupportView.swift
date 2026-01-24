@@ -161,11 +161,24 @@ struct ContactSupportView: View {
     private func submitRequest() {
         isSubmitting = true
 
-        // Simulate API call
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            isSubmitting = false
-            appState.showSuccess("Support request submitted! We'll get back to you within 24 hours.")
-            dismiss()
+        Task {
+            do {
+                let response = try await APIService.shared.submitSupportRequest(
+                    category: selectedCategory,
+                    subject: subject,
+                    message: message
+                )
+                await MainActor.run {
+                    isSubmitting = false
+                    appState.showSuccess("Support request submitted! Ticket ID: \(response.ticketId). We'll get back to you within 24 hours.")
+                    dismiss()
+                }
+            } catch {
+                await MainActor.run {
+                    isSubmitting = false
+                    appState.showError(error.localizedDescription)
+                }
+            }
         }
     }
 }
