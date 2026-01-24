@@ -7,14 +7,24 @@ class AuthViewModel: ObservableObject {
     @Published var currentUser: User?
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var showBiometricPrompt = false
+    @Published var biometricEnabled: Bool
 
     private let apiService = APIService.shared
+    private let biometricService = BiometricService.shared
 
     init() {
+        self.biometricEnabled = BiometricService.shared.isBiometricEnabled
         checkAuthStatus()
     }
 
     func checkAuthStatus() {
+        // Check if we should show biometric prompt
+        if biometricService.shouldShowBiometricLogin {
+            showBiometricPrompt = true
+            return
+        }
+
         // Check if we have a valid token
         if KeychainService.shared.isAuthenticated {
             Task {
@@ -34,6 +44,71 @@ class AuthViewModel: ObservableObject {
                 }
             }
         }
+    }
+
+    // MARK: - Biometric Authentication
+
+    /// Check if biometric login is available
+    var canUseBiometric: Bool {
+        biometricService.canUseBiometric
+    }
+
+    /// Get the biometric type name for display
+    var biometricTypeName: String {
+        biometricService.biometricType.displayName
+    }
+
+    /// Get the biometric icon name
+    var biometricIconName: String {
+        biometricService.biometricType.iconName
+    }
+
+    /// Check if biometric enrollment should be offered after login
+    var shouldOfferBiometricEnrollment: Bool {
+        canUseBiometric && !biometricEnabled
+    }
+
+    /// Enable or disable biometric login
+    func setBiometricEnabled(_ enabled: Bool) {
+        biometricService.isBiometricEnabled = enabled
+        biometricEnabled = enabled
+    }
+
+    /// Authenticate using biometrics
+    func authenticateWithBiometric() async {
+        let result = await biometricService.authenticate()
+
+        if result.success {
+            // Biometric succeeded, load user data
+            do {
+                currentUser = try await apiService.getCurrentUser()
+                isAuthenticated = true
+                showBiometricPrompt = false
+
+                // Set Sentry user context
+                if let user = currentUser {
+                    let sentryUser = Sentry.User(userId: user.id)
+                    SentrySDK.setUser(sentryUser)
+                }
+
+                // Connect to SSE
+                SSEService.shared.connect()
+            } catch {
+                // Token might be invalid
+                logout()
+            }
+        } else {
+            // Biometric failed or cancelled
+            showBiometricPrompt = false
+            if let error = result.error {
+                errorMessage = error
+            }
+        }
+    }
+
+    /// Dismiss biometric prompt and show regular login
+    func dismissBiometricPrompt() {
+        showBiometricPrompt = false
     }
 
     func login(email: String) async throws {
@@ -85,6 +160,10 @@ class AuthViewModel: ObservableObject {
         _ = KeychainService.shared.delete(.userId)
         _ = KeychainService.shared.delete(.userEmail)
 
+        // Disable biometric login
+        biometricService.disable()
+        biometricEnabled = false
+
         // Clear Sentry user context
         SentrySDK.setUser(nil)
 
@@ -99,6 +178,28 @@ class AuthViewModel: ObservableObject {
         do {
             currentUser = try await apiService.updateUser(updates)
             isLoading = false
+        } catch {
+            isLoading = false
+            errorMessage = error.localizedDescription
+            throw error
+        }
+    }
+
+    /// Check if user can delete their account
+    func canDeleteAccount() async throws -> CanDeleteAccountResponse {
+        return try await apiService.canDeleteAccount()
+    }
+
+    /// Delete user account and log out
+    func deleteAccount() async throws {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            _ = try await apiService.deleteAccount()
+            isLoading = false
+            // Log out after successful deletion
+            logout()
         } catch {
             isLoading = false
             errorMessage = error.localizedDescription

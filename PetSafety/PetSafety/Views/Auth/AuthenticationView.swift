@@ -6,6 +6,7 @@ struct AuthenticationView: View {
     @State private var email = ""
     @State private var otpCode = ""
     @State private var showOTPField = false
+    @State private var showBiometricEnrollment = false
 
     var body: some View {
         ZStack {
@@ -79,6 +80,24 @@ struct AuthenticationView: View {
                                 .buttonStyle(BrandButtonStyle(isDisabled: email.isEmpty))
                                 .disabled(email.isEmpty || authViewModel.isLoading)
                                 .padding(.top, 8)
+
+                                // Biometric Login Option (if enabled and has stored session)
+                                if authViewModel.canUseBiometric && authViewModel.biometricEnabled {
+                                    Button(action: {
+                                        Task {
+                                            await authViewModel.authenticateWithBiometric()
+                                        }
+                                    }) {
+                                        HStack(spacing: 8) {
+                                            Image(systemName: authViewModel.biometricIconName)
+                                                .font(.system(size: 18))
+                                            Text("Log in with \(authViewModel.biometricTypeName)")
+                                                .font(.system(size: 15, weight: .medium))
+                                        }
+                                        .foregroundColor(.brandOrange)
+                                    }
+                                    .padding(.top, 8)
+                                }
                             }
                         } else {
                             // OTP Verification
@@ -124,12 +143,48 @@ struct AuthenticationView: View {
                                 .foregroundColor(.mutedText)
                             }
                         }
+
+                        // T&Cs and Privacy Policy Disclaimer
+                        VStack(spacing: 4) {
+                            Text("By logging in, you agree to our")
+                                .font(.system(size: 12))
+                                .foregroundColor(.mutedText)
+                            HStack(spacing: 4) {
+                                Link("Terms of Service", destination: URL(string: "https://pet-er.app/terms")!)
+                                    .font(.system(size: 12, weight: .medium))
+                                    .foregroundColor(.brandOrange)
+                                Text("and")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.mutedText)
+                                Link("Privacy Policy", destination: URL(string: "https://pet-er.app/privacy")!)
+                                    .font(.system(size: 12, weight: .medium))
+                                    .foregroundColor(.brandOrange)
+                            }
+                        }
+                        .padding(.top, 8)
                     }
                     .padding(28)
                     .background(Color.cardBackground)
                     .cornerRadius(40)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 40)
+                }
+            }
+        }
+        .alert("Enable \(authViewModel.biometricTypeName)?", isPresented: $showBiometricEnrollment) {
+            Button("Enable") {
+                authViewModel.setBiometricEnabled(true)
+                appState.showSuccess("\(authViewModel.biometricTypeName) enabled")
+            }
+            Button("Skip", role: .cancel) {}
+        } message: {
+            Text("Use \(authViewModel.biometricTypeName) to quickly log in next time.")
+        }
+        .onAppear {
+            // Show biometric prompt on appear if available
+            if authViewModel.showBiometricPrompt {
+                Task {
+                    await authViewModel.authenticateWithBiometric()
                 }
             }
         }
@@ -151,6 +206,10 @@ struct AuthenticationView: View {
         Task {
             do {
                 try await authViewModel.verifyOTP(email: email, code: otpCode)
+                // Offer biometric enrollment if available and not already enabled
+                if authViewModel.shouldOfferBiometricEnrollment {
+                    showBiometricEnrollment = true
+                }
             } catch {
                 appState.showError(error.localizedDescription)
             }
