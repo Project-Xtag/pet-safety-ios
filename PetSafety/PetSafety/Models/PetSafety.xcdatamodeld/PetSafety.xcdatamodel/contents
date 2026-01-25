@@ -31,6 +31,7 @@
         <attribute name="updatedAt" attributeType="String"/>
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="alerts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AlertEntity" inverseName="pet" inverseEntity="AlertEntity"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PetPhotoEntity" inverseName="pet" inverseEntity="PetPhotoEntity"/>
         <relationship name="successStories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SuccessStoryEntity" inverseName="pet" inverseEntity="SuccessStoryEntity"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -40,8 +41,11 @@
     </entity>
     <entity name="AlertEntity" representedClassName="AlertEntity" syncable="YES" codeGenerationType="class">
         <attribute name="additionalInfo" optional="YES" attributeType="String"/>
+        <attribute name="alertRadiusKm" optional="YES" attributeType="Double" defaultValueString="10" usesScalarValueType="YES"/>
         <attribute name="createdAt" attributeType="String"/>
+        <attribute name="foundAt" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
+        <attribute name="lastSeenAt" optional="YES" attributeType="String"/>
         <attribute name="lastSeenLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lastSeenLocation" optional="YES" attributeType="String"/>
         <attribute name="lastSeenLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -125,6 +129,21 @@
         <attribute name="photoUrl" attributeType="String"/>
         <attribute name="successStoryId" attributeType="String"/>
         <relationship name="successStory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SuccessStoryEntity" inverseName="photos" inverseEntity="SuccessStoryEntity"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="PetPhotoEntity" representedClassName="PetPhotoEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="displayOrder" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="isPrimary" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="lastSyncedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="petId" attributeType="String"/>
+        <attribute name="photoUrl" attributeType="String"/>
+        <attribute name="uploadedAt" attributeType="String"/>
+        <relationship name="pet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PetEntity" inverseName="photos" inverseEntity="PetEntity"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>

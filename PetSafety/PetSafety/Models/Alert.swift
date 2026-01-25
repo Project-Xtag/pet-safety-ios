@@ -10,6 +10,9 @@ struct MissingPetAlert: Codable, Identifiable {
     let lastSeenLatitude: Double?
     let lastSeenLongitude: Double?
     let additionalInfo: String?
+    let alertRadiusKm: Double?
+    let lastSeenAt: String?
+    let foundAt: String?
     let createdAt: String
     let updatedAt: String
     let pet: Pet?
@@ -34,6 +37,9 @@ struct MissingPetAlert: Codable, Identifiable {
         case lng
         case additionalInfo = "additional_info"
         case description
+        case alertRadiusKm = "alert_radius_km"
+        case lastSeenAt = "last_seen_at"
+        case foundAt = "found_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }
@@ -48,6 +54,9 @@ struct MissingPetAlert: Codable, Identifiable {
         lastSeenLatitude: Double? = nil,
         lastSeenLongitude: Double? = nil,
         additionalInfo: String? = nil,
+        alertRadiusKm: Double? = 10.0,
+        lastSeenAt: String? = nil,
+        foundAt: String? = nil,
         createdAt: String,
         updatedAt: String,
         pet: Pet? = nil,
@@ -61,6 +70,9 @@ struct MissingPetAlert: Codable, Identifiable {
         self.lastSeenLatitude = lastSeenLatitude
         self.lastSeenLongitude = lastSeenLongitude
         self.additionalInfo = additionalInfo
+        self.alertRadiusKm = alertRadiusKm
+        self.lastSeenAt = lastSeenAt
+        self.foundAt = foundAt
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.pet = pet
@@ -93,6 +105,13 @@ struct MissingPetAlert: Codable, Identifiable {
         let info = try container.decodeIfPresent(String.self, forKey: .additionalInfo)
         let description = try container.decodeIfPresent(String.self, forKey: .description)
         additionalInfo = info ?? description
+
+        // Parse alert radius (default to 10km if not provided)
+        alertRadiusKm = try container.decodeIfPresent(Double.self, forKey: .alertRadiusKm) ?? 10.0
+
+        // Parse timestamps
+        lastSeenAt = try container.decodeIfPresent(String.self, forKey: .lastSeenAt)
+        foundAt = try container.decodeIfPresent(String.self, forKey: .foundAt)
     }
 
     // Custom encoder (extra CodingKeys are only used for decoding legacy API responses)
@@ -107,6 +126,9 @@ struct MissingPetAlert: Codable, Identifiable {
         try container.encodeIfPresent(lastSeenLatitude, forKey: .lastSeenLatitude)
         try container.encodeIfPresent(lastSeenLongitude, forKey: .lastSeenLongitude)
         try container.encodeIfPresent(additionalInfo, forKey: .additionalInfo)
+        try container.encodeIfPresent(alertRadiusKm, forKey: .alertRadiusKm)
+        try container.encodeIfPresent(lastSeenAt, forKey: .lastSeenAt)
+        try container.encodeIfPresent(foundAt, forKey: .foundAt)
         try container.encode(createdAt, forKey: .createdAt)
         try container.encode(updatedAt, forKey: .updatedAt)
         try container.encodeIfPresent(pet, forKey: .pet)

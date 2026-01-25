@@ -124,8 +124,8 @@ class APIService {
                         if let payload = envelope.data {
                             return payload
                         }
-                        if T.self == EmptyResponse.self {
-                            return EmptyResponse() as! T
+                        if T.self == EmptyResponse.self, let empty = EmptyResponse() as? T {
+                            return empty
                         }
                         throw APIError.decodingError
                     }
@@ -655,6 +655,15 @@ class APIService {
         return response.orders
     }
 
+    func checkReplacementEligibility() async throws -> ReplacementEligibilityResponse {
+        let request = try buildRequest(
+            endpoint: "/orders/replacement/check-eligibility",
+            method: "GET",
+            requiresAuth: true
+        )
+        return try await performRequest(request, responseType: ReplacementEligibilityResponse.self)
+    }
+
     func createReplacementOrder(petId: String, shippingAddress: ShippingAddress) async throws -> ReplacementOrderResponse {
         let request = try buildRequest(
             endpoint: "/orders/replacement/\(petId)",
@@ -881,7 +890,16 @@ struct CreateReplacementOrderRequest: Codable {
 
 struct ReplacementOrderResponse: Codable {
     let order: Order
+    let requiresPayment: Bool?
+    let shippingCost: Double?
     let message: String?
+}
+
+struct ReplacementEligibilityResponse: Codable {
+    let isFreeReplacement: Bool
+    let planName: String
+    let shippingCost: Double
+    let message: String
 }
 
 // MARK: - Order More Tags Types
@@ -1269,5 +1287,84 @@ extension APIService {
         )
         let response = try await performRequest(request, responseType: CancelSubscriptionResponse.self)
         return response.subscription
+    }
+
+    // MARK: - Account Deletion
+
+    /// Check if user can delete their account (no missing pets)
+    func canDeleteAccount() async throws -> CanDeleteAccountResponse {
+        #if DEBUG
+        print("📡 API: Checking if account can be deleted...")
+        #endif
+
+        let request = try buildRequest(endpoint: "/users/me/can-delete")
+        return try await performRequest(request, responseType: CanDeleteAccountResponse.self)
+    }
+
+    /// Delete user account (GDPR-compliant)
+    /// - Anonymizes personal data
+    /// - Cancels active subscriptions
+    /// - Soft-deletes pets
+    func deleteAccount() async throws -> DeleteAccountResponse {
+        #if DEBUG
+        print("📡 API: Deleting user account...")
+        #endif
+
+        let request = try buildRequest(
+            endpoint: "/users/me/delete",
+            method: "POST",
+            body: DeleteAccountRequest(confirmDelete: true)
+        )
+        return try await performRequest(request, responseType: DeleteAccountResponse.self)
+    }
+}
+
+// MARK: - Account Deletion Types
+struct CanDeleteAccountResponse: Codable {
+    let canDelete: Bool
+    let reason: String?
+    let message: String?
+    let missingPets: [MissingPetInfo]?
+}
+
+struct MissingPetInfo: Codable {
+    let id: String
+    let name: String
+}
+
+struct DeleteAccountRequest: Codable {
+    let confirmDelete: Bool
+}
+
+struct DeleteAccountResponse: Codable {
+    let message: String
+}
+
+// MARK: - Support Contact Types
+struct SupportRequest: Codable {
+    let category: String
+    let subject: String
+    let message: String
+}
+
+struct SupportResponse: Codable {
+    let ticketId: String
+    let message: String
+}
+
+// MARK: - Support Contact Extension
+extension APIService {
+    /// Submit a support request
+    func submitSupportRequest(category: String, subject: String, message: String) async throws -> SupportResponse {
+        #if DEBUG
+        print("📡 API: Submitting support request...")
+        #endif
+
+        let request = try buildRequest(
+            endpoint: "/contact/support",
+            method: "POST",
+            body: SupportRequest(category: category, subject: subject, message: message)
+        )
+        return try await performRequest(request, responseType: SupportResponse.self)
     }
 }

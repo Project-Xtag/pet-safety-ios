@@ -3,6 +3,12 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var showingLogoutAlert = false
+    @State private var showingDeleteConfirmation = false
+    @State private var showingDeleteError = false
+    @State private var deleteErrorMessage = ""
+    @State private var missingPetNames: [String] = []
+    @State private var isCheckingDelete = false
+    @State private var isDeleting = false
 
     var body: some View {
         ZStack {
@@ -21,6 +27,10 @@ struct ProfileView: View {
                     // Logout Button
                     logoutSection
                         .padding(.top, 24)
+
+                    // Delete Account Section
+                    deleteAccountSection
+                        .padding(.top, 16)
                         .padding(.bottom, 100)
                 }
             }
@@ -33,6 +43,23 @@ struct ProfileView: View {
             }
         } message: {
             Text("Are you sure you want to log out?")
+        }
+        .alert("Delete Account", isPresented: $showingDeleteConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Delete Account", role: .destructive) {
+                performDeleteAccount()
+            }
+        } message: {
+            Text("This action cannot be undone. Your account will be permanently deleted, all personal data will be removed, and any active subscriptions will be cancelled.")
+        }
+        .alert("Cannot Delete Account", isPresented: $showingDeleteError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            if missingPetNames.isEmpty {
+                Text(deleteErrorMessage)
+            } else {
+                Text("\(deleteErrorMessage)\n\nMissing pets: \(missingPetNames.joined(separator: ", "))")
+            }
         }
     }
 
@@ -158,6 +185,94 @@ struct ProfileView: View {
             .shadow(color: Color.brandOrange.opacity(0.3), radius: 8, x: 0, y: 4)
         }
         .padding(.horizontal, 24)
+    }
+
+    // MARK: - Delete Account Section
+    private var deleteAccountSection: some View {
+        VStack(spacing: 12) {
+            Text("Danger Zone")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundColor(.red.opacity(0.7))
+                .tracking(1)
+
+            Button(action: { checkAndDeleteAccount() }) {
+                HStack(spacing: 12) {
+                    if isCheckingDelete || isDeleting {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .scaleEffect(0.8)
+                    } else {
+                        Image(systemName: "trash")
+                            .font(.system(size: 18))
+                    }
+                    Text(isDeleting ? "Deleting..." : "Delete Account")
+                        .font(.system(size: 16, weight: .semibold))
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
+                .background(Color.red)
+                .cornerRadius(16)
+                .shadow(color: Color.red.opacity(0.3), radius: 8, x: 0, y: 4)
+            }
+            .disabled(isCheckingDelete || isDeleting)
+
+            Text("This will permanently delete your account and all data")
+                .font(.system(size: 11))
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .padding(.horizontal, 24)
+    }
+
+    // MARK: - Delete Account Helpers
+    private func checkAndDeleteAccount() {
+        isCheckingDelete = true
+
+        Task {
+            do {
+                let response = try await APIService.shared.canDeleteAccount()
+
+                await MainActor.run {
+                    isCheckingDelete = false
+
+                    if response.canDelete {
+                        showingDeleteConfirmation = true
+                    } else {
+                        deleteErrorMessage = response.message ?? "You cannot delete your account at this time."
+                        missingPetNames = response.missingPets?.map { $0.name } ?? []
+                        showingDeleteError = true
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    isCheckingDelete = false
+                    deleteErrorMessage = error.localizedDescription
+                    missingPetNames = []
+                    showingDeleteError = true
+                }
+            }
+        }
+    }
+
+    private func performDeleteAccount() {
+        isDeleting = true
+
+        Task {
+            do {
+                _ = try await APIService.shared.deleteAccount()
+                await MainActor.run {
+                    authViewModel.logout()
+                }
+            } catch {
+                await MainActor.run {
+                    isDeleting = false
+                    deleteErrorMessage = error.localizedDescription
+                    missingPetNames = []
+                    showingDeleteError = true
+                }
+            }
+        }
     }
 }
 

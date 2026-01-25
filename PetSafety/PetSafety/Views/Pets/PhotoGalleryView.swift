@@ -131,13 +131,6 @@ struct PhotoGalleryView: View {
                 }
             }
 
-            // Camera view overlay
-            if showingCamera {
-                CameraView(isPresented: $showingCamera) { image in
-                    processSelectedImage(image)
-                }
-                .edgesIgnoringSafeArea(.all)
-            }
         }
         .navigationTitle("Photo Gallery")
         .navigationBarTitleDisplayMode(.inline)
@@ -149,6 +142,12 @@ struct PhotoGalleryView: View {
         )
         .onChange(of: selectedItems) { _ in
             processSelectedPhotos()
+        }
+        .fullScreenCover(isPresented: $showingCamera) {
+            CameraView(isPresented: $showingCamera) { image in
+                processSelectedImage(image)
+            }
+            .edgesIgnoringSafeArea(.all)
         }
         .confirmationDialog("Choose Photo Source", isPresented: $showingSourcePicker) {
             Button("Take Photo") {

@@ -6,7 +6,13 @@ struct OrderReplacementTagView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var isLoading = false
+    @State private var isCheckingEligibility = true
     @State private var orderComplete = false
+
+    // Replacement eligibility
+    @State private var isFreeReplacement = false
+    @State private var shippingCost: Double = 3.90
+    @State private var planName: String = "starter"
 
     // Shipping address fields
     @State private var street1 = ""
@@ -36,7 +42,27 @@ struct OrderReplacementTagView: View {
             }
         }
         .task {
+            await checkEligibility()
             await loadUserAddress()
+        }
+    }
+
+    private func checkEligibility() async {
+        do {
+            let eligibility = try await APIService.shared.checkReplacementEligibility()
+            await MainActor.run {
+                isFreeReplacement = eligibility.isFreeReplacement
+                shippingCost = eligibility.shippingCost
+                planName = eligibility.planName
+                isCheckingEligibility = false
+            }
+        } catch {
+            // Default to paid replacement if check fails
+            await MainActor.run {
+                isFreeReplacement = false
+                shippingCost = 3.90
+                isCheckingEligibility = false
+            }
         }
     }
 
@@ -106,16 +132,28 @@ struct OrderReplacementTagView: View {
 
             Section(header: Text("Important Information")) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Label("As a Premium member, replacement tags are completely free", systemImage: "checkmark.circle")
-                        .font(.caption)
+                    if isFreeReplacement {
+                        Label("As a \(planName.capitalized) member, replacement tags are completely free!", systemImage: "checkmark.circle")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                    } else {
+                        Label("Shipping fee: €\(String(format: "%.2f", shippingCost))", systemImage: "eurosign.circle")
+                            .font(.caption)
+                            .foregroundColor(.brandOrange)
+                        Label("Upgrade to Standard or Ultimate for free replacements", systemImage: "star.fill")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                     Label("Your old QR code will be deactivated when you place this order", systemImage: "exclamationmark.triangle")
                         .font(.caption)
+                        .foregroundColor(.secondary)
                     Label("You'll receive your new tag within 5-7 business days", systemImage: "shippingbox")
                         .font(.caption)
+                        .foregroundColor(.secondary)
                     Label("Once you receive the new tag, you'll need to scan it to activate it", systemImage: "qrcode")
                         .font(.caption)
+                        .foregroundColor(.secondary)
                 }
-                .foregroundColor(.secondary)
             }
 
             Section(header: Text("Shipping Address"), footer: Text("Confirm your shipping address for the replacement tag")) {
@@ -196,15 +234,21 @@ struct OrderReplacementTagView: View {
                             Text("Creating Order...")
                                 .foregroundColor(.white)
                         } else {
-                            Text("Confirm & Order Replacement Tag")
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
+                            if isFreeReplacement {
+                                Text("Confirm & Order Free Replacement Tag")
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                            } else {
+                                Text("Confirm & Pay €\(String(format: "%.2f", shippingCost))")
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                            }
                         }
                         Spacer()
                     }
                 }
                 .listRowBackground(Color.blue)
-                .disabled(isLoading || !isFormValid)
+                .disabled(isLoading || !isFormValid || isCheckingEligibility)
             }
         }
         .adaptiveList()

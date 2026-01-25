@@ -53,21 +53,13 @@ struct PetPublicProfileView: View {
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 24)
 
-                    // Pet details row (matching web design)
+                    // Pet details row
                     HStack(spacing: 16) {
-                        if !pet.species.isEmpty {
-                            Text("**Species:** \(pet.species.capitalized)")
-                                .font(.system(size: 14))
-                                .foregroundColor(.mutedText)
-                        }
                         if let breed = pet.breed {
                             Text("**Breed:** \(breed)")
                                 .font(.system(size: 14))
                                 .foregroundColor(.mutedText)
                         }
-                    }
-
-                    HStack(spacing: 16) {
                         if let age = pet.age {
                             Text("**Age:** \(age)")
                                 .font(.system(size: 14))
@@ -80,21 +72,6 @@ struct PetPublicProfileView: View {
                         }
                     }
                 }
-
-                // Owner Notification Notice
-                HStack(spacing: 10) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.green)
-                    Text("Owner is automatically notified when tag is scanned")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.green)
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-                .frame(maxWidth: .infinity)
-                .background(Color.green.opacity(0.1))
-                .cornerRadius(14)
-                .padding(.horizontal, 24)
 
                 // Share Location Button (placeholder - shown in preview)
                 VStack(spacing: 8) {
@@ -225,6 +202,69 @@ struct PetPublicProfileView: View {
                         .background(Color(.systemGray6))
                         .cornerRadius(14)
                     }
+                    .padding(.horizontal, 24)
+                }
+
+                // Medical Information
+                if let medical = pet.medicalInfo, !medical.isEmpty {
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "cross.case.fill")
+                                .foregroundColor(.red)
+                            Text("Medical Information")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.red)
+                        }
+                        Text(medical)
+                            .font(.system(size: 14))
+                            .foregroundColor(.primary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color.red.opacity(0.1))
+                    .cornerRadius(14)
+                    .padding(.horizontal, 24)
+                }
+
+                // Allergies
+                if let allergies = pet.allergies, !allergies.isEmpty {
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(.orange)
+                            Text("Allergies")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.orange)
+                        }
+                        Text(allergies)
+                            .font(.system(size: 14))
+                            .foregroundColor(.primary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color.orange.opacity(0.1))
+                    .cornerRadius(14)
+                    .padding(.horizontal, 24)
+                }
+
+                // Notes
+                if let notes = pet.notes, !notes.isEmpty {
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "note.text")
+                                .foregroundColor(.blue)
+                            Text("Notes")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.blue)
+                        }
+                        Text(notes)
+                            .font(.system(size: 14))
+                            .foregroundColor(.primary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color.blue.opacity(0.1))
+                    .cornerRadius(14)
                     .padding(.horizontal, 24)
                 }
 
