@@ -1,10 +1,15 @@
 import SwiftUI
+import UIKit
 import Sentry
 
 @main
 struct PetSafetyApp: App {
+    // Use AppDelegate for Firebase and push notification setup
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     @StateObject private var authViewModel = AuthViewModel()
     @StateObject private var appState = AppState()
+    @StateObject private var notificationHandler = NotificationHandler.shared
 
     init() {
         // Initialize Sentry for error tracking
@@ -62,7 +67,23 @@ struct PetSafetyApp: App {
             ContentView()
                 .environmentObject(authViewModel)
                 .environmentObject(appState)
+                .environmentObject(notificationHandler)
                 .tint(Color(red: 1.0, green: 0.569, blue: 0.302)) // Brand Orange #FF914D
+                .sheet(isPresented: $notificationHandler.showMapPicker) {
+                    if let notification = notificationHandler.pendingScanNotification,
+                       let location = notification.location {
+                        MapAppPickerView(
+                            location: location,
+                            petName: notification.petName ?? "Pet"
+                        )
+                    }
+                }
+                .onReceive(NotificationCenter.default.publisher(for: .fcmTokenReceived)) { notification in
+                    // FCM token received - could update UI or trigger additional actions
+                    if let token = notification.userInfo?["token"] as? String {
+                        print("App received FCM token: \(token.prefix(20))...")
+                    }
+                }
         }
     }
 
@@ -142,6 +163,7 @@ class AppState: ObservableObject {
         #endif
         sseService.disconnect()
     }
+
 
     private func setupSSEHandlers() {
         // Handle tag scanned events

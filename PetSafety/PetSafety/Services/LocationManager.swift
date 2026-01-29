@@ -4,6 +4,7 @@ import CoreLocation
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var location: CLLocationCoordinate2D?
     @Published var authorizationStatus: CLAuthorizationStatus?
+    @Published var accuracy: Double?
 
     private let manager = CLLocationManager()
 
@@ -19,7 +20,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations.first?.coordinate
+        if let lastLocation = locations.first {
+            location = lastLocation.coordinate
+            accuracy = lastLocation.horizontalAccuracy
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

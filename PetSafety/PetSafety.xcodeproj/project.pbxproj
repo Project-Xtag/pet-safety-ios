@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D2302FF2F2A876300F4F960 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D829061300128B000A86E74 /* FirebaseCore */; };
+		1D2303002F2A876300F4F960 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1D829062300128C000A86E74 /* FirebaseMessaging */; };
 		1D8290602F1FF25400A86E74 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 1D82905F2F1FF25400A86E74 /* Sentry */; };
 /* End PBXBuildFile section */
 
@@ -33,9 +35,22 @@
 		1DAD36A42EB818CC001F54AA /* PetSafetyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetSafetyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1DAD368F2EB818CC001F54AB /* Exceptions for "PetSafety" folder in "PetSafety" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1DAD368C2EB818CC001F54AA /* PetSafety */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1DAD368F2EB818CC001F54AA /* PetSafety */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1DAD368F2EB818CC001F54AB /* Exceptions for "PetSafety" folder in "PetSafety" target */,
+			);
 			path = PetSafety;
 			sourceTree = "<group>";
 		};
@@ -56,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D2303002F2A876300F4F960 /* FirebaseMessaging in Frameworks */,
+				1D2302FF2F2A876300F4F960 /* FirebaseCore in Frameworks */,
 				1D8290602F1FF25400A86E74 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +143,8 @@
 			name = PetSafety;
 			packageProductDependencies = (
 				1D82905F2F1FF25400A86E74 /* Sentry */,
+				1D829061300128B000A86E74 /* FirebaseCore */,
+				1D829062300128C000A86E74 /* FirebaseMessaging */,
 			);
 			productName = PetSafety;
 			productReference = 1DAD368D2EB818CC001F54AA /* PetSafety.app */;
@@ -211,6 +230,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1D82905D2F1FF13800A86E74 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+				1D829060300128A000A86E74 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1DAD368E2EB818CC001F54AA /* Products */;
@@ -418,16 +438,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 883LUWSQCF;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleURLTypes = "(petsafety)";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to scan QR codes on pet tags";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to help find missing pets and show nearby alerts";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to select pet photos";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PetSafety/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,16 +464,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 883LUWSQCF;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleURLTypes = "(petsafety)";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to scan QR codes on pet tags";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to help find missing pets and show nearby alerts";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to select pet photos";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PetSafety/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -597,6 +601,14 @@
 				minimumVersion = 9.1.0;
 			};
 		};
+		1D829060300128A000A86E74 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -604,6 +616,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1D82905D2F1FF13800A86E74 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = Sentry;
+		};
+		1D829061300128B000A86E74 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D829060300128A000A86E74 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		1D829062300128C000A86E74 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D829060300128A000A86E74 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

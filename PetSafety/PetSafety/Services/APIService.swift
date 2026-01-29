@@ -608,20 +608,15 @@ class APIService {
     }
 
     // Share finder's location with pet owner (no auth required)
+    // Supports 3-tier GDPR-compliant location consent: none, approximate, precise
     func shareLocation(
         qrCode: String,
-        latitude: Double,
-        longitude: Double,
+        location: LocationConsentData? = nil,
         address: String? = nil
     ) async throws -> ShareLocationResponse {
-        struct LocationData: Codable {
-            let lat: Double
-            let lng: Double
-        }
-
         struct ShareLocationRequest: Codable {
             let qrCode: String
-            let location: LocationData
+            let location: LocationConsentData?
             let address: String?
         }
 
@@ -630,12 +625,30 @@ class APIService {
             method: "POST",
             body: ShareLocationRequest(
                 qrCode: qrCode,
-                location: LocationData(lat: latitude, lng: longitude),
+                location: location,
                 address: address
             ),
             requiresAuth: false
         )
         return try await performRequest(request, responseType: ShareLocationResponse.self)
+    }
+
+    /// Legacy share location method for backwards compatibility
+    func shareLocationLegacy(
+        qrCode: String,
+        latitude: Double,
+        longitude: Double,
+        address: String? = nil
+    ) async throws -> ShareLocationResponse {
+        // Convert to 3-tier format with precise location
+        let location = LocationConsentData(
+            latitude: latitude,
+            longitude: longitude,
+            accuracy_meters: 10,
+            is_approximate: false,
+            consent_type: .precise
+        )
+        return try await shareLocation(qrCode: qrCode, location: location, address: address)
     }
 
     // MARK: - Orders
@@ -930,12 +943,45 @@ struct CreateTagOrderResponse: Codable {
     let message: String
 }
 
-// MARK: - Location Sharing Types
+// MARK: - Location Sharing Types (3-Tier GDPR Consent)
+
+/// Location consent type for GDPR compliance
+enum LocationConsentType: String, Codable {
+    case approximate = "approximate"
+    case precise = "precise"
+}
+
+/// Location data with consent type for GDPR compliance
+struct LocationConsentData: Codable {
+    let latitude: Double
+    let longitude: Double
+    let accuracy_meters: Double
+    let is_approximate: Bool
+    let consent_type: LocationConsentType
+}
+
+/// Updated response for share-location endpoint
 struct ShareLocationResponse: Codable {
-    let message: String
-    let sightingId: String
-    let sentSMS: Bool
-    let sentEmail: Bool
+    // New format fields
+    let scan_id: String?
+    let pet: PetSummary?
+    let is_missing: Bool?
+    let owner_notified: Bool?
+    let location_shared: Bool?
+    let location_type: String?
+
+    // Legacy format fields (for backwards compatibility)
+    let message: String?
+    let sightingId: String?
+    let sentSMS: Bool?
+    let sentEmail: Bool?
+    let sentPush: Bool?
+
+    struct PetSummary: Codable {
+        let name: String
+        let species: String?
+        let image_url: String?
+    }
 }
 
 // MARK: - Mark Missing/Found Types

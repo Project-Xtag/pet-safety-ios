@@ -1,24 +1,32 @@
 import SwiftUI
 
 struct PrivacyModeView: View {
-    @AppStorage("hidePersonalInfo") private var hidePersonalInfo = false
-    @AppStorage("hideAddress") private var hideAddress = false
-    @AppStorage("shareLocationWithFinders") private var shareLocationWithFinders = true
-    @AppStorage("allowPublicProfile") private var allowPublicProfile = true
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var appState: AppState
+
+    @State private var showPhonePublicly: Bool = true
+    @State private var showEmailPublicly: Bool = true
+    @State private var showAddressPublicly: Bool = true
+    @State private var isUpdating: Bool = false
 
     var body: some View {
         List {
-            Section(header: Text("Profile Visibility"), footer: Text("Control what information is visible when someone scans your pet's QR tag")) {
-                Toggle("Hide Personal Information", isOn: $hidePersonalInfo)
-                Toggle("Hide Address Details", isOn: $hideAddress)
-            }
-
-            Section(header: Text("Location Sharing"), footer: Text("Allow people who find your pet to share their current location with you")) {
-                Toggle("Share Location with Finders", isOn: $shareLocationWithFinders)
-            }
-
-            Section(header: Text("Public Profile"), footer: Text("Allow your profile to be visible in the community pet safety network")) {
-                Toggle("Public Profile", isOn: $allowPublicProfile)
+            Section(header: Text("Contact Visibility"), footer: Text("Control what contact information is visible when someone scans your pet's QR tag")) {
+                Toggle("Show Phone Number", isOn: $showPhonePublicly)
+                    .disabled(isUpdating)
+                    .onChange(of: showPhonePublicly) { _, newValue in
+                        updatePrivacySetting("show_phone_publicly", value: newValue)
+                    }
+                Toggle("Show Email Address", isOn: $showEmailPublicly)
+                    .disabled(isUpdating)
+                    .onChange(of: showEmailPublicly) { _, newValue in
+                        updatePrivacySetting("show_email_publicly", value: newValue)
+                    }
+                Toggle("Show Address", isOn: $showAddressPublicly)
+                    .disabled(isUpdating)
+                    .onChange(of: showAddressPublicly) { _, newValue in
+                        updatePrivacySetting("show_address_publicly", value: newValue)
+                    }
             }
 
             Section(header: Text("Data Privacy")) {
@@ -48,6 +56,38 @@ struct PrivacyModeView: View {
         .navigationTitle("Privacy Mode")
         .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            // Initialize from current user settings
+            if let user = authViewModel.currentUser {
+                showPhonePublicly = user.showPhonePublicly ?? true
+                showEmailPublicly = user.showEmailPublicly ?? true
+                showAddressPublicly = user.showAddressPublicly ?? true
+            }
+        }
+    }
+
+    private func updatePrivacySetting(_ field: String, value: Bool) {
+        isUpdating = true
+        Task {
+            do {
+                try await authViewModel.updateProfile(updates: [field: value])
+                await MainActor.run {
+                    isUpdating = false
+                    appState.showSuccess("Privacy settings updated")
+                }
+            } catch {
+                await MainActor.run {
+                    isUpdating = false
+                    appState.showError("Failed to update privacy settings")
+                    // Revert the toggle on failure
+                    if let user = authViewModel.currentUser {
+                        showPhonePublicly = user.showPhonePublicly ?? true
+                        showEmailPublicly = user.showEmailPublicly ?? true
+                        showAddressPublicly = user.showAddressPublicly ?? true
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -164,4 +204,6 @@ struct SectionText: View {
     NavigationView {
         PrivacyModeView()
     }
+    .environmentObject(AuthViewModel())
+    .environmentObject(AppState())
 }

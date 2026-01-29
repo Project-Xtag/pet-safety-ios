@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import Sentry
 
 @MainActor
@@ -38,11 +39,39 @@ class AuthViewModel: ObservableObject {
                     }
                     // Connect to SSE for real-time notifications
                     SSEService.shared.connect()
+
+                    // Register FCM token for push notifications
+                    registerFCMToken()
                 } catch {
                     // Token might be invalid, log out
                     logout()
                 }
             }
+        }
+    }
+
+    // MARK: - FCM Token Management
+
+    private func registerFCMToken() {
+        guard let token = UserDefaults.standard.string(forKey: "fcmToken") else {
+            #if DEBUG
+            print("No FCM token available to register")
+            #endif
+            return
+        }
+
+        Task {
+            await FCMService.shared.registerToken(token, deviceName: UIDevice.current.name)
+        }
+    }
+
+    private func unregisterFCMToken() {
+        guard let token = UserDefaults.standard.string(forKey: "fcmToken") else {
+            return
+        }
+
+        Task {
+            await FCMService.shared.removeToken(token)
         }
     }
 
@@ -93,6 +122,9 @@ class AuthViewModel: ObservableObject {
 
                 // Connect to SSE
                 SSEService.shared.connect()
+
+                // Register FCM token
+                registerFCMToken()
             } catch {
                 // Token might be invalid
                 logout()
@@ -145,6 +177,9 @@ class AuthViewModel: ObservableObject {
 
             // Connect to SSE for real-time notifications
             SSEService.shared.connect()
+
+            // Register FCM token for push notifications
+            registerFCMToken()
         } catch {
             isLoading = false
             errorMessage = error.localizedDescription
@@ -153,6 +188,8 @@ class AuthViewModel: ObservableObject {
     }
 
     func logout() {
+        // Unregister FCM token before logout
+        unregisterFCMToken()
         apiService.logout()
         currentUser = nil
         isAuthenticated = false
