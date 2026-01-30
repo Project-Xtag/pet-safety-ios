@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D2302FF2F2A876300F4F960 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D829061300128B000A86E74 /* FirebaseCore */; };
-		1D2303002F2A876300F4F960 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1D829062300128C000A86E74 /* FirebaseMessaging */; };
+		1D2303D32F2D144300F4F960 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 1D2303D22F2D144300F4F960 /* FirebaseAppCheck */; };
+		1D2303D52F2D144300F4F960 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D2303D42F2D144300F4F960 /* FirebaseCore */; };
+		1D2303D72F2D144300F4F960 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1D2303D62F2D144300F4F960 /* FirebaseMessaging */; };
+		1D2303D92F2D144300F4F960 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 1D2303D82F2D144300F4F960 /* FirebaseRemoteConfig */; };
 		1D8290602F1FF25400A86E74 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 1D82905F2F1FF25400A86E74 /* Sentry */; };
 /* End PBXBuildFile section */
 
@@ -71,9 +73,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D2303002F2A876300F4F960 /* FirebaseMessaging in Frameworks */,
-				1D2302FF2F2A876300F4F960 /* FirebaseCore in Frameworks */,
+				1D2303D72F2D144300F4F960 /* FirebaseMessaging in Frameworks */,
+				1D2303D32F2D144300F4F960 /* FirebaseAppCheck in Frameworks */,
+				1D2303D52F2D144300F4F960 /* FirebaseCore in Frameworks */,
 				1D8290602F1FF25400A86E74 /* Sentry in Frameworks */,
+				1D2303D92F2D144300F4F960 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,8 +147,10 @@
 			name = PetSafety;
 			packageProductDependencies = (
 				1D82905F2F1FF25400A86E74 /* Sentry */,
-				1D829061300128B000A86E74 /* FirebaseCore */,
-				1D829062300128C000A86E74 /* FirebaseMessaging */,
+				1D2303D22F2D144300F4F960 /* FirebaseAppCheck */,
+				1D2303D42F2D144300F4F960 /* FirebaseCore */,
+				1D2303D62F2D144300F4F960 /* FirebaseMessaging */,
+				1D2303D82F2D144300F4F960 /* FirebaseRemoteConfig */,
 			);
 			productName = PetSafety;
 			productReference = 1DAD368D2EB818CC001F54AA /* PetSafety.app */;
@@ -230,7 +236,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1D82905D2F1FF13800A86E74 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
-				1D829060300128A000A86E74 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1D2303D12F2D144300F4F960 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1DAD368E2EB818CC001F54AA /* Products */;
@@ -593,6 +599,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1D2303D12F2D144300F4F960 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.8.0;
+			};
+		};
 		1D82905D2F1FF13800A86E74 /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
@@ -601,31 +615,33 @@
 				minimumVersion = 9.1.0;
 			};
 		};
-		1D829060300128A000A86E74 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1D2303D22F2D144300F4F960 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D2303D12F2D144300F4F960 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		1D2303D42F2D144300F4F960 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D2303D12F2D144300F4F960 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		1D2303D62F2D144300F4F960 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D2303D12F2D144300F4F960 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		1D2303D82F2D144300F4F960 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D2303D12F2D144300F4F960 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
 		1D82905F2F1FF25400A86E74 /* Sentry */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1D82905D2F1FF13800A86E74 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = Sentry;
-		};
-		1D829061300128B000A86E74 /* FirebaseCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1D829060300128A000A86E74 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCore;
-		};
-		1D829062300128C000A86E74 /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1D829060300128A000A86E74 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

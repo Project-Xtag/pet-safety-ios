@@ -19,6 +19,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
+        // Configure App Check BEFORE Firebase initialization
+        // This protects Firebase APIs from abuse by verifying requests come from legitimate app instances
+        ConfigurationManager.configureAppCheck()
+
         // Initialize Firebase
         FirebaseApp.configure()
 
@@ -40,17 +44,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
             if let error = error {
+                #if DEBUG
                 print("Push notification authorization error: \(error)")
+                #endif
                 return
             }
 
             if granted {
+                #if DEBUG
                 print("Push notification permission granted")
+                #endif
                 DispatchQueue.main.async {
                     application.registerForRemoteNotifications()
                 }
             } else {
+                #if DEBUG
                 print("Push notification permission denied")
+                #endif
             }
         }
     }
@@ -64,15 +74,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Pass device token to Firebase
         Messaging.messaging().apnsToken = deviceToken
 
+        #if DEBUG
         let tokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("APNs device token: \(tokenString)")
+        #endif
     }
 
     func application(
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
+        #if DEBUG
         print("Failed to register for remote notifications: \(error)")
+        #endif
     }
 }
 
@@ -88,8 +102,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     ) {
         let userInfo = notification.request.content.userInfo
 
+        #if DEBUG
         // Log the notification
         print("Received notification in foreground: \(userInfo)")
+        #endif
 
         // Show banner, sound, and badge even when app is in foreground
         completionHandler([.banner, .sound, .badge])
@@ -103,7 +119,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     ) {
         let userInfo = response.notification.request.content.userInfo
 
+        #if DEBUG
         print("User tapped notification: \(userInfo)")
+        #endif
 
         // Handle the notification tap via NotificationHandler
         NotificationHandler.shared.handleNotificationTap(userInfo: userInfo)
@@ -119,14 +137,18 @@ extension AppDelegate: MessagingDelegate {
     /// Called when FCM token is refreshed
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let token = fcmToken else {
+            #if DEBUG
             print("FCM token is nil")
+            #endif
             return
         }
 
+        #if DEBUG
         print("FCM token received: \(token)")
+        #endif
 
-        // Store token locally for reference
-        UserDefaults.standard.set(token, forKey: "fcmToken")
+        // Store token securely in Keychain (not UserDefaults)
+        _ = KeychainService.shared.saveFCMToken(token)
 
         // Register token with backend if user is authenticated
         if KeychainService.shared.isAuthenticated {

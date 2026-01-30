@@ -27,7 +27,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        #if DEBUG
         print("Location error: \(error.localizedDescription)")
+        #endif
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

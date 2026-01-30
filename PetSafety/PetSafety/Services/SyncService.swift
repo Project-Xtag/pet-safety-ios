@@ -106,11 +106,15 @@ class SyncService: ObservableObject {
             UserDefaults.standard.set(lastSyncDate, forKey: "lastSyncDate")
 
             syncStatus = "Sync completed"
+            #if DEBUG
             print("✅ Full sync completed successfully")
+            #endif
 
         } catch {
             syncStatus = "Sync failed: \(error.localizedDescription)"
+            #if DEBUG
             print("❌ Sync failed: \(error.localizedDescription)")
+            #endif
         }
 
         isSyncing = false
@@ -120,7 +124,9 @@ class SyncService: ObservableObject {
 
     /// Sync when coming back online
     private func syncWhenOnline() async {
+        #if DEBUG
         print("🌐 Network connection restored, starting sync...")
+        #endif
         await performFullSync()
     }
 
@@ -131,7 +137,9 @@ class SyncService: ObservableObject {
         let actionId = try offlineManager.queueAction(type: type.rawValue, data: data)
         updatePendingCount()
 
+        #if DEBUG
         print("📝 Queued action: \(type.rawValue) (ID: \(actionId))")
+        #endif
 
         // Try to sync immediately if online
         if networkMonitor.isConnected {
@@ -148,21 +156,29 @@ class SyncService: ObservableObject {
         let actions = try offlineManager.fetchPendingActions()
 
         guard !actions.isEmpty else {
+            #if DEBUG
             print("✅ No pending actions to process")
+            #endif
             return
         }
 
+        #if DEBUG
         print("📤 Processing \(actions.count) queued action(s)...")
+        #endif
 
         for action in actions {
             do {
                 try await processAction(action)
                 try offlineManager.completeAction(withId: action.id)
+                #if DEBUG
                 print("✅ Completed action: \(action.type) (ID: \(action.id))")
+                #endif
             } catch {
                 let errorMessage = error.localizedDescription
                 try offlineManager.failAction(withId: action.id, error: errorMessage)
+                #if DEBUG
                 print("❌ Failed action: \(action.type) - \(errorMessage)")
+                #endif
             }
         }
     }
@@ -306,12 +322,16 @@ class SyncService: ObservableObject {
 
     /// Fetch fresh data from server and cache locally
     private func fetchRemoteData() async throws {
+        #if DEBUG
         print("📥 Fetching remote data...")
+        #endif
 
         // Fetch pets
         let pets = try await apiService.getPets()
         try offlineManager.savePets(pets)
+        #if DEBUG
         print("✅ Cached \(pets.count) pet(s)")
+        #endif
 
         // Fetch alerts
         let alerts = try await apiService.getAlerts()
@@ -319,7 +339,9 @@ class SyncService: ObservableObject {
             for alert in alerts {
                 try offlineManager.saveAlert(alert)
             }
+            #if DEBUG
             print("✅ Cached \(alerts.count) alert(s)")
+            #endif
         }
     }
 
@@ -367,7 +389,9 @@ class SyncService: ObservableObject {
                 await performFullSync()
             }
         } catch {
+            #if DEBUG
             print("❌ Failed to retry action: \(error.localizedDescription)")
+            #endif
         }
     }
 
@@ -376,9 +400,13 @@ class SyncService: ObservableObject {
         do {
             try offlineManager.dismissAction(withId: action.id)
             updateFailedActions()
+            #if DEBUG
             print("🗑️ Dismissed failed action: \(action.type)")
+            #endif
         } catch {
+            #if DEBUG
             print("❌ Failed to dismiss action: \(error.localizedDescription)")
+            #endif
         }
     }
 
@@ -394,7 +422,9 @@ class SyncService: ObservableObject {
                 await performFullSync()
             }
         } catch {
+            #if DEBUG
             print("❌ Failed to retry all actions: \(error.localizedDescription)")
+            #endif
         }
     }
 
@@ -403,9 +433,13 @@ class SyncService: ObservableObject {
         do {
             try offlineManager.dismissAllFailedActions()
             updateFailedActions()
+            #if DEBUG
             print("🗑️ Dismissed all failed actions")
+            #endif
         } catch {
+            #if DEBUG
             print("❌ Failed to dismiss all actions: \(error.localizedDescription)")
+            #endif
         }
     }
 

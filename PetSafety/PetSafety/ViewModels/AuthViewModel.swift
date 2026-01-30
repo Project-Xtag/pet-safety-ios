@@ -53,7 +53,7 @@ class AuthViewModel: ObservableObject {
     // MARK: - FCM Token Management
 
     private func registerFCMToken() {
-        guard let token = UserDefaults.standard.string(forKey: "fcmToken") else {
+        guard let token = KeychainService.shared.getFCMToken() else {
             #if DEBUG
             print("No FCM token available to register")
             #endif
@@ -66,7 +66,7 @@ class AuthViewModel: ObservableObject {
     }
 
     private func unregisterFCMToken() {
-        guard let token = UserDefaults.standard.string(forKey: "fcmToken") else {
+        guard let token = KeychainService.shared.getFCMToken() else {
             return
         }
 

@@ -7,6 +7,7 @@ struct AuthenticationView: View {
     @State private var otpCode = ""
     @State private var showOTPField = false
     @State private var showBiometricEnrollment = false
+    @State private var showOrderTagSheet = false
 
     var body: some View {
         ZStack {
@@ -162,13 +163,39 @@ struct AuthenticationView: View {
                             }
                         }
                         .padding(.top, 8)
+
                     }
                     .padding(28)
                     .background(Color.cardBackground)
                     .cornerRadius(40)
                     .padding(.horizontal, 16)
+
+                    // Order Free Tag CTA for new users (outside card)
+                    VStack(spacing: 8) {
+                        Text("Don't have an account?")
+                            .font(.system(size: 14))
+                            .foregroundColor(.mutedText)
+
+                        Button(action: { showOrderTagSheet = true }) {
+                            HStack(spacing: 6) {
+                                Image(systemName: "tag.fill")
+                                    .font(.system(size: 14))
+                                Text("Start here & order your free tag")
+                                    .font(.system(size: 14, weight: .semibold))
+                            }
+                            .foregroundColor(.brandOrange)
+                        }
+                    }
+                    .padding(.top, 24)
                     .padding(.bottom, 40)
                 }
+            }
+        }
+        .sheet(isPresented: $showOrderTagSheet) {
+            NavigationView {
+                OrderMoreTagsView()
+                    .environmentObject(appState)
+                    .environmentObject(authViewModel)
             }
         }
         .alert("Enable \(authViewModel.biometricTypeName)?", isPresented: $showBiometricEnrollment) {

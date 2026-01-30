@@ -305,6 +305,22 @@ class SSEService: NSObject, ObservableObject {
     }
 }
 
+// MARK: - URLSessionDelegate (Certificate Pinning)
+extension SSEService: URLSessionDelegate {
+    func urlSession(
+        _ session: URLSession,
+        didReceive challenge: URLAuthenticationChallenge,
+        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+    ) {
+        // Delegate certificate pinning to CertificatePinningService
+        CertificatePinningService.shared.urlSession(
+            session,
+            didReceive: challenge,
+            completionHandler: completionHandler
+        )
+    }
+}
+
 // MARK: - URLSessionDataDelegate
 extension SSEService: URLSessionDataDelegate {
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {

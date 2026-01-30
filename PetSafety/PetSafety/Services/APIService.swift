@@ -42,7 +42,12 @@ class APIService {
     static let shared = APIService()
 
     // MARK: - Configuration
-    private let baseURL = "https://pet-er.app/api"
+    // Base URL is now fetched from ConfigurationManager (Firebase Remote Config)
+    // Falls back to hardcoded default if Remote Config is unavailable
+    private var baseURL: String {
+        let configuredURL = ConfigurationManager.shared.apiBaseURL
+        return configuredURL.isEmpty ? "https://pet-er.app/api" : configuredURL
+    }
     private var authToken: String? {
         get { KeychainService.shared.getAuthToken() }
         set {
@@ -65,7 +70,7 @@ class APIService {
         method: String = "GET",
         body: Encodable? = nil,
         requiresAuth: Bool = true
-    ) throws -> URLRequest {
+    ) async throws -> URLRequest {
         guard let url = URL(string: baseURL + endpoint) else {
             throw APIError.invalidURL
         }
@@ -76,6 +81,12 @@ class APIService {
 
         if requiresAuth, let token = authToken {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+
+        // Add Firebase App Check token for API protection
+        // This verifies the request comes from a legitimate app instance
+        if let appCheckToken = await ConfigurationManager.shared.getAppCheckToken() {
+            request.setValue(appCheckToken, forHTTPHeaderField: "X-Firebase-AppCheck")
         }
 
         if let body = body {
@@ -107,7 +118,7 @@ class APIService {
         SentrySDK.addBreadcrumb(crumb)
 
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
+            let (data, response) = try await CertificatePinningService.shared.pinnedSession.data(for: request)
 
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw APIError.invalidResponse
@@ -202,7 +213,7 @@ class APIService {
 
     // MARK: - Authentication
     func login(email: String) async throws -> LoginResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/auth/send-otp",
             method: "POST",
             body: LoginRequest(email: email),
@@ -212,7 +223,7 @@ class APIService {
     }
 
     func verifyOTP(email: String, code: String) async throws -> VerifyOTPResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/auth/verify-otp",
             method: "POST",
             body: VerifyOTPRequest(email: email, code: code),
@@ -229,13 +240,13 @@ class APIService {
 
     // MARK: - User
     func getCurrentUser() async throws -> User {
-        let request = try buildRequest(endpoint: "/users/me")
+        let request = try await buildRequest(endpoint: "/users/me")
         let response = try await performRequest(request, responseType: UserResponse.self)
         return response.user
     }
 
     func updateUser(_ updates: [String: Any]) async throws -> User {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/users/me",
             method: "PATCH",
             body: DynamicBody(updates)
@@ -256,7 +267,7 @@ class APIService {
             updates["show_email_publicly"] = showEmail
         }
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/users/me",
             method: "PATCH",
             body: DynamicBody(updates)
@@ -267,19 +278,19 @@ class APIService {
 
     // MARK: - Pets
     func getPets() async throws -> [Pet] {
-        let request = try buildRequest(endpoint: "/pets")
+        let request = try await buildRequest(endpoint: "/pets")
         let response = try await performRequest(request, responseType: PetsResponse.self)
         return response.pets
     }
 
     func getPet(id: String) async throws -> Pet {
-        let request = try buildRequest(endpoint: "/pets/\(id)")
+        let request = try await buildRequest(endpoint: "/pets/\(id)")
         let response = try await performRequest(request, responseType: PetResponse.self)
         return response.pet
     }
 
     func createPet(_ petData: CreatePetRequest) async throws -> Pet {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/pets",
             method: "POST",
             body: petData
@@ -289,7 +300,7 @@ class APIService {
     }
 
     func updatePet(id: String, _ updates: UpdatePetRequest) async throws -> Pet {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/pets/\(id)",
             method: "PUT",
             body: updates
@@ -299,7 +310,7 @@ class APIService {
     }
 
     func deletePet(id: String) async throws {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/pets/\(id)",
             method: "DELETE"
         )
@@ -334,7 +345,7 @@ class APIService {
             rewardAmount: rewardAmount
         )
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/pets/\(petId)/mark-missing",
             method: "POST",
             body: requestBody
@@ -363,7 +374,7 @@ class APIService {
             isMissing: false
         )
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/pets/\(petId)",
             method: "PUT",
             body: updates
@@ -424,7 +435,7 @@ class APIService {
 
     /// Get all photos for a pet
     func getPetPhotos(petId: String) async throws -> PetPhotosResponse {
-        let request = try buildRequest(endpoint: "/pets/\(petId)/photos")
+        let request = try await buildRequest(endpoint: "/pets/\(petId)/photos")
         return try await performRequest(request, responseType: PetPhotosResponse.self)
     }
 
@@ -473,7 +484,7 @@ class APIService {
 
     /// Set a photo as primary
     func setPrimaryPhoto(petId: String, photoId: String) async throws -> PhotoOperationResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/pets/\(petId)/photos/\(photoId)/primary",
             method: "PUT",
             body: EmptyBody()
@@ -483,7 +494,7 @@ class APIService {
 
     /// Delete a photo
     func deletePetPhoto(petId: String, photoId: String) async throws -> PhotoOperationResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/pets/\(petId)/photos/\(photoId)",
             method: "DELETE"
         )
@@ -492,7 +503,7 @@ class APIService {
 
     /// Reorder photos
     func reorderPetPhotos(petId: String, photoIds: [String]) async throws -> PhotoReorderResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/pets/\(petId)/photos/reorder",
             method: "PUT",
             body: PhotoReorderRequest(photoOrder: photoIds)
@@ -502,7 +513,7 @@ class APIService {
 
     // MARK: - Alerts
     func getAlerts() async throws -> [MissingPetAlert] {
-        let request = try buildRequest(endpoint: "/alerts")
+        let request = try await buildRequest(endpoint: "/alerts")
         let response = try await performRequest(request, responseType: AlertsResponse.self)
         return response.alerts
     }
@@ -518,7 +529,7 @@ class APIService {
         }
 
         let endpoint = "/alerts/nearby?lat=\(latitude)&lng=\(longitude)&radius=\(radiusKm)"
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: endpoint,
             method: "GET",
             requiresAuth: false
@@ -528,7 +539,7 @@ class APIService {
     }
 
     func createAlert(_ alertData: CreateAlertRequest) async throws -> MissingPetAlert {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/alerts/missing",
             method: "POST",
             body: alertData
@@ -541,7 +552,7 @@ class APIService {
         guard status == "found" else {
             throw APIError.serverError("Only 'found' status is supported")
         }
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/alerts/\(id)/found",
             method: "POST",
             body: EmptyBody()
@@ -551,7 +562,7 @@ class APIService {
     }
 
     func reportSighting(alertId: String, sighting: ReportSightingRequest) async throws -> Sighting {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/alerts/\(alertId)/sightings",
             method: "POST",
             body: sighting
@@ -562,7 +573,7 @@ class APIService {
 
     // MARK: - QR Tags
     func scanQRCode(_ code: String) async throws -> ScanResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/qr-tags/scan/\(code)",
             method: "GET",
             requiresAuth: false
@@ -581,7 +592,7 @@ class APIService {
             let message: String?
         }
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/qr-tags/activate",
             method: "POST",
             body: ActivateRequest(qrCode: qrCode, petId: petId),
@@ -598,7 +609,7 @@ class APIService {
             let message: String?
         }
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/qr-tags/pet/\(petId)",
             method: "GET",
             requiresAuth: true
@@ -620,7 +631,7 @@ class APIService {
             let address: String?
         }
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/qr-tags/share-location",
             method: "POST",
             body: ShareLocationRequest(
@@ -653,7 +664,7 @@ class APIService {
 
     // MARK: - Orders
     func createOrder(_ orderData: CreateOrderRequest) async throws -> CreateTagOrderResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/orders",
             method: "POST",
             body: orderData,
@@ -663,13 +674,13 @@ class APIService {
     }
 
     func getOrders() async throws -> [Order] {
-        let request = try buildRequest(endpoint: "/orders")
+        let request = try await buildRequest(endpoint: "/orders")
         let response = try await performRequest(request, responseType: OrdersResponse.self)
         return response.orders
     }
 
     func checkReplacementEligibility() async throws -> ReplacementEligibilityResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/orders/replacement/check-eligibility",
             method: "GET",
             requiresAuth: true
@@ -678,7 +689,7 @@ class APIService {
     }
 
     func createReplacementOrder(petId: String, shippingAddress: ShippingAddress) async throws -> ReplacementOrderResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/orders/replacement/\(petId)",
             method: "POST",
             body: CreateReplacementOrderRequest(shippingAddress: shippingAddress),
@@ -688,7 +699,7 @@ class APIService {
     }
 
     func createTagOrder(_ orderData: CreateTagOrderRequest) async throws -> CreateTagOrderResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/orders",
             method: "POST",
             body: orderData,
@@ -705,7 +716,7 @@ class APIService {
         currency: String? = nil,
         requiresAuth: Bool = true
     ) async throws -> PaymentIntentResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/payments/intent",
             method: "POST",
             body: CreatePaymentIntentRequest(
@@ -721,7 +732,7 @@ class APIService {
     }
 
     func getPaymentIntent(paymentIntentId: String) async throws -> PaymentIntentStatusResponse {
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/payments/intent/\(paymentIntentId)",
             method: "GET",
             requiresAuth: true
@@ -1008,12 +1019,12 @@ extension APIService {
         print("📡 API: Getting notification preferences...")
         #endif
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/users/me/notification-preferences",
             method: "GET"
         )
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await CertificatePinningService.shared.pinnedSession.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse else {
             throw APIError.invalidResponse
@@ -1068,13 +1079,13 @@ extension APIService {
             "notifyByPush": preferences.notifyByPush
         ]
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/users/me/notification-preferences",
             method: "PUT",
             body: body
         )
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await CertificatePinningService.shared.pinnedSession.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse else {
             throw APIError.invalidResponse
@@ -1138,7 +1149,7 @@ extension APIService {
         #endif
 
         let endpoint = "/success-stories?lat=\(latitude)&lng=\(longitude)&radius=\(radiusKm)&page=\(page)&limit=\(limit)"
-        let request = try buildRequest(endpoint: endpoint, requiresAuth: false)
+        let request = try await buildRequest(endpoint: endpoint, requiresAuth: false)
 
         return try await performRequest(request, responseType: SuccessStoriesResponse.self)
     }
@@ -1149,7 +1160,7 @@ extension APIService {
         print("📡 API: Fetching success stories for pet \(petId)...")
         #endif
 
-        let request = try buildRequest(endpoint: "/success-stories/pet/\(petId)")
+        let request = try await buildRequest(endpoint: "/success-stories/pet/\(petId)")
         return try await performRequest(request, responseType: [SuccessStory].self)
     }
 
@@ -1159,7 +1170,7 @@ extension APIService {
         print("📡 API: Creating success story...")
         #endif
 
-        let request = try buildRequest(endpoint: "/success-stories", method: "POST", body: story)
+        let request = try await buildRequest(endpoint: "/success-stories", method: "POST", body: story)
         return try await performRequest(request, responseType: SuccessStory.self)
     }
 
@@ -1190,7 +1201,7 @@ extension APIService {
             requestBody["reunion_city"] = reunionCity
         }
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/success-stories",
             method: "POST",
             body: DynamicBody(requestBody)
@@ -1204,7 +1215,7 @@ extension APIService {
         print("📡 API: Updating success story \(id)...")
         #endif
 
-        let request = try buildRequest(endpoint: "/success-stories/\(id)", method: "PATCH", body: updates)
+        let request = try await buildRequest(endpoint: "/success-stories/\(id)", method: "PATCH", body: updates)
         return try await performRequest(request, responseType: SuccessStory.self)
     }
 
@@ -1214,7 +1225,7 @@ extension APIService {
         print("📡 API: Deleting success story \(id)...")
         #endif
 
-        let request = try buildRequest(endpoint: "/success-stories/\(id)", method: "DELETE")
+        let request = try await buildRequest(endpoint: "/success-stories/\(id)", method: "DELETE")
         _ = try await performRequest(request, responseType: EmptyResponse.self)
 
         #if DEBUG
@@ -1262,7 +1273,7 @@ extension APIService {
         print("📡 API: Fetching subscription plans...")
         #endif
 
-        let request = try buildRequest(endpoint: "/subscriptions/plans", requiresAuth: false)
+        let request = try await buildRequest(endpoint: "/subscriptions/plans", requiresAuth: false)
         let response = try await performRequest(request, responseType: SubscriptionPlansResponse.self)
         return response.plans
     }
@@ -1273,7 +1284,7 @@ extension APIService {
         print("📡 API: Fetching user subscription...")
         #endif
 
-        let request = try buildRequest(endpoint: "/subscriptions/my-subscription")
+        let request = try await buildRequest(endpoint: "/subscriptions/my-subscription")
         let response = try await performRequest(request, responseType: MySubscriptionResponse.self)
         return response.subscription
     }
@@ -1287,7 +1298,7 @@ extension APIService {
         print("📡 API: Creating subscription checkout for \(planName) (\(billingPeriod))...")
         #endif
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/subscriptions/checkout",
             method: "POST",
             body: CreateCheckoutRequest(planName: planName, billingPeriod: billingPeriod)
@@ -1301,7 +1312,7 @@ extension APIService {
         print("📡 API: Upgrading to Starter plan...")
         #endif
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/subscriptions/upgrade",
             method: "POST",
             body: UpgradeRequest(planName: "starter")
@@ -1316,7 +1327,7 @@ extension APIService {
         print("📡 API: Fetching subscription features...")
         #endif
 
-        let request = try buildRequest(endpoint: "/subscriptions/features")
+        let request = try await buildRequest(endpoint: "/subscriptions/features")
         return try await performRequest(request, responseType: SubscriptionFeatures.self)
     }
 
@@ -1326,7 +1337,7 @@ extension APIService {
         print("📡 API: Cancelling subscription...")
         #endif
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/subscriptions/cancel",
             method: "POST",
             body: EmptyBody()
@@ -1343,7 +1354,7 @@ extension APIService {
         print("📡 API: Checking if account can be deleted...")
         #endif
 
-        let request = try buildRequest(endpoint: "/users/me/can-delete")
+        let request = try await buildRequest(endpoint: "/users/me/can-delete")
         return try await performRequest(request, responseType: CanDeleteAccountResponse.self)
     }
 
@@ -1356,7 +1367,7 @@ extension APIService {
         print("📡 API: Deleting user account...")
         #endif
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/users/me/delete",
             method: "POST",
             body: DeleteAccountRequest(confirmDelete: true)
@@ -1406,7 +1417,7 @@ extension APIService {
         print("📡 API: Submitting support request...")
         #endif
 
-        let request = try buildRequest(
+        let request = try await buildRequest(
             endpoint: "/contact/support",
             method: "POST",
             body: SupportRequest(category: category, subject: subject, message: message)

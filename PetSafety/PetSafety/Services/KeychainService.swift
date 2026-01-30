@@ -26,6 +26,7 @@ class KeychainService {
         case refreshToken = "refresh_token"
         case userId = "user_id"
         case userEmail = "user_email"
+        case fcmToken = "fcm_token"
     }
 
     // MARK: - Public Methods
@@ -33,7 +34,9 @@ class KeychainService {
     /// Save a string value to Keychain
     func save(_ value: String, for key: KeychainKey) -> Bool {
         guard let data = value.data(using: .utf8) else {
+            #if DEBUG
             print("❌ KeychainService: Failed to convert string to data")
+            #endif
             return false
         }
 
@@ -61,7 +64,9 @@ class KeychainService {
             #endif
             return true
         } else {
+            #if DEBUG
             print("❌ KeychainService: Failed to save \(key.rawValue) - Status: \(status)")
+            #endif
             return false
         }
     }
@@ -99,7 +104,9 @@ class KeychainService {
             #endif
             return nil
         } else {
+            #if DEBUG
             print("❌ KeychainService: Failed to retrieve \(key.rawValue) - Status: \(status)")
+            #endif
             return nil
         }
     }
@@ -121,7 +128,9 @@ class KeychainService {
             #endif
             return true
         } else {
+            #if DEBUG
             print("❌ KeychainService: Failed to delete \(key.rawValue) - Status: \(status)")
+            #endif
             return false
         }
     }
@@ -173,6 +182,23 @@ class KeychainService {
         return exists(.authToken)
     }
 
+    // MARK: - Convenience Methods for FCM Token
+
+    /// Save FCM token
+    func saveFCMToken(_ token: String) -> Bool {
+        return save(token, for: .fcmToken)
+    }
+
+    /// Get FCM token
+    func getFCMToken() -> String? {
+        return getString(for: .fcmToken)
+    }
+
+    /// Delete FCM token
+    func deleteFCMToken() -> Bool {
+        return delete(.fcmToken)
+    }
+
     // MARK: - Migration Helper
 
     /// Migrate token from UserDefaults to Keychain
@@ -184,7 +210,9 @@ class KeychainService {
         if let oldToken = userDefaults.string(forKey: "auth_token") {
             if saveAuthToken(oldToken) {
                 userDefaults.removeObject(forKey: "auth_token")
+                #if DEBUG
                 print("✅ Migrated auth_token from UserDefaults to Keychain")
+                #endif
             }
         }
 
@@ -192,7 +220,19 @@ class KeychainService {
         if let oldUserId = userDefaults.string(forKey: "user_id") {
             if save(oldUserId, for: .userId) {
                 userDefaults.removeObject(forKey: "user_id")
+                #if DEBUG
                 print("✅ Migrated user_id from UserDefaults to Keychain")
+                #endif
+            }
+        }
+
+        // Migrate FCM token if stored
+        if let oldFCMToken = userDefaults.string(forKey: "fcmToken") {
+            if saveFCMToken(oldFCMToken) {
+                userDefaults.removeObject(forKey: "fcmToken")
+                #if DEBUG
+                print("✅ Migrated fcmToken from UserDefaults to Keychain")
+                #endif
             }
         }
 

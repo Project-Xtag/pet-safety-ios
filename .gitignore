@@ -91,3 +91,15 @@ iOSInjectionProject/
 
 # OS
 .DS_Store
+
+# Security - sensitive configuration files
+# Note: GoogleService-Info.plist is kept in repo but API keys should be restricted in Firebase Console
+*.xcconfig.local
+Secrets/
+secrets.json
+appcheck-debug-token.txt
+
+# Environment files
+.env
+.env.local
+*.env

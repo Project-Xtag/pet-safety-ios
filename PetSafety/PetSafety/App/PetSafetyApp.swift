@@ -20,46 +20,71 @@ struct PetSafetyApp: App {
     }
 
     private func initializeSentry() {
-        // Sentry DSN for error tracking
-        let dsn = "https://59598f05268ea6c3d56f1af280001bf3@o4510743830724608.ingest.de.sentry.io/4510743841669200"
-
-        SentrySDK.start { options in
-            options.dsn = dsn
-            options.environment = {
+        // Fetch Sentry DSN from Firebase Remote Config
+        // This prevents hardcoding sensitive configuration in source code
+        Task {
+            do {
+                // Fetch remote configuration first
+                try await ConfigurationManager.shared.fetchConfiguration()
+            } catch {
                 #if DEBUG
-                return "development"
-                #else
-                return "production"
+                print("⚠️ Remote Config fetch failed: \(error)")
+                print("   Continuing with default/cached values...")
                 #endif
-            }()
+            }
 
-            // Performance monitoring - 10% of transactions
-            options.tracesSampleRate = 0.1
+            // Get Sentry DSN from Remote Config
+            let dsn = ConfigurationManager.shared.sentryDSN
 
-            // Attach screenshots and view hierarchy for debugging
-            options.attachScreenshot = true
-            options.attachViewHierarchy = true
+            // Only initialize if DSN is configured
+            guard !dsn.isEmpty else {
+                #if DEBUG
+                print("⚠️ Sentry DSN not configured in Remote Config - error tracking disabled")
+                #endif
+                return
+            }
 
-            // Enable automatic instrumentation
-            options.enableSwizzling = true
-            options.enableCaptureFailedRequests = true
+            // Initialize Sentry on the main thread
+            await MainActor.run {
+                SentrySDK.start { options in
+                    options.dsn = dsn
+                    options.environment = {
+                        #if DEBUG
+                        return "development"
+                        #else
+                        return "production"
+                        #endif
+                    }()
 
-            // Filter out expected errors (4xx client errors)
-            options.beforeSend = { event in
-                // Check if the error is a client error (4xx)
-                if let exceptionValue = event.exceptions?.first?.value,
-                   exceptionValue.contains("unauthorized") || exceptionValue.contains("401") ||
-                   exceptionValue.contains("400") || exceptionValue.contains("404") ||
-                   exceptionValue.contains("403") {
-                    return nil // Don't send client errors
+                    // Performance monitoring - 10% of transactions
+                    options.tracesSampleRate = 0.1
+
+                    // Attach screenshots and view hierarchy for debugging
+                    options.attachScreenshot = true
+                    options.attachViewHierarchy = true
+
+                    // Enable automatic instrumentation
+                    options.enableSwizzling = true
+                    options.enableCaptureFailedRequests = true
+
+                    // Filter out expected errors (4xx client errors)
+                    options.beforeSend = { event in
+                        // Check if the error is a client error (4xx)
+                        if let exceptionValue = event.exceptions?.first?.value,
+                           exceptionValue.contains("unauthorized") || exceptionValue.contains("401") ||
+                           exceptionValue.contains("400") || exceptionValue.contains("404") ||
+                           exceptionValue.contains("403") {
+                            return nil // Don't send client errors
+                        }
+                        return event
+                    }
                 }
-                return event
+
+                #if DEBUG
+                print("✅ Sentry initialized for error tracking")
+                #endif
             }
         }
-
-        #if DEBUG
-        print("✅ Sentry initialized for error tracking")
-        #endif
     }
 
     var body: some Scene {
