@@ -329,20 +329,29 @@ class APIService {
         location: LocationCoordinate? = nil,
         address: String? = nil,
         description: String? = nil,
-        rewardAmount: Double? = nil
+        rewardAmount: Double? = nil,
+        notificationCenterSource: String? = nil,
+        notificationCenterLocation: LocationCoordinate? = nil,
+        notificationCenterAddress: String? = nil
     ) async throws -> MarkMissingResponse {
         struct MarkMissingRequest: Codable {
             let lastSeenLocation: LocationCoordinate?
             let lastSeenAddress: String?
             let description: String?
             let rewardAmount: Double?
+            let notificationCenterSource: String?
+            let notificationCenterLocation: LocationCoordinate?
+            let notificationCenterAddress: String?
         }
 
         let requestBody = MarkMissingRequest(
             lastSeenLocation: location,
             lastSeenAddress: address,
             description: description,
-            rewardAmount: rewardAmount
+            rewardAmount: rewardAmount,
+            notificationCenterSource: notificationCenterSource,
+            notificationCenterLocation: notificationCenterLocation,
+            notificationCenterAddress: notificationCenterAddress
         )
 
         let request = try await buildRequest(

@@ -130,7 +130,10 @@ class PetsViewModel: ObservableObject {
         location: LocationCoordinate? = nil,
         address: String? = nil,
         description: String? = nil,
-        rewardAmount: Double? = nil
+        rewardAmount: Double? = nil,
+        notificationCenterSource: String? = nil,
+        notificationCenterLocation: LocationCoordinate? = nil,
+        notificationCenterAddress: String? = nil
     ) async throws -> MarkMissingResponse {
         isLoading = true
         errorMessage = nil
@@ -147,6 +150,16 @@ class PetsViewModel: ObservableObject {
             }
             if let description = description {
                 actionData["description"] = description
+            }
+            if let notificationCenterSource = notificationCenterSource {
+                actionData["notificationCenterSource"] = notificationCenterSource
+            }
+            if let notificationCenterLocation = notificationCenterLocation {
+                actionData["notificationCenterLatitude"] = notificationCenterLocation.lat
+                actionData["notificationCenterLongitude"] = notificationCenterLocation.lng
+            }
+            if let notificationCenterAddress = notificationCenterAddress {
+                actionData["notificationCenterAddress"] = notificationCenterAddress
             }
 
             _ = try await syncService.queueAction(type: .markPetLost, data: actionData)
@@ -201,7 +214,10 @@ class PetsViewModel: ObservableObject {
                 location: location,
                 address: address,
                 description: description,
-                rewardAmount: rewardAmount
+                rewardAmount: rewardAmount,
+                notificationCenterSource: notificationCenterSource,
+                notificationCenterLocation: notificationCenterLocation,
+                notificationCenterAddress: notificationCenterAddress
             )
 
             // Update local pet list and cache

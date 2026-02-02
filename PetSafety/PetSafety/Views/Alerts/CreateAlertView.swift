@@ -35,7 +35,7 @@ struct CreateAlertView: View {
                 if !useCurrentLocation {
                     TextField("Enter location", text: $location)
                 } else if let coordinate = locationManager.location {
-                    Text("Lat: \(coordinate.latitude), Lon: \(coordinate.longitude)")
+                    Text("Lat: \(String(format: "%.6f", coordinate.latitude)), Lon: \(String(format: "%.6f", coordinate.longitude))")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

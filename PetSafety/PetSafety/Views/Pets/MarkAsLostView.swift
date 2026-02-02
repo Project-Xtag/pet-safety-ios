@@ -1,5 +1,20 @@
 import SwiftUI
 import MapKit
+import CoreLocation
+
+enum NotificationCenterSource: String, CaseIterable {
+    case currentLocation = "current_location"
+    case registeredAddress = "registered_address"
+    case customAddress = "custom_address"
+
+    var displayName: String {
+        switch self {
+        case .currentLocation: return "Current Location"
+        case .registeredAddress: return "My Address"
+        case .customAddress: return "Custom"
+        }
+    }
+}
 
 struct MarkAsLostView: View {
     let pet: Pet
@@ -11,6 +26,11 @@ struct MarkAsLostView: View {
     @State private var location = ""
     @State private var additionalInfo = ""
     @State private var useCurrentLocation = false
+
+    // Notification center fields
+    @State private var notificationCenterSource: NotificationCenterSource = .registeredAddress
+    @State private var customNotificationAddress = ""
+    @State private var isGeocodingAddress = false
 
     var body: some View {
         Form {
@@ -68,6 +88,59 @@ struct MarkAsLostView: View {
                     }
             }
 
+            Section(header: Text("Notification Center"),
+                    footer: Text("Alerts will be sent to users, vets, and shelters within 10km of this location.")) {
+                Picker("Send alerts near", selection: $notificationCenterSource) {
+                    ForEach(NotificationCenterSource.allCases, id: \.self) { source in
+                        Text(source.displayName).tag(source)
+                    }
+                }
+                .pickerStyle(.segmented)
+
+                switch notificationCenterSource {
+                case .currentLocation:
+                    if let loc = locationManager.location {
+                        HStack {
+                            Image(systemName: "location.fill")
+                                .foregroundColor(.blue)
+                            Text("Lat: \(String(format: "%.6f", loc.latitude)), Lng: \(String(format: "%.6f", loc.longitude))")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    } else {
+                        HStack {
+                            ProgressView()
+                                .scaleEffect(0.8)
+                            Text("Getting location...")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
+                case .registeredAddress:
+                    HStack {
+                        Image(systemName: "house.fill")
+                            .foregroundColor(.green)
+                        Text("Using your registered address")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+
+                case .customAddress:
+                    TextField("Enter address for notifications", text: $customNotificationAddress)
+                        .autocapitalization(.words)
+                    if isGeocodingAddress {
+                        HStack {
+                            ProgressView()
+                                .scaleEffect(0.8)
+                            Text("Validating address...")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+            }
+
             Section {
                 Text("This will send alerts to:")
                     .font(.subheadline)
@@ -101,12 +174,16 @@ struct MarkAsLostView: View {
             }
         }
         .task {
-            if useCurrentLocation {
-                locationManager.requestLocation()
-            }
+            // Request location on load for notification center default
+            locationManager.requestLocation()
         }
         .onChange(of: useCurrentLocation) { _, isOn in
             if isOn {
+                locationManager.requestLocation()
+            }
+        }
+        .onChange(of: notificationCenterSource) { _, source in
+            if source == .currentLocation {
                 locationManager.requestLocation()
             }
         }
@@ -125,11 +202,29 @@ struct MarkAsLostView: View {
                 // Use address text if not using current location
                 let addressText = useCurrentLocation ? nil : (location.isEmpty ? nil : location)
 
+                // Build notification center location if using current location
+                let notificationCenterLocation: LocationCoordinate? = if notificationCenterSource == .currentLocation,
+                   let loc = locationManager.location {
+                    LocationCoordinate(lat: loc.latitude, lng: loc.longitude)
+                } else {
+                    nil
+                }
+
+                // Build notification center address if using custom address
+                let notificationCenterAddress: String? = if notificationCenterSource == .customAddress {
+                    customNotificationAddress.isEmpty ? nil : customNotificationAddress
+                } else {
+                    nil
+                }
+
                 let response = try await petsViewModel.markPetMissing(
                     petId: pet.id,
                     location: coordinate,
                     address: addressText,
-                    description: additionalInfo.isEmpty ? nil : additionalInfo
+                    description: additionalInfo.isEmpty ? nil : additionalInfo,
+                    notificationCenterSource: notificationCenterSource.rawValue,
+                    notificationCenterLocation: notificationCenterLocation,
+                    notificationCenterAddress: notificationCenterAddress
                 )
 
                 // Show appropriate success message based on whether alert was created
