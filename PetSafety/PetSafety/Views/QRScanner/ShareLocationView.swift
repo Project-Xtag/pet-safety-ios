@@ -28,17 +28,17 @@ struct ShareLocationView: View {
 
         var title: String {
             switch self {
-            case .decline: return "Don't Share"
-            case .approximate: return "Approximate Area"
-            case .precise: return "Exact Location"
+            case .decline: return NSLocalizedString("share_dont_share", comment: "")
+            case .approximate: return NSLocalizedString("share_approximate", comment: "")
+            case .precise: return NSLocalizedString("share_exact", comment: "")
             }
         }
 
         var description: String {
             switch self {
-            case .decline: return "The owner will only know their tag was scanned"
-            case .approximate: return "Share your area (~500m accuracy)"
-            case .precise: return "Share your exact GPS coordinates"
+            case .decline: return NSLocalizedString("share_dont_share_desc", comment: "")
+            case .approximate: return NSLocalizedString("share_approximate_desc", comment: "")
+            case .precise: return NSLocalizedString("share_exact_desc", comment: "")
             }
         }
 
@@ -61,11 +61,11 @@ struct ShareLocationView: View {
                             .font(.system(size: 60))
                             .foregroundColor(.blue)
 
-                        Text("Help \(petName) Get Home")
+                        Text(String(format: NSLocalizedString("share_help_get_home %@", comment: ""), petName))
                             .font(.title2)
                             .bold()
 
-                        Text("Choose how much location info to share with the owner")
+                        Text("share_choose_desc")
                             .multilineTextAlignment(.center)
                             .foregroundColor(.secondary)
                             .padding(.horizontal)
@@ -87,7 +87,7 @@ struct ShareLocationView: View {
                     if selectedConsent != .decline {
                         if let location = locationManager.location {
                             VStack(spacing: 8) {
-                                Text("Your Location")
+                                Text("share_your_location")
                                     .font(.headline)
 
                                 if selectedConsent == .approximate {
@@ -95,7 +95,7 @@ struct ShareLocationView: View {
                                     Text("Lat: \(rounded.lat, specifier: "%.3f"), Lng: \(rounded.lng, specifier: "%.3f")")
                                         .font(.caption)
                                         .foregroundColor(.secondary)
-                                    Text("(~500m accuracy)")
+                                    Text("share_accuracy")
                                         .font(.caption2)
                                         .foregroundColor(.orange)
                                 } else {
@@ -110,7 +110,7 @@ struct ShareLocationView: View {
                         } else {
                             VStack(spacing: 8) {
                                 ProgressView()
-                                Text("Getting your location...")
+                                Text("share_getting_location")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -133,12 +133,12 @@ struct ShareLocationView: View {
                             Image(systemName: "checkmark.circle.fill")
                                 .font(.system(size: 50))
                                 .foregroundColor(.green)
-                            Text("Owner Notified!")
+                            Text("share_owner_notified")
                                 .font(.headline)
                             if selectedConsent == .decline {
-                                Text("They know their pet's tag was scanned")
+                                Text("share_owner_knows")
                             } else {
-                                Text("They're on their way!")
+                                Text("share_on_their_way")
                             }
                         }
                         .foregroundColor(.secondary)
@@ -150,12 +150,12 @@ struct ShareLocationView: View {
                                 HStack {
                                     ProgressView()
                                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                    Text("Notifying Owner...")
+                                    Text("share_notifying")
                                         .foregroundColor(.white)
                                 }
                             } else {
                                 Label(
-                                    selectedConsent == .decline ? "Notify Owner (No Location)" : "Share & Notify Owner",
+                                    selectedConsent == .decline ? NSLocalizedString("share_notify_no_location", comment: "") : NSLocalizedString("share_notify_with_location", comment: ""),
                                     systemImage: selectedConsent == .decline ? "bell.fill" : "location.fill"
                                 )
                             }
@@ -170,7 +170,7 @@ struct ShareLocationView: View {
                     }
 
                     // Privacy note
-                    Text("Your location data is only shared with the pet owner and is not stored permanently.")
+                    Text("share_privacy_note")
                         .font(.caption2)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -180,11 +180,11 @@ struct ShareLocationView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Found \(petName)!")
+            .navigationTitle(Text(String(format: NSLocalizedString("share_found_pet %@", comment: ""), petName)))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button("done") {
                         dismiss()
                     }
                 }

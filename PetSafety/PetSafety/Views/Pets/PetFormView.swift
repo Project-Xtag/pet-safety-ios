@@ -7,8 +7,8 @@ enum PetFormMode {
 
     var title: String {
         switch self {
-        case .create: return "Add Pet"
-        case .edit: return "Edit Pet"
+        case .create: return NSLocalizedString("add_pet", comment: "")
+        case .edit: return NSLocalizedString("edit_pet", comment: "")
         }
     }
 
@@ -53,7 +53,7 @@ struct PetFormView: View {
     var body: some View {
         Form {
             // Photo section moved to top
-            Section("Photo") {
+            Section("photo") {
                 PhotosPicker(selection: $selectedPhoto, matching: .images) {
                     HStack {
                         if let image = selectedImage {
@@ -72,9 +72,9 @@ struct PetFormView: View {
                         }
 
                         VStack(alignment: .leading) {
-                            Text(mode.isEdit ? "Edit Photo" : "Select Photo")
+                            Text(mode.isEdit ? "edit_photo" : "select_photo")
                                 .font(.headline)
-                            Text("Choose a photo of your pet")
+                            Text("choose_photo_hint")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -85,17 +85,17 @@ struct PetFormView: View {
                 }
             }
 
-            Section("Basic Information") {
+            Section("basic_information") {
                 HStack {
-                    Text("Name")
+                    Text("name")
                         .frame(width: 80, alignment: .leading)
-                    TextField("Pet Name", text: $name)
+                    TextField("pet_name", text: $name)
                 }
 
                 if mode.isEdit {
                     // In edit mode, show species as read-only text
                     HStack {
-                        Text("Species")
+                        Text("species")
                             .frame(width: 80, alignment: .leading)
                         Text(species)
                             .foregroundColor(.primary)
@@ -103,7 +103,7 @@ struct PetFormView: View {
                     }
                 } else {
                     // In create mode, show species picker
-                    Picker("Species", selection: $species) {
+                    Picker("species", selection: $species) {
                         ForEach(speciesOptions, id: \.self) { option in
                             Text(option).tag(option)
                         }
@@ -111,62 +111,62 @@ struct PetFormView: View {
                 }
 
                 HStack {
-                    Text("Breed")
+                    Text("breed")
                         .frame(width: 80, alignment: .leading)
                     BreedPickerButton(breed: $breed, species: species)
                 }
 
                 HStack {
-                    Text("Colour")
+                    Text("colour")
                         .frame(width: 80, alignment: .leading)
-                    TextField("Colour (optional)", text: $color)
+                    TextField("colour_optional", text: $color)
                 }
 
                 // Age display (merged from Physical Details)
                 if mode.isEdit, case .edit(let pet) = mode, let age = pet.age {
                     HStack {
-                        Text("Age")
+                        Text("age")
                             .frame(width: 80, alignment: .leading)
                         Text(age)
                             .foregroundColor(.primary)
                         Spacer()
                     }
                 } else if !mode.isEdit {
-                    DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: .date)
+                    DatePicker("date_of_birth", selection: $dateOfBirth, displayedComponents: .date)
                 }
 
                 // Microchip Number (merged from Physical Details)
                 HStack {
-                    Text("Microchip")
+                    Text("microchip")
                         .frame(width: 80, alignment: .leading)
-                    TextField("Microchip Number (optional)", text: $microchipNumber)
+                    TextField("microchip_optional", text: $microchipNumber)
                         .keyboardType(.numberPad)
                 }
             }
 
-            Section("Physical Details") {
+            Section("physical_details") {
                 HStack {
-                    Text("Weight")
+                    Text("weight")
                         .frame(width: 80, alignment: .leading)
-                    TextField("Weight in kg (optional)", text: $weight)
+                    TextField("weight_optional", text: $weight)
                         .keyboardType(.decimalPad)
                 }
 
-                Picker("Sex", selection: $sex) {
+                Picker("sex", selection: $sex) {
                     ForEach(sexOptions, id: \.self) { option in
                         Text(option).tag(option)
                     }
                 }
 
-                Toggle("Neutered/Spayed", isOn: $isNeutered)
+                Toggle("neutered_spayed", isOn: $isNeutered)
             }
 
-            Section("Health Information") {
+            Section("health_information") {
                 TextEditor(text: $medicalInfo)
                     .frame(minHeight: 80)
                     .overlay(alignment: .topLeading) {
                         if medicalInfo.isEmpty {
-                            Text("Medical notes (conditions, surgeries, etc.)")
+                            Text("medical_notes_hint")
                                 .foregroundColor(.mutedText)
                                 .padding(.top, 8)
                                 .padding(.leading, 4)
@@ -177,7 +177,7 @@ struct PetFormView: View {
                     .frame(minHeight: 60)
                     .overlay(alignment: .topLeading) {
                         if allergies.isEmpty {
-                            Text("Allergies (food, medication, etc.)")
+                            Text("allergies_hint")
                                 .foregroundColor(.mutedText)
                                 .padding(.top, 8)
                                 .padding(.leading, 4)
@@ -188,7 +188,7 @@ struct PetFormView: View {
                     .frame(minHeight: 60)
                     .overlay(alignment: .topLeading) {
                         if medications.isEmpty {
-                            Text("Current medications")
+                            Text("medications_hint")
                                 .foregroundColor(.mutedText)
                                 .padding(.top, 8)
                                 .padding(.leading, 4)
@@ -196,12 +196,12 @@ struct PetFormView: View {
                     }
             }
 
-            Section("Additional Information") {
+            Section("additional_information") {
                 TextEditor(text: $uniqueFeatures)
                     .frame(minHeight: 60)
                     .overlay(alignment: .topLeading) {
                         if uniqueFeatures.isEmpty {
-                            Text("Unique features (markings, scars, etc.)")
+                            Text("unique_features_hint")
                                 .foregroundColor(.mutedText)
                                 .padding(.top, 8)
                                 .padding(.leading, 4)
@@ -212,7 +212,7 @@ struct PetFormView: View {
                     .frame(minHeight: 80)
                     .overlay(alignment: .topLeading) {
                         if behaviorNotes.isEmpty {
-                            Text("Behavior notes (temperament, training, etc.)")
+                            Text("behavior_notes_hint")
                                 .foregroundColor(.mutedText)
                                 .padding(.top, 8)
                                 .padding(.leading, 4)
@@ -225,7 +225,7 @@ struct PetFormView: View {
                 Button(action: { savePet() }) {
                     HStack {
                         Spacer()
-                        Text("Save Changes")
+                        Text("save_changes")
                             .fontWeight(.semibold)
                         Spacer()
                     }
@@ -235,7 +235,7 @@ struct PetFormView: View {
                 Button(action: { dismiss() }) {
                     HStack {
                         Spacer()
-                        Text("Cancel")
+                        Text("cancel")
                         Spacer()
                     }
                 }
@@ -248,7 +248,7 @@ struct PetFormView: View {
                     Button(action: { showingDeleteAlert = true }) {
                         HStack {
                             Spacer()
-                            Text("Delete Pet")
+                            Text("delete_pet_button")
                                 .fontWeight(.semibold)
                             Spacer()
                         }
@@ -262,27 +262,27 @@ struct PetFormView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+                Button("cancel") {
                     dismiss()
                 }
                 .foregroundColor(.brandOrange)
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Save") {
+                Button("save") {
                     savePet()
                 }
                 .foregroundColor(.brandOrange)
                 .disabled(name.isEmpty || viewModel.isLoading)
             }
         }
-        .alert("Delete Pet", isPresented: $showingDeleteAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("Delete", role: .destructive) {
+        .alert("delete_pet_button", isPresented: $showingDeleteAlert) {
+            Button("cancel", role: .cancel) { }
+            Button("delete", role: .destructive) {
                 deletePet()
             }
         } message: {
-            Text("Are you sure you want to delete this pet? This action cannot be undone.")
+            Text("delete_pet_dialog_message")
         }
         .onChange(of: selectedPhoto) { _, newValue in
             Task {
@@ -384,7 +384,7 @@ struct PetFormView: View {
                         print("✅ Photo uploaded successfully")
                     }
 
-                    appState.showSuccess("Pet added successfully!")
+                    appState.showSuccess(NSLocalizedString("pet_created", comment: ""))
 
                 case .edit(let pet):
                     print("✏️ Updating pet with ID: \(pet.id)")
@@ -420,17 +420,17 @@ struct PetFormView: View {
                             print("📸 Uploading new photo...")
                             _ = try await viewModel.uploadPhoto(for: pet.id, image: image)
                             print("✅ Photo uploaded successfully")
-                            appState.showSuccess("Pet and photo updated successfully!")
+                            appState.showSuccess(NSLocalizedString("pet_updated", comment: ""))
                         } catch {
                             print("❌ Photo upload failed: \(error)")
                             // Pet was saved successfully, just warn about photo
                             if let apiError = error as? APIError {
                                 print("API Error details: \(apiError)")
                             }
-                            appState.showSuccess("Pet updated! Photo upload failed - please try again later.")
+                            appState.showSuccess(NSLocalizedString("pet_updated_photo_failed", comment: ""))
                         }
                     } else {
-                        appState.showSuccess("Pet updated successfully!")
+                        appState.showSuccess(NSLocalizedString("pet_updated", comment: ""))
                     }
                 }
 
@@ -452,10 +452,10 @@ struct PetFormView: View {
         Task {
             do {
                 try await viewModel.deletePet(id: pet.id)
-                appState.showSuccess("\(pet.name) has been deleted.")
+                appState.showSuccess(String(format: NSLocalizedString("pet_deleted", comment: ""), pet.name))
                 dismiss()
             } catch {
-                appState.showError("Failed to delete \(pet.name): \(error.localizedDescription)")
+                appState.showError(String(format: NSLocalizedString("delete_pet_failed", comment: ""), error.localizedDescription))
             }
         }
     }

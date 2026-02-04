@@ -10,6 +10,7 @@ struct PetsListView: View {
     @State private var showingPetSelection = false
     @State private var showingSuccessStories = false
     @State private var selectedPetForReplacement: Pet?
+    @State private var searchText = ""
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
 
@@ -21,6 +22,18 @@ struct PetsListView: View {
         viewModel.pets.filter { $0.isMissing }
     }
 
+    var filteredPets: [Pet] {
+        if searchText.isEmpty {
+            return viewModel.pets
+        }
+        let query = searchText.lowercased()
+        return viewModel.pets.filter { pet in
+            pet.name.lowercased().contains(query) ||
+            pet.species.lowercased().contains(query) ||
+            (pet.breed?.lowercased().contains(query) ?? false)
+        }
+    }
+
     var body: some View {
         ZStack {
             Color(UIColor.systemGroupedBackground)
@@ -29,12 +42,19 @@ struct PetsListView: View {
             VStack(spacing: 0) {
                 OfflineIndicator()
 
-                if viewModel.pets.isEmpty && !viewModel.isLoading {
+                if viewModel.isLoading && viewModel.pets.isEmpty {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else if viewModel.errorMessage != nil && viewModel.pets.isEmpty {
+                    ErrorRetryView(message: viewModel.errorMessage ?? "Failed to load pets") {
+                        Task { await viewModel.fetchPets() }
+                    }
+                } else if viewModel.pets.isEmpty {
                     EmptyStateView(
                         icon: "pawprint.fill",
-                        title: "No Pets Yet",
-                        message: "Add your first pet to get started with Pet Safety",
-                        actionTitle: "Add Pet",
+                        title: NSLocalizedString("empty_pets_title", comment: ""),
+                        message: NSLocalizedString("empty_pets_message", comment: ""),
+                        actionTitle: NSLocalizedString("add_pet", comment: ""),
                         action: { showingAddPet = true }
                     )
                 } else {
@@ -115,7 +135,7 @@ struct PetsListView: View {
             await viewModel.fetchPets()
         }
         .overlay {
-            if viewModel.isLoading {
+            if viewModel.isLoading && !viewModel.pets.isEmpty {
                 ProgressView()
             }
         }
@@ -125,10 +145,10 @@ struct PetsListView: View {
     private var headerSection: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Welcome back,")
+                Text("welcome_back_greeting")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.mutedText)
-                Text(authViewModel.currentUser?.firstName ?? "Pet Owner")
+                Text(authViewModel.currentUser?.firstName ?? NSLocalizedString("pet_owner_default", comment: ""))
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(.primary)
             }
@@ -145,12 +165,12 @@ struct PetsListView: View {
     private var petsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Text("My Pets")
+                Text("tab_my_pets")
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.primary)
                 Spacer()
-                if viewModel.pets.count > 4 {
-                    Button("View All") {
+                if viewModel.pets.count > 4 && searchText.isEmpty {
+                    Button("view_all") {
                         // Show all pets
                     }
                     .font(.system(size: 14, weight: .semibold))
@@ -159,12 +179,33 @@ struct PetsListView: View {
             }
             .padding(.horizontal, 24)
 
+            // Search bar (only show when >4 pets)
+            if viewModel.pets.count > 4 {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.mutedText)
+                    TextField("search_pets_hint", text: $searchText)
+                        .textFieldStyle(.plain)
+                        .font(.system(size: 15))
+                    if !searchText.isEmpty {
+                        Button(action: { searchText = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.mutedText)
+                        }
+                    }
+                }
+                .padding(12)
+                .background(Color(UIColor.systemGray6))
+                .cornerRadius(12)
+                .padding(.horizontal, 24)
+            }
+
             // Pet Cards Grid
             LazyVGrid(columns: [
                 GridItem(.flexible(), spacing: 16),
                 GridItem(.flexible(), spacing: 16)
             ], spacing: 16) {
-                ForEach(viewModel.pets.prefix(4)) { pet in
+                ForEach(searchText.isEmpty ? Array(viewModel.pets.prefix(4)) : filteredPets) { pet in
                     PetCardView(pet: pet)
                 }
             }
@@ -175,7 +216,7 @@ struct PetsListView: View {
     // MARK: - Quick Actions Section
     private var quickActionsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Quick Actions")
+            Text("quick_actions")
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
@@ -184,14 +225,14 @@ struct PetsListView: View {
             HStack(spacing: 12) {
                 QuickActionButton(
                     icon: "plus.circle.fill",
-                    title: "Add Pet",
+                    title: NSLocalizedString("action_add_pet", comment: ""),
                     color: .tealAccent,
                     action: { showingAddPet = true }
                 )
 
                 QuickActionButton(
                     icon: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill",
-                    title: hasMissingPets ? "Mark Found" : "Report Missing",
+                    title: hasMissingPets ? NSLocalizedString("action_mark_found", comment: "") : NSLocalizedString("action_report_missing", comment: ""),
                     color: hasMissingPets ? .green : .red,
                     action: {
                         if hasMissingPets {
@@ -204,14 +245,14 @@ struct PetsListView: View {
 
                 QuickActionButton(
                     icon: "cart.badge.plus",
-                    title: "Order Tags",
+                    title: NSLocalizedString("action_order_tags", comment: ""),
                     color: .tealAccent,
                     action: { showingOrderMoreTags = true }
                 )
 
                 QuickActionButton(
                     icon: "arrow.triangle.2.circlepath",
-                    title: "Replace Tag",
+                    title: NSLocalizedString("action_replace_tag", comment: ""),
                     color: .brandOrange,
                     action: { showOrderReplacementMenu() }
                 )
@@ -223,7 +264,7 @@ struct PetsListView: View {
     // MARK: - Success Stories Section
     private var successStoriesSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Success Stories")
+            Text("success_stories")
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
@@ -239,14 +280,15 @@ struct PetsListView: View {
                         Image(systemName: "heart.circle.fill")
                             .font(.system(size: 30))
                             .foregroundColor(.green)
+                            .accessibilityLabel(NSLocalizedString("success_stories", comment: ""))
                     }
 
                     // Text
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Found Pets")
+                        Text("found_pets")
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(.primary)
-                        Text("See happy reunions near you")
+                        Text("success_stories_subtitle")
                             .font(.system(size: 14))
                             .foregroundColor(.mutedText)
                     }
@@ -257,6 +299,7 @@ struct PetsListView: View {
                     Image(systemName: "chevron.right")
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.mutedText)
+                        .accessibilityHidden(true)
                 }
                 .padding(16)
                 .background(Color(UIColor.systemBackground))
@@ -322,7 +365,8 @@ struct PetCardView: View {
                         HStack(spacing: 4) {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .font(.system(size: 10))
-                            Text("MISSING")
+                                .accessibilityLabel(NSLocalizedString("missing_badge", comment: ""))
+                            Text("missing_badge")
                                 .font(.system(size: 10, weight: .bold))
                         }
                         .foregroundColor(.white)
@@ -365,6 +409,7 @@ struct PetCardView: View {
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(.mutedText)
                 .padding(35)
+                .accessibilityLabel(pet.species)
         }
     }
 }
@@ -379,7 +424,8 @@ struct AddPetCard: View {
                 Image(systemName: "plus.circle")
                     .font(.system(size: 32))
                     .foregroundColor(.mutedText)
-                Text("Add Pet")
+                    .accessibilityLabel(NSLocalizedString("add_pet", comment: ""))
+                Text("add_pet")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.mutedText)
             }
@@ -424,6 +470,7 @@ struct EmptyStateView: View {
                 Image(systemName: icon)
                     .font(.system(size: 40))
                     .foregroundColor(.tealAccent)
+                    .accessibilityHidden(true)
             }
 
             VStack(spacing: 8) {
@@ -467,6 +514,7 @@ struct QuickActionButton: View {
                     Image(systemName: icon)
                         .font(.system(size: 20))
                         .foregroundColor(color)
+                        .accessibilityLabel(title)
                 }
 
                 Text(title.uppercased())
@@ -513,7 +561,7 @@ struct PetSelectionView: View {
 
     var body: some View {
         List {
-            Section(header: Text("Select Pet for Replacement Tag")) {
+            Section(header: Text("select_pet_for_replacement")) {
                 ForEach(pets) { pet in
                     Button(action: {
                         onPetSelected(pet)
@@ -549,17 +597,18 @@ struct PetSelectionView: View {
                             Image(systemName: "chevron.right")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
+                                .accessibilityHidden(true)
                         }
                         .padding(.vertical, 4)
                     }
                 }
             }
         }
-        .navigationTitle("Select Pet")
+        .navigationTitle("select_pet")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Cancel") {
+                Button("cancel") {
                     dismiss()
                 }
             }

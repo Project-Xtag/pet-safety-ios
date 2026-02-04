@@ -146,6 +146,7 @@ struct SyncErrorRow: View {
                 .frame(width: 32, height: 32)
                 .background(Color.orange.opacity(0.1))
                 .cornerRadius(8)
+                .accessibilityLabel("Retry")
 
                 // Dismiss button
                 Button(action: {
@@ -157,6 +158,7 @@ struct SyncErrorRow: View {
                 .frame(width: 32, height: 32)
                 .background(Color(.systemGray5))
                 .cornerRadius(8)
+                .accessibilityLabel("Dismiss")
             }
         }
         .padding(.horizontal, 16)

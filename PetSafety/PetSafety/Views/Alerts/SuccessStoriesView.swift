@@ -17,7 +17,7 @@ struct SuccessStoriesView: View {
                     Spacer()
                     ProgressView()
                         .scaleEffect(1.2)
-                    Text("Loading success stories...")
+                    Text("loading_success_stories")
                         .font(.system(size: 15))
                         .foregroundColor(.mutedText)
                     Spacer()
@@ -105,15 +105,15 @@ struct SuccessStoriesView: View {
     private func createShareText(for story: SuccessStory) -> String {
         var text = ""
         if let petName = story.petName {
-            text += "\(petName) Found! 🎉\n\n"
+            text += String(format: NSLocalizedString("pet_found_share", comment: ""), petName) + " 🎉\n\n"
         }
         if let storyText = story.storyText {
             text += "\(storyText)\n\n"
         }
         if let city = story.reunionCity {
-            text += "Reunited in \(city)\n"
+            text += String(format: NSLocalizedString("reunited_in", comment: ""), city) + "\n"
         }
-        text += "\nShared via Pet Safety App"
+        text += "\n" + String(localized: "shared_via_pet_safety")
         return text
     }
 }
@@ -137,7 +137,7 @@ struct SuccessStoriesListView: View {
                     if viewModel.isLoading {
                         ProgressView()
                     } else {
-                        Button("Load More") {
+                        Button("load_more") {
                             Task {
                                 if let userLoc = viewModel.stories.first?.coordinate {
                                     await viewModel.loadMore(
@@ -204,7 +204,7 @@ struct SuccessStoryRowView: View {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.caption)
                             .foregroundColor(.green)
-                        Text("Found & Reunited")
+                        Text("found_and_reunited")
                             .font(.caption)
                             .fontWeight(.semibold)
                             .foregroundColor(.green)
@@ -227,7 +227,7 @@ struct SuccessStoryRowView: View {
 
                     // Distance
                     if let distance = story.distanceKm {
-                        Text("\(String(format: "%.1f", distance)) km away")
+                        Text(String(format: NSLocalizedString("distance_km", comment: ""), distance))
                             .font(.caption2)
                             .foregroundColor(.secondary)
                     }
@@ -259,7 +259,7 @@ struct SuccessStoryRowView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "clock.fill")
                             .font(.caption2)
-                        Text("Missing for \(timeMissing)")
+                        Text(String(format: NSLocalizedString("missing_for", comment: ""), timeMissing))
                             .font(.caption2)
                     }
                     .foregroundColor(.secondary)
@@ -269,7 +269,7 @@ struct SuccessStoryRowView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "calendar")
                             .font(.caption2)
-                        Text("Found \(foundDate.timeAgoDisplay())")
+                        Text(String(format: NSLocalizedString("found_on", comment: ""), foundDate.timeAgoDisplay()))
                             .font(.caption2)
                     }
                     .foregroundColor(.secondary)
@@ -299,7 +299,7 @@ struct SuccessStoriesMapView: View {
             Map(position: $mapPosition) {
                 ForEach(stories) { story in
                     if let coordinate = story.coordinate {
-                        Annotation("Success Story", coordinate: coordinate) {
+                        Annotation(String(localized: "success_story_marker"), coordinate: coordinate) {
                             SuccessStoryMapMarker(
                                 story: story,
                                 isSelected: selectedStory?.id == story.id
@@ -413,7 +413,7 @@ struct SuccessStoryMapCard: View {
                 HStack(spacing: 4) {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.caption)
-                    Text("Found & Reunited")
+                    Text("found_and_reunited")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                 }
@@ -468,11 +468,11 @@ struct EmptySuccessStoriesView: View {
             }
 
             VStack(spacing: 12) {
-                Text("No Success Stories Nearby")
+                Text("no_success_stories")
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.primary)
 
-                Text("Be the first to share a happy reunion in your area!")
+                Text("no_success_stories_message")
                     .font(.system(size: 15))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
@@ -504,13 +504,13 @@ extension Date {
         let components = calendar.dateComponents([.day, .hour, .minute], from: self, to: now)
 
         if let day = components.day, day > 0 {
-            return day == 1 ? "1 day ago" : "\(day) days ago"
+            return day == 1 ? String(localized: "success_day_ago") : String(format: NSLocalizedString("success_days_ago %lld", comment: ""), day)
         } else if let hour = components.hour, hour > 0 {
-            return hour == 1 ? "1 hour ago" : "\(hour) hours ago"
+            return hour == 1 ? String(localized: "success_hour_ago") : String(format: NSLocalizedString("success_hours_ago %lld", comment: ""), hour)
         } else if let minute = components.minute, minute > 0 {
-            return minute == 1 ? "1 minute ago" : "\(minute) minutes ago"
+            return minute == 1 ? String(localized: "success_minute_ago") : String(format: NSLocalizedString("success_minutes_ago %lld", comment: ""), minute)
         } else {
-            return "just now"
+            return String(localized: "success_just_now")
         }
     }
 }

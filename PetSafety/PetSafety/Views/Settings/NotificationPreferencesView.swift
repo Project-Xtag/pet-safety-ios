@@ -8,19 +8,19 @@ struct NotificationPreferencesView: View {
         ZStack {
             Form {
                 Section {
-                    Text("Choose how you want to be notified when your pet's tag is scanned or a sighting is reported.")
+                    Text("notif_pref_intro")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .padding(.vertical, 4)
                 }
 
-                Section(header: Text("Notification Methods")) {
+                Section(header: Text("notif_pref_methods")) {
                     Toggle(isOn: $viewModel.preferences.notifyByEmail) {
                         Label {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Email Notifications")
+                                Text("notif_pref_email")
                                     .font(.body)
-                                Text("Receive detailed email alerts")
+                                Text("notif_pref_email_desc")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -34,9 +34,9 @@ struct NotificationPreferencesView: View {
                     Toggle(isOn: $viewModel.preferences.notifyBySms) {
                         Label {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("SMS Notifications")
+                                Text("notif_pref_sms")
                                     .font(.body)
-                                Text("Receive text message alerts")
+                                Text("notif_pref_sms_desc")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -50,9 +50,9 @@ struct NotificationPreferencesView: View {
                     Toggle(isOn: $viewModel.preferences.notifyByPush) {
                         Label {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Push Notifications")
+                                Text("notif_pref_push")
                                     .font(.body)
-                                Text("Receive real-time in-app alerts")
+                                Text("notif_pref_push_desc")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -65,7 +65,7 @@ struct NotificationPreferencesView: View {
                 }
 
                 Section {
-                    Text("⚠️ At least one notification method must remain enabled to ensure you don't miss important alerts about your pets.")
+                    Text("notif_pref_warning")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .padding(.vertical, 4)
@@ -84,7 +84,7 @@ struct NotificationPreferencesView: View {
                                     ProgressView()
                                         .tint(.white)
                                 } else {
-                                    Text("Save Changes")
+                                    Text("notif_pref_save")
                                         .fontWeight(.semibold)
                                 }
                                 Spacer()
@@ -97,22 +97,22 @@ struct NotificationPreferencesView: View {
                 }
             }
             .adaptiveList()
-            .navigationTitle("Notification Settings")
+            .navigationTitle("notif_pref_title")
             .navigationBarTitleDisplayMode(.inline)
             .task {
                 await viewModel.loadPreferences()
             }
-            .alert("Error", isPresented: $viewModel.showError) {
-                Button("OK", role: .cancel) {}
+            .alert("error", isPresented: $viewModel.showError) {
+                Button("ok", role: .cancel) {}
             } message: {
-                Text(viewModel.errorMessage ?? "An error occurred")
+                Text(viewModel.errorMessage ?? String(localized: "error"))
             }
-            .alert("Success", isPresented: $viewModel.showSuccess) {
-                Button("OK", role: .cancel) {
+            .alert("success", isPresented: $viewModel.showSuccess) {
+                Button("ok", role: .cancel) {
                     dismiss()
                 }
             } message: {
-                Text("Notification preferences saved successfully")
+                Text("notif_pref_success")
             }
 
             // Loading overlay
@@ -123,7 +123,7 @@ struct NotificationPreferencesView: View {
                     ProgressView()
                         .scaleEffect(1.5)
                         .tint(.white)
-                    Text("Loading preferences...")
+                    Text("notif_pref_loading")
                         .foregroundColor(.white)
                         .padding(.top)
                 }
@@ -176,7 +176,7 @@ class NotificationPreferencesViewModel: ObservableObject {
 
     func savePreferences() async {
         guard preferences.isValid else {
-            errorMessage = "At least one notification method must be enabled"
+            errorMessage = String(localized: "notification_method_required")
             showError = true
             return
         }

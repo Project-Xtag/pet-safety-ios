@@ -8,8 +8,8 @@ struct OrdersView: View {
             if viewModel.orders.isEmpty && !viewModel.isLoading {
                 EmptyStateView(
                     icon: "cart.fill",
-                    title: "No Orders",
-                    message: "You haven't placed any orders yet"
+                    title: String(localized: "orders_no_orders"),
+                    message: String(localized: "orders_no_orders_message")
                 )
             } else {
                 List {
@@ -23,7 +23,7 @@ struct OrdersView: View {
                 .adaptiveList()
             }
         }
-        .navigationTitle("Orders")
+        .navigationTitle(Text("orders_title"))
         .task {
             await viewModel.fetchOrders()
         }
@@ -54,7 +54,7 @@ struct OrderRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text("Order #\(order.id)")
+                Text("order_number \(order.id)")
                     .font(.headline)
 
                 Spacer()
@@ -107,16 +107,16 @@ struct OrderDetailView: View {
 
     var body: some View {
         List {
-            Section("Order Information") {
+            Section(header: Text("orders_information")) {
                 HStack {
-                    Text("Order ID")
+                    Text("orders_order_id")
                     Spacer()
                     Text("#\(order.id)")
                         .foregroundColor(.secondary)
                 }
 
                 HStack {
-                    Text("Status")
+                    Text("orders_status")
                     Spacer()
                     HStack {
                         Circle()
@@ -128,14 +128,14 @@ struct OrderDetailView: View {
                 }
 
                 HStack {
-                    Text("Total Amount")
+                    Text("orders_total_amount")
                     Spacer()
                     Text(order.formattedAmount)
                         .fontWeight(.bold)
                 }
 
                 HStack {
-                    Text("Order Date")
+                    Text("orders_order_date")
                     Spacer()
                     Text(formatDate(order.createdAt))
                         .foregroundColor(.secondary)
@@ -143,18 +143,18 @@ struct OrderDetailView: View {
             }
 
             if let items = order.items, !items.isEmpty {
-                Section("Items") {
+                Section(header: Text("orders_items")) {
                     ForEach(items) { item in
                         VStack(alignment: .leading, spacing: 4) {
                             Text(item.itemType.capitalized)
                                 .font(.headline)
 
-                            Text("Quantity: \(item.quantity)")
+                            Text("orders_quantity \(item.quantity)")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
 
                             HStack {
-                                Text(item.qrTagId == nil ? "QR Tag pending" : "QR Tag assigned")
+                                Text(item.qrTagId == nil ? String(localized: "orders_tag_pending") : String(localized: "orders_tag_assigned"))
                                         .font(.caption)
                                     .foregroundColor(item.qrTagId == nil ? .orange : .blue)
 
@@ -170,7 +170,7 @@ struct OrderDetailView: View {
                 }
             }
         }
-        .navigationTitle("Order Details")
+        .navigationTitle(Text("orders_detail_title"))
         .navigationBarTitleDisplayMode(.inline)
         .adaptiveList()
     }

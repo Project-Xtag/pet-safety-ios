@@ -36,29 +36,29 @@ struct ProfileView: View {
             }
         }
         .navigationBarHidden(true)
-        .alert("Log Out", isPresented: $showingLogoutAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("Log Out", role: .destructive) {
+        .alert("log_out", isPresented: $showingLogoutAlert) {
+            Button("cancel", role: .cancel) { }
+            Button("log_out", role: .destructive) {
                 authViewModel.logout()
             }
         } message: {
-            Text("Are you sure you want to log out?")
+            Text("logout_confirm")
         }
-        .alert("Delete Account", isPresented: $showingDeleteConfirmation) {
-            Button("Cancel", role: .cancel) { }
-            Button("Delete Account", role: .destructive) {
+        .alert("profile_delete_account", isPresented: $showingDeleteConfirmation) {
+            Button("cancel", role: .cancel) { }
+            Button("delete_account", role: .destructive) {
                 performDeleteAccount()
             }
         } message: {
-            Text("This action cannot be undone. Your account will be permanently deleted, all personal data will be removed, and any active subscriptions will be cancelled.")
+            Text("delete_account_full_warning")
         }
-        .alert("Cannot Delete Account", isPresented: $showingDeleteError) {
-            Button("OK", role: .cancel) { }
+        .alert("profile_cannot_delete", isPresented: $showingDeleteError) {
+            Button("ok", role: .cancel) { }
         } message: {
             if missingPetNames.isEmpty {
                 Text(deleteErrorMessage)
             } else {
-                Text("\(deleteErrorMessage)\n\nMissing pets: \(missingPetNames.joined(separator: ", "))")
+                Text(String(format: NSLocalizedString("missing_pets_label", comment: ""), missingPetNames.joined(separator: ", ")))
             }
         }
     }
@@ -67,7 +67,7 @@ struct ProfileView: View {
     private var headerSection: some View {
         VStack(spacing: 16) {
             // Title
-            Text("Account")
+            Text("profile_title")
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(.primary)
                 .padding(.top, 60)
@@ -83,6 +83,7 @@ struct ProfileView: View {
                         Image(systemName: "person.fill")
                             .font(.system(size: 40))
                             .foregroundColor(.white)
+                            .accessibilityLabel("Profile avatar")
                     }
                     .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 4)
 
@@ -98,6 +99,7 @@ struct ProfileView: View {
                             .clipShape(Circle())
                             .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 2)
                     }
+                    .accessibilityLabel("Edit profile photo")
                 }
 
                 // User Info
@@ -113,21 +115,6 @@ struct ProfileView: View {
                             .font(.system(size: 14))
                             .foregroundColor(.mutedText)
                     }
-
-                    // Premium Badge
-                    HStack(spacing: 6) {
-                        Image(systemName: "crown.fill")
-                            .font(.system(size: 12))
-                            .foregroundColor(.tealAccent)
-                        Text("PREMIUM MEMBER")
-                            .font(.system(size: 11, weight: .bold))
-                            .foregroundColor(.tealAccent)
-                            .tracking(1)
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(Color.tealAccent.opacity(0.1))
-                    .cornerRadius(20)
                 }
             }
             .padding(.bottom, 24)
@@ -140,27 +127,27 @@ struct ProfileView: View {
     private var menuSection: some View {
         VStack(spacing: 2) {
             NavigationLink(destination: PersonalInformationView()) {
-                ProfileMenuRow(icon: "person", title: "Personal Information")
+                ProfileMenuRow(icon: "person", title: NSLocalizedString("profile_personal_info", comment: ""))
             }
 
             NavigationLink(destination: AddressView()) {
-                ProfileMenuRow(icon: "house", title: "Address")
+                ProfileMenuRow(icon: "house", title: NSLocalizedString("profile_address", comment: ""))
             }
 
             NavigationLink(destination: ContactsView()) {
-                ProfileMenuRow(icon: "person.2", title: "Contacts")
+                ProfileMenuRow(icon: "person.2", title: NSLocalizedString("profile_contacts", comment: ""))
             }
 
             NavigationLink(destination: PrivacyModeView()) {
-                ProfileMenuRow(icon: "lock.shield", title: "Privacy Mode")
+                ProfileMenuRow(icon: "lock.shield", title: NSLocalizedString("profile_privacy_mode", comment: ""))
             }
 
             NavigationLink(destination: NotificationSettingsView()) {
-                ProfileMenuRow(icon: "bell", title: "Notifications")
+                ProfileMenuRow(icon: "bell", title: NSLocalizedString("profile_notifications", comment: ""))
             }
 
             NavigationLink(destination: HelpAndSupportView()) {
-                ProfileMenuRow(icon: "questionmark.circle", title: "Help & Support")
+                ProfileMenuRow(icon: "questionmark.circle", title: NSLocalizedString("profile_help_support", comment: ""))
             }
         }
         .background(Color(UIColor.systemBackground))
@@ -174,7 +161,7 @@ struct ProfileView: View {
             HStack(spacing: 12) {
                 Image(systemName: "rectangle.portrait.and.arrow.right")
                     .font(.system(size: 18))
-                Text("Log Out")
+                Text("profile_log_out")
                     .font(.system(size: 16, weight: .semibold))
             }
             .foregroundColor(.white)
@@ -190,7 +177,7 @@ struct ProfileView: View {
     // MARK: - Delete Account Section
     private var deleteAccountSection: some View {
         VStack(spacing: 12) {
-            Text("Danger Zone")
+            Text("profile_danger_zone")
                 .font(.system(size: 12, weight: .semibold))
                 .foregroundColor(.red.opacity(0.7))
                 .tracking(1)
@@ -205,7 +192,7 @@ struct ProfileView: View {
                         Image(systemName: "trash")
                             .font(.system(size: 18))
                     }
-                    Text(isDeleting ? "Deleting..." : "Delete Account")
+                    Text(isDeleting ? NSLocalizedString("profile_deleting", comment: "") : NSLocalizedString("profile_delete_account", comment: ""))
                         .font(.system(size: 16, weight: .semibold))
                 }
                 .foregroundColor(.white)
@@ -217,7 +204,7 @@ struct ProfileView: View {
             }
             .disabled(isCheckingDelete || isDeleting)
 
-            Text("This will permanently delete your account and all data")
+            Text("profile_delete_permanent")
                 .font(.system(size: 11))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -239,7 +226,7 @@ struct ProfileView: View {
                     if response.canDelete {
                         showingDeleteConfirmation = true
                     } else {
-                        deleteErrorMessage = response.message ?? "You cannot delete your account at this time."
+                        deleteErrorMessage = response.message ?? NSLocalizedString("profile_cannot_delete_message", comment: "")
                         missingPetNames = response.missingPets?.map { $0.name } ?? []
                         showingDeleteError = true
                     }
@@ -297,6 +284,7 @@ struct ProfileMenuRow: View {
             Image(systemName: "chevron.right")
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(Color(UIColor.systemGray3))
+                .accessibilityHidden(true)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 16)
@@ -315,6 +303,7 @@ struct MenuItemRow: View {
             Image(systemName: icon)
                 .foregroundColor(iconColor)
                 .frame(width: 24)
+                .accessibilityLabel(title)
 
             Text(title)
                 .foregroundColor(.primary)

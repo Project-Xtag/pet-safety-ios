@@ -1,6 +1,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import UIKit
 
 enum NotificationCenterSource: String, CaseIterable {
     case currentLocation = "current_location"
@@ -228,6 +229,7 @@ struct MarkAsLostView: View {
                 )
 
                 // Show appropriate success message based on whether alert was created
+                UINotificationFeedbackGenerator().notificationOccurred(.warning)
                 if response.alert != nil {
                     appState.showSuccess("\(pet.name) has been reported as missing. Alerts are being sent to nearby users, vets, and shelters.")
                 } else {

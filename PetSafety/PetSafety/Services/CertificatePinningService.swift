@@ -38,13 +38,14 @@ final class CertificatePinningService: NSObject {
     ///
     /// Include multiple pins for certificate rotation (primary + backup).
     private let pinnedPublicKeyHashes: Set<String> = [
-        // Primary certificate pin (pet-er.app current certificate)
-        // TODO: Replace with actual hash from production certificate
-        "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=",  // Placeholder - replace with actual pin
+        // Primary certificate pin (pet-er.app leaf certificate)
+        "zycaJHtDpqsq38D/MDTe1LBwbcKPDspfg9hQUwWqFSo=",
 
-        // Backup pin (for certificate rotation)
-        // This should be the pin of the next certificate or CA's intermediate
-        "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC=",  // Placeholder - replace with actual backup pin
+        // Intermediate certificate (backup pin for chain validation)
+        "AlSQhgtJirc8ahLyekmtX+Iw+v46yPYRLJt9Cq1GlB0=",
+
+        // Root certificate (additional backup)
+        "bLBmD1ixuVZ6W9R3gNTrzsWj5YcYU21f2YDnSw/9N/Q=",
     ]
 
     /// Whether to enforce pinning (disable for debugging only)

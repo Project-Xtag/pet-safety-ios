@@ -12,7 +12,7 @@ struct PetPublicProfileView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "eye.fill")
                         .foregroundColor(.blue)
-                    Text("This is how others see \(pet.name)'s profile")
+                    Text(String(format: NSLocalizedString("public_profile_subtitle", comment: ""), pet.name))
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.blue)
                 }
@@ -43,11 +43,11 @@ struct PetPublicProfileView: View {
 
                 // Pet Name & Info
                 VStack(spacing: 8) {
-                    Text("Hello! I'm \(pet.name)")
+                    Text(String(format: NSLocalizedString("hello_pet_name", comment: ""), pet.name))
                         .font(.system(size: 26, weight: .bold))
                         .multilineTextAlignment(.center)
 
-                    Text("You've just scanned my tag. Thank you for helping me!")
+                    Text("scanned_tag_thanks")
                         .font(.system(size: 15))
                         .foregroundColor(.mutedText)
                         .multilineTextAlignment(.center)
@@ -56,17 +56,17 @@ struct PetPublicProfileView: View {
                     // Pet details row
                     HStack(spacing: 16) {
                         if let breed = pet.breed {
-                            Text("**Breed:** \(breed)")
+                            Text("**\(NSLocalizedString("scanner_breed", comment: "")):** \(breed)")
                                 .font(.system(size: 14))
                                 .foregroundColor(.mutedText)
                         }
                         if let age = pet.age {
-                            Text("**Age:** \(age)")
+                            Text("**\(NSLocalizedString("scanner_age", comment: "")):** \(age)")
                                 .font(.system(size: 14))
                                 .foregroundColor(.mutedText)
                         }
                         if let color = pet.color {
-                            Text("**Color:** \(color)")
+                            Text("**\(NSLocalizedString("scanner_color", comment: "")):** \(color)")
                                 .font(.system(size: 14))
                                 .foregroundColor(.mutedText)
                         }
@@ -77,7 +77,7 @@ struct PetPublicProfileView: View {
                 VStack(spacing: 8) {
                     HStack(spacing: 8) {
                         Image(systemName: "location.fill")
-                        Text("Share My Location with Owner")
+                        Text("share_location_with_owner")
                     }
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(.white)
@@ -87,7 +87,7 @@ struct PetPublicProfileView: View {
                     .cornerRadius(14)
                     .padding(.horizontal, 24)
 
-                    Text("\(pet.name)'s owner will receive an SMS and email with your location")
+                    Text(String(format: NSLocalizedString("owner_notified_sms_email", comment: ""), pet.name))
                         .font(.system(size: 12))
                         .foregroundColor(.mutedText)
                         .multilineTextAlignment(.center)
@@ -97,10 +97,10 @@ struct PetPublicProfileView: View {
                 // Contact Owner Section
                 if pet.ownerPhone != nil || pet.ownerEmail != nil {
                     VStack(spacing: 16) {
-                        Text("Contact Owner")
+                        Text("contact_owner")
                             .font(.system(size: 18, weight: .bold))
 
-                        Text("Please let my owner know that you have found me. Tap on the share location button or call them on the phone number below.")
+                        Text("contact_owner_plea")
                             .font(.system(size: 14))
                             .foregroundColor(.mutedText)
                             .multilineTextAlignment(.center)
@@ -112,7 +112,7 @@ struct PetPublicProfileView: View {
                                     HStack(spacing: 12) {
                                         Image(systemName: "phone.fill")
                                             .foregroundColor(.tealAccent)
-                                        Text("Call: \(phone)")
+                                        Text(String(format: NSLocalizedString("call_phone", comment: ""), phone))
                                             .font(.system(size: 15, weight: .medium))
                                             .foregroundColor(.primary)
                                         Spacer()
@@ -132,7 +132,7 @@ struct PetPublicProfileView: View {
                                     HStack(spacing: 12) {
                                         Image(systemName: "envelope.fill")
                                             .foregroundColor(.tealAccent)
-                                        Text("Email: \(email)")
+                                        Text(String(format: NSLocalizedString("email_contact", comment: ""), email))
                                             .font(.system(size: 15, weight: .medium))
                                             .foregroundColor(.primary)
                                         Spacer()
@@ -153,7 +153,7 @@ struct PetPublicProfileView: View {
                     HStack(spacing: 12) {
                         Image(systemName: "info.circle.fill")
                             .foregroundColor(.orange)
-                        Text("Contact info not set up yet")
+                        Text("contact_info_not_set")
                             .font(.system(size: 15, weight: .medium))
                             .foregroundColor(.orange)
                         Spacer()
@@ -167,7 +167,7 @@ struct PetPublicProfileView: View {
                 // Owner Address Section (if publicly visible)
                 if let address = pet.ownerAddress {
                     VStack(spacing: 12) {
-                        Text("Owner Location")
+                        Text("scanner_owner_location")
                             .font(.system(size: 18, weight: .bold))
 
                         HStack(alignment: .top, spacing: 12) {
@@ -211,7 +211,7 @@ struct PetPublicProfileView: View {
                         HStack(spacing: 8) {
                             Image(systemName: "cross.case.fill")
                                 .foregroundColor(.red)
-                            Text("Medical Information")
+                            Text("scanner_medical_info")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(.red)
                         }
@@ -232,7 +232,7 @@ struct PetPublicProfileView: View {
                         HStack(spacing: 8) {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .foregroundColor(.orange)
-                            Text("Allergies")
+                            Text("allergies")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(.orange)
                         }
@@ -253,7 +253,7 @@ struct PetPublicProfileView: View {
                         HStack(spacing: 8) {
                             Image(systemName: "note.text")
                                 .foregroundColor(.blue)
-                            Text("Notes")
+                            Text("scanner_notes")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(.blue)
                         }
@@ -271,17 +271,17 @@ struct PetPublicProfileView: View {
                 // How It Works Card
                 VStack(alignment: .leading, spacing: 16) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("How It Works")
+                        Text("how_it_works")
                             .font(.system(size: 18, weight: .bold))
-                        Text("Help reunite \(pet.name) with their owner safely")
+                        Text(String(format: NSLocalizedString("help_reunite_pet", comment: ""), pet.name))
                             .font(.system(size: 14))
                             .foregroundColor(.mutedText)
                     }
 
                     VStack(alignment: .leading, spacing: 12) {
-                        HowItWorksStep(number: "1", title: "Share Your Location", description: "Click the button above to share where you found \(pet.name)")
-                        HowItWorksStep(number: "2", title: "Owner Gets Notified", description: "The owner receives an SMS with your location on Google Maps")
-                        HowItWorksStep(number: "3", title: "Quick Reunion", description: "Stay near the location so the owner can find you and \(pet.name)")
+                        HowItWorksStep(number: "1", title: NSLocalizedString("step_share_location", comment: ""), description: String(format: NSLocalizedString("scanner_step1_dynamic_desc", comment: ""), pet.name))
+                        HowItWorksStep(number: "2", title: NSLocalizedString("step_owner_notified", comment: ""), description: NSLocalizedString("step_owner_notified_desc", comment: ""))
+                        HowItWorksStep(number: "3", title: NSLocalizedString("step_quick_reunion", comment: ""), description: String(format: NSLocalizedString("scanner_step3_dynamic_desc", comment: ""), pet.name))
                     }
                 }
                 .padding()
@@ -294,7 +294,7 @@ struct PetPublicProfileView: View {
                     Image(systemName: "lock.fill")
                         .font(.system(size: 12))
                         .foregroundColor(.mutedText)
-                    Text("Your privacy matters. We'll only share your location with \(pet.name)'s owner with your explicit consent.")
+                    Text(String(format: NSLocalizedString("privacy_notice", comment: ""), pet.name))
                         .font(.system(size: 12))
                         .foregroundColor(.mutedText)
                 }
@@ -306,7 +306,7 @@ struct PetPublicProfileView: View {
             .padding(.top, 24)
             .padding(.bottom, 120)
         }
-        .navigationTitle("Public Profile Preview")
+        .navigationTitle(Text("public_profile_preview"))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

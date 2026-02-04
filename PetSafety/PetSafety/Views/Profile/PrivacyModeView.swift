@@ -11,31 +11,31 @@ struct PrivacyModeView: View {
 
     var body: some View {
         List {
-            Section(header: Text("Contact Visibility"), footer: Text("Control what contact information is visible when someone scans your pet's QR tag")) {
-                Toggle("Show Phone Number", isOn: $showPhonePublicly)
+            Section(header: Text("privacy_contact_visibility"), footer: Text("privacy_contact_footer")) {
+                Toggle("privacy_show_phone", isOn: $showPhonePublicly)
                     .disabled(isUpdating)
                     .onChange(of: showPhonePublicly) { _, newValue in
                         updatePrivacySetting("show_phone_publicly", value: newValue)
                     }
-                Toggle("Show Email Address", isOn: $showEmailPublicly)
+                Toggle("privacy_show_email", isOn: $showEmailPublicly)
                     .disabled(isUpdating)
                     .onChange(of: showEmailPublicly) { _, newValue in
                         updatePrivacySetting("show_email_publicly", value: newValue)
                     }
-                Toggle("Show Address", isOn: $showAddressPublicly)
+                Toggle("privacy_show_address", isOn: $showAddressPublicly)
                     .disabled(isUpdating)
                     .onChange(of: showAddressPublicly) { _, newValue in
                         updatePrivacySetting("show_address_publicly", value: newValue)
                     }
             }
 
-            Section(header: Text("Data Privacy")) {
+            Section(header: Text("privacy_data_privacy")) {
                 NavigationLink(destination: PrivacyPolicyView()) {
                     HStack {
                         Image(systemName: "doc.text.fill")
                             .foregroundColor(.indigo)
                             .frame(width: 24)
-                        Text("Privacy Policy")
+                        Text("privacy_privacy_policy")
                     }
                 }
 
@@ -44,16 +44,16 @@ struct PrivacyModeView: View {
                         Image(systemName: "server.rack")
                             .foregroundColor(.indigo)
                             .frame(width: 24)
-                        Text("Data Management")
+                        Text("privacy_data_management")
                     }
                 }
             }
 
-            Section(footer: Text("Your privacy is important to us. We never share your data with third parties without your explicit consent.")) {
+            Section(footer: Text("privacy_mode_footer")) {
                 EmptyView()
             }
         }
-        .navigationTitle("Privacy Mode")
+        .navigationTitle("privacy_title")
         .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
@@ -73,12 +73,12 @@ struct PrivacyModeView: View {
                 try await authViewModel.updateProfile(updates: [field: value])
                 await MainActor.run {
                     isUpdating = false
-                    appState.showSuccess("Privacy settings updated")
+                    appState.showSuccess(String(localized: "privacy_settings_updated"))
                 }
             } catch {
                 await MainActor.run {
                     isUpdating = false
-                    appState.showError("Failed to update privacy settings")
+                    appState.showError(String(localized: "privacy_settings_failed"))
                     // Revert the toggle on failure
                     if let user = authViewModel.currentUser {
                         showPhonePublicly = user.showPhonePublicly ?? true
@@ -96,37 +96,37 @@ struct PrivacyPolicyView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                Text("Privacy Policy")
+                Text("privacy_privacy_policy")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(.bottom, 8)
 
-                Text("Last updated: November 2024")
+                Text("privacy_policy_updated")
                     .font(.caption)
                     .foregroundColor(.secondary)
 
                 Group {
-                    SectionHeader(title: "1. Information We Collect")
-                    SectionText(text: "We collect information you provide directly to us, including your name, email address, phone number, and address when you register for our service.")
+                    SectionHeader(title: String(localized: "privacy_policy_section1_title"))
+                    SectionText(text: String(localized: "privacy_policy_section1_body"))
 
-                    SectionHeader(title: "2. How We Use Your Information")
-                    SectionText(text: "We use the information we collect to provide, maintain, and improve our services, including to help reunite lost pets with their owners.")
+                    SectionHeader(title: String(localized: "privacy_policy_section2_title"))
+                    SectionText(text: String(localized: "privacy_policy_section2_body"))
 
-                    SectionHeader(title: "3. Information Sharing")
-                    SectionText(text: "We do not share your personal information with third parties except as necessary to provide our services or as required by law.")
+                    SectionHeader(title: String(localized: "privacy_policy_section3_title"))
+                    SectionText(text: String(localized: "privacy_policy_section3_body"))
 
-                    SectionHeader(title: "4. Data Security")
-                    SectionText(text: "We implement appropriate security measures to protect your personal information from unauthorized access, alteration, or destruction.")
+                    SectionHeader(title: String(localized: "privacy_policy_section4_title"))
+                    SectionText(text: String(localized: "privacy_policy_section4_body"))
 
-                    SectionHeader(title: "5. Your Rights")
-                    SectionText(text: "You have the right to access, update, or delete your personal information at any time through your account settings.")
+                    SectionHeader(title: String(localized: "privacy_policy_section5_title"))
+                    SectionText(text: String(localized: "privacy_policy_section5_body"))
                 }
 
                 Spacer(minLength: 40)
             }
             .padding()
         }
-        .navigationTitle("Privacy Policy")
+        .navigationTitle("privacy_policy_title")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -137,37 +137,37 @@ struct DataManagementView: View {
 
     var body: some View {
         List {
-            Section(header: Text("Your Data"), footer: Text("View and manage all data we have stored about you")) {
+            Section(header: Text("privacy_your_data"), footer: Text("privacy_your_data_footer")) {
                 Button(action: { exportData() }) {
                     HStack {
                         Image(systemName: "square.and.arrow.up")
                             .foregroundColor(.blue)
-                        Text("Export My Data")
+                        Text("privacy_export_data")
                             .foregroundColor(.primary)
                     }
                 }
             }
 
-            Section(header: Text("Data Deletion"), footer: Text("Permanently delete your account and all associated data. This action cannot be undone.")) {
+            Section(header: Text("privacy_deletion_section"), footer: Text("privacy_deletion_footer")) {
                 Button(action: { showingDeleteAlert = true }) {
                     HStack {
                         Image(systemName: "trash.fill")
                             .foregroundColor(.red)
-                        Text("Delete My Account")
+                        Text("privacy_delete_account")
                             .foregroundColor(.red)
                     }
                 }
             }
         }
-        .navigationTitle("Data Management")
+        .navigationTitle("privacy_data_management")
         .navigationBarTitleDisplayMode(.inline)
-        .alert("Delete Account", isPresented: $showingDeleteAlert) {
-            Button("Cancel", role: .cancel) { }
-            Button("Delete", role: .destructive) {
+        .alert("delete_account", isPresented: $showingDeleteAlert) {
+            Button("cancel", role: .cancel) { }
+            Button("delete", role: .destructive) {
                 deleteAccount()
             }
         } message: {
-            Text("Are you sure you want to permanently delete your account? This will remove all your data including pet profiles and cannot be undone.")
+            Text("privacy_delete_confirm")
         }
     }
 

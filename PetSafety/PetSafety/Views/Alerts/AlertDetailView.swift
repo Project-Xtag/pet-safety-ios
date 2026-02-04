@@ -49,6 +49,7 @@ struct AlertDetailView: View {
                             Image(systemName: "pawprint.fill")
                                 .font(.system(size: 60))
                                 .foregroundColor(.white)
+                                .accessibilityLabel("Pet photo placeholder")
                         }
                         .frame(width: 150, height: 150)
                         .background(Color.red.opacity(0.2))
@@ -61,7 +62,7 @@ struct AlertDetailView: View {
                         Text(pet.name)
                             .font(.system(size: 32, weight: .bold))
 
-                        Text("\(pet.species) • \(pet.breed ?? "Unknown Breed")")
+                        Text("\(pet.species) • \(pet.breed ?? String(localized: "unknown_breed"))")
                             .font(.title3)
                             .foregroundColor(.secondary)
                     }
@@ -86,7 +87,7 @@ struct AlertDetailView: View {
                                 ProgressView()
                                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
                             } else {
-                                Text("Mark as Found")
+                                Text("mark_as_found")
                             }
                         }
                         .buttonStyle(.borderedProminent)
@@ -102,17 +103,18 @@ struct AlertDetailView: View {
                 // Last Seen Location
                 if let coordinate = alert.coordinate {
                     VStack(alignment: .leading, spacing: 12) {
-                        Label("Last Seen Location", systemImage: "location.fill")
+                        Label("last_seen_location", systemImage: "location.fill")
                             .font(.headline)
 
                         Map(position: $mapPosition) {
-                            Annotation("Last Seen", coordinate: coordinate) {
+                            Annotation(String(localized: "last_seen_label"), coordinate: coordinate) {
                                 VStack {
                                     Image(systemName: "mappin.circle.fill")
                                         .font(.system(size: 40))
                                         .foregroundColor(.red)
+                                        .accessibilityLabel(Text("last_seen_location"))
 
-                                    Text("Last Seen")
+                                    Text("last_seen_label")
                                         .font(.caption)
                                         .padding(4)
                                         .background(Color.white)
@@ -138,7 +140,7 @@ struct AlertDetailView: View {
                 // Additional Info
                 if let info = alert.additionalInfo {
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("Additional Information", systemImage: "info.circle.fill")
+                        Label("additional_information", systemImage: "info.circle.fill")
                             .font(.headline)
 
                         Text(info)
@@ -155,7 +157,7 @@ struct AlertDetailView: View {
                 // Sightings
                 if let sightings = alert.sightings, !sightings.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
-                        Label("Reported Sightings (\(sightings.count))", systemImage: "eye.fill")
+                        Label(String(format: NSLocalizedString("reported_sightings_count", comment: ""), sightings.count), systemImage: "eye.fill")
                             .font(.headline)
                             .padding(.horizontal)
 
@@ -167,7 +169,7 @@ struct AlertDetailView: View {
 
                 // Report Sighting Button
                 Button(action: { showingReportSighting = true }) {
-                    Label("Report a Sighting", systemImage: "plus.circle.fill")
+                    Label("report_a_sighting", systemImage: "plus.circle.fill")
                 }
                 .buttonStyle(PrimaryButtonStyle())
                 .padding(.horizontal)
@@ -191,14 +193,14 @@ struct AlertDetailView: View {
 
                 await MainActor.run {
                     isMarkingFound = false
-                    appState.showSuccess("\(alert.pet?.name ?? "Pet") has been marked as found! 🎉")
+                    appState.showSuccess(String(format: NSLocalizedString("pet_marked_found", comment: ""), alert.pet?.name ?? "Pet"))
                     // Dismiss the detail view to return to the refreshed list
                     dismiss()
                 }
             } catch {
                 await MainActor.run {
                     isMarkingFound = false
-                    appState.showError("Failed to mark as found: \(error.localizedDescription)")
+                    appState.showError(String(format: NSLocalizedString("mark_found_failed_message", comment: ""), error.localizedDescription))
                 }
             }
         }
@@ -212,7 +214,7 @@ struct SightingCard: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Label(
-                    sighting.reporterName ?? "Anonymous",
+                    sighting.reporterName ?? String(localized: "anonymous"),
                     systemImage: "person.fill"
                 )
                 .font(.subheadline)
@@ -238,7 +240,7 @@ struct SightingCard: View {
             }
 
             if let contact = sighting.reporterPhone ?? sighting.reporterEmail {
-                Text("Contact: \(contact)")
+                Text(String(format: NSLocalizedString("contact_label", comment: ""), contact))
                     .font(.caption)
                     .foregroundColor(.blue)
             }
@@ -259,92 +261,6 @@ struct SightingCard: View {
         displayFormatter.dateStyle = .short
         displayFormatter.timeStyle = .short
         return displayFormatter.string(from: date)
-    }
-}
-
-struct ReportSightingView: View {
-    let alertId: String
-    @StateObject private var viewModel = AlertsViewModel()
-    @StateObject private var locationManager = LocationManager()
-    @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var appState: AppState
-
-    @State private var reporterName = ""
-    @State private var reporterPhone = ""
-    @State private var reporterEmail = ""
-    @State private var location = ""
-    @State private var notes = ""
-    @State private var useCurrentLocation = false
-
-    var body: some View {
-        Form {
-            Section("Your Contact Information") {
-                TextField("Name (optional)", text: $reporterName)
-                TextField("Phone (optional)", text: $reporterPhone)
-                    .keyboardType(.phonePad)
-                TextField("Email (optional)", text: $reporterEmail)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
-            }
-
-            Section("Sighting Location") {
-                Toggle("Use Current Location", isOn: $useCurrentLocation)
-
-                if !useCurrentLocation {
-                    TextField("Enter location", text: $location)
-                }
-            }
-
-            Section("Details") {
-                TextEditor(text: $notes)
-                    .frame(minHeight: 100)
-            }
-        }
-        .navigationTitle("Report Sighting")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Submit") {
-                    submitSighting()
-                }
-                .disabled(viewModel.isLoading)
-            }
-        }
-        .onChange(of: useCurrentLocation) { _, isOn in
-            if isOn {
-                locationManager.requestLocation()
-            }
-        }
-    }
-
-    private func submitSighting() {
-        Task {
-            do {
-                let coordinate = useCurrentLocation ? locationManager.location : nil
-                let locationText = useCurrentLocation ? nil : (location.isEmpty ? nil : location)
-
-                try await viewModel.reportSighting(
-                    alertId: alertId,
-                    reporterName: reporterName.isEmpty ? nil : reporterName,
-                    reporterPhone: reporterPhone.isEmpty ? nil : reporterPhone,
-                    reporterEmail: reporterEmail.isEmpty ? nil : reporterEmail,
-                    location: locationText,
-                    coordinate: coordinate,
-                    notes: notes.isEmpty ? nil : notes
-                )
-
-                appState.showSuccess("Sighting reported successfully!")
-                dismiss()
-            } catch {
-                appState.showError(error.localizedDescription)
-            }
-        }
     }
 }
 

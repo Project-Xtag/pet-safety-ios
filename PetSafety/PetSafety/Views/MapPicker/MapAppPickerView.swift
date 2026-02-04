@@ -21,7 +21,7 @@ struct MapAppPickerView: View {
                 if location.isApproximate {
                     Section {
                         Label {
-                            Text("This is an approximate location (~500m). Search the surrounding area.")
+                            Text("map_approximate_notice")
                                 .font(.callout)
                                 .foregroundStyle(.orange)
                         } icon: {
@@ -34,7 +34,7 @@ struct MapAppPickerView: View {
                 // Coordinates display
                 Section {
                     HStack {
-                        Text("Coordinates")
+                        Text("map_coordinates")
                             .foregroundStyle(.secondary)
                         Spacer()
                         Text(formatCoordinates())
@@ -44,25 +44,25 @@ struct MapAppPickerView: View {
                 }
 
                 // Map app options
-                Section("Open in") {
+                Section(header: Text("map_open_in")) {
                     Button(action: openAppleMaps) {
-                        Label("Apple Maps", systemImage: "map.fill")
+                        Label(String(localized: "map_apple_maps"), systemImage: "map.fill")
                     }
 
                     Button(action: openGoogleMaps) {
-                        Label("Google Maps", systemImage: "globe")
+                        Label(String(localized: "map_google_maps"), systemImage: "globe")
                     }
 
                     Button(action: openWaze) {
-                        Label("Waze", systemImage: "car.fill")
+                        Label(String(localized: "map_waze"), systemImage: "car.fill")
                     }
                 }
             }
-            .navigationTitle("\(petName) Location")
+            .navigationTitle(Text("map_pet_location \(petName)"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") {
+                    Button(String(localized: "done")) {
                         dismiss()
                     }
                 }

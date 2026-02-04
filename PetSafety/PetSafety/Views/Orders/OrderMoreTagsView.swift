@@ -40,11 +40,11 @@ struct OrderMoreTagsView: View {
                 orderFormView
             }
         }
-        .navigationTitle("Order More Tags")
+        .navigationTitle(Text("order_more_title"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+                Button(String(localized: "cancel")) {
                     dismiss()
                 }
                 .foregroundColor(.brandOrange)
@@ -65,17 +65,17 @@ struct OrderMoreTagsView: View {
                 .frame(width: 80, height: 80)
                 .foregroundColor(.green)
 
-            Text("Order Complete!")
+            Text("order_more_complete")
                 .font(.system(size: 32, weight: .bold))
 
             if paymentPending {
-                Text("Your order is placed and payment is pending. We'll guide you through payment soon.")
+                Text("order_more_payment_pending")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
             } else {
-                Text("Your tags have been ordered! You'll receive a confirmation email shortly with tracking information.")
+                Text("order_more_confirmation")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -86,7 +86,7 @@ struct OrderMoreTagsView: View {
 
             VStack(spacing: 12) {
                 Button(action: { dismiss() }) {
-                    Text("Done")
+                    Text("done")
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.blue)
@@ -102,10 +102,10 @@ struct OrderMoreTagsView: View {
 
     private var orderFormView: some View {
         Form {
-            Section(header: Text("Pet Names"), footer: Text("Enter the names of pets you want tags for")) {
+            Section(header: Text("order_more_pet_names"), footer: Text("order_more_pet_names_footer")) {
                 ForEach(petNames.indices, id: \.self) { index in
                     HStack {
-                        TextField("Pet name", text: $petNames[index])
+                        TextField(String(localized: "order_more_pet_name_placeholder"), text: $petNames[index])
 
                         if petNames.count > 1 {
                             Button(action: { removePetName(at: index) }) {
@@ -117,81 +117,81 @@ struct OrderMoreTagsView: View {
                 }
 
                 Button(action: addPetName) {
-                    Label("Add Another Pet", systemImage: "plus.circle")
+                    Label(String(localized: "order_more_add_another"), systemImage: "plus.circle")
                 }
             }
 
-            Section(header: Text("Your Information")) {
-                TextField("Full Name", text: $ownerName)
-                TextField("Email", text: $email)
+            Section(header: Text("order_more_your_info")) {
+                TextField(String(localized: "order_more_full_name"), text: $ownerName)
+                TextField(String(localized: "order_more_email"), text: $email)
                     .keyboardType(.emailAddress)
                     .textContentType(.emailAddress)
                     .autocapitalization(.none)
-                TextField("Phone", text: $phone)
+                TextField(String(localized: "order_more_phone"), text: $phone)
                     .keyboardType(.phonePad)
                     .textContentType(.telephoneNumber)
             }
 
-            Section(header: Text("Shipping Address")) {
+            Section(header: Text("order_more_shipping")) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Street Address")
+                    Text("order_more_street")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., 123 Main Street, Apartment 4B", text: $street1)
+                    TextField(String(localized: "order_more_street_placeholder"), text: $street1)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Street Address Line 2 (Optional)")
+                    Text("order_more_line2")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., Building, Floor, Suite", text: $street2)
+                    TextField(String(localized: "order_more_line2_placeholder"), text: $street2)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("City")
+                    Text("order_more_city")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., London", text: $city)
+                    TextField(String(localized: "order_more_city"), text: $city)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Province / State (Optional)")
+                    Text("order_more_province")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., Greater London", text: $province)
+                    TextField(String(localized: "order_more_province"), text: $province)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Postal Code")
+                    Text("order_more_postal")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., SW1A 1AA", text: $postCode)
+                    TextField(String(localized: "order_more_postal"), text: $postCode)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.allCharacters)
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Country")
+                    Text("order_more_country")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., United Kingdom", text: $country)
+                    TextField(String(localized: "order_more_country"), text: $country)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
             }
 
-            Section(header: Text("Order Summary")) {
+            Section(header: Text("order_more_summary")) {
                 HStack {
-                    Text("Tags (\(validPetCount))")
+                    Text("order_more_tags_count \(validPetCount)")
                     Spacer()
                     Text("FREE")
                         .foregroundColor(.green)
@@ -199,13 +199,13 @@ struct OrderMoreTagsView: View {
                 }
 
                 HStack {
-                    Text("Shipping")
+                    Text("order_more_shipping_cost")
                     Spacer()
                     Text(String(format: "€%.2f", shippingCost))
                 }
 
                 HStack {
-                    Text("Total")
+                    Text("order_more_total")
                         .fontWeight(.bold)
                     Spacer()
                     Text(String(format: "€%.2f", totalCost))
@@ -220,10 +220,10 @@ struct OrderMoreTagsView: View {
                         if isLoading {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            Text("Creating Order...")
+                            Text("order_more_creating")
                                 .foregroundColor(.white)
                         } else {
-                            Text("Place Order")
+                            Text("order_more_place_order")
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                         }

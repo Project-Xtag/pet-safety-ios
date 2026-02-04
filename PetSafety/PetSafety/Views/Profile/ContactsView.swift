@@ -29,12 +29,12 @@ struct ContactsView: View {
             // Info Section
             Section {
                 VStack(alignment: .leading, spacing: 8) {
-                    Label("Contact Settings", systemImage: "info.circle")
+                    Label("contacts_settings", systemImage: "info.circle")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.brandOrange)
 
-                    Text("These contact details will be shown when someone scans your pet's QR tag. You can add up to two email addresses and phone numbers.")
+                    Text("contacts_info_full")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -48,20 +48,20 @@ struct ContactsView: View {
             }
         }
         .adaptiveList()
-        .navigationTitle("Contact Details")
+        .navigationTitle("contact_details")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(isEditing)
         .toolbar {
             if isEditing {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button("cancel") {
                         cancelEditing()
                     }
                     .foregroundColor(.brandOrange)
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
+                    Button("save") {
                         saveChanges()
                     }
                     .foregroundColor(.brandOrange)
@@ -78,7 +78,7 @@ struct ContactsView: View {
     @ViewBuilder
     private var displayView: some View {
         // Email Section
-        Section(header: Text("Email Addresses")) {
+        Section(header: Text("contacts_email_section")) {
             if !primaryEmail.isEmpty || !secondaryEmail.isEmpty {
                 if !primaryEmail.isEmpty {
                     ContactRowView(
@@ -98,12 +98,12 @@ struct ContactsView: View {
                     )
                 }
             } else {
-                EmptyContactView(type: "email addresses")
+                EmptyContactView(type: NSLocalizedString("email_addresses", comment: "").lowercased())
             }
         }
 
         // Phone Section
-        Section(header: Text("Phone Numbers")) {
+        Section(header: Text("contacts_phone_section")) {
             if !primaryPhone.isEmpty || !secondaryPhone.isEmpty {
                 if !primaryPhone.isEmpty {
                     ContactRowView(
@@ -123,7 +123,7 @@ struct ContactsView: View {
                     )
                 }
             } else {
-                EmptyContactView(type: "phone numbers")
+                EmptyContactView(type: NSLocalizedString("phone_numbers", comment: "").lowercased())
             }
         }
 
@@ -132,7 +132,7 @@ struct ContactsView: View {
             Button(action: { isEditing = true }) {
                 HStack {
                     Spacer()
-                    Text("Edit Contact Details")
+                    Text("contacts_edit_title")
                         .fontWeight(.semibold)
                     Spacer()
                 }
@@ -144,31 +144,31 @@ struct ContactsView: View {
     @ViewBuilder
     private var editingView: some View {
         // Primary Email
-        Section(header: Text("Primary Email"), footer: Text("Your main account email address")) {
+        Section(header: Text("contacts_primary_email"), footer: Text("contacts_primary_email_edit_footer")) {
             VStack(alignment: .leading, spacing: 8) {
-                TextField("Email address", text: $primaryEmail)
+                TextField(NSLocalizedString("contacts_email_placeholder", comment: ""), text: $primaryEmail)
                     .keyboardType(.emailAddress)
                     .textContentType(.emailAddress)
                     .autocapitalization(.none)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                Toggle("Show on pet tag", isOn: $showPrimaryEmail)
+                Toggle("contacts_show_on_tag", isOn: $showPrimaryEmail)
                     .tint(.brandOrange)
             }
             .padding(.vertical, 4)
         }
 
         // Secondary Email
-        Section(header: Text("Secondary Email (Optional)"), footer: Text("Backup email for pet recovery notifications")) {
+        Section(header: Text("contacts_secondary_email"), footer: Text("contacts_secondary_email_edit_footer")) {
             VStack(alignment: .leading, spacing: 8) {
-                TextField("Secondary email address", text: $secondaryEmail)
+                TextField(NSLocalizedString("contacts_secondary_email_placeholder", comment: ""), text: $secondaryEmail)
                     .keyboardType(.emailAddress)
                     .textContentType(.emailAddress)
                     .autocapitalization(.none)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 if !secondaryEmail.isEmpty {
-                    Toggle("Show on pet tag", isOn: $showSecondaryEmail)
+                    Toggle("contacts_show_on_tag", isOn: $showSecondaryEmail)
                         .tint(.brandOrange)
                 }
             }
@@ -176,29 +176,29 @@ struct ContactsView: View {
         }
 
         // Primary Phone
-        Section(header: Text("Primary Phone"), footer: Text("Your main contact number")) {
+        Section(header: Text("contacts_primary_phone"), footer: Text("contacts_primary_phone_edit_footer")) {
             VStack(alignment: .leading, spacing: 8) {
-                TextField("Phone number", text: $primaryPhone)
+                TextField(NSLocalizedString("contacts_phone_placeholder", comment: ""), text: $primaryPhone)
                     .keyboardType(.phonePad)
                     .textContentType(.telephoneNumber)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                Toggle("Show on pet tag", isOn: $showPrimaryPhone)
+                Toggle("contacts_show_on_tag", isOn: $showPrimaryPhone)
                     .tint(.brandOrange)
             }
             .padding(.vertical, 4)
         }
 
         // Secondary Phone
-        Section(header: Text("Secondary Phone (Optional)"), footer: Text("Backup phone for emergencies")) {
+        Section(header: Text("contacts_secondary_phone"), footer: Text("contacts_secondary_phone_edit_footer")) {
             VStack(alignment: .leading, spacing: 8) {
-                TextField("Secondary phone number", text: $secondaryPhone)
+                TextField(NSLocalizedString("contacts_secondary_phone_placeholder", comment: ""), text: $secondaryPhone)
                     .keyboardType(.phonePad)
                     .textContentType(.telephoneNumber)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 if !secondaryPhone.isEmpty {
-                    Toggle("Show on pet tag", isOn: $showSecondaryPhone)
+                    Toggle("contacts_show_on_tag", isOn: $showSecondaryPhone)
                         .tint(.brandOrange)
                 }
             }
@@ -213,9 +213,9 @@ struct ContactsView: View {
                     if isLoading {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle())
-                        Text("Saving...")
+                        Text("saving")
                     } else {
-                        Text("Save Changes")
+                        Text("save_changes")
                             .fontWeight(.semibold)
                     }
                     Spacer()
@@ -226,7 +226,7 @@ struct ContactsView: View {
             Button(action: { cancelEditing() }) {
                 HStack {
                     Spacer()
-                    Text("Cancel")
+                    Text("cancel")
                     Spacer()
                 }
             }
@@ -288,7 +288,7 @@ struct ContactsView: View {
 
                 try await authViewModel.updateProfile(updates: updates)
 
-                appState.showSuccess("Contact details updated successfully!")
+                appState.showSuccess(NSLocalizedString("updated", comment: ""))
 
                 await MainActor.run {
                     isLoading = false
@@ -323,7 +323,7 @@ struct ContactRowView: View {
 
                 HStack(spacing: 8) {
                     if isPrimary {
-                        Text("PRIMARY")
+                        Text("contacts_primary_badge")
                             .font(.system(size: 9, weight: .bold))
                             .foregroundColor(.white)
                             .padding(.horizontal, 6)
@@ -333,11 +333,11 @@ struct ContactRowView: View {
                     }
 
                     if isVisible {
-                        Text("Visible on tag")
+                        Text("contacts_visible_on_tag")
                             .font(.caption2)
                             .foregroundColor(.secondary)
                     } else {
-                        Text("Hidden")
+                        Text("contacts_hidden_badge")
                             .font(.caption2)
                             .foregroundColor(.secondary)
                     }
@@ -355,11 +355,11 @@ struct EmptyContactView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            Image(systemName: type == "email addresses" ? "envelope" : "phone")
+            Image(systemName: type.contains(NSLocalizedString("email", comment: "").lowercased()) ? "envelope" : "phone")
                 .font(.system(size: 32))
                 .foregroundColor(.secondary)
 
-            Text("No \(type) added")
+            Text(String(format: NSLocalizedString("contacts_no_type_added", comment: ""), type))
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }

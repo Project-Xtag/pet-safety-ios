@@ -8,6 +8,7 @@ struct PetDetailView: View {
     @State private var showingMarkLostSheet = false
     @State private var showingDeleteConfirmation = false
     @State private var showingCannotDeleteAlert = false
+    @State private var showingMarkFoundConfirmation = false
     @State private var isDeleting = false
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
@@ -37,7 +38,7 @@ struct PetDetailView: View {
                 NavigationLink(destination: PhotoGalleryView(pet: pet)) {
                     HStack {
                         Image(systemName: "photo.on.rectangle")
-                        Text("View \(pet.name)'s Photos")
+                        Text(String(format: NSLocalizedString("view_pet_photos", comment: ""), pet.name))
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -55,10 +56,10 @@ struct PetDetailView: View {
                 // Mark as Lost/Found Buttons
                 HStack(spacing: 12) {
                     if pet.isMissing {
-                        Button(action: { markAsFound() }) {
+                        Button(action: { showingMarkFoundConfirmation = true }) {
                             HStack {
                                 Image(systemName: "checkmark.circle.fill")
-                                Text("Mark as Found")
+                                Text("mark_as_found")
                             }
                         }
                         .buttonStyle(FoundButtonStyle())
@@ -66,7 +67,7 @@ struct PetDetailView: View {
                         Button(action: { showingMarkLostSheet = true }) {
                             HStack {
                                 Image(systemName: "exclamationmark.triangle.fill")
-                                Text("Mark as Lost")
+                                Text("mark_as_lost")
                             }
                         }
                         .buttonStyle(LostButtonStyle())
@@ -76,22 +77,22 @@ struct PetDetailView: View {
 
                 // Basic Info Cards
                 VStack(spacing: 16) {
-                    InfoCard(title: "Species", value: pet.species.capitalized, icon: "pawprint.fill")
+                    InfoCard(title: NSLocalizedString("species", comment: ""), value: pet.species.capitalized, icon: "pawprint.fill")
 
                     if let breed = pet.breed {
-                        InfoCard(title: "Breed", value: breed, icon: "list.bullet")
+                        InfoCard(title: NSLocalizedString("breed", comment: ""), value: breed, icon: "list.bullet")
                     }
 
                     if let color = pet.color {
-                        InfoCard(title: "Color", value: color, icon: "paintpalette.fill")
+                        InfoCard(title: NSLocalizedString("color", comment: ""), value: color, icon: "paintpalette.fill")
                     }
 
                     if let age = pet.age {
-                        InfoCard(title: "Age", value: age, icon: "calendar")
+                        InfoCard(title: NSLocalizedString("age", comment: ""), value: age, icon: "calendar")
                     }
 
                     if let microchip = pet.microchipNumber {
-                        InfoCard(title: "Microchip", value: microchip, icon: "number")
+                        InfoCard(title: NSLocalizedString("microchip", comment: ""), value: microchip, icon: "number")
                     }
                 }
                 .padding(.horizontal)
@@ -99,7 +100,7 @@ struct PetDetailView: View {
                 // Medical Info
                 if let medical = pet.medicalInfo {
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("Medical Information", systemImage: "cross.case.fill")
+                        Label("medical_information", systemImage: "cross.case.fill")
                             .font(.headline)
 
                         Text(medical)
@@ -116,7 +117,7 @@ struct PetDetailView: View {
                 // Additional Information
                 if let behavior = pet.behaviorNotes {
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("Additional Information", systemImage: "text.bubble.fill")
+                        Label("additional_information", systemImage: "text.bubble.fill")
                             .font(.headline)
 
                         Text(behavior)
@@ -136,7 +137,7 @@ struct PetDetailView: View {
                     NavigationLink(destination: PetPublicProfileView(pet: pet)) {
                         HStack {
                             Image(systemName: "eye")
-                            Text("View \(pet.name)'s Public Profile")
+                            Text(String(format: NSLocalizedString("view_public_profile", comment: ""), pet.name))
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -149,7 +150,7 @@ struct PetDetailView: View {
                     Button(action: { showingEditSheet = true }) {
                         HStack {
                             Image(systemName: "pencil")
-                            Text("Edit \(pet.name)'s Profile")
+                            Text(String(format: NSLocalizedString("edit_pet_profile", comment: ""), pet.name))
                         }
                     }
                     .buttonStyle(BrandButtonStyle())
@@ -163,7 +164,7 @@ struct PetDetailView: View {
                             } else {
                                 Image(systemName: "trash")
                             }
-                            Text("Delete \(pet.name)")
+                            Text(String(format: NSLocalizedString("delete_pet_name", comment: ""), pet.name))
                         }
                     }
                     .buttonStyle(DestructiveButtonStyle())
@@ -187,21 +188,29 @@ struct PetDetailView: View {
                 MarkAsLostView(pet: pet)
             }
         }
-        .alert("Delete \(pet.name)?", isPresented: $showingDeleteConfirmation) {
-            Button("Cancel", role: .cancel) { }
-            Button("Delete", role: .destructive) {
+        .alert(String(format: NSLocalizedString("mark_found_confirm_title", comment: ""), pet.name), isPresented: $showingMarkFoundConfirmation) {
+            Button("cancel", role: .cancel) { }
+            Button("mark_as_found") {
+                markAsFound()
+            }
+        } message: {
+            Text(String(format: NSLocalizedString("mark_found_confirm_message", comment: ""), pet.name))
+        }
+        .alert(String(format: NSLocalizedString("delete_pet_confirm_title", comment: ""), pet.name), isPresented: $showingDeleteConfirmation) {
+            Button("cancel", role: .cancel) { }
+            Button("delete", role: .destructive) {
                 performDelete()
             }
         } message: {
-            Text("This action cannot be undone. All data for \(pet.name) will be permanently deleted.")
+            Text(String(format: NSLocalizedString("delete_pet_confirm_message", comment: ""), pet.name))
         }
-        .alert("Cannot Delete Missing Pet", isPresented: $showingCannotDeleteAlert) {
-            Button("Mark as Found") {
-                markAsFound()
+        .alert(NSLocalizedString("cannot_delete_missing_pet", comment: ""), isPresented: $showingCannotDeleteAlert) {
+            Button("mark_as_found") {
+                showingMarkFoundConfirmation = true
             }
-            Button("Cancel", role: .cancel) { }
+            Button("cancel", role: .cancel) { }
         } message: {
-            Text("\(pet.name) is currently marked as missing. Please mark them as found before deleting.")
+            Text(String(format: NSLocalizedString("cannot_delete_missing_message", comment: ""), pet.name))
         }
     }
 
@@ -219,10 +228,10 @@ struct PetDetailView: View {
         Task {
             do {
                 try await viewModel.deletePet(id: pet.id)
-                appState.showSuccess("\(pet.name) has been deleted")
+                appState.showSuccess(String(format: NSLocalizedString("pet_deleted", comment: ""), pet.name))
                 dismiss()
             } catch {
-                appState.showError("Failed to delete \(pet.name): \(error.localizedDescription)")
+                appState.showError(String(format: NSLocalizedString("delete_pet_failed", comment: ""), error.localizedDescription))
             }
             isDeleting = false
         }
@@ -232,10 +241,10 @@ struct PetDetailView: View {
         Task {
             do {
                 _ = try await viewModel.markPetFound(petId: pet.id)
-                appState.showSuccess("\(pet.name) has been marked as found! 🎉")
+                appState.showSuccess(String(format: NSLocalizedString("marked_found_message", comment: ""), pet.name))
                 dismiss()
             } catch {
-                appState.showError("Failed to mark \(pet.name) as found: \(error.localizedDescription)")
+                appState.showError(String(format: NSLocalizedString("mark_found_failed", comment: ""), error.localizedDescription))
             }
         }
     }

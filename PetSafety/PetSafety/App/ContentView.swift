@@ -5,15 +5,31 @@ struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var appState: AppState
     @StateObject private var deepLinkService = DeepLinkService.shared
+    @State private var showRegistration = false
 
     var body: some View {
         Group {
             if authViewModel.isAuthenticated {
                 MainTabView()
+                    .transition(.opacity)
+            } else if showRegistration {
+                RegistrationView(onBackToLogin: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        showRegistration = false
+                    }
+                })
+                .transition(.opacity)
             } else {
-                AuthenticationView()
+                AuthenticationView(onNavigateToRegister: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        showRegistration = true
+                    }
+                })
+                .transition(.opacity)
             }
         }
+        .animation(.easeInOut(duration: 0.3), value: authViewModel.isAuthenticated)
+        .animation(.easeInOut(duration: 0.3), value: showRegistration)
         .alert(appState.alertTitle, isPresented: $appState.showAlert) {
             Button("OK", role: .cancel) { }
         } message: {
@@ -140,22 +156,27 @@ struct MainTabView: View {
                         PetsListView()
                     }
                     .navigationViewStyle(.stack)
+                    .transition(.opacity)
                 case 1:
                     NavigationView {
                         QRScannerView()
                     }
                     .navigationViewStyle(.stack)
+                    .transition(.opacity)
                 case 2:
                     AlertsTabView()
+                        .transition(.opacity)
                 case 3:
                     NavigationView {
                         ProfileView()
                     }
                     .navigationViewStyle(.stack)
+                    .transition(.opacity)
                 default:
                     EmptyView()
                 }
             }
+            .animation(.easeInOut(duration: 0.2), value: selectedTab)
 
             // Custom Tab Bar
             CustomTabBar(selectedTab: $selectedTab)
@@ -233,6 +254,7 @@ struct TabBarItem: View {
                     : Color.clear
             )
             .cornerRadius(16)
+            .animation(.easeInOut(duration: 0.2), value: isSelected)
         }
     }
 }

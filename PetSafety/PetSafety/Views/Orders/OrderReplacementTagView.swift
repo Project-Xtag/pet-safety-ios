@@ -31,11 +31,11 @@ struct OrderReplacementTagView: View {
                 orderFormView
             }
         }
-        .navigationTitle("Order Replacement Tag")
+        .navigationTitle(Text("order_replace_title"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+                Button(String(localized: "cancel")) {
                     dismiss()
                 }
                 .foregroundColor(.brandOrange)
@@ -76,10 +76,10 @@ struct OrderReplacementTagView: View {
                 .frame(width: 80, height: 80)
                 .foregroundColor(.green)
 
-            Text("Order Complete!")
+            Text("order_replace_complete")
                 .font(.system(size: 32, weight: .bold))
 
-            Text("Your replacement tag for \(pet.name) has been ordered. The old QR code has been deactivated. You'll receive a confirmation email shortly.")
+            Text("order_replace_confirmation")
                 .font(.body)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -89,7 +89,7 @@ struct OrderReplacementTagView: View {
 
             VStack(spacing: 12) {
                 Button(action: { dismiss() }) {
-                    Text("Done")
+                    Text("done")
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.blue)
@@ -105,7 +105,7 @@ struct OrderReplacementTagView: View {
 
     private var orderFormView: some View {
         Form {
-            Section(header: Text("Pet Information")) {
+            Section(header: Text("order_replace_pet_info")) {
                 HStack {
                     if let imageUrl = pet.profileImage {
                         AsyncImage(url: URL(string: imageUrl)) { image in
@@ -130,93 +130,93 @@ struct OrderReplacementTagView: View {
                 }
             }
 
-            Section(header: Text("Important Information")) {
+            Section(header: Text("order_replace_important")) {
                 VStack(alignment: .leading, spacing: 8) {
                     if isFreeReplacement {
-                        Label("As a \(planName.capitalized) member, replacement tags are completely free!", systemImage: "checkmark.circle")
+                        Label(String(localized: "order_replace_eligible_free"), systemImage: "checkmark.circle")
                             .font(.caption)
                             .foregroundColor(.green)
                     } else {
-                        Label("Shipping fee: €\(String(format: "%.2f", shippingCost))", systemImage: "eurosign.circle")
+                        Label(String(format: String(localized: "order_replace_additional_fee %@"), String(format: "€%.2f", shippingCost)), systemImage: "eurosign.circle")
                             .font(.caption)
                             .foregroundColor(.brandOrange)
-                        Label("Upgrade to Standard or Ultimate for free replacements", systemImage: "star.fill")
+                        Label(String(localized: "order_replace_upgrade_hint"), systemImage: "star.fill")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
-                    Label("Your old QR code will be deactivated when you place this order", systemImage: "exclamationmark.triangle")
+                    Label(String(localized: "order_replace_old_deactivated"), systemImage: "exclamationmark.triangle")
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    Label("You'll receive your new tag within 5-7 business days", systemImage: "shippingbox")
+                    Label(String(localized: "order_replace_delivery_time"), systemImage: "shippingbox")
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    Label("Once you receive the new tag, you'll need to scan it to activate it", systemImage: "qrcode")
+                    Label(String(localized: "order_replace_scan_activate"), systemImage: "qrcode")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
             }
 
-            Section(header: Text("Shipping Address"), footer: Text("Confirm your shipping address for the replacement tag")) {
+            Section(header: Text("order_replace_shipping"), footer: Text("order_replace_shipping_footer")) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Street Address")
+                    Text("order_replace_street")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., 123 Main Street, Apartment 4B", text: $street1)
+                    TextField(String(localized: "order_replace_street_placeholder"), text: $street1)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Street Address Line 2 (Optional)")
+                    Text("order_replace_line2")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., Building, Floor, Suite", text: $street2)
+                    TextField(String(localized: "order_replace_line2_placeholder"), text: $street2)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("City")
+                    Text("order_replace_city")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., London", text: $city)
+                    TextField(String(localized: "order_replace_city"), text: $city)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Province / State (Optional)")
+                    Text("order_replace_province")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., Greater London", text: $province)
+                    TextField(String(localized: "order_replace_province"), text: $province)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Postal Code")
+                    Text("order_replace_postal")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., SW1A 1AA", text: $postCode)
+                    TextField(String(localized: "order_replace_postal"), text: $postCode)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.allCharacters)
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Country")
+                    Text("order_replace_country")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., United Kingdom", text: $country)
+                    TextField(String(localized: "order_replace_country"), text: $country)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Phone Number (Optional)")
+                    Text("order_replace_phone")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("e.g., +44 7700 900123", text: $phone)
+                    TextField(String(localized: "order_replace_phone_placeholder"), text: $phone)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.phonePad)
                         .textContentType(.telephoneNumber)
@@ -231,15 +231,15 @@ struct OrderReplacementTagView: View {
                         if isLoading {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            Text("Creating Order...")
+                            Text("order_replace_creating")
                                 .foregroundColor(.white)
                         } else {
                             if isFreeReplacement {
-                                Text("Confirm & Order Free Replacement Tag")
+                                Text("order_replace_free_button")
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                             } else {
-                                Text("Confirm & Pay €\(String(format: "%.2f", shippingCost))")
+                                Text(String(format: String(localized: "order_replace_paid_button %@"), String(format: "€%.2f", shippingCost)))
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                             }

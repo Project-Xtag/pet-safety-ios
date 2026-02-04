@@ -31,51 +31,51 @@ struct AddressView: View {
         List {
             if isEditing {
                 // Edit Mode
-                Section(header: Text("Address Details"), footer: Text("Enter your complete address for shipping and billing purposes")) {
+                Section(header: Text("address_details"), footer: Text("address_shipping_footer")) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Street Address")
+                        Text("address_street")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        TextField("e.g., 123 Main Street", text: $streetAddress)
+                        TextField(NSLocalizedString("address_street_placeholder", comment: ""), text: $streetAddress)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                     .padding(.vertical, 4)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Address Line 2 (Optional)")
+                        Text("address_line2")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        TextField("Apartment, suite, unit, building, floor, etc.", text: $addressLine2)
+                        TextField(NSLocalizedString("address_line2_placeholder", comment: ""), text: $addressLine2)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                     .padding(.vertical, 4)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("City / Town")
+                        Text("address_city")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        TextField("e.g., London", text: $city)
+                        TextField(NSLocalizedString("address_city_placeholder", comment: ""), text: $city)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                     .padding(.vertical, 4)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Postal Code / ZIP Code")
+                        Text("address_postal")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
-                        TextField("e.g., SW1A 1AA", text: $postalCode)
+                        TextField(NSLocalizedString("address_postal_placeholder", comment: ""), text: $postalCode)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .autocapitalization(.allCharacters)
                     }
                     .padding(.vertical, 4)
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Country")
+                        Text("address_country")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                         Button(action: { showCountryPicker = true }) {
                             HStack {
-                                Text(country.isEmpty ? "Select country" : country)
+                                Text(country.isEmpty ? NSLocalizedString("address_select_country", comment: "") : country)
                                     .foregroundColor(country.isEmpty ? .secondary : .primary)
                                 Spacer()
                                 Image(systemName: "chevron.down")
@@ -97,9 +97,9 @@ struct AddressView: View {
                             if isLoading {
                                 ProgressView()
                                     .progressViewStyle(CircularProgressViewStyle())
-                                Text("Saving...")
+                                Text("saving")
                             } else {
-                                Text("Save Changes")
+                                Text("save_changes")
                                     .fontWeight(.semibold)
                             }
                             Spacer()
@@ -110,7 +110,7 @@ struct AddressView: View {
                     Button(action: { cancelEditing() }) {
                         HStack {
                             Spacer()
-                            Text("Cancel")
+                            Text("cancel")
                             Spacer()
                         }
                     }
@@ -119,27 +119,27 @@ struct AddressView: View {
                 }
             } else {
                 // View Mode
-                Section(header: Text("Registered Address")) {
+                Section(header: Text("registered_address")) {
                     if !streetAddress.isEmpty || !city.isEmpty || !postalCode.isEmpty || !country.isEmpty {
                         VStack(alignment: .leading, spacing: 16) {
                             if !streetAddress.isEmpty {
-                                AddressFieldView(label: "Street Address", value: streetAddress)
+                                AddressFieldView(label: NSLocalizedString("address_street", comment: ""), value: streetAddress)
                             }
 
                             if !addressLine2.isEmpty {
-                                AddressFieldView(label: "Address Line 2", value: addressLine2)
+                                AddressFieldView(label: NSLocalizedString("address_line2_label", comment: ""), value: addressLine2)
                             }
 
                             if !city.isEmpty {
-                                AddressFieldView(label: "City / Town", value: city)
+                                AddressFieldView(label: NSLocalizedString("address_city", comment: ""), value: city)
                             }
 
                             if !postalCode.isEmpty {
-                                AddressFieldView(label: "Postal Code", value: postalCode)
+                                AddressFieldView(label: NSLocalizedString("address_postal_label", comment: ""), value: postalCode)
                             }
 
                             if !country.isEmpty {
-                                AddressFieldView(label: "Country", value: country)
+                                AddressFieldView(label: NSLocalizedString("address_country", comment: ""), value: country)
                             }
                         }
                         .padding(.vertical, 8)
@@ -149,11 +149,11 @@ struct AddressView: View {
                                 .font(.system(size: 50))
                                 .foregroundColor(.secondary)
 
-                            Text("No address registered")
+                            Text("address_no_address")
                                 .font(.headline)
                                 .foregroundColor(.secondary)
 
-                            Text("Add your address to enable shipping and delivery of QR tags")
+                            Text("address_delivery_prompt")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .multilineTextAlignment(.center)
@@ -167,7 +167,7 @@ struct AddressView: View {
                     Button(action: { startEditing() }) {
                         HStack {
                             Spacer()
-                            Text(streetAddress.isEmpty && city.isEmpty ? "Add Address" : "Edit Address")
+                            Text(streetAddress.isEmpty && city.isEmpty ? NSLocalizedString("address_add", comment: "") : NSLocalizedString("address_edit", comment: ""))
                                 .fontWeight(.semibold)
                             Spacer()
                         }
@@ -175,21 +175,21 @@ struct AddressView: View {
                 }
             }
         }
-        .navigationTitle("Address")
+        .navigationTitle("address_title")
         .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(isEditing)
         .toolbar {
             if isEditing {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button("cancel") {
                         cancelEditing()
                     }
                     .foregroundColor(.brandOrange)
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
+                    Button("save") {
                         saveChanges()
                     }
                     .foregroundColor(.brandOrange)
@@ -252,7 +252,7 @@ struct AddressView: View {
                 ]
 
                 try await authViewModel.updateProfile(updates: updates)
-                appState.showSuccess("Address updated successfully!")
+                appState.showSuccess(NSLocalizedString("updated", comment: ""))
 
                 await MainActor.run {
                     isLoading = false
@@ -294,11 +294,11 @@ struct CountryPickerView: View {
                     }
                 }
             }
-            .navigationTitle("Select Country")
+            .navigationTitle("address_select_country_title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Cancel") {
+                    Button("cancel") {
                         dismiss()
                     }
                 }

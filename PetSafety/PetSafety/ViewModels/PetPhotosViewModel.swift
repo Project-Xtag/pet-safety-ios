@@ -9,6 +9,8 @@ class PetPhotosViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isUploading = false
     @Published var uploadProgress: Double = 0.0
+    @Published var uploadedCount: Int = 0
+    @Published var totalUploadCount: Int = 0
     @Published var errorMessage: String?
 
     private let apiService = APIService.shared
@@ -78,25 +80,35 @@ class PetPhotosViewModel: ObservableObject {
     /// Upload multiple photos with progress tracking
     func uploadPhotos(for petId: String, imageDataArray: [Data]) async -> (succeeded: Int, failed: Int) {
         isUploading = true
+        uploadProgress = 0.0
+        uploadedCount = 0
+        totalUploadCount = imageDataArray.count
         var succeeded = 0
         var failed = 0
-        let total = imageDataArray.count
 
         for (index, imageData) in imageDataArray.enumerated() {
-            let success = await uploadPhoto(for: petId, imageData: imageData)
-
-            if success {
+            do {
+                let response = try await apiService.uploadPetPhotoToGallery(
+                    petId: petId,
+                    imageData: imageData,
+                    isPrimary: false
+                )
+                photos.append(response.photo)
+                photos.sort { $0.displayOrder < $1.displayOrder }
                 succeeded += 1
-            } else {
+            } catch {
+                errorMessage = error.localizedDescription
                 failed += 1
             }
 
-            // Update progress
-            uploadProgress = Double(index + 1) / Double(total)
+            uploadedCount = index + 1
+            uploadProgress = Double(index + 1) / Double(imageDataArray.count)
         }
 
         isUploading = false
         uploadProgress = 0.0
+        uploadedCount = 0
+        totalUploadCount = 0
 
         return (succeeded, failed)
     }

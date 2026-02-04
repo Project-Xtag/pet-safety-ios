@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct QuickMarkFoundView: View {
     let pets: [Pet]
@@ -9,13 +10,16 @@ struct QuickMarkFoundView: View {
     @State private var isProcessing = false
     @State private var showSuccessStoryPrompt = false
     @State private var foundPet: Pet?
+    @State private var showingFoundConfirmation = false
+    @State private var petToMarkFound: Pet?
 
     var body: some View {
         List {
             Section(header: Text("Select Pet to Mark as Found")) {
                 ForEach(pets) { pet in
                     Button(action: {
-                        markAsFound(pet: pet)
+                        petToMarkFound = pet
+                        showingFoundConfirmation = true
                     }) {
                         HStack(spacing: 16) {
                             // Pet Photo
@@ -99,6 +103,19 @@ struct QuickMarkFoundView: View {
                 .environmentObject(appState)
             }
         }
+        .alert("Mark \(petToMarkFound?.name ?? "pet") as Found?", isPresented: $showingFoundConfirmation) {
+            Button("Cancel", role: .cancel) {
+                petToMarkFound = nil
+            }
+            Button("Mark as Found") {
+                if let pet = petToMarkFound {
+                    markAsFound(pet: pet)
+                }
+                petToMarkFound = nil
+            }
+        } message: {
+            Text("This will close the missing alert for \(petToMarkFound?.name ?? "this pet"). Are you sure?")
+        }
     }
 
     private func markAsFound(pet: Pet) {
@@ -108,6 +125,7 @@ struct QuickMarkFoundView: View {
         Task {
             do {
                 _ = try await viewModel.markPetFound(petId: pet.id)
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
                 // Show success story prompt instead of dismissing immediately
                 showSuccessStoryPrompt = true
             } catch {

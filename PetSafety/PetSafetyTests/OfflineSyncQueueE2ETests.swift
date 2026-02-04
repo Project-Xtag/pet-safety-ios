@@ -12,7 +12,7 @@ struct OfflineSyncQueueE2ETests {
     func testOfflineAlertQueuedAndSynced() async throws {
         let offlineManager = OfflineDataManager(storeType: NSInMemoryStoreType)
         let networkMonitor = TestNetworkMonitor(isConnected: false)
-        let apiService = MockAPIService()
+        let apiService = OfflineE2EMockAPIService()
         let syncService = SyncService(
             offlineManager: offlineManager,
             networkMonitor: networkMonitor,
@@ -73,7 +73,7 @@ final class TestNetworkMonitor: NetworkMonitoring {
     }
 }
 
-final class MockAPIService: APIServiceProtocol {
+final class OfflineE2EMockAPIService: APIServiceProtocol {
     private(set) var createdAlertId: String = ""
 
     func createAlert(_ request: CreateAlertRequest) async throws -> MissingPetAlert {

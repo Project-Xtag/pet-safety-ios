@@ -31,11 +31,11 @@ struct TagActivationView: View {
                     petSelectionView
                 }
             }
-            .navigationTitle("Activate Tag")
+            .navigationTitle(Text("tag_activate_title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button(String(localized: "cancel")) {
                         onDismiss()
                     }
                 }
@@ -51,7 +51,7 @@ struct TagActivationView: View {
         VStack(spacing: 20) {
             ProgressView()
                 .scaleEffect(1.5)
-            Text("Loading your pets...")
+            Text("tag_loading_pets")
                 .font(.body)
                 .foregroundColor(.secondary)
         }
@@ -67,12 +67,12 @@ struct TagActivationView: View {
                 .font(.system(size: 80))
                 .foregroundColor(.green)
 
-            Text("Tag Activated!")
+            Text("tag_activated")
                 .font(.title)
                 .fontWeight(.bold)
 
             if let pet = selectedPet {
-                Text("\(pet.name)'s tag is now active")
+                Text("tag_activated_message \(pet.name)")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -92,7 +92,7 @@ struct TagActivationView: View {
                 .clipShape(Circle())
             }
 
-            Text("Choose a subscription plan to unlock all features like lost pet alerts and SMS notifications.")
+            Text("tag_choose_plan")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -103,7 +103,7 @@ struct TagActivationView: View {
             Button {
                 showPlanSelection = true
             } label: {
-                Text("Choose Plan")
+                Text("tag_choose_plan_button")
                     .fontWeight(.semibold)
             }
             .buttonStyle(TagPrimaryButtonStyle())
@@ -112,7 +112,7 @@ struct TagActivationView: View {
             Button {
                 onDismiss()
             } label: {
-                Text("Skip for now")
+                Text("tag_skip_for_now")
                     .fontWeight(.medium)
                     .foregroundColor(.secondary)
             }
@@ -134,18 +134,18 @@ struct TagActivationView: View {
                 .font(.system(size: 60))
                 .foregroundColor(.secondary)
 
-            Text("No Pets Yet")
+            Text("tag_no_pets")
                 .font(.title2)
                 .fontWeight(.bold)
 
-            Text("Add a pet first before activating a tag")
+            Text("tag_no_pets_message")
                 .font(.body)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
 
             VStack(spacing: 12) {
-                Text("Tag Code")
+                Text("tag_code_label")
                     .font(.caption)
                     .foregroundColor(.secondary)
 
@@ -163,7 +163,7 @@ struct TagActivationView: View {
             Button {
                 onDismiss()
             } label: {
-                Text("Close")
+                Text("close")
                     .fontWeight(.semibold)
             }
             .buttonStyle(TagSecondaryButtonStyle())
@@ -181,7 +181,7 @@ struct TagActivationView: View {
                     .font(.system(size: 40))
                     .foregroundColor(Color("BrandColor"))
 
-                Text("Tag Code")
+                Text("tag_code_label")
                     .font(.caption)
                     .foregroundColor(.secondary)
 
@@ -198,7 +198,7 @@ struct TagActivationView: View {
             .background(grayBackground.opacity(0.5))
 
             // Instructions
-            Text("Select a pet to link with this tag")
+            Text("tag_select_pet")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding(.top, 16)
@@ -250,7 +250,7 @@ struct TagActivationView: View {
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
                                 .scaleEffect(0.8)
                         }
-                        Text(isActivating ? "Activating..." : "Activate Tag")
+                        Text(isActivating ? String(localized: "tag_activating") : String(localized: "tag_activate_button"))
                             .fontWeight(.semibold)
                     }
                 }
@@ -258,7 +258,7 @@ struct TagActivationView: View {
                 .disabled(selectedPet == nil || isActivating)
                 .opacity(selectedPet == nil ? 0.6 : 1.0)
 
-                Text("This tag will be linked to the selected pet")
+                Text("tag_link_message")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

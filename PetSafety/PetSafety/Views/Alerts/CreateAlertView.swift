@@ -1,5 +1,6 @@
 import SwiftUI
 import MapKit
+import UIKit
 
 struct CreateAlertView: View {
     @StateObject private var viewModel = AlertsViewModel()
@@ -15,13 +16,13 @@ struct CreateAlertView: View {
 
     var body: some View {
         Form {
-            Section(header: Text("Select Pet")) {
+            Section(header: Text("select_pet_header")) {
                 if petsViewModel.pets.isEmpty {
-                    Text("No pets available. Please add a pet first.")
+                    Text("no_pets_available")
                         .foregroundColor(.secondary)
                 } else {
-                    Picker("Pet", selection: $selectedPet) {
-                        Text("Select a pet").tag(nil as Pet?)
+                    Picker("pet_picker_label", selection: $selectedPet) {
+                        Text("select_pet_to_report").tag(nil as Pet?)
                         ForEach(petsViewModel.pets) { pet in
                             Text(pet.name).tag(pet as Pet?)
                         }
@@ -29,11 +30,11 @@ struct CreateAlertView: View {
                 }
             }
 
-            Section(header: Text("Last Seen Location")) {
-                Toggle("Use Current Location", isOn: $useCurrentLocation)
+            Section(header: Text("last_seen_location_header")) {
+                Toggle("use_current_location", isOn: $useCurrentLocation)
 
                 if !useCurrentLocation {
-                    TextField("Enter location", text: $location)
+                    TextField(String(localized: "enter_location"), text: $location)
                 } else if let coordinate = locationManager.location {
                     Text("Lat: \(String(format: "%.6f", coordinate.latitude)), Lon: \(String(format: "%.6f", coordinate.longitude))")
                         .font(.caption)
@@ -41,12 +42,12 @@ struct CreateAlertView: View {
                 }
             }
 
-            Section(header: Text("Additional Information")) {
+            Section(header: Text("additional_information_header")) {
                 TextEditor(text: $additionalInfo)
                     .frame(minHeight: 100)
                     .overlay(alignment: .topLeading) {
                         if additionalInfo.isEmpty {
-                            Text("Provide any additional details about when and where your pet was last seen...")
+                            Text("additional_details_placeholder")
                                 .foregroundColor(.secondary)
                                 .padding(.top, 8)
                                 .padding(.leading, 4)
@@ -55,18 +56,18 @@ struct CreateAlertView: View {
             }
         }
         .adaptiveList()
-        .navigationTitle("Report Missing Pet")
+        .navigationTitle(Text("report_missing_pet"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+                Button("cancel") {
                     dismiss()
                 }
                 .foregroundColor(.brandOrange)
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Create Alert") {
+                Button("create_alert") {
                     createAlert()
                 }
                 .foregroundColor(.brandOrange)
@@ -101,12 +102,14 @@ struct CreateAlertView: View {
                     additionalInfo: additionalInfo.isEmpty ? nil : additionalInfo
                 )
 
-                appState.showSuccess("Missing pet alert created successfully!")
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+                appState.showSuccess(String(localized: "alert_created_success"))
                 dismiss()
             } catch {
                 let nsError = error as NSError
                 if nsError.domain == "Offline" {
-                    appState.showSuccess("Alert queued. Will sync when online.")
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    appState.showSuccess(String(localized: "alert_queued_offline"))
                     dismiss()
                 } else {
                     appState.showError(error.localizedDescription)

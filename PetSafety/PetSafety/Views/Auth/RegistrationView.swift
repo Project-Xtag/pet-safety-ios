@@ -1,16 +1,18 @@
 import SwiftUI
 
-struct AuthenticationView: View {
+struct RegistrationView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var appState: AppState
+    @State private var firstName = ""
+    @State private var lastName = ""
     @State private var email = ""
     @State private var otpCode = ""
     @State private var showOTPField = false
     @State private var showBiometricEnrollment = false
-    @State private var showOrderTagSheet = false
     @State private var resendCooldown = 0
     @State private var resendTimer: Timer?
-    var onNavigateToRegister: (() -> Void)?
+
+    var onBackToLogin: () -> Void
 
     private var isValidEmail: Bool {
         let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -20,7 +22,6 @@ struct AuthenticationView: View {
 
     var body: some View {
         ZStack {
-            // Background
             Color(.systemBackground)
                 .ignoresSafeArea()
 
@@ -36,15 +37,15 @@ struct AuthenticationView: View {
                             .padding(.bottom, 20)
                     }
 
-                    // Login Card
+                    // Registration Card
                     VStack(spacing: 24) {
                         // Header
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("welcome_back")
+                            Text("create_account")
                                 .font(.system(size: 26, weight: .bold))
                                 .foregroundColor(.primary)
 
-                            Text("enter_email_subtitle")
+                            Text("enter_details_subtitle")
                                 .font(.system(size: 15))
                                 .foregroundColor(.mutedText)
                         }
@@ -53,6 +54,54 @@ struct AuthenticationView: View {
                         // Form
                         if !showOTPField {
                             VStack(spacing: 16) {
+                                // First Name Field
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("first_name")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(.primary)
+
+                                    HStack(spacing: 12) {
+                                        Image(systemName: "person")
+                                            .foregroundColor(.mutedText)
+                                            .frame(width: 20)
+                                        TextField("", text: $firstName)
+                                            .textContentType(.givenName)
+                                            .autocapitalization(.words)
+                                    }
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 14)
+                                    .background(Color(.systemBackground))
+                                    .cornerRadius(14)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 14)
+                                            .stroke(Color(.systemGray4).opacity(0.5), lineWidth: 1)
+                                    )
+                                }
+
+                                // Last Name Field
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("last_name")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(.primary)
+
+                                    HStack(spacing: 12) {
+                                        Image(systemName: "person")
+                                            .foregroundColor(.mutedText)
+                                            .frame(width: 20)
+                                        TextField("", text: $lastName)
+                                            .textContentType(.familyName)
+                                            .autocapitalization(.words)
+                                    }
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 14)
+                                    .background(Color(.systemBackground))
+                                    .cornerRadius(14)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 14)
+                                            .stroke(Color(.systemGray4).opacity(0.5), lineWidth: 1)
+                                    )
+                                }
+
                                 // Email Field
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text("email_address")
@@ -63,7 +112,6 @@ struct AuthenticationView: View {
                                         Image(systemName: "envelope")
                                             .foregroundColor(.mutedText)
                                             .frame(width: 20)
-                                            .accessibilityHidden(true)
                                         TextField("", text: $email)
                                             .textContentType(.emailAddress)
                                             .autocapitalization(.none)
@@ -86,37 +134,18 @@ struct AuthenticationView: View {
                                     }
                                 }
 
-                                // Send Code Button
+                                // Register Button
                                 Button(action: sendOTP) {
                                     if authViewModel.isLoading {
                                         ProgressView()
                                             .progressViewStyle(CircularProgressViewStyle(tint: .white))
                                     } else {
-                                        Text("send_login_code")
+                                        Text("create_account")
                                     }
                                 }
-                                .buttonStyle(BrandButtonStyle(isDisabled: !isValidEmail))
-                                .disabled(!isValidEmail || authViewModel.isLoading)
+                                .buttonStyle(BrandButtonStyle(isDisabled: firstName.isEmpty || !isValidEmail))
+                                .disabled(firstName.isEmpty || !isValidEmail || authViewModel.isLoading)
                                 .padding(.top, 8)
-
-                                // Biometric Login Option (if enabled and has stored session)
-                                if authViewModel.canUseBiometric && authViewModel.biometricEnabled {
-                                    Button(action: {
-                                        Task {
-                                            await authViewModel.authenticateWithBiometric()
-                                        }
-                                    }) {
-                                        HStack(spacing: 8) {
-                                            Image(systemName: authViewModel.biometricIconName)
-                                                .font(.system(size: 18))
-                                                .accessibilityLabel(NSLocalizedString("biometric_login_title", comment: ""))
-                                            Text(String(format: NSLocalizedString("login_with_biometric_type", comment: ""), authViewModel.biometricTypeName))
-                                                .font(.system(size: 15, weight: .medium))
-                                        }
-                                        .foregroundColor(.brandOrange)
-                                    }
-                                    .padding(.top, 8)
-                                }
                             }
                         } else {
                             // OTP Verification
@@ -182,7 +211,7 @@ struct AuthenticationView: View {
 
                         // T&Cs and Privacy Policy Disclaimer
                         VStack(spacing: 4) {
-                            Text("terms_login_prefix")
+                            Text("by_creating_account_agree")
                                 .font(.system(size: 12))
                                 .foregroundColor(.mutedText)
                             HStack(spacing: 4) {
@@ -198,45 +227,27 @@ struct AuthenticationView: View {
                             }
                         }
                         .padding(.top, 8)
-
                     }
                     .padding(28)
                     .background(Color.cardBackground)
                     .cornerRadius(40)
                     .padding(.horizontal, 16)
 
-                    // Register & Order Tag CTAs for new users (outside card)
+                    // Already have an account? Log in
                     VStack(spacing: 8) {
-                        Text("dont_have_account")
+                        Text("already_have_account")
                             .font(.system(size: 14))
                             .foregroundColor(.mutedText)
 
-                        Button(action: { onNavigateToRegister?() }) {
-                            Text("register")
+                        Button(action: onBackToLogin) {
+                            Text("log_in")
                                 .font(.system(size: 14, weight: .semibold))
                                 .foregroundColor(.brandOrange)
-                        }
-
-                        Button(action: { showOrderTagSheet = true }) {
-                            HStack(spacing: 6) {
-                                Image(systemName: "tag.fill")
-                                    .font(.system(size: 14))
-                                Text("start_here_order_free_tag")
-                                    .font(.system(size: 14, weight: .semibold))
-                            }
-                            .foregroundColor(.brandOrange)
                         }
                     }
                     .padding(.top, 24)
                     .padding(.bottom, 40)
                 }
-            }
-        }
-        .sheet(isPresented: $showOrderTagSheet) {
-            NavigationView {
-                OrderMoreTagsView()
-                    .environmentObject(appState)
-                    .environmentObject(authViewModel)
             }
         }
         .alert(String(format: NSLocalizedString("enable_biometric_type", comment: ""), authViewModel.biometricTypeName), isPresented: $showBiometricEnrollment) {
@@ -247,14 +258,6 @@ struct AuthenticationView: View {
             Button("skip", role: .cancel) {}
         } message: {
             Text(String(format: NSLocalizedString("use_biometric_quick_login", comment: ""), authViewModel.biometricTypeName))
-        }
-        .onAppear {
-            // Show biometric prompt on appear if available
-            if authViewModel.showBiometricPrompt {
-                Task {
-                    await authViewModel.authenticateWithBiometric()
-                }
-            }
         }
     }
 
@@ -306,10 +309,19 @@ struct AuthenticationView: View {
     }
 
     private func verifyOTP() {
+        let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedFirstName = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedLastName = lastName.trimmingCharacters(in: .whitespacesAndNewlines)
         Task {
             do {
-                try await authViewModel.verifyOTP(email: email, code: otpCode)
-                // Offer biometric enrollment if available and not already enabled
+                try await authViewModel.verifyOTP(email: trimmedEmail, code: otpCode)
+                // Update user profile with name after successful registration
+                var updates: [String: Any] = ["first_name": trimmedFirstName]
+                if !trimmedLastName.isEmpty {
+                    updates["last_name"] = trimmedLastName
+                }
+                try? await authViewModel.updateProfile(updates: updates)
+                // Offer biometric enrollment
                 if authViewModel.shouldOfferBiometricEnrollment {
                     showBiometricEnrollment = true
                 }
@@ -320,30 +332,8 @@ struct AuthenticationView: View {
     }
 }
 
-// Keep the original styles for backward compatibility
-struct RoundedTextFieldStyle: TextFieldStyle {
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        configuration
-            .padding()
-            .background(Color(.systemGray6))
-            .cornerRadius(10)
-    }
-}
-
-struct PrimaryButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(configuration.isPressed ? Color.brandOrange.opacity(0.8) : Color.brandOrange)
-            .foregroundColor(.white)
-            .cornerRadius(14)
-            .fontWeight(.semibold)
-    }
-}
-
 #Preview {
-    AuthenticationView()
+    RegistrationView(onBackToLogin: {})
         .environmentObject(AuthViewModel())
         .environmentObject(AppState())
 }

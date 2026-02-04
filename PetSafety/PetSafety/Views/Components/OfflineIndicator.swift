@@ -16,6 +16,7 @@ struct OfflineIndicator: View {
                     Image(systemName: statusIcon)
                         .foregroundColor(statusColor)
                         .font(.system(size: 16, weight: .semibold))
+                        .accessibilityLabel(statusTitle)
 
                     // Status text
                     VStack(alignment: .leading, spacing: 2) {
@@ -36,6 +37,7 @@ struct OfflineIndicator: View {
                         Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                             .font(.system(size: 12, weight: .semibold))
                             .foregroundColor(.secondary)
+                            .accessibilityHidden(true)
                     }
                 }
                 .padding(.horizontal, 16)
@@ -52,7 +54,7 @@ struct OfflineIndicator: View {
                             HStack {
                                 Image(systemName: "tray.full")
                                     .foregroundColor(.orange)
-                                Text("\(syncService.pendingActionsCount) action\(syncService.pendingActionsCount == 1 ? "" : "s") queued")
+                                Text("offline_actions_queued \(syncService.pendingActionsCount)")
                                     .font(.caption)
                             }
                         }
@@ -62,7 +64,8 @@ struct OfflineIndicator: View {
                             HStack {
                                 Image(systemName: "clock")
                                     .foregroundColor(.secondary)
-                                Text("Last synced: \(syncService.timeSinceLastSync)")
+                                    .accessibilityLabel(String(localized: "offline_last_sync_label"))
+                                Text("offline_last_synced \(syncService.timeSinceLastSync)")
                                     .font(.caption)
                             }
                         }
@@ -81,7 +84,7 @@ struct OfflineIndicator: View {
                                     } else {
                                         Image(systemName: "arrow.clockwise")
                                     }
-                                    Text(syncService.isSyncing ? "Syncing..." : "Sync Now")
+                                    Text(syncService.isSyncing ? String(localized: "syncing") : String(localized: "offline_sync_now"))
                                         .font(.caption)
                                         .fontWeight(.medium)
                                 }
@@ -127,21 +130,21 @@ struct OfflineIndicator: View {
 
     private var statusTitle: String {
         if !networkMonitor.isConnected {
-            return "Offline Mode"
+            return String(localized: "offline_mode")
         } else if syncService.isSyncing {
-            return "Syncing..."
+            return String(localized: "syncing")
         } else if syncService.pendingActionsCount > 0 {
-            return "Pending Changes"
+            return String(localized: "offline_pending_changes")
         } else {
-            return "Online"
+            return String(localized: "offline_online")
         }
     }
 
     private var statusSubtitle: String {
         if !networkMonitor.isConnected {
-            return "Changes will sync when online"
+            return String(localized: "offline_changes_sync")
         } else if syncService.pendingActionsCount > 0 {
-            return "Tap to view queued actions"
+            return String(localized: "offline_tap_to_view")
         } else {
             return networkMonitor.connectionDescription
         }
@@ -178,6 +181,7 @@ struct OfflineBadge: View {
             HStack(spacing: 6) {
                 Image(systemName: icon)
                     .font(.system(size: 12, weight: .semibold))
+                    .accessibilityHidden(true)
 
                 if syncService.pendingActionsCount > 0 {
                     Text("\(syncService.pendingActionsCount)")

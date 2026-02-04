@@ -6,13 +6,13 @@ struct HelpAndSupportView: View {
 
     var body: some View {
         List {
-            Section(header: Text("Quick Actions")) {
+            Section(header: Text("help_quick_actions")) {
                 Button(action: { showingContactForm = true }) {
                     HStack {
                         Image(systemName: "envelope.fill")
                             .foregroundColor(.cyan)
                             .frame(width: 24)
-                        Text("Contact Support")
+                        Text("help_contact_support")
                             .foregroundColor(.primary)
                         Spacer()
                         Image(systemName: "chevron.right")
@@ -22,13 +22,13 @@ struct HelpAndSupportView: View {
                 }
             }
 
-            Section(header: Text("Resources")) {
+            Section(header: Text("help_resources")) {
                 NavigationLink(destination: FAQView()) {
                     HStack {
                         Image(systemName: "questionmark.circle.fill")
                             .foregroundColor(.cyan)
                             .frame(width: 24)
-                        Text("Frequently Asked Questions")
+                        Text("help_faq")
                     }
                 }
 
@@ -37,18 +37,18 @@ struct HelpAndSupportView: View {
                         Image(systemName: "book.fill")
                             .foregroundColor(.cyan)
                             .frame(width: 24)
-                        Text("User Guides")
+                        Text("help_user_guides")
                     }
                 }
             }
 
-            Section(header: Text("Legal")) {
+            Section(header: Text("help_legal")) {
                 Link(destination: URL(string: "https://pet-er.app/terms")!) {
                     HStack {
                         Image(systemName: "doc.text.fill")
                             .foregroundColor(.cyan)
                             .frame(width: 24)
-                        Text("Terms of Service")
+                        Text("help_terms")
                         Spacer()
                         Image(systemName: "arrow.up.right")
                             .font(.caption)
@@ -61,7 +61,7 @@ struct HelpAndSupportView: View {
                         Image(systemName: "lock.shield.fill")
                             .foregroundColor(.cyan)
                             .frame(width: 24)
-                        Text("Privacy Policy")
+                        Text("help_privacy")
                         Spacer()
                         Image(systemName: "arrow.up.right")
                             .font(.caption)
@@ -70,27 +70,27 @@ struct HelpAndSupportView: View {
                 }
             }
 
-            Section(header: Text("App Information")) {
+            Section(header: Text("help_app_info")) {
                 HStack {
-                    Text("Version")
+                    Text("help_version")
                     Spacer()
                     Text("1.0.0")
                         .foregroundColor(.secondary)
                 }
 
                 HStack {
-                    Text("Build")
+                    Text("help_build")
                     Spacer()
                     Text("2024.11.001")
                         .foregroundColor(.secondary)
                 }
             }
 
-            Section(footer: Text("We're here to help! Our support team typically responds within 24 hours.")) {
+            Section(footer: Text("help_support_footer")) {
                 EmptyView()
             }
         }
-        .navigationTitle("Help & Support")
+        .navigationTitle("help_title")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showingContactForm) {
             ContactSupportView()
@@ -112,19 +112,19 @@ struct ContactSupportView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Category")) {
-                    Picker("Category", selection: $selectedCategory) {
+                Section(header: Text("help_category")) {
+                    Picker("help_category", selection: $selectedCategory) {
                         ForEach(categories, id: \.self) { category in
                             Text(category).tag(category)
                         }
                     }
                 }
 
-                Section(header: Text("Subject")) {
-                    TextField("Brief description of your issue", text: $subject)
+                Section(header: Text("help_subject")) {
+                    TextField("help_subject_placeholder", text: $subject)
                 }
 
-                Section(header: Text("Message")) {
+                Section(header: Text("help_message")) {
                     TextEditor(text: $message)
                         .frame(minHeight: 150)
                 }
@@ -135,9 +135,9 @@ struct ContactSupportView: View {
                             Spacer()
                             if isSubmitting {
                                 ProgressView()
-                                Text("Sending...")
+                                Text("help_sending")
                             } else {
-                                Text("Submit Request")
+                                Text("help_submit_request")
                                     .fontWeight(.semibold)
                             }
                             Spacer()
@@ -146,11 +146,11 @@ struct ContactSupportView: View {
                     .disabled(subject.isEmpty || message.isEmpty || isSubmitting)
                 }
             }
-            .navigationTitle("Contact Support")
+            .navigationTitle("help_contact_title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button("cancel") {
                         dismiss()
                     }
                 }
@@ -207,7 +207,7 @@ struct FAQView: View {
                 .padding(.vertical, 4)
             }
         }
-        .navigationTitle("FAQ")
+        .navigationTitle("help_faq_title")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -230,7 +230,7 @@ struct FAQDetailView: View {
             }
             .padding()
         }
-        .navigationTitle("FAQ")
+        .navigationTitle("help_faq_title")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -256,7 +256,7 @@ struct GuidesView: View {
                 }
             }
         }
-        .navigationTitle("User Guides")
+        .navigationTitle("help_guides_title")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -271,7 +271,7 @@ struct GuideDetailView: View {
                     .font(.title)
                     .fontWeight(.bold)
 
-                Text("Detailed guide content will be available here.")
+                Text("help_guide_placeholder")
                     .font(.body)
                     .foregroundColor(.secondary)
 

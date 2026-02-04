@@ -11,12 +11,19 @@ struct AlertsListView: View {
             OfflineIndicator()
 
             ZStack {
-                if viewModel.alerts.isEmpty && !viewModel.isLoading {
+                if viewModel.isLoading && viewModel.alerts.isEmpty {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else if viewModel.errorMessage != nil && viewModel.alerts.isEmpty {
+                    ErrorRetryView(message: viewModel.errorMessage ?? String(localized: "failed_load_alerts")) {
+                        Task { await viewModel.fetchAlerts() }
+                    }
+                } else if viewModel.alerts.isEmpty {
                 EmptyStateView(
                     icon: "exclamationmark.triangle.fill",
-                    title: "No Active Alerts",
-                    message: "You don't have any missing pet alerts at the moment",
-                    actionTitle: "Create Alert",
+                    title: String(localized: "no_active_alerts"),
+                    message: String(localized: "no_active_alerts_message"),
+                    actionTitle: String(localized: "create_alert"),
                     action: { showingCreateAlert = true }
                 )
             } else {
@@ -31,11 +38,12 @@ struct AlertsListView: View {
             }
         } // end of ZStack
         } // end of VStack with OfflineIndicator
-        .navigationTitle("Missing Pet Alerts")
+        .navigationTitle(Text("missing_pet_alerts_title"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: { showingCreateAlert = true }) {
                     Image(systemName: "plus")
+                        .accessibilityLabel(Text("create_new_alert"))
                 }
             }
         }
@@ -106,7 +114,7 @@ struct AlertRowView: View {
                 }
 
                 if let sightings = alert.sightings, !sightings.isEmpty {
-                    Text("\(sightings.count) sighting\(sightings.count == 1 ? "" : "s")")
+                    Text(sightings.count == 1 ? String(localized: "sighting_count_singular") : String(format: NSLocalizedString("sighting_count_plural", comment: ""), sightings.count))
                         .font(.caption)
                         .foregroundColor(.blue)
                 }

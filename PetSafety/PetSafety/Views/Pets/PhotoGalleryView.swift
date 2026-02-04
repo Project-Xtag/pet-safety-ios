@@ -1,5 +1,6 @@
 import SwiftUI
 import PhotosUI
+import UIKit
 
 /// Photo Gallery View for displaying and managing pet photos
 struct PhotoGalleryView: View {
@@ -27,7 +28,7 @@ struct PhotoGalleryView: View {
                 VStack(spacing: 20) {
                     // Header with pet info
                     VStack(spacing: 8) {
-                        Text("\(pet.name)'s Photos")
+                        Text(String(format: NSLocalizedString("pet_photos_title", comment: ""), pet.name))
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.primary)
 
@@ -43,7 +44,7 @@ struct PhotoGalleryView: View {
                     Button(action: { showingSourcePicker = true }) {
                         HStack {
                             Image(systemName: "photo.badge.plus")
-                            Text("Add Photos")
+                            Text("add_photos")
                         }
                     }
                     .buttonStyle(BrandButtonStyle(isDisabled: viewModel.isUploading))
@@ -55,9 +56,20 @@ struct PhotoGalleryView: View {
                         VStack(spacing: 8) {
                             ProgressView(value: viewModel.uploadProgress)
                                 .progressViewStyle(LinearProgressViewStyle())
+                                .tint(.brandOrange)
 
-                            Text("Uploading photos...")
-                                .font(.caption)
+                            if viewModel.totalUploadCount > 1 {
+                                Text("Uploading photo \(viewModel.uploadedCount) of \(viewModel.totalUploadCount)...")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            } else {
+                                Text("Uploading photo...")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+
+                            Text("\(Int(viewModel.uploadProgress * 100))%")
+                                .font(.caption2.monospacedDigit())
                                 .foregroundColor(.secondary)
                         }
                         .padding(.horizontal)
@@ -65,7 +77,7 @@ struct PhotoGalleryView: View {
 
                     // Photo grid
                     if viewModel.isLoading {
-                        ProgressView("Loading photos...")
+                        ProgressView("loading_photos")
                             .padding(.top, 50)
                     } else if viewModel.hasPhotos {
                         LazyVGrid(columns: columns, spacing: 12) {
@@ -95,7 +107,7 @@ struct PhotoGalleryView: View {
                         .padding(.horizontal)
 
                         // Edit mode hint
-                        Text("Tip: Long press a photo to set as primary or delete")
+                        Text("photo_tip")
                             .font(.caption)
                             .foregroundColor(.secondary)
                             .padding()
@@ -112,11 +124,11 @@ struct PhotoGalleryView: View {
                                     .foregroundColor(.tealAccent)
                             }
 
-                            Text("No photos yet")
+                            Text("no_photos_yet")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(.primary)
 
-                            Text("Add photos to create a gallery for \(pet.name)")
+                            Text(String(format: NSLocalizedString("add_photos_gallery_hint", comment: ""), pet.name))
                                 .font(.system(size: 15))
                                 .foregroundColor(.mutedText)
                                 .multilineTextAlignment(.center)
@@ -132,7 +144,7 @@ struct PhotoGalleryView: View {
             }
 
         }
-        .navigationTitle("Photo Gallery")
+        .navigationTitle(Text("photo_gallery_title"))
         .navigationBarTitleDisplayMode(.inline)
         .photosPicker(
             isPresented: $showingImagePicker,
@@ -149,24 +161,24 @@ struct PhotoGalleryView: View {
             }
             .edgesIgnoringSafeArea(.all)
         }
-        .confirmationDialog("Choose Photo Source", isPresented: $showingSourcePicker) {
-            Button("Take Photo") {
+        .confirmationDialog(Text("choose_photo_source"), isPresented: $showingSourcePicker) {
+            Button("take_photo") {
                 showingCamera = true
             }
-            Button("Choose from Library") {
+            Button("choose_from_gallery") {
                 showingImagePicker = true
             }
-            Button("Cancel", role: .cancel) {}
+            Button("cancel", role: .cancel) {}
         }
-        .alert("Delete Photo", isPresented: $showingDeleteConfirmation) {
-            Button("Cancel", role: .cancel) {}
-            Button("Delete", role: .destructive) {
+        .alert(Text("delete_photo"), isPresented: $showingDeleteConfirmation) {
+            Button("cancel", role: .cancel) {}
+            Button("delete", role: .destructive) {
                 if let photo = photoToDelete {
                     deletePhoto(photo)
                 }
             }
         } message: {
-            Text("Are you sure you want to delete this photo? This action cannot be undone.")
+            Text("delete_photo_confirm")
         }
         .task {
             await viewModel.loadPhotos(for: pet.id)
@@ -202,6 +214,7 @@ struct PhotoGalleryView: View {
                 )
 
                 if succeeded > 0 {
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
                     appState.showSuccess("\(succeeded) photo\(succeeded == 1 ? "" : "s") uploaded successfully")
                 }
 
@@ -223,6 +236,7 @@ struct PhotoGalleryView: View {
                 let success = await viewModel.uploadPhoto(for: pet.id, imageData: compressedData)
 
                 if success {
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
                     appState.showSuccess("Photo uploaded successfully")
                 } else {
                     appState.showError(viewModel.errorMessage ?? "Failed to upload photo")
@@ -258,6 +272,7 @@ struct PhotoGalleryView: View {
             let success = await viewModel.deletePhoto(petId: pet.id, photoId: photo.id)
 
             if success {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 appState.showSuccess("Photo deleted")
             } else {
                 appState.showError(viewModel.errorMessage ?? "Failed to delete photo")
@@ -313,13 +328,13 @@ struct PhotoGridItem: View {
                 Button {
                     onSetPrimary()
                 } label: {
-                    Label("Set as Primary", systemImage: "star.fill")
+                    Label("primary", systemImage: "star.fill")
                 }
 
                 Button(role: .destructive) {
                     onDelete()
                 } label: {
-                    Label("Delete", systemImage: "trash")
+                    Label("delete", systemImage: "trash")
                 }
             }
 
@@ -328,7 +343,7 @@ struct PhotoGridItem: View {
                 HStack(spacing: 4) {
                     Image(systemName: "star.fill")
                         .font(.caption)
-                    Text("Primary")
+                    Text("primary")
                         .font(.caption2)
                         .fontWeight(.semibold)
                 }

@@ -17,23 +17,23 @@ struct PersonalInformationView: View {
         List {
             if isEditing {
                 // Edit Mode
-                Section(header: Text("Personal Details")) {
+                Section(header: Text("personal_details")) {
                     HStack {
-                        Text("First Name")
+                        Text("personal_first_name")
                             .frame(width: 100, alignment: .leading)
-                        TextField("Enter first name", text: $firstName)
+                        TextField(NSLocalizedString("personal_first_name_placeholder", comment: ""), text: $firstName)
                     }
 
                     HStack {
-                        Text("Last Name")
+                        Text("personal_last_name")
                             .frame(width: 100, alignment: .leading)
-                        TextField("Enter last name", text: $lastName)
+                        TextField(NSLocalizedString("personal_last_name_placeholder", comment: ""), text: $lastName)
                     }
 
                     HStack {
-                        Text("Email")
+                        Text("personal_email")
                             .frame(width: 100, alignment: .leading)
-                        TextField("Enter email", text: $email)
+                        TextField(NSLocalizedString("personal_email_placeholder", comment: ""), text: $email)
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
                             .disabled(true) // Email usually can't be changed
@@ -41,9 +41,9 @@ struct PersonalInformationView: View {
                     }
 
                     HStack {
-                        Text("Phone")
+                        Text("personal_phone")
                             .frame(width: 100, alignment: .leading)
-                        TextField("Enter phone number", text: $phone)
+                        TextField(NSLocalizedString("personal_phone_placeholder", comment: ""), text: $phone)
                             .keyboardType(.phonePad)
                     }
                 }
@@ -55,10 +55,10 @@ struct PersonalInformationView: View {
                             if isLoading {
                                 ProgressView()
                                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                Text("Saving...")
+                                Text("saving")
                                     .foregroundColor(.white)
                             } else {
-                                Text("Save Changes")
+                                Text("save_changes")
                                     .fontWeight(.semibold)
                             }
                             Spacer()
@@ -72,7 +72,7 @@ struct PersonalInformationView: View {
                     Button(action: { cancelEditing() }) {
                         HStack {
                             Spacer()
-                            Text("Cancel")
+                            Text("cancel")
                             Spacer()
                         }
                     }
@@ -83,16 +83,16 @@ struct PersonalInformationView: View {
                 }
             } else {
                 // View Mode
-                Section(header: Text("Personal Details")) {
-                    InfoRow(label: "First Name", value: firstName.isEmpty ? "Not set" : firstName)
-                    InfoRow(label: "Last Name", value: lastName.isEmpty ? "Not set" : lastName)
-                    InfoRow(label: "Email", value: email)
-                    InfoRow(label: "Phone", value: phone.isEmpty ? "Not set" : phone)
+                Section(header: Text("personal_details")) {
+                    InfoRow(label: NSLocalizedString("personal_first_name", comment: ""), value: firstName.isEmpty ? NSLocalizedString("not_set", comment: "") : firstName)
+                    InfoRow(label: NSLocalizedString("personal_last_name", comment: ""), value: lastName.isEmpty ? NSLocalizedString("not_set", comment: "") : lastName)
+                    InfoRow(label: NSLocalizedString("personal_email", comment: ""), value: email)
+                    InfoRow(label: NSLocalizedString("personal_phone", comment: ""), value: phone.isEmpty ? NSLocalizedString("not_set", comment: "") : phone)
                 }
 
                 Section {
                     Button(action: { startEditing() }) {
-                        Text("Edit Information")
+                        Text("edit_information")
                     }
                     .buttonStyle(BrandButtonStyle())
                     .listRowInsets(EdgeInsets())
@@ -100,21 +100,21 @@ struct PersonalInformationView: View {
                 }
             }
         }
-        .navigationTitle("Personal Information")
+        .navigationTitle("personal_title")
         .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(isEditing)
         .toolbar {
             if isEditing {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button("cancel") {
                         cancelEditing()
                     }
                     .foregroundColor(.brandOrange)
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
+                    Button("save") {
                         saveChanges()
                     }
                     .foregroundColor(.brandOrange)
@@ -163,7 +163,7 @@ struct PersonalInformationView: View {
                 ]
 
                 try await authViewModel.updateProfile(updates: updates)
-                appState.showSuccess("Personal information updated successfully!")
+                appState.showSuccess(NSLocalizedString("updated", comment: ""))
 
                 await MainActor.run {
                     isLoading = false
@@ -190,7 +190,7 @@ struct InfoRow: View {
                 .foregroundColor(.secondary)
             Spacer()
             Text(value)
-                .foregroundColor(value == "Not set" ? .secondary : .primary)
+                .foregroundColor(value == NSLocalizedString("not_set", comment: "") ? .secondary : .primary)
         }
     }
 }

@@ -219,7 +219,11 @@ class APIService {
             body: LoginRequest(email: email),
             requiresAuth: false
         )
-        return try await performRequest(request, responseType: LoginResponse.self)
+        let response = try await performRequest(request, responseType: LoginResponse.self)
+        #if DEBUG
+        print("✅ OTP send response: \(response.message)")
+        #endif
+        return response
     }
 
     func verifyOTP(email: String, code: String) async throws -> VerifyOTPResponse {
