@@ -1,17 +1,24 @@
 import SwiftUI
+import UIKit
 
 struct PetDetailView: View {
-    let pet: Pet
+    @State private var pet: Pet
     @StateObject private var viewModel = PetsViewModel()
+
+    init(pet: Pet) {
+        _pet = State(initialValue: pet)
+    }
     @StateObject private var alertsViewModel = AlertsViewModel()
     @State private var showingEditSheet = false
     @State private var showingMarkLostSheet = false
     @State private var showingDeleteConfirmation = false
     @State private var showingCannotDeleteAlert = false
     @State private var showingMarkFoundConfirmation = false
+    @State private var showingSuccessStoryPrompt = false
     @State private var isDeleting = false
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var authViewModel: AuthViewModel
 
     var body: some View {
         ScrollView {
@@ -177,16 +184,18 @@ struct PetDetailView: View {
             .padding(.vertical)
         }
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showingEditSheet) {
+        .sheet(isPresented: $showingEditSheet, onDismiss: refreshPet) {
             NavigationView {
                 PetFormView(mode: .edit(pet))
             }
             .adaptiveContainer()
         }
-        .sheet(isPresented: $showingMarkLostSheet) {
+        .sheet(isPresented: $showingMarkLostSheet, onDismiss: refreshPet) {
             NavigationView {
                 MarkAsLostView(pet: pet)
             }
+            .environmentObject(appState)
+            .environmentObject(authViewModel)
         }
         .alert(String(format: NSLocalizedString("mark_found_confirm_title", comment: ""), pet.name), isPresented: $showingMarkFoundConfirmation) {
             Button("cancel", role: .cancel) { }
@@ -211,6 +220,20 @@ struct PetDetailView: View {
             Button("cancel", role: .cancel) { }
         } message: {
             Text(String(format: NSLocalizedString("cannot_delete_missing_message", comment: ""), pet.name))
+        }
+        .fullScreenCover(isPresented: $showingSuccessStoryPrompt) {
+            SuccessStoryPromptView(
+                pet: pet,
+                onDismiss: {
+                    showingSuccessStoryPrompt = false
+                    dismiss()
+                },
+                onStorySubmitted: {
+                    showingSuccessStoryPrompt = false
+                    dismiss()
+                }
+            )
+            .environmentObject(appState)
         }
     }
 
@@ -241,10 +264,20 @@ struct PetDetailView: View {
         Task {
             do {
                 _ = try await viewModel.markPetFound(petId: pet.id)
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
                 appState.showSuccess(String(format: NSLocalizedString("marked_found_message", comment: ""), pet.name))
-                dismiss()
+                showingSuccessStoryPrompt = true
             } catch {
                 appState.showError(String(format: NSLocalizedString("mark_found_failed", comment: ""), error.localizedDescription))
+            }
+        }
+    }
+
+    private func refreshPet() {
+        Task {
+            await viewModel.fetchPets()
+            if let updated = viewModel.pets.first(where: { $0.id == pet.id }) {
+                pet = updated
             }
         }
     }
@@ -342,4 +375,6 @@ struct FoundButtonStyle: ButtonStyle {
             dateOfBirth: "2020-01-01"
         ))
     }
+    .environmentObject(AppState())
+    .environmentObject(AuthViewModel())
 }

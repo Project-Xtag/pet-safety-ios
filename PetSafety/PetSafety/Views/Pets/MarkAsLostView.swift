@@ -3,7 +3,7 @@ import MapKit
 import CoreLocation
 import UIKit
 
-enum NotificationCenterSource: String, CaseIterable {
+enum LastSeenSource: String, CaseIterable {
     case currentLocation = "current_location"
     case registeredAddress = "registered_address"
     case customAddress = "custom_address"
@@ -23,15 +23,20 @@ struct MarkAsLostView: View {
     @StateObject private var locationManager = LocationManager()
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var authViewModel: AuthViewModel
 
-    @State private var location = ""
+    @State private var lastSeenSource: LastSeenSource = .registeredAddress
+    @State private var customAddress = ""
     @State private var additionalInfo = ""
-    @State private var useCurrentLocation = false
+    @State private var isGeocoding = false
 
-    // Notification center fields
-    @State private var notificationCenterSource: NotificationCenterSource = .registeredAddress
-    @State private var customNotificationAddress = ""
-    @State private var isGeocodingAddress = false
+    /// Formatted registered address from user profile
+    private var registeredAddress: String? {
+        guard let user = authViewModel.currentUser else { return nil }
+        let parts = [user.address, user.addressLine2, user.city, user.postalCode, user.country]
+        let address = parts.compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: ", ")
+        return address.isEmpty ? nil : address
+    }
 
     var body: some View {
         Form {
@@ -60,45 +65,16 @@ struct MarkAsLostView: View {
                 }
             }
 
-            Section(header: Text("Last Seen Location"), footer: Text("Enter a street address, neighborhood, or landmark (e.g., 'Central Park, NYC' or '123 Main St, London')")) {
-                Toggle("Use Current Location", isOn: $useCurrentLocation)
-
-                if !useCurrentLocation {
-                    TextField("e.g., Central Park or 123 Main St", text: $location)
-                        .autocapitalization(.words)
-                } else if locationManager.location != nil {
-                    HStack {
-                        Image(systemName: "location.fill")
-                            .foregroundColor(.blue)
-                        Text("Using current location")
-                            .font(.subheadline)
-                    }
-                }
-            }
-
-            Section(header: Text("Additional Information")) {
-                TextEditor(text: $additionalInfo)
-                    .frame(minHeight: 100)
-                    .overlay(alignment: .topLeading) {
-                        if additionalInfo.isEmpty {
-                            Text("Provide any additional details about when and where your pet was last seen...")
-                                .foregroundColor(.secondary)
-                                .padding(.top, 8)
-                                .padding(.leading, 4)
-                        }
-                    }
-            }
-
-            Section(header: Text("Notification Center"),
+            Section(header: Text("Last Seen Location"),
                     footer: Text("Alerts will be sent to users, vets, and shelters within 10km of this location.")) {
-                Picker("Send alerts near", selection: $notificationCenterSource) {
-                    ForEach(NotificationCenterSource.allCases, id: \.self) { source in
+                Picker("Location", selection: $lastSeenSource) {
+                    ForEach(LastSeenSource.allCases, id: \.self) { source in
                         Text(source.displayName).tag(source)
                     }
                 }
                 .pickerStyle(.segmented)
 
-                switch notificationCenterSource {
+                switch lastSeenSource {
                 case .currentLocation:
                     if let loc = locationManager.location {
                         HStack {
@@ -122,24 +98,34 @@ struct MarkAsLostView: View {
                     HStack {
                         Image(systemName: "house.fill")
                             .foregroundColor(.green)
-                        Text("Using your registered address")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        if let address = registeredAddress {
+                            Text(address)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        } else {
+                            Text("No registered address found. Please update your profile.")
+                                .font(.subheadline)
+                                .foregroundColor(.red)
+                        }
                     }
 
                 case .customAddress:
-                    TextField("Enter address for notifications", text: $customNotificationAddress)
+                    TextField("e.g., Central Park or 123 Main St", text: $customAddress)
                         .autocapitalization(.words)
-                    if isGeocodingAddress {
-                        HStack {
-                            ProgressView()
-                                .scaleEffect(0.8)
-                            Text("Validating address...")
-                                .font(.caption)
+                }
+            }
+
+            Section(header: Text("Additional Information")) {
+                TextEditor(text: $additionalInfo)
+                    .frame(minHeight: 100)
+                    .overlay(alignment: .topLeading) {
+                        if additionalInfo.isEmpty {
+                            Text("Provide any additional details about when and where your pet was last seen...")
                                 .foregroundColor(.secondary)
+                                .padding(.top, 8)
+                                .padding(.leading, 4)
                         }
                     }
-                }
             }
 
             Section {
@@ -154,7 +140,27 @@ struct MarkAsLostView: View {
                 .font(.caption)
                 .foregroundColor(.secondary)
             }
+
+            Section {
+                Button(action: reportMissing) {
+                    HStack {
+                        Spacer()
+                        if petsViewModel.isLoading || isGeocoding {
+                            ProgressView()
+                                .tint(.white)
+                        } else {
+                            Text("Report Missing")
+                                .fontWeight(.semibold)
+                        }
+                        Spacer()
+                    }
+                }
+                .listRowBackground(isReportDisabled ? Color.gray.opacity(0.3) : Color.brandOrange)
+                .foregroundColor(.white)
+                .disabled(isReportDisabled)
+            }
         }
+        .scrollDismissesKeyboard(.interactively)
         .adaptiveList()
         .navigationTitle("Report Missing Pet")
         .navigationBarTitleDisplayMode(.inline)
@@ -165,70 +171,115 @@ struct MarkAsLostView: View {
                 }
                 .foregroundColor(.brandOrange)
             }
-
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Report Missing") {
-                    reportMissing()
-                }
-                .foregroundColor(.brandOrange)
-                .disabled(petsViewModel.isLoading || (!useCurrentLocation && location.isEmpty))
-            }
         }
         .task {
-            // Request location on load for notification center default
             locationManager.requestLocation()
         }
-        .onChange(of: useCurrentLocation) { _, isOn in
-            if isOn {
-                locationManager.requestLocation()
-            }
-        }
-        .onChange(of: notificationCenterSource) { _, source in
+        .onChange(of: lastSeenSource) { _, source in
             if source == .currentLocation {
                 locationManager.requestLocation()
             }
         }
     }
 
+    private var isReportDisabled: Bool {
+        if petsViewModel.isLoading || isGeocoding { return true }
+        switch lastSeenSource {
+        case .currentLocation:
+            return locationManager.location == nil
+        case .registeredAddress:
+            return registeredAddress == nil
+        case .customAddress:
+            return customAddress.isEmpty
+        }
+    }
+
+    private func geocodeAddress(_ address: String) async -> CLLocationCoordinate2D? {
+        let geocoder = CLGeocoder()
+        do {
+            let placemarks = try await geocoder.geocodeAddressString(address)
+            return placemarks.first?.location?.coordinate
+        } catch {
+            #if DEBUG
+            print("⚠️ Geocoding failed for '\(address)': \(error.localizedDescription)")
+            #endif
+            return nil
+        }
+    }
+
+    private func reverseGeocodeLocation(_ coordinate: CLLocationCoordinate2D) async -> String? {
+        let geocoder = CLGeocoder()
+        let clLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        do {
+            let placemarks = try await geocoder.reverseGeocodeLocation(clLocation)
+            if let placemark = placemarks.first {
+                let parts = [placemark.name, placemark.locality, placemark.administrativeArea, placemark.country]
+                return parts.compactMap { $0 }.joined(separator: ", ")
+            }
+            return nil
+        } catch {
+            #if DEBUG
+            print("⚠️ Reverse geocoding failed: \(error.localizedDescription)")
+            #endif
+            return nil
+        }
+    }
+
     private func reportMissing() {
         Task {
             do {
-                // Build location coordinate from current location
-                let coordinate: LocationCoordinate? = if let loc = locationManager.location {
-                    LocationCoordinate(lat: loc.latitude, lng: loc.longitude)
-                } else {
-                    nil
-                }
+                isGeocoding = true
+                var coordinate: LocationCoordinate? = nil
+                var addressText: String? = nil
+                let notificationSource = lastSeenSource.rawValue
+                var notificationLocation: LocationCoordinate? = nil
+                var notificationAddress: String? = nil
 
-                // Use address text if not using current location
-                let addressText = useCurrentLocation ? nil : (location.isEmpty ? nil : location)
-
-                // Build notification center location if using current location
-                let notificationCenterLocation: LocationCoordinate? = if notificationCenterSource == .currentLocation,
-                   let loc = locationManager.location {
-                    LocationCoordinate(lat: loc.latitude, lng: loc.longitude)
-                } else {
-                    nil
+                switch lastSeenSource {
+                case .currentLocation:
+                    if let loc = locationManager.location {
+                        let coord = LocationCoordinate(lat: loc.latitude, lng: loc.longitude)
+                        coordinate = coord
+                        notificationLocation = coord
+                        // Reverse-geocode to get address text for the backend
+                        let clCoord = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
+                        addressText = await reverseGeocodeLocation(clCoord) ?? "Current location"
+                        notificationAddress = addressText
+                    }
+                case .registeredAddress:
+                    addressText = registeredAddress
+                    notificationAddress = registeredAddress
+                    // Geocode address to get coordinates for alert creation
+                    if let address = registeredAddress,
+                       let geo = await geocodeAddress(address) {
+                        let coord = LocationCoordinate(lat: geo.latitude, lng: geo.longitude)
+                        coordinate = coord
+                        notificationLocation = coord
+                    }
+                case .customAddress:
+                    let addr = customAddress.isEmpty ? nil : customAddress
+                    addressText = addr
+                    notificationAddress = addr
+                    // Geocode custom address to get coordinates for alert creation
+                    if let address = addr,
+                       let geo = await geocodeAddress(address) {
+                        let coord = LocationCoordinate(lat: geo.latitude, lng: geo.longitude)
+                        coordinate = coord
+                        notificationLocation = coord
+                    }
                 }
-
-                // Build notification center address if using custom address
-                let notificationCenterAddress: String? = if notificationCenterSource == .customAddress {
-                    customNotificationAddress.isEmpty ? nil : customNotificationAddress
-                } else {
-                    nil
-                }
+                isGeocoding = false
 
                 let response = try await petsViewModel.markPetMissing(
                     petId: pet.id,
                     location: coordinate,
                     address: addressText,
                     description: additionalInfo.isEmpty ? nil : additionalInfo,
-                    notificationCenterSource: notificationCenterSource.rawValue,
-                    notificationCenterLocation: notificationCenterLocation,
-                    notificationCenterAddress: notificationCenterAddress
+                    notificationCenterSource: notificationSource,
+                    notificationCenterLocation: notificationLocation,
+                    notificationCenterAddress: notificationAddress
                 )
 
-                // Show appropriate success message based on whether alert was created
                 UINotificationFeedbackGenerator().notificationOccurred(.warning)
                 if response.alert != nil {
                     appState.showSuccess("\(pet.name) has been reported as missing. Alerts are being sent to nearby users, vets, and shelters.")
@@ -238,6 +289,7 @@ struct MarkAsLostView: View {
 
                 dismiss()
             } catch {
+                isGeocoding = false
                 appState.showError(error.localizedDescription)
             }
         }
@@ -263,5 +315,6 @@ struct MarkAsLostView: View {
             updatedAt: ""
         ))
         .environmentObject(AppState())
+        .environmentObject(AuthViewModel())
     }
 }
