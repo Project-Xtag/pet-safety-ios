@@ -42,6 +42,12 @@ struct MissingPetAlert: Codable, Identifiable {
         case foundAt = "found_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        // Flat pet fields from /alerts/nearby response
+        case petName = "pet_name"
+        case species
+        case breed
+        case color
+        case profileImage = "profile_image"
     }
 
     // Memberwise initializer (required since custom decoder/encoder removes auto-synthesis)
@@ -86,10 +92,29 @@ struct MissingPetAlert: Codable, Identifiable {
         petId = try container.decode(String.self, forKey: .petId)
         userId = try container.decode(String.self, forKey: .userId)
         status = try container.decode(String.self, forKey: .status)
-        pet = try container.decodeIfPresent(Pet.self, forKey: .pet)
         sightings = try container.decodeIfPresent([Sighting].self, forKey: .sightings)
         createdAt = try container.decode(String.self, forKey: .createdAt)
         updatedAt = try container.decode(String.self, forKey: .updatedAt)
+
+        // Try nested pet object first, then build from flat fields
+        var decodedPet = try container.decodeIfPresent(Pet.self, forKey: .pet)
+        if decodedPet == nil,
+           let petName = try container.decodeIfPresent(String.self, forKey: .petName) {
+            let petSpecies = try container.decodeIfPresent(String.self, forKey: .species) ?? "Unknown"
+            decodedPet = Pet(
+                id: petId,
+                ownerId: userId,
+                name: petName,
+                species: petSpecies,
+                breed: try container.decodeIfPresent(String.self, forKey: .breed),
+                color: try container.decodeIfPresent(String.self, forKey: .color),
+                profileImage: try container.decodeIfPresent(String.self, forKey: .profileImage),
+                isMissing: status == "active",
+                createdAt: createdAt,
+                updatedAt: updatedAt
+            )
+        }
+        pet = decodedPet
 
         let address = try container.decodeIfPresent(String.self, forKey: .lastSeenAddress)
         let legacyLocation = try container.decodeIfPresent(String.self, forKey: .lastSeenLocation)
