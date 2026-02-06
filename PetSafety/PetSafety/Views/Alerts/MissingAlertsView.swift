@@ -247,69 +247,113 @@ struct PetMapMarker: View {
 struct MissingAlertMapCard: View {
     let alert: MissingPetAlert
     @Environment(\.dismiss) private var dismiss
+    @State private var showingReportSighting = false
+    @State private var showingReportFound = false
 
     var body: some View {
-        NavigationLink(destination: AlertDetailView(alert: alert)) {
-            HStack(spacing: 16) {
-                // Pet Photo
-                if let pet = alert.pet {
-                    AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    } placeholder: {
-                        Image(systemName: "pawprint.fill")
-                            .foregroundColor(.white)
-                            .padding(15)
-                    }
-                    .frame(width: 70, height: 70)
-                    .background(Color.red.opacity(0.2))
-                    .cornerRadius(12)
-                    .clipped()
-                }
-
-                VStack(alignment: .leading, spacing: 6) {
-                    // Pet Name
+        VStack(spacing: 12) {
+            // Main card content - tappable to view details
+            NavigationLink(destination: AlertDetailView(alert: alert)) {
+                HStack(spacing: 16) {
+                    // Pet Photo
                     if let pet = alert.pet {
-                        Text(pet.name)
-                            .font(.headline)
-                            .foregroundColor(.primary)
-                    }
-
-                    // Duration Missing
-                    if let createdAt = alert.createdAt.toDate() {
-                        let duration = Date().timeIntervalSince(createdAt)
-                        Text("Missing for \(duration.formatDuration())")
-                            .font(.subheadline)
-                            .foregroundColor(.red)
-                            .fontWeight(.semibold)
-                    }
-
-                    // Location
-                    if let location = alert.lastSeenLocation {
-                        HStack(spacing: 4) {
-                            Image(systemName: "location.fill")
-                                .font(.caption2)
-                            Text(location)
-                                .font(.caption)
+                        AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        } placeholder: {
+                            Image(systemName: "pawprint.fill")
+                                .foregroundColor(.white)
+                                .padding(15)
                         }
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
+                        .frame(width: 70, height: 70)
+                        .background(Color.red.opacity(0.2))
+                        .cornerRadius(12)
+                        .clipped()
                     }
+
+                    VStack(alignment: .leading, spacing: 6) {
+                        // Pet Name
+                        if let pet = alert.pet {
+                            Text(pet.name)
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                        }
+
+                        // Duration Missing
+                        if let createdAt = alert.createdAt.toDate() {
+                            let duration = Date().timeIntervalSince(createdAt)
+                            Text("Missing for \(duration.formatDuration())")
+                                .font(.subheadline)
+                                .foregroundColor(.red)
+                                .fontWeight(.semibold)
+                        }
+
+                        // Location
+                        if let location = alert.lastSeenLocation {
+                            HStack(spacing: 4) {
+                                Image(systemName: "location.fill")
+                                    .font(.caption2)
+                                Text(location)
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.secondary)
+                            .lineLimit(1)
+                        }
+                    }
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .buttonStyle(PlainButtonStyle())
+
+            // Action buttons
+            HStack(spacing: 12) {
+                Button(action: { showingReportSighting = true }) {
+                    HStack {
+                        Image(systemName: "eye.fill")
+                        Text("Report Sighting")
+                    }
+                    .font(.system(size: 14, weight: .semibold))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .background(Color.brandOrange)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
                 }
 
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(.body)
-                    .foregroundColor(.secondary)
+                Button(action: { showingReportFound = true }) {
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                        Text("Report Found")
+                    }
+                    .font(.system(size: 14, weight: .semibold))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                }
             }
-            .padding()
-            .background(Color(.systemBackground))
-            .cornerRadius(16)
-            .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: -2)
         }
-        .buttonStyle(PlainButtonStyle())
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: -2)
+        .sheet(isPresented: $showingReportSighting) {
+            NavigationView {
+                ReportSightingView(alertId: alert.id)
+            }
+        }
+        .sheet(isPresented: $showingReportFound) {
+            NavigationView {
+                ReportFoundView(alert: alert)
+            }
+        }
     }
 }
 
