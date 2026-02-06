@@ -1,5 +1,6 @@
 import SwiftUI
 import MapKit
+import UIKit
 
 struct MissingAlertsView: View {
     @ObservedObject var viewModel: AlertsViewModel
@@ -246,9 +247,21 @@ struct PetMapMarker: View {
 
 struct MissingAlertMapCard: View {
     let alert: MissingPetAlert
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var appState: AppState
     @Environment(\.dismiss) private var dismiss
+    @StateObject private var viewModel = PetsViewModel()
     @State private var showingReportSighting = false
     @State private var showingReportFound = false
+    @State private var showingMarkFoundConfirmation = false
+    @State private var showingSuccessStoryPrompt = false
+    @State private var isMarkingFound = false
+
+    // Check if current user is the pet owner
+    private var isOwner: Bool {
+        guard let currentUserId = authViewModel.currentUser?.id else { return false }
+        return alert.userId == currentUserId
+    }
 
     var body: some View {
         VStack(spacing: 12) {
@@ -326,17 +339,41 @@ struct MissingAlertMapCard: View {
                     .cornerRadius(10)
                 }
 
-                Button(action: { showingReportFound = true }) {
-                    HStack {
-                        Image(systemName: "checkmark.circle.fill")
-                        Text("Report Found")
+                if isOwner {
+                    // Owner sees "Mark as Found" button
+                    Button(action: { showingMarkFoundConfirmation = true }) {
+                        HStack {
+                            if isMarkingFound {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                    .scaleEffect(0.8)
+                            } else {
+                                Image(systemName: "checkmark.circle.fill")
+                            }
+                            Text("Mark as Found")
+                        }
+                        .font(.system(size: 14, weight: .semibold))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                     }
-                    .font(.system(size: 14, weight: .semibold))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                    .disabled(isMarkingFound)
+                } else {
+                    // Non-owners see "Report Found" button
+                    Button(action: { showingReportFound = true }) {
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                            Text("Report Found")
+                        }
+                        .font(.system(size: 14, weight: .semibold))
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                    }
                 }
             }
         }
@@ -352,6 +389,62 @@ struct MissingAlertMapCard: View {
         .sheet(isPresented: $showingReportFound) {
             NavigationView {
                 ReportFoundView(alert: alert)
+                    .environmentObject(appState)
+            }
+        }
+        .alert("Mark \(alert.pet?.name ?? "pet") as Found?", isPresented: $showingMarkFoundConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Mark as Found") {
+                markAsFound()
+            }
+        } message: {
+            Text("This will close the missing alert. Are you sure?")
+        }
+        .fullScreenCover(isPresented: $showingSuccessStoryPrompt) {
+            if let pet = alert.pet {
+                SuccessStoryPromptView(
+                    pet: Pet(
+                        id: pet.id,
+                        ownerId: alert.userId,
+                        name: pet.name,
+                        species: pet.species,
+                        breed: pet.breed,
+                        color: pet.color,
+                        profileImage: pet.photoUrl,
+                        isMissing: false,
+                        createdAt: alert.createdAt,
+                        updatedAt: alert.updatedAt
+                    ),
+                    onDismiss: {
+                        showingSuccessStoryPrompt = false
+                    },
+                    onStorySubmitted: {
+                        showingSuccessStoryPrompt = false
+                    }
+                )
+                .environmentObject(appState)
+            }
+        }
+    }
+
+    private func markAsFound() {
+        guard let petId = alert.pet?.id else { return }
+        isMarkingFound = true
+
+        Task {
+            do {
+                _ = try await viewModel.markPetFound(petId: petId)
+                await MainActor.run {
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    appState.showSuccess("\(alert.pet?.name ?? "Pet") has been marked as found!")
+                    showingSuccessStoryPrompt = true
+                    isMarkingFound = false
+                }
+            } catch {
+                await MainActor.run {
+                    appState.showError("Failed to mark as found: \(error.localizedDescription)")
+                    isMarkingFound = false
+                }
             }
         }
     }
