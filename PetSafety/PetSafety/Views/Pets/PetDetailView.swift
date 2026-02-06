@@ -226,6 +226,7 @@ struct PetDetailView: View {
                 pet: pet,
                 onDismiss: {
                     showingSuccessStoryPrompt = false
+                    appState.showSuccess(String(format: NSLocalizedString("marked_found_message", comment: ""), pet.name))
                     dismiss()
                 },
                 onStorySubmitted: {
@@ -266,7 +267,7 @@ struct PetDetailView: View {
                 _ = try await viewModel.markPetFound(petId: pet.id)
                 await MainActor.run {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    appState.showSuccess(String(format: NSLocalizedString("marked_found_message", comment: ""), pet.name))
+                    // Show success story prompt - toast will show after user dismisses prompt
                     showingSuccessStoryPrompt = true
                 }
             } catch {

@@ -417,6 +417,7 @@ struct MissingAlertMapCard: View {
                     ),
                     onDismiss: {
                         showingSuccessStoryPrompt = false
+                        appState.showSuccess("\(pet.name) has been marked as found!")
                     },
                     onStorySubmitted: {
                         showingSuccessStoryPrompt = false
@@ -436,9 +437,9 @@ struct MissingAlertMapCard: View {
                 _ = try await viewModel.markPetFound(petId: petId)
                 await MainActor.run {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    appState.showSuccess("\(alert.pet?.name ?? "Pet") has been marked as found!")
-                    showingSuccessStoryPrompt = true
                     isMarkingFound = false
+                    // Show success story prompt - don't show toast until after prompt
+                    showingSuccessStoryPrompt = true
                 }
             } catch {
                 await MainActor.run {
