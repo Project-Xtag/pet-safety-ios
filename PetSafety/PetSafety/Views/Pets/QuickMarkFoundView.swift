@@ -127,9 +127,12 @@ struct QuickMarkFoundView: View {
                 _ = try await viewModel.markPetFound(petId: pet.id)
                 await MainActor.run {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    // Show success story prompt instead of dismissing immediately
-                    showSuccessStoryPrompt = true
                     isProcessing = false
+                }
+                // Small delay to allow alert to dismiss before showing fullScreenCover
+                try? await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
+                await MainActor.run {
+                    showSuccessStoryPrompt = true
                 }
             } catch {
                 await MainActor.run {

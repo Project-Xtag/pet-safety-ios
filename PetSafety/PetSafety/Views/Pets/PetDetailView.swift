@@ -267,7 +267,10 @@ struct PetDetailView: View {
                 _ = try await viewModel.markPetFound(petId: pet.id)
                 await MainActor.run {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    // Show success story prompt - toast will show after user dismisses prompt
+                }
+                // Small delay to allow alert to dismiss before showing fullScreenCover
+                try? await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
+                await MainActor.run {
                     showingSuccessStoryPrompt = true
                 }
             } catch {

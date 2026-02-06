@@ -438,7 +438,10 @@ struct MissingAlertMapCard: View {
                 await MainActor.run {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
                     isMarkingFound = false
-                    // Show success story prompt - don't show toast until after prompt
+                }
+                // Small delay to allow alert to dismiss before showing fullScreenCover
+                try? await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
+                await MainActor.run {
                     showingSuccessStoryPrompt = true
                 }
             } catch {
