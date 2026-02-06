@@ -125,14 +125,19 @@ struct QuickMarkFoundView: View {
         Task {
             do {
                 _ = try await viewModel.markPetFound(petId: pet.id)
-                UINotificationFeedbackGenerator().notificationOccurred(.success)
-                // Show success story prompt instead of dismissing immediately
-                showSuccessStoryPrompt = true
+                await MainActor.run {
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    // Show success story prompt instead of dismissing immediately
+                    showSuccessStoryPrompt = true
+                    isProcessing = false
+                }
             } catch {
-                appState.showError("Failed to mark \(pet.name) as found: \(error.localizedDescription)")
-                foundPet = nil
+                await MainActor.run {
+                    appState.showError("Failed to mark \(pet.name) as found: \(error.localizedDescription)")
+                    foundPet = nil
+                    isProcessing = false
+                }
             }
-            isProcessing = false
         }
     }
 }

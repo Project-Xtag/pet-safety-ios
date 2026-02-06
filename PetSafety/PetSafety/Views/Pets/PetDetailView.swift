@@ -264,11 +264,15 @@ struct PetDetailView: View {
         Task {
             do {
                 _ = try await viewModel.markPetFound(petId: pet.id)
-                UINotificationFeedbackGenerator().notificationOccurred(.success)
-                appState.showSuccess(String(format: NSLocalizedString("marked_found_message", comment: ""), pet.name))
-                showingSuccessStoryPrompt = true
+                await MainActor.run {
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    appState.showSuccess(String(format: NSLocalizedString("marked_found_message", comment: ""), pet.name))
+                    showingSuccessStoryPrompt = true
+                }
             } catch {
-                appState.showError(String(format: NSLocalizedString("mark_found_failed", comment: ""), error.localizedDescription))
+                await MainActor.run {
+                    appState.showError(String(format: NSLocalizedString("mark_found_failed", comment: ""), error.localizedDescription))
+                }
             }
         }
     }
