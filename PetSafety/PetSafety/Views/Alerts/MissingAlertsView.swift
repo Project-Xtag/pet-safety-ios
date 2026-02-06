@@ -123,20 +123,32 @@ struct MissingAlertRowView: View {
 // MARK: - Map View
 struct MissingAlertsMapView: View {
     let alerts: [MissingPetAlert]
-    @State private var mapPosition: MapCameraPosition = .region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
-            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        )
-    )
+    var userLocation: CLLocationCoordinate2D?
+    @State private var mapPosition: MapCameraPosition = .automatic
     @State private var selectedAlert: MissingPetAlert?
 
     var body: some View {
         ZStack(alignment: .bottom) {
             Map(position: $mapPosition) {
-                ForEach(alerts) { alert in
-                    let coordinate = alert.coordinate ?? CLLocationCoordinate2D()
-                    Annotation("Missing Alert", coordinate: coordinate) {
+                // Show user location marker
+                if let userLoc = userLocation {
+                    Annotation("You", coordinate: userLoc) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.blue.opacity(0.2))
+                                .frame(width: 32, height: 32)
+                            Circle()
+                                .fill(Color.blue)
+                                .frame(width: 14, height: 14)
+                            Circle()
+                                .stroke(Color.white, lineWidth: 2)
+                                .frame(width: 14, height: 14)
+                        }
+                    }
+                }
+
+                ForEach(alerts.filter { $0.coordinate != nil }) { alert in
+                    Annotation("Missing Alert", coordinate: alert.coordinate!) {
                         PetMapMarker(alert: alert, isSelected: selectedAlert?.id == alert.id)
                             .onTapGesture {
                                 withAnimation(.spring(response: 0.3)) {
@@ -148,26 +160,49 @@ struct MissingAlertsMapView: View {
             }
             .ignoresSafeArea(edges: .bottom)
 
+            if alerts.filter({ $0.coordinate != nil }).isEmpty {
+                VStack {
+                    Spacer()
+                    Text("No missing pet alerts nearby")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(12)
+                        .padding(.bottom, 20)
+                }
+            }
+
             // Selected Alert Card
             if let alert = selectedAlert {
                 VStack {
                     Spacer()
                     MissingAlertMapCard(alert: alert)
                         .padding()
+                        .padding(.bottom, 80) // Extra padding to avoid tab bar overlap
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
             }
         }
         .onAppear {
-            // Center map on first alert or use default location
-            var region = MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
+            centerMap()
+        }
+        .onChange(of: alerts.count) { _, _ in
+            centerMap()
+        }
+    }
+
+    private func centerMap() {
+        if let firstCoord = alerts.first(where: { $0.coordinate != nil })?.coordinate {
+            mapPosition = .region(MKCoordinateRegion(
+                center: firstCoord,
                 span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-            )
-            if let firstCoord = alerts.first?.coordinate {
-                region.center = firstCoord
-            }
-            mapPosition = .region(region)
+            ))
+        } else if let userLoc = userLocation {
+            mapPosition = .region(MKCoordinateRegion(
+                center: userLoc,
+                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+            ))
         }
     }
 }
