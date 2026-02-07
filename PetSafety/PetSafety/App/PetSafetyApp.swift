@@ -93,7 +93,7 @@ struct PetSafetyApp: App {
                 .environmentObject(authViewModel)
                 .environmentObject(appState)
                 .environmentObject(notificationHandler)
-                .tint(Color(red: 1.0, green: 0.569, blue: 0.302)) // Brand Orange #FF914D
+                .tint(Color(UIColor.darkGray)) // Dark gray for alert buttons
                 .sheet(isPresented: $notificationHandler.showMapPicker) {
                     if let notification = notificationHandler.pendingScanNotification,
                        let location = notification.location {
