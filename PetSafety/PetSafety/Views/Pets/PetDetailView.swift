@@ -204,8 +204,8 @@ struct PetDetailView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.green.opacity(0.1))
-                        .foregroundColor(.green)
+                        .background(Color.tealAccent.opacity(0.1))
+                        .foregroundColor(.tealAccent)
                         .cornerRadius(14)
                         .font(.system(size: 15, weight: .semibold))
                     }
@@ -347,7 +347,7 @@ struct FoundButtonStyle: ButtonStyle {
         configuration.label
             .frame(maxWidth: .infinity)
             .padding()
-            .background(Color.green.opacity(configuration.isPressed ? 0.7 : 1.0))
+            .background(Color.successColor.opacity(configuration.isPressed ? 0.7 : 1.0))
             .foregroundColor(.white)
             .cornerRadius(10)
             .fontWeight(.semibold)

@@ -233,7 +233,7 @@ struct PetsListView: View {
                 QuickActionButton(
                     icon: hasMissingPets ? "checkmark.circle.fill" : "exclamationmark.triangle.fill",
                     title: hasMissingPets ? NSLocalizedString("action_mark_found", comment: "") : NSLocalizedString("action_report_missing", comment: ""),
-                    color: hasMissingPets ? .green : .red,
+                    color: hasMissingPets ? .successColor : .errorColor,
                     action: {
                         if hasMissingPets {
                             showingMarkFoundSheet = true
@@ -275,11 +275,11 @@ struct PetsListView: View {
                     // Icon
                     ZStack {
                         Circle()
-                            .fill(Color.green.opacity(0.15))
+                            .fill(Color.successColor.opacity(0.15))
                             .frame(width: 60, height: 60)
                         Image(systemName: "heart.circle.fill")
                             .font(.system(size: 30))
-                            .foregroundColor(.green)
+                            .foregroundColor(.successColor)
                             .accessibilityLabel(NSLocalizedString("success_stories", comment: ""))
                     }
 

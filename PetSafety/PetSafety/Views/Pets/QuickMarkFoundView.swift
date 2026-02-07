@@ -59,7 +59,7 @@ struct QuickMarkFoundView: View {
                                 ProgressView()
                             } else {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
+                                    .foregroundColor(.successColor)
                             }
                         }
                     }

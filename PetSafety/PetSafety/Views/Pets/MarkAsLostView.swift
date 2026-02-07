@@ -97,7 +97,7 @@ struct MarkAsLostView: View {
                 case .registeredAddress:
                     HStack {
                         Image(systemName: "house.fill")
-                            .foregroundColor(.green)
+                            .foregroundColor(.tealAccent)
                         if let address = registeredAddress {
                             Text(address)
                                 .font(.subheadline)
