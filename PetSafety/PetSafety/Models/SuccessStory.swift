@@ -106,28 +106,14 @@ struct CreateSuccessStoryRequest: Codable {
     let reunionCity: String?
     let storyText: String?
     let autoConfirm: Bool?
-
-    enum CodingKeys: String, CodingKey {
-        case petId = "pet_id"
-        case alertId = "alert_id"
-        case reunionLatitude = "reunion_latitude"
-        case reunionLongitude = "reunion_longitude"
-        case reunionCity = "reunion_city"
-        case storyText = "story_text"
-        case autoConfirm = "auto_confirm"
-    }
+    // Note: No CodingKeys - backend expects camelCase field names
 }
 
 struct UpdateSuccessStoryRequest: Codable {
     let storyText: String?
     let isPublic: Bool?
     let isConfirmed: Bool?
-
-    enum CodingKeys: String, CodingKey {
-        case storyText = "story_text"
-        case isPublic = "is_public"
-        case isConfirmed = "is_confirmed"
-    }
+    // Note: No CodingKeys - backend expects camelCase field names
 }
 
 struct SuccessStoriesResponse: Codable {
