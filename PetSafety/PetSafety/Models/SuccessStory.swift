@@ -86,9 +86,9 @@ struct SuccessStory: Codable, Identifiable {
 
 struct SuccessStoryPhoto: Codable, Identifiable {
     let id: String
-    let successStoryId: String
+    let successStoryId: String?
     let photoUrl: String
-    let displayOrder: Int
+    let displayOrder: Int?
 
     enum CodingKeys: String, CodingKey {
         case id
