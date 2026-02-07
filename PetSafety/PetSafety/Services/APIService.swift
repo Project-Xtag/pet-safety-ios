@@ -1218,8 +1218,11 @@ extension APIService {
         if let reunionCity = reunionCity {
             requestBody["reunionCity"] = reunionCity
         }
-        if let lat = reunionLatitude, let lng = reunionLongitude {
-            requestBody["reunionLocation"] = ["lat": lat, "lng": lng]
+        if let lat = reunionLatitude {
+            requestBody["reunionLatitude"] = lat
+        }
+        if let lng = reunionLongitude {
+            requestBody["reunionLongitude"] = lng
         }
 
         let request = try await buildRequest(
