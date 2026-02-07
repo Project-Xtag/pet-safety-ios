@@ -7,32 +7,87 @@ struct PetPublicProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
 
     // Use owner info from pet if available (public scan), otherwise fall back to current user
+    // Respects privacy settings when showing current user's info
     private var ownerPhone: String? {
-        pet.ownerPhone ?? authViewModel.currentUser?.phone
+        // If pet has owner phone (from public scan), use it (backend already filtered by privacy)
+        if let phone = pet.ownerPhone {
+            return phone
+        }
+        // For own pet preview, check privacy setting
+        guard let user = authViewModel.currentUser else { return nil }
+        let showPublicly = user.showPhonePublicly ?? true
+        return showPublicly ? user.phone : nil
     }
 
     private var ownerEmail: String? {
-        pet.ownerEmail ?? authViewModel.currentUser?.email
+        if let email = pet.ownerEmail {
+            return email
+        }
+        guard let user = authViewModel.currentUser else { return nil }
+        let showPublicly = user.showEmailPublicly ?? true
+        return showPublicly ? user.email : nil
     }
 
     private var ownerAddress: String? {
-        pet.ownerAddress ?? authViewModel.currentUser?.address
+        if let address = pet.ownerAddress {
+            return address
+        }
+        guard let user = authViewModel.currentUser else { return nil }
+        let showPublicly = user.showAddressPublicly ?? true
+        return showPublicly ? user.address : nil
     }
 
     private var ownerAddressLine2: String? {
-        pet.ownerAddressLine2 ?? authViewModel.currentUser?.addressLine2
+        if let line2 = pet.ownerAddressLine2 {
+            return line2
+        }
+        guard let user = authViewModel.currentUser else { return nil }
+        let showPublicly = user.showAddressPublicly ?? true
+        return showPublicly ? user.addressLine2 : nil
     }
 
     private var ownerCity: String? {
-        pet.ownerCity ?? authViewModel.currentUser?.city
+        if let city = pet.ownerCity {
+            return city
+        }
+        guard let user = authViewModel.currentUser else { return nil }
+        let showPublicly = user.showAddressPublicly ?? true
+        return showPublicly ? user.city : nil
     }
 
     private var ownerPostalCode: String? {
-        pet.ownerPostalCode ?? authViewModel.currentUser?.postalCode
+        if let postalCode = pet.ownerPostalCode {
+            return postalCode
+        }
+        guard let user = authViewModel.currentUser else { return nil }
+        let showPublicly = user.showAddressPublicly ?? true
+        return showPublicly ? user.postalCode : nil
     }
 
     private var ownerCountry: String? {
-        pet.ownerCountry ?? authViewModel.currentUser?.country
+        if let country = pet.ownerCountry {
+            return country
+        }
+        guard let user = authViewModel.currentUser else { return nil }
+        let showPublicly = user.showAddressPublicly ?? true
+        return showPublicly ? user.country : nil
+    }
+
+    // Check if user has contact info but it's hidden due to privacy settings
+    private var hasHiddenContactInfo: Bool {
+        guard let user = authViewModel.currentUser else { return false }
+        // Check if user has phone/email but privacy settings hide them
+        let hasPhone = user.phone != nil && !user.phone!.isEmpty
+        let hasEmail = user.email != nil && !user.email.isEmpty
+        let phoneHidden = hasPhone && !(user.showPhonePublicly ?? true)
+        let emailHidden = hasEmail && !(user.showEmailPublicly ?? true)
+        return phoneHidden || emailHidden
+    }
+
+    private var hasHiddenAddressInfo: Bool {
+        guard let user = authViewModel.currentUser else { return false }
+        let hasAddress = user.address != nil && !user.address!.isEmpty
+        return hasAddress && !(user.showAddressPublicly ?? true)
     }
 
     var body: some View {
@@ -179,19 +234,41 @@ struct PetPublicProfileView: View {
                     }
                     .padding(.horizontal, 24)
                 } else {
-                    // No contact info message
-                    HStack(spacing: 12) {
-                        Image(systemName: "info.circle.fill")
-                            .foregroundColor(.orange)
-                        Text("contact_info_not_set")
-                            .font(.system(size: 15, weight: .medium))
-                            .foregroundColor(.orange)
-                        Spacer()
+                    // No visible contact info - show appropriate message
+                    if hasHiddenContactInfo {
+                        // Contact info exists but is hidden due to privacy settings
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 12) {
+                                Image(systemName: "eye.slash.fill")
+                                    .foregroundColor(.blue)
+                                Text("contact_info_hidden")
+                                    .font(.system(size: 15, weight: .medium))
+                                    .foregroundColor(.blue)
+                                Spacer()
+                            }
+                            Text("contact_info_hidden_hint")
+                                .font(.system(size: 13))
+                                .foregroundColor(.secondary)
+                        }
+                        .padding()
+                        .background(Color.blue.opacity(0.1))
+                        .cornerRadius(14)
+                        .padding(.horizontal, 24)
+                    } else {
+                        // No contact info set up at all
+                        HStack(spacing: 12) {
+                            Image(systemName: "info.circle.fill")
+                                .foregroundColor(.orange)
+                            Text("contact_info_not_set")
+                                .font(.system(size: 15, weight: .medium))
+                                .foregroundColor(.orange)
+                            Spacer()
+                        }
+                        .padding()
+                        .background(Color.orange.opacity(0.1))
+                        .cornerRadius(14)
+                        .padding(.horizontal, 24)
                     }
-                    .padding()
-                    .background(Color.orange.opacity(0.1))
-                    .cornerRadius(14)
-                    .padding(.horizontal, 24)
                 }
 
                 // Owner Address Section (if publicly visible)
