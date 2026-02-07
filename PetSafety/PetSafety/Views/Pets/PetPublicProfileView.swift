@@ -4,6 +4,36 @@ import SwiftUI
 struct PetPublicProfileView: View {
     let pet: Pet
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var authViewModel: AuthViewModel
+
+    // Use owner info from pet if available (public scan), otherwise fall back to current user
+    private var ownerPhone: String? {
+        pet.ownerPhone ?? authViewModel.currentUser?.phone
+    }
+
+    private var ownerEmail: String? {
+        pet.ownerEmail ?? authViewModel.currentUser?.email
+    }
+
+    private var ownerAddress: String? {
+        pet.ownerAddress ?? authViewModel.currentUser?.address
+    }
+
+    private var ownerAddressLine2: String? {
+        pet.ownerAddressLine2 ?? authViewModel.currentUser?.addressLine2
+    }
+
+    private var ownerCity: String? {
+        pet.ownerCity ?? authViewModel.currentUser?.city
+    }
+
+    private var ownerPostalCode: String? {
+        pet.ownerPostalCode ?? authViewModel.currentUser?.postalCode
+    }
+
+    private var ownerCountry: String? {
+        pet.ownerCountry ?? authViewModel.currentUser?.country
+    }
 
     var body: some View {
         ScrollView {
@@ -95,7 +125,7 @@ struct PetPublicProfileView: View {
                 }
 
                 // Contact Owner Section
-                if pet.ownerPhone != nil || pet.ownerEmail != nil {
+                if ownerPhone != nil || ownerEmail != nil {
                     VStack(spacing: 16) {
                         Text("contact_owner")
                             .font(.system(size: 18, weight: .bold))
@@ -107,7 +137,7 @@ struct PetPublicProfileView: View {
 
                         VStack(spacing: 12) {
                             // Phone (tappable to call)
-                            if let phone = pet.ownerPhone {
+                            if let phone = ownerPhone {
                                 Link(destination: URL(string: "tel:\(phone.replacingOccurrences(of: " ", with: ""))")!) {
                                     HStack(spacing: 12) {
                                         Image(systemName: "phone.fill")
@@ -127,7 +157,7 @@ struct PetPublicProfileView: View {
                             }
 
                             // Email (tappable to send email)
-                            if let email = pet.ownerEmail {
+                            if let email = ownerEmail {
                                 Link(destination: URL(string: "mailto:\(email)")!) {
                                     HStack(spacing: 12) {
                                         Image(systemName: "envelope.fill")
@@ -165,7 +195,7 @@ struct PetPublicProfileView: View {
                 }
 
                 // Owner Address Section (if publicly visible)
-                if let address = pet.ownerAddress {
+                if let address = ownerAddress {
                     VStack(spacing: 12) {
                         Text("scanner_owner_location")
                             .font(.system(size: 18, weight: .bold))
@@ -178,18 +208,18 @@ struct PetPublicProfileView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(address)
                                     .font(.system(size: 15, weight: .medium))
-                                if let line2 = pet.ownerAddressLine2, !line2.isEmpty {
+                                if let line2 = ownerAddressLine2, !line2.isEmpty {
                                     Text(line2)
                                         .font(.system(size: 14))
                                         .foregroundColor(.mutedText)
                                 }
-                                let cityLine = [pet.ownerCity, pet.ownerPostalCode].compactMap { $0 }.joined(separator: ", ")
+                                let cityLine = [ownerCity, ownerPostalCode].compactMap { $0 }.joined(separator: ", ")
                                 if !cityLine.isEmpty {
                                     Text(cityLine)
                                         .font(.system(size: 14))
                                         .foregroundColor(.mutedText)
                                 }
-                                if let country = pet.ownerCountry {
+                                if let country = ownerCountry {
                                     Text(country)
                                         .font(.system(size: 14))
                                         .foregroundColor(.mutedText)
@@ -403,4 +433,5 @@ struct PublicProfileInfoCard: View {
             ownerCountry: "United Kingdom"
         ))
     }
+    .environmentObject(AuthViewModel())
 }
