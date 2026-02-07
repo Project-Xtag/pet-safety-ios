@@ -7,12 +7,14 @@ struct SuccessStoryPromptView: View {
     let onDismiss: () -> Void
     let onStorySubmitted: () -> Void
 
+    @StateObject private var locationManager = LocationManager()
     @State private var showShareForm = false
     @State private var storyText = ""
     @State private var reunionCity = ""
     @State private var isPublic = true
     @State private var isSubmitting = false
     @State private var errorMessage: String?
+    @State private var userLocation: CLLocationCoordinate2D?
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
@@ -30,6 +32,15 @@ struct SuccessStoryPromptView: View {
             }
             .navigationTitle(showShareForm ? "Share Your Story" : "Great News!")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                // Request location when view appears
+                locationManager.requestLocation()
+            }
+            .onChange(of: locationManager.location) { _, newLocation in
+                if let location = newLocation {
+                    userLocation = location
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(showShareForm ? "Back" : "Skip") {
@@ -293,6 +304,8 @@ struct SuccessStoryPromptView: View {
                     alertId: nil,
                     storyText: storyText.trimmingCharacters(in: .whitespacesAndNewlines),
                     reunionCity: reunionCity.isEmpty ? nil : reunionCity.trimmingCharacters(in: .whitespacesAndNewlines),
+                    reunionLatitude: userLocation?.latitude,
+                    reunionLongitude: userLocation?.longitude,
                     isPublic: isPublic
                 )
 

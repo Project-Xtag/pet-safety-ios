@@ -1195,6 +1195,8 @@ extension APIService {
         alertId: String? = nil,
         storyText: String?,
         reunionCity: String?,
+        reunionLatitude: Double?,
+        reunionLongitude: Double?,
         isPublic: Bool
     ) async throws -> SuccessStory {
         #if DEBUG
@@ -1215,6 +1217,9 @@ extension APIService {
         }
         if let reunionCity = reunionCity {
             requestBody["reunionCity"] = reunionCity
+        }
+        if let lat = reunionLatitude, let lng = reunionLongitude {
+            requestBody["reunionLocation"] = ["lat": lat, "lng": lng]
         }
 
         let request = try await buildRequest(
