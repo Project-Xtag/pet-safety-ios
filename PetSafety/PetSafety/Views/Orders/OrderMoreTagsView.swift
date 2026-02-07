@@ -63,7 +63,7 @@ struct OrderMoreTagsView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80, height: 80)
-                .foregroundColor(.green)
+                .foregroundColor(.tealAccent)
 
             Text("order_more_complete")
                 .font(.system(size: 32, weight: .bold))
@@ -194,7 +194,7 @@ struct OrderMoreTagsView: View {
                     Text("order_more_tags_count \(validPetCount)")
                     Spacer()
                     Text("FREE")
-                        .foregroundColor(.green)
+                        .foregroundColor(.tealAccent)
                         .fontWeight(.semibold)
                 }
 

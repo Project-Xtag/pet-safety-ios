@@ -65,7 +65,7 @@ struct TagActivationView: View {
 
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 80))
-                .foregroundColor(.green)
+                .foregroundColor(.tealAccent)
 
             Text("tag_activated")
                 .font(.title)

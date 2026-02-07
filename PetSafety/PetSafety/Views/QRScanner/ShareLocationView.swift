@@ -132,7 +132,7 @@ struct ShareLocationView: View {
                         VStack(spacing: 10) {
                             Image(systemName: "checkmark.circle.fill")
                                 .font(.system(size: 50))
-                                .foregroundColor(.green)
+                                .foregroundColor(.tealAccent)
                             Text("share_owner_notified")
                                 .font(.headline)
                             if selectedConsent == .decline {

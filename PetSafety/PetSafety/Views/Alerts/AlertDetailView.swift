@@ -93,7 +93,7 @@ struct AlertDetailView: View {
                 // Alert Status
                 HStack {
                     Circle()
-                        .fill(alert.status == "active" ? Color.red : Color.green)
+                        .fill(alert.status == "active" ? Color.red : Color.tealAccent)
                         .frame(width: 12, height: 12)
 
                     Text(alert.status.capitalized)

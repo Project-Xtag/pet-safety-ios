@@ -342,7 +342,7 @@ struct MissingAlertMapCard: View {
                     .font(.system(size: 14, weight: .semibold))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
-                    .background(Color.green)
+                    .background(Color.tealAccent)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                 }
@@ -371,7 +371,7 @@ struct MissingAlertMapCard: View {
                         .font(.system(size: 14, weight: .semibold))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
-                        .background(Color.green)
+                        .background(Color.tealAccent)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                     }

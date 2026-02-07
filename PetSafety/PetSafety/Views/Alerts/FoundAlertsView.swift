@@ -59,7 +59,7 @@ struct FoundAlertRowView: View {
                         .padding(20)
                 }
                 .frame(width: 80, height: 80)
-                .background(Color.green.opacity(0.2))
+                .background(Color.tealAccent.opacity(0.2))
                 .cornerRadius(12)
                 .clipped()
             }
@@ -76,15 +76,15 @@ struct FoundAlertRowView: View {
                 HStack(spacing: 4) {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.caption)
-                        .foregroundColor(.green)
+                        .foregroundColor(.tealAccent)
                     Text("Found")
                         .font(.caption)
                         .fontWeight(.semibold)
-                        .foregroundColor(.green)
+                        .foregroundColor(.tealAccent)
                 }
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .background(Color.green.opacity(0.1))
+                .background(Color.tealAccent.opacity(0.1))
                 .cornerRadius(6)
 
                 // Found Date
@@ -190,7 +190,7 @@ struct FoundPetMapMarker: View {
                 .clipShape(Circle())
                 .overlay(
                     Circle()
-                        .stroke(Color.green, lineWidth: isSelected ? 4 : 3)
+                        .stroke(Color.tealAccent, lineWidth: isSelected ? 4 : 3)
                 )
                 .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
             }
@@ -198,7 +198,7 @@ struct FoundPetMapMarker: View {
             // Arrow pointing down
             Image(systemName: "arrowtriangle.down.fill")
                 .font(.system(size: 12))
-                .foregroundColor(.green)
+                .foregroundColor(.tealAccent)
                 .offset(y: -6)
         }
         .scaleEffect(isSelected ? 1.1 : 1.0)
@@ -225,7 +225,7 @@ struct FoundAlertMapCard: View {
                             .padding(15)
                     }
                     .frame(width: 70, height: 70)
-                    .background(Color.green.opacity(0.2))
+                    .background(Color.tealAccent.opacity(0.2))
                     .cornerRadius(12)
                     .clipped()
                 }
@@ -246,7 +246,7 @@ struct FoundAlertMapCard: View {
                             .font(.subheadline)
                             .fontWeight(.semibold)
                     }
-                    .foregroundColor(.green)
+                    .foregroundColor(.tealAccent)
 
                     // Location
                     if let location = alert.lastSeenLocation {

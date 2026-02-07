@@ -203,11 +203,11 @@ struct SuccessStoryRowView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.caption)
-                            .foregroundColor(.green)
+                            .foregroundColor(.tealAccent)
                         Text("found_and_reunited")
                             .font(.caption)
                             .fontWeight(.semibold)
-                            .foregroundColor(.green)
+                            .foregroundColor(.tealAccent)
                     }
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
@@ -370,7 +370,7 @@ struct SuccessStoryMapMarker: View {
             // Arrow pointing down
             Image(systemName: "arrowtriangle.down.fill")
                 .font(.system(size: 12))
-                .foregroundColor(.green)
+                .foregroundColor(.tealAccent)
                 .offset(y: -6)
         }
         .scaleEffect(isSelected ? 1.1 : 1.0)
@@ -417,7 +417,7 @@ struct SuccessStoryMapCard: View {
                         .font(.subheadline)
                         .fontWeight(.semibold)
                 }
-                .foregroundColor(.green)
+                .foregroundColor(.tealAccent)
 
                 // Location
                 if let city = story.reunionCity {

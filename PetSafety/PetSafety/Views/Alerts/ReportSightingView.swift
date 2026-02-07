@@ -155,7 +155,7 @@ struct ReportSightingView: View {
                         if let coordinate = locationManager.location {
                             HStack(spacing: 8) {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
+                                    .foregroundColor(.tealAccent)
                                 Text("location_captured")
                                     .font(.system(size: 14))
                                     .foregroundColor(.secondary)

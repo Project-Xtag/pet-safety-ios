@@ -78,7 +78,7 @@ struct PlanSelectionView: View {
             if fromActivation {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 48))
-                    .foregroundColor(.green)
+                    .foregroundColor(.tealAccent)
 
                 Text("Tag Activated!")
                     .font(.title2)
@@ -341,7 +341,7 @@ struct FeatureRow: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .foregroundColor(included ? .green : .gray)
+                .foregroundColor(included ? .tealAccent : .gray)
                 .frame(width: 20)
 
             Text(text)

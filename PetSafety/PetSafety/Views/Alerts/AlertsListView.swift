@@ -67,7 +67,7 @@ struct AlertRowView: View {
     var statusColor: Color {
         switch alert.status {
         case "active": return .red
-        case "found": return .green
+        case "found": return .tealAccent
         default: return .gray
         }
     }

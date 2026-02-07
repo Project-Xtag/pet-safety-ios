@@ -74,7 +74,7 @@ struct SuccessStoryPromptView: View {
 
                     Image(systemName: "heart.fill")
                         .font(.system(size: 44))
-                        .foregroundColor(.green)
+                        .foregroundColor(.tealAccent)
                 }
 
                 Text("\(pet.name) is home!")
@@ -169,14 +169,14 @@ struct SuccessStoryPromptView: View {
                             .font(.headline)
                         Text("Reunited!")
                             .font(.subheadline)
-                            .foregroundColor(.green)
+                            .foregroundColor(.tealAccent)
                     }
 
                     Spacer()
 
                     Image(systemName: "checkmark.seal.fill")
                         .font(.title2)
-                        .foregroundColor(.green)
+                        .foregroundColor(.tealAccent)
                 }
                 .padding()
                 .background(Color(.systemGray6))
@@ -229,7 +229,7 @@ struct SuccessStoryPromptView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
-                    .tint(.green)
+                    .tint(.tealAccent)
                 }
 
                 // Error Message

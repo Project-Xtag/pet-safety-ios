@@ -74,7 +74,7 @@ struct OrderReplacementTagView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 80, height: 80)
-                .foregroundColor(.green)
+                .foregroundColor(.tealAccent)
 
             Text("order_replace_complete")
                 .font(.system(size: 32, weight: .bold))
@@ -135,7 +135,7 @@ struct OrderReplacementTagView: View {
                     if isFreeReplacement {
                         Label(String(localized: "order_replace_eligible_free"), systemImage: "checkmark.circle")
                             .font(.caption)
-                            .foregroundColor(.green)
+                            .foregroundColor(.tealAccent)
                     } else {
                         Label(String(format: String(localized: "order_replace_additional_fee %@"), String(format: "€%.2f", shippingCost)), systemImage: "eurosign.circle")
                             .font(.caption)
