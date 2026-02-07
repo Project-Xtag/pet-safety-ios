@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreLocation
+import Combine
 
 /// Prompt shown after marking a pet as found to encourage sharing a success story
 struct SuccessStoryPromptView: View {
@@ -36,7 +37,7 @@ struct SuccessStoryPromptView: View {
                 // Request location when view appears
                 locationManager.requestLocation()
             }
-            .onChange(of: locationManager.location) { _, newLocation in
+            .onReceive(locationManager.$location) { newLocation in
                 if let location = newLocation {
                     userLocation = location
                 }
