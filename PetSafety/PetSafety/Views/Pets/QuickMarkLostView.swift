@@ -6,6 +6,7 @@ struct QuickMarkLostView: View {
     @State private var showingMarkLostFlow = false
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var authViewModel: AuthViewModel
 
     var body: some View {
         List {
@@ -76,6 +77,8 @@ struct QuickMarkLostView: View {
                 NavigationView {
                     MarkAsLostView(pet: pet)
                 }
+                .environmentObject(appState)
+                .environmentObject(authViewModel)
             }
         }
     }
@@ -102,5 +105,6 @@ struct QuickMarkLostView: View {
             )
         ])
         .environmentObject(AppState())
+        .environmentObject(AuthViewModel())
     }
 }

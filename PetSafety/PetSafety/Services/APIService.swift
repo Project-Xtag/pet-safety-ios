@@ -113,9 +113,11 @@ class APIService {
         responseType: T.Type
     ) async throws -> T {
         // Add Sentry breadcrumb for API request tracking
-        let crumb = Breadcrumb(level: .info, category: "http")
-        crumb.message = "\(request.httpMethod ?? "GET") \(request.url?.path ?? "")"
-        SentrySDK.addBreadcrumb(crumb)
+        if SentrySDK.isEnabled {
+            let crumb = Breadcrumb(level: .info, category: "http")
+            crumb.message = "\(request.httpMethod ?? "GET") \(request.url?.path ?? "")"
+            SentrySDK.addBreadcrumb(crumb)
+        }
 
         do {
             let (data, response) = try await CertificatePinningService.shared.pinnedSession.data(for: request)
@@ -182,7 +184,7 @@ class APIService {
 
             default:
                 // Capture 5xx server errors to Sentry
-                if httpResponse.statusCode >= 500 {
+                if httpResponse.statusCode >= 500 && SentrySDK.isEnabled {
                     SentrySDK.capture(message: "Server error \(httpResponse.statusCode): \(request.url?.path ?? "")")
                 }
 

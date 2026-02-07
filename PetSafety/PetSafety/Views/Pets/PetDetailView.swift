@@ -11,11 +11,8 @@ struct PetDetailView: View {
     @StateObject private var alertsViewModel = AlertsViewModel()
     @State private var showingEditSheet = false
     @State private var showingMarkLostSheet = false
-    @State private var showingDeleteConfirmation = false
-    @State private var showingCannotDeleteAlert = false
     @State private var showingMarkFoundConfirmation = false
     @State private var showingSuccessStoryPrompt = false
-    @State private var isDeleting = false
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -98,21 +95,62 @@ struct PetDetailView: View {
                         InfoCard(title: NSLocalizedString("age", comment: ""), value: age, icon: "calendar")
                     }
 
+                    if let weight = pet.weight {
+                        InfoCard(title: NSLocalizedString("weight", comment: ""), value: String(format: "%.1f kg", weight), icon: "scalemass.fill")
+                    }
+
+                    if let sex = pet.sex, sex.lowercased() != "unknown" {
+                        InfoCard(title: NSLocalizedString("sex", comment: ""), value: sex.capitalized, icon: "figure.stand")
+                    }
+
+                    if let isNeutered = pet.isNeutered, isNeutered {
+                        InfoCard(title: NSLocalizedString("neutered_spayed", comment: ""), value: NSLocalizedString("yes", comment: ""), icon: "checkmark.seal.fill")
+                    }
+
                     if let microchip = pet.microchipNumber {
                         InfoCard(title: NSLocalizedString("microchip", comment: ""), value: microchip, icon: "number")
                     }
                 }
                 .padding(.horizontal)
 
-                // Medical Info
-                if let medical = pet.medicalInfo {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Label("medical_information", systemImage: "cross.case.fill")
+                // Health Information
+                if pet.medicalInfo != nil || pet.allergies != nil || pet.medications != nil {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Label("health_information", systemImage: "cross.case.fill")
                             .font(.headline)
 
-                        Text(medical)
-                            .font(.body)
-                            .foregroundColor(.secondary)
+                        if let medical = pet.medicalInfo, !medical.isEmpty {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("medical_notes")
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                Text(medical)
+                                    .font(.body)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+
+                        if let allergies = pet.allergies, !allergies.isEmpty {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("allergies")
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                Text(allergies)
+                                    .font(.body)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+
+                        if let medications = pet.medications, !medications.isEmpty {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("medications")
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                Text(medications)
+                                    .font(.body)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
@@ -122,14 +160,32 @@ struct PetDetailView: View {
                 }
 
                 // Additional Information
-                if let behavior = pet.behaviorNotes {
-                    VStack(alignment: .leading, spacing: 8) {
+                if pet.behaviorNotes != nil || pet.uniqueFeatures != nil {
+                    VStack(alignment: .leading, spacing: 12) {
                         Label("additional_information", systemImage: "text.bubble.fill")
                             .font(.headline)
 
-                        Text(behavior)
-                            .font(.body)
-                            .foregroundColor(.secondary)
+                        if let uniqueFeatures = pet.uniqueFeatures, !uniqueFeatures.isEmpty {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("unique_features")
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                Text(uniqueFeatures)
+                                    .font(.body)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+
+                        if let behavior = pet.behaviorNotes, !behavior.isEmpty {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("behavior_notes")
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                                Text(behavior)
+                                    .font(.body)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
@@ -161,21 +217,6 @@ struct PetDetailView: View {
                         }
                     }
                     .buttonStyle(BrandButtonStyle())
-
-                    // Delete Button
-                    Button(action: { attemptDelete() }) {
-                        HStack {
-                            if isDeleting {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .red))
-                            } else {
-                                Image(systemName: "trash")
-                            }
-                            Text(String(format: NSLocalizedString("delete_pet_name", comment: ""), pet.name))
-                        }
-                    }
-                    .buttonStyle(DestructiveButtonStyle())
-                    .disabled(isDeleting)
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)
@@ -205,22 +246,6 @@ struct PetDetailView: View {
         } message: {
             Text(String(format: NSLocalizedString("mark_found_confirm_message", comment: ""), pet.name))
         }
-        .alert(String(format: NSLocalizedString("delete_pet_confirm_title", comment: ""), pet.name), isPresented: $showingDeleteConfirmation) {
-            Button("cancel", role: .cancel) { }
-            Button("delete", role: .destructive) {
-                performDelete()
-            }
-        } message: {
-            Text(String(format: NSLocalizedString("delete_pet_confirm_message", comment: ""), pet.name))
-        }
-        .alert(NSLocalizedString("cannot_delete_missing_pet", comment: ""), isPresented: $showingCannotDeleteAlert) {
-            Button("mark_as_found") {
-                showingMarkFoundConfirmation = true
-            }
-            Button("cancel", role: .cancel) { }
-        } message: {
-            Text(String(format: NSLocalizedString("cannot_delete_missing_message", comment: ""), pet.name))
-        }
         .fullScreenCover(isPresented: $showingSuccessStoryPrompt) {
             SuccessStoryPromptView(
                 pet: pet,
@@ -235,29 +260,6 @@ struct PetDetailView: View {
                 }
             )
             .environmentObject(appState)
-        }
-    }
-
-    private func attemptDelete() {
-        // Block deletion if pet is missing
-        if pet.isMissing {
-            showingCannotDeleteAlert = true
-        } else {
-            showingDeleteConfirmation = true
-        }
-    }
-
-    private func performDelete() {
-        isDeleting = true
-        Task {
-            do {
-                try await viewModel.deletePet(id: pet.id)
-                appState.showSuccess(String(format: NSLocalizedString("pet_deleted", comment: ""), pet.name))
-                dismiss()
-            } catch {
-                appState.showError(String(format: NSLocalizedString("delete_pet_failed", comment: ""), error.localizedDescription))
-            }
-            isDeleting = false
         }
     }
 

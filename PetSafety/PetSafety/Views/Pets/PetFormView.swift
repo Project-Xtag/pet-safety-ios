@@ -37,14 +37,13 @@ struct PetFormView: View {
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var selectedImage: UIImage?
     @State private var showingDeleteAlert = false
+    @State private var showingCannotDeleteAlert = false
     @State private var photoWasChanged = false
 
     // Additional fields from web app
     @State private var weight: String = ""
     @State private var sex = "Unknown"
     @State private var isNeutered = false
-    @State private var allergies = ""
-    @State private var medications = ""
     @State private var uniqueFeatures = ""
 
     let speciesOptions = ["Dog", "Cat", "Bird", "Rabbit", "Other"]
@@ -122,7 +121,7 @@ struct PetFormView: View {
                     TextField("colour_optional", text: $color)
                 }
 
-                // Age display (merged from Physical Details)
+                // Age display
                 if mode.isEdit, case .edit(let pet) = mode, let age = pet.age {
                     HStack {
                         Text("age")
@@ -135,16 +134,14 @@ struct PetFormView: View {
                     DatePicker("date_of_birth", selection: $dateOfBirth, displayedComponents: .date)
                 }
 
-                // Microchip Number (merged from Physical Details)
                 HStack {
                     Text("microchip")
                         .frame(width: 80, alignment: .leading)
                     TextField("microchip_optional", text: $microchipNumber)
                         .keyboardType(.numberPad)
                 }
-            }
 
-            Section("physical_details") {
+                // Physical details (merged into basic information)
                 HStack {
                     Text("weight")
                         .frame(width: 80, alignment: .leading)
@@ -163,32 +160,10 @@ struct PetFormView: View {
 
             Section("health_information") {
                 TextEditor(text: $medicalInfo)
-                    .frame(minHeight: 80)
+                    .frame(minHeight: 120)
                     .overlay(alignment: .topLeading) {
                         if medicalInfo.isEmpty {
-                            Text("medical_notes_hint")
-                                .foregroundColor(.mutedText)
-                                .padding(.top, 8)
-                                .padding(.leading, 4)
-                        }
-                    }
-
-                TextEditor(text: $allergies)
-                    .frame(minHeight: 60)
-                    .overlay(alignment: .topLeading) {
-                        if allergies.isEmpty {
-                            Text("allergies_hint")
-                                .foregroundColor(.mutedText)
-                                .padding(.top, 8)
-                                .padding(.leading, 4)
-                        }
-                    }
-
-                TextEditor(text: $medications)
-                    .frame(minHeight: 60)
-                    .overlay(alignment: .topLeading) {
-                        if medications.isEmpty {
-                            Text("medications_hint")
+                            Text("health_info_hint")
                                 .foregroundColor(.mutedText)
                                 .padding(.top, 8)
                                 .padding(.leading, 4)
@@ -243,9 +218,16 @@ struct PetFormView: View {
             }
 
             // Delete Pet button - only show in edit mode
-            if case .edit = mode {
+            if case .edit(let pet) = mode {
                 Section {
-                    Button(action: { showingDeleteAlert = true }) {
+                    Button(action: {
+                        // Block deletion if pet is missing
+                        if pet.isMissing {
+                            showingCannotDeleteAlert = true
+                        } else {
+                            showingDeleteAlert = true
+                        }
+                    }) {
                         HStack {
                             Spacer()
                             Text("delete_pet_button")
@@ -284,6 +266,11 @@ struct PetFormView: View {
         } message: {
             Text("delete_pet_dialog_message")
         }
+        .alert(NSLocalizedString("cannot_delete_missing_pet", comment: ""), isPresented: $showingCannotDeleteAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(NSLocalizedString("cannot_delete_missing_message_short", comment: "You must mark this pet as found before deleting."))
+        }
         .onChange(of: selectedPhoto) { _, newValue in
             Task {
                 if let data = try? await newValue?.loadTransferable(type: Data.self),
@@ -320,9 +307,22 @@ struct PetFormView: View {
         }
         sex = pet.sex ?? "Unknown"
         isNeutered = pet.isNeutered ?? false
-        allergies = pet.allergies ?? ""
-        medications = pet.medications ?? ""
         uniqueFeatures = pet.uniqueFeatures ?? ""
+
+        // Combine health info from all sources
+        var healthParts: [String] = []
+        if let medical = pet.medicalInfo, !medical.isEmpty {
+            healthParts.append(medical)
+        }
+        if let allergiesText = pet.allergies, !allergiesText.isEmpty {
+            healthParts.append("Allergies: \(allergiesText)")
+        }
+        if let medicationsText = pet.medications, !medicationsText.isEmpty {
+            healthParts.append("Medications: \(medicationsText)")
+        }
+        if !healthParts.isEmpty {
+            medicalInfo = healthParts.joined(separator: "\n\n")
+        }
 
         // Load existing photo if available
         if let imageUrlString = pet.profileImage,
@@ -365,11 +365,11 @@ struct PetFormView: View {
                         weight: weightValue,
                         microchipNumber: microchipNumber.isEmpty ? nil : microchipNumber,
                         medicalNotes: medicalInfo.isEmpty ? nil : medicalInfo,
-                        allergies: allergies.isEmpty ? nil : allergies,
-                        medications: medications.isEmpty ? nil : medications,
+                        allergies: nil,
+                        medications: nil,
                         notes: behaviorNotes.isEmpty ? nil : behaviorNotes,
                         uniqueFeatures: uniqueFeatures.isEmpty ? nil : uniqueFeatures,
-                        sex: sex == "Unknown" ? nil : sex,
+                        sex: sex == "Unknown" ? nil : sex.lowercased(),
                         isNeutered: isNeutered
                     )
 
@@ -400,11 +400,11 @@ struct PetFormView: View {
                         weight: editWeightValue,
                         microchipNumber: microchipNumber.isEmpty ? nil : microchipNumber,
                         medicalNotes: medicalInfo.isEmpty ? nil : medicalInfo,
-                        allergies: allergies.isEmpty ? nil : allergies,
-                        medications: medications.isEmpty ? nil : medications,
+                        allergies: nil,
+                        medications: nil,
                         notes: behaviorNotes.isEmpty ? nil : behaviorNotes,
                         uniqueFeatures: uniqueFeatures.isEmpty ? nil : uniqueFeatures,
-                        sex: sex == "Unknown" ? nil : sex,
+                        sex: sex == "Unknown" ? nil : sex.lowercased(),
                         isNeutered: isNeutered,
                         isMissing: nil  // Not in form - use mark lost/found feature
                     )

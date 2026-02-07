@@ -33,7 +33,7 @@ class AuthViewModel: ObservableObject {
                     currentUser = try await apiService.getCurrentUser()
                     isAuthenticated = true
                     // Set Sentry user context for error tracking
-                    if let user = currentUser {
+                    if SentrySDK.isEnabled, let user = currentUser {
                         let sentryUser = Sentry.User(userId: user.id)
                         SentrySDK.setUser(sentryUser)
                     }
@@ -115,7 +115,7 @@ class AuthViewModel: ObservableObject {
                 showBiometricPrompt = false
 
                 // Set Sentry user context
-                if let user = currentUser {
+                if SentrySDK.isEnabled, let user = currentUser {
                     let sentryUser = Sentry.User(userId: user.id)
                     SentrySDK.setUser(sentryUser)
                 }
@@ -172,8 +172,10 @@ class AuthViewModel: ObservableObject {
             _ = KeychainService.shared.save(response.user.email, for: .userEmail)
 
             // Set Sentry user context for error tracking
-            let sentryUser = Sentry.User(userId: response.user.id)
-            SentrySDK.setUser(sentryUser)
+            if SentrySDK.isEnabled {
+                let sentryUser = Sentry.User(userId: response.user.id)
+                SentrySDK.setUser(sentryUser)
+            }
 
             // Connect to SSE for real-time notifications
             SSEService.shared.connect()
@@ -202,7 +204,9 @@ class AuthViewModel: ObservableObject {
         biometricEnabled = false
 
         // Clear Sentry user context
-        SentrySDK.setUser(nil)
+        if SentrySDK.isEnabled {
+            SentrySDK.setUser(nil)
+        }
 
         // Disconnect from SSE
         SSEService.shared.disconnect()

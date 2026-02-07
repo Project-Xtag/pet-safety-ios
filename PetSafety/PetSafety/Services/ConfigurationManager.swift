@@ -168,15 +168,21 @@ final class ConfigurationManager: ObservableObject {
      * Returns nil if App Check is not available or token retrieval fails.
      */
     func getAppCheckToken() async -> String? {
+        #if DEBUG
+        // In debug mode, skip App Check token retrieval entirely.
+        // The backend does not enforce App Check, so this avoids the latency
+        // and 403 errors from Firebase's debug token exchange.
+        // To test App Check in debug, register your debug token in Firebase Console
+        // and temporarily remove this early return.
+        return nil
+        #else
         do {
             let token = try await AppCheck.appCheck().token(forcingRefresh: false)
             return token.token
         } catch {
-            #if DEBUG
-            print("[ConfigurationManager] Failed to get App Check token: \(error)")
-            #endif
             return nil
         }
+        #endif
     }
 
     /**
@@ -185,15 +191,16 @@ final class ConfigurationManager: ObservableObject {
      * Use this if a request fails with an invalid token error.
      */
     func getAppCheckTokenForced() async -> String? {
+        #if DEBUG
+        return nil
+        #else
         do {
             let token = try await AppCheck.appCheck().token(forcingRefresh: true)
             return token.token
         } catch {
-            #if DEBUG
-            print("[ConfigurationManager] Failed to force refresh App Check token: \(error)")
-            #endif
             return nil
         }
+        #endif
     }
 
     // MARK: - Status

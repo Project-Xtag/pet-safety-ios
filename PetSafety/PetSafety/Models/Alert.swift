@@ -48,6 +48,7 @@ struct MissingPetAlert: Codable, Identifiable {
         case breed
         case color
         case profileImage = "profile_image"
+        case qrCode = "qr_code"
     }
 
     // Memberwise initializer (required since custom decoder/encoder removes auto-synthesis)
@@ -111,7 +112,8 @@ struct MissingPetAlert: Codable, Identifiable {
                 profileImage: try container.decodeIfPresent(String.self, forKey: .profileImage),
                 isMissing: status == "active",
                 createdAt: createdAt,
-                updatedAt: updatedAt
+                updatedAt: updatedAt,
+                qrCode: try container.decodeIfPresent(String.self, forKey: .qrCode)
             )
         }
         pet = decodedPet

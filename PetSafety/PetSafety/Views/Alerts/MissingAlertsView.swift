@@ -251,6 +251,7 @@ struct MissingAlertMapCard: View {
     @EnvironmentObject var appState: AppState
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = PetsViewModel()
+    @StateObject private var alertsViewModel = AlertsViewModel()
     @State private var showingReportSighting = false
     @State private var showingReportFound = false
     @State private var showingMarkFoundConfirmation = false
@@ -325,43 +326,43 @@ struct MissingAlertMapCard: View {
             .buttonStyle(PlainButtonStyle())
 
             // Action buttons
-            HStack(spacing: 12) {
-                Button(action: { showingReportSighting = true }) {
+            if isOwner {
+                // Owner only sees "Mark as Found" button
+                Button(action: { showingMarkFoundConfirmation = true }) {
                     HStack {
-                        Image(systemName: "eye.fill")
-                        Text("Report Sighting")
+                        if isMarkingFound {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                .scaleEffect(0.8)
+                        } else {
+                            Image(systemName: "checkmark.circle.fill")
+                        }
+                        Text("Mark as Found")
                     }
                     .font(.system(size: 14, weight: .semibold))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
-                    .background(Color.brandOrange)
+                    .background(Color.green)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                 }
-
-                if isOwner {
-                    // Owner sees "Mark as Found" button
-                    Button(action: { showingMarkFoundConfirmation = true }) {
+                .disabled(isMarkingFound)
+            } else {
+                // Non-owners see "Report Sighting" and "Report Found" buttons
+                VStack(spacing: 8) {
+                    Button(action: { showingReportSighting = true }) {
                         HStack {
-                            if isMarkingFound {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                    .scaleEffect(0.8)
-                            } else {
-                                Image(systemName: "checkmark.circle.fill")
-                            }
-                            Text("Mark as Found")
+                            Image(systemName: "eye.fill")
+                            Text("Report Sighting")
                         }
                         .font(.system(size: 14, weight: .semibold))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
-                        .background(Color.green)
+                        .background(Color.brandOrange)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                     }
-                    .disabled(isMarkingFound)
-                } else {
-                    // Non-owners see "Report Found" button
+
                     Button(action: { showingReportFound = true }) {
                         HStack {
                             Image(systemName: "checkmark.circle.fill")
@@ -384,12 +385,13 @@ struct MissingAlertMapCard: View {
         .sheet(isPresented: $showingReportSighting) {
             NavigationView {
                 ReportSightingView(alertId: alert.id)
+                    .environmentObject(appState)
+                    .environmentObject(alertsViewModel)
             }
         }
         .sheet(isPresented: $showingReportFound) {
-            NavigationView {
-                ReportFoundView(alert: alert)
-                    .environmentObject(appState)
+            if let pet = alert.pet, let qrCode = pet.qrCode {
+                ShareLocationView(qrCode: qrCode, petName: pet.name)
             }
         }
         .alert("Mark \(alert.pet?.name ?? "pet") as Found?", isPresented: $showingMarkFoundConfirmation) {
