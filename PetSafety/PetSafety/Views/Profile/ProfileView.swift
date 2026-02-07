@@ -3,12 +3,6 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var showingLogoutAlert = false
-    @State private var showingDeleteConfirmation = false
-    @State private var showingDeleteError = false
-    @State private var deleteErrorMessage = ""
-    @State private var missingPetNames: [String] = []
-    @State private var isCheckingDelete = false
-    @State private var isDeleting = false
 
     var body: some View {
         ZStack {
@@ -27,11 +21,7 @@ struct ProfileView: View {
                     // Logout Button
                     logoutSection
                         .padding(.top, 24)
-
-                    // Delete Account Section
-                    deleteAccountSection
-                        .padding(.top, 16)
-                        .padding(.bottom, 100)
+                        .padding(.bottom, 120)
                 }
             }
         }
@@ -43,23 +33,6 @@ struct ProfileView: View {
             }
         } message: {
             Text("logout_confirm")
-        }
-        .alert("profile_delete_account", isPresented: $showingDeleteConfirmation) {
-            Button("cancel", role: .cancel) { }
-            Button("delete_account", role: .destructive) {
-                performDeleteAccount()
-            }
-        } message: {
-            Text("delete_account_full_warning")
-        }
-        .alert("profile_cannot_delete", isPresented: $showingDeleteError) {
-            Button("ok", role: .cancel) { }
-        } message: {
-            if missingPetNames.isEmpty {
-                Text(deleteErrorMessage)
-            } else {
-                Text(String(format: NSLocalizedString("missing_pets_label", comment: ""), missingPetNames.joined(separator: ", ")))
-            }
         }
     }
 
@@ -172,94 +145,6 @@ struct ProfileView: View {
             .shadow(color: Color.brandOrange.opacity(0.3), radius: 8, x: 0, y: 4)
         }
         .padding(.horizontal, 24)
-    }
-
-    // MARK: - Delete Account Section
-    private var deleteAccountSection: some View {
-        VStack(spacing: 12) {
-            Text("profile_danger_zone")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(.red.opacity(0.7))
-                .tracking(1)
-
-            Button(action: { checkAndDeleteAccount() }) {
-                HStack(spacing: 12) {
-                    if isCheckingDelete || isDeleting {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            .scaleEffect(0.8)
-                    } else {
-                        Image(systemName: "trash")
-                            .font(.system(size: 18))
-                    }
-                    Text(isDeleting ? NSLocalizedString("profile_deleting", comment: "") : NSLocalizedString("profile_delete_account", comment: ""))
-                        .font(.system(size: 16, weight: .semibold))
-                }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(Color.red)
-                .cornerRadius(16)
-                .shadow(color: Color.red.opacity(0.3), radius: 8, x: 0, y: 4)
-            }
-            .disabled(isCheckingDelete || isDeleting)
-
-            Text("profile_delete_permanent")
-                .font(.system(size: 11))
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-        }
-        .padding(.horizontal, 24)
-    }
-
-    // MARK: - Delete Account Helpers
-    private func checkAndDeleteAccount() {
-        isCheckingDelete = true
-
-        Task {
-            do {
-                let response = try await APIService.shared.canDeleteAccount()
-
-                await MainActor.run {
-                    isCheckingDelete = false
-
-                    if response.canDelete {
-                        showingDeleteConfirmation = true
-                    } else {
-                        deleteErrorMessage = response.message ?? NSLocalizedString("profile_cannot_delete_message", comment: "")
-                        missingPetNames = response.missingPets?.map { $0.name } ?? []
-                        showingDeleteError = true
-                    }
-                }
-            } catch {
-                await MainActor.run {
-                    isCheckingDelete = false
-                    deleteErrorMessage = error.localizedDescription
-                    missingPetNames = []
-                    showingDeleteError = true
-                }
-            }
-        }
-    }
-
-    private func performDeleteAccount() {
-        isDeleting = true
-
-        Task {
-            do {
-                _ = try await APIService.shared.deleteAccount()
-                await MainActor.run {
-                    authViewModel.logout()
-                }
-            } catch {
-                await MainActor.run {
-                    isDeleting = false
-                    deleteErrorMessage = error.localizedDescription
-                    missingPetNames = []
-                    showingDeleteError = true
-                }
-            }
-        }
     }
 }
 

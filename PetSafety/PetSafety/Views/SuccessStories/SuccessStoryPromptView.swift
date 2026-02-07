@@ -65,11 +65,11 @@ struct SuccessStoryPromptView: View {
             VStack(spacing: 16) {
                 ZStack {
                     Circle()
-                        .fill(Color.green.opacity(0.15))
+                        .fill(Color.tealAccent.opacity(0.15))
                         .frame(width: 120, height: 120)
 
                     Circle()
-                        .fill(Color.green.opacity(0.25))
+                        .fill(Color.tealAccent.opacity(0.25))
                         .frame(width: 90, height: 90)
 
                     Image(systemName: "heart.fill")
@@ -97,7 +97,7 @@ struct SuccessStoryPromptView: View {
             .clipShape(Circle())
             .overlay(
                 Circle()
-                    .stroke(Color.green, lineWidth: 3)
+                    .stroke(Color.tealAccent, lineWidth: 3)
             )
 
             // Message
@@ -128,7 +128,7 @@ struct SuccessStoryPromptView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.green)
+                    .background(Color.tealAccent)
                     .foregroundColor(.white)
                     .cornerRadius(12)
                 }
@@ -260,7 +260,7 @@ struct SuccessStoryPromptView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(storyText.isEmpty ? Color.gray : Color.green)
+                    .background(storyText.isEmpty ? Color.gray : Color.tealAccent)
                     .foregroundColor(.white)
                     .cornerRadius(12)
                 }

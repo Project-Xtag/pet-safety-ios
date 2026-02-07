@@ -42,12 +42,17 @@ struct PhotoGalleryView: View {
 
                     // Upload button
                     Button(action: { showingSourcePicker = true }) {
-                        HStack {
+                        HStack(spacing: 8) {
                             Image(systemName: "photo.badge.plus")
                             Text("add_photos")
                         }
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(viewModel.isUploading ? Color.tealAccent.opacity(0.5) : Color.tealAccent)
+                        .cornerRadius(14)
                     }
-                    .buttonStyle(BrandButtonStyle(isDisabled: viewModel.isUploading))
                     .padding(.horizontal)
                     .disabled(viewModel.isUploading)
 

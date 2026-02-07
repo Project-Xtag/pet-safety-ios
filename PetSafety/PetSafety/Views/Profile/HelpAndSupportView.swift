@@ -2,7 +2,14 @@ import SwiftUI
 
 struct HelpAndSupportView: View {
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var showingContactForm = false
+    @State private var showingDeleteConfirmation = false
+    @State private var showingDeleteError = false
+    @State private var deleteErrorMessage = ""
+    @State private var missingPetNames: [String] = []
+    @State private var isCheckingDelete = false
+    @State private var isDeleting = false
 
     var body: some View {
         List {
@@ -89,11 +96,106 @@ struct HelpAndSupportView: View {
             Section(footer: Text("help_support_footer")) {
                 EmptyView()
             }
+
+            // Danger Zone Section
+            Section(header: Text("profile_danger_zone").foregroundColor(.red)) {
+                Button(action: { checkAndDeleteAccount() }) {
+                    HStack {
+                        if isCheckingDelete || isDeleting {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .red))
+                                .scaleEffect(0.8)
+                        } else {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                                .frame(width: 24)
+                        }
+                        Text(isDeleting ? NSLocalizedString("profile_deleting", comment: "") : NSLocalizedString("profile_delete_account", comment: ""))
+                            .foregroundColor(.red)
+                        Spacer()
+                    }
+                }
+                .disabled(isCheckingDelete || isDeleting)
+            }
+
+            // Extra space for tab bar
+            Section {
+                Color.clear
+                    .frame(height: 60)
+                    .listRowBackground(Color.clear)
+            }
         }
         .navigationTitle("help_title")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showingContactForm) {
             ContactSupportView()
+        }
+        .alert("profile_delete_account", isPresented: $showingDeleteConfirmation) {
+            Button("cancel", role: .cancel) { }
+            Button("delete_account", role: .destructive) {
+                performDeleteAccount()
+            }
+        } message: {
+            Text("delete_account_full_warning")
+        }
+        .alert("profile_cannot_delete", isPresented: $showingDeleteError) {
+            Button("ok", role: .cancel) { }
+        } message: {
+            if missingPetNames.isEmpty {
+                Text(deleteErrorMessage)
+            } else {
+                Text(String(format: NSLocalizedString("missing_pets_label", comment: ""), missingPetNames.joined(separator: ", ")))
+            }
+        }
+    }
+
+    // MARK: - Delete Account Helpers
+    private func checkAndDeleteAccount() {
+        isCheckingDelete = true
+
+        Task {
+            do {
+                let response = try await APIService.shared.canDeleteAccount()
+
+                await MainActor.run {
+                    isCheckingDelete = false
+
+                    if response.canDelete {
+                        showingDeleteConfirmation = true
+                    } else {
+                        deleteErrorMessage = response.message ?? NSLocalizedString("profile_cannot_delete_message", comment: "")
+                        missingPetNames = response.missingPets?.map { $0.name } ?? []
+                        showingDeleteError = true
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    isCheckingDelete = false
+                    deleteErrorMessage = error.localizedDescription
+                    missingPetNames = []
+                    showingDeleteError = true
+                }
+            }
+        }
+    }
+
+    private func performDeleteAccount() {
+        isDeleting = true
+
+        Task {
+            do {
+                _ = try await APIService.shared.deleteAccount()
+                await MainActor.run {
+                    authViewModel.logout()
+                }
+            } catch {
+                await MainActor.run {
+                    isDeleting = false
+                    deleteErrorMessage = error.localizedDescription
+                    missingPetNames = []
+                    showingDeleteError = true
+                }
+            }
         }
     }
 }
@@ -295,5 +397,6 @@ struct FAQ: Identifiable {
     NavigationView {
         HelpAndSupportView()
             .environmentObject(AppState())
+            .environmentObject(AuthViewModel())
     }
 }

@@ -153,6 +153,7 @@
 "sex" = "Sex";
 "not_specified" = "Not specified";
 "neutered_spayed" = "Neutered/Spayed";
+"neutered" = "Neutered";
 "health_information" = "Health Information";
 "medical_notes_hint" = "Medical notes (conditions, surgeries, etc.)";
 "health_info_hint" = "Health info: conditions, allergies, medications...";

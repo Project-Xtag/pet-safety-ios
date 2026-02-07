@@ -38,24 +38,24 @@ struct PetDetailView: View {
                 .cornerRadius(20)
                 .padding(.horizontal)
 
-                // View Photos Button (under profile picture)
-                NavigationLink(destination: PhotoGalleryView(pet: pet)) {
-                    HStack {
-                        Image(systemName: "photo.on.rectangle")
-                        Text(String(format: NSLocalizedString("view_pet_photos", comment: ""), pet.name))
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.tealAccent.opacity(0.1))
-                    .foregroundColor(.tealAccent)
-                    .cornerRadius(14)
-                    .font(.system(size: 15, weight: .semibold))
-                }
-                .padding(.horizontal)
-
                 // Pet Name
                 Text(pet.name)
                     .font(.system(size: 32, weight: .bold))
+
+                // View Photos Button (under pet name)
+                NavigationLink(destination: PhotoGalleryView(pet: pet)) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "photo.on.rectangle")
+                        Text(String(format: NSLocalizedString("view_pet_photos", comment: ""), pet.name))
+                    }
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .background(Color.tealAccent)
+                    .cornerRadius(14)
+                }
+                .padding(.horizontal)
 
                 // Mark as Lost/Found Buttons
                 HStack(spacing: 12) {
@@ -198,16 +198,16 @@ struct PetDetailView: View {
                 VStack(spacing: 12) {
                     // View Public Profile Button
                     NavigationLink(destination: PetPublicProfileView(pet: pet)) {
-                        HStack {
+                        HStack(spacing: 8) {
                             Image(systemName: "eye")
                             Text(String(format: NSLocalizedString("view_public_profile", comment: ""), pet.name))
                         }
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.tealAccent.opacity(0.1))
-                        .foregroundColor(.tealAccent)
+                        .padding(.vertical, 16)
+                        .background(Color.tealAccent)
                         .cornerRadius(14)
-                        .font(.system(size: 15, weight: .semibold))
                     }
 
                     Button(action: { showingEditSheet = true }) {
@@ -345,13 +345,12 @@ struct LostButtonStyle: ButtonStyle {
 struct FoundButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.successColor.opacity(configuration.isPressed ? 0.7 : 1.0))
+            .font(.system(size: 16, weight: .semibold))
             .foregroundColor(.white)
-            .cornerRadius(10)
-            .fontWeight(.semibold)
-            .shadow(radius: 2)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .background(Color.tealAccent.opacity(configuration.isPressed ? 0.8 : 1.0))
+            .cornerRadius(14)
     }
 }
 

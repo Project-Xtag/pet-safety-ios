@@ -230,7 +230,7 @@ struct OrderMoreTagsView: View {
                         Spacer()
                     }
                 }
-                .listRowBackground(Color.blue)
+                .listRowBackground(Color.tealAccent)
                 .disabled(isLoading || !isFormValid)
             }
         }

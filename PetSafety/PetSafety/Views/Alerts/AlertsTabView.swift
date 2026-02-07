@@ -107,8 +107,16 @@ struct AlertsTabView: View {
 
     // MARK: - Helper Methods
     private func loadNearbyAlerts() async {
+        // Request location
         locationManager.requestLocation()
-        try? await Task.sleep(nanoseconds: 1_000_000_000)
+
+        // Wait for location with retries (up to 5 seconds total)
+        var attempts = 0
+        let maxAttempts = 10
+        while locationManager.location == nil && attempts < maxAttempts {
+            try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+            attempts += 1
+        }
 
         if let location = locationManager.location {
             showAddressRequiredMessage = false

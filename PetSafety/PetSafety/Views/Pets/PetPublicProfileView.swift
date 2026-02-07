@@ -138,20 +138,35 @@ struct PetPublicProfileView: View {
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 24)
 
-                    // Pet details row
-                    HStack(spacing: 16) {
-                        if let breed = pet.breed {
-                            Text("**\(NSLocalizedString("scanner_breed", comment: "")):** \(breed)")
-                                .font(.system(size: 14))
-                                .foregroundColor(.mutedText)
-                        }
-                        if let age = pet.age {
-                            Text("**\(NSLocalizedString("scanner_age", comment: "")):** \(age)")
-                                .font(.system(size: 14))
-                                .foregroundColor(.mutedText)
-                        }
-                        if let color = pet.color {
-                            Text("**\(NSLocalizedString("scanner_color", comment: "")):** \(color)")
+                    // Pet details row (values only, no labels)
+                    HStack(spacing: 8) {
+                        let details: [String] = {
+                            var items: [String] = []
+                            if let breed = pet.breed, !breed.isEmpty {
+                                items.append(breed)
+                            }
+                            if let age = pet.age, !age.isEmpty {
+                                items.append(age)
+                            }
+                            if let sex = pet.sex, sex.lowercased() != "unknown" {
+                                var sexText = sex.capitalized
+                                if pet.isNeutered == true {
+                                    sexText += ", " + NSLocalizedString("neutered", comment: "")
+                                }
+                                items.append(sexText)
+                            } else if pet.isNeutered == true {
+                                items.append(NSLocalizedString("neutered", comment: ""))
+                            }
+                            return items
+                        }()
+
+                        ForEach(Array(details.enumerated()), id: \.offset) { index, detail in
+                            if index > 0 {
+                                Text("•")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.mutedText)
+                            }
+                            Text(detail)
                                 .font(.system(size: 14))
                                 .foregroundColor(.mutedText)
                         }
@@ -274,7 +289,7 @@ struct PetPublicProfileView: View {
                 // Owner Address Section (if publicly visible)
                 if let address = ownerAddress {
                     VStack(spacing: 12) {
-                        Text("scanner_owner_location")
+                        Text("scanner_owner_address")
                             .font(.system(size: 18, weight: .bold))
 
                         HStack(alignment: .top, spacing: 12) {

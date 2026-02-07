@@ -1202,18 +1202,19 @@ extension APIService {
         #endif
 
         var requestBody: [String: Any] = [
-            "pet_id": petId,
-            "is_public": isPublic
+            "petId": petId,
+            "isPublic": isPublic,
+            "autoConfirm": true
         ]
 
         if let alertId = alertId {
-            requestBody["alert_id"] = alertId
+            requestBody["alertId"] = alertId
         }
         if let storyText = storyText {
-            requestBody["story_text"] = storyText
+            requestBody["storyText"] = storyText
         }
         if let reunionCity = reunionCity {
-            requestBody["reunion_city"] = reunionCity
+            requestBody["reunionCity"] = reunionCity
         }
 
         let request = try await buildRequest(

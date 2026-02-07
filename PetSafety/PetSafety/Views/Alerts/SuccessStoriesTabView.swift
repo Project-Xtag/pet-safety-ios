@@ -73,7 +73,7 @@ struct SuccessStoriesTabView: View {
                 .padding(.bottom, 24)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.green.opacity(0.1))
+        .background(Color.tealAccent.opacity(0.1))
     }
 
     // MARK: - Segmented Control
@@ -92,7 +92,7 @@ struct SuccessStoriesTabView: View {
                         .padding(.vertical, 10)
                         .background(
                             selection.wrappedValue == index
-                                ? Color.green
+                                ? Color.tealAccent
                                 : Color.clear
                         )
                         .cornerRadius(14)

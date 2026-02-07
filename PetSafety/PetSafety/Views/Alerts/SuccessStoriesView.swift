@@ -179,7 +179,7 @@ struct SuccessStoryRowView: View {
                             .padding(20)
                     }
                     .frame(width: 80, height: 80)
-                    .background(Color.green.opacity(0.2))
+                    .background(Color.tealAccent.opacity(0.2))
                     .cornerRadius(12)
                     .clipped()
                 } else {
@@ -187,7 +187,7 @@ struct SuccessStoryRowView: View {
                         .foregroundColor(.white)
                         .padding(20)
                         .frame(width: 80, height: 80)
-                        .background(Color.green.opacity(0.2))
+                        .background(Color.tealAccent.opacity(0.2))
                         .cornerRadius(12)
                 }
 
@@ -211,7 +211,7 @@ struct SuccessStoryRowView: View {
                     }
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
-                    .background(Color.green.opacity(0.1))
+                    .background(Color.tealAccent.opacity(0.1))
                     .cornerRadius(6)
 
                     // Location
@@ -362,7 +362,7 @@ struct SuccessStoryMapMarker: View {
                 .clipShape(Circle())
                 .overlay(
                     Circle()
-                        .stroke(Color.green, lineWidth: isSelected ? 4 : 3)
+                        .stroke(Color.tealAccent, lineWidth: isSelected ? 4 : 3)
                 )
                 .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
             }
@@ -396,7 +396,7 @@ struct SuccessStoryMapCard: View {
                         .padding(15)
                 }
                 .frame(width: 70, height: 70)
-                .background(Color.green.opacity(0.2))
+                .background(Color.tealAccent.opacity(0.2))
                 .cornerRadius(12)
                 .clipped()
             }
