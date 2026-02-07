@@ -155,6 +155,7 @@
 "neutered_spayed" = "Neutered/Spayed";
 "health_information" = "Health Information";
 "medical_notes_hint" = "Medical notes (conditions, surgeries, etc.)";
+"health_info_hint" = "Health info: conditions, allergies, medications...";
 "behavior_notes_hint" = "Behavior notes (temperament, training, etc.)";
 "save_changes" = "Save Changes";
 "delete_pet_button" = "Delete Pet";
@@ -913,7 +914,14 @@
 "owner_notified_sms_email" = "%@'s owner will receive an SMS and email with your location";
 "contact_owner_plea" = "Please let my owner know that you have found me…";
 "contact_info_not_set" = "Contact info not set up yet";
+"contact_info_hidden" = "Contact info is hidden";
+"contact_info_hidden_hint" = "Your contact details are set but hidden due to privacy settings. Update in Account > Privacy Mode.";
 "allergies" = "Allergies";
+"medications" = "Medications";
+"unique_features" = "Unique Features";
+"behavior_notes" = "Behavior Notes";
+"yes" = "Yes";
+"no" = "No";
 "how_it_works" = "How It Works";
 "help_reunite_pet" = "Help reunite %@ with their owner safely";
 "step_share_location" = "Share Your Location";
