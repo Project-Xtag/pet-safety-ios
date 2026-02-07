@@ -175,10 +175,12 @@ struct MySubscriptionResponse: Codable {
 struct CreateCheckoutRequest: Codable {
     let planName: String
     let billingPeriod: String
+    let platform: String
 
     enum CodingKeys: String, CodingKey {
         case planName = "plan_name"
         case billingPeriod = "billing_period"
+        case platform
     }
 }
 
@@ -189,6 +191,57 @@ struct SubscriptionCheckoutResponse: Codable {
     enum CodingKeys: String, CodingKey {
         case sessionId = "session_id"
         case url
+    }
+}
+
+// MARK: - Billing Portal
+struct PortalSessionResponse: Codable {
+    let url: String
+}
+
+struct InvoiceItem: Codable, Identifiable {
+    let id: String
+    let number: String?
+    let status: String?
+    let amount: Int
+    let currency: String
+    let date: Int
+    let pdfUrl: String?
+    let hostedUrl: String?
+}
+
+struct InvoicesResponse: Codable {
+    let invoices: [InvoiceItem]
+}
+
+// MARK: - Referral
+struct ReferralCodeResponse: Codable {
+    let code: String
+    let expiresAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case code
+        case expiresAt = "expires_at"
+    }
+}
+
+struct ReferralItem: Codable, Identifiable {
+    let id: String
+    let refereeEmail: String?
+    let status: String
+    let redeemedAt: String?
+    let rewardedAt: String?
+}
+
+struct ReferralStatusResponse: Codable {
+    let code: String?
+    let expiresAt: String?
+    let referrals: [ReferralItem]
+
+    enum CodingKeys: String, CodingKey {
+        case code
+        case expiresAt = "expires_at"
+        case referrals
     }
 }
 

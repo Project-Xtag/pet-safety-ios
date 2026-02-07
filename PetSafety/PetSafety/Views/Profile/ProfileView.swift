@@ -122,6 +122,14 @@ struct ProfileView: View {
             NavigationLink(destination: HelpAndSupportView()) {
                 ProfileMenuRow(icon: "questionmark.circle", title: NSLocalizedString("profile_help_support", comment: ""))
             }
+
+            NavigationLink(destination: BillingView()) {
+                ProfileMenuRow(icon: "creditcard", title: NSLocalizedString("profile_billing", comment: ""))
+            }
+
+            NavigationLink(destination: ReferralView()) {
+                ProfileMenuRow(icon: "gift", title: NSLocalizedString("profile_referral", comment: ""))
+            }
         }
         .background(Color(UIColor.systemBackground))
         .cornerRadius(16)

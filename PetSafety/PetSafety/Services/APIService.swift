@@ -1325,7 +1325,7 @@ extension APIService {
         let request = try await buildRequest(
             endpoint: "/subscriptions/checkout",
             method: "POST",
-            body: CreateCheckoutRequest(planName: planName, billingPeriod: billingPeriod)
+            body: CreateCheckoutRequest(planName: planName, billingPeriod: billingPeriod, platform: "ios")
         )
         return try await performRequest(request, responseType: SubscriptionCheckoutResponse.self)
     }
@@ -1368,6 +1368,59 @@ extension APIService {
         )
         let response = try await performRequest(request, responseType: CancelSubscriptionResponse.self)
         return response.subscription
+    }
+
+    // MARK: - Billing Portal & Invoices
+
+    /// Create a Stripe Customer Portal session
+    func createPortalSession() async throws -> PortalSessionResponse {
+        #if DEBUG
+        print("📡 API: Creating billing portal session...")
+        #endif
+
+        let request = try await buildRequest(
+            endpoint: "/billing/portal-session",
+            method: "POST",
+            body: EmptyBody()
+        )
+        return try await performRequest(request, responseType: PortalSessionResponse.self)
+    }
+
+    /// Get user's invoices
+    func getInvoices(limit: Int = 24) async throws -> [InvoiceItem] {
+        #if DEBUG
+        print("📡 API: Fetching invoices...")
+        #endif
+
+        let request = try await buildRequest(endpoint: "/billing/invoices?limit=\(limit)")
+        let response = try await performRequest(request, responseType: InvoicesResponse.self)
+        return response.invoices
+    }
+
+    // MARK: - Referral Program
+
+    /// Generate a referral code for the current user
+    func generateReferralCode() async throws -> ReferralCodeResponse {
+        #if DEBUG
+        print("📡 API: Generating referral code...")
+        #endif
+
+        let request = try await buildRequest(
+            endpoint: "/referrals/generate-code",
+            method: "POST",
+            body: EmptyBody()
+        )
+        return try await performRequest(request, responseType: ReferralCodeResponse.self)
+    }
+
+    /// Get referral status (code + history)
+    func getReferralStatus() async throws -> ReferralStatusResponse {
+        #if DEBUG
+        print("📡 API: Fetching referral status...")
+        #endif
+
+        let request = try await buildRequest(endpoint: "/referrals/status")
+        return try await performRequest(request, responseType: ReferralStatusResponse.self)
     }
 
     // MARK: - Account Deletion

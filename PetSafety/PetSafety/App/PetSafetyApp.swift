@@ -109,6 +109,33 @@ struct PetSafetyApp: App {
                         print("App received FCM token: \(token.prefix(20))...")
                     }
                 }
+                .onOpenURL { url in
+                    handleDeepLink(url)
+                }
+        }
+    }
+
+    private func handleDeepLink(_ url: URL) {
+        guard url.scheme == "petsafety" else { return }
+
+        switch url.host {
+        case "checkout":
+            let path = url.path.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+            if path == "success" {
+                // Stripe checkout completed — refresh subscription state
+                #if DEBUG
+                print("✅ Checkout success deep link received")
+                #endif
+                appState.showSuccess("Payment successful! Your subscription is being activated.")
+            } else if path == "cancelled" {
+                #if DEBUG
+                print("⚠️ Checkout cancelled deep link received")
+                #endif
+            }
+        default:
+            #if DEBUG
+            print("ℹ️ Unhandled deep link: \(url)")
+            #endif
         }
     }
 
