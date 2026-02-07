@@ -72,7 +72,7 @@ struct SuccessStoriesView: View {
         await viewModel.fetchSuccessStories(
             latitude: latitude,
             longitude: longitude,
-            radiusKm: 10,
+            radiusKm: 50,  // Increased from 10km for better coverage
             page: 1
         )
     }
@@ -143,7 +143,7 @@ struct SuccessStoriesListView: View {
                                     await viewModel.loadMore(
                                         latitude: userLoc.latitude,
                                         longitude: userLoc.longitude,
-                                        radiusKm: 10
+                                        radiusKm: 50
                                     )
                                 }
                             }
