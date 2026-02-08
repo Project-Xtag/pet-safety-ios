@@ -40,7 +40,22 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     private func setupPushNotifications(_ application: UIApplication) {
         UNUserNotificationCenter.current().delegate = self
 
-        // Request notification permissions
+        // Check if permission was already granted — if so, register immediately.
+        // Otherwise, defer to PushNotificationPromptView which shows a custom
+        // pre-permission dialog before triggering the system prompt.
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            if settings.authorizationStatus == .authorized {
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            }
+            // If not yet determined, the custom prompt in the app will handle requesting permission
+        }
+    }
+
+    /// Public method to request push notification permission.
+    /// Called from PushNotificationPromptView when user taps "Enable Notifications".
+    static func requestPushPermission() {
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
             if let error = error {
@@ -55,7 +70,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 print("Push notification permission granted")
                 #endif
                 DispatchQueue.main.async {
-                    application.registerForRemoteNotifications()
+                    UIApplication.shared.registerForRemoteNotifications()
                 }
             } else {
                 #if DEBUG

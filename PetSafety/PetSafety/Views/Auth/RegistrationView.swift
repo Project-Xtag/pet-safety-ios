@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 
 struct RegistrationView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -9,6 +10,7 @@ struct RegistrationView: View {
     @State private var otpCode = ""
     @State private var showOTPField = false
     @State private var showBiometricEnrollment = false
+    @State private var showPushPrompt = false
     @State private var resendCooldown = 0
     @State private var resendTimer: Timer?
 
@@ -254,10 +256,39 @@ struct RegistrationView: View {
             Button("enable") {
                 authViewModel.setBiometricEnabled(true)
                 appState.showSuccess(String(format: NSLocalizedString("biometric_type_enabled", comment: ""), authViewModel.biometricTypeName))
+                showPushPromptIfNeeded()
             }
-            Button("skip", role: .cancel) {}
+            Button("skip", role: .cancel) {
+                showPushPromptIfNeeded()
+            }
         } message: {
             Text(String(format: NSLocalizedString("use_biometric_quick_login", comment: ""), authViewModel.biometricTypeName))
+        }
+        .sheet(isPresented: $showPushPrompt) {
+            PushNotificationPromptView(
+                onEnable: {
+                    AppDelegate.requestPushPermission()
+                    UserDefaults.standard.set(true, forKey: "push_prompt_shown")
+                },
+                onDismiss: {
+                    UserDefaults.standard.set(true, forKey: "push_prompt_shown")
+                }
+            )
+        }
+    }
+
+    private func showPushPromptIfNeeded() {
+        // Only show once per user
+        let alreadyShown = UserDefaults.standard.bool(forKey: "push_prompt_shown")
+        guard !alreadyShown else { return }
+
+        // Check if permission is not yet determined
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            if settings.authorizationStatus == .notDetermined {
+                DispatchQueue.main.async {
+                    self.showPushPrompt = true
+                }
+            }
         }
     }
 
@@ -324,6 +355,8 @@ struct RegistrationView: View {
                 // Offer biometric enrollment
                 if authViewModel.shouldOfferBiometricEnrollment {
                     showBiometricEnrollment = true
+                } else {
+                    showPushPromptIfNeeded()
                 }
             } catch {
                 appState.showError(error.localizedDescription)
