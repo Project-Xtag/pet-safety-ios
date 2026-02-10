@@ -107,14 +107,16 @@ struct AlertsTabView: View {
 
     // MARK: - Helper Methods
     private func loadNearbyAlerts() async {
-        // Request location
         locationManager.requestLocation()
 
-        // Wait for location with retries (up to 5 seconds total)
+        // Start geocoding user's address in parallel as fallback
+        let currentUser = authViewModel.currentUser
+        async let geocodedFallback = geocodeUserAddressFallback(currentUser)
+
+        // Wait for device location (up to 3s, polling every 200ms)
         var attempts = 0
-        let maxAttempts = 10
-        while locationManager.location == nil && attempts < maxAttempts {
-            try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+        while locationManager.location == nil && attempts < 15 {
+            try? await Task.sleep(nanoseconds: 200_000_000)
             attempts += 1
         }
 
@@ -125,17 +127,21 @@ struct AlertsTabView: View {
                 longitude: location.longitude,
                 radiusKm: 10
             )
-        } else if let user = authViewModel.currentUser,
-                  let addressCoordinate = await geocodeUserAddress(user: user) {
+        } else if let coordinate = await geocodedFallback {
             showAddressRequiredMessage = false
             await viewModel.fetchNearbyAlerts(
-                latitude: addressCoordinate.latitude,
-                longitude: addressCoordinate.longitude,
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude,
                 radiusKm: 10
             )
         } else {
             showAddressRequiredMessage = true
         }
+    }
+
+    private func geocodeUserAddressFallback(_ user: User?) async -> CLLocationCoordinate2D? {
+        guard let user = user else { return nil }
+        return await geocodeUserAddress(user: user)
     }
 
     private func geocodeUserAddress(user: User) async -> CLLocationCoordinate2D? {

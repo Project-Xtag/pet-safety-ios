@@ -27,11 +27,7 @@ struct SuccessStoriesView: View {
                 EmptySuccessStoriesView()
             } else {
                 SuccessStoriesListView(
-                    viewModel: viewModel,
-                    onShare: { story in
-                        selectedStoryForShare = story
-                        showShareSheet = true
-                    }
+                    viewModel: viewModel
                 )
             }
         }
@@ -51,9 +47,18 @@ struct SuccessStoriesView: View {
     // MARK: - Helper Methods
 
     private func loadSuccessStories() async {
-        // Get location
         locationManager.requestLocation()
-        try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 second
+
+        // Start geocoding user's address in parallel as fallback
+        let currentUser = authViewModel.currentUser
+        async let geocodedFallback = geocodeUserAddressFallback(currentUser)
+
+        // Wait for device location (up to 3s, polling every 200ms)
+        var attempts = 0
+        while locationManager.location == nil && attempts < 15 {
+            try? await Task.sleep(nanoseconds: 200_000_000)
+            attempts += 1
+        }
 
         var latitude = 51.5074 // Default: London
         var longitude = -0.1278
@@ -62,8 +67,7 @@ struct SuccessStoriesView: View {
             latitude = location.latitude
             longitude = location.longitude
             userLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        } else if let user = authViewModel.currentUser,
-                  let addressCoordinate = await geocodeUserAddress(user: user) {
+        } else if let addressCoordinate = await geocodedFallback {
             latitude = addressCoordinate.latitude
             longitude = addressCoordinate.longitude
             userLocation = addressCoordinate
@@ -72,9 +76,14 @@ struct SuccessStoriesView: View {
         await viewModel.fetchSuccessStories(
             latitude: latitude,
             longitude: longitude,
-            radiusKm: 50,  // Increased from 10km for better coverage
+            radiusKm: 50,
             page: 1
         )
+    }
+
+    private func geocodeUserAddressFallback(_ user: User?) async -> CLLocationCoordinate2D? {
+        guard let user = user else { return nil }
+        return await geocodeUserAddress(user: user)
     }
 
     private func geocodeUserAddress(user: User) async -> CLLocationCoordinate2D? {
@@ -123,12 +132,11 @@ struct SuccessStoriesView: View {
 // MARK: - List View
 struct SuccessStoriesListView: View {
     @ObservedObject var viewModel: SuccessStoriesViewModel
-    let onShare: (SuccessStory) -> Void
 
     var body: some View {
         List {
             ForEach(viewModel.stories) { story in
-                SuccessStoryRowView(story: story, onShare: onShare)
+                SuccessStoryRowView(story: story)
                     .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             }
 
@@ -164,7 +172,6 @@ struct SuccessStoriesListView: View {
 
 struct SuccessStoryRowView: View {
     let story: SuccessStory
-    let onShare: (SuccessStory) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -236,15 +243,6 @@ struct SuccessStoryRowView: View {
                 }
 
                 Spacer()
-
-                // Share Button
-                Button(action: {
-                    onShare(story)
-                }) {
-                    Image(systemName: "square.and.arrow.up")
-                        .font(.body)
-                        .foregroundColor(.blue)
-                }
             }
 
             // Reunion Template
@@ -308,7 +306,6 @@ struct SuccessStoryRowView: View {
 struct SuccessStoriesMapView: View {
     let stories: [SuccessStory]
     let userLocation: CLLocationCoordinate2D?
-    let onShare: (SuccessStory) -> Void
 
     @State private var mapPosition: MapCameraPosition = .region(
         MKCoordinateRegion(
@@ -343,7 +340,7 @@ struct SuccessStoriesMapView: View {
             if let story = selectedStory {
                 VStack {
                     Spacer()
-                    SuccessStoryMapCard(story: story, onShare: onShare)
+                    SuccessStoryMapCard(story: story)
                         .padding()
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
@@ -404,80 +401,130 @@ struct SuccessStoryMapMarker: View {
 
 struct SuccessStoryMapCard: View {
     let story: SuccessStory
-    let onShare: (SuccessStory) -> Void
 
     var body: some View {
-        HStack(spacing: 16) {
-            // Pet Photo
-            if let photoUrl = story.petPhotoUrl {
-                AsyncImage(url: URL(string: photoUrl)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                } placeholder: {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top, spacing: 12) {
+                // Pet Photo
+                if let photoUrl = story.petPhotoUrl {
+                    AsyncImage(url: URL(string: photoUrl)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    } placeholder: {
+                        Image(systemName: "heart.fill")
+                            .foregroundColor(.white)
+                            .padding(20)
+                    }
+                    .frame(width: 80, height: 80)
+                    .background(Color.tealAccent.opacity(0.2))
+                    .cornerRadius(12)
+                    .clipped()
+                } else {
                     Image(systemName: "heart.fill")
                         .foregroundColor(.white)
-                        .padding(15)
+                        .padding(20)
+                        .frame(width: 80, height: 80)
+                        .background(Color.tealAccent.opacity(0.2))
+                        .cornerRadius(12)
                 }
-                .frame(width: 70, height: 70)
-                .background(Color.tealAccent.opacity(0.2))
-                .cornerRadius(12)
-                .clipped()
+
+                VStack(alignment: .leading, spacing: 6) {
+                    // Pet Name
+                    if let petName = story.petName {
+                        Text(petName)
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                    }
+
+                    // Found Badge
+                    HStack(spacing: 4) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.caption)
+                            .foregroundColor(.tealAccent)
+                        Text("found_and_reunited")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.tealAccent)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.tealAccent.opacity(0.1))
+                    .cornerRadius(6)
+
+                    // Location
+                    if let city = story.reunionCity {
+                        HStack(spacing: 4) {
+                            Image(systemName: "location.fill")
+                                .font(.caption2)
+                            Text(city)
+                                .font(.caption)
+                        }
+                        .foregroundColor(.secondary)
+                    }
+
+                    // Distance
+                    if let distance = story.distanceKm {
+                        Text(String(format: NSLocalizedString("distance_km", comment: ""), distance))
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                    }
+                }
+
+                Spacer()
             }
 
-            VStack(alignment: .leading, spacing: 6) {
-                // Pet Name
-                if let petName = story.petName {
-                    Text(petName)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                }
+            // Reunion Template
+            let petName = story.petName ?? ""
+            let timeMissing = story.timeMissingText ?? String(localized: "some_time")
+            if story.missingSinceDate != nil {
+                Text(String(format: NSLocalizedString("reunion_template", comment: ""), petName, timeMissing, petName, petName))
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .lineLimit(4)
+            } else {
+                Text(String(format: NSLocalizedString("reunion_template_no_time", comment: ""), petName, petName))
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .lineLimit(3)
+            }
 
-                // Found Status
-                HStack(spacing: 4) {
-                    Image(systemName: "checkmark.circle.fill")
+            // Owner's Story (optional)
+            if let storyText = story.storyText {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("owners_story")
                         .font(.caption)
-                    Text("found_and_reunited")
-                        .font(.subheadline)
                         .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+                    Text(storyText)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .italic()
+                        .lineLimit(2)
                 }
-                .foregroundColor(.tealAccent)
+            }
 
-                // Location
-                if let city = story.reunionCity {
+            // Time Info
+            HStack(spacing: 12) {
+                if let timeMissingText = story.timeMissingText {
                     HStack(spacing: 4) {
-                        Image(systemName: "location.fill")
+                        Image(systemName: "clock.fill")
                             .font(.caption2)
-                        Text(city)
-                            .font(.caption)
+                        Text(String(format: NSLocalizedString("missing_for", comment: ""), timeMissingText))
+                            .font(.caption2)
                     }
                     .foregroundColor(.secondary)
                 }
 
-                // Reunion Text (abbreviated)
-                if let petName = story.petName {
-                    let timeMissing = story.timeMissingText ?? String(localized: "some_time")
-                    if story.missingSinceDate != nil {
-                        Text(String(format: NSLocalizedString("reunion_template", comment: ""), petName, timeMissing, petName, petName))
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .lineLimit(2)
+                if let foundDate = story.foundAtDate {
+                    HStack(spacing: 4) {
+                        Image(systemName: "calendar")
+                            .font(.caption2)
+                        Text(String(format: NSLocalizedString("found_on", comment: ""), foundDate.timeAgoDisplay()))
+                            .font(.caption2)
                     }
+                    .foregroundColor(.secondary)
                 }
-            }
-
-            Spacer()
-
-            // Share Button
-            Button(action: {
-                onShare(story)
-            }) {
-                Image(systemName: "square.and.arrow.up")
-                    .font(.title2)
-                    .foregroundColor(.blue)
-                    .padding(12)
-                    .background(Color.blue.opacity(0.1))
-                    .clipShape(Circle())
             }
         }
         .padding()

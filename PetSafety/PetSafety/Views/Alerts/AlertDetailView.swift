@@ -15,6 +15,7 @@ struct AlertDetailView: View {
     @State private var showingSuccessStoryPrompt = false
     @State private var isMarkingFound = false
     @State private var mapPosition: MapCameraPosition
+    @State private var reverseGeocodedAddress: String?
 
     // Check if current user is the pet owner
     private var isOwner: Bool {
@@ -155,8 +156,8 @@ struct AlertDetailView: View {
                         .frame(height: 200)
                         .cornerRadius(12)
 
-                        if let location = alert.lastSeenLocation {
-                            Text(location)
+                        if let address = reverseGeocodedAddress ?? alert.lastSeenLocation {
+                            Text(address)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }
@@ -165,6 +166,9 @@ struct AlertDetailView: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(12)
                     .padding(.horizontal)
+                    .task {
+                        await reverseGeocodeCoordinate(coordinate)
+                    }
                 }
 
                 // Sightings
@@ -266,6 +270,27 @@ struct AlertDetailView: View {
                 )
                 .environmentObject(appState)
             }
+        }
+    }
+
+    private func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) async {
+        let geocoder = CLGeocoder()
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        do {
+            let placemarks = try await geocoder.reverseGeocodeLocation(location)
+            if let placemark = placemarks.first {
+                let components = [
+                    placemark.thoroughfare,
+                    placemark.locality,
+                    placemark.administrativeArea,
+                    placemark.country
+                ].compactMap { $0 }
+                if !components.isEmpty {
+                    reverseGeocodedAddress = components.joined(separator: ", ")
+                }
+            }
+        } catch {
+            // Reverse geocoding failed, fall back to stored address
         }
     }
 

@@ -10,8 +10,6 @@ struct SuccessStoriesTabView: View {
     @State private var selectedViewMode = 0
     @State private var showAddressRequiredMessage = false
     @State private var userLocation: CLLocationCoordinate2D?
-    @State private var showShareSheet = false
-    @State private var selectedStoryForShare: SuccessStory?
 
     var body: some View {
         ZStack {
@@ -54,11 +52,6 @@ struct SuccessStoriesTabView: View {
         }
         .refreshable {
             await loadSuccessStories()
-        }
-        .sheet(isPresented: $showShareSheet) {
-            if let story = selectedStoryForShare {
-                ShareSheet(activityItems: [createShareText(for: story)])
-            }
         }
     }
 
@@ -124,21 +117,13 @@ struct SuccessStoriesTabView: View {
             if selectedViewMode == 0 {
                 // List View
                 SuccessStoriesListContent(
-                    viewModel: viewModel,
-                    onShare: { story in
-                        selectedStoryForShare = story
-                        showShareSheet = true
-                    }
+                    viewModel: viewModel
                 )
             } else {
                 // Map View - real MapKit map
                 SuccessStoriesMapView(
                     stories: viewModel.stories,
-                    userLocation: userLocation,
-                    onShare: { story in
-                        selectedStoryForShare = story
-                        showShareSheet = true
-                    }
+                    userLocation: userLocation
                 )
             }
         }
@@ -147,7 +132,17 @@ struct SuccessStoriesTabView: View {
     // MARK: - Helper Methods
     private func loadSuccessStories() async {
         locationManager.requestLocation()
-        try? await Task.sleep(nanoseconds: 500_000_000)
+
+        // Start geocoding user's address in parallel as fallback
+        let currentUser = authViewModel.currentUser
+        async let geocodedFallback = geocodeUserAddressFallback(currentUser)
+
+        // Wait for device location (up to 3s, polling every 200ms)
+        var attempts = 0
+        while locationManager.location == nil && attempts < 15 {
+            try? await Task.sleep(nanoseconds: 200_000_000)
+            attempts += 1
+        }
 
         var latitude = 51.5074 // Default: London
         var longitude = -0.1278
@@ -157,8 +152,7 @@ struct SuccessStoriesTabView: View {
             longitude = location.longitude
             userLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             showAddressRequiredMessage = false
-        } else if let user = authViewModel.currentUser,
-                  let addressCoordinate = await geocodeUserAddress(user: user) {
+        } else if let addressCoordinate = await geocodedFallback {
             latitude = addressCoordinate.latitude
             longitude = addressCoordinate.longitude
             userLocation = addressCoordinate
@@ -174,6 +168,11 @@ struct SuccessStoriesTabView: View {
             radiusKm: 10,
             page: 1
         )
+    }
+
+    private func geocodeUserAddressFallback(_ user: User?) async -> CLLocationCoordinate2D? {
+        guard let user = user else { return nil }
+        return await geocodeUserAddress(user: user)
     }
 
     private func geocodeUserAddress(user: User) async -> CLLocationCoordinate2D? {
@@ -201,33 +200,16 @@ struct SuccessStoriesTabView: View {
         return nil
     }
 
-    private func createShareText(for story: SuccessStory) -> String {
-        var text = ""
-        if let petName = story.petName {
-            let timeMissing = story.timeMissingText ?? String(localized: "some_time")
-            if story.missingSinceDate != nil {
-                text += String(format: NSLocalizedString("reunion_template", comment: ""), petName, timeMissing, petName, petName) + "\n\n"
-            } else {
-                text += String(format: NSLocalizedString("reunion_template_no_time", comment: ""), petName, petName) + "\n\n"
-            }
-        }
-        if let storyText = story.storyText {
-            text += "\(storyText)\n\n"
-        }
-        text += String(localized: "shared_via_pet_safety")
-        return text
-    }
 }
 
 // MARK: - Success Stories List Content
 struct SuccessStoriesListContent: View {
     @ObservedObject var viewModel: SuccessStoriesViewModel
-    let onShare: (SuccessStory) -> Void
 
     var body: some View {
         List {
             ForEach(viewModel.stories) { story in
-                SuccessStoryRowView(story: story, onShare: onShare)
+                SuccessStoryRowView(story: story)
                     .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             }
 
