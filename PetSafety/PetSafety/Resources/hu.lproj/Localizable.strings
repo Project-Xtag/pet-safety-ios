@@ -225,8 +225,8 @@
 "manual_code_label" = "QR-kód";
 "submit_code" = "Kód beküldése";
 "invalid_qr_code" = "Adj meg érvényes kódot";
-"turn_off_flashlight" = "Zseblámpa kikapcsolása";
-"turn_on_flashlight" = "Zseblámpa bekapcsolása";
+"turn_off_flashlight" = "Vaku kikapcsolása";
+"turn_on_flashlight" = "Vaku bekapcsolása";
 "hello_pet_name" = "Szia! %@ vagyok";
 "scanned_tag_thanks" = "Épp most olvastad be a bilétámat. Köszönöm, hogy segítesz!";
 "share_location_with_owner" = "Helyzetem megosztása a gazdával";
@@ -240,7 +240,7 @@
 "dont_share_location_desc" = "Csak értesítsd a gazdát, hogy a kedvencét megtalálták";
 "sending" = "Küldés…";
 "confirm_notify_owner" = "Megerősítés & gazda értesítése";
-"contact_owner" = "Gazda elérhetősége";
+"contact_owner" = "Gazdi elérhetősége";
 "call_phone" = "Hívás: %@";
 "email_contact" = "Email: %@";
 "privacy_notice" = "Fontos az adatvédelem. A helyzetedet csak %@ gazdájával osztjuk meg, hogy segítsünk újra találkozni.";
@@ -252,9 +252,9 @@
 
 // MARK: - Helymegosztás folyamat
 "share_help_get_home %@" = "Segíts, hogy %@ hazajusson";
-"share_choose_desc" = "Válaszd ki, mennyi helyinformációt osztasz meg a gazdával";
+"share_choose_desc" = "Válaszd ki, mennyi helyinformációt osztasz meg a gazdival";
 "share_dont_share" = "Ne ossz meg";
-"share_dont_share_desc" = "Csak értesítsd a gazdát, hogy a kedvenc bilétáját beolvasták";
+"share_dont_share_desc" = "Csak értesítsd a gazdit, hogy a kedvenc bilétáját beolvasták";
 "share_approximate" = "Közelítő terület";
 "share_approximate_desc" = "Oszd meg a környéked (~500m sugarú terület)";
 "share_exact" = "Pontos hely";
@@ -268,7 +268,7 @@
 "share_notifying" = "Gazda értesítése...";
 "share_notify_no_location" = "Gazda értesítése (hely nélkül)";
 "share_notify_with_location" = "Megosztás & gazda értesítése";
-"share_privacy_note" = "A pontos helyedet soha nem tároljuk. Csak a közelítő területet osztjuk meg a gazdával.";
+"share_privacy_note" = "A pontos helyedet soha nem tároljuk. Csak a közelítő területet osztjuk meg a gazdival.";
 "share_found_pet %@" = "%@ megtalálva!";
 
 // MARK: - Beolvasó részletei
@@ -1200,3 +1200,16 @@
 "login_activate_instructions" = "Bejelentkezés után olvasd be újra a bilétát, vagy menj a Kedvenceim menübe az aktiváláshoz";
 "free_price" = "INGYENES";
 "referral_expires %@" = "Lejárat: %@";
+
+// MARK: - Sikertörténetek újraegyesülés
+"reunion_template" = "%@ hazatalált. %@ eltűnés után %@ sikeresen újraegyesült családjával. Köszönet csodálatos közösségünknek, amiért hazahozták %@-t!";
+"reunion_template_no_time" = "%@ újraegyesült családjával! Köszönet csodálatos közösségünknek, amiért hazahozták %@-t!";
+"owners_story" = "A gazdi története:";
+"some_time" = "egy idő";
+"list" = "Lista";
+"map" = "Térkép";
+"post_to_success_stories" = "Közzététel a sikertörténeteknél";
+"remove_from_success_stories" = "Eltávolítás a sikertörténetekből";
+"removed_from_success_stories" = "Eltávolítva a sikertörténetekből";
+"remove_story_confirm_title" = "Sikertörténet eltávolítása?";
+"remove_story_confirm_message" = "Ezzel eltávolítja kisállata történetét a nyilvános sikertörténetek listájából.";

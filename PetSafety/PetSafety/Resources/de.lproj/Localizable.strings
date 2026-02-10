@@ -1187,3 +1187,16 @@
 "login_activate_instructions" = "Scannen Sie den Tag nach der Anmeldung erneut oder gehen Sie zu Meine Haustiere, um ihn zu aktivieren";
 "free_price" = "KOSTENLOS";
 "referral_expires %@" = "Gültig bis: %@";
+
+// MARK: - Success Stories Reunion (stubs)
+"reunion_template" = "%@ has been reunited. After %@ missing, %@ was successfully reunited with their family. Thank you to our amazing community for bringing %@ home!";
+"reunion_template_no_time" = "%@ has been reunited with their family! Thank you to our amazing community for bringing %@ home!";
+"owners_story" = "Owner's story:";
+"some_time" = "some time";
+"list" = "List";
+"map" = "Map";
+"post_to_success_stories" = "Post to Success Stories";
+"remove_from_success_stories" = "Remove from Success Stories";
+"removed_from_success_stories" = "Removed from Success Stories";
+"remove_story_confirm_title" = "Remove Success Story?";
+"remove_story_confirm_message" = "This will remove your pet's story from the public success stories feed.";

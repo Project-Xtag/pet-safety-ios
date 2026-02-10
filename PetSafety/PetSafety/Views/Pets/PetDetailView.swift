@@ -9,6 +9,9 @@ struct PetDetailView: View {
         _pet = State(initialValue: pet)
     }
     @StateObject private var alertsViewModel = AlertsViewModel()
+    @StateObject private var successStoriesVM = SuccessStoriesViewModel()
+    @State private var petSuccessStory: SuccessStory?
+    @State private var showRemoveStoryConfirmation = false
     @State private var showingEditSheet = false
     @State private var showingMarkLostSheet = false
     @State private var showingMarkFoundConfirmation = false
@@ -78,6 +81,18 @@ struct PetDetailView: View {
                     }
                 }
                 .padding(.horizontal)
+
+                // Success Story Buttons (only for previously-missing pets that have/had stories)
+                if !pet.isMissing && petSuccessStory != nil {
+                    Button(action: { showRemoveStoryConfirmation = true }) {
+                        HStack {
+                            Image(systemName: "trash")
+                            Text("remove_from_success_stories")
+                        }
+                    }
+                    .buttonStyle(DestructiveButtonStyle())
+                    .padding(.horizontal)
+                }
 
                 // Basic Info Cards
                 VStack(spacing: 16) {
@@ -256,10 +271,40 @@ struct PetDetailView: View {
                 },
                 onStorySubmitted: {
                     showingSuccessStoryPrompt = false
+                    Task {
+                        await successStoriesVM.fetchStoriesForPet(petId: pet.id)
+                        petSuccessStory = successStoriesVM.stories.first
+                    }
                     dismiss()
                 }
             )
             .environmentObject(appState)
+        }
+        .task {
+            await successStoriesVM.fetchStoriesForPet(petId: pet.id)
+            petSuccessStory = successStoriesVM.stories.first
+        }
+        .alert(String(localized: "remove_story_confirm_title"), isPresented: $showRemoveStoryConfirmation) {
+            Button("cancel", role: .cancel) { }
+            Button("remove", role: .destructive) {
+                Task {
+                    if let story = petSuccessStory {
+                        do {
+                            try await successStoriesVM.deleteSuccessStory(id: story.id)
+                            await MainActor.run {
+                                petSuccessStory = nil
+                                appState.showSuccess(String(localized: "removed_from_success_stories"))
+                            }
+                        } catch {
+                            await MainActor.run {
+                                appState.showError(error.localizedDescription)
+                            }
+                        }
+                    }
+                }
+            }
+        } message: {
+            Text("remove_story_confirm_message")
         }
     }
 

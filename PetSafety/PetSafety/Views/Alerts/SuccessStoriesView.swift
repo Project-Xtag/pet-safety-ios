@@ -105,15 +105,17 @@ struct SuccessStoriesView: View {
     private func createShareText(for story: SuccessStory) -> String {
         var text = ""
         if let petName = story.petName {
-            text += String(format: NSLocalizedString("pet_found_share", comment: ""), petName) + " 🎉\n\n"
+            let timeMissing = story.timeMissingText ?? String(localized: "some_time")
+            if story.missingSinceDate != nil {
+                text += String(format: NSLocalizedString("reunion_template", comment: ""), petName, timeMissing, petName, petName) + "\n\n"
+            } else {
+                text += String(format: NSLocalizedString("reunion_template_no_time", comment: ""), petName, petName) + "\n\n"
+            }
         }
         if let storyText = story.storyText {
             text += "\(storyText)\n\n"
         }
-        if let city = story.reunionCity {
-            text += String(format: NSLocalizedString("reunited_in", comment: ""), city) + "\n"
-        }
-        text += "\n" + String(localized: "shared_via_pet_safety")
+        text += String(localized: "shared_via_pet_safety")
         return text
     }
 }
@@ -245,12 +247,34 @@ struct SuccessStoryRowView: View {
                 }
             }
 
-            // Story Text
-            if let storyText = story.storyText {
-                Text(storyText)
+            // Reunion Template
+            let petName = story.petName ?? ""
+            let timeMissing = story.timeMissingText ?? String(localized: "some_time")
+            if story.missingSinceDate != nil {
+                Text(String(format: NSLocalizedString("reunion_template", comment: ""), petName, timeMissing, petName, petName))
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .lineLimit(4)
+            } else {
+                Text(String(format: NSLocalizedString("reunion_template_no_time", comment: ""), petName, petName))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .lineLimit(3)
+            }
+
+            // Owner's Story (optional)
+            if let storyText = story.storyText {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("owners_story")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+                    Text(storyText)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .italic()
+                        .lineLimit(2)
+                }
             }
 
             // Time Info
@@ -428,6 +452,17 @@ struct SuccessStoryMapCard: View {
                             .font(.caption)
                     }
                     .foregroundColor(.secondary)
+                }
+
+                // Reunion Text (abbreviated)
+                if let petName = story.petName {
+                    let timeMissing = story.timeMissingText ?? String(localized: "some_time")
+                    if story.missingSinceDate != nil {
+                        Text(String(format: NSLocalizedString("reunion_template", comment: ""), petName, timeMissing, petName, petName))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .lineLimit(2)
+                    }
                 }
             }
 

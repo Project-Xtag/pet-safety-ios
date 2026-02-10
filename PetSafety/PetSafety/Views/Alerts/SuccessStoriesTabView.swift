@@ -26,7 +26,7 @@ struct SuccessStoriesTabView: View {
                 VStack(spacing: 20) {
                     // View Mode Segmented Control (List / Map)
                     segmentedControl(
-                        options: ["List", "Map"],
+                        options: [String(localized: "list"), String(localized: "map")],
                         selection: $selectedViewMode
                     )
                     .padding(.horizontal, 24)
@@ -204,15 +204,17 @@ struct SuccessStoriesTabView: View {
     private func createShareText(for story: SuccessStory) -> String {
         var text = ""
         if let petName = story.petName {
-            text += "\(petName) Found! \n\n"
+            let timeMissing = story.timeMissingText ?? String(localized: "some_time")
+            if story.missingSinceDate != nil {
+                text += String(format: NSLocalizedString("reunion_template", comment: ""), petName, timeMissing, petName, petName) + "\n\n"
+            } else {
+                text += String(format: NSLocalizedString("reunion_template_no_time", comment: ""), petName, petName) + "\n\n"
+            }
         }
         if let storyText = story.storyText {
             text += "\(storyText)\n\n"
         }
-        if let city = story.reunionCity {
-            text += "Reunited in \(city)\n"
-        }
-        text += "\nShared via Pet Safety App"
+        text += String(localized: "shared_via_pet_safety")
         return text
     }
 }
