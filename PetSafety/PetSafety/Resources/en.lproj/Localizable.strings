@@ -520,6 +520,8 @@
 "profile_contacts" = "Contacts";
 "profile_privacy_mode" = "Privacy Mode";
 "profile_notifications" = "Notifications";
+"profile_billing" = "Billing";
+"profile_referral" = "Referral Program";
 "profile_help_support" = "Help & Support";
 "profile_log_out" = "Log Out";
 "profile_logout_confirm" = "Are you sure you want to log out?";
@@ -1014,3 +1016,187 @@
 
 // MARK: - Additional Offline Keys
 "offline_last_sync_label" = "Last sync time";
+
+// MARK: - Plan Selection
+"plan_choose_title" = "Choose Your Plan";
+"plan_tag_activated" = "Tag Activated!";
+"plan_choose_subtitle" = "Choose a plan to unlock all features";
+"plan_upgrade_title" = "Upgrade Your Plan";
+"plan_upgrade_subtitle" = "Get more features for your pets";
+"plan_loading" = "Loading plans...";
+"plan_load_failed" = "Failed to load plans";
+"plan_skip_free" = "Skip for now (Free Plan)";
+"plan_all_include" = "All plans include:";
+"plan_paid_add" = "Paid plans add:";
+"plan_feature_qr_tag" = "QR tag for your pet";
+"plan_feature_scan_notif" = "Instant scan notifications";
+"plan_feature_public_profile" = "Public pet profile";
+"plan_feature_secure_storage" = "Secure data storage";
+"plan_feature_lost_alerts" = "Lost pet alerts to vets & community";
+"plan_feature_lost_alerts_short" = "Lost pet alerts";
+"plan_feature_sms" = "SMS notifications";
+"plan_feature_photos" = "Up to 10 photos per pet";
+"plan_feature_replacements" = "Free tag replacements";
+"plan_popular" = "Popular";
+"plan_current" = "Current Plan";
+"plan_select_free" = "Select Free Plan";
+"plan_select %@" = "Select %@";
+
+// MARK: - Alerts Tab (Chunk 1)
+"alerts_loading" = "Loading alerts…";
+"alerts_missing_pets_title" = "Missing Pet Alerts";
+"alerts_list" = "List";
+"alerts_map" = "Map";
+"alerts_no_nearby_title %@" = "No %@ Alerts Nearby";
+"alerts_no_nearby_message %@" = "No %@ pet alerts in your area right now";
+"alerts_location_required" = "Location Required";
+"alerts_location_required_message" = "To see missing pet alerts near you, please enable location services or add your address.";
+"alerts_enable_location" = "Enable Location Services in Settings";
+"alerts_or" = "OR";
+"alerts_add_address_profile" = "Add your address in your profile";
+"alerts_add_my_address" = "Add My Address";
+"alerts_no_missing_nearby" = "No missing pet alerts nearby";
+
+// MARK: - Alert Status & Details (Chunk 1)
+"alert_status_missing" = "Missing";
+"alert_status_found" = "Found";
+"alert_missing_since %@" = "Missing since %@";
+"alert_missing_for %@" = "Missing for %@";
+"alert_found_on %@" = "Found on %@";
+"alert_found_reunited" = "Found & Reunited";
+"alert_mark_found_title" = "Mark %@ as Found?";
+"alert_mark_found_title %@" = "Mark %@ as Found?";
+"alert_mark_found_message" = "This will close the missing alert. Are you sure?";
+"alert_mark_found_message %@" = "This will close the missing alert for %@. Are you sure?";
+"alert_mark_found_failed" = "Failed to mark as found";
+"alert_marked_found_success" = "%@ has been marked as found!";
+"alert_mark_found_error" = "Failed to mark as found: %@";
+"pet_default" = "pet";
+"report_found" = "Report Found";
+
+// MARK: - Map Annotations (Chunk 1)
+"map_you" = "You";
+"map_missing_alert" = "Missing Alert";
+"map_found_alert" = "Found Alert";
+"time_less_than_hour" = "Less than an hour";
+
+// MARK: - Push Notification Prompt (Chunk 1)
+"push_prompt_title" = "Stay Connected";
+"push_prompt_benefit_scan" = "Instant alerts when your pet's tag is scanned";
+"push_prompt_benefit_sighting" = "Sighting reports from the community";
+"push_prompt_benefit_found" = "Know immediately when your pet is found";
+"push_prompt_benefit_missing" = "Missing pet alerts in your area";
+"push_prompt_enable" = "Enable Notifications";
+"push_prompt_later" = "Maybe Later";
+
+// MARK: - Referral (Chunk 1)
+"referral_loading" = "Loading…";
+"referral_your_code" = "Your Referral Code";
+"referral_share_footer" = "Share your code with friends. When they subscribe, you both get rewarded!";
+"referral_how_it_works" = "How It Works";
+"referral_step_1" = "Share your referral code with a friend";
+"referral_step_2" = "They sign up and subscribe using your code";
+"referral_step_3" = "You both get 2 months free!";
+"referral_history" = "Referral History";
+"referral_no_referrals" = "No referrals yet";
+"referral_title" = "Referral Program";
+"referral_generate" = "Generate Referral Code";
+"referral_copied" = "Copied!";
+"referral_copy" = "Copy";
+"referral_share" = "Share";
+"referral_pending" = "Pending";
+
+// MARK: - Billing (Chunk 1)
+"billing_manage_subscription" = "Manage Subscription";
+"billing_subscription" = "Subscription";
+"billing_portal_footer" = "Manage your subscription, payment method, and billing details through Stripe.";
+"billing_invoices" = "Invoices";
+"billing_loading_invoices" = "Loading invoices…";
+"billing_no_invoices" = "No invoices yet";
+"billing_invoice" = "Invoice";
+"billing_unknown" = "Unknown";
+"billing_title" = "Billing";
+
+// MARK: - Sync Error Banner (Chunk 1)
+"sync_retry_all" = "Retry All";
+"sync_dismiss_all" = "Dismiss All";
+"sync_syncing" = "Syncing…";
+"sync_count_failed %lld" = "%lld failed";
+"sync_count_pending %lld" = "%lld pending";
+
+// MARK: - Success Stories Tab (Chunk 1)
+"success_stories_title" = "Success Stories";
+"success_stories_loading" = "Loading stories…";
+
+// MARK: - Success Story Prompt (Chunk 1)
+"story_share_title" = "Share Your Story";
+"story_pet_is_home %@" = "%@ is home!";
+"story_share_reunion" = "Share your reunion story!";
+"story_inspire_others %@" = "Your story about %@ can inspire hope for other pet owners.";
+"story_share_my_story" = "Share My Story";
+"story_share_how %@" = "Share how %@ was found and reunited";
+"story_privacy_note" = "Your contact information will not be shared.";
+"story_shared_success" = "Your success story has been shared!";
+
+// MARK: - Breed Picker (Chunk 1)
+"breed_select_title" = "Select Breed";
+"breed_search_placeholder" = "Search breeds…";
+"breed_no_results" = "No breeds found";
+"breed_use_custom %@" = "Use \"%@\" as custom breed";
+"breed_manual_entry" = "Enter breed manually";
+"breed_clear_selection" = "Clear Selection";
+"breed_enter_name" = "Enter breed name";
+"breed_custom" = "Custom Breed";
+"breed_custom_footer" = "Enter a custom breed name if yours isn't listed";
+"breed_back_to_list" = "Back to Breed List";
+"breed_select_optional" = "Select breed (optional)";
+"breed_optional" = "Breed (optional)";
+
+// MARK: - Quick Mark Lost (Chunk 1)
+"quick_lost_select_pet" = "Select a pet to report as missing";
+"quick_lost_all_missing" = "All your pets are already marked as missing.";
+"quick_lost_title" = "Report Missing";
+
+// MARK: - Quick Mark Found (Chunk 1)
+"quick_found_select_pet" = "Select a pet to mark as found";
+"quick_found_currently_missing" = "Currently Missing";
+"quick_found_no_missing" = "No missing pets to mark as found.";
+"quick_found_title" = "Mark Pet as Found";
+"quick_found_mark_failed" = "Failed to mark %@ as found: %@";
+
+// MARK: - Mark As Lost (Chunk 1)
+"location_current" = "Current Location";
+"location_my_address" = "My Address";
+"location_custom" = "Custom Address";
+"mark_lost_pet_info" = "Pet Information";
+"mark_lost_last_seen" = "Last Seen Location";
+"mark_lost_alerts_footer" = "Alerts will be sent to nearby users, vets, and shelters within 10km.";
+"mark_lost_getting_location" = "Getting your location…";
+"mark_lost_no_address" = "No address registered. Go to Profile > Address.";
+"mark_lost_address_placeholder" = "Enter address or location";
+"mark_lost_additional_info" = "Additional Information";
+"mark_lost_additional_placeholder" = "Describe when and where you last saw your pet, what they were wearing, etc.";
+"mark_lost_sends_to" = "This alert will be sent to:";
+"mark_lost_nearby_owners" = "Nearby pet owners";
+"mark_lost_vet_clinics" = "Vet clinics in the area";
+"mark_lost_shelters" = "Animal shelters nearby";
+"mark_lost_report" = "Report Missing";
+"mark_lost_title" = "Report Missing";
+
+// MARK: - Photo Gallery extras (Chunk 1)
+"photo_count %lld" = "%lld photos";
+"photo_uploading_count %lld %lld" = "Uploading photo %lld of %lld...";
+"photo_uploading" = "Uploading photo...";
+"photo_primary_updated" = "Primary photo updated";
+"photo_primary_failed" = "Failed to set primary photo";
+"photo_upload_success" = "%d photo(s) uploaded successfully";
+"photo_upload_failed" = "%d photo(s) failed to upload";
+"photo_upload_single_failed" = "Failed to upload photo";
+"photo_delete_failed" = "Failed to delete photo";
+
+// MARK: - Missing Localization Cleanup
+"login_required" = "Login Required";
+"login_required_activate_tag" = "Please log in to activate this tag for your pet";
+"login_activate_instructions" = "After logging in, scan the tag again or go to My Pets to activate it";
+"free_price" = "FREE";
+"referral_expires %@" = "Expires: %@";

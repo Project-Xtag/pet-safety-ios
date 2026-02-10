@@ -12,7 +12,7 @@ struct FoundAlertsView: View {
                     Spacer()
                     ProgressView()
                         .scaleEffect(1.2)
-                    Text("Loading alerts...")
+                    Text("alerts_loading")
                         .font(.system(size: 15))
                         .foregroundColor(.mutedText)
                     Spacer()
@@ -77,7 +77,7 @@ struct FoundAlertRowView: View {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.caption)
                         .foregroundColor(.tealAccent)
-                    Text("Found")
+                    Text("alert_status_found")
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(.tealAccent)
@@ -89,7 +89,7 @@ struct FoundAlertRowView: View {
 
                 // Found Date
                 if let updatedAt = alert.updatedAt.toDate() {
-                    Text("Found on \(updatedAt.formatted(date: .abbreviated, time: .omitted))")
+                    Text("alert_found_on \(updatedAt.formatted(date: .abbreviated, time: .omitted))")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -133,7 +133,7 @@ struct FoundAlertsMapView: View {
             Map(position: $mapPosition) {
                 ForEach(alerts) { alert in
                     let coordinate = alert.coordinate ?? CLLocationCoordinate2D()
-                    Annotation("Found Alert", coordinate: coordinate) {
+                    Annotation(String(localized: "map_found_alert"), coordinate: coordinate) {
                         FoundPetMapMarker(alert: alert, isSelected: selectedAlert?.id == alert.id)
                             .onTapGesture {
                                 withAnimation(.spring(response: 0.3)) {
@@ -242,7 +242,7 @@ struct FoundAlertMapCard: View {
                     HStack(spacing: 4) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.caption)
-                        Text("Found & Reunited")
+                        Text("alert_found_reunited")
                             .font(.subheadline)
                             .fontWeight(.semibold)
                     }

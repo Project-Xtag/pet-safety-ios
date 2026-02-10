@@ -15,7 +15,7 @@ struct QuickMarkFoundView: View {
 
     var body: some View {
         List {
-            Section(header: Text("Select Pet to Mark as Found")) {
+            Section(header: Text("quick_found_select_pet")) {
                 ForEach(pets) { pet in
                     Button(action: {
                         petToMarkFound = pet
@@ -48,7 +48,7 @@ struct QuickMarkFoundView: View {
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
 
-                                Text("Currently Missing")
+                                Text("quick_found_currently_missing")
                                     .font(.caption)
                                     .foregroundColor(.orange)
                             }
@@ -69,19 +69,19 @@ struct QuickMarkFoundView: View {
 
             if pets.isEmpty {
                 Section {
-                    Text("No missing pets to mark as found.")
+                    Text("quick_found_no_missing")
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding()
                 }
             }
         }
-        .navigationTitle("Mark Pet as Found")
+        .navigationTitle("quick_found_title")
         .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+                Button("cancel") {
                     dismiss()
                 }
                 .disabled(isProcessing)
@@ -103,18 +103,18 @@ struct QuickMarkFoundView: View {
                 .environmentObject(appState)
             }
         }
-        .alert("Mark \(petToMarkFound?.name ?? "pet") as Found?", isPresented: $showingFoundConfirmation) {
-            Button("Cancel", role: .cancel) {
+        .alert("alert_mark_found_title \(petToMarkFound?.name ?? String(localized: "pet_default"))", isPresented: $showingFoundConfirmation) {
+            Button("cancel", role: .cancel) {
                 petToMarkFound = nil
             }
-            Button("Mark as Found") {
+            Button("mark_as_found") {
                 if let pet = petToMarkFound {
                     markAsFound(pet: pet)
                 }
                 petToMarkFound = nil
             }
         } message: {
-            Text("This will close the missing alert for \(petToMarkFound?.name ?? "this pet"). Are you sure?")
+            Text("alert_mark_found_message \(petToMarkFound?.name ?? String(localized: "pet_default"))")
         }
     }
 
@@ -136,7 +136,7 @@ struct QuickMarkFoundView: View {
                 }
             } catch {
                 await MainActor.run {
-                    appState.showError("Failed to mark \(pet.name) as found: \(error.localizedDescription)")
+                    appState.showError(String(format: String(localized: "quick_found_mark_failed"), pet.name, error.localizedDescription))
                     foundPet = nil
                     isProcessing = false
                 }

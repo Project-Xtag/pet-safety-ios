@@ -39,12 +39,12 @@ struct PlanSelectionView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Choose Your Plan")
+            .navigationTitle("plan_choose_title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 if !fromActivation {
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Button("Close") {
+                        Button("close") {
                             dismiss()
                         }
                     }
@@ -80,18 +80,18 @@ struct PlanSelectionView: View {
                     .font(.system(size: 48))
                     .foregroundColor(.tealAccent)
 
-                Text("Tag Activated!")
+                Text("plan_tag_activated")
                     .font(.title2)
                     .fontWeight(.bold)
 
-                Text("Choose a plan to unlock all features")
+                Text("plan_choose_subtitle")
                     .foregroundColor(.secondary)
             } else {
-                Text("Upgrade Your Plan")
+                Text("plan_upgrade_title")
                     .font(.title2)
                     .fontWeight(.bold)
 
-                Text("Get more features for your pets")
+                Text("plan_upgrade_subtitle")
                     .foregroundColor(.secondary)
             }
         }
@@ -102,7 +102,7 @@ struct PlanSelectionView: View {
     private var loadingView: some View {
         VStack(spacing: 16) {
             ProgressView()
-            Text("Loading plans...")
+            Text("plan_loading")
                 .foregroundColor(.secondary)
         }
         .padding(.vertical, 60)
@@ -114,7 +114,7 @@ struct PlanSelectionView: View {
                 .font(.largeTitle)
                 .foregroundColor(.orange)
 
-            Text("Failed to load plans")
+            Text("plan_load_failed")
                 .font(.headline)
 
             Text(error)
@@ -122,7 +122,7 @@ struct PlanSelectionView: View {
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
 
-            Button("Try Again") {
+            Button("retry") {
                 Task {
                     await viewModel.loadAll()
                 }
@@ -191,7 +191,7 @@ struct PlanSelectionView: View {
                 dismiss()
             }
         } label: {
-            Text("Skip for now (Free Plan)")
+            Text("plan_skip_free")
                 .foregroundColor(.secondary)
                 .underline()
         }
@@ -200,24 +200,24 @@ struct PlanSelectionView: View {
 
     private var infoSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("All plans include:")
+            Text("plan_all_include")
                 .font(.headline)
 
-            FeatureRow(icon: "qrcode", text: "QR tag for your pet")
-            FeatureRow(icon: "bell.badge", text: "Instant scan notifications")
-            FeatureRow(icon: "person.crop.circle", text: "Public pet profile")
-            FeatureRow(icon: "lock.shield", text: "Secure data storage")
+            FeatureRow(icon: "qrcode", text: String(localized: "plan_feature_qr_tag"))
+            FeatureRow(icon: "bell.badge", text: String(localized: "plan_feature_scan_notif"))
+            FeatureRow(icon: "person.crop.circle", text: String(localized: "plan_feature_public_profile"))
+            FeatureRow(icon: "lock.shield", text: String(localized: "plan_feature_secure_storage"))
 
             Divider()
                 .padding(.vertical, 8)
 
-            Text("Paid plans add:")
+            Text("plan_paid_add")
                 .font(.headline)
 
-            FeatureRow(icon: "megaphone", text: "Lost pet alerts to vets & community")
-            FeatureRow(icon: "message.badge", text: "SMS notifications")
-            FeatureRow(icon: "photo.stack", text: "Up to 10 photos per pet")
-            FeatureRow(icon: "arrow.triangle.2.circlepath", text: "Free tag replacements")
+            FeatureRow(icon: "megaphone", text: String(localized: "plan_feature_lost_alerts"))
+            FeatureRow(icon: "message.badge", text: String(localized: "plan_feature_sms"))
+            FeatureRow(icon: "photo.stack", text: String(localized: "plan_feature_photos"))
+            FeatureRow(icon: "arrow.triangle.2.circlepath", text: String(localized: "plan_feature_replacements"))
         }
         .padding()
         .background(Color(.systemGray6))
@@ -253,7 +253,7 @@ struct PlanCard: View {
                 Spacer()
 
                 if isPopular {
-                    Text("Popular")
+                    Text("plan_popular")
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
@@ -287,12 +287,12 @@ struct PlanCard: View {
                 )
                 FeatureRow(
                     icon: "megaphone",
-                    text: "Lost pet alerts",
+                    text: String(localized: "plan_feature_lost_alerts_short"),
                     included: plan.features.vetAlerts
                 )
                 FeatureRow(
                     icon: "message",
-                    text: "SMS notifications",
+                    text: String(localized: "plan_feature_sms"),
                     included: plan.features.smsNotifications
                 )
             }
@@ -306,11 +306,11 @@ struct PlanCard: View {
                         ProgressView()
                             .tint(.white)
                     } else if isCurrentPlan {
-                        Text("Current Plan")
+                        Text("plan_current")
                     } else if plan.isFree {
-                        Text("Select Free Plan")
+                        Text("plan_select_free")
                     } else {
-                        Text("Select \(plan.displayName)")
+                        Text("plan_select \(plan.displayName)")
                     }
                 }
                 .frame(maxWidth: .infinity)

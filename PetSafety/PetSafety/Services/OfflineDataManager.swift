@@ -595,7 +595,6 @@ class OfflineDataManager {
     private func convertSuccessStoryEntityToStory(_ entity: SuccessStoryEntity) -> SuccessStory? {
         guard let id = entity.id,
               let petId = entity.petId,
-              let ownerId = entity.ownerId,
               let foundAt = entity.foundAt,
               let createdAt = entity.createdAt,
               let updatedAt = entity.updatedAt else {
@@ -606,7 +605,7 @@ class OfflineDataManager {
             id: id,
             alertId: entity.alertId,
             petId: petId,
-            ownerId: ownerId,
+            ownerId: entity.ownerId,
             reunionCity: entity.reunionCity,
             reunionLatitude: entity.reunionLatitude != 0 ? entity.reunionLatitude : nil,
             reunionLongitude: entity.reunionLongitude != 0 ? entity.reunionLongitude : nil,

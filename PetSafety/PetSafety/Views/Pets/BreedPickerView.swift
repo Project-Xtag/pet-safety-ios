@@ -32,11 +32,11 @@ struct BreedPickerView: View {
                     breedListView
                 }
             }
-            .navigationTitle("Select Breed")
+            .navigationTitle("breed_select_title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button("cancel") {
                         dismiss()
                     }
                     .foregroundColor(.brandOrange)
@@ -44,7 +44,7 @@ struct BreedPickerView: View {
 
                 if showManualEntry {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Done") {
+                        Button("done") {
                             selectedBreed = manualBreed
                             dismiss()
                         }
@@ -63,7 +63,7 @@ struct BreedPickerView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.secondary)
-                    TextField("Search breeds...", text: $searchText)
+                    TextField(String(localized: "breed_search_placeholder"), text: $searchText)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                 }
@@ -73,14 +73,14 @@ struct BreedPickerView: View {
             Section {
                 if filteredBreeds.isEmpty && !searchText.isEmpty {
                     VStack(spacing: 12) {
-                        Text("No breeds found")
+                        Text("breed_no_results")
                             .foregroundColor(.secondary)
 
                         Button {
                             manualBreed = searchText
                             showManualEntry = true
                         } label: {
-                            Text("Use \"\(searchText)\" as breed")
+                            Text("breed_use_custom \(searchText)")
                                 .foregroundColor(.brandOrange)
                         }
                     }
@@ -113,7 +113,7 @@ struct BreedPickerView: View {
                 } label: {
                     HStack {
                         Image(systemName: "pencil")
-                        Text("Not listed - enter manually")
+                        Text("breed_manual_entry")
                     }
                     .foregroundColor(.secondary)
                 }
@@ -128,7 +128,7 @@ struct BreedPickerView: View {
                     } label: {
                         HStack {
                             Image(systemName: "xmark.circle")
-                            Text("Clear selection")
+                            Text("breed_clear_selection")
                         }
                         .foregroundColor(.red)
                     }
@@ -141,12 +141,12 @@ struct BreedPickerView: View {
     private var manualEntryView: some View {
         List {
             Section {
-                TextField("Enter breed name", text: $manualBreed)
+                TextField(String(localized: "breed_enter_name"), text: $manualBreed)
                     .textInputAutocapitalization(.words)
             } header: {
-                Text("Custom Breed")
+                Text("breed_custom")
             } footer: {
-                Text("Enter the breed name if it's not in our list")
+                Text("breed_custom_footer")
             }
 
             Section {
@@ -155,7 +155,7 @@ struct BreedPickerView: View {
                 } label: {
                     HStack {
                         Image(systemName: "arrow.left")
-                        Text("Back to breed list")
+                        Text("breed_back_to_list")
                     }
                     .foregroundColor(.brandOrange)
                 }
@@ -191,7 +191,7 @@ struct BreedPickerButton: View {
                 showingPicker = true
             } label: {
                 HStack {
-                    Text(breed.isEmpty ? "Select breed (optional)" : breed)
+                    Text(breed.isEmpty ? String(localized: "breed_select_optional") : breed)
                         .foregroundColor(breed.isEmpty ? .secondary : .primary)
                     Spacer()
                     Image(systemName: "chevron.right")
@@ -205,7 +205,7 @@ struct BreedPickerButton: View {
             }
         } else {
             // For other species, show a plain text field
-            TextField("Breed (optional)", text: $breed)
+            TextField(String(localized: "breed_optional"), text: $breed)
                 .disabled(disabled)
         }
     }

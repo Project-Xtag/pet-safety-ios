@@ -5,7 +5,7 @@ struct SuccessStory: Codable, Identifiable {
     let id: String
     let alertId: String?
     let petId: String
-    let ownerId: String
+    let ownerId: String?
     let reunionCity: String?
     let reunionLatitude: Double?
     let reunionLongitude: Double?

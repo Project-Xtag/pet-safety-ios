@@ -14,7 +14,7 @@ struct SyncErrorBanner: View {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .foregroundColor(.white)
 
-                        Text("\(syncService.failedActionsCount) action\(syncService.failedActionsCount == 1 ? "" : "s") failed to sync")
+                        Text("sync_failed_count \(syncService.failedActionsCount)")
                             .font(.subheadline)
                             .fontWeight(.medium)
                             .foregroundColor(.white)
@@ -43,7 +43,7 @@ struct SyncErrorBanner: View {
                             }) {
                                 HStack {
                                     Image(systemName: "arrow.clockwise")
-                                    Text("Retry All")
+                                    Text("sync_retry_all")
                                 }
                                 .font(.subheadline)
                                 .fontWeight(.medium)
@@ -62,7 +62,7 @@ struct SyncErrorBanner: View {
                             }) {
                                 HStack {
                                     Image(systemName: "xmark")
-                                    Text("Dismiss All")
+                                    Text("sync_dismiss_all")
                                 }
                                 .font(.subheadline)
                                 .fontWeight(.medium)
@@ -118,7 +118,7 @@ struct SyncErrorRow: View {
                         .lineLimit(2)
                 }
 
-                Text("Tried \(action.retryCount) time\(action.retryCount == 1 ? "" : "s")")
+                Text("sync_tried_count \(action.retryCount)")
                     .font(.caption2)
                     .foregroundColor(.secondary)
             }
@@ -179,21 +179,21 @@ struct SyncStatusIndicator: View {
             if syncService.isSyncing {
                 ProgressView()
                     .scaleEffect(0.7)
-                Text("Syncing...")
+                Text("sync_syncing")
                     .font(.caption)
                     .foregroundColor(.secondary)
             } else if syncService.failedActionsCount > 0 {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundColor(.orange)
                     .font(.caption)
-                Text("\(syncService.failedActionsCount) failed")
+                Text("sync_count_failed \(syncService.failedActionsCount)")
                     .font(.caption)
                     .foregroundColor(.orange)
             } else if syncService.pendingActionsCount > 0 {
                 Image(systemName: "arrow.triangle.2.circlepath")
                     .foregroundColor(.blue)
                     .font(.caption)
-                Text("\(syncService.pendingActionsCount) pending")
+                Text("sync_count_pending \(syncService.pendingActionsCount)")
                     .font(.caption)
                     .foregroundColor(.blue)
             }

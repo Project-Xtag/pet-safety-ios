@@ -17,26 +17,26 @@ struct PushNotificationPromptView: View {
                 .font(.system(size: 60))
                 .foregroundColor(.brandOrange)
 
-            Text("Stay Connected")
+            Text("push_prompt_title")
                 .font(.title2)
                 .fontWeight(.bold)
 
             VStack(alignment: .leading, spacing: 12) {
                 BenefitRow(
                     icon: "qrcode.viewfinder",
-                    text: "Get instant alerts when your pet's tag is scanned"
+                    text: String(localized: "push_prompt_benefit_scan")
                 )
                 BenefitRow(
                     icon: "eye.fill",
-                    text: "Receive sighting reports from the community"
+                    text: String(localized: "push_prompt_benefit_sighting")
                 )
                 BenefitRow(
                     icon: "heart.fill",
-                    text: "Be the first to know when your pet is found"
+                    text: String(localized: "push_prompt_benefit_found")
                 )
                 BenefitRow(
                     icon: "exclamationmark.triangle.fill",
-                    text: "Get notified about missing pets in your area"
+                    text: String(localized: "push_prompt_benefit_missing")
                 )
             }
             .padding(.horizontal)
@@ -48,7 +48,7 @@ struct PushNotificationPromptView: View {
                     onEnable()
                     dismiss()
                 } label: {
-                    Text("Enable Notifications")
+                    Text("push_prompt_enable")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
@@ -60,7 +60,7 @@ struct PushNotificationPromptView: View {
                     onDismiss()
                     dismiss()
                 } label: {
-                    Text("Maybe Later")
+                    Text("push_prompt_later")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

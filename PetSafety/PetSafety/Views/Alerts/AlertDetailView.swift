@@ -103,7 +103,7 @@ struct AlertDetailView: View {
 
                     // Missing since date
                     if let createdAt = alert.createdAt.toDate() {
-                        Text("Missing since \(createdAt.formatted(date: .abbreviated, time: .omitted))")
+                        Text("alert_missing_since \(createdAt.formatted(date: .abbreviated, time: .omitted))")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -193,7 +193,7 @@ struct AlertDetailView: View {
                                     } else {
                                         Image(systemName: "checkmark.circle.fill")
                                     }
-                                    Text("Mark as Found")
+                                    Text("mark_as_found")
                                 }
                             }
                             .buttonStyle(PrimaryButtonStyle())
@@ -206,7 +206,7 @@ struct AlertDetailView: View {
                             .buttonStyle(SecondaryButtonStyle())
 
                             Button(action: { showingReportFound = true }) {
-                                Label("Report Found", systemImage: "checkmark.circle.fill")
+                                Label("report_found", systemImage: "checkmark.circle.fill")
                             }
                             .buttonStyle(PrimaryButtonStyle())
                         }
@@ -231,13 +231,13 @@ struct AlertDetailView: View {
                 ShareLocationView(qrCode: qrCode, petName: pet.name)
             }
         }
-        .alert("Mark \(alert.pet?.name ?? "pet") as Found?", isPresented: $showingMarkFoundConfirmation) {
-            Button("Cancel", role: .cancel) { }
-            Button("Mark as Found") {
+        .alert("alert_mark_found_title \(alert.pet?.name ?? String(localized: "pet_default"))", isPresented: $showingMarkFoundConfirmation) {
+            Button("cancel", role: .cancel) { }
+            Button("mark_as_found") {
                 markAsFound()
             }
         } message: {
-            Text("This will close the missing alert. Are you sure?")
+            Text("alert_mark_found_message \(alert.pet?.name ?? String(localized: "pet_default"))")
         }
         .fullScreenCover(isPresented: $showingSuccessStoryPrompt) {
             if let pet = alert.pet {
@@ -256,7 +256,7 @@ struct AlertDetailView: View {
                     ),
                     onDismiss: {
                         showingSuccessStoryPrompt = false
-                        appState.showSuccess("\(pet.name) has been marked as found!")
+                        appState.showSuccess(String(format: String(localized: "alert_marked_found_success"), pet.name))
                         dismiss()
                     },
                     onStorySubmitted: {
@@ -286,7 +286,7 @@ struct AlertDetailView: View {
                 }
             } catch {
                 await MainActor.run {
-                    appState.showError("Failed to mark as found: \(error.localizedDescription)")
+                    appState.showError(String(format: String(localized: "alert_mark_found_error"), error.localizedDescription))
                     isMarkingFound = false
                 }
             }

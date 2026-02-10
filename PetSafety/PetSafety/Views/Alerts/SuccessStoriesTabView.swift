@@ -44,7 +44,7 @@ struct SuccessStoriesTabView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Done") {
+                Button("done") {
                     dismiss()
                 }
             }
@@ -65,7 +65,7 @@ struct SuccessStoriesTabView: View {
     // MARK: - Header Section
     private var headerSection: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Success Stories")
+            Text("success_stories_title")
                 .font(.system(size: 28, weight: .bold))
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
@@ -112,7 +112,7 @@ struct SuccessStoriesTabView: View {
                 Spacer()
                 ProgressView()
                     .scaleEffect(1.2)
-                Text("Loading success stories...")
+                Text("success_stories_loading")
                     .font(.system(size: 15))
                     .foregroundColor(.mutedText)
                 Spacer()
@@ -236,7 +236,7 @@ struct SuccessStoriesListContent: View {
                     if viewModel.isLoading {
                         ProgressView()
                     } else {
-                        Button("Load More") {
+                        Button("load_more") {
                             Task {
                                 if let userLoc = viewModel.stories.first?.coordinate {
                                     await viewModel.loadMore(

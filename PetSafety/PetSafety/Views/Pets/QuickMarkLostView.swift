@@ -10,7 +10,7 @@ struct QuickMarkLostView: View {
 
     var body: some View {
         List {
-            Section(header: Text("Select Pet to Report Missing")) {
+            Section(header: Text("quick_lost_select_pet")) {
                 ForEach(pets.filter { !$0.isMissing }) { pet in
                     Button(action: {
                         selectedPet = pet
@@ -55,19 +55,19 @@ struct QuickMarkLostView: View {
 
             if pets.filter({ !$0.isMissing }).isEmpty {
                 Section {
-                    Text("All your pets are already marked as missing or you have no pets to report.")
+                    Text("quick_lost_all_missing")
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding()
                 }
             }
         }
-        .navigationTitle("Report Missing Pet")
+        .navigationTitle("quick_lost_title")
         .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+                Button("cancel") {
                     dismiss()
                 }
             }

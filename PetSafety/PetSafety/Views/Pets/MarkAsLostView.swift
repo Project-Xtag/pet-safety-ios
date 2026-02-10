@@ -10,9 +10,9 @@ enum LastSeenSource: String, CaseIterable {
 
     var displayName: String {
         switch self {
-        case .currentLocation: return "Current Location"
-        case .registeredAddress: return "My Address"
-        case .customAddress: return "Custom"
+        case .currentLocation: return String(localized: "location_current")
+        case .registeredAddress: return String(localized: "location_my_address")
+        case .customAddress: return String(localized: "location_custom")
         }
     }
 }
@@ -40,7 +40,7 @@ struct MarkAsLostView: View {
 
     var body: some View {
         Form {
-            Section(header: Text("Pet Information")) {
+            Section(header: Text("mark_lost_pet_info")) {
                 HStack {
                     if let imageUrl = pet.profileImage {
                         AsyncImage(url: URL(string: imageUrl)) { image in
@@ -65,8 +65,8 @@ struct MarkAsLostView: View {
                 }
             }
 
-            Section(header: Text("Last Seen Location"),
-                    footer: Text("Alerts will be sent to users, vets, and shelters within 10km of this location.")) {
+            Section(header: Text("mark_lost_last_seen"),
+                    footer: Text("mark_lost_alerts_footer")) {
                 Picker("Location", selection: $lastSeenSource) {
                     ForEach(LastSeenSource.allCases, id: \.self) { source in
                         Text(source.displayName).tag(source)
@@ -88,7 +88,7 @@ struct MarkAsLostView: View {
                         HStack {
                             ProgressView()
                                 .scaleEffect(0.8)
-                            Text("Getting location...")
+                            Text("mark_lost_getting_location")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }
@@ -103,24 +103,24 @@ struct MarkAsLostView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         } else {
-                            Text("No registered address found. Please update your profile.")
+                            Text("mark_lost_no_address")
                                 .font(.subheadline)
                                 .foregroundColor(.red)
                         }
                     }
 
                 case .customAddress:
-                    TextField("e.g., Central Park or 123 Main St", text: $customAddress)
+                    TextField(String(localized: "mark_lost_address_placeholder"), text: $customAddress)
                         .autocapitalization(.words)
                 }
             }
 
-            Section(header: Text("Additional Information")) {
+            Section(header: Text("mark_lost_additional_info")) {
                 TextEditor(text: $additionalInfo)
                     .frame(minHeight: 100)
                     .overlay(alignment: .topLeading) {
                         if additionalInfo.isEmpty {
-                            Text("Provide any additional details about when and where your pet was last seen...")
+                            Text("mark_lost_additional_placeholder")
                                 .foregroundColor(.secondary)
                                 .padding(.top, 8)
                                 .padding(.leading, 4)
@@ -129,13 +129,13 @@ struct MarkAsLostView: View {
             }
 
             Section {
-                Text("This will send alerts to:")
+                Text("mark_lost_sends_to")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                 VStack(alignment: .leading, spacing: 8) {
-                    Label("Nearby pet owners (within 10km)", systemImage: "person.3.fill")
-                    Label("Local veterinary clinics", systemImage: "cross.case.fill")
-                    Label("Animal shelters", systemImage: "house.fill")
+                    Label(String(localized: "mark_lost_nearby_owners"), systemImage: "person.3.fill")
+                    Label(String(localized: "mark_lost_vet_clinics"), systemImage: "cross.case.fill")
+                    Label(String(localized: "mark_lost_shelters"), systemImage: "house.fill")
                 }
                 .font(.caption)
                 .foregroundColor(.secondary)
@@ -149,7 +149,7 @@ struct MarkAsLostView: View {
                             ProgressView()
                                 .tint(.white)
                         } else {
-                            Text("Report Missing")
+                            Text("mark_lost_report")
                                 .fontWeight(.semibold)
                         }
                         Spacer()
@@ -162,11 +162,11 @@ struct MarkAsLostView: View {
         }
         .scrollDismissesKeyboard(.interactively)
         .adaptiveList()
-        .navigationTitle("Report Missing Pet")
+        .navigationTitle("mark_lost_title")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+                Button("cancel") {
                     dismiss()
                 }
                 .foregroundColor(.brandOrange)

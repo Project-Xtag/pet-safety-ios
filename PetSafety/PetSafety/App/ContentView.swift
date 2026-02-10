@@ -90,18 +90,18 @@ struct DeepLinkLoginPromptView: View {
                         .foregroundColor(.brandOrange)
                 }
 
-                Text("Login Required")
+                Text(String(localized: "login_required"))
                     .font(.system(size: 22, weight: .bold))
                     .foregroundColor(.primary)
 
-                Text("Please log in to activate this tag for your pet")
+                Text(String(localized: "login_required_activate_tag"))
                     .font(.system(size: 15))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
 
                 VStack(spacing: 8) {
-                    Text("Tag Code")
+                    Text(String(localized: "tag_code_label"))
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(.mutedText)
 
@@ -114,7 +114,7 @@ struct DeepLinkLoginPromptView: View {
                 }
                 .padding(.vertical)
 
-                Text("After logging in, scan the tag again or go to My Pets to activate it")
+                Text(String(localized: "login_activate_instructions"))
                     .font(.system(size: 13))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
@@ -123,13 +123,13 @@ struct DeepLinkLoginPromptView: View {
                 Spacer()
 
                 Button(action: onDismiss) {
-                    Text("OK")
+                    Text(String(localized: "ok"))
                 }
                 .buttonStyle(BrandButtonStyle())
                 .padding(.horizontal, 24)
                 .padding(.bottom, 40)
             }
-            .navigationTitle("Activate Tag")
+            .navigationTitle(String(localized: "tag_activate_title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

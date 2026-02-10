@@ -16,7 +16,7 @@ struct MissingAlertsView: View {
                     Spacer()
                     ProgressView()
                         .scaleEffect(1.2)
-                    Text("Loading alerts...")
+                    Text("alerts_loading")
                         .font(.system(size: 15))
                         .foregroundColor(.mutedText)
                     Spacer()
@@ -81,7 +81,7 @@ struct MissingAlertRowView: View {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .font(.caption)
                         .foregroundColor(.red)
-                    Text("Missing")
+                    Text("alert_status_missing")
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(.red)
@@ -93,7 +93,7 @@ struct MissingAlertRowView: View {
 
                 // Missing Since
                 if let createdAt = alert.createdAt.toDate() {
-                    Text("Missing since \(createdAt.formatted(date: .abbreviated, time: .omitted))")
+                    Text("alert_missing_since \(createdAt.formatted(date: .abbreviated, time: .omitted))")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -133,7 +133,7 @@ struct MissingAlertsMapView: View {
             Map(position: $mapPosition) {
                 // Show user location marker
                 if let userLoc = userLocation {
-                    Annotation("You", coordinate: userLoc) {
+                    Annotation(String(localized: "map_you"), coordinate: userLoc) {
                         ZStack {
                             Circle()
                                 .fill(Color.blue.opacity(0.2))
@@ -149,7 +149,7 @@ struct MissingAlertsMapView: View {
                 }
 
                 ForEach(alerts.filter { $0.coordinate != nil }) { alert in
-                    Annotation("Missing Alert", coordinate: alert.coordinate!) {
+                    Annotation(String(localized: "map_missing_alert"), coordinate: alert.coordinate!) {
                         PetMapMarker(alert: alert, isSelected: selectedAlert?.id == alert.id)
                             .onTapGesture {
                                 withAnimation(.spring(response: 0.3)) {
@@ -164,7 +164,7 @@ struct MissingAlertsMapView: View {
             if alerts.filter({ $0.coordinate != nil }).isEmpty {
                 VStack {
                     Spacer()
-                    Text("No missing pet alerts nearby")
+                    Text("alerts_no_missing_nearby")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .padding()
@@ -297,7 +297,7 @@ struct MissingAlertMapCard: View {
                         // Duration Missing
                         if let createdAt = alert.createdAt.toDate() {
                             let duration = Date().timeIntervalSince(createdAt)
-                            Text("Missing for \(duration.formatDuration())")
+                            Text("alert_missing_for \(duration.formatDuration())")
                                 .font(.subheadline)
                                 .foregroundColor(.red)
                                 .fontWeight(.semibold)
@@ -337,7 +337,7 @@ struct MissingAlertMapCard: View {
                         } else {
                             Image(systemName: "checkmark.circle.fill")
                         }
-                        Text("Mark as Found")
+                        Text("mark_as_found")
                     }
                     .font(.system(size: 14, weight: .semibold))
                     .frame(maxWidth: .infinity)
@@ -353,7 +353,7 @@ struct MissingAlertMapCard: View {
                     Button(action: { showingReportSighting = true }) {
                         HStack {
                             Image(systemName: "eye.fill")
-                            Text("Report Sighting")
+                            Text("report_sighting")
                         }
                         .font(.system(size: 14, weight: .semibold))
                         .frame(maxWidth: .infinity)
@@ -366,7 +366,7 @@ struct MissingAlertMapCard: View {
                     Button(action: { showingReportFound = true }) {
                         HStack {
                             Image(systemName: "checkmark.circle.fill")
-                            Text("Report Found")
+                            Text("report_found")
                         }
                         .font(.system(size: 14, weight: .semibold))
                         .frame(maxWidth: .infinity)
@@ -394,13 +394,13 @@ struct MissingAlertMapCard: View {
                 ShareLocationView(qrCode: qrCode, petName: pet.name)
             }
         }
-        .alert("Mark \(alert.pet?.name ?? "pet") as Found?", isPresented: $showingMarkFoundConfirmation) {
-            Button("Cancel", role: .cancel) { }
-            Button("Mark as Found") {
+        .alert(String(format: String(localized: "alert_mark_found_title"), alert.pet?.name ?? String(localized: "pet_default")), isPresented: $showingMarkFoundConfirmation) {
+            Button("cancel", role: .cancel) { }
+            Button("mark_as_found") {
                 markAsFound()
             }
         } message: {
-            Text("This will close the missing alert. Are you sure?")
+            Text("alert_mark_found_message")
         }
         .fullScreenCover(isPresented: $showingSuccessStoryPrompt) {
             if let pet = alert.pet {
@@ -448,7 +448,7 @@ struct MissingAlertMapCard: View {
                 }
             } catch {
                 await MainActor.run {
-                    appState.showError("Failed to mark as found: \(error.localizedDescription)")
+                    appState.showError(String(localized: "alert_mark_found_failed") + ": \(error.localizedDescription)")
                     isMarkingFound = false
                 }
             }
@@ -475,7 +475,7 @@ extension TimeInterval {
         } else if hours > 0 {
             return "\(hours) hour\(hours == 1 ? "" : "s")"
         } else {
-            return "Less than an hour"
+            return String(localized: "time_less_than_hour")
         }
     }
 }

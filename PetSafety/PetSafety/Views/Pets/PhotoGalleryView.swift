@@ -33,7 +33,7 @@ struct PhotoGalleryView: View {
                             .foregroundColor(.primary)
 
                         if viewModel.hasPhotos {
-                            Text("\(viewModel.photoCount) photo\(viewModel.photoCount == 1 ? "" : "s")")
+                            Text("photo_count \(viewModel.photoCount)")
                                 .font(.system(size: 15))
                                 .foregroundColor(.mutedText)
                         }
@@ -64,11 +64,11 @@ struct PhotoGalleryView: View {
                                 .tint(.brandOrange)
 
                             if viewModel.totalUploadCount > 1 {
-                                Text("Uploading photo \(viewModel.uploadedCount) of \(viewModel.totalUploadCount)...")
+                                Text("photo_uploading_count \(viewModel.uploadedCount) \(viewModel.totalUploadCount)")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             } else {
-                                Text("Uploading photo...")
+                                Text("photo_uploading")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -96,9 +96,9 @@ struct PhotoGalleryView: View {
                                                 photoId: photo.id
                                             )
                                             if success {
-                                                appState.showSuccess("Primary photo updated")
+                                                appState.showSuccess(String(localized: "photo_primary_updated"))
                                             } else {
-                                                appState.showError("Failed to set primary photo")
+                                                appState.showError(String(localized: "photo_primary_failed"))
                                             }
                                         }
                                     },
@@ -220,11 +220,11 @@ struct PhotoGalleryView: View {
 
                 if succeeded > 0 {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    appState.showSuccess("\(succeeded) photo\(succeeded == 1 ? "" : "s") uploaded successfully")
+                    appState.showSuccess(String(format: String(localized: "photo_upload_success"), succeeded))
                 }
 
                 if failed > 0 {
-                    appState.showError("\(failed) photo\(failed == 1 ? "" : "s") failed to upload")
+                    appState.showError(String(format: String(localized: "photo_upload_failed"), failed))
                 }
             }
 
@@ -242,9 +242,9 @@ struct PhotoGalleryView: View {
 
                 if success {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    appState.showSuccess("Photo uploaded successfully")
+                    appState.showSuccess(String(localized: "photo_uploaded"))
                 } else {
-                    appState.showError(viewModel.errorMessage ?? "Failed to upload photo")
+                    appState.showError(viewModel.errorMessage ?? String(localized: "photo_upload_single_failed"))
                 }
             }
         }
@@ -278,9 +278,9 @@ struct PhotoGalleryView: View {
 
             if success {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                appState.showSuccess("Photo deleted")
+                appState.showSuccess(String(localized: "photo_deleted"))
             } else {
-                appState.showError(viewModel.errorMessage ?? "Failed to delete photo")
+                appState.showError(viewModel.errorMessage ?? String(localized: "photo_delete_failed"))
             }
         }
     }

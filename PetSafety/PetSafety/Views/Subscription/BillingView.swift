@@ -17,7 +17,7 @@ struct BillingView: View {
                     HStack {
                         Image(systemName: "creditcard")
                             .foregroundColor(.brandOrange)
-                        Text("Manage Subscription")
+                        Text("billing_manage_subscription")
                         Spacer()
                         if isPortalLoading {
                             ProgressView()
@@ -29,22 +29,22 @@ struct BillingView: View {
                 }
                 .disabled(isPortalLoading)
             } header: {
-                Text("Subscription")
+                Text("billing_subscription")
             } footer: {
-                Text("Opens the Stripe billing portal to manage your payment method, change plan, or cancel.")
+                Text("billing_portal_footer")
             }
 
             // Invoices Section
-            Section("Invoices") {
+            Section("billing_invoices") {
                 if isLoading {
                     HStack {
                         Spacer()
-                        ProgressView("Loading invoices...")
+                        ProgressView(String(localized: "billing_loading_invoices"))
                         Spacer()
                     }
                     .padding(.vertical, 8)
                 } else if invoices.isEmpty {
-                    Text("No invoices yet")
+                    Text("billing_no_invoices")
                         .foregroundColor(.secondary)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.vertical, 8)
@@ -63,7 +63,7 @@ struct BillingView: View {
                 }
             }
         }
-        .navigationTitle("Billing & Invoices")
+        .navigationTitle("billing_title")
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await loadInvoices()
@@ -80,7 +80,7 @@ struct BillingView: View {
     private func invoiceRow(_ invoice: InvoiceItem) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(invoice.number ?? "Invoice")
+                Text(invoice.number ?? String(localized: "billing_invoice"))
                     .font(.subheadline.weight(.medium))
                 Text(formatDate(invoice.date))
                     .font(.caption)
@@ -92,7 +92,7 @@ struct BillingView: View {
             VStack(alignment: .trailing, spacing: 4) {
                 Text(formatAmount(invoice.amount, currency: invoice.currency))
                     .font(.subheadline.weight(.semibold))
-                Text(invoice.status?.capitalized ?? "Unknown")
+                Text(invoice.status?.capitalized ?? String(localized: "billing_unknown"))
                     .font(.caption)
                     .foregroundColor(invoice.status == "paid" ? .green : .orange)
             }

@@ -22,7 +22,7 @@ struct AlertsTabView: View {
                     VStack(spacing: 20) {
                         // View Mode Segmented Control (List / Map)
                         segmentedControl(
-                            options: ["List", "Map"],
+                            options: [String(localized: "alerts_list"), String(localized: "alerts_map")],
                             selection: $selectedViewMode
                         )
                         .padding(.horizontal, 24)
@@ -51,7 +51,7 @@ struct AlertsTabView: View {
     // MARK: - Header Section
     private var headerSection: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Missing Pets")
+            Text("alerts_missing_pets_title")
                 .font(.system(size: 28, weight: .bold))
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
@@ -185,11 +185,11 @@ struct EmptyAlertsStateView: View {
             }
 
             VStack(spacing: 8) {
-                Text("No \(alertType) Pets Nearby")
+                Text("alerts_no_nearby_title \(alertType)")
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.primary)
 
-                Text("There are no active \(alertType.lowercased()) pet alerts within 10km of your location")
+                Text("alerts_no_nearby_message \(alertType)")
                     .font(.system(size: 14))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
@@ -218,11 +218,11 @@ struct AddressRequiredView: View {
             }
 
             VStack(spacing: 12) {
-                Text("Location Required")
+                Text("alerts_location_required")
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.primary)
 
-                Text("To view nearby alerts, we need to know your location")
+                Text("alerts_location_required_message")
                     .font(.system(size: 15))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
@@ -240,12 +240,12 @@ struct AddressRequiredView: View {
                                 .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(.tealAccent)
                         }
-                        Text("Enable location services in Settings")
+                        Text("alerts_enable_location")
                             .font(.system(size: 14))
                             .foregroundColor(.primary)
                     }
 
-                    Text("OR")
+                    Text("alerts_or")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(.mutedText)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -259,7 +259,7 @@ struct AddressRequiredView: View {
                                 .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(.tealAccent)
                         }
-                        Text("Add your registered address in Profile")
+                        Text("alerts_add_address_profile")
                             .font(.system(size: 14))
                             .foregroundColor(.primary)
                     }
@@ -269,7 +269,7 @@ struct AddressRequiredView: View {
                 NavigationLink(destination: AddressView()) {
                     HStack {
                         Image(systemName: "house.fill")
-                        Text("Add My Address")
+                        Text("alerts_add_my_address")
                             .fontWeight(.semibold)
                     }
                 }

@@ -31,7 +31,7 @@ struct SuccessStoryPromptView: View {
                     promptView
                 }
             }
-            .navigationTitle(showShareForm ? "Share Your Story" : "Great News!")
+            .navigationTitle(showShareForm ? String(localized: "story_share_title") : String(localized: "story_great_news"))
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 // Request location when view appears
@@ -44,7 +44,7 @@ struct SuccessStoryPromptView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(showShareForm ? "Back" : "Skip") {
+                    Button(showShareForm ? String(localized: "back") : String(localized: "skip")) {
                         if showShareForm {
                             withAnimation {
                                 showShareForm = false
@@ -57,7 +57,7 @@ struct SuccessStoryPromptView: View {
 
                 if showShareForm {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Post") {
+                        Button("story_post") {
                             submitStory()
                         }
                         .fontWeight(.semibold)
@@ -89,7 +89,7 @@ struct SuccessStoryPromptView: View {
                         .foregroundColor(.tealAccent)
                 }
 
-                Text("\(pet.name) is home!")
+                Text("story_pet_is_home \(pet.name)")
                     .font(.title)
                     .fontWeight(.bold)
             }
@@ -114,11 +114,11 @@ struct SuccessStoryPromptView: View {
 
             // Message
             VStack(spacing: 12) {
-                Text("Share your reunion story!")
+                Text("story_share_reunion")
                     .font(.title3)
                     .fontWeight(.semibold)
 
-                Text("Help inspire other pet owners by sharing how \(pet.name) was reunited with you. Your story could give hope to others.")
+                Text("story_inspire_others \(pet.name)")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -136,7 +136,7 @@ struct SuccessStoryPromptView: View {
                 } label: {
                     HStack {
                         Image(systemName: "square.and.pencil")
-                        Text("Share My Story")
+                        Text("story_share_my_story")
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -148,7 +148,7 @@ struct SuccessStoryPromptView: View {
                 Button {
                     onDismiss()
                 } label: {
-                    Text("Maybe Later")
+                    Text("story_maybe_later")
                         .foregroundColor(.secondary)
                 }
             }
@@ -179,7 +179,7 @@ struct SuccessStoryPromptView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(pet.name)
                             .font(.headline)
-                        Text("Reunited!")
+                        Text("story_reunited")
                             .font(.subheadline)
                             .foregroundColor(.tealAccent)
                     }
@@ -196,7 +196,7 @@ struct SuccessStoryPromptView: View {
 
                 // Story Text
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Your Story")
+                    Text("story_your_story")
                         .font(.headline)
 
                     TextEditor(text: $storyText)
@@ -211,7 +211,7 @@ struct SuccessStoryPromptView: View {
                         }
 
                     HStack {
-                        Text("Share how \(pet.name) was found and reunited")
+                        Text("story_share_how \(pet.name)")
                             .font(.caption)
                             .foregroundColor(.secondary)
                         Spacer()
@@ -223,10 +223,10 @@ struct SuccessStoryPromptView: View {
 
                 // Reunion City
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("City/Area (Optional)")
+                    Text("story_city_optional")
                         .font(.headline)
 
-                    TextField("e.g., London, Manchester", text: $reunionCity)
+                    TextField(String(localized: "story_city_placeholder"), text: $reunionCity)
                         .textFieldStyle(.roundedBorder)
                 }
 
@@ -234,9 +234,9 @@ struct SuccessStoryPromptView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Toggle(isOn: $isPublic) {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Share Publicly")
+                            Text("story_share_publicly")
                                 .font(.headline)
-                            Text("Allow others nearby to see your story")
+                            Text("story_share_publicly_desc")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -268,7 +268,7 @@ struct SuccessStoryPromptView: View {
                             ProgressView()
                                 .tint(.white)
                         }
-                        Text(isSubmitting ? "Posting..." : "Share Story")
+                        Text(isSubmitting ? String(localized: "story_posting") : String(localized: "story_share_story"))
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -282,7 +282,7 @@ struct SuccessStoryPromptView: View {
                 HStack {
                     Image(systemName: "info.circle")
                         .foregroundColor(.secondary)
-                    Text("Your contact information will not be shared.")
+                    Text("story_privacy_note")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -310,7 +310,7 @@ struct SuccessStoryPromptView: View {
                     isPublic: isPublic
                 )
 
-                appState.showSuccess("Your story has been shared! Thank you for inspiring others.")
+                appState.showSuccess(String(localized: "story_shared_success"))
                 onStorySubmitted()
             } catch {
                 errorMessage = error.localizedDescription

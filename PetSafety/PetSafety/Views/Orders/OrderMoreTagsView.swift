@@ -193,7 +193,7 @@ struct OrderMoreTagsView: View {
                 HStack {
                     Text("order_more_tags_count \(validPetCount)")
                     Spacer()
-                    Text("FREE")
+                    Text(String(localized: "free_price"))
                         .foregroundColor(.tealAccent)
                         .fontWeight(.semibold)
                 }

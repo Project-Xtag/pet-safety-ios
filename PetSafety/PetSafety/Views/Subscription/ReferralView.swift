@@ -16,7 +16,7 @@ struct ReferralView: View {
                 if isLoading {
                     HStack {
                         Spacer()
-                        ProgressView("Loading...")
+                        ProgressView(String(localized: "referral_loading"))
                         Spacer()
                     }
                     .padding(.vertical, 8)
@@ -26,22 +26,22 @@ struct ReferralView: View {
                     generateButton
                 }
             } header: {
-                Text("Your Referral Code")
+                Text("referral_your_code")
             } footer: {
-                Text("Share this code with friends. When they subscribe, you both get 2 months free!")
+                Text("referral_share_footer")
             }
 
             // How It Works
-            Section("How It Works") {
-                Label("Share your unique code with friends", systemImage: "1.circle.fill")
-                Label("They use it when subscribing to a paid plan", systemImage: "2.circle.fill")
-                Label("You both enjoy 2 months free", systemImage: "3.circle.fill")
+            Section("referral_how_it_works") {
+                Label(String(localized: "referral_step_1"), systemImage: "1.circle.fill")
+                Label(String(localized: "referral_step_2"), systemImage: "2.circle.fill")
+                Label(String(localized: "referral_step_3"), systemImage: "3.circle.fill")
             }
 
             // Referral History
-            Section("Referral History") {
+            Section("referral_history") {
                 if referrals.isEmpty {
-                    Text("No referrals yet. Share your code to get started!")
+                    Text("referral_no_referrals")
                         .foregroundColor(.secondary)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.vertical, 8)
@@ -60,7 +60,7 @@ struct ReferralView: View {
                 }
             }
         }
-        .navigationTitle("Refer a Friend")
+        .navigationTitle("referral_title")
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await loadStatus()
@@ -80,13 +80,13 @@ struct ReferralView: View {
 
             HStack(spacing: 12) {
                 Button(action: copyCode) {
-                    Label(copied ? "Copied!" : "Copy", systemImage: copied ? "checkmark" : "doc.on.doc")
+                    Label(copied ? String(localized: "referral_copied") : String(localized: "referral_copy"), systemImage: copied ? "checkmark" : "doc.on.doc")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
 
                 Button(action: shareCode) {
-                    Label("Share", systemImage: "square.and.arrow.up")
+                    Label(String(localized: "referral_share"), systemImage: "square.and.arrow.up")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
@@ -94,7 +94,7 @@ struct ReferralView: View {
             }
 
             if let expiresAt {
-                Text("Expires: \(formatExpiryDate(expiresAt))")
+                Text(String(format: String(localized: "referral_expires %@"), formatExpiryDate(expiresAt)))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -110,7 +110,7 @@ struct ReferralView: View {
                     ProgressView()
                         .padding(.trailing, 4)
                 }
-                Text("Generate Referral Code")
+                Text("referral_generate")
             }
             .frame(maxWidth: .infinity)
         }
@@ -125,7 +125,7 @@ struct ReferralView: View {
     private func referralRow(_ referral: ReferralItem) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(referral.refereeEmail ?? "Pending")
+                Text(referral.refereeEmail ?? String(localized: "referral_pending"))
                     .font(.subheadline)
                 Text(statusText(referral.status))
                     .font(.caption)
