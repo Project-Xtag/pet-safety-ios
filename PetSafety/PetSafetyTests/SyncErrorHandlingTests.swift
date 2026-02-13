@@ -150,6 +150,9 @@ final class SyncErrorHandlingTests: XCTestCase {
     // MARK: - Time Since Last Sync Tests
 
     func testTimeSinceLastSyncNever() async {
+        // Clear any persisted sync date from previous runs
+        UserDefaults.standard.removeObject(forKey: "lastSyncDate")
+
         let syncService = await SyncService(autoSync: false)
 
         await MainActor.run {
