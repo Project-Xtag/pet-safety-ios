@@ -239,7 +239,9 @@ struct ShareLocationView: View {
                 }
             } catch {
                 await MainActor.run {
+                    #if DEBUG
                     print("Error sharing location: \(error)")
+                    #endif
                     errorMessage = error.localizedDescription
                     isSharing = false
                 }

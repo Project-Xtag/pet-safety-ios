@@ -207,7 +207,7 @@ struct ScannedPetView: View {
             ScrollView {
                 VStack(spacing: 24) {
                     // Pet Photo
-                    AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                    CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)

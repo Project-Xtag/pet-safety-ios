@@ -105,7 +105,9 @@ struct SuccessStoriesView: View {
                 return location.coordinate
             }
         } catch {
+            #if DEBUG
             print("Geocoding failed: \(error.localizedDescription)")
+            #endif
         }
 
         return nil
@@ -178,7 +180,7 @@ struct SuccessStoryRowView: View {
             HStack(alignment: .top, spacing: 12) {
                 // Pet Photo
                 if let photoUrl = story.petPhotoUrl {
-                    AsyncImage(url: URL(string: photoUrl)) { image in
+                    CachedAsyncImage(url: URL(string: photoUrl)) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -370,7 +372,7 @@ struct SuccessStoryMapMarker: View {
         VStack(spacing: 4) {
             // Pet Photo in Circle
             if let photoUrl = story.petPhotoUrl {
-                AsyncImage(url: URL(string: photoUrl)) { image in
+                CachedAsyncImage(url: URL(string: photoUrl)) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -407,7 +409,7 @@ struct SuccessStoryMapCard: View {
             HStack(alignment: .top, spacing: 12) {
                 // Pet Photo
                 if let photoUrl = story.petPhotoUrl {
-                    AsyncImage(url: URL(string: photoUrl)) { image in
+                    CachedAsyncImage(url: URL(string: photoUrl)) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)

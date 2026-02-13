@@ -400,6 +400,8 @@ struct SafariCheckoutView: UIViewControllerRepresentable {
 
 #Preview {
     PlanSelectionView(fromActivation: true) {
+        #if DEBUG
         print("Plan selection complete")
+        #endif
     }
 }

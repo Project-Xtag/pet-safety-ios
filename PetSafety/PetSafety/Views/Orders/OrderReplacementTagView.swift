@@ -108,7 +108,7 @@ struct OrderReplacementTagView: View {
             Section(header: Text("order_replace_pet_info")) {
                 HStack {
                     if let imageUrl = pet.profileImage {
-                        AsyncImage(url: URL(string: imageUrl)) { image in
+                        CachedAsyncImage(url: URL(string: imageUrl)) { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -269,7 +269,9 @@ struct OrderReplacementTagView: View {
     private func loadUserAddress() async {
         // Use cached user data from AuthViewModel instead of making API call
         guard let user = authViewModel.currentUser else {
+            #if DEBUG
             print("⚠️ No user data available - user can fill form manually")
+            #endif
             return
         }
 

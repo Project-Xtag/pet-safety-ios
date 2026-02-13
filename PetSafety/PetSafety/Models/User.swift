@@ -81,5 +81,6 @@ struct VerifyOTPRequest: Codable {
 
 struct VerifyOTPResponse: Codable {
     let token: String
+    let refreshToken: String?
     let user: User
 }

@@ -59,9 +59,51 @@ class APIService {
         }
     }
 
+    // MARK: - Token Refresh State
+    /// Actor to serialize concurrent token refresh attempts
+    private let refreshCoordinator = TokenRefreshCoordinator()
+
     private init() {
         // Migrate existing tokens from UserDefaults to Keychain (one-time migration)
         KeychainService.shared.migrateFromUserDefaults()
+    }
+
+    // MARK: - Token Refresh
+
+    /// Attempt to refresh the access token using the stored refresh token.
+    /// Uses a raw URLSession call to avoid infinite loops through performRequest.
+    private func refreshAccessToken(refreshToken: String) async throws -> (accessToken: String, refreshToken: String) {
+        guard let url = URL(string: "\(baseURL)/auth/refresh") else {
+            throw APIError.invalidURL
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body = ["refreshToken": refreshToken]
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw APIError.unauthorized
+        }
+
+        struct RefreshResponse: Codable {
+            let success: Bool
+            let data: RefreshData?
+            struct RefreshData: Codable {
+                let token: String
+                let refreshToken: String
+            }
+        }
+
+        let result = try JSONDecoder().decode(RefreshResponse.self, from: data)
+        guard let tokenData = result.data else {
+            throw APIError.unauthorized
+        }
+        return (tokenData.token, tokenData.refreshToken)
     }
 
     // MARK: - Request Builder
@@ -110,7 +152,8 @@ class APIService {
     // MARK: - Generic Request Method
     private func performRequest<T: Decodable>(
         _ request: URLRequest,
-        responseType: T.Type
+        responseType: T.Type,
+        isRetryAfterRefresh: Bool = false
     ) async throws -> T {
         // Add Sentry breadcrumb for API request tracking
         if SentrySDK.isEnabled {
@@ -179,8 +222,39 @@ class APIService {
                 }
 
             case 401:
-                authToken = nil
-                throw APIError.unauthorized
+                // If this is already a retry after refresh, give up
+                if isRetryAfterRefresh {
+                    authToken = nil
+                    KeychainService.shared.clearRefreshToken()
+                    throw APIError.unauthorized
+                }
+
+                // Attempt token refresh
+                guard let storedRefreshToken = KeychainService.shared.getRefreshToken() else {
+                    authToken = nil
+                    throw APIError.unauthorized
+                }
+
+                do {
+                    let newTokens = try await refreshCoordinator.refresh {
+                        try await self.refreshAccessToken(refreshToken: storedRefreshToken)
+                    }
+                    // Save new tokens
+                    self.authToken = newTokens.accessToken
+                    _ = KeychainService.shared.saveRefreshToken(newTokens.refreshToken)
+
+                    // Rebuild the original request with the new token
+                    var retryRequest = request
+                    retryRequest.setValue("Bearer \(newTokens.accessToken)", forHTTPHeaderField: "Authorization")
+
+                    // Retry the original request once
+                    return try await performRequest(retryRequest, responseType: responseType, isRetryAfterRefresh: true)
+                } catch {
+                    // Refresh failed — clear all tokens and throw unauthorized
+                    authToken = nil
+                    KeychainService.shared.clearRefreshToken()
+                    throw APIError.unauthorized
+                }
 
             default:
                 // Capture 5xx server errors to Sentry
@@ -237,11 +311,15 @@ class APIService {
         )
         let response = try await performRequest(request, responseType: VerifyOTPResponse.self)
         authToken = response.token
+        if let refreshToken = response.refreshToken {
+            _ = KeychainService.shared.saveRefreshToken(refreshToken)
+        }
         return response
     }
 
     func logout() {
         authToken = nil
+        KeychainService.shared.clearRefreshToken()
     }
 
     // MARK: - User
@@ -1537,5 +1615,36 @@ extension APIService {
             body: SupportRequest(category: category, subject: subject, message: message)
         )
         return try await performRequest(request, responseType: SupportResponse.self)
+    }
+}
+
+// MARK: - Token Refresh Coordinator
+/// Actor that serializes concurrent token refresh attempts so only one
+/// network call is made, and all waiting callers receive the same result.
+private actor TokenRefreshCoordinator {
+    private var isRefreshing = false
+    private var refreshTask: Task<(accessToken: String, refreshToken: String), Error>?
+
+    func refresh(
+        using refreshClosure: @Sendable @escaping () async throws -> (accessToken: String, refreshToken: String)
+    ) async throws -> (accessToken: String, refreshToken: String) {
+        // If a refresh is already in flight, wait for it
+        if let existingTask = refreshTask {
+            return try await existingTask.value
+        }
+
+        let task = Task<(accessToken: String, refreshToken: String), Error> {
+            try await refreshClosure()
+        }
+        refreshTask = task
+
+        do {
+            let result = try await task.value
+            refreshTask = nil
+            return result
+        } catch {
+            refreshTask = nil
+            throw error
+        }
     }
 }

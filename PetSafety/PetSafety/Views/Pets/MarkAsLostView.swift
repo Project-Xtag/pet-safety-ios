@@ -43,7 +43,7 @@ struct MarkAsLostView: View {
             Section(header: Text("mark_lost_pet_info")) {
                 HStack {
                     if let imageUrl = pet.profileImage {
-                        AsyncImage(url: URL(string: imageUrl)) { image in
+                        CachedAsyncImage(url: URL(string: imageUrl)) { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)

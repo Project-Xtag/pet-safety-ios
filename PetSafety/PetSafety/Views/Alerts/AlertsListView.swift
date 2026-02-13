@@ -76,7 +76,7 @@ struct AlertRowView: View {
         HStack(spacing: 16) {
             // Pet Photo or Icon
             if let pet = alert.pet {
-                AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)

@@ -83,7 +83,6 @@ final class ConfigurationManager: ObservableObject {
         #else
         // DeviceCheck provider for production (physical devices only)
         let providerFactory = DeviceCheckProviderFactory()
-        print("[ConfigurationManager] Using App Check DeviceCheck provider")
         #endif
 
         AppCheck.setAppCheckProviderFactory(providerFactory)

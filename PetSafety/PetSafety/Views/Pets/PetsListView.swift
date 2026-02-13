@@ -336,21 +336,14 @@ struct PetCardView: View {
                 ZStack(alignment: .topTrailing) {
                     ZStack {
                         if let photoUrl = pet.photoUrl, !photoUrl.isEmpty {
-                            AsyncImage(url: URL(string: photoUrl)) { phase in
-                                switch phase {
-                                case .empty:
-                                    ZStack {
-                                        Color(UIColor.systemGray6)
-                                        ProgressView()
-                                    }
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                case .failure:
-                                    placeholderImage
-                                @unknown default:
-                                    placeholderImage
+                            CachedAsyncImage(url: URL(string: photoUrl)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            } placeholder: {
+                                ZStack {
+                                    Color(UIColor.systemGray6)
+                                    ProgressView()
                                 }
                             }
                         } else {
@@ -567,7 +560,7 @@ struct PetSelectionView: View {
                         onPetSelected(pet)
                     }) {
                         HStack(spacing: 16) {
-                            AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                            CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)

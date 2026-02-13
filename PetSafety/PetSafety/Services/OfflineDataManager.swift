@@ -69,6 +69,14 @@ class OfflineDataManager {
             description.type = storeType
             description.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
             description.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
+
+            // Encrypt Core Data store when device is locked (GDPR protection for offline PII)
+            if storeType == NSSQLiteStoreType {
+                description.setOption(
+                    FileProtectionType.complete as NSObject,
+                    forKey: NSPersistentStoreFileProtectionKey
+                )
+            }
         }
 
         var loadError: Error?

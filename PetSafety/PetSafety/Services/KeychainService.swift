@@ -182,6 +182,23 @@ class KeychainService {
         return exists(.authToken)
     }
 
+    // MARK: - Convenience Methods for Refresh Token
+
+    /// Save refresh token
+    func saveRefreshToken(_ token: String) -> Bool {
+        return save(token, for: .refreshToken)
+    }
+
+    /// Get refresh token
+    func getRefreshToken() -> String? {
+        return getString(for: .refreshToken)
+    }
+
+    /// Delete refresh token
+    func clearRefreshToken() -> Bool {
+        return delete(.refreshToken)
+    }
+
     // MARK: - Convenience Methods for FCM Token
 
     /// Save FCM token

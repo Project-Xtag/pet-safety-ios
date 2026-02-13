@@ -126,7 +126,7 @@ struct SuccessStoryPromptView: View {
             }
 
             // Pet Photo
-            AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+            CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -214,7 +214,7 @@ struct SuccessStoryPromptView: View {
             VStack(alignment: .leading, spacing: 24) {
                 // Pet Header
                 HStack(spacing: 16) {
-                    AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                    CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)

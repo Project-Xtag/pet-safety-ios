@@ -342,18 +342,24 @@ struct PetFormView: View {
                 }
             }
         } catch {
+            #if DEBUG
             print("Failed to load image: \(error.localizedDescription)")
+            #endif
         }
     }
 
     private func savePet() {
         Task {
             do {
+                #if DEBUG
                 print("🔄 Starting save pet operation...")
+                #endif
 
                 switch mode {
                 case .create:
+                    #if DEBUG
                     print("📝 Creating new pet")
+                    #endif
 
                     let weightValue = Double(weight)
                     let request = CreatePetRequest(
@@ -373,21 +379,31 @@ struct PetFormView: View {
                         isNeutered: isNeutered
                     )
 
+                    #if DEBUG
                     print("Creating pet with data: name=\(name), species=\(species), breed=\(breed)")
+                    #endif
                     let newPet = try await viewModel.createPet(request)
+                    #if DEBUG
                     print("✅ Pet created successfully with ID: \(newPet.id)")
+                    #endif
 
                     // Upload photo if selected
                     if let image = selectedImage {
+                        #if DEBUG
                         print("📸 Uploading photo...")
+                        #endif
                         _ = try await viewModel.uploadPhoto(for: newPet.id, image: image)
+                        #if DEBUG
                         print("✅ Photo uploaded successfully")
+                        #endif
                     }
 
                     appState.showSuccess(NSLocalizedString("pet_created", comment: ""))
 
                 case .edit(let pet):
+                    #if DEBUG
                     print("✏️ Updating pet with ID: \(pet.id)")
+                    #endif
 
                     // Send all editable fields from the form
                     let editWeightValue = Double(weight)
@@ -409,24 +425,34 @@ struct PetFormView: View {
                         isMissing: nil  // Not in form - use mark lost/found feature
                     )
 
+                    #if DEBUG
                     print("Updating pet with: name=\(name), breed=\(breed), color=\(color)")
+                    #endif
                     let updatedPet = try await viewModel.updatePet(id: pet.id, updates: request)
+                    #if DEBUG
                     print("✅ Pet updated successfully")
                     print("📥 Received pet data: \(updatedPet.name), species: \(updatedPet.species)")
+                    #endif
 
                     // Upload photo only if user selected a new one
                     if photoWasChanged, let image = selectedImage {
                         do {
+                            #if DEBUG
                             print("📸 Uploading new photo...")
+                            #endif
                             _ = try await viewModel.uploadPhoto(for: pet.id, image: image)
+                            #if DEBUG
                             print("✅ Photo uploaded successfully")
+                            #endif
                             appState.showSuccess(NSLocalizedString("pet_updated", comment: ""))
                         } catch {
+                            #if DEBUG
                             print("❌ Photo upload failed: \(error)")
                             // Pet was saved successfully, just warn about photo
                             if let apiError = error as? APIError {
                                 print("API Error details: \(apiError)")
                             }
+                            #endif
                             appState.showSuccess(NSLocalizedString("pet_updated_photo_failed", comment: ""))
                         }
                     } else {
@@ -434,13 +460,17 @@ struct PetFormView: View {
                     }
                 }
 
+                #if DEBUG
                 print("✅ Save operation completed successfully")
+                #endif
                 dismiss()
             } catch {
+                #if DEBUG
                 print("❌ Save operation failed: \(error)")
                 if let apiError = error as? APIError {
                     print("API Error type: \(apiError.errorDescription ?? "Unknown")")
                 }
+                #endif
                 appState.showError(error.localizedDescription)
             }
         }

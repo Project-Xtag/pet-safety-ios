@@ -46,6 +46,8 @@ class SSEService: NSObject, ObservableObject {
         print("🔌 SSEService: Attempting to connect...")
         #endif
 
+        shouldReconnect = true
+
         guard let token = KeychainService.shared.getAuthToken() else {
             #if DEBUG
             print("❌ SSEService: No auth token available")

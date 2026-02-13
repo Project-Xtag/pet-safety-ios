@@ -53,7 +53,7 @@ struct MissingAlertRowView: View {
         HStack(spacing: 16) {
             // Pet Photo
             if let pet = alert.pet {
-                AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -216,7 +216,7 @@ struct PetMapMarker: View {
         VStack(spacing: 4) {
             // Pet Photo in Circle
             if let pet = alert.pet {
-                AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -271,7 +271,7 @@ struct MissingAlertMapCard: View {
                 HStack(spacing: 16) {
                     // Pet Photo
                     if let pet = alert.pet {
-                        AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                        CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)

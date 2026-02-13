@@ -78,7 +78,7 @@ struct TagActivationView: View {
                     .multilineTextAlignment(.center)
 
                 // Pet Photo
-                AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -301,7 +301,7 @@ struct TagPetSelectionRow: View {
         Button(action: onSelect) {
             HStack(spacing: 16) {
                 // Pet Photo
-                AsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -393,7 +393,9 @@ struct TagSecondaryButtonStyle: ButtonStyle {
 
 #Preview {
     TagActivationView(tagCode: "PS-TEST1234") {
+        #if DEBUG
         print("Dismissed")
+        #endif
     }
     .environmentObject(AppState())
 }

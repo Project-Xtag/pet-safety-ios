@@ -171,6 +171,11 @@ class AuthViewModel: ObservableObject {
             _ = KeychainService.shared.save(response.user.id, for: .userId)
             _ = KeychainService.shared.save(response.user.email, for: .userEmail)
 
+            // Store refresh token if provided by the backend
+            if let refreshToken = response.refreshToken {
+                _ = KeychainService.shared.saveRefreshToken(refreshToken)
+            }
+
             // Set Sentry user context for error tracking
             if SentrySDK.isEnabled {
                 let sentryUser = Sentry.User(userId: response.user.id)

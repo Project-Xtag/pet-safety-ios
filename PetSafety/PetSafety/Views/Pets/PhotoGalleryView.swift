@@ -298,32 +298,17 @@ struct PhotoGridItem: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             // Photo
-            AsyncImage(url: URL(string: photo.photoUrl)) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .frame(height: 180)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.systemGray6))
-
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(height: 180)
-                        .clipped()
-
-                case .failure:
-                    Image(systemName: "photo")
-                        .font(.largeTitle)
-                        .foregroundColor(.secondary)
-                        .frame(height: 180)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.systemGray6))
-
-                @unknown default:
-                    EmptyView()
-                }
+            CachedAsyncImage(url: URL(string: photo.photoUrl)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 180)
+                    .clipped()
+            } placeholder: {
+                ProgressView()
+                    .frame(height: 180)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(.systemGray6))
             }
             .cornerRadius(12)
             .onTapGesture {
@@ -376,24 +361,12 @@ struct FullScreenPhotoView: View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
 
-            AsyncImage(url: URL(string: photo.photoUrl)) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-
-                case .empty:
-                    ProgressView()
-
-                case .failure:
-                    Image(systemName: "photo")
-                        .font(.largeTitle)
-                        .foregroundColor(.white)
-
-                @unknown default:
-                    EmptyView()
-                }
+            CachedAsyncImage(url: URL(string: photo.photoUrl)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                ProgressView()
             }
 
             // Close button

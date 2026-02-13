@@ -59,9 +59,14 @@ struct PetSafetyApp: App {
                     // Performance monitoring - 10% of transactions
                     options.tracesSampleRate = 0.1
 
-                    // Attach screenshots and view hierarchy for debugging
+                    // Attach screenshots and view hierarchy for debugging (DEBUG only — PII risk in production)
+                    #if DEBUG
                     options.attachScreenshot = true
                     options.attachViewHierarchy = true
+                    #else
+                    options.attachScreenshot = false
+                    options.attachViewHierarchy = false
+                    #endif
 
                     // Enable automatic instrumentation
                     options.enableSwizzling = true
@@ -105,9 +110,11 @@ struct PetSafetyApp: App {
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .fcmTokenReceived)) { notification in
                     // FCM token received - could update UI or trigger additional actions
+                    #if DEBUG
                     if let token = notification.userInfo?["token"] as? String {
                         print("App received FCM token: \(token.prefix(20))...")
                     }
+                    #endif
                 }
                 .onOpenURL { url in
                     handleDeepLink(url)

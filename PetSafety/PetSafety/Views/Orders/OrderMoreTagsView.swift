@@ -264,7 +264,9 @@ struct OrderMoreTagsView: View {
     private func loadUserInfo() async {
         // Use cached user data from AuthViewModel instead of making API call
         guard let user = authViewModel.currentUser else {
+            #if DEBUG
             print("⚠️ No user data available - user can fill form manually")
+            #endif
             return
         }
 

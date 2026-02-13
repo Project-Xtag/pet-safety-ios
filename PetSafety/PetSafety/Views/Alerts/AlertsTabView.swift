@@ -165,7 +165,9 @@ struct AlertsTabView: View {
                 return location.coordinate
             }
         } catch {
+            #if DEBUG
             print("Geocoding failed: \(error.localizedDescription)")
+            #endif
         }
 
         return nil
