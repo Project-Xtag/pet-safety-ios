@@ -50,7 +50,7 @@ struct HelpAndSupportView: View {
             }
 
             Section(header: Text("help_legal")) {
-                Link(destination: URL(string: "https://pet-er.app/terms")!) {
+                Link(destination: URL(string: "https://senra.pet/terms")!) {
                     HStack {
                         Image(systemName: "doc.text.fill")
                             .foregroundColor(.cyan)
@@ -63,7 +63,7 @@ struct HelpAndSupportView: View {
                     }
                 }
 
-                Link(destination: URL(string: "https://pet-er.app/privacy")!) {
+                Link(destination: URL(string: "https://senra.pet/privacy")!) {
                     HStack {
                         Image(systemName: "lock.shield.fill")
                             .foregroundColor(.cyan)
@@ -209,15 +209,22 @@ struct ContactSupportView: View {
     @State private var selectedCategory = "General"
     @State private var isSubmitting = false
 
-    let categories = ["General", "Technical Issue", "Account", "Billing", "Feature Request", "Other"]
+    let categories: [(key: String, label: String)] = [
+        ("General", NSLocalizedString("help_cat_general", comment: "")),
+        ("Technical Issue", NSLocalizedString("help_cat_technical", comment: "")),
+        ("Account", NSLocalizedString("help_cat_account", comment: "")),
+        ("Billing", NSLocalizedString("help_cat_billing", comment: "")),
+        ("Feature Request", NSLocalizedString("help_cat_feature", comment: "")),
+        ("Other", NSLocalizedString("help_cat_other", comment: "")),
+    ]
 
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("help_category")) {
                     Picker("help_category", selection: $selectedCategory) {
-                        ForEach(categories, id: \.self) { category in
-                            Text(category).tag(category)
+                        ForEach(categories, id: \.key) { category in
+                            Text(category.label).tag(category.key)
                         }
                     }
                 }
@@ -237,14 +244,23 @@ struct ContactSupportView: View {
                             Spacer()
                             if isSubmitting {
                                 ProgressView()
+                                    .tint(.white)
                                 Text("help_sending")
+                                    .foregroundColor(.white)
                             } else {
                                 Text("help_submit_request")
                                     .fontWeight(.semibold)
+                                    .foregroundColor(.white)
                             }
                             Spacer()
                         }
+                        .padding(.vertical, 8)
                     }
+                    .listRowBackground(
+                        (subject.isEmpty || message.isEmpty || isSubmitting)
+                            ? Color.brandOrange.opacity(0.4)
+                            : Color.brandOrange
+                    )
                     .disabled(subject.isEmpty || message.isEmpty || isSubmitting)
                 }
             }
@@ -272,7 +288,7 @@ struct ContactSupportView: View {
                 )
                 await MainActor.run {
                     isSubmitting = false
-                    appState.showSuccess("Support request submitted! Ticket ID: \(response.ticketId). We'll get back to you within 24 hours.")
+                    appState.showSuccess(NSLocalizedString("help_request_submitted", comment: ""))
                     dismiss()
                 }
             } catch {

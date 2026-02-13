@@ -88,7 +88,8 @@ class AlertsViewModel: ObservableObject {
         petId: String,
         location: String?,
         coordinate: CLLocationCoordinate2D?,
-        additionalInfo: String?
+        additionalInfo: String?,
+        rewardAmount: Double? = nil
     ) async throws -> MissingPetAlert {
         isLoading = true
         errorMessage = nil
@@ -105,6 +106,9 @@ class AlertsViewModel: ObservableObject {
             }
             if let additionalInfo = additionalInfo {
                 actionData["description"] = additionalInfo
+            }
+            if let rewardAmount = rewardAmount {
+                actionData["rewardAmount"] = rewardAmount
             }
 
             let localAlertId = "offline-\(UUID().uuidString)"
@@ -143,7 +147,7 @@ class AlertsViewModel: ObservableObject {
             lastSeenLocation: coordinate.map { LocationCoordinate(lat: $0.latitude, lng: $0.longitude) },
             lastSeenAddress: location,
             description: additionalInfo,
-            rewardAmount: nil,
+            rewardAmount: rewardAmount,
             alertRadiusKm: nil
         )
 

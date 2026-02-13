@@ -64,7 +64,7 @@ RegisterScreen(
 - Match AuthScreen.kt styling: RoundedCornerShape(40.dp) card, PeachBackground, 28.dp padding, 14.dp rounded inputs with white background
 - Use existing string resources: R.string.create_account, R.string.enter_details_subtitle, R.string.first_name, R.string.last_name, R.string.email_address, R.string.verify_code, R.string.otp_sent_to, R.string.use_different_email, R.string.already_have_account, R.string.log_in
 - Use existing theme: BackgroundLight, BrandOrange, MutedTextLight, PeachBackground, BrandButton, AdaptiveLayout.MaxContentWidth
-- Include T&Cs disclaimer with clickable Terms (https://pet-er.app/terms) and Privacy (https://pet-er.app/privacy) links
+- Include T&Cs disclaimer with clickable Terms (https://senra.pet/terms) and Privacy (https://senra.pet/privacy) links
 - Reference AuthScreen.kt for exact styling patterns
 
 ---
@@ -108,5 +108,5 @@ RegisterScreen(
 - **Android**: Jetpack Compose, Material 3, Hilt DI, MVVM, StateFlow
 - **iOS**: SwiftUI, MVVM, EnvironmentObject
 - **Web**: React + Radix UI, Node.js backend
-- **API base**: https://pet-er.app/api
+- **API base**: https://senra.pet/api
 - **Stripe**: Not yet implemented (skip subscription tasks)

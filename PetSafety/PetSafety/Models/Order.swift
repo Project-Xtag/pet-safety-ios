@@ -90,6 +90,28 @@ struct AddressDetails: Codable {
     let country: String
 }
 
+// MARK: - Tag Checkout (Stripe Checkout redirect)
+struct CreateTagCheckoutRequest: Codable {
+    let quantity: Int
+    let countryCode: String?
+    let platform: String
+
+    enum CodingKeys: String, CodingKey {
+        case quantity
+        case countryCode = "country_code"
+        case platform
+    }
+}
+
+struct TagCheckoutResponse: Codable {
+    let checkout: TagCheckoutData
+}
+
+struct TagCheckoutData: Codable {
+    let id: String
+    let url: String
+}
+
 // MARK: - Payment Intent Types
 struct CreatePaymentIntentRequest: Codable {
     let orderId: String

@@ -19,7 +19,7 @@ class KeychainService {
 
     // MARK: - Constants
 
-    private let serviceName = "com.petsafety.app"
+    private let serviceName = "pet.senra.app"
 
     enum KeychainKey: String, CaseIterable {
         case authToken = "auth_token"

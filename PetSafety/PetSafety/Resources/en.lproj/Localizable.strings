@@ -252,23 +252,19 @@
 
 // MARK: - Share Location Flow
 "share_help_get_home %@" = "Help %@ Get Home";
-"share_choose_desc" = "Choose how much location info to share with the owner";
-"share_dont_share" = "Don't Share";
-"share_dont_share_desc" = "Just notify the owner that their pet's tag was scanned";
-"share_approximate" = "Approximate Area";
+"share_location_subtitle" = "Your location helps the owner find their pet faster.";
+"share_exact_location_toggle" = "Share exact location";
 "share_approximate_desc" = "Share your general area (~500m radius)";
-"share_exact" = "Exact Location";
 "share_exact_desc" = "Share your precise location for faster reunion";
 "share_your_location" = "Your Location";
 "share_accuracy" = "(~500m accuracy)";
 "share_getting_location" = "Getting your location...";
+"share_location_unavailable" = "Location not available. Please ensure location services are enabled.";
 "share_owner_notified" = "Owner Notified!";
-"share_owner_knows" = "They know their pet's tag was scanned";
 "share_on_their_way" = "They're on their way!";
 "share_notifying" = "Notifying Owner...";
-"share_notify_no_location" = "Notify Owner (No Location)";
 "share_notify_with_location" = "Share & Notify Owner";
-"share_privacy_note" = "Your precise location is never stored. Only the approximate area is shared with the pet owner.";
+"share_privacy_note" = "Your location is shared with the pet owner to help reunite them with their pet.";
 "share_found_pet %@" = "Found %@!";
 
 // MARK: - Scanner Detail
@@ -501,6 +497,9 @@
 "story_inspiration" = "Your story can inspire hope for other pet owners in your area.";
 "story_share_button" = "Share My Story";
 "story_maybe_later" = "Maybe Later";
+"story_share_good_news" = "Share the Good News";
+"story_social_caption %@" = "%@ has been reunited with their family! Thank you to the TagMe Now community for helping bring %@ home. senra.pet";
+"story_generating_card" = "Creating share card...";
 "story_your_story" = "Your Story";
 "story_placeholder_named %@" = "Share how %@ was found and reunited";
 "story_city_optional" = "City/Area (Optional)";
@@ -712,6 +711,13 @@
 "help_sending" = "Sending...";
 "help_submit_request" = "Submit Request";
 "help_contact_title" = "Contact Support";
+"help_request_submitted" = "Support request submitted! We'll get back to you within 24 hours.";
+"help_cat_general" = "General";
+"help_cat_technical" = "Technical Issue";
+"help_cat_account" = "Account";
+"help_cat_billing" = "Billing";
+"help_cat_feature" = "Feature Request";
+"help_cat_other" = "Other";
 "help_faq_title" = "FAQ";
 "help_guides_title" = "User Guides";
 "help_guide_placeholder" = "Detailed guide content will be available here.";
@@ -730,7 +736,7 @@
 "contact_support_sending" = "Sending…";
 "contact_support_success" = "Support request submitted! Ticket ID: %@";
 "contact_support_response" = "We'll get back to you within 24 hours.";
-"support_email" = "Support: support@petsafety.eu";
+"support_email" = "Support: hello@senra.pet";
 "support_category_general" = "General";
 "support_category_technical" = "Technical Issue";
 "support_category_account" = "Account";
@@ -880,6 +886,8 @@
 "order_more_total" = "Total";
 "order_more_creating" = "Creating Order...";
 "order_more_place_order" = "Place Order";
+"order_more_proceed_to_payment" = "Proceed to Payment";
+"order_more_redirecting" = "Redirecting...";
 "pet_names" = "Pet Names";
 "shipping_address" = "Shipping Address";
 "shipping" = "Shipping";
@@ -984,13 +992,12 @@
 // MARK: - App Info
 "app_name_label" = "Pet Safety";
 "app_version" = "Version 1.0.0";
-"terms_url" = "Terms: https://pet-er.app/terms";
-"privacy_url" = "Privacy: https://pet-er.app/privacy";
+"terms_url" = "Terms: https://senra.pet/terms";
+"privacy_url" = "Privacy: https://senra.pet/privacy";
 
 // MARK: - Scanner Dynamic Descriptions
 "scanner_step1_dynamic_desc" = "Click the button above to share where you found %@";
 "scanner_step3_dynamic_desc" = "Stay near the location so the owner can find you and %@";
-"share_owner_knows" = "They know their pet's tag was scanned";
 
 // MARK: - Additional Profile Keys
 "not_set" = "Not set";
@@ -1213,3 +1220,14 @@
 "removed_from_success_stories" = "Removed from Success Stories";
 "remove_story_confirm_title" = "Remove Success Story?";
 "remove_story_confirm_message" = "This will remove your pet's story from the public success stories feed.";
+
+// MARK: - SSE Subscription Events
+"sse_subscription_title" = "Subscription Updated";
+"sse_subscription_message" = "Your %@ plan is now %@.";
+"sse_referral_title" = "Referral Used!";
+"sse_referral_message" = "%@ used your referral code!";
+
+// MARK: - Reward
+"create_alert_reward" = "Reward (optional)";
+"create_alert_reward_placeholder" = "e.g. 50";
+"reward_badge" = "\U20AC%@ Reward";

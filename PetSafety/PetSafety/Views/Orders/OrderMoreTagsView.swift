@@ -6,8 +6,8 @@ struct OrderMoreTagsView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var isLoading = false
     @State private var orderComplete = false
-    @State private var paymentPending = false
-    @State private var paymentIntentId: String?
+    @State private var checkoutURL: URL?
+    @State private var showCheckoutSheet = false
 
     // Pet names
     @State private var petNames: [String] = [""]
@@ -53,6 +53,15 @@ struct OrderMoreTagsView: View {
         .task {
             await loadUserInfo()
         }
+        .sheet(isPresented: $showCheckoutSheet) {
+            if let url = checkoutURL {
+                SafariCheckoutView(url: url) { _ in
+                    showCheckoutSheet = false
+                    checkoutURL = nil
+                    orderComplete = true
+                }
+            }
+        }
     }
 
     private var orderCompleteView: some View {
@@ -68,19 +77,11 @@ struct OrderMoreTagsView: View {
             Text("order_more_complete")
                 .font(.system(size: 32, weight: .bold))
 
-            if paymentPending {
-                Text("order_more_payment_pending")
-                    .font(.body)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
-            } else {
-                Text("order_more_confirmation")
-                    .font(.body)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
-            }
+            Text("order_more_confirmation")
+                .font(.body)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
 
             Spacer()
 
@@ -220,10 +221,10 @@ struct OrderMoreTagsView: View {
                         if isLoading {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            Text("order_more_creating")
+                            Text("order_more_redirecting")
                                 .foregroundColor(.white)
                         } else {
-                            Text("order_more_place_order")
+                            Text("order_more_proceed_to_payment")
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                         }
@@ -301,51 +302,25 @@ struct OrderMoreTagsView: View {
             isLoading = true
 
             do {
-                // Filter out empty pet names
-                let validPetNames = petNames.filter { !$0.isEmpty }
+                let quantity = validPetCount
+                let userCountry = authViewModel.currentUser?.country
 
-                let shippingAddress = ShippingAddressDetails(
-                    street1: street1,
-                    street2: street2.isEmpty ? nil : street2,
-                    city: city,
-                    province: province.isEmpty ? nil : province,
-                    postCode: postCode,
-                    country: country,
-                    phone: phone.isEmpty ? nil : phone
+                let checkout = try await APIService.shared.createTagCheckout(
+                    quantity: quantity,
+                    countryCode: userCountry
                 )
 
-                let orderRequest = CreateTagOrderRequest(
-                    petNames: validPetNames,
-                    ownerName: ownerName,
-                    email: email,
-                    shippingAddress: shippingAddress,
-                    billingAddress: nil,
-                    paymentMethod: "free",
-                    shippingCost: shippingCost
-                )
-
-                let response = try await APIService.shared.createTagOrder(orderRequest)
-
-                // Kick off payment intent creation for shipping
-                let paymentResponse = try await APIService.shared.createPaymentIntent(
-                    orderId: response.order.id,
-                    amount: response.order.totalAmount,
-                    email: email,
-                    paymentMethod: "card",
-                    currency: "gbp",
-                    requiresAuth: authViewModel.isAuthenticated
-                )
-
-                paymentIntentId = paymentResponse.paymentIntent.id
-                paymentPending = true
-
-                isLoading = false
-
-                orderComplete = true
+                if let url = URL(string: checkout.url) {
+                    checkoutURL = url
+                    showCheckoutSheet = true
+                } else {
+                    appState.showError("Invalid checkout URL")
+                }
             } catch {
-                isLoading = false
                 appState.showError(error.localizedDescription)
             }
+
+            isLoading = false
         }
     }
 }

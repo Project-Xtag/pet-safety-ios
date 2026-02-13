@@ -91,6 +91,24 @@ struct AlertDetailView: View {
                     .padding()
                 }
 
+                // Reward Badge
+                if let reward = alert.rewardAmount, reward > 0 {
+                    let formattedReward = reward.truncatingRemainder(dividingBy: 1) == 0
+                        ? String(format: "%.0f", reward)
+                        : String(format: "%.2f", reward)
+                    HStack {
+                        Image(systemName: "gift.fill")
+                            .foregroundColor(.white)
+                        Text(String(format: String(localized: "reward_badge"), formattedReward))
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .background(Color.green)
+                    .cornerRadius(20)
+                }
+
                 // Alert Status
                 HStack {
                     Circle()

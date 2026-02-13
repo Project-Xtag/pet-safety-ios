@@ -70,6 +70,20 @@ struct AlertUpdatedEvent: Codable {
     let updatedAt: Date
 }
 
+// MARK: - Subscription Changed Event
+struct SubscriptionChangedEvent: Codable {
+    let planName: String
+    let status: String
+    let billingPeriod: String?
+    let expiresAt: String?
+}
+
+// MARK: - Referral Used Event
+struct ReferralUsedEvent: Codable {
+    let refereeName: String?
+    let refereeEmail: String?
+}
+
 // MARK: - Connection Event
 struct ConnectionEvent: Codable {
     let userId: String

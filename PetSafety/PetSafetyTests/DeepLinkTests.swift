@@ -14,8 +14,8 @@ final class DeepLinkTests: XCTestCase {
             XCTAssertNil(deepLinkService.pendingTagCode)
             XCTAssertFalse(deepLinkService.showTagActivation)
 
-            // Test petsafety://tag/PS-12345678
-            let url = URL(string: "petsafety://tag/PS-12345678")!
+            // Test senra://tag/PS-12345678
+            let url = URL(string: "senra://tag/PS-12345678")!
             let handled = deepLinkService.handleURL(url)
 
             XCTAssertTrue(handled, "Custom scheme URL should be handled")
@@ -31,8 +31,8 @@ final class DeepLinkTests: XCTestCase {
             // Clear any existing state
             deepLinkService.clearPendingLink()
 
-            // Test https://pet-er.app/qr/PS-ABCDEFGH
-            let url = URL(string: "https://pet-er.app/qr/PS-ABCDEFGH")!
+            // Test https://senra.pet/qr/PS-ABCDEFGH
+            let url = URL(string: "https://senra.pet/qr/PS-ABCDEFGH")!
             let handled = deepLinkService.handleURL(url)
 
             XCTAssertTrue(handled, "Universal link URL should be handled")
@@ -47,8 +47,8 @@ final class DeepLinkTests: XCTestCase {
         await MainActor.run {
             deepLinkService.clearPendingLink()
 
-            // Test https://www.pet-er.app/qr/PS-WWW12345
-            let url = URL(string: "https://www.pet-er.app/qr/PS-WWW12345")!
+            // Test https://www.senra.pet/qr/PS-WWW12345
+            let url = URL(string: "https://www.senra.pet/qr/PS-WWW12345")!
             let handled = deepLinkService.handleURL(url)
 
             XCTAssertTrue(handled, "Universal link with www should be handled")
@@ -77,7 +77,7 @@ final class DeepLinkTests: XCTestCase {
 
         await MainActor.run {
             // Set up a pending link
-            let url = URL(string: "petsafety://tag/PS-TEST1234")!
+            let url = URL(string: "senra://tag/PS-TEST1234")!
             _ = deepLinkService.handleURL(url)
 
             XCTAssertNotNil(deepLinkService.pendingTagCode)
@@ -102,14 +102,14 @@ final class DeepLinkTests: XCTestCase {
 
     @MainActor
     func testExtractTagCodeFromUniversalLink() {
-        let url = "https://pet-er.app/qr/PS-URLCODE1"
+        let url = "https://senra.pet/qr/PS-URLCODE1"
         let extracted = DeepLinkService.extractTagCode(from: url)
         XCTAssertEqual(extracted, "PS-URLCODE1")
     }
 
     @MainActor
     func testExtractTagCodeFromCustomScheme() {
-        let url = "petsafety://tag/PS-CUSTCODE"
+        let url = "senra://tag/PS-CUSTCODE"
         let extracted = DeepLinkService.extractTagCode(from: url)
         XCTAssertEqual(extracted, "PS-CUSTCODE")
     }
@@ -123,7 +123,7 @@ final class DeepLinkTests: XCTestCase {
 
     @MainActor
     func testExtractTagCodeFromWwwUrl() {
-        let url = "https://www.pet-er.app/qr/PS-WWWCODE1"
+        let url = "https://www.senra.pet/qr/PS-WWWCODE1"
         let extracted = DeepLinkService.extractTagCode(from: url)
         XCTAssertEqual(extracted, "PS-WWWCODE1")
     }
@@ -218,7 +218,7 @@ final class DeepLinkTests: XCTestCase {
         // When an owner wants to activate a tag, they must be logged in.
 
         // The flow is:
-        // 1. Deep link received (petsafety://tag/CODE or https://pet-er.app/qr/CODE)
+        // 1. Deep link received (senra://tag/CODE or https://senra.pet/qr/CODE)
         // 2. DeepLinkService sets pendingTagCode and showTagActivation
         // 3. ContentView checks authentication:
         //    - If authenticated: shows TagActivationView
@@ -237,8 +237,8 @@ final class DeepLinkTests: XCTestCase {
         await MainActor.run {
             deepLinkService.clearPendingLink()
 
-            // Test petsafety://invalid/PS-12345678
-            let url = URL(string: "petsafety://invalid/PS-12345678")!
+            // Test senra://invalid/PS-12345678
+            let url = URL(string: "senra://invalid/PS-12345678")!
             let handled = deepLinkService.handleURL(url)
 
             XCTAssertFalse(handled, "Invalid host should not be handled")
@@ -252,8 +252,8 @@ final class DeepLinkTests: XCTestCase {
         await MainActor.run {
             deepLinkService.clearPendingLink()
 
-            // Test https://pet-er.app/other/PS-12345678 (wrong path)
-            let url = URL(string: "https://pet-er.app/other/PS-12345678")!
+            // Test https://senra.pet/other/PS-12345678 (wrong path)
+            let url = URL(string: "https://senra.pet/other/PS-12345678")!
             let handled = deepLinkService.handleURL(url)
 
             XCTAssertFalse(handled, "Wrong path should not be handled")
@@ -267,8 +267,8 @@ final class DeepLinkTests: XCTestCase {
         await MainActor.run {
             deepLinkService.clearPendingLink()
 
-            // Test https://pet-er.app/qr (missing code)
-            let url = URL(string: "https://pet-er.app/qr")!
+            // Test https://senra.pet/qr (missing code)
+            let url = URL(string: "https://senra.pet/qr")!
             let handled = deepLinkService.handleURL(url)
 
             XCTAssertFalse(handled, "URL without code should not be handled")

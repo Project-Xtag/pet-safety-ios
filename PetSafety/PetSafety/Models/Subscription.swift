@@ -176,11 +176,13 @@ struct CreateCheckoutRequest: Codable {
     let planName: String
     let billingPeriod: String
     let platform: String
+    let countryCode: String?
 
     enum CodingKeys: String, CodingKey {
         case planName = "plan_name"
         case billingPeriod = "billing_period"
         case platform
+        case countryCode = "country_code"
     }
 }
 

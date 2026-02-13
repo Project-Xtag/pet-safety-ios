@@ -17,7 +17,7 @@ class OfflineDataManager {
     /// Stores the last persistent store load error (if any)
     private(set) var storeLoadError: Error?
 
-    private let logger = Logger(subsystem: "com.petsafety.app", category: "OfflineDataManager")
+    private let logger = Logger(subsystem: "pet.senra.app", category: "OfflineDataManager")
 
     /// View context for UI operations (main thread)
     var viewContext: NSManagedObjectContext {

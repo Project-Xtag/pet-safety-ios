@@ -28,10 +28,10 @@ final class ConfigurationManager: ObservableObject {
     @Published private(set) var sentryDSN: String = ""
 
     /// API base URL for backend requests
-    @Published private(set) var apiBaseURL: String = "https://pet-er.app/api"
+    @Published private(set) var apiBaseURL: String = "https://api.senra.pet/api"
 
     /// SSE base URL for real-time events
-    @Published private(set) var sseBaseURL: String = "https://pet-er.app"
+    @Published private(set) var sseBaseURL: String = "https://api.senra.pet"
 
     // MARK: - Private Properties
 
@@ -41,8 +41,8 @@ final class ConfigurationManager: ObservableObject {
     /// Default values used when Remote Config is unavailable
     private let defaults: [String: NSObject] = [
         "sentry_dsn_ios": "" as NSObject,
-        "api_base_url": "https://pet-er.app/api" as NSObject,
-        "sse_base_url": "https://pet-er.app" as NSObject
+        "api_base_url": "https://api.senra.pet/api" as NSObject,
+        "sse_base_url": "https://api.senra.pet" as NSObject
     ]
 
     // MARK: - Initialization

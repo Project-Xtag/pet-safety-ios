@@ -13,7 +13,7 @@ class SSEService: NSObject, ObservableObject {
     @Published var lastEvent: String?
 
     // MARK: - Private Properties
-    private let baseURL = "https://pet-er.app"
+    private let baseURL = "https://api.senra.pet"
     private var urlSession: URLSession?
     private var dataTask: URLSessionDataTask?
     private var buffer = ""
@@ -29,6 +29,8 @@ class SSEService: NSObject, ObservableObject {
     var onPetFound: ((PetFoundEvent) -> Void)?
     var onAlertCreated: ((AlertCreatedEvent) -> Void)?
     var onAlertUpdated: ((AlertUpdatedEvent) -> Void)?
+    var onSubscriptionChanged: ((SubscriptionChangedEvent) -> Void)?
+    var onReferralUsed: ((ReferralUsedEvent) -> Void)?
     var onConnected: ((ConnectionEvent) -> Void)?
 
     // MARK: - Initialization
@@ -263,6 +265,26 @@ class SSEService: NSObject, ObservableObject {
                 DispatchQueue.main.async { [weak self] in
                     self?.onAlertUpdated?(event)
                 }
+
+            case "subscription_changed":
+                let event = try decoder.decode(SubscriptionChangedEvent.self, from: jsonData)
+                DispatchQueue.main.async { [weak self] in
+                    self?.onSubscriptionChanged?(event)
+                }
+                showNotification(
+                    title: NSLocalizedString("sse_subscription_title", comment: ""),
+                    body: String(format: NSLocalizedString("sse_subscription_message", comment: ""), event.planName, event.status)
+                )
+
+            case "referral_used":
+                let event = try decoder.decode(ReferralUsedEvent.self, from: jsonData)
+                DispatchQueue.main.async { [weak self] in
+                    self?.onReferralUsed?(event)
+                }
+                showNotification(
+                    title: NSLocalizedString("sse_referral_title", comment: ""),
+                    body: String(format: NSLocalizedString("sse_referral_message", comment: ""), event.refereeName ?? event.refereeEmail ?? "Someone")
+                )
 
             default:
                 #if DEBUG

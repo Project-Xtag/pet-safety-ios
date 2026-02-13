@@ -10,7 +10,7 @@ import Foundation
 actor FCMService {
     static let shared = FCMService()
 
-    private let baseURL = "https://pet-er.app/api"
+    private let baseURL = "https://api.senra.pet/api"
 
     private init() {}
 
@@ -49,7 +49,7 @@ actor FCMService {
     // MARK: - Private API Methods
 
     private func registerTokenWithBackend(_ token: String, deviceName: String?) async throws {
-        guard let url = URL(string: "https://pet-er.app/api/users/me/fcm-tokens") else {
+        guard let url = URL(string: "https://api.senra.pet/api/users/me/fcm-tokens") else {
             throw URLError(.badURL)
         }
 
@@ -83,7 +83,7 @@ actor FCMService {
 
     private func removeTokenFromBackend(_ token: String) async throws {
         let encodedToken = token.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? token
-        guard let url = URL(string: "https://pet-er.app/api/users/me/fcm-tokens/\(encodedToken)") else {
+        guard let url = URL(string: "https://api.senra.pet/api/users/me/fcm-tokens/\(encodedToken)") else {
             throw URLError(.badURL)
         }
 

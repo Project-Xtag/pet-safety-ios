@@ -252,23 +252,19 @@
 
 // MARK: - Flux partajare locație
 "share_help_get_home %@" = "Ajută-l pe %@ să ajungă acasă";
-"share_choose_desc" = "Alege câtă informație de locație să partajezi cu proprietarul";
-"share_dont_share" = "Nu partaja";
-"share_dont_share_desc" = "Doar notifică proprietarul că eticheta a fost scanată";
-"share_approximate" = "Zonă aproximativă";
+"share_location_subtitle" = "Locația ta ajută proprietarul să-și găsească animalul mai repede.";
+"share_exact_location_toggle" = "Partajează locația exactă";
 "share_approximate_desc" = "Partajează zona generală (~500 m)";
-"share_exact" = "Locație exactă";
 "share_exact_desc" = "Partajează locația exactă pentru o reunire mai rapidă";
 "share_your_location" = "Locația ta";
 "share_accuracy" = "(~500 m precizie)";
 "share_getting_location" = "Se obține locația...";
+"share_location_unavailable" = "Locație indisponibilă. Asigurați-vă că serviciile de localizare sunt activate.";
 "share_owner_notified" = "Proprietar notificat!";
-"share_owner_knows" = "Știe că eticheta animalului a fost scanată";
 "share_on_their_way" = "Este pe drum!";
 "share_notifying" = "Se notifică proprietarul...";
-"share_notify_no_location" = "Notifică proprietarul (fără locație)";
 "share_notify_with_location" = "Partajează și notifică proprietarul";
-"share_privacy_note" = "Locația ta exactă nu este stocată niciodată. Doar zona aproximativă este partajată cu proprietarul.";
+"share_privacy_note" = "Locația ta este partajată cu proprietarul pentru a ajuta la reunire.";
 "share_found_pet %@" = "%@ găsit!";
 
 // MARK: - Detalii scanner
@@ -501,6 +497,9 @@
 "story_inspiration" = "Povestea ta poate inspira speranță altor proprietari de animale din zona ta.";
 "story_share_button" = "Partajează povestea mea";
 "story_maybe_later" = "Poate mai târziu";
+"story_share_good_news" = "Împărtășește vestea bună";
+"story_social_caption %@" = "%@ s-a reunit cu familia! Mulțumim comunității TagMe Now pentru că a ajutat la aducerea lui %@ acasă. senra.pet";
+"story_generating_card" = "Se creează cardul de partajare...";
 "story_your_story" = "Povestea ta";
 "story_placeholder_named %@" = "Împărtășește cum a fost găsit și reunit %@";
 "story_city_optional" = "Oraș/Zonă (opțional)";
@@ -712,6 +711,13 @@
 "help_sending" = "Se trimite...";
 "help_submit_request" = "Trimite solicitarea";
 "help_contact_title" = "Contactează suportul";
+"help_request_submitted" = "Solicitare trimisă! Vom răspunde în 24 de ore.";
+"help_cat_general" = "General";
+"help_cat_technical" = "Problemă tehnică";
+"help_cat_account" = "Cont";
+"help_cat_billing" = "Facturare";
+"help_cat_feature" = "Cerere de funcționalitate";
+"help_cat_other" = "Altele";
 "help_faq_title" = "FAQ";
 "help_guides_title" = "Ghiduri utilizator";
 "help_guide_placeholder" = "Conținutul detaliat al ghidului va fi disponibil aici.";
@@ -730,7 +736,7 @@
 "contact_support_sending" = "Se trimite…";
 "contact_support_success" = "Solicitare trimisă! ID ticket: %@";
 "contact_support_response" = "Îți vom răspunde în 24 de ore.";
-"support_email" = "Suport: support@petsafety.eu";
+"support_email" = "Suport: hello@senra.pet";
 "support_category_general" = "General";
 "support_category_technical" = "Problemă tehnică";
 "support_category_account" = "Cont";
@@ -880,6 +886,8 @@
 "order_more_total" = "Total";
 "order_more_creating" = "Se creează comanda...";
 "order_more_place_order" = "Plasează comanda";
+"order_more_proceed_to_payment" = "Continuă la plată";
+"order_more_redirecting" = "Redirecționare...";
 "pet_names" = "Numele animalelor";
 "shipping_address" = "Adresă de livrare";
 "shipping" = "Livrare";
@@ -984,13 +992,12 @@
 // MARK: - Informații aplicație
 "app_name_label" = "Pet Safety";
 "app_version" = "Versiunea 1.0.0";
-"terms_url" = "Termeni: https://pet-er.app/terms";
-"privacy_url" = "Confidențialitate: https://pet-er.app/privacy";
+"terms_url" = "Termeni: https://senra.pet/terms";
+"privacy_url" = "Confidențialitate: https://senra.pet/privacy";
 
 // MARK: - Descrieri dinamice scanner
 "scanner_step1_dynamic_desc" = "Apasă butonul de mai sus pentru a partaja unde ai găsit %@";
 "scanner_step3_dynamic_desc" = "Rămâi aproape pentru ca proprietarul să te poată găsi pe tine și pe %@";
-"share_owner_knows" = "Știe că eticheta animalului a fost scanată";
 
 // MARK: - Chei adiționale profil
 "not_set" = "Nesetat";
@@ -1213,3 +1220,14 @@
 "removed_from_success_stories" = "Removed from Success Stories";
 "remove_story_confirm_title" = "Remove Success Story?";
 "remove_story_confirm_message" = "This will remove your pet's story from the public success stories feed.";
+
+// MARK: - SSE Subscription Events
+"sse_subscription_title" = "Abonament actualizat";
+"sse_subscription_message" = "Planul tău %@ este acum %@.";
+"sse_referral_title" = "Recomandare folosită!";
+"sse_referral_message" = "%@ a folosit codul tău de recomandare!";
+
+// MARK: - Recompensă
+"create_alert_reward" = "Recompensă (opțional)";
+"create_alert_reward_placeholder" = "ex. 50";
+"reward_badge" = "\U20AC%@ recompensă";

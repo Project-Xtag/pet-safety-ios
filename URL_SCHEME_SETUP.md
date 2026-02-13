@@ -2,7 +2,7 @@
 
 This document explains how to configure the URL scheme and Universal Links to enable deep linking for QR code tag activation.
 
-## 1. Custom URL Scheme (petsafety://)
+## 1. Custom URL Scheme (senra://)
 
 ### Configure in Xcode:
 
@@ -12,22 +12,22 @@ This document explains how to configure the URL scheme and Universal Links to en
 4. Expand **URL Types**
 5. Click **+** to add a new URL Type
 6. Configure:
-   - **Identifier**: `com.pet-er.petsafety`
+   - **Identifier**: `com.senra.petsafety`
    - **URL Schemes**: `petsafety`
    - **Role**: Editor
 
 ### Supported URLs:
-- `petsafety://tag/PS-XXXXXXXX` - Opens tag activation for the specified code
+- `senra://tag/PS-XXXXXXXX` - Opens tag activation for the specified code
 
 ### Test:
 ```bash
 # On Mac with simulator running:
-xcrun simctl openurl booted "petsafety://tag/PS-TEST1234"
+xcrun simctl openurl booted "senra://tag/PS-TEST1234"
 ```
 
 ---
 
-## 2. Universal Links (https://pet-er.app/)
+## 2. Universal Links (https://senra.pet/)
 
 Universal Links allow the app to open when users tap links on websites or in messages.
 
@@ -38,13 +38,13 @@ Universal Links allow the app to open when users tap links on websites or in mes
 3. Click **+ Capability**
 4. Add **Associated Domains**
 5. Add these domains:
-   - `applinks:pet-er.app`
-   - `applinks:www.pet-er.app`
+   - `applinks:senra.pet`
+   - `applinks:www.senra.pet`
 
 ### Step 2: Create Apple App Site Association (AASA) File
 
-The server (pet-er.app) needs to host this file at:
-`https://pet-er.app/.well-known/apple-app-site-association`
+The server (senra.pet) needs to host this file at:
+`https://senra.pet/.well-known/apple-app-site-association`
 
 ```json
 {
@@ -52,7 +52,7 @@ The server (pet-er.app) needs to host this file at:
     "apps": [],
     "details": [
       {
-        "appID": "TEAM_ID.com.pet-er.petsafety",
+        "appID": "TEAM_ID.com.senra.petsafety",
         "paths": [
           "/qr/*"
         ]
@@ -77,14 +77,14 @@ location /.well-known/apple-app-site-association {
 ```
 
 ### Supported URLs:
-- `https://pet-er.app/qr/PS-XXXXXXXX` - Opens tag activation
+- `https://senra.pet/qr/PS-XXXXXXXX` - Opens tag activation
 
 ---
 
 ## 3. How It Works
 
 ### Flow:
-1. User scans physical QR code with camera (contains URL: `https://pet-er.app/qr/PS-XXXXXXXX`)
+1. User scans physical QR code with camera (contains URL: `https://senra.pet/qr/PS-XXXXXXXX`)
 2. iOS detects the URL and checks if any app handles it via Universal Links
 3. If Pet Safety app is installed → App opens with TagActivationView
 4. If app not installed → Safari opens the web version
@@ -101,14 +101,14 @@ location /.well-known/apple-app-site-association {
 ### Test Custom Scheme:
 ```bash
 # Simulator
-xcrun simctl openurl booted "petsafety://tag/PS-TEST1234"
+xcrun simctl openurl booted "senra://tag/PS-TEST1234"
 
 # Or use Safari on device/simulator:
-# Type: petsafety://tag/PS-TEST1234
+# Type: senra://tag/PS-TEST1234
 ```
 
 ### Test Universal Links:
-1. Send yourself an iMessage with: `https://pet-er.app/qr/PS-TEST1234`
+1. Send yourself an iMessage with: `https://senra.pet/qr/PS-TEST1234`
 2. Tap the link on the device with the app installed
 3. Should open the app directly
 
@@ -131,7 +131,7 @@ print("🔗 Received URL: \(url.absoluteString)")
 ### Custom scheme not working:
 1. Verify URL scheme is added in Xcode Info tab
 2. Check the `.onOpenURL` modifier is in the view hierarchy
-3. Ensure the URL format is correct: `petsafety://tag/CODE`
+3. Ensure the URL format is correct: `senra://tag/CODE`
 
 ---
 
@@ -139,7 +139,7 @@ print("🔗 Received URL: \(url.absoluteString)")
 
 ### Physical Tags Should Encode:
 ```
-https://pet-er.app/qr/PS-XXXXXXXX
+https://senra.pet/qr/PS-XXXXXXXX
 ```
 
 This format:
@@ -149,7 +149,7 @@ This format:
 
 ### Alternative (App-Only):
 ```
-petsafety://tag/PS-XXXXXXXX
+senra://tag/PS-XXXXXXXX
 ```
 
 This only works if the app is installed - not recommended for physical tags.

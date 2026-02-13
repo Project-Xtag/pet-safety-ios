@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreLocation
 import Combine
+import UIKit
 
 /// Prompt shown after marking a pet as found to encourage sharing a success story
 struct SuccessStoryPromptView: View {
@@ -16,6 +17,9 @@ struct SuccessStoryPromptView: View {
     @State private var isSubmitting = false
     @State private var errorMessage: String?
     @State private var userLocation: CLLocationCoordinate2D?
+    @State private var isGeneratingShareCard = false
+    @State private var showSocialShareSheet = false
+    @State private var shareCardImage: UIImage?
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
@@ -65,7 +69,34 @@ struct SuccessStoryPromptView: View {
                     }
                 }
             }
+            .sheet(isPresented: $showSocialShareSheet) {
+                if let image = shareCardImage {
+                    let caption = String(format: String(localized: "story_social_caption %@"), pet.name, pet.name)
+                    ShareSheetView(activityItems: [image, caption])
+                }
+            }
         }
+    }
+
+    // MARK: - Share Sheet Wrapper
+    private struct ShareSheetView: UIViewControllerRepresentable {
+        let activityItems: [Any]
+
+        func makeUIViewController(context: Context) -> UIActivityViewController {
+            let vc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+            vc.excludedActivityTypes = [
+                .saveToCameraRoll,
+                .print,
+                .assignToContact,
+                .addToReadingList,
+                .airDrop,
+                .markupAsPDF,
+                .openInIBooks,
+            ]
+            return vc
+        }
+
+        func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
     }
 
     // MARK: - Prompt View
@@ -144,6 +175,26 @@ struct SuccessStoryPromptView: View {
                     .foregroundColor(.white)
                     .cornerRadius(12)
                 }
+
+                Button {
+                    generateAndShareCard()
+                } label: {
+                    HStack {
+                        if isGeneratingShareCard {
+                            ProgressView()
+                                .tint(.white)
+                        } else {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                        Text(isGeneratingShareCard ? String(localized: "story_generating_card") : String(localized: "story_share_good_news"))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.brandOrange)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+                }
+                .disabled(isGeneratingShareCard)
 
                 Button {
                     onDismiss()
@@ -288,6 +339,35 @@ struct SuccessStoryPromptView: View {
                 }
             }
             .padding()
+        }
+    }
+
+    // MARK: - Social Share Card
+    private func generateAndShareCard() {
+        isGeneratingShareCard = true
+        Task {
+            var petImage: UIImage?
+            if let urlString = pet.photoUrl, let url = URL(string: urlString) {
+                do {
+                    let (data, _) = try await URLSession.shared.data(from: url)
+                    petImage = UIImage(data: data)
+                } catch {
+                    // Use placeholder if photo fails to load
+                }
+            }
+
+            let cardImage = ShareCardGenerator.generate(
+                petName: pet.name,
+                petImage: petImage,
+                petSpecies: pet.species,
+                city: pet.ownerCity
+            )
+
+            await MainActor.run {
+                shareCardImage = cardImage
+                isGeneratingShareCard = false
+                showSocialShareSheet = true
+            }
         }
     }
 

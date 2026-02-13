@@ -19,7 +19,7 @@ class NetworkMonitor: ObservableObject {
     @Published private(set) var isExpensive: Bool = false
 
     private let monitor: NWPathMonitor
-    private let queue = DispatchQueue(label: "com.petsafety.networkmonitor")
+    private let queue = DispatchQueue(label: "pet.senra.networkmonitor")
 
     #if DEBUG
     enum NetworkOverrideMode: String, CaseIterable, Identifiable {

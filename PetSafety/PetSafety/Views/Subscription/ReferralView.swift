@@ -180,7 +180,7 @@ struct ReferralView: View {
 
     private func shareCode() {
         guard let code else { return }
-        let text = "Use my referral code \(code) to get 2 months free on Pet Safety! https://pet-er.app/choose-plan?referral=\(code)"
+        let text = "Use my referral code \(code) to get 2 months free on Pet Safety! https://senra.pet/choose-plan?referral=\(code)"
         let controller = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = scene.windows.first,

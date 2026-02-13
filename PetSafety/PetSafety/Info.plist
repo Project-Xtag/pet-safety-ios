@@ -70,6 +70,19 @@
 		<string>maps</string>
 	</array>
 
+	<!-- Custom URL Scheme -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>senra</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.petsafety.PetSafety</string>
+		</dict>
+	</array>
+
 	<!-- Background Modes for Push Notifications -->
 	<key>UIBackgroundModes</key>
 	<array>

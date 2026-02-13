@@ -27,25 +27,21 @@ final class CertificatePinningService: NSObject {
 
     // MARK: - Configuration
 
-    /// Pinned host - only apply pinning to this domain
-    private let pinnedHost = "pet-er.app"
+    /// Pinned host - only apply pinning to the API domain
+    private let pinnedHost = "api.senra.pet"
 
     /// SHA-256 hashes of the Subject Public Key Info (SPKI) of trusted certificates.
-    /// These are Base64-encoded SHA-256 hashes of the public key.
+    /// Pinning to Amazon's intermediate and root CAs provides long-term stability
+    /// since ACM certificates auto-renew but the CA chain remains stable for years.
     ///
-    /// To generate a pin from a certificate:
-    /// openssl s_client -connect pet-er.app:443 | openssl x509 -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
-    ///
-    /// Include multiple pins for certificate rotation (primary + backup).
+    /// To verify pins:
+    /// openssl s_client -connect api.senra.pet:443 -showcerts | openssl x509 -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
     private let pinnedPublicKeyHashes: Set<String> = [
-        // Primary certificate pin (pet-er.app leaf certificate)
-        "zycaJHtDpqsq38D/MDTe1LBwbcKPDspfg9hQUwWqFSo=",
+        // Amazon RSA 2048 M01 (Intermediate CA) — stable for years
+        "DxH4tt40L+eduF6szpY6TONlxhZhBd+pJ9wbHlQ2fuw=",
 
-        // Intermediate certificate (backup pin for chain validation)
-        "AlSQhgtJirc8ahLyekmtX+Iw+v46yPYRLJt9Cq1GlB0=",
-
-        // Root certificate (additional backup)
-        "bLBmD1ixuVZ6W9R3gNTrzsWj5YcYU21f2YDnSw/9N/Q=",
+        // Amazon Root CA 1 — stable indefinitely
+        "++MBgDH5WGvL9Bcn5Be30cRcL0f5O+NyoXuWtQdX1aI=",
     ]
 
     /// Whether to enforce pinning (disable for debugging only)

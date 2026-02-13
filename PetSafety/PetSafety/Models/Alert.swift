@@ -11,6 +11,7 @@ struct MissingPetAlert: Codable, Identifiable {
     let lastSeenLongitude: Double?
     let additionalInfo: String?
     let alertRadiusKm: Double?
+    let rewardAmount: Double?
     let lastSeenAt: String?
     let foundAt: String?
     let createdAt: String
@@ -38,6 +39,7 @@ struct MissingPetAlert: Codable, Identifiable {
         case additionalInfo = "additional_info"
         case description
         case alertRadiusKm = "alert_radius_km"
+        case rewardAmount = "reward_amount"
         case lastSeenAt = "last_seen_at"
         case foundAt = "found_at"
         case createdAt = "created_at"
@@ -62,6 +64,7 @@ struct MissingPetAlert: Codable, Identifiable {
         lastSeenLongitude: Double? = nil,
         additionalInfo: String? = nil,
         alertRadiusKm: Double? = 10.0,
+        rewardAmount: Double? = nil,
         lastSeenAt: String? = nil,
         foundAt: String? = nil,
         createdAt: String,
@@ -78,6 +81,7 @@ struct MissingPetAlert: Codable, Identifiable {
         self.lastSeenLongitude = lastSeenLongitude
         self.additionalInfo = additionalInfo
         self.alertRadiusKm = alertRadiusKm
+        self.rewardAmount = rewardAmount
         self.lastSeenAt = lastSeenAt
         self.foundAt = foundAt
         self.createdAt = createdAt
@@ -136,6 +140,9 @@ struct MissingPetAlert: Codable, Identifiable {
         // Parse alert radius (default to 10km if not provided)
         alertRadiusKm = try container.decodeIfPresent(Double.self, forKey: .alertRadiusKm) ?? 10.0
 
+        // Parse reward amount
+        rewardAmount = try container.decodeIfPresent(Double.self, forKey: .rewardAmount)
+
         // Parse timestamps
         lastSeenAt = try container.decodeIfPresent(String.self, forKey: .lastSeenAt)
         foundAt = try container.decodeIfPresent(String.self, forKey: .foundAt)
@@ -154,6 +161,7 @@ struct MissingPetAlert: Codable, Identifiable {
         try container.encodeIfPresent(lastSeenLongitude, forKey: .lastSeenLongitude)
         try container.encodeIfPresent(additionalInfo, forKey: .additionalInfo)
         try container.encodeIfPresent(alertRadiusKm, forKey: .alertRadiusKm)
+        try container.encodeIfPresent(rewardAmount, forKey: .rewardAmount)
         try container.encodeIfPresent(lastSeenAt, forKey: .lastSeenAt)
         try container.encodeIfPresent(foundAt, forKey: .foundAt)
         try container.encode(createdAt, forKey: .createdAt)

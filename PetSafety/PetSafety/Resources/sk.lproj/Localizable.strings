@@ -252,23 +252,19 @@
 
 // MARK: - Tok zdielania polohy
 "share_help_get_home %@" = "Pomozte %@ dostat sa domov";
-"share_choose_desc" = "Vyberte, kolko informacii o polohe chcete zdielat s majitelom";
-"share_dont_share" = "Nezdielat";
-"share_dont_share_desc" = "Len informujte majitela, ze stitok zvierata bol naskenovany";
-"share_approximate" = "Priblizna oblast";
+"share_location_subtitle" = "Vasa poloha pomoze majitelovi najst jeho zviera.";
+"share_exact_location_toggle" = "Zdielat presnu polohu";
 "share_approximate_desc" = "Zdielajte svoju vseobecnu oblast (~500 m)";
-"share_exact" = "Presna poloha";
 "share_exact_desc" = "Zdielajte presnu polohu pre rychlejsie znovuzjednotenie";
 "share_your_location" = "Vasa poloha";
 "share_accuracy" = "(~500 m presnost)";
 "share_getting_location" = "Ziskavam vasu polohu...";
+"share_location_unavailable" = "Poloha nie je dostupna. Prosim, skontrolujte, ci su sluzby urcenia polohy povolene.";
 "share_owner_notified" = "Majitel informovany!";
-"share_owner_knows" = "Vie, ze stitok jeho zvierata bol naskenovany";
 "share_on_their_way" = "Je na ceste!";
 "share_notifying" = "Informujem majitela...";
-"share_notify_no_location" = "Informovat majitela (bez polohy)";
 "share_notify_with_location" = "Zdielat a informovat majitela";
-"share_privacy_note" = "Vasa presna poloha sa nikdy neuklada. Majitelovi sa zdiela iba priblizna oblast.";
+"share_privacy_note" = "Vasa poloha je zdielana s majitelom, aby sa mu pomohlo znovuzjednotit so zvieratom.";
 "share_found_pet %@" = "Najdeny %@!";
 
 // MARK: - Detail skenera
@@ -501,6 +497,9 @@
 "story_inspiration" = "Vas pribeh moze inspirovat dalsich majitelov zvierat vo vasom okoli.";
 "story_share_button" = "Zdielat moj pribeh";
 "story_maybe_later" = "Mozno neskor";
+"story_share_good_news" = "Zdieľaj dobrú správu";
+"story_social_caption %@" = "%@ sa opäť stretol so svojou rodinou! Ďakujeme komunite TagMe Now za pomoc pri návrate %@ domov. senra.pet";
+"story_generating_card" = "Vytváranie zdieľacej karty...";
 "story_your_story" = "Vas pribeh";
 "story_placeholder_named %@" = "Zdielajte, ako bol %@ najdeny a znovuzjednoteny";
 "story_city_optional" = "Mesto/oblast (volitelne)";
@@ -712,6 +711,13 @@
 "help_sending" = "Odosiela sa...";
 "help_submit_request" = "Odoslat poziadavku";
 "help_contact_title" = "Kontaktovat podporu";
+"help_request_submitted" = "Požiadavka odoslaná! Odpovieme do 24 hodín.";
+"help_cat_general" = "Všeobecné";
+"help_cat_technical" = "Technický problém";
+"help_cat_account" = "Účet";
+"help_cat_billing" = "Fakturácia";
+"help_cat_feature" = "Žiadosť o funkciu";
+"help_cat_other" = "Iné";
 "help_faq_title" = "FAQ";
 "help_guides_title" = "Pouzivatelske prirucky";
 "help_guide_placeholder" = "Podrobny obsah prirucky bude dostupny tu.";
@@ -730,7 +736,7 @@
 "contact_support_sending" = "Odosiela sa\u2026";
 "contact_support_success" = "Poziadavka odoslana! ID tiketu: %@";
 "contact_support_response" = "Odpovieme do 24 hodin.";
-"support_email" = "Podpora: support@petsafety.eu";
+"support_email" = "Podpora: hello@senra.pet";
 "support_category_general" = "Vseobecne";
 "support_category_technical" = "Technicky problem";
 "support_category_account" = "Ucet";
@@ -880,6 +886,8 @@
 "order_more_total" = "Spolu";
 "order_more_creating" = "Vytvara sa objednavka...";
 "order_more_place_order" = "Odoslat objednavku";
+"order_more_proceed_to_payment" = "Pokračovať k platbe";
+"order_more_redirecting" = "Presmerovanie...";
 "pet_names" = "Mena zvierat";
 "shipping_address" = "Dodacia adresa";
 "shipping" = "Doprava";
@@ -984,13 +992,12 @@
 // MARK: - Informacie o aplikacii
 "app_name_label" = "Pet Safety";
 "app_version" = "Verzia 1.0.0";
-"terms_url" = "Podmienky: https://pet-er.app/terms";
-"privacy_url" = "Sukromie: https://pet-er.app/privacy";
+"terms_url" = "Podmienky: https://senra.pet/terms";
+"privacy_url" = "Sukromie: https://senra.pet/privacy";
 
 // MARK: - Dynamicke popisy skenera
 "scanner_step1_dynamic_desc" = "Kliknite na tlacidlo vyssie a zdielajte miesto, kde ste nasli %@";
 "scanner_step3_dynamic_desc" = "Zostante nablizku, aby vas majitel nasiel spolu s %@";
-"share_owner_knows" = "Vie, ze stitok jeho zvierata bol naskenovany";
 
 // MARK: - Dalsie kluce profilu
 "not_set" = "Nenastavene";
@@ -1213,3 +1220,14 @@
 "removed_from_success_stories" = "Removed from Success Stories";
 "remove_story_confirm_title" = "Remove Success Story?";
 "remove_story_confirm_message" = "This will remove your pet's story from the public success stories feed.";
+
+// MARK: - SSE Subscription Events
+"sse_subscription_title" = "Predplatné aktualizované";
+"sse_subscription_message" = "Váš %@ plán je teraz %@.";
+"sse_referral_title" = "Odporúčanie použité!";
+"sse_referral_message" = "%@ použil váš odporúčací kód!";
+
+// MARK: - Odmena
+"create_alert_reward" = "Odmena (voliteľné)";
+"create_alert_reward_placeholder" = "napr. 50";
+"reward_badge" = "\U20AC%@ odmena";

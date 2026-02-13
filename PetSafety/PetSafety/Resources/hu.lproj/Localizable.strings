@@ -252,23 +252,19 @@
 
 // MARK: - Helymegosztás folyamat
 "share_help_get_home %@" = "Segíts, hogy %@ hazajusson";
-"share_choose_desc" = "Válaszd ki, mennyi helyinformációt osztasz meg a gazdival";
-"share_dont_share" = "Ne ossz meg";
-"share_dont_share_desc" = "Csak értesítsd a gazdit, hogy a kedvenc bilétáját beolvasták";
-"share_approximate" = "Közelítő terület";
+"share_location_subtitle" = "A helyed segít a gazdának megtalálni a kedvencét.";
+"share_exact_location_toggle" = "Pontos hely megosztása";
 "share_approximate_desc" = "Oszd meg a környéked (~500m sugarú terület)";
-"share_exact" = "Pontos hely";
 "share_exact_desc" = "Oszd meg a pontos helyed a gyorsabb újraegyesüléshez";
 "share_your_location" = "Tartózkodási helyed";
 "share_accuracy" = "(~500m pontosság)";
 "share_getting_location" = "Hely lekérése...";
+"share_location_unavailable" = "A hely nem elérhető. Kérjük, ellenőrizd, hogy a helymeghatározás engedélyezve van.";
 "share_owner_notified" = "Gazda értesítve!";
-"share_owner_knows" = "Tudja, hogy a kedvence bilétáját beolvasták";
 "share_on_their_way" = "Úton van!";
 "share_notifying" = "Gazda értesítése...";
-"share_notify_no_location" = "Gazda értesítése (hely nélkül)";
 "share_notify_with_location" = "Megosztás & gazda értesítése";
-"share_privacy_note" = "A pontos helyedet soha nem tároljuk. Csak a közelítő területet osztjuk meg a gazdival.";
+"share_privacy_note" = "A helyed megosztásra kerül a gazdával, hogy segítsen az újraegyesülésben.";
 "share_found_pet %@" = "%@ megtalálva!";
 
 // MARK: - Beolvasó részletei
@@ -501,6 +497,9 @@
 "story_inspiration" = "A történeted reményt adhat más gazdáknak a környékeden.";
 "story_share_button" = "Történetem megosztása";
 "story_maybe_later" = "Talán később";
+"story_share_good_news" = "Oszd meg a jó hírt";
+"story_social_caption %@" = "%@ újra a családjával van! Köszönjük a TagMe Now közösségnek, hogy segített %@ hazajutni. senra.pet";
+"story_generating_card" = "Megosztási kártya készítése...";
 "story_your_story" = "A történeted";
 "story_placeholder_named %@" = "Oszd meg, hogyan találtad meg és egyesültetek újra: %@";
 "story_city_optional" = "Város/terület (opcionális)";
@@ -712,6 +711,13 @@
 "help_sending" = "Küldés...";
 "help_submit_request" = "Kérés beküldése";
 "help_contact_title" = "Kapcsolat a támogatással";
+"help_request_submitted" = "Kérés beküldve! 24 órán belül válaszolunk.";
+"help_cat_general" = "Általános";
+"help_cat_technical" = "Technikai probléma";
+"help_cat_account" = "Fiók";
+"help_cat_billing" = "Számlázás";
+"help_cat_feature" = "Funkció kérés";
+"help_cat_other" = "Egyéb";
 "help_faq_title" = "GYIK";
 "help_guides_title" = "Felhasználói útmutatók";
 "help_guide_placeholder" = "Részletes útmutató tartalom itt lesz elérhető.";
@@ -730,7 +736,7 @@
 "contact_support_sending" = "Küldés…";
 "contact_support_success" = "Támogatási kérés elküldve! Jegyazonosító: %@";
 "contact_support_response" = "24 órán belül válaszolunk.";
-"support_email" = "Támogatás: support@petsafety.eu";
+"support_email" = "Támogatás: hello@senra.pet";
 "support_category_general" = "Általános";
 "support_category_technical" = "Technikai probléma";
 "support_category_account" = "Fiók";
@@ -880,6 +886,8 @@
 "order_more_total" = "Összesen";
 "order_more_creating" = "Rendelés létrehozása...";
 "order_more_place_order" = "Rendelés leadása";
+"order_more_proceed_to_payment" = "Tovább a fizetéshez";
+"order_more_redirecting" = "Átirányítás...";
 "pet_names" = "Kedvencek nevei";
 "shipping_address" = "Szállítási cím";
 "shipping" = "Szállítás";
@@ -984,13 +992,12 @@
 // MARK: - Alkalmazás információ
 "app_name_label" = "Pet Safety";
 "app_version" = "Verzió 1.0.0";
-"terms_url" = "Feltételek: https://pet-er.app/terms";
-"privacy_url" = "Adatvédelem: https://pet-er.app/privacy";
+"terms_url" = "Feltételek: https://senra.pet/terms";
+"privacy_url" = "Adatvédelem: https://senra.pet/privacy";
 
 // MARK: - Beolvasó dinamikus leírások
 "scanner_step1_dynamic_desc" = "Kattints a fenti gombra, hogy megoszd, hol találtad meg %@-t";
 "scanner_step3_dynamic_desc" = "Maradj a hely közelében, hogy a gazda megtalálhasson téged és %@-t";
-"share_owner_knows" = "Tudja, hogy a kedvence bilétáját beolvasták";
 
 // MARK: - További profil kulcsok
 "not_set" = "Nincs megadva";
@@ -1213,3 +1220,14 @@
 "removed_from_success_stories" = "Eltávolítva a sikertörténetekből";
 "remove_story_confirm_title" = "Sikertörténet eltávolítása?";
 "remove_story_confirm_message" = "Ezzel eltávolítja kisállata történetét a nyilvános sikertörténetek listájából.";
+
+// MARK: - SSE Subscription Events
+"sse_subscription_title" = "Előfizetés frissítve";
+"sse_subscription_message" = "A(z) %@ csomagod most %@.";
+"sse_referral_title" = "Ajánlás felhasználva!";
+"sse_referral_message" = "%@ felhasználta az ajánlókódodat!";
+
+// MARK: - Jutalom
+"create_alert_reward" = "Jutalom (opcionális)";
+"create_alert_reward_placeholder" = "pl. 50";
+"reward_badge" = "\U20AC%@ jutalom";

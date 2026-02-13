@@ -93,7 +93,7 @@ class NotificationHandler: ObservableObject {
 
         // Navigate to alert details
         // This will be handled by the DeepLinkService
-        let deepLink = "petsafety://alert/\(alertId)"
+        let deepLink = "senra://alert/\(alertId)"
 
         #if DEBUG
         print("Missing pet alert notification: alertId=\(alertId), petId=\(petId)")

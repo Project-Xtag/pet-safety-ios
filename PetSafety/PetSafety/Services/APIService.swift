@@ -46,7 +46,7 @@ class APIService {
     // Falls back to hardcoded default if Remote Config is unavailable
     private var baseURL: String {
         let configuredURL = ConfigurationManager.shared.apiBaseURL
-        return configuredURL.isEmpty ? "https://pet-er.app/api" : configuredURL
+        return configuredURL.isEmpty ? "https://api.senra.pet/api" : configuredURL
     }
     private var authToken: String? {
         get { KeychainService.shared.getAuthToken() }
@@ -634,7 +634,7 @@ class APIService {
     }
 
     // Share finder's location with pet owner (no auth required)
-    // Supports 3-tier GDPR-compliant location consent: none, approximate, precise
+    // Supports 2-tier location consent: approximate or precise (toggle-based)
     func shareLocation(
         qrCode: String,
         location: LocationConsentData? = nil,
@@ -721,6 +721,23 @@ class APIService {
             requiresAuth: false
         )
         return try await performRequest(request, responseType: CreateTagOrderResponse.self)
+    }
+
+    func createTagCheckout(
+        quantity: Int,
+        countryCode: String? = nil
+    ) async throws -> TagCheckoutData {
+        #if DEBUG
+        print("📡 API: Creating tag checkout for \(quantity) tags...")
+        #endif
+
+        let request = try await buildRequest(
+            endpoint: "/orders/create-checkout",
+            method: "POST",
+            body: CreateTagCheckoutRequest(quantity: quantity, countryCode: countryCode, platform: "ios")
+        )
+        let response: TagCheckoutResponse = try await performRequest(request, responseType: TagCheckoutResponse.self)
+        return response.checkout
     }
 
     func createPaymentIntent(
@@ -969,7 +986,7 @@ struct CreateTagOrderResponse: Codable {
     let message: String
 }
 
-// MARK: - Location Sharing Types (3-Tier GDPR Consent)
+// MARK: - Location Sharing Types (2-Tier Toggle Consent)
 
 /// Location consent type for GDPR compliance
 enum LocationConsentType: String, Codable {
@@ -984,6 +1001,25 @@ struct LocationConsentData: Codable {
     let accuracy_meters: Double
     let is_approximate: Bool
     let consent_type: LocationConsentType
+    /// New field for 2-tier toggle: true = precise, false = approximate
+    let share_exact_location: Bool
+
+    /// Backwards-compatible initializer (defaults share_exact_location based on consent_type)
+    init(
+        latitude: Double,
+        longitude: Double,
+        accuracy_meters: Double,
+        is_approximate: Bool,
+        consent_type: LocationConsentType,
+        share_exact_location: Bool? = nil
+    ) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.accuracy_meters = accuracy_meters
+        self.is_approximate = is_approximate
+        self.consent_type = consent_type
+        self.share_exact_location = share_exact_location ?? (consent_type == .precise)
+    }
 }
 
 /// Updated response for share-location endpoint
@@ -1316,7 +1352,8 @@ extension APIService {
     /// Create Stripe checkout session for subscription
     func createSubscriptionCheckout(
         planName: String,
-        billingPeriod: String = "monthly"
+        billingPeriod: String = "monthly",
+        countryCode: String? = nil
     ) async throws -> SubscriptionCheckoutResponse {
         #if DEBUG
         print("📡 API: Creating subscription checkout for \(planName) (\(billingPeriod))...")
@@ -1325,7 +1362,7 @@ extension APIService {
         let request = try await buildRequest(
             endpoint: "/subscriptions/checkout",
             method: "POST",
-            body: CreateCheckoutRequest(planName: planName, billingPeriod: billingPeriod, platform: "ios")
+            body: CreateCheckoutRequest(planName: planName, billingPeriod: billingPeriod, platform: "ios", countryCode: countryCode)
         )
         return try await performRequest(request, responseType: SubscriptionCheckoutResponse.self)
     }

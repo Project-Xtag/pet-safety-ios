@@ -43,7 +43,15 @@ class SubscriptionViewModel: ObservableObject {
     }
 
     // MARK: - Initialization
-    init() {}
+    init() {
+        // Listen for SSE subscription_changed events and auto-refresh
+        SSEService.shared.onSubscriptionChanged = { [weak self] _ in
+            Task { @MainActor [weak self] in
+                await self?.loadCurrentSubscription()
+                await self?.loadFeatures()
+            }
+        }
+    }
 
     // MARK: - Data Loading
     func loadPlans() async {

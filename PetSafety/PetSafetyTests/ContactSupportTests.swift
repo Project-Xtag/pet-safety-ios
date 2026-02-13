@@ -150,10 +150,10 @@ struct ContactSupportAPITests {
     @Test("submitSupportRequest should create correct URL request")
     func testRequestConstruction() throws {
         // Verify the endpoint path is correct
-        let baseURL = URL(string: "https://pet-er.app/api")!
+        let baseURL = URL(string: "https://api.senra.pet/api")!
         let endpoint = baseURL.appendingPathComponent("contact/support")
 
-        #expect(endpoint.absoluteString == "https://pet-er.app/api/contact/support")
+        #expect(endpoint.absoluteString == "https://api.senra.pet/api/contact/support")
     }
 
     @Test("Request body should be properly formatted")

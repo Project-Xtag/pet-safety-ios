@@ -29,13 +29,13 @@ final class FCMServiceTests: XCTestCase {
 
     func testRegisterTokenBuildsCorrectURL() async throws {
         // Given
-        let expectedURL = "https://pet-er.app/api/users/me/fcm-tokens"
+        let expectedURL = "https://api.senra.pet/api/users/me/fcm-tokens"
 
         // Verify URL construction
         let url = URL(string: expectedURL)
         XCTAssertNotNil(url)
         XCTAssertEqual(url?.scheme, "https")
-        XCTAssertEqual(url?.host, "pet-er.app")
+        XCTAssertEqual(url?.host, "senra.pet")
         XCTAssertEqual(url?.path, "/api/users/me/fcm-tokens")
     }
 
@@ -74,7 +74,7 @@ final class FCMServiceTests: XCTestCase {
 
     func testRegisterTokenSetsCorrectHeaders() async throws {
         // Given
-        let url = URL(string: "https://pet-er.app/api/users/me/fcm-tokens")!
+        let url = URL(string: "https://api.senra.pet/api/users/me/fcm-tokens")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -87,7 +87,7 @@ final class FCMServiceTests: XCTestCase {
     func testRegisterTokenIncludesAuthHeader() async throws {
         // Given
         let authToken = "test-auth-token-xyz"
-        let url = URL(string: "https://pet-er.app/api/users/me/fcm-tokens")!
+        let url = URL(string: "https://api.senra.pet/api/users/me/fcm-tokens")!
         var request = URLRequest(url: url)
         request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
 
@@ -101,7 +101,7 @@ final class FCMServiceTests: XCTestCase {
         // Given
         let token = "token-to-remove-123"
         let encodedToken = token.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? token
-        let expectedURL = "https://pet-er.app/api/users/me/fcm-tokens/\(encodedToken)"
+        let expectedURL = "https://api.senra.pet/api/users/me/fcm-tokens/\(encodedToken)"
 
         // Verify URL construction
         let url = URL(string: expectedURL)
@@ -125,7 +125,7 @@ final class FCMServiceTests: XCTestCase {
 
     func testRemoveTokenUsesDeleteMethod() async throws {
         // Given
-        let url = URL(string: "https://pet-er.app/api/users/me/fcm-tokens/test-token")!
+        let url = URL(string: "https://api.senra.pet/api/users/me/fcm-tokens/test-token")!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
 
@@ -268,7 +268,7 @@ extension FCMServiceTests {
     /// Helper to create a mock HTTP response
     func createMockResponse(statusCode: Int) -> HTTPURLResponse {
         return HTTPURLResponse(
-            url: URL(string: "https://pet-er.app/api/users/me/fcm-tokens")!,
+            url: URL(string: "https://api.senra.pet/api/users/me/fcm-tokens")!,
             statusCode: statusCode,
             httpVersion: nil,
             headerFields: nil

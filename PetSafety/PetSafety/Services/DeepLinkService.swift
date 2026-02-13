@@ -3,8 +3,8 @@ import SwiftUI
 
 /// Handles deep links and universal links for the Pet Safety app
 /// Supports:
-/// - Custom scheme: petsafety://tag/{code}
-/// - Universal links: https://pet-er.app/qr/{code}
+/// - Custom scheme: senra://tag/{code}
+/// - Universal links: https://senra.pet/qr/{code}
 @MainActor
 class DeepLinkService: ObservableObject {
     static let shared = DeepLinkService()
@@ -33,13 +33,13 @@ class DeepLinkService: ObservableObject {
         print("🔗 DeepLinkService: Handling URL: \(url.absoluteString)")
         #endif
 
-        // Handle custom scheme: petsafety://tag/{code}
-        if url.scheme == "petsafety" {
+        // Handle custom scheme: senra://tag/{code}
+        if url.scheme == "senra" {
             return handleCustomScheme(url)
         }
 
-        // Handle universal link: https://pet-er.app/qr/{code}
-        if url.scheme == "https" && (url.host == "pet-er.app" || url.host == "www.pet-er.app") {
+        // Handle universal link: https://senra.pet/qr/{code}
+        if url.scheme == "https" && (url.host == "senra.pet" || url.host == "www.senra.pet") {
             return handleUniversalLink(url)
         }
 
@@ -50,20 +50,20 @@ class DeepLinkService: ObservableObject {
         return false
     }
 
-    /// Handle custom scheme URLs (petsafety://)
+    /// Handle custom scheme URLs (senra://)
     private func handleCustomScheme(_ url: URL) -> Bool {
         guard let host = url.host else { return false }
 
         switch host {
         case "tag":
-            // petsafety://tag/{code}
+            // senra://tag/{code}
             // Path components: ["", "code"]
             let pathComponents = url.pathComponents.filter { $0 != "/" }
             if let code = pathComponents.first {
                 handleTagActivation(code: code)
                 return true
             }
-            // If code is directly after the host (petsafety://tag/PS-XXXXXXXX)
+            // If code is directly after the host (senra://tag/PS-XXXXXXXX)
             // Check if path is empty but there's a last path component
             if let lastComponent = url.lastPathComponent as String?, !lastComponent.isEmpty && lastComponent != "tag" {
                 handleTagActivation(code: lastComponent)
@@ -71,7 +71,7 @@ class DeepLinkService: ObservableObject {
             }
 
         case "pet":
-            // petsafety://pet/{petId}
+            // senra://pet/{petId}
             let pathComponents = url.pathComponents.filter { $0 != "/" }
             if let petId = pathComponents.first {
                 #if DEBUG
@@ -88,11 +88,11 @@ class DeepLinkService: ObservableObject {
         return false
     }
 
-    /// Handle universal link URLs (https://pet-er.app/...)
+    /// Handle universal link URLs (https://senra.pet/...)
     private func handleUniversalLink(_ url: URL) -> Bool {
         let pathComponents = url.pathComponents.filter { $0 != "/" }
 
-        // https://pet-er.app/qr/{code}
+        // https://senra.pet/qr/{code}
         if pathComponents.count >= 2 && pathComponents[0] == "qr" {
             let code = pathComponents[1]
             handleTagActivation(code: code)
@@ -122,23 +122,23 @@ class DeepLinkService: ObservableObject {
     /// Extract tag code from a scanned QR code string
     /// The QR code might contain:
     /// - Just the code: PS-XXXXXXXX
-    /// - Full URL: https://pet-er.app/qr/PS-XXXXXXXX
-    /// - Custom scheme: petsafety://tag/PS-XXXXXXXX
+    /// - Full URL: https://senra.pet/qr/PS-XXXXXXXX
+    /// - Custom scheme: senra://tag/PS-XXXXXXXX
     static func extractTagCode(from scannedValue: String) -> String {
         let trimmed = scannedValue.trimmingCharacters(in: .whitespacesAndNewlines)
 
         // Check if it's a URL
         if let url = URL(string: trimmed) {
-            // https://pet-er.app/qr/{code}
-            if url.scheme == "https" && (url.host == "pet-er.app" || url.host == "www.pet-er.app") {
+            // https://senra.pet/qr/{code}
+            if url.scheme == "https" && (url.host == "senra.pet" || url.host == "www.senra.pet") {
                 let pathComponents = url.pathComponents.filter { $0 != "/" }
                 if pathComponents.count >= 2 && pathComponents[0] == "qr" {
                     return pathComponents[1]
                 }
             }
 
-            // petsafety://tag/{code}
-            if url.scheme == "petsafety" && url.host == "tag" {
+            // senra://tag/{code}
+            if url.scheme == "senra" && url.host == "tag" {
                 let pathComponents = url.pathComponents.filter { $0 != "/" }
                 if let code = pathComponents.first {
                     return code

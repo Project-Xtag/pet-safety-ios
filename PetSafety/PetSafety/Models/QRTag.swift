@@ -13,7 +13,7 @@ struct QRTag: Codable, Identifiable {
     }
 
     var deepLink: String {
-        "petsafety://tag/\(qrCode)"
+        "senra://tag/\(qrCode)"
     }
 
     enum CodingKeys: String, CodingKey {

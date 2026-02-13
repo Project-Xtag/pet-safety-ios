@@ -116,7 +116,7 @@ struct PetSafetyApp: App {
     }
 
     private func handleDeepLink(_ url: URL) {
-        guard url.scheme == "petsafety" else { return }
+        guard url.scheme == "senra" else { return }
 
         switch url.host {
         case "checkout":

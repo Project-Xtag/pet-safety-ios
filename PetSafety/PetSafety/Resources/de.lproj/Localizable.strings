@@ -252,23 +252,19 @@
 
 // MARK: - Standort-Freigabe
 "share_help_get_home %@" = "Hilf %@, nach Hause zu kommen";
-"share_choose_desc" = "Wählen Sie, wie viele Standortinformationen Sie mit dem Besitzer teilen möchten";
-"share_dont_share" = "Nicht teilen";
-"share_dont_share_desc" = "Besitzer nur informieren, dass der Tag gescannt wurde";
-"share_approximate" = "Ungefährer Bereich";
+"share_location_subtitle" = "Ihr Standort hilft dem Besitzer, sein Haustier schneller zu finden.";
+"share_exact_location_toggle" = "Genauen Standort teilen";
 "share_approximate_desc" = "Teilen Sie Ihren ungefähren Bereich (~500 m)";
-"share_exact" = "Genauer Standort";
 "share_exact_desc" = "Teilen Sie Ihren genauen Standort für eine schnellere Wiedervereinigung";
 "share_your_location" = "Ihr Standort";
 "share_accuracy" = "(~500 m Genauigkeit)";
 "share_getting_location" = "Standort wird ermittelt…";
+"share_location_unavailable" = "Standort nicht verfügbar. Bitte stellen Sie sicher, dass die Ortungsdienste aktiviert sind.";
 "share_owner_notified" = "Besitzer informiert!";
-"share_owner_knows" = "Er weiß, dass der Tag seines Haustiers gescannt wurde";
 "share_on_their_way" = "Sie sind unterwegs!";
 "share_notifying" = "Besitzer wird informiert…";
-"share_notify_no_location" = "Besitzer informieren (ohne Standort)";
 "share_notify_with_location" = "Teilen & Besitzer informieren";
-"share_privacy_note" = "Ihr genauer Standort wird nie gespeichert. Es wird nur der ungefähre Bereich mit dem Besitzer geteilt.";
+"share_privacy_note" = "Ihr Standort wird mit dem Besitzer geteilt, um bei der Wiedervereinigung zu helfen.";
 "share_found_pet %@" = "%@ gefunden!";
 
 // MARK: - Scanner-Detail
@@ -501,6 +497,9 @@
 "story_inspiration" = "Ihre Geschichte kann anderen Haustierbesitzern in Ihrer Nähe Hoffnung geben.";
 "story_share_button" = "Meine Geschichte teilen";
 "story_maybe_later" = "Vielleicht später";
+"story_share_good_news" = "Teile die gute Nachricht";
+"story_social_caption %@" = "%@ ist wieder mit seiner Familie vereint! Danke an die TagMe Now Community, die geholfen hat, %@ nach Hause zu bringen. senra.pet";
+"story_generating_card" = "Teilen-Karte wird erstellt...";
 "story_your_story" = "Ihre Geschichte";
 "story_placeholder_named %@" = "Teilen Sie, wie %@ gefunden wurde und wieder vereint wurde";
 "story_city_optional" = "Stadt/Region (optional)";
@@ -712,6 +711,13 @@
 "help_sending" = "Wird gesendet…";
 "help_submit_request" = "Anfrage senden";
 "help_contact_title" = "Support kontaktieren";
+"help_request_submitted" = "Anfrage gesendet! Wir antworten innerhalb von 24 Stunden.";
+"help_cat_general" = "Allgemein";
+"help_cat_technical" = "Technisches Problem";
+"help_cat_account" = "Konto";
+"help_cat_billing" = "Abrechnung";
+"help_cat_feature" = "Funktionswunsch";
+"help_cat_other" = "Sonstiges";
 "help_faq_title" = "FAQ";
 "help_guides_title" = "Benutzerhandbücher";
 "help_guide_placeholder" = "Detaillierte Inhalte werden hier verfügbar sein.";
@@ -730,7 +736,7 @@
 "contact_support_sending" = "Wird gesendet…";
 "contact_support_success" = "Support-Anfrage gesendet! Ticket-ID: %@";
 "contact_support_response" = "Wir melden uns innerhalb von 24 Stunden.";
-"support_email" = "Support: support@petsafety.eu";
+"support_email" = "Support: hello@senra.pet";
 "support_category_general" = "Allgemein";
 "support_category_technical" = "Technisches Problem";
 "support_category_account" = "Konto";
@@ -880,6 +886,8 @@
 "order_more_total" = "Gesamt";
 "order_more_creating" = "Bestellung wird erstellt…";
 "order_more_place_order" = "Bestellung aufgeben";
+"order_more_proceed_to_payment" = "Weiter zur Zahlung";
+"order_more_redirecting" = "Weiterleitung...";
 "pet_names" = "Namen der Haustiere";
 "shipping_address" = "Lieferadresse";
 "shipping" = "Versand";
@@ -984,8 +992,8 @@
 // MARK: - App-Info
 "app_name_label" = "Pet Safety";
 "app_version" = "Version 1.0.0";
-"terms_url" = "Bedingungen: https://pet-er.app/terms";
-"privacy_url" = "Datenschutz: https://pet-er.app/privacy";
+"terms_url" = "Bedingungen: https://senra.pet/terms";
+"privacy_url" = "Datenschutz: https://senra.pet/privacy";
 
 // MARK: - Scanner-Dynamische Beschreibungen
 "scanner_step1_dynamic_desc" = "Klicken Sie oben, um zu teilen, wo Sie %@ gefunden haben";
@@ -1200,3 +1208,14 @@
 "removed_from_success_stories" = "Removed from Success Stories";
 "remove_story_confirm_title" = "Remove Success Story?";
 "remove_story_confirm_message" = "This will remove your pet's story from the public success stories feed.";
+
+// MARK: - SSE Subscription Events
+"sse_subscription_title" = "Abonnement aktualisiert";
+"sse_subscription_message" = "Ihr %@-Plan ist jetzt %@.";
+"sse_referral_title" = "Empfehlung genutzt!";
+"sse_referral_message" = "%@ hat Ihren Empfehlungscode verwendet!";
+
+// MARK: - Belohnung
+"create_alert_reward" = "Belohnung (optional)";
+"create_alert_reward_placeholder" = "z.B. 50";
+"reward_badge" = "\U20AC%@ Belohnung";

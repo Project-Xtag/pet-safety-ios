@@ -12,6 +12,7 @@ struct CreateAlertView: View {
     @State private var selectedPet: Pet?
     @State private var location = ""
     @State private var additionalInfo = ""
+    @State private var rewardAmount: String = ""
     @State private var useCurrentLocation = false
 
     var body: some View {
@@ -53,6 +54,15 @@ struct CreateAlertView: View {
                                 .padding(.leading, 4)
                         }
                     }
+            }
+
+            Section(header: Text("create_alert_reward")) {
+                HStack {
+                    Text("€")
+                        .foregroundColor(.secondary)
+                    TextField(String(localized: "create_alert_reward_placeholder"), text: $rewardAmount)
+                        .keyboardType(.decimalPad)
+                }
             }
         }
         .adaptiveList()
@@ -99,7 +109,8 @@ struct CreateAlertView: View {
                     petId: pet.id,
                     location: locationText,
                     coordinate: coordinate,
-                    additionalInfo: additionalInfo.isEmpty ? nil : additionalInfo
+                    additionalInfo: additionalInfo.isEmpty ? nil : additionalInfo,
+                    rewardAmount: Double(rewardAmount)
                 )
 
                 UINotificationFeedbackGenerator().notificationOccurred(.success)
