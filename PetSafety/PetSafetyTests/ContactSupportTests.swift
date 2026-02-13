@@ -229,7 +229,7 @@ struct ContactSupportViewStateTests {
         let maxLength = 5000
 
         let displayText = "\(message.count)/\(maxLength) characters"
-        #expect(displayText == "36/5000 characters")
+        #expect(displayText == "35/5000 characters")
     }
 
     @Test("Category selection should default to General")

@@ -154,11 +154,13 @@ struct ShareCardGeneratorTests {
             return
         }
 
-        // Check that the image has actual content (not all transparent)
+        // cgImage.width/height are in pixels, which depend on the renderer scale.
+        // Verify the image dimensions match 1080 points scaled by the image's scale factor.
+        let scale = image.scale
         let width = cgImage.width
         let height = cgImage.height
-        #expect(width == 1080)
-        #expect(height == 1080)
+        #expect(width == Int(1080 * scale))
+        #expect(height == Int(1080 * scale))
 
         // Sample a pixel from the center area (should be teal background or content)
         let dataProvider = cgImage.dataProvider
