@@ -1,5 +1,22 @@
 import SwiftUI
 
+private func localizedString(_ key: String) -> String {
+    let current = NSLocalizedString(key, comment: "")
+    if current != key {
+        return current
+    }
+
+    guard
+        let enPath = Bundle.main.path(forResource: "en", ofType: "lproj"),
+        let enBundle = Bundle(path: enPath)
+    else {
+        return key
+    }
+
+    let englishValue = enBundle.localizedString(forKey: key, value: nil, table: nil)
+    return englishValue == key ? key : englishValue
+}
+
 struct HelpAndSupportView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -50,7 +67,7 @@ struct HelpAndSupportView: View {
             }
 
             Section(header: Text("help_legal")) {
-                Link(destination: URL(string: "https://senra.pet/terms")!) {
+                Link(destination: URL(string: "https://senra.pet/terms-conditions")!) {
                     HStack {
                         Image(systemName: "doc.text.fill")
                             .foregroundColor(.cyan)
@@ -63,7 +80,7 @@ struct HelpAndSupportView: View {
                     }
                 }
 
-                Link(destination: URL(string: "https://senra.pet/privacy")!) {
+                Link(destination: URL(string: "https://senra.pet/privacy-policy")!) {
                     HStack {
                         Image(systemName: "lock.shield.fill")
                             .foregroundColor(.cyan)
@@ -303,26 +320,33 @@ struct ContactSupportView: View {
 
 // MARK: - FAQ View
 struct FAQView: View {
-    let faqs = [
-        FAQ(question: "How do I activate my QR tag?", answer: "To activate your QR tag, scan it with your phone's camera and follow the on-screen instructions to link it to your pet's profile."),
-        FAQ(question: "What should I do if my pet goes missing?", answer: "Immediately mark your pet as missing in the app. This will send alerts to nearby users, vets, and shelters. Update your pet's last known location and add any additional information that might help."),
-        FAQ(question: "How do I order a replacement tag?", answer: "Go to the Profile tab, select 'Order Replacement Tag', choose your pet, and confirm your shipping address. Premium members get free replacements."),
-        FAQ(question: "Can I have multiple pets?", answer: "Yes! You can add as many pets as you want to your account. Each pet can have its own QR tag."),
-        FAQ(question: "How do notifications work?", answer: "You'll receive push notifications for pet sightings, nearby missing pet alerts, and important account updates. You can customize your notification preferences in Settings."),
+    let faqGroups: [FAQGroup] = [
+        FAQGroup(titleKey: "help_faq_group_getting_started", indices: [1, 2, 3, 13]),
+        FAQGroup(titleKey: "help_faq_group_tags_scanning", indices: [4, 5, 6, 7, 25]),
+        FAQGroup(titleKey: "help_faq_group_missing_pets", indices: [8, 9, 14, 18, 23, 26]),
+        FAQGroup(titleKey: "help_faq_group_billing_plans", indices: [10, 11, 12, 21]),
+        FAQGroup(titleKey: "help_faq_group_privacy_account", indices: [15, 19, 22, 24]),
+        FAQGroup(titleKey: "help_faq_group_troubleshooting", indices: [16, 17, 20, 27]),
     ]
 
     var body: some View {
-        List(faqs) { faq in
-            NavigationLink(destination: FAQDetailView(faq: faq)) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(faq.question)
-                        .font(.headline)
-                    Text(faq.answer)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .lineLimit(2)
+        List {
+            ForEach(faqGroups) { group in
+                Section(header: Text(localizedString(group.titleKey))) {
+                    ForEach(group.items) { faq in
+                        NavigationLink(destination: FAQDetailView(faq: faq)) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(faq.question)
+                                    .font(.headline)
+                                Text(faq.answer)
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                    .lineLimit(2)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
                 }
-                .padding(.vertical, 4)
             }
         }
         .navigationTitle("help_faq_title")
@@ -355,22 +379,42 @@ struct FAQDetailView: View {
 
 // MARK: - Guides View
 struct GuidesView: View {
-    let guides = [
-        "Getting Started with Pet Safety",
-        "How to Use QR Tags",
-        "Reporting a Missing Pet",
-        "Finding Lost Pets Near You",
-        "Managing Your Profile",
-        "Understanding Subscription Benefits"
-    ]
+    var guides: [GuideArticle] {
+        [
+            GuideArticle(
+                title: localizedString("help_guide_qr_tags_title"),
+                body: localizedString("help_guide_qr_tags_desc")
+            ),
+            GuideArticle(
+                title: localizedString("help_guide_materials_title"),
+                body: localizedString("help_guide_materials_desc")
+            ),
+            GuideArticle(
+                title: localizedString("help_guide_emergency_title"),
+                body: localizedString("help_guide_emergency_desc")
+            ),
+            GuideArticle(
+                title: localizedString("help_guide_profile_title"),
+                body: localizedString("help_guide_profile_desc")
+            ),
+            GuideArticle(
+                title: localizedString("help_guide_missing_alerts_title"),
+                body: localizedString("help_guide_missing_alerts_desc")
+            ),
+            GuideArticle(
+                title: localizedString("help_guide_community_title"),
+                body: localizedString("help_guide_community_desc")
+            ),
+        ]
+    }
 
     var body: some View {
-        List(guides, id: \.self) { guide in
-            NavigationLink(destination: GuideDetailView(title: guide)) {
+        List(guides) { guide in
+            NavigationLink(destination: GuideDetailView(title: guide.title, content: guide.body)) {
                 HStack {
                     Image(systemName: "doc.text.fill")
                         .foregroundColor(.cyan)
-                    Text(guide)
+                    Text(guide.title)
                 }
             }
         }
@@ -381,6 +425,7 @@ struct GuidesView: View {
 
 struct GuideDetailView: View {
     let title: String
+    let content: String
 
     var body: some View {
         ScrollView {
@@ -389,7 +434,7 @@ struct GuideDetailView: View {
                     .font(.title)
                     .fontWeight(.bold)
 
-                Text("help_guide_placeholder")
+                Text(content)
                     .font(.body)
                     .foregroundColor(.secondary)
 
@@ -404,9 +449,31 @@ struct GuideDetailView: View {
 
 // MARK: - Supporting Models
 struct FAQ: Identifiable {
-    let id = UUID()
+    let id: Int
     let question: String
     let answer: String
+}
+
+struct FAQGroup: Identifiable {
+    let id = UUID()
+    let titleKey: String
+    let indices: [Int]
+
+    var items: [FAQ] {
+        indices.map { index in
+            FAQ(
+                id: index,
+                question: localizedString("help_faq_q\(index)"),
+                answer: localizedString("help_faq_a\(index)")
+            )
+        }
+    }
+}
+
+struct GuideArticle: Identifiable {
+    let id = UUID()
+    let title: String
+    let body: String
 }
 
 #Preview {

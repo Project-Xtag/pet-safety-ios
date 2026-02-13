@@ -313,7 +313,7 @@ struct PetsListView: View {
 
     private func showOrderReplacementMenu() {
         if viewModel.pets.isEmpty {
-            appState.showError("You don't have any pets yet. Add a pet first to order a replacement tag.")
+            appState.showError(String(localized: "add_pet_first_replacement"))
             return
         }
 

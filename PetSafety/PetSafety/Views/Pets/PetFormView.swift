@@ -267,9 +267,9 @@ struct PetFormView: View {
             Text("delete_pet_dialog_message")
         }
         .alert(NSLocalizedString("cannot_delete_missing_pet", comment: ""), isPresented: $showingCannotDeleteAlert) {
-            Button("OK", role: .cancel) { }
+            Button("ok", role: .cancel) { }
         } message: {
-            Text(NSLocalizedString("cannot_delete_missing_message_short", comment: "You must mark this pet as found before deleting."))
+            Text("cannot_delete_missing_message_short")
         }
         .onChange(of: selectedPhoto) { _, newValue in
             Task {
@@ -315,10 +315,10 @@ struct PetFormView: View {
             healthParts.append(medical)
         }
         if let allergiesText = pet.allergies, !allergiesText.isEmpty {
-            healthParts.append("Allergies: \(allergiesText)")
+            healthParts.append("\(String(localized: "allergies")): \(allergiesText)")
         }
         if let medicationsText = pet.medications, !medicationsText.isEmpty {
-            healthParts.append("Medications: \(medicationsText)")
+            healthParts.append("\(String(localized: "medications")): \(medicationsText)")
         }
         if !healthParts.isEmpty {
             medicalInfo = healthParts.joined(separator: "\n\n")

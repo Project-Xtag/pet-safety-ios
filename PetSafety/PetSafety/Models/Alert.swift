@@ -140,8 +140,17 @@ struct MissingPetAlert: Codable, Identifiable {
         // Parse alert radius (default to 10km if not provided)
         alertRadiusKm = try container.decodeIfPresent(Double.self, forKey: .alertRadiusKm) ?? 10.0
 
-        // Parse reward amount
-        rewardAmount = try container.decodeIfPresent(Double.self, forKey: .rewardAmount)
+        // Parse reward amount (API may return number, string, or null)
+        if let numericReward = try? container.decodeIfPresent(Double.self, forKey: .rewardAmount) {
+            rewardAmount = numericReward
+        } else if
+            let rewardString = try? container.decodeIfPresent(String.self, forKey: .rewardAmount),
+            let parsedReward = Double(rewardString.trimmingCharacters(in: .whitespacesAndNewlines))
+        {
+            rewardAmount = parsedReward
+        } else {
+            rewardAmount = nil
+        }
 
         // Parse timestamps
         lastSeenAt = try container.decodeIfPresent(String.self, forKey: .lastSeenAt)

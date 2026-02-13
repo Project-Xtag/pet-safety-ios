@@ -745,17 +745,16 @@
 "support_category_other" = "Sonstiges";
 
 // FAQ-Einträge
-"help_faq_q1" = "Wie füge ich ein Haustier hinzu?";
-"help_faq_a1" = "Gehen Sie zur Registerkarte \"Meine Haustiere\" und tippen Sie auf das +. Geben Sie die Daten Ihres Haustiers ein und speichern Sie.";
-"help_faq_q2" = "Wie funktionieren QR-Tags?";
-"help_faq_a2" = "Jeder QR-Tag enthält einen eindeutigen Code, der mit dem Profil Ihres Haustiers verknüpft ist. Beim Scannen können Finder die Informationen sehen und Sie kontaktieren.";
-"help_faq_q3" = "Was passiert, wenn mein Haustier als vermisst markiert ist?";
-"help_faq_a3" = "Eine Warnung wird an Pet Safety Nutzer in der Nähe gesendet. Jeder, der den Tag scannt, wird gebeten, seinen Standort zu teilen.";
-"help_faq_q4" = "Wie aktualisiere ich meine Kontaktdaten?";
-"help_faq_a4" = "Gehen Sie zu Konto > Kontakte, um E-Mail und Telefonnummern zu aktualisieren, die auf dem Tag angezeigt werden.";
-"help_faq_q5" = "Sind meine persönlichen Daten sicher?";
-"help_faq_a5" = "Ja. Wir verwenden Verschlüsselung und sichere Server zum Schutz Ihrer Daten. Sie können über die Datenschutzeinstellungen steuern, welche Informationen sichtbar sind.";
-
+"help_faq_q1" = "Wie registriere ich mein Tier?";
+"help_faq_a1" = "Gehe zu 'Meine Tiere' und klicke auf 'Neues Tier hinzufügen'. Fülle alle Pflichtfelder aus und lade ein Foto hoch.";
+"help_faq_q2" = "Welche Informationen sollte ich im Profil angeben?";
+"help_faq_a2" = "Name, Art, Rasse, Alter, medizinische Angaben, Notfallkontakte und ein aktuelles Foto.";
+"help_faq_q3" = "Wie funktioniert der QR-Code-Tag?";
+"help_faq_a3" = "Jedes Tier erhält einen einzigartigen QR-Tag. Nach dem Scan können Finder das Profil sehen und dich kontaktieren.";
+"help_faq_q4" = "Kann ich die Informationen später aktualisieren?";
+"help_faq_a4" = "Ja! Gehe zu 'Meine Tiere', wähle dein Tier aus und klicke auf 'Profil bearbeiten'.";
+"help_faq_q5" = "Wie bestelle ich einen Ersatz-Tag?";
+"help_faq_a5" = "Gehe zum Profil deines Tieres und klicke auf 'Ersatz-Tag bestellen'.";
 // Anleitungen
 "help_guide_getting_started" = "Erste Schritte";
 "help_guide_managing_pets" = "Haustiere verwalten";
@@ -992,8 +991,8 @@
 // MARK: - App-Info
 "app_name_label" = "Pet Safety";
 "app_version" = "Version 1.0.0";
-"terms_url" = "Bedingungen: https://senra.pet/terms";
-"privacy_url" = "Datenschutz: https://senra.pet/privacy";
+"terms_url" = "Bedingungen: https://senra.pet/terms-conditions";
+"privacy_url" = "Datenschutz: https://senra.pet/privacy-policy";
 
 // MARK: - Scanner-Dynamische Beschreibungen
 "scanner_step1_dynamic_desc" = "Klicken Sie oben, um zu teilen, wo Sie %@ gefunden haben";
@@ -1026,7 +1025,15 @@
 
 // MARK: - Plan-Auswahl
 "plan_choose_title" = "Plan auswählen";
+"plan_tag_activated" = "Tag aktiviert!";
+"plan_choose_subtitle" = "Wählen Sie einen Plan, um alle Funktionen freizuschalten";
+"plan_upgrade_title" = "Plan upgraden";
+"plan_upgrade_subtitle" = "Mehr Funktionen für Ihre Haustiere";
+"plan_loading" = "Pläne werden geladen…";
 "plan_load_failed" = "Pläne konnten nicht geladen werden";
+"plan_skip_free" = "Vorerst überspringen (Gratis-Plan)";
+"plan_all_include" = "Alle Pläne enthalten:";
+"plan_paid_add" = "Bezahlte Pläne bieten zusätzlich:";
 "plan_feature_qr_tag" = "QR-Tag für Ihr Haustier";
 "plan_feature_scan_notif" = "Sofortige Scan-Benachrichtigungen";
 "plan_feature_public_profile" = "Öffentliches Haustierprofil";
@@ -1036,6 +1043,10 @@
 "plan_feature_sms" = "SMS-Benachrichtigungen";
 "plan_feature_photos" = "Bis zu 10 Fotos pro Haustier";
 "plan_feature_replacements" = "Kostenlose Tag-Ersatzlieferungen";
+"plan_popular" = "Beliebt";
+"plan_current" = "Aktueller Plan";
+"plan_select_free" = "Gratis-Plan wählen";
+"plan_select %@" = "%@ auswählen";
 
 // MARK: - Warnungen-Tab (Teil 1)
 "alerts_loading" = "Warnungen werden geladen…";
@@ -1196,18 +1207,18 @@
 "free_price" = "KOSTENLOS";
 "referral_expires %@" = "Gültig bis: %@";
 
-// MARK: - Success Stories Reunion (stubs)
-"reunion_template" = "%@ has been reunited. After %@ missing, %@ was successfully reunited with their family. Thank you to our amazing community for bringing %@ home!";
-"reunion_template_no_time" = "%@ has been reunited with their family! Thank you to our amazing community for bringing %@ home!";
-"owners_story" = "Owner's story:";
-"some_time" = "some time";
-"list" = "List";
-"map" = "Map";
-"post_to_success_stories" = "Post to Success Stories";
-"remove_from_success_stories" = "Remove from Success Stories";
-"removed_from_success_stories" = "Removed from Success Stories";
-"remove_story_confirm_title" = "Remove Success Story?";
-"remove_story_confirm_message" = "This will remove your pet's story from the public success stories feed.";
+// MARK: - Erfolgsgeschichten Wiedervereinigung
+"reunion_template" = "%@ wurde wiedervereint. Nach %@ Vermissung wurde %@ erfolgreich mit seiner Familie wiedervereint. Vielen Dank an unsere großartige Community, die %@ nach Hause gebracht hat!";
+"reunion_template_no_time" = "%@ wurde mit seiner Familie wiedervereint! Vielen Dank an unsere großartige Community, die %@ nach Hause gebracht hat!";
+"owners_story" = "Geschichte des Besitzers:";
+"some_time" = "einige Zeit";
+"list" = "Liste";
+"map" = "Karte";
+"post_to_success_stories" = "In Erfolgsgeschichten posten";
+"remove_from_success_stories" = "Aus Erfolgsgeschichten entfernen";
+"removed_from_success_stories" = "Aus Erfolgsgeschichten entfernt";
+"remove_story_confirm_title" = "Erfolgsgeschichte entfernen?";
+"remove_story_confirm_message" = "Dadurch wird die Geschichte Ihres Haustiers aus dem öffentlichen Erfolgsgeschichten-Feed entfernt.";
 
 // MARK: - SSE Subscription Events
 "sse_subscription_title" = "Abonnement aktualisiert";
@@ -1219,3 +1230,77 @@
 "create_alert_reward" = "Belohnung (optional)";
 "create_alert_reward_placeholder" = "z.B. 50";
 "reward_badge" = "\U20AC%@ Belohnung";
+
+// MARK: - Zusätzliche Lokalisierungsschlüssel
+"data_export_requested" = "Der Datenexport wird Ihnen innerhalb von 24 Stunden per E-Mail zugesandt";
+"account_deletion_unavailable" = "Die Kontolöschung ist derzeit nicht verfügbar. Bitte kontaktieren Sie den Support.";
+"cannot_delete_missing_message_short" = "Sie müssen dieses Haustier zuerst als gefunden markieren, bevor es gelöscht werden kann.";
+"plan_feature_pets_count" = "Haustiere: %@";
+"plan_feature_photos_count" = "%lld Fotos pro Haustier";
+"referral_status_pending" = "Ausstehend";
+"referral_status_signed_up" = "Registriert";
+"referral_status_subscribed" = "Abonniert";
+"referral_status_rewarded" = "Belohnt";
+"referral_share_message" = "Nutze meinen Empfehlungscode %@ und erhalte 2 Monate Pet Safety gratis! https://senra.pet/choose-plan?referral=%@";
+"help_faq_q6" = "Wie aktiviere ich meinen Tag nach der Lieferung?";
+"help_faq_a6" = "Gehe in der App zu \"Tag scannen\" und richte die Kamera deines Handys auf den QR-Code auf deinem Tag. Dadurch wird der Tag mit deinem Konto verknüpft. Dann wirst du aufgefordert, ein bestehendes Tier auszuwählen oder ein neues Tierprofil zu erstellen. Nach der Aktivierung wähle deinen Aboplan.";
+"help_faq_q7" = "Kann ich die Informationen meines Tieres nach der Registrierung aktualisieren?";
+"help_faq_a7" = "Ja — du kannst das Profil deines Tieres jederzeit bearbeiten. Gehe zu \"Meine Tiere\", wähle dein Tier und tippe auf \"Bearbeiten\". Du kannst jedes Feld einschließlich Fotos aktualisieren. Änderungen werden sofort gespeichert.";
+"help_faq_q8" = "Was soll ich tun, wenn mein Tier vermisst wird?";
+"help_faq_a8" = "Gehe zu \"Meine Tiere\" und tippe auf das Menü auf der Karte deines Tieres, dann wähle \"Als vermisst markieren\". Dies erstellt eine Vermisstmeldung, die für die Senra-Community in deiner Gegend sichtbar ist. Nutzer in deiner Nähe sehen die Meldung und können Sichtungen mit Standortinformationen melden. Du wirst sofort über Sichtungen benachrichtigt.";
+"help_faq_q9" = "Wie funktionieren Vermisstmeldungen?";
+"help_faq_a9" = "Wenn du ein Tier als vermisst markierst, wird eine Meldung mit Foto und Details erstellt. Andere Senra-Nutzer im Umkreis von 10 km können die Meldung auf der Vermisste-Tiere-Karte sehen. Jeder in der Community kann eine Sichtung melden, wobei dir Standort und Kontaktdaten zugesendet werden. Tierärzte und Tierheime, die bei Senra registriert sind, erhalten die Meldung ebenfalls.";
+"help_faq_q10" = "Wie bestelle ich einen Ersatz-Tag?";
+"help_faq_a10" = "Gehe zu deiner Kontoseite und tippe auf \"Ersatz bestellen\". Wähle das Tier aus, das einen neuen Tag braucht. Ultimate-Mitglieder erhalten unbegrenzt kostenlose Ersatzlieferungen, Standard-Mitglieder eine kostenlose pro Jahr, und Starter-Mitglieder können Ersatz für eine geringe Versandgebühr bestellen.";
+"help_faq_q11" = "Was ist das Empfehlungsprogramm?";
+"help_faq_a11" = "Teile den Code SENRAFRIEND mit Freunden und Familie. Wenn jemand diesen Code verwendet und einen bezahlten Plan (Standard oder Ultimate) abschließt, erhaltet ihr beide 2 Monate gratis. Du kannst deine Empfehlungen auf der Empfehlungsseite verfolgen.";
+"help_faq_q12" = "In welche Länder liefert ihr?";
+"help_faq_a12" = "Wir liefern derzeit nach Ungarn, in die Slowakei, nach Tschechien, Österreich, Rumänien, Kroatien, Spanien und Portugal. Der Versand kostet £3,90 pro Bestellung.";
+"help_faq_q13" = "Kann ich mehrere Tiere in einem Konto haben?";
+"help_faq_a13" = "Ja. Im Starter (kostenlos) Plan kannst du ein Tier registrieren. Der Standard-Plan unterstützt ebenfalls ein Tier. Der Ultimate-Plan unterstützt unbegrenzt viele Tiere. Du kannst deinen Plan jederzeit auf der Kontoseite upgraden.";
+"help_faq_q14" = "Wie melde ich ein gefundenes Tier?";
+"help_faq_a14" = "Wenn das Tier einen Senra-Tag hat, scanne einfach den QR-Code mit deiner Handykamera — keine App nötig. Du siehst das Profil des Tieres und kannst deinen Standort mit dem Besitzer teilen. Ohne Tag kannst du die Vermisste-Tiere-Karte auf der Senra-Website prüfen, ob das Tier als vermisst gemeldet wurde.";
+"help_faq_q15" = "Sind meine persönlichen Daten sicher?";
+"help_faq_a15" = "Ja. Du kontrollierst genau, welche Informationen sichtbar sind, wenn jemand den Tag deines Tieres scannt. Unter Einstellungen > Datenschutz kannst du Telefonnummer, E-Mail und Adresse ein- oder ausblenden. Dein Login ist durch Einmal-Codes gesichert — es gibt keine Passwörter. Du kannst dein Konto jederzeit löschen.";
+"help_faq_q16" = "Ich habe meinen Tag verloren oder er ist beschädigt — was soll ich tun?";
+"help_faq_a16" = "Keine Sorge — das digitale Profil deines Tieres ist sicher und nicht auf dem Tag gespeichert. Gehe zu deiner Kontoseite und tippe auf \"Ersatz bestellen\". Ein neuer Tag mit frischem QR-Code wird mit deinem bestehenden Tierprofil verknüpft. Standard-Mitglieder erhalten eine kostenlose Ersatzlieferung pro Jahr, Ultimate-Mitglieder unbegrenzt, und Starter-Mitglieder zahlen eine geringe Versandgebühr. Dein alter Tag wird deaktiviert, sobald der neue aktiviert ist.";
+"help_faq_q17" = "Mein Tag lässt sich nicht scannen — wie behebe ich das?";
+"help_faq_a17" = "Versuche diese Schritte: Reinige die Tag-Oberfläche mit einem feuchten Tuch, sorge für gute Beleuchtung, halte die Kamera ruhig etwa 10-15 cm vom Tag entfernt und stelle sicher, dass deine Kamera-App funktioniert. Wenn der QR-Code zerkratzt oder verblasst ist, kannst du die manuelle Eingabe unter \"Tag scannen\" nutzen. Wenn der Tag zu beschädigt ist, bestelle einen kostenlosen Ersatz über deine Kontoseite (Standard und Ultimate).";
+"help_faq_q18" = "Ich habe ein Tier ohne Senra-Tag gefunden — was kann ich tun?";
+"help_faq_a18" = "Prüfe die Vermisste-Tiere-Karte auf der Senra-Website (senra.pet) — das Tier könnte in deiner Gegend als vermisst gemeldet sein. Du kannst Vermisstmeldungen ohne Konto ansehen. Bei einer Übereinstimmung kannst du eine Sichtung mit deinem Standort melden. Du kannst das Tier auch zum Tierarzt bringen, um nach einem Mikrochip zu suchen.";
+"help_faq_q19" = "Kann ich meine E-Mail-Adresse ändern?";
+"help_faq_a19" = "Deine primäre E-Mail wird als Kontoidentität verwendet und kann nicht direkt geändert werden. Wenn du eine andere E-Mail nutzen möchtest, kannst du eine sekundäre E-Mail unter Einstellungen > Kontaktdaten hinzufügen. Wenn du deine primäre E-Mail unbedingt ändern musst, kontaktiere unser Support-Team.";
+"help_faq_q20" = "Was ist der Unterschied zwischen einem Mikrochip und einem Senra QR-Tag?";
+"help_faq_a20" = "Ein Mikrochip ist ein kleines Implantat unter der Haut deines Tieres, das eine eindeutige ID-Nummer speichert — es benötigt jedoch einen speziellen Scanner (meist nur bei Tierärzten und Tierheimen). Ein Senra QR-Tag funktioniert sofort mit jeder Smartphone-Kamera und zeigt das vollständige Profil, Foto und deine Kontaktdaten. Der Finder kann auch seinen GPS-Standort mit dir teilen. Wir empfehlen beides: den Mikrochip als dauerhafte Absicherung und den Senra-Tag für die sofortige, alltägliche Identifikation.";
+"help_faq_q21" = "Was passiert mit meinen Daten, wenn ich mein Abo kündige?";
+"help_faq_a21" = "Wenn du dein Abo kündigst, behältst du den Zugriff bis zum Ende des aktuellen Abrechnungszeitraums. Danach wechselt dein Konto automatisch zum kostenlosen Starter-Plan. Tierprofile, Fotos und QR-Tags bleiben aktiv — du verlierst nur Premium-Funktionen wie SMS, Tierarzt-Alerts und kostenlose Ersatz-Tags. Deine Daten werden beim Kündigen nie gelöscht. Für eine dauerhafte Löschung nutze die Kontolöschung in den Einstellungen.";
+"help_faq_q22" = "Wie registriere ich meinen Tierarzt oder mein Tierheim bei Senra?";
+"help_faq_a22" = "Tierärzte und Tierheime können sich unter senra.pet/register-vet-shelter registrieren. Fülle die Praxis- oder Organisationsdetails aus, und wir senden eine Bestätigungs-E-Mail. Nach der Bestätigung erhältst du automatisch E-Mail-Alerts bei vermissten Tieren in deiner Nähe. Es gibt keine Kosten und kein Login ist erforderlich. Tierbesitzer können ihren Tierarzt auch in ihrem Namen registrieren.";
+"help_faq_q23" = "Wie teile ich eine Erfolgsgeschichte, wenn mein Tier gefunden wird?";
+"help_faq_a23" = "Wenn du dein Tier unter \"Meine Tiere\" als gefunden markierst, wirst du gefragt, ob du deine Wiedervereinigungsgeschichte teilen möchtest. Du kannst eine kurze Nachricht hinzufügen und den Wiedervereinigungsort bestätigen. Öffentliche Geschichten erscheinen auf der Gefundene-Tiere-Karte. Du kannst auch später eine Geschichte posten oder entfernen.";
+"help_faq_q24" = "Welche Browser und Geräte werden unterstützt?";
+"help_faq_a24" = "Senra funktioniert auf allen modernen Browsern einschließlich Chrome, Safari, Firefox und Edge, auf Mobilgeräten und Desktop. QR-Tag-Scan funktioniert mit jeder Smartphone-Kamera — der Finder braucht keine App und kein Konto. Push-Benachrichtigungen werden in Chrome und Edge auf Desktop und Android unterstützt. Für die beste Erfahrung empfehlen wir einen aktuellen Browser auf deinem Handy.";
+"help_faq_q25" = "Kann ich Tags für mehrere Tiere gleichzeitig bestellen?";
+"help_faq_a25" = "Jede Bestellung enthält Tags für die Tiernamen, die du beim Checkout angibst. Du kannst mehrere Namen in einer Bestellung eingeben. Scanne nach der Lieferung jeden Tag, um ihn zu aktivieren und dem richtigen Tier zuzuordnen. Wenn du später mehr Tags brauchst, kannst du jederzeit weitere Bestellungen aufgeben.";
+"help_faq_q26" = "Wie erreichen Vermisstmeldungen Tierärzte und Tierheime?";
+"help_faq_a26" = "Wenn du dein Tier als vermisst markierst, sendet Senra automatisch E-Mail-Alerts an alle verifizierten Tierärzte und Tierheime in deiner Gegend. Das bedeutet, dass lokale Tierfachleute sofort wissen, dass dein Tier vermisst wird. Je mehr Tierärzte und Tierheime registriert sind, desto stärker das Sicherheitsnetzwerk. Du kannst helfen, indem du deinen eigenen Tierarzt zur Registrierung bei Senra ermutigst.";
+"help_faq_q27" = "Kann ich einen Tag auf ein anderes Tier übertragen?";
+"help_faq_a27" = "Jeder QR-Tag ist dauerhaft mit einem Tierprofil verknüpft und kann nicht neu zugewiesen werden. Wenn ein Tier verstirbt oder du den Tag nicht mehr brauchst, wird der alte Tag einfach inaktiv. Um ein neues Tier zu taggen, bestelle einen neuen Tag über die Kontoseite. Wenn du einen Standard- oder Ultimate-Plan hast, kannst du Anspruch auf einen kostenlosen Ersatz-Tag haben.";
+"help_guide_qr_tags_title" = "QR-Code Tier-Tags";
+"help_guide_qr_tags_desc" = "Erfahre mehr über unsere smarten QR-Tags.";
+"help_guide_materials_title" = "Materialien & Haltbarkeit";
+"help_guide_materials_desc" = "Informationen über Materialien und Pflege.";
+"help_guide_emergency_title" = "Notfallkontakt-Funktionen";
+"help_guide_emergency_desc" = "Wie unser Notfallkontakt-System funktioniert.";
+"help_guide_profile_title" = "Profilverwaltung";
+"help_guide_profile_desc" = "Profil verwalten und Informationen aktualisieren.";
+"help_guide_missing_alerts_title" = "Vermisstmeldungen & Sichtungen";
+"help_guide_missing_alerts_desc" = "Wenn dein Tier vermisst wird, markiere es unter \"Meine Tiere\" als vermisst, um eine sofortige Community-Warnung zu erstellen. Das Foto und die Details deines Tieres erscheinen auf der Vermisste-Tiere-Karte, die für alle Senra-Nutzer in deiner Gegend sichtbar ist. Community-Mitglieder können Sichtungen mit ihrem GPS-Standort melden, die du als Benachrichtigungen erhältst. Registrierte Tierärzte und Tierheime werden ebenfalls benachrichtigt. Wenn dein Tier gefunden wird, markiere es als gefunden und teile optional deine Wiedervereinigungsgeschichte, um die Community zu inspirieren.";
+"help_guide_community_title" = "Community & Gefundene Tiere";
+"help_guide_community_desc" = "Die Stärke von Senra ist die Community. Die Vermisste-Tiere-Karte zeigt aktive Meldungen in deiner Nähe — prüfe sie, um zu sehen, ob Tiere in deiner Gegend als vermisst gemeldet wurden. Die Gefundene-Tiere-Seite feiert erfolgreiche Wiedervereinigungen mit Geschichten von Tierbesitzern. Du kannst deinen Tierarzt oder dein Tierheim bei Senra registrieren, damit sie automatisch Vermisstmeldungen erhalten und so ein stärkeres Sicherheitsnetzwerk für alle Tiere in deiner Gegend entsteht.";
+"help_faq_group_getting_started" = "Erste Schritte";
+"help_faq_group_tags_scanning" = "Tags & Scannen";
+"help_faq_group_missing_pets" = "Vermisste Tiere & Alerts";
+"help_faq_group_billing_plans" = "Abrechnung & Pläne";
+"help_faq_group_privacy_account" = "Datenschutz & Konto";
+"help_faq_group_troubleshooting" = "Fehlerbehebung";

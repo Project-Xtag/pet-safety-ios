@@ -277,12 +277,12 @@ struct PlanCard: View {
             VStack(alignment: .leading, spacing: 8) {
                 FeatureRow(
                     icon: "pawprint",
-                    text: "Pets: \(plan.features.maxPetsDisplay)",
+                    text: String(format: String(localized: "plan_feature_pets_count"), plan.features.maxPetsDisplay),
                     included: true
                 )
                 FeatureRow(
                     icon: "photo",
-                    text: "\(plan.features.maxPhotosPerPet) photos per pet",
+                    text: String(format: String(localized: "plan_feature_photos_count"), plan.features.maxPhotosPerPet),
                     included: true
                 )
                 FeatureRow(

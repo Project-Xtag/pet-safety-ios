@@ -186,13 +186,13 @@ struct AuthenticationView: View {
                                 .font(.system(size: 12))
                                 .foregroundColor(.mutedText)
                             HStack(spacing: 4) {
-                                Link("terms_of_service", destination: URL(string: "https://senra.pet/terms")!)
+                                Link("terms_of_service", destination: URL(string: "https://senra.pet/terms-conditions")!)
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundColor(.brandOrange)
                                 Text("terms_and")
                                     .font(.system(size: 12))
                                     .foregroundColor(.mutedText)
-                                Link("privacy_policy", destination: URL(string: "https://senra.pet/privacy")!)
+                                Link("privacy_policy", destination: URL(string: "https://senra.pet/privacy-policy")!)
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundColor(.brandOrange)
                             }

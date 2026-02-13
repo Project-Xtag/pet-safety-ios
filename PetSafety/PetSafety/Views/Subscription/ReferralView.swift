@@ -180,7 +180,7 @@ struct ReferralView: View {
 
     private func shareCode() {
         guard let code else { return }
-        let text = "Use my referral code \(code) to get 2 months free on Pet Safety! https://senra.pet/choose-plan?referral=\(code)"
+        let text = String(format: String(localized: "referral_share_message"), code, code)
         let controller = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let window = scene.windows.first,
@@ -205,10 +205,10 @@ struct ReferralView: View {
 
     private func statusText(_ status: String) -> String {
         switch status {
-        case "pending": return "Pending"
-        case "signed_up": return "Signed Up"
-        case "subscribed": return "Subscribed"
-        case "rewarded": return "Rewarded"
+        case "pending": return String(localized: "referral_status_pending")
+        case "signed_up": return String(localized: "referral_status_signed_up")
+        case "subscribed": return String(localized: "referral_status_subscribed")
+        case "rewarded": return String(localized: "referral_status_rewarded")
         default: return status.capitalized
         }
     }

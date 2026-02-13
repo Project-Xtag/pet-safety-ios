@@ -745,24 +745,73 @@
 "support_category_other" = "Other";
 
 // FAQ Items
-"help_faq_q1" = "How do I add a pet?";
-"help_faq_a1" = "Go to the My Pets tab and tap the + button. Fill in your pet's details and save.";
-"help_faq_q2" = "How do QR tags work?";
-"help_faq_a2" = "Each QR tag contains a unique code linked to your pet's profile. When someone scans it, they can see your pet's information and contact you.";
-"help_faq_q3" = "What happens when my pet is marked as missing?";
-"help_faq_a3" = "An alert is sent to nearby Pet Safety users. Anyone who scans your pet's tag will be prompted to share their location with you.";
-"help_faq_q4" = "How do I update my contact information?";
-"help_faq_a4" = "Go to Account > Contacts to update your email and phone numbers that appear on your pet's tag.";
-"help_faq_q5" = "Is my personal data secure?";
-"help_faq_a5" = "Yes. We use encryption and secure servers to protect your data. You can control what information is visible through Privacy Mode settings.";
-
+"help_faq_q1" = "How do I create an account?";
+"help_faq_a1" = "Senra uses a passwordless login. Simply enter your email address on the login page and we'll send you a 6-digit verification code. Enter the code to sign in. If you're new, your account is created automatically on your first login — no separate registration needed.";
+"help_faq_q2" = "How do I register my pet?";
+"help_faq_a2" = "Go to 'My Pets' and tap 'Add New Pet'. Enter your pet's name, species, breed, and age, then upload a photo. If you've already received your QR tag, you can scan it during registration to link it to your pet's profile straight away.";
+"help_faq_q3" = "What information should I include in my pet's profile?";
+"help_faq_a3" = "At minimum, add your pet's name, species, and a clear photo. For the best chance of a quick reunion if they go missing, also add: breed, age, weight, colour, microchip number, medical notes, allergies, medications, and any unique features (markings, scars, etc.). The more detail, the easier it is for someone to identify your pet.";
+"help_faq_q4" = "How does the QR code tag work?";
+"help_faq_a4" = "Each Senra tag has a unique QR code. When someone finds your pet and scans it with their phone camera, they instantly see your pet's profile — photo, name, medical info, and your contact details. They can also share their location with you so you know exactly where your pet is. No app download is needed for the person scanning.";
+"help_faq_q5" = "What happens when someone scans my pet's tag?";
+"help_faq_a5" = "The scanner sees your pet's public profile with the details you've chosen to share (name, photo, medical info, contact details). They can tap 'I found this pet!' to share their location with you. You'll receive an instant notification by email (and SMS if you have a Standard or Ultimate plan) with the finder's location and details.";
+"help_faq_q6" = "How do I activate my tag after it arrives?";
+"help_faq_a6" = "Go to 'Scan Tag' in the app and point your phone camera at the QR code on your tag. This links the tag to your account. You'll then be asked to choose an existing pet or create a new pet profile. After activation, select your subscription plan.";
+"help_faq_q7" = "Can I update my pet's information after registration?";
+"help_faq_a7" = "Yes — you can edit your pet's profile at any time. Go to 'My Pets', select your pet, and tap 'Edit'. You can update any field including photos. Changes are saved immediately.";
+"help_faq_q8" = "What should I do if my pet goes missing?";
+"help_faq_a8" = "Go to 'My Pets' and tap the menu on your pet's card, then select 'Mark as Missing'. This creates a missing pet alert visible to the Senra community in your area. People near you will see the alert and can report sightings with location information. You'll be notified immediately of any sightings.";
+"help_faq_q9" = "How do missing pet alerts work?";
+"help_faq_a9" = "When you mark a pet as missing, an alert is created with your pet's photo and details. Other Senra users within 10km can see the alert on the Missing Pets map. Anyone in the community can report a sighting, which sends you their location and contact information. Vets and shelters registered with Senra in your area also receive the alert.";
+"help_faq_q10" = "How do I order a replacement tag?";
+"help_faq_a10" = "Go to your Account page and tap 'Order Replacement'. Select the pet that needs a new tag. Ultimate plan members get unlimited free replacements, Standard plan members get one free replacement per year, and Starter plan members can order replacements for a small shipping fee.";
+"help_faq_q11" = "What is the referral programme?";
+"help_faq_a11" = "Share the code SENRAFRIEND with friends and family. When someone uses this code and subscribes to a paid plan (Standard or Ultimate), both you and your friend receive 2 months free. You can track your referrals and their status on the Referral page.";
+"help_faq_q12" = "Which countries do you ship to?";
+"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping costs £3.90 per order.";
+"help_faq_q13" = "Can I have multiple pets on one account?";
+"help_faq_a13" = "Yes. On the Starter (free) plan you can register one pet. The Standard plan also supports one pet. The Ultimate plan supports unlimited pets. You can upgrade your plan at any time from the Account page.";
+"help_faq_q14" = "How do I report a pet I've found?";
+"help_faq_a14" = "If the pet has a Senra tag, simply scan the QR code with your phone camera — no app needed. You'll see the pet's profile and can share your location with the owner. If there's no tag, you can check the Missing Pets map on the Senra website to see if the pet has been reported missing in your area.";
+"help_faq_q15" = "Is my personal information safe?";
+"help_faq_a15" = "Yes. You control exactly what information is visible when someone scans your pet's tag. In Settings > Privacy, you can choose to show or hide your phone number, email, and address. Your login is secured with one-time verification codes — there are no passwords to be stolen. You can delete your account and all data at any time.";
+"help_faq_q16" = "I lost my tag or it's damaged — what should I do?";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and not stored on the tag itself. Go to your Account page and tap 'Order Replacement'. A new tag with a fresh QR code will be linked to your existing pet profile. Standard plan members get one free replacement per year, Ultimate members get unlimited free replacements, and Starter members pay a small shipping fee. Your old tag will stop working once the new one is activated.";
+"help_faq_q17" = "My tag won't scan — how do I fix it?";
+"help_faq_a17" = "Try these steps: clean the tag surface with a damp cloth, ensure you have good lighting, hold your phone camera steady about 10-15cm from the tag, and make sure your camera app or QR scanner is working. If the QR code is scratched or faded, you can use the manual code entry option in the app under 'Scan Tag'. If the tag is too damaged to read, order a free replacement from your Account page (Standard and Ultimate plans).";
+"help_faq_q18" = "I found a pet without a Senra tag — what can I do?";
+"help_faq_a18" = "Check the Missing Pets map on the Senra website (senra.pet) — the pet may have been reported missing in your area. You can view missing pet alerts without an account. If you find a match, you can report a sighting with your location to help reunite the pet with their owner. You can also take the pet to a local vet to check for a microchip.";
+"help_faq_q19" = "Can I change my email address?";
+"help_faq_a19" = "Your primary email address is used as your account identity and cannot be changed directly. If you need to use a different email, you can add a secondary email in Settings > Contact Details — this will also be shown on your pet's profile. If you absolutely need to change your primary email, contact our support team and we'll help you migrate your account.";
+"help_faq_q20" = "What's the difference between a microchip and a Senra QR tag?";
+"help_faq_a20" = "A microchip is a tiny implant under your pet's skin that stores a unique ID number — but it requires a special scanner (usually only available at vets and shelters) to read. A Senra QR tag works instantly with any smartphone camera, showing your pet's full profile, photo, and your contact details on the spot. The person who finds your pet can also share their GPS location with you. We recommend using both: the microchip as a permanent backup, and the Senra tag for instant, everyday identification.";
+"help_faq_q21" = "What happens to my data if I cancel my subscription?";
+"help_faq_a21" = "If you cancel your subscription, you keep access to your paid features until the end of your current billing period. After that, your account automatically moves to the free Starter plan. Your pet profiles, photos, and QR tags remain active — you just lose access to premium features like SMS notifications, vet alerts, and free tag replacements. Your data is never deleted when you cancel. To permanently remove all data, use the Account Deletion option in Settings.";
+"help_faq_q22" = "How do I register my vet or shelter with Senra?";
+"help_faq_a22" = "Vets and shelters can register at senra.pet/register-vet-shelter. Fill in your practice or organisation details, and we'll send a verification email. Once confirmed, you'll automatically receive email alerts when pets go missing in your area — helping you reunite lost pets with their families. There's no cost and no login required. Pet owners can also register their local vet on their behalf.";
+"help_faq_q23" = "How do I share a success story when my pet is found?";
+"help_faq_a23" = "When you mark your pet as found in 'My Pets', you'll be asked if you'd like to share your reunion story. You can add a short message about how your pet was found and confirm the reunion location. Public stories appear on the Found Pets map, inspiring the community and showing that the system works. You can also post or remove a success story later from your pet's profile page.";
+"help_faq_q24" = "Which browsers and devices are supported?";
+"help_faq_a24" = "Senra works on all modern web browsers including Chrome, Safari, Firefox, and Edge on both mobile and desktop. QR tag scanning works with any smartphone camera — the person finding your pet doesn't need the Senra app or even an account. Push notifications are supported in Chrome and Edge on desktop and Android. For the best experience, we recommend using an up-to-date browser on your phone.";
+"help_faq_q25" = "Can I order tags for multiple pets at once?";
+"help_faq_a25" = "Each tag order includes tags for the pet names you specify during checkout. You can enter multiple pet names in a single order. After your tags arrive, scan each one to activate it and link it to the correct pet profile. If you need tags for more pets later, you can place additional orders from the Account page at any time.";
+"help_faq_q26" = "How do missing pet alerts reach vets and shelters?";
+"help_faq_a26" = "When you mark your pet as missing, Senra automatically sends email alerts to all verified vets and shelters registered in your area. This means local animal professionals are immediately aware that your pet is missing and can look out for them. The more vets and shelters registered in your area, the stronger the safety network. You can help by encouraging your own vet to register with Senra.";
+"help_faq_q27" = "Can I transfer a tag to a different pet?";
+"help_faq_a27" = "Each QR tag is permanently linked to one pet profile and cannot be reassigned. If a pet passes away or you no longer need a tag, the old tag simply becomes inactive. To tag a new pet, order a new tag from the Account page. If you're on a Standard or Ultimate plan, you may be eligible for a free replacement tag for your new pet.";
 // Guide Items
-"help_guide_getting_started" = "Getting Started";
-"help_guide_managing_pets" = "Managing Your Pets";
-"help_guide_qr_tags" = "Understanding QR Tags";
-"help_guide_missing_pet" = "What To Do If Your Pet Goes Missing";
-"help_guide_privacy" = "Privacy & Security Settings";
-
+"help_guide_qr_tags_title" = "QR Code Pet Tags";
+"help_guide_qr_tags_desc" = "Each Senra tag features a unique QR code that links to your pet's digital profile. Anyone who finds your pet can scan the code with their phone camera — no app download required. The scanner instantly sees your pet's photo, name, medical information, and your contact details. They can also share their GPS location with you so you know exactly where your pet is. Tags work with all modern smartphones.";
+"help_guide_materials_title" = "Tag Materials & Durability";
+"help_guide_materials_desc" = "Senra tags are made from durable, lightweight metal with an epoxy coating for extra protection. They're waterproof and UV-resistant, suitable for all weather conditions. The QR code is printed with fade-resistant ink to remain scannable over time. Tags attach securely to your pet's collar. If a tag becomes damaged or the QR code is no longer scannable, you can order a replacement from your Account page — free for Standard and Ultimate plan members.";
+"help_guide_emergency_title" = "Emergency Contact & Alerts";
+"help_guide_emergency_desc" = "When someone scans your pet's tag, you receive an instant notification by email with the finder's location. Standard and Ultimate plan members also receive SMS alerts for faster response. If you mark your pet as missing, a community alert is sent to all Senra users within 10km, and registered vets and shelters in your area are also notified. Anyone in the community can report sightings with their location, building a trail to help you find your pet.";
+"help_guide_profile_title" = "Pet Profile Management";
+"help_guide_profile_desc" = "Your pet's digital profile is the heart of Senra. Add essential details like name, species, breed, age, and a clear photo. You can also include medical information (allergies, medications, conditions), microchip number, and unique features that help identify your pet. Upload multiple photos to a gallery. All information can be updated at any time from the 'My Pets' section. You control which of your personal details (phone, email, address) are visible to people who scan the tag.";
+"help_guide_missing_alerts_title" = "Missing Pet Alerts & Sightings";
+"help_guide_missing_alerts_desc" = "If your pet goes missing, mark them as missing from 'My Pets' to create an instant community alert. Your pet's photo and details appear on the Missing Pets map visible to all Senra users in your area. Community members can report sightings with their GPS location, which you receive as notifications. Registered vets and shelters are also alerted. Once your pet is found, mark them as found and optionally share your reunion story to inspire the community.";
+"help_guide_community_title" = "Community & Found Pets";
+"help_guide_community_desc" = "Senra's strength is its community. The Missing Pets map shows active alerts near you — check it to see if any pets have been reported missing in your area. The Found Pets page celebrates successful reunions with stories from pet owners. You can register your local vet or animal shelter with Senra so they receive missing pet alerts automatically, helping create a stronger safety network for all pets in your area.";
 // MARK: - Privacy Mode
 "privacy_contact_visibility" = "Contact Visibility";
 "privacy_contact_footer" = "Control which contact details are visible when someone scans your pet's QR tag.";
@@ -992,8 +1041,8 @@
 // MARK: - App Info
 "app_name_label" = "Pet Safety";
 "app_version" = "Version 1.0.0";
-"terms_url" = "Terms: https://senra.pet/terms";
-"privacy_url" = "Privacy: https://senra.pet/privacy";
+"terms_url" = "Terms: https://senra.pet/terms-conditions";
+"privacy_url" = "Privacy: https://senra.pet/privacy-policy";
 
 // MARK: - Scanner Dynamic Descriptions
 "scanner_step1_dynamic_desc" = "Click the button above to share where you found %@";
@@ -1231,3 +1280,21 @@
 "create_alert_reward" = "Reward (optional)";
 "create_alert_reward_placeholder" = "e.g. 50";
 "reward_badge" = "\U20AC%@ Reward";
+
+// MARK: - Additional Localization Keys
+"data_export_requested" = "Data export will be emailed to you within 24 hours";
+"account_deletion_unavailable" = "Account deletion is currently not available. Please contact support.";
+"cannot_delete_missing_message_short" = "You must mark this pet as found before deleting.";
+"plan_feature_pets_count" = "Pets: %@";
+"plan_feature_photos_count" = "%lld photos per pet";
+"referral_status_pending" = "Pending";
+"referral_status_signed_up" = "Signed Up";
+"referral_status_subscribed" = "Subscribed";
+"referral_status_rewarded" = "Rewarded";
+"referral_share_message" = "Use my referral code %@ to get 2 months free on Pet Safety! https://senra.pet/choose-plan?referral=%@";
+"help_faq_group_getting_started" = "Getting Started";
+"help_faq_group_tags_scanning" = "Tags & Scanning";
+"help_faq_group_missing_pets" = "Missing Pets & Alerts";
+"help_faq_group_billing_plans" = "Billing & Plans";
+"help_faq_group_privacy_account" = "Privacy & Account";
+"help_faq_group_troubleshooting" = "Troubleshooting";

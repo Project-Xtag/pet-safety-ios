@@ -745,17 +745,16 @@
 "support_category_other" = "Egyéb";
 
 // GYIK elemek
-"help_faq_q1" = "Hogyan adok hozzá kedvencet?";
-"help_faq_a1" = "Lépj a Kedvenceim fülre és koppints a + gombra. Töltsd ki a kedvenced adatait, majd mentsd.";
-"help_faq_q2" = "Hogyan működnek a QR biléták?";
-"help_faq_a2" = "Minden QR biléta egyedi kódot tartalmaz, amely a kedvenced profiljához kapcsolódik. Amikor valaki beolvassa, láthatja a kedvenced információit és kapcsolatba léphet veled.";
-"help_faq_q3" = "Mi történik, ha a kedvencem eltűntként van jelölve?";
-"help_faq_a3" = "Riasztást küldünk a közelben lévő Pet Safety felhasználóknak. Bárki, aki beolvassa a kedvenced bilétáját, felkérést kap a helyzet megosztására.";
-"help_faq_q4" = "Hogyan frissíthetem az elérhetőségeimet?";
-"help_faq_a4" = "Lépj a Fiók > Kapcsolatok menüpontra, és frissítsd az email címeidet és telefonszámaidat, amelyek a kedvenced bilétáján megjelennek.";
-"help_faq_q5" = "Biztonságban vannak a személyes adataim?";
-"help_faq_a5" = "Igen. Titkosítást és biztonságos szervereket használunk az adataid védelmére. Az adatokat az Adatvédelmi mód beállításaiban szabályozhatod.";
-
+"help_faq_q1" = "Hogyan regisztrálhatom a kedvencemet?";
+"help_faq_a1" = "A kedvencedet a 'Kedvenceim' szekcióban regisztrálhatod az 'Új kedvenc hozzáadása' gombra kattintva. Töltsd ki a szükséges információkat és tölts fel egy fotót.";
+"help_faq_q2" = "Milyen információkat kell megadnom a kedvencem profiljában?";
+"help_faq_a2" = "Add meg a kedvenced nevét, faját, fajtáját, korát, bármilyen egészségügyi állapotot, vészhelyzeti elérhetőségeket és egy friss fotót. Ez segít a gyors azonosításban és hazajuttatásban.";
+"help_faq_q3" = "Hogyan működik a QR-kódos biléta?";
+"help_faq_a3" = "Minden kedvenc egyedi QR-kódos bilétát kap. Amikor valaki megtalálja a kedvencedet és beolvassa a kódot, megtekintheti a kedvenced profilját és kapcsolatfelvételi adatait a hazajuttatáshoz.";
+"help_faq_q4" = "Később frissíthetem a kedvencem adatait?";
+"help_faq_a4" = "Igen! Bármikor frissítheted a kedvenced adatait a 'Kedvenceim' menüpontban, a kedvenc kiválasztása után a 'Profil szerkesztése' gombra kattintva.";
+"help_faq_q5" = "Hogyan rendelhetek cserebilétát?";
+"help_faq_a5" = "Ha cserebilétára van szükséged, menj a kedvenced profiljába és kattints a 'Cserebiléta rendelése' gombra. Kövesd a lépéseket a rendelés befejezéséhez.";
 // Útmutató elemek
 "help_guide_getting_started" = "Első lépések";
 "help_guide_managing_pets" = "Kedvenceid kezelése";
@@ -992,8 +991,8 @@
 // MARK: - Alkalmazás információ
 "app_name_label" = "Pet Safety";
 "app_version" = "Verzió 1.0.0";
-"terms_url" = "Feltételek: https://senra.pet/terms";
-"privacy_url" = "Adatvédelem: https://senra.pet/privacy";
+"terms_url" = "Feltételek: https://senra.pet/terms-conditions";
+"privacy_url" = "Adatvédelem: https://senra.pet/privacy-policy";
 
 // MARK: - Beolvasó dinamikus leírások
 "scanner_step1_dynamic_desc" = "Kattints a fenti gombra, hogy megoszd, hol találtad meg %@-t";
@@ -1231,3 +1230,77 @@
 "create_alert_reward" = "Jutalom (opcionális)";
 "create_alert_reward_placeholder" = "pl. 50";
 "reward_badge" = "\U20AC%@ jutalom";
+
+// MARK: - További lokalizációs kulcsok
+"data_export_requested" = "Az adatexportálás 24 órán belül e-mailben érkezik";
+"account_deletion_unavailable" = "A fiók törlése jelenleg nem elérhető. Kérjük, lépjen kapcsolatba az ügyfélszolgálattal.";
+"cannot_delete_missing_message_short" = "Először jelölje meg ezt a kisállatot megtaláltként a törlés előtt.";
+"plan_feature_pets_count" = "Kisállatok: %@";
+"plan_feature_photos_count" = "%lld fotó kisállatonként";
+"referral_status_pending" = "Függőben";
+"referral_status_signed_up" = "Regisztrált";
+"referral_status_subscribed" = "Előfizető";
+"referral_status_rewarded" = "Jutalmazott";
+"referral_share_message" = "Használd az ajánlókódomat %@ és kapj 2 hónap ingyenest a Pet Safety-n! https://senra.pet/choose-plan?referral=%@";
+"help_faq_q6" = "Hogyan aktiválom a bilétát, miután megérkezett?";
+"help_faq_a6" = "Menj a 'Biléta beolvasása' menüpontra az alkalmazásban, és tartsd a telefonod kameráját a bilétán lévő QR-kód felé. Ez összekapcsolja a bilétát a fiókoddal. Ezután ki kell választanod egy meglévő kedvencet, vagy létre kell hoznod egy új kedvenc profilt. Az aktiválás után válaszd ki az előfizetési csomagodat.";
+"help_faq_q7" = "Frissíthetem a kedvencem adatait a regisztráció után?";
+"help_faq_a7" = "Igen — bármikor szerkesztheted a kedvenced profilját. Menj a 'Kedvenceim' menübe, válaszd ki a kedvencedet, és kattints a 'Szerkesztés' gombra. Bármilyen mezőt frissíthetsz, beleértve a fotókat is. A változtatások azonnal mentésre kerülnek.";
+"help_faq_q8" = "Mi a teendő, ha eltűnik a kedvencem?";
+"help_faq_a8" = "Menj a 'Kedvenceim' menübe, kattints a kedvenced kártyáján lévő menüre, majd válaszd az 'Eltűntként jelölés' opciót. Ez létrehoz egy eltűnt kedvenc riasztást, amely látható a Senra közösség számára a környékeden. A közeledben lévők látják a riasztást, és észleléseket jelenthetnek helyadatokkal. Azonnal értesítést kapsz bármilyen észlelésről.";
+"help_faq_q9" = "Hogyan működnek az eltűnt kedvenc riasztások?";
+"help_faq_a9" = "Amikor eltűntként jelölsz egy kedvencet, egy riasztás jön létre a kedvenced fotójával és adataival. Más Senra felhasználók 10 km-en belül látják a riasztást az Eltűnt kedvencek térképen. Bárki a közösségből jelenthet észlelést, amely elküldi neked a helyét és elérhetőségét. A Senra-nál regisztrált állatorvosok és menhelyek a környékeden szintén megkapják a riasztást.";
+"help_faq_q10" = "Hogyan rendelhetek cserebilétát?";
+"help_faq_a10" = "Menj a Fiók oldalra és kattints a 'Csere rendelése' gombra. Válaszd ki, melyik kedvencnek kell új biléta. Az Ultimate csomag tagjai korlátlan ingyenes cserét kapnak, a Standard csomag tagjai évente egy ingyenes cserét, a Starter csomag tagjai pedig kis szállítási díjért rendelhetnek cserét.";
+"help_faq_q11" = "Mi az ajánlói program?";
+"help_faq_a11" = "Oszd meg a SENRAFRIEND kódot barátaiddal és családtagjaiddal. Amikor valaki felhasználja ezt a kódot és előfizet egy fizetős csomagra (Standard vagy Ultimate), te és a barátod is 2 hónap ingyenességet kaptok. Az ajánlásaidat és azok állapotát az Ajánló oldalon követheted nyomon.";
+"help_faq_q12" = "Mely országokba szállítotok?";
+"help_faq_a12" = "Jelenleg Magyarországra, Szlovákiába, Csehországba, Ausztriába, Romániába, Horvátországba, Spanyolországba és Portugáliába szállítunk. A szállítási költség £3.90 rendelésenként.";
+"help_faq_q13" = "Lehet több kedvencem egy fiókon?";
+"help_faq_a13" = "Igen. A Starter (ingyenes) csomagnál egy kedvencet regisztrálhatsz. A Standard csomag szintén egy kedvencet támogat. Az Ultimate csomag korlátlan számú kedvencet támogat. A csomagodat bármikor frissítheted a Fiók oldalon.";
+"help_faq_q14" = "Hogyan jelenthetek egy megtalált kedvencet?";
+"help_faq_a14" = "Ha a kedvencnek van Senra bilétája, egyszerűen olvasd be a QR-kódot a telefonod kamerájával — nincs szükség alkalmazásra. Megtekintheted a kedvenc profilját, és megoszthatod a helyed a gazdával. Ha nincs biléta, megnézheted az Eltűnt kedvencek térképet a Senra weboldalán, hogy jelentették-e a kedvencet eltűntként a környékeden.";
+"help_faq_q15" = "Biztonságban vannak a személyes adataim?";
+"help_faq_a15" = "Igen. Te határozod meg, pontosan milyen adatok láthatók, amikor valaki beolvassa a kedvenced bilétáját. A Beállítások > Adatvédelem menüben kiválaszthatod, hogy megjelenjen-e a telefonszámod, e-mail címed és lakcímed. A bejelentkezésed egyszeri ellenőrző kódokkal védett — nincs jelszó, amit el lehetne lopni. A fiókodat és minden adatodat bármikor törölheted.";
+"help_faq_q16" = "Elvesztettem a bilétát vagy megsérült — mit tegyek?";
+"help_faq_a16" = "Ne aggódj — a kedvenced digitális profilja biztonságban van, és nem a bilétán tárolódik. Menj a Fiók oldalra és kattints a 'Csere rendelése' gombra. Egy új bilétát friss QR-kóddal kapcsolunk a meglévő kedvenc profilodhoz. A Standard csomag tagjai évente egy ingyenes cserét kapnak, az Ultimate tagok korlátlan ingyenes cserét, a Starter tagok pedig kis szállítási díjat fizetnek. A régi bilétád az új aktiválásakor leáll.";
+"help_faq_q17" = "A bilétám nem olvasható be — hogyan javíthatom?";
+"help_faq_a17" = "Próbáld a következőket: tisztítsd meg a biléta felületét nedves ruhával, biztosíts jó megvilágítást, tartsd stabilan a telefonod kameráját kb. 10-15 cm-re a bilétától, és ellenőrizd, hogy a kamera alkalmazásod vagy QR-olvasód működik-e. Ha a QR-kód karcolódott vagy elhalványult, használhatod a kézi kódbeviteli lehetőséget az alkalmazásban a 'Biléta beolvasása' menüben. Ha a biléta túlságosan sérült az olvasáshoz, rendelj ingyenes cserét a Fiók oldalon (Standard és Ultimate csomagok).";
+"help_faq_q18" = "Találtam egy kedvencet Senra biléta nélkül — mit tehetek?";
+"help_faq_a18" = "Nézd meg az Eltűnt kedvencek térképet a Senra weboldalán (senra.pet) — lehet, hogy a kedvencet eltűntként jelentették a környékeden. Fiók nélkül is megtekintheted az eltűnt kedvenc riasztásokat. Ha találsz egyezést, jelents észlelést a helyeddel, hogy segíts újraegyesíteni a kedvencet a gazdájával. A kedvencet elviheted egy helyi állatorvoshoz is, hogy ellenőrizzék a mikrochipet.";
+"help_faq_q19" = "Megváltoztathatom az e-mail címemet?";
+"help_faq_a19" = "Az elsődleges e-mail címed a fiókod azonosítójaként szolgál, és nem változtatható meg közvetlenül. Ha másik e-mailt szeretnél használni, hozzáadhatsz egy másodlagos e-mailt a Beállítások > Elérhetőségek menüben — ez szintén megjelenik a kedvenced profilján. Ha feltétlenül szükséged van az elsődleges e-mail megváltoztatására, vedd fel a kapcsolatot a támogatással, és segítünk átköltöztetni a fiókodat.";
+"help_faq_q20" = "Mi a különbség a mikrochip és a Senra QR biléta között?";
+"help_faq_a20" = "A mikrochip egy apró implantátum a kedvenced bőre alatt, amely egyedi azonosító számot tárol — de speciális leolvasó kell hozzá (általában csak állatklinikakon és menhelyeken elérhető). A Senra QR biléta azonnal működik bármilyen okostelefon kamerájával, megjelenítve a kedvenced teljes profilját, fotóját és a kapcsolattartási adataidat helyben. A megtaláló a GPS helyét is megoszthatja veled. Javasoljuk mindkettő használatát: a mikrochipet állandó biztonsági megoldásként, a Senra bilétát pedig azonnali, mindennapi azonosításra.";
+"help_faq_q21" = "Mi történik az adataimmal, ha lemondom az előfizetést?";
+"help_faq_a21" = "Ha lemondod az előfizetést, a jelenlegi számlázási időszak végéig megtartod a fizetős funkciókhoz való hozzáférést. Ezután a fiókod automatikusan az ingyenes Starter csomagra vált. A kedvenc profilok, fotók és QR biléták aktívak maradnak — csak a prémium funkciókhoz (SMS értesítések, állatorvosi riasztások, ingyenes bilétacsere) való hozzáférést veszíted el. Az adataid soha nem törlődnek lemondáskor. Az összes adat végleges törléséhez használd a Fiók törlése opciót a Beállításokban.";
+"help_faq_q22" = "Hogyan regisztrálhatom az állatklinikamat vagy menhelyemet a Senra-nál?";
+"help_faq_a22" = "Állatklinikák és menhelyek a senra.pet/register-vet-shelter oldalon regisztrálhatnak. Töltsd ki a rendelő vagy szervezet adatait, és küldünk egy ellenőrző e-mailt. A megerősítés után automatikusan e-mail riasztásokat kapsz, amikor kedvencek tűnnek el a környékeden — segítve az elveszett kedvencek hazajuttatását. Nincs költsége és nem szükséges bejelentkezés. A kedvenc gazdik is regisztrálhatják a helyi állatklinikaijukat.";
+"help_faq_q23" = "Hogyan oszthatok meg sikertörténetet, ha megtalálták a kedvencemet?";
+"help_faq_a23" = "Amikor megtaláltként jelölöd a kedvencedet a 'Kedvenceim' menüben, megkérdezzük, szeretnéd-e megosztani az újraegyesülés történetét. Hozzáadhatsz egy rövid üzenetet arról, hogyan találtad meg a kedvencedet, és megerősítheted az újraegyesülés helyszínét. A nyilvános történetek megjelennek a Megtalált kedvencek térképen, inspirálva a közösséget és megmutatva, hogy a rendszer működik. Később is közzétehetsz vagy eltávolíthatsz sikertörténetet a kedvenced profil oldaláról.";
+"help_faq_q24" = "Milyen böngészők és eszközök támogatottak?";
+"help_faq_a24" = "A Senra minden modern böngészőn működik, beleértve a Chrome-ot, Safarit, Firefoxot és Edge-et mobil és asztali eszközökön egyaránt. A QR biléta beolvasása bármilyen okostelefon kamerájával működik — a megtalálónak nincs szüksége a Senra alkalmazásra, sőt fiókra sem. A push értesítések Chrome-ban és Edge-ben támogatottak asztali és Android eszközökön. A legjobb élmény érdekében javasoljuk egy naprakész böngésző használatát a telefonodon.";
+"help_faq_q25" = "Rendelhetek bilétákat egyszerre több kedvencnek?";
+"help_faq_a25" = "Minden bilétarendelés tartalmazza a fizetés során megadott kedvencnevek bilétáit. Egyetlen rendelésben több kedvencnevet is megadhatsz. A biléták megérkezése után olvasd be mindegyiket az aktiváláshoz és a megfelelő kedvenc profilhoz való hozzárendeléshez. Ha később több kedvencnek is kell biléta, bármikor adhatsz le további rendeléseket a Fiók oldalon.";
+"help_faq_q26" = "Hogyan jutnak el az eltűnt kedvenc riasztások az állatorvosokhoz és menhelyekhez?";
+"help_faq_a26" = "Amikor eltűntként jelölöd a kedvencedet, a Senra automatikusan e-mail riasztásokat küld az összes hitelesített állatorvosnak és menhelynek a környékeden. Ez azt jelenti, hogy a helyi állatszakemberek azonnal tudják, hogy a kedvenced eltűnt, és figyelhetnek rá. Minél több állatorvos és menhely van regisztrálva a környékeden, annál erősebb a biztonsági hálózat. Te is segíthetsz azzal, hogy bátorítod a saját állatklinikadat a Senra-nál való regisztrációra.";
+"help_faq_q27" = "Áthelyezhetek egy bilétát másik kedvencre?";
+"help_faq_a27" = "Minden QR biléta véglegesen egy kedvenc profilhoz van kapcsolva, és nem rendelhető át. Ha egy kedvenc elpusztul, vagy már nincs szükséged a bilétára, a régi biléta egyszerűen inaktívvá válik. Új kedvenc bilétázásához rendelj új bilétát a Fiók oldalon. Ha Standard vagy Ultimate csomagod van, jogosult lehetsz ingyenes cserebilétára az új kedvencedhez.";
+"help_guide_qr_tags_title" = "QR-kódos kedvenc biléták";
+"help_guide_qr_tags_desc" = "Ismerd meg okos QR-kódos kedvenc bilétáinkat és működésüket.";
+"help_guide_materials_title" = "Címke anyaga és tartóssága";
+"help_guide_materials_desc" = "Információ az általunk használt anyagokról és a biléta ápolásáról.";
+"help_guide_emergency_title" = "Vészhelyzeti kontakt funkciók";
+"help_guide_emergency_desc" = "Hogyan működik a vészhelyzeti kontakt rendszerünk, hogy gyorsan hazajuttassa az elveszett kedvencedet.";
+"help_guide_profile_title" = "Profilkezelés";
+"help_guide_profile_desc" = "A kedvenced digitális profiljának kezelése és adatainak frissítése.";
+"help_guide_missing_alerts_title" = "Eltűnt kedvenc riasztások és észlelések";
+"help_guide_missing_alerts_desc" = "Ha a kedvenced eltűnik, jelöld eltűntként a 'Kedvenceim' menüben, hogy azonnali közösségi riasztást hozz létre. Kedvenced fotója és adatai megjelennek az Eltűnt kedvencek térképén, amely minden Senra felhasználó számára látható a környékeden. A közösség tagjai észleléseket jelenthetnek GPS helyadatokkal, amelyeket értesítésként kapsz meg. A regisztrált állatorvosok és menhelyek is riasztást kapnak. Ha megtalálod a kedvencedet, jelöld megtaláltként, és ha szeretnéd, oszd meg az újraegyesülés történetét a közösség inspirálására.";
+"help_guide_community_title" = "Közösség és megtalált kedvencek";
+"help_guide_community_desc" = "A Senra ereje a közössége. Az Eltűnt kedvencek térképen megtekintheted a közeli aktív riasztásokat — nézd meg, jelentettek-e eltűnt kedvencet a környékeden. A Megtalált kedvencek oldal a sikeres újraegyesüléseket ünnepli a gazdik történeteivel. Regisztrálhatod a helyi állatklinikadat vagy menhelyet a Senra-nál, hogy automatikusan megkapják az eltűnt kedvenc riasztásokat, ezzel erősítve a biztonsági hálózatot a környék összes kedvence számára.";
+"help_faq_group_getting_started" = "Első lépések";
+"help_faq_group_tags_scanning" = "Biléták és beolvasás";
+"help_faq_group_missing_pets" = "Eltűnt kedvencek és riasztások";
+"help_faq_group_billing_plans" = "Számlázás és csomagok";
+"help_faq_group_privacy_account" = "Adatvédelem és fiók";
+"help_faq_group_troubleshooting" = "Hibaelhárítás";

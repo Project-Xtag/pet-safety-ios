@@ -149,6 +149,24 @@ struct AlertModelTests {
         #expect(alert.rewardAmount == 50.0, "Integer 50 should decode as Double 50.0")
     }
 
+    @Test("Decodes alert with string rewardAmount")
+    func testDecodeAlertWithStringReward() throws {
+        let json = """
+        {
+            "id": "alert_021",
+            "pet_id": "pet_021",
+            "user_id": "user_021",
+            "status": "active",
+            "reward_amount": "100.00",
+            "created_at": "2026-01-13T00:00:00Z",
+            "updated_at": "2026-01-13T00:00:00Z"
+        }
+        """.data(using: .utf8)!
+
+        let alert = try JSONDecoder().decode(MissingPetAlert.self, from: json)
+        #expect(alert.rewardAmount == 100.0, "String reward should decode as Double")
+    }
+
     @Test("Decodes alert from /alerts/nearby response with flat pet fields")
     func testDecodeAlertWithFlatPetFields() throws {
         let json = """

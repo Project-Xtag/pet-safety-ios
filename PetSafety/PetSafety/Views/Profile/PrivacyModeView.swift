@@ -172,11 +172,11 @@ struct DataManagementView: View {
     }
 
     private func exportData() {
-        appState.showSuccess("Data export will be emailed to you within 24 hours")
+        appState.showSuccess(String(localized: "data_export_requested"))
     }
 
     private func deleteAccount() {
-        appState.showError("Account deletion is currently not available. Please contact support.")
+        appState.showError(String(localized: "account_deletion_unavailable"))
     }
 }
 
