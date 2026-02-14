@@ -15,17 +15,10 @@ struct AddressView: View {
     @State private var country = ""
     @State private var showCountryPicker = false
 
-    // Common countries list
-    private let countries = [
-        "Hungary",
-        "Slovakia",
-        "Czechia",
-        "Austria",
-        "Romania",
-        "Croatia",
-        "Spain",
-        "Portugal"
-    ]
+    // All countries (sorted alphabetically)
+    private let countries = Locale.isoRegionCodes
+        .compactMap { Locale.current.localizedString(forRegionCode: $0) }
+        .sorted()
 
     var body: some View {
         List {
@@ -273,11 +266,19 @@ struct CountryPickerView: View {
     @Binding var selectedCountry: String
     let countries: [String]
     @Environment(\.dismiss) private var dismiss
+    @State private var searchText = ""
+
+    private var filteredCountries: [String] {
+        if searchText.isEmpty {
+            return countries
+        }
+        return countries.filter { $0.localizedCaseInsensitiveContains(searchText) }
+    }
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(countries, id: \.self) { country in
+                ForEach(filteredCountries, id: \.self) { country in
                     Button(action: {
                         selectedCountry = country
                         dismiss()
@@ -294,6 +295,7 @@ struct CountryPickerView: View {
                     }
                 }
             }
+            .searchable(text: $searchText, prompt: Text("address_search_country"))
             .navigationTitle("address_select_country_title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
