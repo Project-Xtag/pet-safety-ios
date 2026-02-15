@@ -89,7 +89,7 @@ class AlertsViewModel: ObservableObject {
         location: String?,
         coordinate: CLLocationCoordinate2D?,
         additionalInfo: String?,
-        rewardAmount: Double? = nil
+        rewardAmount: String? = nil
     ) async throws -> MissingPetAlert {
         isLoading = true
         errorMessage = nil

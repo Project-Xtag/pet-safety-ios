@@ -1278,8 +1278,8 @@
 
 // MARK: - Reward
 "create_alert_reward" = "Reward (optional)";
-"create_alert_reward_placeholder" = "e.g. 50";
-"reward_badge" = "\U20AC%@ Reward";
+"create_alert_reward_placeholder" = "e.g., €50, $100, or a special gift";
+"reward_badge" = "Reward: %@";
 
 // MARK: - Additional Localization Keys
 "data_export_requested" = "Data export will be emailed to you within 24 hours";

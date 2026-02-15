@@ -1228,8 +1228,8 @@
 
 // MARK: - Odměna
 "create_alert_reward" = "Odměna (volitelné)";
-"create_alert_reward_placeholder" = "např. 50";
-"reward_badge" = "\U20AC%@ odměna";
+"create_alert_reward_placeholder" = "např. €50, $100 nebo speciální dárek";
+"reward_badge" = "Odměna: %@";
 
 // MARK: - Další lokalizační klíče
 "data_export_requested" = "Export dat vám bude zaslán e-mailem do 24 hodin";

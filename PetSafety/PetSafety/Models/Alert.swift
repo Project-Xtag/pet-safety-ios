@@ -11,7 +11,7 @@ struct MissingPetAlert: Codable, Identifiable {
     let lastSeenLongitude: Double?
     let additionalInfo: String?
     let alertRadiusKm: Double?
-    let rewardAmount: Double?
+    let rewardAmount: String?
     let lastSeenAt: String?
     let foundAt: String?
     let createdAt: String
@@ -64,7 +64,7 @@ struct MissingPetAlert: Codable, Identifiable {
         lastSeenLongitude: Double? = nil,
         additionalInfo: String? = nil,
         alertRadiusKm: Double? = 10.0,
-        rewardAmount: Double? = nil,
+        rewardAmount: String? = nil,
         lastSeenAt: String? = nil,
         foundAt: String? = nil,
         createdAt: String,
@@ -140,14 +140,15 @@ struct MissingPetAlert: Codable, Identifiable {
         // Parse alert radius (default to 10km if not provided)
         alertRadiusKm = try container.decodeIfPresent(Double.self, forKey: .alertRadiusKm) ?? 10.0
 
-        // Parse reward amount (API may return number, string, or null)
-        if let numericReward = try? container.decodeIfPresent(Double.self, forKey: .rewardAmount) {
-            rewardAmount = numericReward
-        } else if
-            let rewardString = try? container.decodeIfPresent(String.self, forKey: .rewardAmount),
-            let parsedReward = Double(rewardString.trimmingCharacters(in: .whitespacesAndNewlines))
-        {
-            rewardAmount = parsedReward
+        // Parse reward amount (API may return string, number, or null)
+        if let rewardString = try? container.decodeIfPresent(String.self, forKey: .rewardAmount),
+           !rewardString.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            rewardAmount = rewardString
+        } else if let numericReward = try? container.decodeIfPresent(Double.self, forKey: .rewardAmount) {
+            // Legacy: convert numeric reward to string
+            rewardAmount = numericReward.truncatingRemainder(dividingBy: 1) == 0
+                ? String(format: "%.0f", numericReward)
+                : String(format: "%.2f", numericReward)
         } else {
             rewardAmount = nil
         }
@@ -185,7 +186,7 @@ struct CreateAlertRequest: Codable {
     let lastSeenLocation: LocationCoordinate?
     let lastSeenAddress: String?
     let description: String?
-    let rewardAmount: Double?
+    let rewardAmount: String?
     let alertRadiusKm: Double?
 
     enum CodingKeys: String, CodingKey {

@@ -57,12 +57,7 @@ struct CreateAlertView: View {
             }
 
             Section(header: Text("create_alert_reward")) {
-                HStack {
-                    Text("€")
-                        .foregroundColor(.secondary)
-                    TextField(String(localized: "create_alert_reward_placeholder"), text: $rewardAmount)
-                        .keyboardType(.decimalPad)
-                }
+                TextField(String(localized: "create_alert_reward_placeholder"), text: $rewardAmount)
             }
         }
         .adaptiveList()
@@ -110,7 +105,7 @@ struct CreateAlertView: View {
                     location: locationText,
                     coordinate: coordinate,
                     additionalInfo: additionalInfo.isEmpty ? nil : additionalInfo,
-                    rewardAmount: Double(rewardAmount)
+                    rewardAmount: rewardAmount.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : rewardAmount.trimmingCharacters(in: .whitespacesAndNewlines)
                 )
 
                 UINotificationFeedbackGenerator().notificationOccurred(.success)

@@ -1228,8 +1228,8 @@
 
 // MARK: - Jutalom
 "create_alert_reward" = "Jutalom (opcionális)";
-"create_alert_reward_placeholder" = "pl. 50";
-"reward_badge" = "\U20AC%@ jutalom";
+"create_alert_reward_placeholder" = "pl. €50, $100, vagy egyéb jutalom";
+"reward_badge" = "Jutalom: %@";
 
 // MARK: - További lokalizációs kulcsok
 "data_export_requested" = "Az adatexportálás 24 órán belül e-mailben érkezik";

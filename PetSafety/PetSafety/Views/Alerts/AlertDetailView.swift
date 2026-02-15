@@ -92,14 +92,11 @@ struct AlertDetailView: View {
                 }
 
                 // Reward Badge
-                if let reward = alert.rewardAmount, reward > 0 {
-                    let formattedReward = reward.truncatingRemainder(dividingBy: 1) == 0
-                        ? String(format: "%.0f", reward)
-                        : String(format: "%.2f", reward)
+                if let reward = alert.rewardAmount, !reward.isEmpty {
                     HStack {
                         Image(systemName: "gift.fill")
                             .foregroundColor(.white)
-                        Text(String(format: String(localized: "reward_badge"), formattedReward))
+                        Text(String(format: String(localized: "reward_badge"), reward))
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                     }

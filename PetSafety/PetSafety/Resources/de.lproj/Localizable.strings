@@ -1228,8 +1228,8 @@
 
 // MARK: - Belohnung
 "create_alert_reward" = "Belohnung (optional)";
-"create_alert_reward_placeholder" = "z.B. 50";
-"reward_badge" = "\U20AC%@ Belohnung";
+"create_alert_reward_placeholder" = "z.B. €50, $100 oder ein besonderes Geschenk";
+"reward_badge" = "Belohnung: %@";
 
 // MARK: - Zusätzliche Lokalisierungsschlüssel
 "data_export_requested" = "Der Datenexport wird Ihnen innerhalb von 24 Stunden per E-Mail zugesandt";

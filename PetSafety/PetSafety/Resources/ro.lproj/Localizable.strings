@@ -1228,8 +1228,8 @@
 
 // MARK: - Recompensă
 "create_alert_reward" = "Recompensă (opțional)";
-"create_alert_reward_placeholder" = "ex. 50";
-"reward_badge" = "\U20AC%@ recompensă";
+"create_alert_reward_placeholder" = "ex. €50, $100 sau un cadou special";
+"reward_badge" = "Recompensă: %@";
 
 // MARK: - Chei de localizare suplimentare
 "data_export_requested" = "Exportul de date va fi trimis prin e-mail în 24 de ore";
