@@ -67,7 +67,7 @@ struct HelpAndSupportView: View {
             }
 
             Section(header: Text("help_legal")) {
-                Link(destination: URL(string: "https://senra.pet/terms-conditions")!) {
+                Link(destination: WebURLHelper.termsURL) {
                     HStack {
                         Image(systemName: "doc.text.fill")
                             .foregroundColor(.cyan)
@@ -80,7 +80,7 @@ struct HelpAndSupportView: View {
                     }
                 }
 
-                Link(destination: URL(string: "https://senra.pet/privacy-policy")!) {
+                Link(destination: WebURLHelper.privacyURL) {
                     HStack {
                         Image(systemName: "lock.shield.fill")
                             .foregroundColor(.cyan)

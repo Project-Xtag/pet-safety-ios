@@ -90,9 +90,14 @@ class DeepLinkService: ObservableObject {
 
     /// Handle universal link URLs (https://senra.pet/...)
     private func handleUniversalLink(_ url: URL) -> Bool {
-        let pathComponents = url.pathComponents.filter { $0 != "/" }
+        var pathComponents = url.pathComponents.filter { $0 != "/" }
 
-        // https://senra.pet/qr/{code}
+        // Strip country prefix (e.g. /hu/qr/ABC -> /qr/ABC)
+        if let first = pathComponents.first, WebURLHelper.validCountryCodes.contains(first) {
+            pathComponents.removeFirst()
+        }
+
+        // https://senra.pet/qr/{code} or https://senra.pet/{country}/qr/{code}
         if pathComponents.count >= 2 && pathComponents[0] == "qr" {
             let code = pathComponents[1]
             handleTagActivation(code: code)
@@ -129,9 +134,13 @@ class DeepLinkService: ObservableObject {
 
         // Check if it's a URL
         if let url = URL(string: trimmed) {
-            // https://senra.pet/qr/{code}
+            // https://senra.pet/qr/{code} or https://senra.pet/{country}/qr/{code}
             if url.scheme == "https" && (url.host == "senra.pet" || url.host == "www.senra.pet") {
-                let pathComponents = url.pathComponents.filter { $0 != "/" }
+                var pathComponents = url.pathComponents.filter { $0 != "/" }
+                // Strip country prefix
+                if let first = pathComponents.first, WebURLHelper.validCountryCodes.contains(first) {
+                    pathComponents.removeFirst()
+                }
                 if pathComponents.count >= 2 && pathComponents[0] == "qr" {
                     return pathComponents[1]
                 }
