@@ -52,6 +52,7 @@ struct User: Codable, Identifiable {
 
 struct LoginRequest: Codable {
     let email: String
+    let locale: String?
 }
 
 struct LoginResponse: Codable {

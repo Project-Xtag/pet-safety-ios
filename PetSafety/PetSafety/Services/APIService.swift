@@ -289,10 +289,11 @@ class APIService {
 
     // MARK: - Authentication
     func login(email: String) async throws -> LoginResponse {
+        let locale = Locale.current.language.languageCode?.identifier
         let request = try await buildRequest(
             endpoint: "/auth/send-otp",
             method: "POST",
-            body: LoginRequest(email: email),
+            body: LoginRequest(email: email, locale: locale),
             requiresAuth: false
         )
         let response = try await performRequest(request, responseType: LoginResponse.self)
