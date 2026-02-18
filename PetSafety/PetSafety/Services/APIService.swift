@@ -665,6 +665,18 @@ class APIService {
     }
 
     // MARK: - QR Tags
+
+    /// Look up a QR tag by code to determine its status before deciding what to show
+    /// This is a public endpoint (no auth required) that returns tag status and pet info
+    func lookupTag(code: String) async throws -> TagLookupResponse {
+        let request = try await buildRequest(
+            endpoint: "/qr-tags/lookup/\(code)",
+            method: "GET",
+            requiresAuth: false
+        )
+        return try await performRequest(request, responseType: TagLookupResponse.self)
+    }
+
     func scanQRCode(_ code: String) async throws -> ScanResponse {
         let request = try await buildRequest(
             endpoint: "/qr-tags/scan/\(code)",

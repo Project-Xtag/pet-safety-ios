@@ -1,0 +1,1 @@
+mascota,seguridad,perdido,encontrado,QR,etiqueta,perro,gato,GPS

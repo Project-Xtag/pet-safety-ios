@@ -28,7 +28,7 @@ struct AuthenticationView: View {
                 VStack(spacing: 0) {
                     // Logo Section
                     VStack(spacing: 0) {
-                        Image("LogoNew")
+                        Image(LocalizedLogo.imageName)
                             .resizable()
                             .scaledToFit()
                             .frame(height: 120)

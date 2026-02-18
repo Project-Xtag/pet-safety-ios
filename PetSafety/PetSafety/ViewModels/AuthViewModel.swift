@@ -28,20 +28,26 @@ class AuthViewModel: ObservableObject {
 
         // Check if we have a valid token
         if KeychainService.shared.isAuthenticated {
+            // Show authenticated UI immediately while background tasks run
+            isAuthenticated = true
+
             Task {
                 do {
-                    currentUser = try await apiService.getCurrentUser()
-                    isAuthenticated = true
+                    // Fetch user data and connect SSE in parallel
+                    async let userFetch = apiService.getCurrentUser()
+                    async let sseConnect: Void = { SSEService.shared.connect() }()
+
+                    currentUser = try await userFetch
+                    _ = await sseConnect
+
+                    // Register FCM token after user fetch succeeds (on MainActor)
+                    registerFCMToken()
+
                     // Set Sentry user context for error tracking
                     if SentrySDK.isEnabled, let user = currentUser {
                         let sentryUser = Sentry.User(userId: user.id)
                         SentrySDK.setUser(sentryUser)
                     }
-                    // Connect to SSE for real-time notifications
-                    SSEService.shared.connect()
-
-                    // Register FCM token for push notifications
-                    registerFCMToken()
                 } catch {
                     // Token might be invalid, log out
                     logout()

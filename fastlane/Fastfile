@@ -1,0 +1,17 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Upload metadata to App Store Connect"
+  lane :metadata do
+    deliver(
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      force: true
+    )
+  end
+
+  desc "Take screenshots"
+  lane :screenshots do
+    snapshot
+  end
+end

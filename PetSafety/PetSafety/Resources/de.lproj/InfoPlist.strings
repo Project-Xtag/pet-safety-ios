@@ -1,0 +1,7 @@
+/* Info.plist localized strings — German */
+
+"CFBundleDisplayName" = "Pet Safety";
+"NSCameraUsageDescription" = "Wir benötigen Zugriff auf Ihre Kamera, um Fotos Ihres Haustiers aufzunehmen und QR-Codes auf Tiermarken zu scannen.";
+"NSPhotoLibraryUsageDescription" = "Wir benötigen Zugriff auf Ihre Fotomediathek, um Fotos Ihres Haustiers auszuwählen.";
+"NSLocationWhenInUseUsageDescription" = "Wir benötigen Ihren Standort, um vermisste Haustiere zu finden und Warnmeldungen in der Nähe anzuzeigen.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Wir benötigen Ihren Standort, um vermisste Haustiere zu finden und Warnmeldungen in der Nähe anzuzeigen.";

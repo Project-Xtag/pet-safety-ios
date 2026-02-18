@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
-	<string>Pet Safety</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -53,15 +51,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>We need access to your camera to take photos of your pet and scan QR codes on pet tags</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need access to your photo library to select photos of your pet</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to help find missing pets and show nearby alerts</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need your location to help find missing pets and show nearby alerts</string>
-
 	<!-- URL Schemes for Map Apps (canOpenURL checks) -->
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
@@ -88,6 +77,18 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+
+	<!-- Privacy Usage Descriptions -->
+	<key>NSCameraUsageDescription</key>
+	<string>We need camera access to scan QR codes on pet tags.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need photo library access to upload pet profile photos.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We use your location to show nearby missing pet alerts and help locate found pets.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We use your location to notify you about missing pets in your area.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Use Face ID to securely sign in to your account.</string>
 
 	<!-- Firebase Configuration -->
 	<key>FirebaseAppDelegateProxyEnabled</key>

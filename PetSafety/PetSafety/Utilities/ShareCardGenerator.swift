@@ -13,7 +13,7 @@ struct ShareCardGenerator {
             ctx.fill(CGRect(origin: .zero, size: size))
 
             // Logo (compact)
-            if let logo = UIImage(named: "LogoNew") {
+            if let logo = UIImage(named: LocalizedLogo.imageName) {
                 let logoHeight: CGFloat = 60
                 let logoWidth = (logo.size.width / logo.size.height) * logoHeight
                 let logoRect = CGRect(

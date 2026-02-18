@@ -181,9 +181,9 @@ struct Pet: Codable, Identifiable, Hashable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         id = try container.decode(String.self, forKey: .id)
-        ownerId = try container.decode(String.self, forKey: .ownerId)
+        ownerId = try container.decodeIfPresent(String.self, forKey: .ownerId) ?? ""
         name = try container.decode(String.self, forKey: .name)
-        species = try container.decode(String.self, forKey: .species)
+        species = try container.decodeIfPresent(String.self, forKey: .species) ?? ""
         breed = try container.decodeIfPresent(String.self, forKey: .breed)
         color = try container.decodeIfPresent(String.self, forKey: .color)
 
@@ -202,9 +202,9 @@ struct Pet: Codable, Identifiable, Hashable {
         let profileImageValue = try container.decodeIfPresent(String.self, forKey: .profileImage)
         let photoUrlValue = try container.decodeIfPresent(String.self, forKey: .photoUrl)
         profileImage = profileImageValue ?? photoUrlValue
-        isMissing = try container.decode(Bool.self, forKey: .isMissing)
-        createdAt = try container.decode(String.self, forKey: .createdAt)
-        updatedAt = try container.decode(String.self, forKey: .updatedAt)
+        isMissing = try container.decodeIfPresent(Bool.self, forKey: .isMissing) ?? false
+        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
+        updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
         ageYears = try container.decodeIfPresent(Int.self, forKey: .ageYears)
         ageMonths = try container.decodeIfPresent(Int.self, forKey: .ageMonths)
         ageText = try container.decodeIfPresent(String.self, forKey: .ageText)

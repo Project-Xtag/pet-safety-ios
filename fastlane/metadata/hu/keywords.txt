@@ -1,0 +1,1 @@
+kisállat,biztonság,elveszett,talált,QR,cédula,kutya,macska,riasztás,GPS

@@ -20,11 +20,10 @@ struct PetSafetyApp: App {
     }
 
     private func initializeSentry() {
-        // Fetch Sentry DSN from Firebase Remote Config
-        // This prevents hardcoding sensitive configuration in source code
-        Task {
+        // Fetch Sentry DSN from Firebase Remote Config in the background.
+        // This runs with low priority so it doesn't block app startup.
+        Task.detached(priority: .utility) {
             do {
-                // Fetch remote configuration first
                 try await ConfigurationManager.shared.fetchConfiguration()
             } catch {
                 #if DEBUG
@@ -33,18 +32,15 @@ struct PetSafetyApp: App {
                 #endif
             }
 
-            // Get Sentry DSN from Remote Config
             let dsn = ConfigurationManager.shared.sentryDSN
 
-            // Only initialize if DSN is configured
             guard !dsn.isEmpty else {
                 #if DEBUG
-                print("⚠️ Sentry DSN not configured in Remote Config - error tracking disabled")
+                await MainActor.run { print("⚠️ Sentry DSN not configured in Remote Config - error tracking disabled") }
                 #endif
                 return
             }
 
-            // Initialize Sentry on the main thread
             await MainActor.run {
                 SentrySDK.start { options in
                     options.dsn = dsn
@@ -56,10 +52,8 @@ struct PetSafetyApp: App {
                         #endif
                     }()
 
-                    // Performance monitoring - 10% of transactions
                     options.tracesSampleRate = 0.1
 
-                    // Attach screenshots and view hierarchy for debugging (DEBUG only — PII risk in production)
                     #if DEBUG
                     options.attachScreenshot = true
                     options.attachViewHierarchy = true
@@ -68,18 +62,15 @@ struct PetSafetyApp: App {
                     options.attachViewHierarchy = false
                     #endif
 
-                    // Enable automatic instrumentation
                     options.enableSwizzling = true
                     options.enableCaptureFailedRequests = true
 
-                    // Filter out expected errors (4xx client errors)
                     options.beforeSend = { event in
-                        // Check if the error is a client error (4xx)
                         if let exceptionValue = event.exceptions?.first?.value,
                            exceptionValue.contains("unauthorized") || exceptionValue.contains("401") ||
                            exceptionValue.contains("400") || exceptionValue.contains("404") ||
                            exceptionValue.contains("403") {
-                            return nil // Don't send client errors
+                            return nil
                         }
                         return event
                     }
@@ -186,13 +177,8 @@ class AppState: ObservableObject {
     private let sseService = SSEService.shared
 
     init() {
-        // Setup SSE event handlers
+        // Setup SSE event handlers (connection is managed by AuthViewModel)
         setupSSEHandlers()
-
-        // Connect to SSE if user is authenticated
-        if KeychainService.shared.isAuthenticated {
-            connectToSSE()
-        }
     }
 
     func showError(_ message: String) {

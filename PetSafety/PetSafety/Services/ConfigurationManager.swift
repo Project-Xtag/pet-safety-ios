@@ -35,8 +35,9 @@ final class ConfigurationManager: ObservableObject {
 
     // MARK: - Private Properties
 
-    private let remoteConfig: RemoteConfig
+    private var remoteConfig: RemoteConfig?
     private var isConfigured = false
+    private var isRemoteConfigInitialized = false
 
     /// Default values used when Remote Config is unavailable
     private let defaults: [String: NSObject] = [
@@ -48,21 +49,26 @@ final class ConfigurationManager: ObservableObject {
     // MARK: - Initialization
 
     private init() {
-        remoteConfig = RemoteConfig.remoteConfig()
+        // Note: RemoteConfig.remoteConfig() requires FirebaseApp.configure() first,
+        // so we defer initialization to ensureRemoteConfigInitialized()
+    }
 
-        // Configure fetch settings
+    /// Initialize RemoteConfig lazily — must only be called after FirebaseApp.configure()
+    private func ensureRemoteConfigInitialized() {
+        guard !isRemoteConfigInitialized else { return }
+        let config = RemoteConfig.remoteConfig()
+
         let settings = RemoteConfigSettings()
         #if DEBUG
-        // Fetch immediately in debug mode for testing
         settings.minimumFetchInterval = 0
         #else
-        // Cache for 1 hour in production
         settings.minimumFetchInterval = 3600
         #endif
-        remoteConfig.configSettings = settings
+        config.configSettings = settings
+        config.setDefaults(defaults)
 
-        // Set default values for offline/fallback scenarios
-        remoteConfig.setDefaults(defaults)
+        remoteConfig = config
+        isRemoteConfigInitialized = true
     }
 
     // MARK: - App Check Configuration
@@ -97,6 +103,16 @@ final class ConfigurationManager: ObservableObject {
      * Uses cached values if fetch fails or is rate-limited.
      */
     func fetchConfiguration() async throws {
+        // Wait for FirebaseApp.configure() to complete (called in AppDelegate)
+        // before accessing RemoteConfig. The detached Task in PetSafetyApp.init()
+        // can race with AppDelegate's didFinishLaunchingWithOptions.
+        while FirebaseApp.app() == nil {
+            try await Task.sleep(nanoseconds: 50_000_000) // 50ms
+        }
+
+        ensureRemoteConfigInitialized()
+        guard let remoteConfig = remoteConfig else { return }
+
         do {
             // Fetch and activate remote config
             let status = try await remoteConfig.fetch()
@@ -130,6 +146,8 @@ final class ConfigurationManager: ObservableObject {
      * Update local properties from Remote Config values
      */
     private func updateConfigValues() {
+        guard let remoteConfig = remoteConfig else { return }
+
         // Sentry DSN
         let dsn = remoteConfig["sentry_dsn_ios"].stringValue
         if !dsn.isEmpty {

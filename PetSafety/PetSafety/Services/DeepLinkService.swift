@@ -15,6 +15,15 @@ class DeepLinkService: ObservableObject {
     /// Whether to show the tag activation view
     @Published var showTagActivation = false
 
+    /// Whether a tag lookup is in progress
+    @Published var isLookingUpTag = false
+
+    /// Whether to show the scanned pet public profile (for active tags with a pet)
+    @Published var showScannedPetProfile = false
+
+    /// The pet data from a scanned active tag (populated by lookup)
+    @Published var scannedTagLookup: TagLookupResponse?
+
     /// The type of deep link received
     enum DeepLinkType {
         case tagActivation(code: String)
@@ -60,13 +69,13 @@ class DeepLinkService: ObservableObject {
             // Path components: ["", "code"]
             let pathComponents = url.pathComponents.filter { $0 != "/" }
             if let code = pathComponents.first {
-                handleTagActivation(code: code)
+                handleTagScanned(code: code)
                 return true
             }
             // If code is directly after the host (senra://tag/PS-XXXXXXXX)
             // Check if path is empty but there's a last path component
             if let lastComponent = url.lastPathComponent as String?, !lastComponent.isEmpty && lastComponent != "tag" {
-                handleTagActivation(code: lastComponent)
+                handleTagScanned(code: lastComponent)
                 return true
             }
 
@@ -100,28 +109,63 @@ class DeepLinkService: ObservableObject {
         // https://senra.pet/qr/{code} or https://senra.pet/{country}/qr/{code}
         if pathComponents.count >= 2 && pathComponents[0] == "qr" {
             let code = pathComponents[1]
-            handleTagActivation(code: code)
+            handleTagScanned(code: code)
             return true
         }
 
         return false
     }
 
-    /// Process a tag activation deep link
-    private func handleTagActivation(code: String) {
+    /// Process a scanned/deep-linked QR tag code.
+    /// Performs a lookup first to determine the tag's status, then routes accordingly:
+    /// - Active tag with pet → show public pet profile
+    /// - Inactive tag + authenticated owner → show tag activation
+    /// - Inactive tag + not logged in → show login prompt
+    /// - Network error → fall back to activation flow (safe default)
+    private func handleTagScanned(code: String) {
         #if DEBUG
-        print("🔗 DeepLinkService: Tag activation for code: \(code)")
+        print("🔗 DeepLinkService: Tag scanned, looking up code: \(code)")
         #endif
 
-        // Store the code and trigger the activation flow
         pendingTagCode = code
-        showTagActivation = true
+        isLookingUpTag = true
+
+        Task {
+            do {
+                let lookup = try await APIService.shared.lookupTag(code: code)
+
+                #if DEBUG
+                print("🔗 DeepLinkService: Lookup result - exists: \(lookup.exists), status: \(lookup.status ?? "nil"), hasPet: \(lookup.hasPet ?? false), isOwner: \(lookup.isOwner ?? false)")
+                #endif
+
+                if lookup.exists && lookup.status == "active" && lookup.hasPet == true && lookup.pet != nil {
+                    // Active tag with a pet linked — show the public pet profile
+                    scannedTagLookup = lookup
+                    isLookingUpTag = false
+                    showScannedPetProfile = true
+                } else {
+                    // Tag exists but is not active/has no pet — show activation flow
+                    isLookingUpTag = false
+                    showTagActivation = true
+                }
+            } catch {
+                #if DEBUG
+                print("🔗 DeepLinkService: Lookup failed with error: \(error.localizedDescription). Falling back to activation flow.")
+                #endif
+                // Network error or unexpected response — fall back to activation flow
+                isLookingUpTag = false
+                showTagActivation = true
+            }
+        }
     }
 
     /// Clear the pending deep link state
     func clearPendingLink() {
         pendingTagCode = nil
         showTagActivation = false
+        showScannedPetProfile = false
+        scannedTagLookup = nil
+        isLookingUpTag = false
     }
 
     /// Extract tag code from a scanned QR code string

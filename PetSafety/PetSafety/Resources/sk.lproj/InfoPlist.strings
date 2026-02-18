@@ -1,0 +1,7 @@
+/* Info.plist localized strings — Slovak */
+
+"CFBundleDisplayName" = "Pet Safety";
+"NSCameraUsageDescription" = "Potrebujeme prístup k vášmu fotoaparátu, aby ste mohli fotiť svojho miláčika a skenovať QR kódy na štítkoch pre zvieratá.";
+"NSPhotoLibraryUsageDescription" = "Potrebujeme prístup k vašej knižnici fotografií, aby ste mohli vybrať fotografie svojho miláčika.";
+"NSLocationWhenInUseUsageDescription" = "Potrebujeme vašu polohu, aby sme vám pomohli nájsť stratené zvieratá a zobrazili upozornenia v okolí.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Potrebujeme vašu polohu, aby sme vám pomohli nájsť stratené zvieratá a zobrazili upozornenia v okolí.";
