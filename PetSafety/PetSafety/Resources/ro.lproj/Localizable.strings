@@ -636,11 +636,15 @@
 "notif_pet_alerts" = "Alerte animale";
 "notif_pet_alerts_footer" = "Notificări despre animale dispărute în zona ta";
 "notif_missing_pet_alerts" = "Alerte animale dispărute";
+"notif_missing_pet_alerts_subtitle" = "Primește notificări despre animale dispărute în zona ta";
 "notif_nearby_alerts" = "Alerte în apropiere (10 km)";
+"notif_nearby_alerts_subtitle" = "Alerte pentru animale într-o rază de 10 km de locația ta";
 "notif_account_orders" = "Cont și comenzi";
 "notif_account_orders_footer" = "Fii la curent cu activitatea contului și comenzile";
 "notif_order_updates" = "Actualizări comenzi";
+"notif_order_updates_subtitle" = "Notificări de expediere și livrare";
 "notif_account_activity" = "Activitatea contului";
+"notif_account_activity_subtitle" = "Notificări de autentificare și securitate";
 "notif_optional_updates" = "Actualizări opționale";
 "notif_optional_footer" = "Noutăți, sfaturi și conținut promoțional";
 "notif_product_updates" = "Actualizări produs";
@@ -764,10 +768,13 @@
 
 // MARK: - Mod confidențialitate
 "privacy_contact_visibility" = "Vizibilitatea contactelor";
-"privacy_contact_footer" = "Controlează ce contacte sunt vizibile când se scanează eticheta QR a animalului.";
-"privacy_show_phone" = "Afișează numărul de telefon";
-"privacy_show_email" = "Afișează adresa de e-mail";
+"privacy_contact_footer" = "Controlează ce contacte sunt vizibile pe profilul public al animalului. Aceste setări se aplică atât datelor de contact principale, cât și secundare.";
+"privacy_show_phone" = "Afișează numerele de telefon";
+"privacy_show_phone_subtitle" = "Numerele tale de telefon principale și secundare vor fi vizibile pe profilul public al animalului";
+"privacy_show_email" = "Afișează adresele de e-mail";
+"privacy_show_email_subtitle" = "Adresele tale de e-mail principale și secundare vor fi vizibile pe profilul public al animalului";
 "privacy_show_address" = "Afișează adresa";
+"privacy_show_address_subtitle" = "Adresa ta va fi vizibilă pe profilul public al animalului";
 "privacy_data_privacy" = "Confidențialitate date";
 "privacy_privacy_policy" = "Politica de confidențialitate";
 "privacy_data_management" = "Gestionare date";

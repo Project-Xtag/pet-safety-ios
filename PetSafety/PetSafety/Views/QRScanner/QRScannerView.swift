@@ -4,6 +4,8 @@ import AVFoundation
 struct QRScannerView: View {
     @StateObject private var viewModel = QRScannerViewModel()
     @State private var showingScannedPet = false
+    @State private var showOverlay = true
+    @State private var isTorchOn = false
 
     var body: some View {
         ZStack {
@@ -22,41 +24,72 @@ struct QRScannerView: View {
                 )
                 .ignoresSafeArea()
 
-                // Scanning Overlay
-                VStack {
-                    Spacer()
+                // Scanning Overlay — auto-hides after 5s or on tap
+                if showOverlay {
+                    VStack {
+                        Spacer()
 
-                    VStack(spacing: 16) {
-                        ZStack {
-                            Circle()
-                                .fill(Color.white.opacity(0.2))
-                                .frame(width: 80, height: 80)
-                            Image(systemName: "qrcode.viewfinder")
-                                .font(.system(size: 40))
+                        VStack(spacing: 16) {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.white.opacity(0.2))
+                                    .frame(width: 80, height: 80)
+                                Image(systemName: "qrcode.viewfinder")
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.white)
+                                    .accessibilityLabel("QR scanner")
+                            }
+
+                            Text("scan_qr_code")
+                                .font(.system(size: 22, weight: .bold))
                                 .foregroundColor(.white)
-                                .accessibilityLabel("QR scanner")
+
+                            Text("scan_qr_subtitle")
+                                .font(.system(size: 15))
+                                .foregroundColor(.white.opacity(0.8))
+                        }
+                        .padding(.horizontal, 32)
+                        .padding(.vertical, 28)
+                        .background(
+                            RoundedRectangle(cornerRadius: 28)
+                                .fill(Color.black.opacity(0.7))
+                                .background(.ultraThinMaterial)
+                                .cornerRadius(28)
+                        )
+                        .padding(.horizontal, 24)
+                        .onTapGesture {
+                            withAnimation { showOverlay = false }
                         }
 
-                        Text("scan_qr_code")
-                            .font(.system(size: 22, weight: .bold))
-                            .foregroundColor(.white)
-
-                        Text("scan_qr_subtitle")
-                            .font(.system(size: 15))
-                            .foregroundColor(.white.opacity(0.8))
+                        Spacer()
                     }
-                    .padding(.horizontal, 32)
-                    .padding(.vertical, 28)
-                    .background(
-                        RoundedRectangle(cornerRadius: 28)
-                            .fill(Color.black.opacity(0.7))
-                            .background(.ultraThinMaterial)
-                            .cornerRadius(28)
-                    )
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 120)
+                    .transition(.opacity)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            withAnimation { showOverlay = false }
+                        }
+                    }
+                }
 
+                // Flashlight toggle button — bottom right
+                VStack {
                     Spacer()
+                    HStack {
+                        Spacer()
+                        Button(action: { toggleTorch() }) {
+                            Image(systemName: isTorchOn ? "flashlight.on.fill" : "flashlight.off.fill")
+                                .font(.system(size: 22))
+                                .foregroundColor(.white)
+                                .frame(width: 50, height: 50)
+                                .background(
+                                    Circle()
+                                        .fill(isTorchOn ? Color.brandOrange : Color.black.opacity(0.6))
+                                )
+                                .accessibilityLabel(isTorchOn ? "Turn off flashlight" : "Turn on flashlight")
+                        }
+                        .padding(.trailing, 24)
+                        .padding(.bottom, 40)
+                    }
                 }
             } else {
                 // Camera Permission Required
@@ -107,6 +140,25 @@ struct QRScannerView: View {
         }
         .onAppear {
             viewModel.checkCameraPermission()
+        }
+        .onDisappear {
+            // Turn off torch when leaving the scanner
+            if isTorchOn { toggleTorch() }
+        }
+    }
+
+    private func toggleTorch() {
+        guard let device = AVCaptureDevice.default(for: .video),
+              device.hasTorch else { return }
+        do {
+            try device.lockForConfiguration()
+            isTorchOn.toggle()
+            device.torchMode = isTorchOn ? .on : .off
+            device.unlockForConfiguration()
+        } catch {
+            #if DEBUG
+            print("Failed to toggle torch: \(error)")
+            #endif
         }
     }
 }

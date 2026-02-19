@@ -195,26 +195,28 @@ struct PetFormView: View {
                     }
             }
 
-            // Action buttons section
+            // Save button
             Section {
                 Button(action: { savePet() }) {
                     HStack {
                         Spacer()
-                        Text("save_changes")
-                            .fontWeight(.semibold)
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .tint(.white)
+                        } else {
+                            Text("save_changes")
+                                .fontWeight(.semibold)
+                        }
                         Spacer()
                     }
+                    .padding(.vertical, 4)
                 }
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(name.isEmpty || viewModel.isLoading ? Color.brandOrange.opacity(0.4) : Color.brandOrange)
+                )
+                .foregroundColor(.white)
                 .disabled(name.isEmpty || viewModel.isLoading)
-
-                Button(action: { dismiss() }) {
-                    HStack {
-                        Spacer()
-                        Text("cancel")
-                        Spacer()
-                    }
-                }
-                .foregroundColor(.secondary)
             }
 
             // Delete Pet button - only show in edit mode
@@ -248,14 +250,6 @@ struct PetFormView: View {
                     dismiss()
                 }
                 .foregroundColor(.brandOrange)
-            }
-
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("save") {
-                    savePet()
-                }
-                .foregroundColor(.brandOrange)
-                .disabled(name.isEmpty || viewModel.isLoading)
             }
         }
         .alert("delete_pet_button", isPresented: $showingDeleteAlert) {

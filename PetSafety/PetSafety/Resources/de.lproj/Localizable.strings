@@ -636,11 +636,15 @@
 "notif_pet_alerts" = "Haustier-Warnungen";
 "notif_pet_alerts_footer" = "Warnungen über vermisste Haustiere in Ihrer Nähe";
 "notif_missing_pet_alerts" = "Vermisstenwarnungen";
+"notif_missing_pet_alerts_subtitle" = "Benachrichtigungen über vermisste Haustiere in Ihrer Nähe";
 "notif_nearby_alerts" = "Warnungen in der Nähe (10 km)";
+"notif_nearby_alerts_subtitle" = "Warnungen für Haustiere im Umkreis von 10 km";
 "notif_account_orders" = "Konto & Bestellungen";
 "notif_account_orders_footer" = "Bleiben Sie über Ihre Kontoaktivität und Bestellungen informiert";
 "notif_order_updates" = "Bestell-Updates";
+"notif_order_updates_subtitle" = "Versand- und Lieferbenachrichtigungen";
 "notif_account_activity" = "Kontoaktivität";
+"notif_account_activity_subtitle" = "Anmelde- und Sicherheitsbenachrichtigungen";
 "notif_optional_updates" = "Optionale Updates";
 "notif_optional_footer" = "News, Tipps und Werbeinhalte";
 "notif_product_updates" = "Produkt-Updates";
@@ -764,10 +768,13 @@
 
 // MARK: - Privatsphäre-Modus
 "privacy_contact_visibility" = "Sichtbarkeit der Kontakte";
-"privacy_contact_footer" = "Steuern Sie, welche Kontaktdaten sichtbar sind, wenn jemand den QR-Tag Ihres Haustiers scannt.";
-"privacy_show_phone" = "Telefonnummer anzeigen";
-"privacy_show_email" = "E-Mail-Adresse anzeigen";
+"privacy_contact_footer" = "Steuern Sie, welche Kontaktdaten auf dem öffentlichen Profil Ihres Haustiers sichtbar sind. Diese Einstellungen gelten sowohl für Ihre primären als auch sekundären Kontaktdaten.";
+"privacy_show_phone" = "Telefonnummern anzeigen";
+"privacy_show_phone_subtitle" = "Ihre primäre und sekundäre Telefonnummer werden auf dem öffentlichen Profil Ihres Haustiers sichtbar sein";
+"privacy_show_email" = "E-Mail-Adressen anzeigen";
+"privacy_show_email_subtitle" = "Ihre primäre und sekundäre E-Mail-Adresse werden auf dem öffentlichen Profil Ihres Haustiers sichtbar sein";
 "privacy_show_address" = "Adresse anzeigen";
+"privacy_show_address_subtitle" = "Ihre Adresse wird auf dem öffentlichen Profil Ihres Haustiers sichtbar sein";
 "privacy_data_privacy" = "Datenschutz";
 "privacy_privacy_policy" = "Datenschutzrichtlinie";
 "privacy_data_management" = "Datenverwaltung";

@@ -636,11 +636,15 @@
 "notif_pet_alerts" = "Alertas de mascotas";
 "notif_pet_alerts_footer" = "Notificaciones sobre mascotas perdidas en tu zona";
 "notif_missing_pet_alerts" = "Alertas de mascotas perdidas";
+"notif_missing_pet_alerts_subtitle" = "Recibe notificaciones sobre mascotas perdidas en tu zona";
 "notif_nearby_alerts" = "Alertas cercanas (10 km)";
+"notif_nearby_alerts_subtitle" = "Alertas de mascotas en un radio de 10 km de tu ubicación";
 "notif_account_orders" = "Cuenta y pedidos";
 "notif_account_orders_footer" = "Mantente al día con la actividad de tu cuenta y pedidos";
 "notif_order_updates" = "Actualizaciones de pedidos";
+"notif_order_updates_subtitle" = "Notificaciones de envío y entrega";
 "notif_account_activity" = "Actividad de la cuenta";
+"notif_account_activity_subtitle" = "Notificaciones de inicio de sesión y seguridad";
 "notif_optional_updates" = "Actualizaciones opcionales";
 "notif_optional_footer" = "Noticias, consejos y contenido promocional";
 "notif_product_updates" = "Actualizaciones de producto";
@@ -764,10 +768,13 @@
 
 // MARK: - Modo de privacidad
 "privacy_contact_visibility" = "Visibilidad de contactos";
-"privacy_contact_footer" = "Controla qué datos de contacto son visibles cuando se escanea la etiqueta QR de tu mascota.";
-"privacy_show_phone" = "Mostrar número de teléfono";
-"privacy_show_email" = "Mostrar correo";
+"privacy_contact_footer" = "Controla qué datos de contacto son visibles en el perfil público de tu mascota. Estos ajustes se aplican tanto a los datos de contacto principales como secundarios.";
+"privacy_show_phone" = "Mostrar números de teléfono";
+"privacy_show_phone_subtitle" = "Tus números de teléfono principal y secundario serán visibles en el perfil público de tu mascota";
+"privacy_show_email" = "Mostrar correos electrónicos";
+"privacy_show_email_subtitle" = "Tus direcciones de correo principal y secundaria serán visibles en el perfil público de tu mascota";
 "privacy_show_address" = "Mostrar dirección";
+"privacy_show_address_subtitle" = "Tu dirección será visible en el perfil público de tu mascota";
 "privacy_data_privacy" = "Privacidad de datos";
 "privacy_privacy_policy" = "Política de privacidad";
 "privacy_data_management" = "Gestión de datos";

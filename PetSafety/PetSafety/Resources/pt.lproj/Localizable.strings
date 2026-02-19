@@ -636,11 +636,15 @@
 "notif_pet_alerts" = "Alertas de animais";
 "notif_pet_alerts_footer" = "Notificações sobre animais desaparecidos na sua área";
 "notif_missing_pet_alerts" = "Alertas de animais desaparecidos";
+"notif_missing_pet_alerts_subtitle" = "Receba notificações sobre animais desaparecidos na sua área";
 "notif_nearby_alerts" = "Alertas nas proximidades (10 km)";
+"notif_nearby_alerts_subtitle" = "Alertas de animais num raio de 10 km da sua localização";
 "notif_account_orders" = "Conta e encomendas";
 "notif_account_orders_footer" = "Mantenha-se atualizado sobre a atividade da sua conta e encomendas";
 "notif_order_updates" = "Atualizações de encomendas";
+"notif_order_updates_subtitle" = "Notificações de envio e entrega";
 "notif_account_activity" = "Atividade da conta";
+"notif_account_activity_subtitle" = "Notificações de início de sessão e segurança";
 "notif_optional_updates" = "Atualizações opcionais";
 "notif_optional_footer" = "Notícias, dicas e conteúdo promocional";
 "notif_product_updates" = "Atualizações do produto";
@@ -764,10 +768,13 @@
 
 // MARK: - Modo de privacidade
 "privacy_contact_visibility" = "Visibilidade de contacto";
-"privacy_contact_footer" = "Controle quais contactos são visíveis quando alguém lê a etiqueta QR do seu animal.";
-"privacy_show_phone" = "Mostrar número de telefone";
-"privacy_show_email" = "Mostrar e-mail";
+"privacy_contact_footer" = "Controle quais contactos são visíveis no perfil público do seu animal. Estas definições aplicam-se aos dados de contacto principais e secundários.";
+"privacy_show_phone" = "Mostrar números de telefone";
+"privacy_show_phone_subtitle" = "Os seus números de telefone principal e secundário serão visíveis no perfil público do seu animal";
+"privacy_show_email" = "Mostrar endereços de e-mail";
+"privacy_show_email_subtitle" = "Os seus endereços de e-mail principal e secundário serão visíveis no perfil público do seu animal";
 "privacy_show_address" = "Mostrar morada";
+"privacy_show_address_subtitle" = "A sua morada será visível no perfil público do seu animal";
 "privacy_data_privacy" = "Privacidade de dados";
 "privacy_privacy_policy" = "Política de Privacidade";
 "privacy_data_management" = "Gestão de dados";

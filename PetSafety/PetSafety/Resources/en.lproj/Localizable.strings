@@ -636,11 +636,15 @@
 "notif_pet_alerts" = "Pet Alerts";
 "notif_pet_alerts_footer" = "Notifications about missing pets in your area";
 "notif_missing_pet_alerts" = "Missing Pet Alerts";
+"notif_missing_pet_alerts_subtitle" = "Get notified about missing pets in your area";
 "notif_nearby_alerts" = "Nearby Alerts (10km)";
+"notif_nearby_alerts_subtitle" = "Alerts for pets within 10km of your location";
 "notif_account_orders" = "Account & Orders";
 "notif_account_orders_footer" = "Stay updated on your account activity and orders";
 "notif_order_updates" = "Order Updates";
+"notif_order_updates_subtitle" = "Shipping and delivery notifications";
 "notif_account_activity" = "Account Activity";
+"notif_account_activity_subtitle" = "Login and security notifications";
 "notif_optional_updates" = "Optional Updates";
 "notif_optional_footer" = "News, tips, and promotional content";
 "notif_product_updates" = "Product Updates";
@@ -814,10 +818,13 @@
 "help_guide_community_desc" = "Senra's strength is its community. The Missing Pets map shows active alerts near you — check it to see if any pets have been reported missing in your area. The Found Pets page celebrates successful reunions with stories from pet owners. You can register your local vet or animal shelter with Senra so they receive missing pet alerts automatically, helping create a stronger safety network for all pets in your area.";
 // MARK: - Privacy Mode
 "privacy_contact_visibility" = "Contact Visibility";
-"privacy_contact_footer" = "Control which contact details are visible when someone scans your pet's QR tag.";
-"privacy_show_phone" = "Show Phone Number";
-"privacy_show_email" = "Show Email Address";
+"privacy_contact_footer" = "Control which contact details are visible on your pet's public profile. These settings apply to both your primary and secondary contact details.";
+"privacy_show_phone" = "Show Phone Numbers";
+"privacy_show_phone_subtitle" = "Your primary and secondary phone numbers will be visible on your pet's public profile";
+"privacy_show_email" = "Show Email Addresses";
+"privacy_show_email_subtitle" = "Your primary and secondary email addresses will be visible on your pet's public profile";
 "privacy_show_address" = "Show Address";
+"privacy_show_address_subtitle" = "Your address will be visible on your pet's public profile";
 "privacy_data_privacy" = "Data Privacy";
 "privacy_privacy_policy" = "Privacy Policy";
 "privacy_data_management" = "Data Management";

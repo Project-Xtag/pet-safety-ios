@@ -636,11 +636,15 @@
 "notif_pet_alerts" = "Upozornenia o zvieratach";
 "notif_pet_alerts_footer" = "Upozornenia o stratenych zvieratach vo vasom okoli";
 "notif_missing_pet_alerts" = "Upozornenia na stratene zvierata";
+"notif_missing_pet_alerts_subtitle" = "Upozornenia o stratenych zvieratach vo vasom okoli";
 "notif_nearby_alerts" = "Upozornenia v okoli (10 km)";
+"notif_nearby_alerts_subtitle" = "Upozornenia na zvierata v okruhu 10 km od vasej polohy";
 "notif_account_orders" = "Ucet a objednavky";
 "notif_account_orders_footer" = "Budte informovani o aktivite uctu a objednavkach";
 "notif_order_updates" = "Aktualizacie objednavok";
+"notif_order_updates_subtitle" = "Upozornenia o zasielkach a doruceni";
 "notif_account_activity" = "Aktivita uctu";
+"notif_account_activity_subtitle" = "Upozornenia o prihlaseni a bezpecnosti";
 "notif_optional_updates" = "Volitelne aktualizacie";
 "notif_optional_footer" = "Novinky, tipy a propagacny obsah";
 "notif_product_updates" = "Aktualizacie produktu";
@@ -764,10 +768,13 @@
 
 // MARK: - Rezim sukromia
 "privacy_contact_visibility" = "Viditelnost kontaktov";
-"privacy_contact_footer" = "Ovladajte, ktore kontaktne udaje su viditelne po naskenovani QR stitka vasho zvierata.";
-"privacy_show_phone" = "Zobrazit telefonne cislo";
-"privacy_show_email" = "Zobrazit e-mail";
+"privacy_contact_footer" = "Ovladajte, ktore kontaktne udaje su viditelne na verejnom profile vasho zvierata. Tieto nastavenia sa vztahuju na primarne aj sekundarne kontaktne udaje.";
+"privacy_show_phone" = "Zobrazit telefonne cisla";
+"privacy_show_phone_subtitle" = "Vase primarne a sekundarne telefonne cisla budu viditelne na verejnom profile vasho zvierata";
+"privacy_show_email" = "Zobrazit e-mailove adresy";
+"privacy_show_email_subtitle" = "Vase primarne a sekundarne e-mailove adresy budu viditelne na verejnom profile vasho zvierata";
 "privacy_show_address" = "Zobrazit adresu";
+"privacy_show_address_subtitle" = "Vasa adresa bude viditelna na verejnom profile vasho zvierata";
 "privacy_data_privacy" = "Ochrana udajov";
 "privacy_privacy_policy" = "Zasady ochrany sukromia";
 "privacy_data_management" = "Sprava udajov";

@@ -636,11 +636,15 @@
 "notif_pet_alerts" = "Kedvenc riasztások";
 "notif_pet_alerts_footer" = "Értesítések eltűnt kedvencekről a környékeden";
 "notif_missing_pet_alerts" = "Eltűnt kedvenc riasztások";
+"notif_missing_pet_alerts_subtitle" = "Értesítés eltűnt kedvencekről a környékeden";
 "notif_nearby_alerts" = "Közeli riasztások (10km)";
+"notif_nearby_alerts_subtitle" = "Riasztások a tartózkodási helyed 10 km-es körzetében";
 "notif_account_orders" = "Fiók & rendelések";
 "notif_account_orders_footer" = "Maradj naprakész a fióktevékenységeidről és rendeléseidről";
 "notif_order_updates" = "Rendelésfrissítések";
+"notif_order_updates_subtitle" = "Szállítási és kézbesítési értesítések";
 "notif_account_activity" = "Fióktevékenység";
+"notif_account_activity_subtitle" = "Bejelentkezési és biztonsági értesítések";
 "notif_optional_updates" = "Opcionális frissítések";
 "notif_optional_footer" = "Hírek, tippek és promóciós tartalmak";
 "notif_product_updates" = "Termékfrissítések";
@@ -764,10 +768,13 @@
 
 // MARK: - Adatvédelmi mód
 "privacy_contact_visibility" = "Elérhetőségek láthatósága";
-"privacy_contact_footer" = "Szabályozd, mely elérhetőségek láthatók, amikor beolvassák a kedvenced QR bilétáját.";
-"privacy_show_phone" = "Telefonszám megjelenítése";
-"privacy_show_email" = "Email cím megjelenítése";
+"privacy_contact_footer" = "Szabályozd, mely elérhetőségek láthatók a kedvenced nyilvános profilján. Ezek a beállítások az elsődleges és másodlagos elérhetőségekre egyaránt vonatkoznak.";
+"privacy_show_phone" = "Telefonszámok megjelenítése";
+"privacy_show_phone_subtitle" = "Az elsődleges és másodlagos telefonszámod látható lesz a kedvenced nyilvános profilján";
+"privacy_show_email" = "Email címek megjelenítése";
+"privacy_show_email_subtitle" = "Az elsődleges és másodlagos email címed látható lesz a kedvenced nyilvános profilján";
 "privacy_show_address" = "Cím megjelenítése";
+"privacy_show_address_subtitle" = "A címed látható lesz a kedvenced nyilvános profilján";
 "privacy_data_privacy" = "Adatvédelem";
 "privacy_privacy_policy" = "Adatvédelmi szabályzat";
 "privacy_data_management" = "Adatkezelés";

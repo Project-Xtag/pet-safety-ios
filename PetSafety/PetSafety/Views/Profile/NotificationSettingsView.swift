@@ -10,8 +10,6 @@ struct NotificationSettingsView: View {
     // Updates (local-only preferences)
     @AppStorage("notifyOrderUpdates") private var notifyOrderUpdates = true
     @AppStorage("notifyAccountActivity") private var notifyAccountActivity = true
-    @AppStorage("notifyProductUpdates") private var notifyProductUpdates = false
-    @AppStorage("notifyMarketingEmails") private var notifyMarketingEmails = false
 
     var body: some View {
         List {
@@ -63,18 +61,41 @@ struct NotificationSettingsView: View {
             }
 
             Section(header: Text("notif_pet_alerts"), footer: Text("notif_pet_alerts_footer")) {
-                Toggle("notif_missing_pet_alerts", isOn: $notifyMissingPetAlerts)
-                Toggle("notif_nearby_alerts", isOn: $notifyNearbyAlerts)
+                Toggle(isOn: $notifyMissingPetAlerts) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("notif_missing_pet_alerts")
+                        Text("notif_missing_pet_alerts_subtitle")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                Toggle(isOn: $notifyNearbyAlerts) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("notif_nearby_alerts")
+                        Text("notif_nearby_alerts_subtitle")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
             }
 
             Section(header: Text("notif_account_orders"), footer: Text("notif_account_orders_footer")) {
-                Toggle("notif_order_updates", isOn: $notifyOrderUpdates)
-                Toggle("notif_account_activity", isOn: $notifyAccountActivity)
-            }
-
-            Section(header: Text("notif_optional_updates"), footer: Text("notif_optional_footer")) {
-                Toggle("notif_product_updates", isOn: $notifyProductUpdates)
-                Toggle("notif_marketing_emails", isOn: $notifyMarketingEmails)
+                Toggle(isOn: $notifyOrderUpdates) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("notif_order_updates")
+                        Text("notif_order_updates_subtitle")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                Toggle(isOn: $notifyAccountActivity) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("notif_account_activity")
+                        Text("notif_account_activity_subtitle")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
             }
 
             if viewModel.hasChanges {
@@ -103,6 +124,9 @@ struct NotificationSettingsView: View {
             Section(footer: Text("notif_critical_footer")) {
                 EmptyView()
             }
+        }
+        .safeAreaInset(edge: .bottom) {
+            Spacer().frame(height: 20)
         }
         .navigationTitle("notif_title")
         .adaptiveList()
