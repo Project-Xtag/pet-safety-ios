@@ -112,37 +112,4 @@ struct TagCheckoutData: Codable {
     let url: String
 }
 
-// MARK: - Payment Intent Types
-struct CreatePaymentIntentRequest: Codable {
-    let orderId: String
-    let amount: Double
-    let paymentMethod: String?
-    let currency: String?
-    let email: String?
-}
 
-struct PaymentIntentResponse: Codable {
-    let paymentIntent: PaymentIntent
-}
-
-struct PaymentIntentStatusResponse: Codable {
-    let paymentIntent: PaymentIntent
-}
-
-struct PaymentIntent: Codable {
-    let id: String
-    let clientSecret: String?
-    let amount: Double
-    let currency: String
-    let status: String?
-    let paymentMethod: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case clientSecret = "client_secret"
-        case amount
-        case currency
-        case status
-        case paymentMethod = "payment_method"
-    }
-}

@@ -51,6 +51,17 @@ class SubscriptionViewModel: ObservableObject {
                 await self?.loadFeatures()
             }
         }
+
+        // Listen for checkout deep link completion and refresh
+        NotificationCenter.default.addObserver(
+            forName: .checkoutCompleted,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                await self?.handleCheckoutComplete()
+            }
+        }
     }
 
     // MARK: - Data Loading

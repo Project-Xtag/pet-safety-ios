@@ -9,15 +9,22 @@ class OfflineDataManager {
     static let shared = OfflineDataManager()
 
     /// Main persistent container for Core Data stack
-    private let container: NSPersistentContainer
+    private var container: NSPersistentContainer
 
     /// Indicates whether the persistent SQLite store is available
     private(set) var isPersistentStoreAvailable: Bool = true
+
+    /// Indicates whether Core Data has finished loading and is ready for queries
+    private(set) var isReady: Bool = false
 
     /// Stores the last persistent store load error (if any)
     private(set) var storeLoadError: Error?
 
     private let logger = Logger(subsystem: "pet.senra.app", category: "OfflineDataManager")
+
+    /// Continuation for callers waiting on Core Data readiness
+    private var readyContinuations: [CheckedContinuation<Void, Never>] = []
+    private let readyLock = NSLock()
 
     /// View context for UI operations (main thread)
     var viewContext: NSManagedObjectContext {
@@ -32,67 +39,91 @@ class OfflineDataManager {
     init(storeType: String = NSSQLiteStoreType) {
         let storeName = "PetSafety"
 
-        do {
-            container = try Self.loadContainer(name: storeName, storeType: storeType)
-        } catch {
-            logger.error("Core Data store failed to load: \(error.localizedDescription)")
-            storeLoadError = error
-
-            if storeType == NSSQLiteStoreType, let storeURL = Self.defaultStoreURL(for: storeName) {
-                do {
-                    try Self.destroyPersistentStore(at: storeURL, name: storeName)
-                    container = try Self.loadContainer(name: storeName, storeType: NSSQLiteStoreType)
-                    logger.warning("Core Data store was reset and reloaded successfully")
-                } catch {
-                    logger.error("Core Data store recovery failed: \(error.localizedDescription)")
-                    storeLoadError = error
-                    isPersistentStoreAvailable = false
-                    container = (try? Self.loadContainer(name: storeName, storeType: NSInMemoryStoreType))
-                        ?? NSPersistentContainer(name: storeName)
-                }
-            } else {
-                isPersistentStoreAvailable = false
-                container = (try? Self.loadContainer(name: storeName, storeType: NSInMemoryStoreType))
-                    ?? NSPersistentContainer(name: storeName)
-            }
-        }
-
-        // Configure view context
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-    }
-
-    private static func loadContainer(name: String, storeType: String) throws -> NSPersistentContainer {
-        let container = NSPersistentContainer(name: name)
+        // Create the container immediately but load stores asynchronously
+        container = NSPersistentContainer(name: storeName)
 
         if let description = container.persistentStoreDescriptions.first {
             description.type = storeType
             description.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
             description.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
 
-            // Encrypt Core Data store when device is locked (GDPR protection for offline PII)
             if storeType == NSSQLiteStoreType {
                 description.setOption(
-                    FileProtectionType.complete as NSObject,
+                    FileProtectionType.completeUntilFirstUserAuthentication as NSObject,
                     forKey: NSPersistentStoreFileProtectionKey
                 )
             }
         }
 
-        var loadError: Error?
-        let group = DispatchGroup()
-        group.enter()
-        container.loadPersistentStores { _, error in
-            loadError = error
-            group.leave()
-        }
-        group.wait()
+        // Load persistent stores asynchronously to avoid blocking the main thread
+        container.loadPersistentStores { [weak self] _, error in
+            guard let self = self else { return }
 
-        if let loadError = loadError {
-            throw loadError
-        }
+            if let error = error {
+                self.logger.error("Core Data store failed to load: \(error.localizedDescription)")
+                self.storeLoadError = error
 
-        return container
+                if storeType == NSSQLiteStoreType, let storeURL = Self.defaultStoreURL(for: storeName) {
+                    // Attempt recovery: destroy and reload
+                    do {
+                        try Self.destroyPersistentStore(at: storeURL, name: storeName)
+                        self.logger.warning("Destroyed corrupt store, reloading...")
+                        self.container = NSPersistentContainer(name: storeName)
+                        self.container.loadPersistentStores { _, retryError in
+                            if let retryError = retryError {
+                                self.logger.error("Core Data recovery failed: \(retryError.localizedDescription)")
+                                self.isPersistentStoreAvailable = false
+                            } else {
+                                self.logger.warning("Core Data store recovered successfully")
+                            }
+                            self.finalizeSetup()
+                        }
+                        return
+                    } catch {
+                        self.logger.error("Failed to destroy corrupt store: \(error.localizedDescription)")
+                        self.isPersistentStoreAvailable = false
+                    }
+                } else {
+                    self.isPersistentStoreAvailable = false
+                }
+            }
+
+            self.finalizeSetup()
+        }
+    }
+
+    /// Complete Core Data setup and notify waiting callers
+    private func finalizeSetup() {
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+        readyLock.lock()
+        isReady = true
+        let continuations = readyContinuations
+        readyContinuations.removeAll()
+        readyLock.unlock()
+
+        logger.notice("✅ Core Data ready (persistent store available: \(self.isPersistentStoreAvailable))")
+
+        for continuation in continuations {
+            continuation.resume()
+        }
+    }
+
+    /// Wait for Core Data to be ready before performing operations.
+    /// Returns immediately if already ready.
+    func waitUntilReady() async {
+        if isReady { return }
+        await withCheckedContinuation { continuation in
+            readyLock.lock()
+            if isReady {
+                readyLock.unlock()
+                continuation.resume()
+            } else {
+                readyContinuations.append(continuation)
+                readyLock.unlock()
+            }
+        }
     }
 
     private static func defaultStoreURL(for name: String) -> URL? {

@@ -1,6 +1,9 @@
 import Foundation
 import UIKit
 import Sentry
+import os
+
+private let authLog = Logger(subsystem: "com.petsafety.PetSafety", category: "AuthViewModel")
 
 @MainActor
 class AuthViewModel: ObservableObject {
@@ -20,9 +23,12 @@ class AuthViewModel: ObservableObject {
     }
 
     func checkAuthStatus() {
+        authLog.notice("⏱️ checkAuthStatus — hasToken: \(KeychainService.shared.isAuthenticated), biometricShouldShow: \(self.biometricService.shouldShowBiometricLogin), biometricEnabled: \(self.biometricEnabled), canUseBiometric: \(self.biometricService.canUseBiometric)")
+
         // Check if we should show biometric prompt
         if biometricService.shouldShowBiometricLogin {
             showBiometricPrompt = true
+            authLog.notice("🔐 Showing biometric prompt, returning early")
             return
         }
 
@@ -30,6 +36,7 @@ class AuthViewModel: ObservableObject {
         if KeychainService.shared.isAuthenticated {
             // Show authenticated UI immediately while background tasks run
             isAuthenticated = true
+            authLog.notice("🔐 Token found, setting isAuthenticated = true")
 
             Task {
                 do {

@@ -39,6 +39,11 @@ final class ConfigurationManager: ObservableObject {
     private var isConfigured = false
     private var isRemoteConfigInitialized = false
 
+    /// Continuations waiting for Firebase to be configured
+    private var firebaseReadyContinuations: [CheckedContinuation<Void, Never>] = []
+    private let firebaseLock = NSLock()
+    private var firebaseReady = false
+
     /// Default values used when Remote Config is unavailable
     private let defaults: [String: NSObject] = [
         "sentry_dsn_ios": "" as NSObject,
@@ -102,13 +107,38 @@ final class ConfigurationManager: ObservableObject {
      * Call this after Firebase is initialized. Safe to call multiple times.
      * Uses cached values if fetch fails or is rate-limited.
      */
+    /// Signal that Firebase has been configured (call from AppDelegate after FirebaseApp.configure())
+    func notifyFirebaseReady() {
+        firebaseLock.lock()
+        firebaseReady = true
+        let continuations = firebaseReadyContinuations
+        firebaseReadyContinuations.removeAll()
+        firebaseLock.unlock()
+
+        for continuation in continuations {
+            continuation.resume()
+        }
+    }
+
+    /// Wait for Firebase to be configured before accessing Remote Config
+    private func waitForFirebase() async {
+        if firebaseReady { return }
+        await withCheckedContinuation { continuation in
+            firebaseLock.lock()
+            if firebaseReady {
+                firebaseLock.unlock()
+                continuation.resume()
+            } else {
+                firebaseReadyContinuations.append(continuation)
+                firebaseLock.unlock()
+            }
+        }
+    }
+
     func fetchConfiguration() async throws {
         // Wait for FirebaseApp.configure() to complete (called in AppDelegate)
-        // before accessing RemoteConfig. The detached Task in PetSafetyApp.init()
-        // can race with AppDelegate's didFinishLaunchingWithOptions.
-        while FirebaseApp.app() == nil {
-            try await Task.sleep(nanoseconds: 50_000_000) // 50ms
-        }
+        // Uses continuation instead of busy-wait polling for efficiency
+        await waitForFirebase()
 
         ensureRemoteConfigInitialized()
         guard let remoteConfig = remoteConfig else { return }

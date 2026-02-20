@@ -2,6 +2,9 @@ import UIKit
 import UserNotifications
 import FirebaseCore
 import FirebaseMessaging
+import os
+
+private let delegateLog = Logger(subsystem: "com.petsafety.PetSafety", category: "AppDelegate")
 
 /**
  * AppDelegate for Firebase Cloud Messaging and Push Notifications
@@ -19,12 +22,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
+        let t0 = CFAbsoluteTimeGetCurrent()
+        delegateLog.notice("⏱️ AppDelegate: didFinishLaunching START")
+
         // Configure App Check BEFORE Firebase initialization
-        // This protects Firebase APIs from abuse by verifying requests come from legitimate app instances
         ConfigurationManager.configureAppCheck()
+        delegateLog.notice("⏱️ AppDelegate: App Check configured +\(String(format: "%.0f", (CFAbsoluteTimeGetCurrent() - t0) * 1000))ms")
 
         // Initialize Firebase
         FirebaseApp.configure()
+        delegateLog.notice("⏱️ AppDelegate: Firebase configured +\(String(format: "%.0f", (CFAbsoluteTimeGetCurrent() - t0) * 1000))ms")
+
+        // Notify ConfigurationManager that Firebase is ready (unblocks Remote Config fetch)
+        ConfigurationManager.shared.notifyFirebaseReady()
 
         // Set up push notifications
         setupPushNotifications(application)
@@ -32,6 +42,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Set FCM messaging delegate
         Messaging.messaging().delegate = self
 
+        delegateLog.notice("⏱️ AppDelegate: didFinishLaunching END +\(String(format: "%.0f", (CFAbsoluteTimeGetCurrent() - t0) * 1000))ms")
         return true
     }
 

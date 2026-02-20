@@ -1,5 +1,8 @@
 import SwiftUI
 import UIKit
+import os
+
+private let viewLog = Logger(subsystem: "com.petsafety.PetSafety", category: "ContentView")
 
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -8,6 +11,7 @@ struct ContentView: View {
     @State private var showRegistration = false
 
     var body: some View {
+        let _ = viewLog.notice("⏱️ ContentView.body evaluated — isAuth: \(authViewModel.isAuthenticated), biometric: \(authViewModel.showBiometricPrompt), reg: \(showRegistration)")
         Group {
             if authViewModel.isAuthenticated {
                 MainTabView()
@@ -27,6 +31,9 @@ struct ContentView: View {
                 })
                 .transition(.opacity)
             }
+        }
+        .onAppear {
+            viewLog.notice("⏱️ ContentView.onAppear fired — UI is now visible")
         }
         .animation(.easeInOut(duration: 0.3), value: authViewModel.isAuthenticated)
         .animation(.easeInOut(duration: 0.3), value: showRegistration)

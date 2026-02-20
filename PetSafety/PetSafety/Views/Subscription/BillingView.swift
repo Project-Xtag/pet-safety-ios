@@ -2,6 +2,7 @@ import SwiftUI
 import SafariServices
 
 struct BillingView: View {
+    @EnvironmentObject var subscriptionViewModel: SubscriptionViewModel
     @State private var invoices: [InvoiceItem] = []
     @State private var isLoading = true
     @State private var isPortalLoading = false
@@ -11,6 +12,32 @@ struct BillingView: View {
 
     var body: some View {
         List {
+            // Past Due Warning
+            if subscriptionViewModel.currentSubscription?.status == .pastDue {
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label {
+                            Text("billing_past_due_title")
+                                .font(.headline)
+                        } icon: {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(.orange)
+                        }
+                        Text("billing_past_due_message")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Button(action: openPortal) {
+                            Text("billing_update_payment")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.orange)
+                        .disabled(isPortalLoading)
+                    }
+                    .padding(.vertical, 4)
+                }
+            }
+
             // Manage Subscription Section
             Section {
                 Button(action: openPortal) {

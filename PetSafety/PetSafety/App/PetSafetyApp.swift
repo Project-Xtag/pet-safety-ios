@@ -1,6 +1,14 @@
 import SwiftUI
 import UIKit
 import Sentry
+import os
+
+extension Notification.Name {
+    static let checkoutCompleted = Notification.Name("checkoutCompleted")
+}
+
+private let appLog = Logger(subsystem: "com.petsafety.PetSafety", category: "AppStartup")
+private let startupTime = CFAbsoluteTimeGetCurrent()
 
 @main
 struct PetSafetyApp: App {
@@ -10,13 +18,18 @@ struct PetSafetyApp: App {
     @StateObject private var authViewModel = AuthViewModel()
     @StateObject private var appState = AppState()
     @StateObject private var notificationHandler = NotificationHandler.shared
+    @State private var showSplash = true
 
     init() {
+        appLog.notice("⏱️ PetSafetyApp.init() started at +\(String(format: "%.0f", (CFAbsoluteTimeGetCurrent() - startupTime) * 1000))ms")
+
         // Initialize Sentry for error tracking
         initializeSentry()
 
         // Configure appearance
         setupAppearance()
+
+        appLog.notice("⏱️ PetSafetyApp.init() completed at +\(String(format: "%.0f", (CFAbsoluteTimeGetCurrent() - startupTime) * 1000))ms")
     }
 
     private func initializeSentry() {
@@ -85,31 +98,40 @@ struct PetSafetyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(authViewModel)
-                .environmentObject(appState)
-                .environmentObject(notificationHandler)
-                .tint(Color(UIColor.darkGray)) // Dark gray for alert buttons
-                .sheet(isPresented: $notificationHandler.showMapPicker) {
-                    if let notification = notificationHandler.pendingScanNotification,
-                       let location = notification.location {
-                        MapAppPickerView(
-                            location: location,
-                            petName: notification.petName ?? "Pet"
-                        )
+            if showSplash {
+                SplashScreenView {
+                    withAnimation(.easeInOut(duration: 0.4)) {
+                        showSplash = false
                     }
                 }
-                .onReceive(NotificationCenter.default.publisher(for: .fcmTokenReceived)) { notification in
-                    // FCM token received - could update UI or trigger additional actions
-                    #if DEBUG
-                    if let token = notification.userInfo?["token"] as? String {
-                        print("App received FCM token: \(token.prefix(20))...")
+            } else {
+                ContentView()
+                    .environmentObject(authViewModel)
+                    .environmentObject(appState)
+                    .environmentObject(notificationHandler)
+                    .tint(Color(UIColor.darkGray)) // Dark gray for alert buttons
+                    .transition(.opacity)
+                    .sheet(isPresented: $notificationHandler.showMapPicker) {
+                        if let notification = notificationHandler.pendingScanNotification,
+                           let location = notification.location {
+                            MapAppPickerView(
+                                location: location,
+                                petName: notification.petName ?? "Pet"
+                            )
+                        }
                     }
-                    #endif
-                }
-                .onOpenURL { url in
-                    handleDeepLink(url)
-                }
+                    .onReceive(NotificationCenter.default.publisher(for: .fcmTokenReceived)) { notification in
+                        // FCM token received - could update UI or trigger additional actions
+                        #if DEBUG
+                        if let token = notification.userInfo?["token"] as? String {
+                            print("App received FCM token: \(token.prefix(20))...")
+                        }
+                        #endif
+                    }
+                    .onOpenURL { url in
+                        handleDeepLink(url)
+                    }
+            }
         }
     }
 
@@ -125,6 +147,7 @@ struct PetSafetyApp: App {
                 print("✅ Checkout success deep link received")
                 #endif
                 appState.showSuccess("Payment successful! Your subscription is being activated.")
+                NotificationCenter.default.post(name: .checkoutCompleted, object: nil)
             } else if path == "cancelled" {
                 #if DEBUG
                 print("⚠️ Checkout cancelled deep link received")

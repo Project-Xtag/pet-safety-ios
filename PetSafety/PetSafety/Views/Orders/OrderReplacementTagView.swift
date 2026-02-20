@@ -8,6 +8,8 @@ struct OrderReplacementTagView: View {
     @State private var isLoading = false
     @State private var isCheckingEligibility = true
     @State private var orderComplete = false
+    @State private var showCheckoutSheet = false
+    @State private var checkoutURL: URL?
 
     // Replacement eligibility
     @State private var isFreeReplacement = false
@@ -39,6 +41,15 @@ struct OrderReplacementTagView: View {
                     dismiss()
                 }
                 .foregroundColor(.brandOrange)
+            }
+        }
+        .sheet(isPresented: $showCheckoutSheet) {
+            if let url = checkoutURL {
+                SafariCheckoutView(url: url) { _ in
+                    showCheckoutSheet = false
+                    checkoutURL = nil
+                    orderComplete = true
+                }
             }
         }
         .task {
@@ -317,7 +328,15 @@ struct OrderReplacementTagView: View {
 
                 isLoading = false
 
-                orderComplete = true
+                // If backend returned a checkout URL, redirect to Stripe
+                if let urlString = response.checkoutUrl,
+                   urlString.hasPrefix("https://checkout.stripe.com/"),
+                   let url = URL(string: urlString) {
+                    checkoutURL = url
+                    showCheckoutSheet = true
+                } else {
+                    orderComplete = true
+                }
             } catch {
                 isLoading = false
                 appState.showError(error.localizedDescription)

@@ -54,8 +54,13 @@ class SyncService: ObservableObject {
 
         setupNetworkObserver()
         loadLastSyncDate()
-        updatePendingCount()
-        updateFailedActions()
+
+        // Defer Core Data queries until the store is ready to avoid blocking startup
+        Task { @MainActor [weak self] in
+            await offlineManager.waitUntilReady()
+            self?.updatePendingCount()
+            self?.updateFailedActions()
+        }
 
         if autoSync {
             // Auto-sync every 5 minutes when online
