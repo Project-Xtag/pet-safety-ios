@@ -20,7 +20,6 @@ struct OrderReplacementTagView: View {
     @State private var street1 = ""
     @State private var street2 = ""
     @State private var city = ""
-    @State private var province = ""
     @State private var postCode = ""
     @State private var country = ""
     @State private var phone = ""
@@ -172,7 +171,7 @@ struct OrderReplacementTagView: View {
                     Text("order_replace_street")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "order_replace_street_placeholder"), text: $street1)
+                    TextField("", text: $street1)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
@@ -181,7 +180,7 @@ struct OrderReplacementTagView: View {
                     Text("order_replace_line2")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "order_replace_line2_placeholder"), text: $street2)
+                    TextField("", text: $street2)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
@@ -190,16 +189,7 @@ struct OrderReplacementTagView: View {
                     Text("order_replace_city")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "order_replace_city"), text: $city)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-                .padding(.vertical, 4)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("order_replace_province")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    TextField(String(localized: "order_replace_province"), text: $province)
+                    TextField("", text: $city)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
@@ -208,7 +198,7 @@ struct OrderReplacementTagView: View {
                     Text("order_replace_postal")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "order_replace_postal"), text: $postCode)
+                    TextField("", text: $postCode)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.allCharacters)
                 }
@@ -218,7 +208,7 @@ struct OrderReplacementTagView: View {
                     Text("order_replace_country")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "order_replace_country"), text: $country)
+                    TextField("", text: $country)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
@@ -227,7 +217,7 @@ struct OrderReplacementTagView: View {
                     Text("order_replace_phone")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "order_replace_phone_placeholder"), text: $phone)
+                    TextField("", text: $phone)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.phonePad)
                         .textContentType(.telephoneNumber)
@@ -315,7 +305,7 @@ struct OrderReplacementTagView: View {
                     street1: street1,
                     street2: street2.isEmpty ? nil : street2,
                     city: city,
-                    province: province.isEmpty ? nil : province,
+                    province: nil,
                     postCode: postCode,
                     country: country,
                     phone: phone.isEmpty ? nil : phone

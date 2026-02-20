@@ -21,7 +21,6 @@ struct OrderMoreTagsView: View {
     @State private var street1 = ""
     @State private var street2 = ""
     @State private var city = ""
-    @State private var province = ""
     @State private var postCode = ""
     @State private var country = ""
 
@@ -106,7 +105,7 @@ struct OrderMoreTagsView: View {
             Section(header: Text("order_more_pet_names"), footer: Text("order_more_pet_names_footer")) {
                 ForEach(petNames.indices, id: \.self) { index in
                     HStack {
-                        TextField(String(localized: "order_more_pet_name_placeholder"), text: $petNames[index])
+                        TextField("", text: $petNames[index])
 
                         if petNames.count > 1 {
                             Button(action: { removePetName(at: index) }) {
@@ -123,12 +122,12 @@ struct OrderMoreTagsView: View {
             }
 
             Section(header: Text("order_more_your_info")) {
-                TextField(String(localized: "order_more_full_name"), text: $ownerName)
-                TextField(String(localized: "order_more_email"), text: $email)
+                TextField("", text: $ownerName)
+                TextField("", text: $email)
                     .keyboardType(.emailAddress)
                     .textContentType(.emailAddress)
                     .autocapitalization(.none)
-                TextField(String(localized: "order_more_phone"), text: $phone)
+                TextField("", text: $phone)
                     .keyboardType(.phonePad)
                     .textContentType(.telephoneNumber)
             }
@@ -138,7 +137,7 @@ struct OrderMoreTagsView: View {
                     Text("order_more_street")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "order_more_street_placeholder"), text: $street1)
+                    TextField("", text: $street1)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
@@ -147,7 +146,7 @@ struct OrderMoreTagsView: View {
                     Text("order_more_line2")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "order_more_line2_placeholder"), text: $street2)
+                    TextField("", text: $street2)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
@@ -156,16 +155,7 @@ struct OrderMoreTagsView: View {
                     Text("order_more_city")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "order_more_city"), text: $city)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-                .padding(.vertical, 4)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("order_more_province")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    TextField(String(localized: "order_more_province"), text: $province)
+                    TextField("", text: $city)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
@@ -174,18 +164,9 @@ struct OrderMoreTagsView: View {
                     Text("order_more_postal")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "order_more_postal"), text: $postCode)
+                    TextField("", text: $postCode)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.allCharacters)
-                }
-                .padding(.vertical, 4)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("order_more_country")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    TextField(String(localized: "order_more_country"), text: $country)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 .padding(.vertical, 4)
             }
@@ -249,8 +230,7 @@ struct OrderMoreTagsView: View {
         email.contains("@") &&
         !street1.isEmpty &&
         !city.isEmpty &&
-        !postCode.isEmpty &&
-        !country.isEmpty
+        !postCode.isEmpty
     }
 
     private func addPetName() {
