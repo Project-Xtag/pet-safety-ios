@@ -11,15 +11,17 @@ struct Order: Codable, Identifiable {
     let paymentMethod: String
     let paymentStatus: String
     let paymentIntentId: String?
+    let currency: String?
     let orderStatus: String
     let createdAt: String
     let updatedAt: String
     let items: [OrderItem]?
 
     var formattedAmount: String {
+        let currencyCode = currency ?? "EUR"
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencyCode = "EUR"
+        formatter.currencyCode = currencyCode
         return formatter.string(from: NSNumber(value: totalAmount)) ?? "€\(totalAmount)"
     }
 
@@ -34,7 +36,7 @@ struct Order: Codable, Identifiable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case id, items
+        case id, items, currency
         case userId = "user_id"
         case petName = "pet_name"
         case totalAmount = "total_amount"
@@ -47,6 +49,25 @@ struct Order: Codable, Identifiable {
         case orderStatus = "order_status"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        userId = try container.decodeIfPresent(String.self, forKey: .userId)
+        petName = try container.decodeIfPresent(String.self, forKey: .petName) ?? ""
+        totalAmount = try container.decodeIfPresent(Double.self, forKey: .totalAmount) ?? 0
+        shippingCost = try container.decodeIfPresent(Double.self, forKey: .shippingCost) ?? 0
+        shippingAddress = try container.decodeIfPresent(AddressDetails.self, forKey: .shippingAddress)
+        billingAddress = try container.decodeIfPresent(AddressDetails.self, forKey: .billingAddress)
+        paymentMethod = try container.decodeIfPresent(String.self, forKey: .paymentMethod) ?? "card"
+        paymentStatus = try container.decodeIfPresent(String.self, forKey: .paymentStatus) ?? "pending"
+        paymentIntentId = try container.decodeIfPresent(String.self, forKey: .paymentIntentId)
+        currency = try container.decodeIfPresent(String.self, forKey: .currency)
+        orderStatus = try container.decodeIfPresent(String.self, forKey: .orderStatus) ?? "pending"
+        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
+        updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
+        items = try container.decodeIfPresent([OrderItem].self, forKey: .items)
     }
 }
 

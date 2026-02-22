@@ -24,18 +24,35 @@ struct SubscriptionPlan: Codable, Identifiable {
         case isPopular = "is_popular"
     }
 
+    private func currencySymbol(for code: String) -> String {
+        switch code.uppercased() {
+        case "EUR": return "€"
+        case "HUF": return "Ft"
+        case "GBP": return "£"
+        default: return "€"
+        }
+    }
+
+    private func formatPrice(_ amount: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencyCode = currency
+        formatter.currencySymbol = currencySymbol(for: currency)
+        return formatter.string(from: NSNumber(value: amount)) ?? "\(currencySymbol(for: currency))\(String(format: "%.2f", amount))"
+    }
+
     var formattedMonthlyPrice: String {
         if priceMonthly == 0 {
             return "Free"
         }
-        return String(format: "£%.2f/mo", priceMonthly)
+        return "\(formatPrice(priceMonthly))/mo"
     }
 
     var formattedYearlyPrice: String {
         if priceYearly == 0 {
             return "Free"
         }
-        return String(format: "£%.2f/yr", priceYearly)
+        return "\(formatPrice(priceYearly))/yr"
     }
 
     var isFree: Bool {
@@ -187,13 +204,12 @@ struct CreateCheckoutRequest: Codable {
 }
 
 struct SubscriptionCheckoutResponse: Codable {
-    let sessionId: String
-    let url: String
+    let checkout: SubscriptionCheckoutData
+}
 
-    enum CodingKeys: String, CodingKey {
-        case sessionId = "session_id"
-        case url
-    }
+struct SubscriptionCheckoutData: Codable {
+    let id: String
+    let url: String
 }
 
 // MARK: - Billing Portal

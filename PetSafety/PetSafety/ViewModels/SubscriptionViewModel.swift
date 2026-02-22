@@ -138,16 +138,16 @@ class SubscriptionViewModel: ObservableObject {
                 #endif
             } else {
                 // Paid plan - create checkout session
-                let checkout = try await APIService.shared.createSubscriptionCheckout(
+                let response = try await APIService.shared.createSubscriptionCheckout(
                     planName: plan.name,
                     billingPeriod: billingPeriod
                 )
 
-                if let url = URL(string: checkout.url) {
+                if let url = URL(string: response.checkout.url) {
                     checkoutURL = url
                     showCheckoutSheet = true
                     #if DEBUG
-                    print("✅ Created checkout session, URL: \(checkout.url)")
+                    print("✅ Created checkout session, URL: \(response.checkout.url)")
                     #endif
                 } else {
                     error = "Invalid checkout URL"
