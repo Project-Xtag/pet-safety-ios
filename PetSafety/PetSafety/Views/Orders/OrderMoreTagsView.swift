@@ -24,13 +24,6 @@ struct OrderMoreTagsView: View {
     @State private var postCode = ""
     @State private var country = ""
 
-    // Pricing - tags are free, only shipping cost
-    private let shippingCost: Double = 3.90
-
-    var totalCost: Double {
-        return shippingCost
-    }
-
     var body: some View {
         Group {
             if orderComplete {
@@ -57,9 +50,11 @@ struct OrderMoreTagsView: View {
                 SafariCheckoutView(url: url) { _ in
                     showCheckoutSheet = false
                     checkoutURL = nil
-                    orderComplete = true
                 }
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .tagOrderCompleted)) { _ in
+            orderComplete = true
         }
     }
 
@@ -169,6 +164,15 @@ struct OrderMoreTagsView: View {
                         .autocapitalization(.allCharacters)
                 }
                 .padding(.vertical, 4)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("order_more_country")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    TextField("", text: $country)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding(.vertical, 4)
             }
 
             Section(header: Text("order_more_summary")) {
@@ -183,14 +187,14 @@ struct OrderMoreTagsView: View {
                 HStack {
                     Text("order_more_shipping_cost")
                     Spacer()
-                    Text(String(format: "€%.2f", shippingCost))
+                    Text(String(localized: "order_more_shipping_calculated"))
                 }
 
                 HStack {
                     Text("order_more_total")
                         .fontWeight(.bold)
                     Spacer()
-                    Text(String(format: "€%.2f", totalCost))
+                    Text(String(localized: "order_more_total_shipping_only"))
                         .fontWeight(.bold)
                 }
             }
@@ -230,7 +234,8 @@ struct OrderMoreTagsView: View {
         email.contains("@") &&
         !street1.isEmpty &&
         !city.isEmpty &&
-        !postCode.isEmpty
+        !postCode.isEmpty &&
+        !country.isEmpty
     }
 
     private func addPetName() {

@@ -47,9 +47,11 @@ struct OrderReplacementTagView: View {
                 SafariCheckoutView(url: url) { _ in
                     showCheckoutSheet = false
                     checkoutURL = nil
-                    orderComplete = true
                 }
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .replacementCompleted)) { _ in
+            orderComplete = true
         }
         .task {
             await checkEligibility()

@@ -2,30 +2,42 @@ import Testing
 import Foundation
 @testable import PetSafety
 
-@Suite("Payment Intent Decoding")
+@Suite("Checkout Response Decoding")
 struct PaymentIntentTests {
-    @Test("Decodes payment intent create response")
-    func testDecodePaymentIntentResponse() throws {
+    @Test("Decodes tag checkout response with session URL")
+    func testDecodeTagCheckoutResponse() throws {
         let json = """
         {
           "success": true,
           "data": {
-            "paymentIntent": {
-              "id": "pi_test_123",
-              "client_secret": "secret_abc",
-              "amount": 3.90,
-              "currency": "gbp"
+            "checkout": {
+              "id": "cs_test_abc123",
+              "url": "https://checkout.stripe.com/c/pay/cs_test_abc123"
             }
           }
         }
         """.data(using: .utf8)!
 
         let decoder = JSONDecoder()
-        let response = try decoder.decode(PetSafety.ApiEnvelope<PetSafety.PaymentIntentResponse>.self, from: json)
+        let response = try decoder.decode(ApiEnvelope<TagCheckoutResponse>.self, from: json)
         #expect(response.success == true)
-        #expect(response.data?.paymentIntent.id == "pi_test_123")
-        #expect(response.data?.paymentIntent.clientSecret == "secret_abc")
-        #expect(response.data?.paymentIntent.amount == 3.90)
-        #expect(response.data?.paymentIntent.currency == "gbp")
+        #expect(response.data?.checkout.id == "cs_test_abc123")
+        #expect(response.data?.checkout.url.contains("stripe.com") == true)
+    }
+
+    @Test("CreateTagCheckoutRequest encodes country_code correctly")
+    func testCreateTagCheckoutRequestEncoding() throws {
+        let request = CreateTagCheckoutRequest(
+            quantity: 2,
+            countryCode: "SK",
+            platform: "ios"
+        )
+
+        let data = try JSONEncoder().encode(request)
+        let dict = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+
+        #expect(dict["quantity"] as? Int == 2)
+        #expect(dict["country_code"] as? String == "SK")
+        #expect(dict["platform"] as? String == "ios")
     }
 }

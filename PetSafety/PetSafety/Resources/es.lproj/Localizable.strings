@@ -1311,3 +1311,19 @@
 "help_faq_group_billing_plans" = "Facturación y planes";
 "help_faq_group_privacy_account" = "Privacidad y cuenta";
 "help_faq_group_troubleshooting" = "Solución de problemas";
+
+// MARK: - Checkout & Order Status Localization
+"order_more_shipping_calculated" = "Calculated at checkout";
+"order_more_total_shipping_only" = "Shipping only";
+"checkout_subscription_success" = "Your subscription is now active!";
+"checkout_tag_order_success" = "Payment successful! Your tag order is being processed.";
+"checkout_replacement_success" = "Payment successful! Your replacement tag is on the way.";
+"checkout_success" = "Payment successful!";
+"order_status_completed" = "Completed";
+"order_status_pending" = "Pending";
+"order_status_failed" = "Failed";
+"order_status_processing" = "Processing";
+"order_status_shipped" = "Shipped";
+"order_status_delivered" = "Delivered";
+"order_status_cancelled" = "Cancelled";
+"orders_item_count %lld" = "%lld items";

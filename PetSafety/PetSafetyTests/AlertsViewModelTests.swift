@@ -29,7 +29,7 @@ struct AlertsViewModelTests {
             lastSeenLocation: LocationCoordinate(lat: 47.4979, lng: 19.0402),
             lastSeenAddress: "Budapest, Andrassy ut",
             description: "Last seen near Heroes' Square",
-            rewardAmount: 200.0,
+            rewardAmount: "200",
             alertRadiusKm: 5.0
         )
 
@@ -37,7 +37,7 @@ struct AlertsViewModelTests {
         let dict = try JSONSerialization.jsonObject(with: data) as! [String: Any]
 
         #expect(dict["petId"] as? String == "pet_vm_001")
-        #expect(dict["rewardAmount"] as? Double == 200.0)
+        #expect(dict["rewardAmount"] as? String == "200")
         #expect(dict["alertRadiusKm"] as? Double == 5.0)
         #expect(dict["description"] as? String == "Last seen near Heroes' Square")
         #expect(dict["lastSeenAddress"] as? String == "Budapest, Andrassy ut")
@@ -72,9 +72,8 @@ struct AlertsViewModelTests {
 
     @Test("Offline alert queueing action data includes rewardAmount")
     func testOfflineQueueActionDataIncludesReward() {
-        // Simulate the action data dictionary built in createAlert when offline
         var actionData: [String: Any] = ["petId": "pet_vm_003"]
-        let rewardAmount: Double? = 150.0
+        let rewardAmount: String? = "150"
         let coordinate = (latitude: 51.5074, longitude: -0.1278)
         let location: String? = "Central Park"
         let additionalInfo: String? = "Lost near the entrance"
@@ -93,7 +92,7 @@ struct AlertsViewModelTests {
         }
 
         #expect(actionData["petId"] as? String == "pet_vm_003")
-        #expect(actionData["rewardAmount"] as? Double == 150.0)
+        #expect(actionData["rewardAmount"] as? String == "150")
         #expect(actionData["latitude"] as? Double == 51.5074)
         #expect(actionData["longitude"] as? Double == -0.1278)
         #expect(actionData["lastSeenAddress"] as? String == "Central Park")
@@ -103,7 +102,7 @@ struct AlertsViewModelTests {
     @Test("Offline alert queueing action data omits rewardAmount when nil")
     func testOfflineQueueActionDataOmitsNilReward() {
         var actionData: [String: Any] = ["petId": "pet_vm_004"]
-        let rewardAmount: Double? = nil
+        let rewardAmount: String? = nil
 
         if let rewardAmount = rewardAmount {
             actionData["rewardAmount"] = rewardAmount
@@ -139,7 +138,7 @@ struct AlertsViewModelTests {
             lastSeenLocation: location,
             lastSeenAddress: "Sydney Opera House",
             description: nil,
-            rewardAmount: 300.0,
+            rewardAmount: "300",
             alertRadiusKm: 25.0
         )
 
@@ -164,7 +163,7 @@ struct AlertsViewModelTests {
                 "pet_id": "pet_env_001",
                 "user_id": "user_env_001",
                 "status": "active",
-                "reward_amount": 999.99,
+                "reward_amount": "999.99",
                 "alert_radius_km": 10,
                 "created_at": "2026-02-01T12:00:00Z",
                 "updated_at": "2026-02-01T12:00:00Z"
@@ -175,7 +174,7 @@ struct AlertsViewModelTests {
         let envelope = try JSONDecoder().decode(ApiEnvelope<MissingPetAlert>.self, from: json)
         #expect(envelope.success == true)
         #expect(envelope.data?.id == "alert_env_001")
-        #expect(envelope.data?.rewardAmount == 999.99)
+        #expect(envelope.data?.rewardAmount == "999.99")
         #expect(envelope.data?.alertRadiusKm == 10.0)
     }
 
@@ -186,9 +185,7 @@ struct AlertsViewModelTests {
         let viewModel = AlertsViewModel()
 
         // Verify the method signature compiles with rewardAmount parameter.
-        // We store a closure reference that calls createAlert with all parameters
-        // including rewardAmount. If the signature changes, this test will fail to compile.
-        let _: (String, String?, CLLocationCoordinate2D?, String?, Double?) async throws -> MissingPetAlert = {
+        let _: (String, String?, CLLocationCoordinate2D?, String?, String?) async throws -> MissingPetAlert = {
             petId, location, coordinate, additionalInfo, rewardAmount in
             return try await viewModel.createAlert(
                 petId: petId,

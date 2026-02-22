@@ -19,8 +19,8 @@ struct Order: Codable, Identifiable {
     var formattedAmount: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencyCode = "GBP"
-        return formatter.string(from: NSNumber(value: totalAmount)) ?? "GBP \(totalAmount)"
+        formatter.currencyCode = "EUR"
+        return formatter.string(from: NSNumber(value: totalAmount)) ?? "€\(totalAmount)"
     }
 
     var statusColor: String {

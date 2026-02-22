@@ -5,6 +5,8 @@ import os
 
 extension Notification.Name {
     static let checkoutCompleted = Notification.Name("checkoutCompleted")
+    static let tagOrderCompleted = Notification.Name("tagOrderCompleted")
+    static let replacementCompleted = Notification.Name("replacementCompleted")
 }
 
 private let appLog = Logger(subsystem: "com.petsafety.PetSafety", category: "AppStartup")
@@ -141,16 +143,27 @@ struct PetSafetyApp: App {
         switch url.host {
         case "checkout":
             let path = url.path.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+            let type = components?.queryItems?.first(where: { $0.name == "type" })?.value
+
             if path == "success" {
-                // Stripe checkout completed — refresh subscription state
-                #if DEBUG
-                print("✅ Checkout success deep link received")
-                #endif
-                appState.showSuccess("Payment successful! Your subscription is being activated.")
-                NotificationCenter.default.post(name: .checkoutCompleted, object: nil)
+                switch type {
+                case "subscription":
+                    appState.showSuccess(String(localized: "checkout_subscription_success"))
+                    NotificationCenter.default.post(name: .checkoutCompleted, object: nil)
+                case "qr_tag_order":
+                    appState.showSuccess(String(localized: "checkout_tag_order_success"))
+                    NotificationCenter.default.post(name: .tagOrderCompleted, object: nil)
+                case "replacement_shipping":
+                    appState.showSuccess(String(localized: "checkout_replacement_success"))
+                    NotificationCenter.default.post(name: .replacementCompleted, object: nil)
+                default:
+                    appState.showSuccess(String(localized: "checkout_success"))
+                    NotificationCenter.default.post(name: .checkoutCompleted, object: nil)
+                }
             } else if path == "cancelled" {
                 #if DEBUG
-                print("⚠️ Checkout cancelled deep link received")
+                print("Checkout cancelled deep link received")
                 #endif
             }
         default:

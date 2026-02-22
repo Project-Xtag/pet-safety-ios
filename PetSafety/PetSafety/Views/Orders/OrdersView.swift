@@ -69,7 +69,7 @@ struct OrderRowView: View {
                     .fill(statusColor)
                     .frame(width: 8, height: 8)
 
-                Text(order.orderStatus.capitalized)
+                Text(localizedStatus(order.orderStatus))
                     .font(.subheadline)
                     .foregroundColor(statusColor)
 
@@ -82,12 +82,25 @@ struct OrderRowView: View {
 
             if let items = order.items, !items.isEmpty {
                 let totalItems = items.reduce(0) { $0 + $1.quantity }
-                Text("\(totalItems) item\(totalItems == 1 ? "" : "s")")
+                Text(String(localized: "orders_item_count \(totalItems)"))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
         }
         .padding(.vertical, 8)
+    }
+
+    private func localizedStatus(_ status: String) -> String {
+        switch status {
+        case "completed": return String(localized: "order_status_completed")
+        case "pending": return String(localized: "order_status_pending")
+        case "failed": return String(localized: "order_status_failed")
+        case "processing": return String(localized: "order_status_processing")
+        case "shipped": return String(localized: "order_status_shipped")
+        case "delivered": return String(localized: "order_status_delivered")
+        case "cancelled": return String(localized: "order_status_cancelled")
+        default: return status.capitalized
+        }
     }
 
     private func formatDate(_ dateString: String) -> String {
@@ -122,7 +135,7 @@ struct OrderDetailView: View {
                         Circle()
                             .fill(statusColor)
                             .frame(width: 8, height: 8)
-                Text(order.orderStatus.capitalized)
+                Text(localizedStatus(order.orderStatus))
                             .foregroundColor(statusColor)
                     }
                 }
@@ -197,11 +210,24 @@ struct OrderDetailView: View {
         return displayFormatter.string(from: date)
     }
 
+    private func localizedStatus(_ status: String) -> String {
+        switch status {
+        case "completed": return String(localized: "order_status_completed")
+        case "pending": return String(localized: "order_status_pending")
+        case "failed": return String(localized: "order_status_failed")
+        case "processing": return String(localized: "order_status_processing")
+        case "shipped": return String(localized: "order_status_shipped")
+        case "delivered": return String(localized: "order_status_delivered")
+        case "cancelled": return String(localized: "order_status_cancelled")
+        default: return status.capitalized
+        }
+    }
+
     private func formatCurrency(_ amount: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencyCode = "GBP"
-        return formatter.string(from: NSNumber(value: amount)) ?? "GBP \(amount)"
+        formatter.currencyCode = "EUR"
+        return formatter.string(from: NSNumber(value: amount)) ?? "€\(amount)"
     }
 }
 
