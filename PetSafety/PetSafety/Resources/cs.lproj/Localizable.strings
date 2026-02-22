@@ -31,6 +31,7 @@
 "tab_scan_qr" = "Skenovat QR";
 "tab_alerts" = "Upozornění";
 "tab_profile" = "Profil";
+"tab_account" = "Účet";
 
 // MARK: - Ověřování
 "auth_tagline" = "Chraňte své mazlíčky pomocí QR známek";

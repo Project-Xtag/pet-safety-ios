@@ -98,14 +98,14 @@ struct HelpAndSupportView: View {
                 HStack {
                     Text("help_version")
                     Spacer()
-                    Text("1.0.0")
+                    Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0")
                         .foregroundColor(.secondary)
                 }
 
                 HStack {
                     Text("help_build")
                     Spacer()
-                    Text("2024.11.001")
+                    Text(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1")
                         .foregroundColor(.secondary)
                 }
             }

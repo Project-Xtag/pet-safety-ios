@@ -31,6 +31,7 @@
 "tab_scan_qr" = "Scan QR";
 "tab_alerts" = "Alerts";
 "tab_profile" = "Profile";
+"tab_account" = "Account";
 
 // MARK: - Auth
 "auth_tagline" = "Keep your pets safe with QR tags";

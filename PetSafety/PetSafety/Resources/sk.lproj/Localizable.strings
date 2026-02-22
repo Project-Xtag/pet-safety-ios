@@ -31,6 +31,7 @@
 "tab_scan_qr" = "Skenovat QR";
 "tab_alerts" = "Upozornenia";
 "tab_profile" = "Profil";
+"tab_account" = "Účet";
 
 // MARK: - Autentifikacia
 "auth_tagline" = "Chrante svojich milacikov pomocou QR stitkov";

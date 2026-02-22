@@ -216,28 +216,28 @@ struct CustomTabBar: View {
         HStack(spacing: 0) {
             TabBarItem(
                 icon: "pawprint.fill",
-                title: "My Pets",
+                title: String(localized: "tab_my_pets"),
                 isSelected: selectedTab == 0,
                 action: { selectedTab = 0 }
             )
 
             TabBarItem(
                 icon: "qrcode.viewfinder",
-                title: "Scan QR",
+                title: String(localized: "tab_scan_qr"),
                 isSelected: selectedTab == 1,
                 action: { selectedTab = 1 }
             )
 
             TabBarItem(
                 icon: "exclamationmark.triangle.fill",
-                title: "Alerts",
+                title: String(localized: "tab_alerts"),
                 isSelected: selectedTab == 2,
                 action: { selectedTab = 2 }
             )
 
             TabBarItem(
                 icon: "person.fill",
-                title: "Account",
+                title: String(localized: "tab_account"),
                 isSelected: selectedTab == 3,
                 action: { selectedTab = 3 }
             )

@@ -13,7 +13,7 @@ struct OrderReplacementTagView: View {
 
     // Replacement eligibility
     @State private var isFreeReplacement = false
-    @State private var shippingCost: Double = 3.90
+    @State private var shippingCost: Double = 0.0
     @State private var planName: String = "starter"
 
     // Shipping address fields
@@ -72,7 +72,6 @@ struct OrderReplacementTagView: View {
             // Default to paid replacement if check fails
             await MainActor.run {
                 isFreeReplacement = false
-                shippingCost = 3.90
                 isCheckingEligibility = false
             }
         }

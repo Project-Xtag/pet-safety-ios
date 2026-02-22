@@ -31,6 +31,7 @@
 "tab_scan_qr" = "Escanear QR";
 "tab_alerts" = "Alertas";
 "tab_profile" = "Perfil";
+"tab_account" = "Cuenta";
 
 // MARK: - Autenticación
 "auth_tagline" = "Mantén a tus mascotas seguras con etiquetas QR";

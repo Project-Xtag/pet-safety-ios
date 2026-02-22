@@ -31,6 +31,7 @@
 "tab_scan_qr" = "Scanează QR";
 "tab_alerts" = "Alerte";
 "tab_profile" = "Profil";
+"tab_account" = "Cont";
 
 // MARK: - Autentificare
 "auth_tagline" = "Ține-ți animalele în siguranță cu etichete QR";

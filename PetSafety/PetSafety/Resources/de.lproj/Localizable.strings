@@ -31,6 +31,7 @@
 "tab_scan_qr" = "QR scannen";
 "tab_alerts" = "Warnungen";
 "tab_profile" = "Profil";
+"tab_account" = "Konto";
 
 // MARK: - Authentifizierung
 "auth_tagline" = "Schützen Sie Ihre Haustiere mit QR-Tags";
