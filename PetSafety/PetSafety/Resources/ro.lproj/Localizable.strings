@@ -558,8 +558,8 @@
 "address_details_footer" = "Adresa ta este folosită pentru livrarea etichetelor și găsirea alertelor din apropiere.";
 "address_street" = "Stradă și număr";
 "address_street_placeholder" = "Introdu strada și numărul";
-"address_line2" = "Linia 2 adresă (opțional)";
-"address_line2_placeholder" = "Apartament, etaj, etc.";
+"address_line2" = "Etaj, apartament (opțional)";
+"address_line2_placeholder" = "4B";
 "address_city" = "Oraș / localitate";
 "address_city_placeholder" = "Introdu orașul sau localitatea";
 "address_postal" = "Cod poștal";
@@ -572,7 +572,7 @@
 "address_edit" = "Editează adresă";
 "address_title" = "Adresă";
 "address_select_country_title" = "Selectează țara";
-"address_line2_label" = "Linia 2 adresă";
+"address_line2_label" = "Etaj, apartament";
 "address_postal_label" = "Cod poștal";
 "street_address" = "Stradă și număr";
 "address_line_2_optional" = "Linia 2 adresă (opțional)";
@@ -881,8 +881,8 @@
 "order_more_shipping" = "Adresă de livrare";
 "order_more_street" = "Stradă și număr";
 "order_more_street_placeholder" = "Introdu strada și numărul";
-"order_more_line2" = "Linia 2 adresă (opțional)";
-"order_more_line2_placeholder" = "Apartament, etaj, etc.";
+"order_more_line2" = "Etaj, apartament (opțional)";
+"order_more_line2_placeholder" = "4B";
 "order_more_city" = "Oraș";
 "order_more_province" = "Județ / stat (opțional)";
 "order_more_postal" = "Cod poștal";
@@ -912,8 +912,8 @@
 "order_replace_shipping_footer" = "Vom expedia eticheta de înlocuire la această adresă.";
 "order_replace_street" = "Stradă și număr";
 "order_replace_street_placeholder" = "Introdu strada și numărul";
-"order_replace_line2" = "Linia 2 adresă (opțional)";
-"order_replace_line2_placeholder" = "Apartament, etaj, etc.";
+"order_replace_line2" = "Etaj, apartament (opțional)";
+"order_replace_line2_placeholder" = "4B";
 "order_replace_city" = "Oraș";
 "order_replace_postal" = "Cod poștal";
 "order_replace_country" = "Țară";

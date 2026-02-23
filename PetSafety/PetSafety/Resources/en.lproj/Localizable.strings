@@ -558,8 +558,8 @@
 "address_details_footer" = "Your address is used for shipping tags and finding nearby alerts.";
 "address_street" = "Street Address";
 "address_street_placeholder" = "Enter street address";
-"address_line2" = "Address Line 2 (Optional)";
-"address_line2_placeholder" = "Apartment, suite, etc.";
+"address_line2" = "Apartment, suite, etc. (Optional)";
+"address_line2_placeholder" = "Apt 4B";
 "address_city" = "City / Town";
 "address_city_placeholder" = "Enter city or town";
 "address_postal" = "Postal Code / ZIP Code";
@@ -572,7 +572,7 @@
 "address_edit" = "Edit Address";
 "address_title" = "Address";
 "address_select_country_title" = "Select Country";
-"address_line2_label" = "Address Line 2";
+"address_line2_label" = "Apartment, suite, etc.";
 "address_postal_label" = "Postal Code";
 "street_address" = "Street Address";
 "address_line_2_optional" = "Address Line 2 (Optional)";
@@ -931,8 +931,8 @@
 "order_more_shipping" = "Shipping Address";
 "order_more_street" = "Street Address";
 "order_more_street_placeholder" = "Enter street address";
-"order_more_line2" = "Address Line 2 (Optional)";
-"order_more_line2_placeholder" = "Apartment, suite, etc.";
+"order_more_line2" = "Apartment, suite, etc. (Optional)";
+"order_more_line2_placeholder" = "Apt 4B";
 "order_more_city" = "City";
 "order_more_province" = "Province / State (Optional)";
 "order_more_postal" = "Postal Code";
@@ -962,8 +962,8 @@
 "order_replace_shipping_footer" = "We'll ship the replacement tag to this address.";
 "order_replace_street" = "Street Address";
 "order_replace_street_placeholder" = "Enter street address";
-"order_replace_line2" = "Address Line 2 (Optional)";
-"order_replace_line2_placeholder" = "Apartment, suite, etc.";
+"order_replace_line2" = "Apartment, suite, etc. (Optional)";
+"order_replace_line2_placeholder" = "Apt 4B";
 "order_replace_city" = "City";
 "order_replace_postal" = "Postal Code";
 "order_replace_country" = "Country";

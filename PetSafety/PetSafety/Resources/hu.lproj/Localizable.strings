@@ -558,8 +558,8 @@
 "address_details_footer" = "A címedet a biléták szállításához és a közeli riasztásokhoz használjuk.";
 "address_street" = "Utca, házszám";
 "address_street_placeholder" = "Add meg az utcát és házszámot";
-"address_line2" = "Cím 2. sora (opcionális)";
-"address_line2_placeholder" = "Lakás, emelet, stb.";
+"address_line2" = "Emelet, ajtó (opcionális)";
+"address_line2_placeholder" = "4/B";
 "address_city" = "Város / település";
 "address_city_placeholder" = "Add meg a várost vagy települést";
 "address_postal" = "Irányítószám";
@@ -572,7 +572,7 @@
 "address_edit" = "Cím szerkesztése";
 "address_title" = "Cím";
 "address_select_country_title" = "Ország kiválasztása";
-"address_line2_label" = "Cím 2. sora";
+"address_line2_label" = "Emelet, ajtó";
 "address_postal_label" = "Irányítószám";
 "street_address" = "Utca, házszám";
 "address_line_2_optional" = "Cím 2. sora (opcionális)";
@@ -881,8 +881,8 @@
 "order_more_shipping" = "Szállítási cím";
 "order_more_street" = "Utca, házszám";
 "order_more_street_placeholder" = "Add meg az utcát és házszámot";
-"order_more_line2" = "Cím 2. sora (opcionális)";
-"order_more_line2_placeholder" = "Lakás, emelet, stb.";
+"order_more_line2" = "Emelet, ajtó (opcionális)";
+"order_more_line2_placeholder" = "4/B";
 "order_more_city" = "Város";
 "order_more_province" = "Megye / állam (opcionális)";
 "order_more_postal" = "Irányítószám";
@@ -912,8 +912,8 @@
 "order_replace_shipping_footer" = "A cserebilétát erre a címre szállítjuk.";
 "order_replace_street" = "Utca, házszám";
 "order_replace_street_placeholder" = "Add meg az utcát és házszámot";
-"order_replace_line2" = "Cím 2. sora (opcionális)";
-"order_replace_line2_placeholder" = "Lakás, emelet, stb.";
+"order_replace_line2" = "Emelet, ajtó (opcionális)";
+"order_replace_line2_placeholder" = "4/B";
 "order_replace_city" = "Város";
 "order_replace_postal" = "Irányítószám";
 "order_replace_country" = "Ország";

@@ -558,8 +558,8 @@
 "address_details_footer" = "A sua morada é usada para envio de etiquetas e alertas próximos.";
 "address_street" = "Rua e número";
 "address_street_placeholder" = "Introduza rua e número";
-"address_line2" = "Linha de morada 2 (opcional)";
-"address_line2_placeholder" = "Apartamento, suíte, etc.";
+"address_line2" = "Andar, apartamento (opcional)";
+"address_line2_placeholder" = "4B";
 "address_city" = "Cidade / localidade";
 "address_city_placeholder" = "Introduza cidade ou localidade";
 "address_postal" = "Código postal";
@@ -572,7 +572,7 @@
 "address_edit" = "Editar morada";
 "address_title" = "Morada";
 "address_select_country_title" = "Selecionar país";
-"address_line2_label" = "Linha de morada 2";
+"address_line2_label" = "Andar, apartamento";
 "address_postal_label" = "Código postal";
 "street_address" = "Rua e número";
 "address_line_2_optional" = "Linha de morada 2 (opcional)";
@@ -881,8 +881,8 @@
 "order_more_shipping" = "Morada de envio";
 "order_more_street" = "Rua e número";
 "order_more_street_placeholder" = "Introduza rua e número";
-"order_more_line2" = "Linha de morada 2 (opcional)";
-"order_more_line2_placeholder" = "Apartamento, suíte, etc.";
+"order_more_line2" = "Andar, apartamento (opcional)";
+"order_more_line2_placeholder" = "4B";
 "order_more_city" = "Cidade";
 "order_more_province" = "Distrito / estado (opcional)";
 "order_more_postal" = "Código postal";
@@ -912,8 +912,8 @@
 "order_replace_shipping_footer" = "Enviaremos a etiqueta de substituição para esta morada.";
 "order_replace_street" = "Rua e número";
 "order_replace_street_placeholder" = "Introduza rua e número";
-"order_replace_line2" = "Linha de morada 2 (opcional)";
-"order_replace_line2_placeholder" = "Apartamento, suíte, etc.";
+"order_replace_line2" = "Andar, apartamento (opcional)";
+"order_replace_line2_placeholder" = "4B";
 "order_replace_city" = "Cidade";
 "order_replace_postal" = "Código postal";
 "order_replace_country" = "País";

@@ -558,8 +558,8 @@
 "address_details_footer" = "Vasa adresa sa pouziva na dorucenie stitkov a vyhladavanie upozorneni v okoli.";
 "address_street" = "Ulica a cislo";
 "address_street_placeholder" = "Zadajte ulicu a cislo";
-"address_line2" = "Adresny riadok 2 (volitelne)";
-"address_line2_placeholder" = "Byt, poschodie, atd.";
+"address_line2" = "Poschodie, byt (volitelne)";
+"address_line2_placeholder" = "4B";
 "address_city" = "Mesto / obec";
 "address_city_placeholder" = "Zadajte mesto alebo obec";
 "address_postal" = "PSC";
@@ -572,7 +572,7 @@
 "address_edit" = "Upravit adresu";
 "address_title" = "Adresa";
 "address_select_country_title" = "Vybrat krajinu";
-"address_line2_label" = "Adresny riadok 2";
+"address_line2_label" = "Poschodie, byt";
 "address_postal_label" = "PSC";
 "street_address" = "Ulica a cislo";
 "address_line_2_optional" = "Adresny riadok 2 (volitelne)";
@@ -881,8 +881,8 @@
 "order_more_shipping" = "Dodacia adresa";
 "order_more_street" = "Ulica a cislo";
 "order_more_street_placeholder" = "Zadajte ulicu a cislo";
-"order_more_line2" = "Adresny riadok 2 (volitelne)";
-"order_more_line2_placeholder" = "Byt, poschodie, atd.";
+"order_more_line2" = "Poschodie, byt (volitelne)";
+"order_more_line2_placeholder" = "4B";
 "order_more_city" = "Mesto";
 "order_more_province" = "Kraj/stat (volitelne)";
 "order_more_postal" = "PSC";
@@ -912,8 +912,8 @@
 "order_replace_shipping_footer" = "Nahradny stitok posleme na tuto adresu.";
 "order_replace_street" = "Ulica a cislo";
 "order_replace_street_placeholder" = "Zadajte ulicu a cislo";
-"order_replace_line2" = "Adresny riadok 2 (volitelne)";
-"order_replace_line2_placeholder" = "Byt, poschodie, atd.";
+"order_replace_line2" = "Poschodie, byt (volitelne)";
+"order_replace_line2_placeholder" = "4B";
 "order_replace_city" = "Mesto";
 "order_replace_postal" = "PSC";
 "order_replace_country" = "Krajina";

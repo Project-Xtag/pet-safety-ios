@@ -558,8 +558,8 @@
 "address_details_footer" = "Vaše adresa se používá pro doručení známek a hledání upozornění v okolí.";
 "address_street" = "Ulice a číslo";
 "address_street_placeholder" = "Zadejte ulici a číslo";
-"address_line2" = "Adresní řádek 2 (volitelné)";
-"address_line2_placeholder" = "Byt, patro apod.";
+"address_line2" = "Patro, byt (volitelné)";
+"address_line2_placeholder" = "4B";
 "address_city" = "Město / obec";
 "address_city_placeholder" = "Zadejte město nebo obec";
 "address_postal" = "PSČ";
@@ -572,7 +572,7 @@
 "address_edit" = "Upravit adresu";
 "address_title" = "Adresa";
 "address_select_country_title" = "Vybrat zemi";
-"address_line2_label" = "Adresní řádek 2";
+"address_line2_label" = "Patro, byt";
 "address_postal_label" = "PSČ";
 "street_address" = "Ulice a číslo";
 "address_line_2_optional" = "Adresní řádek 2 (volitelné)";
@@ -881,8 +881,8 @@
 "order_more_shipping" = "Doručovací adresa";
 "order_more_street" = "Ulice a číslo";
 "order_more_street_placeholder" = "Zadejte ulici a číslo";
-"order_more_line2" = "Adresní řádek 2 (volitelné)";
-"order_more_line2_placeholder" = "Byt, patro apod.";
+"order_more_line2" = "Patro, byt (volitelné)";
+"order_more_line2_placeholder" = "4B";
 "order_more_city" = "Město";
 "order_more_province" = "Kraj / stát (volitelné)";
 "order_more_postal" = "PSČ";
@@ -912,8 +912,8 @@
 "order_replace_shipping_footer" = "Náhradní známku odešleme na tuto adresu.";
 "order_replace_street" = "Ulice a číslo";
 "order_replace_street_placeholder" = "Zadejte ulici a číslo";
-"order_replace_line2" = "Adresní řádek 2 (volitelné)";
-"order_replace_line2_placeholder" = "Byt, patro apod.";
+"order_replace_line2" = "Patro, byt (volitelné)";
+"order_replace_line2_placeholder" = "4B";
 "order_replace_city" = "Město";
 "order_replace_postal" = "PSČ";
 "order_replace_country" = "Země";
