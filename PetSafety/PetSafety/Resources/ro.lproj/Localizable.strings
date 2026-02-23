@@ -1138,6 +1138,31 @@
 "sync_count_failed %lld" = "%lld eșuate";
 "sync_count_pending %lld" = "%lld în așteptare";
 
+// MARK: - Mesaje de stare offline
+"cached_data_offline" = "Se afișează date din cache (offline)";
+"cached_data_failed" = "Se afișează date din cache (conexiune eșuată)";
+"alert_queued_offline" = "Alertă adăugată în coadă. Se va sincroniza la conectare.";
+"sighting_queued_offline" = "Raport de observare adăugat în coadă. Se va sincroniza la conectare.";
+"action_queued_offline" = "Acțiune adăugată în coadă. Se va sincroniza la conectare.";
+
+// MARK: - Etichete de accesibilitate
+"accessibility_pet_photo" = "Fotografie animal";
+"accessibility_share_location" = "Partajare locație";
+"accessibility_call_owner" = "Apelare proprietar";
+"accessibility_email_owner" = "Email proprietar";
+"accessibility_owner_address" = "Adresa proprietarului";
+"accessibility_medical_info" = "Informații medicale";
+"accessibility_allergies" = "Alergii";
+"accessibility_notes" = "Notițe";
+"accessibility_privacy_notice" = "Notificare de confidențialitate";
+"accessibility_qr_scanner" = "Scanner QR";
+"accessibility_camera_required" = "Acces la cameră necesar";
+"accessibility_profile_avatar" = "Avatar profil";
+"accessibility_edit_profile_photo" = "Editare fotografie de profil";
+"accessibility_pet_photo_placeholder" = "Substituent fotografie animal";
+"accessibility_retry" = "Reîncercare";
+"accessibility_dismiss" = "Închide";
+
 // MARK: - Fila povești de succes (Secțiunea 1)
 "success_stories_title" = "Povești de succes";
 "success_stories_loading" = "Se încarcă povești…";

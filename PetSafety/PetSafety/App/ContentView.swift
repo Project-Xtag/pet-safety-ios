@@ -38,7 +38,7 @@ struct ContentView: View {
         .animation(.easeInOut(duration: 0.3), value: authViewModel.isAuthenticated)
         .animation(.easeInOut(duration: 0.3), value: showRegistration)
         .alert(appState.alertTitle, isPresented: $appState.showAlert) {
-            Button("OK", role: .cancel) { }
+            Button("ok", role: .cancel) { }
         } message: {
             Text(appState.alertMessage)
         }
@@ -156,7 +156,7 @@ struct DeepLinkLoginPromptView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Close") {
+                    Button("close") {
                         onDismiss()
                     }
                 }
@@ -342,7 +342,7 @@ struct DeepLinkScannedPetView: View {
                             Image(systemName: "pawprint.fill")
                                 .font(.system(size: 50))
                                 .foregroundColor(.tealAccent)
-                                .accessibilityLabel("Pet photo")
+                                .accessibilityLabel(String(localized: "accessibility_pet_photo"))
                         }
                     }
                     .frame(width: 140, height: 140)
@@ -389,7 +389,7 @@ struct DeepLinkScannedPetView: View {
                             }) {
                                 HStack(spacing: 8) {
                                     Image(systemName: "location.fill")
-                                        .accessibilityLabel("Share location")
+                                        .accessibilityLabel(String(localized: "accessibility_share_location"))
                                     Text("share_location_with_owner")
                                 }
                             }
@@ -424,7 +424,7 @@ struct DeepLinkScannedPetView: View {
                                         HStack(spacing: 12) {
                                             Image(systemName: "phone.fill")
                                                 .foregroundColor(.tealAccent)
-                                                .accessibilityLabel("Call owner")
+                                                .accessibilityLabel(String(localized: "accessibility_call_owner"))
                                             Text(String(format: NSLocalizedString("call_phone", comment: ""), phone))
                                                 .font(.system(size: 15, weight: .medium))
                                                 .foregroundColor(.primary)
@@ -445,7 +445,7 @@ struct DeepLinkScannedPetView: View {
                                         HStack(spacing: 12) {
                                             Image(systemName: "envelope.fill")
                                                 .foregroundColor(.tealAccent)
-                                                .accessibilityLabel("Email owner")
+                                                .accessibilityLabel(String(localized: "accessibility_email_owner"))
                                             Text(String(format: NSLocalizedString("email_contact", comment: ""), email))
                                                 .font(.system(size: 15, weight: .medium))
                                                 .foregroundColor(.primary)
@@ -475,7 +475,7 @@ struct DeepLinkScannedPetView: View {
                                 Image(systemName: "house.fill")
                                     .foregroundColor(.mutedText)
                                     .frame(width: 20)
-                                    .accessibilityLabel("Owner address")
+                                    .accessibilityLabel(String(localized: "accessibility_owner_address"))
 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(address)
@@ -513,7 +513,7 @@ struct DeepLinkScannedPetView: View {
                             HStack(spacing: 8) {
                                 Image(systemName: "cross.case.fill")
                                     .foregroundColor(.red)
-                                    .accessibilityLabel("Medical information")
+                                    .accessibilityLabel(String(localized: "accessibility_medical_info"))
                                 Text("scanner_medical_info")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.red)
@@ -535,7 +535,7 @@ struct DeepLinkScannedPetView: View {
                             HStack(spacing: 8) {
                                 Image(systemName: "exclamationmark.triangle.fill")
                                     .foregroundColor(.orange)
-                                    .accessibilityLabel("Allergies")
+                                    .accessibilityLabel(String(localized: "accessibility_allergies"))
                                 Text("scanner_allergies")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.orange)
@@ -557,7 +557,7 @@ struct DeepLinkScannedPetView: View {
                             HStack(spacing: 8) {
                                 Image(systemName: "note.text")
                                     .foregroundColor(.blue)
-                                    .accessibilityLabel("Notes")
+                                    .accessibilityLabel(String(localized: "accessibility_notes"))
                                 Text("scanner_notes")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.blue)
@@ -599,7 +599,7 @@ struct DeepLinkScannedPetView: View {
                         Image(systemName: "lock.fill")
                             .font(.system(size: 12))
                             .foregroundColor(.mutedText)
-                            .accessibilityLabel("Privacy notice")
+                            .accessibilityLabel(String(localized: "accessibility_privacy_notice"))
                         Text(String(format: NSLocalizedString("privacy_notice", comment: ""), pet.name))
                             .font(.system(size: 12))
                             .foregroundColor(.mutedText)

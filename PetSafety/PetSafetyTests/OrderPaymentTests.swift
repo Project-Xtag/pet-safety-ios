@@ -2,6 +2,39 @@ import Testing
 import Foundation
 @testable import PetSafety
 
+// Helper to create Order instances from JSON for testing
+private func makeOrder(
+    id: String = "test",
+    userId: String? = nil,
+    petName: String = "",
+    totalAmount: Double = 0,
+    shippingCost: Double = 0,
+    paymentMethod: String = "stripe",
+    paymentStatus: String = "pending",
+    paymentIntentId: String? = nil,
+    currency: String? = nil,
+    orderStatus: String = "pending",
+    createdAt: String = "",
+    updatedAt: String = ""
+) -> Order {
+    var json: [String: Any] = [
+        "id": id,
+        "pet_name": petName,
+        "total_amount": totalAmount,
+        "shipping_cost": shippingCost,
+        "payment_method": paymentMethod,
+        "payment_status": paymentStatus,
+        "order_status": orderStatus,
+        "created_at": createdAt,
+        "updated_at": updatedAt
+    ]
+    if let userId { json["user_id"] = userId }
+    if let paymentIntentId { json["payment_intent_id"] = paymentIntentId }
+    if let currency { json["currency"] = currency }
+    let data = try! JSONSerialization.data(withJSONObject: json)
+    return try! JSONDecoder().decode(Order.self, from: data)
+}
+
 @Suite("Order Payment Fixes Tests")
 struct OrderPaymentTests {
 
@@ -9,21 +42,16 @@ struct OrderPaymentTests {
 
     @Test("Order formattedAmount uses EUR, not GBP")
     func testOrderFormattedAmountUsesEUR() {
-        let order = Order(
+        let order = makeOrder(
             id: "test-1",
             userId: "user-1",
             petName: "Buddy",
             totalAmount: 3.90,
             shippingCost: 3.90,
-            shippingAddress: nil,
-            billingAddress: nil,
-            paymentMethod: "stripe",
             paymentStatus: "paid",
-            paymentIntentId: nil,
             orderStatus: "completed",
             createdAt: "2026-01-01T00:00:00Z",
-            updatedAt: "2026-01-01T00:00:00Z",
-            items: nil
+            updatedAt: "2026-01-01T00:00:00Z"
         )
 
         let formatted = order.formattedAmount
@@ -35,21 +63,10 @@ struct OrderPaymentTests {
 
     @Test("Order formattedAmount formats zero correctly")
     func testOrderFormattedAmountZero() {
-        let order = Order(
+        let order = makeOrder(
             id: "test-2",
             userId: "user-1",
-            petName: "Max",
-            totalAmount: 0.0,
-            shippingCost: 0.0,
-            shippingAddress: nil,
-            billingAddress: nil,
-            paymentMethod: "stripe",
-            paymentStatus: "pending",
-            paymentIntentId: nil,
-            orderStatus: "pending",
-            createdAt: "2026-01-01T00:00:00Z",
-            updatedAt: "2026-01-01T00:00:00Z",
-            items: nil
+            petName: "Max"
         )
 
         let formatted = order.formattedAmount
@@ -69,22 +86,7 @@ struct OrderPaymentTests {
         ]
 
         for (status, expectedColor) in statuses {
-            let order = Order(
-                id: "test",
-                userId: "user",
-                petName: "Pet",
-                totalAmount: 0,
-                shippingCost: 0,
-                shippingAddress: nil,
-                billingAddress: nil,
-                paymentMethod: "stripe",
-                paymentStatus: "paid",
-                paymentIntentId: nil,
-                orderStatus: status,
-                createdAt: "",
-                updatedAt: "",
-                items: nil
-            )
+            let order = makeOrder(orderStatus: status)
             #expect(order.statusColor == expectedColor, "Status '\(status)' should map to '\(expectedColor)'")
         }
     }

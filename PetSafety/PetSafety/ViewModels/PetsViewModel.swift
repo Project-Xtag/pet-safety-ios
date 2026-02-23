@@ -34,7 +34,7 @@ class PetsViewModel: ObservableObject {
             } else {
                 // Load from local cache when offline
                 pets = try offlineManager.fetchPets()
-                errorMessage = "Showing cached data (offline)"
+                errorMessage = String(localized: "cached_data_offline")
             }
             isLoading = false
         } catch {
@@ -42,7 +42,7 @@ class PetsViewModel: ObservableObject {
             // Try to load from cache if API fails
             do {
                 pets = try offlineManager.fetchPets()
-                errorMessage = "Showing cached data (failed to connect)"
+                errorMessage = String(localized: "cached_data_failed")
             } catch {
                 errorMessage = error.localizedDescription
             }
@@ -203,7 +203,7 @@ class PetsViewModel: ObservableObject {
             }
 
             isLoading = false
-            errorMessage = "Action queued. Will sync when online."
+            errorMessage = String(localized: "action_queued_offline")
             // Return a mock response for offline mode
             throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
         }
@@ -288,7 +288,7 @@ class PetsViewModel: ObservableObject {
             }
 
             isLoading = false
-            errorMessage = "Action queued. Will sync when online."
+            errorMessage = String(localized: "action_queued_offline")
             throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
         }
 

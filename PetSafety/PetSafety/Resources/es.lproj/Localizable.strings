@@ -1138,6 +1138,31 @@
 "sync_count_failed %lld" = "%lld fallidas";
 "sync_count_pending %lld" = "%lld pendientes";
 
+// MARK: - Mensajes de estado offline
+"cached_data_offline" = "Mostrando datos en caché (sin conexión)";
+"cached_data_failed" = "Mostrando datos en caché (error de conexión)";
+"alert_queued_offline" = "Alerta en cola. Se sincronizará cuando haya conexión.";
+"sighting_queued_offline" = "Reporte de avistamiento en cola. Se sincronizará cuando haya conexión.";
+"action_queued_offline" = "Acción en cola. Se sincronizará cuando haya conexión.";
+
+// MARK: - Etiquetas de accesibilidad
+"accessibility_pet_photo" = "Foto de mascota";
+"accessibility_share_location" = "Compartir ubicación";
+"accessibility_call_owner" = "Llamar al dueño";
+"accessibility_email_owner" = "Enviar email al dueño";
+"accessibility_owner_address" = "Dirección del dueño";
+"accessibility_medical_info" = "Información médica";
+"accessibility_allergies" = "Alergias";
+"accessibility_notes" = "Notas";
+"accessibility_privacy_notice" = "Aviso de privacidad";
+"accessibility_qr_scanner" = "Escáner QR";
+"accessibility_camera_required" = "Se requiere acceso a la cámara";
+"accessibility_profile_avatar" = "Avatar de perfil";
+"accessibility_edit_profile_photo" = "Editar foto de perfil";
+"accessibility_pet_photo_placeholder" = "Marcador de foto de mascota";
+"accessibility_retry" = "Reintentar";
+"accessibility_dismiss" = "Descartar";
+
 // MARK: - Pestaña de historias de éxito (Bloque 1)
 "success_stories_title" = "Historias de éxito";
 "success_stories_loading" = "Cargando historias…";

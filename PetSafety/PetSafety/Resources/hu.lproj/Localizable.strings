@@ -1138,6 +1138,31 @@
 "sync_count_failed %lld" = "%lld sikertelen";
 "sync_count_pending %lld" = "%lld függőben";
 
+// MARK: - Offline állapotüzenetek
+"cached_data_offline" = "Gyorsítótárazott adatok megjelenítése (offline)";
+"cached_data_failed" = "Gyorsítótárazott adatok megjelenítése (nem sikerült csatlakozni)";
+"alert_queued_offline" = "Riasztás sorba állítva. Szinkronizálás online állapotban.";
+"sighting_queued_offline" = "Észlelés jelentés sorba állítva. Szinkronizálás online állapotban.";
+"action_queued_offline" = "Művelet sorba állítva. Szinkronizálás online állapotban.";
+
+// MARK: - Akadálymentesítési címkék
+"accessibility_pet_photo" = "Kisállat fotó";
+"accessibility_share_location" = "Helyzet megosztása";
+"accessibility_call_owner" = "Gazda hívása";
+"accessibility_email_owner" = "Email a gazdának";
+"accessibility_owner_address" = "Gazda címe";
+"accessibility_medical_info" = "Egészségügyi információ";
+"accessibility_allergies" = "Allergiák";
+"accessibility_notes" = "Jegyzetek";
+"accessibility_privacy_notice" = "Adatvédelmi nyilatkozat";
+"accessibility_qr_scanner" = "QR szkenner";
+"accessibility_camera_required" = "Kamera hozzáférés szükséges";
+"accessibility_profile_avatar" = "Profil avatar";
+"accessibility_edit_profile_photo" = "Profil fotó szerkesztése";
+"accessibility_pet_photo_placeholder" = "Kisállat fotó helykitöltő";
+"accessibility_retry" = "Újrapróbálás";
+"accessibility_dismiss" = "Elvetés";
+
 // MARK: - Sikertörténetek fül (1. rész)
 "success_stories_title" = "Sikertörténetek";
 "success_stories_loading" = "Történetek betöltése…";

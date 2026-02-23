@@ -1188,6 +1188,38 @@
 "sync_count_failed %lld" = "%lld failed";
 "sync_count_pending %lld" = "%lld pending";
 
+// MARK: - Offline Status Messages
+"cached_data_offline" = "Showing cached data (offline)";
+"cached_data_failed" = "Showing cached data (failed to connect)";
+"alert_queued_offline" = "Alert queued. Will sync when online.";
+"sighting_queued_offline" = "Sighting report queued. Will sync when online.";
+"action_queued_offline" = "Action queued. Will sync when online.";
+
+// MARK: - Accessibility Labels
+"accessibility_pet_photo" = "Pet photo";
+"accessibility_share_location" = "Share location";
+"accessibility_call_owner" = "Call owner";
+"accessibility_email_owner" = "Email owner";
+"accessibility_owner_address" = "Owner address";
+"accessibility_medical_info" = "Medical information";
+"accessibility_allergies" = "Allergies";
+"accessibility_notes" = "Notes";
+"accessibility_privacy_notice" = "Privacy notice";
+"accessibility_qr_scanner" = "QR scanner";
+"accessibility_camera_required" = "Camera access required";
+"accessibility_profile_avatar" = "Profile avatar";
+"accessibility_edit_profile_photo" = "Edit profile photo";
+"accessibility_pet_photo_placeholder" = "Pet photo placeholder";
+"accessibility_retry" = "Retry";
+"accessibility_dismiss" = "Dismiss";
+
+// MARK: - Help Guides
+"help_guide_getting_started" = "Getting Started";
+"help_guide_managing_pets" = "Managing Pets";
+"help_guide_missing_pet" = "Missing Pet";
+"help_guide_privacy" = "Privacy";
+"help_guide_qr_tags" = "QR Tags";
+
 // MARK: - Success Stories Tab (Chunk 1)
 "success_stories_title" = "Success Stories";
 "success_stories_loading" = "Loading stories…";

@@ -70,7 +70,7 @@ struct AlertDetailView: View {
                             Image(systemName: "pawprint.fill")
                                 .font(.system(size: 60))
                                 .foregroundColor(.white)
-                                .accessibilityLabel("Pet photo placeholder")
+                                .accessibilityLabel(String(localized: "accessibility_pet_photo_placeholder"))
                         }
                         .frame(width: 150, height: 150)
                         .background(Color.red.opacity(0.2))

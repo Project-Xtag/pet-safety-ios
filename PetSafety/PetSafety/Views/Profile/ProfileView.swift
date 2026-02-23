@@ -56,7 +56,7 @@ struct ProfileView: View {
                         Image(systemName: "person.fill")
                             .font(.system(size: 40))
                             .foregroundColor(.white)
-                            .accessibilityLabel("Profile avatar")
+                            .accessibilityLabel(String(localized: "accessibility_profile_avatar"))
                     }
                     .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 4)
 
@@ -72,7 +72,7 @@ struct ProfileView: View {
                             .clipShape(Circle())
                             .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 2)
                     }
-                    .accessibilityLabel("Edit profile photo")
+                    .accessibilityLabel(String(localized: "accessibility_edit_profile_photo"))
                 }
 
                 // User Info

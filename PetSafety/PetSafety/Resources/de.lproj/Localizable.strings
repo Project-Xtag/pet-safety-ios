@@ -1138,6 +1138,31 @@
 "sync_count_failed %lld" = "%lld fehlgeschlagen";
 "sync_count_pending %lld" = "%lld ausstehend";
 
+// MARK: - Offline-Statusmeldungen
+"cached_data_offline" = "Zwischengespeicherte Daten angezeigt (offline)";
+"cached_data_failed" = "Zwischengespeicherte Daten angezeigt (Verbindung fehlgeschlagen)";
+"alert_queued_offline" = "Warnung in Warteschlange. Wird bei Verbindung synchronisiert.";
+"sighting_queued_offline" = "Sichtungsbericht in Warteschlange. Wird bei Verbindung synchronisiert.";
+"action_queued_offline" = "Aktion in Warteschlange. Wird bei Verbindung synchronisiert.";
+
+// MARK: - Barrierefreiheit
+"accessibility_pet_photo" = "Tierfoto";
+"accessibility_share_location" = "Standort teilen";
+"accessibility_call_owner" = "Besitzer anrufen";
+"accessibility_email_owner" = "E-Mail an Besitzer";
+"accessibility_owner_address" = "Adresse des Besitzers";
+"accessibility_medical_info" = "Medizinische Informationen";
+"accessibility_allergies" = "Allergien";
+"accessibility_notes" = "Notizen";
+"accessibility_privacy_notice" = "Datenschutzhinweis";
+"accessibility_qr_scanner" = "QR-Scanner";
+"accessibility_camera_required" = "Kamerazugriff erforderlich";
+"accessibility_profile_avatar" = "Profil-Avatar";
+"accessibility_edit_profile_photo" = "Profilfoto bearbeiten";
+"accessibility_pet_photo_placeholder" = "Platzhalter für Tierfoto";
+"accessibility_retry" = "Erneut versuchen";
+"accessibility_dismiss" = "Schließen";
+
 // MARK: - Erfolgsgeschichten-Tab (Teil 1)
 "success_stories_title" = "Erfolgsgeschichten";
 "success_stories_loading" = "Geschichten werden geladen…";

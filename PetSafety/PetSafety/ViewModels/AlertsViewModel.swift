@@ -43,7 +43,7 @@ class AlertsViewModel: ObservableObject {
             } else {
                 // Load from local cache when offline
                 alerts = try offlineManager.fetchAlerts()
-                errorMessage = "Showing cached data (offline)"
+                errorMessage = String(localized: "cached_data_offline")
             }
             isLoading = false
         } catch {
@@ -51,7 +51,7 @@ class AlertsViewModel: ObservableObject {
             // Try to load from cache if API fails
             do {
                 alerts = try offlineManager.fetchAlerts()
-                errorMessage = "Showing cached data (failed to connect)"
+                errorMessage = String(localized: "cached_data_failed")
             } catch {
                 errorMessage = error.localizedDescription
             }
@@ -138,7 +138,7 @@ class AlertsViewModel: ObservableObject {
             try? offlineManager.saveAlert(localAlert)
 
             isLoading = false
-            errorMessage = "Alert queued. Will sync when online."
+            errorMessage = String(localized: "alert_queued_offline")
             throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
         }
 
@@ -238,7 +238,7 @@ class AlertsViewModel: ObservableObject {
             _ = try await syncService.queueAction(type: .reportSighting, data: actionData)
 
             isLoading = false
-            errorMessage = "Sighting report queued. Will sync when online."
+            errorMessage = String(localized: "sighting_queued_offline")
             throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
         }
 

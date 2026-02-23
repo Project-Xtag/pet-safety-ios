@@ -59,7 +59,7 @@ class SuccessStoriesViewModel: ObservableObject {
             } else {
                 // Load from local cache when offline
                 stories = try offlineManager.fetchSuccessStories()
-                errorMessage = "Showing cached data (offline)"
+                errorMessage = String(localized: "cached_data_offline")
             }
 
             isLoading = false
@@ -68,7 +68,7 @@ class SuccessStoriesViewModel: ObservableObject {
             // Try to load from cache if API fails
             do {
                 stories = try offlineManager.fetchSuccessStories()
-                errorMessage = "Showing cached data (failed to connect)"
+                errorMessage = String(localized: "cached_data_failed")
             } catch {
                 errorMessage = error.localizedDescription
             }

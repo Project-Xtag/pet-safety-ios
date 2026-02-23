@@ -1138,6 +1138,31 @@
 "sync_count_failed %lld" = "%lld zlyhalo";
 "sync_count_pending %lld" = "%lld caka";
 
+// MARK: - Offline stavové správy
+"cached_data_offline" = "Zobrazenie uložených dát (offline)";
+"cached_data_failed" = "Zobrazenie uložených dát (nepodarilo sa pripojiť)";
+"alert_queued_offline" = "Upozornenie zaradené do frontu. Synchronizuje sa po pripojení.";
+"sighting_queued_offline" = "Hlásenie pozorovania zaradené do frontu. Synchronizuje sa po pripojení.";
+"action_queued_offline" = "Akcia zaradená do frontu. Synchronizuje sa po pripojení.";
+
+// MARK: - Prístupnosť
+"accessibility_pet_photo" = "Fotka zvieratka";
+"accessibility_share_location" = "Zdieľať polohu";
+"accessibility_call_owner" = "Zavolať majiteľa";
+"accessibility_email_owner" = "Email majiteľovi";
+"accessibility_owner_address" = "Adresa majiteľa";
+"accessibility_medical_info" = "Zdravotné informácie";
+"accessibility_allergies" = "Alergie";
+"accessibility_notes" = "Poznámky";
+"accessibility_privacy_notice" = "Oznámenie o ochrane súkromia";
+"accessibility_qr_scanner" = "QR skener";
+"accessibility_camera_required" = "Vyžaduje sa prístup ku kamere";
+"accessibility_profile_avatar" = "Profilový avatar";
+"accessibility_edit_profile_photo" = "Upraviť profilovú fotku";
+"accessibility_pet_photo_placeholder" = "Zástupná fotka zvieratka";
+"accessibility_retry" = "Skúsiť znova";
+"accessibility_dismiss" = "Zavrieť";
+
 // MARK: - Zalozka uspesnych pribehov (Cast 1)
 "success_stories_title" = "Uspesne pribehy";
 "success_stories_loading" = "Nacitavam pribehy\u2026";

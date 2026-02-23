@@ -215,16 +215,18 @@ struct SubscriptionModelTests {
         {
             "success": true,
             "data": {
-                "session_id": "cs_test_abc",
-                "url": "https://checkout.stripe.com/session/abc"
+                "checkout": {
+                    "id": "cs_test_abc",
+                    "url": "https://checkout.stripe.com/session/abc"
+                }
             }
         }
         """.data(using: .utf8)!
 
         let response = try JSONDecoder().decode(ApiEnvelope<SubscriptionCheckoutResponse>.self, from: json)
         #expect(response.success == true)
-        #expect(response.data?.sessionId == "cs_test_abc")
-        #expect(response.data?.url == "https://checkout.stripe.com/session/abc")
+        #expect(response.data?.checkout.id == "cs_test_abc")
+        #expect(response.data?.checkout.url == "https://checkout.stripe.com/session/abc")
     }
 
     @Test("Decodes portal session response")
