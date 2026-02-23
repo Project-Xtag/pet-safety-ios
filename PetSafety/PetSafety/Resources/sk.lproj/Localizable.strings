@@ -925,6 +925,16 @@
 "replacement_subtitle" = "Strateny alebo poskodeny? Posleme novy";
 "free_replacement" = "Bezplatna nahrada";
 
+// MARK: - Delivery Method & PostaPoint
+"delivery_method_title" = "Spôsob doručenia";
+"home_delivery_option" = "Doručenie domov (2 490 Ft)";
+"home_delivery_price" = "2 490 Ft";
+"postapoint_delivery_option" = "PostaPoint (1 490 Ft)";
+"postapoint_delivery_price" = "1 490 Ft";
+"postapoint_zip_placeholder" = "PSČ";
+"postapoint_no_results" = "Pre toto PSČ sa nenašli žiadne PostaPointy";
+"postapoint_search_failed" = "Nepodarilo sa vyhľadať PostaPointy";
+
 // MARK: - Verejny profil zvierata
 "public_profile_preview" = "Nahlad verejneho profilu";
 "failed_load_profile" = "Nacitanie profilu zlyhalo";
@@ -1288,7 +1298,7 @@
 "help_faq_q11" = "Čo je odporúčací program?";
 "help_faq_a11" = "Zdieľajte kód SENRAFRIEND s priateľmi a rodinou. Keď niekto použije tento kód a predplatí si platený plán (Standard alebo Ultimate), vy aj váš priateľ získate 2 mesiace zdarma. Svoje odporúčania a ich stav môžete sledovať na stránke Odporúčania.";
 "help_faq_q12" = "Do ktorých krajín doručujete?";
-"help_faq_a12" = "Momentálne doručujeme do Maďarska, Slovenska, Česka, Rakúska, Rumunska, Chorvátska, Španielska a Portugalska. Doprava stojí £3,90 za objednávku.";
+"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPoint) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
 "help_faq_q13" = "Môžem mať viac zvierat na jednom účte?";
 "help_faq_a13" = "Áno. V Starter (bezplatnom) pláne môžete zaregistrovať jedno zviera. Standard plán tiež podporuje jedno zviera. Ultimate plán podporuje neobmedzený počet zvierat. Plán môžete kedykoľvek upgradovať zo stránky Účtu.";
 "help_faq_q14" = "Ako nahlásim nájdené zviera?";

@@ -925,6 +925,16 @@
 "replacement_subtitle" = "Pierdută sau deteriorată? Îți trimitem una nouă";
 "free_replacement" = "Înlocuire gratuită";
 
+// MARK: - Delivery Method & PostaPoint
+"delivery_method_title" = "Metodă de livrare";
+"home_delivery_option" = "Livrare la domiciliu (2.490 Ft)";
+"home_delivery_price" = "2.490 Ft";
+"postapoint_delivery_option" = "PostaPoint (1.490 Ft)";
+"postapoint_delivery_price" = "1.490 Ft";
+"postapoint_zip_placeholder" = "Cod poștal";
+"postapoint_no_results" = "Nu s-au găsit PostaPoint-uri pentru acest cod poștal";
+"postapoint_search_failed" = "Căutarea PostaPoint-urilor a eșuat";
+
 // MARK: - Profil public animal
 "public_profile_preview" = "Previzualizare profil public";
 "failed_load_profile" = "Nu s-a putut încărca profilul";
@@ -1288,7 +1298,7 @@
 "help_faq_q11" = "Ce este programul de recomandare?";
 "help_faq_a11" = "Distribuie codul SENRAFRIEND prietenilor și familiei. Când cineva folosește acest cod și se abonează la un plan plătit (Standard sau Ultimate), amândoi primiți 2 luni gratuite. Poți urmări recomandările și statusul lor pe pagina de Recomandări.";
 "help_faq_q12" = "În ce țări livrați?";
-"help_faq_a12" = "În prezent livrăm în Ungaria, Slovacia, Cehia, Austria, România, Croația, Spania și Portugalia. Costul de livrare este de £3,90 pe comandă.";
+"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPoint) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
 "help_faq_q13" = "Pot avea mai multe animale pe un singur cont?";
 "help_faq_a13" = "Da. Cu planul Starter (gratuit) poți înregistra un animal. Planul Standard permite de asemenea un animal. Planul Ultimate permite animale nelimitate. Poți face upgrade oricând din pagina Cont.";
 "help_faq_q14" = "Cum raportez un animal pe care l-am găsit?";

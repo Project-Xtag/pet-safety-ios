@@ -24,6 +24,15 @@ struct OrderReplacementTagView: View {
     @State private var country = ""
     @State private var phone = ""
 
+    // Delivery method (Hungary only)
+    @State private var deliveryMethod = "home_delivery"
+    @State private var selectedPostaPoint: PostaPointDetails?
+
+    private var isHungary: Bool {
+        let c = country.lowercased().trimmingCharacters(in: .whitespaces)
+        return c == "hu" || c == "hungary" || c == "magyarország" || c == "magyarorszag"
+    }
+
     var body: some View {
         Group {
             if orderComplete {
@@ -226,6 +235,30 @@ struct OrderReplacementTagView: View {
                 .padding(.vertical, 4)
             }
 
+            if isHungary {
+                Section(header: Text("delivery_method_title")) {
+                    Picker("", selection: $deliveryMethod) {
+                        Text("home_delivery_option").tag("home_delivery")
+                        Text("postapoint_delivery_option").tag("postapoint")
+                    }
+                    .pickerStyle(.segmented)
+                    .onChange(of: deliveryMethod) { _, newValue in
+                        if newValue != "postapoint" {
+                            selectedPostaPoint = nil
+                        }
+                    }
+
+                    if deliveryMethod == "postapoint" {
+                        PostaPointPickerView(
+                            selected: selectedPostaPoint,
+                            onSelect: { point in
+                                selectedPostaPoint = point
+                            }
+                        )
+                    }
+                }
+            }
+
             Section {
                 Button(action: { submitOrder() }) {
                     HStack {
@@ -265,7 +298,8 @@ struct OrderReplacementTagView: View {
     }
 
     private var isFormValid: Bool {
-        !street1.isEmpty && !city.isEmpty && !postCode.isEmpty && !country.isEmpty
+        !street1.isEmpty && !city.isEmpty && !postCode.isEmpty && !country.isEmpty &&
+        (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
     }
 
     private func loadUserAddress() async {
@@ -314,7 +348,9 @@ struct OrderReplacementTagView: View {
 
                 let response = try await APIService.shared.createReplacementOrder(
                     petId: pet.id,
-                    shippingAddress: shippingAddress
+                    shippingAddress: shippingAddress,
+                    deliveryMethod: isHungary ? deliveryMethod : nil,
+                    postapointDetails: selectedPostaPoint
                 )
 
                 isLoading = false

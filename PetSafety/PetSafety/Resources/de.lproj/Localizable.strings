@@ -925,6 +925,16 @@
 "replacement_subtitle" = "Verloren oder beschädigt? Wir senden einen neuen";
 "free_replacement" = "Kostenloser Ersatz";
 
+// MARK: - Delivery Method & PostaPoint
+"delivery_method_title" = "Versandmethode";
+"home_delivery_option" = "Hauszustellung (2.490 Ft)";
+"home_delivery_price" = "2.490 Ft";
+"postapoint_delivery_option" = "PostaPoint (1.490 Ft)";
+"postapoint_delivery_price" = "1.490 Ft";
+"postapoint_zip_placeholder" = "Postleitzahl";
+"postapoint_no_results" = "Keine PostaPoints für diese Postleitzahl gefunden";
+"postapoint_search_failed" = "PostaPoints konnten nicht gesucht werden";
+
 // MARK: - Öffentliches Haustierprofil
 "public_profile_preview" = "Vorschau des öffentlichen Profils";
 "failed_load_profile" = "Profil konnte nicht geladen werden";
@@ -1288,7 +1298,7 @@
 "help_faq_q11" = "Was ist das Empfehlungsprogramm?";
 "help_faq_a11" = "Teile den Code SENRAFRIEND mit Freunden und Familie. Wenn jemand diesen Code verwendet und einen bezahlten Plan (Standard oder Ultimate) abschließt, erhaltet ihr beide 2 Monate gratis. Du kannst deine Empfehlungen auf der Empfehlungsseite verfolgen.";
 "help_faq_q12" = "In welche Länder liefert ihr?";
-"help_faq_a12" = "Wir liefern derzeit nach Ungarn, in die Slowakei, nach Tschechien, Österreich, Rumänien, Kroatien, Spanien und Portugal. Der Versand kostet £3,90 pro Bestellung.";
+"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPoint) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
 "help_faq_q13" = "Kann ich mehrere Tiere in einem Konto haben?";
 "help_faq_a13" = "Ja. Im Starter (kostenlos) Plan kannst du ein Tier registrieren. Der Standard-Plan unterstützt ebenfalls ein Tier. Der Ultimate-Plan unterstützt unbegrenzt viele Tiere. Du kannst deinen Plan jederzeit auf der Kontoseite upgraden.";
 "help_faq_q14" = "Wie melde ich ein gefundenes Tier?";

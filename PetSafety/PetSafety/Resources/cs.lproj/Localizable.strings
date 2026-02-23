@@ -925,6 +925,16 @@
 "replacement_subtitle" = "Ztracená nebo poškozená? Pošleme novou";
 "free_replacement" = "Bezplatná náhrada";
 
+// MARK: - Delivery Method & PostaPoint
+"delivery_method_title" = "Způsob doručení";
+"home_delivery_option" = "Doručení domů (2 490 Ft)";
+"home_delivery_price" = "2 490 Ft";
+"postapoint_delivery_option" = "PostaPoint (1 490 Ft)";
+"postapoint_delivery_price" = "1 490 Ft";
+"postapoint_zip_placeholder" = "PSČ";
+"postapoint_no_results" = "Pro toto PSČ nebyly nalezeny žádné PostaPointy";
+"postapoint_search_failed" = "Nepodařilo se vyhledat PostaPointy";
+
 // MARK: - Veřejný profil mazlíčka
 "public_profile_preview" = "Náhled veřejného profilu";
 "failed_load_profile" = "Nepodařilo se načíst profil";
@@ -1288,7 +1298,7 @@
 "help_faq_q11" = "Co je to program doporučení?";
 "help_faq_a11" = "Sdílejte kód SENRAFRIEND s přáteli a rodinou. Když někdo použije tento kód a přihlásí se k placenému plánu (Standard nebo Ultimate), oba — vy i váš přítel — získáte 2 měsíce zdarma. Svá doporučení a jejich stav můžete sledovat na stránce Doporučení.";
 "help_faq_q12" = "Do jakých zemí zasíláte?";
-"help_faq_a12" = "V současné době zasíláme do Maďarska, Slovenska, Česka, Rakouska, Rumunska, Chorvatska, Španělska a Portugalska. Doprava stojí 3,90 £ za objednávku.";
+"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPoint) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
 "help_faq_q13" = "Mohu mít více mazlíčků na jednom účtu?";
 "help_faq_a13" = "Ano. Na plánu Starter (zdarma) můžete zaregistrovat jednoho mazlíčka. Plán Standard také podporuje jednoho mazlíčka. Plán Ultimate podporuje neomezený počet mazlíčků. Svůj plán můžete kdykoli upgradovat na stránce Účet.";
 "help_faq_q14" = "Jak nahlásím nalezeného mazlíčka?";

@@ -925,6 +925,16 @@
 "replacement_subtitle" = "Elveszett vagy sérült? Küldünk újat";
 "free_replacement" = "Ingyenes csere";
 
+// MARK: - Delivery Method & PostaPoint
+"delivery_method_title" = "Szállítási mód";
+"home_delivery_option" = "Házhozszállítás (2 490 Ft)";
+"home_delivery_price" = "2 490 Ft";
+"postapoint_delivery_option" = "PostaPont (1 490 Ft)";
+"postapoint_delivery_price" = "1 490 Ft";
+"postapoint_zip_placeholder" = "Irányítószám";
+"postapoint_no_results" = "Nem található PostaPont ezen az irányítószámon";
+"postapoint_search_failed" = "Nem sikerült PostaPontot keresni";
+
 // MARK: - Nyilvános kedvenc profil
 "public_profile_preview" = "Nyilvános profil előnézet";
 "failed_load_profile" = "Nem sikerült betölteni a profilt";
@@ -1288,7 +1298,7 @@
 "help_faq_q11" = "Mi az ajánlói program?";
 "help_faq_a11" = "Oszd meg a SENRAFRIEND kódot barátaiddal és családtagjaiddal. Amikor valaki felhasználja ezt a kódot és előfizet egy fizetős csomagra (Standard vagy Ultimate), te és a barátod is 2 hónap ingyenességet kaptok. Az ajánlásaidat és azok állapotát az Ajánló oldalon követheted nyomon.";
 "help_faq_q12" = "Mely országokba szállítotok?";
-"help_faq_a12" = "Jelenleg Magyarországra, Szlovákiába, Csehországba, Ausztriába, Romániába, Horvátországba, Spanyolországba és Portugáliába szállítunk. A szállítási költség £3.90 rendelésenként.";
+"help_faq_a12" = "Jelenleg Magyarországra, Szlovákiába, Csehországba, Ausztriába, Romániába, Horvátországba, Spanyolországba és Portugáliába szállítunk. Magyarországi szállítás: 1 490 Ft (PostaPont) vagy 2 490 Ft (házhozszállítás). Nemzetközi szállítás: €9,95 rendelésenként.";
 "help_faq_q13" = "Lehet több kedvencem egy fiókon?";
 "help_faq_a13" = "Igen. A Starter (ingyenes) csomagnál egy kedvencet regisztrálhatsz. A Standard csomag szintén egy kedvencet támogat. Az Ultimate csomag korlátlan számú kedvencet támogat. A csomagodat bármikor frissítheted a Fiók oldalon.";
 "help_faq_q14" = "Hogyan jelenthetek egy megtalált kedvencet?";

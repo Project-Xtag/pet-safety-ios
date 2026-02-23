@@ -794,14 +794,23 @@ class APIService {
         return try await performRequest(request, responseType: ReplacementEligibilityResponse.self)
     }
 
-    func createReplacementOrder(petId: String, shippingAddress: ShippingAddress) async throws -> ReplacementOrderResponse {
+    func createReplacementOrder(petId: String, shippingAddress: ShippingAddress, deliveryMethod: String? = nil, postapointDetails: PostaPointDetails? = nil) async throws -> ReplacementOrderResponse {
         let request = try await buildRequest(
             endpoint: "/orders/replacement/\(petId)",
             method: "POST",
-            body: CreateReplacementOrderRequest(shippingAddress: shippingAddress),
+            body: CreateReplacementOrderRequest(shippingAddress: shippingAddress, deliveryMethod: deliveryMethod, postapointDetails: postapointDetails),
             requiresAuth: true
         )
         return try await performRequest(request, responseType: ReplacementOrderResponse.self)
+    }
+
+    func getDeliveryPoints(zipCode: String) async throws -> [DeliveryPoint] {
+        let request = try await buildRequest(
+            endpoint: "/orders/delivery-points?zipCode=\(zipCode)",
+            method: "GET",
+            requiresAuth: false
+        )
+        return try await performRequest(request, responseType: [DeliveryPoint].self)
     }
 
     func createTagOrder(_ orderData: CreateTagOrderRequest) async throws -> CreateTagOrderResponse {
@@ -816,7 +825,9 @@ class APIService {
 
     func createTagCheckout(
         quantity: Int,
-        countryCode: String? = nil
+        countryCode: String? = nil,
+        deliveryMethod: String? = nil,
+        postapointDetails: PostaPointDetails? = nil
     ) async throws -> TagCheckoutData {
         #if DEBUG
         print("📡 API: Creating tag checkout for \(quantity) tags...")
@@ -825,7 +836,7 @@ class APIService {
         let request = try await buildRequest(
             endpoint: "/orders/create-checkout",
             method: "POST",
-            body: CreateTagCheckoutRequest(quantity: quantity, countryCode: countryCode, platform: "ios")
+            body: CreateTagCheckoutRequest(quantity: quantity, countryCode: countryCode, platform: "ios", deliveryMethod: deliveryMethod, postapointDetails: postapointDetails)
         )
         let response: TagCheckoutResponse = try await performRequest(request, responseType: TagCheckoutResponse.self)
         return response.checkout
@@ -1003,6 +1014,8 @@ struct ShippingAddress: Codable {
 struct CreateReplacementOrderRequest: Codable {
     let shippingAddress: ShippingAddress
     let platform: String = "ios"
+    let deliveryMethod: String?
+    let postapointDetails: PostaPointDetails?
 }
 
 struct ReplacementOrderResponse: Codable {
@@ -1029,6 +1042,8 @@ struct CreateTagOrderRequest: Codable {
     let billingAddress: ShippingAddressDetails?
     let paymentMethod: String?
     let shippingCost: Double?
+    let deliveryMethod: String?
+    let postapointDetails: PostaPointDetails?
 }
 
 struct ShippingAddressDetails: Codable {

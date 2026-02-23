@@ -773,7 +773,7 @@
 "help_faq_q11" = "What is the referral programme?";
 "help_faq_a11" = "Share the code SENRAFRIEND with friends and family. When someone uses this code and subscribes to a paid plan (Standard or Ultimate), both you and your friend receive 2 months free. You can track your referrals and their status on the Referral page.";
 "help_faq_q12" = "Which countries do you ship to?";
-"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping costs £3.90 per order.";
+"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPoint) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
 "help_faq_q13" = "Can I have multiple pets on one account?";
 "help_faq_a13" = "Yes. On the Starter (free) plan you can register one pet. The Standard plan also supports one pet. The Ultimate plan supports unlimited pets. You can upgrade your plan at any time from the Account page.";
 "help_faq_q14" = "How do I report a pet I've found?";
@@ -974,6 +974,16 @@
 "order_replace_paid_button %@" = "Confirm & Pay %@";
 "replacement_subtitle" = "Lost or damaged? We'll send you a new one";
 "free_replacement" = "Free Replacement";
+
+// MARK: - Delivery Method & PostaPoint
+"delivery_method_title" = "Delivery Method";
+"home_delivery_option" = "Home Delivery (2,490 Ft)";
+"home_delivery_price" = "2,490 Ft";
+"postapoint_delivery_option" = "PostaPoint (1,490 Ft)";
+"postapoint_delivery_price" = "1,490 Ft";
+"postapoint_zip_placeholder" = "Zip code";
+"postapoint_no_results" = "No PostaPoints found for this zip code";
+"postapoint_search_failed" = "Failed to search for PostaPoints";
 
 // MARK: - Public Pet Profile
 "public_profile_preview" = "Public Profile Preview";

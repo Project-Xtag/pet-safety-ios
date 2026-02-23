@@ -24,6 +24,10 @@ struct OrderMoreTagsView: View {
     @State private var postCode = ""
     @State private var country = ""
 
+    // Delivery method (Hungary only)
+    @State private var deliveryMethod = "home_delivery"
+    @State private var selectedPostaPoint: PostaPointDetails?
+
     var body: some View {
         Group {
             if orderComplete {
@@ -175,6 +179,30 @@ struct OrderMoreTagsView: View {
                 .padding(.vertical, 4)
             }
 
+            if isHungary {
+                Section(header: Text("delivery_method_title")) {
+                    Picker("", selection: $deliveryMethod) {
+                        Text("home_delivery_option").tag("home_delivery")
+                        Text("postapoint_delivery_option").tag("postapoint")
+                    }
+                    .pickerStyle(.segmented)
+                    .onChange(of: deliveryMethod) { _, newValue in
+                        if newValue != "postapoint" {
+                            selectedPostaPoint = nil
+                        }
+                    }
+
+                    if deliveryMethod == "postapoint" {
+                        PostaPointPickerView(
+                            selected: selectedPostaPoint,
+                            onSelect: { point in
+                                selectedPostaPoint = point
+                            }
+                        )
+                    }
+                }
+            }
+
             Section(header: Text("order_more_summary")) {
                 HStack {
                     Text("order_more_tags_count \(validPetCount)")
@@ -187,7 +215,12 @@ struct OrderMoreTagsView: View {
                 HStack {
                     Text("order_more_shipping_cost")
                     Spacer()
-                    Text(String(localized: "order_more_shipping_calculated"))
+                    if isHungary {
+                        Text(deliveryMethod == "postapoint" ? String(localized: "postapoint_delivery_price") : String(localized: "home_delivery_price"))
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text(String(localized: "order_more_shipping_calculated"))
+                    }
                 }
 
                 HStack {
@@ -223,6 +256,11 @@ struct OrderMoreTagsView: View {
         .adaptiveList()
     }
 
+    private var isHungary: Bool {
+        let c = country.lowercased().trimmingCharacters(in: .whitespaces)
+        return c == "hu" || c == "hungary" || c == "magyarország" || c == "magyarorszag"
+    }
+
     private var validPetCount: Int {
         petNames.filter { !$0.isEmpty }.count
     }
@@ -235,7 +273,8 @@ struct OrderMoreTagsView: View {
         !street1.isEmpty &&
         !city.isEmpty &&
         !postCode.isEmpty &&
-        !country.isEmpty
+        !country.isEmpty &&
+        (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
     }
 
     private func addPetName() {
@@ -294,7 +333,9 @@ struct OrderMoreTagsView: View {
 
                 let checkout = try await APIService.shared.createTagCheckout(
                     quantity: quantity,
-                    countryCode: userCountry
+                    countryCode: userCountry,
+                    deliveryMethod: isHungary ? deliveryMethod : nil,
+                    postapointDetails: selectedPostaPoint
                 )
 
                 if let url = URL(string: checkout.url) {

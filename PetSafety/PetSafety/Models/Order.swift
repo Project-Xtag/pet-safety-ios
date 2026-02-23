@@ -116,12 +116,31 @@ struct CreateTagCheckoutRequest: Codable {
     let quantity: Int
     let countryCode: String?
     let platform: String
+    let deliveryMethod: String?
+    let postapointDetails: PostaPointDetails?
 
     enum CodingKeys: String, CodingKey {
         case quantity
         case countryCode = "country_code"
         case platform
+        case deliveryMethod
+        case postapointDetails
     }
+}
+
+struct PostaPointDetails: Codable {
+    let id: String
+    let name: String
+    let address: String?
+}
+
+struct DeliveryPoint: Codable, Identifiable {
+    let id: String
+    let name: String
+    let address: String?
+    let city: String?
+    let postcode: String?
+    let openingHours: String?
 }
 
 struct TagCheckoutResponse: Codable {
