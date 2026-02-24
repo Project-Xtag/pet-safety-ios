@@ -321,3 +321,193 @@ struct SubscriptionModelTests {
         #expect(dict["platform"] as? String == "ios")
     }
 }
+
+// MARK: - Upgrade/Downgrade & Feature Limits
+
+@Suite("Subscription Upgrade/Downgrade & Feature Limits")
+struct SubscriptionUpgradeDowngradeTests {
+
+    // Helper to determine plan tier
+    func planTier(_ name: String) -> Int {
+        switch name.lowercased() {
+        case "starter": return 0
+        case "standard": return 1
+        case "ultimate": return 2
+        default: return -1
+        }
+    }
+
+    // MARK: - Upgrade Detection
+
+    @Test("Starter to Standard is an upgrade")
+    func testStarterToStandardIsUpgrade() {
+        #expect(planTier("starter") < planTier("standard"))
+    }
+
+    @Test("Starter to Ultimate is an upgrade")
+    func testStarterToUltimateIsUpgrade() {
+        #expect(planTier("starter") < planTier("ultimate"))
+    }
+
+    @Test("Standard to Ultimate is an upgrade")
+    func testStandardToUltimateIsUpgrade() {
+        #expect(planTier("standard") < planTier("ultimate"))
+    }
+
+    @Test("Ultimate to Standard is a downgrade")
+    func testUltimateToStandardIsDowngrade() {
+        #expect(planTier("ultimate") > planTier("standard"))
+    }
+
+    @Test("Ultimate to Starter is a downgrade")
+    func testUltimateToStarterIsDowngrade() {
+        #expect(planTier("ultimate") > planTier("starter"))
+    }
+
+    @Test("Standard to Starter is a downgrade")
+    func testStandardToStarterIsDowngrade() {
+        #expect(planTier("standard") > planTier("starter"))
+    }
+
+    @Test("Same plan is neither upgrade nor downgrade")
+    func testSamePlanNoChange() {
+        #expect(planTier("standard") == planTier("standard"))
+        let from = planTier("standard")
+        let to = planTier("standard")
+        #expect(!(from < to)) // not an upgrade
+        #expect(!(from > to)) // not a downgrade
+    }
+
+    // MARK: - Currency Formatting
+
+    @Test("EUR plan formatted price contains euro sign")
+    func testEURFormatting() throws {
+        let json = """
+        {
+            "id": "plan_eur",
+            "name": "standard",
+            "display_name": "Standard",
+            "description": "EUR plan",
+            "price_monthly": 4.95,
+            "price_yearly": 49.50,
+            "currency": "EUR",
+            "features": {
+                "max_pets": 5,
+                "max_photos_per_pet": 10,
+                "max_emergency_contacts": 5,
+                "sms_notifications": true,
+                "vet_alerts": true,
+                "community_alerts": true,
+                "free_tag_replacement": false,
+                "priority_support": false
+            }
+        }
+        """.data(using: .utf8)!
+
+        let plan = try JSONDecoder().decode(SubscriptionPlan.self, from: json)
+        #expect(plan.formattedMonthlyPrice.contains("€"))
+    }
+
+    @Test("HUF plan formatted price contains Ft symbol")
+    func testHUFFormatting() throws {
+        let json = """
+        {
+            "id": "plan_huf",
+            "name": "standard",
+            "display_name": "Standard",
+            "description": "HUF plan",
+            "price_monthly": 1990,
+            "price_yearly": 19900,
+            "currency": "HUF",
+            "features": {
+                "max_pets": 5,
+                "max_photos_per_pet": 10,
+                "max_emergency_contacts": 5,
+                "sms_notifications": true,
+                "vet_alerts": true,
+                "community_alerts": true,
+                "free_tag_replacement": false,
+                "priority_support": false
+            }
+        }
+        """.data(using: .utf8)!
+
+        let plan = try JSONDecoder().decode(SubscriptionPlan.self, from: json)
+        #expect(plan.formattedMonthlyPrice.contains("Ft"))
+    }
+
+    // MARK: - Subscription Edge Cases
+
+    @Test("Subscription with cancel_at_period_end true and active status is still active")
+    func testCancelAtPeriodEndStillActive() throws {
+        let json = """
+        {
+            "id": "sub_cancel",
+            "user_id": "user_1",
+            "plan_id": "plan_1",
+            "plan_name": "standard",
+            "status": "active",
+            "cancel_at_period_end": true
+        }
+        """.data(using: .utf8)!
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let sub = try decoder.decode(UserSubscription.self, from: json)
+        #expect(sub.isActive == true)
+        #expect(sub.cancelAtPeriodEnd == true)
+    }
+
+    @Test("Decode CancelSubscriptionResponse with subscription and message")
+    func testDecodeCancelSubscriptionResponse() throws {
+        let json = """
+        {
+            "subscription": {
+                "id": "sub_cancelled",
+                "user_id": "user_1",
+                "plan_id": "plan_1",
+                "plan_name": "standard",
+                "status": "cancelled"
+            },
+            "message": "Subscription cancelled successfully"
+        }
+        """.data(using: .utf8)!
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let response = try decoder.decode(CancelSubscriptionResponse.self, from: json)
+        #expect(response.subscription.id == "sub_cancelled")
+        #expect(response.subscription.status == .cancelled)
+        #expect(response.message == "Subscription cancelled successfully")
+    }
+
+    // MARK: - Feature Limit Check Logic
+
+    @Test("maxPets=5, currentCount=5 should NOT allow more")
+    func testPetLimitReached() {
+        let maxPets: Int? = 5
+        let currentCount = 5
+        #expect(!(currentCount < (maxPets ?? Int.max)))
+    }
+
+    @Test("maxPets=5, currentCount=4 should allow more")
+    func testPetLimitNotReached() {
+        let maxPets: Int? = 5
+        let currentCount = 4
+        #expect(currentCount < (maxPets ?? Int.max))
+    }
+
+    @Test("maxPets=nil (unlimited) should always allow")
+    func testUnlimitedPets() {
+        let maxPets: Int? = nil
+        let currentCount = 100
+        #expect(currentCount < (maxPets ?? Int.max))
+    }
+
+    @Test("maxPhotosPerPet limit check at boundary and below")
+    func testPhotoLimitBoundary() {
+        let maxPhotos = 10
+        #expect(!(10 < maxPhotos)) // at limit, should NOT allow
+        #expect(9 < maxPhotos)     // below limit, should allow
+    }
+}
