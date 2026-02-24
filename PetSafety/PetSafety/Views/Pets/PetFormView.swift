@@ -265,6 +265,20 @@ struct PetFormView: View {
         } message: {
             Text("cannot_delete_missing_message_short")
         }
+        .alert("Pet Limit Reached", isPresented: $viewModel.showUpgradePrompt) {
+            Button("Upgrade to Ultimate") {
+                if let url = URL(string: "https://senra.pet/manage-subscription") {
+                    UIApplication.shared.open(url)
+                }
+            }
+            Button("Keep Current Plan", role: .cancel) { }
+        } message: {
+            if let info = viewModel.upgradeInfo {
+                Text("Your \(info.currentPlan.capitalized) plan allows \(info.maxPets) pet. Upgrade to \(info.upgradeTo.capitalized) for \(info.upgradePrice) to add unlimited pets.")
+            } else {
+                Text("Upgrade your plan to add more pets.")
+            }
+        }
         .onChange(of: selectedPhoto) { _, newValue in
             Task {
                 if let data = try? await newValue?.loadTransferable(type: Data.self),
@@ -458,12 +472,17 @@ struct PetFormView: View {
                 print("✅ Save operation completed successfully")
                 #endif
                 dismiss()
+            } catch let error as APIError {
+                #if DEBUG
+                print("❌ Save operation failed: \(error)")
+                print("API Error type: \(error.errorDescription ?? "Unknown")")
+                #endif
+                // Don't show generic error for pet limit — the alert handles it
+                if case .petLimitExceeded = error { return }
+                appState.showError(error.localizedDescription)
             } catch {
                 #if DEBUG
                 print("❌ Save operation failed: \(error)")
-                if let apiError = error as? APIError {
-                    print("API Error type: \(apiError.errorDescription ?? "Unknown")")
-                }
                 #endif
                 appState.showError(error.localizedDescription)
             }

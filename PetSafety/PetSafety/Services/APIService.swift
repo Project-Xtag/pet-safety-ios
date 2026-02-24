@@ -1,11 +1,20 @@
 import Foundation
 import Sentry
 
+struct SubscriptionLimitInfo {
+    let currentPlan: String
+    let currentPetCount: Int
+    let maxPets: Int
+    let upgradeTo: String
+    let upgradePrice: String
+}
+
 enum APIError: Error, LocalizedError {
     case invalidURL
     case invalidResponse
     case unauthorized
     case serverError(String)
+    case petLimitExceeded(SubscriptionLimitInfo)
     case decodingError
     case networkError(Error)
 
@@ -19,6 +28,8 @@ enum APIError: Error, LocalizedError {
             return "Unauthorized. Please log in again."
         case .serverError(let message):
             return message
+        case .petLimitExceeded:
+            return "Pet registration limit reached. Upgrade your plan to add more pets."
         case .decodingError:
             return "Failed to decode server response"
         case .networkError(let error):
@@ -255,6 +266,24 @@ class APIService {
                     KeychainService.shared.clearRefreshToken()
                     throw APIError.unauthorized
                 }
+
+            case 403:
+                // Check if this is a pet limit exceeded error
+                if let limitResponse = try? decoder.decode(PetLimitErrorResponse.self, from: data),
+                   let sub = limitResponse.subscription {
+                    throw APIError.petLimitExceeded(SubscriptionLimitInfo(
+                        currentPlan: sub.current_plan,
+                        currentPetCount: sub.current_pet_count,
+                        maxPets: sub.max_pets,
+                        upgradeTo: sub.upgrade_to,
+                        upgradePrice: sub.upgrade_price
+                    ))
+                }
+                // Generic 403
+                if let errorResponse = try? decoder.decode(ErrorResponse.self, from: data) {
+                    throw APIError.serverError(errorResponse.error)
+                }
+                throw APIError.serverError("Access denied")
 
             default:
                 // Capture 5xx server errors to Sentry
@@ -851,6 +880,20 @@ struct ErrorResponse: Codable {
     let error: String
     let code: String?
     let details: [String: JSONValue]?
+}
+
+struct SubscriptionLimitResponse: Codable {
+    let current_plan: String
+    let current_pet_count: Int
+    let max_pets: Int
+    let upgrade_to: String
+    let upgrade_price: String
+}
+
+struct PetLimitErrorResponse: Codable {
+    let success: Bool
+    let error: String
+    let subscription: SubscriptionLimitResponse?
 }
 
 struct ApiEnvelope<T: Decodable>: Decodable {

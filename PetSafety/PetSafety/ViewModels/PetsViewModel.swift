@@ -7,6 +7,8 @@ class PetsViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var isOfflineMode = false
+    @Published var showUpgradePrompt = false
+    @Published var upgradeInfo: SubscriptionLimitInfo?
 
     private let apiService = APIService.shared
     private let offlineManager = OfflineDataManager.shared
@@ -58,6 +60,14 @@ class PetsViewModel: ObservableObject {
             pets.append(newPet)
             isLoading = false
             return newPet
+        } catch let error as APIError {
+            isLoading = false
+            if case .petLimitExceeded(let info) = error {
+                upgradeInfo = info
+                showUpgradePrompt = true
+            }
+            errorMessage = error.localizedDescription
+            throw error
         } catch {
             isLoading = false
             errorMessage = error.localizedDescription
