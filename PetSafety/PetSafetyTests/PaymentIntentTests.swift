@@ -30,7 +30,9 @@ struct PaymentIntentTests {
         let request = CreateTagCheckoutRequest(
             quantity: 2,
             countryCode: "SK",
-            platform: "ios"
+            platform: "ios",
+            deliveryMethod: nil,
+            postapointDetails: nil
         )
 
         let data = try JSONEncoder().encode(request)
