@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import UserNotifications
 import Sentry
 import os
 
@@ -47,8 +48,8 @@ class AuthViewModel: ObservableObject {
                     currentUser = try await userFetch
                     _ = await sseConnect
 
-                    // Register FCM token after user fetch succeeds (on MainActor)
-                    registerFCMToken()
+                    // Ensure push notifications enabled + register FCM token
+                    ensurePushNotificationsEnabled()
 
                     // Set Sentry user context for error tracking
                     if SentrySDK.isEnabled, let user = currentUser {
@@ -63,7 +64,33 @@ class AuthViewModel: ObservableObject {
         }
     }
 
-    // MARK: - FCM Token Management
+    // MARK: - Push Notifications & FCM Token Management
+
+    /// Request push notification permission if not yet granted, then register FCM token.
+    /// Called after every successful authentication (login, biometric, token restore).
+    private func ensurePushNotificationsEnabled() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                // First time — request permission (shows system dialog)
+                AppDelegate.requestPushPermission()
+            case .authorized, .provisional, .ephemeral:
+                // Already granted — ensure registered for remote notifications
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            case .denied:
+                #if DEBUG
+                print("Push notifications denied by user — skipping FCM registration")
+                #endif
+            @unknown default:
+                break
+            }
+        }
+
+        // Try to register any existing FCM token with the backend
+        registerFCMToken()
+    }
 
     private func registerFCMToken() {
         guard let token = KeychainService.shared.getFCMToken() else {
@@ -136,8 +163,8 @@ class AuthViewModel: ObservableObject {
                 // Connect to SSE
                 SSEService.shared.connect()
 
-                // Register FCM token
-                registerFCMToken()
+                // Ensure push notifications enabled + register FCM token
+                ensurePushNotificationsEnabled()
             } catch {
                 // Token might be invalid
                 logout()
@@ -198,8 +225,8 @@ class AuthViewModel: ObservableObject {
             // Connect to SSE for real-time notifications
             SSEService.shared.connect()
 
-            // Register FCM token for push notifications
-            registerFCMToken()
+            // Ensure push notifications enabled + register FCM token
+            ensurePushNotificationsEnabled()
         } catch {
             isLoading = false
             errorMessage = error.localizedDescription
