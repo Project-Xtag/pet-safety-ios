@@ -1,6 +1,6 @@
 /* Info.plist localized strings — Hungarian */
 
-"CFBundleDisplayName" = "Pet Safety";
+"CFBundleDisplayName" = "Senra Pet";
 "NSCameraUsageDescription" = "Szükségünk van a kamerádhoz való hozzáférésre, hogy fényképet készíthess a kedvencedről és beolvashasd a kisállat-címkéken lévő QR-kódokat.";
 "NSPhotoLibraryUsageDescription" = "Szükségünk van a fotótáradhoz való hozzáférésre, hogy kiválaszthass fényképeket a kedvencedről.";
 "NSLocationWhenInUseUsageDescription" = "Szükségünk van a tartózkodási helyedre, hogy segítsünk megtalálni az elveszett kisállatokat és megjeleníteni a közeli riasztásokat.";

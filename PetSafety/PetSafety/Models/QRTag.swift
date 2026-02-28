@@ -75,12 +75,14 @@ struct TagLookupResponse: Codable {
     let status: String?
     let hasPet: Bool?
     let isOwner: Bool?
+    let canActivate: Bool?
     let pet: TagLookupPet?
 
     enum CodingKeys: String, CodingKey {
         case exists, status, pet
         case hasPet = "has_pet"
         case isOwner = "is_owner"
+        case canActivate = "can_activate"
     }
 }
 
