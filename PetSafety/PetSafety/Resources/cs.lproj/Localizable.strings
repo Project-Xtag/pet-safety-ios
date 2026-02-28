@@ -9,21 +9,14 @@
 "back" = "Zpět";
 "submit" = "Odeslat";
 "skip" = "Přeskočit";
-"loading" = "Načítání...";
 "error" = "Chyba";
 "success" = "Úspěch";
-"confirm" = "Potvrdit";
 "retry" = "Zkusit znovu";
 "done" = "Hotovo";
-"edit" = "Upravit";
-"add" = "Přidat";
 "remove" = "Odstranit";
 "search" = "Hledat";
-"settings" = "Nastavení";
 "updated" = "Aktualizováno";
-"update_failed" = "Aktualizace se nezdařila";
 "enable" = "Povolit";
-"change" = "Změnit";
 "primary" = "Hlavní";
 
 // MARK: - Lišta záložek
@@ -34,18 +27,14 @@
 "tab_account" = "Účet";
 
 // MARK: - Ověřování
-"auth_tagline" = "Chraňte své mazlíčky pomocí QR známek";
 "welcome_back" = "Vítejte zpět!";
 "enter_email_subtitle" = "Zadejte e-mail pro obdržení přihlašovacího kódu.";
 "email_address" = "E-mailová adresa";
 "send_login_code" = "Odeslat přihlašovací kód";
-"enter_otp_code" = "Zadejte 6místný kód";
 "verify_code" = "Ověřit kód";
 "use_different_email" = "Použít jiný e-mail";
 "code_sent_to_email" = "Kód odeslán na %@";
 "otp_sent_to" = "Zadejte 6místný kód odeslaný na";
-"login_failed" = "Přihlášení se nezdařilo";
-"verification_failed" = "Ověření se nezdařilo";
 "invalid_email" = "Zadejte platnou e-mailovou adresu";
 "resend_code_cooldown" = "Znovu odeslat kód za %llds";
 "resend_code_prompt" = "Nedostali jste kód? Odeslat znovu";
@@ -57,7 +46,6 @@
 "already_have_account" = "Už máte účet?";
 "log_in" = "Přihlásit se";
 "terms_login_prefix" = "Přihlášením souhlasíte s našimi ";
-"terms_register_prefix" = "Registrací souhlasíte s našimi ";
 "terms_and" = " a ";
 "terms_of_service" = "Podmínkami služby";
 "privacy_policy" = "Zásadami ochrany soukromí";
@@ -68,12 +56,6 @@
 
 // MARK: - Biometrické přihlášení
 "biometric_login_title" = "Biometrické přihlášení";
-"biometric_login_subtitle" = "Použijte otisk prstu nebo obličej k přihlášení";
-"use_password" = "Použít e-mail";
-"login_with_biometric" = "Přihlásit se biometricky";
-"enable_biometric_title" = "Povolit biometrické přihlášení?";
-"enable_biometric_message" = "Použijte otisk prstu nebo obličej pro rychlé přihlášení příště.";
-"biometric_enabled" = "Biometrické přihlášení povoleno";
 "enable_biometric_type" = "Povolit %@?";
 "biometric_type_enabled" = "%@ povoleno";
 "use_biometric_quick_login" = "Použijte %@ pro rychlé přihlášení příště.";
@@ -82,9 +64,6 @@
 "by_creating_account_agree" = "Vytvořením účtu souhlasíte s našimi";
 
 // MARK: - Relace
-"session_expired_title" = "Relace vypršela";
-"session_expired_message" = "Vaše relace vypršela. Přihlaste se znovu.";
-"session_expired_log_in" = "Přihlásit se";
 
 // MARK: - Domů / Seznam mazlíčků
 "pet_owner_default" = "Majitel mazlíčka";
@@ -102,37 +81,23 @@
 "missing_badge" = "ZTRACENÝ";
 "add_pet" = "Přidat mazlíčka";
 "pet_name" = "Jméno mazlíčka";
-"pet_safety_user" = "Uživatel Pet Safety";
 
 // MARK: - Detail mazlíčka
-"breed_label" = "Plemeno: %@";
-"color_label" = "Barva: %@";
-"age_label" = "Věk: %@";
-"microchip_label" = "Mikročip: %@";
 "species_label" = "Druh: %@";
 "medical_information" = "Zdravotní informace";
 "additional_information" = "Doplňující informace";
-"photo_gallery" = "Fotogalerie";
 "edit_pet" = "Upravit mazlíčka";
 "view_pet_photos" = "Zobrazit fotky %@";
 "mark_as_found" = "Označit jako nalezené";
 "mark_as_lost" = "Označit jako ztracené";
-"mark_found" = "Označit nalezené";
-"mark_missing" = "Označit ztracené";
 "age" = "Věk";
 "view_public_profile" = "Zobrazit veřejný profil %@";
 "edit_pet_profile" = "Upravit profil %@";
-"delete_pet_name" = "Smazat %@";
-"delete_pet_confirm_title" = "Smazat %@?";
-"delete_pet_confirm_message" = "Tuto akci nelze vrátit. Všechna data pro %@ budou trvale smazána.";
 "cannot_delete_missing_pet" = "Ztraceného mazlíčka nelze smazat";
-"cannot_delete_missing_message" = "%@ je označen jako ztracený. Před smazáním jej označte jako nalezeného.";
 "mark_found_confirm_title" = "Označit %@ jako nalezené?";
 "mark_found_confirm_message" = "Tímto se uzavře výstraha o ztrátě %@. Opravdu?";
 "marked_found_message" = "%@ označen jako nalezený.";
-"marked_missing_message" = "%@ označen jako ztracený.";
 "mark_found_failed" = "Nepodařilo se označit jako nalezený";
-"mark_missing_failed" = "Nepodařilo se označit jako ztracený";
 "pet_deleted" = "%@ byl smazán";
 "delete_pet_failed" = "Nepodařilo se smazat mazlíčka";
 
@@ -145,111 +110,60 @@
 "medical_notes" = "Zdravotní poznámky";
 "photo" = "Fotka";
 "edit_photo" = "Upravit fotku";
-"photo_selected_hint" = "Fotka vybrána";
 "choose_photo_hint" = "Vyberte fotku svého mazlíčka";
 "basic_information" = "Základní informace";
 "colour" = "Barva";
 "colour_optional" = "Barva (volitelné)";
 "microchip_optional" = "Číslo mikročipu (volitelné)";
 "sex" = "Pohlaví";
-"not_specified" = "Nespecifikováno";
 "neutered_spayed" = "Kastrovaný/sterilizovaný";
 "neutered" = "Kastrovaný";
 "health_information" = "Zdravotní informace";
-"medical_notes_hint" = "Zdravotní poznámky (stavy, operace apod.)";
 "health_info_hint" = "Alergie, léky, zdravotní stavy…";
 "behavior_notes_hint" = "Poznámky k chování (povaha, výcvik apod.)";
 "save_changes" = "Uložit změny";
 "delete_pet_button" = "Smazat mazlíčka";
-"delete_pet_dialog_title" = "Smazat %@?";
 "delete_pet_dialog_message" = "Opravdu chcete smazat tohoto mazlíčka? Tuto akci nelze vrátit.";
-"male" = "Samec";
-"female" = "Samice";
-"default_species_dog" = "Pes";
 "species_cat" = "Kočka";
-"search_breed" = "Hledat plemeno…";
 "select_photo" = "Vybrat fotku";
 "select_pet" = "Vybrat mazlíčka";
 "select_pet_for_replacement" = "Vybrat mazlíčka pro náhradní známku";
-"physical_details" = "Fyzické údaje";
 "weight" = "Hmotnost";
 "weight_optional" = "Hmotnost v kg (volitelné)";
 "date_of_birth" = "Datum narození";
 "allergies_hint" = "Alergie (jídlo, léky apod.)";
-"medications_hint" = "Aktuální léky";
 "unique_features_hint" = "Jedinečné znaky (známky, jizvy, výrazné rysy…)";
-"photo_selected" = "Fotka vybrána";
 "pet_created" = "Mazlíček vytvořen";
-"pet_create_failed" = "Mazlíčka se nepodařilo vytvořit";
 "pet_updated" = "Mazlíček aktualizován";
-"pet_update_failed" = "Mazlíčka se nepodařilo aktualizovat";
 "pet_updated_photo_failed" = "Mazlíček aktualizován! Nahrání fotky se nezdařilo – zkuste to později.";
 
 // MARK: - Fotogalerie
 "pet_photos_title" = "Fotky %@";
 "add_photos" = "Přidat fotky";
-"uploading_photos" = "Nahrávání fotek…";
-"loading_photos" = "Načítání fotek…";
 "no_photos_yet" = "Zatím žádné fotky";
 "add_photos_gallery_hint" = "Přidejte fotky a vytvořte galerii pro %@";
 "add_photos_gallery_generic" = "Přidejte fotky a vytvořte galerii";
 "choose_photo_source" = "Vybrat zdroj fotografií";
-"camera" = "Fotoaparát";
-"library" = "Knihovna";
 "delete_photo" = "Smazat fotku";
 "delete_photo_confirm" = "Opravdu chcete smazat tuto fotku? Tuto akci nelze vrátit.";
 "photo_tip" = "Tip: Dlouze stiskněte fotku pro nastavení jako hlavní nebo smazání";
 "photo_uploaded" = "Fotka nahrána";
-"upload_failed" = "Nahrání selhalo";
-"primary_updated" = "Hlavní fotka aktualizována";
-"primary_failed" = "Nepodařilo se nastavit hlavní";
 "photo_deleted" = "Fotka smazána";
-"delete_photo_failed" = "Smazání fotky se nezdařilo";
-"upload_photo_failed" = "Nahrání fotky se nezdařilo";
-"add_photo" = "Přidat fotku";
-"use_camera" = "Otevřít fotoaparát zařízení";
 "choose_from_gallery" = "Vybrat z galerie";
-"select_existing_photo" = "Vybrat existující fotku";
-"choose_photos" = "Vybrat fotky";
 "take_photo" = "Vyfotit";
 "photo_gallery_title" = "Fotogalerie";
 
 // MARK: - QR skener
-"scan_qr" = "Skenovat QR";
 "scan_qr_code" = "Skenovat QR kód";
 "scan_qr_subtitle" = "Naměřte kameru na QR známku mazlíčka";
-"camera_access_required" = "Vyžadován přístup ke kameře";
-"camera_access_message" = "Povolte přístup ke kameře v Nastavení pro skenování QR kódů";
-"enable_camera" = "Povolit kameru";
-"qr_scanned" = "QR naskenováno";
-"manual_code_entry" = "Zadat kód ručně";
-"manual_code_label" = "QR kód";
-"submit_code" = "Odeslat kód";
-"invalid_qr_code" = "Zadejte platný kód";
-"turn_off_flashlight" = "Vypnout baterku";
-"turn_on_flashlight" = "Zapnout baterku";
 "hello_pet_name" = "Ahoj! Jmenuji se %@";
 "scanned_tag_thanks" = "Právě jste naskenovali mou známku. Děkuji, že mi pomáháte!";
 "share_location_with_owner" = "Sdílet moji polohu s majitelem";
-"owner_notified_message" = "Majitel %@ obdrží upozornění s vaší polohou";
-"share_location_help" = "Pomozte majiteli %@ najít mazlíčka sdílením vaší polohy";
-"precise_location" = "Přesná poloha";
-"precise_location_desc" = "Sdílejte přesné GPS souřadnice";
-"approximate_location" = "Přibližná poloha";
-"approximate_location_desc" = "Sdílení s přesností ~500 m (GDPR compliant)";
-"dont_share_location" = "Nesdílet polohu";
-"dont_share_location_desc" = "Pouze informovat majitele, že mazlíček byl nalezen";
-"sending" = "Odesílání…";
-"confirm_notify_owner" = "Potvrdit a informovat majitele";
 "contact_owner" = "Kontaktovat majitele";
 "call_phone" = "Volat: %@";
 "email_contact" = "E-mail: %@";
 "privacy_notice" = "Na vašem soukromí záleží. Vaši polohu sdílíme pouze s majitelem %@ pro pomoc při shledání.";
-"recommended" = "Doporučeno";
 "found_pet_title" = "%@ nalezen";
-"share_location" = "Sdílet polohu";
-"location_shared" = "Poloha sdílena";
-"share_location_failed" = "Sdílení polohy se nezdařilo";
 
 // MARK: - Průběh sdílení polohy
 "share_help_get_home %@" = "Pomozte %@ dostat se domů";
@@ -269,35 +183,15 @@
 "share_found_pet %@" = "%@ nalezen!";
 
 // MARK: - Detail skeneru
-"scanner_title" = "Skenovat QR kód";
-"scanner_subtitle" = "Naměřte kameru na QR známku mazlíčka";
-"scanner_camera_required" = "Vyžadován přístup ke kameře";
-"scanner_camera_message" = "Povolte přístup ke kameře v Nastavení pro skenování QR kódů";
 "scanner_open_settings" = "Otevřít nastavení";
-"scanner_greeting %@" = "Ahoj! Jmenuji se %@";
-"scanner_scanned_message" = "Právě jste naskenovali mou známku. Děkuji, že mi pomáháte!";
 "scanner_breed" = "Plemeno";
 "scanner_age" = "Věk";
 "scanner_color" = "Barva";
-"scanner_share_location" = "Sdílet moji polohu s majitelem";
-"scanner_owner_notified" = "Majitel byl informován, že známka jeho mazlíčka byla naskenována.";
-"scanner_contact_owner" = "Kontaktovat majitele";
-"scanner_contact_instructions" = "Kontaktujte majitele a dejte mu vědět, že jste našli jeho mazlíčka:";
-"scanner_call %@" = "Volat: %@";
-"scanner_email %@" = "E-mail: %@";
 "scanner_owner_location" = "Poloha majitele";
 "scanner_medical_info" = "Zdravotní informace";
 "scanner_allergies" = "Alergie";
 "scanner_notes" = "Poznámky";
 "scanner_how_it_works" = "Jak to funguje";
-"scanner_step1_title" = "1. Naskenujte známku";
-"scanner_step1_desc" = "To jste už udělali! Známka obsahuje unikátní QR kód.";
-"scanner_step2_title" = "2. Sdílejte polohu";
-"scanner_step2_desc" = "Klepněte na tlačítko výše a sdílejte místo, kde jste mazlíčka našli.";
-"scanner_step3_title" = "3. Kontaktujte majitele";
-"scanner_step3_desc" = "Použijte kontaktní údaje k přímému kontaktu s majitelem.";
-"scanner_privacy_notice" = "Vaše přesná poloha není sdílena. Viditelná je pouze přibližná oblast (~500 m).";
-"scanner_found_pet %@" = "%@ nalezen!";
 
 // MARK: - Aktivace známky
 "tag_activate_title" = "Aktivovat známku";
@@ -321,98 +215,50 @@
 "plan_upgrade_title" = "Upgradovat plán";
 "plan_upgrade_subtitle" = "Získejte více funkcí pro své mazlíčky";
 "plan_loading" = "Načítání plánů…";
-"plan_failed_to_load" = "Plány se nepodařilo načíst";
-"plan_choose_your_plan" = "Vyberte si plán";
 "plan_popular" = "Oblíbené";
 "plan_current" = "Aktuální plán";
 "plan_select_free" = "Vybrat bezplatný plán";
 "plan_select %@" = "Vybrat %@";
 "plan_skip_free" = "Přeskočit (bezplatný plán)";
 "plan_all_include" = "Všechny plány zahrnují:";
-"plan_feature_qr" = "QR známka pro vašeho mazlíčka";
-"plan_feature_profile" = "Profilová stránka mazlíčka";
-"plan_feature_scan_notify" = "Upozornění na skenování";
 "plan_paid_add" = "Placené plány navíc:";
-"plan_feature_alerts" = "Upozornění na ztracené mazlíčky";
-"plan_feature_location" = "Sdílení polohy";
-"plan_feature_priority" = "Prioritní podpora";
 
 // MARK: - Upozornění
-"alerts" = "Upozornění";
 "tab_missing" = "Ztracený";
 "tab_found" = "Nalezený";
 "tab_success" = "Nalezení mazlíčci";
-"show_list" = "Zobrazit seznam";
-"show_map" = "Zobrazit mapu";
-"unknown_pet" = "Neznámý mazlíček";
-"pet_alert" = "Upozornění na mazlíčka";
-"alert_status" = "Stav: %@";
-"alert_last_seen" = "Naposledy viděn: %@";
-"alert_info" = "Info: %@";
-"alert_sightings_count" = "Pozorování: %lld";
-"alert_marker" = "Upozornění";
-"loading_alerts" = "Načítání upozornění…";
 "failed_load_alerts" = "Upozornění se nepodařilo načíst";
 "no_active_alerts" = "Žádná aktivní upozornění";
 "no_active_alerts_message" = "Aktuálně nemáte žádná upozornění na ztracené mazlíčky";
-"no_found_alerts" = "Žádná upozornění na nalezení";
-"no_found_alerts_message" = "Ve vašem okolí nebyli nedávno nalezeni žádní mazlíčci";
 "missing_pet_alerts_title" = "Upozornění na ztracené mazlíčky";
 "create_alert" = "Vytvořit upozornění";
 "create_new_alert" = "Vytvořit nové upozornění";
 "sighting_count_singular" = "1 pozorování";
 "sighting_count_plural" = "%lld pozorování";
-"unknown_breed" = "Neznámé plemeno";
 "last_seen_label" = "Naposledy viděn";
 "reported_sightings_count" = "Nahlášená pozorování (%lld)";
 "report_a_sighting" = "Nahlásit pozorování";
 "anonymous" = "Anonymní";
 "contact_label" = "Kontakt: %@";
-"pet_marked_found" = "%@ byl označen jako nalezený!";
-"mark_found_failed_message" = "Označení jako nalezený se nezdařilo: %@";
 
 // MARK: - Nahlášení ztráty / pozorování
-"report_missing_title" = "Nahlásit ztrátu %@";
 "last_seen_location" = "Místo posledního výskytu";
-"additional_info" = "Další info";
-"report" = "Nahlásit";
 "report_sighting" = "Nahlásit pozorování";
-"report_sighting_prompt" = "Sdílejte detaily o tom, kde jste mazlíčka viděli.";
 "notes" = "Poznámky";
-"sighting_reported" = "Pozorování nahlášeno";
-"report_failed" = "Nahlášení se nezdařilo";
 "sighting_location" = "Místo pozorování";
 "use_current_location" = "Použít aktuální polohu";
 "location_captured" = "Poloha získána z GPS";
-"create_alert_failed" = "Nepodařilo se vytvořit upozornění";
-"update_alert_failed" = "Nepodařilo se aktualizovat upozornění";
-"report_sighting_failed" = "Nepodařilo se nahlásit pozorování";
 "report_missing_pet" = "Nahlásit ztraceného mazlíčka";
 "select_pet_to_report" = "Vyberte mazlíčka";
-"add_missing_details" = "Přidat detaily o ztrátě";
-"enter_address_or_location" = "Zadejte adresu nebo popis místa";
 "additional_details" = "Další detaily";
-"describe_circumstances" = "Popište okolnosti, rozlišovací znaky apod.";
-"report_missing" = "Nahlásit ztrátu";
-"no_pets_to_report_message" = "Nejdříve přidejte mazlíčka, abyste jej mohli nahlásit jako ztraceného";
-"mark_pet_found" = "Označit mazlíčka jako nalezeného";
-"select_pet_to_mark_found" = "Vyberte mazlíčka, který byl nalezen";
-"no_missing_pets_message" = "Nemáte žádné mazlíčky označené jako ztracené";
 "select_pet_header" = "Vybrat mazlíčka";
 "no_pets_available" = "Žádní mazlíčci nejsou dostupní. Nejprve přidejte mazlíčka.";
-"pet_picker_label" = "Mazlíček";
 "last_seen_location_header" = "Místo posledního výskytu";
 "enter_location" = "Zadejte polohu";
 "additional_information_header" = "Další informace";
 "additional_details_placeholder" = "Uveďte další podrobnosti o tom, kdy a kde jste mazlíčka naposledy viděli…";
 "alert_created_success" = "Upozornění na ztraceného mazlíčka bylo úspěšně vytvořeno!";
 "alert_queued_offline" = "Upozornění ve frontě. Synchronizuje se po připojení.";
-"your_contact_information" = "Vaše kontaktní údaje";
-"name_optional" = "Jméno (volitelné)";
-"phone_optional" = "Telefon (volitelné)";
-"email_optional" = "E-mail (volitelné)";
-"details" = "Podrobnosti";
-"sighting_reported_success" = "Pozorování úspěšně nahlášeno!";
 "report_sighting_header" = "Nahlásit pozorování";
 "report_sighting_help" = "Pomozte mazlíčkovi znovu se shledat s majitelem sdílením místa pozorování.";
 "share_contact_info" = "Sdílet moje kontaktní údaje";
@@ -429,50 +275,25 @@
 "sighting_queued_offline" = "Pozorování ve frontě – odešle se po připojení.";
 
 // MARK: - Označení ztráty/nalezení
-"mark_pet_found_confirm" = "Označit %@ jako nalezeného?";
-"mark_found_confirm_alert" = "Tímto se uzavře upozornění o ztrátě %@. Opravdu?";
-"notification_center" = "Centrum oznámení";
-"alerts_radius_info" = "Upozornění budou odeslána v okruhu 10 km od této polohy";
-"current_location" = "Aktuální poloha";
-"tap_get_location" = "Klepněte pro získání aktuální polohy…";
-"using_registered_address" = "Používá se vaše registrovaná adresa";
-"enter_address_notifications" = "Zadejte adresu pro oznámení";
 
 // MARK: - Oznámení
 "tag_scanned_message" = "Známka %@ byla naskenována v %@!";
-"unknown_location" = "na neznámém místě";
 "sighting_message_with_location" = "%@ byl spatřen v %@!";
 "sighting_message_no_location" = "%@ byl spatřen!";
-"pet_found_message" = "Skvělá zpráva! %@ byl nalezen!";
-"notification_tag_scanned_title" = "%@ nalezen!";
-"notification_sighting_title" = "%@ spatřen!";
-"notification_pet_found_title" = "Skvělá zpráva!";
-"notification_channel_name" = "Pet Safety upozornění";
-"notification_method_required" = "Musí být povolen alespoň jeden způsob oznámení";
 
 // MARK: - Příběhy úspěchu
 "success_stories" = "Příběhy úspěchu";
 "found_pets" = "Nalezení mazlíčci";
 "success_stories_subtitle" = "Podívejte se na šťastná shledání ve vašem okolí";
-"share_your_story" = "Sdílejte svůj příběh";
-"success_story_prompt" = "Skvělé zprávy! %@ byl nalezen! Chcete sdílet svůj příběh shledání a inspirovat ostatní?";
-"your_story" = "Váš příběh";
-"story_placeholder" = "Řekněte nám, jak jste se shledali…";
-"share_story" = "Sdílet příběh";
-"story_shared" = "Příběh úspěšně sdílen";
-"story_share_failed" = "Sdílení příběhu se nezdařilo";
 "loading_success_stories" = "Načítání příběhů úspěchu…";
 "no_success_stories" = "Žádné příběhy úspěchu v okolí";
 "no_success_stories_message" = "Buďte první, kdo sdílí šťastné shledání ve vašem okolí!";
 "found_and_reunited" = "Nalezen a shledán";
 "distance_km" = "%.1f km daleko";
-"missing_since" = "Ztracen od %@";
 "found_on" = "Nalezen %@";
 "success_story_marker" = "Příběh úspěchu";
 "load_more" = "Načíst více";
 "missing_for" = "Ztracen po dobu %@";
-"pet_found_share" = "%@ nalezen!";
-"reunited_in" = "Shledáno za %@";
 "shared_via_pet_safety" = "Sdíleno přes Pet Safety aplikaci";
 
 // MARK: - Čas příběhu úspěchu
@@ -485,32 +306,22 @@
 "success_minutes_ago %lld" = "Před %lld minutami";
 
 // MARK: - Záložka příběhů úspěchu
-"success_tab_title" = "Příběhy úspěchu";
-"success_tab_list" = "Seznam";
-"success_tab_map" = "Mapa";
 
 // MARK: - Výzva k sdílení příběhu
 "story_great_news" = "Skvělé zprávy!";
 "story_post" = "Publikovat";
-"story_pet_home %@" = "%@ je doma!";
 "story_reunited" = "Shledáno!";
-"story_share_prompt" = "Sdílejte svůj příběh shledání!";
-"story_inspiration" = "Váš příběh může inspirovat ostatní majitele mazlíčků ve vašem okolí.";
-"story_share_button" = "Sdílet můj příběh";
 "story_maybe_later" = "Možná později";
 "story_share_good_news" = "Sdílej dobrou zprávu";
 "story_social_caption %@" = "%@ se opět shledal se svou rodinou! Děkujeme komunitě TagMe Now za pomoc s návratem %@ domů. senra.pet";
 "story_generating_card" = "Vytváření sdílecí karty...";
 "story_your_story" = "Váš příběh";
-"story_placeholder_named %@" = "Sdílejte, jak byl %@ nalezen a shledán";
 "story_city_optional" = "Město/oblast (volitelné)";
 "story_city_placeholder" = "např. Praha, Vinohrady";
 "story_share_publicly" = "Sdílet veřejně";
 "story_share_publicly_desc" = "Umožněte ostatním v okolí vidět váš příběh";
 "story_posting" = "Publikování…";
 "story_share_story" = "Sdílet příběh";
-"story_contact_note" = "Vaše kontaktní údaje nebudou sdíleny.";
-"story_posted_success" = "Váš příběh úspěchu byl sdílen!";
 
 // MARK: - Profil
 "profile" = "Profil";
@@ -524,21 +335,12 @@
 "profile_referral" = "Doporučovací program";
 "profile_help_support" = "Nápověda a podpora";
 "profile_log_out" = "Odhlásit se";
-"profile_logout_confirm" = "Opravdu se chcete odhlásit?";
 "profile_delete_account" = "Smazat účet";
-"profile_delete_confirm" = "Opravdu chcete smazat svůj účet? Tuto akci nelze vrátit.";
 "profile_cannot_delete" = "Účet nelze smazat";
 "profile_cannot_delete_message" = "Před smazáním účtu označte všechny ztracené mazlíčky jako nalezené.";
 "profile_danger_zone" = "Nebezpečná zóna";
 "profile_deleting" = "Mazání…";
-"profile_delete_permanent" = "Tímto dojde k trvalému smazání vašeho účtu a všech dat";
 "log_out" = "Odhlásit se";
-"personal_information" = "Osobní údaje";
-"address" = "Adresa";
-"contacts" = "Kontakty";
-"privacy_mode" = "Režim soukromí";
-"notifications" = "Oznámení";
-"help_support" = "Nápověda a podpora";
 
 // MARK: - Osobní údaje
 "personal_details" = "Osobní údaje";
@@ -550,7 +352,6 @@
 "personal_email_placeholder" = "Zadejte e-mail";
 "personal_phone" = "Telefon";
 "personal_phone_placeholder" = "Zadejte telefonní číslo";
-"personal_edit_info" = "Upravit údaje";
 "personal_title" = "Osobní údaje";
 
 // MARK: - Adresa
@@ -574,56 +375,28 @@
 "address_select_country_title" = "Vybrat zemi";
 "address_line2_label" = "Patro, byt";
 "address_postal_label" = "PSČ";
-"street_address" = "Ulice a číslo";
 "address_line_2_optional" = "Adresní řádek 2 (volitelné)";
-"city" = "Město";
-"post_code" = "PSČ";
-"country" = "Země";
-"street" = "Ulice";
 
 // MARK: - Kontakty
 "contacts_settings" = "Nastavení kontaktů";
-"contacts_info_text" = "Tyto kontaktní údaje budou zobrazeny při skenování QR známky vašeho mazlíčka. Je vyžadován alespoň jeden kontakt.";
 "contacts_email_section" = "E-mailové adresy";
 "contacts_phone_section" = "Telefonní čísla";
 "contacts_edit_title" = "Upravit kontaktní údaje";
 "contacts_primary_email" = "Hlavní e-mail";
-"contacts_primary_email_footer" = "Tento e-mail se zobrazí při skenování QR známky vašeho mazlíčka.";
 "contacts_email_placeholder" = "E-mailová adresa";
-"contacts_show_on_tag" = "Zobrazit na známce";
 "contacts_secondary_email" = "Sekundární e-mail (volitelné)";
-"contacts_secondary_email_footer" = "Záložní e-mail pro kontakt.";
 "contacts_secondary_email_placeholder" = "Sekundární e-mailová adresa";
 "contacts_primary_phone" = "Hlavní telefon";
-"contacts_primary_phone_footer" = "Toto číslo se zobrazí při skenování QR známky vašeho mazlíčka.";
 "contacts_phone_placeholder" = "Telefonní číslo";
 "contacts_secondary_phone" = "Sekundární telefon (volitelné)";
-"contacts_secondary_phone_footer" = "Záložní telefonní číslo pro kontakt.";
 "contacts_secondary_phone_placeholder" = "Sekundární telefonní číslo";
-"contacts_title" = "Kontaktní údaje";
 "contacts_primary_badge" = "HLAVNÍ";
-"contacts_visible_badge" = "Viditelné na známce";
 "contacts_hidden_badge" = "Skryté";
-"contacts_none_added %@" = "Žádné %@ nebyly přidány";
 "email_addresses" = "E-mailové adresy";
-"primary_email" = "Hlavní e-mail";
-"secondary_email_optional" = "Sekundární e-mail (volitelné)";
 "phone_numbers" = "Telefonní čísla";
-"primary_phone" = "Hlavní telefon";
-"show_on_qr_tag" = "Zobrazit na QR známce";
-"secondary_phone_optional" = "Sekundární telefon (volitelné)";
-"contacts_qr_tag_info" = "Kontakty označené jako viditelné se zobrazí na QR známce vašeho mazlíčka při skenování.";
 "contact_details" = "Kontaktní údaje";
 
 // MARK: - Viditelnost kontaktů
-"contact_visibility" = "Viditelnost kontaktů";
-"contact_visibility_desc" = "Ovládejte, jaké kontaktní údaje jsou viditelné při skenování QR známky vašeho mazlíčka";
-"show_phone_number" = "Zobrazit telefonní číslo";
-"show_phone_subtitle" = "Vaše telefonní číslo bude viditelné pro nálezce";
-"show_email_address" = "Zobrazit e-mail";
-"show_email_subtitle" = "Váš e-mail bude viditelný pro nálezce";
-"show_address" = "Zobrazit adresu";
-"show_address_subtitle" = "Vaše adresa bude viditelná pro nálezce";
 
 // MARK: - Nastavení oznámení
 "notif_channels" = "Kanály oznámení";
@@ -646,37 +419,11 @@
 "notif_order_updates_subtitle" = "Oznámení o zásilkách a doručení";
 "notif_account_activity" = "Aktivita účtu";
 "notif_account_activity_subtitle" = "Oznámení o přihlášení a zabezpečení";
-"notif_optional_updates" = "Volitelné aktualizace";
-"notif_optional_footer" = "Novinky, tipy a propagační obsah";
-"notif_product_updates" = "Aktualizace produktu";
-"notif_marketing_emails" = "Marketingové e-maily";
 "notif_save_changes" = "Uložit změny";
 "notif_title" = "Oznámení";
 "notif_saved" = "Uloženo";
 "notif_saved_message" = "Nastavení oznámení bylo úspěšně uloženo";
 "notif_critical_footer" = "Tato nastavení můžete kdykoli změnit. Kritická upozornění o vašich mazlíčcích budou vždy odesílána.";
-"push_notifications" = "Push oznámení";
-"email_notifications" = "E-mailová oznámení";
-"sms_notifications" = "SMS oznámení";
-"push_notifications_subtitle" = "Přijímat push oznámení na zařízení";
-"email_notifications_subtitle" = "Přijímat oznámení e-mailem";
-"sms_notifications_subtitle" = "Přijímat oznámení SMS";
-"pet_alerts" = "Upozornění na mazlíčky";
-"missing_pet_alerts" = "Upozornění na ztracené mazlíčky";
-"missing_pet_alerts_subtitle" = "Získávejte upozornění o ztracených mazlíčcích ve vašem okolí";
-"nearby_alerts_10km" = "Upozornění v okolí (10 km)";
-"nearby_alerts_subtitle" = "Upozornění na mazlíčky v okruhu 10 km od vaší polohy";
-"account_and_orders" = "Účet a objednávky";
-"order_updates" = "Aktualizace objednávek";
-"order_updates_subtitle" = "Oznámení o dopravě a doručení";
-"account_activity" = "Aktivita účtu";
-"account_activity_subtitle" = "Oznámení o přihlášení a bezpečnosti";
-"optional_updates" = "Volitelné aktualizace";
-"product_updates" = "Aktualizace produktu";
-"product_updates_subtitle" = "Nové funkce a vylepšení";
-"marketing_emails" = "Marketingové e-maily";
-"marketing_emails_subtitle" = "Nabídky a akce";
-"critical_alerts_note" = "Poznámka: Kritická upozornění o vašich mazlíčcích budou vždy odeslána bez ohledu na toto nastavení.";
 "notification_preferences_title" = "Nastavení oznámení";
 
 // MARK: - Předvolby oznámení (Nastavení)
@@ -712,7 +459,6 @@
 "help_subject" = "Předmět";
 "help_subject_placeholder" = "Krátký popis problému";
 "help_message" = "Zpráva";
-"help_message_placeholder" = "Popište problém podrobně…";
 "help_sending" = "Odesílání…";
 "help_submit_request" = "Odeslat žádost";
 "help_contact_title" = "Kontaktovat podporu";
@@ -725,22 +471,7 @@
 "help_cat_other" = "Jiné";
 "help_faq_title" = "FAQ";
 "help_guides_title" = "Uživatelské příručky";
-"help_guide_placeholder" = "Podrobný obsah příručky bude k dispozici zde.";
-"get_help" = "Získat pomoc";
-"faq" = "Často kladené otázky";
-"user_guides" = "Uživatelské příručky";
-"legal" = "Právní";
 "support_response_time" = "Náš tým podpory obvykle odpovídá do 24 hodin.";
-"contact_support" = "Kontaktovat podporu";
-"contact_support_category" = "Kategorie";
-"contact_support_subject" = "Předmět";
-"contact_support_subject_hint" = "Krátký popis problému";
-"contact_support_message" = "Zpráva";
-"contact_support_message_hint" = "Popište problém podrobně…";
-"contact_support_submit" = "Odeslat";
-"contact_support_sending" = "Odesílání…";
-"contact_support_success" = "Žádost o podporu odeslána! ID tiketu: %@";
-"contact_support_response" = "Odpovíme do 24 hodin.";
 "support_email" = "Podpora: hello@senra.pet";
 "support_category_general" = "Obecné";
 "support_category_technical" = "Technický problém";
@@ -761,11 +492,6 @@
 "help_faq_q5" = "Jak objednám náhradní štítek?";
 "help_faq_a5" = "V profilu mazlíčka klikněte na 'Objednat náhradní štítek' a postupujte dle pokynů.";
 // Položky průvodce
-"help_guide_getting_started" = "Začínáme";
-"help_guide_managing_pets" = "Správa mazlíčků";
-"help_guide_qr_tags" = "Porozumění QR známkám";
-"help_guide_missing_pet" = "Co dělat, když se mazlíček ztratí";
-"help_guide_privacy" = "Nastavení soukromí a zabezpečení";
 
 // MARK: - Režim soukromí
 "privacy_contact_visibility" = "Viditelnost kontaktů";
@@ -778,74 +504,23 @@
 "privacy_show_address_subtitle" = "Vaše adresa bude viditelná na veřejném profilu vašeho mazlíčka";
 "privacy_data_privacy" = "Ochrana dat";
 "privacy_privacy_policy" = "Zásady ochrany soukromí";
-"privacy_data_management" = "Správa dat";
 "privacy_title" = "Režim soukromí";
 "privacy_mode_footer" = "Nastavení soukromí pomáhá kontrolovat, jaké informace se sdílí při skenování QR známky vašeho mazlíčka.";
-"privacy_policy_title" = "Zásady ochrany soukromí";
-"privacy_policy_updated" = "Poslední aktualizace: listopad 2024";
-"privacy_policy_section1_title" = "1. Informace, které shromažďujeme";
-"privacy_policy_section1_body" = "Shromažďujeme informace, které poskytujete přímo, včetně jména, e-mailu, telefonu, adresy a informací o mazlíčkovi. Také shromažďujeme údaje o poloze, pokud se rozhodnete je sdílet.";
-"privacy_policy_section2_title" = "2. Jak používáme vaše informace";
-"privacy_policy_section2_body" = "Vaše informace používáme k poskytování našich služeb, zasílání upozornění o ztracených mazlíčcích a usnadnění shledání s majiteli.";
-"privacy_policy_section3_title" = "3. Sdílení informací";
-"privacy_policy_section3_body" = "Vaše kontaktní údaje sdílíme pouze podle vašich nastavení soukromí. Údaje o poloze sdílíme pouze tehdy, když to výslovně zvolíte.";
-"privacy_policy_section4_title" = "4. Bezpečnost dat";
-"privacy_policy_section4_body" = "Používáme standardní šifrování a bezpečnostní opatření k ochraně vašich osobních údajů.";
-"privacy_policy_section5_title" = "5. Vaše práva";
-"privacy_policy_section5_body" = "Máte právo kdykoli přistupovat ke svým osobním údajům, aktualizovat je a smazat je v nastavení aplikace.";
-"privacy_your_data" = "Vaše data";
-"privacy_your_data_footer" = "Požádejte o kopii všech svých osobních údajů uložených v našem systému.";
-"privacy_export_data" = "Exportovat moje data";
-"privacy_deletion_section" = "Smazání dat";
-"privacy_deletion_footer" = "Trvale smazat váš účet a všechna související data.";
-"privacy_delete_account" = "Smazat můj účet";
-"privacy_delete_confirm" = "Opravdu chcete smazat účet? Tímto budou trvale odstraněna všechna data včetně mazlíčků, upozornění a historie objednávek. Tuto akci nelze vrátit.";
-"data_privacy" = "Ochrana dat";
-"data_management" = "Správa dat";
 "privacy_settings_updated" = "Nastavení soukromí aktualizováno";
 "privacy_settings_failed" = "Aktualizace nastavení soukromí se nezdařila";
 
 // MARK: - Smazání účtu
 "delete_account" = "Smazat účet";
-"delete_account_warning" = "Tuto akci nelze vrátit. Všechna vaše data včetně mazlíčků, upozornění a fotek budou trvale smazána.";
-"delete_account_confirm_prompt" = "Pro potvrzení napište níže DELETE:";
-"type_delete_to_confirm" = "Napište DELETE";
-"account_deleted" = "Účet smazán";
-"delete_account_failed" = "Smazání účtu se nezdařilo";
-"cannot_delete_account" = "Účet nelze smazat";
-"cannot_delete_missing_pets" = "Nemůžete smazat účet, dokud máte mazlíčky označené jako ztracené. Nejprve je označte jako nalezené.";
 "missing_pets_label" = "Ztracení mazlíčci: %@";
-"checking_delete_eligibility" = "Kontrola…";
-"danger_zone" = "NEBEZPEČNÁ ZÓNA";
-"deleting" = "Mazání…";
-"delete_account_permanent" = "Tímto dojde k trvalému smazání vašeho účtu a všech dat";
 "logout_confirm" = "Opravdu se chcete odhlásit?";
 "delete_account_full_warning" = "Tuto akci nelze vrátit. Váš účet bude trvale smazán, všechna osobní data budou odstraněna a případná aktivní předplatná budou zrušena.";
 
 // MARK: - Objednávky
 "orders_title" = "Objednávky";
 "order_number" = "Objednávka #%@";
-"order_total" = "Celkem: %@";
-"order_tags" = "Objednat známky";
-"replace_tag" = "Vyměnit známku";
 "add_pet_first_replacement" = "Nejprve přidejte mazlíčka, abyste mohli objednat náhradní známku.";
-"order_more_tags_title" = "Objednat více známek";
-"add_another_pet" = "Přidat dalšího mazlíčka";
-"full_name" = "Celé jméno";
-"place_order" = "Odeslat objednávku";
-"order_created_payment_pending" = "Objednávka vytvořena. Platba čeká.";
-"payment_intent_failed" = "Záměr platby selhal";
-"order_create_failed" = "Objednávku se nepodařilo vytvořit";
-"order_replacement_title" = "Objednat náhradní známku";
-"pet_label" = "Mazlíček: %@";
-"order_replacement_button" = "Objednat náhradu";
-"replacement_ordered" = "Náhrada objednána";
-"replacement_failed" = "Náhradu se nepodařilo objednat";
-"replacement_order_failed" = "Objednávku náhrady se nepodařilo vytvořit";
-"create_payment_intent_failed" = "Záměr platby se nepodařilo vytvořit";
 "orders_no_orders" = "Žádné objednávky";
 "orders_no_orders_message" = "Zatím jste neprovedli žádnou objednávku";
-"orders_order_number %@" = "Objednávka #%@";
 "orders_information" = "Informace o objednávce";
 "orders_order_id" = "ID objednávky";
 "orders_status" = "Stav";
@@ -856,49 +531,27 @@
 "orders_tag_pending" = "QR známka čeká";
 "orders_tag_assigned" = "QR známka přiřazena";
 "orders_detail_title" = "Detail objednávky";
-"failed_load_orders" = "Objednávky se nepodařilo načíst";
-"order_id_short" = "Objednávka #%@";
-"order_information" = "Informace o objednávce";
-"order_id_label" = "ID objednávky";
-"status" = "Stav";
-"total_amount" = "Celková částka";
-"order_date" = "Datum objednávky";
-"items" = "Položky";
 
 // MARK: - Objednat více známek
 "order_more_title" = "Objednat více známek";
 "order_more_complete" = "Objednávka dokončena!";
-"order_more_payment_pending" = "Objednávka byla odeslána. Brzy obdržíte e-mail s pokyny k platbě.";
 "order_more_confirmation" = "Známky odešleme po potvrzení platby.";
 "order_more_pet_names" = "Jména mazlíčků";
 "order_more_pet_names_footer" = "Zadejte jména mazlíčků, pro které chcete známky. Na každou známku vygravírujeme jméno.";
-"order_more_pet_name_placeholder" = "Jméno mazlíčka";
 "order_more_add_another" = "Přidat dalšího mazlíčka";
 "order_more_your_info" = "Vaše údaje";
-"order_more_full_name" = "Celé jméno";
-"order_more_email" = "E-mail";
-"order_more_phone" = "Telefon";
 "order_more_shipping" = "Doručovací adresa";
 "order_more_street" = "Ulice a číslo";
-"order_more_street_placeholder" = "Zadejte ulici a číslo";
 "order_more_line2" = "Patro, byt (volitelné)";
-"order_more_line2_placeholder" = "4B";
 "order_more_city" = "Město";
-"order_more_province" = "Kraj / stát (volitelné)";
 "order_more_postal" = "PSČ";
 "order_more_country" = "Země";
 "order_more_summary" = "Shrnutí objednávky";
 "order_more_tags_count %lld" = "Známky (%lld)";
 "order_more_shipping_cost" = "Doprava";
 "order_more_total" = "Celkem";
-"order_more_creating" = "Vytváření objednávky…";
-"order_more_place_order" = "Odeslat objednávku";
 "order_more_proceed_to_payment" = "Pokračovat k platbě";
 "order_more_redirecting" = "Přesměrování...";
-"pet_names" = "Jména mazlíčků";
-"shipping_address" = "Doručovací adresa";
-"shipping" = "Doprava";
-"get_qr_tags_subtitle" = "Získejte QR známky pro své mazlíčky";
 
 // MARK: - Objednat náhradní známku
 "order_replace_title" = "Objednat náhradní známku";
@@ -911,19 +564,14 @@
 "order_replace_shipping" = "Doručovací adresa";
 "order_replace_shipping_footer" = "Náhradní známku odešleme na tuto adresu.";
 "order_replace_street" = "Ulice a číslo";
-"order_replace_street_placeholder" = "Zadejte ulici a číslo";
 "order_replace_line2" = "Patro, byt (volitelné)";
-"order_replace_line2_placeholder" = "4B";
 "order_replace_city" = "Město";
 "order_replace_postal" = "PSČ";
 "order_replace_country" = "Země";
 "order_replace_phone" = "Telefon (volitelné)";
-"order_replace_phone_placeholder" = "Zadejte telefonní číslo";
 "order_replace_creating" = "Vytváření objednávky…";
 "order_replace_free_button" = "Potvrdit a objednat bezplatnou náhradní známku";
 "order_replace_paid_button %@" = "Potvrdit a zaplatit %@";
-"replacement_subtitle" = "Ztracená nebo poškozená? Pošleme novou";
-"free_replacement" = "Bezplatná náhrada";
 
 // MARK: - Delivery Method & PostaPoint
 "delivery_method_title" = "Způsob doručení";
@@ -937,7 +585,6 @@
 
 // MARK: - Veřejný profil mazlíčka
 "public_profile_preview" = "Náhled veřejného profilu";
-"failed_load_profile" = "Nepodařilo se načíst profil";
 "public_profile_subtitle" = "Takto ostatní uvidí profil %@";
 "owner_notified_sms_email" = "Majitel %@ obdrží SMS a e-mail s vaší polohou";
 "contact_owner_plea" = "Prosím, dejte mému majiteli vědět, že jste mě našli…";
@@ -949,7 +596,6 @@
 "unique_features" = "Jedinečné znaky";
 "behavior_notes" = "Poznámky k chování";
 "yes" = "Ano";
-"no" = "Ne";
 "how_it_works" = "Jak to funguje";
 "help_reunite_pet" = "Pomozte bezpečně shledat %@ s majitelem";
 "step_share_location" = "Sdílejte svou polohu";
@@ -958,8 +604,6 @@
 "step_owner_notified_desc" = "Majitel obdrží SMS a e-mail s vaší polohou";
 "step_quick_reunion" = "Rychlé shledání";
 "step_quick_reunion_desc" = "Majitel může navigovat k vaší poloze a vyzvednout svého mazlíčka";
-"owner_phone_label" = "Telefon majitele: %@";
-"owner_email_label" = "E-mail majitele: %@";
 
 // MARK: - Offline režim
 "offline_mode" = "Offline režim";
@@ -967,13 +611,8 @@
 "sync_completed" = "Synchronizace dokončena";
 "sync_failed" = "Synchronizace se nezdařila: %@";
 "sync_no_connection" = "Nelze synchronizovat: bez internetového připojení";
-"pending_changes" = "Čekající změny";
-"online" = "Online";
 "offline_changes_sync" = "Změny se synchronizují po připojení";
-"tap_view_queued_actions" = "Klepněte pro zobrazení čekajících akcí";
-"connected" = "Připojeno";
 "sync_now" = "Synchronizovat nyní";
-"changes_sync_restored" = "Změny se budou automaticky synchronizovat po obnovení připojení.";
 "offline_pending_changes" = "Čekající změny";
 "offline_online" = "Online";
 "offline_sync_message" = "Změny se synchronizují po připojení";
@@ -987,7 +626,6 @@
 "sync_tried_count %lld" = "Vyzkoušeno %lldx";
 
 // MARK: - Zobrazení chyby a opakování
-"error_something_wrong" = "Něco se pokazilo";
 "something_went_wrong" = "Něco se pokazilo";
 "try_again" = "Zkusit znovu";
 
@@ -1001,16 +639,8 @@
 "map_pet_location %@" = "Poloha %@";
 "location_title" = "Poloha %@";
 "approximate_location_note" = "Toto je přibližná poloha (~500 m). Prohledejte okolí.";
-"coordinates_label" = "Souřadnice: %@";
-"open_in" = "Otevřít v:";
-"google_maps" = "Google Mapy";
-"waze" = "Waze";
 
 // MARK: - Informace o aplikaci
-"app_name_label" = "Pet Safety";
-"app_version" = "Verze 1.0.0";
-"terms_url" = "Podmínky: https://senra.pet/terms-conditions";
-"privacy_url" = "Soukromí: https://senra.pet/privacy-policy";
 
 // MARK: - Dynamické popisy skeneru
 "scanner_step1_dynamic_desc" = "Klikněte na tlačítko výše a sdílejte, kde jste našli %@";
@@ -1032,11 +662,10 @@
 "contacts_no_type_added" = "Žádné %@ nebyly přidány";
 
 // MARK: - Další klíče náhradní objednávky
-"order_replace_upgrade_hint" = "Upgradujte na Standard nebo Ultimate pro bezplatné náhrady";
+"order_replace_upgrade_hint" = "Upgradujte na Standard nebo Maximum pro bezplatné náhrady";
 "order_replace_old_deactivated" = "Váš starý QR kód bude deaktivován po odeslání této objednávky";
 "order_replace_delivery_time" = "Novou známku obdržíte do 5–7 pracovních dnů";
 "order_replace_scan_activate" = "Jakmile obdržíte novou známku, musíte ji naskenovat pro aktivaci";
-"order_replace_province" = "Kraj / stát (volitelné)";
 
 // MARK: - Další offline klíče
 "offline_last_sync_label" = "Čas poslední synchronizace";
@@ -1257,7 +886,6 @@
 "some_time" = "nějaký čas";
 "list" = "Seznam";
 "map" = "Mapa";
-"post_to_success_stories" = "Zveřejnit v Úspěšných příbězích";
 "remove_from_success_stories" = "Odebrat z Úspěšných příběhů";
 "removed_from_success_stories" = "Odebráno z Úspěšných příběhů";
 "remove_story_confirm_title" = "Odebrat úspěšný příběh?";
@@ -1275,8 +903,6 @@
 "reward_badge" = "Odměna: %@";
 
 // MARK: - Další lokalizační klíče
-"data_export_requested" = "Export dat vám bude zaslán e-mailem do 24 hodin";
-"account_deletion_unavailable" = "Smazání účtu momentálně není k dispozici. Prosím, kontaktujte podporu.";
 "cannot_delete_missing_message_short" = "Před smazáním musíte tohoto mazlíčka označit jako nalezeného.";
 "plan_feature_pets_count" = "Mazlíčci: %@";
 "plan_feature_photos_count" = "%lld fotek na mazlíčka";
@@ -1294,21 +920,21 @@
 "help_faq_q9" = "Jak fungují upozornění na ztracené mazlíčky?";
 "help_faq_a9" = "Když označíte mazlíčka jako ztraceného, vytvoří se upozornění s fotografií a údaji vašeho mazlíčka. Ostatní uživatelé Senra v okruhu 10 km mohou upozornění vidět na mapě ztracených mazlíčků. Kdokoli z komunity může nahlásit pozorování, čímž vám zašle svou polohu a kontaktní údaje. Upozornění obdrží také veterináři a útulky registrovaní na Senra ve vašem okolí.";
 "help_faq_q10" = "Jak objednám náhradní štítek?";
-"help_faq_a10" = "Přejděte na stránku Účet a klepněte na 'Objednat náhradu'. Vyberte mazlíčka, který potřebuje nový štítek. Členové plánu Ultimate mají neomezené bezplatné náhrady, členové plánu Standard mají jednu bezplatnou náhradu ročně a členové plánu Starter si mohou objednat náhrady za malý poplatek za dopravu.";
+"help_faq_a10" = "Přejděte na stránku Účet a klepněte na 'Objednat náhradu'. Vyberte mazlíčka, který potřebuje nový štítek. Členové plánu Maximum mají neomezené bezplatné náhrady, členové plánu Standard mají jednu bezplatnou náhradu ročně a členové plánu Starter si mohou objednat náhrady za malý poplatek za dopravu.";
 "help_faq_q11" = "Co je to program doporučení?";
-"help_faq_a11" = "Sdílejte kód SENRAFRIEND s přáteli a rodinou. Když někdo použije tento kód a přihlásí se k placenému plánu (Standard nebo Ultimate), oba — vy i váš přítel — získáte 2 měsíce zdarma. Svá doporučení a jejich stav můžete sledovat na stránce Doporučení.";
+"help_faq_a11" = "Sdílejte kód SENRAFRIEND s přáteli a rodinou. Když někdo použije tento kód a přihlásí se k placenému plánu (Standard nebo Maximum), oba — vy i váš přítel — získáte 2 měsíce zdarma. Svá doporučení a jejich stav můžete sledovat na stránce Doporučení.";
 "help_faq_q12" = "Do jakých zemí zasíláte?";
 "help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPoint) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
 "help_faq_q13" = "Mohu mít více mazlíčků na jednom účtu?";
-"help_faq_a13" = "Ano. Na plánu Starter (zdarma) můžete zaregistrovat jednoho mazlíčka. Plán Standard také podporuje jednoho mazlíčka. Plán Ultimate podporuje neomezený počet mazlíčků. Svůj plán můžete kdykoli upgradovat na stránce Účet.";
+"help_faq_a13" = "Ano. Na plánu Starter (zdarma) můžete zaregistrovat až 10 domácích mazlíčků. Plán Standard podporuje 1 mazlíčka. Plán Maximum podporuje až 10 domácích mazlíčků. Svůj plán můžete kdykoli upgradovat na stránce Účet.";
 "help_faq_q14" = "Jak nahlásím nalezeného mazlíčka?";
 "help_faq_a14" = "Pokud má mazlíček štítek Senra, jednoduše naskenujte QR kód kamerou telefonu — není potřeba žádná aplikace. Uvidíte profil mazlíčka a můžete sdílet svou polohu s majitelem. Pokud štítek nemá, můžete zkontrolovat mapu ztracených mazlíčků na webu Senra a zjistit, zda byl mazlíček nahlášen jako ztracený ve vašem okolí.";
 "help_faq_q15" = "Jsou mé osobní údaje v bezpečí?";
 "help_faq_a15" = "Ano. Máte plnou kontrolu nad tím, jaké informace jsou viditelné při naskenování štítku vašeho mazlíčka. V Nastavení > Soukromí si můžete zvolit, zda zobrazit nebo skrýt telefonní číslo, e-mail a adresu. Vaše přihlášení je zabezpečeno jednorázovými ověřovacími kódy — žádná hesla, která by mohla být ukradena. Svůj účet a všechna data můžete kdykoli smazat.";
 "help_faq_q16" = "Ztratil jsem štítek nebo je poškozený — co mám dělat?";
-"help_faq_a16" = "Nebojte se — digitální profil vašeho mazlíčka je v bezpečí a není uložen na samotném štítku. Přejděte na stránku Účet a klepněte na 'Objednat náhradu'. Nový štítek s novým QR kódem bude propojen s vaším stávajícím profilem mazlíčka. Členové plánu Standard mají jednu bezplatnou náhradu ročně, členové Ultimate mají neomezené bezplatné náhrady a členové Starter zaplatí malý poplatek za dopravu. Váš starý štítek přestane fungovat po aktivaci nového.";
+"help_faq_a16" = "Nebojte se — digitální profil vašeho mazlíčka je v bezpečí a není uložen na samotném štítku. Přejděte na stránku Účet a klepněte na 'Objednat náhradu'. Nový štítek s novým QR kódem bude propojen s vaším stávajícím profilem mazlíčka. Členové plánu Standard mají jednu bezplatnou náhradu ročně, členové Maximum mají neomezené bezplatné náhrady a členové Starter zaplatí malý poplatek za dopravu. Váš starý štítek přestane fungovat po aktivaci nového.";
 "help_faq_q17" = "Můj štítek nejde naskenovat — jak to opravím?";
-"help_faq_a17" = "Zkuste tyto kroky: očistěte povrch štítku vlhkým hadříkem, zajistěte dobré osvětlení, držte kameru telefonu stabilně asi 10–15 cm od štítku a ujistěte se, že aplikace fotoaparátu nebo QR skener funguje. Pokud je QR kód poškrábaný nebo vybledlý, můžete použít možnost ručního zadání kódu v aplikaci pod 'Naskenovat štítek'. Pokud je štítek příliš poškozený na čtení, objednejte si bezplatnou náhradu na stránce Účet (plány Standard a Ultimate).";
+"help_faq_a17" = "Zkuste tyto kroky: očistěte povrch štítku vlhkým hadříkem, zajistěte dobré osvětlení, držte kameru telefonu stabilně asi 10–15 cm od štítku a ujistěte se, že aplikace fotoaparátu nebo QR skener funguje. Pokud je QR kód poškrábaný nebo vybledlý, můžete použít možnost ručního zadání kódu v aplikaci pod 'Naskenovat štítek'. Pokud je štítek příliš poškozený na čtení, objednejte si bezplatnou náhradu na stránce Účet (plány Standard a Maximum).";
 "help_faq_q18" = "Našel jsem mazlíčka bez štítku Senra — co mohu udělat?";
 "help_faq_a18" = "Zkontrolujte mapu ztracených mazlíčků na webu Senra (senra.pet) — mazlíček mohl být nahlášen jako ztracený ve vašem okolí. Upozornění na ztracené mazlíčky si můžete prohlédnout bez účtu. Pokud najdete shodu, můžete nahlásit pozorování se svou polohou a pomoci tak sjednotit mazlíčka s majitelem. Můžete také vzít mazlíčka k místnímu veterináři na kontrolu mikročipu.";
 "help_faq_q19" = "Mohu změnit svou e-mailovou adresu?";
@@ -1328,7 +954,7 @@
 "help_faq_q26" = "Jak se upozornění na ztracené mazlíčky dostanou k veterinářům a útulkům?";
 "help_faq_a26" = "Když označíte svého mazlíčka jako ztraceného, Senra automaticky odešle e-mailová upozornění všem ověřeným veterinářům a útulkům registrovaným ve vašem okolí. To znamená, že místní odborníci na zvířata jsou okamžitě informováni o tom, že váš mazlíček je ztracený, a mohou po něm pátrat. Čím více veterinářů a útulků je ve vašem okolí registrováno, tím silnější je bezpečnostní síť. Můžete pomoci tím, že povzbudíte svého veterináře k registraci na Senra.";
 "help_faq_q27" = "Mohu převést štítek na jiného mazlíčka?";
-"help_faq_a27" = "Každý QR štítek je trvale propojen s jedním profilem mazlíčka a nelze ho přeřadit. Pokud mazlíček zemře nebo štítek již nepotřebujete, starý štítek se jednoduše deaktivuje. Pro označení nového mazlíčka objednejte nový štítek na stránce Účet. Pokud máte plán Standard nebo Ultimate, můžete mít nárok na bezplatný náhradní štítek pro svého nového mazlíčka.";
+"help_faq_a27" = "Každý QR štítek je trvale propojen s jedním profilem mazlíčka a nelze ho přeřadit. Pokud mazlíček zemře nebo štítek již nepotřebujete, starý štítek se jednoduše deaktivuje. Pro označení nového mazlíčka objednejte nový štítek na stránce Účet. Pokud máte plán Standard nebo Maximum, můžete mít nárok na bezplatný náhradní štítek pro svého nového mazlíčka.";
 "help_guide_qr_tags_title" = "QR štítky pro mazlíčky";
 "help_guide_qr_tags_desc" = "Zjistěte více o našich chytrých QR štítcích.";
 "help_guide_materials_title" = "Materiály a odolnost";
@@ -1363,3 +989,29 @@
 "order_status_delivered" = "Delivered";
 "order_status_cancelled" = "Cancelled";
 "orders_item_count %lld" = "%lld items";
+
+// MARK: - Scanner Additional
+"scanner_owner_address" = "Adresa vlastníka";
+
+// MARK: - Billing Additional
+"billing_past_due_title" = "Platba po splatnosti";
+"billing_past_due_message" = "Platba za předplatné je po splatnosti. Aktualizujte způsob platby.";
+"billing_update_payment" = "Aktualizovat platbu";
+
+// MARK: - Address Additional
+"address_search_country" = "Hledat zemi";
+
+// MARK: - Sync Additional
+"sync_failed_count" = "Synchronizace selhala";
+
+// MARK: - Pet Form Additional
+"pet_limit_reached" = "Limit domácích zvířat dosažen";
+"upgrade_to_ultimate" = "Přejít na Maximum";
+"keep_current_plan" = "Ponechat aktuální plán";
+"pet_limit_upgrade_message %@ %lld %@ %@" = "Váš plán %@ povoluje %lld zvíře. Přejděte na %@ za %@ pro až 10 domácích mazlíčků.";
+"pet_limit_upgrade_generic" = "Aktualizujte svůj plán pro přidání dalších zvířat.";
+
+// MARK: - Breed Picker Species Headers
+"species_dog" = "Pes";
+"species_cat_header" = "Kočka";
+"species_bird_no_picker" = "Pták (bez výběru)";

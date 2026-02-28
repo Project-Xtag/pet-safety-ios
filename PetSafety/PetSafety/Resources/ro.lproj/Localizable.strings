@@ -9,21 +9,14 @@
 "back" = "Înapoi";
 "submit" = "Trimite";
 "skip" = "Sari peste";
-"loading" = "Se încarcă...";
 "error" = "Eroare";
 "success" = "Succes";
-"confirm" = "Confirmă";
 "retry" = "Reîncearcă";
 "done" = "Gata";
-"edit" = "Editează";
-"add" = "Adaugă";
 "remove" = "Elimină";
 "search" = "Caută";
-"settings" = "Setări";
 "updated" = "Actualizat";
-"update_failed" = "Actualizarea a eșuat";
 "enable" = "Activează";
-"change" = "Schimbă";
 "primary" = "Principal";
 
 // MARK: - Bara de file
@@ -34,18 +27,14 @@
 "tab_account" = "Cont";
 
 // MARK: - Autentificare
-"auth_tagline" = "Ține-ți animalele în siguranță cu etichete QR";
 "welcome_back" = "Bine ai revenit!";
 "enter_email_subtitle" = "Introdu e-mailul pentru a primi un cod de autentificare.";
 "email_address" = "Adresă de e-mail";
 "send_login_code" = "Trimite codul de autentificare";
-"enter_otp_code" = "Introdu codul de 6 cifre";
 "verify_code" = "Verifică codul";
 "use_different_email" = "Folosește alt e-mail";
 "code_sent_to_email" = "Cod trimis la %@";
 "otp_sent_to" = "Introdu codul de 6 cifre trimis la";
-"login_failed" = "Autentificare eșuată";
-"verification_failed" = "Verificare eșuată";
 "invalid_email" = "Introdu o adresă de e-mail validă";
 "resend_code_cooldown" = "Retrimite codul în %llds";
 "resend_code_prompt" = "Nu ai primit codul? Retrimite";
@@ -57,7 +46,6 @@
 "already_have_account" = "Ai deja cont?";
 "log_in" = "Autentificare";
 "terms_login_prefix" = "Prin autentificare, ești de acord cu ";
-"terms_register_prefix" = "Prin înregistrare, ești de acord cu ";
 "terms_and" = " și ";
 "terms_of_service" = "Termenii de utilizare";
 "privacy_policy" = "Politica de confidențialitate";
@@ -68,12 +56,6 @@
 
 // MARK: - Biometric
 "biometric_login_title" = "Autentificare biometrică";
-"biometric_login_subtitle" = "Folosește amprenta sau fața pentru autentificare";
-"use_password" = "Folosește e-mail";
-"login_with_biometric" = "Autentificare biometrică";
-"enable_biometric_title" = "Activezi autentificarea biometrică?";
-"enable_biometric_message" = "Folosește amprenta sau fața pentru autentificare rapidă data viitoare.";
-"biometric_enabled" = "Autentificare biometrică activată";
 "enable_biometric_type" = "Activezi %@?";
 "biometric_type_enabled" = "%@ activat";
 "use_biometric_quick_login" = "Folosește %@ pentru autentificare rapidă data viitoare.";
@@ -82,9 +64,6 @@
 "by_creating_account_agree" = "Prin crearea unui cont, ești de acord cu";
 
 // MARK: - Sesiune
-"session_expired_title" = "Sesiune expirată";
-"session_expired_message" = "Sesiunea ta a expirat. Te rugăm să te autentifici din nou.";
-"session_expired_log_in" = "Autentificare";
 
 // MARK: - Acasă / Lista animalelor
 "pet_owner_default" = "Proprietar animal";
@@ -102,37 +81,23 @@
 "missing_badge" = "DISPĂRUT";
 "add_pet" = "Adaugă animal";
 "pet_name" = "Numele animalului";
-"pet_safety_user" = "Utilizator Pet Safety";
 
 // MARK: - Detalii animal
-"breed_label" = "Rasă: %@";
-"color_label" = "Culoare: %@";
-"age_label" = "Vârstă: %@";
-"microchip_label" = "Microcip: %@";
 "species_label" = "Specie: %@";
 "medical_information" = "Informații medicale";
 "additional_information" = "Informații suplimentare";
-"photo_gallery" = "Galerie foto";
 "edit_pet" = "Editează animalul";
 "view_pet_photos" = "Vezi fotografiile lui %@";
 "mark_as_found" = "Marchează ca găsit";
 "mark_as_lost" = "Marchează ca dispărut";
-"mark_found" = "Marchează găsit";
-"mark_missing" = "Marchează dispărut";
 "age" = "Vârstă";
 "view_public_profile" = "Vezi profilul public al lui %@";
 "edit_pet_profile" = "Editează profilul lui %@";
-"delete_pet_name" = "Șterge %@";
-"delete_pet_confirm_title" = "Ștergi %@?";
-"delete_pet_confirm_message" = "Această acțiune nu poate fi anulată. Toate datele pentru %@ vor fi șterse definitiv.";
 "cannot_delete_missing_pet" = "Nu se poate șterge un animal dispărut";
-"cannot_delete_missing_message" = "%@ este marcat ca dispărut. Marchează-l ca găsit înainte de ștergere.";
 "mark_found_confirm_title" = "Marchezi %@ ca găsit?";
 "mark_found_confirm_message" = "Aceasta va închide alerta de dispariție pentru %@. Ești sigur?";
 "marked_found_message" = "%@ marcat ca găsit.";
-"marked_missing_message" = "%@ marcat ca dispărut.";
 "mark_found_failed" = "Nu s-a putut marca găsit";
-"mark_missing_failed" = "Nu s-a putut marca dispărut";
 "pet_deleted" = "%@ a fost șters";
 "delete_pet_failed" = "Nu s-a putut șterge animalul";
 
@@ -145,111 +110,60 @@
 "medical_notes" = "Note medicale";
 "photo" = "Foto";
 "edit_photo" = "Editează fotografia";
-"photo_selected_hint" = "Fotografie selectată";
 "choose_photo_hint" = "Alege o fotografie a animalului tău";
 "basic_information" = "Informații de bază";
 "colour" = "Culoare";
 "colour_optional" = "Culoare (opțional)";
 "microchip_optional" = "Număr microcip (opțional)";
 "sex" = "Sex";
-"not_specified" = "Nespecificat";
 "neutered_spayed" = "Castrat/Sterilizat";
 "neutered" = "Castrat";
 "health_information" = "Informații de sănătate";
-"medical_notes_hint" = "Note medicale (afecțiuni, intervenții etc.)";
 "health_info_hint" = "Alergii, medicamente, condiții medicale...";
 "behavior_notes_hint" = "Note comportamentale (temperament, dresaj, etc.)";
 "save_changes" = "Salvează modificările";
 "delete_pet_button" = "Șterge animalul";
-"delete_pet_dialog_title" = "Ștergi %@?";
 "delete_pet_dialog_message" = "Sigur dorești să ștergi acest animal? Această acțiune nu poate fi anulată.";
-"male" = "Mascul";
-"female" = "Femelă";
-"default_species_dog" = "Câine";
 "species_cat" = "Pisică";
-"search_breed" = "Caută rasă...";
 "select_photo" = "Selectează foto";
 "select_pet" = "Selectează animal";
 "select_pet_for_replacement" = "Selectează animal pentru etichetă de înlocuire";
-"physical_details" = "Detalii fizice";
 "weight" = "Greutate";
 "weight_optional" = "Greutate în kg (opțional)";
 "date_of_birth" = "Data nașterii";
 "allergies_hint" = "Alergii (hrană, medicamente, etc.)";
-"medications_hint" = "Medicamente curente";
 "unique_features_hint" = "Caracteristici unice (semne, cicatrici, trăsături distinctive…)";
-"photo_selected" = "Fotografie selectată";
 "pet_created" = "Animal creat";
-"pet_create_failed" = "Nu s-a putut crea animalul";
 "pet_updated" = "Animal actualizat";
-"pet_update_failed" = "Nu s-a putut actualiza animalul";
 "pet_updated_photo_failed" = "Animal actualizat! Încărcarea fotografiei a eșuat - încearcă din nou mai târziu.";
 
 // MARK: - Galerie foto
 "pet_photos_title" = "Fotografiile lui %@";
 "add_photos" = "Adaugă fotografii";
-"uploading_photos" = "Se încarcă fotografii…";
-"loading_photos" = "Se încarcă fotografii…";
 "no_photos_yet" = "Încă nu există fotografii";
 "add_photos_gallery_hint" = "Adaugă fotografii pentru a crea o galerie pentru %@";
 "add_photos_gallery_generic" = "Adaugă fotografii pentru a crea o galerie";
 "choose_photo_source" = "Alege sursa fotografiei";
-"camera" = "Cameră";
-"library" = "Bibliotecă";
 "delete_photo" = "Șterge fotografia";
 "delete_photo_confirm" = "Ești sigur că vrei să ștergi această fotografie? Această acțiune nu poate fi anulată.";
 "photo_tip" = "Sfat: Apasă lung pe o fotografie pentru a o seta ca principală sau pentru a o șterge";
 "photo_uploaded" = "Fotografie încărcată";
-"upload_failed" = "Încărcarea a eșuat";
-"primary_updated" = "Fotografia principală a fost actualizată";
-"primary_failed" = "Nu s-a putut seta ca principală";
 "photo_deleted" = "Fotografie ștearsă";
-"delete_photo_failed" = "Nu s-a putut șterge fotografia";
-"upload_photo_failed" = "Nu s-a putut încărca fotografia";
-"add_photo" = "Adaugă fotografie";
-"use_camera" = "Deschide camera dispozitivului";
 "choose_from_gallery" = "Alege din galerie";
-"select_existing_photo" = "Selectează o fotografie existentă";
-"choose_photos" = "Alege fotografii";
 "take_photo" = "Fă o fotografie";
 "photo_gallery_title" = "Galerie foto";
 
 // MARK: - Scanner QR
-"scan_qr" = "Scanează QR";
 "scan_qr_code" = "Scanează cod QR";
 "scan_qr_subtitle" = "Îndreaptă camera către eticheta QR a animalului";
-"camera_access_required" = "Acces la cameră necesar";
-"camera_access_message" = "Activează accesul la cameră în Setări pentru a scana coduri QR";
-"enable_camera" = "Activează camera";
-"qr_scanned" = "QR scanat";
-"manual_code_entry" = "Introdu codul manual";
-"manual_code_label" = "Cod QR";
-"submit_code" = "Trimite cod";
-"invalid_qr_code" = "Introdu un cod valid";
-"turn_off_flashlight" = "Oprește lanterna";
-"turn_on_flashlight" = "Pornește lanterna";
 "hello_pet_name" = "Salut! Sunt %@";
 "scanned_tag_thanks" = "Tocmai ai scanat eticheta mea. Mulțumesc că mă ajuți!";
 "share_location_with_owner" = "Partajează locația mea cu proprietarul";
-"owner_notified_message" = "Proprietarul lui %@ va primi o notificare cu locația ta";
-"share_location_help" = "Ajută proprietarul lui %@ să-l găsească partajând locația ta";
-"precise_location" = "Locație precisă";
-"precise_location_desc" = "Partajează coordonatele GPS exacte";
-"approximate_location" = "Locație aproximativă";
-"approximate_location_desc" = "Partajează cu o precizie de ~500 m (conform GDPR)";
-"dont_share_location" = "Nu partaja locația";
-"dont_share_location_desc" = "Doar notifică proprietarul că animalul a fost găsit";
-"sending" = "Se trimite…";
-"confirm_notify_owner" = "Confirmă și notifică proprietarul";
 "contact_owner" = "Contactează proprietarul";
 "call_phone" = "Sună: %@";
 "email_contact" = "E-mail: %@";
 "privacy_notice" = "Confidențialitatea ta contează. Vom partaja locația ta doar cu proprietarul lui %@ pentru a ajuta la reunire.";
-"recommended" = "Recomandat";
 "found_pet_title" = "%@ găsit";
-"share_location" = "Partajează locația";
-"location_shared" = "Locație partajată";
-"share_location_failed" = "Partajarea locației a eșuat";
 
 // MARK: - Flux partajare locație
 "share_help_get_home %@" = "Ajută-l pe %@ să ajungă acasă";
@@ -269,35 +183,15 @@
 "share_found_pet %@" = "%@ găsit!";
 
 // MARK: - Detalii scanner
-"scanner_title" = "Scanează cod QR";
-"scanner_subtitle" = "Îndreaptă camera către eticheta QR a animalului";
-"scanner_camera_required" = "Acces la cameră necesar";
-"scanner_camera_message" = "Activează accesul la cameră în Setări pentru a scana coduri QR";
 "scanner_open_settings" = "Deschide setările";
-"scanner_greeting %@" = "Salut! Sunt %@";
-"scanner_scanned_message" = "Tocmai ai scanat eticheta mea. Mulțumesc că mă ajuți!";
 "scanner_breed" = "Rasă";
 "scanner_age" = "Vârstă";
 "scanner_color" = "Culoare";
-"scanner_share_location" = "Partajează locația mea cu proprietarul";
-"scanner_owner_notified" = "Proprietarul a fost notificat că eticheta animalului a fost scanată.";
-"scanner_contact_owner" = "Contactează proprietarul";
-"scanner_contact_instructions" = "Contactează proprietarul pentru a-l anunța că ai găsit animalul:";
-"scanner_call %@" = "Sună: %@";
-"scanner_email %@" = "E-mail: %@";
 "scanner_owner_location" = "Locația proprietarului";
 "scanner_medical_info" = "Informații medicale";
 "scanner_allergies" = "Alergii";
 "scanner_notes" = "Note";
 "scanner_how_it_works" = "Cum funcționează";
-"scanner_step1_title" = "1. Scanează eticheta";
-"scanner_step1_desc" = "Ai făcut deja acest pas! Eticheta conține un cod QR unic.";
-"scanner_step2_title" = "2. Partajează locația";
-"scanner_step2_desc" = "Atinge butonul de mai sus pentru a partaja unde ai găsit animalul.";
-"scanner_step3_title" = "3. Contactează proprietarul";
-"scanner_step3_desc" = "Folosește datele de contact pentru a lua legătura direct cu proprietarul.";
-"scanner_privacy_notice" = "Locația ta exactă nu este partajată. Este vizibilă doar zona aproximativă (~500 m).";
-"scanner_found_pet %@" = "%@ găsit!";
 
 // MARK: - Activare etichetă
 "tag_activate_title" = "Activează eticheta";
@@ -321,98 +215,50 @@
 "plan_upgrade_title" = "Îmbunătățește planul";
 "plan_upgrade_subtitle" = "Obține mai multe funcții pentru animalele tale";
 "plan_loading" = "Se încarcă planurile...";
-"plan_failed_to_load" = "Nu s-au putut încărca planurile";
-"plan_choose_your_plan" = "Alege planul";
 "plan_popular" = "Popular";
 "plan_current" = "Planul actual";
 "plan_select_free" = "Selectează planul gratuit";
 "plan_select %@" = "Selectează %@";
 "plan_skip_free" = "Sari peste (Plan gratuit)";
 "plan_all_include" = "Toate planurile includ:";
-"plan_feature_qr" = "Etichetă QR pentru animalul tău";
-"plan_feature_profile" = "Pagina de profil a animalului";
-"plan_feature_scan_notify" = "Notificări de scanare";
 "plan_paid_add" = "Planurile plătite oferă în plus:";
-"plan_feature_alerts" = "Alerte animale dispărute";
-"plan_feature_location" = "Partajare locație";
-"plan_feature_priority" = "Suport prioritar";
 
 // MARK: - Alerte
-"alerts" = "Alerte";
 "tab_missing" = "Dispărut";
 "tab_found" = "Găsit";
 "tab_success" = "Animale găsite";
-"show_list" = "Afișează lista";
-"show_map" = "Afișează harta";
-"unknown_pet" = "Animal necunoscut";
-"pet_alert" = "Alertă animal";
-"alert_status" = "Stare: %@";
-"alert_last_seen" = "Văzut ultima dată: %@";
-"alert_info" = "Info: %@";
-"alert_sightings_count" = "Observații: %lld";
-"alert_marker" = "Alertă";
-"loading_alerts" = "Se încarcă alertele…";
 "failed_load_alerts" = "Nu s-au putut încărca alertele";
 "no_active_alerts" = "Nicio alertă activă";
 "no_active_alerts_message" = "În prezent nu ai alerte pentru animale dispărute";
-"no_found_alerts" = "Nicio alertă de animale găsite";
-"no_found_alerts_message" = "Nu au fost găsite animale recent în zona ta";
 "missing_pet_alerts_title" = "Alerte animale dispărute";
 "create_alert" = "Creează alertă";
 "create_new_alert" = "Creează alertă nouă";
 "sighting_count_singular" = "1 observație";
 "sighting_count_plural" = "%lld observații";
-"unknown_breed" = "Rasă necunoscută";
 "last_seen_label" = "Văzut ultima dată";
 "reported_sightings_count" = "Observații raportate (%lld)";
 "report_a_sighting" = "Raportează o observație";
 "anonymous" = "Anonim";
 "contact_label" = "Contact: %@";
-"pet_marked_found" = "%@ a fost marcat ca găsit!";
-"mark_found_failed_message" = "Nu s-a putut marca ca găsit: %@";
 
 // MARK: - Raportare dispariție / Observație
-"report_missing_title" = "Raportează %@ ca dispărut";
 "last_seen_location" = "Locația unde a fost văzut ultima dată";
-"additional_info" = "Informații suplimentare";
-"report" = "Raportează";
 "report_sighting" = "Raportează observație";
-"report_sighting_prompt" = "Împărtășește detalii despre unde ai văzut animalul.";
 "notes" = "Note";
-"sighting_reported" = "Observație raportată";
-"report_failed" = "Raportarea a eșuat";
 "sighting_location" = "Locația observației";
 "use_current_location" = "Folosește locația curentă";
 "location_captured" = "Locație capturată din GPS";
-"create_alert_failed" = "Nu s-a putut crea alerta";
-"update_alert_failed" = "Nu s-a putut actualiza alerta";
-"report_sighting_failed" = "Nu s-a putut raporta observația";
 "report_missing_pet" = "Raportează animal dispărut";
 "select_pet_to_report" = "Selectează un animal";
-"add_missing_details" = "Adaugă detalii despre dispariție";
-"enter_address_or_location" = "Introdu adresa sau descrierea locației";
 "additional_details" = "Detalii suplimentare";
-"describe_circumstances" = "Descrie circumstanțele, trăsăturile distinctive, etc.";
-"report_missing" = "Raportează dispariția";
-"no_pets_to_report_message" = "Adaugă un animal înainte de a-l raporta ca dispărut";
-"mark_pet_found" = "Marchează animal ca găsit";
-"select_pet_to_mark_found" = "Selectează animalul care a fost găsit";
-"no_missing_pets_message" = "Nu ai animale marcate ca dispărute";
 "select_pet_header" = "Selectează animal";
 "no_pets_available" = "Nu există animale disponibile. Adaugă unul mai întâi.";
-"pet_picker_label" = "Animal";
 "last_seen_location_header" = "Locația unde a fost văzut ultima dată";
 "enter_location" = "Introdu locația";
 "additional_information_header" = "Informații suplimentare";
 "additional_details_placeholder" = "Oferă detalii despre când și unde ai văzut ultima dată animalul...";
 "alert_created_success" = "Alertă de animal dispărut creată cu succes!";
 "alert_queued_offline" = "Alertă în coadă. Se va sincroniza când ești online.";
-"your_contact_information" = "Informațiile tale de contact";
-"name_optional" = "Nume (opțional)";
-"phone_optional" = "Telefon (opțional)";
-"email_optional" = "E-mail (opțional)";
-"details" = "Detalii";
-"sighting_reported_success" = "Observație raportată cu succes!";
 "report_sighting_header" = "Raportează o observație";
 "report_sighting_help" = "Ajută la reunirea animalului cu proprietarul împărtășind locul unde l-ai văzut.";
 "share_contact_info" = "Partajează datele mele de contact";
@@ -429,50 +275,25 @@
 "sighting_queued_offline" = "Observație în coadă - va fi trimisă când ești online.";
 
 // MARK: - Marcare pierdut/găsit
-"mark_pet_found_confirm" = "Marchezi %@ ca găsit?";
-"mark_found_confirm_alert" = "Aceasta va închide alerta de dispariție pentru %@. Ești sigur?";
-"notification_center" = "Centru de notificări";
-"alerts_radius_info" = "Alertele vor fi trimise în raza de 10 km de această locație";
-"current_location" = "Locația curentă";
-"tap_get_location" = "Apasă pentru a obține locația curentă…";
-"using_registered_address" = "Se folosește adresa ta înregistrată";
-"enter_address_notifications" = "Introdu adresa pentru notificări";
 
 // MARK: - Notificări
 "tag_scanned_message" = "Eticheta lui %@ a fost scanată la %@!";
-"unknown_location" = "o locație necunoscută";
 "sighting_message_with_location" = "%@ a fost văzut la %@!";
 "sighting_message_no_location" = "%@ a fost văzut!";
-"pet_found_message" = "Vești bune! %@ a fost găsit!";
-"notification_tag_scanned_title" = "%@ găsit!";
-"notification_sighting_title" = "%@ văzut!";
-"notification_pet_found_title" = "Vești bune!";
-"notification_channel_name" = "Alerte Pet Safety";
-"notification_method_required" = "Cel puțin un mod de notificare trebuie să fie activ";
 
 // MARK: - Povești de succes
 "success_stories" = "Povești de succes";
 "found_pets" = "Animale găsite";
 "success_stories_subtitle" = "Vezi reuniuni fericite în apropierea ta";
-"share_your_story" = "Împărtășește-ți povestea";
-"success_story_prompt" = "Vești bune! %@ a fost găsit! Vrei să împărtășești povestea de reunire pentru a-i inspira pe alții?";
-"your_story" = "Povestea ta";
-"story_placeholder" = "Spune-ne cum v-ați reunit...";
-"share_story" = "Partajează povestea";
-"story_shared" = "Povestea a fost partajată cu succes";
-"story_share_failed" = "Nu s-a putut partaja povestea";
 "loading_success_stories" = "Se încarcă povești de succes…";
 "no_success_stories" = "Nu există povești de succes în apropiere";
 "no_success_stories_message" = "Fii primul care împărtășește o reuniune fericită în zona ta!";
 "found_and_reunited" = "Găsit și reunificat";
 "distance_km" = "La %.1f km";
-"missing_since" = "Dispărut din %@";
 "found_on" = "Găsit %@";
 "success_story_marker" = "Poveste de succes";
 "load_more" = "Încarcă mai mult";
 "missing_for" = "Dispărut de %@";
-"pet_found_share" = "%@ găsit!";
-"reunited_in" = "Reunit în %@";
 "shared_via_pet_safety" = "Partajat prin aplicația Pet Safety";
 
 // MARK: - Timp poveste de succes
@@ -485,32 +306,22 @@
 "success_minutes_ago %lld" = "Acum %lld minute";
 
 // MARK: - Fila povești de succes
-"success_tab_title" = "Povești de succes";
-"success_tab_list" = "Listă";
-"success_tab_map" = "Hartă";
 
 // MARK: - Prompt poveste de succes
 "story_great_news" = "Vești bune!";
 "story_post" = "Publică";
-"story_pet_home %@" = "%@ este acasă!";
 "story_reunited" = "Reunit!";
-"story_share_prompt" = "Împărtășește-ți povestea de reunire!";
-"story_inspiration" = "Povestea ta poate inspira speranță altor proprietari de animale din zona ta.";
-"story_share_button" = "Partajează povestea mea";
 "story_maybe_later" = "Poate mai târziu";
 "story_share_good_news" = "Împărtășește vestea bună";
 "story_social_caption %@" = "%@ s-a reunit cu familia! Mulțumim comunității TagMe Now pentru că a ajutat la aducerea lui %@ acasă. senra.pet";
 "story_generating_card" = "Se creează cardul de partajare...";
 "story_your_story" = "Povestea ta";
-"story_placeholder_named %@" = "Împărtășește cum a fost găsit și reunit %@";
 "story_city_optional" = "Oraș/Zonă (opțional)";
 "story_city_placeholder" = "ex. București, Sector 1";
 "story_share_publicly" = "Partajează public";
 "story_share_publicly_desc" = "Permite altora din apropiere să vadă povestea ta";
 "story_posting" = "Se publică...";
 "story_share_story" = "Partajează povestea";
-"story_contact_note" = "Informațiile tale de contact nu vor fi partajate.";
-"story_posted_success" = "Povestea ta de succes a fost partajată!";
 
 // MARK: - Profil
 "profile" = "Profil";
@@ -524,21 +335,12 @@
 "profile_referral" = "Program de recomandare";
 "profile_help_support" = "Ajutor și suport";
 "profile_log_out" = "Deconectare";
-"profile_logout_confirm" = "Sigur dorești să te deconectezi?";
 "profile_delete_account" = "Șterge contul";
-"profile_delete_confirm" = "Sigur dorești să îți ștergi contul? Această acțiune nu poate fi anulată.";
 "profile_cannot_delete" = "Contul nu poate fi șters";
 "profile_cannot_delete_message" = "Marchează toate animalele dispărute ca găsite înainte de a șterge contul.";
 "profile_danger_zone" = "Zonă periculoasă";
 "profile_deleting" = "Se șterge...";
-"profile_delete_permanent" = "Aceasta va șterge permanent contul și toate datele";
 "log_out" = "Deconectare";
-"personal_information" = "Informații personale";
-"address" = "Adresă";
-"contacts" = "Contacte";
-"privacy_mode" = "Mod confidențialitate";
-"notifications" = "Notificări";
-"help_support" = "Ajutor și suport";
 
 // MARK: - Informații personale
 "personal_details" = "Date personale";
@@ -550,7 +352,6 @@
 "personal_email_placeholder" = "Introdu e-mailul";
 "personal_phone" = "Telefon";
 "personal_phone_placeholder" = "Introdu numărul de telefon";
-"personal_edit_info" = "Editează informațiile";
 "personal_title" = "Informații personale";
 
 // MARK: - Adresă
@@ -574,56 +375,28 @@
 "address_select_country_title" = "Selectează țara";
 "address_line2_label" = "Etaj, apartament";
 "address_postal_label" = "Cod poștal";
-"street_address" = "Stradă și număr";
 "address_line_2_optional" = "Linia 2 adresă (opțional)";
-"city" = "Oraș";
-"post_code" = "Cod poștal";
-"country" = "Țară";
-"street" = "Stradă";
 
 // MARK: - Contacte
 "contacts_settings" = "Setări contacte";
-"contacts_info_text" = "Aceste detalii de contact vor fi afișate când cineva scanează eticheta QR a animalului. Este necesar cel puțin un contact.";
 "contacts_email_section" = "Adrese de e-mail";
 "contacts_phone_section" = "Numere de telefon";
 "contacts_edit_title" = "Editează detaliile de contact";
 "contacts_primary_email" = "E-mail principal";
-"contacts_primary_email_footer" = "Acest e-mail va fi afișat când cineva scanează eticheta QR a animalului.";
 "contacts_email_placeholder" = "Adresă de e-mail";
-"contacts_show_on_tag" = "Afișează pe etichetă";
 "contacts_secondary_email" = "E-mail secundar (opțional)";
-"contacts_secondary_email_footer" = "Un e-mail de rezervă pentru contact.";
 "contacts_secondary_email_placeholder" = "Adresă de e-mail secundară";
 "contacts_primary_phone" = "Telefon principal";
-"contacts_primary_phone_footer" = "Acest număr va fi afișat când cineva scanează eticheta QR a animalului.";
 "contacts_phone_placeholder" = "Număr de telefon";
 "contacts_secondary_phone" = "Telefon secundar (opțional)";
-"contacts_secondary_phone_footer" = "Un telefon de rezervă pentru contact.";
 "contacts_secondary_phone_placeholder" = "Număr de telefon secundar";
-"contacts_title" = "Detalii de contact";
 "contacts_primary_badge" = "PRINCIPAL";
-"contacts_visible_badge" = "Vizibil pe etichetă";
 "contacts_hidden_badge" = "Ascuns";
-"contacts_none_added %@" = "Niciun %@ adăugat";
 "email_addresses" = "Adrese de e-mail";
-"primary_email" = "E-mail principal";
-"secondary_email_optional" = "E-mail secundar (opțional)";
 "phone_numbers" = "Numere de telefon";
-"primary_phone" = "Telefon principal";
-"show_on_qr_tag" = "Afișează pe eticheta QR";
-"secondary_phone_optional" = "Telefon secundar (opțional)";
-"contacts_qr_tag_info" = "Contactele marcate ca vizibile vor fi afișate pe eticheta QR a animalului atunci când este scanată.";
 "contact_details" = "Detalii de contact";
 
 // MARK: - Vizibilitate contacte
-"contact_visibility" = "Vizibilitatea contactelor";
-"contact_visibility_desc" = "Controlează ce informații de contact sunt vizibile când se scanează eticheta QR a animalului";
-"show_phone_number" = "Afișează numărul de telefon";
-"show_phone_subtitle" = "Numărul tău de telefon va fi vizibil pentru cei care găsesc animalul";
-"show_email_address" = "Afișează adresa de e-mail";
-"show_email_subtitle" = "E-mailul tău va fi vizibil pentru cei care găsesc animalul";
-"show_address" = "Afișează adresa";
-"show_address_subtitle" = "Adresa ta va fi vizibilă pentru cei care găsesc animalul";
 
 // MARK: - Setări notificări
 "notif_channels" = "Canale de notificare";
@@ -646,37 +419,11 @@
 "notif_order_updates_subtitle" = "Notificări de expediere și livrare";
 "notif_account_activity" = "Activitatea contului";
 "notif_account_activity_subtitle" = "Notificări de autentificare și securitate";
-"notif_optional_updates" = "Actualizări opționale";
-"notif_optional_footer" = "Noutăți, sfaturi și conținut promoțional";
-"notif_product_updates" = "Actualizări produs";
-"notif_marketing_emails" = "E-mailuri de marketing";
 "notif_save_changes" = "Salvează modificările";
 "notif_title" = "Notificări";
 "notif_saved" = "Salvat";
 "notif_saved_message" = "Preferințele de notificare au fost salvate cu succes";
 "notif_critical_footer" = "Poți modifica aceste setări oricând. Alertele critice despre animalele tale vor fi întotdeauna trimise.";
-"push_notifications" = "Notificări push";
-"email_notifications" = "Notificări prin e-mail";
-"sms_notifications" = "Notificări SMS";
-"push_notifications_subtitle" = "Primește notificări push pe dispozitiv";
-"email_notifications_subtitle" = "Primește notificări prin e-mail";
-"sms_notifications_subtitle" = "Primește notificări prin SMS";
-"pet_alerts" = "Alerte animale";
-"missing_pet_alerts" = "Alerte animale dispărute";
-"missing_pet_alerts_subtitle" = "Primește notificări despre animale dispărute în zona ta";
-"nearby_alerts_10km" = "Alerte în apropiere (10 km)";
-"nearby_alerts_subtitle" = "Alerte pentru animale în raza de 10 km de locația ta";
-"account_and_orders" = "Cont și comenzi";
-"order_updates" = "Actualizări comenzi";
-"order_updates_subtitle" = "Notificări despre livrare și expediere";
-"account_activity" = "Activitatea contului";
-"account_activity_subtitle" = "Notificări de autentificare și securitate";
-"optional_updates" = "Actualizări opționale";
-"product_updates" = "Actualizări produs";
-"product_updates_subtitle" = "Funcții noi și îmbunătățiri";
-"marketing_emails" = "E-mailuri de marketing";
-"marketing_emails_subtitle" = "Oferte și promoții";
-"critical_alerts_note" = "Notă: Alertele critice despre animalele tale vor fi întotdeauna trimise indiferent de aceste setări.";
 "notification_preferences_title" = "Preferințe notificări";
 
 // MARK: - Preferințe notificări (Setări)
@@ -712,7 +459,6 @@
 "help_subject" = "Subiect";
 "help_subject_placeholder" = "Descriere scurtă a problemei";
 "help_message" = "Mesaj";
-"help_message_placeholder" = "Descrie problema în detaliu...";
 "help_sending" = "Se trimite...";
 "help_submit_request" = "Trimite solicitarea";
 "help_contact_title" = "Contactează suportul";
@@ -725,22 +471,7 @@
 "help_cat_other" = "Altele";
 "help_faq_title" = "FAQ";
 "help_guides_title" = "Ghiduri utilizator";
-"help_guide_placeholder" = "Conținutul detaliat al ghidului va fi disponibil aici.";
-"get_help" = "Obține ajutor";
-"faq" = "Întrebări frecvente";
-"user_guides" = "Ghiduri utilizator";
-"legal" = "Legal";
 "support_response_time" = "Echipa noastră răspunde de obicei în 24 de ore.";
-"contact_support" = "Contactează suportul";
-"contact_support_category" = "Categorie";
-"contact_support_subject" = "Subiect";
-"contact_support_subject_hint" = "Descriere scurtă a problemei";
-"contact_support_message" = "Mesaj";
-"contact_support_message_hint" = "Descrie problema în detaliu…";
-"contact_support_submit" = "Trimite";
-"contact_support_sending" = "Se trimite…";
-"contact_support_success" = "Solicitare trimisă! ID ticket: %@";
-"contact_support_response" = "Îți vom răspunde în 24 de ore.";
 "support_email" = "Suport: hello@senra.pet";
 "support_category_general" = "General";
 "support_category_technical" = "Problemă tehnică";
@@ -761,11 +492,6 @@
 "help_faq_q5" = "Cum comand o etichetă de înlocuire?";
 "help_faq_a5" = "În profilul animalului apasă 'Comandă înlocuire' și urmează pașii.";
 // Ghiduri
-"help_guide_getting_started" = "Introducere";
-"help_guide_managing_pets" = "Gestionarea animalelor";
-"help_guide_qr_tags" = "Înțelegerea etichetelor QR";
-"help_guide_missing_pet" = "Ce să faci dacă animalul tău dispare";
-"help_guide_privacy" = "Setări de confidențialitate și securitate";
 
 // MARK: - Mod confidențialitate
 "privacy_contact_visibility" = "Vizibilitatea contactelor";
@@ -778,74 +504,23 @@
 "privacy_show_address_subtitle" = "Adresa ta va fi vizibilă pe profilul public al animalului";
 "privacy_data_privacy" = "Confidențialitate date";
 "privacy_privacy_policy" = "Politica de confidențialitate";
-"privacy_data_management" = "Gestionare date";
 "privacy_title" = "Mod confidențialitate";
 "privacy_mode_footer" = "Setările de confidențialitate te ajută să controlezi ce informații sunt partajate când se scanează eticheta QR a animalului.";
-"privacy_policy_title" = "Politica de confidențialitate";
-"privacy_policy_updated" = "Ultima actualizare: noiembrie 2024";
-"privacy_policy_section1_title" = "1. Informații colectate";
-"privacy_policy_section1_body" = "Colectăm informațiile furnizate direct, inclusiv nume, e-mail, telefon, adresă și informații despre animal. De asemenea, colectăm date de locație când alegi să le partajezi.";
-"privacy_policy_section2_title" = "2. Cum folosim informațiile";
-"privacy_policy_section2_body" = "Informațiile tale sunt folosite pentru serviciile de siguranță a animalelor, trimiterea notificărilor și facilitarea reunificărilor.";
-"privacy_policy_section3_title" = "3. Partajarea informațiilor";
-"privacy_policy_section3_body" = "Partajăm datele de contact doar conform setărilor de confidențialitate. Locația este partajată doar când alegi explicit.";
-"privacy_policy_section4_title" = "4. Securitatea datelor";
-"privacy_policy_section4_body" = "Folosim criptare și măsuri standard din industrie pentru protecția datelor personale.";
-"privacy_policy_section5_title" = "5. Drepturile tale";
-"privacy_policy_section5_body" = "Ai dreptul de a accesa, actualiza și șterge datele tale personale în orice moment din setările aplicației.";
-"privacy_your_data" = "Datele tale";
-"privacy_your_data_footer" = "Solicită o copie a tuturor datelor personale stocate în sistemul nostru.";
-"privacy_export_data" = "Exportă datele mele";
-"privacy_deletion_section" = "Ștergere date";
-"privacy_deletion_footer" = "Șterge permanent contul tău și toate datele asociate.";
-"privacy_delete_account" = "Șterge contul meu";
-"privacy_delete_confirm" = "Sigur dorești să îți ștergi contul? Acest lucru va elimina definitiv toate datele, inclusiv animale, alerte și istoricul comenzilor. Această acțiune nu poate fi anulată.";
-"data_privacy" = "Confidențialitate date";
-"data_management" = "Gestionare date";
 "privacy_settings_updated" = "Setările de confidențialitate au fost actualizate";
 "privacy_settings_failed" = "Nu s-au putut actualiza setările de confidențialitate";
 
 // MARK: - Ștergere cont
 "delete_account" = "Șterge contul";
-"delete_account_warning" = "Această acțiune nu poate fi anulată. Toate datele tale, inclusiv animale, alerte și fotografii, vor fi șterse definitiv.";
-"delete_account_confirm_prompt" = "Pentru a confirma, tastează DELETE mai jos:";
-"type_delete_to_confirm" = "Tastează DELETE";
-"account_deleted" = "Cont șters";
-"delete_account_failed" = "Nu s-a putut șterge contul";
-"cannot_delete_account" = "Contul nu poate fi șters";
-"cannot_delete_missing_pets" = "Nu poți șterge contul cât timp ai animale marcate ca dispărute. Marchează-le ca găsite mai întâi.";
 "missing_pets_label" = "Animale dispărute: %@";
-"checking_delete_eligibility" = "Se verifică...";
-"danger_zone" = "ZONĂ PERICULOASĂ";
-"deleting" = "Se șterge…";
-"delete_account_permanent" = "Aceasta va șterge permanent contul și toate datele";
 "logout_confirm" = "Sigur dorești să te deconectezi?";
 "delete_account_full_warning" = "Această acțiune nu poate fi anulată. Contul tău va fi șters permanent, toate datele personale vor fi eliminate și orice abonamente active vor fi anulate.";
 
 // MARK: - Comenzi
 "orders_title" = "Comenzi";
 "order_number" = "Comanda #%@";
-"order_total" = "Total: %@";
-"order_tags" = "Comandă etichete";
-"replace_tag" = "Înlocuiește eticheta";
 "add_pet_first_replacement" = "Adaugă un animal înainte de a comanda o etichetă de înlocuire.";
-"order_more_tags_title" = "Comandă mai multe etichete";
-"add_another_pet" = "Adaugă alt animal";
-"full_name" = "Nume complet";
-"place_order" = "Plasează comanda";
-"order_created_payment_pending" = "Comandă creată. Plata este în așteptare.";
-"payment_intent_failed" = "Intenția de plată a eșuat";
-"order_create_failed" = "Nu s-a putut crea comanda";
-"order_replacement_title" = "Comandă etichetă de înlocuire";
-"pet_label" = "Animal: %@";
-"order_replacement_button" = "Comandă înlocuirea";
-"replacement_ordered" = "Înlocuire comandată";
-"replacement_failed" = "Nu s-a putut comanda înlocuirea";
-"replacement_order_failed" = "Nu s-a putut crea comanda de înlocuire";
-"create_payment_intent_failed" = "Nu s-a putut crea intenția de plată";
 "orders_no_orders" = "Nu există comenzi";
 "orders_no_orders_message" = "Nu ai plasat încă nicio comandă";
-"orders_order_number %@" = "Comanda #%@";
 "orders_information" = "Informații comandă";
 "orders_order_id" = "ID comandă";
 "orders_status" = "Stare";
@@ -856,49 +531,27 @@
 "orders_tag_pending" = "Etichetă QR în așteptare";
 "orders_tag_assigned" = "Etichetă QR alocată";
 "orders_detail_title" = "Detalii comandă";
-"failed_load_orders" = "Nu s-au putut încărca comenzile";
-"order_id_short" = "Comanda #%@";
-"order_information" = "Informații comandă";
-"order_id_label" = "ID comandă";
-"status" = "Stare";
-"total_amount" = "Suma totală";
-"order_date" = "Data comenzii";
-"items" = "Produse";
 
 // MARK: - Comandă etichete suplimentare
 "order_more_title" = "Comandă mai multe etichete";
 "order_more_complete" = "Comandă completă!";
-"order_more_payment_pending" = "Comanda ta a fost plasată. Vei primi în curând un e-mail cu instrucțiunile de plată.";
 "order_more_confirmation" = "Vom expedia etichetele după confirmarea plății.";
 "order_more_pet_names" = "Numele animalelor";
 "order_more_pet_names_footer" = "Introdu numele animalelor pentru care vrei etichete. Vom grava fiecare etichetă cu numele animalului.";
-"order_more_pet_name_placeholder" = "Numele animalului";
 "order_more_add_another" = "Adaugă alt animal";
 "order_more_your_info" = "Informațiile tale";
-"order_more_full_name" = "Nume complet";
-"order_more_email" = "E-mail";
-"order_more_phone" = "Telefon";
 "order_more_shipping" = "Adresă de livrare";
 "order_more_street" = "Stradă și număr";
-"order_more_street_placeholder" = "Introdu strada și numărul";
 "order_more_line2" = "Etaj, apartament (opțional)";
-"order_more_line2_placeholder" = "4B";
 "order_more_city" = "Oraș";
-"order_more_province" = "Județ / stat (opțional)";
 "order_more_postal" = "Cod poștal";
 "order_more_country" = "Țară";
 "order_more_summary" = "Rezumat comandă";
 "order_more_tags_count %lld" = "Etichete (%lld)";
 "order_more_shipping_cost" = "Livrare";
 "order_more_total" = "Total";
-"order_more_creating" = "Se creează comanda...";
-"order_more_place_order" = "Plasează comanda";
 "order_more_proceed_to_payment" = "Continuă la plată";
 "order_more_redirecting" = "Redirecționare...";
-"pet_names" = "Numele animalelor";
-"shipping_address" = "Adresă de livrare";
-"shipping" = "Livrare";
-"get_qr_tags_subtitle" = "Obține etichete QR pentru animalele tale";
 
 // MARK: - Comandă etichetă de înlocuire
 "order_replace_title" = "Comandă etichetă de înlocuire";
@@ -911,19 +564,14 @@
 "order_replace_shipping" = "Adresă de livrare";
 "order_replace_shipping_footer" = "Vom expedia eticheta de înlocuire la această adresă.";
 "order_replace_street" = "Stradă și număr";
-"order_replace_street_placeholder" = "Introdu strada și numărul";
 "order_replace_line2" = "Etaj, apartament (opțional)";
-"order_replace_line2_placeholder" = "4B";
 "order_replace_city" = "Oraș";
 "order_replace_postal" = "Cod poștal";
 "order_replace_country" = "Țară";
 "order_replace_phone" = "Telefon (opțional)";
-"order_replace_phone_placeholder" = "Introdu numărul de telefon";
 "order_replace_creating" = "Se creează comanda...";
 "order_replace_free_button" = "Confirmă și comandă eticheta de înlocuire gratuită";
 "order_replace_paid_button %@" = "Confirmă și plătește %@";
-"replacement_subtitle" = "Pierdută sau deteriorată? Îți trimitem una nouă";
-"free_replacement" = "Înlocuire gratuită";
 
 // MARK: - Delivery Method & PostaPoint
 "delivery_method_title" = "Metodă de livrare";
@@ -937,7 +585,6 @@
 
 // MARK: - Profil public animal
 "public_profile_preview" = "Previzualizare profil public";
-"failed_load_profile" = "Nu s-a putut încărca profilul";
 "public_profile_subtitle" = "Așa văd ceilalți profilul lui %@";
 "owner_notified_sms_email" = "Proprietarul lui %@ va primi un SMS și un e-mail cu locația ta";
 "contact_owner_plea" = "Te rog anunță proprietarul că m-ai găsit…";
@@ -949,7 +596,6 @@
 "unique_features" = "Caracteristici unice";
 "behavior_notes" = "Note comportament";
 "yes" = "Da";
-"no" = "Nu";
 "how_it_works" = "Cum funcționează";
 "help_reunite_pet" = "Ajută la reunirea în siguranță a lui %@ cu proprietarul";
 "step_share_location" = "Partajează locația";
@@ -958,8 +604,6 @@
 "step_owner_notified_desc" = "Proprietarul primește SMS și e-mail cu locația ta";
 "step_quick_reunion" = "Reunire rapidă";
 "step_quick_reunion_desc" = "Proprietarul poate naviga către locația ta pentru a-și recupera animalul";
-"owner_phone_label" = "Telefon proprietar: %@";
-"owner_email_label" = "E-mail proprietar: %@";
 
 // MARK: - Mod offline
 "offline_mode" = "Mod offline";
@@ -967,13 +611,8 @@
 "sync_completed" = "Sincronizare completă";
 "sync_failed" = "Sincronizare eșuată: %@";
 "sync_no_connection" = "Nu se poate sincroniza: fără internet";
-"pending_changes" = "Modificări în așteptare";
-"online" = "Online";
 "offline_changes_sync" = "Modificările se vor sincroniza când ești online";
-"tap_view_queued_actions" = "Apasă pentru a vedea acțiunile în coadă";
-"connected" = "Conectat";
 "sync_now" = "Sincronizează acum";
-"changes_sync_restored" = "Modificările se vor sincroniza automat când conexiunea este restabilită.";
 "offline_pending_changes" = "Modificări în așteptare";
 "offline_online" = "Online";
 "offline_sync_message" = "Modificările se vor sincroniza când ești online";
@@ -987,7 +626,6 @@
 "sync_tried_count %lld" = "Încercat de %lld ori";
 
 // MARK: - Ecran reîncercare eroare
-"error_something_wrong" = "Ceva nu a mers bine";
 "something_went_wrong" = "Ceva nu a mers bine";
 "try_again" = "Încearcă din nou";
 
@@ -1001,16 +639,8 @@
 "map_pet_location %@" = "Locația lui %@";
 "location_title" = "Locația lui %@";
 "approximate_location_note" = "Aceasta este o locație aproximativă (~500 m). Caută în zona din jur.";
-"coordinates_label" = "Coordonate: %@";
-"open_in" = "Deschide în:";
-"google_maps" = "Google Maps";
-"waze" = "Waze";
 
 // MARK: - Informații aplicație
-"app_name_label" = "Pet Safety";
-"app_version" = "Versiunea 1.0.0";
-"terms_url" = "Termeni: https://senra.pet/terms-conditions";
-"privacy_url" = "Confidențialitate: https://senra.pet/privacy-policy";
 
 // MARK: - Descrieri dinamice scanner
 "scanner_step1_dynamic_desc" = "Apasă butonul de mai sus pentru a partaja unde ai găsit %@";
@@ -1032,11 +662,10 @@
 "contacts_no_type_added" = "Niciun %@ adăugat";
 
 // MARK: - Chei adiționale înlocuire etichetă
-"order_replace_upgrade_hint" = "Fă upgrade la Standard sau Ultimate pentru înlocuiri gratuite";
+"order_replace_upgrade_hint" = "Fă upgrade la Standard sau Maximum pentru înlocuiri gratuite";
 "order_replace_old_deactivated" = "Codul QR vechi va fi dezactivat când plasezi această comandă";
 "order_replace_delivery_time" = "Vei primi noua etichetă în 5-7 zile lucrătoare";
 "order_replace_scan_activate" = "După ce primești noua etichetă, trebuie să o scanezi pentru activare";
-"order_replace_province" = "Județ / stat (opțional)";
 
 // MARK: - Chei adiționale offline
 "offline_last_sync_label" = "Timp ultima sincronizare";
@@ -1257,7 +886,6 @@
 "some_time" = "ceva timp";
 "list" = "Listă";
 "map" = "Hartă";
-"post_to_success_stories" = "Publică în Povești de Succes";
 "remove_from_success_stories" = "Elimină din Povești de Succes";
 "removed_from_success_stories" = "Eliminat din Povești de Succes";
 "remove_story_confirm_title" = "Elimini Povestea de Succes?";
@@ -1275,8 +903,6 @@
 "reward_badge" = "Recompensă: %@";
 
 // MARK: - Chei de localizare suplimentare
-"data_export_requested" = "Exportul de date va fi trimis prin e-mail în 24 de ore";
-"account_deletion_unavailable" = "Ștergerea contului nu este disponibilă momentan. Vă rugăm să contactați suportul.";
 "cannot_delete_missing_message_short" = "Trebuie să marcați acest animal ca găsit înainte de ștergere.";
 "plan_feature_pets_count" = "Animale: %@";
 "plan_feature_photos_count" = "%lld fotografii per animal";
@@ -1294,21 +920,21 @@
 "help_faq_q9" = "Cum funcționează alertele pentru animale dispărute?";
 "help_faq_a9" = "Când marchezi un animal ca dispărut, se creează o alertă cu fotografia și detaliile animalului. Alți utilizatori Senra într-o rază de 10 km pot vedea alerta pe harta Animale dispărute. Oricine din comunitate poate raporta o observare, trimițându-ți locația și datele de contact. Veterinarii și adăposturile înregistrate la Senra din zona ta primesc de asemenea alerta.";
 "help_faq_q10" = "Cum comand o etichetă de înlocuire?";
-"help_faq_a10" = "Mergi la pagina Contul tău și apasă „Comandă înlocuire”. Selectează animalul care are nevoie de o etichetă nouă. Membrii Ultimate primesc înlocuiri gratuite nelimitate, membrii Standard primesc o înlocuire gratuită pe an, iar membrii Starter pot comanda înlocuiri contra unei mici taxe de livrare.";
+"help_faq_a10" = "Mergi la pagina Contul tău și apasă „Comandă înlocuire”. Selectează animalul care are nevoie de o etichetă nouă. Membrii Maximum primesc înlocuiri gratuite nelimitate, membrii Standard primesc o înlocuire gratuită pe an, iar membrii Starter pot comanda înlocuiri contra unei mici taxe de livrare.";
 "help_faq_q11" = "Ce este programul de recomandare?";
-"help_faq_a11" = "Distribuie codul SENRAFRIEND prietenilor și familiei. Când cineva folosește acest cod și se abonează la un plan plătit (Standard sau Ultimate), amândoi primiți 2 luni gratuite. Poți urmări recomandările și statusul lor pe pagina de Recomandări.";
+"help_faq_a11" = "Distribuie codul SENRAFRIEND prietenilor și familiei. Când cineva folosește acest cod și se abonează la un plan plătit (Standard sau Maximum), amândoi primiți 2 luni gratuite. Poți urmări recomandările și statusul lor pe pagina de Recomandări.";
 "help_faq_q12" = "În ce țări livrați?";
 "help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPoint) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
 "help_faq_q13" = "Pot avea mai multe animale pe un singur cont?";
-"help_faq_a13" = "Da. Cu planul Starter (gratuit) poți înregistra un animal. Planul Standard permite de asemenea un animal. Planul Ultimate permite animale nelimitate. Poți face upgrade oricând din pagina Cont.";
+"help_faq_a13" = "Da. Cu planul Starter (gratuit) poți înregistra până la 10 animale. Planul Standard permite 1 animal. Planul Maximum permite până la 10 animale. Poți face upgrade oricând din pagina Cont.";
 "help_faq_q14" = "Cum raportez un animal pe care l-am găsit?";
 "help_faq_a14" = "Dacă animalul are o etichetă Senra, pur și simplu scanează codul QR cu camera telefonului — nu ai nevoie de aplicație. Vei vedea profilul animalului și poți partaja locația cu proprietarul. Dacă nu are etichetă, poți verifica harta Animale dispărute pe site-ul Senra pentru a vedea dacă animalul a fost raportat ca dispărut în zona ta.";
 "help_faq_q15" = "Sunt în siguranță informațiile mele personale?";
 "help_faq_a15" = "Da. Tu controlezi exact ce informații sunt vizibile când cineva scanează eticheta animalului tău. În Setări > Confidențialitate poți alege să afișezi sau să ascunzi numărul de telefon, e-mailul și adresa. Autentificarea este securizată cu coduri de verificare unice — nu există parole care să fie furate. Poți șterge contul și toate datele oricând.";
 "help_faq_q16" = "Am pierdut eticheta sau este deteriorată — ce ar trebui să fac?";
-"help_faq_a16" = "Nu-ți face griji — profilul digital al animalului este în siguranță și nu este stocat pe etichetă. Mergi la pagina Cont și apasă „Comandă înlocuire”. O etichetă nouă cu un cod QR proaspăt va fi legată de profilul existent al animalului. Membrii Standard primesc o înlocuire gratuită pe an, membrii Ultimate primesc înlocuiri gratuite nelimitate, iar membrii Starter plătesc o mică taxă de livrare. Eticheta veche nu va mai funcționa odată ce cea nouă este activată.";
+"help_faq_a16" = "Nu-ți face griji — profilul digital al animalului este în siguranță și nu este stocat pe etichetă. Mergi la pagina Cont și apasă „Comandă înlocuire”. O etichetă nouă cu un cod QR proaspăt va fi legată de profilul existent al animalului. Membrii Standard primesc o înlocuire gratuită pe an, membrii Maximum primesc înlocuiri gratuite nelimitate, iar membrii Starter plătesc o mică taxă de livrare. Eticheta veche nu va mai funcționa odată ce cea nouă este activată.";
 "help_faq_q17" = "Eticheta mea nu se scanează — cum o repar?";
-"help_faq_a17" = "Încearcă acești pași: curăță suprafața etichetei cu o cârpă umedă, asigură-te că ai iluminare bună, ține camera telefonului stabilă la aproximativ 10-15 cm de etichetă și verifică dacă aplicația camerei sau scanerul QR funcționează. Dacă codul QR este zgâriat sau decolorat, poți folosi opțiunea de introducere manuală din aplicație, la „Scanează eticheta”. Dacă eticheta este prea deteriorată pentru a fi citită, comandă o înlocuire gratuită din pagina Cont (planurile Standard și Ultimate).";
+"help_faq_a17" = "Încearcă acești pași: curăță suprafața etichetei cu o cârpă umedă, asigură-te că ai iluminare bună, ține camera telefonului stabilă la aproximativ 10-15 cm de etichetă și verifică dacă aplicația camerei sau scanerul QR funcționează. Dacă codul QR este zgâriat sau decolorat, poți folosi opțiunea de introducere manuală din aplicație, la „Scanează eticheta”. Dacă eticheta este prea deteriorată pentru a fi citită, comandă o înlocuire gratuită din pagina Cont (planurile Standard și Maximum).";
 "help_faq_q18" = "Am găsit un animal fără etichetă Senra — ce pot face?";
 "help_faq_a18" = "Verifică harta Animale dispărute de pe site-ul Senra (senra.pet) — animalul poate fi raportat ca dispărut în zona ta. Poți vedea alertele fără cont. Dacă găsești o potrivire, poți raporta o observare cu locația ta pentru a ajuta la reunirea animalului cu proprietarul. Poți de asemenea să duci animalul la un veterinar local pentru a verifica microcipul.";
 "help_faq_q19" = "Pot să-mi schimb adresa de e-mail?";
@@ -1328,7 +954,7 @@
 "help_faq_q26" = "Cum ajung alertele de animale dispărute la veterinari și adăposturi?";
 "help_faq_a26" = "Când marchezi animalul ca dispărut, Senra trimite automat alerte prin e-mail tuturor veterinarilor și adăposturilor verificate înregistrate în zona ta. Aceasta înseamnă că profesioniștii locali în domeniul animalelor sunt imediat conștienți că animalul tău este dispărut și pot fi atenți. Cu cât mai mulți veterinari și adăposturi sunt înregistrate în zona ta, cu atât rețeaua de siguranță este mai puternică. Poți ajuta încurajându-ți propriul veterinar să se înregistreze la Senra.";
 "help_faq_q27" = "Pot transfera o etichetă la un alt animal?";
-"help_faq_a27" = "Fiecare etichetă QR este legată permanent de un singur profil de animal și nu poate fi reatribuită. Dacă un animal trece la cele veșnice sau nu mai ai nevoie de o etichetă, eticheta veche devine pur și simplu inactivă. Pentru a eticheta un animal nou, comandă o etichetă nouă din pagina Cont. Dacă ai un plan Standard sau Ultimate, poți beneficia de o etichetă de înlocuire gratuită pentru noul animal.";
+"help_faq_a27" = "Fiecare etichetă QR este legată permanent de un singur profil de animal și nu poate fi reatribuită. Dacă un animal trece la cele veșnice sau nu mai ai nevoie de o etichetă, eticheta veche devine pur și simplu inactivă. Pentru a eticheta un animal nou, comandă o etichetă nouă din pagina Cont. Dacă ai un plan Standard sau Maximum, poți beneficia de o etichetă de înlocuire gratuită pentru noul animal.";
 "help_guide_qr_tags_title" = "Etichete QR pentru animale";
 "help_guide_qr_tags_desc" = "Află despre etichetele noastre smart QR.";
 "help_guide_materials_title" = "Materiale și durabilitate";
@@ -1363,3 +989,29 @@
 "order_status_delivered" = "Delivered";
 "order_status_cancelled" = "Cancelled";
 "orders_item_count %lld" = "%lld items";
+
+// MARK: - Scanner Additional
+"scanner_owner_address" = "Adresa proprietarului";
+
+// MARK: - Billing Additional
+"billing_past_due_title" = "Plată restantă";
+"billing_past_due_message" = "Plata abonamentului este restantă. Vă rugăm să actualizați metoda de plată.";
+"billing_update_payment" = "Actualizare plată";
+
+// MARK: - Address Additional
+"address_search_country" = "Căutare țară";
+
+// MARK: - Sync Additional
+"sync_failed_count" = "Sincronizare eșuată";
+
+// MARK: - Pet Form Additional
+"pet_limit_reached" = "Limita de animale atinsă";
+"upgrade_to_ultimate" = "Upgrade la Maximum";
+"keep_current_plan" = "Păstrează planul actual";
+"pet_limit_upgrade_message %@ %lld %@ %@" = "Planul tău %@ permite %lld animal. Fă upgrade la %@ pentru %@ pentru până la 10 animale.";
+"pet_limit_upgrade_generic" = "Actualizează-ți planul pentru a adăuga mai multe animale.";
+
+// MARK: - Breed Picker Species Headers
+"species_dog" = "Câine";
+"species_cat_header" = "Pisică";
+"species_bird_no_picker" = "Pasăre (fără selector)";

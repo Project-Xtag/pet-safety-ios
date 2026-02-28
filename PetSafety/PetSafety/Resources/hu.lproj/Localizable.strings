@@ -9,21 +9,14 @@
 "back" = "Vissza";
 "submit" = "Beküldés";
 "skip" = "Kihagyás";
-"loading" = "Betöltés...";
 "error" = "Hiba";
 "success" = "Siker";
-"confirm" = "Megerősítés";
 "retry" = "Újrapróbálás";
 "done" = "Kész";
-"edit" = "Szerkesztés";
-"add" = "Hozzáadás";
 "remove" = "Eltávolítás";
 "search" = "Keresés";
-"settings" = "Beállítások";
 "updated" = "Frissítve";
-"update_failed" = "A frissítés sikertelen";
 "enable" = "Engedélyezés";
-"change" = "Módosítás";
 "primary" = "Elsődleges";
 
 // MARK: - Fülsáv
@@ -34,18 +27,14 @@
 "tab_account" = "Fiók";
 
 // MARK: - Hitelesítés
-"auth_tagline" = "Tartsd biztonságban kedvenceidet QR bilétákkal";
 "welcome_back" = "Üdv újra!";
 "enter_email_subtitle" = "Add meg az email címed, hogy bejelentkezési kódot kapj.";
 "email_address" = "Email cím";
 "send_login_code" = "Bejelentkezési kód küldése";
-"enter_otp_code" = "Add meg a 6 számjegyű kódot";
 "verify_code" = "Kód ellenőrzése";
 "use_different_email" = "Másik email használata";
 "code_sent_to_email" = "Kód elküldve: %@";
 "otp_sent_to" = "Add meg a 6 számjegyű kódot, amelyet ide küldtünk:";
-"login_failed" = "Sikertelen bejelentkezés";
-"verification_failed" = "Sikertelen ellenőrzés";
 "invalid_email" = "Kérjük, adj meg érvényes email címet";
 "resend_code_cooldown" = "Kód újraküldése %lld mp múlva";
 "resend_code_prompt" = "Nem kaptad meg a kódot? Újraküldés";
@@ -57,7 +46,6 @@
 "already_have_account" = "Már van fiókod?";
 "log_in" = "Bejelentkezés";
 "terms_login_prefix" = "Bejelentkezéssel elfogadod a(z) ";
-"terms_register_prefix" = "Regisztrációval elfogadod a(z) ";
 "terms_and" = " és ";
 "terms_of_service" = "Felhasználási feltételeket";
 "privacy_policy" = "Adatvédelmi szabályzatot";
@@ -68,12 +56,6 @@
 
 // MARK: - Biometrikus
 "biometric_login_title" = "Biometrikus bejelentkezés";
-"biometric_login_subtitle" = "Használd az ujjlenyomatodat vagy az arcodat a bejelentkezéshez";
-"use_password" = "Email használata";
-"login_with_biometric" = "Bejelentkezés biometrikával";
-"enable_biometric_title" = "Engedélyezed a biometrikus bejelentkezést?";
-"enable_biometric_message" = "Használd az ujjlenyomatodat vagy az arcodat a gyors bejelentkezéshez legközelebb.";
-"biometric_enabled" = "Biometrikus bejelentkezés engedélyezve";
 "enable_biometric_type" = "Engedélyezed a(z) %@ használatát?";
 "biometric_type_enabled" = "%@ engedélyezve";
 "use_biometric_quick_login" = "Használd a(z) %@-t a gyors bejelentkezéshez legközelebb.";
@@ -82,9 +64,6 @@
 "by_creating_account_agree" = "Fiók létrehozásával elfogadod a";
 
 // MARK: - Munkamenet
-"session_expired_title" = "A munkamenet lejárt";
-"session_expired_message" = "A munkamenet lejárt. Kérjük, jelentkezz be újra.";
-"session_expired_log_in" = "Bejelentkezés";
 
 // MARK: - Kezdőlap / Kedvencek listája
 "pet_owner_default" = "Kedvenc gazdája";
@@ -102,37 +81,23 @@
 "missing_badge" = "ELTŰNT";
 "add_pet" = "Kedvenc hozzáadása";
 "pet_name" = "Kedvenc neve";
-"pet_safety_user" = "Pet Safety felhasználó";
 
 // MARK: - Kedvenc részletei
-"breed_label" = "Fajta: %@";
-"color_label" = "Szín: %@";
-"age_label" = "Kor: %@";
-"microchip_label" = "Mikrochip: %@";
 "species_label" = "Faj: %@";
 "medical_information" = "Egészségügyi információ";
 "additional_information" = "További információ";
-"photo_gallery" = "Fotógaléria";
 "edit_pet" = "Kedvenc szerkesztése";
 "view_pet_photos" = "%@ fotóinak megtekintése";
 "mark_as_found" = "Megtaláltként jelölés";
 "mark_as_lost" = "Eltűntként jelölés";
-"mark_found" = "Megtalált jelölése";
-"mark_missing" = "Eltűnt jelölése";
 "age" = "Kor";
 "view_public_profile" = "%@ nyilvános profiljának megtekintése";
 "edit_pet_profile" = "%@ profiljának szerkesztése";
-"delete_pet_name" = "%@ törlése";
-"delete_pet_confirm_title" = "Törlöd %@-t?";
-"delete_pet_confirm_message" = "Ez a művelet nem vonható vissza. %@ minden adata véglegesen törlődik.";
 "cannot_delete_missing_pet" = "Eltűnt kedvenc nem törölhető";
-"cannot_delete_missing_message" = "%@ jelenleg eltűntként van jelölve. Törlés előtt jelöld meg megtaláltként.";
 "mark_found_confirm_title" = "%@ megtaláltként jelölése?";
 "mark_found_confirm_message" = "Ez lezárja %@ eltűnt riasztását. Biztos vagy benne?";
 "marked_found_message" = "%@ megtaláltként jelölve.";
-"marked_missing_message" = "%@ eltűntként jelölve.";
 "mark_found_failed" = "Nem sikerült megtaláltként jelölni";
-"mark_missing_failed" = "Nem sikerült eltűntként jelölni";
 "pet_deleted" = "%@ törölve lett";
 "delete_pet_failed" = "Nem sikerült törölni a kedvencet";
 
@@ -145,111 +110,60 @@
 "medical_notes" = "Egészségügyi megjegyzések";
 "photo" = "Fotó";
 "edit_photo" = "Fotó szerkesztése";
-"photo_selected_hint" = "Fotó kiválasztva";
 "choose_photo_hint" = "Válassz fotót a kedvencedről";
 "basic_information" = "Alapinformációk";
 "colour" = "Szín";
 "colour_optional" = "Szín (opcionális)";
 "microchip_optional" = "Mikrochip szám (opcionális)";
 "sex" = "Nem";
-"not_specified" = "Nincs megadva";
 "neutered_spayed" = "Ivartalanított";
 "neutered" = "Ivartalanított";
 "health_information" = "Egészségügyi információ";
-"medical_notes_hint" = "Egészségügyi megjegyzések (állapotok, műtétek, stb.)";
 "health_info_hint" = "Allergiák, gyógyszerek, egészségügyi állapotok...";
 "behavior_notes_hint" = "Viselkedési megjegyzések (temperamentum, képzés, stb.)";
 "save_changes" = "Változások mentése";
 "delete_pet_button" = "Kedvenc törlése";
-"delete_pet_dialog_title" = "Törlöd %@-t?";
 "delete_pet_dialog_message" = "Biztosan törlöd ezt a kedvencet? Ez a művelet nem vonható vissza.";
-"male" = "Hím";
-"female" = "Nőstény";
-"default_species_dog" = "Kutya";
 "species_cat" = "Macska";
-"search_breed" = "Fajta keresése...";
 "select_photo" = "Fotó kiválasztása";
 "select_pet" = "Kedvenc kiválasztása";
 "select_pet_for_replacement" = "Kedvenc kiválasztása biléta cseréhez";
-"physical_details" = "Fizikai adatok";
 "weight" = "Súly";
 "weight_optional" = "Súly kg-ban (opcionális)";
 "date_of_birth" = "Születési dátum";
 "allergies_hint" = "Allergiák (étel, gyógyszer, stb.)";
-"medications_hint" = "Jelenlegi gyógyszerek";
 "unique_features_hint" = "Egyedi jegyek (mintázatok, hegek, stb.)";
-"photo_selected" = "Fotó kiválasztva";
 "pet_created" = "Kedvenc létrehozva";
-"pet_create_failed" = "Nem sikerült létrehozni a kedvencet";
 "pet_updated" = "Kedvenc frissítve";
-"pet_update_failed" = "Nem sikerült frissíteni a kedvencet";
 "pet_updated_photo_failed" = "Kedvenc frissítve! A fotó feltöltése nem sikerült - kérjük, próbáld meg később.";
 
 // MARK: - Fotógaléria
 "pet_photos_title" = "%@ fotói";
 "add_photos" = "Fotók hozzáadása";
-"uploading_photos" = "Fotók feltöltése…";
-"loading_photos" = "Fotók betöltése…";
 "no_photos_yet" = "Még nincs fotó";
 "add_photos_gallery_hint" = "Adj hozzá fotókat, hogy galéria készüljön %@ számára";
 "add_photos_gallery_generic" = "Adj hozzá fotókat, hogy galéria készüljön";
 "choose_photo_source" = "Fotóforrás kiválasztása";
-"camera" = "Kamera";
-"library" = "Galéria";
 "delete_photo" = "Fotó törlése";
 "delete_photo_confirm" = "Biztosan törlöd ezt a fotót? Ez a művelet nem vonható vissza.";
 "photo_tip" = "Tipp: Hosszú nyomással állítsd be elsődlegesnek vagy töröld";
 "photo_uploaded" = "Fotó feltöltve";
-"upload_failed" = "Feltöltés sikertelen";
-"primary_updated" = "Elsődleges fotó frissítve";
-"primary_failed" = "Nem sikerült elsődlegesnek beállítani";
 "photo_deleted" = "Fotó törölve";
-"delete_photo_failed" = "Nem sikerült törölni a fotót";
-"upload_photo_failed" = "Nem sikerült feltölteni a fotót";
-"add_photo" = "Fotó hozzáadása";
-"use_camera" = "Eszköz kamera megnyitása";
 "choose_from_gallery" = "Választás a galériából";
-"select_existing_photo" = "Meglévő fotó kiválasztása";
-"choose_photos" = "Fotók kiválasztása";
 "take_photo" = "Fotó készítése";
 "photo_gallery_title" = "Fotógaléria";
 
 // MARK: - QR beolvasó
-"scan_qr" = "QR beolvasás";
 "scan_qr_code" = "QR-kód beolvasása";
 "scan_qr_subtitle" = "Irányítsd a kamerát a kedvenc QR bilétájára";
-"camera_access_required" = "Kamera-hozzáférés szükséges";
-"camera_access_message" = "Kérjük, engedélyezd a kamera hozzáférést a beállításokban a QR-kódok beolvasásához";
-"enable_camera" = "Kamera engedélyezése";
-"qr_scanned" = "QR beolvasva";
-"manual_code_entry" = "Kód kézi megadása";
-"manual_code_label" = "QR-kód";
-"submit_code" = "Kód beküldése";
-"invalid_qr_code" = "Adj meg érvényes kódot";
-"turn_off_flashlight" = "Vaku kikapcsolása";
-"turn_on_flashlight" = "Vaku bekapcsolása";
 "hello_pet_name" = "Szia! %@ vagyok";
 "scanned_tag_thanks" = "Épp most olvastad be a bilétámat. Köszönöm, hogy segítesz!";
 "share_location_with_owner" = "Helyzetem megosztása a gazdával";
-"owner_notified_message" = "%@ gazdája értesítést kap a tartózkodási helyedről";
-"share_location_help" = "Segíts %@ gazdájának megtalálni őt a helyzeted megosztásával";
-"precise_location" = "Pontos hely";
-"precise_location_desc" = "Oszd meg a pontos GPS koordinátáid";
-"approximate_location" = "Közelítő hely";
-"approximate_location_desc" = "Megosztás ~500m pontossággal (GDPR-kompatibilis)";
-"dont_share_location" = "Ne ossz meg helyet";
-"dont_share_location_desc" = "Csak értesítsd a gazdát, hogy a kedvencét megtalálták";
-"sending" = "Küldés…";
-"confirm_notify_owner" = "Megerősítés & gazda értesítése";
 "contact_owner" = "Gazdi elérhetősége";
 "call_phone" = "Hívás: %@";
 "email_contact" = "Email: %@";
 "privacy_notice" = "Fontos az adatvédelem. A helyzetedet csak %@ gazdájával osztjuk meg, hogy segítsünk újra találkozni.";
-"recommended" = "Ajánlott";
 "found_pet_title" = "%@ megtalálva";
-"share_location" = "Hely megosztása";
-"location_shared" = "Hely megosztva";
-"share_location_failed" = "Nem sikerült megosztani a helyet";
 
 // MARK: - Helymegosztás folyamat
 "share_help_get_home %@" = "Segíts, hogy %@ hazajusson";
@@ -269,35 +183,15 @@
 "share_found_pet %@" = "%@ megtalálva!";
 
 // MARK: - Beolvasó részletei
-"scanner_title" = "QR-kód beolvasása";
-"scanner_subtitle" = "Irányítsd a kamerát a kedvenc QR bilétájára";
-"scanner_camera_required" = "Kamera-hozzáférés szükséges";
-"scanner_camera_message" = "Kérjük, engedélyezd a kamera hozzáférést a beállításokban a QR-kódok beolvasásához";
 "scanner_open_settings" = "Beállítások megnyitása";
-"scanner_greeting %@" = "Szia! %@ vagyok";
-"scanner_scanned_message" = "Épp most olvastad be a bilétámat. Köszönöm, hogy segítesz!";
 "scanner_breed" = "Fajta";
 "scanner_age" = "Kor";
 "scanner_color" = "Szín";
-"scanner_share_location" = "Helyzetem megosztása a gazdával";
-"scanner_owner_notified" = "A gazdát értesítettük, hogy a kedvence bilétáját beolvasták.";
-"scanner_contact_owner" = "Gazda elérhetősége";
-"scanner_contact_instructions" = "Vedd fel a kapcsolatot a gazdával, hogy tudassa, megtaláltad a kedvencét:";
-"scanner_call %@" = "Hívás: %@";
-"scanner_email %@" = "Email: %@";
 "scanner_owner_location" = "Gazda helye";
 "scanner_medical_info" = "Egészségügyi információ";
 "scanner_allergies" = "Allergiák";
 "scanner_notes" = "Megjegyzések";
 "scanner_how_it_works" = "Hogyan működik";
-"scanner_step1_title" = "1. Biléta beolvasása";
-"scanner_step1_desc" = "Ezt már megtetted! A biléta egyedi QR-kódot tartalmaz.";
-"scanner_step2_title" = "2. Hely megosztása";
-"scanner_step2_desc" = "Koppints a fenti gombra, hogy megoszd, hol találtad meg a kedvencet.";
-"scanner_step3_title" = "3. Gazda elérése";
-"scanner_step3_desc" = "Használd az elérhetőségeket, hogy közvetlenül elérd a gazdát.";
-"scanner_privacy_notice" = "A pontos helyed nem kerül megosztásra. Csak a közelítő terület (~500m) látható.";
-"scanner_found_pet %@" = "%@ megtalálva!";
 
 // MARK: - Biléta aktiválás
 "tag_activate_title" = "Biléta aktiválása";
@@ -321,98 +215,50 @@
 "plan_upgrade_title" = "Csomagfrissítés";
 "plan_upgrade_subtitle" = "További funkciók a kedvenceidnek";
 "plan_loading" = "Csomagok betöltése...";
-"plan_failed_to_load" = "Nem sikerült betölteni a csomagokat";
-"plan_choose_your_plan" = "Válaszd ki a csomagod";
 "plan_popular" = "Népszerű";
 "plan_current" = "Jelenlegi csomag";
 "plan_select_free" = "Ingyenes csomag kiválasztása";
 "plan_select %@" = "%@ kiválasztása";
 "plan_skip_free" = "Kihagyás most (Ingyenes csomag)";
 "plan_all_include" = "Minden csomag tartalmazza:";
-"plan_feature_qr" = "QR biléta a kedvencednek";
-"plan_feature_profile" = "Kedvenc profiloldala";
-"plan_feature_scan_notify" = "Beolvasási értesítések";
 "plan_paid_add" = "A fizetős csomagok tartalmazzák még:";
-"plan_feature_alerts" = "Eltűnt kedvenc riasztások";
-"plan_feature_location" = "Helymegosztás";
-"plan_feature_priority" = "Elsőbbségi támogatás";
 
 // MARK: - Riasztások
-"alerts" = "Riasztások";
 "tab_missing" = "Eltűnt";
 "tab_found" = "Megtalált";
 "tab_success" = "Megtalált kedvencek";
-"show_list" = "Lista megjelenítése";
-"show_map" = "Térkép megjelenítése";
-"unknown_pet" = "Ismeretlen kedvenc";
-"pet_alert" = "Kedvenc riasztás";
-"alert_status" = "Állapot: %@";
-"alert_last_seen" = "Utoljára látva: %@";
-"alert_info" = "Info: %@";
-"alert_sightings_count" = "Észlelések: %lld";
-"alert_marker" = "Riasztás";
-"loading_alerts" = "Riasztások betöltése…";
 "failed_load_alerts" = "Nem sikerült betölteni a riasztásokat";
 "no_active_alerts" = "Nincsenek aktív riasztások";
 "no_active_alerts_message" = "Jelenleg nincs eltűnt kedvenc riasztásod";
-"no_found_alerts" = "Nincsenek megtalált riasztások";
-"no_found_alerts_message" = "Mostanában nem találtak kedvenceket a környékeden";
 "missing_pet_alerts_title" = "Eltűnt kedvenc riasztások";
 "create_alert" = "Riasztás létrehozása";
 "create_new_alert" = "Új riasztás létrehozása";
 "sighting_count_singular" = "1 észlelés";
 "sighting_count_plural" = "%lld észlelés";
-"unknown_breed" = "Ismeretlen fajta";
 "last_seen_label" = "Utoljára látva";
 "reported_sightings_count" = "Bejelentett észlelések (%lld)";
 "report_a_sighting" = "Észlelés bejelentése";
 "anonymous" = "Névtelen";
 "contact_label" = "Kapcsolat: %@";
-"pet_marked_found" = "%@ megtaláltként jelölve!";
-"mark_found_failed_message" = "Nem sikerült megtaláltként jelölni: %@";
 
 // MARK: - Eltűnt bejelentés / Észlelés
-"report_missing_title" = "%@ eltűnésének bejelentése";
 "last_seen_location" = "Utoljára látott hely";
-"additional_info" = "További információ";
-"report" = "Jelentés";
 "report_sighting" = "Észlelés bejelentése";
-"report_sighting_prompt" = "Oszd meg azokat a részleteket, ahol láttad a kedvencet.";
 "notes" = "Megjegyzések";
-"sighting_reported" = "Észlelés bejelentve";
-"report_failed" = "Nem sikerült bejelenteni";
 "sighting_location" = "Észlelés helye";
 "use_current_location" = "Jelenlegi hely használata";
 "location_captured" = "Hely rögzítve GPS-ből";
-"create_alert_failed" = "Nem sikerült létrehozni a riasztást";
-"update_alert_failed" = "Nem sikerült frissíteni a riasztást";
-"report_sighting_failed" = "Nem sikerült bejelenteni az észlelést";
 "report_missing_pet" = "Eltűnt kedvenc bejelentése";
 "select_pet_to_report" = "Válassz kedvencet";
-"add_missing_details" = "Adj meg részleteket az eltűnésről";
-"enter_address_or_location" = "Add meg a címet vagy a hely leírását";
 "additional_details" = "További részletek";
-"describe_circumstances" = "Írd le a körülményeket, megkülönböztető jegyeket, stb.";
-"report_missing" = "Eltűnt jelentése";
-"no_pets_to_report_message" = "Adj hozzá egy kedvencet, hogy eltűntként jelenthessük";
-"mark_pet_found" = "Kedvenc megtaláltnak jelölése";
-"select_pet_to_mark_found" = "Válaszd ki a megtalált kedvencet";
-"no_missing_pets_message" = "Nincs eltűntként jelölt kedvenced";
 "select_pet_header" = "Kedvenc kiválasztása";
 "no_pets_available" = "Nincs elérhető kedvenc. Kérjük, adj hozzá egyet.";
-"pet_picker_label" = "Kedvenc";
 "last_seen_location_header" = "Utoljára látott hely";
 "enter_location" = "Hely megadása";
 "additional_information_header" = "További információ";
 "additional_details_placeholder" = "Adj meg további részleteket arról, mikor és hol láttad utoljára a kedvenced...";
 "alert_created_success" = "Eltűnt kedvenc riasztás sikeresen létrehozva!";
 "alert_queued_offline" = "Riasztás sorba állítva. Online állapotban szinkronizálódik.";
-"your_contact_information" = "Elérhetőségeid";
-"name_optional" = "Név (opcionális)";
-"phone_optional" = "Telefonszám (opcionális)";
-"email_optional" = "Email (opcionális)";
-"details" = "Részletek";
-"sighting_reported_success" = "Észlelés sikeresen bejelentve!";
 "report_sighting_header" = "Észlelés bejelentése";
 "report_sighting_help" = "Segíts, hogy a kedvenc újra találkozhasson a gazdájával a hely megosztásával.";
 "share_contact_info" = "Elérhetőségeim megosztása";
@@ -429,50 +275,25 @@
 "sighting_queued_offline" = "Észlelés sorba állítva - online állapotban elküldjük.";
 
 // MARK: - Eltűnt/Megtalált jelölés
-"mark_pet_found_confirm" = "%@ megtaláltként jelölése?";
-"mark_found_confirm_alert" = "Ez lezárja %@ eltűnt riasztását. Biztos vagy benne?";
-"notification_center" = "Értesítési központ";
-"alerts_radius_info" = "A riasztások 10 km-es körzetben lesznek elküldve ezen a helyen";
-"current_location" = "Jelenlegi hely";
-"tap_get_location" = "Koppints a jelenlegi hely lekéréséhez…";
-"using_registered_address" = "A regisztrált címed használata";
-"enter_address_notifications" = "Adj meg címet az értesítésekhez";
 
 // MARK: - Értesítések
 "tag_scanned_message" = "%@ bilétáját beolvasták ekkor: %@!";
-"unknown_location" = "ismeretlen helyen";
 "sighting_message_with_location" = "%@-t észlelték itt: %@!";
 "sighting_message_no_location" = "%@-t észlelték!";
-"pet_found_message" = "Jó hír! %@ megkerült!";
-"notification_tag_scanned_title" = "%@ megkerült!";
-"notification_sighting_title" = "%@ észlelve!";
-"notification_pet_found_title" = "Jó hír!";
-"notification_channel_name" = "Pet Safety riasztások";
-"notification_method_required" = "Legalább egy értesítési módot engedélyezni kell";
 
 // MARK: - Sikertörténetek
 "success_stories" = "Sikertörténetek";
 "found_pets" = "Megtalált kedvencek";
 "success_stories_subtitle" = "Nézd meg a boldog újraegyesüléseket a közeledben";
-"share_your_story" = "Oszd meg a történeted";
-"success_story_prompt" = "Jó hír! %@ megkerült! Szeretnéd megosztani az újraegyesülés történetét, hogy inspirálj másokat?";
-"your_story" = "A történeted";
-"story_placeholder" = "Meséld el, hogyan találkoztatok újra...";
-"share_story" = "Történet megosztása";
-"story_shared" = "Történet sikeresen megosztva";
-"story_share_failed" = "Nem sikerült megosztani a történetet";
 "loading_success_stories" = "Sikertörténetek betöltése…";
 "no_success_stories" = "Nincsenek sikertörténetek a közelben";
 "no_success_stories_message" = "Légy te az első, aki megoszt egy boldog újraegyesülést a környékeden!";
 "found_and_reunited" = "Megtalált & újraegyesült";
 "distance_km" = "%.1f km távolság";
-"missing_since" = "Eltűnt ekkor: %@";
 "found_on" = "%@ megtalálva";
 "success_story_marker" = "Sikertörténet";
 "load_more" = "További betöltése";
 "missing_for" = "Eltűnt ennyi ideje: %@";
-"pet_found_share" = "%@ megkerült!";
-"reunited_in" = "%@ alatt újraegyesült";
 "shared_via_pet_safety" = "Megosztva a Pet Safety alkalmazásból";
 
 // MARK: - Sikertörténet idő
@@ -485,32 +306,22 @@
 "success_minutes_ago %lld" = "%lld perce";
 
 // MARK: - Sikertörténetek fül
-"success_tab_title" = "Sikertörténetek";
-"success_tab_list" = "Lista";
-"success_tab_map" = "Térkép";
 
 // MARK: - Sikertörténet felszólítás
 "story_great_news" = "Jó hír!";
 "story_post" = "Közzététel";
-"story_pet_home %@" = "%@ itthon van!";
 "story_reunited" = "Újraegyesült!";
-"story_share_prompt" = "Oszd meg az újraegyesülés történetét!";
-"story_inspiration" = "A történeted reményt adhat más gazdáknak a környékeden.";
-"story_share_button" = "Történetem megosztása";
 "story_maybe_later" = "Talán később";
 "story_share_good_news" = "Oszd meg a jó hírt";
 "story_social_caption %@" = "%@ újra a családjával van! Köszönjük a TagMe Now közösségnek, hogy segített %@ hazajutni. senra.pet";
 "story_generating_card" = "Megosztási kártya készítése...";
 "story_your_story" = "A történeted";
-"story_placeholder_named %@" = "Oszd meg, hogyan találtad meg és egyesültetek újra: %@";
 "story_city_optional" = "Város/terület (opcionális)";
 "story_city_placeholder" = "pl. Budapest, VII. kerület";
 "story_share_publicly" = "Megosztás nyilvánosan";
 "story_share_publicly_desc" = "Engedélyezd, hogy a közelben mások is láthassák a történeted";
 "story_posting" = "Közzététel...";
 "story_share_story" = "Történet megosztása";
-"story_contact_note" = "Elérhetőségeid nem kerülnek megosztásra.";
-"story_posted_success" = "A sikertörténeted megosztásra került!";
 
 // MARK: - Profil
 "profile" = "Profil";
@@ -524,21 +335,12 @@
 "profile_referral" = "Ajánlói program";
 "profile_help_support" = "Súgó és támogatás";
 "profile_log_out" = "Kijelentkezés";
-"profile_logout_confirm" = "Biztosan kijelentkezel?";
 "profile_delete_account" = "Fiók törlése";
-"profile_delete_confirm" = "Biztosan törlöd a fiókodat? Ez a művelet nem vonható vissza.";
 "profile_cannot_delete" = "Fiók nem törölhető";
 "profile_cannot_delete_message" = "Mielőtt törölnéd a fiókod, jelöld meg minden eltűnt kedvencet megtaláltként.";
 "profile_danger_zone" = "Veszélyzóna";
 "profile_deleting" = "Törlés...";
-"profile_delete_permanent" = "Ez véglegesen törli a fiókodat és az összes adatot";
 "log_out" = "Kijelentkezés";
-"personal_information" = "Személyes adatok";
-"address" = "Cím";
-"contacts" = "Kapcsolatok";
-"privacy_mode" = "Adatvédelmi mód";
-"notifications" = "Értesítések";
-"help_support" = "Súgó és támogatás";
 
 // MARK: - Személyes adatok
 "personal_details" = "Személyes adatok";
@@ -550,7 +352,6 @@
 "personal_email_placeholder" = "Add meg az emailed";
 "personal_phone" = "Telefonszám";
 "personal_phone_placeholder" = "Add meg a telefonszámod";
-"personal_edit_info" = "Adatok szerkesztése";
 "personal_title" = "Személyes adatok";
 
 // MARK: - Cím
@@ -574,56 +375,28 @@
 "address_select_country_title" = "Ország kiválasztása";
 "address_line2_label" = "Emelet, ajtó";
 "address_postal_label" = "Irányítószám";
-"street_address" = "Utca, házszám";
 "address_line_2_optional" = "Cím 2. sora (opcionális)";
-"city" = "Város";
-"post_code" = "Irányítószám";
-"country" = "Ország";
-"street" = "Utca";
 
 // MARK: - Kapcsolatok
 "contacts_settings" = "Kapcsolati beállítások";
-"contacts_info_text" = "Ezeket az elérhetőségeket láthatják, amikor beolvassák a kedvenced QR bilétáját. Legalább egy kapcsolati mód megadása szükséges.";
 "contacts_email_section" = "Email címek";
 "contacts_phone_section" = "Telefonszámok";
 "contacts_edit_title" = "Elérhetőségek szerkesztése";
 "contacts_primary_email" = "Elsődleges email";
-"contacts_primary_email_footer" = "Ez az email jelenik meg, amikor beolvassák a kedvenced QR bilétáját.";
 "contacts_email_placeholder" = "Email cím";
-"contacts_show_on_tag" = "Megjelenítés a bilétán";
 "contacts_secondary_email" = "Másodlagos email (opcionális)";
-"contacts_secondary_email_footer" = "Tartalék email elérhetőséghez.";
 "contacts_secondary_email_placeholder" = "Másodlagos email cím";
 "contacts_primary_phone" = "Elsődleges telefonszám";
-"contacts_primary_phone_footer" = "Ez a telefonszám jelenik meg, amikor beolvassák a kedvenced QR bilétáját.";
 "contacts_phone_placeholder" = "Telefonszám";
 "contacts_secondary_phone" = "Másodlagos telefonszám (opcionális)";
-"contacts_secondary_phone_footer" = "Tartalék telefonszám elérhetőséghez.";
 "contacts_secondary_phone_placeholder" = "Másodlagos telefonszám";
-"contacts_title" = "Elérhetőségek";
 "contacts_primary_badge" = "ELSŐDLEGES";
-"contacts_visible_badge" = "Látható a bilétán";
 "contacts_hidden_badge" = "Rejtett";
-"contacts_none_added %@" = "Nincs megadva: %@";
 "email_addresses" = "Email címek";
-"primary_email" = "Elsődleges email";
-"secondary_email_optional" = "Másodlagos email (opcionális)";
 "phone_numbers" = "Telefonszámok";
-"primary_phone" = "Elsődleges telefonszám";
-"show_on_qr_tag" = "Megjelenítés a QR bilétán";
-"secondary_phone_optional" = "Másodlagos telefonszám (opcionális)";
-"contacts_qr_tag_info" = "A láthatóként megjelölt elérhetőségek megjelennek a kedvenced QR bilétáján, amikor azt valaki beolvassa.";
 "contact_details" = "Elérhetőségek";
 
 // MARK: - Elérhetőségek láthatósága
-"contact_visibility" = "Elérhetőségek láthatósága";
-"contact_visibility_desc" = "Szabályozd, milyen elérhetőség látható, amikor beolvassák a kedvenced QR bilétáját";
-"show_phone_number" = "Telefonszám megjelenítése";
-"show_phone_subtitle" = "A telefonszámod látható lesz a megtalálók számára";
-"show_email_address" = "Email cím megjelenítése";
-"show_email_subtitle" = "Az emailed látható lesz a megtalálók számára";
-"show_address" = "Cím megjelenítése";
-"show_address_subtitle" = "A címed látható lesz a megtalálók számára";
 
 // MARK: - Értesítési beállítások
 "notif_channels" = "Értesítési csatornák";
@@ -646,37 +419,11 @@
 "notif_order_updates_subtitle" = "Szállítási és kézbesítési értesítések";
 "notif_account_activity" = "Fióktevékenység";
 "notif_account_activity_subtitle" = "Bejelentkezési és biztonsági értesítések";
-"notif_optional_updates" = "Opcionális frissítések";
-"notif_optional_footer" = "Hírek, tippek és promóciós tartalmak";
-"notif_product_updates" = "Termékfrissítések";
-"notif_marketing_emails" = "Marketing emailek";
 "notif_save_changes" = "Változások mentése";
 "notif_title" = "Értesítések";
 "notif_saved" = "Mentve";
 "notif_saved_message" = "Értesítési beállítások sikeresen mentve";
 "notif_critical_footer" = "Ezeket a beállításokat bármikor módosíthatod. A kedvenceid kritikus riasztásai mindig elküldésre kerülnek.";
-"push_notifications" = "Push értesítések";
-"email_notifications" = "Email értesítések";
-"sms_notifications" = "SMS értesítések";
-"push_notifications_subtitle" = "Push értesítések fogadása az eszközödön";
-"email_notifications_subtitle" = "Értesítések fogadása emailben";
-"sms_notifications_subtitle" = "Értesítések fogadása SMS-ben";
-"pet_alerts" = "Kedvenc riasztások";
-"missing_pet_alerts" = "Eltűnt kedvenc riasztások";
-"missing_pet_alerts_subtitle" = "Értesítés eltűnt kedvencekről a környékeden";
-"nearby_alerts_10km" = "Közeli riasztások (10km)";
-"nearby_alerts_subtitle" = "Riasztások 10 km-en belül a tartózkodási helyedhez képest";
-"account_and_orders" = "Fiók & rendelések";
-"order_updates" = "Rendelésfrissítések";
-"order_updates_subtitle" = "Szállítási és kézbesítési értesítések";
-"account_activity" = "Fióktevékenység";
-"account_activity_subtitle" = "Bejelentkezési és biztonsági értesítések";
-"optional_updates" = "Opcionális frissítések";
-"product_updates" = "Termékfrissítések";
-"product_updates_subtitle" = "Új funkciók és fejlesztések";
-"marketing_emails" = "Marketing emailek";
-"marketing_emails_subtitle" = "Ajánlatok és promóciók";
-"critical_alerts_note" = "Megjegyzés: a kedvenceid kritikus riasztásai mindig elküldésre kerülnek, függetlenül a beállításoktól.";
 "notification_preferences_title" = "Értesítési beállítások";
 
 // MARK: - Értesítési beállítások (Beállítások)
@@ -712,7 +459,6 @@
 "help_subject" = "Tárgy";
 "help_subject_placeholder" = "Rövid leírás a problémáról";
 "help_message" = "Üzenet";
-"help_message_placeholder" = "Írd le részletesen a problémát...";
 "help_sending" = "Küldés...";
 "help_submit_request" = "Kérés beküldése";
 "help_contact_title" = "Kapcsolat a támogatással";
@@ -725,22 +471,7 @@
 "help_cat_other" = "Egyéb";
 "help_faq_title" = "GYIK";
 "help_guides_title" = "Felhasználói útmutatók";
-"help_guide_placeholder" = "Részletes útmutató tartalom itt lesz elérhető.";
-"get_help" = "Segítség kérése";
-"faq" = "Gyakran Ismételt Kérdések";
-"user_guides" = "Felhasználói útmutatók";
-"legal" = "Jogi";
 "support_response_time" = "Támogató csapatunk általában 24 órán belül válaszol.";
-"contact_support" = "Kapcsolat a támogatással";
-"contact_support_category" = "Kategória";
-"contact_support_subject" = "Tárgy";
-"contact_support_subject_hint" = "Rövid leírás a problémáról";
-"contact_support_message" = "Üzenet";
-"contact_support_message_hint" = "Írd le részletesen a problémát…";
-"contact_support_submit" = "Beküldés";
-"contact_support_sending" = "Küldés…";
-"contact_support_success" = "Támogatási kérés elküldve! Jegyazonosító: %@";
-"contact_support_response" = "24 órán belül válaszolunk.";
 "support_email" = "Támogatás: hello@senra.pet";
 "support_category_general" = "Általános";
 "support_category_technical" = "Technikai probléma";
@@ -761,11 +492,6 @@
 "help_faq_q5" = "Hogyan rendelhetek cserebilétát?";
 "help_faq_a5" = "Ha cserebilétára van szükséged, menj a kedvenced profiljába és kattints a 'Cserebiléta rendelése' gombra. Kövesd a lépéseket a rendelés befejezéséhez.";
 // Útmutató elemek
-"help_guide_getting_started" = "Első lépések";
-"help_guide_managing_pets" = "Kedvenceid kezelése";
-"help_guide_qr_tags" = "QR biléták megértése";
-"help_guide_missing_pet" = "Mit tegyél, ha eltűnik a kedvenced";
-"help_guide_privacy" = "Adatvédelmi és biztonsági beállítások";
 
 // MARK: - Adatvédelmi mód
 "privacy_contact_visibility" = "Elérhetőségek láthatósága";
@@ -778,74 +504,23 @@
 "privacy_show_address_subtitle" = "A címed látható lesz a kedvenced nyilvános profilján";
 "privacy_data_privacy" = "Adatvédelem";
 "privacy_privacy_policy" = "Adatvédelmi szabályzat";
-"privacy_data_management" = "Adatkezelés";
 "privacy_title" = "Adatvédelmi mód";
 "privacy_mode_footer" = "Az adatvédelmi beállítások segítenek szabályozni, milyen információk kerülnek megosztásra, amikor beolvassák a kedvenced QR bilétáját.";
-"privacy_policy_title" = "Adatvédelmi szabályzat";
-"privacy_policy_updated" = "Utoljára frissítve: 2024. november";
-"privacy_policy_section1_title" = "1. Gyűjtött információk";
-"privacy_policy_section1_body" = "Összegyűjtjük az általad közvetlenül megadott információkat, beleértve a neved, emailed, telefonszámod, címed és kedvenc adatait. Helyadatokat is gyűjtünk, ha úgy döntesz, hogy megosztod azokat.";
-"privacy_policy_section2_title" = "2. Az információk felhasználása";
-"privacy_policy_section2_body" = "Az adataidat a kedvenc biztonsági szolgáltatásaink nyújtásához, eltűnt kedvencekről szóló értesítések küldéséhez és a gazda-kedvenc újraegyesülésének segítéséhez használjuk.";
-"privacy_policy_section3_title" = "3. Információmegosztás";
-"privacy_policy_section3_body" = "Az elérhetőségeidet csak az adatvédelmi beállításaid szerint osztjuk meg. A helyadatokat csak akkor osztjuk meg, ha ezt kifejezetten engedélyezed.";
-"privacy_policy_section4_title" = "4. Adatbiztonság";
-"privacy_policy_section4_body" = "Iparági szabványú titkosítást és biztonsági intézkedéseket használunk a személyes adataid védelmére.";
-"privacy_policy_section5_title" = "5. A jogaid";
-"privacy_policy_section5_body" = "Jogod van a személyes adataid eléréséhez, frissítéséhez és törléséhez bármikor az alkalmazás beállításaiban.";
-"privacy_your_data" = "Adataid";
-"privacy_your_data_footer" = "Kérj másolatot az összes személyes adatról, amelyet a rendszerünk tárol.";
-"privacy_export_data" = "Adataim exportálása";
-"privacy_deletion_section" = "Adattörlés";
-"privacy_deletion_footer" = "Fiókod és az összes kapcsolódó adat végleges törlése.";
-"privacy_delete_account" = "Fiókom törlése";
-"privacy_delete_confirm" = "Biztosan törlöd a fiókodat? Ez véglegesen eltávolítja az összes adatodat, beleértve a kedvenceket, riasztásokat és rendelési előzményeket. Ez a művelet nem vonható vissza.";
-"data_privacy" = "Adatvédelem";
-"data_management" = "Adatkezelés";
 "privacy_settings_updated" = "Adatvédelmi beállítások frissítve";
 "privacy_settings_failed" = "Nem sikerült frissíteni az adatvédelmi beállításokat";
 
 // MARK: - Fiók törlése
 "delete_account" = "Fiók törlése";
-"delete_account_warning" = "Ez a művelet nem vonható vissza. Minden adatod, beleértve a kedvenceket, riasztásokat és fotókat, véglegesen törlődik.";
-"delete_account_confirm_prompt" = "Megerősítéshez írd be alább: DELETE";
-"type_delete_to_confirm" = "Írd be: DELETE";
-"account_deleted" = "Fiók törölve";
-"delete_account_failed" = "Nem sikerült törölni a fiókot";
-"cannot_delete_account" = "Fiók nem törölhető";
-"cannot_delete_missing_pets" = "Nem törölheted a fiókodat, amíg vannak eltűntként jelölt kedvenceid. Előbb jelöld meg őket megtaláltként.";
 "missing_pets_label" = "Eltűnt kedvencek: %@";
-"checking_delete_eligibility" = "Ellenőrzés...";
-"danger_zone" = "VESZÉLYZÓNA";
-"deleting" = "Törlés…";
-"delete_account_permanent" = "Ez véglegesen törli a fiókodat és az összes adatot";
 "logout_confirm" = "Biztosan kijelentkezel?";
 "delete_account_full_warning" = "Ez a művelet nem vonható vissza. A fiókod véglegesen törlődik, minden személyes adat eltávolításra kerül, és az aktív előfizetések megszűnnek.";
 
 // MARK: - Rendelések
 "orders_title" = "Rendelések";
 "order_number" = "Rendelés #%@";
-"order_total" = "Összesen: %@";
-"order_tags" = "Biléták rendelése";
-"replace_tag" = "Biléta csere";
 "add_pet_first_replacement" = "Először adj hozzá egy kedvencet, hogy bilétát cserélhess.";
-"order_more_tags_title" = "További biléták rendelése";
-"add_another_pet" = "Kedvenc hozzáadása";
-"full_name" = "Teljes név";
-"place_order" = "Rendelés leadása";
-"order_created_payment_pending" = "Rendelés létrehozva. Fizetés folyamatban.";
-"payment_intent_failed" = "Sikertelen fizetési szándék";
-"order_create_failed" = "Nem sikerült létrehozni a rendelést";
-"order_replacement_title" = "Biléta csere rendelése";
-"pet_label" = "Kedvenc: %@";
-"order_replacement_button" = "Csere rendelése";
-"replacement_ordered" = "Csere megrendelve";
-"replacement_failed" = "Nem sikerült megrendelni a cserét";
-"replacement_order_failed" = "Nem sikerült létrehozni a csere rendelést";
-"create_payment_intent_failed" = "Nem sikerült létrehozni a fizetési szándékot";
 "orders_no_orders" = "Nincsenek rendelések";
 "orders_no_orders_message" = "Még nem adtál le rendelést";
-"orders_order_number %@" = "Rendelés #%@";
 "orders_information" = "Rendelési információk";
 "orders_order_id" = "Rendelés azonosító";
 "orders_status" = "Állapot";
@@ -856,49 +531,27 @@
 "orders_tag_pending" = "QR biléta függőben";
 "orders_tag_assigned" = "QR biléta hozzárendelve";
 "orders_detail_title" = "Rendelés részletei";
-"failed_load_orders" = "Nem sikerült betölteni a rendeléseket";
-"order_id_short" = "Rendelés #%@";
-"order_information" = "Rendelési információk";
-"order_id_label" = "Rendelés azonosító";
-"status" = "Állapot";
-"total_amount" = "Végösszeg";
-"order_date" = "Rendelés dátuma";
-"items" = "Tételek";
 
 // MARK: - További biléták rendelése
 "order_more_title" = "További biléták rendelése";
 "order_more_complete" = "Rendelés kész!";
-"order_more_payment_pending" = "A rendelésed leadva. Hamarosan emailt kapsz a fizetési instrukciókkal.";
 "order_more_confirmation" = "A bilétákat a fizetés megerősítése után szállítjuk.";
 "order_more_pet_names" = "Kedvencek nevei";
 "order_more_pet_names_footer" = "Add meg azoknak a kedvenceknek a nevét, akiknek bilétát szeretnél. A bilétára gravírozzuk a kedvenc nevét.";
-"order_more_pet_name_placeholder" = "Kedvenc neve";
 "order_more_add_another" = "Kedvenc hozzáadása";
 "order_more_your_info" = "Adataid";
-"order_more_full_name" = "Teljes név";
-"order_more_email" = "Email";
-"order_more_phone" = "Telefonszám";
 "order_more_shipping" = "Szállítási cím";
 "order_more_street" = "Utca, házszám";
-"order_more_street_placeholder" = "Add meg az utcát és házszámot";
 "order_more_line2" = "Emelet, ajtó (opcionális)";
-"order_more_line2_placeholder" = "4/B";
 "order_more_city" = "Város";
-"order_more_province" = "Megye / állam (opcionális)";
 "order_more_postal" = "Irányítószám";
 "order_more_country" = "Ország";
 "order_more_summary" = "Rendelés összegzése";
 "order_more_tags_count %lld" = "Biléták (%lld)";
 "order_more_shipping_cost" = "Szállítás";
 "order_more_total" = "Összesen";
-"order_more_creating" = "Rendelés létrehozása...";
-"order_more_place_order" = "Rendelés leadása";
 "order_more_proceed_to_payment" = "Tovább a fizetéshez";
 "order_more_redirecting" = "Átirányítás...";
-"pet_names" = "Kedvencek nevei";
-"shipping_address" = "Szállítási cím";
-"shipping" = "Szállítás";
-"get_qr_tags_subtitle" = "Szerezz QR bilétákat a kedvenceidnek";
 
 // MARK: - Cserebiléta rendelése
 "order_replace_title" = "Biléta csere rendelése";
@@ -911,19 +564,14 @@
 "order_replace_shipping" = "Szállítási cím";
 "order_replace_shipping_footer" = "A cserebilétát erre a címre szállítjuk.";
 "order_replace_street" = "Utca, házszám";
-"order_replace_street_placeholder" = "Add meg az utcát és házszámot";
 "order_replace_line2" = "Emelet, ajtó (opcionális)";
-"order_replace_line2_placeholder" = "4/B";
 "order_replace_city" = "Város";
 "order_replace_postal" = "Irányítószám";
 "order_replace_country" = "Ország";
 "order_replace_phone" = "Telefonszám (opcionális)";
-"order_replace_phone_placeholder" = "Add meg a telefonszámod";
 "order_replace_creating" = "Rendelés létrehozása...";
 "order_replace_free_button" = "Megerősítés & ingyenes csere biléta rendelése";
 "order_replace_paid_button %@" = "Megerősítés & fizetés: %@";
-"replacement_subtitle" = "Elveszett vagy sérült? Küldünk újat";
-"free_replacement" = "Ingyenes csere";
 
 // MARK: - Delivery Method & PostaPoint
 "delivery_method_title" = "Szállítási mód";
@@ -937,7 +585,6 @@
 
 // MARK: - Nyilvános kedvenc profil
 "public_profile_preview" = "Nyilvános profil előnézet";
-"failed_load_profile" = "Nem sikerült betölteni a profilt";
 "public_profile_subtitle" = "Így látják mások %@ profilját";
 "owner_notified_sms_email" = "%@ gazdája SMS-t és emailt kap a tartózkodási helyedről";
 "contact_owner_plea" = "Kérlek, tudasd a gazdámmal, hogy megtaláltál…";
@@ -949,7 +596,6 @@
 "unique_features" = "Egyedi jegyek";
 "behavior_notes" = "Viselkedési megjegyzések";
 "yes" = "Igen";
-"no" = "Nem";
 "how_it_works" = "Hogyan működik";
 "help_reunite_pet" = "Segíts biztonságosan újraegyesíteni %@-t a gazdájával";
 "step_share_location" = "Helyed megosztása";
@@ -958,8 +604,6 @@
 "step_owner_notified_desc" = "A gazda SMS-t és emailt kap a helyedről";
 "step_quick_reunion" = "Gyors újraegyesülés";
 "step_quick_reunion_desc" = "A gazda a helyedre navigálhat, hogy összegyűjtse a kedvencét";
-"owner_phone_label" = "Gazda telefonszáma: %@";
-"owner_email_label" = "Gazda email címe: %@";
 
 // MARK: - Offline mód
 "offline_mode" = "Offline mód";
@@ -967,13 +611,8 @@
 "sync_completed" = "Szinkronizálás kész";
 "sync_failed" = "Szinkronizálás sikertelen: %@";
 "sync_no_connection" = "Nem lehet szinkronizálni: nincs internetkapcsolat";
-"pending_changes" = "Függőben lévő változások";
-"online" = "Online";
 "offline_changes_sync" = "A változások online állapotban szinkronizálódnak";
-"tap_view_queued_actions" = "Koppints a sorba állított műveletek megtekintéséhez";
-"connected" = "Kapcsolódva";
 "sync_now" = "Szinkronizálás most";
-"changes_sync_restored" = "A változások automatikusan szinkronizálódnak, ha a kapcsolat helyreáll.";
 "offline_pending_changes" = "Függőben lévő változások";
 "offline_online" = "Online";
 "offline_sync_message" = "A változások online állapotban szinkronizálódnak";
@@ -987,7 +626,6 @@
 "sync_tried_count %lld" = "%lld alkalommal próbáltuk";
 
 // MARK: - Hiba újrapróbálás nézet
-"error_something_wrong" = "Valami hiba történt";
 "something_went_wrong" = "Valami hiba történt";
 "try_again" = "Próbáld újra";
 
@@ -1001,16 +639,8 @@
 "map_pet_location %@" = "%@ helye";
 "location_title" = "%@ helye";
 "approximate_location_note" = "Ez egy közelítő hely (~500m). Keresd a környező területet.";
-"coordinates_label" = "Koordináták: %@";
-"open_in" = "Megnyitás itt:";
-"google_maps" = "Google Térkép";
-"waze" = "Waze";
 
 // MARK: - Alkalmazás információ
-"app_name_label" = "Pet Safety";
-"app_version" = "Verzió 1.0.0";
-"terms_url" = "Feltételek: https://senra.pet/terms-conditions";
-"privacy_url" = "Adatvédelem: https://senra.pet/privacy-policy";
 
 // MARK: - Beolvasó dinamikus leírások
 "scanner_step1_dynamic_desc" = "Kattints a fenti gombra, hogy megoszd, hol találtad meg %@-t";
@@ -1032,11 +662,10 @@
 "contacts_no_type_added" = "Nincs megadva: %@";
 
 // MARK: - További cserebiléta rendelés kulcsok
-"order_replace_upgrade_hint" = "Válts Standard vagy Ultimate csomagra ingyenes cserékért";
+"order_replace_upgrade_hint" = "Válts Standard vagy Maximum csomagra ingyenes cserékért";
 "order_replace_old_deactivated" = "A régi QR kód deaktiválva lesz a rendelés leadásakor";
 "order_replace_delivery_time" = "Az új bilétád 5-7 munkanapon belül megérkezik";
 "order_replace_scan_activate" = "A biléta megérkezése után be kell olvasnod az aktiváláshoz";
-"order_replace_province" = "Megye / állam (opcionális)";
 
 // MARK: - További offline kulcsok
 "offline_last_sync_label" = "Utolsó szinkron ideje";
@@ -1257,7 +886,6 @@
 "some_time" = "egy idő";
 "list" = "Lista";
 "map" = "Térkép";
-"post_to_success_stories" = "Közzététel a sikertörténeteknél";
 "remove_from_success_stories" = "Eltávolítás a sikertörténetekből";
 "removed_from_success_stories" = "Eltávolítva a sikertörténetekből";
 "remove_story_confirm_title" = "Sikertörténet eltávolítása?";
@@ -1275,8 +903,6 @@
 "reward_badge" = "Jutalom: %@";
 
 // MARK: - További lokalizációs kulcsok
-"data_export_requested" = "Az adatexportálás 24 órán belül e-mailben érkezik";
-"account_deletion_unavailable" = "A fiók törlése jelenleg nem elérhető. Kérjük, lépjen kapcsolatba az ügyfélszolgálattal.";
 "cannot_delete_missing_message_short" = "Először jelölje meg ezt a kisállatot megtaláltként a törlés előtt.";
 "plan_feature_pets_count" = "Kisállatok: %@";
 "plan_feature_photos_count" = "%lld fotó kisállatonként";
@@ -1294,21 +920,21 @@
 "help_faq_q9" = "Hogyan működnek az eltűnt kedvenc riasztások?";
 "help_faq_a9" = "Amikor eltűntként jelölsz egy kedvencet, egy riasztás jön létre a kedvenced fotójával és adataival. Más Senra felhasználók 10 km-en belül látják a riasztást az Eltűnt kedvencek térképen. Bárki a közösségből jelenthet észlelést, amely elküldi neked a helyét és elérhetőségét. A Senra-nál regisztrált állatorvosok és menhelyek a környékeden szintén megkapják a riasztást.";
 "help_faq_q10" = "Hogyan rendelhetek cserebilétát?";
-"help_faq_a10" = "Menj a Fiók oldalra és kattints a 'Csere rendelése' gombra. Válaszd ki, melyik kedvencnek kell új biléta. Az Ultimate csomag tagjai korlátlan ingyenes cserét kapnak, a Standard csomag tagjai évente egy ingyenes cserét, a Starter csomag tagjai pedig kis szállítási díjért rendelhetnek cserét.";
+"help_faq_a10" = "Menj a Fiók oldalra és kattints a 'Csere rendelése' gombra. Válaszd ki, melyik kedvencnek kell új biléta. Az Maximum csomag tagjai korlátlan ingyenes cserét kapnak, a Standard csomag tagjai évente egy ingyenes cserét, a Starter csomag tagjai pedig kis szállítási díjért rendelhetnek cserét.";
 "help_faq_q11" = "Mi az ajánlói program?";
-"help_faq_a11" = "Oszd meg a SENRAFRIEND kódot barátaiddal és családtagjaiddal. Amikor valaki felhasználja ezt a kódot és előfizet egy fizetős csomagra (Standard vagy Ultimate), te és a barátod is 2 hónap ingyenességet kaptok. Az ajánlásaidat és azok állapotát az Ajánló oldalon követheted nyomon.";
+"help_faq_a11" = "Oszd meg a SENRAFRIEND kódot barátaiddal és családtagjaiddal. Amikor valaki felhasználja ezt a kódot és előfizet egy fizetős csomagra (Standard vagy Maximum), te és a barátod is 2 hónap ingyenességet kaptok. Az ajánlásaidat és azok állapotát az Ajánló oldalon követheted nyomon.";
 "help_faq_q12" = "Mely országokba szállítotok?";
 "help_faq_a12" = "Jelenleg Magyarországra, Szlovákiába, Csehországba, Ausztriába, Romániába, Horvátországba, Spanyolországba és Portugáliába szállítunk. Magyarországi szállítás: 1 490 Ft (PostaPont) vagy 2 490 Ft (házhozszállítás). Nemzetközi szállítás: €9,95 rendelésenként.";
 "help_faq_q13" = "Lehet több kedvencem egy fiókon?";
-"help_faq_a13" = "Igen. A Starter (ingyenes) csomagnál egy kedvencet regisztrálhatsz. A Standard csomag szintén egy kedvencet támogat. Az Ultimate csomag korlátlan számú kedvencet támogat. A csomagodat bármikor frissítheted a Fiók oldalon.";
+"help_faq_a13" = "Igen. A Starter (ingyenes) csomagnál akár 10 kisállatot regisztrálhatsz. A Standard csomag 1 kedvencet támogat. Az Maximum csomag akár 10 kisállatot támogat. A csomagodat bármikor frissítheted a Fiók oldalon.";
 "help_faq_q14" = "Hogyan jelenthetek egy megtalált kedvencet?";
 "help_faq_a14" = "Ha a kedvencnek van Senra bilétája, egyszerűen olvasd be a QR-kódot a telefonod kamerájával — nincs szükség alkalmazásra. Megtekintheted a kedvenc profilját, és megoszthatod a helyed a gazdával. Ha nincs biléta, megnézheted az Eltűnt kedvencek térképet a Senra weboldalán, hogy jelentették-e a kedvencet eltűntként a környékeden.";
 "help_faq_q15" = "Biztonságban vannak a személyes adataim?";
 "help_faq_a15" = "Igen. Te határozod meg, pontosan milyen adatok láthatók, amikor valaki beolvassa a kedvenced bilétáját. A Beállítások > Adatvédelem menüben kiválaszthatod, hogy megjelenjen-e a telefonszámod, e-mail címed és lakcímed. A bejelentkezésed egyszeri ellenőrző kódokkal védett — nincs jelszó, amit el lehetne lopni. A fiókodat és minden adatodat bármikor törölheted.";
 "help_faq_q16" = "Elvesztettem a bilétát vagy megsérült — mit tegyek?";
-"help_faq_a16" = "Ne aggódj — a kedvenced digitális profilja biztonságban van, és nem a bilétán tárolódik. Menj a Fiók oldalra és kattints a 'Csere rendelése' gombra. Egy új bilétát friss QR-kóddal kapcsolunk a meglévő kedvenc profilodhoz. A Standard csomag tagjai évente egy ingyenes cserét kapnak, az Ultimate tagok korlátlan ingyenes cserét, a Starter tagok pedig kis szállítási díjat fizetnek. A régi bilétád az új aktiválásakor leáll.";
+"help_faq_a16" = "Ne aggódj — a kedvenced digitális profilja biztonságban van, és nem a bilétán tárolódik. Menj a Fiók oldalra és kattints a 'Csere rendelése' gombra. Egy új bilétát friss QR-kóddal kapcsolunk a meglévő kedvenc profilodhoz. A Standard csomag tagjai évente egy ingyenes cserét kapnak, az Maximum tagok korlátlan ingyenes cserét, a Starter tagok pedig kis szállítási díjat fizetnek. A régi bilétád az új aktiválásakor leáll.";
 "help_faq_q17" = "A bilétám nem olvasható be — hogyan javíthatom?";
-"help_faq_a17" = "Próbáld a következőket: tisztítsd meg a biléta felületét nedves ruhával, biztosíts jó megvilágítást, tartsd stabilan a telefonod kameráját kb. 10-15 cm-re a bilétától, és ellenőrizd, hogy a kamera alkalmazásod vagy QR-olvasód működik-e. Ha a QR-kód karcolódott vagy elhalványult, használhatod a kézi kódbeviteli lehetőséget az alkalmazásban a 'Biléta beolvasása' menüben. Ha a biléta túlságosan sérült az olvasáshoz, rendelj ingyenes cserét a Fiók oldalon (Standard és Ultimate csomagok).";
+"help_faq_a17" = "Próbáld a következőket: tisztítsd meg a biléta felületét nedves ruhával, biztosíts jó megvilágítást, tartsd stabilan a telefonod kameráját kb. 10-15 cm-re a bilétától, és ellenőrizd, hogy a kamera alkalmazásod vagy QR-olvasód működik-e. Ha a QR-kód karcolódott vagy elhalványult, használhatod a kézi kódbeviteli lehetőséget az alkalmazásban a 'Biléta beolvasása' menüben. Ha a biléta túlságosan sérült az olvasáshoz, rendelj ingyenes cserét a Fiók oldalon (Standard és Maximum csomagok).";
 "help_faq_q18" = "Találtam egy kedvencet Senra biléta nélkül — mit tehetek?";
 "help_faq_a18" = "Nézd meg az Eltűnt kedvencek térképet a Senra weboldalán (senra.pet) — lehet, hogy a kedvencet eltűntként jelentették a környékeden. Fiók nélkül is megtekintheted az eltűnt kedvenc riasztásokat. Ha találsz egyezést, jelents észlelést a helyeddel, hogy segíts újraegyesíteni a kedvencet a gazdájával. A kedvencet elviheted egy helyi állatorvoshoz is, hogy ellenőrizzék a mikrochipet.";
 "help_faq_q19" = "Megváltoztathatom az e-mail címemet?";
@@ -1328,7 +954,7 @@
 "help_faq_q26" = "Hogyan jutnak el az eltűnt kedvenc riasztások az állatorvosokhoz és menhelyekhez?";
 "help_faq_a26" = "Amikor eltűntként jelölöd a kedvencedet, a Senra automatikusan e-mail riasztásokat küld az összes hitelesített állatorvosnak és menhelynek a környékeden. Ez azt jelenti, hogy a helyi állatszakemberek azonnal tudják, hogy a kedvenced eltűnt, és figyelhetnek rá. Minél több állatorvos és menhely van regisztrálva a környékeden, annál erősebb a biztonsági hálózat. Te is segíthetsz azzal, hogy bátorítod a saját állatklinikadat a Senra-nál való regisztrációra.";
 "help_faq_q27" = "Áthelyezhetek egy bilétát másik kedvencre?";
-"help_faq_a27" = "Minden QR biléta véglegesen egy kedvenc profilhoz van kapcsolva, és nem rendelhető át. Ha egy kedvenc elpusztul, vagy már nincs szükséged a bilétára, a régi biléta egyszerűen inaktívvá válik. Új kedvenc bilétázásához rendelj új bilétát a Fiók oldalon. Ha Standard vagy Ultimate csomagod van, jogosult lehetsz ingyenes cserebilétára az új kedvencedhez.";
+"help_faq_a27" = "Minden QR biléta véglegesen egy kedvenc profilhoz van kapcsolva, és nem rendelhető át. Ha egy kedvenc elpusztul, vagy már nincs szükséged a bilétára, a régi biléta egyszerűen inaktívvá válik. Új kedvenc bilétázásához rendelj új bilétát a Fiók oldalon. Ha Standard vagy Maximum csomagod van, jogosult lehetsz ingyenes cserebilétára az új kedvencedhez.";
 "help_guide_qr_tags_title" = "QR-kódos kedvenc biléták";
 "help_guide_qr_tags_desc" = "Ismerd meg okos QR-kódos kedvenc bilétáinkat és működésüket.";
 "help_guide_materials_title" = "Címke anyaga és tartóssága";
@@ -1363,3 +989,29 @@
 "order_status_delivered" = "Delivered";
 "order_status_cancelled" = "Cancelled";
 "orders_item_count %lld" = "%lld items";
+
+// MARK: - Scanner Additional
+"scanner_owner_address" = "Tulajdonos címe";
+
+// MARK: - Billing Additional
+"billing_past_due_title" = "Lejárt fizetés";
+"billing_past_due_message" = "Az előfizetésed fizetése lejárt. Kérjük, frissítsd a fizetési módod.";
+"billing_update_payment" = "Fizetés frissítése";
+
+// MARK: - Address Additional
+"address_search_country" = "Ország keresése";
+
+// MARK: - Sync Additional
+"sync_failed_count" = "Szinkronizálás sikertelen";
+
+// MARK: - Pet Form Additional
+"pet_limit_reached" = "Kedvenclimit elérve";
+"upgrade_to_ultimate" = "Frissítés Maximum-re";
+"keep_current_plan" = "Jelenlegi csomag megtartása";
+"pet_limit_upgrade_message %@ %lld %@ %@" = "A(z) %@ csomagod %lld kedvencet engedélyez. Frissíts %@-ra %@ áron akár 10 kisállatért.";
+"pet_limit_upgrade_generic" = "Frissítsd a csomagodat több kedvenc hozzáadásához.";
+
+// MARK: - Breed Picker Species Headers
+"species_dog" = "Kutya";
+"species_cat_header" = "Macska";
+"species_bird_no_picker" = "Madár (nincs választó)";

@@ -9,21 +9,14 @@
 "back" = "Voltar";
 "submit" = "Enviar";
 "skip" = "Ignorar";
-"loading" = "A carregar...";
 "error" = "Erro";
 "success" = "Sucesso";
-"confirm" = "Confirmar";
 "retry" = "Tentar novamente";
 "done" = "Concluído";
-"edit" = "Editar";
-"add" = "Adicionar";
 "remove" = "Remover";
 "search" = "Pesquisar";
-"settings" = "Definições";
 "updated" = "Atualizado";
-"update_failed" = "Falha na atualização";
 "enable" = "Ativar";
-"change" = "Alterar";
 "primary" = "Principal";
 
 // MARK: - Barra de separadores
@@ -34,18 +27,14 @@
 "tab_account" = "Conta";
 
 // MARK: - Autenticação
-"auth_tagline" = "Mantenha os seus animais seguros com etiquetas QR";
 "welcome_back" = "Bem-vindo de volta!";
 "enter_email_subtitle" = "Introduza o seu e-mail para receber um código de acesso.";
 "email_address" = "Endereço de e-mail";
 "send_login_code" = "Enviar código de acesso";
-"enter_otp_code" = "Introduza o código de 6 dígitos";
 "verify_code" = "Verificar código";
 "use_different_email" = "Usar outro e-mail";
 "code_sent_to_email" = "Código enviado para %@";
 "otp_sent_to" = "Introduza o código de 6 dígitos enviado para";
-"login_failed" = "Falha no login";
-"verification_failed" = "Falha na verificação";
 "invalid_email" = "Introduza um endereço de e-mail válido";
 "resend_code_cooldown" = "Reenviar código em %llds";
 "resend_code_prompt" = "Não recebeu o código? Reenviar";
@@ -57,7 +46,6 @@
 "already_have_account" = "Já tem conta?";
 "log_in" = "Iniciar sessão";
 "terms_login_prefix" = "Ao iniciar sessão, aceita os nossos ";
-"terms_register_prefix" = "Ao registar-se, aceita os nossos ";
 "terms_and" = " e ";
 "terms_of_service" = "Termos de Serviço";
 "privacy_policy" = "Política de Privacidade";
@@ -68,12 +56,6 @@
 
 // MARK: - Biométrico
 "biometric_login_title" = "Login biométrico";
-"biometric_login_subtitle" = "Use a sua impressão digital ou o rosto para iniciar sessão";
-"use_password" = "Usar e-mail";
-"login_with_biometric" = "Iniciar sessão com biometria";
-"enable_biometric_title" = "Ativar login biométrico?";
-"enable_biometric_message" = "Use a sua impressão digital ou o rosto para iniciar sessão rapidamente da próxima vez.";
-"biometric_enabled" = "Login biométrico ativado";
 "enable_biometric_type" = "Ativar %@?";
 "biometric_type_enabled" = "%@ ativado";
 "use_biometric_quick_login" = "Use %@ para iniciar sessão rapidamente da próxima vez.";
@@ -82,9 +64,6 @@
 "by_creating_account_agree" = "Ao criar uma conta, aceita os nossos";
 
 // MARK: - Sessão
-"session_expired_title" = "Sessão expirada";
-"session_expired_message" = "A sua sessão expirou. Inicie sessão novamente.";
-"session_expired_log_in" = "Iniciar sessão";
 
 // MARK: - Início / Lista de animais
 "pet_owner_default" = "Dono do animal";
@@ -102,37 +81,23 @@
 "missing_badge" = "DESAPARECIDO";
 "add_pet" = "Adicionar animal";
 "pet_name" = "Nome do animal";
-"pet_safety_user" = "Utilizador Pet Safety";
 
 // MARK: - Detalhe do animal
-"breed_label" = "Raça: %@";
-"color_label" = "Cor: %@";
-"age_label" = "Idade: %@";
-"microchip_label" = "Microchip: %@";
 "species_label" = "Espécie: %@";
 "medical_information" = "Informação médica";
 "additional_information" = "Informação adicional";
-"photo_gallery" = "Galeria de fotos";
 "edit_pet" = "Editar animal";
 "view_pet_photos" = "Ver fotos de %@";
 "mark_as_found" = "Marcar como encontrado";
 "mark_as_lost" = "Marcar como desaparecido";
-"mark_found" = "Marcar encontrado";
-"mark_missing" = "Marcar desaparecido";
 "age" = "Idade";
 "view_public_profile" = "Ver perfil público de %@";
 "edit_pet_profile" = "Editar perfil de %@";
-"delete_pet_name" = "Eliminar %@";
-"delete_pet_confirm_title" = "Eliminar %@?";
-"delete_pet_confirm_message" = "Esta ação não pode ser desfeita. Todos os dados de %@ serão eliminados permanentemente.";
 "cannot_delete_missing_pet" = "Não é possível eliminar um animal desaparecido";
-"cannot_delete_missing_message" = "%@ está marcado como desaparecido. Marque como encontrado antes de eliminar.";
 "mark_found_confirm_title" = "Marcar %@ como encontrado?";
 "mark_found_confirm_message" = "Isto irá fechar o alerta de desaparecimento de %@. Tem a certeza?";
 "marked_found_message" = "%@ marcado como encontrado.";
-"marked_missing_message" = "%@ marcado como desaparecido.";
 "mark_found_failed" = "Falha ao marcar como encontrado";
-"mark_missing_failed" = "Falha ao marcar como desaparecido";
 "pet_deleted" = "%@ foi eliminado";
 "delete_pet_failed" = "Falha ao eliminar o animal";
 
@@ -145,111 +110,60 @@
 "medical_notes" = "Notas médicas";
 "photo" = "Foto";
 "edit_photo" = "Editar foto";
-"photo_selected_hint" = "Foto selecionada";
 "choose_photo_hint" = "Escolha uma foto do seu animal";
 "basic_information" = "Informação básica";
 "colour" = "Cor";
 "colour_optional" = "Cor (opcional)";
 "microchip_optional" = "Número do microchip (opcional)";
 "sex" = "Sexo";
-"not_specified" = "Não especificado";
 "neutered_spayed" = "Castrado/Esterilizado";
 "neutered" = "Castrado";
 "health_information" = "Informação de saúde";
-"medical_notes_hint" = "Notas médicas (condições, cirurgias, etc.)";
 "health_info_hint" = "Alergias, medicação, condições médicas...";
 "behavior_notes_hint" = "Notas de comportamento (temperamento, treino, etc.)";
 "save_changes" = "Guardar alterações";
 "delete_pet_button" = "Eliminar animal";
-"delete_pet_dialog_title" = "Eliminar %@?";
 "delete_pet_dialog_message" = "Tem a certeza que pretende eliminar este animal? Esta ação não pode ser desfeita.";
-"male" = "Macho";
-"female" = "Fêmea";
-"default_species_dog" = "Cão";
 "species_cat" = "Gato";
-"search_breed" = "Pesquisar raça...";
 "select_photo" = "Selecionar foto";
 "select_pet" = "Selecionar animal";
 "select_pet_for_replacement" = "Selecionar animal para etiqueta de substituição";
-"physical_details" = "Detalhes físicos";
 "weight" = "Peso";
 "weight_optional" = "Peso em kg (opcional)";
 "date_of_birth" = "Data de nascimento";
 "allergies_hint" = "Alergias (comida, medicação, etc.)";
-"medications_hint" = "Medicamentos atuais";
 "unique_features_hint" = "Características únicas (marcas, cicatrizes, etc.)";
-"photo_selected" = "Foto selecionada";
 "pet_created" = "Animal criado";
-"pet_create_failed" = "Falha ao criar o animal";
 "pet_updated" = "Animal atualizado";
-"pet_update_failed" = "Falha ao atualizar o animal";
 "pet_updated_photo_failed" = "Animal atualizado! O upload da foto falhou - tente mais tarde.";
 
 // MARK: - Galeria de fotos
 "pet_photos_title" = "Fotos de %@";
 "add_photos" = "Adicionar fotos";
-"uploading_photos" = "A enviar fotos\u2026";
-"loading_photos" = "A carregar fotos\u2026";
 "no_photos_yet" = "Ainda sem fotos";
 "add_photos_gallery_hint" = "Adicione fotos para criar uma galeria de %@";
 "add_photos_gallery_generic" = "Adicione fotos para criar uma galeria";
 "choose_photo_source" = "Escolher origem da foto";
-"camera" = "Câmara";
-"library" = "Biblioteca";
 "delete_photo" = "Eliminar foto";
 "delete_photo_confirm" = "Tem a certeza que pretende eliminar esta foto? Esta ação não pode ser desfeita.";
 "photo_tip" = "Dica: pressione uma foto para definir como principal ou eliminar";
 "photo_uploaded" = "Foto enviada";
-"upload_failed" = "Falha no envio";
-"primary_updated" = "Foto principal atualizada";
-"primary_failed" = "Falha ao definir principal";
 "photo_deleted" = "Foto eliminada";
-"delete_photo_failed" = "Falha ao eliminar a foto";
-"upload_photo_failed" = "Falha ao enviar a foto";
-"add_photo" = "Adicionar foto";
-"use_camera" = "Abrir câmara do dispositivo";
 "choose_from_gallery" = "Escolher da galeria";
-"select_existing_photo" = "Selecionar foto existente";
-"choose_photos" = "Escolher fotos";
 "take_photo" = "Tirar foto";
 "photo_gallery_title" = "Galeria de fotos";
 
 // MARK: - Leitor QR
-"scan_qr" = "Ler QR";
 "scan_qr_code" = "Ler código QR";
 "scan_qr_subtitle" = "Aponte a câmara para a etiqueta QR do animal";
-"camera_access_required" = "Acesso à câmara necessário";
-"camera_access_message" = "Ative o acesso à câmara nas Definições para ler códigos QR";
-"enable_camera" = "Ativar câmara";
-"qr_scanned" = "QR lido";
-"manual_code_entry" = "Introduzir código manualmente";
-"manual_code_label" = "Código QR";
-"submit_code" = "Enviar código";
-"invalid_qr_code" = "Introduza um código válido";
-"turn_off_flashlight" = "Desligar lanterna";
-"turn_on_flashlight" = "Ligar lanterna";
 "hello_pet_name" = "Olá! Eu sou %@";
 "scanned_tag_thanks" = "Acabou de ler a minha etiqueta. Obrigado por me ajudar!";
 "share_location_with_owner" = "Partilhar a minha localização com o dono";
-"owner_notified_message" = "O dono de %@ receberá uma notificação com a sua localização";
-"share_location_help" = "Ajude o dono de %@ a encontrá-lo partilhando a sua localização";
-"precise_location" = "Localização precisa";
-"precise_location_desc" = "Partilhe as suas coordenadas GPS exatas";
-"approximate_location" = "Localização aproximada";
-"approximate_location_desc" = "Partilhar com precisão de ~500 m (compatível com RGPD)";
-"dont_share_location" = "Não partilhar localização";
-"dont_share_location_desc" = "Apenas notificar o dono de que o animal foi encontrado";
-"sending" = "A enviar\u2026";
-"confirm_notify_owner" = "Confirmar e notificar o dono";
 "contact_owner" = "Contactar o dono";
 "call_phone" = "Ligar: %@";
 "email_contact" = "E-mail: %@";
 "privacy_notice" = "A sua privacidade é importante. Só partilharemos a sua localização com o dono de %@ para ajudar a reuni-los.";
-"recommended" = "Recomendado";
 "found_pet_title" = "%@ encontrado";
-"share_location" = "Partilhar localização";
-"location_shared" = "Localização partilhada";
-"share_location_failed" = "Falha ao partilhar localização";
 
 // MARK: - Fluxo de partilha de localização
 "share_help_get_home %@" = "Ajude %@ a voltar para casa";
@@ -269,35 +183,15 @@
 "share_found_pet %@" = "%@ encontrado!";
 
 // MARK: - Detalhe do leitor
-"scanner_title" = "Ler código QR";
-"scanner_subtitle" = "Aponte a câmara para a etiqueta QR do animal";
-"scanner_camera_required" = "Acesso à câmara necessário";
-"scanner_camera_message" = "Ative o acesso à câmara nas Definições para ler códigos QR";
 "scanner_open_settings" = "Abrir definições";
-"scanner_greeting %@" = "Olá! Eu sou %@";
-"scanner_scanned_message" = "Acabou de ler a minha etiqueta. Obrigado por me ajudar!";
 "scanner_breed" = "Raça";
 "scanner_age" = "Idade";
 "scanner_color" = "Cor";
-"scanner_share_location" = "Partilhar a minha localização com o dono";
-"scanner_owner_notified" = "O dono foi notificado de que a etiqueta do seu animal foi lida.";
-"scanner_contact_owner" = "Contactar o dono";
-"scanner_contact_instructions" = "Contacte o dono para informar que encontrou o animal:";
-"scanner_call %@" = "Ligar: %@";
-"scanner_email %@" = "E-mail: %@";
 "scanner_owner_location" = "Localização do dono";
 "scanner_medical_info" = "Informação médica";
 "scanner_allergies" = "Alergias";
 "scanner_notes" = "Notas";
 "scanner_how_it_works" = "Como funciona";
-"scanner_step1_title" = "1. Ler a etiqueta";
-"scanner_step1_desc" = "Já o fez! A etiqueta contém um código QR único.";
-"scanner_step2_title" = "2. Partilhar localização";
-"scanner_step2_desc" = "Toque no botão acima para partilhar onde encontrou o animal.";
-"scanner_step3_title" = "3. Contactar o dono";
-"scanner_step3_desc" = "Use os contactos para falar diretamente com o dono.";
-"scanner_privacy_notice" = "A sua localização exata não é partilhada. Apenas a área aproximada (~500 m) é visível.";
-"scanner_found_pet %@" = "%@ encontrado!";
 
 // MARK: - Ativação de etiqueta
 "tag_activate_title" = "Ativar etiqueta";
@@ -321,98 +215,50 @@
 "plan_upgrade_title" = "Atualizar plano";
 "plan_upgrade_subtitle" = "Obtenha mais funcionalidades para os seus animais";
 "plan_loading" = "A carregar planos...";
-"plan_failed_to_load" = "Falha ao carregar planos";
-"plan_choose_your_plan" = "Escolha o seu plano";
 "plan_popular" = "Popular";
 "plan_current" = "Plano atual";
 "plan_select_free" = "Selecionar plano gratuito";
 "plan_select %@" = "Selecionar %@";
 "plan_skip_free" = "Ignorar por agora (Plano gratuito)";
 "plan_all_include" = "Todos os planos incluem:";
-"plan_feature_qr" = "Etiqueta QR para o seu animal";
-"plan_feature_profile" = "Página de perfil do animal";
-"plan_feature_scan_notify" = "Notificações de leitura";
 "plan_paid_add" = "Os planos pagos incluem:";
-"plan_feature_alerts" = "Alertas de animais desaparecidos";
-"plan_feature_location" = "Partilha de localização";
-"plan_feature_priority" = "Suporte prioritário";
 
 // MARK: - Alertas
-"alerts" = "Alertas";
 "tab_missing" = "Desaparecido";
 "tab_found" = "Encontrado";
 "tab_success" = "Animais encontrados";
-"show_list" = "Mostrar lista";
-"show_map" = "Mostrar mapa";
-"unknown_pet" = "Animal desconhecido";
-"pet_alert" = "Alerta de animal";
-"alert_status" = "Estado: %@";
-"alert_last_seen" = "Visto pela última vez: %@";
-"alert_info" = "Info: %@";
-"alert_sightings_count" = "Avistamentos: %lld";
-"alert_marker" = "Alerta";
-"loading_alerts" = "A carregar alertas\u2026";
 "failed_load_alerts" = "Falha ao carregar alertas";
 "no_active_alerts" = "Sem alertas ativos";
 "no_active_alerts_message" = "De momento não tem alertas de animais desaparecidos";
-"no_found_alerts" = "Sem alertas de encontrados";
-"no_found_alerts_message" = "Nenhum animal foi encontrado recentemente na sua área";
 "missing_pet_alerts_title" = "Alertas de animais desaparecidos";
 "create_alert" = "Criar alerta";
 "create_new_alert" = "Criar novo alerta";
 "sighting_count_singular" = "1 avistamento";
 "sighting_count_plural" = "%lld avistamentos";
-"unknown_breed" = "Raça desconhecida";
 "last_seen_label" = "Visto pela última vez";
 "reported_sightings_count" = "Avistamentos reportados (%lld)";
 "report_a_sighting" = "Reportar avistamento";
 "anonymous" = "Anónimo";
 "contact_label" = "Contacto: %@";
-"pet_marked_found" = "%@ foi marcado como encontrado!";
-"mark_found_failed_message" = "Falha ao marcar como encontrado: %@";
 
 // MARK: - Reportar desaparecimento / Avistamento
-"report_missing_title" = "Reportar %@ como desaparecido";
 "last_seen_location" = "Localização onde foi visto pela última vez";
-"additional_info" = "Informação adicional";
-"report" = "Reportar";
 "report_sighting" = "Reportar avistamento";
-"report_sighting_prompt" = "Partilhe detalhes sobre onde viu o animal.";
 "notes" = "Notas";
-"sighting_reported" = "Avistamento reportado";
-"report_failed" = "Falha ao reportar";
 "sighting_location" = "Localização do avistamento";
 "use_current_location" = "Usar localização atual";
 "location_captured" = "Localização capturada por GPS";
-"create_alert_failed" = "Falha ao criar alerta";
-"update_alert_failed" = "Falha ao atualizar alerta";
-"report_sighting_failed" = "Falha ao reportar avistamento";
 "report_missing_pet" = "Reportar animal desaparecido";
 "select_pet_to_report" = "Selecione um animal";
-"add_missing_details" = "Adicionar detalhes do desaparecimento";
-"enter_address_or_location" = "Introduza a morada ou descrição do local";
 "additional_details" = "Detalhes adicionais";
-"describe_circumstances" = "Descreva as circunstâncias, traços distintivos, etc.";
-"report_missing" = "Reportar desaparecido";
-"no_pets_to_report_message" = "Adicione um animal antes de o reportar como desaparecido";
-"mark_pet_found" = "Marcar animal como encontrado";
-"select_pet_to_mark_found" = "Selecione o animal que foi encontrado";
-"no_missing_pets_message" = "Não tem animais marcados como desaparecidos";
 "select_pet_header" = "Selecionar animal";
 "no_pets_available" = "Sem animais disponíveis. Adicione um animal primeiro.";
-"pet_picker_label" = "Animal";
 "last_seen_location_header" = "Localização onde foi visto pela última vez";
 "enter_location" = "Introduzir localização";
 "additional_information_header" = "Informação adicional";
 "additional_details_placeholder" = "Forneça detalhes sobre quando e onde viu o seu animal pela última vez...";
 "alert_created_success" = "Alerta de animal desaparecido criado com sucesso!";
 "alert_queued_offline" = "Alerta em fila. Será sincronizado quando estiver online.";
-"your_contact_information" = "A sua informação de contacto";
-"name_optional" = "Nome (opcional)";
-"phone_optional" = "Telefone (opcional)";
-"email_optional" = "E-mail (opcional)";
-"details" = "Detalhes";
-"sighting_reported_success" = "Avistamento reportado com sucesso!";
 "report_sighting_header" = "Reportar avistamento";
 "report_sighting_help" = "Ajude a reunir este animal com o dono partilhando onde o viu.";
 "share_contact_info" = "Partilhar os meus contactos";
@@ -429,50 +275,25 @@
 "sighting_queued_offline" = "Avistamento em fila - será enviado quando estiver online.";
 
 // MARK: - Marcar perdido/encontrado
-"mark_pet_found_confirm" = "Marcar %@ como encontrado?";
-"mark_found_confirm_alert" = "Isto irá fechar o alerta de desaparecimento de %@. Tem a certeza?";
-"notification_center" = "Centro de notificações";
-"alerts_radius_info" = "Alertas serão enviados dentro de 10 km desta localização";
-"current_location" = "Localização atual";
-"tap_get_location" = "Toque para obter a localização atual\u2026";
-"using_registered_address" = "A usar a sua morada registada";
-"enter_address_notifications" = "Introduza a morada para notificações";
 
 // MARK: - Notificações
 "tag_scanned_message" = "A etiqueta de %@ foi lida em %@!";
-"unknown_location" = "um local desconhecido";
 "sighting_message_with_location" = "%@ foi avistado em %@!";
 "sighting_message_no_location" = "%@ foi avistado!";
-"pet_found_message" = "Boas notícias! %@ foi encontrado!";
-"notification_tag_scanned_title" = "%@ encontrado!";
-"notification_sighting_title" = "%@ avistado!";
-"notification_pet_found_title" = "Boas notícias!";
-"notification_channel_name" = "Alertas Pet Safety";
-"notification_method_required" = "Pelo menos um método de notificação deve estar ativado";
 
 // MARK: - Histórias de sucesso
 "success_stories" = "Histórias de sucesso";
 "found_pets" = "Animais encontrados";
 "success_stories_subtitle" = "Veja reencontros felizes perto de si";
-"share_your_story" = "Partilhe a sua história";
-"success_story_prompt" = "Boas notícias! %@ foi encontrado! Quer partilhar a sua história de reencontro para inspirar outros?";
-"your_story" = "A sua história";
-"story_placeholder" = "Conte-nos como se reencontraram...";
-"share_story" = "Partilhar história";
-"story_shared" = "História partilhada com sucesso";
-"story_share_failed" = "Falha ao partilhar história";
 "loading_success_stories" = "A carregar histórias de sucesso\u2026";
 "no_success_stories" = "Sem histórias de sucesso nas proximidades";
 "no_success_stories_message" = "Seja o primeiro a partilhar um reencontro feliz na sua área!";
 "found_and_reunited" = "Encontrado e reunido";
 "distance_km" = "A %.1f km";
-"missing_since" = "Desaparecido desde %@";
 "found_on" = "Encontrado %@";
 "success_story_marker" = "História de sucesso";
 "load_more" = "Carregar mais";
 "missing_for" = "Desaparecido há %@";
-"pet_found_share" = "%@ encontrado!";
-"reunited_in" = "Reunido em %@";
 "shared_via_pet_safety" = "Partilhado via Pet Safety App";
 
 // MARK: - Tempo das histórias de sucesso
@@ -485,32 +306,22 @@
 "success_minutes_ago %lld" = "há %lld minutos";
 
 // MARK: - Separador de histórias de sucesso
-"success_tab_title" = "Histórias de sucesso";
-"success_tab_list" = "Lista";
-"success_tab_map" = "Mapa";
 
 // MARK: - Pedido de história de sucesso
 "story_great_news" = "Boas notícias!";
 "story_post" = "Publicar";
-"story_pet_home %@" = "%@ está em casa!";
 "story_reunited" = "Reunidos!";
-"story_share_prompt" = "Partilhe a sua história de reencontro!";
-"story_inspiration" = "A sua história pode inspirar esperança a outros donos de animais na sua área.";
-"story_share_button" = "Partilhar a minha história";
 "story_maybe_later" = "Talvez mais tarde";
 "story_share_good_news" = "Partilha a boa notícia";
 "story_social_caption %@" = "%@ reencontrou a sua família! Obrigado à comunidade TagMe Now por ajudar a trazer %@ para casa. senra.pet";
 "story_generating_card" = "A criar cartão de partilha...";
 "story_your_story" = "A sua história";
-"story_placeholder_named %@" = "Partilhe como %@ foi encontrado e reunido";
 "story_city_optional" = "Cidade/Área (opcional)";
 "story_city_placeholder" = "ex. Lisboa, Bairro Alto";
 "story_share_publicly" = "Partilhar publicamente";
 "story_share_publicly_desc" = "Permita que outros nas proximidades vejam a sua história";
 "story_posting" = "A publicar...";
 "story_share_story" = "Partilhar história";
-"story_contact_note" = "A sua informação de contacto não será partilhada.";
-"story_posted_success" = "A sua história de sucesso foi partilhada!";
 
 // MARK: - Perfil
 "profile" = "Perfil";
@@ -524,21 +335,12 @@
 "profile_referral" = "Programa de referência";
 "profile_help_support" = "Ajuda e suporte";
 "profile_log_out" = "Terminar sessão";
-"profile_logout_confirm" = "Tem a certeza que quer terminar sessão?";
 "profile_delete_account" = "Eliminar conta";
-"profile_delete_confirm" = "Tem a certeza que quer eliminar a sua conta? Esta ação não pode ser desfeita.";
 "profile_cannot_delete" = "Não é possível eliminar a conta";
 "profile_cannot_delete_message" = "Marque todos os animais desaparecidos como encontrados antes de eliminar a sua conta.";
 "profile_danger_zone" = "Zona de perigo";
 "profile_deleting" = "A eliminar...";
-"profile_delete_permanent" = "Isto irá eliminar permanentemente a sua conta e todos os dados";
 "log_out" = "Terminar sessão";
-"personal_information" = "Informação pessoal";
-"address" = "Morada";
-"contacts" = "Contactos";
-"privacy_mode" = "Modo de privacidade";
-"notifications" = "Notificações";
-"help_support" = "Ajuda e suporte";
 
 // MARK: - Informação pessoal
 "personal_details" = "Dados pessoais";
@@ -550,7 +352,6 @@
 "personal_email_placeholder" = "Introduza o e-mail";
 "personal_phone" = "Telefone";
 "personal_phone_placeholder" = "Introduza o telefone";
-"personal_edit_info" = "Editar informação";
 "personal_title" = "Informação pessoal";
 
 // MARK: - Morada
@@ -574,56 +375,28 @@
 "address_select_country_title" = "Selecionar país";
 "address_line2_label" = "Andar, apartamento";
 "address_postal_label" = "Código postal";
-"street_address" = "Rua e número";
 "address_line_2_optional" = "Linha de morada 2 (opcional)";
-"city" = "Cidade";
-"post_code" = "Código postal";
-"country" = "País";
-"street" = "Rua";
 
 // MARK: - Contactos
 "contacts_settings" = "Definições de contacto";
-"contacts_info_text" = "Estes contactos serão mostrados quando alguém ler a etiqueta QR do seu animal. É necessário pelo menos um método de contacto.";
 "contacts_email_section" = "Endereços de e-mail";
 "contacts_phone_section" = "Números de telefone";
 "contacts_edit_title" = "Editar contactos";
 "contacts_primary_email" = "E-mail principal";
-"contacts_primary_email_footer" = "Este e-mail será mostrado quando alguém ler a etiqueta QR do seu animal.";
 "contacts_email_placeholder" = "Endereço de e-mail";
-"contacts_show_on_tag" = "Mostrar na etiqueta";
 "contacts_secondary_email" = "E-mail secundário (opcional)";
-"contacts_secondary_email_footer" = "Um e-mail de backup para contacto.";
 "contacts_secondary_email_placeholder" = "Endereço de e-mail secundário";
 "contacts_primary_phone" = "Telefone principal";
-"contacts_primary_phone_footer" = "Este número será mostrado quando alguém ler a etiqueta QR do seu animal.";
 "contacts_phone_placeholder" = "Número de telefone";
 "contacts_secondary_phone" = "Telefone secundário (opcional)";
-"contacts_secondary_phone_footer" = "Um telefone de backup para contacto.";
 "contacts_secondary_phone_placeholder" = "Número de telefone secundário";
-"contacts_title" = "Contactos";
 "contacts_primary_badge" = "PRINCIPAL";
-"contacts_visible_badge" = "Visível na etiqueta";
 "contacts_hidden_badge" = "Oculto";
-"contacts_none_added %@" = "Nenhum %@ adicionado";
 "email_addresses" = "Endereços de e-mail";
-"primary_email" = "E-mail principal";
-"secondary_email_optional" = "E-mail secundário (opcional)";
 "phone_numbers" = "Números de telefone";
-"primary_phone" = "Telefone principal";
-"show_on_qr_tag" = "Mostrar na etiqueta QR";
-"secondary_phone_optional" = "Telefone secundário (opcional)";
-"contacts_qr_tag_info" = "Contactos marcados como visíveis serão apresentados na etiqueta QR do seu animal quando for lida.";
 "contact_details" = "Contactos";
 
 // MARK: - Visibilidade de contacto
-"contact_visibility" = "Visibilidade de contacto";
-"contact_visibility_desc" = "Controle quais informações de contacto são visíveis quando alguém lê a etiqueta QR do seu animal";
-"show_phone_number" = "Mostrar número de telefone";
-"show_phone_subtitle" = "O seu número de telefone será visível para quem encontrar o seu animal";
-"show_email_address" = "Mostrar e-mail";
-"show_email_subtitle" = "O seu e-mail será visível para quem encontrar o seu animal";
-"show_address" = "Mostrar morada";
-"show_address_subtitle" = "A sua morada será visível para quem encontrar o seu animal";
 
 // MARK: - Definições de notificação
 "notif_channels" = "Canais de notificação";
@@ -646,37 +419,11 @@
 "notif_order_updates_subtitle" = "Notificações de envio e entrega";
 "notif_account_activity" = "Atividade da conta";
 "notif_account_activity_subtitle" = "Notificações de início de sessão e segurança";
-"notif_optional_updates" = "Atualizações opcionais";
-"notif_optional_footer" = "Notícias, dicas e conteúdo promocional";
-"notif_product_updates" = "Atualizações do produto";
-"notif_marketing_emails" = "E-mails de marketing";
 "notif_save_changes" = "Guardar alterações";
 "notif_title" = "Notificações";
 "notif_saved" = "Guardado";
 "notif_saved_message" = "Preferências de notificação guardadas com sucesso";
 "notif_critical_footer" = "Pode alterar estas definições a qualquer momento. Alertas críticos sobre os seus animais serão sempre enviados.";
-"push_notifications" = "Notificações push";
-"email_notifications" = "Notificações por e-mail";
-"sms_notifications" = "Notificações por SMS";
-"push_notifications_subtitle" = "Receber notificações push no seu dispositivo";
-"email_notifications_subtitle" = "Receber notificações por e-mail";
-"sms_notifications_subtitle" = "Receber notificações por SMS";
-"pet_alerts" = "Alertas de animais";
-"missing_pet_alerts" = "Alertas de animais desaparecidos";
-"missing_pet_alerts_subtitle" = "Receba alertas de animais desaparecidos na sua área";
-"nearby_alerts_10km" = "Alertas nas proximidades (10 km)";
-"nearby_alerts_subtitle" = "Alertas para animais num raio de 10 km da sua localização";
-"account_and_orders" = "Conta e encomendas";
-"order_updates" = "Atualizações de encomendas";
-"order_updates_subtitle" = "Notificações de envio e entrega";
-"account_activity" = "Atividade da conta";
-"account_activity_subtitle" = "Notificações de login e segurança";
-"optional_updates" = "Atualizações opcionais";
-"product_updates" = "Atualizações do produto";
-"product_updates_subtitle" = "Novas funcionalidades e melhorias";
-"marketing_emails" = "E-mails de marketing";
-"marketing_emails_subtitle" = "Ofertas e promoções";
-"critical_alerts_note" = "Nota: Alertas críticos sobre os seus animais serão sempre enviados, independentemente destas definições.";
 "notification_preferences_title" = "Preferências de notificação";
 
 // MARK: - Preferências de notificação (Definições)
@@ -712,7 +459,6 @@
 "help_subject" = "Assunto";
 "help_subject_placeholder" = "Descrição breve do seu problema";
 "help_message" = "Mensagem";
-"help_message_placeholder" = "Descreva o seu problema em detalhe...";
 "help_sending" = "A enviar...";
 "help_submit_request" = "Enviar pedido";
 "help_contact_title" = "Contactar suporte";
@@ -725,22 +471,7 @@
 "help_cat_other" = "Outro";
 "help_faq_title" = "FAQ";
 "help_guides_title" = "Guias do utilizador";
-"help_guide_placeholder" = "O conteúdo detalhado do guia estará disponível aqui.";
-"get_help" = "Obter ajuda";
-"faq" = "Perguntas frequentes";
-"user_guides" = "Guias do utilizador";
-"legal" = "Legal";
 "support_response_time" = "A nossa equipa de suporte responde normalmente em 24 horas.";
-"contact_support" = "Contactar suporte";
-"contact_support_category" = "Categoria";
-"contact_support_subject" = "Assunto";
-"contact_support_subject_hint" = "Descrição breve do seu problema";
-"contact_support_message" = "Mensagem";
-"contact_support_message_hint" = "Descreva o seu problema em detalhe\u2026";
-"contact_support_submit" = "Enviar";
-"contact_support_sending" = "A enviar\u2026";
-"contact_support_success" = "Pedido de suporte enviado! ID do ticket: %@";
-"contact_support_response" = "Responderemos em 24 horas.";
 "support_email" = "Suporte: hello@senra.pet";
 "support_category_general" = "Geral";
 "support_category_technical" = "Problema técnico";
@@ -761,11 +492,6 @@
 "help_faq_q5" = "Como pedir uma etiqueta de substituição?";
 "help_faq_a5" = "No perfil do animal, escolha 'Pedir substituição' e siga os passos.";
 // Itens de guia
-"help_guide_getting_started" = "Primeiros passos";
-"help_guide_managing_pets" = "Gerir os seus animais";
-"help_guide_qr_tags" = "Compreender etiquetas QR";
-"help_guide_missing_pet" = "O que fazer se o seu animal desaparecer";
-"help_guide_privacy" = "Definições de privacidade e segurança";
 
 // MARK: - Modo de privacidade
 "privacy_contact_visibility" = "Visibilidade de contacto";
@@ -778,74 +504,23 @@
 "privacy_show_address_subtitle" = "A sua morada será visível no perfil público do seu animal";
 "privacy_data_privacy" = "Privacidade de dados";
 "privacy_privacy_policy" = "Política de Privacidade";
-"privacy_data_management" = "Gestão de dados";
 "privacy_title" = "Modo de privacidade";
 "privacy_mode_footer" = "As definições de privacidade ajudam a controlar que informações são partilhadas quando alguém lê a etiqueta QR do seu animal.";
-"privacy_policy_title" = "Política de Privacidade";
-"privacy_policy_updated" = "Última atualização: novembro de 2024";
-"privacy_policy_section1_title" = "1. Informação que recolhemos";
-"privacy_policy_section1_body" = "Recolhemos as informações que fornece diretamente, incluindo nome, e-mail, telefone, morada e informações do animal. Também recolhemos dados de localização quando escolhe partilhá-los.";
-"privacy_policy_section2_title" = "2. Como usamos as suas informações";
-"privacy_policy_section2_body" = "As suas informações são usadas para fornecer os nossos serviços de segurança de animais, enviar notificações sobre animais desaparecidos e facilitar reunificações.";
-"privacy_policy_section3_title" = "3. Partilha de informação";
-"privacy_policy_section3_body" = "Partilhamos a sua informação de contacto apenas conforme as suas definições de privacidade. Os dados de localização só são partilhados quando escolhe explicitamente partilhar.";
-"privacy_policy_section4_title" = "4. Segurança dos dados";
-"privacy_policy_section4_body" = "Usamos encriptação e medidas de segurança padrão da indústria para proteger a sua informação pessoal.";
-"privacy_policy_section5_title" = "5. Os seus direitos";
-"privacy_policy_section5_body" = "Tem o direito de aceder, atualizar e eliminar os seus dados pessoais a qualquer momento nas definições da app.";
-"privacy_your_data" = "Os seus dados";
-"privacy_your_data_footer" = "Peça uma cópia de todos os dados pessoais armazenados no nosso sistema.";
-"privacy_export_data" = "Exportar os meus dados";
-"privacy_deletion_section" = "Eliminação de dados";
-"privacy_deletion_footer" = "Eliminar permanentemente a sua conta e todos os dados associados.";
-"privacy_delete_account" = "Eliminar a minha conta";
-"privacy_delete_confirm" = "Tem a certeza que quer eliminar a sua conta? Isto eliminará permanentemente todos os seus dados, incluindo animais, alertas e histórico de encomendas. Esta ação não pode ser desfeita.";
-"data_privacy" = "Privacidade de dados";
-"data_management" = "Gestão de dados";
 "privacy_settings_updated" = "Definições de privacidade atualizadas";
 "privacy_settings_failed" = "Falha ao atualizar definições de privacidade";
 
 // MARK: - Eliminar conta
 "delete_account" = "Eliminar conta";
-"delete_account_warning" = "Esta ação não pode ser desfeita. Todos os seus dados, incluindo animais, alertas e fotos, serão eliminados permanentemente.";
-"delete_account_confirm_prompt" = "Para confirmar, escreva DELETE abaixo:";
-"type_delete_to_confirm" = "Escrever DELETE";
-"account_deleted" = "Conta eliminada";
-"delete_account_failed" = "Falha ao eliminar conta";
-"cannot_delete_account" = "Não é possível eliminar a conta";
-"cannot_delete_missing_pets" = "Não pode eliminar a sua conta enquanto tiver animais marcados como desaparecidos. Marque-os como encontrados primeiro.";
 "missing_pets_label" = "Animais desaparecidos: %@";
-"checking_delete_eligibility" = "A verificar...";
-"danger_zone" = "ZONA DE PERIGO";
-"deleting" = "A eliminar\u2026";
-"delete_account_permanent" = "Isto irá eliminar permanentemente a sua conta e todos os dados";
 "logout_confirm" = "Tem a certeza que quer terminar sessão?";
 "delete_account_full_warning" = "Esta ação não pode ser desfeita. A sua conta será eliminada permanentemente, todos os dados pessoais serão removidos e quaisquer subscrições ativas serão canceladas.";
 
 // MARK: - Encomendas
 "orders_title" = "Encomendas";
 "order_number" = "Encomenda #%@";
-"order_total" = "Total: %@";
-"order_tags" = "Encomendar etiquetas";
-"replace_tag" = "Substituir etiqueta";
 "add_pet_first_replacement" = "Adicione um animal antes de encomendar uma etiqueta de substituição.";
-"order_more_tags_title" = "Encomendar mais etiquetas";
-"add_another_pet" = "Adicionar outro animal";
-"full_name" = "Nome completo";
-"place_order" = "Fazer encomenda";
-"order_created_payment_pending" = "Encomenda criada. Pagamento pendente.";
-"payment_intent_failed" = "Falha na intenção de pagamento";
-"order_create_failed" = "Falha ao criar encomenda";
-"order_replacement_title" = "Encomendar etiqueta de substituição";
-"pet_label" = "Animal: %@";
-"order_replacement_button" = "Encomendar substituição";
-"replacement_ordered" = "Substituição encomendada";
-"replacement_failed" = "Falha ao encomendar substituição";
-"replacement_order_failed" = "Falha ao criar encomenda de substituição";
-"create_payment_intent_failed" = "Falha ao criar intenção de pagamento";
 "orders_no_orders" = "Sem encomendas";
 "orders_no_orders_message" = "Ainda não fez encomendas";
-"orders_order_number %@" = "Encomenda #%@";
 "orders_information" = "Informação da encomenda";
 "orders_order_id" = "ID da encomenda";
 "orders_status" = "Estado";
@@ -856,49 +531,27 @@
 "orders_tag_pending" = "Etiqueta QR pendente";
 "orders_tag_assigned" = "Etiqueta QR atribuída";
 "orders_detail_title" = "Detalhes da encomenda";
-"failed_load_orders" = "Falha ao carregar encomendas";
-"order_id_short" = "Encomenda #%@";
-"order_information" = "Informação da encomenda";
-"order_id_label" = "ID da encomenda";
-"status" = "Estado";
-"total_amount" = "Montante total";
-"order_date" = "Data da encomenda";
-"items" = "Itens";
 
 // MARK: - Encomendar mais etiquetas
 "order_more_title" = "Encomendar mais etiquetas";
 "order_more_complete" = "Encomenda completa!";
-"order_more_payment_pending" = "A sua encomenda foi efetuada. Receberá um e-mail com instruções de pagamento em breve.";
 "order_more_confirmation" = "Enviaremos as etiquetas após confirmação do pagamento.";
 "order_more_pet_names" = "Nomes dos animais";
 "order_more_pet_names_footer" = "Introduza os nomes dos animais para os quais pretende etiquetas. Vamos gravar o nome em cada etiqueta.";
-"order_more_pet_name_placeholder" = "Nome do animal";
 "order_more_add_another" = "Adicionar outro animal";
 "order_more_your_info" = "A sua informação";
-"order_more_full_name" = "Nome completo";
-"order_more_email" = "E-mail";
-"order_more_phone" = "Telefone";
 "order_more_shipping" = "Morada de envio";
 "order_more_street" = "Rua e número";
-"order_more_street_placeholder" = "Introduza rua e número";
 "order_more_line2" = "Andar, apartamento (opcional)";
-"order_more_line2_placeholder" = "4B";
 "order_more_city" = "Cidade";
-"order_more_province" = "Distrito / estado (opcional)";
 "order_more_postal" = "Código postal";
 "order_more_country" = "País";
 "order_more_summary" = "Resumo da encomenda";
 "order_more_tags_count %lld" = "Etiquetas (%lld)";
 "order_more_shipping_cost" = "Envio";
 "order_more_total" = "Total";
-"order_more_creating" = "A criar encomenda...";
-"order_more_place_order" = "Fazer encomenda";
 "order_more_proceed_to_payment" = "Continuar para pagamento";
 "order_more_redirecting" = "Redirecionando...";
-"pet_names" = "Nomes dos animais";
-"shipping_address" = "Morada de envio";
-"shipping" = "Envio";
-"get_qr_tags_subtitle" = "Obtenha etiquetas QR para os seus animais";
 
 // MARK: - Encomendar etiqueta de substituição
 "order_replace_title" = "Encomendar etiqueta de substituição";
@@ -911,19 +564,14 @@
 "order_replace_shipping" = "Morada de envio";
 "order_replace_shipping_footer" = "Enviaremos a etiqueta de substituição para esta morada.";
 "order_replace_street" = "Rua e número";
-"order_replace_street_placeholder" = "Introduza rua e número";
 "order_replace_line2" = "Andar, apartamento (opcional)";
-"order_replace_line2_placeholder" = "4B";
 "order_replace_city" = "Cidade";
 "order_replace_postal" = "Código postal";
 "order_replace_country" = "País";
 "order_replace_phone" = "Telefone (opcional)";
-"order_replace_phone_placeholder" = "Introduza o telefone";
 "order_replace_creating" = "A criar encomenda...";
 "order_replace_free_button" = "Confirmar e encomendar etiqueta de substituição grátis";
 "order_replace_paid_button %@" = "Confirmar e pagar %@";
-"replacement_subtitle" = "Perdida ou danificada? Enviaremos uma nova";
-"free_replacement" = "Substituição gratuita";
 
 // MARK: - Delivery Method & PostaPoint
 "delivery_method_title" = "Método de entrega";
@@ -937,7 +585,6 @@
 
 // MARK: - Perfil público do animal
 "public_profile_preview" = "Pré-visualização do perfil público";
-"failed_load_profile" = "Falha ao carregar perfil";
 "public_profile_subtitle" = "É assim que os outros veem o perfil de %@";
 "owner_notified_sms_email" = "O dono de %@ receberá um SMS e um e-mail com a sua localização";
 "contact_owner_plea" = "Por favor, avise o meu dono que me encontrou\u2026";
@@ -949,7 +596,6 @@
 "unique_features" = "Características únicas";
 "behavior_notes" = "Notas de comportamento";
 "yes" = "Sim";
-"no" = "Não";
 "how_it_works" = "Como funciona";
 "help_reunite_pet" = "Ajude a reunir %@ com o dono em segurança";
 "step_share_location" = "Partilhar a sua localização";
@@ -958,8 +604,6 @@
 "step_owner_notified_desc" = "O dono recebe um SMS e um e-mail com a sua localização";
 "step_quick_reunion" = "Reunião rápida";
 "step_quick_reunion_desc" = "O dono pode navegar até à sua localização para recolher o animal";
-"owner_phone_label" = "Telefone do dono: %@";
-"owner_email_label" = "E-mail do dono: %@";
 
 // MARK: - Modo offline
 "offline_mode" = "Modo offline";
@@ -967,13 +611,8 @@
 "sync_completed" = "Sincronização concluída";
 "sync_failed" = "Sincronização falhou: %@";
 "sync_no_connection" = "Não é possível sincronizar: sem ligação à internet";
-"pending_changes" = "Alterações pendentes";
-"online" = "Online";
 "offline_changes_sync" = "As alterações serão sincronizadas quando estiver online";
-"tap_view_queued_actions" = "Toque para ver ações em fila";
-"connected" = "Ligado";
 "sync_now" = "Sincronizar agora";
-"changes_sync_restored" = "As alterações serão sincronizadas automaticamente quando a ligação for restaurada.";
 "offline_pending_changes" = "Alterações pendentes";
 "offline_online" = "Online";
 "offline_sync_message" = "As alterações serão sincronizadas quando estiver online";
@@ -987,7 +626,6 @@
 "sync_tried_count %lld" = "Tentado %lld vez(es)";
 
 // MARK: - Vista de erro e repetição
-"error_something_wrong" = "Algo correu mal";
 "something_went_wrong" = "Algo correu mal";
 "try_again" = "Tentar novamente";
 
@@ -1001,16 +639,8 @@
 "map_pet_location %@" = "Localização de %@";
 "location_title" = "Localização de %@";
 "approximate_location_note" = "Esta é uma localização aproximada (~500 m). Procure a área ao redor.";
-"coordinates_label" = "Coordenadas: %@";
-"open_in" = "Abrir em:";
-"google_maps" = "Google Maps";
-"waze" = "Waze";
 
 // MARK: - Informação da app
-"app_name_label" = "Pet Safety";
-"app_version" = "Versão 1.0.0";
-"terms_url" = "Termos: https://senra.pet/terms-conditions";
-"privacy_url" = "Privacidade: https://senra.pet/privacy-policy";
 
 // MARK: - Descrições dinâmicas do leitor
 "scanner_step1_dynamic_desc" = "Clique no botão acima para partilhar onde encontrou %@";
@@ -1032,11 +662,10 @@
 "contacts_no_type_added" = "Nenhum %@ adicionado";
 
 // MARK: - Chaves adicionais de substituição de encomenda
-"order_replace_upgrade_hint" = "Faça upgrade para Standard ou Ultimate para substituições gratuitas";
+"order_replace_upgrade_hint" = "Faça upgrade para Standard ou Maximum para substituições gratuitas";
 "order_replace_old_deactivated" = "O seu antigo código QR será desativado quando fizer esta encomenda";
 "order_replace_delivery_time" = "Receberá a sua nova etiqueta em 5-7 dias úteis";
 "order_replace_scan_activate" = "Assim que receber a nova etiqueta, deverá lê-la para a ativar";
-"order_replace_province" = "Distrito / estado (opcional)";
 
 // MARK: - Chaves adicionais offline
 "offline_last_sync_label" = "Hora da última sincronização";
@@ -1257,7 +886,6 @@
 "some_time" = "algum tempo";
 "list" = "Lista";
 "map" = "Mapa";
-"post_to_success_stories" = "Publicar nas Histórias de Sucesso";
 "remove_from_success_stories" = "Remover das Histórias de Sucesso";
 "removed_from_success_stories" = "Removido das Histórias de Sucesso";
 "remove_story_confirm_title" = "Remover História de Sucesso?";
@@ -1275,8 +903,6 @@
 "reward_badge" = "Recompensa: %@";
 
 // MARK: - Chaves de Localização Adicionais
-"data_export_requested" = "A exportação de dados será enviada por e-mail dentro de 24 horas";
-"account_deletion_unavailable" = "A eliminação da conta não está disponível de momento. Por favor contacte o suporte.";
 "cannot_delete_missing_message_short" = "Tem de marcar este animal como encontrado antes de eliminar.";
 "plan_feature_pets_count" = "Animais: %@";
 "plan_feature_photos_count" = "%lld fotos por animal";
@@ -1294,21 +920,21 @@
 "help_faq_q9" = "Como funcionam os alertas de animais desaparecidos?";
 "help_faq_a9" = "Quando marca um animal como desaparecido, é criado um alerta com a foto e detalhes do animal. Outros utilizadores Senra num raio de 10 km podem ver o alerta no mapa de Animais Desaparecidos. Qualquer pessoa da comunidade pode reportar um avistamento, que lhe envia a localização e informações de contacto. Veterinários e abrigos registados na Senra na sua área também recebem o alerta.";
 "help_faq_q10" = "Como peço uma etiqueta de substituição?";
-"help_faq_a10" = "Vá à página da Conta e clique em 'Pedir substituição'. Selecione o animal que precisa de uma nova etiqueta. Membros Ultimate têm substituições gratuitas ilimitadas, membros Standard têm uma substituição grátis por ano, e membros Starter podem pedir substituições por uma pequena taxa de envio.";
+"help_faq_a10" = "Vá à página da Conta e clique em 'Pedir substituição'. Selecione o animal que precisa de uma nova etiqueta. Membros Maximum têm substituições gratuitas ilimitadas, membros Standard têm uma substituição grátis por ano, e membros Starter podem pedir substituições por uma pequena taxa de envio.";
 "help_faq_q11" = "O que é o programa de referência?";
-"help_faq_a11" = "Partilhe o código SENRAFRIEND com amigos e familiares. Quando alguém usar este código e subscrever um plano pago (Standard ou Ultimate), ambos recebem 2 meses grátis. Pode acompanhar as suas referências e o seu estado na página de Referências.";
+"help_faq_a11" = "Partilhe o código SENRAFRIEND com amigos e familiares. Quando alguém usar este código e subscrever um plano pago (Standard ou Maximum), ambos recebem 2 meses grátis. Pode acompanhar as suas referências e o seu estado na página de Referências.";
 "help_faq_q12" = "Para que países fazem envio?";
 "help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPoint) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
 "help_faq_q13" = "Posso ter vários animais numa conta?";
-"help_faq_a13" = "Sim. No plano Starter (gratuito) pode registar um animal. O plano Standard também suporta um animal. O plano Ultimate suporta animais ilimitados. Pode atualizar o plano a qualquer momento na página da Conta.";
+"help_faq_a13" = "Sim. No plano Starter (gratuito) pode registar até 10 animais. O plano Standard suporta 1 animal. O plano Maximum suporta até 10 animais. Pode atualizar o plano a qualquer momento na página da Conta.";
 "help_faq_q14" = "Como reporto um animal que encontrei?";
 "help_faq_a14" = "Se o animal tiver uma etiqueta Senra, basta ler o código QR com a câmara do telemóvel — não precisa de app. Verá o perfil do animal e pode partilhar a sua localização com o dono. Se não houver etiqueta, pode verificar o mapa de Animais Desaparecidos no site da Senra para ver se o animal foi reportado na sua área.";
 "help_faq_q15" = "As minhas informações pessoais estão seguras?";
 "help_faq_a15" = "Sim. Controla exatamente que informações ficam visíveis quando alguém lê a etiqueta do seu animal. Em Definições > Privacidade, pode escolher mostrar ou ocultar o telefone, e-mail e morada. O login é protegido por códigos de verificação únicos — não há palavras-passe para roubar. Pode eliminar a conta e todos os dados a qualquer momento.";
 "help_faq_q16" = "Perdi a minha etiqueta ou está danificada — o que devo fazer?";
-"help_faq_a16" = "Não se preocupe — o perfil digital do seu animal está seguro e não é guardado na etiqueta. Vá à página da Conta e clique em 'Pedir substituição'. Uma nova etiqueta com um novo código QR será ligada ao perfil existente. Membros Standard têm uma substituição grátis por ano, membros Ultimate têm substituições gratuitas ilimitadas, e membros Starter pagam uma pequena taxa de envio. A etiqueta antiga deixará de funcionar quando a nova for ativada.";
+"help_faq_a16" = "Não se preocupe — o perfil digital do seu animal está seguro e não é guardado na etiqueta. Vá à página da Conta e clique em 'Pedir substituição'. Uma nova etiqueta com um novo código QR será ligada ao perfil existente. Membros Standard têm uma substituição grátis por ano, membros Maximum têm substituições gratuitas ilimitadas, e membros Starter pagam uma pequena taxa de envio. A etiqueta antiga deixará de funcionar quando a nova for ativada.";
 "help_faq_q17" = "A minha etiqueta não lê — como resolvo?";
-"help_faq_a17" = "Experimente estes passos: limpe a superfície da etiqueta com um pano húmido, garanta boa iluminação, mantenha a câmara do telemóvel estável a cerca de 10-15 cm da etiqueta e verifique se a câmara ou leitor QR está a funcionar. Se o código QR estiver riscado ou desbotado, pode usar a opção de entrada manual na app em 'Ler etiqueta'. Se a etiqueta estiver demasiado danificada para ler, peça uma substituição grátis na página da Conta (planos Standard e Ultimate).";
+"help_faq_a17" = "Experimente estes passos: limpe a superfície da etiqueta com um pano húmido, garanta boa iluminação, mantenha a câmara do telemóvel estável a cerca de 10-15 cm da etiqueta e verifique se a câmara ou leitor QR está a funcionar. Se o código QR estiver riscado ou desbotado, pode usar a opção de entrada manual na app em 'Ler etiqueta'. Se a etiqueta estiver demasiado danificada para ler, peça uma substituição grátis na página da Conta (planos Standard e Maximum).";
 "help_faq_q18" = "Encontrei um animal sem etiqueta Senra — o que posso fazer?";
 "help_faq_a18" = "Verifique o mapa de Animais Desaparecidos no site da Senra (senra.pet) — o animal pode ter sido reportado como desaparecido na sua área. Pode ver os alertas sem conta. Se encontrar uma correspondência, pode reportar um avistamento com a sua localização para ajudar a reunir o animal com o dono. Também pode levar o animal a um veterinário local para verificar o microchip.";
 "help_faq_q19" = "Posso alterar o meu endereço de e-mail?";
@@ -1328,7 +954,7 @@
 "help_faq_q26" = "Como é que os alertas de animais desaparecidos chegam aos veterinários e abrigos?";
 "help_faq_a26" = "Quando marca o animal como desaparecido, a Senra envia automaticamente alertas por e-mail a todos os veterinários e abrigos verificados registados na sua área. Isto significa que os profissionais de animais locais ficam imediatamente cientes de que o seu animal está desaparecido. Quanto mais veterinários e abrigos registados na sua área, mais forte é a rede de segurança. Pode ajudar incentivando o seu veterinário a registar-se na Senra.";
 "help_faq_q27" = "Posso transferir uma etiqueta para outro animal?";
-"help_faq_a27" = "Cada etiqueta QR está permanentemente ligada a um perfil de animal e não pode ser reassociada. Se um animal falecer ou já não precisar de uma etiqueta, a etiqueta antiga fica simplesmente inativa. Para etiquetar um novo animal, peça uma nova etiqueta na página da Conta. Se tiver um plano Standard ou Ultimate, pode ter direito a uma etiqueta de substituição gratuita para o novo animal.";
+"help_faq_a27" = "Cada etiqueta QR está permanentemente ligada a um perfil de animal e não pode ser reassociada. Se um animal falecer ou já não precisar de uma etiqueta, a etiqueta antiga fica simplesmente inativa. Para etiquetar um novo animal, peça uma nova etiqueta na página da Conta. Se tiver um plano Standard ou Maximum, pode ter direito a uma etiqueta de substituição gratuita para o novo animal.";
 "help_guide_qr_tags_title" = "Etiquetas QR para animais";
 "help_guide_qr_tags_desc" = "Conheça as nossas etiquetas QR inteligentes.";
 "help_guide_materials_title" = "Materiais e durabilidade";
@@ -1363,3 +989,29 @@
 "order_status_delivered" = "Delivered";
 "order_status_cancelled" = "Cancelled";
 "orders_item_count %lld" = "%lld items";
+
+// MARK: - Scanner Additional
+"scanner_owner_address" = "Morada do proprietário";
+
+// MARK: - Billing Additional
+"billing_past_due_title" = "Pagamento em atraso";
+"billing_past_due_message" = "O pagamento da sua subscrição está em atraso. Por favor, atualize o seu método de pagamento.";
+"billing_update_payment" = "Atualizar pagamento";
+
+// MARK: - Address Additional
+"address_search_country" = "Pesquisar país";
+
+// MARK: - Sync Additional
+"sync_failed_count" = "Falha na sincronização";
+
+// MARK: - Pet Form Additional
+"pet_limit_reached" = "Limite de animais atingido";
+"upgrade_to_ultimate" = "Atualizar para Maximum";
+"keep_current_plan" = "Manter plano atual";
+"pet_limit_upgrade_message %@ %lld %@ %@" = "O seu plano %@ permite %lld animal. Atualize para %@ por %@ para até 10 animais.";
+"pet_limit_upgrade_generic" = "Atualize o seu plano para adicionar mais animais.";
+
+// MARK: - Breed Picker Species Headers
+"species_dog" = "Cão";
+"species_cat_header" = "Gato";
+"species_bird_no_picker" = "Ave (sem seletor)";

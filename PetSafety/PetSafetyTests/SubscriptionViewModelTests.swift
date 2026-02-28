@@ -19,7 +19,7 @@ struct SubscriptionModelTests {
             "price_yearly": 49.50,
             "currency": "GBP",
             "features": {
-                "max_pets": 5,
+                "max_pets": 1,
                 "max_photos_per_pet": 10,
                 "max_emergency_contacts": 5,
                 "sms_notifications": true,
@@ -41,7 +41,7 @@ struct SubscriptionModelTests {
         #expect(plan.currency == "GBP")
         #expect(plan.isPopular == true)
         #expect(plan.isFree == false)
-        #expect(plan.features.maxPets == 5)
+        #expect(plan.features.maxPets == 1)
         #expect(plan.features.smsNotifications == true)
         #expect(plan.features.vetAlerts == true)
     }
@@ -58,7 +58,7 @@ struct SubscriptionModelTests {
             "price_yearly": 0,
             "currency": "GBP",
             "features": {
-                "max_pets": 1,
+                "max_pets": 10,
                 "max_photos_per_pet": 3,
                 "max_emergency_contacts": 2,
                 "sms_notifications": false,
@@ -89,7 +89,7 @@ struct SubscriptionModelTests {
             "price_yearly": 99.50,
             "currency": "GBP",
             "features": {
-                "max_pets": null,
+                "max_pets": 10,
                 "max_photos_per_pet": 20,
                 "max_emergency_contacts": 10,
                 "sms_notifications": true,
@@ -104,8 +104,8 @@ struct SubscriptionModelTests {
         let plan = try JSONDecoder().decode(SubscriptionPlan.self, from: json)
         #expect(plan.formattedMonthlyPrice == "£9.95/mo")
         #expect(plan.formattedYearlyPrice == "£99.50/yr")
-        #expect(plan.features.maxPets == nil)
-        #expect(plan.features.maxPetsDisplay == "Unlimited")
+        #expect(plan.features.maxPets == 10)
+        #expect(plan.features.maxPetsDisplay == "10")
     }
 
     // MARK: - UserSubscription
@@ -194,7 +194,7 @@ struct SubscriptionModelTests {
             "can_receive_vet_alerts": true,
             "can_receive_community_alerts": true,
             "can_use_sms_notifications": true,
-            "max_pets": null,
+            "max_pets": 10,
             "max_photos_per_pet": 20,
             "max_emergency_contacts": 10,
             "free_tag_replacement": true
@@ -204,7 +204,7 @@ struct SubscriptionModelTests {
         let features = try JSONDecoder().decode(SubscriptionFeatures.self, from: json)
         #expect(features.planName == "ultimate")
         #expect(features.hasFullAlertFeatures == true)
-        #expect(features.maxPets == nil)
+        #expect(features.maxPets == 10)
     }
 
     // MARK: - Checkout & Portal Responses
@@ -392,7 +392,7 @@ struct SubscriptionUpgradeDowngradeTests {
             "price_yearly": 49.50,
             "currency": "EUR",
             "features": {
-                "max_pets": 5,
+                "max_pets": 10,
                 "max_photos_per_pet": 10,
                 "max_emergency_contacts": 5,
                 "sms_notifications": true,
@@ -420,7 +420,7 @@ struct SubscriptionUpgradeDowngradeTests {
             "price_yearly": 19900,
             "currency": "HUF",
             "features": {
-                "max_pets": 5,
+                "max_pets": 10,
                 "max_photos_per_pet": 10,
                 "max_emergency_contacts": 5,
                 "sms_notifications": true,
@@ -483,24 +483,24 @@ struct SubscriptionUpgradeDowngradeTests {
 
     // MARK: - Feature Limit Check Logic
 
-    @Test("maxPets=5, currentCount=5 should NOT allow more")
+    @Test("maxPets=10, currentCount=10 should NOT allow more")
     func testPetLimitReached() {
-        let maxPets: Int? = 5
-        let currentCount = 5
+        let maxPets: Int? = 10
+        let currentCount = 10
         #expect(!(currentCount < (maxPets ?? Int.max)))
     }
 
-    @Test("maxPets=5, currentCount=4 should allow more")
+    @Test("maxPets=10, currentCount=9 should allow more")
     func testPetLimitNotReached() {
-        let maxPets: Int? = 5
-        let currentCount = 4
+        let maxPets: Int? = 10
+        let currentCount = 9
         #expect(currentCount < (maxPets ?? Int.max))
     }
 
-    @Test("maxPets=nil (unlimited) should always allow")
-    func testUnlimitedPets() {
-        let maxPets: Int? = nil
-        let currentCount = 100
+    @Test("maxPets=10 (maximum plan) should allow up to 10")
+    func testMaximumPlanPets() {
+        let maxPets: Int? = 10
+        let currentCount = 5
         #expect(currentCount < (maxPets ?? Int.max))
     }
 
