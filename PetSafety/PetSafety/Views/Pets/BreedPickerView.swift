@@ -219,21 +219,21 @@ struct BreedPickerButton: View {
 
 #Preview("Breed Picker Button") {
     Form {
-        Section("Dog") {
+        Section(String(localized: "species_dog")) {
             HStack {
                 Text("Breed")
                     .frame(width: 80, alignment: .leading)
                 BreedPickerButton(breed: .constant(""), species: "Dog")
             }
         }
-        Section("Cat") {
+        Section(String(localized: "species_cat_header")) {
             HStack {
                 Text("Breed")
                     .frame(width: 80, alignment: .leading)
                 BreedPickerButton(breed: .constant("Persian"), species: "Cat")
             }
         }
-        Section("Bird (no picker)") {
+        Section(String(localized: "species_bird_no_picker")) {
             HStack {
                 Text("Breed")
                     .frame(width: 80, alignment: .leading)

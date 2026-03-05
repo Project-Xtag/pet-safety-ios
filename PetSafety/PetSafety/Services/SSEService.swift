@@ -22,6 +22,7 @@ class SSEService: NSObject, ObservableObject {
     private var reconnectAttempts = 0
     private let maxReconnectAttempts = 5
     private let baseReconnectDelay: TimeInterval = 1.0 // Start with 1 second
+    private var isRefreshingToken = false
 
     // MARK: - Event Handlers
     var onTagScanned: ((TagScannedEvent) -> Void)?
@@ -132,6 +133,49 @@ class SSEService: NSObject, ObservableObject {
     #endif
 
     // MARK: - Private Methods
+
+    /// Handle a 401 response by refreshing the token before reconnecting.
+    /// If the refresh fails, stop reconnecting to avoid an infinite loop with expired credentials.
+    private func handleUnauthorized() {
+        guard !isRefreshingToken else {
+            #if DEBUG
+            print("⏳ SSEService: Token refresh already in progress, skipping")
+            #endif
+            return
+        }
+
+        isRefreshingToken = true
+
+        Task { [weak self] in
+            defer { self?.isRefreshingToken = false }
+
+            let refreshSucceeded = await APIService.shared.attemptTokenRefresh()
+
+            guard let self = self else { return }
+
+            if refreshSucceeded {
+                #if DEBUG
+                print("✅ SSEService: Token refreshed successfully, reconnecting")
+                #endif
+
+                // Reset reconnect attempts since this is not a connectivity issue
+                self.reconnectAttempts = 0
+                DispatchQueue.main.async {
+                    self.connect()
+                }
+            } else {
+                #if DEBUG
+                print("❌ SSEService: Token refresh failed — stopping reconnection")
+                #endif
+
+                DispatchQueue.main.async {
+                    self.shouldReconnect = false
+                    self.isConnected = false
+                    self.connectionError = "Authentication expired. Please log in again."
+                }
+            }
+        }
+    }
 
     private func scheduleReconnect() {
         guard shouldReconnect && reconnectAttempts < maxReconnectAttempts else {
@@ -395,6 +439,13 @@ extension SSEService: URLSessionDataDelegate {
 
         if httpResponse.statusCode == 200 {
             completionHandler(.allow)
+        } else if httpResponse.statusCode == 401 {
+            #if DEBUG
+            print("🔑 SSEService: Received 401 — attempting token refresh before reconnect")
+            #endif
+
+            completionHandler(.cancel)
+            handleUnauthorized()
         } else {
             #if DEBUG
             print("❌ SSEService: Unexpected status code: \(httpResponse.statusCode)")

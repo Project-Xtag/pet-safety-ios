@@ -43,32 +43,76 @@ class KeychainService {
         return save(data, for: key)
     }
 
-    /// Save data to Keychain
+    /// Save data to Keychain using an update-or-add pattern to avoid
+    /// errSecDuplicateItem (-25299) race conditions.
+    ///
+    /// Strategy:
+    /// 1. Try `SecItemUpdate` (fast path for existing items).
+    /// 2. If `errSecItemNotFound`, fall back to `SecItemAdd`.
+    /// 3. If the add races with another caller and returns `errSecDuplicateItem`,
+    ///    retry once with `SecItemUpdate`.
     func save(_ data: Data, for key: KeychainKey) -> Bool {
-        // Delete any existing item first
-        delete(key)
-
-        let query: [String: Any] = [
+        let lookupQuery: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
-            kSecAttrAccount as String: key.rawValue,
+            kSecAttrAccount as String: key.rawValue
+        ]
+
+        let updateAttributes: [String: Any] = [
             kSecValueData as String: data,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
         ]
 
-        let status = SecItemAdd(query as CFDictionary, nil)
+        // 1. Try to update the existing item (most common path after first launch).
+        let updateStatus = SecItemUpdate(lookupQuery as CFDictionary, updateAttributes as CFDictionary)
 
-        if status == errSecSuccess {
+        if updateStatus == errSecSuccess {
             #if DEBUG
-            print("✅ KeychainService: Saved \(key.rawValue)")
+            print("KeychainService: Updated \(key.rawValue)")
             #endif
             return true
-        } else {
+        }
+
+        guard updateStatus == errSecItemNotFound else {
             #if DEBUG
-            print("❌ KeychainService: Failed to save \(key.rawValue) - Status: \(status)")
+            print("KeychainService: Failed to update \(key.rawValue) — \(errorMessage(for: updateStatus)) (\(updateStatus))")
             #endif
             return false
         }
+
+        // 2. Item does not exist yet — add it.
+        var addQuery = lookupQuery
+        addQuery[kSecValueData as String] = data
+        addQuery[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
+
+        let addStatus = SecItemAdd(addQuery as CFDictionary, nil)
+
+        if addStatus == errSecSuccess {
+            #if DEBUG
+            print("KeychainService: Saved \(key.rawValue)")
+            #endif
+            return true
+        }
+
+        // 3. Another caller added the item between our update and add — retry update.
+        if addStatus == errSecDuplicateItem {
+            let retryStatus = SecItemUpdate(lookupQuery as CFDictionary, updateAttributes as CFDictionary)
+            if retryStatus == errSecSuccess {
+                #if DEBUG
+                print("KeychainService: Saved \(key.rawValue) (retry after duplicate)")
+                #endif
+                return true
+            }
+            #if DEBUG
+            print("KeychainService: Failed to save \(key.rawValue) on retry — \(errorMessage(for: retryStatus)) (\(retryStatus))")
+            #endif
+            return false
+        }
+
+        #if DEBUG
+        print("KeychainService: Failed to save \(key.rawValue) — \(errorMessage(for: addStatus)) (\(addStatus))")
+        #endif
+        return false
     }
 
     /// Retrieve a string value from Keychain

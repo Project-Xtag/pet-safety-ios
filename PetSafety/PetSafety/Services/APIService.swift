@@ -81,6 +81,28 @@ class APIService {
 
     // MARK: - Token Refresh
 
+    /// Attempt to refresh the access token and persist the new tokens.
+    /// Called by other services (e.g. SSEService) when they encounter a 401.
+    /// Returns `true` if the refresh succeeded, `false` otherwise.
+    func attemptTokenRefresh() async -> Bool {
+        guard let storedRefreshToken = KeychainService.shared.getRefreshToken() else {
+            return false
+        }
+        do {
+            let newTokens = try await refreshCoordinator.refresh {
+                try await self.refreshAccessToken(refreshToken: storedRefreshToken)
+            }
+            self.authToken = newTokens.accessToken
+            _ = KeychainService.shared.saveRefreshToken(newTokens.refreshToken)
+            return true
+        } catch {
+            #if DEBUG
+            print("❌ APIService: Token refresh failed: \(error)")
+            #endif
+            return false
+        }
+    }
+
     /// Attempt to refresh the access token using the stored refresh token.
     /// Uses a raw URLSession call to avoid infinite loops through performRequest.
     private func refreshAccessToken(refreshToken: String) async throws -> (accessToken: String, refreshToken: String) {
