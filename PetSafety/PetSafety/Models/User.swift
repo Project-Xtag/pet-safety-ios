@@ -24,6 +24,8 @@ struct User: Codable, Identifiable {
     let showPhonePublicly: Bool?
     let showEmailPublicly: Bool?
     let showAddressPublicly: Bool?
+    let showSecondaryPhonePublicly: Bool?
+    let showSecondaryEmailPublicly: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id, email, role, phone, address, city, country
@@ -43,6 +45,8 @@ struct User: Codable, Identifiable {
         case showPhonePublicly = "show_phone_publicly"
         case showEmailPublicly = "show_email_publicly"
         case showAddressPublicly = "show_address_publicly"
+        case showSecondaryPhonePublicly = "show_secondary_phone_publicly"
+        case showSecondaryEmailPublicly = "show_secondary_email_publicly"
     }
 
     var fullName: String {

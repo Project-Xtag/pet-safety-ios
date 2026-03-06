@@ -334,6 +334,7 @@
 "profile_billing" = "Fakturace";
 "profile_referral" = "Doporučovací program";
 "profile_help_support" = "Nápověda a podpora";
+"profile_orders" = "Objednávky";
 "profile_log_out" = "Odhlásit se";
 "profile_delete_account" = "Smazat účet";
 "profile_cannot_delete" = "Účet nelze smazat";
@@ -502,6 +503,10 @@
 "privacy_show_email_subtitle" = "Vaše primární a sekundární e-mailové adresy budou viditelné na veřejném profilu vašeho mazlíčka";
 "privacy_show_address" = "Zobrazit adresu";
 "privacy_show_address_subtitle" = "Vaše adresa bude viditelná na veřejném profilu vašeho mazlíčka";
+"privacy_show_secondary_phone" = "Zobrazit sekundární telefon";
+"privacy_show_secondary_phone_subtitle" = "Zobrazit vaše sekundární telefonní číslo na veřejném profilu mazlíčka";
+"privacy_show_secondary_email" = "Zobrazit sekundární e-mail";
+"privacy_show_secondary_email_subtitle" = "Zobrazit vaši sekundární e-mailovou adresu na veřejném profilu mazlíčka";
 "privacy_data_privacy" = "Ochrana dat";
 "privacy_privacy_policy" = "Zásady ochrany soukromí";
 "privacy_title" = "Režim soukromí";
@@ -975,20 +980,20 @@
 "help_faq_group_troubleshooting" = "Řešení problémů";
 
 // MARK: - Checkout & Order Status Localization
-"order_more_shipping_calculated" = "Calculated at checkout";
-"order_more_total_shipping_only" = "Shipping only";
-"checkout_subscription_success" = "Your subscription is now active!";
-"checkout_tag_order_success" = "Payment successful! Your tag order is being processed.";
-"checkout_replacement_success" = "Payment successful! Your replacement tag is on the way.";
-"checkout_success" = "Payment successful!";
-"order_status_completed" = "Completed";
-"order_status_pending" = "Pending";
-"order_status_failed" = "Failed";
-"order_status_processing" = "Processing";
-"order_status_shipped" = "Shipped";
-"order_status_delivered" = "Delivered";
-"order_status_cancelled" = "Cancelled";
-"orders_item_count %lld" = "%lld items";
+"order_more_shipping_calculated" = "Vypočítáno při platbě";
+"order_more_total_shipping_only" = "Pouze poštovné";
+"checkout_subscription_success" = "Vaše předplatné je aktivní!";
+"checkout_tag_order_success" = "Platba proběhla úspěšně! Vaše objednávka známky se zpracovává.";
+"checkout_replacement_success" = "Platba proběhla úspěšně! Vaše náhradní známka je na cestě.";
+"checkout_success" = "Platba proběhla úspěšně!";
+"order_status_completed" = "Dokončeno";
+"order_status_pending" = "Čeká na vyřízení";
+"order_status_failed" = "Neúspěšná";
+"order_status_processing" = "Zpracovává se";
+"order_status_shipped" = "Odesláno";
+"order_status_delivered" = "Doručeno";
+"order_status_cancelled" = "Zrušeno";
+"orders_item_count %lld" = "%lld položek";
 
 // MARK: - Scanner Additional
 "scanner_owner_address" = "Adresa vlastníka";

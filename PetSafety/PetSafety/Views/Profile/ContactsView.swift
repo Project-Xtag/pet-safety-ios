@@ -256,9 +256,9 @@ struct ContactsView: View {
         // Load secondary contacts from user profile
         secondaryEmail = user.secondaryEmail ?? ""
         secondaryPhone = user.secondaryPhone ?? ""
-        // Secondary contacts default to hidden if not explicitly set
-        showSecondaryEmail = !secondaryEmail.isEmpty
-        showSecondaryPhone = !secondaryPhone.isEmpty
+        // Secondary contacts use independent visibility settings
+        showSecondaryEmail = user.showSecondaryEmailPublicly ?? false
+        showSecondaryPhone = user.showSecondaryPhonePublicly ?? false
     }
 
     private func cancelEditing() {
@@ -285,6 +285,8 @@ struct ContactsView: View {
                 // Send secondary_phone and secondary_email to backend
                 updates["secondary_phone"] = trimmedSecondaryPhone.isEmpty ? "" : trimmedSecondaryPhone
                 updates["secondary_email"] = trimmedSecondaryEmail.isEmpty ? "" : trimmedSecondaryEmail
+                updates["show_secondary_phone_publicly"] = showSecondaryPhone
+                updates["show_secondary_email_publicly"] = showSecondaryEmail
 
                 try await authViewModel.updateProfile(updates: updates)
 

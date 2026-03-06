@@ -334,6 +334,7 @@
 "profile_billing" = "Abrechnung";
 "profile_referral" = "Empfehlungsprogramm";
 "profile_help_support" = "Hilfe & Support";
+"profile_orders" = "Bestellungen";
 "profile_log_out" = "Ausloggen";
 "profile_delete_account" = "Konto löschen";
 "profile_cannot_delete" = "Konto kann nicht gelöscht werden";
@@ -502,6 +503,10 @@
 "privacy_show_email_subtitle" = "Ihre primäre und sekundäre E-Mail-Adresse werden auf dem öffentlichen Profil Ihres Haustiers sichtbar sein";
 "privacy_show_address" = "Adresse anzeigen";
 "privacy_show_address_subtitle" = "Ihre Adresse wird auf dem öffentlichen Profil Ihres Haustiers sichtbar sein";
+"privacy_show_secondary_phone" = "Zweite Telefonnummer anzeigen";
+"privacy_show_secondary_phone_subtitle" = "Ihre zweite Telefonnummer auf dem öffentlichen Profil Ihres Haustiers anzeigen";
+"privacy_show_secondary_email" = "Zweite E-Mail anzeigen";
+"privacy_show_secondary_email_subtitle" = "Ihre zweite E-Mail-Adresse auf dem öffentlichen Profil Ihres Haustiers anzeigen";
 "privacy_data_privacy" = "Datenschutz";
 "privacy_privacy_policy" = "Datenschutzrichtlinie";
 "privacy_title" = "Privatsphäre-Modus";
@@ -975,20 +980,20 @@
 "help_faq_group_troubleshooting" = "Fehlerbehebung";
 
 // MARK: - Checkout & Order Status Localization
-"order_more_shipping_calculated" = "Calculated at checkout";
-"order_more_total_shipping_only" = "Shipping only";
-"checkout_subscription_success" = "Your subscription is now active!";
-"checkout_tag_order_success" = "Payment successful! Your tag order is being processed.";
-"checkout_replacement_success" = "Payment successful! Your replacement tag is on the way.";
-"checkout_success" = "Payment successful!";
-"order_status_completed" = "Completed";
-"order_status_pending" = "Pending";
-"order_status_failed" = "Failed";
-"order_status_processing" = "Processing";
-"order_status_shipped" = "Shipped";
-"order_status_delivered" = "Delivered";
-"order_status_cancelled" = "Cancelled";
-"orders_item_count %lld" = "%lld items";
+"order_more_shipping_calculated" = "Berechnung an der Kasse";
+"order_more_total_shipping_only" = "Nur Versand";
+"checkout_subscription_success" = "Ihr Abonnement ist jetzt aktiv!";
+"checkout_tag_order_success" = "Zahlung erfolgreich! Ihre Markenbestellung wird bearbeitet.";
+"checkout_replacement_success" = "Zahlung erfolgreich! Ihre Ersatzmarke ist unterwegs.";
+"checkout_success" = "Zahlung erfolgreich!";
+"order_status_completed" = "Abgeschlossen";
+"order_status_pending" = "Ausstehend";
+"order_status_failed" = "Fehlgeschlagen";
+"order_status_processing" = "In Bearbeitung";
+"order_status_shipped" = "Versendet";
+"order_status_delivered" = "Zugestellt";
+"order_status_cancelled" = "Storniert";
+"orders_item_count %lld" = "%lld Artikel";
 
 // MARK: - Scanner Additional
 "scanner_owner_address" = "Adresse des Besitzers";

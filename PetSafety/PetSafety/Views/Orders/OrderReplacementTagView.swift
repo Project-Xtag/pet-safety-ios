@@ -28,6 +28,10 @@ struct OrderReplacementTagView: View {
     @State private var deliveryMethod = "home_delivery"
     @State private var selectedPostaPoint: PostaPointDetails?
 
+    // Shipping prices (fetched from API)
+    @State private var shippingPrices: ShippingPricesResponse?
+    @State private var isLoadingPrices = true
+
     private var isHungary: Bool {
         let c = country.lowercased().trimmingCharacters(in: .whitespaces)
         return c == "hu" || c == "hungary" || c == "magyarország" || c == "magyarorszag"
@@ -65,6 +69,7 @@ struct OrderReplacementTagView: View {
         .task {
             await checkEligibility()
             await loadUserAddress()
+            await loadShippingPrices()
         }
     }
 
@@ -157,7 +162,7 @@ struct OrderReplacementTagView: View {
                             .font(.caption)
                             .foregroundColor(.tealAccent)
                     } else {
-                        Label(String(format: String(localized: "order_replace_additional_fee %@"), String(format: "€%.2f", shippingCost)), systemImage: "eurosign.circle")
+                        Label(String(format: String(localized: "order_replace_additional_fee %@"), formattedShippingCost), systemImage: "eurosign.circle")
                             .font(.caption)
                             .foregroundColor(.brandOrange)
                         Label(String(localized: "order_replace_upgrade_hint"), systemImage: "star.fill")
@@ -274,7 +279,7 @@ struct OrderReplacementTagView: View {
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                             } else {
-                                Text(String(format: String(localized: "order_replace_paid_button %@"), String(format: "€%.2f", shippingCost)))
+                                Text(String(format: String(localized: "order_replace_paid_button %@"), formattedShippingCost))
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                             }
@@ -327,6 +332,51 @@ struct OrderReplacementTagView: View {
             }
             if let userCountry = user.country {
                 country = userCountry
+            }
+        }
+    }
+
+    /// Format the shipping cost using the currency from the API, or fall back to EUR format
+    private var formattedShippingCost: String {
+        if isHungary, let hu = shippingPrices?.HU {
+            // For Hungary, use the home_delivery price info to determine currency
+            if let info = hu.home_delivery {
+                let priceInfo = ShippingPriceInfo(amount: shippingCost, currency: info.currency, label: "")
+                return priceInfo.formattedPrice
+            }
+        }
+        if let defaultInfo = shippingPrices?.defaultShipping {
+            let priceInfo = ShippingPriceInfo(amount: shippingCost, currency: defaultInfo.currency, label: "")
+            return priceInfo.formattedPrice
+        }
+        // Fallback: EUR format
+        return String(format: "€%.2f", shippingCost)
+    }
+
+    private func shippingPriceLabel(for method: String) -> String {
+        guard let hu = shippingPrices?.HU else {
+            return "..."
+        }
+        if method == "postapoint" {
+            return hu.postapoint?.formattedPrice ?? "..."
+        } else {
+            return hu.home_delivery?.formattedPrice ?? "..."
+        }
+    }
+
+    private func loadShippingPrices() async {
+        do {
+            let prices = try await APIService.shared.getShippingPrices()
+            await MainActor.run {
+                shippingPrices = prices
+                isLoadingPrices = false
+            }
+        } catch {
+            #if DEBUG
+            print("⚠️ Failed to load shipping prices: \(error)")
+            #endif
+            await MainActor.run {
+                isLoadingPrices = false
             }
         }
     }

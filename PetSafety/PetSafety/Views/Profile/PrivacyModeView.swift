@@ -7,6 +7,8 @@ struct PrivacyModeView: View {
     @State private var showPhonePublicly: Bool = true
     @State private var showEmailPublicly: Bool = true
     @State private var showAddressPublicly: Bool = true
+    @State private var showSecondaryPhonePublicly: Bool = false
+    @State private var showSecondaryEmailPublicly: Bool = false
     @State private var isUpdating: Bool = false
     @State private var didInitialize: Bool = false
 
@@ -58,6 +60,39 @@ struct PrivacyModeView: View {
                     guard didInitialize else { return }
                     updatePrivacySetting("show_address_publicly", value: newValue)
                 }
+
+                // Secondary contact toggles (only shown when secondary contacts exist)
+                if let secondaryPhone = authViewModel.currentUser?.secondaryPhone, !secondaryPhone.isEmpty {
+                    Toggle(isOn: $showSecondaryPhonePublicly) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("privacy_show_secondary_phone")
+                            Text("privacy_show_secondary_phone_subtitle")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .disabled(isUpdating)
+                    .onChange(of: showSecondaryPhonePublicly) { _, newValue in
+                        guard didInitialize else { return }
+                        updatePrivacySetting("show_secondary_phone_publicly", value: newValue)
+                    }
+                }
+
+                if let secondaryEmail = authViewModel.currentUser?.secondaryEmail, !secondaryEmail.isEmpty {
+                    Toggle(isOn: $showSecondaryEmailPublicly) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("privacy_show_secondary_email")
+                            Text("privacy_show_secondary_email_subtitle")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .disabled(isUpdating)
+                    .onChange(of: showSecondaryEmailPublicly) { _, newValue in
+                        guard didInitialize else { return }
+                        updatePrivacySetting("show_secondary_email_publicly", value: newValue)
+                    }
+                }
             }
 
             Section(header: Text("privacy_data_privacy")) {
@@ -91,6 +126,8 @@ struct PrivacyModeView: View {
                 showPhonePublicly = user.showPhonePublicly ?? true
                 showEmailPublicly = user.showEmailPublicly ?? true
                 showAddressPublicly = user.showAddressPublicly ?? true
+                showSecondaryPhonePublicly = user.showSecondaryPhonePublicly ?? false
+                showSecondaryEmailPublicly = user.showSecondaryEmailPublicly ?? false
             }
             // Defer so onChange handlers ignore the initial state setup
             DispatchQueue.main.async {
@@ -117,6 +154,8 @@ struct PrivacyModeView: View {
                         showPhonePublicly = user.showPhonePublicly ?? true
                         showEmailPublicly = user.showEmailPublicly ?? true
                         showAddressPublicly = user.showAddressPublicly ?? true
+                        showSecondaryPhonePublicly = user.showSecondaryPhonePublicly ?? false
+                        showSecondaryEmailPublicly = user.showSecondaryEmailPublicly ?? false
                     }
                 }
             }

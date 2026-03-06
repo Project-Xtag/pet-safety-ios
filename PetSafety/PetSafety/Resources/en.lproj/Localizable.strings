@@ -334,6 +334,7 @@
 "profile_billing" = "Billing";
 "profile_referral" = "Referral Program";
 "profile_help_support" = "Help & Support";
+"profile_orders" = "Orders";
 "profile_log_out" = "Log Out";
 "profile_delete_account" = "Delete Account";
 "profile_cannot_delete" = "Cannot Delete Account";
@@ -557,6 +558,10 @@
 "privacy_show_email_subtitle" = "Your primary and secondary email addresses will be visible on your pet's public profile";
 "privacy_show_address" = "Show Address";
 "privacy_show_address_subtitle" = "Your address will be visible on your pet's public profile";
+"privacy_show_secondary_phone" = "Show Secondary Phone";
+"privacy_show_secondary_phone_subtitle" = "Display your secondary phone number on your pet's public profile";
+"privacy_show_secondary_email" = "Show Secondary Email";
+"privacy_show_secondary_email_subtitle" = "Display your secondary email address on your pet's public profile";
 "privacy_data_privacy" = "Data Privacy";
 "privacy_privacy_policy" = "Privacy Policy";
 "privacy_title" = "Privacy Mode";

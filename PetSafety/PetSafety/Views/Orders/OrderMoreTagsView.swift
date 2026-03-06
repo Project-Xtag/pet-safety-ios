@@ -28,6 +28,10 @@ struct OrderMoreTagsView: View {
     @State private var deliveryMethod = "home_delivery"
     @State private var selectedPostaPoint: PostaPointDetails?
 
+    // Shipping prices (fetched from API)
+    @State private var shippingPrices: ShippingPricesResponse?
+    @State private var isLoadingPrices = true
+
     var body: some View {
         Group {
             if orderComplete {
@@ -48,6 +52,7 @@ struct OrderMoreTagsView: View {
         }
         .task {
             await loadUserInfo()
+            await loadShippingPrices()
         }
         .sheet(isPresented: $showCheckoutSheet) {
             if let url = checkoutURL {
@@ -215,11 +220,15 @@ struct OrderMoreTagsView: View {
                 HStack {
                     Text("order_more_shipping_cost")
                     Spacer()
-                    if isHungary {
-                        Text(deliveryMethod == "postapoint" ? String(localized: "postapoint_delivery_price") : String(localized: "home_delivery_price"))
+                    if isLoadingPrices {
+                        ProgressView()
+                            .scaleEffect(0.8)
+                    } else if isHungary {
+                        Text(shippingPriceLabel(for: deliveryMethod))
                             .foregroundColor(.secondary)
                     } else {
-                        Text(String(localized: "order_more_shipping_calculated"))
+                        Text(shippingPrices?.defaultShipping?.formattedPrice ?? String(localized: "order_more_shipping_calculated"))
+                            .foregroundColor(.secondary)
                     }
                 }
 
@@ -320,6 +329,34 @@ struct OrderMoreTagsView: View {
             if let userCountry = user.country {
                 country = userCountry
             }
+        }
+    }
+
+    private func loadShippingPrices() async {
+        do {
+            let prices = try await APIService.shared.getShippingPrices()
+            await MainActor.run {
+                shippingPrices = prices
+                isLoadingPrices = false
+            }
+        } catch {
+            #if DEBUG
+            print("⚠️ Failed to load shipping prices: \(error)")
+            #endif
+            await MainActor.run {
+                isLoadingPrices = false
+            }
+        }
+    }
+
+    private func shippingPriceLabel(for method: String) -> String {
+        guard let hu = shippingPrices?.HU else {
+            return "..."
+        }
+        if method == "postapoint" {
+            return hu.postapoint?.formattedPrice ?? "..."
+        } else {
+            return hu.home_delivery?.formattedPrice ?? "..."
         }
     }
 

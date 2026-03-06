@@ -334,6 +334,7 @@
 "profile_billing" = "Facturare";
 "profile_referral" = "Program de recomandare";
 "profile_help_support" = "Ajutor și suport";
+"profile_orders" = "Comenzi";
 "profile_log_out" = "Deconectare";
 "profile_delete_account" = "Șterge contul";
 "profile_cannot_delete" = "Contul nu poate fi șters";
@@ -502,6 +503,10 @@
 "privacy_show_email_subtitle" = "Adresele tale de e-mail principale și secundare vor fi vizibile pe profilul public al animalului";
 "privacy_show_address" = "Afișează adresa";
 "privacy_show_address_subtitle" = "Adresa ta va fi vizibilă pe profilul public al animalului";
+"privacy_show_secondary_phone" = "Afișează telefonul secundar";
+"privacy_show_secondary_phone_subtitle" = "Afișează numărul tău de telefon secundar pe profilul public al animalului";
+"privacy_show_secondary_email" = "Afișează e-mailul secundar";
+"privacy_show_secondary_email_subtitle" = "Afișează adresa ta de e-mail secundară pe profilul public al animalului";
 "privacy_data_privacy" = "Confidențialitate date";
 "privacy_privacy_policy" = "Politica de confidențialitate";
 "privacy_title" = "Mod confidențialitate";
@@ -975,20 +980,20 @@
 "help_faq_group_troubleshooting" = "Depanare";
 
 // MARK: - Checkout & Order Status Localization
-"order_more_shipping_calculated" = "Calculated at checkout";
-"order_more_total_shipping_only" = "Shipping only";
-"checkout_subscription_success" = "Your subscription is now active!";
-"checkout_tag_order_success" = "Payment successful! Your tag order is being processed.";
-"checkout_replacement_success" = "Payment successful! Your replacement tag is on the way.";
-"checkout_success" = "Payment successful!";
-"order_status_completed" = "Completed";
-"order_status_pending" = "Pending";
-"order_status_failed" = "Failed";
-"order_status_processing" = "Processing";
-"order_status_shipped" = "Shipped";
-"order_status_delivered" = "Delivered";
-"order_status_cancelled" = "Cancelled";
-"orders_item_count %lld" = "%lld items";
+"order_more_shipping_calculated" = "Calculat la finalizare";
+"order_more_total_shipping_only" = "Doar livrare";
+"checkout_subscription_success" = "Abonamentul tău este activ!";
+"checkout_tag_order_success" = "Plată reușită! Comanda ta de medalion este în curs de procesare.";
+"checkout_replacement_success" = "Plată reușită! Medalionul tău de înlocuire este pe drum.";
+"checkout_success" = "Plată reușită!";
+"order_status_completed" = "Finalizată";
+"order_status_pending" = "În așteptare";
+"order_status_failed" = "Eșuată";
+"order_status_processing" = "Se procesează";
+"order_status_shipped" = "Expediată";
+"order_status_delivered" = "Livrată";
+"order_status_cancelled" = "Anulată";
+"orders_item_count %lld" = "%lld articole";
 
 // MARK: - Scanner Additional
 "scanner_owner_address" = "Adresa proprietarului";

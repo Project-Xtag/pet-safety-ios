@@ -893,6 +893,15 @@ class APIService {
         return response.checkout
     }
 
+    func getShippingPrices() async throws -> ShippingPricesResponse {
+        let request = try await buildRequest(
+            endpoint: "/orders/shipping-prices",
+            method: "GET",
+            requiresAuth: false
+        )
+        return try await performRequest(request, responseType: ShippingPricesResponse.self)
+    }
+
 }
 
 extension APIService: APIServiceProtocol {}
@@ -1096,6 +1105,44 @@ struct ReplacementEligibilityResponse: Codable {
     let planName: String
     let shippingCost: Double
     let message: String
+}
+
+// MARK: - Shipping Prices Types
+struct ShippingPriceInfo: Codable {
+    let amount: Double
+    let currency: String
+    let label: String
+
+    /// Format the price in a locale-aware way: HUF → "1 490 Ft", EUR → "€4.99"
+    var formattedPrice: String {
+        if currency == "HUF" {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = 0
+            formatter.groupingSeparator = "\u{00A0}" // non-breaking space
+            let formatted = formatter.string(from: NSNumber(value: amount)) ?? "\(Int(amount))"
+            return "\(formatted) Ft"
+        } else {
+            return String(format: "€%.2f", amount)
+        }
+    }
+}
+
+struct ShippingPricesCountry: Codable {
+    let home_delivery: ShippingPriceInfo?
+    let postapoint: ShippingPriceInfo?
+}
+
+struct ShippingPricesResponse: Codable {
+    let HU: ShippingPricesCountry?
+
+    // `default` is a Swift keyword, so we use a CodingKey
+    let defaultShipping: ShippingPriceInfo?
+
+    enum CodingKeys: String, CodingKey {
+        case HU
+        case defaultShipping = "default"
+    }
 }
 
 // MARK: - Order More Tags Types

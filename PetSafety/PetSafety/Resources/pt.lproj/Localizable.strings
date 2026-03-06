@@ -334,6 +334,7 @@
 "profile_billing" = "Faturação";
 "profile_referral" = "Programa de referência";
 "profile_help_support" = "Ajuda e suporte";
+"profile_orders" = "Encomendas";
 "profile_log_out" = "Terminar sessão";
 "profile_delete_account" = "Eliminar conta";
 "profile_cannot_delete" = "Não é possível eliminar a conta";
@@ -502,6 +503,10 @@
 "privacy_show_email_subtitle" = "Os seus endereços de e-mail principal e secundário serão visíveis no perfil público do seu animal";
 "privacy_show_address" = "Mostrar morada";
 "privacy_show_address_subtitle" = "A sua morada será visível no perfil público do seu animal";
+"privacy_show_secondary_phone" = "Mostrar telefone secundário";
+"privacy_show_secondary_phone_subtitle" = "Mostrar o seu número de telefone secundário no perfil público do seu animal";
+"privacy_show_secondary_email" = "Mostrar e-mail secundário";
+"privacy_show_secondary_email_subtitle" = "Mostrar o seu endereço de e-mail secundário no perfil público do seu animal";
 "privacy_data_privacy" = "Privacidade de dados";
 "privacy_privacy_policy" = "Política de Privacidade";
 "privacy_title" = "Modo de privacidade";
@@ -975,20 +980,20 @@
 "help_faq_group_troubleshooting" = "Resolução de problemas";
 
 // MARK: - Checkout & Order Status Localization
-"order_more_shipping_calculated" = "Calculated at checkout";
-"order_more_total_shipping_only" = "Shipping only";
-"checkout_subscription_success" = "Your subscription is now active!";
-"checkout_tag_order_success" = "Payment successful! Your tag order is being processed.";
-"checkout_replacement_success" = "Payment successful! Your replacement tag is on the way.";
-"checkout_success" = "Payment successful!";
-"order_status_completed" = "Completed";
-"order_status_pending" = "Pending";
-"order_status_failed" = "Failed";
-"order_status_processing" = "Processing";
-"order_status_shipped" = "Shipped";
-"order_status_delivered" = "Delivered";
-"order_status_cancelled" = "Cancelled";
-"orders_item_count %lld" = "%lld items";
+"order_more_shipping_calculated" = "Calculado no checkout";
+"order_more_total_shipping_only" = "Apenas envio";
+"checkout_subscription_success" = "A sua subscrição está ativa!";
+"checkout_tag_order_success" = "Pagamento efetuado! A sua encomenda de placa está a ser processada.";
+"checkout_replacement_success" = "Pagamento efetuado! A sua placa de substituição está a caminho.";
+"checkout_success" = "Pagamento efetuado!";
+"order_status_completed" = "Concluído";
+"order_status_pending" = "Pendente";
+"order_status_failed" = "Falhado";
+"order_status_processing" = "Em processamento";
+"order_status_shipped" = "Enviado";
+"order_status_delivered" = "Entregue";
+"order_status_cancelled" = "Cancelado";
+"orders_item_count %lld" = "%lld artigos";
 
 // MARK: - Scanner Additional
 "scanner_owner_address" = "Morada do proprietário";
