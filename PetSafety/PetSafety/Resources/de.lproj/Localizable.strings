@@ -578,15 +578,15 @@
 "order_replace_free_button" = "Bestätigen & kostenlosen Ersatz-Tag bestellen";
 "order_replace_paid_button %@" = "Bestätigen & %@ bezahlen";
 
-// MARK: - Delivery Method & PostaPoint
+// MARK: - Delivery Method & PostaPont
 "delivery_method_title" = "Versandmethode";
 "home_delivery_option" = "Hauszustellung (2.490 Ft)";
 "home_delivery_price" = "2.490 Ft";
-"postapoint_delivery_option" = "PostaPoint (1.490 Ft)";
+"postapoint_delivery_option" = "PostaPont (1.490 Ft)";
 "postapoint_delivery_price" = "1.490 Ft";
 "postapoint_zip_placeholder" = "Postleitzahl";
-"postapoint_no_results" = "Keine PostaPoints für diese Postleitzahl gefunden";
-"postapoint_search_failed" = "PostaPoints konnten nicht gesucht werden";
+"postapoint_no_results" = "Keine PostaPonts für diese Postleitzahl gefunden";
+"postapoint_search_failed" = "PostaPonts konnten nicht gesucht werden";
 
 // MARK: - Öffentliches Haustierprofil
 "public_profile_preview" = "Vorschau des öffentlichen Profils";
@@ -929,7 +929,7 @@
 "help_faq_q11" = "Was ist das Empfehlungsprogramm?";
 "help_faq_a11" = "Teile den Code SENRAFRIEND mit Freunden und Familie. Wenn jemand diesen Code verwendet und einen bezahlten Plan (Standard oder Maximum) abschließt, erhaltet ihr beide 2 Monate gratis. Du kannst deine Empfehlungen auf der Empfehlungsseite verfolgen.";
 "help_faq_q12" = "In welche Länder liefert ihr?";
-"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPoint) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
+"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPont) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
 "help_faq_q13" = "Kann ich mehrere Tiere in einem Konto haben?";
 "help_faq_a13" = "Ja. Im Starter (kostenlos) Plan kannst du bis zu 10 Haustiere registrieren. Der Standard-Plan unterstützt 1 Haustier. Der Maximum-Plan unterstützt bis zu 10 Haustiere. Du kannst deinen Plan jederzeit auf der Kontoseite upgraden.";
 "help_faq_q14" = "Wie melde ich ein gefundenes Tier?";

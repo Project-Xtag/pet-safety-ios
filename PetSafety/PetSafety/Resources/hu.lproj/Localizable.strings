@@ -578,7 +578,7 @@
 "order_replace_free_button" = "Megerősítés & ingyenes csere biléta rendelése";
 "order_replace_paid_button %@" = "Megerősítés & fizetés: %@";
 
-// MARK: - Delivery Method & PostaPoint
+// MARK: - Delivery Method & PostaPont
 "delivery_method_title" = "Szállítási mód";
 "home_delivery_option" = "Házhozszállítás (2 490 Ft)";
 "home_delivery_price" = "2 490 Ft";

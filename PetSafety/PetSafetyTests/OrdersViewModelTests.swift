@@ -87,7 +87,7 @@ struct OrdersViewModelTests {
     func testCreateTagCheckoutRequestWithDelivery() throws {
         let postapoint = PostaPointDetails(
             id: "pp-123",
-            name: "PostaPoint Budapest 1",
+            name: "PostaPont Budapest 1",
             address: "Váci u. 10"
         )
         let request = CreateTagCheckoutRequest(
@@ -107,7 +107,7 @@ struct OrdersViewModelTests {
 
         let ppDetails = dict["postapointDetails"] as? [String: Any]
         #expect(ppDetails?["id"] as? String == "pp-123")
-        #expect(ppDetails?["name"] as? String == "PostaPoint Budapest 1")
+        #expect(ppDetails?["name"] as? String == "PostaPont Budapest 1")
     }
 
     @Test("CreateTagCheckoutRequest encodes home_delivery without postapointDetails")
@@ -203,7 +203,7 @@ struct OrdersViewModelTests {
         let json = """
         {
             "id": "pp-456",
-            "name": "PostaPoint Váci út",
+            "name": "PostaPont Váci út",
             "address": "Váci út 10",
             "city": "Budapest",
             "postcode": "1055"
@@ -213,7 +213,7 @@ struct OrdersViewModelTests {
         let point = try JSONDecoder().decode(DeliveryPoint.self, from: json)
 
         #expect(point.id == "pp-456")
-        #expect(point.name == "PostaPoint Váci út")
+        #expect(point.name == "PostaPont Váci út")
         #expect(point.address == "Váci út 10")
         #expect(point.city == "Budapest")
         #expect(point.postcode == "1055")

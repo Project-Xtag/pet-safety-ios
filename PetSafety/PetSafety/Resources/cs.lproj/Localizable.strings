@@ -578,15 +578,15 @@
 "order_replace_free_button" = "Potvrdit a objednat bezplatnou náhradní známku";
 "order_replace_paid_button %@" = "Potvrdit a zaplatit %@";
 
-// MARK: - Delivery Method & PostaPoint
+// MARK: - Delivery Method & PostaPont
 "delivery_method_title" = "Způsob doručení";
 "home_delivery_option" = "Doručení domů (2 490 Ft)";
 "home_delivery_price" = "2 490 Ft";
-"postapoint_delivery_option" = "PostaPoint (1 490 Ft)";
+"postapoint_delivery_option" = "PostaPont (1 490 Ft)";
 "postapoint_delivery_price" = "1 490 Ft";
 "postapoint_zip_placeholder" = "PSČ";
-"postapoint_no_results" = "Pro toto PSČ nebyly nalezeny žádné PostaPointy";
-"postapoint_search_failed" = "Nepodařilo se vyhledat PostaPointy";
+"postapoint_no_results" = "Pro toto PSČ nebyly nalezeny žádné PostaPonty";
+"postapoint_search_failed" = "Nepodařilo se vyhledat PostaPonty";
 
 // MARK: - Veřejný profil mazlíčka
 "public_profile_preview" = "Náhled veřejného profilu";
@@ -929,7 +929,7 @@
 "help_faq_q11" = "Co je to program doporučení?";
 "help_faq_a11" = "Sdílejte kód SENRAFRIEND s přáteli a rodinou. Když někdo použije tento kód a přihlásí se k placenému plánu (Standard nebo Maximum), oba — vy i váš přítel — získáte 2 měsíce zdarma. Svá doporučení a jejich stav můžete sledovat na stránce Doporučení.";
 "help_faq_q12" = "Do jakých zemí zasíláte?";
-"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPoint) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
+"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPont) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
 "help_faq_q13" = "Mohu mít více mazlíčků na jednom účtu?";
 "help_faq_a13" = "Ano. Na plánu Starter (zdarma) můžete zaregistrovat až 10 domácích mazlíčků. Plán Standard podporuje 1 mazlíčka. Plán Maximum podporuje až 10 domácích mazlíčků. Svůj plán můžete kdykoli upgradovat na stránce Účet.";
 "help_faq_q14" = "Jak nahlásím nalezeného mazlíčka?";
