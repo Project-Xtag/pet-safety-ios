@@ -580,10 +580,8 @@
 
 // MARK: - Delivery Method & PostaPont
 "delivery_method_title" = "Szállítási mód";
-"home_delivery_option" = "Házhozszállítás (2 490 Ft)";
-"home_delivery_price" = "2 490 Ft";
-"postapoint_delivery_option" = "PostaPont (1 490 Ft)";
-"postapoint_delivery_price" = "1 490 Ft";
+"home_delivery_option" = "Házhozszállítás";
+"postapoint_delivery_option" = "PostaPont";
 "postapoint_zip_placeholder" = "Irányítószám";
 "postapoint_no_results" = "Nem található PostaPont a megadott irányítószám közelében";
 "postapoint_search_failed" = "Nem sikerült PostaPontot találni";
@@ -929,7 +927,7 @@
 "help_faq_q11" = "Mi az ajánlói program?";
 "help_faq_a11" = "Oszd meg a honlapon generált kódodat a barátaiddal és családtagjaiddal. Amikor valaki felhasználja ezt a kódot és előfizet egy fizetős csomagra (Standard vagy Maximum), te és a barátod is 2 hónap ingyenességet kaptok. Az ajánlásaidat és azok állapotát az Ajánló oldalon követheted nyomon.";
 "help_faq_q12" = "Mely országokba szállítotok?";
-"help_faq_a12" = "Jelenleg Magyarországra és az Európai Unió országaiba szállítunk, de a biléták a világ összes országában müködnek. Magyarországi szállítás: 1 490 Ft (PostaPont) vagy 2 490 Ft (házhozszállítás). Nemzetközi szállítás: €9,95 rendelésenként.";
+"help_faq_a12" = "Jelenleg Magyarországra és az Európai Unió országaiba szállítunk, de a biléták a világ összes országában müködnek. Magyarországi szállítás: %1$@ (PostaPont) vagy %2$@ (házhozszállítás). Nemzetközi szállítás: %3$@ rendelésenként.";
 "help_faq_q13" = "Lehet több kedvencem is regisztrálva egy fiókon?";
 "help_faq_a13" = "Igen. A Starter (ingyenes) csomagnál akár 10 kisállatot regisztrálhatsz. A Standard csomag 1 kedvencet támogat. Az Maximum csomag akár 10 kisállatot is regisztrálhatsz. A csomagodat bármikor frissítheted a Fiók oldalon.";
 "help_faq_q14" = "Hogyan jelenthetek egy megtalált kisállatot?";

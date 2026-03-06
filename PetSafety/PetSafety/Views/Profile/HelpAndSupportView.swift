@@ -329,16 +329,19 @@ struct FAQView: View {
         FAQGroup(titleKey: "help_faq_group_troubleshooting", indices: [16, 17, 20, 27]),
     ]
 
+    @State private var shippingPrices: ShippingPricesResponse?
+
     var body: some View {
         List {
             ForEach(faqGroups) { group in
                 Section(header: Text(localizedString(group.titleKey))) {
                     ForEach(group.items) { faq in
-                        NavigationLink(destination: FAQDetailView(faq: faq)) {
+                        let resolvedFaq = resolveFaq(faq)
+                        NavigationLink(destination: FAQDetailView(faq: resolvedFaq)) {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text(faq.question)
+                                Text(resolvedFaq.question)
                                     .font(.headline)
-                                Text(faq.answer)
+                                Text(resolvedFaq.answer)
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                     .lineLimit(2)
@@ -351,6 +354,21 @@ struct FAQView: View {
         }
         .navigationTitle("help_faq_title")
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            shippingPrices = try? await APIService.shared.getShippingPrices()
+        }
+    }
+
+    /// Interpolate dynamic shipping prices into FAQ #12
+    private func resolveFaq(_ faq: FAQ) -> FAQ {
+        guard faq.id == 12, let prices = shippingPrices else { return faq }
+        let answer = String(
+            format: faq.answer,
+            prices.HU?.postapoint?.formattedPrice ?? "...",
+            prices.HU?.home_delivery?.formattedPrice ?? "...",
+            prices.defaultShipping?.formattedPrice ?? "..."
+        )
+        return FAQ(id: faq.id, question: faq.question, answer: answer)
     }
 }
 

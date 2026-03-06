@@ -580,10 +580,8 @@
 
 // MARK: - Delivery Method & PostaPont
 "delivery_method_title" = "Método de entrega";
-"home_delivery_option" = "Entrega ao domicílio (2.490 Ft)";
-"home_delivery_price" = "2.490 Ft";
-"postapoint_delivery_option" = "PostaPont (1.490 Ft)";
-"postapoint_delivery_price" = "1.490 Ft";
+"home_delivery_option" = "Entrega ao domicílio";
+"postapoint_delivery_option" = "PostaPont";
 "postapoint_zip_placeholder" = "Código postal";
 "postapoint_no_results" = "Nenhum PostaPont encontrado para este código postal";
 "postapoint_search_failed" = "Falha ao pesquisar PostaPonts";
@@ -929,7 +927,7 @@
 "help_faq_q11" = "O que é o programa de referência?";
 "help_faq_a11" = "Partilhe o código SENRAFRIEND com amigos e familiares. Quando alguém usar este código e subscrever um plano pago (Standard ou Maximum), ambos recebem 2 meses grátis. Pode acompanhar as suas referências e o seu estado na página de Referências.";
 "help_faq_q12" = "Para que países fazem envio?";
-"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs 1,490 Ft (PostaPont) or 2,490 Ft (home delivery). International shipping is €9.95 per order.";
+"help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs %1$@ (PostaPont) or %2$@ (home delivery). International shipping is %3$@ per order.";
 "help_faq_q13" = "Posso ter vários animais numa conta?";
 "help_faq_a13" = "Sim. No plano Starter (gratuito) pode registar até 10 animais. O plano Standard suporta 1 animal. O plano Maximum suporta até 10 animais. Pode atualizar o plano a qualquer momento na página da Conta.";
 "help_faq_q14" = "Como reporto um animal que encontrei?";
