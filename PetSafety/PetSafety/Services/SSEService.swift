@@ -19,6 +19,8 @@ class SSEService: NSObject, ObservableObject {
     private var buffer = ""
     private var shouldReconnect = true
     private var reconnectTimer: Timer?
+    private var watchdogTimer: Timer?
+    private let watchdogInterval: TimeInterval = 90.0 // Expect data within 90s (server sends keep-alive pings)
     private var reconnectAttempts = 0
     private let maxReconnectAttempts = 5
     private let baseReconnectDelay: TimeInterval = 1.0 // Start with 1 second
@@ -98,6 +100,8 @@ class SSEService: NSObject, ObservableObject {
         shouldReconnect = false
         reconnectTimer?.invalidate()
         reconnectTimer = nil
+        watchdogTimer?.invalidate()
+        watchdogTimer = nil
         dataTask?.cancel()
         dataTask = nil
         urlSession?.invalidateAndCancel()
@@ -174,6 +178,26 @@ class SSEService: NSObject, ObservableObject {
                     self.connectionError = "Authentication expired. Please log in again."
                 }
             }
+        }
+    }
+
+    /// Resets the watchdog timer. Called each time data is received.
+    /// If no data arrives within `watchdogInterval`, the connection is assumed dead
+    /// and a reconnect is triggered.
+    private func resetWatchdog() {
+        watchdogTimer?.invalidate()
+        watchdogTimer = Timer.scheduledTimer(withTimeInterval: watchdogInterval, repeats: false) { [weak self] _ in
+            guard let self = self, self.shouldReconnect else { return }
+            #if DEBUG
+            print("⏰ SSEService: Watchdog timeout — no data received in \(self.watchdogInterval)s, reconnecting")
+            #endif
+            DispatchQueue.main.async {
+                self.isConnected = false
+                self.connectionError = "Connection stale — reconnecting"
+            }
+            self.dataTask?.cancel()
+            self.dataTask = nil
+            self.scheduleReconnect()
         }
     }
 
@@ -400,6 +424,7 @@ extension SSEService: URLSessionDataDelegate {
         }
 
         buffer += string
+        resetWatchdog()
         processBuffer()
     }
 
@@ -418,11 +443,16 @@ extension SSEService: URLSessionDataDelegate {
             scheduleReconnect()
         } else {
             #if DEBUG
-            print("✅ SSEService: Connection completed successfully")
+            print("✅ SSEService: Connection completed by server")
             #endif
 
             DispatchQueue.main.async { [weak self] in
                 self?.isConnected = false
+            }
+
+            // Server closed the connection gracefully — reconnect if we should
+            if shouldReconnect {
+                scheduleReconnect()
             }
         }
     }

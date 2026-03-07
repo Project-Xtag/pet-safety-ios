@@ -117,7 +117,7 @@ class APIService {
         let body = ["refreshToken": refreshToken]
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await CertificatePinningService.shared.pinnedSession.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw APIError.unauthorized

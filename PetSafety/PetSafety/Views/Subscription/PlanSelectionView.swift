@@ -282,18 +282,18 @@ struct PlanCard: View {
                 )
                 FeatureRow(
                     icon: "photo",
-                    text: String(format: String(localized: "plan_feature_photos_count"), plan.features.maxPhotosPerPet),
+                    text: String(format: String(localized: "plan_feature_photos_count"), plan.features.resolvedMaxPhotosPerPet),
                     included: true
                 )
                 FeatureRow(
                     icon: "megaphone",
                     text: String(localized: "plan_feature_lost_alerts_short"),
-                    included: plan.features.vetAlerts
+                    included: plan.features.vetAlerts ?? false
                 )
                 FeatureRow(
                     icon: "message",
                     text: String(localized: "plan_feature_sms"),
-                    included: plan.features.smsNotifications
+                    included: plan.features.smsNotifications ?? false
                 )
             }
 

@@ -60,7 +60,7 @@ struct PetsViewModelTests {
         let json = """
         {
             "success": false,
-            "error": "Pet registration limit reached. Standard plan allows 1 pet. Upgrade to Ultimate for unlimited pets.",
+            "error": "Pet registration limit reached. Standard plan allows 1 pet. Upgrade to Maximum for unlimited pets.",
             "subscription": {
                 "current_plan": "standard",
                 "current_pet_count": 1,

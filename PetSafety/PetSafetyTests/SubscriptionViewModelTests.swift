@@ -83,7 +83,7 @@ struct SubscriptionModelTests {
         {
             "id": "plan_2",
             "name": "ultimate",
-            "display_name": "Ultimate",
+            "display_name": "Maximum",
             "description": null,
             "price_monthly": 9.95,
             "price_yearly": 99.50,
@@ -162,6 +162,7 @@ struct SubscriptionModelTests {
             ("past_due", "Past Due", false),
             ("cancelled", "Cancelled", false),
             ("expired", "Expired", false),
+            ("suspended", "Suspended", false),
         ]
 
         for (raw, display, isActive) in statuses {
@@ -319,6 +320,130 @@ struct SubscriptionModelTests {
         #expect(dict["plan_name"] as? String == "standard")
         #expect(dict["billing_period"] as? String == "monthly")
         #expect(dict["platform"] as? String == "ios")
+    }
+
+    // MARK: - Critical Fix: SubscriptionStatus.suspended
+
+    @Test("Decodes suspended subscription status without crash")
+    func testDecodeSuspendedStatus() throws {
+        let json = """
+        {
+            "id": "sub_suspended",
+            "user_id": "user_1",
+            "plan_id": "plan_1",
+            "plan_name": "standard",
+            "status": "suspended"
+        }
+        """.data(using: .utf8)!
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let sub = try decoder.decode(UserSubscription.self, from: json)
+        #expect(sub.status == .suspended)
+        #expect(sub.isActive == false)
+        #expect(sub.displayStatus == "Suspended")
+    }
+
+    @Test("Decodes unknown subscription status gracefully")
+    func testDecodeUnknownStatus() throws {
+        let json = """
+        {
+            "id": "sub_future",
+            "user_id": "user_1",
+            "plan_id": "plan_1",
+            "plan_name": "standard",
+            "status": "some_future_status"
+        }
+        """.data(using: .utf8)!
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let sub = try decoder.decode(UserSubscription.self, from: json)
+        #expect(sub.status == .unknown)
+        #expect(sub.isActive == false)
+        #expect(sub.displayStatus == "Unknown")
+    }
+
+    // MARK: - Critical Fix: PlanFeatures optional fields
+
+    @Test("Decodes PlanFeatures with missing optional fields")
+    func testDecodePlanFeaturesWithMissingFields() throws {
+        let json = """
+        {
+            "max_pets": 5
+        }
+        """.data(using: .utf8)!
+
+        let features = try JSONDecoder().decode(PlanFeatures.self, from: json)
+        #expect(features.maxPets == 5)
+        #expect(features.maxPhotosPerPet == nil)
+        #expect(features.maxEmergencyContacts == nil)
+        #expect(features.smsNotifications == nil)
+        #expect(features.vetAlerts == nil)
+        #expect(features.resolvedMaxPhotosPerPet == 3)
+        #expect(features.resolvedMaxEmergencyContacts == 1)
+    }
+
+    @Test("PlanFeatures resolved defaults are correct")
+    func testPlanFeaturesResolvedDefaults() throws {
+        let json = """
+        {
+            "max_pets": null,
+            "max_photos_per_pet": 20,
+            "max_emergency_contacts": 10
+        }
+        """.data(using: .utf8)!
+
+        let features = try JSONDecoder().decode(PlanFeatures.self, from: json)
+        #expect(features.maxPetsDisplay == "Unlimited")
+        #expect(features.resolvedMaxPhotosPerPet == 20)
+        #expect(features.resolvedMaxEmergencyContacts == 10)
+    }
+
+    // MARK: - Critical Fix: SubscriptionFeatures optional fields
+
+    @Test("Decodes SubscriptionFeatures with missing optional fields")
+    func testDecodeSubscriptionFeaturesWithMissingFields() throws {
+        let json = """
+        {
+            "plan_name": "starter"
+        }
+        """.data(using: .utf8)!
+
+        let features = try JSONDecoder().decode(SubscriptionFeatures.self, from: json)
+        #expect(features.planName == "starter")
+        #expect(features.canCreateAlerts == nil)
+        #expect(features.maxPhotosPerPet == nil)
+        #expect(features.resolvedMaxPhotosPerPet == 3)
+        #expect(features.resolvedMaxEmergencyContacts == 1)
+        #expect(features.hasFullAlertFeatures == false)
+    }
+
+    @Test("SubscriptionFeatures hasFullAlertFeatures requires all three")
+    func testFullAlertFeaturesRequiresAll() throws {
+        let jsonPartial = """
+        {
+            "plan_name": "standard",
+            "can_create_alerts": true,
+            "can_receive_vet_alerts": true,
+            "can_receive_community_alerts": false
+        }
+        """.data(using: .utf8)!
+
+        let partial = try JSONDecoder().decode(SubscriptionFeatures.self, from: jsonPartial)
+        #expect(partial.hasFullAlertFeatures == false)
+
+        let jsonFull = """
+        {
+            "plan_name": "ultimate",
+            "can_create_alerts": true,
+            "can_receive_vet_alerts": true,
+            "can_receive_community_alerts": true
+        }
+        """.data(using: .utf8)!
+
+        let full = try JSONDecoder().decode(SubscriptionFeatures.self, from: jsonFull)
+        #expect(full.hasFullAlertFeatures == true)
     }
 }
 

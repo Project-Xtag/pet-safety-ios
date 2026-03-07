@@ -62,13 +62,13 @@ struct SubscriptionPlan: Codable, Identifiable {
 
 struct PlanFeatures: Codable {
     let maxPets: Int?
-    let maxPhotosPerPet: Int
-    let maxEmergencyContacts: Int
-    let smsNotifications: Bool
-    let vetAlerts: Bool
-    let communityAlerts: Bool
-    let freeTagReplacement: Bool
-    let prioritySupport: Bool
+    let maxPhotosPerPet: Int?
+    let maxEmergencyContacts: Int?
+    let smsNotifications: Bool?
+    let vetAlerts: Bool?
+    let communityAlerts: Bool?
+    let freeTagReplacement: Bool?
+    let prioritySupport: Bool?
 
     enum CodingKeys: String, CodingKey {
         case maxPets = "max_pets"
@@ -87,6 +87,9 @@ struct PlanFeatures: Codable {
         }
         return "Unlimited"
     }
+
+    var resolvedMaxPhotosPerPet: Int { maxPhotosPerPet ?? 3 }
+    var resolvedMaxEmergencyContacts: Int { maxEmergencyContacts ?? 1 }
 }
 
 // MARK: - User Subscription
@@ -139,6 +142,10 @@ struct UserSubscription: Codable {
             return "Cancelled"
         case .expired:
             return "Expired"
+        case .suspended:
+            return "Suspended"
+        case .unknown:
+            return "Unknown"
         }
     }
 }
@@ -149,19 +156,27 @@ enum SubscriptionStatus: String, Codable {
     case pastDue = "past_due"
     case cancelled
     case expired
+    case suspended
+    case unknown
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+        self = SubscriptionStatus(rawValue: rawValue) ?? .unknown
+    }
 }
 
 // MARK: - Subscription Features
 struct SubscriptionFeatures: Codable {
-    let planName: String
-    let canCreateAlerts: Bool
-    let canReceiveVetAlerts: Bool
-    let canReceiveCommunityAlerts: Bool
-    let canUseSmsNotifications: Bool
+    let planName: String?
+    let canCreateAlerts: Bool?
+    let canReceiveVetAlerts: Bool?
+    let canReceiveCommunityAlerts: Bool?
+    let canUseSmsNotifications: Bool?
     let maxPets: Int?
-    let maxPhotosPerPet: Int
-    let maxEmergencyContacts: Int
-    let freeTagReplacement: Bool
+    let maxPhotosPerPet: Int?
+    let maxEmergencyContacts: Int?
+    let freeTagReplacement: Bool?
 
     enum CodingKeys: String, CodingKey {
         case planName = "plan_name"
@@ -175,8 +190,11 @@ struct SubscriptionFeatures: Codable {
         case freeTagReplacement = "free_tag_replacement"
     }
 
+    var resolvedMaxPhotosPerPet: Int { maxPhotosPerPet ?? 3 }
+    var resolvedMaxEmergencyContacts: Int { maxEmergencyContacts ?? 1 }
+
     var hasFullAlertFeatures: Bool {
-        return canCreateAlerts && canReceiveVetAlerts && canReceiveCommunityAlerts
+        return (canCreateAlerts ?? false) && (canReceiveVetAlerts ?? false) && (canReceiveCommunityAlerts ?? false)
     }
 }
 

@@ -209,11 +209,11 @@ class SubscriptionViewModel: ObservableObject {
 
     func checkPhotoLimit(currentPhotoCount: Int) -> Bool {
         guard let features = features else { return true }
-        return currentPhotoCount < features.maxPhotosPerPet
+        return currentPhotoCount < features.resolvedMaxPhotosPerPet
     }
 
     func checkContactLimit(currentContactCount: Int) -> Bool {
         guard let features = features else { return true }
-        return currentContactCount < features.maxEmergencyContacts
+        return currentContactCount < features.resolvedMaxEmergencyContacts
     }
 }
