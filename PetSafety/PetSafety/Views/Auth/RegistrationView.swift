@@ -17,9 +17,7 @@ struct RegistrationView: View {
     var onBackToLogin: () -> Void
 
     private var isValidEmail: Bool {
-        let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
-        let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: trimmed)
+        InputValidators.isValidEmail(email)
     }
 
     var body: some View {
@@ -166,6 +164,10 @@ struct RegistrationView: View {
                                     .keyboardType(.numberPad)
                                     .multilineTextAlignment(.center)
                                     .font(.system(size: 28, weight: .semibold, design: .monospaced))
+                                    .onChange(of: otpCode) { _, new in
+                                        let filtered = String(new.filter(\.isNumber).prefix(6))
+                                        if filtered != new { otpCode = filtered }
+                                    }
                                     .padding()
                                     .background(Color(.systemBackground))
                                     .cornerRadius(14)
@@ -182,8 +184,8 @@ struct RegistrationView: View {
                                         Text("verify_code")
                                     }
                                 }
-                                .buttonStyle(BrandButtonStyle(isDisabled: otpCode.count != 6))
-                                .disabled(otpCode.count != 6 || authViewModel.isLoading)
+                                .buttonStyle(BrandButtonStyle(isDisabled: !InputValidators.isValidOTP(otpCode)))
+                                .disabled(!InputValidators.isValidOTP(otpCode) || authViewModel.isLoading)
 
                                 // Resend code
                                 VStack(spacing: 8) {

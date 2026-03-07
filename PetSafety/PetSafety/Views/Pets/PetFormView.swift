@@ -89,6 +89,7 @@ struct PetFormView: View {
                     Text("name")
                         .frame(width: 80, alignment: .leading)
                     TextField("pet_name", text: $name)
+                        .onChange(of: name) { _, new in if new.count > InputValidators.maxPetName { name = String(new.prefix(InputValidators.maxPetName)) } }
                 }
 
                 if mode.isEdit {
@@ -119,6 +120,7 @@ struct PetFormView: View {
                     Text("colour")
                         .frame(width: 80, alignment: .leading)
                     TextField("colour_optional", text: $color)
+                        .onChange(of: color) { _, new in if new.count > InputValidators.maxColor { color = String(new.prefix(InputValidators.maxColor)) } }
                 }
 
                 // Age display
@@ -139,6 +141,7 @@ struct PetFormView: View {
                         .frame(width: 80, alignment: .leading)
                     TextField("microchip_optional", text: $microchipNumber)
                         .keyboardType(.numberPad)
+                        .onChange(of: microchipNumber) { _, new in if new.count > InputValidators.maxMicrochip { microchipNumber = String(new.prefix(InputValidators.maxMicrochip)) } }
                 }
 
                 // Physical details (merged into basic information)
@@ -147,6 +150,7 @@ struct PetFormView: View {
                         .frame(width: 80, alignment: .leading)
                     TextField("weight_optional", text: $weight)
                         .keyboardType(.decimalPad)
+                        .onChange(of: weight) { _, new in if new.count > 10 { weight = String(new.prefix(10)) } }
                 }
 
                 Picker("sex", selection: $sex) {
@@ -161,6 +165,7 @@ struct PetFormView: View {
             Section("health_information") {
                 TextEditor(text: $medicalInfo)
                     .frame(minHeight: 120)
+                    .onChange(of: medicalInfo) { _, new in if new.count > InputValidators.maxMedicalNotes { medicalInfo = String(new.prefix(InputValidators.maxMedicalNotes)) } }
                     .overlay(alignment: .topLeading) {
                         if medicalInfo.isEmpty {
                             Text("health_info_hint")
@@ -174,6 +179,7 @@ struct PetFormView: View {
             Section("additional_information") {
                 TextEditor(text: $uniqueFeatures)
                     .frame(minHeight: 60)
+                    .onChange(of: uniqueFeatures) { _, new in if new.count > InputValidators.maxUniqueFeatures { uniqueFeatures = String(new.prefix(InputValidators.maxUniqueFeatures)) } }
                     .overlay(alignment: .topLeading) {
                         if uniqueFeatures.isEmpty {
                             Text("unique_features_hint")
@@ -185,6 +191,7 @@ struct PetFormView: View {
 
                 TextEditor(text: $behaviorNotes)
                     .frame(minHeight: 80)
+                    .onChange(of: behaviorNotes) { _, new in if new.count > InputValidators.maxNotes { behaviorNotes = String(new.prefix(InputValidators.maxNotes)) } }
                     .overlay(alignment: .topLeading) {
                         if behaviorNotes.isEmpty {
                             Text("behavior_notes_hint")

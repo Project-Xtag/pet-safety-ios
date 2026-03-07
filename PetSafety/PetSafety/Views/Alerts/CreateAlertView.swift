@@ -36,6 +36,7 @@ struct CreateAlertView: View {
 
                 if !useCurrentLocation {
                     TextField(String(localized: "enter_location"), text: $location)
+                        .onChange(of: location) { _, new in if new.count > InputValidators.maxLocationText { location = String(new.prefix(InputValidators.maxLocationText)) } }
                 } else if let coordinate = locationManager.location {
                     Text("Lat: \(String(format: "%.6f", coordinate.latitude)), Lon: \(String(format: "%.6f", coordinate.longitude))")
                         .font(.caption)
@@ -46,6 +47,7 @@ struct CreateAlertView: View {
             Section(header: Text("additional_information_header")) {
                 TextEditor(text: $additionalInfo)
                     .frame(minHeight: 100)
+                    .onChange(of: additionalInfo) { _, new in if new.count > InputValidators.maxAlertDescription { additionalInfo = String(new.prefix(InputValidators.maxAlertDescription)) } }
                     .overlay(alignment: .topLeading) {
                         if additionalInfo.isEmpty {
                             Text("additional_details_placeholder")
@@ -58,6 +60,8 @@ struct CreateAlertView: View {
 
             Section(header: Text("create_alert_reward")) {
                 TextField(String(localized: "create_alert_reward_placeholder"), text: $rewardAmount)
+                    .keyboardType(.decimalPad)
+                    .onChange(of: rewardAmount) { _, new in if new.count > InputValidators.maxRewardAmount { rewardAmount = String(new.prefix(InputValidators.maxRewardAmount)) } }
             }
         }
         .adaptiveList()

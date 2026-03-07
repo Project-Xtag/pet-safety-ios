@@ -238,9 +238,7 @@ struct ContactsView: View {
     // MARK: - Computed Properties
     private var isFormValid: Bool {
         // At least one valid email must be provided
-        let hasValidEmail = !primaryEmail.trimmingCharacters(in: .whitespaces).isEmpty &&
-                           primaryEmail.contains("@")
-        return hasValidEmail
+        return InputValidators.isValidEmail(primaryEmail)
     }
 
     // MARK: - Data Management

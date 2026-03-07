@@ -277,8 +277,7 @@ struct OrderMoreTagsView: View {
     private var isFormValid: Bool {
         validPetCount > 0 &&
         !ownerName.isEmpty &&
-        !email.isEmpty &&
-        email.contains("@") &&
+        InputValidators.isValidEmail(email) &&
         !street1.isEmpty &&
         !city.isEmpty &&
         !postCode.isEmpty &&
