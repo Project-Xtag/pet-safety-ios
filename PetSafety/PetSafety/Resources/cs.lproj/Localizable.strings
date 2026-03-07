@@ -1018,3 +1018,11 @@
 "species_dog" = "Pes";
 "species_cat_header" = "Kočka";
 "species_bird_no_picker" = "Pták (bez výběru)";
+
+// Referral friend code
+"referral_use_friend_code" = "Použít kód přítele";
+"enter_friend_code" = "Zadejte kód doporučení";
+"apply_code" = "Použít";
+"referral_code_applied" = "Kód doporučení byl použit! Získáte 2 měsíce zdarma.";
+"referral_code_invalid" = "Neplatný nebo vypršený kód doporučení";
+"referral_use_friend_footer" = "Zadejte kód doporučení přítele a získejte 2 měsíce předplatného zdarma.";

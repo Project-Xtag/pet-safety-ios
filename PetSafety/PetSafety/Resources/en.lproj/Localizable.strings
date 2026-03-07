@@ -1019,3 +1019,11 @@
 "species_dog" = "Dog";
 "species_cat_header" = "Cat";
 "species_bird_no_picker" = "Bird (no picker)";
+
+// Referral friend code
+"referral_use_friend_code" = "Use a Friend's Code";
+"enter_friend_code" = "Enter referral code";
+"apply_code" = "Apply";
+"referral_code_applied" = "Referral code applied! You'll get 2 months free.";
+"referral_code_invalid" = "Invalid or expired referral code";
+"referral_use_friend_footer" = "Enter a friend's referral code to get 2 months free when you subscribe.";

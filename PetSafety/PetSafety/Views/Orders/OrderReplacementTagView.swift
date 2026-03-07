@@ -21,7 +21,7 @@ struct OrderReplacementTagView: View {
     @State private var street2 = ""
     @State private var city = ""
     @State private var postCode = ""
-    @State private var country = ""
+    @State private var selectedCountryCode = ""
     @State private var phone = ""
 
     // Delivery method (Hungary only)
@@ -33,8 +33,7 @@ struct OrderReplacementTagView: View {
     @State private var isLoadingPrices = true
 
     private var isHungary: Bool {
-        let c = country.lowercased().trimmingCharacters(in: .whitespaces)
-        return c == "hu" || c == "hungary" || c == "magyarország" || c == "magyarorszag"
+        selectedCountryCode.uppercased() == "HU"
     }
 
     var body: some View {
@@ -302,9 +301,7 @@ struct OrderReplacementTagView: View {
                     .autocapitalization(.allCharacters)
             }
 
-            TextField(String(localized: "order_replace_country"), text: $country)
-                .textFieldStyle(BrandTextFieldStyle(icon: "globe"))
-                .textContentType(.countryName)
+            CountryPickerField(selectedCode: $selectedCountryCode)
 
             TextField(String(localized: "order_replace_phone"), text: $phone)
                 .textFieldStyle(BrandTextFieldStyle(icon: "phone"))
@@ -340,7 +337,7 @@ struct OrderReplacementTagView: View {
     // MARK: - Helpers
 
     private var isFormValid: Bool {
-        !street1.isEmpty && !city.isEmpty && !postCode.isEmpty && !country.isEmpty &&
+        !street1.isEmpty && !city.isEmpty && !postCode.isEmpty && !selectedCountryCode.isEmpty &&
         (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
     }
 
@@ -398,8 +395,8 @@ struct OrderReplacementTagView: View {
         let detectedCountry = Locale.current.region?.identifier
 
         guard let user = authViewModel.currentUser else {
-            if let detected = detectedCountry {
-                await MainActor.run { country = detected }
+            if let detected = detectedCountry, SupportedCountries.findByCode(detected) != nil {
+                await MainActor.run { selectedCountryCode = detected }
             }
             return
         }
@@ -409,7 +406,12 @@ struct OrderReplacementTagView: View {
             if let userPhone = user.phone { phone = userPhone }
             if let userCity = user.city { city = userCity }
             if let postal = user.postalCode { postCode = postal }
-            country = user.country ?? detectedCountry ?? ""
+            let rawCountry = user.country ?? detectedCountry ?? ""
+            if let match = SupportedCountries.find(rawCountry) {
+                selectedCountryCode = match.code
+            } else if let detected = detectedCountry, SupportedCountries.findByCode(detected) != nil {
+                selectedCountryCode = detected
+            }
         }
     }
 
@@ -435,7 +437,7 @@ struct OrderReplacementTagView: View {
                     city: city,
                     province: nil,
                     postCode: postCode,
-                    country: country,
+                    country: selectedCountryCode,
                     phone: phone.isEmpty ? nil : phone
                 )
 

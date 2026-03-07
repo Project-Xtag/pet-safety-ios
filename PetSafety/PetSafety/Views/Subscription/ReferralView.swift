@@ -8,9 +8,42 @@ struct ReferralView: View {
     @State private var isGenerating = false
     @State private var copied = false
     @State private var errorMessage: String?
+    @State private var friendCode = ""
+    @State private var isApplyingFriendCode = false
+    @State private var friendCodeApplied = false
+    @State private var friendCodeMessage: String?
+    @State private var appliedPromoCodeId: String?
 
     var body: some View {
         List {
+            // Enter a friend's code
+            Section {
+                if friendCodeApplied {
+                    Label(friendCodeMessage ?? String(localized: "referral_code_applied"), systemImage: "checkmark.circle.fill")
+                        .foregroundColor(.green)
+                } else {
+                    HStack {
+                        TextField(String(localized: "enter_friend_code"), text: $friendCode)
+                            .textInputAutocapitalization(.characters)
+                            .autocorrectionDisabled()
+                        Button(action: applyFriendCode) {
+                            if isApplyingFriendCode {
+                                ProgressView()
+                            } else {
+                                Text("apply_code")
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.brandOrange)
+                        .disabled(friendCode.isEmpty || isApplyingFriendCode)
+                    }
+                }
+            } header: {
+                Text("referral_use_friend_code")
+            } footer: {
+                Text("referral_use_friend_footer")
+            }
+
             // Referral Code Section
             Section {
                 if isLoading {
@@ -175,6 +208,22 @@ struct ReferralView: View {
         copied = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             copied = false
+        }
+    }
+
+    private func applyFriendCode() {
+        Task {
+            isApplyingFriendCode = true
+            errorMessage = nil
+            do {
+                let response = try await APIService.shared.applyReferralCode(friendCode.trimmingCharacters(in: .whitespacesAndNewlines))
+                friendCodeApplied = true
+                friendCodeMessage = response.message
+                appliedPromoCodeId = response.stripePromoCodeId
+            } catch {
+                errorMessage = error.localizedDescription
+            }
+            isApplyingFriendCode = false
         }
     }
 

@@ -22,7 +22,7 @@ struct OrderMoreTagsView: View {
     @State private var street2 = ""
     @State private var city = ""
     @State private var postCode = ""
-    @State private var country = ""
+    @State private var selectedCountryCode = ""
 
     // Delivery method (Hungary only)
     @State private var deliveryMethod = "home_delivery"
@@ -258,9 +258,7 @@ struct OrderMoreTagsView: View {
                     .autocapitalization(.allCharacters)
             }
 
-            TextField(String(localized: "order_more_country"), text: $country)
-                .textFieldStyle(BrandTextFieldStyle(icon: "globe"))
-                .textContentType(.countryName)
+            CountryPickerField(selectedCode: $selectedCountryCode)
         }
     }
 
@@ -327,8 +325,7 @@ struct OrderMoreTagsView: View {
     // MARK: - Helpers
 
     private var isHungary: Bool {
-        let c = country.lowercased().trimmingCharacters(in: .whitespaces)
-        return c == "hu" || c == "hungary" || c == "magyarország" || c == "magyarorszag"
+        selectedCountryCode.uppercased() == "HU"
     }
 
     private var validPetCount: Int {
@@ -342,7 +339,7 @@ struct OrderMoreTagsView: View {
         !street1.isEmpty &&
         !city.isEmpty &&
         !postCode.isEmpty &&
-        !country.isEmpty &&
+        !selectedCountryCode.isEmpty &&
         (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
     }
 
@@ -386,8 +383,8 @@ struct OrderMoreTagsView: View {
 
         guard let user = authViewModel.currentUser else {
             // No user data — at least set detected country
-            if let detected = detectedCountry {
-                await MainActor.run { country = detected }
+            if let detected = detectedCountry, SupportedCountries.findByCode(detected) != nil {
+                await MainActor.run { selectedCountryCode = detected }
             }
             return
         }
@@ -405,8 +402,13 @@ struct OrderMoreTagsView: View {
             if let address = user.address { street1 = address }
             if let userCity = user.city { city = userCity }
             if let postal = user.postalCode { postCode = postal }
-            // Use user profile country, fallback to locale detection
-            country = user.country ?? detectedCountry ?? ""
+            // Resolve country: user profile value → locale detection
+            let rawCountry = user.country ?? detectedCountry ?? ""
+            if let match = SupportedCountries.find(rawCountry) {
+                selectedCountryCode = match.code
+            } else if let detected = detectedCountry, SupportedCountries.findByCode(detected) != nil {
+                selectedCountryCode = detected
+            }
         }
     }
 
@@ -427,11 +429,9 @@ struct OrderMoreTagsView: View {
             isLoading = true
             do {
                 let quantity = validPetCount
-                let countryCode = country.count == 2 ? country.uppercased() : (authViewModel.currentUser?.country ?? Locale.current.region?.identifier)
-
                 let checkout = try await APIService.shared.createTagCheckout(
                     quantity: quantity,
-                    countryCode: countryCode,
+                    countryCode: selectedCountryCode.uppercased(),
                     deliveryMethod: isHungary ? deliveryMethod : nil,
                     postapointDetails: selectedPostaPoint
                 )

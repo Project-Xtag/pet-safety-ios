@@ -1018,3 +1018,11 @@
 "species_dog" = "Câine";
 "species_cat_header" = "Pisică";
 "species_bird_no_picker" = "Pasăre (fără selector)";
+
+// Referral friend code
+"referral_use_friend_code" = "Folosește codul unui prieten";
+"enter_friend_code" = "Introduceți codul de recomandare";
+"apply_code" = "Aplică";
+"referral_code_applied" = "Cod de recomandare aplicat! Vei primi 2 luni gratuit.";
+"referral_code_invalid" = "Cod de recomandare invalid sau expirat";
+"referral_use_friend_footer" = "Introduceți codul de recomandare al unui prieten și primiți 2 luni de abonament gratuit.";

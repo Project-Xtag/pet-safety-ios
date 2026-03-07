@@ -1018,3 +1018,11 @@
 "species_dog" = "Hund";
 "species_cat_header" = "Katze";
 "species_bird_no_picker" = "Vogel (keine Auswahl)";
+
+// Referral friend code
+"referral_use_friend_code" = "Code eines Freundes verwenden";
+"enter_friend_code" = "Empfehlungscode eingeben";
+"apply_code" = "Anwenden";
+"referral_code_applied" = "Empfehlungscode angewendet! Sie erhalten 2 Monate gratis.";
+"referral_code_invalid" = "Ungültiger oder abgelaufener Empfehlungscode";
+"referral_use_friend_footer" = "Geben Sie den Empfehlungscode eines Freundes ein und erhalten Sie 2 Monate gratis.";

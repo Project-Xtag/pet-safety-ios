@@ -1542,7 +1542,8 @@ extension APIService {
     func createSubscriptionCheckout(
         planName: String,
         billingPeriod: String = "monthly",
-        countryCode: String? = nil
+        countryCode: String? = nil,
+        promoCode: String? = nil
     ) async throws -> SubscriptionCheckoutResponse {
         #if DEBUG
         print("📡 API: Creating subscription checkout for \(planName) (\(billingPeriod))...")
@@ -1551,9 +1552,23 @@ extension APIService {
         let request = try await buildRequest(
             endpoint: "/subscriptions/checkout",
             method: "POST",
-            body: CreateCheckoutRequest(planName: planName, billingPeriod: billingPeriod, platform: "ios", countryCode: countryCode)
+            body: CreateCheckoutRequest(planName: planName, billingPeriod: billingPeriod, platform: "ios", countryCode: countryCode, promoCode: promoCode)
         )
         return try await performRequest(request, responseType: SubscriptionCheckoutResponse.self)
+    }
+
+    /// Apply a referral code
+    func applyReferralCode(_ code: String) async throws -> ReferralApplyResponse {
+        #if DEBUG
+        print("📡 API: Applying referral code \(code)...")
+        #endif
+
+        let request = try await buildRequest(
+            endpoint: "/referrals/apply",
+            method: "POST",
+            body: ReferralApplyRequest(code: code)
+        )
+        return try await performRequest(request, responseType: ReferralApplyResponse.self)
     }
 
     /// Upgrade to Starter plan (free, no payment required)

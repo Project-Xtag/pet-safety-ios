@@ -212,12 +212,14 @@ struct CreateCheckoutRequest: Codable {
     let billingPeriod: String
     let platform: String
     let countryCode: String?
+    let promoCode: String?
 
     enum CodingKeys: String, CodingKey {
         case planName = "plan_name"
         case billingPeriod = "billing_period"
         case platform
         case countryCode = "country_code"
+        case promoCode = "promo_code"
     }
 }
 
@@ -278,6 +280,20 @@ struct ReferralStatusResponse: Codable {
         case code
         case expiresAt = "expires_at"
         case referrals
+    }
+}
+
+struct ReferralApplyRequest: Codable {
+    let code: String
+}
+
+struct ReferralApplyResponse: Codable {
+    let message: String
+    let stripePromoCodeId: String?
+
+    enum CodingKeys: String, CodingKey {
+        case message
+        case stripePromoCodeId = "stripe_promo_code_id"
     }
 }
 

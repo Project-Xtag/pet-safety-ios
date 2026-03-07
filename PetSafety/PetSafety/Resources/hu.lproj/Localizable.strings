@@ -1018,3 +1018,11 @@
 "species_dog" = "Kutya";
 "species_cat_header" = "Macska";
 "species_bird_no_picker" = "Madár (nincs választó)";
+
+// Referral friend code
+"referral_use_friend_code" = "Barát kódjának használata";
+"enter_friend_code" = "Ajánlókód megadása";
+"apply_code" = "Alkalmazás";
+"referral_code_applied" = "Ajánlókód alkalmazva! 2 hónapot kapsz ingyen.";
+"referral_code_invalid" = "Érvénytelen vagy lejárt ajánlókód";
+"referral_use_friend_footer" = "Add meg egy barátod ajánlókódját, és kapj 2 hónap ingyen előfizetést.";
