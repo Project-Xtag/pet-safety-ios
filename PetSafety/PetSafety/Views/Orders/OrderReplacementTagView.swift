@@ -73,6 +73,310 @@ struct OrderReplacementTagView: View {
         }
     }
 
+    // MARK: - Order Complete
+
+    private var orderCompleteView: some View {
+        VStack(spacing: 24) {
+            Spacer()
+
+            ZStack {
+                Circle()
+                    .fill(Color.tealAccent.opacity(0.15))
+                    .frame(width: 120, height: 120)
+                Image(systemName: "checkmark.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 64, height: 64)
+                    .foregroundColor(.tealAccent)
+            }
+
+            Text("order_replace_complete")
+                .font(.system(size: 28, weight: .bold))
+
+            Text("order_replace_confirmation")
+                .font(.body)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+
+            Spacer()
+
+            Button(action: { dismiss() }) {
+                Text("done")
+            }
+            .buttonStyle(BrandButtonStyle())
+            .padding(.horizontal, 32)
+            .padding(.bottom, 40)
+        }
+    }
+
+    // MARK: - Order Form
+
+    private var orderFormView: some View {
+        ZStack(alignment: .bottom) {
+            ScrollView {
+                VStack(spacing: 0) {
+                    // Header
+                    headerSection
+
+                    VStack(spacing: 16) {
+                        // Pet Info
+                        petInfoCard
+
+                        // Eligibility Info
+                        eligibilityCard
+
+                        // Shipping Address
+                        shippingAddressCard
+
+                        // Delivery Method (Hungary only)
+                        if isHungary {
+                            deliveryMethodCard
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 20)
+                    .padding(.bottom, 100)
+                }
+            }
+
+            // Floating CTA Button
+            VStack(spacing: 0) {
+                Divider()
+                Button(action: { submitOrder() }) {
+                    if isLoading {
+                        HStack(spacing: 8) {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            Text("order_replace_creating")
+                        }
+                    } else if isFreeReplacement {
+                        Text("order_replace_free_button")
+                    } else {
+                        Text(String(format: String(localized: "order_replace_paid_button %@"), formattedShippingCost))
+                    }
+                }
+                .buttonStyle(BrandButtonStyle(isDisabled: !isFormValid || isCheckingEligibility))
+                .disabled(isLoading || !isFormValid || isCheckingEligibility)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 12)
+            }
+            .background(.ultraThinMaterial)
+        }
+    }
+
+    // MARK: - Header
+
+    private var headerSection: some View {
+        VStack(spacing: 12) {
+            ZStack {
+                Circle()
+                    .fill(Color.brandOrange.opacity(0.15))
+                    .frame(width: 70, height: 70)
+                Image(systemName: "arrow.triangle.2.circlepath")
+                    .font(.system(size: 28))
+                    .foregroundColor(.brandOrange)
+            }
+
+            Text("order_replace_title")
+                .font(.system(size: 24, weight: .bold))
+
+            Text("order_replace_subtitle")
+                .font(.system(size: 15))
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 24)
+        .padding(.horizontal, 20)
+        .background(Color.peachBackground)
+    }
+
+    // MARK: - Section Cards
+
+    private var petInfoCard: some View {
+        ReplacementSectionCard(title: String(localized: "order_replace_pet_info"), icon: "pawprint.fill") {
+            HStack(spacing: 14) {
+                if let imageUrl = pet.profileImage {
+                    CachedAsyncImage(url: URL(string: imageUrl)) { image in
+                        image.resizable().aspectRatio(contentMode: .fill)
+                    } placeholder: {
+                        Image(systemName: "pawprint.fill")
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(width: 56, height: 56)
+                    .clipShape(Circle())
+                } else {
+                    ZStack {
+                        Circle()
+                            .fill(Color(UIColor.systemGray6))
+                            .frame(width: 56, height: 56)
+                        Image(systemName: pet.species.lowercased() == "dog" ? "dog.fill" : "cat.fill")
+                            .font(.system(size: 24))
+                            .foregroundColor(.mutedText)
+                    }
+                }
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(pet.name)
+                        .font(.system(size: 17, weight: .semibold))
+                    Text(pet.species.capitalized)
+                        .font(.system(size: 14))
+                        .foregroundColor(.secondary)
+                    if let breed = pet.breed, !breed.isEmpty {
+                        Text(breed)
+                            .font(.system(size: 13))
+                            .foregroundColor(.mutedText)
+                    }
+                }
+
+                Spacer()
+            }
+        }
+    }
+
+    private var eligibilityCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            if isCheckingEligibility {
+                HStack {
+                    ProgressView()
+                    Text("order_replace_checking")
+                        .font(.system(size: 14))
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(16)
+            } else {
+                if isFreeReplacement {
+                    Label(String(localized: "order_replace_eligible_free"), systemImage: "checkmark.circle.fill")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.tealAccent)
+                } else {
+                    Label(String(format: String(localized: "order_replace_additional_fee %@"), formattedShippingCost), systemImage: "eurosign.circle.fill")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.brandOrange)
+                    Label(String(localized: "order_replace_upgrade_hint"), systemImage: "star.fill")
+                        .font(.system(size: 13))
+                        .foregroundColor(.secondary)
+                }
+
+                Label(String(localized: "order_replace_old_deactivated"), systemImage: "exclamationmark.triangle.fill")
+                    .font(.system(size: 13))
+                    .foregroundColor(.secondary)
+                Label(String(localized: "order_replace_delivery_time"), systemImage: "shippingbox.fill")
+                    .font(.system(size: 13))
+                    .foregroundColor(.secondary)
+                Label(String(localized: "order_replace_scan_activate"), systemImage: "qrcode")
+                    .font(.system(size: 13))
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            isFreeReplacement && !isCheckingEligibility
+                ? Color.tealAccent.opacity(0.08)
+                : Color.brandOrange.opacity(0.08)
+        )
+        .cornerRadius(14)
+    }
+
+    private var shippingAddressCard: some View {
+        ReplacementSectionCard(title: String(localized: "order_replace_shipping"), icon: "house.fill") {
+            TextField(String(localized: "order_replace_street"), text: $street1)
+                .textFieldStyle(BrandTextFieldStyle())
+                .textContentType(.streetAddressLine1)
+
+            TextField(String(localized: "order_replace_line2"), text: $street2)
+                .textFieldStyle(BrandTextFieldStyle())
+                .textContentType(.streetAddressLine2)
+
+            HStack(spacing: 12) {
+                TextField(String(localized: "order_replace_city"), text: $city)
+                    .textFieldStyle(BrandTextFieldStyle())
+                    .textContentType(.addressCity)
+
+                TextField(String(localized: "order_replace_postal"), text: $postCode)
+                    .textFieldStyle(BrandTextFieldStyle())
+                    .textContentType(.postalCode)
+                    .autocapitalization(.allCharacters)
+            }
+
+            TextField(String(localized: "order_replace_country"), text: $country)
+                .textFieldStyle(BrandTextFieldStyle(icon: "globe"))
+                .textContentType(.countryName)
+
+            TextField(String(localized: "order_replace_phone"), text: $phone)
+                .textFieldStyle(BrandTextFieldStyle(icon: "phone"))
+                .keyboardType(.phonePad)
+                .textContentType(.telephoneNumber)
+        }
+    }
+
+    private var deliveryMethodCard: some View {
+        ReplacementSectionCard(title: String(localized: "delivery_method_title"), icon: "truck.box.fill") {
+            Picker("", selection: $deliveryMethod) {
+                Text(deliveryOptionLabel(for: "home_delivery")).tag("home_delivery")
+                Text(deliveryOptionLabel(for: "postapoint")).tag("postapoint")
+            }
+            .pickerStyle(.segmented)
+            .onChange(of: deliveryMethod) { _, newValue in
+                if newValue != "postapoint" {
+                    selectedPostaPoint = nil
+                }
+            }
+
+            if deliveryMethod == "postapoint" {
+                PostaPointPickerView(
+                    selected: selectedPostaPoint,
+                    onSelect: { point in
+                        selectedPostaPoint = point
+                    }
+                )
+            }
+        }
+    }
+
+    // MARK: - Helpers
+
+    private var isFormValid: Bool {
+        !street1.isEmpty && !city.isEmpty && !postCode.isEmpty && !country.isEmpty &&
+        (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
+    }
+
+    private var formattedShippingCost: String {
+        if isHungary, let hu = shippingPrices?.HU {
+            if let info = hu.home_delivery {
+                let priceInfo = ShippingPriceInfo(amount: shippingCost, currency: info.currency, label: "")
+                return priceInfo.formattedPrice
+            }
+        }
+        if let defaultInfo = shippingPrices?.defaultShipping {
+            let priceInfo = ShippingPriceInfo(amount: shippingCost, currency: defaultInfo.currency, label: "")
+            return priceInfo.formattedPrice
+        }
+        return String(format: "€%.2f", shippingCost)
+    }
+
+    private func deliveryOptionLabel(for method: String) -> String {
+        let price = shippingPriceLabel(for: method)
+        if method == "postapoint" {
+            return "\(String(localized: "postapoint_delivery_option")) (\(price))"
+        }
+        return "\(String(localized: "home_delivery_option")) (\(price))"
+    }
+
+    private func shippingPriceLabel(for method: String) -> String {
+        guard let hu = shippingPrices?.HU else { return "..." }
+        if method == "postapoint" {
+            return hu.postapoint?.formattedPrice ?? "..."
+        } else {
+            return hu.home_delivery?.formattedPrice ?? "..."
+        }
+    }
+
+    // MARK: - Data Loading
+
     private func checkEligibility() async {
         do {
             let eligibility = try await APIService.shared.checkReplacementEligibility()
@@ -83,7 +387,6 @@ struct OrderReplacementTagView: View {
                 isCheckingEligibility = false
             }
         } catch {
-            // Default to paid replacement if check fails
             await MainActor.run {
                 isFreeReplacement = false
                 isCheckingEligibility = false
@@ -91,276 +394,22 @@ struct OrderReplacementTagView: View {
         }
     }
 
-    private var orderCompleteView: some View {
-        VStack(spacing: 24) {
-            Spacer()
-
-            Image(systemName: "checkmark.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 80, height: 80)
-                .foregroundColor(.tealAccent)
-
-            Text("order_replace_complete")
-                .font(.system(size: 32, weight: .bold))
-
-            Text("order_replace_confirmation")
-                .font(.body)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
-
-            Spacer()
-
-            VStack(spacing: 12) {
-                Button(action: { dismiss() }) {
-                    Text("done")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .fontWeight(.semibold)
-                }
-            }
-            .padding(.horizontal, 40)
-            .padding(.bottom, 40)
-        }
-    }
-
-    private var orderFormView: some View {
-        Form {
-            Section(header: Text("order_replace_pet_info")) {
-                HStack {
-                    if let imageUrl = pet.profileImage {
-                        CachedAsyncImage(url: URL(string: imageUrl)) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        } placeholder: {
-                            Image(systemName: "pawprint.fill")
-                                .foregroundColor(.secondary)
-                        }
-                        .frame(width: 60, height: 60)
-                        .clipShape(Circle())
-                    }
-
-                    VStack(alignment: .leading) {
-                        Text(pet.name)
-                            .font(.headline)
-                        Text(pet.species)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                }
-            }
-
-            Section(header: Text("order_replace_important")) {
-                VStack(alignment: .leading, spacing: 8) {
-                    if isFreeReplacement {
-                        Label(String(localized: "order_replace_eligible_free"), systemImage: "checkmark.circle")
-                            .font(.caption)
-                            .foregroundColor(.tealAccent)
-                    } else {
-                        Label(String(format: String(localized: "order_replace_additional_fee %@"), formattedShippingCost), systemImage: "eurosign.circle")
-                            .font(.caption)
-                            .foregroundColor(.brandOrange)
-                        Label(String(localized: "order_replace_upgrade_hint"), systemImage: "star.fill")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                    Label(String(localized: "order_replace_old_deactivated"), systemImage: "exclamationmark.triangle")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Label(String(localized: "order_replace_delivery_time"), systemImage: "shippingbox")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Label(String(localized: "order_replace_scan_activate"), systemImage: "qrcode")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-            }
-
-            Section(header: Text("order_replace_shipping"), footer: Text("order_replace_shipping_footer")) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("order_replace_street")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    TextField("", text: $street1)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-                .padding(.vertical, 4)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("order_replace_line2")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    TextField("", text: $street2)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-                .padding(.vertical, 4)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("order_replace_city")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    TextField("", text: $city)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-                .padding(.vertical, 4)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("order_replace_postal")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    TextField("", text: $postCode)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .autocapitalization(.allCharacters)
-                }
-                .padding(.vertical, 4)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("order_replace_country")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    TextField("", text: $country)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-                .padding(.vertical, 4)
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("order_replace_phone")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    TextField("", text: $phone)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.phonePad)
-                        .textContentType(.telephoneNumber)
-                }
-                .padding(.vertical, 4)
-            }
-
-            if isHungary {
-                Section(header: Text("delivery_method_title")) {
-                    Picker("", selection: $deliveryMethod) {
-                        Text("home_delivery_option").tag("home_delivery")
-                        Text("postapoint_delivery_option").tag("postapoint")
-                    }
-                    .pickerStyle(.segmented)
-                    .onChange(of: deliveryMethod) { _, newValue in
-                        if newValue != "postapoint" {
-                            selectedPostaPoint = nil
-                        }
-                    }
-
-                    if deliveryMethod == "postapoint" {
-                        PostaPointPickerView(
-                            selected: selectedPostaPoint,
-                            onSelect: { point in
-                                selectedPostaPoint = point
-                            }
-                        )
-                    }
-                }
-            }
-
-            Section {
-                Button(action: { submitOrder() }) {
-                    HStack {
-                        Spacer()
-                        if isLoading {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            Text("order_replace_creating")
-                                .foregroundColor(.white)
-                        } else {
-                            if isFreeReplacement {
-                                Text("order_replace_free_button")
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.white)
-                            } else {
-                                Text(String(format: String(localized: "order_replace_paid_button %@"), formattedShippingCost))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.white)
-                            }
-                        }
-                        Spacer()
-                    }
-                }
-                .listRowBackground(Color.blue)
-                .disabled(isLoading || !isFormValid || isCheckingEligibility)
-            }
-        }
-        .adaptiveList()
-        .overlay {
-            if isLoading {
-                Color.black.opacity(0.3)
-                    .ignoresSafeArea()
-                ProgressView()
-                    .scaleEffect(1.5)
-            }
-        }
-    }
-
-    private var isFormValid: Bool {
-        !street1.isEmpty && !city.isEmpty && !postCode.isEmpty && !country.isEmpty &&
-        (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
-    }
-
     private func loadUserAddress() async {
-        // Use cached user data from AuthViewModel instead of making API call
+        let detectedCountry = Locale.current.region?.identifier
+
         guard let user = authViewModel.currentUser else {
-            #if DEBUG
-            print("⚠️ No user data available - user can fill form manually")
-            #endif
+            if let detected = detectedCountry {
+                await MainActor.run { country = detected }
+            }
             return
         }
 
-        // Pre-fill address fields from user profile
         await MainActor.run {
-            if let address = user.address {
-                street1 = address
-            }
-            if let userPhone = user.phone {
-                phone = userPhone
-            }
-            if let userCity = user.city {
-                city = userCity
-            }
-            if let postal = user.postalCode {
-                postCode = postal
-            }
-            if let userCountry = user.country {
-                country = userCountry
-            }
-        }
-    }
-
-    /// Format the shipping cost using the currency from the API, or fall back to EUR format
-    private var formattedShippingCost: String {
-        if isHungary, let hu = shippingPrices?.HU {
-            // For Hungary, use the home_delivery price info to determine currency
-            if let info = hu.home_delivery {
-                let priceInfo = ShippingPriceInfo(amount: shippingCost, currency: info.currency, label: "")
-                return priceInfo.formattedPrice
-            }
-        }
-        if let defaultInfo = shippingPrices?.defaultShipping {
-            let priceInfo = ShippingPriceInfo(amount: shippingCost, currency: defaultInfo.currency, label: "")
-            return priceInfo.formattedPrice
-        }
-        // Fallback: EUR format
-        return String(format: "€%.2f", shippingCost)
-    }
-
-    private func shippingPriceLabel(for method: String) -> String {
-        guard let hu = shippingPrices?.HU else {
-            return "..."
-        }
-        if method == "postapoint" {
-            return hu.postapoint?.formattedPrice ?? "..."
-        } else {
-            return hu.home_delivery?.formattedPrice ?? "..."
+            if let address = user.address { street1 = address }
+            if let userPhone = user.phone { phone = userPhone }
+            if let userCity = user.city { city = userCity }
+            if let postal = user.postalCode { postCode = postal }
+            country = user.country ?? detectedCountry ?? ""
         }
     }
 
@@ -372,19 +421,13 @@ struct OrderReplacementTagView: View {
                 isLoadingPrices = false
             }
         } catch {
-            #if DEBUG
-            print("⚠️ Failed to load shipping prices: \(error)")
-            #endif
-            await MainActor.run {
-                isLoadingPrices = false
-            }
+            await MainActor.run { isLoadingPrices = false }
         }
     }
 
     private func submitOrder() {
         Task {
             isLoading = true
-
             do {
                 let shippingAddress = ShippingAddress(
                     street1: street1,
@@ -405,7 +448,6 @@ struct OrderReplacementTagView: View {
 
                 isLoading = false
 
-                // If backend returned a checkout URL, redirect to Stripe
                 if let urlString = response.checkoutUrl,
                    urlString.hasPrefix("https://checkout.stripe.com/"),
                    let url = URL(string: urlString) {
@@ -419,6 +461,32 @@ struct OrderReplacementTagView: View {
                 appState.showError(error.localizedDescription)
             }
         }
+    }
+}
+
+// MARK: - Section Card Component
+
+private struct ReplacementSectionCard<Content: View>: View {
+    let title: String
+    let icon: String
+    @ViewBuilder let content: () -> Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 10) {
+                Image(systemName: icon)
+                    .font(.system(size: 16))
+                    .foregroundColor(.tealAccent)
+                Text(title)
+                    .font(.system(size: 17, weight: .semibold))
+            }
+            content()
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.06), radius: 8, x: 0, y: 4)
     }
 }
 
