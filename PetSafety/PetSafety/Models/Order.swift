@@ -18,7 +18,7 @@ struct Order: Codable, Identifiable {
     let items: [OrderItem]?
 
     var formattedAmount: String {
-        let currencyCode = currency ?? "EUR"
+        let currencyCode = (currency ?? "EUR").uppercased()
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.currencyCode = currencyCode
@@ -109,6 +109,7 @@ struct AddressDetails: Codable {
     let province: String?
     let postCode: String
     let country: String
+    var phone: String? = nil
 }
 
 // MARK: - Tag Checkout (Stripe Checkout redirect)

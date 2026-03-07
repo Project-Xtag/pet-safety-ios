@@ -9,6 +9,9 @@ struct SuccessStory: Codable, Identifiable {
     let reunionCity: String?
     let reunionLatitude: Double?
     let reunionLongitude: Double?
+    // Backend may send either reunion_latitude/reunion_longitude or reunion_lat/reunion_lng
+    let reunionLat: Double?
+    let reunionLng: Double?
     let storyText: String?
     let isPublic: Bool
     let isConfirmed: Bool
@@ -25,8 +28,11 @@ struct SuccessStory: Codable, Identifiable {
     let distanceKm: Double?
     let photos: [SuccessStoryPhoto]?
 
+    var resolvedLatitude: Double? { reunionLatitude ?? reunionLat }
+    var resolvedLongitude: Double? { reunionLongitude ?? reunionLng }
+
     var coordinate: CLLocationCoordinate2D? {
-        guard let lat = reunionLatitude, let lon = reunionLongitude else {
+        guard let lat = resolvedLatitude, let lon = resolvedLongitude else {
             return nil
         }
         return CLLocationCoordinate2D(latitude: lat, longitude: lon)
@@ -68,6 +74,8 @@ struct SuccessStory: Codable, Identifiable {
         case reunionCity = "reunion_city"
         case reunionLatitude = "reunion_latitude"
         case reunionLongitude = "reunion_longitude"
+        case reunionLat = "reunion_lat"
+        case reunionLng = "reunion_lng"
         case storyText = "story_text"
         case isPublic = "is_public"
         case isConfirmed = "is_confirmed"

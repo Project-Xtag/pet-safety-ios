@@ -1,10 +1,24 @@
 import Foundation
 
 /// Breed data for autocomplete in pet registration
-struct Breed: Identifiable, Hashable {
+struct Breed: Codable, Identifiable, Hashable {
     let id: String
     let name: String
     let species: String
+    let alternateNames: [String]?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, species
+        case alternateNames = "alternate_names"
+    }
+
+    // Convenience init for static data (without alternateNames)
+    init(id: String, name: String, species: String) {
+        self.id = id
+        self.name = name
+        self.species = species
+        self.alternateNames = nil
+    }
 }
 
 /// Breed data matching backend /api/breeds endpoint

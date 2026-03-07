@@ -648,6 +648,8 @@ class OfflineDataManager {
             reunionCity: entity.reunionCity,
             reunionLatitude: entity.reunionLatitude != 0 ? entity.reunionLatitude : nil,
             reunionLongitude: entity.reunionLongitude != 0 ? entity.reunionLongitude : nil,
+            reunionLat: nil,
+            reunionLng: nil,
             storyText: entity.storyText,
             isPublic: entity.isPublic,
             isConfirmed: entity.isConfirmed,

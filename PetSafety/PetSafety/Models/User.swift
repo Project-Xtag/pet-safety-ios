@@ -24,6 +24,7 @@ struct User: Codable, Identifiable {
     let showPhonePublicly: Bool?
     let showEmailPublicly: Bool?
     let showAddressPublicly: Bool?
+    let preferredLanguage: String?
     let showSecondaryPhonePublicly: Bool?
     let showSecondaryEmailPublicly: Bool?
 
@@ -40,6 +41,7 @@ struct User: Codable, Identifiable {
         case organizationName = "organization_name"
         case vetLicenseNumber = "vet_license_number"
         case isVerified = "is_verified"
+        case preferredLanguage = "preferred_language"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case showPhonePublicly = "show_phone_publicly"
