@@ -277,6 +277,7 @@ struct RegistrationView: View {
                 }
             )
         }
+        .secureScreen()
     }
 
     private func showPushPromptIfNeeded() {

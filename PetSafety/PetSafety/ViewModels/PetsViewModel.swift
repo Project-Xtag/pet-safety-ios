@@ -110,11 +110,24 @@ class PetsViewModel: ObservableObject {
         }
     }
 
+    /// Resize image if either dimension exceeds maxDimension, preserving aspect ratio.
+    private func resizeIfNeeded(_ image: UIImage, maxDimension: CGFloat = 1200) -> UIImage {
+        let size = image.size
+        guard size.width > maxDimension || size.height > maxDimension else { return image }
+        let ratio = min(maxDimension / size.width, maxDimension / size.height)
+        let newSize = CGSize(width: size.width * ratio, height: size.height * ratio)
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        return renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+    }
+
     func uploadPhoto(for petId: String, image: UIImage) async throws -> Pet {
         isLoading = true
         errorMessage = nil
 
-        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+        let resized = resizeIfNeeded(image)
+        guard let imageData = resized.jpegData(compressionQuality: 0.8) else {
             isLoading = false
             throw NSError(domain: "PetsViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to convert image"])
         }

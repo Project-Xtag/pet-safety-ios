@@ -11,6 +11,7 @@ struct PetsListView: View {
     @State private var showingSuccessStories = false
     @State private var selectedPetForReplacement: Pet?
     @State private var searchText = ""
+    @State private var debouncedSearchText = ""
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
 
@@ -23,10 +24,10 @@ struct PetsListView: View {
     }
 
     var filteredPets: [Pet] {
-        if searchText.isEmpty {
+        if debouncedSearchText.isEmpty {
             return viewModel.pets
         }
-        let query = searchText.lowercased()
+        let query = debouncedSearchText.lowercased()
         return viewModel.pets.filter { pet in
             pet.name.lowercased().contains(query) ||
             pet.species.lowercased().contains(query) ||
@@ -134,6 +135,10 @@ struct PetsListView: View {
         .refreshable {
             await viewModel.fetchPets()
         }
+        .task(id: searchText) {
+            try? await Task.sleep(for: .milliseconds(300))
+            debouncedSearchText = searchText
+        }
         .overlay {
             if viewModel.isLoading && !viewModel.pets.isEmpty {
                 ProgressView()
@@ -205,7 +210,7 @@ struct PetsListView: View {
                 GridItem(.flexible(), spacing: 16),
                 GridItem(.flexible(), spacing: 16)
             ], spacing: 16) {
-                ForEach(searchText.isEmpty ? Array(viewModel.pets.prefix(4)) : filteredPets) { pet in
+                ForEach(debouncedSearchText.isEmpty ? Array(viewModel.pets.prefix(4)) : filteredPets) { pet in
                     PetCardView(pet: pet)
                 }
             }

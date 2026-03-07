@@ -145,6 +145,7 @@ struct QRScannerView: View {
             // Turn off torch when leaving the scanner
             if isTorchOn { toggleTorch() }
         }
+        .secureScreen()
     }
 
     private func toggleTorch() {

@@ -258,6 +258,7 @@ struct AuthenticationView: View {
                 }
             }
         }
+        .secureScreen()
     }
 
     private func sendOTP() {
