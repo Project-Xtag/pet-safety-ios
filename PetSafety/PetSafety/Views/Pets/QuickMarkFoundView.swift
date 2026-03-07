@@ -135,10 +135,19 @@ struct QuickMarkFoundView: View {
                     showSuccessStoryPrompt = true
                 }
             } catch {
-                await MainActor.run {
-                    appState.showError(String(format: String(localized: "quick_found_mark_failed"), pet.name, error.localizedDescription))
-                    foundPet = nil
-                    isProcessing = false
+                let nsError = error as NSError
+                if nsError.domain == "Offline" {
+                    await MainActor.run {
+                        appState.showSuccess(nsError.localizedDescription)
+                        isProcessing = false
+                        dismiss()
+                    }
+                } else {
+                    await MainActor.run {
+                        appState.showError(String(format: String(localized: "quick_found_mark_failed"), pet.name, error.localizedDescription))
+                        foundPet = nil
+                        isProcessing = false
+                    }
                 }
             }
         }

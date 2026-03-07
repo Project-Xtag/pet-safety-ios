@@ -213,9 +213,7 @@ class PetsViewModel: ObservableObject {
             }
 
             isLoading = false
-            errorMessage = String(localized: "action_queued_offline")
-            // Return a mock response for offline mode
-            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
+            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: String(localized: "action_queued_offline")])
         }
 
         do {
@@ -298,8 +296,7 @@ class PetsViewModel: ObservableObject {
             }
 
             isLoading = false
-            errorMessage = String(localized: "action_queued_offline")
-            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
+            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: String(localized: "action_queued_offline")])
         }
 
         do {

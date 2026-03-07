@@ -290,7 +290,13 @@ struct MarkAsLostView: View {
                 dismiss()
             } catch {
                 isGeocoding = false
-                appState.showError(error.localizedDescription)
+                let nsError = error as NSError
+                if nsError.domain == "Offline" {
+                    appState.showSuccess(nsError.localizedDescription)
+                    dismiss()
+                } else {
+                    appState.showError(error.localizedDescription)
+                }
             }
         }
     }

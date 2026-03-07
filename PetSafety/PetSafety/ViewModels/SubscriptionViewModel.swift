@@ -64,6 +64,11 @@ class SubscriptionViewModel: ObservableObject {
         }
     }
 
+    deinit {
+        SSEService.shared.onSubscriptionChanged = nil
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: - Data Loading
     func loadPlans() async {
         isLoading = true
