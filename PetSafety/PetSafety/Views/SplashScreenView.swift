@@ -11,7 +11,7 @@ struct SplashScreenView: View {
             Image(LocalizedLogo.imageName)
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: 260)
+                .padding(.horizontal, 40)
         }
         .onAppear {
             // Brief hold so the localized logo is visible, then transition to content.

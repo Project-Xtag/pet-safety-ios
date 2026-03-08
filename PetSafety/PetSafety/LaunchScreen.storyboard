@@ -16,16 +16,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoNew" translatesAutoresizingMaskIntoConstraints="NO" id="YbQ-bK-91a">
-                                <rect key="frame" x="37.5" y="250.5" width="300" height="166"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="HbR-cR-2kP"/>
-                                </constraints>
+                                <rect key="frame" x="40" y="250.5" width="295" height="166"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="YbQ-bK-91a" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Bbz-pH-8V4"/>
+                            <constraint firstItem="YbQ-bK-91a" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="40" id="Ldr-pH-8V4"/>
+                            <constraint firstAttribute="trailing" secondItem="YbQ-bK-91a" secondAttribute="trailing" constant="40" id="Trl-pH-8V4"/>
                             <constraint firstItem="YbQ-bK-91a" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Qw1-VD-FjE"/>
                         </constraints>
                     </view>
