@@ -1,11 +1,56 @@
 {
   "images" : [
-    { "filename" : "logo_light_RO@1x.png", "idiom" : "universal", "scale" : "1x" },
-    { "filename" : "logo_light_RO@2x.png", "idiom" : "universal", "scale" : "2x" },
-    { "filename" : "logo_light_RO@3x.png", "idiom" : "universal", "scale" : "3x" },
-    { "appearances" : [{ "appearance" : "luminosity", "value" : "dark" }], "filename" : "logo_dark_RO@1x.png", "idiom" : "universal", "scale" : "1x" },
-    { "appearances" : [{ "appearance" : "luminosity", "value" : "dark" }], "filename" : "logo_dark_RO@2x.png", "idiom" : "universal", "scale" : "2x" },
-    { "appearances" : [{ "appearance" : "luminosity", "value" : "dark" }], "filename" : "logo_dark_RO@3x.png", "idiom" : "universal", "scale" : "3x" }
+    {
+      "filename" : "logo_light_RO@1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "logo_light_RO@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "logo_light_RO@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "logo_dark_RO@1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "logo_dark_RO@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "logo_dark_RO@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
   ],
-  "info" : { "author" : "xcode", "version" : 1 }
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
 }
