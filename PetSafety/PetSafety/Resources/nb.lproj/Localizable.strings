@@ -504,7 +504,7 @@
 "help_faq_q10" = "Hvordan bestiller jeg et erstatningsmerke?";
 "help_faq_a10" = "Gå til kontosiden din og trykk 'Bestill erstatning'. Velg dyret som trenger et nytt merke. Maximum-abonnenter får ubegrensede gratis erstatninger, Standard-abonnenter får én gratis erstatning per år, og Starter-abonnenter kan bestille erstatninger mot en liten fraktavgift.";
 "help_faq_q11" = "Hva er verveprogrammet?";
-"help_faq_a11" = "Del koden SENRAFRIEND med venner og familie. Når noen bruker koden og abonnerer på et betalt abonnement (Standard eller Maximum), får både du og vennen din 2 måneder gratis. Du kan spore vervingene dine og statusen deres på vervesiden.";
+"help_faq_a11" = "Gå til Verv-siden for å generere din personlige vervekode. Del den med venner og familie. Når noen bruker koden din og abonnerer på et betalt abonnement (Standard eller Maximum), får dere begge 2 måneder gratis. Du kan spore vervingene dine på Verv-siden.";
 "help_faq_q12" = "Hvilke land sender dere til?";
 "help_faq_a12" = "Vi sender for øyeblikket til Ungarn, Slovakia, Tsjekkia, Østerrike, Romania, Kroatia, Spania og Portugal. Frakt innen Ungarn koster %1$@ (PostaPont) eller %2$@ (hjemlevering). Internasjonal frakt er %3$@ per bestilling.";
 "help_faq_q13" = "Kan jeg ha flere dyr på én konto?";

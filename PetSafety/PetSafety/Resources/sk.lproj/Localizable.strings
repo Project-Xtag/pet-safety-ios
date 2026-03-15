@@ -926,7 +926,7 @@
 "help_faq_q10" = "Ako objednám náhradný štítok?";
 "help_faq_a10" = "Prejdite na stránku Účtu a kliknite na 'Objednať náhradu'. Vyberte zviera, ktoré potrebuje nový štítok. Členovia Maximum plánu dostávajú neobmedzené bezplatné náhrady, členovia Standard plánu jednu bezplatnú náhradu ročne a členovia Starter plánu si môžu objednať náhrady za malý poplatok za dopravu.";
 "help_faq_q11" = "Čo je odporúčací program?";
-"help_faq_a11" = "Zdieľajte kód SENRAFRIEND s priateľmi a rodinou. Keď niekto použije tento kód a predplatí si platený plán (Standard alebo Maximum), vy aj váš priateľ získate 2 mesiace zdarma. Svoje odporúčania a ich stav môžete sledovať na stránke Odporúčania.";
+"help_faq_a11" = "Prejdite na stránku Odporúčania a vygenerujte si svoj osobný odporúčací kód. Zdieľajte ho s priateľmi a rodinou. Keď niekto váš kód použije a predplatí si platený plán (Standard alebo Maximum), obaja získate 2 mesiace zdarma. Svoje odporúčania môžete sledovať na stránke Odporúčania.";
 "help_faq_q12" = "Do ktorých krajín doručujete?";
 "help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs %1$@ (PostaPont) or %2$@ (home delivery). International shipping is %3$@ per order.";
 "help_faq_q13" = "Môžem mať viac zvierat na jednom účte?";

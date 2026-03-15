@@ -926,7 +926,7 @@
 "help_faq_q10" = "Wie bestelle ich einen Ersatz-Tag?";
 "help_faq_a10" = "Gehe zu deiner Kontoseite und tippe auf \"Ersatz bestellen\". Wähle das Tier aus, das einen neuen Tag braucht. Maximum-Mitglieder erhalten unbegrenzt kostenlose Ersatzlieferungen, Standard-Mitglieder eine kostenlose pro Jahr, und Starter-Mitglieder können Ersatz für eine geringe Versandgebühr bestellen.";
 "help_faq_q11" = "Was ist das Empfehlungsprogramm?";
-"help_faq_a11" = "Teile den Code SENRAFRIEND mit Freunden und Familie. Wenn jemand diesen Code verwendet und einen bezahlten Plan (Standard oder Maximum) abschließt, erhaltet ihr beide 2 Monate gratis. Du kannst deine Empfehlungen auf der Empfehlungsseite verfolgen.";
+"help_faq_a11" = "Geh auf die Empfehlungsseite, um deinen persönlichen Empfehlungscode zu generieren. Teile ihn mit Freunden und Familie. Wenn jemand deinen Code verwendet und einen bezahlten Plan (Standard oder Maximum) abschließt, erhaltet ihr beide 2 Monate gratis. Du kannst deine Empfehlungen auf der Empfehlungsseite verfolgen.";
 "help_faq_q12" = "In welche Länder liefert ihr?";
 "help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs %1$@ (PostaPont) or %2$@ (home delivery). International shipping is %3$@ per order.";
 "help_faq_q13" = "Kann ich mehrere Tiere in einem Konto haben?";

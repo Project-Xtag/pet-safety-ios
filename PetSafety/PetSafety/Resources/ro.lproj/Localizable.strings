@@ -926,7 +926,7 @@
 "help_faq_q10" = "Cum comand o etichetă de înlocuire?";
 "help_faq_a10" = "Mergi la pagina Contul tău și apasă „Comandă înlocuire”. Selectează animalul care are nevoie de o etichetă nouă. Membrii Maximum primesc înlocuiri gratuite nelimitate, membrii Standard primesc o înlocuire gratuită pe an, iar membrii Starter pot comanda înlocuiri contra unei mici taxe de livrare.";
 "help_faq_q11" = "Ce este programul de recomandare?";
-"help_faq_a11" = "Distribuie codul SENRAFRIEND prietenilor și familiei. Când cineva folosește acest cod și se abonează la un plan plătit (Standard sau Maximum), amândoi primiți 2 luni gratuite. Poți urmări recomandările și statusul lor pe pagina de Recomandări.";
+"help_faq_a11" = "Accesează pagina Recomandări pentru a genera codul tău personal de recomandare. Distribuie-l prietenilor și familiei. Când cineva folosește codul tău și se abonează la un plan plătit (Standard sau Maximum), amândoi primiți 2 luni gratuite. Poți urmări recomandările pe pagina Recomandări.";
 "help_faq_q12" = "În ce țări livrați?";
 "help_faq_a12" = "We currently ship to Hungary, Slovakia, Czechia, Austria, Romania, Croatia, Spain, and Portugal. Shipping within Hungary costs %1$@ (PostaPont) or %2$@ (home delivery). International shipping is %3$@ per order.";
 "help_faq_q13" = "Pot avea mai multe animale pe un singur cont?";

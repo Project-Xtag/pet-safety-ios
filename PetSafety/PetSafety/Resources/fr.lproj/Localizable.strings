@@ -504,7 +504,7 @@
 "help_faq_q10" = "Comment commander une médaille de remplacement ?";
 "help_faq_a10" = "Va sur ta page Compte et appuie sur 'Commander un remplacement'. Sélectionne l'animal qui a besoin d'une nouvelle médaille. Les membres du forfait Maximum bénéficient de remplacements gratuits illimités, les membres Standard ont droit à un remplacement gratuit par an, et les membres Starter peuvent commander des remplacements moyennant de petits frais d'expédition.";
 "help_faq_q11" = "Qu'est-ce que le programme de parrainage ?";
-"help_faq_a11" = "Partage le code généré sur le site avec tes amis et ta famille. Quand quelqu'un utilise ce code et s'abonne à un forfait payant (Standard ou Maximum), toi et ton ami recevez tous les deux 2 mois gratuits. Tu peux suivre tes parrainages et leur statut sur la page Parrainage.";
+"help_faq_a11" = "Rendez-vous sur la page Parrainage pour générer votre code de parrainage personnel. Partagez-le avec vos amis et votre famille. Lorsque quelqu'un utilise votre code et souscrit à un abonnement payant (Standard ou Maximum), vous recevez tous les deux 2 mois gratuits. Vous pouvez suivre vos parrainages sur la page Parrainage.";
 "help_faq_q12" = "Dans quels pays livrez-vous ?";
 "help_faq_a12" = "Nous livrons actuellement en Hongrie, Slovaquie, République tchèque, Autriche, Roumanie, Croatie, Espagne et Portugal. La livraison en Hongrie coûte %1$@ (PostaPont) ou %2$@ (livraison à domicile). La livraison internationale est de %3$@ par commande.";
 "help_faq_q13" = "Puis-je avoir plusieurs animaux sur un seul compte ?";
