@@ -52,7 +52,7 @@ struct User: Codable, Identifiable {
     }
 
     var fullName: String {
-        [firstName, lastName].compactMap { $0 }.joined(separator: " ")
+        InputValidators.formatDisplayName(firstName: firstName, lastName: lastName)
     }
 }
 

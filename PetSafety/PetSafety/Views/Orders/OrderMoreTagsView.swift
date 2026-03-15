@@ -478,10 +478,9 @@ struct OrderMoreTagsView: View {
             if let userPhone = user.phone {
                 phone = userPhone
             }
-            if let firstName = user.firstName, let lastName = user.lastName {
-                ownerName = "\(firstName) \(lastName)"
-            } else if let firstName = user.firstName {
-                ownerName = firstName
+            let formattedName = InputValidators.formatDisplayName(firstName: user.firstName, lastName: user.lastName)
+            if !formattedName.isEmpty {
+                ownerName = formattedName
             }
             if let address = user.address { street1 = address }
             if let userCity = user.city { city = userCity }

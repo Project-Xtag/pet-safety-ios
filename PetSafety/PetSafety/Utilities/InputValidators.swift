@@ -96,4 +96,22 @@ enum InputValidators {
     static func isWithinLimit(_ text: String, maxLength: Int) -> Bool {
         text.count <= maxLength
     }
+
+    // MARK: - Locale-aware name ordering
+
+    /// Format display name in culturally appropriate order.
+    /// Hungarian, Japanese, Chinese, Korean use family-name-first order.
+    static func formatDisplayName(firstName: String?, lastName: String?, locale: String? = nil) -> String {
+        let first = firstName?.trimmingCharacters(in: .whitespaces) ?? ""
+        let last = lastName?.trimmingCharacters(in: .whitespaces) ?? ""
+
+        guard !first.isEmpty || !last.isEmpty else { return "" }
+        guard !first.isEmpty else { return last }
+        guard !last.isEmpty else { return first }
+
+        let lang = (locale ?? Locale.current.language.languageCode?.identifier ?? "en").lowercased().prefix(2)
+        let familyFirst: Set<String> = ["hu", "ja", "zh", "ko"]
+
+        return familyFirst.contains(String(lang)) ? "\(last) \(first)" : "\(first) \(last)"
+    }
 }
