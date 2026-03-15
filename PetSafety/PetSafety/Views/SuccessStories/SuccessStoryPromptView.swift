@@ -6,6 +6,7 @@ import UIKit
 /// Prompt shown after marking a pet as found to encourage sharing a success story
 struct SuccessStoryPromptView: View {
     let pet: Pet
+    var alertId: String?
     let onDismiss: () -> Void
     let onStorySubmitted: () -> Void
 
@@ -20,6 +21,7 @@ struct SuccessStoryPromptView: View {
     @State private var isGeneratingShareCard = false
     @State private var showSocialShareSheet = false
     @State private var shareCardImage: UIImage?
+    @State private var serverCardUrl: String?
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
@@ -40,6 +42,17 @@ struct SuccessStoryPromptView: View {
             .onAppear {
                 // Request location when view appears
                 locationManager.requestLocation()
+                // Pre-fetch server-generated share card (same image posted to official social accounts)
+                if let alertId = alertId {
+                    Task {
+                        do {
+                            let url = try await APIService.shared.getShareCardUrl(alertId: alertId)
+                            await MainActor.run { serverCardUrl = url }
+                        } catch {
+                            // Server card unavailable — local generator will be used as fallback
+                        }
+                    }
+                }
             }
             .onReceive(locationManager.$location) { newLocation in
                 if let location = newLocation {
@@ -343,25 +356,42 @@ struct SuccessStoryPromptView: View {
     }
 
     // MARK: - Social Share Card
+    /// Generates the share card, preferring the server-generated image (same as official social posts).
+    /// Falls back to local generation if the server card is unavailable.
     private func generateAndShareCard() {
         isGeneratingShareCard = true
         Task {
-            var petImage: UIImage?
-            if let urlString = pet.photoUrl, let url = URL(string: urlString) {
+            var cardImage: UIImage?
+
+            // Try server-generated card first (matches what's posted to FB/IG/X)
+            if let urlString = serverCardUrl, let url = URL(string: urlString) {
                 do {
                     let (data, _) = try await URLSession.shared.data(from: url)
-                    petImage = UIImage(data: data)
+                    cardImage = UIImage(data: data)
                 } catch {
-                    // Use placeholder if photo fails to load
+                    // Server card fetch failed — will fall back to local generation
                 }
             }
 
-            let cardImage = ShareCardGenerator.generate(
-                petName: pet.name,
-                petImage: petImage,
-                petSpecies: pet.species,
-                city: pet.ownerCity
-            )
+            // Fallback: generate locally
+            if cardImage == nil {
+                var petImage: UIImage?
+                if let urlString = pet.photoUrl, let url = URL(string: urlString) {
+                    do {
+                        let (data, _) = try await URLSession.shared.data(from: url)
+                        petImage = UIImage(data: data)
+                    } catch {
+                        // Use placeholder if photo fails to load
+                    }
+                }
+
+                cardImage = ShareCardGenerator.generate(
+                    petName: pet.name,
+                    petImage: petImage,
+                    petSpecies: pet.species,
+                    city: pet.ownerCity
+                )
+            }
 
             await MainActor.run {
                 shareCardImage = cardImage
@@ -419,6 +449,7 @@ struct SuccessStoryPromptView: View {
             createdAt: "",
             updatedAt: ""
         ),
+        alertId: nil,
         onDismiss: {},
         onStorySubmitted: {}
     )

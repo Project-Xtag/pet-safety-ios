@@ -314,7 +314,7 @@ struct SubscriptionModelTests {
 
     @Test("Encodes checkout request with platform")
     func testEncodeCheckoutRequest() throws {
-        let request = CreateCheckoutRequest(planName: "standard", billingPeriod: "monthly", platform: "ios", countryCode: nil)
+        let request = CreateCheckoutRequest(planName: "standard", billingPeriod: "monthly", platform: "ios", countryCode: nil, promoCode: nil)
         let data = try JSONEncoder().encode(request)
         let dict = try JSONSerialization.jsonObject(with: data) as! [String: Any]
         #expect(dict["plan_name"] as? String == "standard")

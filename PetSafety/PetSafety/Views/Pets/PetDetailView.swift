@@ -264,6 +264,7 @@ struct PetDetailView: View {
         .fullScreenCover(isPresented: $showingSuccessStoryPrompt) {
             SuccessStoryPromptView(
                 pet: pet,
+                alertId: viewModel.lastResolvedAlertId,
                 onDismiss: {
                     showingSuccessStoryPrompt = false
                     appState.showSuccess(String(format: NSLocalizedString("marked_found_message", comment: ""), pet.name))

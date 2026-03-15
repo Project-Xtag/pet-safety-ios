@@ -256,11 +256,16 @@ class PetsViewModel: ObservableObject {
         }
     }
 
+    /// The alertId from the most recent markPetFound call, used to fetch the server share card
+    @Published var lastResolvedAlertId: String?
+
     /// Mark pet as found
-    /// Queues action if offline
+    /// Resolves the active alert first (triggering GDPR cleanup, notifications, social posting),
+    /// then updates the pet status. Queues action if offline.
     func markPetFound(petId: String) async throws -> Pet {
         isLoading = true
         errorMessage = nil
+        lastResolvedAlertId = nil
 
         // If offline, queue the action
         if !networkMonitor.isConnected {
@@ -313,6 +318,21 @@ class PetsViewModel: ObservableObject {
         }
 
         do {
+            // First, resolve the active alert (triggers GDPR cleanup, notifications, social posting)
+            do {
+                let alerts = try await apiService.getAlerts()
+                if let activeAlert = alerts.first(where: { $0.petId == petId && $0.status == "active" }) {
+                    _ = try await apiService.updateAlertStatus(id: activeAlert.id, status: "found")
+                    lastResolvedAlertId = activeAlert.id
+                }
+            } catch {
+                // Alert resolution failed — continue with pet update so the user isn't blocked
+                #if DEBUG
+                print("⚠️ Failed to resolve alert for pet \(petId): \(error)")
+                #endif
+            }
+
+            // Then update the pet status
             let updatedPet = try await apiService.markPetFound(petId: petId)
 
             // Update local pet list and cache

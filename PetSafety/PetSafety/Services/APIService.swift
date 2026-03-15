@@ -528,6 +528,22 @@ class APIService {
         return response.pet
     }
 
+    /// Get the server-generated social share card URL for an alert.
+    /// Returns the same image that is auto-posted to official social accounts.
+    func getShareCardUrl(alertId: String, locale: String = Locale.current.language.languageCode?.identifier ?? "en") async throws -> String {
+        struct ShareCardResponse: Codable {
+            let imageUrl: String
+            let type: String
+            let locale: String
+        }
+        let request = try await buildRequest(
+            endpoint: "/alerts/\(alertId)/share-card?locale=\(locale)",
+            method: "GET"
+        )
+        let response = try await performRequest(request, responseType: ShareCardResponse.self)
+        return response.imageUrl
+    }
+
     func uploadPetPhoto(petId: String, imageData: Data) async throws -> Pet {
         // Backend expects /image not /photo
         let endpoint = "/pets/\(petId)/image"

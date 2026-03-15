@@ -28,7 +28,7 @@ struct ShareCardGenerator {
                     .font: UIFont.boldSystemFont(ofSize: 36),
                     .foregroundColor: UIColor.white
                 ]
-                let text = "TagMe Now"
+                let text = "Senra"
                 let textSize = text.size(withAttributes: attrs)
                 text.draw(at: CGPoint(x: (size.width - textSize.width) / 2, y: 35), withAttributes: attrs)
             }
@@ -38,7 +38,7 @@ struct ShareCardGenerator {
                 .font: UIFont.boldSystemFont(ofSize: 48),
                 .foregroundColor: UIColor.white
             ]
-            let reunitedText = "Reunited!"
+            let reunitedText = String(localized: "share_card_reunited")
             let reunitedSize = reunitedText.size(withAttributes: reunitedAttrs)
             reunitedText.draw(
                 at: CGPoint(x: (size.width - reunitedSize.width) / 2, y: 95),

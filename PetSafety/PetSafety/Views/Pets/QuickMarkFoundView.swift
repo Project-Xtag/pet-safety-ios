@@ -10,6 +10,7 @@ struct QuickMarkFoundView: View {
     @State private var isProcessing = false
     @State private var showSuccessStoryPrompt = false
     @State private var foundPet: Pet?
+    @State private var foundAlertId: String?
     @State private var showingFoundConfirmation = false
     @State private var petToMarkFound: Pet?
 
@@ -91,6 +92,7 @@ struct QuickMarkFoundView: View {
             if let pet = foundPet {
                 SuccessStoryPromptView(
                     pet: pet,
+                    alertId: foundAlertId,
                     onDismiss: {
                         showSuccessStoryPrompt = false
                         dismiss()
@@ -127,6 +129,7 @@ struct QuickMarkFoundView: View {
                 _ = try await viewModel.markPetFound(petId: pet.id)
                 await MainActor.run {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    foundAlertId = viewModel.lastResolvedAlertId
                     isProcessing = false
                 }
                 // Small delay to allow alert to dismiss before showing fullScreenCover
