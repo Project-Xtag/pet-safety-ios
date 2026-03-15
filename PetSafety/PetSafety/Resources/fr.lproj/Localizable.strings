@@ -311,6 +311,7 @@
 "story_great_news" = "Bonne nouvelle !";
 "story_post" = "Partager";
 "story_reunited" = "Retrouvé !";
+"share_card_reunited" = "Retrouvé !";
 "story_maybe_later" = "Peut-être plus tard";
 "story_share_good_news" = "Partage la bonne nouvelle";
 "story_social_caption %@" = "%@ a retrouvé sa famille ! Merci à la communauté Senra d'avoir aidé %@ à rentrer à la maison.";
@@ -1013,3 +1014,12 @@
 "referral_code_applied" = "Code de parrainage appliqué ! Tu obtiendras 2 mois gratuits.";
 "referral_code_invalid" = "Code de parrainage invalide ou expiré";
 "referral_use_friend_footer" = "Saisis le code de parrainage d'un ami pour obtenir 2 mois gratuits lors de ton abonnement.";
+
+// MARK: - Gift Orders
+"order_gift_toggle" = "Commander comme cadeau";
+"order_gift_description" = "Les noms des animaux sont facultatifs pour les commandes cadeaux. Le destinataire pourra les ajouter lors de l'activation.";
+"order_gift_quantity" = "Nombre de tags";
+"order_gift_recipient_name" = "Nom du destinataire (facultatif)";
+"order_gift_message" = "Message cadeau (facultatif)";
+"order_gift_message_placeholder" = "Ajouter un message personnel...";
+"order_gift_badge" = "Commande cadeau";

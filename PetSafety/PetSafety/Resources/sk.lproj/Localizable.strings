@@ -311,9 +311,10 @@
 "story_great_news" = "Skvela sprava!";
 "story_post" = "Publikovat";
 "story_reunited" = "Znovuzjednoteni!";
+"share_card_reunited" = "Nájdený!";
 "story_maybe_later" = "Mozno neskor";
 "story_share_good_news" = "Zdieľaj dobrú správu";
-"story_social_caption %@" = "%@ sa opäť stretol so svojou rodinou! Ďakujeme komunite TagMe Now za pomoc pri návrate %@ domov. senra.pet";
+"story_social_caption %@" = "%@ sa opäť stretol so svojou rodinou! Ďakujeme komunite Senra za pomoc pri návrate %@ domov. senra.pet";
 "story_generating_card" = "Vytváranie zdieľacej karty...";
 "story_your_story" = "Vas pribeh";
 "story_city_optional" = "Mesto/oblast (volitelne)";
@@ -1026,3 +1027,12 @@
 "referral_code_applied" = "Odporúčací kód bol použitý! Získate 2 mesiace zadarmo.";
 "referral_code_invalid" = "Neplatný alebo vypršaný odporúčací kód";
 "referral_use_friend_footer" = "Zadajte odporúčací kód priateľa a získajte 2 mesiace predplatného zadarmo.";
+
+// MARK: - Gift Orders
+"order_gift_toggle" = "Objednať ako darček";
+"order_gift_description" = "Pri darčekovej objednávke nie sú mená domácich zvierat povinné. Príjemca ich môže pridať pri aktivácii.";
+"order_gift_quantity" = "Počet tagov";
+"order_gift_recipient_name" = "Meno príjemcu (voliteľné)";
+"order_gift_message" = "Darčeková správa (voliteľné)";
+"order_gift_message_placeholder" = "Pridajte osobnú správu...";
+"order_gift_badge" = "Darčeková objednávka";

@@ -311,9 +311,10 @@
 "story_great_news" = "Great News!";
 "story_post" = "Post";
 "story_reunited" = "Reunited!";
+"share_card_reunited" = "Reunited!";
 "story_maybe_later" = "Maybe Later";
 "story_share_good_news" = "Share the Good News";
-"story_social_caption %@" = "%@ has been reunited with their family! Thank you to the TagMe Now community for helping bring %@ home. senra.pet";
+"story_social_caption %@" = "%@ has been reunited with their family! Thank you to the Senra community for helping bring %@ home. senra.pet";
 "story_generating_card" = "Creating share card...";
 "story_your_story" = "Your Story";
 "story_city_optional" = "City/Area (Optional)";
@@ -1027,3 +1028,12 @@
 "referral_code_applied" = "Referral code applied! You'll get 2 months free.";
 "referral_code_invalid" = "Invalid or expired referral code";
 "referral_use_friend_footer" = "Enter a friend's referral code to get 2 months free when you subscribe.";
+
+// MARK: - Gift Orders
+"order_gift_toggle" = "Order as a gift";
+"order_gift_description" = "Pet names are optional for gift orders. The recipient can add them when activating the tags.";
+"order_gift_quantity" = "Number of tags";
+"order_gift_recipient_name" = "Recipient Name (optional)";
+"order_gift_message" = "Gift Message (optional)";
+"order_gift_message_placeholder" = "Add a personal message...";
+"order_gift_badge" = "Gift Order";

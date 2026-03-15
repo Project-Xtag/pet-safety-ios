@@ -311,6 +311,7 @@
 "story_great_news" = "Ottime notizie!";
 "story_post" = "Pubblica";
 "story_reunited" = "Ritrovato!";
+"share_card_reunited" = "Riunito!";
 "story_maybe_later" = "Forse più tardi";
 "story_share_good_news" = "Condividi la buona notizia";
 "story_social_caption %@" = "%@ è tornato dalla sua famiglia! Grazie alla comunità Senra per aver aiutato %@ a tornare a casa. senra.pet";
@@ -1022,3 +1023,12 @@
 "referral_code_applied" = "Codice referral applicato! Otterrai 2 mesi gratuiti.";
 "referral_code_invalid" = "Codice referral non valido o scaduto";
 "referral_use_friend_footer" = "Inserisci il codice referral di un amico per ottenere 2 mesi gratuiti quando ti abboni.";
+
+// MARK: - Gift Orders
+"order_gift_toggle" = "Ordina come regalo";
+"order_gift_description" = "I nomi degli animali sono facoltativi per gli ordini regalo. Il destinatario potrà aggiungerli durante l'attivazione.";
+"order_gift_quantity" = "Numero di tag";
+"order_gift_recipient_name" = "Nome del destinatario (facoltativo)";
+"order_gift_message" = "Messaggio regalo (facoltativo)";
+"order_gift_message_placeholder" = "Aggiungi un messaggio personale...";
+"order_gift_badge" = "Ordine regalo";

@@ -311,6 +311,7 @@
 "story_great_news" = "Gode nyheter!";
 "story_post" = "Del";
 "story_reunited" = "Gjenforent!";
+"share_card_reunited" = "Gjenforent!";
 "story_maybe_later" = "Kanskje senere";
 "story_share_good_news" = "Del de gode nyhetene";
 "story_social_caption %@" = "%@ er gjenforent med familien sin! Takk til Senra-fellesskapet for å ha hjulpet %@ hjem. senra.pet";
@@ -1029,3 +1030,12 @@
 "referral_code_applied" = "Vervekode brukt! Du får 2 måneder gratis.";
 "referral_code_invalid" = "Ugyldig eller utløpt vervekode";
 "referral_use_friend_footer" = "Skriv inn en venns vervekode for å få 2 måneder gratis ved abonnering.";
+
+// MARK: - Gift Orders
+"order_gift_toggle" = "Bestill som gave";
+"order_gift_description" = "Dyrenavn er valgfritt for gavebestillinger. Mottakeren kan legge dem til ved aktivering.";
+"order_gift_quantity" = "Antall tagger";
+"order_gift_recipient_name" = "Mottakerens navn (valgfritt)";
+"order_gift_message" = "Gavemelding (valgfritt)";
+"order_gift_message_placeholder" = "Legg til en personlig melding...";
+"order_gift_badge" = "Gavebestilling";

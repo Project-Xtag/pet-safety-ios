@@ -311,9 +311,10 @@
 "story_great_news" = "Skvělé zprávy!";
 "story_post" = "Publikovat";
 "story_reunited" = "Shledáno!";
+"share_card_reunited" = "Nalezen!";
 "story_maybe_later" = "Možná později";
 "story_share_good_news" = "Sdílej dobrou zprávu";
-"story_social_caption %@" = "%@ se opět shledal se svou rodinou! Děkujeme komunitě TagMe Now za pomoc s návratem %@ domů. senra.pet";
+"story_social_caption %@" = "%@ se opět shledal se svou rodinou! Děkujeme komunitě Senra za pomoc s návratem %@ domů. senra.pet";
 "story_generating_card" = "Vytváření sdílecí karty...";
 "story_your_story" = "Váš příběh";
 "story_city_optional" = "Město/oblast (volitelné)";
@@ -1026,3 +1027,12 @@
 "referral_code_applied" = "Kód doporučení byl použit! Získáte 2 měsíce zdarma.";
 "referral_code_invalid" = "Neplatný nebo vypršený kód doporučení";
 "referral_use_friend_footer" = "Zadejte kód doporučení přítele a získejte 2 měsíce předplatného zdarma.";
+
+// MARK: - Gift Orders
+"order_gift_toggle" = "Objednat jako dárek";
+"order_gift_description" = "U dárkové objednávky nejsou jména mazlíčků povinná. Příjemce je může přidat při aktivaci.";
+"order_gift_quantity" = "Počet tagů";
+"order_gift_recipient_name" = "Jméno příjemce (volitelné)";
+"order_gift_message" = "Dárková zpráva (volitelné)";
+"order_gift_message_placeholder" = "Přidejte osobní zprávu...";
+"order_gift_badge" = "Dárková objednávka";

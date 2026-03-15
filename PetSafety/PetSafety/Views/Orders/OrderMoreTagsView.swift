@@ -9,6 +9,12 @@ struct OrderMoreTagsView: View {
     @State private var checkoutURL: URL?
     @State private var showCheckoutSheet = false
 
+    // Gift order
+    @State private var isGift = false
+    @State private var giftQuantity = 1
+    @State private var giftRecipientName = ""
+    @State private var giftMessage = ""
+
     // Pet names
     @State private var petNames: [String] = [""]
 
@@ -114,8 +120,13 @@ struct OrderMoreTagsView: View {
                     headerSection
 
                     VStack(spacing: 16) {
-                        // Pet Names
-                        petNamesCard
+                        // Gift Toggle
+                        giftToggleCard
+
+                        // Pet Names (hidden when gift order)
+                        if !isGift {
+                            petNamesCard
+                        }
 
                         // Contact Details
                         contactDetailsCard
@@ -188,6 +199,60 @@ struct OrderMoreTagsView: View {
     }
 
     // MARK: - Section Cards
+
+    private var giftToggleCard: some View {
+        SectionCard(title: String(localized: "order_gift_toggle"), icon: "gift.fill") {
+            Toggle(isOn: $isGift) {
+                HStack(spacing: 10) {
+                    Image(systemName: "gift.fill")
+                        .font(.system(size: 18))
+                        .foregroundColor(.brandOrange)
+                    Text("order_gift_toggle")
+                        .font(.system(size: 16, weight: .medium))
+                }
+            }
+            .tint(.brandOrange)
+
+            if isGift {
+                Text("order_gift_description")
+                    .font(.system(size: 13))
+                    .foregroundColor(.secondary)
+                    .padding(.top, 2)
+
+                Stepper(value: $giftQuantity, in: 1...20) {
+                    HStack {
+                        Text("order_gift_quantity")
+                            .font(.system(size: 15))
+                        Spacer()
+                        Text("\(giftQuantity)")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundColor(.tealAccent)
+                    }
+                }
+
+                TextField(String(localized: "order_gift_recipient_name"), text: $giftRecipientName)
+                    .textFieldStyle(BrandTextFieldStyle(icon: "person"))
+                    .textContentType(.name)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    TextField(String(localized: "order_gift_message_placeholder"), text: $giftMessage, axis: .vertical)
+                        .textFieldStyle(BrandTextFieldStyle(icon: "text.quote"))
+                        .lineLimit(3...5)
+                        .onChange(of: giftMessage) { _, newValue in
+                            if newValue.count > 500 {
+                                giftMessage = String(newValue.prefix(500))
+                            }
+                        }
+                    if !giftMessage.isEmpty {
+                        Text("\(giftMessage.count)/500")
+                            .font(.system(size: 11))
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
+                }
+            }
+        }
+    }
 
     private var petNamesCard: some View {
         SectionCard(title: String(localized: "order_more_pet_names"), icon: "pawprint.fill") {
@@ -288,8 +353,26 @@ struct OrderMoreTagsView: View {
 
     private var orderSummaryCard: some View {
         VStack(spacing: 0) {
+            if isGift {
+                HStack(spacing: 6) {
+                    Image(systemName: "gift.fill")
+                        .font(.system(size: 12))
+                        .foregroundColor(.brandOrange)
+                    Text("order_gift_badge")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(.brandOrange)
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(Color.brandOrange.opacity(0.12))
+                .cornerRadius(8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .padding(.top, 10)
+            }
+
             HStack {
-                Text("order_more_tags_count \(validPetCount)")
+                Text("order_more_tags_count \(isGift ? giftQuantity : validPetCount)")
                     .font(.system(size: 15))
                     .foregroundColor(.secondary)
                 Spacer()
@@ -333,14 +416,15 @@ struct OrderMoreTagsView: View {
     }
 
     private var isFormValid: Bool {
-        validPetCount > 0 &&
-        !ownerName.isEmpty &&
-        InputValidators.isValidEmail(email) &&
-        !street1.isEmpty &&
-        !city.isEmpty &&
-        !postCode.isEmpty &&
-        !selectedCountryCode.isEmpty &&
-        (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
+        let hasPetNames = isGift ? true : validPetCount > 0
+        return hasPetNames &&
+            !ownerName.isEmpty &&
+            InputValidators.isValidEmail(email) &&
+            !street1.isEmpty &&
+            !city.isEmpty &&
+            !postCode.isEmpty &&
+            !selectedCountryCode.isEmpty &&
+            (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
     }
 
     private var currentShippingPriceLabel: String {
@@ -428,7 +512,7 @@ struct OrderMoreTagsView: View {
         Task {
             isLoading = true
             do {
-                let quantity = validPetCount
+                let quantity = isGift ? giftQuantity : validPetCount
                 let checkout = try await APIService.shared.createTagCheckout(
                     quantity: quantity,
                     countryCode: selectedCountryCode.uppercased(),

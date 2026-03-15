@@ -311,6 +311,7 @@
 "story_great_news" = "Jó hír!";
 "story_post" = "Megosztás";
 "story_reunited" = "Megtalálva!";
+"share_card_reunited" = "Hazakerült!";
 "story_maybe_later" = "Talán később";
 "story_share_good_news" = "Oszd meg a jó hírt";
 "story_social_caption %@" = "%@ újra a családjával van! Köszönjük a Senra Kisállat Biléta közösségének, hogy segített %@t hazajuttatni.";
@@ -1026,3 +1027,12 @@
 "referral_code_applied" = "Ajánlókód alkalmazva! 2 hónapot kapsz ingyen.";
 "referral_code_invalid" = "Érvénytelen vagy lejárt ajánlókód";
 "referral_use_friend_footer" = "Add meg egy barátod ajánlókódját, és kapj 2 hónap ingyen előfizetést.";
+
+// MARK: - Gift Orders
+"order_gift_toggle" = "Ajándékként rendelés";
+"order_gift_description" = "Ajándék rendelésnél a kisállat neve nem kötelező. A megajándékozott az aktiváláskor adhatja meg.";
+"order_gift_quantity" = "Tagek száma";
+"order_gift_recipient_name" = "Megajándékozott neve (opcionális)";
+"order_gift_message" = "Ajándék üzenet (opcionális)";
+"order_gift_message_placeholder" = "Írj személyes üzenetet...";
+"order_gift_badge" = "Ajándék rendelés";

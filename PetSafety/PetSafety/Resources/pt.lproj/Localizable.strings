@@ -311,9 +311,10 @@
 "story_great_news" = "Boas notícias!";
 "story_post" = "Publicar";
 "story_reunited" = "Reunidos!";
+"share_card_reunited" = "Reunido!";
 "story_maybe_later" = "Talvez mais tarde";
 "story_share_good_news" = "Partilha a boa notícia";
-"story_social_caption %@" = "%@ reencontrou a sua família! Obrigado à comunidade TagMe Now por ajudar a trazer %@ para casa. senra.pet";
+"story_social_caption %@" = "%@ reencontrou a sua família! Obrigado à comunidade Senra por ajudar a trazer %@ para casa. senra.pet";
 "story_generating_card" = "A criar cartão de partilha...";
 "story_your_story" = "A sua história";
 "story_city_optional" = "Cidade/Área (opcional)";
@@ -1026,3 +1027,12 @@
 "referral_code_applied" = "Código de indicação aplicado! Você terá 2 meses grátis.";
 "referral_code_invalid" = "Código de indicação inválido ou expirado";
 "referral_use_friend_footer" = "Insira o código de indicação de um amigo e ganhe 2 meses grátis de assinatura.";
+
+// MARK: - Gift Orders
+"order_gift_toggle" = "Encomendar como presente";
+"order_gift_description" = "Nomes de animais são opcionais em pedidos de presente. O destinatário pode adicioná-los ao ativar as tags.";
+"order_gift_quantity" = "Número de tags";
+"order_gift_recipient_name" = "Nome do destinatário (opcional)";
+"order_gift_message" = "Mensagem de presente (opcional)";
+"order_gift_message_placeholder" = "Adicione uma mensagem pessoal...";
+"order_gift_badge" = "Pedido de presente";

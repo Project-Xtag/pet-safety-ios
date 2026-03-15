@@ -35,6 +35,8 @@ struct Order: Codable, Identifiable {
         }
     }
 
+    let isGift: Bool?
+
     enum CodingKeys: String, CodingKey {
         case id, items, currency
         case userId = "user_id"
@@ -46,6 +48,7 @@ struct Order: Codable, Identifiable {
         case paymentMethod = "payment_method"
         case paymentStatus = "payment_status"
         case paymentIntentId = "payment_intent_id"
+        case isGift = "is_gift"
         case orderStatus = "order_status"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
@@ -67,6 +70,7 @@ struct Order: Codable, Identifiable {
         orderStatus = try container.decodeIfPresent(String.self, forKey: .orderStatus) ?? "pending"
         createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
         updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
+        isGift = try container.decodeIfPresent(Bool.self, forKey: .isGift)
         items = try container.decodeIfPresent([OrderItem].self, forKey: .items)
     }
 }
@@ -93,13 +97,17 @@ struct OrderItem: Codable, Identifiable {
 }
 
 struct CreateOrderRequest: Codable {
-    let petNames: [String]
+    let petNames: [String]?
     let ownerName: String
     let email: String
     let shippingAddress: AddressDetails
     let billingAddress: AddressDetails?
     let paymentMethod: String?
     let shippingCost: Double?
+    var isGift: Bool? = nil
+    var giftRecipientName: String? = nil
+    var giftMessage: String? = nil
+    var quantity: Int? = nil
 }
 
 struct AddressDetails: Codable {
