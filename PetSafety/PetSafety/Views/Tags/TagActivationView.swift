@@ -15,6 +15,7 @@ struct TagActivationView: View {
     @State private var activationSuccess = false
     @State private var errorMessage: String?
     @State private var showPlanSelection = false
+    @State private var orderItems: [UnactivatedOrderItem] = []
 
     private let grayBackground = Color(UIColor.systemGray6)
 
@@ -41,7 +42,16 @@ struct TagActivationView: View {
                 }
             }
             .task {
-                await petsViewModel.fetchPets()
+                async let petsTask: () = petsViewModel.fetchPets()
+                async let orderTask: [UnactivatedOrderItem] = {
+                    do {
+                        return try await APIService.shared.getUnactivatedTagsForQRCode(tagCode)
+                    } catch {
+                        return []
+                    }
+                }()
+                await petsTask
+                orderItems = await orderTask
             }
         }
     }
@@ -223,17 +233,89 @@ struct TagActivationView: View {
             // Pet List
             ScrollView {
                 LazyVStack(spacing: 12) {
-                    ForEach(petsViewModel.pets) { pet in
-                        TagPetSelectionRow(
-                            pet: pet,
-                            isSelected: selectedPet?.id == pet.id,
-                            onSelect: {
-                                withAnimation(.easeInOut(duration: 0.2)) {
-                                    selectedPet = pet
-                                    errorMessage = nil
-                                }
+                    // Section 1: Pets from order (if order context exists)
+                    if !orderItems.isEmpty {
+                        let orderPetNames = orderItems.compactMap { $0.petName?.lowercased() }
+                        let matchingPets = petsViewModel.pets.filter { pet in
+                            orderPetNames.contains(pet.name.lowercased())
+                        }
+                        let unmatchedNames = orderItems.compactMap { $0.petName }.filter { name in
+                            !petsViewModel.pets.contains { $0.name.lowercased() == name.lowercased() }
+                        }
+                        let otherPets = petsViewModel.pets.filter { pet in
+                            !orderPetNames.contains(pet.name.lowercased())
+                        }
+
+                        if !matchingPets.isEmpty || !unmatchedNames.isEmpty {
+                            HStack {
+                                Text("pets_from_order")
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.secondary)
+                                Spacer()
                             }
-                        )
+                            .padding(.bottom, 4)
+
+                            ForEach(matchingPets) { pet in
+                                TagPetSelectionRow(
+                                    pet: pet,
+                                    isSelected: selectedPet?.id == pet.id,
+                                    badge: String(localized: "from_your_order"),
+                                    onSelect: {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            selectedPet = pet
+                                            errorMessage = nil
+                                        }
+                                    }
+                                )
+                            }
+
+                            ForEach(unmatchedNames, id: \.self) { name in
+                                UnmatchedPetCard(petName: name, onCreateProfile: {
+                                    // Navigate to pet creation - for now dismiss
+                                    onDismiss()
+                                })
+                            }
+                        }
+
+                        if !otherPets.isEmpty {
+                            HStack {
+                                Text("other_pets")
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                            }
+                            .padding(.top, 8)
+                            .padding(.bottom, 4)
+
+                            ForEach(otherPets) { pet in
+                                TagPetSelectionRow(
+                                    pet: pet,
+                                    isSelected: selectedPet?.id == pet.id,
+                                    onSelect: {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            selectedPet = pet
+                                            errorMessage = nil
+                                        }
+                                    }
+                                )
+                            }
+                        }
+                    } else {
+                        // No order context - show flat list
+                        ForEach(petsViewModel.pets) { pet in
+                            TagPetSelectionRow(
+                                pet: pet,
+                                isSelected: selectedPet?.id == pet.id,
+                                onSelect: {
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        selectedPet = pet
+                                        errorMessage = nil
+                                    }
+                                }
+                            )
+                        }
                     }
                 }
                 .padding()
@@ -293,6 +375,7 @@ struct TagActivationView: View {
 struct TagPetSelectionRow: View {
     let pet: Pet
     let isSelected: Bool
+    var badge: String? = nil
     let onSelect: () -> Void
 
     private let grayBackground = Color(UIColor.systemGray6)
@@ -321,6 +404,17 @@ struct TagPetSelectionRow: View {
                     Text(pet.name)
                         .font(.headline)
                         .foregroundColor(.primary)
+
+                    if let badge = badge {
+                        Text(badge)
+                            .font(.caption2)
+                            .fontWeight(.medium)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color("BrandColor").opacity(0.15))
+                            .foregroundColor(Color("BrandColor"))
+                            .cornerRadius(4)
+                    }
 
                     HStack(spacing: 4) {
                         Text(pet.species.capitalized)
@@ -363,6 +457,57 @@ struct TagPetSelectionRow: View {
             )
         }
         .buttonStyle(PlainButtonStyle())
+    }
+}
+
+// MARK: - Unmatched Pet Card
+struct UnmatchedPetCard: View {
+    let petName: String
+    let onCreateProfile: () -> Void
+
+    var body: some View {
+        HStack(spacing: 16) {
+            Image(systemName: "pawprint.fill")
+                .font(.system(size: 24))
+                .foregroundColor(.orange)
+                .frame(width: 56, height: 56)
+                .background(Color.orange.opacity(0.1))
+                .cornerRadius(12)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(petName)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+
+                Text("needs_profile")
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Color.orange.opacity(0.15))
+                    .foregroundColor(.orange)
+                    .cornerRadius(4)
+            }
+
+            Spacer()
+
+            Button(action: onCreateProfile) {
+                Text("create_profile_first")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(Color("BrandColor"))
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 14)
+                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6]))
+                .foregroundColor(.orange.opacity(0.3))
+        )
     }
 }
 

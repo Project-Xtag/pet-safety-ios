@@ -1043,3 +1043,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Error al convertir la imagen";
 "error_invalid_checkout_url" = "URL de pago no válida";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Envío";
+"tracking_number_label" = "Número de seguimiento";
+"track_package" = "Seguir envío";
+"delivery_method_label" = "Método de envío";
+"delivery_home" = "Envío a domicilio";
+"delivery_postapoint" = "Recogida en PostaPont";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Placas pendientes";
+"ready_to_activate" = "Listas para activar";
+"still_processing" = "En proceso";
+"scan_tag_now" = "Escanear placa";
+"create_profile_first" = "Crear perfil";
+"create_profile_while_waiting" = "Crear perfil mientras esperas";
+"all_caught_up" = "¡Todo al día!";
+"all_caught_up_description" = "No tienes registros de placas pendientes.";
+"order_tags" = "Pedir placas";
+"status_shipped" = "Enviado";
+"status_delivered" = "Entregado";
+"status_processing" = "En proceso";
+"status_pending" = "Pendiente";
+"activation_help_title" = "Cómo activar tu placa";
+"activation_help_step1" = "Espera a que llegue tu placa";
+"activation_help_step2" = "Escanea el código QR de la placa";
+"activation_help_step3" = "Selecciona la mascota a vincular";
+"activation_help_step4" = "Elige tu plan de suscripción";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Mascotas de tu pedido";
+"from_your_order" = "De tu pedido";
+"needs_profile" = "Necesita perfil";
+"create_profile_first" = "Crear perfil";
+"create_profile_for" = "Crear perfil para %@";
+"other_pets" = "Otras mascotas";
+"link_to_pet" = "Vincular a %@";
+"no_pets_yet" = "Aún no hay mascotas";
+"create_first_pet" = "Crea el perfil de tu mascota para activar la placa.";
+"create_new_pet" = "Crear nueva mascota";

@@ -1043,3 +1043,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Falha ao converter imagem";
 "error_invalid_checkout_url" = "URL de pagamento inválido";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Envio";
+"tracking_number_label" = "Número de rastreio";
+"track_package" = "Rastrear encomenda";
+"delivery_method_label" = "Método de envio";
+"delivery_home" = "Entrega ao domicílio";
+"delivery_postapoint" = "Levantamento PostaPont";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Etiquetas pendentes";
+"ready_to_activate" = "Prontas para ativar";
+"still_processing" = "Em processamento";
+"scan_tag_now" = "Escanear etiqueta";
+"create_profile_first" = "Criar perfil";
+"create_profile_while_waiting" = "Criar perfil enquanto espera";
+"all_caught_up" = "Tudo em dia!";
+"all_caught_up_description" = "Não tem registos de etiquetas pendentes.";
+"order_tags" = "Encomendar etiquetas";
+"status_shipped" = "Enviado";
+"status_delivered" = "Entregue";
+"status_processing" = "Em processamento";
+"status_pending" = "Pendente";
+"activation_help_title" = "Como ativar a sua etiqueta";
+"activation_help_step1" = "Aguarde a chegada da sua etiqueta";
+"activation_help_step2" = "Digitalize o código QR na etiqueta";
+"activation_help_step3" = "Selecione o animal a associar";
+"activation_help_step4" = "Escolha o seu plano de subscrição";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Animais da sua encomenda";
+"from_your_order" = "Da sua encomenda";
+"needs_profile" = "Precisa de perfil";
+"create_profile_first" = "Criar perfil";
+"create_profile_for" = "Criar perfil para %@";
+"other_pets" = "Outros animais";
+"link_to_pet" = "Associar a %@";
+"no_pets_yet" = "Ainda sem animais";
+"create_first_pet" = "Crie o perfil do seu animal para ativar a etiqueta.";
+"create_new_pet" = "Criar novo animal";

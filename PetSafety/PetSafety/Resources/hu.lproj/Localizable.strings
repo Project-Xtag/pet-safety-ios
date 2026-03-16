@@ -1043,3 +1043,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Nem sikerült a kép átalakítása";
 "error_invalid_checkout_url" = "Érvénytelen pénztár URL";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Szállítás";
+"tracking_number_label" = "Nyomkövetési szám";
+"track_package" = "Csomag követése";
+"delivery_method_label" = "Szállítási mód";
+"delivery_home" = "Házhozszállítás";
+"delivery_postapoint" = "PostaPont átvétel";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Függőben lévő címkék";
+"ready_to_activate" = "Aktiválásra kész";
+"still_processing" = "Feldolgozás alatt";
+"scan_tag_now" = "Címke beolvasása";
+"create_profile_first" = "Profil létrehozása";
+"create_profile_while_waiting" = "Profil létrehozása várakozás közben";
+"all_caught_up" = "Minden naprakész!";
+"all_caught_up_description" = "Nincsenek függőben lévő címke regisztrációk.";
+"order_tags" = "Címkék rendelése";
+"status_shipped" = "Feladva";
+"status_delivered" = "Kézbesítve";
+"status_processing" = "Feldolgozás alatt";
+"status_pending" = "Függőben";
+"activation_help_title" = "Hogyan aktiváld a címkéd";
+"activation_help_step1" = "Várd meg, amíg megérkezik a címkéd";
+"activation_help_step2" = "Olvasd be a QR kódot a címkén";
+"activation_help_step3" = "Válaszd ki a kedvencedet";
+"activation_help_step4" = "Válassz előfizetési csomagot";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Rendelésedben szereplő kedvencek";
+"from_your_order" = "A rendelésedből";
+"needs_profile" = "Profil szükséges";
+"create_profile_first" = "Profil létrehozása";
+"create_profile_for" = "Profil létrehozása: %@";
+"other_pets" = "Egyéb kedvencek";
+"link_to_pet" = "Kapcsolás: %@";
+"no_pets_yet" = "Még nincsenek kedvencek";
+"create_first_pet" = "Hozd létre első kedvenced profilját a címke aktiválásához.";
+"create_new_pet" = "Új kedvenc létrehozása";

@@ -1055,3 +1055,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Impossibile convertire l'immagine";
 "error_invalid_checkout_url" = "URL di pagamento non valido";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Spedizione";
+"tracking_number_label" = "Numero di tracciamento";
+"track_package" = "Traccia il pacco";
+"delivery_method_label" = "Metodo di spedizione";
+"delivery_home" = "Consegna a domicilio";
+"delivery_postapoint" = "Ritiro PostaPont";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Targhette in attesa";
+"ready_to_activate" = "Pronte per l'attivazione";
+"still_processing" = "In elaborazione";
+"scan_tag_now" = "Scansiona targhetta";
+"create_profile_first" = "Crea profilo";
+"create_profile_while_waiting" = "Crea profilo mentre aspetti";
+"all_caught_up" = "Tutto aggiornato!";
+"all_caught_up_description" = "Non hai registrazioni di targhette in attesa.";
+"order_tags" = "Ordina targhette";
+"status_shipped" = "Spedito";
+"status_delivered" = "Consegnato";
+"status_processing" = "In elaborazione";
+"status_pending" = "In attesa";
+"activation_help_title" = "Come attivare la tua targhetta";
+"activation_help_step1" = "Attendi l'arrivo della targhetta";
+"activation_help_step2" = "Scansiona il codice QR sulla targhetta";
+"activation_help_step3" = "Seleziona l'animale da associare";
+"activation_help_step4" = "Scegli il tuo piano di abbonamento";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Animali dal tuo ordine";
+"from_your_order" = "Dal tuo ordine";
+"needs_profile" = "Profilo necessario";
+"create_profile_first" = "Crea profilo";
+"create_profile_for" = "Crea profilo per %@";
+"other_pets" = "Altri animali";
+"link_to_pet" = "Collega a %@";
+"no_pets_yet" = "Nessun animale ancora";
+"create_first_pet" = "Crea il profilo del tuo animale per attivare la targhetta.";
+"create_new_pet" = "Crea nuovo animale";

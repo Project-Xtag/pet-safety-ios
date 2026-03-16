@@ -1043,3 +1043,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Bildkonvertierung fehlgeschlagen";
 "error_invalid_checkout_url" = "Ungültige Checkout-URL";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Versand";
+"tracking_number_label" = "Sendungsnummer";
+"track_package" = "Paket verfolgen";
+"delivery_method_label" = "Versandart";
+"delivery_home" = "Hauslieferung";
+"delivery_postapoint" = "PostaPont Abholung";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Ausstehende Marken";
+"ready_to_activate" = "Bereit zur Aktivierung";
+"still_processing" = "In Bearbeitung";
+"scan_tag_now" = "Marke scannen";
+"create_profile_first" = "Profil erstellen";
+"create_profile_while_waiting" = "Profil beim Warten erstellen";
+"all_caught_up" = "Alles erledigt!";
+"all_caught_up_description" = "Sie haben keine ausstehenden Markenregistrierungen.";
+"order_tags" = "Marken bestellen";
+"status_shipped" = "Versendet";
+"status_delivered" = "Zugestellt";
+"status_processing" = "In Bearbeitung";
+"status_pending" = "Ausstehend";
+"activation_help_title" = "So aktivieren Sie Ihre Marke";
+"activation_help_step1" = "Warten Sie auf die Lieferung Ihrer Marke";
+"activation_help_step2" = "Scannen Sie den QR-Code auf der Marke";
+"activation_help_step3" = "Wählen Sie Ihr Haustier aus";
+"activation_help_step4" = "Wählen Sie Ihren Abonnementplan";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Haustiere aus Ihrer Bestellung";
+"from_your_order" = "Aus Ihrer Bestellung";
+"needs_profile" = "Profil benötigt";
+"create_profile_first" = "Profil erstellen";
+"create_profile_for" = "Profil erstellen für %@";
+"other_pets" = "Andere Haustiere";
+"link_to_pet" = "Verknüpfen mit %@";
+"no_pets_yet" = "Noch keine Haustiere";
+"create_first_pet" = "Erstellen Sie ein Haustierprofil, um die Marke zu aktivieren.";
+"create_new_pet" = "Neues Haustier erstellen";

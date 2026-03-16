@@ -852,6 +852,18 @@ class APIService {
         return response.orders
     }
 
+    func getPendingRegistrations() async throws -> [PendingRegistration] {
+        let request = try await buildRequest(endpoint: "/orders/pending-registrations")
+        let response = try await performRequest(request, responseType: PendingRegistrationsResponse.self)
+        return response.pending
+    }
+
+    func getUnactivatedTagsForQRCode(_ qrCode: String) async throws -> [UnactivatedOrderItem] {
+        let request = try await buildRequest(endpoint: "/orders/unactivated-for-qr/\(qrCode)")
+        let response = try await performRequest(request, responseType: UnactivatedTagsResponse.self)
+        return response.unactivated
+    }
+
     func checkReplacementEligibility() async throws -> ReplacementEligibilityResponse {
         let request = try await buildRequest(
             endpoint: "/orders/replacement/check-eligibility",

@@ -80,6 +80,17 @@ struct OrderRowView: View {
                     .foregroundColor(.secondary)
             }
 
+            if order.orderStatus == "shipped" && order.mplTrackingNumber != nil {
+                HStack(spacing: 4) {
+                    Image(systemName: "shippingbox.fill")
+                        .font(.caption)
+                        .foregroundColor(.brandOrange)
+                    Text("track_package")
+                        .font(.caption)
+                        .foregroundColor(.brandOrange)
+                }
+            }
+
             if let items = order.items, !items.isEmpty {
                 let totalItems = items.reduce(0) { $0 + $1.quantity }
                 Text(String(localized: "orders_item_count \(totalItems)"))
@@ -152,6 +163,41 @@ struct OrderDetailView: View {
                     Spacer()
                     Text(formatDate(order.createdAt))
                         .foregroundColor(.secondary)
+                }
+            }
+
+            if order.mplTrackingNumber != nil {
+                Section(header: Text("shipping_section_title")) {
+                    HStack {
+                        Text("tracking_number_label")
+                        Spacer()
+                        Text(order.mplTrackingNumber ?? "")
+                            .foregroundColor(.secondary)
+                            .font(.system(.body, design: .monospaced))
+                    }
+
+                    if let url = order.trackingURL {
+                        Link(destination: url) {
+                            HStack {
+                                Image(systemName: "shippingbox.fill")
+                                    .foregroundColor(.brandOrange)
+                                Text("track_package")
+                                    .foregroundColor(.brandOrange)
+                                Spacer()
+                                Image(systemName: "arrow.up.right.square")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+
+                    if let method = order.deliveryMethod {
+                        HStack {
+                            Text("delivery_method_label")
+                            Spacer()
+                            Text(method == "postapoint" ? String(localized: "delivery_postapoint") : String(localized: "delivery_home"))
+                                .foregroundColor(.secondary)
+                        }
+                    }
                 }
             }
 

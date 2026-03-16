@@ -1043,3 +1043,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Nu s-a putut converti imaginea";
 "error_invalid_checkout_url" = "URL de plată invalid";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Livrare";
+"tracking_number_label" = "Număr de urmărire";
+"track_package" = "Urmărește coletul";
+"delivery_method_label" = "Metodă de livrare";
+"delivery_home" = "Livrare la domiciliu";
+"delivery_postapoint" = "Ridicare PostaPont";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Etichete în așteptare";
+"ready_to_activate" = "Gata de activare";
+"still_processing" = "În procesare";
+"scan_tag_now" = "Scanează eticheta";
+"create_profile_first" = "Creează profil";
+"create_profile_while_waiting" = "Creează profil în timp ce aștepți";
+"all_caught_up" = "Totul e la zi!";
+"all_caught_up_description" = "Nu aveți înregistrări de etichete în așteptare.";
+"order_tags" = "Comandă etichete";
+"status_shipped" = "Expediat";
+"status_delivered" = "Livrat";
+"status_processing" = "În procesare";
+"status_pending" = "În așteptare";
+"activation_help_title" = "Cum să activezi eticheta";
+"activation_help_step1" = "Așteaptă să ajungă eticheta";
+"activation_help_step2" = "Scanează codul QR de pe etichetă";
+"activation_help_step3" = "Selectează animalul de companie";
+"activation_help_step4" = "Alege planul de abonament";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Animale din comanda ta";
+"from_your_order" = "Din comanda ta";
+"needs_profile" = "Necesită profil";
+"create_profile_first" = "Creează profil";
+"create_profile_for" = "Creează profil pentru %@";
+"other_pets" = "Alte animale";
+"link_to_pet" = "Asociază cu %@";
+"no_pets_yet" = "Niciun animal încă";
+"create_first_pet" = "Creează profilul animalului tău pentru a activa eticheta.";
+"create_new_pet" = "Creează animal nou";

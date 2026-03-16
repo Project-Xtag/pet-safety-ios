@@ -1046,3 +1046,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Échec de la conversion de l'image";
 "error_invalid_checkout_url" = "URL de paiement invalide";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Expédition";
+"tracking_number_label" = "Numéro de suivi";
+"track_package" = "Suivre le colis";
+"delivery_method_label" = "Mode de livraison";
+"delivery_home" = "Livraison à domicile";
+"delivery_postapoint" = "Retrait PostaPont";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Médailles en attente";
+"ready_to_activate" = "Prêtes à activer";
+"still_processing" = "En cours de traitement";
+"scan_tag_now" = "Scanner la médaille";
+"create_profile_first" = "Créer un profil";
+"create_profile_while_waiting" = "Créer un profil en attendant";
+"all_caught_up" = "Tout est à jour !";
+"all_caught_up_description" = "Vous n'avez aucune inscription de médaille en attente.";
+"order_tags" = "Commander des médailles";
+"status_shipped" = "Expédié";
+"status_delivered" = "Livré";
+"status_processing" = "En traitement";
+"status_pending" = "En attente";
+"activation_help_title" = "Comment activer votre médaille";
+"activation_help_step1" = "Attendez la réception de votre médaille";
+"activation_help_step2" = "Scannez le code QR sur la médaille";
+"activation_help_step3" = "Sélectionnez l'animal à associer";
+"activation_help_step4" = "Choisissez votre forfait";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Animaux de votre commande";
+"from_your_order" = "De votre commande";
+"needs_profile" = "Profil nécessaire";
+"create_profile_first" = "Créer un profil";
+"create_profile_for" = "Créer un profil pour %@";
+"other_pets" = "Autres animaux";
+"link_to_pet" = "Associer à %@";
+"no_pets_yet" = "Pas encore d'animaux";
+"create_first_pet" = "Créez le profil de votre animal pour activer la médaille.";
+"create_new_pet" = "Créer un nouvel animal";

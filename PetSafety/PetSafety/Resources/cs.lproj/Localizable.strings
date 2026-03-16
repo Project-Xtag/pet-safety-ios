@@ -1043,3 +1043,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Nepodařilo se převést obrázek";
 "error_invalid_checkout_url" = "Neplatná URL adresa pokladny";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Doručení";
+"tracking_number_label" = "Číslo sledování";
+"track_package" = "Sledovat zásilku";
+"delivery_method_label" = "Způsob doručení";
+"delivery_home" = "Doručení domů";
+"delivery_postapoint" = "PostaPont vyzvednutí";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Čekající známky";
+"ready_to_activate" = "Připraveno k aktivaci";
+"still_processing" = "Zpracovává se";
+"scan_tag_now" = "Skenovat známku";
+"create_profile_first" = "Vytvořit profil";
+"create_profile_while_waiting" = "Vytvořit profil při čekání";
+"all_caught_up" = "Vše hotovo!";
+"all_caught_up_description" = "Nemáte žádné čekající registrace známek.";
+"order_tags" = "Objednat známky";
+"status_shipped" = "Odesláno";
+"status_delivered" = "Doručeno";
+"status_processing" = "Zpracovává se";
+"status_pending" = "Čekající";
+"activation_help_title" = "Jak aktivovat známku";
+"activation_help_step1" = "Počkejte na doručení známky";
+"activation_help_step2" = "Naskenujte QR kód na známce";
+"activation_help_step3" = "Vyberte domácí zvíře";
+"activation_help_step4" = "Vyberte předplatné";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Zvířata z vaší objednávky";
+"from_your_order" = "Z vaší objednávky";
+"needs_profile" = "Potřebuje profil";
+"create_profile_first" = "Vytvořit profil";
+"create_profile_for" = "Vytvořit profil pro %@";
+"other_pets" = "Ostatní zvířata";
+"link_to_pet" = "Propojit s %@";
+"no_pets_yet" = "Zatím žádná zvířata";
+"create_first_pet" = "Vytvořte profil svého zvířete pro aktivaci známky.";
+"create_new_pet" = "Vytvořit nové zvíře";

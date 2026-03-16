@@ -1044,3 +1044,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Failed to convert image";
 "error_invalid_checkout_url" = "Invalid checkout URL";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Shipping";
+"tracking_number_label" = "Tracking Number";
+"track_package" = "Track Package";
+"delivery_method_label" = "Delivery Method";
+"delivery_home" = "Home Delivery";
+"delivery_postapoint" = "PostaPont Pickup";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Pending Tags";
+"ready_to_activate" = "Ready to Activate";
+"still_processing" = "Still Processing";
+"scan_tag_now" = "Scan Tag";
+"create_profile_first" = "Create Profile";
+"create_profile_while_waiting" = "Create Profile While Waiting";
+"all_caught_up" = "All Caught Up!";
+"all_caught_up_description" = "You don't have any pending tag registrations.";
+"order_tags" = "Order Tags";
+"status_shipped" = "Shipped";
+"status_delivered" = "Delivered";
+"status_processing" = "Processing";
+"status_pending" = "Pending";
+"activation_help_title" = "How to activate your tag";
+"activation_help_step1" = "Wait for your tag to arrive";
+"activation_help_step2" = "Scan the QR code on the tag";
+"activation_help_step3" = "Select the pet to link it to";
+"activation_help_step4" = "Choose your subscription plan";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Pets from Your Order";
+"from_your_order" = "From your order";
+"needs_profile" = "Needs profile";
+"create_profile_first" = "Create Profile";
+"create_profile_for" = "Create Profile for %@";
+"other_pets" = "Other Pets";
+"link_to_pet" = "Link to %@";
+"no_pets_yet" = "No Pets Yet";
+"create_first_pet" = "Create your first pet profile to activate this tag.";
+"create_new_pet" = "Create New Pet";

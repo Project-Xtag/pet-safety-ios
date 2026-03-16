@@ -35,7 +35,15 @@ struct Order: Codable, Identifiable {
         }
     }
 
+    var trackingURL: URL? {
+        guard let tracking = mplTrackingNumber, !tracking.isEmpty else { return nil }
+        return URL(string: "https://nyomkovetes.posta.hu/international?itemNumber=\(tracking)")
+    }
+
     let isGift: Bool?
+    let mplTrackingNumber: String?
+    let mplShipmentStatus: String?
+    let deliveryMethod: String?
 
     enum CodingKeys: String, CodingKey {
         case id, items, currency
@@ -52,6 +60,9 @@ struct Order: Codable, Identifiable {
         case orderStatus = "order_status"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case mplTrackingNumber = "mpl_tracking_number"
+        case mplShipmentStatus = "mpl_shipment_status"
+        case deliveryMethod = "delivery_method"
     }
 
     init(from decoder: Decoder) throws {
@@ -72,6 +83,9 @@ struct Order: Codable, Identifiable {
         updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
         isGift = try container.decodeIfPresent(Bool.self, forKey: .isGift)
         items = try container.decodeIfPresent([OrderItem].self, forKey: .items)
+        mplTrackingNumber = try container.decodeIfPresent(String.self, forKey: .mplTrackingNumber)
+        mplShipmentStatus = try container.decodeIfPresent(String.self, forKey: .mplShipmentStatus)
+        deliveryMethod = try container.decodeIfPresent(String.self, forKey: .deliveryMethod)
     }
 }
 

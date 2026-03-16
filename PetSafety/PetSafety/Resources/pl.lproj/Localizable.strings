@@ -1046,3 +1046,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Nie udało się przekonwertować obrazu";
 "error_invalid_checkout_url" = "Nieprawidłowy adres URL płatności";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Wysyłka";
+"tracking_number_label" = "Numer śledzenia";
+"track_package" = "Śledź przesyłkę";
+"delivery_method_label" = "Sposób dostawy";
+"delivery_home" = "Dostawa do domu";
+"delivery_postapoint" = "Odbiór PostaPont";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Oczekujące zawieszki";
+"ready_to_activate" = "Gotowe do aktywacji";
+"still_processing" = "W trakcie realizacji";
+"scan_tag_now" = "Skanuj zawieszkę";
+"create_profile_first" = "Utwórz profil";
+"create_profile_while_waiting" = "Utwórz profil podczas oczekiwania";
+"all_caught_up" = "Wszystko aktualne!";
+"all_caught_up_description" = "Nie masz żadnych oczekujących rejestracji zawieszek.";
+"order_tags" = "Zamów zawieszki";
+"status_shipped" = "Wysłano";
+"status_delivered" = "Dostarczono";
+"status_processing" = "W trakcie realizacji";
+"status_pending" = "Oczekujące";
+"activation_help_title" = "Jak aktywować zawieszkę";
+"activation_help_step1" = "Poczekaj na dostarczenie zawieszki";
+"activation_help_step2" = "Zeskanuj kod QR na zawieszce";
+"activation_help_step3" = "Wybierz zwierzaka do powiązania";
+"activation_help_step4" = "Wybierz plan subskrypcji";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Zwierzęta z Twojego zamówienia";
+"from_your_order" = "Z Twojego zamówienia";
+"needs_profile" = "Potrzebuje profilu";
+"create_profile_first" = "Utwórz profil";
+"create_profile_for" = "Utwórz profil dla %@";
+"other_pets" = "Inne zwierzęta";
+"link_to_pet" = "Połącz z %@";
+"no_pets_yet" = "Jeszcze brak zwierząt";
+"create_first_pet" = "Utwórz profil zwierzęcia, aby aktywować zawieszkę.";
+"create_new_pet" = "Utwórz nowe zwierzę";

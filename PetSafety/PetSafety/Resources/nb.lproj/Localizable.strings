@@ -1046,3 +1046,43 @@
 // MARK: - Error Messages
 "error_image_convert" = "Kunne ikke konvertere bildet";
 "error_invalid_checkout_url" = "Ugyldig betalings-URL";
+
+// MARK: - Shipping & Tracking
+"shipping_section_title" = "Levering";
+"tracking_number_label" = "Sporingsnummer";
+"track_package" = "Spor pakken";
+"delivery_method_label" = "Leveringsmetode";
+"delivery_home" = "Hjemlevering";
+"delivery_postapoint" = "PostaPont henting";
+
+// MARK: - Pending Registrations
+"pending_registrations_title" = "Ventende merker";
+"ready_to_activate" = "Klar til aktivering";
+"still_processing" = "Under behandling";
+"scan_tag_now" = "Skann merke";
+"create_profile_first" = "Opprett profil";
+"create_profile_while_waiting" = "Opprett profil mens du venter";
+"all_caught_up" = "Alt oppdatert!";
+"all_caught_up_description" = "Du har ingen ventende merkeregistreringer.";
+"order_tags" = "Bestill merker";
+"status_shipped" = "Sendt";
+"status_delivered" = "Levert";
+"status_processing" = "Under behandling";
+"status_pending" = "Ventende";
+"activation_help_title" = "Slik aktiverer du merket ditt";
+"activation_help_step1" = "Vent på at merket ditt ankommer";
+"activation_help_step2" = "Skann QR-koden på merket";
+"activation_help_step3" = "Velg kjæledyret å knytte til";
+"activation_help_step4" = "Velg abonnementsplan";
+
+// MARK: - Tag Activation Pet Prioritization
+"pets_from_order" = "Kjæledyr fra bestillingen din";
+"from_your_order" = "Fra bestillingen din";
+"needs_profile" = "Trenger profil";
+"create_profile_first" = "Opprett profil";
+"create_profile_for" = "Opprett profil for %@";
+"other_pets" = "Andre kjæledyr";
+"link_to_pet" = "Koble til %@";
+"no_pets_yet" = "Ingen kjæledyr ennå";
+"create_first_pet" = "Opprett en kjæledyrprofil for å aktivere merket.";
+"create_new_pet" = "Opprett nytt kjæledyr";
