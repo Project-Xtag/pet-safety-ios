@@ -512,6 +512,39 @@ struct OrderMoreTagsView: View {
             isLoading = true
             do {
                 let quantity = isGift ? giftQuantity : validPetCount
+                let validNames = petNames.filter { !$0.isEmpty }
+
+                // Step 1: Create order record (matches Android flow)
+                let shippingAddr = AddressDetails(
+                    street1: street1,
+                    street2: street2.isEmpty ? nil : street2,
+                    city: city,
+                    province: nil,
+                    postCode: postCode,
+                    country: selectedCountryCode.uppercased(),
+                    phone: phone.isEmpty ? nil : phone
+                )
+
+                var orderRequest = CreateOrderRequest(
+                    petNames: isGift ? nil : validNames,
+                    ownerName: ownerName,
+                    email: email,
+                    shippingAddress: shippingAddr,
+                    billingAddress: nil,
+                    paymentMethod: "card",
+                    shippingCost: nil
+                )
+                orderRequest.isGift = isGift ? true : nil
+                orderRequest.giftRecipientName = isGift ? (giftRecipientName.isEmpty ? nil : giftRecipientName) : nil
+                orderRequest.giftMessage = isGift ? (giftMessage.isEmpty ? nil : giftMessage) : nil
+                orderRequest.quantity = isGift ? giftQuantity : nil
+                orderRequest.deliveryMethod = isHungary ? deliveryMethod : nil
+                orderRequest.postapointDetails = selectedPostaPoint
+                orderRequest.locale = Locale.current.language.languageCode?.identifier
+
+                _ = try await APIService.shared.createOrder(orderRequest)
+
+                // Step 2: Create Stripe checkout session
                 let checkout = try await APIService.shared.createTagCheckout(
                     quantity: quantity,
                     countryCode: selectedCountryCode.uppercased(),

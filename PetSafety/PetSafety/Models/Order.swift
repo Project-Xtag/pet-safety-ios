@@ -122,6 +122,9 @@ struct CreateOrderRequest: Codable {
     var giftRecipientName: String? = nil
     var giftMessage: String? = nil
     var quantity: Int? = nil
+    var deliveryMethod: String? = nil
+    var postapointDetails: PostaPointDetails? = nil
+    var locale: String? = nil
 }
 
 struct AddressDetails: Codable {
