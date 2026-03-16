@@ -1096,3 +1096,10 @@
 "mark_all_read" = "Alle als gelesen markieren";
 "load_more" = "Mehr laden";
 "just_now" = "Gerade eben";
+
+// MARK: - Activation Error Messages
+"activation_error_qr_not_found" = "QR-Code nicht erkannt. Stellen Sie sicher, dass Sie eine offizielle Senra-Marke scannen.";
+"activation_error_already_activated" = "Diese Marke ist bereits einem anderen Haustier zugeordnet. Kontaktieren Sie den Support.";
+"activation_error_not_linked" = "Diese Marke wurde noch nicht Ihrer Bestellung zugeordnet. Warten Sie auf die Versandbestätigung.";
+"activation_error_not_shipped" = "Ihre Bestellung wurde noch nicht versendet. Warten Sie auf die Lieferung.";
+"activation_error_not_owner" = "Dies ist nicht Ihr Haustier. Bitte wählen Sie eines Ihrer eigenen Haustiere.";

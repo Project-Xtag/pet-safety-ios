@@ -1097,3 +1097,10 @@
 "mark_all_read" = "Mark All Read";
 "load_more" = "Load More";
 "just_now" = "Just now";
+
+// MARK: - Activation Error Messages
+"activation_error_qr_not_found" = "QR code not recognized. Please ensure you are scanning an official Senra tag.";
+"activation_error_already_activated" = "This tag is already linked to another pet. Contact support if you believe this is your tag.";
+"activation_error_not_linked" = "This tag hasn't been assigned to your order yet. Please wait for shipping confirmation.";
+"activation_error_not_shipped" = "Your order hasn't shipped yet. Please wait until you receive your tag.";
+"activation_error_not_owner" = "You don't own this pet. Please select one of your own pets.";

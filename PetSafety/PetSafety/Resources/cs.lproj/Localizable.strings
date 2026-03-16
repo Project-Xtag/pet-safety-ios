@@ -1096,3 +1096,10 @@
 "mark_all_read" = "Označit vše jako přečtené";
 "load_more" = "Načíst více";
 "just_now" = "Právě teď";
+
+// MARK: - Activation Error Messages
+"activation_error_qr_not_found" = "QR kód nebyl rozpoznán. Ujistěte se, že skenujete oficiální Senra známku.";
+"activation_error_already_activated" = "Tato známka je již přiřazena jinému zvířeti. Kontaktujte podporu.";
+"activation_error_not_linked" = "Tato známka zatím nebyla přiřazena k vaší objednávce. Počkejte na potvrzení odeslání.";
+"activation_error_not_shipped" = "Vaše objednávka ještě nebyla odeslána. Počkejte na doručení.";
+"activation_error_not_owner" = "Toto není vaše zvíře. Vyberte jedno ze svých zvířat.";

@@ -1096,3 +1096,10 @@
 "mark_all_read" = "Marcar todo como leído";
 "load_more" = "Cargar más";
 "just_now" = "Ahora mismo";
+
+// MARK: - Activation Error Messages
+"activation_error_qr_not_found" = "Código QR no reconocido. Asegúrate de escanear una placa oficial de Senra.";
+"activation_error_already_activated" = "Esta placa ya está vinculada a otra mascota. Contacta con soporte.";
+"activation_error_not_linked" = "Esta placa aún no ha sido asignada a tu pedido. Espera la confirmación de envío.";
+"activation_error_not_shipped" = "Tu pedido aún no ha sido enviado. Espera a recibir tu placa.";
+"activation_error_not_owner" = "Esta no es tu mascota. Selecciona una de tus propias mascotas.";

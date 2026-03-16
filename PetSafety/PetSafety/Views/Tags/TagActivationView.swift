@@ -370,10 +370,25 @@ struct TagActivationView: View {
                     activationSuccess = true
                 }
             } catch {
-                errorMessage = error.localizedDescription
+                errorMessage = classifyActivationError(error.localizedDescription)
             }
             isActivating = false
         }
+    }
+
+    private func classifyActivationError(_ msg: String) -> String {
+        if msg.contains("not found") && msg.contains("QR") {
+            return String(localized: "activation_error_qr_not_found")
+        } else if msg.contains("already activated") {
+            return String(localized: "activation_error_already_activated")
+        } else if msg.contains("not been linked") {
+            return String(localized: "activation_error_not_linked")
+        } else if msg.contains("not been shipped") {
+            return String(localized: "activation_error_not_shipped")
+        } else if msg.contains("do not own") {
+            return String(localized: "activation_error_not_owner")
+        }
+        return msg
     }
 }
 

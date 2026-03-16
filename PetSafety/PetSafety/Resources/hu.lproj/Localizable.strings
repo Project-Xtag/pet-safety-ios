@@ -1096,3 +1096,10 @@
 "mark_all_read" = "Összes olvasottnak jelölése";
 "load_more" = "Több betöltése";
 "just_now" = "Most";
+
+// MARK: - Activation Error Messages
+"activation_error_qr_not_found" = "A QR kód nem felismerhető. Kérjük, győződj meg róla, hogy hivatalos Senra címkét olvasol be.";
+"activation_error_already_activated" = "Ez a címke már egy másik kedvenchez van rendelve. Kérjük, lépj kapcsolatba az ügyfélszolgálattal.";
+"activation_error_not_linked" = "Ez a címke még nincs hozzárendelve a rendelésedhez. Kérjük, várd meg a szállítási visszaigazolást.";
+"activation_error_not_shipped" = "A rendelésed még nem lett feladva. Kérjük, várd meg a címke megérkezését.";
+"activation_error_not_owner" = "Ez nem a te kedvenced. Kérjük, válassz egyet a saját kedvenceid közül.";

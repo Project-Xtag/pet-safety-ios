@@ -1096,3 +1096,10 @@
 "mark_all_read" = "Marchează toate ca citite";
 "load_more" = "Încarcă mai multe";
 "just_now" = "Chiar acum";
+
+// MARK: - Activation Error Messages
+"activation_error_qr_not_found" = "Codul QR nu a fost recunoscut. Asigurați-vă că scanați o etichetă oficială Senra.";
+"activation_error_already_activated" = "Această etichetă este deja asociată altui animal. Contactați suportul.";
+"activation_error_not_linked" = "Această etichetă nu a fost încă atribuită comenzii dumneavoastră. Așteptați confirmarea expedierii.";
+"activation_error_not_shipped" = "Comanda nu a fost încă expediată. Așteptați livrarea.";
+"activation_error_not_owner" = "Acesta nu este animalul dumneavoastră. Selectați unul dintre animalele proprii.";

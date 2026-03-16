@@ -1099,3 +1099,10 @@
 "mark_all_read" = "Merk alle som lest";
 "load_more" = "Last inn mer";
 "just_now" = "Akkurat nå";
+
+// MARK: - Activation Error Messages
+"activation_error_qr_not_found" = "QR-koden ble ikke gjenkjent. Sørg for at du skanner et offisielt Senra-merke.";
+"activation_error_already_activated" = "Dette merket er allerede knyttet til et annet kjæledyr. Kontakt support.";
+"activation_error_not_linked" = "Dette merket er ennå ikke tilordnet bestillingen din. Vent på forsendelsesbekreftelse.";
+"activation_error_not_shipped" = "Bestillingen din er ikke sendt ennå. Vent til du mottar merket.";
+"activation_error_not_owner" = "Dette er ikke ditt kjæledyr. Velg et av dine egne kjæledyr.";

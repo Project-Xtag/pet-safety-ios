@@ -1108,3 +1108,10 @@
 "mark_all_read" = "Segna tutto come letto";
 "load_more" = "Carica altro";
 "just_now" = "Proprio ora";
+
+// MARK: - Activation Error Messages
+"activation_error_qr_not_found" = "Codice QR non riconosciuto. Assicurati di scansionare una targhetta Senra ufficiale.";
+"activation_error_already_activated" = "Questa targhetta è già associata a un altro animale. Contatta il supporto.";
+"activation_error_not_linked" = "Questa targhetta non è ancora stata assegnata al tuo ordine. Attendi la conferma di spedizione.";
+"activation_error_not_shipped" = "Il tuo ordine non è ancora stato spedito. Attendi la consegna.";
+"activation_error_not_owner" = "Questo non è il tuo animale. Seleziona uno dei tuoi animali.";

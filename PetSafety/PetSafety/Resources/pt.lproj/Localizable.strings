@@ -1096,3 +1096,10 @@
 "mark_all_read" = "Marcar tudo como lido";
 "load_more" = "Carregar mais";
 "just_now" = "Agora mesmo";
+
+// MARK: - Activation Error Messages
+"activation_error_qr_not_found" = "Código QR não reconhecido. Certifique-se de que está a escanear uma etiqueta oficial Senra.";
+"activation_error_already_activated" = "Esta etiqueta já está associada a outro animal. Contacte o suporte.";
+"activation_error_not_linked" = "Esta etiqueta ainda não foi atribuída à sua encomenda. Aguarde a confirmação de envio.";
+"activation_error_not_shipped" = "A sua encomenda ainda não foi enviada. Aguarde a entrega.";
+"activation_error_not_owner" = "Este não é o seu animal. Selecione um dos seus próprios animais.";

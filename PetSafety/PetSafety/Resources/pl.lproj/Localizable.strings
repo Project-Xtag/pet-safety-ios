@@ -1099,3 +1099,10 @@
 "mark_all_read" = "Oznacz wszystkie jako przeczytane";
 "load_more" = "Załaduj więcej";
 "just_now" = "Właśnie teraz";
+
+// MARK: - Activation Error Messages
+"activation_error_qr_not_found" = "Kod QR nie został rozpoznany. Upewnij się, że skanujesz oficjalną zawieszkę Senra.";
+"activation_error_already_activated" = "Ta zawieszka jest już przypisana do innego zwierzęcia. Skontaktuj się ze wsparciem.";
+"activation_error_not_linked" = "Ta zawieszka nie została jeszcze przypisana do Twojego zamówienia. Poczekaj na potwierdzenie wysyłki.";
+"activation_error_not_shipped" = "Twoje zamówienie nie zostało jeszcze wysłane. Poczekaj na dostawę.";
+"activation_error_not_owner" = "To nie jest Twoje zwierzę. Wybierz jedno ze swoich zwierząt.";
