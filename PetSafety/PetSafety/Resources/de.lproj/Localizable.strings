@@ -1083,3 +1083,8 @@
 "no_pets_yet" = "Noch keine Haustiere";
 "create_first_pet" = "Erstellen Sie ein Haustierprofil, um die Marke zu aktivieren.";
 "create_new_pet" = "Neues Haustier erstellen";
+
+// MARK: - Public Profile Details
+"sex_label" = "Geschlecht";
+"neutered_label" = "Kastriert";
+"no" = "Nein";

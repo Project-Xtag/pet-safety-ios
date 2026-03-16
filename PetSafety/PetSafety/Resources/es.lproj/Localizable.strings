@@ -1083,3 +1083,8 @@
 "no_pets_yet" = "Aún no hay mascotas";
 "create_first_pet" = "Crea el perfil de tu mascota para activar la placa.";
 "create_new_pet" = "Crear nueva mascota";
+
+// MARK: - Public Profile Details
+"sex_label" = "Sexo";
+"neutered_label" = "Esterilizado";
+"no" = "No";

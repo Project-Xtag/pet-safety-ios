@@ -1084,3 +1084,8 @@
 "no_pets_yet" = "No Pets Yet";
 "create_first_pet" = "Create your first pet profile to activate this tag.";
 "create_new_pet" = "Create New Pet";
+
+// MARK: - Public Profile Details
+"sex_label" = "Sex";
+"neutered_label" = "Neutered";
+"no" = "No";

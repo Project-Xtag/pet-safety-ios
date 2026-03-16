@@ -307,6 +307,16 @@ struct ScannedPetView: View {
                                     .font(.system(size: 14))
                                     .foregroundColor(.mutedText)
                             }
+                            if let sex = pet.sex, !sex.isEmpty {
+                                Text("**\(NSLocalizedString("sex_label", comment: "")):** \(sex)")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.mutedText)
+                            }
+                            if let neutered = pet.isNeutered {
+                                Text("**\(NSLocalizedString("neutered_label", comment: "")):** \(neutered ? NSLocalizedString("yes", comment: "") : NSLocalizedString("no", comment: ""))")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.mutedText)
+                            }
                         }
                     }
 

@@ -1083,3 +1083,8 @@
 "no_pets_yet" = "Niciun animal încă";
 "create_first_pet" = "Creează profilul animalului tău pentru a activa eticheta.";
 "create_new_pet" = "Creează animal nou";
+
+// MARK: - Public Profile Details
+"sex_label" = "Sex";
+"neutered_label" = "Sterilizat";
+"no" = "Nu";

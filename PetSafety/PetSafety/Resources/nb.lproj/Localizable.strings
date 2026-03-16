@@ -1086,3 +1086,8 @@
 "no_pets_yet" = "Ingen kjæledyr ennå";
 "create_first_pet" = "Opprett en kjæledyrprofil for å aktivere merket.";
 "create_new_pet" = "Opprett nytt kjæledyr";
+
+// MARK: - Public Profile Details
+"sex_label" = "Kjønn";
+"neutered_label" = "Kastrert";
+"no" = "Nei";

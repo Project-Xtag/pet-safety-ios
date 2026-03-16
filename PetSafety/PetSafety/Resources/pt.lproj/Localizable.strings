@@ -1083,3 +1083,8 @@
 "no_pets_yet" = "Ainda sem animais";
 "create_first_pet" = "Crie o perfil do seu animal para ativar a etiqueta.";
 "create_new_pet" = "Criar novo animal";
+
+// MARK: - Public Profile Details
+"sex_label" = "Sexo";
+"neutered_label" = "Esterilizado";
+"no" = "Não";

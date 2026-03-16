@@ -107,6 +107,8 @@ struct TagLookupPet: Codable {
     let medicalInfo: String?
     let allergies: String?
     let notes: String?
+    let sex: String?
+    let isNeutered: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id, name, species, breed, color, age, allergies, notes
@@ -121,5 +123,7 @@ struct TagLookupPet: Codable {
         case ownerPostalCode = "owner_postal_code"
         case ownerCountry = "owner_country"
         case medicalInfo = "medical_info"
+        case sex
+        case isNeutered = "is_neutered"
     }
 }

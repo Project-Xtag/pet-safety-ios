@@ -1086,3 +1086,8 @@
 "no_pets_yet" = "Pas encore d'animaux";
 "create_first_pet" = "Créez le profil de votre animal pour activer la médaille.";
 "create_new_pet" = "Créer un nouvel animal";
+
+// MARK: - Public Profile Details
+"sex_label" = "Sexe";
+"neutered_label" = "Stérilisé";
+"no" = "Non";

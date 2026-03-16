@@ -1083,3 +1083,8 @@
 "no_pets_yet" = "Még nincsenek kedvencek";
 "create_first_pet" = "Hozd létre első kedvenced profilját a címke aktiválásához.";
 "create_new_pet" = "Új kedvenc létrehozása";
+
+// MARK: - Public Profile Details
+"sex_label" = "Nem";
+"neutered_label" = "Ivartalanított";
+"no" = "Nem";

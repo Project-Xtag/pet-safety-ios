@@ -1083,3 +1083,8 @@
 "no_pets_yet" = "Zatiaľ žiadne zvieratá";
 "create_first_pet" = "Vytvorte profil svojho zvieraťa na aktiváciu známky.";
 "create_new_pet" = "Vytvoriť nové zviera";
+
+// MARK: - Public Profile Details
+"sex_label" = "Pohlavie";
+"neutered_label" = "Kastrované";
+"no" = "Nie";

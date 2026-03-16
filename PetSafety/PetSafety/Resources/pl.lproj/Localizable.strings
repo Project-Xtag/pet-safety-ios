@@ -1086,3 +1086,8 @@
 "no_pets_yet" = "Jeszcze brak zwierząt";
 "create_first_pet" = "Utwórz profil zwierzęcia, aby aktywować zawieszkę.";
 "create_new_pet" = "Utwórz nowe zwierzę";
+
+// MARK: - Public Profile Details
+"sex_label" = "Płeć";
+"neutered_label" = "Wykastrowany";
+"no" = "Nie";
