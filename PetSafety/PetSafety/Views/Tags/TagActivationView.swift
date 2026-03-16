@@ -15,6 +15,7 @@ struct TagActivationView: View {
     @State private var activationSuccess = false
     @State private var errorMessage: String?
     @State private var showPlanSelection = false
+    @State private var showCreatePet = false
     @State private var orderItems: [UnactivatedOrderItem] = []
 
     private let grayBackground = Color(UIColor.systemGray6)
@@ -131,6 +132,12 @@ struct TagActivationView: View {
         .fullScreenCover(isPresented: $showPlanSelection) {
             PlanSelectionView(fromActivation: true) {
                 onDismiss()
+            }
+        }
+        .sheet(isPresented: $showCreatePet) {
+            NavigationView {
+                PetFormView(mode: .create)
+                    .environmentObject(appState)
             }
         }
     }
@@ -272,8 +279,7 @@ struct TagActivationView: View {
 
                             ForEach(unmatchedNames, id: \.self) { name in
                                 UnmatchedPetCard(petName: name, onCreateProfile: {
-                                    // Navigate to pet creation - for now dismiss
-                                    onDismiss()
+                                    showCreatePet = true
                                 })
                             }
                         }
