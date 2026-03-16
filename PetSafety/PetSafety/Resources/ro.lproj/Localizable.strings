@@ -1088,3 +1088,11 @@
 "sex_label" = "Sex";
 "neutered_label" = "Sterilizat";
 "no" = "Nu";
+
+// MARK: - Notifications Inbox
+"notifications_title" = "Notificări";
+"no_notifications" = "Nicio notificare";
+"no_notifications_desc" = "Totul e la zi! Notificările vor apărea aici când cineva scanează eticheta animalului tău.";
+"mark_all_read" = "Marchează toate ca citite";
+"load_more" = "Încarcă mai multe";
+"just_now" = "Chiar acum";

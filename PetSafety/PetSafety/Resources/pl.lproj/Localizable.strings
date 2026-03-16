@@ -1091,3 +1091,11 @@
 "sex_label" = "Płeć";
 "neutered_label" = "Wykastrowany";
 "no" = "Nie";
+
+// MARK: - Notifications Inbox
+"notifications_title" = "Powiadomienia";
+"no_notifications" = "Brak powiadomień";
+"no_notifications_desc" = "Wszystko aktualne! Powiadomienia pojawią się tutaj, gdy ktoś zeskanuje zawieszkę Twojego zwierzęcia.";
+"mark_all_read" = "Oznacz wszystkie jako przeczytane";
+"load_more" = "Załaduj więcej";
+"just_now" = "Właśnie teraz";

@@ -123,6 +123,10 @@ struct ProfileView: View {
                 ProfileMenuRow(icon: "questionmark.circle", title: NSLocalizedString("profile_help_support", comment: ""))
             }
 
+            NavigationLink(destination: NotificationsView()) {
+                ProfileMenuRow(icon: "bell.badge", title: NSLocalizedString("notifications_title", comment: ""))
+            }
+
             NavigationLink(destination: PendingRegistrationsView()) {
                 ProfileMenuRow(icon: "tag", title: NSLocalizedString("pending_registrations_title", comment: ""))
             }

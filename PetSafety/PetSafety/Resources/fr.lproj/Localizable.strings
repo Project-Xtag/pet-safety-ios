@@ -1091,3 +1091,11 @@
 "sex_label" = "Sexe";
 "neutered_label" = "Stérilisé";
 "no" = "Non";
+
+// MARK: - Notifications Inbox
+"notifications_title" = "Notifications";
+"no_notifications" = "Aucune notification";
+"no_notifications_desc" = "Tout est à jour ! Les notifications apparaîtront ici quand la médaille de votre animal sera scannée.";
+"mark_all_read" = "Tout marquer comme lu";
+"load_more" = "Charger plus";
+"just_now" = "À l'instant";

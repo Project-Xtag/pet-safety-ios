@@ -1088,3 +1088,11 @@
 "sex_label" = "Pohlaví";
 "neutered_label" = "Kastrované";
 "no" = "Ne";
+
+// MARK: - Notifications Inbox
+"notifications_title" = "Oznámení";
+"no_notifications" = "Žádná oznámení";
+"no_notifications_desc" = "Vše aktuální! Oznámení se zde zobrazí, když někdo naskenuje známku vašeho zvířete.";
+"mark_all_read" = "Označit vše jako přečtené";
+"load_more" = "Načíst více";
+"just_now" = "Právě teď";

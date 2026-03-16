@@ -1088,3 +1088,11 @@
 "sex_label" = "Sexo";
 "neutered_label" = "Esterilizado";
 "no" = "Não";
+
+// MARK: - Notifications Inbox
+"notifications_title" = "Notificações";
+"no_notifications" = "Sem notificações";
+"no_notifications_desc" = "Tudo em dia! As notificações aparecerão aqui quando a etiqueta do seu animal for escaneada.";
+"mark_all_read" = "Marcar tudo como lido";
+"load_more" = "Carregar mais";
+"just_now" = "Agora mesmo";

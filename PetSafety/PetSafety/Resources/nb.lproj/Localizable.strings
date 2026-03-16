@@ -1091,3 +1091,11 @@
 "sex_label" = "Kjønn";
 "neutered_label" = "Kastrert";
 "no" = "Nei";
+
+// MARK: - Notifications Inbox
+"notifications_title" = "Varsler";
+"no_notifications" = "Ingen varsler";
+"no_notifications_desc" = "Alt oppdatert! Varsler vil vises her når noen skanner merket til kjæledyret ditt.";
+"mark_all_read" = "Merk alle som lest";
+"load_more" = "Last inn mer";
+"just_now" = "Akkurat nå";

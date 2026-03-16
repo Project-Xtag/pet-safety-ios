@@ -921,6 +921,29 @@ class APIService {
         return response.checkout
     }
 
+    // MARK: - Notifications Inbox
+
+    func getNotifications(page: Int = 1, limit: Int = 20) async throws -> NotificationsPageResponse {
+        let request = try await buildRequest(endpoint: "/notifications?page=\(page)&limit=\(limit)")
+        return try await performRequest(request, responseType: NotificationsPageResponse.self)
+    }
+
+    func getUnreadNotificationCount() async throws -> Int {
+        let request = try await buildRequest(endpoint: "/notifications/unread-count")
+        let response = try await performRequest(request, responseType: UnreadCountResponse.self)
+        return response.count
+    }
+
+    func markNotificationAsRead(_ id: String) async throws {
+        let request = try await buildRequest(endpoint: "/notifications/\(id)/read", method: "PATCH")
+        _ = try await performRequest(request, responseType: EmptyResponse.self)
+    }
+
+    func markAllNotificationsAsRead() async throws {
+        let request = try await buildRequest(endpoint: "/notifications/read-all", method: "PATCH")
+        _ = try await performRequest(request, responseType: EmptyResponse.self)
+    }
+
     func getShippingPrices() async throws -> ShippingPricesResponse {
         let request = try await buildRequest(
             endpoint: "/orders/shipping-prices",

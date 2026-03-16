@@ -1088,3 +1088,11 @@
 "sex_label" = "Nem";
 "neutered_label" = "Ivartalanított";
 "no" = "Nem";
+
+// MARK: - Notifications Inbox
+"notifications_title" = "Értesítések";
+"no_notifications" = "Nincsenek értesítések";
+"no_notifications_desc" = "Minden naprakész! Az értesítések itt jelennek meg, ha beolvassák a kedvenced címkéjét.";
+"mark_all_read" = "Összes olvasottnak jelölése";
+"load_more" = "Több betöltése";
+"just_now" = "Most";

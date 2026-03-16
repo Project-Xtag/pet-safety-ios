@@ -1088,3 +1088,11 @@
 "sex_label" = "Geschlecht";
 "neutered_label" = "Kastriert";
 "no" = "Nein";
+
+// MARK: - Notifications Inbox
+"notifications_title" = "Benachrichtigungen";
+"no_notifications" = "Keine Benachrichtigungen";
+"no_notifications_desc" = "Alles aktuell! Benachrichtigungen erscheinen hier, wenn die Marke Ihres Haustieres gescannt wird.";
+"mark_all_read" = "Alle als gelesen markieren";
+"load_more" = "Mehr laden";
+"just_now" = "Gerade eben";

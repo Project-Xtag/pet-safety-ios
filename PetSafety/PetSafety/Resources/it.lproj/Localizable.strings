@@ -1100,3 +1100,11 @@
 "sex_label" = "Sesso";
 "neutered_label" = "Sterilizzato";
 "no" = "No";
+
+// MARK: - Notifications Inbox
+"notifications_title" = "Notifiche";
+"no_notifications" = "Nessuna notifica";
+"no_notifications_desc" = "Tutto aggiornato! Le notifiche appariranno qui quando la targhetta del tuo animale sarà scansionata.";
+"mark_all_read" = "Segna tutto come letto";
+"load_more" = "Carica altro";
+"just_now" = "Proprio ora";

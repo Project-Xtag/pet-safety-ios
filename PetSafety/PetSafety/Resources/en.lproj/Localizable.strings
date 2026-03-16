@@ -1089,3 +1089,11 @@
 "sex_label" = "Sex";
 "neutered_label" = "Neutered";
 "no" = "No";
+
+// MARK: - Notifications Inbox
+"notifications_title" = "Notifications";
+"no_notifications" = "No Notifications";
+"no_notifications_desc" = "You're all caught up! Notifications will appear here when your pet's tag is scanned.";
+"mark_all_read" = "Mark All Read";
+"load_more" = "Load More";
+"just_now" = "Just now";
