@@ -259,13 +259,13 @@ struct PetFormView: View {
                 .foregroundColor(.brandOrange)
             }
         }
-        .alert("delete_pet_button", isPresented: $showingDeleteAlert) {
+        .alert(String(format: String(localized: "delete_pet_warning_title"), viewModel.name), isPresented: $showingDeleteAlert) {
             Button("cancel", role: .cancel) { }
-            Button("delete", role: .destructive) {
+            Button(String(localized: "delete_pet_warning_confirm"), role: .destructive) {
                 deletePet()
             }
         } message: {
-            Text("delete_pet_dialog_message")
+            Text(String(format: String(localized: "delete_pet_warning_message"), viewModel.name))
         }
         .alert(NSLocalizedString("cannot_delete_missing_pet", comment: ""), isPresented: $showingCannotDeleteAlert) {
             Button("ok", role: .cancel) { }

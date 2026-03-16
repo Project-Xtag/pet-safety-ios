@@ -124,6 +124,9 @@
 "save_changes" = "Guardar cambios";
 "delete_pet_button" = "Eliminar mascota";
 "delete_pet_dialog_message" = "¿Seguro que quieres eliminar esta mascota? Esta acción no se puede deshacer.";
+"delete_pet_warning_title" = "%@ eliminar?";
+"delete_pet_warning_message" = "%@ será eliminado permanentemente de tu cuenta. La etiqueta QR se desactivará inmediatamente y dejará de funcionar al escanearla. Si esta es tu última mascota, tu suscripción también será cancelada.";
+"delete_pet_warning_confirm" = "Eliminar mascota";
 "species_cat" = "Gato";
 "select_photo" = "Seleccionar foto";
 "select_pet" = "Seleccionar mascota";

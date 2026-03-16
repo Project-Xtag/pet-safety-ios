@@ -124,6 +124,9 @@
 "save_changes" = "Zapisz zmiany";
 "delete_pet_button" = "Usuń zwierzę";
 "delete_pet_dialog_message" = "Czy na pewno chcesz usunąć to zwierzę? Tej operacji nie można cofnąć.";
+"delete_pet_warning_title" = "Usunąć %@?";
+"delete_pet_warning_message" = "%@ zostanie trwale usunięty z Twojego konta. Tag QR zostanie natychmiast dezaktywowany i nie będzie działał po zeskanowaniu. Jeśli to Twoje ostatnie zwierzę, Twoja subskrypcja również zostanie anulowana.";
+"delete_pet_warning_confirm" = "Usuń zwierzę";
 "species_cat" = "Kot";
 "select_photo" = "Wybierz zdjęcie";
 "select_pet" = "Wybierz zwierzę";

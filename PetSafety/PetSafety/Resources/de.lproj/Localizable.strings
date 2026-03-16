@@ -124,6 +124,9 @@
 "save_changes" = "Änderungen speichern";
 "delete_pet_button" = "Haustier löschen";
 "delete_pet_dialog_message" = "Möchten Sie dieses Haustier wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.";
+"delete_pet_warning_title" = "%@ löschen?";
+"delete_pet_warning_message" = "%@ wird dauerhaft aus deinem Konto entfernt. Der QR-Tag wird sofort deaktiviert und funktioniert beim Scannen nicht mehr. Wenn dies dein letztes Haustier ist, wird auch dein Abonnement gekündigt.";
+"delete_pet_warning_confirm" = "Haustier löschen";
 "species_cat" = "Katze";
 "select_photo" = "Foto auswählen";
 "select_pet" = "Haustier auswählen";

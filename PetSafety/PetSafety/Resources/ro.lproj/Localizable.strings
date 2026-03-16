@@ -124,6 +124,9 @@
 "save_changes" = "Salvează modificările";
 "delete_pet_button" = "Șterge animalul";
 "delete_pet_dialog_message" = "Sigur dorești să ștergi acest animal? Această acțiune nu poate fi anulată.";
+"delete_pet_warning_title" = "Ștergi pe %@?";
+"delete_pet_warning_message" = "%@ va fi eliminat permanent din contul tău. Eticheta QR va fi dezactivată imediat și nu va mai funcționa la scanare. Dacă acesta este ultimul tău animal, abonamentul va fi și el anulat.";
+"delete_pet_warning_confirm" = "Șterge animalul";
 "species_cat" = "Pisică";
 "select_photo" = "Selectează foto";
 "select_pet" = "Selectează animal";

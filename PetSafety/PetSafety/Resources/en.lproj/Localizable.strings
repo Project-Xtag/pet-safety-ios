@@ -124,6 +124,9 @@
 "save_changes" = "Save Changes";
 "delete_pet_button" = "Delete Pet";
 "delete_pet_dialog_message" = "Are you sure you want to delete this pet? This action cannot be undone.";
+"delete_pet_warning_title" = "Delete %@?";
+"delete_pet_warning_message" = "This will permanently remove %@ from your account. The QR tag will be deactivated immediately and will no longer work when scanned. If this is your last pet, your subscription will also be cancelled.";
+"delete_pet_warning_confirm" = "Delete Pet";
 "species_cat" = "Cat";
 "select_photo" = "Select Photo";
 "select_pet" = "Select Pet";

@@ -124,6 +124,9 @@
 "save_changes" = "Uložit změny";
 "delete_pet_button" = "Smazat mazlíčka";
 "delete_pet_dialog_message" = "Opravdu chcete smazat tohoto mazlíčka? Tuto akci nelze vrátit.";
+"delete_pet_warning_title" = "Smazat %@?";
+"delete_pet_warning_message" = "%@ bude trvale odstraněn z vašeho účtu. QR štítek bude okamžitě deaktivován a při naskenování přestane fungovat. Pokud je to vaše poslední zvíře, vaše předplatné bude také zrušeno.";
+"delete_pet_warning_confirm" = "Smazat zvíře";
 "species_cat" = "Kočka";
 "select_photo" = "Vybrat fotku";
 "select_pet" = "Vybrat mazlíčka";

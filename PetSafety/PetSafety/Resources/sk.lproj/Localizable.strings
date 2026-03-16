@@ -124,6 +124,9 @@
 "save_changes" = "Ulozit zmeny";
 "delete_pet_button" = "Odstranit zviera";
 "delete_pet_dialog_message" = "Naozaj chcete odstranit toto zviera? Tuto akciu nie je mozne vratit spat.";
+"delete_pet_warning_title" = "Odstrániť %@?";
+"delete_pet_warning_message" = "%@ bude natrvalo odstránený z vášho účtu. QR štítok bude okamžite deaktivovaný a po naskenovaní prestane fungovať. Ak je toto vaše posledné zviera, vaše predplatné bude tiež zrušené.";
+"delete_pet_warning_confirm" = "Odstrániť zviera";
 "species_cat" = "Macka";
 "select_photo" = "Vybrat fotografiu";
 "select_pet" = "Vybrat zviera";

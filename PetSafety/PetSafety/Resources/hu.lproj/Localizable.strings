@@ -124,6 +124,9 @@
 "save_changes" = "Változások mentése";
 "delete_pet_button" = "Kedvenc törlése";
 "delete_pet_dialog_message" = "Biztosan törlöd ezt a kedvencet? Ez a művelet nem vonható vissza.";
+"delete_pet_warning_title" = "%@ törlése?";
+"delete_pet_warning_message" = "%@ véglegesen eltávolításra kerül a fiókodból. A QR biléta azonnal inaktiválódik és a beolvasás nem fog működni. Ha ez az utolsó kedvenced, az előfizetésed is törlődik.";
+"delete_pet_warning_confirm" = "Kedvenc törlése";
 "species_cat" = "Macska";
 "select_photo" = "Fotó kiválasztása";
 "select_pet" = "Kedvenc kiválasztása";

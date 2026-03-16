@@ -124,6 +124,9 @@
 "save_changes" = "Lagre endringer";
 "delete_pet_button" = "Slett dyr";
 "delete_pet_dialog_message" = "Er du sikker på at du vil slette dette dyret? Denne handlingen kan ikke angres.";
+"delete_pet_warning_title" = "Slette %@?";
+"delete_pet_warning_message" = "%@ vil bli permanent fjernet fra kontoen din. QR-merket vil bli deaktivert umiddelbart og vil ikke lenger fungere ved skanning. Hvis dette er ditt siste kjæledyr, vil abonnementet ditt også bli kansellert.";
+"delete_pet_warning_confirm" = "Slett kjæledyr";
 "species_cat" = "Katt";
 "select_photo" = "Velg bilde";
 "select_pet" = "Velg dyr";
