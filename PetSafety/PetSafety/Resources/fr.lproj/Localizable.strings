@@ -1026,3 +1026,23 @@
 "order_gift_message" = "Message cadeau (facultatif)";
 "order_gift_message_placeholder" = "Ajouter un message personnel...";
 "order_gift_badge" = "Commande cadeau";
+
+// MARK: - Plans (missing keys)
+"alert_queued_offline" = "Alerte mise en file d'attente pour la synchronisation";
+"plan_all_include" = "Tous les plans incluent";
+"plan_choose_subtitle" = "Choisissez le plan adapté à vos besoins";
+"plan_current" = "Plan actuel";
+"plan_loading" = "Chargement des plans...";
+"plan_paid_add" = "Les plans payants ajoutent";
+"plan_popular" = "Populaire";
+"plan_select %@" = "Choisir %@";
+"plan_select_free" = "Commencer gratuitement";
+"plan_skip_free" = "Continuer avec le plan gratuit";
+"plan_tag_activated" = "Votre tag a été activé !";
+"plan_upgrade_subtitle" = "Mettez à niveau pour accéder à plus de fonctionnalités";
+"plan_upgrade_title" = "Mettre à niveau votre plan";
+"sighting_queued_offline" = "Signalement mis en file d'attente pour la synchronisation";
+
+// MARK: - Error Messages
+"error_image_convert" = "Échec de la conversion de l'image";
+"error_invalid_checkout_url" = "URL de paiement invalide";

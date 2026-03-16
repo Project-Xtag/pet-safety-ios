@@ -1042,3 +1042,7 @@
 "order_gift_message" = "Gavemelding (valgfritt)";
 "order_gift_message_placeholder" = "Legg til en personlig melding...";
 "order_gift_badge" = "Gavebestilling";
+
+// MARK: - Error Messages
+"error_image_convert" = "Kunne ikke konvertere bildet";
+"error_invalid_checkout_url" = "Ugyldig betalings-URL";

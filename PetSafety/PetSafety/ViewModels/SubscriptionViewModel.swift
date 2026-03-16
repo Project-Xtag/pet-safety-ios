@@ -155,7 +155,7 @@ class SubscriptionViewModel: ObservableObject {
                     print("✅ Created checkout session, URL: \(response.checkout.url)")
                     #endif
                 } else {
-                    error = "Invalid checkout URL"
+                    error = NSLocalizedString("error_invalid_checkout_url", comment: "")
                 }
             }
         } catch {

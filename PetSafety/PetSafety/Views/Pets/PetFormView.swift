@@ -259,13 +259,13 @@ struct PetFormView: View {
                 .foregroundColor(.brandOrange)
             }
         }
-        .alert(String(format: String(localized: "delete_pet_warning_title"), viewModel.name), isPresented: $showingDeleteAlert) {
+        .alert(deleteWarningTitle, isPresented: $showingDeleteAlert) {
             Button("cancel", role: .cancel) { }
             Button(String(localized: "delete_pet_warning_confirm"), role: .destructive) {
                 deletePet()
             }
         } message: {
-            Text(String(format: String(localized: "delete_pet_warning_message"), viewModel.name))
+            Text(deleteWarningMessage)
         }
         .alert(NSLocalizedString("cannot_delete_missing_pet", comment: ""), isPresented: $showingCannotDeleteAlert) {
             Button("ok", role: .cancel) { }
@@ -494,6 +494,14 @@ struct PetFormView: View {
                 appState.showError(error.localizedDescription)
             }
         }
+    }
+
+    private var deleteWarningTitle: String {
+        String(format: NSLocalizedString("delete_pet_warning_title", comment: ""), name)
+    }
+
+    private var deleteWarningMessage: String {
+        String(format: NSLocalizedString("delete_pet_warning_message", comment: ""), name)
     }
 
     private func deletePet() {

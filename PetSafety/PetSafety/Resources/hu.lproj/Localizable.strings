@@ -1039,3 +1039,7 @@
 "order_gift_message" = "Ajándék üzenet (opcionális)";
 "order_gift_message_placeholder" = "Írj személyes üzenetet...";
 "order_gift_badge" = "Ajándék rendelés";
+
+// MARK: - Error Messages
+"error_image_convert" = "Nem sikerült a kép átalakítása";
+"error_invalid_checkout_url" = "Érvénytelen pénztár URL";

@@ -139,7 +139,7 @@ class AlertsViewModel: ObservableObject {
 
             isLoading = false
             errorMessage = String(localized: "alert_queued_offline")
-            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
+            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("alert_queued_offline", comment: "")])
         }
 
         let request = CreateAlertRequest(
@@ -239,7 +239,7 @@ class AlertsViewModel: ObservableObject {
 
             isLoading = false
             errorMessage = String(localized: "sighting_queued_offline")
-            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: "Queued for sync"])
+            throw NSError(domain: "Offline", code: 0, userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("sighting_queued_offline", comment: "")])
         }
 
         let request = ReportSightingRequest(

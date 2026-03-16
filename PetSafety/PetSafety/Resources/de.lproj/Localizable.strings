@@ -1039,3 +1039,7 @@
 "order_gift_message" = "Geschenknachricht (optional)";
 "order_gift_message_placeholder" = "Persönliche Nachricht hinzufügen...";
 "order_gift_badge" = "Geschenkbestellung";
+
+// MARK: - Error Messages
+"error_image_convert" = "Bildkonvertierung fehlgeschlagen";
+"error_invalid_checkout_url" = "Ungültige Checkout-URL";

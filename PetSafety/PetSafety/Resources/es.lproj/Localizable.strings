@@ -1039,3 +1039,7 @@
 "order_gift_message" = "Mensaje de regalo (opcional)";
 "order_gift_message_placeholder" = "Añade un mensaje personal...";
 "order_gift_badge" = "Pedido de regalo";
+
+// MARK: - Error Messages
+"error_image_convert" = "Error al convertir la imagen";
+"error_invalid_checkout_url" = "URL de pago no válida";

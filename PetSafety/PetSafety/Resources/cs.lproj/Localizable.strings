@@ -1039,3 +1039,7 @@
 "order_gift_message" = "Dárková zpráva (volitelné)";
 "order_gift_message_placeholder" = "Přidejte osobní zprávu...";
 "order_gift_badge" = "Dárková objednávka";
+
+// MARK: - Error Messages
+"error_image_convert" = "Nepodařilo se převést obrázek";
+"error_invalid_checkout_url" = "Neplatná URL adresa pokladny";

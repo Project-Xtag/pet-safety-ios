@@ -1040,3 +1040,7 @@
 "order_gift_message" = "Gift Message (optional)";
 "order_gift_message_placeholder" = "Add a personal message...";
 "order_gift_badge" = "Gift Order";
+
+// MARK: - Error Messages
+"error_image_convert" = "Failed to convert image";
+"error_invalid_checkout_url" = "Invalid checkout URL";

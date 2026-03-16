@@ -1039,3 +1039,7 @@
 "order_gift_message" = "Mesaj cadou (opțional)";
 "order_gift_message_placeholder" = "Adaugă un mesaj personal...";
 "order_gift_badge" = "Comandă cadou";
+
+// MARK: - Error Messages
+"error_image_convert" = "Nu s-a putut converti imaginea";
+"error_invalid_checkout_url" = "URL de plată invalid";

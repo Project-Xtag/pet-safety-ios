@@ -129,7 +129,7 @@ class PetsViewModel: ObservableObject {
         let resized = resizeIfNeeded(image)
         guard let imageData = resized.jpegData(compressionQuality: 0.8) else {
             isLoading = false
-            throw NSError(domain: "PetsViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to convert image"])
+            throw NSError(domain: "PetsViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("error_image_convert", comment: "")])
         }
 
         do {
