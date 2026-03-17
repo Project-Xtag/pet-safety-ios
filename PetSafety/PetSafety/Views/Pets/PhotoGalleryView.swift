@@ -86,7 +86,7 @@ struct PhotoGalleryView: View {
                             .padding(.top, 50)
                     } else if viewModel.hasPhotos {
                         LazyVGrid(columns: columns, spacing: 12) {
-                            ForEach(viewModel.photos) { photo in
+                            ForEach(Array(viewModel.photos.enumerated()), id: \.element.id) { index, photo in
                                 PhotoGridItem(
                                     photo: photo,
                                     onSetPrimary: {
@@ -105,7 +105,19 @@ struct PhotoGalleryView: View {
                                     onDelete: {
                                         photoToDelete = photo
                                         showingDeleteConfirmation = true
-                                    }
+                                    },
+                                    onMoveUp: index > 0 ? {
+                                        viewModel.movePhoto(from: IndexSet(integer: index), to: index - 1)
+                                        Task {
+                                            let _ = await viewModel.reorderPhotos(petId: pet.id)
+                                        }
+                                    } : nil,
+                                    onMoveDown: index < viewModel.photos.count - 1 ? {
+                                        viewModel.movePhoto(from: IndexSet(integer: index), to: index + 2)
+                                        Task {
+                                            let _ = await viewModel.reorderPhotos(petId: pet.id)
+                                        }
+                                    } : nil
                                 )
                             }
                         }
@@ -292,6 +304,8 @@ struct PhotoGridItem: View {
     let photo: PetPhoto
     let onSetPrimary: () -> Void
     let onDelete: () -> Void
+    var onMoveUp: (() -> Void)?
+    var onMoveDown: (() -> Void)?
 
     @State private var showingFullScreen = false
 
@@ -319,6 +333,22 @@ struct PhotoGridItem: View {
                     onSetPrimary()
                 } label: {
                     Label("primary", systemImage: "star.fill")
+                }
+
+                if let onMoveUp = onMoveUp {
+                    Button {
+                        onMoveUp()
+                    } label: {
+                        Label("move_up", systemImage: "arrow.up")
+                    }
+                }
+
+                if let onMoveDown = onMoveDown {
+                    Button {
+                        onMoveDown()
+                    } label: {
+                        Label("move_down", systemImage: "arrow.down")
+                    }
                 }
 
                 Button(role: .destructive) {

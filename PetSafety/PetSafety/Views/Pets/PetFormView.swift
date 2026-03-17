@@ -45,6 +45,8 @@ struct PetFormView: View {
     @State private var sex = "Unknown"
     @State private var isNeutered = false
     @State private var uniqueFeatures = ""
+    @State private var allergies = ""
+    @State private var medications = ""
 
     let speciesOptions = ["Dog", "Cat", "Bird", "Rabbit", "Other"]
     let sexOptions = ["Unknown", "Male", "Female"]
@@ -169,6 +171,30 @@ struct PetFormView: View {
                     .overlay(alignment: .topLeading) {
                         if medicalInfo.isEmpty {
                             Text("health_info_hint")
+                                .foregroundColor(.mutedText)
+                                .padding(.top, 8)
+                                .padding(.leading, 4)
+                        }
+                    }
+
+                TextEditor(text: $allergies)
+                    .frame(minHeight: 60)
+                    .onChange(of: allergies) { _, new in if new.count > InputValidators.maxAllergies { allergies = String(new.prefix(InputValidators.maxAllergies)) } }
+                    .overlay(alignment: .topLeading) {
+                        if allergies.isEmpty {
+                            Text("allergies_hint")
+                                .foregroundColor(.mutedText)
+                                .padding(.top, 8)
+                                .padding(.leading, 4)
+                        }
+                    }
+
+                TextEditor(text: $medications)
+                    .frame(minHeight: 60)
+                    .onChange(of: medications) { _, new in if new.count > InputValidators.maxMedications { medications = String(new.prefix(InputValidators.maxMedications)) } }
+                    .overlay(alignment: .topLeading) {
+                        if medications.isEmpty {
+                            Text("medications_hint")
                                 .foregroundColor(.mutedText)
                                 .padding(.top, 8)
                                 .padding(.leading, 4)
@@ -323,21 +349,8 @@ struct PetFormView: View {
         sex = pet.sex ?? "Unknown"
         isNeutered = pet.isNeutered ?? false
         uniqueFeatures = pet.uniqueFeatures ?? ""
-
-        // Combine health info from all sources
-        var healthParts: [String] = []
-        if let medical = pet.medicalInfo, !medical.isEmpty {
-            healthParts.append(medical)
-        }
-        if let allergiesText = pet.allergies, !allergiesText.isEmpty {
-            healthParts.append("\(String(localized: "allergies")): \(allergiesText)")
-        }
-        if let medicationsText = pet.medications, !medicationsText.isEmpty {
-            healthParts.append("\(String(localized: "medications")): \(medicationsText)")
-        }
-        if !healthParts.isEmpty {
-            medicalInfo = healthParts.joined(separator: "\n\n")
-        }
+        allergies = pet.allergies ?? ""
+        medications = pet.medications ?? ""
 
         // Load existing photo if available
         if let imageUrlString = pet.profileImage,
@@ -386,8 +399,8 @@ struct PetFormView: View {
                         weight: weightValue,
                         microchipNumber: microchipNumber.isEmpty ? nil : microchipNumber,
                         medicalNotes: medicalInfo.isEmpty ? nil : medicalInfo,
-                        allergies: nil,
-                        medications: nil,
+                        allergies: allergies.isEmpty ? nil : allergies,
+                        medications: medications.isEmpty ? nil : medications,
                         notes: behaviorNotes.isEmpty ? nil : behaviorNotes,
                         uniqueFeatures: uniqueFeatures.isEmpty ? nil : uniqueFeatures,
                         sex: sex == "Unknown" ? nil : sex.lowercased(),
@@ -431,8 +444,8 @@ struct PetFormView: View {
                         weight: editWeightValue,
                         microchipNumber: microchipNumber.isEmpty ? nil : microchipNumber,
                         medicalNotes: medicalInfo.isEmpty ? nil : medicalInfo,
-                        allergies: nil,
-                        medications: nil,
+                        allergies: allergies.isEmpty ? nil : allergies,
+                        medications: medications.isEmpty ? nil : medications,
                         notes: behaviorNotes.isEmpty ? nil : behaviorNotes,
                         uniqueFeatures: uniqueFeatures.isEmpty ? nil : uniqueFeatures,
                         sex: sex == "Unknown" ? nil : sex.lowercased(),

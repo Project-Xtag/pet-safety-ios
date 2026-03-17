@@ -18,8 +18,10 @@ struct BreedPickerView: View {
         if searchText.isEmpty {
             return breeds
         }
+        let query = searchText.lowercased()
         return breeds.filter { breed in
-            breed.name.lowercased().contains(searchText.lowercased())
+            breed.localizedName.lowercased().contains(query) ||
+            breed.name.lowercased().contains(query)
         }
     }
 
@@ -93,8 +95,15 @@ struct BreedPickerView: View {
                             dismiss()
                         } label: {
                             HStack {
-                                Text(breed.name)
-                                    .foregroundColor(.primary)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(breed.localizedName)
+                                        .foregroundColor(.primary)
+                                    if breed.localizedName != breed.name {
+                                        Text(breed.name)
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
                                 Spacer()
                                 if breed.name == selectedBreed {
                                     Image(systemName: "checkmark")
