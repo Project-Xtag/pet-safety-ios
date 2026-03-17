@@ -265,6 +265,15 @@ struct ReportSightingView: View {
     }
 
     private func submitSighting() {
+        // Validate phone if provided (match backend: 5-30 chars)
+        if shareContactInfo, !reporterPhone.isEmpty {
+            let trimmedPhone = reporterPhone.trimmingCharacters(in: .whitespacesAndNewlines)
+            if trimmedPhone.count < 5 || trimmedPhone.count > 30 {
+                appState.showError(NSLocalizedString("sighting_phone_invalid", comment: ""))
+                return
+            }
+        }
+
         isSubmitting = true
 
         let coordinate = useCurrentLocation ? locationManager.location : nil

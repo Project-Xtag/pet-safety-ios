@@ -1220,3 +1220,4 @@
 "mark_lost_address_required" = "Veuillez fournir une adresse ou activer les services de localisation.";
 "reward_amount_label" = "Récompense (facultatif)";
 "reward_amount_placeholder" = "ex. 50 €";
+"sighting_phone_invalid" = "Le numéro de téléphone doit contenir entre 5 et 30 caractères.";

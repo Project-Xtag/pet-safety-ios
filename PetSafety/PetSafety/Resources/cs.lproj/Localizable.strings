@@ -1217,3 +1217,4 @@
 "mark_lost_address_required" = "Zadejte adresu nebo povolte služby určování polohy.";
 "reward_amount_label" = "Odměna (volitelné)";
 "reward_amount_placeholder" = "např. 50 €";
+"sighting_phone_invalid" = "Telefonní číslo musí mít 5 až 30 znaků.";

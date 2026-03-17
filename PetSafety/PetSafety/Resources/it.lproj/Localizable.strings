@@ -1229,3 +1229,4 @@
 "mark_lost_address_required" = "Fornisci un indirizzo o attiva i servizi di localizzazione.";
 "reward_amount_label" = "Ricompensa (facoltativo)";
 "reward_amount_placeholder" = "es. 50 €";
+"sighting_phone_invalid" = "Il numero di telefono deve avere tra 5 e 30 caratteri.";

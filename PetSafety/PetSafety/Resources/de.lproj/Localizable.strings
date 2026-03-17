@@ -1217,3 +1217,4 @@
 "mark_lost_address_required" = "Bitte geben Sie eine Adresse ein oder aktivieren Sie die Ortungsdienste.";
 "reward_amount_label" = "Belohnung (optional)";
 "reward_amount_placeholder" = "z.B. 50 €";
+"sighting_phone_invalid" = "Telefonnummer muss zwischen 5 und 30 Zeichen lang sein.";

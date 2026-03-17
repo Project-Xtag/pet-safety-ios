@@ -1220,3 +1220,4 @@
 "mark_lost_address_required" = "Podaj adres lub włącz usługi lokalizacji.";
 "reward_amount_label" = "Nagroda (opcjonalnie)";
 "reward_amount_placeholder" = "np. 200 zł";
+"sighting_phone_invalid" = "Numer telefonu musi mieć od 5 do 30 znaków.";

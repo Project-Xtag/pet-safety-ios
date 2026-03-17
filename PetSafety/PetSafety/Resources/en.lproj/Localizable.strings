@@ -1220,3 +1220,4 @@
 "mark_lost_address_required" = "Please provide an address or enable location services.";
 "reward_amount_label" = "Reward (optional)";
 "reward_amount_placeholder" = "e.g. €50";
+"sighting_phone_invalid" = "Phone number must be between 5 and 30 characters.";
