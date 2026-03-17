@@ -30,6 +30,7 @@
 
 // MARK: - Uwierzytelnianie
 "welcome_back" = "Witaj z powrotem!";
+"welcome_new_user" = "Witaj w Senra Pet!";
 "enter_email_subtitle" = "Podaj swój adres e-mail, aby otrzymać kod logowania.";
 "email_address" = "Adres e-mail";
 "send_login_code" = "Wyślij kod logowania";

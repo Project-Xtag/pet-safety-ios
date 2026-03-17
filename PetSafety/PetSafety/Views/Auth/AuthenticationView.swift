@@ -312,6 +312,12 @@ struct AuthenticationView: View {
         Task {
             do {
                 try await authViewModel.verifyOTP(email: email, code: otpCode)
+                // Show differentiated welcome message
+                if authViewModel.isNewUser {
+                    appState.showSuccess(String(localized: "welcome_new_user"))
+                } else {
+                    appState.showSuccess(String(localized: "welcome_back"))
+                }
                 // Offer biometric enrollment if available and not already enabled
                 if authViewModel.shouldOfferBiometricEnrollment {
                     showBiometricEnrollment = true

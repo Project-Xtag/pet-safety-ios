@@ -355,6 +355,8 @@ struct RegistrationView: View {
                     updates["last_name"] = trimmedLastName
                 }
                 try? await authViewModel.updateProfile(updates: updates)
+                // Show welcome message for new users
+                appState.showSuccess(String(localized: "welcome_new_user"))
                 // Offer biometric enrollment
                 if authViewModel.shouldOfferBiometricEnrollment {
                     showBiometricEnrollment = true

@@ -30,6 +30,7 @@
 
 // MARK: - Innlogging
 "welcome_back" = "Velkommen tilbake!";
+"welcome_new_user" = "Velkommen til Senra Pet!";
 "enter_email_subtitle" = "Skriv inn e-postadressen din for å motta en innloggingskode.";
 "email_address" = "E-postadresse";
 "send_login_code" = "Send innloggingskode";

@@ -30,6 +30,7 @@
 
 // MARK: - Autentifikacia
 "welcome_back" = "Vitajte spat!";
+"welcome_new_user" = "Vitaj v Senra Pet!";
 "enter_email_subtitle" = "Zadajte e-mail, aby ste dostali prihlasovaci kod.";
 "email_address" = "E-mailova adresa";
 "send_login_code" = "Odoslat prihlasovaci kod";

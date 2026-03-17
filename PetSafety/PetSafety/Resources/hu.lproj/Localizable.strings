@@ -30,6 +30,7 @@
 
 // MARK: - Hitelesítés
 "welcome_back" = "Üdv újra!";
+"welcome_new_user" = "Üdvözlünk a Senra Petnél!";
 "enter_email_subtitle" = "Add meg az email címed, hogy bejelentkezési kódot kapj.";
 "email_address" = "Email cím";
 "send_login_code" = "Bejelentkezési kód küldése";

@@ -30,6 +30,7 @@
 
 // MARK: - Authentifizierung
 "welcome_back" = "Willkommen zurück!";
+"welcome_new_user" = "Willkommen bei Senra Pet!";
 "enter_email_subtitle" = "Geben Sie Ihre E-Mail ein, um einen Login-Code zu erhalten.";
 "email_address" = "E-Mail-Adresse";
 "send_login_code" = "Login-Code senden";

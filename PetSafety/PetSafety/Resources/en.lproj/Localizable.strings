@@ -30,6 +30,7 @@
 
 // MARK: - Auth
 "welcome_back" = "Welcome Back!";
+"welcome_new_user" = "Welcome to Senra Pet!";
 "enter_email_subtitle" = "Enter your email to receive a login code.";
 "email_address" = "Email Address";
 "send_login_code" = "Send Login Code";

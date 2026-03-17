@@ -14,6 +14,7 @@ class AuthViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var showBiometricPrompt = false
     @Published var biometricEnabled: Bool
+    @Published var isNewUser = false
 
     private let apiService = APIService.shared
     private let biometricService = BiometricService.shared
@@ -206,6 +207,7 @@ class AuthViewModel: ObservableObject {
             let response = try await apiService.verifyOTP(email: email, code: code)
             currentUser = response.user
             isAuthenticated = true
+            isNewUser = response.isNewUser ?? false
             isLoading = false
 
             _ = KeychainService.shared.save(response.user.id, for: .userId)

@@ -30,6 +30,7 @@
 
 // MARK: - Ověřování
 "welcome_back" = "Vítejte zpět!";
+"welcome_new_user" = "Vítej v Senra Pet!";
 "enter_email_subtitle" = "Zadejte e-mail pro obdržení přihlašovacího kódu.";
 "email_address" = "E-mailová adresa";
 "send_login_code" = "Odeslat přihlašovací kód";
