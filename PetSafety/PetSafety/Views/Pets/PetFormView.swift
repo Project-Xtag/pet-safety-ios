@@ -299,18 +299,9 @@ struct PetFormView: View {
             Text("cannot_delete_missing_message_short")
         }
         .alert(String(localized: "pet_limit_reached"), isPresented: $viewModel.showUpgradePrompt) {
-            Button(String(localized: "upgrade_to_ultimate")) {
-                if let url = URL(string: "https://senra.pet/manage-subscription") {
-                    UIApplication.shared.open(url)
-                }
-            }
-            Button(String(localized: "keep_current_plan"), role: .cancel) { }
+            Button("ok", role: .cancel) { }
         } message: {
-            if let info = viewModel.upgradeInfo {
-                Text("pet_limit_upgrade_message \(info.currentPlan.capitalized) \(info.maxPets) \(info.upgradeTo.capitalized) \(info.upgradePrice)")
-            } else {
-                Text("pet_limit_upgrade_generic")
-            }
+            Text("pet_limit_reached_info")
         }
         .onChange(of: selectedPhoto) { _, newValue in
             Task {

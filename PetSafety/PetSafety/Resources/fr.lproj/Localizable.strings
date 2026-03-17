@@ -204,9 +204,9 @@
 "tag_loading_pets" = "Chargement de tes animaux...";
 "tag_activated" = "Médaille activée !";
 "tag_activated_message %@" = "La médaille de %@ est maintenant active";
-"tag_choose_plan" = "Choisis un abonnement pour accéder à toutes les fonctionnalités pour ton animal.";
-"tag_choose_plan_button" = "Choisir un abonnement";
-"tag_skip_for_now" = "Peut-être plus tard";
+"tag_choose_plan" = "Complétez le profil de votre animal pour faciliter sa recherche s'il se perd";
+"tag_choose_plan_button" = "Compléter le profil de l'animal";
+"tag_skip_for_now" = "Je ferai ça plus tard";
 "tag_no_pets" = "Aucun animal enregistré";
 "tag_no_pets_message" = "Ajoute d'abord un animal avant d'activer la médaille";
 "tag_code_label" = "Code de la médaille";
@@ -1003,6 +1003,7 @@
 
 // MARK: - Formulaire animal supplémentaire
 "pet_limit_reached" = "Limite d'animaux atteinte";
+"pet_limit_reached_info" = "Vous avez atteint le nombre maximum d'animaux pour votre forfait actuel. Visitez senra.pet pour gérer votre abonnement.";
 "upgrade_to_ultimate" = "Passer au forfait Maximum";
 "keep_current_plan" = "Conserver le forfait actuel";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Ton forfait %@ permet %lld animal. Passe au forfait %@ pour %@ et ajoute jusqu'à 10 animaux.";

@@ -204,9 +204,9 @@
 "tag_loading_pets" = "Ładowanie zwierząt...";
 "tag_activated" = "Zawieszka aktywowana!";
 "tag_activated_message %@" = "Zawieszka %@ jest teraz aktywna";
-"tag_choose_plan" = "Wybierz plan subskrypcji, aby odblokować wszystkie funkcje dla swojego zwierzęcia.";
-"tag_choose_plan_button" = "Wybierz plan";
-"tag_skip_for_now" = "Może później";
+"tag_choose_plan" = "Uzupełnij profil zwierzęcia, aby ułatwić jego znalezienie w razie zaginięcia";
+"tag_choose_plan_button" = "Uzupełnij profil zwierzęcia";
+"tag_skip_for_now" = "Zrobię to później";
 "tag_no_pets" = "Brak zarejestrowanych zwierząt";
 "tag_no_pets_message" = "Najpierw dodaj zwierzę, a potem aktywuj zawieszk";
 "tag_code_label" = "Kod zawieszki";
@@ -1002,6 +1002,7 @@
 
 // MARK: - Formularz zwierzęcia dodatkowy
 "pet_limit_reached" = "Osiągnięto limit zwierząt";
+"pet_limit_reached_info" = "Osiągnięto maksymalną liczbę zwierząt dla bieżącego planu. Odwiedź senra.pet, aby zarządzać subskrypcją.";
 "upgrade_to_ultimate" = "Przejdź na plan Maximum";
 "keep_current_plan" = "Zachowaj bieżący plan";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Twój plan %@ pozwala na %lld zwierzę. Przejdź na %@ za %@, aby dodać do 10 zwierząt.";

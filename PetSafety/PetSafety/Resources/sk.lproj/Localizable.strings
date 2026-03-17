@@ -204,9 +204,9 @@
 "tag_loading_pets" = "Nacitavaju sa vase zvierata...";
 "tag_activated" = "Stitok aktivovany!";
 "tag_activated_message %@" = "Stitok pre %@ je teraz aktivny";
-"tag_choose_plan" = "Vyberte si predplatny plan a odomknite vsetky funkcie pre svoje zviera.";
-"tag_choose_plan_button" = "Vybrat plan";
-"tag_skip_for_now" = "Preskocit zatial";
+"tag_choose_plan" = "Vyplňte profil zvieraťa, aby bolo jednoduchšie ho nájsť";
+"tag_choose_plan_button" = "Dokončiť profil zvieraťa";
+"tag_skip_for_now" = "Urobím to neskôr";
 "tag_no_pets" = "Zatial ziadne zvierata";
 "tag_no_pets_message" = "Najprv pridajte zviera a potom aktivujte stitok";
 "tag_code_label" = "Kod stitka";
@@ -1016,6 +1016,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Limit domácich zvierat dosiahnutý";
+"pet_limit_reached_info" = "Dosiahli ste maximálny počet zvierat pre váš aktuálny plán. Navštívte senra.pet na správu predplatného.";
 "upgrade_to_ultimate" = "Prejsť na Maximum";
 "keep_current_plan" = "Ponechať aktuálny plán";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Váš plán %@ povoľuje %lld zviera. Prejdite na %@ za %@ pre až 10 domácich zvierat.";

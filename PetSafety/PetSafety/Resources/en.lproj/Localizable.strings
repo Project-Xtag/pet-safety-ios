@@ -204,9 +204,9 @@
 "tag_loading_pets" = "Loading your pets...";
 "tag_activated" = "Tag Activated!";
 "tag_activated_message %@" = "%@'s tag is now active";
-"tag_choose_plan" = "Choose a subscription plan to unlock all features for your pet.";
-"tag_choose_plan_button" = "Choose Plan";
-"tag_skip_for_now" = "Skip for now";
+"tag_choose_plan" = "Complete your pet's profile to help find them if they go missing";
+"tag_choose_plan_button" = "Complete Pet Profile";
+"tag_skip_for_now" = "I'll do this later";
 "tag_no_pets" = "No Pets Yet";
 "tag_no_pets_message" = "Add a pet first before activating a tag";
 "tag_code_label" = "Tag Code";
@@ -1017,6 +1017,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Pet Limit Reached";
+"pet_limit_reached_info" = "You have reached the maximum number of pets for your current plan. Visit senra.pet to manage your subscription.";
 "upgrade_to_ultimate" = "Upgrade to Maximum";
 "keep_current_plan" = "Keep Current Plan";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Your %@ plan allows %lld pet. Upgrade to %@ for %@ to add up to 10 pets.";

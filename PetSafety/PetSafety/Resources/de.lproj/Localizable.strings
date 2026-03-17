@@ -204,9 +204,9 @@
 "tag_loading_pets" = "Haustiere werden geladen…";
 "tag_activated" = "Tag aktiviert!";
 "tag_activated_message %@" = "Der Tag von %@ ist jetzt aktiv";
-"tag_choose_plan" = "Wählen Sie ein Abonnement, um alle Funktionen für Ihr Haustier freizuschalten.";
-"tag_choose_plan_button" = "Plan wählen";
-"tag_skip_for_now" = "Jetzt überspringen";
+"tag_choose_plan" = "Vervollständigen Sie das Profil, damit Ihr Haustier leichter gefunden werden kann";
+"tag_choose_plan_button" = "Haustierprofil vervollständigen";
+"tag_skip_for_now" = "Das mache ich später";
 "tag_no_pets" = "Noch keine Haustiere";
 "tag_no_pets_message" = "Fügen Sie zuerst ein Haustier hinzu, bevor Sie einen Tag aktivieren";
 "tag_code_label" = "Tag-Code";
@@ -1016,6 +1016,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Haustierlimit erreicht";
+"pet_limit_reached_info" = "Sie haben die maximale Anzahl an Haustieren für Ihren aktuellen Plan erreicht. Besuchen Sie senra.pet, um Ihr Abonnement zu verwalten.";
 "upgrade_to_ultimate" = "Auf Maximum upgraden";
 "keep_current_plan" = "Aktuellen Plan beibehalten";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Ihr %@-Plan erlaubt %lld Haustier. Upgraden Sie auf %@ für %@ für bis zu 10 Haustiere.";

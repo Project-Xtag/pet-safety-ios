@@ -204,9 +204,9 @@
 "tag_loading_pets" = "Se încarcă animalele tale...";
 "tag_activated" = "Etichetă activată!";
 "tag_activated_message %@" = "Eticheta lui %@ este acum activă";
-"tag_choose_plan" = "Alege un plan de abonament pentru a debloca toate funcțiile pentru animalul tău.";
-"tag_choose_plan_button" = "Alege plan";
-"tag_skip_for_now" = "Sari peste";
+"tag_choose_plan" = "Completează profilul animalului pentru a facilita găsirea acestuia";
+"tag_choose_plan_button" = "Completează profilul animalului";
+"tag_skip_for_now" = "O fac mai târziu";
 "tag_no_pets" = "Încă nu ai animale";
 "tag_no_pets_message" = "Adaugă un animal înainte de a activa o etichetă";
 "tag_code_label" = "Cod etichetă";
@@ -1016,6 +1016,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Limita de animale atinsă";
+"pet_limit_reached_info" = "Ai atins numărul maxim de animale pentru planul tău actual. Vizitează senra.pet pentru a-ți gestiona abonamentul.";
 "upgrade_to_ultimate" = "Upgrade la Maximum";
 "keep_current_plan" = "Păstrează planul actual";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Planul tău %@ permite %lld animal. Fă upgrade la %@ pentru %@ pentru până la 10 animale.";

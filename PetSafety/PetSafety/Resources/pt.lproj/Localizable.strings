@@ -204,9 +204,9 @@
 "tag_loading_pets" = "A carregar os seus animais...";
 "tag_activated" = "Etiqueta ativada!";
 "tag_activated_message %@" = "A etiqueta de %@ está agora ativa";
-"tag_choose_plan" = "Escolha um plano de subscrição para desbloquear todas as funcionalidades do seu animal.";
-"tag_choose_plan_button" = "Escolher plano";
-"tag_skip_for_now" = "Ignorar por agora";
+"tag_choose_plan" = "Complete o perfil do seu animal para facilitar a sua busca se se perder";
+"tag_choose_plan_button" = "Completar perfil do animal";
+"tag_skip_for_now" = "Faço isso mais tarde";
 "tag_no_pets" = "Ainda sem animais";
 "tag_no_pets_message" = "Adicione um animal antes de ativar uma etiqueta";
 "tag_code_label" = "Código da etiqueta";
@@ -1016,6 +1016,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Limite de animais atingido";
+"pet_limit_reached_info" = "Atingiu o número máximo de animais para o seu plano atual. Visite senra.pet para gerir a sua subscrição.";
 "upgrade_to_ultimate" = "Atualizar para Maximum";
 "keep_current_plan" = "Manter plano atual";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "O seu plano %@ permite %lld animal. Atualize para %@ por %@ para até 10 animais.";

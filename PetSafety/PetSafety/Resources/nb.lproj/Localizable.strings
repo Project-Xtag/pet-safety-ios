@@ -204,9 +204,9 @@
 "tag_loading_pets" = "Laster dyrene dine...";
 "tag_activated" = "Merke aktivert!";
 "tag_activated_message %@" = "%@s merke er nå aktivt";
-"tag_choose_plan" = "Velg et abonnement for å låse opp alle funksjoner for dyret ditt.";
-"tag_choose_plan_button" = "Velg abonnement";
-"tag_skip_for_now" = "Hopp over for nå";
+"tag_choose_plan" = "Fullfør profilen til kjæledyret ditt for å gjøre det lettere å finne det";
+"tag_choose_plan_button" = "Fullfør kjæledyrprofil";
+"tag_skip_for_now" = "Jeg gjør det senere";
 "tag_no_pets" = "Ingen dyr registrert ennå";
 "tag_no_pets_message" = "Legg til et dyr først, og aktiver deretter merket";
 "tag_code_label" = "Merkekode";
@@ -1019,6 +1019,7 @@
 
 // MARK: - Dyreregistreringsskjema-tillegg
 "pet_limit_reached" = "Dyreantall nådd";
+"pet_limit_reached_info" = "Du har nådd maksimalt antall dyr for ditt nåværende abonnement. Besøk senra.pet for å administrere abonnementet ditt.";
 "upgrade_to_ultimate" = "Oppgrader til Maximum";
 "keep_current_plan" = "Behold gjeldende abonnement";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Abonnementet ditt på %@ tillater %lld dyr. Oppgrader til %@ for %@ for å legge til opptil 10 dyr.";

@@ -204,9 +204,9 @@
 "tag_loading_pets" = "Caricamento animali...";
 "tag_activated" = "Medaglietta attivata!";
 "tag_activated_message %@" = "La medaglietta di %@ è ora attiva";
-"tag_choose_plan" = "Scegli un piano di abbonamento per sbloccare tutte le funzionalità per il tuo animale.";
-"tag_choose_plan_button" = "Scegli piano";
-"tag_skip_for_now" = "Forse più tardi";
+"tag_choose_plan" = "Completa il profilo del tuo animale per facilitarne la ricerca in caso di smarrimento";
+"tag_choose_plan_button" = "Completa il profilo dell'animale";
+"tag_skip_for_now" = "Lo farò più tardi";
 "tag_no_pets" = "Nessun animale registrato";
 "tag_no_pets_message" = "Aggiungi prima un animale, poi attiva la medaglietta";
 "tag_code_label" = "Codice medaglietta";
@@ -1012,6 +1012,7 @@
 
 // MARK: - Modulo animale aggiuntivo
 "pet_limit_reached" = "Limite di animali raggiunto";
+"pet_limit_reached_info" = "Hai raggiunto il numero massimo di animali per il tuo piano attuale. Visita senra.pet per gestire il tuo abbonamento.";
 "upgrade_to_ultimate" = "Passa al piano Maximum";
 "keep_current_plan" = "Mantieni il piano attuale";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Il tuo piano %@ permette %lld animale. Passa al piano %@ per %@ e aggiungi fino a 10 animali.";

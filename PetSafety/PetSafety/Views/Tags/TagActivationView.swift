@@ -14,7 +14,6 @@ struct TagActivationView: View {
     @State private var isActivating = false
     @State private var activationSuccess = false
     @State private var errorMessage: String?
-    @State private var showPlanSelection = false
     @State private var showCreatePet = false
     @State private var orderItems: [UnactivatedOrderItem] = []
 
@@ -112,7 +111,7 @@ struct TagActivationView: View {
             Spacer()
 
             Button {
-                showPlanSelection = true
+                onDismiss()
             } label: {
                 Text("tag_choose_plan_button")
                     .fontWeight(.semibold)
@@ -128,11 +127,6 @@ struct TagActivationView: View {
                     .foregroundColor(.secondary)
             }
             .padding(.bottom, 40)
-        }
-        .fullScreenCover(isPresented: $showPlanSelection) {
-            PlanSelectionView(fromActivation: true) {
-                onDismiss()
-            }
         }
         .sheet(isPresented: $showCreatePet) {
             NavigationView {

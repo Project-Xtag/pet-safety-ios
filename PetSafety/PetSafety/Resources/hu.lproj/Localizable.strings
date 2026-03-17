@@ -204,9 +204,9 @@
 "tag_loading_pets" = "Kedvencek betöltése...";
 "tag_activated" = "Biléta aktiválva!";
 "tag_activated_message %@" = "%@ bilétája aktív";
-"tag_choose_plan" = "Válassz előfizetési csomagot, hogy minden funkcióhoz hozzaférj a kedvenced számára.";
-"tag_choose_plan_button" = "Csomag kiválasztása";
-"tag_skip_for_now" = "Talán később";
+"tag_choose_plan" = "Töltsd ki a kedvenced profilját, hogy könnyebben megtalálják, ha elveszne";
+"tag_choose_plan_button" = "Kedvenc profil kitöltése";
+"tag_skip_for_now" = "Később csinálom";
 "tag_no_pets" = "Még nincs kedvenc regisztrálva";
 "tag_no_pets_message" = "Előbb adj hozzá egy kedvencet, majd aktiváld a bilétát";
 "tag_code_label" = "Biléta kód";
@@ -1016,6 +1016,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Kedvenc limit elérve";
+"pet_limit_reached_info" = "Elérted a jelenlegi csomagodban engedélyezett kedvencek maximális számát. Látogass el a senra.pet oldalra az előfizetésed kezeléséhez.";
 "upgrade_to_ultimate" = "Frissítés Maximum csomagra";
 "keep_current_plan" = "Jelenlegi csomag megtartása";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "A(z) %@ csomagod %lld kedvencet engedélyez. Frissíts %@-ra %@ áron akár 10 kisállatért.";

@@ -204,9 +204,9 @@
 "tag_loading_pets" = "Načítání vašich mazlíčků…";
 "tag_activated" = "Známka aktivována!";
 "tag_activated_message %@" = "Známka mazlíčka %@ je nyní aktivní";
-"tag_choose_plan" = "Vyberte předplatné pro odemčení všech funkcí pro svého mazlíčka.";
-"tag_choose_plan_button" = "Vybrat plán";
-"tag_skip_for_now" = "Přeskočit";
+"tag_choose_plan" = "Vyplňte profil zvířete, aby bylo snazší ho najít";
+"tag_choose_plan_button" = "Dokončit profil zvířete";
+"tag_skip_for_now" = "Udělám to později";
 "tag_no_pets" = "Zatím žádní mazlíčci";
 "tag_no_pets_message" = "Před aktivací známky nejprve přidejte mazlíčka";
 "tag_code_label" = "Kód známky";
@@ -1016,6 +1016,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Limit domácích zvířat dosažen";
+"pet_limit_reached_info" = "Dosáhli jste maximálního počtu zvířat pro váš aktuální plán. Navštivte senra.pet pro správu předplatného.";
 "upgrade_to_ultimate" = "Přejít na Maximum";
 "keep_current_plan" = "Ponechat aktuální plán";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Váš plán %@ povoluje %lld zvíře. Přejděte na %@ za %@ pro až 10 domácích mazlíčků.";
