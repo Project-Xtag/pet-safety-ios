@@ -221,6 +221,12 @@ class KeychainService {
         return delete(.authToken)
     }
 
+    /// Clear authentication token (alias for deleteAuthToken, matches clearRefreshToken naming)
+    @discardableResult
+    func clearAuthToken() -> Bool {
+        return delete(.authToken)
+    }
+
     /// Check if user is authenticated (has valid token)
     var isAuthenticated: Bool {
         return exists(.authToken)

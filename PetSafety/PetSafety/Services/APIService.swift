@@ -258,6 +258,7 @@ class APIService {
                 // If this is already a retry after refresh, give up
                 if isRetryAfterRefresh {
                     authToken = nil
+                    KeychainService.shared.clearAuthToken()
                     KeychainService.shared.clearRefreshToken()
                     throw APIError.unauthorized
                 }
@@ -265,6 +266,8 @@ class APIService {
                 // Attempt token refresh
                 guard let storedRefreshToken = KeychainService.shared.getRefreshToken() else {
                     authToken = nil
+                    KeychainService.shared.clearAuthToken()
+                    KeychainService.shared.clearRefreshToken()
                     throw APIError.unauthorized
                 }
 
@@ -285,6 +288,7 @@ class APIService {
                 } catch {
                     // Refresh failed — clear all tokens and throw unauthorized
                     authToken = nil
+                    KeychainService.shared.clearAuthToken()
                     KeychainService.shared.clearRefreshToken()
                     throw APIError.unauthorized
                 }
@@ -371,6 +375,7 @@ class APIService {
 
     func logout() {
         authToken = nil
+        KeychainService.shared.clearAuthToken()
         KeychainService.shared.clearRefreshToken()
     }
 
@@ -1802,6 +1807,9 @@ private actor TokenRefreshCoordinator {
     private var isRefreshing = false
     private var refreshTask: Task<(accessToken: String, refreshToken: String), Error>?
 
+    /// Timeout for token refresh operations (15 seconds)
+    private let refreshTimeoutNanoseconds: UInt64 = 15_000_000_000
+
     func refresh(
         using refreshClosure: @Sendable @escaping () async throws -> (accessToken: String, refreshToken: String)
     ) async throws -> (accessToken: String, refreshToken: String) {
@@ -1815,11 +1823,19 @@ private actor TokenRefreshCoordinator {
         }
         refreshTask = task
 
+        // Start a timeout task that cancels the refresh if it takes too long
+        let timeoutTask = Task {
+            try await Task.sleep(nanoseconds: refreshTimeoutNanoseconds)
+            task.cancel()
+        }
+
         do {
             let result = try await task.value
+            timeoutTask.cancel()
             refreshTask = nil
             return result
         } catch {
+            timeoutTask.cancel()
             refreshTask = nil
             throw error
         }
