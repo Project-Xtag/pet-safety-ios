@@ -1208,3 +1208,12 @@
 "breed_cat_savannah" = "Savannah";
 "breed_cat_toyger" = "Toyger";
 "breed_cat_chausie" = "Chausie";
+
+// MARK: - Mark as Lost
+"coordinates_display" = "Lat: %@, Lng: %@";
+"current_location_fallback" = "Ubicación actual";
+"mark_lost_success_with_alerts" = "%@ ha sido reportado como perdido. Se están enviando alertas a usuarios cercanos.";
+"mark_lost_success_no_location" = "%@ ha sido marcado como perdido. Añade ubicación para enviar alertas comunitarias.";
+"mark_lost_address_required" = "Por favor, proporciona una dirección o activa los servicios de ubicación.";
+"reward_amount_label" = "Recompensa (opcional)";
+"reward_amount_placeholder" = "ej. 50 €";

@@ -1208,3 +1208,12 @@
 "breed_cat_savannah" = "Savannah";
 "breed_cat_toyger" = "Toyger";
 "breed_cat_chausie" = "Chausie";
+
+// MARK: - Mark as Lost
+"coordinates_display" = "Šíř.: %@, Dél.: %@";
+"current_location_fallback" = "Aktuální poloha";
+"mark_lost_success_with_alerts" = "%@ byl nahlášen jako ztracený. Upozornění se posílají blízkým uživatelům.";
+"mark_lost_success_no_location" = "%@ byl označen jako ztracený. Přidejte polohu k odeslání upozornění.";
+"mark_lost_address_required" = "Zadejte adresu nebo povolte služby určování polohy.";
+"reward_amount_label" = "Odměna (volitelné)";
+"reward_amount_placeholder" = "např. 50 €";

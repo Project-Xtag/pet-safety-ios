@@ -1211,3 +1211,12 @@
 "breed_cat_savannah" = "Savannah";
 "breed_cat_toyger" = "Toyger";
 "breed_cat_chausie" = "Chausie";
+
+// MARK: - Mark as Lost
+"coordinates_display" = "Lat: %@, Lng: %@";
+"current_location_fallback" = "Current location";
+"mark_lost_success_with_alerts" = "%@ has been reported as missing. Alerts are being sent to nearby users, vets, and shelters.";
+"mark_lost_success_no_location" = "%@ has been marked as missing. Add location to send community alerts.";
+"mark_lost_address_required" = "Please provide an address or enable location services.";
+"reward_amount_label" = "Reward (optional)";
+"reward_amount_placeholder" = "e.g. €50";

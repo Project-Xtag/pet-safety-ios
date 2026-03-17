@@ -1211,3 +1211,12 @@
 "breed_cat_savannah" = "Savannah";
 "breed_cat_toyger" = "Toyger";
 "breed_cat_chausie" = "Chausie";
+
+// MARK: - Mark as Lost
+"coordinates_display" = "Br.: %@, Lg.: %@";
+"current_location_fallback" = "Nåværende posisjon";
+"mark_lost_success_with_alerts" = "%@ er rapportert som savnet. Varsler sendes til brukere i nærheten.";
+"mark_lost_success_no_location" = "%@ er merket som savnet. Legg til plassering for å sende felleskapsvarsler.";
+"mark_lost_address_required" = "Oppgi en adresse eller aktiver posisjonstjenester.";
+"reward_amount_label" = "Belønning (valgfritt)";
+"reward_amount_placeholder" = "f.eks. 500 kr";

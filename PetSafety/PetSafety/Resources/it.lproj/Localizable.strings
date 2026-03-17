@@ -1220,3 +1220,12 @@
 "breed_cat_savannah" = "Savannah";
 "breed_cat_toyger" = "Toyger";
 "breed_cat_chausie" = "Chausie";
+
+// MARK: - Mark as Lost
+"coordinates_display" = "Lat: %@, Lng: %@";
+"current_location_fallback" = "Posizione attuale";
+"mark_lost_success_with_alerts" = "%@ è stato segnalato come smarrito. Gli avvisi vengono inviati agli utenti nelle vicinanze.";
+"mark_lost_success_no_location" = "%@ è stato contrassegnato come smarrito. Aggiungi la posizione per inviare avvisi alla comunità.";
+"mark_lost_address_required" = "Fornisci un indirizzo o attiva i servizi di localizzazione.";
+"reward_amount_label" = "Ricompensa (facoltativo)";
+"reward_amount_placeholder" = "es. 50 €";

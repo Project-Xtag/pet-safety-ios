@@ -28,6 +28,7 @@ struct MarkAsLostView: View {
     @State private var lastSeenSource: LastSeenSource = .registeredAddress
     @State private var customAddress = ""
     @State private var additionalInfo = ""
+    @State private var rewardAmount = ""
     @State private var isGeocoding = false
 
     /// Formatted registered address from user profile
@@ -80,7 +81,7 @@ struct MarkAsLostView: View {
                         HStack {
                             Image(systemName: "location.fill")
                                 .foregroundColor(.blue)
-                            Text("Lat: \(String(format: "%.6f", loc.latitude)), Lng: \(String(format: "%.6f", loc.longitude))")
+                            Text(String(format: NSLocalizedString("coordinates_display", comment: ""), String(format: "%.6f", loc.latitude), String(format: "%.6f", loc.longitude)))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -126,6 +127,11 @@ struct MarkAsLostView: View {
                                 .padding(.leading, 4)
                         }
                     }
+            }
+
+            Section(header: Text("reward_amount_label")) {
+                TextField(String(localized: "reward_amount_placeholder"), text: $rewardAmount)
+                    .keyboardType(.default)
             }
 
             Section {
@@ -243,7 +249,7 @@ struct MarkAsLostView: View {
                         notificationLocation = coord
                         // Reverse-geocode to get address text for the backend
                         let clCoord = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
-                        addressText = await reverseGeocodeLocation(clCoord) ?? "Current location"
+                        addressText = await reverseGeocodeLocation(clCoord) ?? NSLocalizedString("current_location_fallback", comment: "")
                         notificationAddress = addressText
                     }
                 case .registeredAddress:
@@ -270,11 +276,17 @@ struct MarkAsLostView: View {
                 }
                 isGeocoding = false
 
+                if (addressText ?? "").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    appState.showError(NSLocalizedString("mark_lost_address_required", comment: ""))
+                    return
+                }
+
                 let response = try await petsViewModel.markPetMissing(
                     petId: pet.id,
                     location: coordinate,
                     address: addressText,
                     description: additionalInfo.isEmpty ? nil : additionalInfo,
+                    rewardAmount: rewardAmount.isEmpty ? nil : rewardAmount,
                     notificationCenterSource: notificationSource,
                     notificationCenterLocation: notificationLocation,
                     notificationCenterAddress: notificationAddress
@@ -282,9 +294,9 @@ struct MarkAsLostView: View {
 
                 UINotificationFeedbackGenerator().notificationOccurred(.warning)
                 if response.alert != nil {
-                    appState.showSuccess("\(pet.name) has been reported as missing. Alerts are being sent to nearby users, vets, and shelters.")
+                    appState.showSuccess(String(format: NSLocalizedString("mark_lost_success_with_alerts", comment: ""), pet.name))
                 } else {
-                    appState.showSuccess("\(pet.name) has been marked as missing. Add location to send community alerts.")
+                    appState.showSuccess(String(format: NSLocalizedString("mark_lost_success_no_location", comment: ""), pet.name))
                 }
 
                 dismiss()

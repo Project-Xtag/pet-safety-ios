@@ -1208,3 +1208,12 @@
 "breed_cat_savannah" = "Savannah";
 "breed_cat_toyger" = "Toyger";
 "breed_cat_chausie" = "Chausie";
+
+// MARK: - Mark as Lost
+"coordinates_display" = "Lat: %@, Lng: %@";
+"current_location_fallback" = "Locație curentă";
+"mark_lost_success_with_alerts" = "%@ a fost raportat ca dispărut. Se trimit alerte utilizatorilor din apropiere.";
+"mark_lost_success_no_location" = "%@ a fost marcat ca dispărut. Adăugați locația pentru a trimite alerte comunitare.";
+"mark_lost_address_required" = "Vă rugăm să furnizați o adresă sau activați serviciile de localizare.";
+"reward_amount_label" = "Recompensă (opțional)";
+"reward_amount_placeholder" = "ex. 50 €";

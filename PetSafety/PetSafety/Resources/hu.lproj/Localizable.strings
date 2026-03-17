@@ -1208,3 +1208,12 @@
 "breed_cat_savannah" = "Savannah";
 "breed_cat_toyger" = "Toyger";
 "breed_cat_chausie" = "Chausie";
+
+// MARK: - Mark as Lost
+"coordinates_display" = "Szél.: %@, Hossz.: %@";
+"current_location_fallback" = "Jelenlegi hely";
+"mark_lost_success_with_alerts" = "%@ elveszettként lett bejelentve. Értesítések küldése a közeli felhasználóknak, állatorvosoknak és menhelyeknek.";
+"mark_lost_success_no_location" = "%@ elveszettként lett megjelölve. Add meg a helyet a közösségi riasztások küldéséhez.";
+"mark_lost_address_required" = "Kérjük, add meg a címet vagy engedélyezd a helymeghatározást.";
+"reward_amount_label" = "Jutalom (nem kötelező)";
+"reward_amount_placeholder" = "pl. 10 000 Ft";
