@@ -1219,3 +1219,9 @@
 "reward_amount_label" = "Odměna (volitelné)";
 "reward_amount_placeholder" = "např. 50 €";
 "sighting_phone_invalid" = "Telefonní číslo musí mít 5 až 30 znaků.";
+
+// Pet form warnings
+"profile_incomplete_warning" = "Dokončete profil zvířete";
+"profile_incomplete_desc" = "Chybějící údaje ztěžují nalezení zvířete. Vyplňte hmotnost, barvu a zdravotní informace.";
+"identity_locked_title" = "Jméno, druh a plemeno jsou uzamčeny";
+"identity_locked_desc" = "Tato pole nelze změnit po aktivaci známky.";

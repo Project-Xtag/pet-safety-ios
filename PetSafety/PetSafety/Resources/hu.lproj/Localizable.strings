@@ -1219,3 +1219,9 @@
 "reward_amount_label" = "Jutalom (nem kötelező)";
 "reward_amount_placeholder" = "pl. 10 000 Ft";
 "sighting_phone_invalid" = "A telefonszámnak 5 és 30 karakter között kell lennie.";
+
+// Pet form warnings
+"profile_incomplete_warning" = "Töltsd ki a kedvenced profilját";
+"profile_incomplete_desc" = "A hiányzó adatok megnehezítik a kedvenced megtalálását, ha elveszne. Kérjük, add meg a súlyt, színt és egészségügyi információkat.";
+"identity_locked_title" = "A név, faj és fajta zárolva van";
+"identity_locked_desc" = "Ezek a mezők a címke aktiválása után nem módosíthatók. Kérjük, lépj kapcsolatba az ügyfélszolgálattal.";

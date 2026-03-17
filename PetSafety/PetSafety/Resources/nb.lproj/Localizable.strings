@@ -1222,3 +1222,9 @@
 "reward_amount_label" = "Belønning (valgfritt)";
 "reward_amount_placeholder" = "f.eks. 500 kr";
 "sighting_phone_invalid" = "Telefonnummeret må være mellom 5 og 30 tegn.";
+
+// Pet form warnings
+"profile_incomplete_warning" = "Fullfør kjæledyrprofilen";
+"profile_incomplete_desc" = "Manglende detaljer gjør det vanskeligere å gjenforene kjæledyret. Fyll inn vekt, farge og medisinsk informasjon.";
+"identity_locked_title" = "Navn, art og rase er låst";
+"identity_locked_desc" = "Disse feltene kan ikke endres etter merkeaktivering.";

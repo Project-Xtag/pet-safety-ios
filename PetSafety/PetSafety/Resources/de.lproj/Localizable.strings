@@ -1219,3 +1219,9 @@
 "reward_amount_label" = "Belohnung (optional)";
 "reward_amount_placeholder" = "z.B. 50 €";
 "sighting_phone_invalid" = "Telefonnummer muss zwischen 5 und 30 Zeichen lang sein.";
+
+// Pet form warnings
+"profile_incomplete_warning" = "Profil vervollständigen";
+"profile_incomplete_desc" = "Fehlende Angaben erschweren das Wiederfinden Ihres Haustieres. Bitte geben Sie Gewicht, Farbe und Gesundheitsinformationen an.";
+"identity_locked_title" = "Name, Art und Rasse sind gesperrt";
+"identity_locked_desc" = "Diese Felder können nach der Markenaktivierung nicht geändert werden.";

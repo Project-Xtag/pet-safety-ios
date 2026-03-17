@@ -1222,3 +1222,9 @@
 "reward_amount_label" = "Nagroda (opcjonalnie)";
 "reward_amount_placeholder" = "np. 200 zł";
 "sighting_phone_invalid" = "Numer telefonu musi mieć od 5 do 30 znaków.";
+
+// Pet form warnings
+"profile_incomplete_warning" = "Uzupełnij profil zwierzęcia";
+"profile_incomplete_desc" = "Brakujące dane utrudniają odnalezienie zwierzęcia. Uzupełnij wagę, kolor i informacje medyczne.";
+"identity_locked_title" = "Imię, gatunek i rasa są zablokowane";
+"identity_locked_desc" = "Tych pól nie można zmienić po aktywacji zawieszki.";

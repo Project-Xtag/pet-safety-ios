@@ -51,8 +51,50 @@ struct PetFormView: View {
     let speciesOptions = ["Dog", "Cat", "Bird", "Rabbit", "Other"]
     let sexOptions = ["Unknown", "Male", "Female"]
 
+    private var existingPet: Pet? {
+        if case .edit(let pet) = mode { return pet }
+        return nil
+    }
+
     var body: some View {
         Form {
+            // Profile completion warning
+            if mode.isEdit, let pet = existingPet, pet.qrCode != nil,
+               pet.color == nil && pet.weight == nil {
+                Section {
+                    HStack(spacing: 12) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(.orange)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("profile_incomplete_warning")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                            Text("profile_incomplete_desc")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+            }
+
+            // Locked fields info banner
+            if mode.isEdit, let pet = existingPet, pet.qrCode != nil {
+                Section {
+                    HStack(spacing: 12) {
+                        Image(systemName: "lock.fill")
+                            .foregroundColor(.blue)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("identity_locked_title")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                            Text("identity_locked_desc")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+            }
+
             // Photo section moved to top
             Section("photo") {
                 PhotosPicker(selection: $selectedPhoto, matching: .images) {

@@ -1222,3 +1222,9 @@
 "reward_amount_label" = "Reward (optional)";
 "reward_amount_placeholder" = "e.g. €50";
 "sighting_phone_invalid" = "Phone number must be between 5 and 30 characters.";
+
+// Pet form warnings
+"profile_incomplete_warning" = "Complete your pet's profile";
+"profile_incomplete_desc" = "Missing details make it harder to reunite your pet if they go missing. Please fill in weight, color, and medical information.";
+"identity_locked_title" = "Name, species, and breed are locked";
+"identity_locked_desc" = "These fields cannot be changed after tag activation to prevent misuse. Contact support if you need to make changes.";

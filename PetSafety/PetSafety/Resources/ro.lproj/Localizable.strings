@@ -1219,3 +1219,9 @@
 "reward_amount_label" = "Recompensă (opțional)";
 "reward_amount_placeholder" = "ex. 50 €";
 "sighting_phone_invalid" = "Numărul de telefon trebuie să aibă între 5 și 30 de caractere.";
+
+// Pet form warnings
+"profile_incomplete_warning" = "Completează profilul animalului";
+"profile_incomplete_desc" = "Detaliile lipsă îngreunează găsirea animalului. Completează greutatea, culoarea și informațiile medicale.";
+"identity_locked_title" = "Numele, specia și rasa sunt blocate";
+"identity_locked_desc" = "Aceste câmpuri nu pot fi modificate după activarea etichetei.";

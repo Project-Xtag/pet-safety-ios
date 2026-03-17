@@ -1222,3 +1222,9 @@
 "reward_amount_label" = "Récompense (facultatif)";
 "reward_amount_placeholder" = "ex. 50 €";
 "sighting_phone_invalid" = "Le numéro de téléphone doit contenir entre 5 et 30 caractères.";
+
+// Pet form warnings
+"profile_incomplete_warning" = "Complétez le profil de votre animal";
+"profile_incomplete_desc" = "Les informations manquantes rendent plus difficile la recherche de votre animal. Renseignez le poids, la couleur et les informations médicales.";
+"identity_locked_title" = "Nom, espèce et race sont verrouillés";
+"identity_locked_desc" = "Ces champs ne peuvent pas être modifiés après l'activation de la médaille.";
