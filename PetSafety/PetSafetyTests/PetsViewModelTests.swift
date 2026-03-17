@@ -27,7 +27,7 @@ struct PetsViewModelTests {
             currentPlan: "standard",
             currentPetCount: 1,
             maxPets: 1,
-            upgradeTo: "ultimate",
+            upgradeTo: "maximum",
             upgradePrice: "€6.95/month"
         )
         let error = APIError.petLimitExceeded(info)
@@ -42,14 +42,14 @@ struct PetsViewModelTests {
             currentPlan: "standard",
             currentPetCount: 1,
             maxPets: 1,
-            upgradeTo: "ultimate",
+            upgradeTo: "maximum",
             upgradePrice: "€6.95/month"
         )
 
         #expect(info.currentPlan == "standard")
         #expect(info.currentPetCount == 1)
         #expect(info.maxPets == 1)
-        #expect(info.upgradeTo == "ultimate")
+        #expect(info.upgradeTo == "maximum")
         #expect(info.upgradePrice == "€6.95/month")
     }
 
@@ -65,7 +65,7 @@ struct PetsViewModelTests {
                 "current_plan": "standard",
                 "current_pet_count": 1,
                 "max_pets": 1,
-                "upgrade_to": "ultimate",
+                "upgrade_to": "maximum",
                 "upgrade_price": "€6.95/month"
             }
         }
@@ -79,7 +79,7 @@ struct PetsViewModelTests {
         #expect(decoded.subscription?.current_plan == "standard")
         #expect(decoded.subscription?.current_pet_count == 1)
         #expect(decoded.subscription?.max_pets == 1)
-        #expect(decoded.subscription?.upgrade_to == "ultimate")
+        #expect(decoded.subscription?.upgrade_to == "maximum")
         #expect(decoded.subscription?.upgrade_price == "€6.95/month")
     }
 

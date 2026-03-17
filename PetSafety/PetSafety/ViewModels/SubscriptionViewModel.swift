@@ -38,8 +38,8 @@ class SubscriptionViewModel: ObservableObject {
         plans.first { $0.name.lowercased() == "standard" }
     }
 
-    var ultimatePlan: SubscriptionPlan? {
-        plans.first { $0.name.lowercased() == "ultimate" }
+    var maximumPlan: SubscriptionPlan? {
+        plans.first { $0.name.lowercased() == "maximum" }
     }
 
     // MARK: - Initialization

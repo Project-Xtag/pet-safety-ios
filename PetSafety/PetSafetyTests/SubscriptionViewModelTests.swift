@@ -82,7 +82,7 @@ struct SubscriptionModelTests {
         let json = """
         {
             "id": "plan_2",
-            "name": "ultimate",
+            "name": "maximum",
             "display_name": "Maximum",
             "description": null,
             "price_monthly": 9.95,
@@ -190,7 +190,7 @@ struct SubscriptionModelTests {
     func testDecodeFeatures() throws {
         let json = """
         {
-            "plan_name": "ultimate",
+            "plan_name": "maximum",
             "can_create_alerts": true,
             "can_receive_vet_alerts": true,
             "can_receive_community_alerts": true,
@@ -203,7 +203,7 @@ struct SubscriptionModelTests {
         """.data(using: .utf8)!
 
         let features = try JSONDecoder().decode(SubscriptionFeatures.self, from: json)
-        #expect(features.planName == "ultimate")
+        #expect(features.planName == "maximum")
         #expect(features.hasFullAlertFeatures == true)
         #expect(features.maxPets == 10)
     }
@@ -435,7 +435,7 @@ struct SubscriptionModelTests {
 
         let jsonFull = """
         {
-            "plan_name": "ultimate",
+            "plan_name": "maximum",
             "can_create_alerts": true,
             "can_receive_vet_alerts": true,
             "can_receive_community_alerts": true
@@ -457,7 +457,7 @@ struct SubscriptionUpgradeDowngradeTests {
         switch name.lowercased() {
         case "starter": return 0
         case "standard": return 1
-        case "ultimate": return 2
+        case "maximum": return 2
         default: return -1
         }
     }
@@ -469,24 +469,24 @@ struct SubscriptionUpgradeDowngradeTests {
         #expect(planTier("starter") < planTier("standard"))
     }
 
-    @Test("Starter to Ultimate is an upgrade")
-    func testStarterToUltimateIsUpgrade() {
-        #expect(planTier("starter") < planTier("ultimate"))
+    @Test("Starter to Maximum is an upgrade")
+    func testStarterToMaximumIsUpgrade() {
+        #expect(planTier("starter") < planTier("maximum"))
     }
 
-    @Test("Standard to Ultimate is an upgrade")
-    func testStandardToUltimateIsUpgrade() {
-        #expect(planTier("standard") < planTier("ultimate"))
+    @Test("Standard to Maximum is an upgrade")
+    func testStandardToMaximumIsUpgrade() {
+        #expect(planTier("standard") < planTier("maximum"))
     }
 
-    @Test("Ultimate to Standard is a downgrade")
-    func testUltimateToStandardIsDowngrade() {
-        #expect(planTier("ultimate") > planTier("standard"))
+    @Test("Maximum to Standard is a downgrade")
+    func testMaximumToStandardIsDowngrade() {
+        #expect(planTier("maximum") > planTier("standard"))
     }
 
-    @Test("Ultimate to Starter is a downgrade")
-    func testUltimateToStarterIsDowngrade() {
-        #expect(planTier("ultimate") > planTier("starter"))
+    @Test("Maximum to Starter is a downgrade")
+    func testMaximumToStarterIsDowngrade() {
+        #expect(planTier("maximum") > planTier("starter"))
     }
 
     @Test("Standard to Starter is a downgrade")

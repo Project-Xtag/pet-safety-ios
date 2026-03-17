@@ -165,15 +165,15 @@ struct PlanSelectionView: View {
                 }
             }
 
-            // Ultimate Plan
-            if let ultimate = viewModel.ultimatePlan {
+            // Maximum Plan
+            if let maximum = viewModel.maximumPlan {
                 PlanCard(
-                    plan: ultimate,
-                    isCurrentPlan: viewModel.currentSubscription?.planName.lowercased() == "ultimate",
+                    plan: maximum,
+                    isCurrentPlan: viewModel.currentSubscription?.planName.lowercased() == "maximum",
                     isProcessing: viewModel.isProcessing
                 ) {
                     Task {
-                        await viewModel.selectPlan(ultimate)
+                        await viewModel.selectPlan(maximum)
                     }
                 }
             }
