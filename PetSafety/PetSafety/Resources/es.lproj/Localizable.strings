@@ -1226,3 +1226,19 @@
 "profile_incomplete_desc" = "Los datos faltantes dificultan la búsqueda de tu mascota. Completa peso, color e información médica.";
 "identity_locked_title" = "Nombre, especie y raza están bloqueados";
 "identity_locked_desc" = "Estos campos no se pueden cambiar después de activar la placa.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Cancelar suscripción?";
+"cancel_warning_a" = "Perderás las notificaciones instantáneas por correo, SMS y alertas comunitarias";
+"cancel_warning_b" = "Los reemplazos gratuitos de placas ya no estarán disponibles";
+"cancel_warning_c" = "Perderás el acceso a las alertas veterinarias y de refugios";
+"cancel_warning_d" = "Tu cuenta y los registros de mascotas permanecerán activos";
+"cancel_access_until" = "Conservarás el acceso hasta el %@";
+"cancel_confirm" = "Cancelar suscripción";
+"keep_subscription" = "Mantener suscripción";
+"cancel_success" = "Suscripción cancelada. Conservarás el acceso hasta el %@.";
+"current_plan" = "Plan actual";
+"plan_renews" = "Se renueva el %@";
+"plan_cancels_on" = "Finaliza el %@";
+"delete_premium_warning" = "Tienes una suscripción %@ activa hasta el %@. Eliminar tu cuenta borrará permanentemente tu perfil y perderás inmediatamente el acceso al tiempo pagado restante. Si solo quieres detener los pagos futuros, cancela tu suscripción.";
+"cancel_instead" = "Cancelar suscripción en su lugar";

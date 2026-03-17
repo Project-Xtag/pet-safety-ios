@@ -1229,3 +1229,19 @@
 "profile_incomplete_desc" = "Brakujące dane utrudniają odnalezienie zwierzęcia. Uzupełnij wagę, kolor i informacje medyczne.";
 "identity_locked_title" = "Imię, gatunek i rasa są zablokowane";
 "identity_locked_desc" = "Tych pól nie można zmienić po aktywacji zawieszki.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Anulować subskrypcję?";
+"cancel_warning_a" = "Stracisz natychmiastowe powiadomienia e-mail, SMS i alerty społecznościowe";
+"cancel_warning_b" = "Bezpłatna wymiana zawieszek nie będzie już dostępna";
+"cancel_warning_c" = "Stracisz dostęp do alertów weterynaryjnych i schroniskowych";
+"cancel_warning_d" = "Twoje konto i rejestracje zwierząt pozostaną aktywne";
+"cancel_access_until" = "Zachowasz dostęp do %@";
+"cancel_confirm" = "Anuluj subskrypcję";
+"keep_subscription" = "Zachowaj subskrypcję";
+"cancel_success" = "Subskrypcja anulowana. Zachowasz dostęp do %@.";
+"current_plan" = "Aktualny plan";
+"plan_renews" = "Odnawia się %@";
+"plan_cancels_on" = "Kończy się %@";
+"delete_premium_warning" = "Masz aktywną subskrypcję %@ do %@. Usunięcie konta trwale usunie Twój profil i natychmiast stracisz dostęp do pozostałego opłaconego czasu. Jeśli chcesz tylko zatrzymać przyszłe płatności, anuluj subskrypcję.";
+"cancel_instead" = "Anuluj subskrypcję zamiast tego";

@@ -1229,3 +1229,19 @@
 "profile_incomplete_desc" = "Les informations manquantes rendent plus difficile la recherche de votre animal. Renseignez le poids, la couleur et les informations médicales.";
 "identity_locked_title" = "Nom, espèce et race sont verrouillés";
 "identity_locked_desc" = "Ces champs ne peuvent pas être modifiés après l'activation de la médaille.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Annuler l'abonnement ?";
+"cancel_warning_a" = "Vous perdrez les notifications instantanées par e-mail, SMS et les alertes communautaires";
+"cancel_warning_b" = "Les remplacements gratuits de médailles ne seront plus disponibles";
+"cancel_warning_c" = "Vous perdrez l'accès aux alertes vétérinaires et de refuges";
+"cancel_warning_d" = "Votre compte et les enregistrements d'animaux resteront actifs";
+"cancel_access_until" = "Vous conserverez l'accès jusqu'au %@";
+"cancel_confirm" = "Annuler l'abonnement";
+"keep_subscription" = "Garder l'abonnement";
+"cancel_success" = "Abonnement annulé. Vous conserverez l'accès jusqu'au %@.";
+"current_plan" = "Plan actuel";
+"plan_renews" = "Se renouvelle le %@";
+"plan_cancels_on" = "Prend fin le %@";
+"delete_premium_warning" = "Vous avez un abonnement %@ actif jusqu'au %@. La suppression de votre compte effacera définitivement votre profil et vous perdrez immédiatement l'accès au temps payé restant. Si vous souhaitez simplement arrêter les paiements futurs, annulez votre abonnement.";
+"cancel_instead" = "Annuler l'abonnement à la place";

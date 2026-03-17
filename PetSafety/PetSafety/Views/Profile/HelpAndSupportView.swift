@@ -20,6 +20,7 @@ private func localizedString(_ key: String) -> String {
 struct HelpAndSupportView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var subscriptionViewModel: SubscriptionViewModel
     @State private var showingContactForm = false
     @State private var showingDeleteConfirmation = false
     @State private var showingDeleteError = false
@@ -27,6 +28,23 @@ struct HelpAndSupportView: View {
     @State private var missingPetNames: [String] = []
     @State private var isCheckingDelete = false
     @State private var isDeleting = false
+    @State private var navigateToBilling = false
+
+    private var hasPaidSubscription: Bool {
+        guard let sub = subscriptionViewModel.currentSubscription else { return false }
+        return sub.isActive && sub.isPaid
+    }
+
+    private var premiumDeleteWarning: String {
+        guard let sub = subscriptionViewModel.currentSubscription else { return "" }
+        let dateStr: String = {
+            guard let date = sub.currentPeriodEnd else { return "" }
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            return formatter.string(from: date)
+        }()
+        return String(format: NSLocalizedString("delete_premium_warning", comment: ""), sub.planName, dateStr)
+    }
 
     var body: some View {
         List {
@@ -149,12 +167,29 @@ struct HelpAndSupportView: View {
         }
         .alert("profile_delete_account", isPresented: $showingDeleteConfirmation) {
             Button("cancel", role: .cancel) { }
+            if hasPaidSubscription {
+                Button(NSLocalizedString("cancel_instead", comment: ""), role: .cancel) {
+                    navigateToBilling = true
+                }
+            }
             Button("delete_account", role: .destructive) {
                 performDeleteAccount()
             }
         } message: {
-            Text("delete_account_full_warning")
+            if hasPaidSubscription {
+                Text(premiumDeleteWarning)
+            } else {
+                Text("delete_account_full_warning")
+            }
         }
+        .background(
+            NavigationLink(
+                destination: BillingView()
+                    .environmentObject(subscriptionViewModel)
+                    .environmentObject(appState),
+                isActive: $navigateToBilling
+            ) { EmptyView() }
+        )
         .alert("profile_cannot_delete", isPresented: $showingDeleteError) {
             Button("ok", role: .cancel) { }
         } message: {
@@ -499,5 +534,6 @@ struct GuideArticle: Identifiable {
         HelpAndSupportView()
             .environmentObject(AppState())
             .environmentObject(AuthViewModel())
+            .environmentObject(SubscriptionViewModel())
     }
 }

@@ -1226,3 +1226,19 @@
 "profile_incomplete_desc" = "Fehlende Angaben erschweren das Wiederfinden Ihres Haustieres. Bitte geben Sie Gewicht, Farbe und Gesundheitsinformationen an.";
 "identity_locked_title" = "Name, Art und Rasse sind gesperrt";
 "identity_locked_desc" = "Diese Felder können nach der Markenaktivierung nicht geändert werden.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Abonnement kündigen?";
+"cancel_warning_a" = "Sie verlieren sofortige E-Mail-, SMS-Benachrichtigungen und Community-Warnungen";
+"cancel_warning_b" = "Kostenloser Markenersatz ist nicht mehr verfügbar";
+"cancel_warning_c" = "Sie verlieren den Zugang zu Tierarzt- und Tierheimwarnungen";
+"cancel_warning_d" = "Ihr Konto und Ihre Tierregistrierungen bleiben aktiv";
+"cancel_access_until" = "Sie behalten den Zugang bis %@";
+"cancel_confirm" = "Abonnement kündigen";
+"keep_subscription" = "Abonnement behalten";
+"cancel_success" = "Abonnement gekündigt. Sie behalten den Zugang bis %@.";
+"current_plan" = "Aktueller Plan";
+"plan_renews" = "Verlängert sich am %@";
+"plan_cancels_on" = "Endet am %@";
+"delete_premium_warning" = "Sie haben ein aktives %@-Abonnement bis %@. Das Löschen Ihres Kontos entfernt Ihr Profil dauerhaft und Sie verlieren sofort den Zugang zu Ihrer verbleibenden bezahlten Zeit. Wenn Sie nur zukünftige Zahlungen stoppen möchten, kündigen Sie stattdessen Ihr Abonnement.";
+"cancel_instead" = "Stattdessen Abonnement kündigen";

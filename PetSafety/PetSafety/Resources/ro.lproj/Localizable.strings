@@ -1226,3 +1226,19 @@
 "profile_incomplete_desc" = "Detaliile lipsă îngreunează găsirea animalului. Completează greutatea, culoarea și informațiile medicale.";
 "identity_locked_title" = "Numele, specia și rasa sunt blocate";
 "identity_locked_desc" = "Aceste câmpuri nu pot fi modificate după activarea etichetei.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Anulezi abonamentul?";
+"cancel_warning_a" = "Vei pierde notificările instantanee prin e-mail, SMS și alertele comunitare";
+"cancel_warning_b" = "Înlocuirile gratuite de etichete nu vor mai fi disponibile";
+"cancel_warning_c" = "Vei pierde accesul la alertele veterinare și de adăpost";
+"cancel_warning_d" = "Contul și înregistrările animalelor tale rămân active";
+"cancel_access_until" = "Vei păstra accesul până la %@";
+"cancel_confirm" = "Anulează abonamentul";
+"keep_subscription" = "Păstrează abonamentul";
+"cancel_success" = "Abonament anulat. Vei păstra accesul până la %@.";
+"current_plan" = "Planul curent";
+"plan_renews" = "Se reînnoiește pe %@";
+"plan_cancels_on" = "Se încheie pe %@";
+"delete_premium_warning" = "Ai un abonament %@ activ până la %@. Ștergerea contului va elimina permanent profilul tău și vei pierde imediat accesul la timpul plătit rămas. Dacă dorești doar să oprești plățile viitoare, anulează-ți abonamentul.";
+"cancel_instead" = "Anulează abonamentul în schimb";

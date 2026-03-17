@@ -1229,3 +1229,19 @@
 "profile_incomplete_desc" = "Manglende detaljer gjør det vanskeligere å gjenforene kjæledyret. Fyll inn vekt, farge og medisinsk informasjon.";
 "identity_locked_title" = "Navn, art og rase er låst";
 "identity_locked_desc" = "Disse feltene kan ikke endres etter merkeaktivering.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Avbryte abonnementet?";
+"cancel_warning_a" = "Du mister umiddelbare e-post-, SMS-varsler og fellesskapsvarsler";
+"cancel_warning_b" = "Gratis erstatning av merker vil ikke lenger være tilgjengelig";
+"cancel_warning_c" = "Du mister tilgang til veterinær- og dyrehjem-varsler";
+"cancel_warning_d" = "Kontoen din og dyreregistreringene forblir aktive";
+"cancel_access_until" = "Du beholder tilgangen til %@";
+"cancel_confirm" = "Avbryt abonnement";
+"keep_subscription" = "Behold abonnement";
+"cancel_success" = "Abonnement avbrutt. Du beholder tilgangen til %@.";
+"current_plan" = "Nåværende plan";
+"plan_renews" = "Fornyes %@";
+"plan_cancels_on" = "Avsluttes %@";
+"delete_premium_warning" = "Du har et aktivt %@-abonnement til %@. Sletting av kontoen din vil permanent fjerne profilen din, og du mister umiddelbart tilgang til gjenværende betalt tid. Hvis du bare vil stoppe fremtidige betalinger, avbryt abonnementet i stedet.";
+"cancel_instead" = "Avbryt abonnement i stedet";

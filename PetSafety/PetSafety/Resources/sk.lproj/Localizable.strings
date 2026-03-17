@@ -1226,3 +1226,19 @@
 "profile_incomplete_desc" = "Chýbajúce údaje sťažujú nájdenie zvieraťa. Vyplňte hmotnosť, farbu a zdravotné informácie.";
 "identity_locked_title" = "Meno, druh a plemeno sú uzamknuté";
 "identity_locked_desc" = "Tieto polia nie je možné zmeniť po aktivácii známky.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Zrušiť predplatné?";
+"cancel_warning_a" = "Stratíte okamžité e-mailové, SMS notifikácie a komunitné upozornenia";
+"cancel_warning_b" = "Bezplatná výmena známok už nebude dostupná";
+"cancel_warning_c" = "Stratíte prístup k veterinárnym a útulkovým upozorneniam";
+"cancel_warning_d" = "Váš účet a registrácie zvierat zostanú aktívne";
+"cancel_access_until" = "Prístup si zachováte do %@";
+"cancel_confirm" = "Zrušiť predplatné";
+"keep_subscription" = "Ponechať predplatné";
+"cancel_success" = "Predplatné zrušené. Prístup si zachováte do %@.";
+"current_plan" = "Aktuálny plán";
+"plan_renews" = "Obnoví sa %@";
+"plan_cancels_on" = "Končí %@";
+"delete_premium_warning" = "Máte aktívne predplatné %@ do %@. Vymazanie účtu natrvalo odstráni váš profil a okamžite stratíte prístup k zostávajúcemu platenému obdobiu. Ak chcete len zastaviť budúce platby, zrušte predplatné.";
+"cancel_instead" = "Namiesto toho zrušiť predplatné";

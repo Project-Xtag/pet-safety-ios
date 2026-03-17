@@ -1229,3 +1229,19 @@
 "profile_incomplete_desc" = "Missing details make it harder to reunite your pet if they go missing. Please fill in weight, color, and medical information.";
 "identity_locked_title" = "Name, species, and breed are locked";
 "identity_locked_desc" = "These fields cannot be changed after tag activation to prevent misuse. Contact support if you need to make changes.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Cancel Subscription?";
+"cancel_warning_a" = "You'll lose instant email, SMS notifications and community alerts";
+"cancel_warning_b" = "Free tag replacements will no longer be available";
+"cancel_warning_c" = "You'll lose access to vet and shelter alerts";
+"cancel_warning_d" = "Your account and pet registrations remain active";
+"cancel_access_until" = "You will retain access until %@";
+"cancel_confirm" = "Cancel Subscription";
+"keep_subscription" = "Keep Subscription";
+"cancel_success" = "Subscription cancelled. You'll retain access until %@.";
+"current_plan" = "Current Plan";
+"plan_renews" = "Renews %@";
+"plan_cancels_on" = "Cancels on %@";
+"delete_premium_warning" = "You have an active %@ subscription until %@. Deleting your account will permanently erase your profile and you will immediately lose access to your remaining paid time. If you just want to stop future payments, please Cancel Subscription instead.";
+"cancel_instead" = "Cancel Subscription Instead";

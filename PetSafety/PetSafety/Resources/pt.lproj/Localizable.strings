@@ -1226,3 +1226,19 @@
 "profile_incomplete_desc" = "Dados em falta dificultam encontrar o seu animal. Preencha peso, cor e informações médicas.";
 "identity_locked_title" = "Nome, espécie e raça estão bloqueados";
 "identity_locked_desc" = "Estes campos não podem ser alterados após ativação da etiqueta.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Cancelar subscrição?";
+"cancel_warning_a" = "Perderá as notificações instantâneas por e-mail, SMS e alertas comunitários";
+"cancel_warning_b" = "As substituições gratuitas de etiquetas deixarão de estar disponíveis";
+"cancel_warning_c" = "Perderá o acesso aos alertas veterinários e de abrigos";
+"cancel_warning_d" = "A sua conta e os registos de animais permanecerão ativos";
+"cancel_access_until" = "Manterá o acesso até %@";
+"cancel_confirm" = "Cancelar subscrição";
+"keep_subscription" = "Manter subscrição";
+"cancel_success" = "Subscrição cancelada. Manterá o acesso até %@.";
+"current_plan" = "Plano atual";
+"plan_renews" = "Renova a %@";
+"plan_cancels_on" = "Termina a %@";
+"delete_premium_warning" = "Tem uma subscrição %@ ativa até %@. Eliminar a sua conta apagará permanentemente o seu perfil e perderá imediatamente o acesso ao tempo pago restante. Se apenas quiser parar pagamentos futuros, cancele a sua subscrição.";
+"cancel_instead" = "Cancelar subscrição em vez disso";

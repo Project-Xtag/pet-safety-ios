@@ -1238,3 +1238,19 @@
 "profile_incomplete_desc" = "I dati mancanti rendono più difficile ritrovare il tuo animale. Compila peso, colore e informazioni mediche.";
 "identity_locked_title" = "Nome, specie e razza sono bloccati";
 "identity_locked_desc" = "Questi campi non possono essere modificati dopo l'attivazione della targhetta.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Annullare l'abbonamento?";
+"cancel_warning_a" = "Perderai le notifiche istantanee via e-mail, SMS e gli avvisi della comunità";
+"cancel_warning_b" = "Le sostituzioni gratuite delle targhette non saranno più disponibili";
+"cancel_warning_c" = "Perderai l'accesso agli avvisi veterinari e dei rifugi";
+"cancel_warning_d" = "Il tuo account e le registrazioni degli animali rimarranno attivi";
+"cancel_access_until" = "Manterrai l'accesso fino al %@";
+"cancel_confirm" = "Annulla abbonamento";
+"keep_subscription" = "Mantieni abbonamento";
+"cancel_success" = "Abbonamento annullato. Manterrai l'accesso fino al %@.";
+"current_plan" = "Piano attuale";
+"plan_renews" = "Si rinnova il %@";
+"plan_cancels_on" = "Termina il %@";
+"delete_premium_warning" = "Hai un abbonamento %@ attivo fino al %@. L'eliminazione del tuo account cancellerà permanentemente il tuo profilo e perderai immediatamente l'accesso al tempo pagato rimanente. Se vuoi solo interrompere i pagamenti futuri, annulla il tuo abbonamento.";
+"cancel_instead" = "Annulla l'abbonamento invece";

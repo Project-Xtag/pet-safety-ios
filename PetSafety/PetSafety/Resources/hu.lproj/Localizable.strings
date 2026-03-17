@@ -1226,3 +1226,19 @@
 "profile_incomplete_desc" = "A hiányzó adatok megnehezítik a kedvenced megtalálását, ha elveszne. Kérjük, add meg a súlyt, színt és egészségügyi információkat.";
 "identity_locked_title" = "A név, faj és fajta zárolva van";
 "identity_locked_desc" = "Ezek a mezők a címke aktiválása után nem módosíthatók. Kérjük, lépj kapcsolatba az ügyfélszolgálattal.";
+
+// MARK: - Subscription Management
+"cancel_subscription_title" = "Előfizetés lemondása?";
+"cancel_warning_a" = "Elveszíted az azonnali e-mail, SMS értesítéseket és közösségi riasztásokat";
+"cancel_warning_b" = "Az ingyenes címkecserék többé nem lesznek elérhetők";
+"cancel_warning_c" = "Elveszíted a hozzáférést az állatorvosi és menhelyi riasztásokhoz";
+"cancel_warning_d" = "A fiókod és a kisállat-regisztrációk aktívak maradnak";
+"cancel_access_until" = "A hozzáférésed megmarad eddig: %@";
+"cancel_confirm" = "Előfizetés lemondása";
+"keep_subscription" = "Előfizetés megtartása";
+"cancel_success" = "Előfizetés lemondva. A hozzáférésed megmarad eddig: %@.";
+"current_plan" = "Jelenlegi csomag";
+"plan_renews" = "Megújul: %@";
+"plan_cancels_on" = "Lejár: %@";
+"delete_premium_warning" = "Aktív %@ előfizetésed van eddig: %@. A fiók törlése véglegesen eltávolítja a profilodat, és azonnal elveszíted a hátralévő fizetett időszakhoz való hozzáférést. Ha csak a jövőbeli fizetéseket szeretnéd leállítani, mondj le az előfizetésedről.";
+"cancel_instead" = "Előfizetés lemondása ehelyett";

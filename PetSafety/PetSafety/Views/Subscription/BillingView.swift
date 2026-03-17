@@ -3,15 +3,78 @@ import SafariServices
 
 struct BillingView: View {
     @EnvironmentObject var subscriptionViewModel: SubscriptionViewModel
+    @EnvironmentObject var appState: AppState
     @State private var invoices: [InvoiceItem] = []
     @State private var isLoading = true
     @State private var isPortalLoading = false
     @State private var portalURL: URL?
     @State private var showSafari = false
     @State private var errorMessage: String?
+    @State private var showCancelWarning = false
+    @State private var isCancelling = false
+
+    // MARK: - Computed Properties
+
+    private var subscription: UserSubscription? {
+        subscriptionViewModel.currentSubscription
+    }
+
+    private var canCancel: Bool {
+        guard let sub = subscription else { return false }
+        return sub.isActive && sub.isPaid && !(sub.cancelAtPeriodEnd ?? false)
+    }
+
+    private var periodEndFormatted: String? {
+        guard let date = subscription?.currentPeriodEnd else { return nil }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter.string(from: date)
+    }
 
     var body: some View {
         List {
+            // Current Plan Section
+            if let sub = subscription {
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Text("current_plan")
+                                .font(.headline)
+                            Spacer()
+                            Text(sub.planName)
+                                .font(.headline)
+                                .foregroundColor(.brandOrange)
+                        }
+
+                        HStack {
+                            Text(NSLocalizedString("billing_subscription", comment: ""))
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Spacer()
+                            statusBadge(for: sub)
+                        }
+
+                        if sub.cancelAtPeriodEnd == true, let endDate = periodEndFormatted {
+                            HStack {
+                                Image(systemName: "exclamationmark.circle.fill")
+                                    .foregroundColor(.orange)
+                                    .font(.caption)
+                                Text(String(format: NSLocalizedString("plan_cancels_on", comment: ""), endDate))
+                                    .font(.subheadline)
+                                    .foregroundColor(.orange)
+                            }
+                        } else if sub.isActive, let endDate = periodEndFormatted {
+                            Text(String(format: NSLocalizedString("plan_renews", comment: ""), endDate))
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .padding(.vertical, 4)
+                } header: {
+                    Text("current_plan")
+                }
+            }
+
             // Past Due Warning
             if subscriptionViewModel.currentSubscription?.status == .pastDue {
                 Section {
@@ -89,10 +152,33 @@ struct BillingView: View {
                         .font(.footnote)
                 }
             }
+
+            // Cancel Subscription Section
+            if canCancel {
+                Section {
+                    Button(action: { showCancelWarning = true }) {
+                        HStack {
+                            if isCancelling {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .red))
+                                    .scaleEffect(0.8)
+                            } else {
+                                Image(systemName: "xmark.circle")
+                                    .foregroundColor(.red)
+                            }
+                            Text("cancel_confirm")
+                                .foregroundColor(.red)
+                            Spacer()
+                        }
+                    }
+                    .disabled(isCancelling)
+                }
+            }
         }
         .navigationTitle("billing_title")
         .navigationBarTitleDisplayMode(.inline)
         .task {
+            await subscriptionViewModel.loadCurrentSubscription()
             await loadInvoices()
         }
         .sheet(isPresented: $showSafari) {
@@ -100,6 +186,49 @@ struct BillingView: View {
                 SafariView(url: url)
             }
         }
+        .confirmationDialog(
+            NSLocalizedString("cancel_subscription_title", comment: ""),
+            isPresented: $showCancelWarning,
+            titleVisibility: .visible
+        ) {
+            Button(NSLocalizedString("cancel_confirm", comment: ""), role: .destructive) {
+                performCancelSubscription()
+            }
+            Button(NSLocalizedString("keep_subscription", comment: ""), role: .cancel) { }
+        } message: {
+            let warnings = [
+                NSLocalizedString("cancel_warning_a", comment: ""),
+                NSLocalizedString("cancel_warning_b", comment: ""),
+                NSLocalizedString("cancel_warning_c", comment: ""),
+                NSLocalizedString("cancel_warning_d", comment: "")
+            ]
+            let accessLine = periodEndFormatted.map {
+                String(format: NSLocalizedString("cancel_access_until", comment: ""), $0)
+            } ?? ""
+            Text(warnings.joined(separator: "\n") + (accessLine.isEmpty ? "" : "\n\n\(accessLine)"))
+        }
+    }
+
+    // MARK: - Status Badge
+
+    @ViewBuilder
+    private func statusBadge(for sub: UserSubscription) -> some View {
+        let color: Color = {
+            if sub.cancelAtPeriodEnd == true { return .orange }
+            switch sub.status {
+            case .active, .trialing: return .green
+            case .pastDue: return .orange
+            case .cancelled, .expired: return .red
+            default: return .secondary
+            }
+        }()
+        Text(sub.displayStatus)
+            .font(.caption.weight(.semibold))
+            .foregroundColor(color)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 3)
+            .background(color.opacity(0.15))
+            .cornerRadius(6)
     }
 
     // MARK: - Invoice Row
@@ -150,6 +279,18 @@ struct BillingView: View {
                 errorMessage = error.localizedDescription
             }
             isPortalLoading = false
+        }
+    }
+
+    private func performCancelSubscription() {
+        isCancelling = true
+        Task {
+            await subscriptionViewModel.cancelSubscription()
+            await MainActor.run {
+                isCancelling = false
+                let dateStr = periodEndFormatted ?? ""
+                appState.showSuccess(String(format: NSLocalizedString("cancel_success", comment: ""), dateStr))
+            }
         }
     }
 

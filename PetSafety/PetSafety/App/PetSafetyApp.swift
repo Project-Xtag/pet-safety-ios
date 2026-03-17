@@ -19,6 +19,7 @@ struct PetSafetyApp: App {
 
     @StateObject private var authViewModel = AuthViewModel()
     @StateObject private var appState = AppState()
+    @StateObject private var subscriptionViewModel = SubscriptionViewModel()
     @StateObject private var notificationHandler = NotificationHandler.shared
     @State private var showSplash = true
 
@@ -110,6 +111,7 @@ struct PetSafetyApp: App {
                 ContentView()
                     .environmentObject(authViewModel)
                     .environmentObject(appState)
+                    .environmentObject(subscriptionViewModel)
                     .environmentObject(notificationHandler)
                     .tint(Color(UIColor.darkGray)) // Dark gray for alert buttons
                     .transition(.opacity)
