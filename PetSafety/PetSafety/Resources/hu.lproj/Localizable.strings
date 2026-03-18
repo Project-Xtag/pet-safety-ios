@@ -1259,3 +1259,7 @@
 // MARK: - Próbaidőszak
 "trial_ends_on" = "A próbaidőszak vége: %@";
 "trial_upgrade_now" = "Frissíts most, hogy megtartsd a funkcióidat!";
+
+// MARK: - Ajánlás dátumok
+"referral_redeemed_on" = "Beváltva: %@";
+"referral_rewarded_on" = "Jutalmazva: %@";

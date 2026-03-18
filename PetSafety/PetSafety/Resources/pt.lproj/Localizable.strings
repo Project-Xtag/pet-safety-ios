@@ -1260,3 +1260,7 @@
 // MARK: - Trial
 "trial_ends_on" = "Trial ends on %@";
 "trial_upgrade_now" = "Upgrade now to keep your features!";
+
+// MARK: - Referral
+"referral_redeemed_on" = "Resgatado: %@";
+"referral_rewarded_on" = "Recompensado: %@";

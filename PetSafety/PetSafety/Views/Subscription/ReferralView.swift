@@ -98,6 +98,14 @@ struct ReferralView: View {
         .task {
             await loadStatus()
         }
+        .onAppear {
+            SSEService.shared.onReferralUsed = { _ in
+                Task { await loadStatus() }
+            }
+        }
+        .onDisappear {
+            SSEService.shared.onReferralUsed = nil
+        }
     }
 
     // MARK: - Code Display
@@ -163,6 +171,16 @@ struct ReferralView: View {
                 Text(statusText(referral.status))
                     .font(.caption)
                     .foregroundColor(statusColor(referral.status))
+                if let redeemed = referral.redeemedAt {
+                    Text(String(format: NSLocalizedString("referral_redeemed_on", comment: ""), formatExpiryDate(redeemed)))
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+                if let rewarded = referral.rewardedAt {
+                    Text(String(format: NSLocalizedString("referral_rewarded_on", comment: ""), formatExpiryDate(rewarded)))
+                        .font(.caption2)
+                        .foregroundColor(.green)
+                }
             }
             Spacer()
             if referral.rewardedAt != nil {
