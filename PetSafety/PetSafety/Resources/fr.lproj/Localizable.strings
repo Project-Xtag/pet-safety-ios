@@ -582,6 +582,8 @@
 "missing_pets_label" = "Animaux disparus : %@";
 "logout_confirm" = "Tu veux vraiment te déconnecter ?";
 "delete_account_full_warning" = "Cette action est irréversible. Ton compte sera définitivement supprimé, toutes les données personnelles seront effacées, et les abonnements actifs seront annulés.";
+"delete_confirm_checkbox" = "Je comprends que cette action est irréversible et que toutes mes données seront définitivement supprimées";
+"delete_warning_message" = "Cela supprimera définitivement ton compte, tous tes animaux de compagnie et toutes les données associées. Cette action est irréversible.";
 
 // MARK: - Commandes
 "orders_title" = "Commandes";

@@ -527,6 +527,8 @@
 "missing_pets_label" = "Eltűnt kedvencek: %@";
 "logout_confirm" = "Biztosan kijelentkezel?";
 "delete_account_full_warning" = "Ez a művelet nem vonható vissza. A fiókod véglegesen törlődik, minden személyes adat eltávolításra kerül, és az aktív előfizetések megszűnnek.";
+"delete_confirm_checkbox" = "Megértem, hogy ez a művelet nem vonható vissza és minden adatom véglegesen törlésre kerül";
+"delete_warning_message" = "Ez véglegesen törli a fiókodat, az összes háziállatodat és az összes kapcsolódó adatot. Ez a művelet nem vonható vissza.";
 
 // MARK: - Rendelések
 "orders_title" = "Rendelések";

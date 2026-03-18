@@ -581,6 +581,8 @@
 "missing_pets_label" = "Zaginione zwierzęta: %@";
 "logout_confirm" = "Czy na pewno chcesz się wylogować?";
 "delete_account_full_warning" = "Tej operacji nie można cofnąć. Twoje konto zostanie trwale usunięte, wszystkie dane osobowe zostaną usunięte, a wszelkie aktywne subskrypcje zostaną anulowane.";
+"delete_confirm_checkbox" = "Rozumiem, że ta akcja jest nieodwracalna i wszystkie moje dane zostaną trwale usunięte";
+"delete_warning_message" = "To trwale usunie Twoje konto, wszystkie Twoje zwierzęta i wszystkie powiązane dane. Tej operacji nie można cofnąć.";
 
 // MARK: - Zamówienia
 "orders_title" = "Zamówienia";

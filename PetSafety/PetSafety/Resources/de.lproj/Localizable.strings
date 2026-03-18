@@ -527,6 +527,8 @@
 "missing_pets_label" = "Vermisste Haustiere: %@";
 "logout_confirm" = "Möchten Sie sich wirklich ausloggen?";
 "delete_account_full_warning" = "Diese Aktion kann nicht rückgängig gemacht werden. Ihr Konto wird dauerhaft gelöscht, alle persönlichen Daten werden entfernt und alle aktiven Abonnements werden gekündigt.";
+"delete_confirm_checkbox" = "Ich verstehe, dass diese Aktion nicht rückgängig gemacht werden kann und alle meine Daten dauerhaft gelöscht werden";
+"delete_warning_message" = "Dies wird Ihr Konto, alle Ihre Haustiere und alle zugehörigen Daten dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.";
 
 // MARK: - Bestellungen
 "orders_title" = "Bestellungen";

@@ -527,6 +527,8 @@
 "missing_pets_label" = "Stratene zvierata: %@";
 "logout_confirm" = "Naozaj sa chcete odhlasit?";
 "delete_account_full_warning" = "Tuto akciu nie je mozne vratit spat. Vas ucet bude natrvalo odstraneny, vsetky osobne udaje budu vymazane a aktivne predplatne bude zrusene.";
+"delete_confirm_checkbox" = "Rozumiem, že táto akcia je nezvratná a všetky moje údaje budú natrvalo vymazané";
+"delete_warning_message" = "Toto natrvalo vymaže váš účet, všetky vaše domáce zvieratá a všetky súvisiace údaje. Túto akciu nie je možné vrátiť späť.";
 
 // MARK: - Objednavky
 "orders_title" = "Objednavky";

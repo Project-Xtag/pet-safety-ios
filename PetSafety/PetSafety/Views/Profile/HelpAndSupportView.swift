@@ -23,6 +23,7 @@ struct HelpAndSupportView: View {
     @EnvironmentObject var subscriptionViewModel: SubscriptionViewModel
     @State private var showingContactForm = false
     @State private var showingDeleteConfirmation = false
+    @State private var confirmDeleteChecked = false
     @State private var showingDeleteError = false
     @State private var deleteErrorMessage = ""
     @State private var missingPetNames: [String] = []
@@ -165,22 +166,64 @@ struct HelpAndSupportView: View {
         .sheet(isPresented: $showingContactForm) {
             ContactSupportView()
         }
-        .alert("profile_delete_account", isPresented: $showingDeleteConfirmation) {
-            Button("cancel", role: .cancel) { }
-            if hasPaidSubscription {
-                Button(NSLocalizedString("cancel_instead", comment: ""), role: .cancel) {
-                    navigateToBilling = true
+        .sheet(isPresented: $showingDeleteConfirmation) {
+            VStack(spacing: 20) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 48))
+                    .foregroundColor(.red)
+
+                Text("profile_delete_account")
+                    .font(.title2.bold())
+
+                Text("delete_warning_message")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+
+                if hasPaidSubscription {
+                    Text(premiumDeleteWarning)
+                        .font(.callout)
+                        .foregroundColor(.orange)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
                 }
+
+                Toggle(isOn: $confirmDeleteChecked) {
+                    Text("delete_confirm_checkbox")
+                        .font(.subheadline)
+                }
+                .padding(.horizontal)
+
+                HStack(spacing: 16) {
+                    Button("cancel") {
+                        showingDeleteConfirmation = false
+                        confirmDeleteChecked = false
+                    }
+                    .buttonStyle(.bordered)
+
+                    if hasPaidSubscription {
+                        Button(NSLocalizedString("cancel_instead", comment: "")) {
+                            showingDeleteConfirmation = false
+                            confirmDeleteChecked = false
+                            navigateToBilling = true
+                        }
+                        .buttonStyle(.bordered)
+                    }
+
+                    Button("delete_account") {
+                        showingDeleteConfirmation = false
+                        confirmDeleteChecked = false
+                        performDeleteAccount()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.red)
+                    .disabled(!confirmDeleteChecked)
+                }
+                .padding(.top)
             }
-            Button("delete_account", role: .destructive) {
-                performDeleteAccount()
-            }
-        } message: {
-            if hasPaidSubscription {
-                Text(premiumDeleteWarning)
-            } else {
-                Text("delete_account_full_warning")
-            }
+            .padding(30)
+            .presentationDetents([.medium])
         }
         .background(
             NavigationLink(

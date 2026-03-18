@@ -527,6 +527,8 @@
 "missing_pets_label" = "Animais desaparecidos: %@";
 "logout_confirm" = "Tem a certeza que quer terminar sessão?";
 "delete_account_full_warning" = "Esta ação não pode ser desfeita. A sua conta será eliminada permanentemente, todos os dados pessoais serão removidos e quaisquer subscrições ativas serão canceladas.";
+"delete_confirm_checkbox" = "Compreendo que esta ação não pode ser desfeita e todos os meus dados serão permanentemente eliminados";
+"delete_warning_message" = "Isto eliminará permanentemente a sua conta, todos os seus animais de estimação e todos os dados associados. Esta ação não pode ser desfeita.";
 
 // MARK: - Encomendas
 "orders_title" = "Encomendas";

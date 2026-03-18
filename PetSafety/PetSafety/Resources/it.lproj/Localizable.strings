@@ -591,6 +591,8 @@
 "missing_pets_label" = "Animali scomparsi: %@";
 "logout_confirm" = "Sei sicuro di voler uscire?";
 "delete_account_full_warning" = "Questa azione è irreversibile. Il tuo account verrà eliminato definitivamente, tutti i dati personali verranno rimossi e gli abbonamenti attivi verranno cancellati.";
+"delete_confirm_checkbox" = "Capisco che questa azione non può essere annullata e tutti i miei dati verranno eliminati permanentemente";
+"delete_warning_message" = "Questo eliminerà permanentemente il tuo account, tutti i tuoi animali domestici e tutti i dati associati. Questa azione non può essere annullata.";
 
 // MARK: - Ordini
 "orders_title" = "Ordini";

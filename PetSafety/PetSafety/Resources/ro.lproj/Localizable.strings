@@ -527,6 +527,8 @@
 "missing_pets_label" = "Animale dispărute: %@";
 "logout_confirm" = "Sigur dorești să te deconectezi?";
 "delete_account_full_warning" = "Această acțiune nu poate fi anulată. Contul tău va fi șters permanent, toate datele personale vor fi eliminate și orice abonamente active vor fi anulate.";
+"delete_confirm_checkbox" = "Înțeleg că această acțiune nu poate fi anulată și toate datele mele vor fi șterse permanent";
+"delete_warning_message" = "Aceasta va șterge permanent contul tău, toate animalele tale de companie și toate datele asociate. Această acțiune nu poate fi anulată.";
 
 // MARK: - Comenzi
 "orders_title" = "Comenzi";

@@ -584,6 +584,8 @@
 "missing_pets_label" = "Savnede dyr: %@";
 "logout_confirm" = "Er du sikker på at du vil logge ut?";
 "delete_account_full_warning" = "Denne handlingen kan ikke angres. Kontoen din slettes permanent, alle personopplysninger fjernes, og aktive abonnementer kanselleres.";
+"delete_confirm_checkbox" = "Jeg forstår at denne handlingen ikke kan angres og at all min data vil bli permanent slettet";
+"delete_warning_message" = "Dette vil permanent slette kontoen din, alle dine kjæledyr og alle tilknyttede data. Denne handlingen kan ikke angres.";
 
 // MARK: - Bestillinger
 "orders_title" = "Bestillinger";
