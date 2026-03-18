@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import UIKit
 import UserNotifications
 
 /// Service for managing Server-Sent Events (SSE) connections
@@ -39,6 +40,11 @@ class SSEService: NSObject, ObservableObject {
     // MARK: - Initialization
     private override init() {
         super.init()
+        setupLifecycleObservers()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Public Methods
@@ -135,6 +141,44 @@ class SSEService: NSObject, ObservableObject {
         reconnectAttempts = 0
     }
     #endif
+
+    // MARK: - Lifecycle
+
+    private func setupLifecycleObservers() {
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.didEnterBackgroundNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.handleDidEnterBackground()
+        }
+
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.willEnterForegroundNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.handleWillEnterForeground()
+        }
+    }
+
+    private func handleDidEnterBackground() {
+        #if DEBUG
+        print("📡 SSE: App entering background — disconnecting")
+        #endif
+        disconnect()
+    }
+
+    private func handleWillEnterForeground() {
+        #if DEBUG
+        print("📡 SSE: App entering foreground — reconnecting")
+        #endif
+        // Only reconnect if we have a valid auth token
+        if KeychainService.shared.getAuthToken() != nil {
+            reconnectAttempts = 0
+            connect()
+        }
+    }
 
     // MARK: - Private Methods
 
