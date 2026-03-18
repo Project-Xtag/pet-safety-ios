@@ -63,6 +63,21 @@ struct BillingView: View {
                                     .font(.subheadline)
                                     .foregroundColor(.orange)
                             }
+                        } else if sub.isTrialing, let trialEnd = sub.trialEndFormatted {
+                            HStack {
+                                Image(systemName: "clock.fill")
+                                    .foregroundColor(.orange)
+                                    .font(.caption)
+                                Text(String(format: NSLocalizedString("trial_ends_on", comment: ""), trialEnd))
+                                    .font(.subheadline)
+                                    .foregroundColor(.orange)
+                            }
+                            if let days = sub.trialDaysLeft, days <= 7 {
+                                Text(NSLocalizedString("trial_upgrade_now", comment: ""))
+                                    .font(.caption)
+                                    .foregroundColor(.red)
+                                    .fontWeight(.semibold)
+                            }
                         } else if sub.isActive, let endDate = periodEndFormatted {
                             Text(String(format: NSLocalizedString("plan_renews", comment: ""), endDate))
                                 .font(.subheadline)

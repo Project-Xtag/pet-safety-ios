@@ -104,6 +104,7 @@ struct UserSubscription: Codable {
     let currentPeriodEnd: Date?
     let cancelAtPeriodEnd: Bool?
     let stripeSubscriptionId: String?
+    let trialEndsAt: Date?
     let createdAt: Date?
     let updatedAt: Date?
 
@@ -118,12 +119,30 @@ struct UserSubscription: Codable {
         case currentPeriodEnd = "current_period_end"
         case cancelAtPeriodEnd = "cancel_at_period_end"
         case stripeSubscriptionId = "stripe_subscription_id"
+        case trialEndsAt = "trial_ends_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
     }
 
     var isActive: Bool {
         return status == .active || status == .trialing
+    }
+
+    var isTrialing: Bool {
+        return status == .trialing
+    }
+
+    var trialEndFormatted: String? {
+        guard let trialEndsAt else { return nil }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter.string(from: trialEndsAt)
+    }
+
+    var trialDaysLeft: Int? {
+        guard let trialEndsAt else { return nil }
+        let days = Calendar.current.dateComponents([.day], from: Date(), to: trialEndsAt).day
+        return days
     }
 
     var isPaid: Bool {
@@ -294,6 +313,20 @@ struct ReferralApplyResponse: Codable {
     enum CodingKeys: String, CodingKey {
         case message
         case stripePromoCodeId = "stripe_promo_code_id"
+    }
+}
+
+struct ShelterCodeRedeemRequest: Codable {
+    let code: String
+}
+
+struct ShelterCodeRedeemResponse: Codable {
+    let message: String
+    let orderId: String?
+
+    enum CodingKeys: String, CodingKey {
+        case message
+        case orderId = "order_id"
     }
 }
 

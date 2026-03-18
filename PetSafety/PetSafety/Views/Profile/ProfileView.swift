@@ -142,6 +142,10 @@ struct ProfileView: View {
             NavigationLink(destination: ReferralView()) {
                 ProfileMenuRow(icon: "gift", title: NSLocalizedString("profile_referral", comment: ""))
             }
+
+            NavigationLink(destination: ShelterCodeView()) {
+                ProfileMenuRow(icon: "building.2", title: NSLocalizedString("profile_shelter_code", comment: ""))
+            }
         }
         .background(Color(UIColor.systemBackground))
         .cornerRadius(16)
