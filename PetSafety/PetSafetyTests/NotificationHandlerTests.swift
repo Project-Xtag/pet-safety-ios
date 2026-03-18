@@ -281,6 +281,115 @@ final class NotificationHandlerTests: XCTestCase {
         waitForExpectations(timeout: 1.0)
     }
 
+    // MARK: - ALERT_CREATED Notification Tests
+
+    func testHandleAlertConfirmation() {
+        // Given
+        let userInfo: [AnyHashable: Any] = [
+            "type": "ALERT_CREATED",
+            "alert_id": "alert-123",
+            "pet_id": "pet-456"
+        ]
+
+        // When - should post navigateToAlert notification
+        let navExpectation = expectNavigationNotification(named: .navigateToAlert)
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func testHandleAlertConfirmationWithEmptyAlertId() {
+        // Given - missing alert_id means empty string, should not post notification
+        let userInfo: [AnyHashable: Any] = [
+            "type": "ALERT_CREATED"
+        ]
+
+        // When
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then - should not crash
+        XCTAssertNil(notificationHandler.pendingScanNotification)
+    }
+
+    // MARK: - PROMO_EXPIRING Notification Tests
+
+    func testHandlePromoExpiring() {
+        // Given
+        let userInfo: [AnyHashable: Any] = [
+            "type": "PROMO_EXPIRING",
+            "plan_name": "standard",
+            "days_left": "3"
+        ]
+
+        // When - should post navigateToBilling notification
+        let navExpectation = expectNavigationNotification(named: .navigateToBilling)
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then
+        waitForExpectations(timeout: 1.0)
+    }
+
+    // MARK: - ALERT_REMINDER Notification Tests
+
+    func testHandleAlertReminder() {
+        // Given
+        let userInfo: [AnyHashable: Any] = [
+            "type": "ALERT_REMINDER",
+            "alert_id": "alert-789"
+        ]
+
+        // When - should post navigateToAlert notification
+        let navExpectation = expectNavigationNotification(named: .navigateToAlert)
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func testHandleAlertReminderWithEmptyAlertId() {
+        // Given - missing alert_id
+        let userInfo: [AnyHashable: Any] = [
+            "type": "ALERT_REMINDER"
+        ]
+
+        // When
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then - should not crash, no navigation posted
+        XCTAssertNil(notificationHandler.pendingScanNotification)
+    }
+
+    // MARK: - MULTIPLE_SIGHTINGS Notification Tests
+
+    func testHandleMultipleSightings() {
+        // Given
+        let userInfo: [AnyHashable: Any] = [
+            "type": "MULTIPLE_SIGHTINGS",
+            "alert_id": "alert-101"
+        ]
+
+        // When - should post navigateToAlert notification
+        let navExpectation = expectNavigationNotification(named: .navigateToAlert)
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func testHandleMultipleSightingsWithEmptyAlertId() {
+        // Given - missing alert_id
+        let userInfo: [AnyHashable: Any] = [
+            "type": "MULTIPLE_SIGHTINGS"
+        ]
+
+        // When
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then - should not crash
+        XCTAssertNil(notificationHandler.pendingScanNotification)
+    }
+
     // MARK: - Clear Pending Notification Tests
 
     func testClearPendingNotification() {
@@ -376,6 +485,7 @@ final class NotificationHandlerTests: XCTestCase {
         XCTAssertEqual(Notification.Name.navigateToAlert.rawValue, "navigateToAlert")
         XCTAssertEqual(Notification.Name.navigateToPet.rawValue, "navigateToPet")
         XCTAssertEqual(Notification.Name.navigateToScan.rawValue, "navigateToScan")
+        XCTAssertEqual(Notification.Name.navigateToBilling.rawValue, "navigateToBilling")
     }
 
     // MARK: - Thread Safety Tests

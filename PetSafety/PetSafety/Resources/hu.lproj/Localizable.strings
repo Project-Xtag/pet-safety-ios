@@ -1263,3 +1263,7 @@
 // MARK: - Ajánlás dátumok
 "referral_redeemed_on" = "Beváltva: %@";
 "referral_rewarded_on" = "Jutalmazva: %@";
+
+// MARK: - Notification Actions
+"notif_promo_expiring_action" = "Előfizetés megtekintése";
+"notif_alert_reminder_action" = "Riasztás megtekintése";

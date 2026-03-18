@@ -1266,3 +1266,7 @@
 // MARK: - Referral Dates
 "referral_redeemed_on" = "Redeemed: %@";
 "referral_rewarded_on" = "Rewarded: %@";
+
+// MARK: - Notification Actions
+"notif_promo_expiring_action" = "View Subscription";
+"notif_alert_reminder_action" = "View Alert";

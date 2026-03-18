@@ -1276,3 +1276,7 @@
 // MARK: - Referral
 "referral_redeemed_on" = "Riscattato: %@";
 "referral_rewarded_on" = "Premiato: %@";
+
+// MARK: - Notification Actions
+"notif_promo_expiring_action" = "Vedi abbonamento";
+"notif_alert_reminder_action" = "Vedi avviso";

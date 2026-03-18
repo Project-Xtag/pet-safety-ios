@@ -1267,3 +1267,7 @@
 // MARK: - Referral
 "referral_redeemed_on" = "Innløst: %@";
 "referral_rewarded_on" = "Belønnet: %@";
+
+// MARK: - Notification Actions
+"notif_promo_expiring_action" = "Se abonnement";
+"notif_alert_reminder_action" = "Se varsel";

@@ -1264,3 +1264,7 @@
 // MARK: - Referral
 "referral_redeemed_on" = "Revendicat: %@";
 "referral_rewarded_on" = "Recompensat: %@";
+
+// MARK: - Notification Actions
+"notif_promo_expiring_action" = "Vezi abonamentul";
+"notif_alert_reminder_action" = "Vezi alerta";

@@ -39,6 +39,14 @@ class NotificationHandler: ObservableObject {
             handlePetFoundNotification(userInfo)
         case "SIGHTING_REPORTED":
             handleSightingNotification(userInfo)
+        case "ALERT_CREATED":
+            handleAlertConfirmation(userInfo)
+        case "PROMO_EXPIRING":
+            handlePromoExpiring(userInfo)
+        case "ALERT_REMINDER":
+            handleAlertReminder(userInfo)
+        case "MULTIPLE_SIGHTINGS":
+            handleMultipleSightings(userInfo)
         default:
             #if DEBUG
             print("Unknown notification type: \(type)")
@@ -169,6 +177,60 @@ class NotificationHandler: ObservableObject {
         )
     }
 
+    // MARK: - Alert Confirmation
+
+    private func handleAlertConfirmation(_ userInfo: [AnyHashable: Any]) {
+        let alertId = userInfo["alert_id"] as? String ?? ""
+        let petId = userInfo["pet_id"] as? String ?? ""
+
+        if !alertId.isEmpty {
+            NotificationCenter.default.post(
+                name: .navigateToAlert,
+                object: nil,
+                userInfo: ["alertId": alertId, "petId": petId]
+            )
+        }
+    }
+
+    // MARK: - Promo Expiring
+
+    private func handlePromoExpiring(_ userInfo: [AnyHashable: Any]) {
+        // Navigate to billing/subscription screen
+        NotificationCenter.default.post(
+            name: .navigateToBilling,
+            object: nil,
+            userInfo: userInfo as? [String: Any] ?? [:]
+        )
+    }
+
+    // MARK: - Alert Reminder
+
+    private func handleAlertReminder(_ userInfo: [AnyHashable: Any]) {
+        let alertId = userInfo["alert_id"] as? String ?? ""
+
+        if !alertId.isEmpty {
+            NotificationCenter.default.post(
+                name: .navigateToAlert,
+                object: nil,
+                userInfo: ["alertId": alertId]
+            )
+        }
+    }
+
+    // MARK: - Multiple Sightings
+
+    private func handleMultipleSightings(_ userInfo: [AnyHashable: Any]) {
+        let alertId = userInfo["alert_id"] as? String ?? ""
+
+        if !alertId.isEmpty {
+            NotificationCenter.default.post(
+                name: .navigateToAlert,
+                object: nil,
+                userInfo: ["alertId": alertId]
+            )
+        }
+    }
+
     // MARK: - Clear Pending Notification
 
     func clearPendingNotification() {
@@ -183,4 +245,5 @@ extension Notification.Name {
     static let navigateToAlert = Notification.Name("navigateToAlert")
     static let navigateToPet = Notification.Name("navigateToPet")
     static let navigateToScan = Notification.Name("navigateToScan")
+    static let navigateToBilling = Notification.Name("navigateToBilling")
 }

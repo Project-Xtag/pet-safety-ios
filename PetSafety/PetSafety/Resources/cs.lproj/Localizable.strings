@@ -1264,3 +1264,7 @@
 // MARK: - Referral
 "referral_redeemed_on" = "Uplatněno: %@";
 "referral_rewarded_on" = "Odměněno: %@";
+
+// MARK: - Notification Actions
+"notif_promo_expiring_action" = "Zobrazit předplatné";
+"notif_alert_reminder_action" = "Zobrazit upozornění";
