@@ -21,7 +21,9 @@ struct PetSafetyApp: App {
     @StateObject private var appState = AppState()
     @StateObject private var subscriptionViewModel = SubscriptionViewModel()
     @StateObject private var notificationHandler = NotificationHandler.shared
+    @Environment(\.scenePhase) private var scenePhase
     @State private var showSplash = true
+    @State private var lastSubscriptionRefresh: Date = .distantPast
 
     init() {
         appLog.notice("⏱️ PetSafetyApp.init() started at +\(String(format: "%.0f", (CFAbsoluteTimeGetCurrent() - startupTime) * 1000))ms")
@@ -134,6 +136,18 @@ struct PetSafetyApp: App {
                     }
                     .onOpenURL { url in
                         handleDeepLink(url)
+                    }
+                    .onChange(of: scenePhase) { _, newPhase in
+                        if newPhase == .active && authViewModel.isAuthenticated {
+                            // Refresh subscription when app comes to foreground (debounce 60s)
+                            let now = Date()
+                            if now.timeIntervalSince(lastSubscriptionRefresh) > 60 {
+                                lastSubscriptionRefresh = now
+                                Task {
+                                    await subscriptionViewModel.loadCurrentSubscription()
+                                }
+                            }
+                        }
                     }
             }
         }

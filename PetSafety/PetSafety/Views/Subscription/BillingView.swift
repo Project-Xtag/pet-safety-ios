@@ -28,6 +28,10 @@ struct BillingView: View {
         guard let date = subscription?.currentPeriodEnd else { return nil }
         let formatter = DateFormatter()
         formatter.dateStyle = .long
+        // Use the app's preferred language (set by the user in-app or via device settings)
+        if let preferredLang = Locale.preferredLanguages.first {
+            formatter.locale = Locale(identifier: preferredLang)
+        }
         return formatter.string(from: date)
     }
 
@@ -192,6 +196,10 @@ struct BillingView: View {
         }
         .navigationTitle("billing_title")
         .navigationBarTitleDisplayMode(.inline)
+        .refreshable {
+            await subscriptionViewModel.loadCurrentSubscription()
+            await loadInvoices()
+        }
         .task {
             await subscriptionViewModel.loadCurrentSubscription()
             await loadInvoices()

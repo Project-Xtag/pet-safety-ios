@@ -142,17 +142,13 @@ class SubscriptionViewModel: ObservableObject {
                 print("✅ Upgraded to Starter plan")
                 #endif
             } else {
-                // Paid plan - create checkout session
-                let response = try await APIService.shared.createSubscriptionCheckout(
-                    planName: plan.name,
-                    billingPeriod: billingPeriod
-                )
-
-                if let url = URL(string: response.checkout.url) {
+                // Paid plan - redirect to web app for subscription checkout
+                // Subscriptions are web-only (no in-app purchasing / no store entitlement needed)
+                if let url = URL(string: "https://senra.pet/choose-plan") {
                     checkoutURL = url
                     showCheckoutSheet = true
                     #if DEBUG
-                    print("✅ Created checkout session, URL: \(response.checkout.url)")
+                    print("✅ Opening web checkout for paid plan: \(plan.name)")
                     #endif
                 } else {
                     error = NSLocalizedString("error_invalid_checkout_url", comment: "")
