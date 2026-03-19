@@ -133,7 +133,7 @@
 "species_cat" = "Kot";
 "select_photo" = "Wybierz zdjęcie";
 "select_pet" = "Wybierz zwierzę";
-"select_pet_for_replacement" = "Wybierz zwierzę do wymiany zawieszki";
+"select_pet_for_replacement" = "Wybierz zwierzę do wymiany nieśki";
 "weight" = "Waga";
 "weight_optional" = "Waga w kg (opcjonalnie)";
 "date_of_birth" = "Data urodzenia";
@@ -200,24 +200,24 @@
 "scanner_notes" = "Uwagi";
 "scanner_how_it_works" = "Jak to działa";
 
-// MARK: - Aktywacja zawieszki
+// MARK: - Aktywacja nieśki
 "tag_activate_title" = "Aktywuj zawieszk";
 "tag_loading_pets" = "Ładowanie zwierząt...";
-"tag_activated" = "Zawieszka aktywowana!";
-"tag_activated_message %@" = "Zawieszka %@ jest teraz aktywna";
+"tag_activated" = "Nieśka aktywowana!";
+"tag_activated_message %@" = "Nieśka %@ jest teraz aktywna";
 "tag_choose_plan" = "Uzupełnij profil zwierzęcia, aby ułatwić jego znalezienie w razie zaginięcia";
 "tag_choose_plan_button" = "Uzupełnij profil zwierzęcia";
 "tag_skip_for_now" = "Zrobię to później";
 "tag_no_pets" = "Brak zarejestrowanych zwierząt";
 "tag_no_pets_message" = "Najpierw dodaj zwierzę, a potem aktywuj zawieszk";
-"tag_code_label" = "Kod zawieszki";
+"tag_code_label" = "Kod nieśki";
 "tag_select_pet" = "Wybierz zwierzę, aby aktywować zawieszk";
 "tag_activating" = "Aktywowanie...";
 "tag_activate_button" = "Aktywuj zawieszk";
-"tag_link_message" = "Zawieszka zostanie przypisana do wybranego zwierzęcia";
+"tag_link_message" = "Nieśka zostanie przypisana do wybranego zwierzęcia";
 
 // MARK: - Wybór planu
-"plan_tag_activated" = "Zawieszka aktywowana!";
+"plan_tag_activated" = "Nieśka aktywowana!";
 "plan_choose_subtitle" = "Wybierz plan, aby odblokować wszystkie funkcje";
 "plan_upgrade_title" = "Zmień plan";
 "plan_upgrade_subtitle" = "Więcej funkcji dla twoich zwierząt";
@@ -284,7 +284,7 @@
 // MARK: - Oznaczanie jako zaginione/znalezione
 
 // MARK: - Powiadomienia
-"tag_scanned_message" = "Zawieszka %@ została zeskanowana o %@!";
+"tag_scanned_message" = "Nieśka %@ została zeskanowana o %@!";
 "sighting_message_with_location" = "%@ został/a zauważony/a w %@!";
 "sighting_message_no_location" = "%@ został/a zauważony/a!";
 
@@ -364,7 +364,7 @@
 
 // MARK: - Adres
 "address_details" = "Szczegóły adresu";
-"address_details_footer" = "Twój adres jest używany do wysyłki zawieszek i znajdowania alertów w pobliżu.";
+"address_details_footer" = "Twój adres jest używany do wysyłki nieśek i znajdowania alertów w pobliżu.";
 "address_street" = "Ulica i numer domu";
 "address_street_placeholder" = "Podaj ulicę i numer domu";
 "address_line2" = "Mieszkanie, piętro itp. (opcjonalnie)";
@@ -495,20 +495,20 @@
 "help_faq_a2" = "Przejdź do „Moje zwierzęta” i dotknij „Dodaj nowe zwierzę”. Podaj imię, gatunek, rasę i wiek pupila, a następnie prześlij zdjęcie. Jeśli masz już zawieszk QR, możesz ją zeskanować podczas rejestracji, aby od razu połączyć ją z profilem zwierzęcia.";
 "help_faq_q3" = "Jakie informacje należy podać w profilu zwierzęcia?";
 "help_faq_a3" = "Podaj co najmniej imię, gatunek i wyraźne zdjęcie. Aby zwiększyć szanse na szybki powrót do domu w razie zaginięcia, dodaj też: rasę, wiek, wagę, kolor, numer mikrochipa, uwagi medyczne, alergie, leki i cechy charakterystyczne (wzory, blizny itp.). Im więcej szczegółów, tym łatwiej komuś zidentyfikować twoje zwierzę.";
-"help_faq_q4" = "Jak działa zawieszka z kodem QR?";
-"help_faq_a4" = "Każda zawieszka Senra ma unikalny kod QR. Gdy ktoś znajdzie twoje zwierzę i zeskanuje go aparatem telefonu, natychmiast zobaczy profil pupila — zdjęcie, imię, informacje medyczne i twoje dane kontaktowe. Może też udostępnić swoją lokalizację GPS, dzięki czemu będziesz wiedział/a dokładnie, gdzie jest twoje zwierzę. Osoba skanująca nie musi pobierać aplikacji.";
+"help_faq_q4" = "Jak działa nieśka z kodem QR?";
+"help_faq_a4" = "Każda nieśka Senra ma unikalny kod QR. Gdy ktoś znajdzie twoje zwierzę i zeskanuje go aparatem telefonu, natychmiast zobaczy profil pupila — zdjęcie, imię, informacje medyczne i twoje dane kontaktowe. Może też udostępnić swoją lokalizację GPS, dzięki czemu będziesz wiedział/a dokładnie, gdzie jest twoje zwierzę. Osoba skanująca nie musi pobierać aplikacji.";
 "help_faq_q5" = "Co się dzieje, gdy ktoś zeskanuje zawieszk mojego zwierzęcia?";
 "help_faq_a5" = "Skaner widzi publiczny profil twojego pupila ze szczegółami, które zdecydowałeś/aś się udostępnić (imię, zdjęcie, informacje medyczne, dane kontaktowe). Może dotknąć „Znalazłem to zwierzę!”, aby udostępnić ci swoją lokalizację. Otrzymasz natychmiastowe powiadomienie e-mailem (i SMS-em, jeśli masz plan Standard lub Maximum) z lokalizacją i danymi znalazcy.";
 "help_faq_q6" = "Jak aktywować zawieszk po jej otrzymaniu?";
-"help_faq_a6" = "Przejdź do „Skanuj zawieszk” w aplikacji i skieruj aparat telefonu na kod QR na zawieszce. Spowoduje to połączenie zawieszki z twoim kontem. Zostaniesz poproszony/a o wybranie istniejącego zwierzęcia lub utworzenie nowego profilu. Po aktywacji wybierz plan subskrypcji.";
+"help_faq_a6" = "Przejdź do „Skanuj zawieszk” w aplikacji i skieruj aparat telefonu na kod QR na zawieszce. Spowoduje to połączenie nieśki z twoim kontem. Zostaniesz poproszony/a o wybranie istniejącego zwierzęcia lub utworzenie nowego profilu. Po aktywacji wybierz plan subskrypcji.";
 "help_faq_q7" = "Czy mogę zaktualizować informacje o zwierzęciu po rejestracji?";
 "help_faq_a7" = "Tak — możesz edytować profil zwierzęcia w dowolnym momencie. Przejdź do „Moje zwierzęta”, wybierz zwierzę i dotknij „Edytuj”. Możesz zaktualizować dowolne pole, w tym zdjęcia. Zmiany są zapisywane natychmiast.";
 "help_faq_q8" = "Co zrobić, gdy moje zwierzę zaginęło?";
 "help_faq_a8" = "Przejdź do „Moje zwierzęta” i dotknij menu na karcie zwierzęcia, a następnie wybierz „Oznacz jako zaginione”. Spowoduje to utworzenie alertu o zaginionym zwierzęciu widocznego dla społeczności Senra w twoim rejonie. Osoby w pobliżu zobaczą alert i będą mogły zgłaszać spostrzeżenia z informacją o lokalizacji. Zostaniesz natychmiast powiadomiony/a o wszelkich spostrzeżeniach.";
 "help_faq_q9" = "Jak działają alerty o zaginionych zwierzętach?";
 "help_faq_a9" = "Gdy oznaczysz zwierzę jako zaginione, tworzony jest alert ze zdjęciem i danymi pupila. Inni użytkownicy Senra w promieniu 10km mogą zobaczyć alert na mapie zaginionych zwierząt. Każdy ze społeczności może zgłosić spostrzeżenie z lokalizacją GPS, które otrzymasz jako powiadomienie. Zarejestrowani weterynarze i schroniska w twoim rejonie również otrzymują alert.";
-"help_faq_q10" = "Jak zamówić zamienninik zawieszki?";
-"help_faq_a10" = "Przejdź do strony Konto i dotknij „Zamów zamiennik”. Wybierz zwierzę, które potrzebuje nowej zawieszki. Członkowie planu Maximum otrzymują nieograniczone bezpłatne zamienniki, członkowie planu Standard otrzymują jeden bezpłatny zamiennik rocznie, a członkowie planu Starter mogą zamawiać zamienniki za małą opłatą za wysyłkę.";
+"help_faq_q10" = "Jak zamówić zamienninik nieśki?";
+"help_faq_a10" = "Przejdź do strony Konto i dotknij „Zamów zamiennik”. Wybierz zwierzę, które potrzebuje nowej nieśki. Członkowie planu Maximum otrzymują nieograniczone bezpłatne zamienniki, członkowie planu Standard otrzymują jeden bezpłatny zamiennik rocznie, a członkowie planu Starter mogą zamawiać zamienniki za małą opłatą za wysyłkę.";
 "help_faq_q11" = "Co to jest program poleceń?";
 "help_faq_a11" = "Przejdź na stronę Polecenia, aby wygenerować swój osobisty kod polecenia. Udostępnij go znajomym i rodzinie. Gdy ktoś użyje Twojego kodu i subskrybuje plan płatny (Standard lub Maximum), oboje otrzymacie 2 miesiące za darmo. Możesz śledzić swoje polecenia na stronie Polecenia.";
 "help_faq_q12" = "Do jakich krajów wysyłacie?";
@@ -516,38 +516,38 @@
 "help_faq_q13" = "Czy mogę mieć kilka zwierząt na jednym koncie?";
 "help_faq_a13" = "Tak. W planie Starter (bezpłatnym) możesz zarejestrować do 10 zwierząt. Plan Standard obsługuje 1 zwierzę. Plan Maximum obsługuje do 10 zwierząt. Możesz zmienić plan w dowolnym momencie na stronie Konto.";
 "help_faq_q14" = "Jak zgłosić znalezione zwierzę?";
-"help_faq_a14" = "Jeśli zwierzę ma zawieszk Senra, wystarczy zeskanować kod QR aparatem telefonu — nie jest potrzebna aplikacja. Zobaczysz profil zwierzęcia i będziesz mógł/mogła udostępnić swoją lokalizację właścicielowi. Jeśli nie ma zawieszki, możesz sprawdzić mapę zaginionych zwierząt na stronie Senra, aby zobaczyć, czy zwierzę zostało zgłoszone jako zaginione w twoim rejonie.";
+"help_faq_a14" = "Jeśli zwierzę ma zawieszk Senra, wystarczy zeskanować kod QR aparatem telefonu — nie jest potrzebna aplikacja. Zobaczysz profil zwierzęcia i będziesz mógł/mogła udostępnić swoją lokalizację właścicielowi. Jeśli nie ma nieśki, możesz sprawdzić mapę zaginionych zwierząt na stronie Senra, aby zobaczyć, czy zwierzę zostało zgłoszone jako zaginione w twoim rejonie.";
 "help_faq_q15" = "Czy moje dane osobowe są bezpieczne?";
 "help_faq_a15" = "Tak. Masz pełną kontrolę nad tym, jakie informacje są widoczne, gdy ktoś skanuje zawieszk twojego zwierzęcia. W Ustawieniach > Prywatność możesz wybrać, czy pokazywać numer telefonu, e-mail i adres. Logowanie jest zabezpieczone jednorazowymi kodami weryfikacyjnymi — nie ma haseł do kradzieży. Możesz usunąć konto i wszystkie dane w dowolnym momencie.";
 "help_faq_q16" = "Zgubiłem/am zawieszk lub jest uszkodzona — co zrobić?";
-"help_faq_a16" = "Nie martw się — cyfrowy profil twojego zwierzęcia jest bezpieczny i nie jest przechowywany na samej zawieszce. Przejdź na stronę Konto i dotknij „Zamów zamiennik”. Nowa zawieszka ze świeżym kodem QR zostanie połączona z twoim istniejącym profilem zwierzęcia. Członkowie planów Standard i Maximum mogą prosić o nieograniczone bezpłatne zamienniki, a członkowie Startera płacą małą opłatę za wysyłkę. Twoja stara zawieszka przestanie działać po aktywacji nowej.";
-"help_faq_q17" = "Moja zawieszka nie skanuje się — jak to naprawić?";
-"help_faq_a17" = "Spróbuj następujących kroków: wyczyść powierzchnię zawieszki wilgotną ściereczką, zapewnij dobre oświetlenie, trzymaj aparat telefonu stabilnie około 10-15cm od zawieszki i upewnij się, że aparat lub skaner QR działa. Jeśli kod QR jest porysowany lub wyblakły, możesz użyć opcji ręcznego wprowadzania kodu w aplikacji w sekcji „Skanuj zawieszk”. Jeśli zawieszka jest zbyt zniszczona, zamów bezpłatny zamiennik na stronie Konto (plany Standard i Maximum).";
-"help_faq_q18" = "Znalazłem/am zwierzę bez zawieszki Senra — co mogę zrobić?";
+"help_faq_a16" = "Nie martw się — cyfrowy profil twojego zwierzęcia jest bezpieczny i nie jest przechowywany na samej zawieszce. Przejdź na stronę Konto i dotknij „Zamów zamiennik”. Nowa nieśka ze świeżym kodem QR zostanie połączona z twoim istniejącym profilem zwierzęcia. Członkowie planów Standard i Maximum mogą prosić o nieograniczone bezpłatne zamienniki, a członkowie Startera płacą małą opłatę za wysyłkę. Twoja stara nieśka przestanie działać po aktywacji nowej.";
+"help_faq_q17" = "Moja nieśka nie skanuje się — jak to naprawić?";
+"help_faq_a17" = "Spróbuj następujących kroków: wyczyść powierzchnię nieśki wilgotną ściereczką, zapewnij dobre oświetlenie, trzymaj aparat telefonu stabilnie około 10-15cm od nieśki i upewnij się, że aparat lub skaner QR działa. Jeśli kod QR jest porysowany lub wyblakły, możesz użyć opcji ręcznego wprowadzania kodu w aplikacji w sekcji „Skanuj zawieszk”. Jeśli nieśka jest zbyt zniszczona, zamów bezpłatny zamiennik na stronie Konto (plany Standard i Maximum).";
+"help_faq_q18" = "Znalazłem/am zwierzę bez nieśki Senra — co mogę zrobić?";
 "help_faq_a18" = "Sprawdź mapę zaginionych zwierząt na stronie Senra (senra.pet) — zwierzę mogło zostać zgłoszone jako zaginione w twoim rejonie. Alerty o zaginionych zwierzętach możesz przeglądać bez konta. Jeśli znajdziesz dopasowanie, możesz zgłosić spostrzeżenie z lokalizacją, aby pomóc zreunifikować zwierzę z właścicielem. Możesz też zabrać zwierzę do lokalnego weterynarza w celu sprawdzenia mikrochipa.";
 "help_faq_q19" = "Czy mogę zmienić adres e-mail?";
 "help_faq_a19" = "Twój główny adres e-mail służy jako identyfikator konta i nie można go bezpośrednio zmienić. Jeśli chcesz używać innego e-maila, możesz dodać zapasowy w Ustawieniach > Dane kontaktowe — będzie on widoczny na profilu twojego zwierzęcia. Jeśli absolutnie potrzebujesz zmienić główny e-mail, skontaktuj się z naszym zespołem wsparcia, a pomożemy ci przenieść konto.";
-"help_faq_q20" = "Jaka jest różnica między mikrochipem a zawieszką QR Senra?";
-"help_faq_a20" = "Mikrochip to mały implant pod skórą twojego zwierzęcia, który przechowuje unikalny numer identyfikacyjny — ale wymaga specjalnego skanera (zazwyczaj dostępnego tylko u weterynarzy i w schroniskach) do odczytu. Zawieszka QR Senra działa natychmiast z aparatem dowolnego smartfona, pokazując pełny profil twojego zwierzęcia, zdjęcie i dane kontaktowe na miejscu. Osoba, która znajdzie twoje zwierzę, może też udostępnić ci swoją lokalizację GPS. Zalecamy używanie obu: mikrochipa jako stałego zabezpieczenia, a zawieszki Senra do natychmiastowej, codziennej identyfikacji.";
+"help_faq_q20" = "Jaka jest różnica między mikrochipem a nieśką QR Senra?";
+"help_faq_a20" = "Mikrochip to mały implant pod skórą twojego zwierzęcia, który przechowuje unikalny numer identyfikacyjny — ale wymaga specjalnego skanera (zazwyczaj dostępnego tylko u weterynarzy i w schroniskach) do odczytu. Nieśka QR Senra działa natychmiast z aparatem dowolnego smartfona, pokazując pełny profil twojego zwierzęcia, zdjęcie i dane kontaktowe na miejscu. Osoba, która znajdzie twoje zwierzę, może też udostępnić ci swoją lokalizację GPS. Zalecamy używanie obu: mikrochipa jako stałego zabezpieczenia, a nieśki Senra do natychmiastowej, codziennej identyfikacji.";
 "help_faq_q21" = "Co stanie się z moimi danymi, jeśli anuluję subskrypcję?";
-"help_faq_a21" = "Jeśli anulujesz subskrypcję, zachowasz dostęp do płatnych funkcji do końca bieżącego okresu rozliczeniowego. Potem twoje konto automatycznie przejdzie na bezpłatny plan Starter. Profile zwierząt, zdjęcia i zawieszki QR pozostają aktywne — tracisz jedynie dostęp do funkcji premium, takich jak powiadomienia SMS, alerty weterynarzy i bezpłatne zamienniki zawieszek. Twoje dane nigdy nie są usuwane po anulowaniu. Aby trwale usunąć wszystkie dane, użyj opcji Usunięcie konta w Ustawieniach.";
+"help_faq_a21" = "Jeśli anulujesz subskrypcję, zachowasz dostęp do płatnych funkcji do końca bieżącego okresu rozliczeniowego. Potem twoje konto automatycznie przejdzie na bezpłatny plan Starter. Profile zwierząt, zdjęcia i nieśki QR pozostają aktywne — tracisz jedynie dostęp do funkcji premium, takich jak powiadomienia SMS, alerty weterynarzy i bezpłatne zamienniki nieśek. Twoje dane nigdy nie są usuwane po anulowaniu. Aby trwale usunąć wszystkie dane, użyj opcji Usunięcie konta w Ustawieniach.";
 "help_faq_q22" = "Jak zarejestrować weterynarza lub schronisko w Senra?";
 "help_faq_a22" = "Weterynarze i schroniska mogą rejestrować się na stronie senra.pet/register-vet-shelter. Wypełnij dane gabinetu lub organizacji, a my wyślemy e-mail weryfikacyjny. Po potwierdzeniu automatycznie będziesz otrzymywać alerty e-mail, gdy zwierzęta zaginą w twoim rejonie — pomagając reunifikować zagubione zwierzęta z ich rodzinami. Rejestracja jest bezpłatna i nie wymaga logowania. Właściciele zwierząt mogą też zarejestrować swojego lokalnego weterynarza w ich imieniu.";
 "help_faq_q23" = "Jak podzielić się historią sukcesu, gdy moje zwierzę zostanie odnalezione?";
 "help_faq_a23" = "Gdy oznaczysz swoje zwierzę jako znalezione w „Moje zwierzęta”, zostaniesz zapytany/a, czy chcesz podzielić się historią powrotu do domu. Możesz dodać krótką wiadomość o tym, jak twoje zwierzę zostało odnalezione i potwierdzić miejsce reunifikacji. Publiczne historie pojawiają się na mapie odnalezionych zwierząt, inspirując społeczność i pokazując, że system działa. Możesz też opublikować lub usunąć historię sukcesu później ze strony profilu zwierzęcia.";
 "help_faq_q24" = "Które przeglądarki i urządzenia są obsługiwane?";
-"help_faq_a24" = "Senra działa we wszystkich nowoczesnych przeglądarkach, w tym Chrome, Safari, Firefox i Edge na urządzeniach mobilnych i stacjonarnych. Skanowanie zawieszek QR działa z aparatem dowolnego smartfona — osoba znajdująca twoje zwierzę nie potrzebuje aplikacji Senra ani nawet konta. Powiadomienia push są obsługiwane w Chrome i Edge na komputerach stacjonarnych i Androidzie. Dla najlepszych wyników zalecamy używanie aktualnej przeglądarki na telefonie.";
-"help_faq_q25" = "Czy mogę zamówić zawieszki dla kilku zwierząt naraz?";
-"help_faq_a25" = "Każde zamówienie zawieszek zawiera zawieszki dla imion zwierząt podanych podczas realizacji zamówienia. Możesz podać kilka imion zwierząt w jednym zamówieniu. Po otrzymaniu zawieszek zeskanuj każdą, aby ją aktywować i połączyć z odpowiednim profilem zwierzęcia. Jeśli później potrzebujesz zawieszek dla kolejnych zwierząt, możesz składać dodatkowe zamówienia na stronie Konto w dowolnym momencie.";
+"help_faq_a24" = "Senra działa we wszystkich nowoczesnych przeglądarkach, w tym Chrome, Safari, Firefox i Edge na urządzeniach mobilnych i stacjonarnych. Skanowanie nieśek QR działa z aparatem dowolnego smartfona — osoba znajdująca twoje zwierzę nie potrzebuje aplikacji Senra ani nawet konta. Powiadomienia push są obsługiwane w Chrome i Edge na komputerach stacjonarnych i Androidzie. Dla najlepszych wyników zalecamy używanie aktualnej przeglądarki na telefonie.";
+"help_faq_q25" = "Czy mogę zamówić nieśki dla kilku zwierząt naraz?";
+"help_faq_a25" = "Każde zamówienie nieśek zawiera nieśki dla imion zwierząt podanych podczas realizacji zamówienia. Możesz podać kilka imion zwierząt w jednym zamówieniu. Po otrzymaniu nieśek zeskanuj każdą, aby ją aktywować i połączyć z odpowiednim profilem zwierzęcia. Jeśli później potrzebujesz nieśek dla kolejnych zwierząt, możesz składać dodatkowe zamówienia na stronie Konto w dowolnym momencie.";
 "help_faq_q26" = "Jak alerty o zaginionych zwierzętach trafiają do weterynarzy i schronisk?";
 "help_faq_a26" = "Gdy oznaczysz swoje zwierzę jako zaginione, Senra automatycznie wysyła alerty e-mail do wszystkich zweryfikowanych weterynarzy i schronisk zarejestrowanych w twoim rejonie. Oznacza to, że lokalni specjaliści od zwierząt są natychmiast świadomi zaginięcia twojego pupila i mogą go wypatrywać. Im więcej weterynarzy i schronisk jest zarejestrowanych w twoim rejonie, tym silniejsza sieć bezpieczeństwa. Możesz pomóc, zachęcając własnego weterynarza do rejestracji w Senra.";
 "help_faq_q27" = "Czy mogę przenieść zawieszk na inne zwierzę?";
-"help_faq_a27" = "Każda zawieszka QR jest trwale połączona z jednym profilem zwierzęcia i nie można jej przypisać ponownie. Jeśli zwierzę umrze lub zawieszka nie jest już potrzebna, stara zawieszka po prostu staje się nieaktywna. Aby oznaczyć nowe zwierzę, zamów nową zawieszk na stronie Konto. Jeśli masz plan Standard lub Maximum, możesz być uprawniony/a do bezpłatnej zawieszki zamiennej dla nowego zwierzęcia.";
+"help_faq_a27" = "Każda nieśka QR jest trwale połączona z jednym profilem zwierzęcia i nie można jej przypisać ponownie. Jeśli zwierzę umrze lub nieśka nie jest już potrzebna, stara nieśka po prostu staje się nieaktywna. Aby oznaczyć nowe zwierzę, zamów nową zawieszk na stronie Konto. Jeśli masz plan Standard lub Maximum, możesz być uprawniony/a do bezpłatnej nieśki zamiennej dla nowego zwierzęcia.";
 // Elementy przewodnika
-"help_guide_qr_tags_title" = "Zawieszki z kodem QR";
-"help_guide_qr_tags_desc" = "Każda zawieszka Senra zawiera unikalny kod QR prowadzący do cyfrowego profilu twojego zwierzęcia. Każdy, kto znajdzie twoje zwierzę, może zeskanować kod aparatem telefonu — bez konieczności pobierania aplikacji. Skaner natychmiast widzi zdjęcie, imię, informacje medyczne i twoje dane kontaktowe. Może też udostępnić swoją lokalizację GPS, dzięki czemu będziesz wiedział/a dokładnie, gdzie jest twoje zwierzę. Zawieszki działają ze wszystkimi nowoczesnymi smartfonami.";
-"help_guide_materials_title" = "Materiały i trwałość zawieszek";
-"help_guide_materials_desc" = "Zawieszki Senra są wykonane z trwałego, lekkiego metalu z powłoką epoksydową zapewniającą dodatkową ochronę. Są wodoodporne i odporne na UV, odpowiednie na każde warunki pogodowe. Kod QR jest wydrukowany tuszem odpornym na blaknięcie, aby pozostać czytelnym przez długi czas. Zawieszki bezpiecznie mocują się do obroży zwierzęcia. Jeśli zawieszka ulegnie uszkodzeniu lub kod QR przestanie się skanować, możesz zamówić zamiennik na stronie Konto — bezpłatnie dla członków planów Standard i Maximum.";
+"help_guide_qr_tags_title" = "Nieśki z kodem QR";
+"help_guide_qr_tags_desc" = "Każda nieśka Senra zawiera unikalny kod QR prowadzący do cyfrowego profilu twojego zwierzęcia. Każdy, kto znajdzie twoje zwierzę, może zeskanować kod aparatem telefonu — bez konieczności pobierania aplikacji. Skaner natychmiast widzi zdjęcie, imię, informacje medyczne i twoje dane kontaktowe. Może też udostępnić swoją lokalizację GPS, dzięki czemu będziesz wiedział/a dokładnie, gdzie jest twoje zwierzę. Nieśki działają ze wszystkimi nowoczesnymi smartfonami.";
+"help_guide_materials_title" = "Materiały i trwałość nieśek";
+"help_guide_materials_desc" = "Nieśki Senra są wykonane z trwałego, lekkiego metalu z powłoką epoksydową zapewniającą dodatkową ochronę. Są wodoodporne i odporne na UV, odpowiednie na każde warunki pogodowe. Kod QR jest wydrukowany tuszem odpornym na blaknięcie, aby pozostać czytelnym przez długi czas. Nieśki bezpiecznie mocują się do obroży zwierzęcia. Jeśli nieśka ulegnie uszkodzeniu lub kod QR przestanie się skanować, możesz zamówić zamiennik na stronie Konto — bezpłatnie dla członków planów Standard i Maximum.";
 "help_guide_emergency_title" = "Kontakt alarmowy i alerty";
 "help_guide_emergency_desc" = "Gdy ktoś zeskanuje zawieszk twojego zwierzęcia, otrzymasz natychmiastowe powiadomienie e-mailem z lokalizacją znalazcy. Członkowie planów Standard i Maximum otrzymują też alerty SMS dla szybszej reakcji. Jeśli oznaczysz zwierzę jako zaginione, alert społecznościowy jest wysyłany do wszystkich użytkowników Senra w promieniu 10km, a zarejestrowani weterynarze i schroniska w twoim rejonie są również powiadamiani. Każdy ze społeczności może zgłaszać spostrzeżenia z lokalizacją, budując ślad, który pomoże ci odnaleźć zwierzę.";
 "help_guide_profile_title" = "Zarządzanie profilem zwierzęcia";
@@ -587,7 +587,7 @@
 // MARK: - Zamówienia
 "orders_title" = "Zamówienia";
 "order_number" = "Zamówienie #%@";
-"add_pet_first_replacement" = "Najpierw dodaj zwierzę, aby zamówić zamiennik zawieszki.";
+"add_pet_first_replacement" = "Najpierw dodaj zwierzę, aby zamówić zamiennik nieśki.";
 "orders_no_orders" = "Brak zamówień";
 "orders_no_orders_message" = "Nie złożyłeś/aś jeszcze żadnych zamówień";
 "orders_information" = "Informacje o zamówieniu";
@@ -597,16 +597,16 @@
 "orders_order_date" = "Data zamówienia";
 "orders_items" = "Pozycje";
 "orders_quantity %lld" = "Ilość: %lld";
-"orders_tag_pending" = "Zawieszka QR oczekująca";
-"orders_tag_assigned" = "Zawieszka QR przypisana";
+"orders_tag_pending" = "Nieśka QR oczekująca";
+"orders_tag_assigned" = "Nieśka QR przypisana";
 "orders_detail_title" = "Szczegóły zamówienia";
 
-// MARK: - Zamówienie kolejnych zawieszek
-"order_more_title" = "Zamów więcej zawieszek";
+// MARK: - Zamówienie kolejnych nieśek
+"order_more_title" = "Zamów więcej nieśek";
 "order_more_complete" = "Zamówienie gotowe!";
-"order_more_confirmation" = "Wyślemy zawieszki po potwierdzeniu płatności.";
+"order_more_confirmation" = "Wyślemy nieśki po potwierdzeniu płatności.";
 "order_more_pet_names" = "Imiona zwierząt";
-"order_more_pet_names_footer" = "Podaj imiona zwierząt, dla których chcesz zawieszki. Każda zawieszka zostanie grawerowana z imieniem zwierzęcia.";
+"order_more_pet_names_footer" = "Podaj imiona zwierząt, dla których chcesz nieśki. Każda nieśka zostanie grawerowana z imieniem zwierzęcia.";
 "order_more_add_another" = "Dodaj kolejne zwierzę";
 "order_more_your_info" = "Twoje dane";
 "order_more_shipping" = "Adres dostawy";
@@ -616,16 +616,16 @@
 "order_more_postal" = "Kod pocztowy";
 "order_more_country" = "Kraj";
 "order_more_summary" = "Podsumowanie zamówienia";
-"order_more_tags_count %lld" = "Zawieszki (%lld)";
+"order_more_tags_count %lld" = "Nieśki (%lld)";
 "order_more_shipping_cost" = "Wysyłka";
 "order_more_total" = "Razem";
 "order_more_proceed_to_payment" = "Przejdź do płatności";
 "order_more_redirecting" = "Przekierowywanie...";
 
-// MARK: - Zamówienie zawieszki zamiennej
+// MARK: - Zamówienie nieśki zamiennej
 "order_replace_title" = "Zamów zawieszk zamienną";
 "order_replace_complete" = "Zamówienie gotowe!";
-"order_replace_confirmation" = "Twoja zawieszka zamienna zostanie wysłana na podany adres.";
+"order_replace_confirmation" = "Twoja nieśka zamienna zostanie wysłana na podany adres.";
 "order_replace_pet_info" = "Informacje o zwierzęciu";
 "order_replace_important" = "Ważne informacje";
 "order_replace_eligible_free" = "Pierwszy zamiennik jest bezpłatny";
@@ -719,7 +719,7 @@
 "edit_information" = "Edytuj informacje";
 "registered_address" = "Zarejestrowany adres";
 "address_shipping_footer" = "Podaj pełny adres do celów wysyłki i rozliczeń";
-"address_delivery_prompt" = "Dodaj adres, aby umożliwić wysyłkę i dostarczenie zawieszek QR";
+"address_delivery_prompt" = "Dodaj adres, aby umożliwić wysyłkę i dostarczenie nieśek QR";
 "contacts_info_full" = "Te dane kontaktowe będą wyświetlane, gdy ktoś zeskanuje zawieszk QR twojego zwierzęcia. Możesz dodać do dwóch adresów e-mail i numerów telefonów.";
 "contacts_primary_email_edit_footer" = "Główny adres e-mail twojego konta";
 "contacts_secondary_email_edit_footer" = "Zapasowy e-mail do powiadomień o odnalezieniu zwierzęcia";
@@ -728,11 +728,11 @@
 "contacts_visible_on_tag" = "Widoczne na zawieszce";
 "contacts_no_type_added" = "Brak %@ dodanego/ej";
 
-// MARK: - Dodatkowe klucze zamówienia zawieszki zamiennej
+// MARK: - Dodatkowe klucze zamówienia nieśki zamiennej
 "order_replace_upgrade_hint" = "Przejdź na plan Standard lub Maximum, aby uzyskać bezpłatne zamienniki";
 "order_replace_old_deactivated" = "Twój stary kod QR zostanie dezaktywowany po złożeniu zamówienia";
 "order_replace_delivery_time" = "Otrzymasz nową zawieszk w ciągu 5–7 dni roboczych";
-"order_replace_scan_activate" = "Po otrzymaniu nowej zawieszki będziesz musiał/a ją zeskanować, aby ją aktywować";
+"order_replace_scan_activate" = "Po otrzymaniu nowej nieśki będziesz musiał/a ją zeskanować, aby ją aktywować";
 
 // MARK: - Dodatkowe klucze offline
 "offline_last_sync_label" = "Czas ostatniej synchronizacji";
@@ -740,7 +740,7 @@
 // MARK: - Wybór planu
 "plan_choose_title" = "Wybierz swój plan";
 "plan_load_failed" = "Nie udało się wczytać planów";
-"plan_feature_qr_tag" = "Zawieszka QR dla twojego zwierzęcia";
+"plan_feature_qr_tag" = "Nieśka QR dla twojego zwierzęcia";
 "plan_feature_scan_notif" = "Natychmiastowe powiadomienia o skanowaniu";
 "plan_feature_public_profile" = "Publiczny profil zwierzęcia";
 "plan_feature_secure_storage" = "Bezpieczne przechowywanie danych";
@@ -748,7 +748,7 @@
 "plan_feature_lost_alerts_short" = "Alerty o zaginionych zwierzętach";
 "plan_feature_sms" = "Powiadomienia SMS";
 "plan_feature_photos" = "Do 10 zdjęć na zwierzę";
-"plan_feature_replacements" = "Bezpłatne zamienniki zawieszek";
+"plan_feature_replacements" = "Bezpłatne zamienniki nieśek";
 
 // MARK: - Karta alertów (Część 1)
 "alerts_loading" = "Ładowanie alertów…";
@@ -790,7 +790,7 @@
 
 // MARK: - Monit o powiadomienia push (Część 1)
 "push_prompt_title" = "Pozostań w kontakcie";
-"push_prompt_benefit_scan" = "Natychmiastowe alerty, gdy zawieszka twojego zwierzęcia zostanie zeskanowana";
+"push_prompt_benefit_scan" = "Natychmiastowe alerty, gdy nieśka twojego zwierzęcia zostanie zeskanowana";
 "push_prompt_benefit_sighting" = "Raporty spostrzeżeń ze społeczności";
 "push_prompt_benefit_found" = "Natychmiastowe powiadomienie, gdy twoje zwierzę zostanie odnalezione";
 "push_prompt_benefit_missing" = "Alerty o zaginionych zwierzętach w twoim rejonie";
@@ -967,7 +967,7 @@
 "referral_status_rewarded" = "Nagrodzony/a";
 "referral_share_message" = "Użyj mojego kodu polecenia %@, aby uzyskać 2 miesiące za darmo w Pet Safety! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Pierwsze kroki";
-"help_faq_group_tags_scanning" = "Zawieszki i skanowanie";
+"help_faq_group_tags_scanning" = "Nieśki i skanowanie";
 "help_faq_group_missing_pets" = "Zaginione zwierzęta i alerty";
 "help_faq_group_billing_plans" = "Płatności i plany";
 "help_faq_group_privacy_account" = "Prywatność i konto";
@@ -977,8 +977,8 @@
 "order_more_shipping_calculated" = "Obliczane przy kasie";
 "order_more_total_shipping_only" = "Tylko koszty wysyłki";
 "checkout_subscription_success" = "Twoja subskrypcja jest teraz aktywna!";
-"checkout_tag_order_success" = "Płatność zakończona sukcesem! Twoje zamówienie zawieszki jest przetwarzane.";
-"checkout_replacement_success" = "Płatność zakończona sukcesem! Twoja zawieszka zamienna jest w drodze.";
+"checkout_tag_order_success" = "Płatność zakończona sukcesem! Twoje zamówienie nieśki jest przetwarzane.";
+"checkout_replacement_success" = "Płatność zakończona sukcesem! Twoja nieśka zamienna jest w drodze.";
 "checkout_success" = "Płatność zakończona sukcesem!";
 "order_status_completed" = "Zrealizowane";
 "order_status_pending" = "Oczekujące";
@@ -1063,21 +1063,21 @@
 "delivery_postapoint" = "Odbiór PostaPont";
 
 // MARK: - Pending Registrations
-"pending_registrations_title" = "Oczekujące zawieszki";
+"pending_registrations_title" = "Oczekujące nieśki";
 "ready_to_activate" = "Gotowe do aktywacji";
 "still_processing" = "W trakcie realizacji";
-"scan_tag_now" = "Skanuj zawieszkę";
+"scan_tag_now" = "Skanuj nieśkę";
 "create_profile_first" = "Utwórz profil";
 "create_profile_while_waiting" = "Utwórz profil podczas oczekiwania";
 "all_caught_up" = "Wszystko aktualne!";
-"all_caught_up_description" = "Nie masz żadnych oczekujących rejestracji zawieszek.";
-"order_tags" = "Zamów zawieszki";
+"all_caught_up_description" = "Nie masz żadnych oczekujących rejestracji nieśek.";
+"order_tags" = "Zamów nieśki";
 "status_shipped" = "Wysłano";
 "status_delivered" = "Dostarczono";
 "status_processing" = "W trakcie realizacji";
 "status_pending" = "Oczekujące";
-"activation_help_title" = "Jak aktywować zawieszkę";
-"activation_help_step1" = "Poczekaj na dostarczenie zawieszki";
+"activation_help_title" = "Jak aktywować nieśkę";
+"activation_help_step1" = "Poczekaj na dostarczenie nieśki";
 "activation_help_step2" = "Zeskanuj kod QR na zawieszce";
 "activation_help_step3" = "Wybierz zwierzaka do powiązania";
 "activation_help_step4" = "Wybierz plan subskrypcji";
@@ -1091,7 +1091,7 @@
 "other_pets" = "Inne zwierzęta";
 "link_to_pet" = "Połącz z %@";
 "no_pets_yet" = "Jeszcze brak zwierząt";
-"create_first_pet" = "Utwórz profil zwierzęcia, aby aktywować zawieszkę.";
+"create_first_pet" = "Utwórz profil zwierzęcia, aby aktywować nieśkę.";
 "create_new_pet" = "Utwórz nowe zwierzę";
 
 // MARK: - Public Profile Details
@@ -1102,15 +1102,15 @@
 // MARK: - Notifications Inbox
 "notifications_title" = "Powiadomienia";
 "no_notifications" = "Brak powiadomień";
-"no_notifications_desc" = "Wszystko aktualne! Powiadomienia pojawią się tutaj, gdy ktoś zeskanuje zawieszkę Twojego zwierzęcia.";
+"no_notifications_desc" = "Wszystko aktualne! Powiadomienia pojawią się tutaj, gdy ktoś zeskanuje nieśkę Twojego zwierzęcia.";
 "mark_all_read" = "Oznacz wszystkie jako przeczytane";
 "load_more" = "Załaduj więcej";
 "just_now" = "Właśnie teraz";
 
 // MARK: - Activation Error Messages
-"activation_error_qr_not_found" = "Kod QR nie został rozpoznany. Upewnij się, że skanujesz oficjalną zawieszkę Senra.";
-"activation_error_already_activated" = "Ta zawieszka jest już przypisana do innego zwierzęcia. Skontaktuj się ze wsparciem.";
-"activation_error_not_linked" = "Ta zawieszka nie została jeszcze przypisana do Twojego zamówienia. Poczekaj na potwierdzenie wysyłki.";
+"activation_error_qr_not_found" = "Kod QR nie został rozpoznany. Upewnij się, że skanujesz oficjalną nieśkę Senra.";
+"activation_error_already_activated" = "Ta nieśka jest już przypisana do innego zwierzęcia. Skontaktuj się ze wsparciem.";
+"activation_error_not_linked" = "Ta nieśka nie została jeszcze przypisana do Twojego zamówienia. Poczekaj na potwierdzenie wysyłki.";
 "activation_error_not_shipped" = "Twoje zamówienie nie zostało jeszcze wysłane. Poczekaj na dostawę.";
 "activation_error_not_owner" = "To nie jest Twoje zwierzę. Wybierz jedno ze swoich zwierząt.";
 
@@ -1230,12 +1230,12 @@
 "profile_incomplete_warning" = "Uzupełnij profil zwierzęcia";
 "profile_incomplete_desc" = "Brakujące dane utrudniają odnalezienie zwierzęcia. Uzupełnij wagę, kolor i informacje medyczne.";
 "identity_locked_title" = "Imię, gatunek i rasa są zablokowane";
-"identity_locked_desc" = "Tych pól nie można zmienić po aktywacji zawieszki.";
+"identity_locked_desc" = "Tych pól nie można zmienić po aktywacji nieśki.";
 
 // MARK: - Subscription Management
 "cancel_subscription_title" = "Anulować subskrypcję?";
 "cancel_warning_a" = "Stracisz natychmiastowe powiadomienia e-mail, SMS i alerty społecznościowe";
-"cancel_warning_b" = "Bezpłatna wymiana zawieszek nie będzie już dostępna";
+"cancel_warning_b" = "Bezpłatna wymiana nieśek nie będzie już dostępna";
 "cancel_warning_c" = "Stracisz dostęp do alertów weterynaryjnych i schroniskowych";
 "cancel_warning_d" = "Twoje konto i rejestracje zwierząt pozostaną aktywne";
 "cancel_access_until" = "Zachowasz dostęp do %@";

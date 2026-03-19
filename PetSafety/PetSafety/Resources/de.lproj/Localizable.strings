@@ -42,7 +42,7 @@
 "resend_code_cooldown" = "Code erneut senden in %llds";
 "resend_code_prompt" = "Keinen Code erhalten? Erneut senden";
 "dont_have_account" = "Noch kein Konto?";
-"start_here_order_free_tag" = "Hier starten & kostenlosen Tag bestellen";
+"start_here_order_free_tag" = "Hier starten & kostenlosen Namensschild bestellen";
 "create_account" = "Konto erstellen";
 "enter_details_subtitle" = "Geben Sie Ihre Daten ein, um zu starten.";
 "register" = "Registrieren";
@@ -128,12 +128,12 @@
 "delete_pet_button" = "Haustier löschen";
 "delete_pet_dialog_message" = "Möchten Sie dieses Haustier wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.";
 "delete_pet_warning_title" = "%@ löschen?";
-"delete_pet_warning_message" = "%@ wird dauerhaft aus deinem Konto entfernt. Der QR-Tag wird sofort deaktiviert und funktioniert beim Scannen nicht mehr. Wenn dies dein letztes Haustier ist, wird auch dein Abonnement gekündigt.";
+"delete_pet_warning_message" = "%@ wird dauerhaft aus deinem Konto entfernt. Der QR-Namensschild wird sofort deaktiviert und funktioniert beim Scannen nicht mehr. Wenn dies dein letztes Haustier ist, wird auch dein Abonnement gekündigt.";
 "delete_pet_warning_confirm" = "Haustier löschen";
 "species_cat" = "Katze";
 "select_photo" = "Foto auswählen";
 "select_pet" = "Haustier auswählen";
-"select_pet_for_replacement" = "Haustier für Ersatz-Tag auswählen";
+"select_pet_for_replacement" = "Haustier für Ersatz-Namensschild auswählen";
 "weight" = "Gewicht";
 "weight_optional" = "Gewicht in kg (optional)";
 "date_of_birth" = "Geburtsdatum";
@@ -162,7 +162,7 @@
 
 // MARK: - QR-Scanner
 "scan_qr_code" = "QR-Code scannen";
-"scan_qr_subtitle" = "Richten Sie Ihre Kamera auf den QR-Tag des Haustiers";
+"scan_qr_subtitle" = "Richten Sie Ihre Kamera auf den QR-Namensschild des Haustiers";
 "hello_pet_name" = "Hallo! Ich bin %@";
 "scanned_tag_thanks" = "Du hast gerade meinen Tag gescannt. Danke, dass du mir hilfst!";
 "share_location_with_owner" = "Meinen Standort mit dem Besitzer teilen";
@@ -200,24 +200,24 @@
 "scanner_notes" = "Notizen";
 "scanner_how_it_works" = "So funktioniert es";
 
-// MARK: - Tag-Aktivierung
-"tag_activate_title" = "Tag aktivieren";
+// MARK: - Namensschild-Aktivierung
+"tag_activate_title" = "Namensschild aktivieren";
 "tag_loading_pets" = "Haustiere werden geladen…";
-"tag_activated" = "Tag aktiviert!";
+"tag_activated" = "Namensschild aktiviert!";
 "tag_activated_message %@" = "Der Tag von %@ ist jetzt aktiv";
 "tag_choose_plan" = "Vervollständigen Sie das Profil, damit Ihr Haustier leichter gefunden werden kann";
 "tag_choose_plan_button" = "Haustierprofil vervollständigen";
 "tag_skip_for_now" = "Das mache ich später";
 "tag_no_pets" = "Noch keine Haustiere";
-"tag_no_pets_message" = "Fügen Sie zuerst ein Haustier hinzu, bevor Sie einen Tag aktivieren";
+"tag_no_pets_message" = "Fügen Sie zuerst ein Haustier hinzu, bevor Sie einen Namensschild aktivieren";
 "tag_code_label" = "Tag-Code";
 "tag_select_pet" = "Haustier auswählen, um diesen Tag zu verknüpfen";
 "tag_activating" = "Aktivierung…";
-"tag_activate_button" = "Tag aktivieren";
+"tag_activate_button" = "Namensschild aktivieren";
 "tag_link_message" = "Dieser Tag wird mit dem ausgewählten Haustier verknüpft";
 
 // MARK: - Plan-Auswahl
-"plan_tag_activated" = "Tag aktiviert!";
+"plan_tag_activated" = "Namensschild aktiviert!";
 "plan_choose_subtitle" = "Wählen Sie einen Plan, um alle Funktionen freizuschalten";
 "plan_upgrade_title" = "Plan upgraden";
 "plan_upgrade_subtitle" = "Mehr Funktionen für Ihre Haustiere";
@@ -365,7 +365,7 @@
 
 // MARK: - Adresse
 "address_details" = "Adressdetails";
-"address_details_footer" = "Ihre Adresse wird für den Versand von Tags und das Finden von Warnungen in der Nähe verwendet.";
+"address_details_footer" = "Ihre Adresse wird für den Versand von Namensschilder und das Finden von Warnungen in der Nähe verwendet.";
 "address_street" = "Straße und Hausnummer";
 "address_street_placeholder" = "Straße und Hausnummer eingeben";
 "address_line2" = "Stockwerk, Wohnung (optional)";
@@ -495,11 +495,11 @@
 "help_faq_q2" = "Welche Informationen sollte ich im Profil angeben?";
 "help_faq_a2" = "Name, Art, Rasse, Alter, medizinische Angaben, Notfallkontakte und ein aktuelles Foto.";
 "help_faq_q3" = "Wie funktioniert der QR-Code-Tag?";
-"help_faq_a3" = "Jedes Tier erhält einen einzigartigen QR-Tag. Nach dem Scan können Finder das Profil sehen und dich kontaktieren.";
+"help_faq_a3" = "Jedes Tier erhält einen einzigartigen QR-Namensschild. Nach dem Scan können Finder das Profil sehen und dich kontaktieren.";
 "help_faq_q4" = "Kann ich die Informationen später aktualisieren?";
 "help_faq_a4" = "Ja! Gehe zu 'Meine Tiere', wähle dein Tier aus und klicke auf 'Profil bearbeiten'.";
-"help_faq_q5" = "Wie bestelle ich einen Ersatz-Tag?";
-"help_faq_a5" = "Gehe zum Profil deines Tieres und klicke auf 'Ersatz-Tag bestellen'.";
+"help_faq_q5" = "Wie bestelle ich einen Ersatz-Namensschild?";
+"help_faq_a5" = "Gehe zum Profil deines Tieres und klicke auf 'Ersatz-Namensschild bestellen'.";
 // Anleitungen
 
 // MARK: - Privatsphäre-Modus
@@ -518,7 +518,7 @@
 "privacy_data_privacy" = "Datenschutz";
 "privacy_privacy_policy" = "Datenschutzrichtlinie";
 "privacy_title" = "Privatsphäre-Modus";
-"privacy_mode_footer" = "Datenschutzeinstellungen helfen Ihnen zu steuern, welche Informationen geteilt werden, wenn jemand den QR-Tag Ihres Haustiers scannt.";
+"privacy_mode_footer" = "Datenschutzeinstellungen helfen Ihnen zu steuern, welche Informationen geteilt werden, wenn jemand den QR-Namensschild Ihres Haustiers scannt.";
 "privacy_settings_updated" = "Datenschutzeinstellungen aktualisiert";
 "privacy_settings_failed" = "Datenschutzeinstellungen konnten nicht aktualisiert werden";
 
@@ -533,7 +533,7 @@
 // MARK: - Bestellungen
 "orders_title" = "Bestellungen";
 "order_number" = "Bestellung #%@";
-"add_pet_first_replacement" = "Fügen Sie zuerst ein Haustier hinzu, um einen Ersatz-Tag zu bestellen.";
+"add_pet_first_replacement" = "Fügen Sie zuerst ein Haustier hinzu, um einen Ersatz-Namensschild zu bestellen.";
 "orders_no_orders" = "Keine Bestellungen";
 "orders_no_orders_message" = "Sie haben noch keine Bestellungen aufgegeben";
 "orders_information" = "Bestellinformationen";
@@ -543,16 +543,16 @@
 "orders_order_date" = "Bestelldatum";
 "orders_items" = "Artikel";
 "orders_quantity %lld" = "Menge: %lld";
-"orders_tag_pending" = "QR-Tag ausstehend";
-"orders_tag_assigned" = "QR-Tag zugewiesen";
+"orders_tag_pending" = "QR-Namensschild ausstehend";
+"orders_tag_assigned" = "QR-Namensschild zugewiesen";
 "orders_detail_title" = "Bestelldetails";
 
-// MARK: - Weitere Tags bestellen
-"order_more_title" = "Weitere Tags bestellen";
+// MARK: - Weitere Namensschilder bestellen
+"order_more_title" = "Weitere Namensschilder bestellen";
 "order_more_complete" = "Bestellung abgeschlossen!";
-"order_more_confirmation" = "Wir versenden Ihre Tags, sobald die Zahlung bestätigt ist.";
+"order_more_confirmation" = "Wir versenden Ihre Namensschilder, sobald die Zahlung bestätigt ist.";
 "order_more_pet_names" = "Namen der Haustiere";
-"order_more_pet_names_footer" = "Geben Sie die Namen der Haustiere ein, für die Sie Tags möchten. Wir gravieren den Namen auf jeden Tag.";
+"order_more_pet_names_footer" = "Geben Sie die Namen der Haustiere ein, für die Sie Namensschilder möchten. Wir gravieren den Namen auf jeden Namensschild.";
 "order_more_add_another" = "Weiteres Haustier hinzufügen";
 "order_more_your_info" = "Ihre Informationen";
 "order_more_shipping" = "Lieferadresse";
@@ -562,22 +562,22 @@
 "order_more_postal" = "Postleitzahl";
 "order_more_country" = "Land";
 "order_more_summary" = "Bestellübersicht";
-"order_more_tags_count %lld" = "Tags (%lld)";
+"order_more_tags_count %lld" = "Namensschilder (%lld)";
 "order_more_shipping_cost" = "Versand";
 "order_more_total" = "Gesamt";
 "order_more_proceed_to_payment" = "Weiter zur Zahlung";
 "order_more_redirecting" = "Weiterleitung...";
 
-// MARK: - Ersatz-Tag bestellen
-"order_replace_title" = "Ersatz-Tag bestellen";
+// MARK: - Ersatz-Namensschild bestellen
+"order_replace_title" = "Ersatz-Namensschild bestellen";
 "order_replace_complete" = "Bestellung abgeschlossen!";
-"order_replace_confirmation" = "Ihr Ersatz-Tag wird an die angegebene Adresse versendet.";
+"order_replace_confirmation" = "Ihr Ersatz-Namensschild wird an die angegebene Adresse versendet.";
 "order_replace_pet_info" = "Haustierinformationen";
 "order_replace_important" = "Wichtige Informationen";
 "order_replace_eligible_free" = "Erster Ersatz ist kostenlos";
-"order_replace_additional_fee %@" = "Weitere Ersatz-Tags: %@";
+"order_replace_additional_fee %@" = "Weitere Ersatz-Namensschilder: %@";
 "order_replace_shipping" = "Lieferadresse";
-"order_replace_shipping_footer" = "Wir senden den Ersatz-Tag an diese Adresse.";
+"order_replace_shipping_footer" = "Wir senden den Ersatz-Namensschild an diese Adresse.";
 "order_replace_street" = "Straße und Hausnummer";
 "order_replace_line2" = "Stockwerk, Wohnung (optional)";
 "order_replace_city" = "Stadt";
@@ -585,7 +585,7 @@
 "order_replace_country" = "Land";
 "order_replace_phone" = "Telefonnummer (optional)";
 "order_replace_creating" = "Bestellung wird erstellt…";
-"order_replace_free_button" = "Bestätigen & kostenlosen Ersatz-Tag bestellen";
+"order_replace_free_button" = "Bestätigen & kostenlosen Ersatz-Namensschild bestellen";
 "order_replace_paid_button %@" = "Bestätigen & %@ bezahlen";
 
 // MARK: - Delivery Method & PostaPont
@@ -665,8 +665,8 @@
 "edit_information" = "Informationen bearbeiten";
 "registered_address" = "Registrierte Adresse";
 "address_shipping_footer" = "Geben Sie Ihre vollständige Adresse für Versand und Abrechnung ein";
-"address_delivery_prompt" = "Fügen Sie Ihre Adresse hinzu, um den Versand von QR-Tags zu ermöglichen";
-"contacts_info_full" = "Diese Kontaktdaten werden angezeigt, wenn jemand den QR-Tag Ihres Haustiers scannt. Sie können bis zu zwei E-Mail-Adressen und Telefonnummern hinzufügen.";
+"address_delivery_prompt" = "Fügen Sie Ihre Adresse hinzu, um den Versand von QR-Namensschilder zu ermöglichen";
+"contacts_info_full" = "Diese Kontaktdaten werden angezeigt, wenn jemand den QR-Namensschild Ihres Haustiers scannt. Sie können bis zu zwei E-Mail-Adressen und Telefonnummern hinzufügen.";
 "contacts_primary_email_edit_footer" = "Ihre Haupt-E-Mail-Adresse";
 "contacts_secondary_email_edit_footer" = "Backup-E-Mail für Benachrichtigungen zur Wiedervereinigung";
 "contacts_primary_phone_edit_footer" = "Ihre Haupt-Telefonnummer";
@@ -674,8 +674,8 @@
 "contacts_visible_on_tag" = "Sichtbar auf dem Tag";
 "contacts_no_type_added" = "Keine %@ hinzugefügt";
 
-// MARK: - Zusätzliche Ersatz-Tag-Schlüssel
-"order_replace_upgrade_hint" = "Upgrade auf Standard oder Maximum für kostenlose Ersatz-Tags";
+// MARK: - Zusätzliche Ersatz-Namensschild-Schlüssel
+"order_replace_upgrade_hint" = "Upgrade auf Standard oder Maximum für kostenlose Ersatz-Namensschilder";
 "order_replace_old_deactivated" = "Ihr alter QR-Code wird deaktiviert, sobald Sie diese Bestellung aufgeben";
 "order_replace_delivery_time" = "Sie erhalten Ihren neuen Tag innerhalb von 5–7 Werktagen";
 "order_replace_scan_activate" = "Sobald Sie den neuen Tag erhalten, müssen Sie ihn zum Aktivieren scannen";
@@ -685,7 +685,7 @@
 
 // MARK: - Plan-Auswahl
 "plan_choose_title" = "Plan auswählen";
-"plan_tag_activated" = "Tag aktiviert!";
+"plan_tag_activated" = "Namensschild aktiviert!";
 "plan_choose_subtitle" = "Wählen Sie einen Plan, um alle Funktionen freizuschalten";
 "plan_upgrade_title" = "Plan upgraden";
 "plan_upgrade_subtitle" = "Mehr Funktionen für Ihre Haustiere";
@@ -694,7 +694,7 @@
 "plan_skip_free" = "Vorerst überspringen (Gratis-Plan)";
 "plan_all_include" = "Alle Pläne enthalten:";
 "plan_paid_add" = "Bezahlte Pläne bieten zusätzlich:";
-"plan_feature_qr_tag" = "QR-Tag für Ihr Haustier";
+"plan_feature_qr_tag" = "QR-Namensschild für Ihr Haustier";
 "plan_feature_scan_notif" = "Sofortige Scan-Benachrichtigungen";
 "plan_feature_public_profile" = "Öffentliches Haustierprofil";
 "plan_feature_secure_storage" = "Sichere Datenspeicherung";
@@ -748,7 +748,7 @@
 
 // MARK: - Push-Benachrichtigungs-Dialog (Teil 1)
 "push_prompt_title" = "Bleiben Sie verbunden";
-"push_prompt_benefit_scan" = "Sofortige Warnungen, wenn der Tag Ihres Haustiers gescannt wird";
+"push_prompt_benefit_scan" = "Sofortige Warnungen, wenn der Namensschild Ihres Haustiers gescannt wird";
 "push_prompt_benefit_sighting" = "Sichtungsmeldungen aus der Community";
 "push_prompt_benefit_found" = "Sofort wissen, wenn Ihr Haustier gefunden wird";
 "push_prompt_benefit_missing" = "Vermisstenwarnungen in Ihrer Nähe";
@@ -888,7 +888,7 @@
 // MARK: - Fehlende Lokalisierung
 "login_required" = "Anmeldung erforderlich";
 "login_required_activate_tag" = "Bitte melden Sie sich an, um diesen Tag für Ihr Haustier zu aktivieren";
-"login_activate_instructions" = "Scannen Sie den Tag nach der Anmeldung erneut oder gehen Sie zu Meine Haustiere, um ihn zu aktivieren";
+"login_activate_instructions" = "Scannen Sie den Namensschild nach der Anmeldung erneut oder gehen Sie zu Meine Haustiere, um ihn zu aktivieren";
 "free_price" = "KOSTENLOS";
 "referral_expires %@" = "Gültig bis: %@";
 
@@ -925,14 +925,14 @@
 "referral_status_rewarded" = "Belohnt";
 "referral_share_message" = "Nutze meinen Empfehlungscode %@ und erhalte 2 Monate Pet Safety gratis! https://senra.pet/choose-plan?referral=%@";
 "help_faq_q6" = "Wie aktiviere ich meinen Tag nach der Lieferung?";
-"help_faq_a6" = "Gehe in der App zu \"Tag scannen\" und richte die Kamera deines Handys auf den QR-Code auf deinem Tag. Dadurch wird der Tag mit deinem Konto verknüpft. Dann wirst du aufgefordert, ein bestehendes Tier auszuwählen oder ein neues Tierprofil zu erstellen. Nach der Aktivierung wähle deinen Aboplan.";
+"help_faq_a6" = "Gehe in der App zu \"Namensschild scannen\" und richte die Kamera deines Handys auf den QR-Code auf deinem Tag. Dadurch wird der Namensschild mit deinem Konto verknüpft. Dann wirst du aufgefordert, ein bestehendes Tier auszuwählen oder ein neues Tierprofil zu erstellen. Nach der Aktivierung wähle deinen Aboplan.";
 "help_faq_q7" = "Kann ich die Informationen meines Tieres nach der Registrierung aktualisieren?";
 "help_faq_a7" = "Ja — du kannst das Profil deines Tieres jederzeit bearbeiten. Gehe zu \"Meine Tiere\", wähle dein Tier und tippe auf \"Bearbeiten\". Du kannst jedes Feld einschließlich Fotos aktualisieren. Änderungen werden sofort gespeichert.";
 "help_faq_q8" = "Was soll ich tun, wenn mein Tier vermisst wird?";
 "help_faq_a8" = "Gehe zu \"Meine Tiere\" und tippe auf das Menü auf der Karte deines Tieres, dann wähle \"Als vermisst markieren\". Dies erstellt eine Vermisstmeldung, die für die Senra-Community in deiner Gegend sichtbar ist. Nutzer in deiner Nähe sehen die Meldung und können Sichtungen mit Standortinformationen melden. Du wirst sofort über Sichtungen benachrichtigt.";
 "help_faq_q9" = "Wie funktionieren Vermisstmeldungen?";
 "help_faq_a9" = "Wenn du ein Tier als vermisst markierst, wird eine Meldung mit Foto und Details erstellt. Andere Senra-Nutzer im Umkreis von 10 km können die Meldung auf der Vermisste-Tiere-Karte sehen. Jeder in der Community kann eine Sichtung melden, wobei dir Standort und Kontaktdaten zugesendet werden. Tierärzte und Tierheime, die bei Senra registriert sind, erhalten die Meldung ebenfalls.";
-"help_faq_q10" = "Wie bestelle ich einen Ersatz-Tag?";
+"help_faq_q10" = "Wie bestelle ich einen Ersatz-Namensschild?";
 "help_faq_a10" = "Gehe zu deiner Kontoseite und tippe auf \"Ersatz bestellen\". Wähle das Tier aus, das einen neuen Tag braucht. Maximum-Mitglieder erhalten unbegrenzt kostenlose Ersatzlieferungen, Standard-Mitglieder eine kostenlose pro Jahr, und Starter-Mitglieder können Ersatz für eine geringe Versandgebühr bestellen.";
 "help_faq_q11" = "Was ist das Empfehlungsprogramm?";
 "help_faq_a11" = "Geh auf die Empfehlungsseite, um deinen persönlichen Empfehlungscode zu generieren. Teile ihn mit Freunden und Familie. Wenn jemand deinen Code verwendet und einen bezahlten Plan (Standard oder Maximum) abschließt, erhaltet ihr beide 2 Monate gratis. Du kannst deine Empfehlungen auf der Empfehlungsseite verfolgen.";
@@ -943,33 +943,33 @@
 "help_faq_q14" = "Wie melde ich ein gefundenes Tier?";
 "help_faq_a14" = "Wenn das Tier einen Senra-Tag hat, scanne einfach den QR-Code mit deiner Handykamera — keine App nötig. Du siehst das Profil des Tieres und kannst deinen Standort mit dem Besitzer teilen. Ohne Tag kannst du die Vermisste-Tiere-Karte auf der Senra-Website prüfen, ob das Tier als vermisst gemeldet wurde.";
 "help_faq_q15" = "Sind meine persönlichen Daten sicher?";
-"help_faq_a15" = "Ja. Du kontrollierst genau, welche Informationen sichtbar sind, wenn jemand den Tag deines Tieres scannt. Unter Einstellungen > Datenschutz kannst du Telefonnummer, E-Mail und Adresse ein- oder ausblenden. Dein Login ist durch Einmal-Codes gesichert — es gibt keine Passwörter. Du kannst dein Konto jederzeit löschen.";
-"help_faq_q16" = "Ich habe meinen Tag verloren oder er ist beschädigt — was soll ich tun?";
+"help_faq_a15" = "Ja. Du kontrollierst genau, welche Informationen sichtbar sind, wenn jemand den Namensschild deines Tieres scannt. Unter Einstellungen > Datenschutz kannst du Telefonnummer, E-Mail und Adresse ein- oder ausblenden. Dein Login ist durch Einmal-Codes gesichert — es gibt keine Passwörter. Du kannst dein Konto jederzeit löschen.";
+"help_faq_q16" = "Ich habe meinen Namensschild verloren oder er ist beschädigt — was soll ich tun?";
 "help_faq_a16" = "Keine Sorge — das digitale Profil deines Tieres ist sicher und nicht auf dem Tag gespeichert. Gehe zu deiner Kontoseite und tippe auf \"Ersatz bestellen\". Ein neuer Tag mit frischem QR-Code wird mit deinem bestehenden Tierprofil verknüpft. Standard-Mitglieder erhalten eine kostenlose Ersatzlieferung pro Jahr, Maximum-Mitglieder unbegrenzt, und Starter-Mitglieder zahlen eine geringe Versandgebühr. Dein alter Tag wird deaktiviert, sobald der neue aktiviert ist.";
-"help_faq_q17" = "Mein Tag lässt sich nicht scannen — wie behebe ich das?";
-"help_faq_a17" = "Versuche diese Schritte: Reinige die Tag-Oberfläche mit einem feuchten Tuch, sorge für gute Beleuchtung, halte die Kamera ruhig etwa 10-15 cm vom Tag entfernt und stelle sicher, dass deine Kamera-App funktioniert. Wenn der QR-Code zerkratzt oder verblasst ist, kannst du die manuelle Eingabe unter \"Tag scannen\" nutzen. Wenn der Tag zu beschädigt ist, bestelle einen kostenlosen Ersatz über deine Kontoseite (Standard und Maximum).";
+"help_faq_q17" = "Mein Namensschild lässt sich nicht scannen — wie behebe ich das?";
+"help_faq_a17" = "Versuche diese Schritte: Reinige die Tag-Oberfläche mit einem feuchten Tuch, sorge für gute Beleuchtung, halte die Kamera ruhig etwa 10-15 cm vom Tag entfernt und stelle sicher, dass deine Kamera-App funktioniert. Wenn der QR-Code zerkratzt oder verblasst ist, kannst du die manuelle Eingabe unter \"Namensschild scannen\" nutzen. Wenn der Namensschild zu beschädigt ist, bestelle einen kostenlosen Ersatz über deine Kontoseite (Standard und Maximum).";
 "help_faq_q18" = "Ich habe ein Tier ohne Senra-Tag gefunden — was kann ich tun?";
 "help_faq_a18" = "Prüfe die Vermisste-Tiere-Karte auf der Senra-Website (senra.pet) — das Tier könnte in deiner Gegend als vermisst gemeldet sein. Du kannst Vermisstmeldungen ohne Konto ansehen. Bei einer Übereinstimmung kannst du eine Sichtung mit deinem Standort melden. Du kannst das Tier auch zum Tierarzt bringen, um nach einem Mikrochip zu suchen.";
 "help_faq_q19" = "Kann ich meine E-Mail-Adresse ändern?";
 "help_faq_a19" = "Deine primäre E-Mail wird als Kontoidentität verwendet und kann nicht direkt geändert werden. Wenn du eine andere E-Mail nutzen möchtest, kannst du eine sekundäre E-Mail unter Einstellungen > Kontaktdaten hinzufügen. Wenn du deine primäre E-Mail unbedingt ändern musst, kontaktiere unser Support-Team.";
-"help_faq_q20" = "Was ist der Unterschied zwischen einem Mikrochip und einem Senra QR-Tag?";
-"help_faq_a20" = "Ein Mikrochip ist ein kleines Implantat unter der Haut deines Tieres, das eine eindeutige ID-Nummer speichert — es benötigt jedoch einen speziellen Scanner (meist nur bei Tierärzten und Tierheimen). Ein Senra QR-Tag funktioniert sofort mit jeder Smartphone-Kamera und zeigt das vollständige Profil, Foto und deine Kontaktdaten. Der Finder kann auch seinen GPS-Standort mit dir teilen. Wir empfehlen beides: den Mikrochip als dauerhafte Absicherung und den Senra-Tag für die sofortige, alltägliche Identifikation.";
+"help_faq_q20" = "Was ist der Unterschied zwischen einem Mikrochip und einem Senra QR-Namensschild?";
+"help_faq_a20" = "Ein Mikrochip ist ein kleines Implantat unter der Haut deines Tieres, das eine eindeutige ID-Nummer speichert — es benötigt jedoch einen speziellen Scanner (meist nur bei Tierärzten und Tierheimen). Ein Senra QR-Namensschild funktioniert sofort mit jeder Smartphone-Kamera und zeigt das vollständige Profil, Foto und deine Kontaktdaten. Der Finder kann auch seinen GPS-Standort mit dir teilen. Wir empfehlen beides: den Mikrochip als dauerhafte Absicherung und den Senra-Tag für die sofortige, alltägliche Identifikation.";
 "help_faq_q21" = "Was passiert mit meinen Daten, wenn ich mein Abo kündige?";
-"help_faq_a21" = "Wenn du dein Abo kündigst, behältst du den Zugriff bis zum Ende des aktuellen Abrechnungszeitraums. Danach wechselt dein Konto automatisch zum kostenlosen Starter-Plan. Tierprofile, Fotos und QR-Tags bleiben aktiv — du verlierst nur Premium-Funktionen wie SMS, Tierarzt-Alerts und kostenlose Ersatz-Tags. Deine Daten werden beim Kündigen nie gelöscht. Für eine dauerhafte Löschung nutze die Kontolöschung in den Einstellungen.";
+"help_faq_a21" = "Wenn du dein Abo kündigst, behältst du den Zugriff bis zum Ende des aktuellen Abrechnungszeitraums. Danach wechselt dein Konto automatisch zum kostenlosen Starter-Plan. Tierprofile, Fotos und QR-Namensschilder bleiben aktiv — du verlierst nur Premium-Funktionen wie SMS, Tierarzt-Alerts und kostenlose Ersatz-Namensschilder. Deine Daten werden beim Kündigen nie gelöscht. Für eine dauerhafte Löschung nutze die Kontolöschung in den Einstellungen.";
 "help_faq_q22" = "Wie registriere ich meinen Tierarzt oder mein Tierheim bei Senra?";
 "help_faq_a22" = "Tierärzte und Tierheime können sich unter senra.pet/register-vet-shelter registrieren. Fülle die Praxis- oder Organisationsdetails aus, und wir senden eine Bestätigungs-E-Mail. Nach der Bestätigung erhältst du automatisch E-Mail-Alerts bei vermissten Tieren in deiner Nähe. Es gibt keine Kosten und kein Login ist erforderlich. Tierbesitzer können ihren Tierarzt auch in ihrem Namen registrieren.";
 "help_faq_q23" = "Wie teile ich eine Erfolgsgeschichte, wenn mein Tier gefunden wird?";
 "help_faq_a23" = "Wenn du dein Tier unter \"Meine Tiere\" als gefunden markierst, wirst du gefragt, ob du deine Wiedervereinigungsgeschichte teilen möchtest. Du kannst eine kurze Nachricht hinzufügen und den Wiedervereinigungsort bestätigen. Öffentliche Geschichten erscheinen auf der Gefundene-Tiere-Karte. Du kannst auch später eine Geschichte posten oder entfernen.";
 "help_faq_q24" = "Welche Browser und Geräte werden unterstützt?";
-"help_faq_a24" = "Senra funktioniert auf allen modernen Browsern einschließlich Chrome, Safari, Firefox und Edge, auf Mobilgeräten und Desktop. QR-Tag-Scan funktioniert mit jeder Smartphone-Kamera — der Finder braucht keine App und kein Konto. Push-Benachrichtigungen werden in Chrome und Edge auf Desktop und Android unterstützt. Für die beste Erfahrung empfehlen wir einen aktuellen Browser auf deinem Handy.";
-"help_faq_q25" = "Kann ich Tags für mehrere Tiere gleichzeitig bestellen?";
-"help_faq_a25" = "Jede Bestellung enthält Tags für die Tiernamen, die du beim Checkout angibst. Du kannst mehrere Namen in einer Bestellung eingeben. Scanne nach der Lieferung jeden Tag, um ihn zu aktivieren und dem richtigen Tier zuzuordnen. Wenn du später mehr Tags brauchst, kannst du jederzeit weitere Bestellungen aufgeben.";
+"help_faq_a24" = "Senra funktioniert auf allen modernen Browsern einschließlich Chrome, Safari, Firefox und Edge, auf Mobilgeräten und Desktop. QR-Namensschild-Scan funktioniert mit jeder Smartphone-Kamera — der Finder braucht keine App und kein Konto. Push-Benachrichtigungen werden in Chrome und Edge auf Desktop und Android unterstützt. Für die beste Erfahrung empfehlen wir einen aktuellen Browser auf deinem Handy.";
+"help_faq_q25" = "Kann ich Namensschilder für mehrere Tiere gleichzeitig bestellen?";
+"help_faq_a25" = "Jede Bestellung enthält Namensschilder für die Tiernamen, die du beim Checkout angibst. Du kannst mehrere Namen in einer Bestellung eingeben. Scanne nach der Lieferung jeden Namensschild, um ihn zu aktivieren und dem richtigen Tier zuzuordnen. Wenn du später mehr Namensschilder brauchst, kannst du jederzeit weitere Bestellungen aufgeben.";
 "help_faq_q26" = "Wie erreichen Vermisstmeldungen Tierärzte und Tierheime?";
 "help_faq_a26" = "Wenn du dein Tier als vermisst markierst, sendet Senra automatisch E-Mail-Alerts an alle verifizierten Tierärzte und Tierheime in deiner Gegend. Das bedeutet, dass lokale Tierfachleute sofort wissen, dass dein Tier vermisst wird. Je mehr Tierärzte und Tierheime registriert sind, desto stärker das Sicherheitsnetzwerk. Du kannst helfen, indem du deinen eigenen Tierarzt zur Registrierung bei Senra ermutigst.";
 "help_faq_q27" = "Kann ich einen Tag auf ein anderes Tier übertragen?";
-"help_faq_a27" = "Jeder QR-Tag ist dauerhaft mit einem Tierprofil verknüpft und kann nicht neu zugewiesen werden. Wenn ein Tier verstirbt oder du den Tag nicht mehr brauchst, wird der alte Tag einfach inaktiv. Um ein neues Tier zu taggen, bestelle einen neuen Tag über die Kontoseite. Wenn du einen Standard- oder Maximum-Plan hast, kannst du Anspruch auf einen kostenlosen Ersatz-Tag haben.";
-"help_guide_qr_tags_title" = "QR-Code Tier-Tags";
-"help_guide_qr_tags_desc" = "Erfahre mehr über unsere smarten QR-Tags.";
+"help_faq_a27" = "Jeder QR-Namensschild ist dauerhaft mit einem Tierprofil verknüpft und kann nicht neu zugewiesen werden. Wenn ein Tier verstirbt oder du den Namensschild nicht mehr brauchst, wird der alte Tag einfach inaktiv. Um ein neues Tier zu taggen, bestelle einen neuen Tag über die Kontoseite. Wenn du einen Standard- oder Maximum-Plan hast, kannst du Anspruch auf einen kostenlosen Ersatz-Namensschild haben.";
+"help_guide_qr_tags_title" = "QR-Code Tier-Namensschilder";
+"help_guide_qr_tags_desc" = "Erfahre mehr über unsere smarten QR-Namensschilder.";
 "help_guide_materials_title" = "Materialien & Haltbarkeit";
 "help_guide_materials_desc" = "Informationen über Materialien und Pflege.";
 "help_guide_emergency_title" = "Notfallkontakt-Funktionen";
@@ -981,7 +981,7 @@
 "help_guide_community_title" = "Community & Gefundene Tiere";
 "help_guide_community_desc" = "Die Stärke von Senra ist die Community. Die Vermisste-Tiere-Karte zeigt aktive Meldungen in deiner Nähe — prüfe sie, um zu sehen, ob Tiere in deiner Gegend als vermisst gemeldet wurden. Die Gefundene-Tiere-Seite feiert erfolgreiche Wiedervereinigungen mit Geschichten von Tierbesitzern. Du kannst deinen Tierarzt oder dein Tierheim bei Senra registrieren, damit sie automatisch Vermisstmeldungen erhalten und so ein stärkeres Sicherheitsnetzwerk für alle Tiere in deiner Gegend entsteht.";
 "help_faq_group_getting_started" = "Erste Schritte";
-"help_faq_group_tags_scanning" = "Tags & Scannen";
+"help_faq_group_tags_scanning" = "Namensschilder & Scannen";
 "help_faq_group_missing_pets" = "Vermisste Tiere & Alerts";
 "help_faq_group_billing_plans" = "Abrechnung & Pläne";
 "help_faq_group_privacy_account" = "Datenschutz & Konto";
@@ -1041,7 +1041,7 @@
 // MARK: - Gift Orders
 "order_gift_toggle" = "Als Geschenk bestellen";
 "order_gift_description" = "Bei Geschenkbestellungen sind Tiernamen optional. Der Empfänger kann sie bei der Aktivierung hinzufügen.";
-"order_gift_quantity" = "Anzahl der Tags";
+"order_gift_quantity" = "Anzahl der Namensschilder";
 "order_gift_recipient_name" = "Name des Empfängers (optional)";
 "order_gift_message" = "Geschenknachricht (optional)";
 "order_gift_message_placeholder" = "Persönliche Nachricht hinzufügen...";
@@ -1060,22 +1060,22 @@
 "delivery_postapoint" = "PostaPont Abholung";
 
 // MARK: - Pending Registrations
-"pending_registrations_title" = "Ausstehende Marken";
+"pending_registrations_title" = "Ausstehende Namensschilder";
 "ready_to_activate" = "Bereit zur Aktivierung";
 "still_processing" = "In Bearbeitung";
-"scan_tag_now" = "Marke scannen";
+"scan_tag_now" = "Namensschild scannen";
 "create_profile_first" = "Profil erstellen";
 "create_profile_while_waiting" = "Profil beim Warten erstellen";
 "all_caught_up" = "Alles erledigt!";
 "all_caught_up_description" = "Sie haben keine ausstehenden Markenregistrierungen.";
-"order_tags" = "Marken bestellen";
+"order_tags" = "Namensschilder bestellen";
 "status_shipped" = "Versendet";
 "status_delivered" = "Zugestellt";
 "status_processing" = "In Bearbeitung";
 "status_pending" = "Ausstehend";
-"activation_help_title" = "So aktivieren Sie Ihre Marke";
-"activation_help_step1" = "Warten Sie auf die Lieferung Ihrer Marke";
-"activation_help_step2" = "Scannen Sie den QR-Code auf der Marke";
+"activation_help_title" = "So aktivieren Sie Ihre Namensschild";
+"activation_help_step1" = "Warten Sie auf die Lieferung Ihrer Namensschild";
+"activation_help_step2" = "Scannen Sie den QR-Code auf der Namensschild";
 "activation_help_step3" = "Wählen Sie Ihr Haustier aus";
 "activation_help_step4" = "Wählen Sie Ihren Abonnementplan";
 
@@ -1088,7 +1088,7 @@
 "other_pets" = "Andere Haustiere";
 "link_to_pet" = "Verknüpfen mit %@";
 "no_pets_yet" = "Noch keine Haustiere";
-"create_first_pet" = "Erstellen Sie ein Haustierprofil, um die Marke zu aktivieren.";
+"create_first_pet" = "Erstellen Sie ein Haustierprofil, um die Namensschild zu aktivieren.";
 "create_new_pet" = "Neues Haustier erstellen";
 
 // MARK: - Public Profile Details
@@ -1099,15 +1099,15 @@
 // MARK: - Notifications Inbox
 "notifications_title" = "Benachrichtigungen";
 "no_notifications" = "Keine Benachrichtigungen";
-"no_notifications_desc" = "Alles aktuell! Benachrichtigungen erscheinen hier, wenn die Marke Ihres Haustieres gescannt wird.";
+"no_notifications_desc" = "Alles aktuell! Benachrichtigungen erscheinen hier, wenn die Namensschild Ihres Haustieres gescannt wird.";
 "mark_all_read" = "Alle als gelesen markieren";
 "load_more" = "Mehr laden";
 "just_now" = "Gerade eben";
 
 // MARK: - Activation Error Messages
-"activation_error_qr_not_found" = "QR-Code nicht erkannt. Stellen Sie sicher, dass Sie eine offizielle Senra-Marke scannen.";
-"activation_error_already_activated" = "Diese Marke ist bereits einem anderen Haustier zugeordnet. Kontaktieren Sie den Support.";
-"activation_error_not_linked" = "Diese Marke wurde noch nicht Ihrer Bestellung zugeordnet. Warten Sie auf die Versandbestätigung.";
+"activation_error_qr_not_found" = "QR-Code nicht erkannt. Stellen Sie sicher, dass Sie eine offizielle Senra-Namensschild scannen.";
+"activation_error_already_activated" = "Diese Namensschild ist bereits einem anderen Haustier zugeordnet. Kontaktieren Sie den Support.";
+"activation_error_not_linked" = "Diese Namensschild wurde noch nicht Ihrer Bestellung zugeordnet. Warten Sie auf die Versandbestätigung.";
 "activation_error_not_shipped" = "Ihre Bestellung wurde noch nicht versendet. Warten Sie auf die Lieferung.";
 "activation_error_not_owner" = "Dies ist nicht Ihr Haustier. Bitte wählen Sie eines Ihrer eigenen Haustiere.";
 

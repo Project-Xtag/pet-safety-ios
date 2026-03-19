@@ -45,7 +45,7 @@
 "resend_code_cooldown" = "Ponovo pošalji kod za %lld s";
 "resend_code_prompt" = "Nisi primio kod? Pošalji ponovo";
 "dont_have_account" = "Nemaš račun?";
-"start_here_order_free_tag" = "Započni ovdje i naruči besplatni privjesak";
+"start_here_order_free_tag" = "Započni ovdje i naruči besplatni pločica";
 "create_account" = "Izradi račun";
 "enter_details_subtitle" = "Unesi svoje podatke za početak.";
 "register" = "Registracija";
@@ -83,7 +83,7 @@
 "action_order_tags" = "NARUČI PRIVJESKE";
 "action_replace_tag" = "ZAMIJENI PRIVJESAK";
 "empty_pets_title" = "Još nema registriranih ljubimaca";
-"empty_pets_message" = "Dodaj svog prvog ljubimca za početak korištenja Senra zajedničkog privjeska";
+"empty_pets_message" = "Dodaj svog prvog ljubimca za početak korištenja Senra zajedničkog pločice";
 "missing_badge" = "NESTAO";
 "add_pet" = "Dodaj ljubimca";
 "pet_name" = "Ime ljubimca";
@@ -131,12 +131,12 @@
 "delete_pet_button" = "Obriši ljubimca";
 "delete_pet_dialog_message" = "Sigurno želiš obrisati ovog ljubimca? Ova radnja se ne može poništiti.";
 "delete_pet_warning_title" = "Obrisati %@?";
-"delete_pet_warning_message" = "%@ će biti trajno uklonjen s tvog računa. QR privjesak odmah prestaje raditi. Ako je ovo tvoj posljednji ljubimac, pretplata će također biti otkazana.";
+"delete_pet_warning_message" = "%@ će biti trajno uklonjen s tvog računa. QR pločica odmah prestaje raditi. Ako je ovo tvoj posljednji ljubimac, pretplata će također biti otkazana.";
 "delete_pet_warning_confirm" = "Obriši ljubimca";
 "species_cat" = "Mačka";
 "select_photo" = "Odaberi fotografiju";
 "select_pet" = "Odaberi ljubimca";
-"select_pet_for_replacement" = "Odaberi ljubimca za zamjenski privjesak";
+"select_pet_for_replacement" = "Odaberi ljubimca za zamjenski pločica";
 "weight" = "Težina";
 "weight_optional" = "Težina u kg (neobavezno)";
 "date_of_birth" = "Datum rođenja";
@@ -165,9 +165,9 @@
 
 // MARK: - QR Scanner
 "scan_qr_code" = "Skeniraj QR kôd";
-"scan_qr_subtitle" = "Usmjeri kameru na QR kôd na privjesku ljubimca";
+"scan_qr_subtitle" = "Usmjeri kameru na QR kôd na pločici ljubimca";
 "hello_pet_name" = "Bok! Ja sam %@";
-"scanned_tag_thanks" = "Upravo si skenirao moj privjesak. Hvala ti što mi pomažeš!";
+"scanned_tag_thanks" = "Upravo si skenirao moj pločica. Hvala ti što mi pomažeš!";
 "share_location_with_owner" = "Podijeli lokaciju s vlasnikom";
 "contact_owner" = "Kontakt vlasnika";
 "call_phone" = "Nazovi: %@";
@@ -204,23 +204,23 @@
 "scanner_how_it_works" = "Kako funkcionira";
 
 // MARK: - Tag Activation
-"tag_activate_title" = "Aktiviraj privjesak";
+"tag_activate_title" = "Aktiviraj pločica";
 "tag_loading_pets" = "Učitavanje ljubimaca...";
-"tag_activated" = "Privjesak aktiviran!";
-"tag_activated_message %@" = "Privjesak ljubimca %@ je sada aktivan";
+"tag_activated" = "Pločica aktiviran!";
+"tag_activated_message %@" = "Pločica ljubimca %@ je sada aktivan";
 "tag_choose_plan" = "Dovrši profil ljubimca kako bi ga bilo lakše pronaći ako nestane";
 "tag_choose_plan_button" = "Dovrši profil ljubimca";
 "tag_skip_for_now" = "Napravit ću to kasnije";
 "tag_no_pets" = "Još nema ljubimaca";
-"tag_no_pets_message" = "Prvo dodaj ljubimca prije aktivacije privjeska";
-"tag_code_label" = "Kôd privjeska";
-"tag_select_pet" = "Odaberi ljubimca za povezivanje s ovim privjeskom";
+"tag_no_pets_message" = "Prvo dodaj ljubimca prije aktivacije pločice";
+"tag_code_label" = "Kôd pločice";
+"tag_select_pet" = "Odaberi ljubimca za povezivanje s ovim pločicom";
 "tag_activating" = "Aktivacija...";
-"tag_activate_button" = "Aktiviraj privjesak";
-"tag_link_message" = "Ovaj privjesak bit će povezan s odabranim ljubimcem";
+"tag_activate_button" = "Aktiviraj pločica";
+"tag_link_message" = "Ovaj pločica bit će povezan s odabranim ljubimcem";
 
 // MARK: - Plan Selection
-"plan_tag_activated" = "Privjesak aktiviran!";
+"plan_tag_activated" = "Pločica aktiviran!";
 "plan_choose_subtitle" = "Odaberi paket za pristup svim značajkama";
 "plan_upgrade_title" = "Nadogradi paket";
 "plan_upgrade_subtitle" = "Dobij više značajki za svoje ljubimce";
@@ -287,7 +287,7 @@
 // MARK: - Mark Lost/Found Sheet
 
 // MARK: - Notifications
-"tag_scanned_message" = "Privjesak ljubimca %@ skeniran na lokaciji %@!";
+"tag_scanned_message" = "Pločica ljubimca %@ skeniran na lokaciji %@!";
 "sighting_message_with_location" = "%@ je viđen na lokaciji %@!";
 "sighting_message_no_location" = "%@ je viđen!";
 
@@ -368,7 +368,7 @@
 
 // MARK: - Address
 "address_details" = "Detalji adrese";
-"address_details_footer" = "Tvoja adresa koristi se za dostavu privjesaka i pronalaženje obližnjih uzbuna.";
+"address_details_footer" = "Tvoja adresa koristi se za dostavu pločica i pronalaženje obližnjih uzbuna.";
 "address_street" = "Ulica i kućni broj";
 "address_street_placeholder" = "Unesi adresu";
 "address_line2" = "Stan, kat itd. (neobavezno)";
@@ -496,23 +496,23 @@
 "help_faq_q1" = "Kako mogu izraditi račun?";
 "help_faq_a1" = "Senra koristi prijavu bez lozinke. Jednostavno unesi svoju e-mail adresu na stranici za prijavu i poslat ćemo ti 6-znamenkasti kod za provjeru. Unesi kod za prijavu. Ako si novi korisnik, račun se automatski izrađuje pri prvoj prijavi — nije potrebna posebna registracija.";
 "help_faq_q2" = "Kako mogu registrirati svog ljubimca?";
-"help_faq_a2" = "Idi na 'Moji ljubimci' i klikni 'Dodaj ljubimca'. Unesi ime, vrstu, pasminu i dob ljubimca, zatim učitaj fotografiju. Ako si već primio QR privjesak, možeš ga skenirati tijekom registracije da ga odmah povežeš s profilom ljubimca.";
+"help_faq_a2" = "Idi na 'Moji ljubimci' i klikni 'Dodaj ljubimca'. Unesi ime, vrstu, pasminu i dob ljubimca, zatim učitaj fotografiju. Ako si već primio QR pločica, možeš ga skenirati tijekom registracije da ga odmah povežeš s profilom ljubimca.";
 "help_faq_q3" = "Koje podatke trebam uključiti u profil ljubimca?";
 "help_faq_a3" = "Minimalno dodaj ime, vrstu i jasnu fotografiju ljubimca. Za najbolje šanse brzog pronalaska ako nestane, dodaj i: pasminu, dob, težinu, boju, broj mikročipa, zdravstvene bilješke, alergije, lijekove i posebne značajke (oznake, ožiljci itd.). Što više detalja, to je lakše nekome identificirati tvog ljubimca.";
-"help_faq_q4" = "Kako funkcionira QR privjesak?";
-"help_faq_a4" = "Svaki Senra privjesak ima jedinstveni QR kôd. Kada netko pronađe tvog ljubimca i skenira ga kamerom telefona, odmah vidi profil — fotografiju, ime, zdravstvene podatke i tvoje kontakt podatke. Također mogu podijeliti svoju lokaciju s tobom kako bi znao točno gdje je tvoj ljubimac. Osoba koja skenira ne treba preuzimati aplikaciju.";
-"help_faq_q5" = "Što se događa kada netko skenira privjesak mog ljubimca?";
+"help_faq_q4" = "Kako funkcionira QR pločica?";
+"help_faq_a4" = "Svaki Senra pločica ima jedinstveni QR kôd. Kada netko pronađe tvog ljubimca i skenira ga kamerom telefona, odmah vidi profil — fotografiju, ime, zdravstvene podatke i tvoje kontakt podatke. Također mogu podijeliti svoju lokaciju s tobom kako bi znao točno gdje je tvoj ljubimac. Osoba koja skenira ne treba preuzimati aplikaciju.";
+"help_faq_q5" = "Što se događa kada netko skenira pločica mog ljubimca?";
 "help_faq_a5" = "Skener vidi javni profil tvog ljubimca s podacima koje si odabrao podijeliti (ime, fotografiju, zdravstvene podatke, kontakt podatke). Može kliknuti 'Pronašao sam ovog ljubimca!' da podijeli svoju lokaciju s tobom. Odmah primaš obavijest e-mailom (i SMS-om ako imaš Standard ili Maximum paket) s lokacijom i detaljima pronalazača.";
-"help_faq_q6" = "Kako aktiviram privjesak nakon što stigne?";
-"help_faq_a6" = "Otvori aplikaciju, idi na 'Skeniraj privjesak' i usmjeri kameru telefona na QR kôd na privjesku. To povezuje privjesak s tvojim računom. Zatim ćeš biti upitan da odabereš postojećeg ljubimca ili izradiš novi profil. Nakon aktivacije, odaberi pretplatnički paket.";
+"help_faq_q6" = "Kako aktiviram pločica nakon što stigne?";
+"help_faq_a6" = "Otvori aplikaciju, idi na 'Skeniraj pločica' i usmjeri kameru telefona na QR kôd na pločici. To povezuje pločica s tvojim računom. Zatim ćeš biti upitan da odabereš postojećeg ljubimca ili izradiš novi profil. Nakon aktivacije, odaberi pretplatnički paket.";
 "help_faq_q7" = "Mogu li ažurirati podatke o ljubimcu nakon registracije?";
 "help_faq_a7" = "Da — profil ljubimca možeš urediti u bilo kojem trenutku. Idi na 'Moji ljubimci', odaberi ljubimca i klikni 'Uredi'. Možeš ažurirati bilo koje polje uključujući fotografije. Promjene se odmah spremaju.";
 "help_faq_q8" = "Što učiniti ako moj ljubimac nestane?";
 "help_faq_a8" = "Idi na 'Moji ljubimci' i klikni na izbornik na kartici ljubimca, zatim odaberi 'Označi kao nestalog'. To izrađuje uzbunu o nestalom ljubimcu vidljivu Senra zajednici u tvom području. Korisnici u blizini vidjet će uzbunu i mogu prijaviti viđenja s informacijama o lokaciji. Odmah ćeš biti obaviješten o svakom viđenju.";
 "help_faq_q9" = "Kako funkcioniraju uzbune o nestalim ljubimcima?";
 "help_faq_a9" = "Kada označiš ljubimca kao nestalog, izrađuje se uzbuna s fotografijom i detaljima. Drugi Senra korisnici unutar 10 km mogu vidjeti uzbunu na karti nestalih ljubimaca. Svatko u zajednici može prijaviti viđenje, što ti šalje njihovu lokaciju i kontakt podatke. Veterinari i skloništa registrirani na Senri u tvom području također primaju uzbunu.";
-"help_faq_q10" = "Kako naručiti zamjenski privjesak?";
-"help_faq_a10" = "Idi na stranicu Račun i klikni 'Naruči zamjenu'. Odaberi ljubimca kojem treba novi privjesak. Maximum pretplatnici dobivaju neograničene besplatne zamjene, Standard pretplatnici jednu besplatnu zamjenu godišnje, a Starter korisnici mogu naručiti zamjene uz malu naknadu za dostavu.";
+"help_faq_q10" = "Kako naručiti zamjenski pločica?";
+"help_faq_a10" = "Idi na stranicu Račun i klikni 'Naruči zamjenu'. Odaberi ljubimca kojem treba novi pločica. Maximum pretplatnici dobivaju neograničene besplatne zamjene, Standard pretplatnici jednu besplatnu zamjenu godišnje, a Starter korisnici mogu naručiti zamjene uz malu naknadu za dostavu.";
 "help_faq_q11" = "Što je program preporuka?";
 "help_faq_a11" = "Na stranici Preporuke generiraj svoj osobni kôd za preporuku. Podijeli ga s prijateljima i obitelji. Kada netko koristi tvoj kôd i pretplati se na plaćeni paket (Standard ili Maximum), oboje dobivate 2 mjeseca besplatno. Status preporuka možeš pratiti na stranici Preporuke.";
 "help_faq_q12" = "U koje zemlje dostavljate?";
@@ -520,42 +520,42 @@
 "help_faq_q13" = "Mogu li imati više ljubimaca na jednom računu?";
 "help_faq_a13" = "Da. Na Starter (besplatnom) paketu možeš registrirati do 10 ljubimaca. Standard paket podržava 1 ljubimca. Maximum paket podržava do 10 ljubimaca. Paket možeš nadograditi u bilo kojem trenutku sa stranice Račun.";
 "help_faq_q14" = "Kako prijaviti ljubimca kojeg sam pronašao?";
-"help_faq_a14" = "Ako ljubimac ima Senra privjesak, jednostavno skeniraj QR kôd kamerom telefona — aplikacija nije potrebna. Vidjet ćeš profil ljubimca i možeš podijeliti svoju lokaciju s vlasnikom. Ako nema privjeska, provjeri kartu nestalih ljubimaca na Senra web stranici da vidiš je li ljubimac prijavljen kao nestao u tvom području.";
+"help_faq_a14" = "Ako ljubimac ima Senra pločica, jednostavno skeniraj QR kôd kamerom telefona — aplikacija nije potrebna. Vidjet ćeš profil ljubimca i možeš podijeliti svoju lokaciju s vlasnikom. Ako nema pločice, provjeri kartu nestalih ljubimaca na Senra web stranici da vidiš je li ljubimac prijavljen kao nestao u tvom području.";
 "help_faq_q15" = "Jesu li moji osobni podaci sigurni?";
-"help_faq_a15" = "Da. Ti kontroliraš točno koje informacije su vidljive kada netko skenira privjesak tvog ljubimca. U Postavke > Privatnost možeš odabrati prikaz ili skrivanje telefonskog broja, e-maila i adrese. Prijava je osigurana jednokratnim kodovima za provjeru — nema lozinki koje se mogu ukrasti. Račun i sve podatke možeš obrisati u bilo kojem trenutku.";
-"help_faq_q16" = "Izgubio sam privjesak ili je oštećen — što da radim?";
-"help_faq_a16" = "Ne brini — digitalni profil tvog ljubimca je siguran i nije pohranjen na samom privjesku. Idi na stranicu Račun i klikni 'Naruči zamjenu'. Novi privjesak s novim QR kôdom bit će povezan s postojećim profilom ljubimca. Standard pretplatnici dobivaju jednu besplatnu zamjenu godišnje, Maximum pretplatnici neograničene besplatne zamjene, a Starter korisnici plaćaju malu naknadu za dostavu. Stari privjesak prestaje raditi nakon aktivacije novog.";
-"help_faq_q17" = "Moj privjesak se ne skenira — kako to popraviti?";
-"help_faq_a17" = "Pokušaj sljedeće: očisti površinu privjeska vlažnom krpom, osiguraj dobro osvjetljenje, drži kameru telefona mirno na 10-15 cm od privjeska i provjeri radi li aplikacija kamere ili QR skener. Ako je QR kôd ogreban ili izblijedio, možeš koristiti ručni unos kôda u aplikaciji pod 'Skeniraj privjesak'. Ako je privjesak previše oštećen za čitanje, naruči besplatnu zamjenu sa stranice Račun (Standard i Maximum paketi).";
-"help_faq_q18" = "Pronašao sam ljubimca bez Senra privjeska — što mogu učiniti?";
+"help_faq_a15" = "Da. Ti kontroliraš točno koje informacije su vidljive kada netko skenira pločica tvog ljubimca. U Postavke > Privatnost možeš odabrati prikaz ili skrivanje telefonskog broja, e-maila i adrese. Prijava je osigurana jednokratnim kodovima za provjeru — nema lozinki koje se mogu ukrasti. Račun i sve podatke možeš obrisati u bilo kojem trenutku.";
+"help_faq_q16" = "Izgubio sam pločica ili je oštećen — što da radim?";
+"help_faq_a16" = "Ne brini — digitalni profil tvog ljubimca je siguran i nije pohranjen na samom pločici. Idi na stranicu Račun i klikni 'Naruči zamjenu'. Novi pločica s novim QR kôdom bit će povezan s postojećim profilom ljubimca. Standard pretplatnici dobivaju jednu besplatnu zamjenu godišnje, Maximum pretplatnici neograničene besplatne zamjene, a Starter korisnici plaćaju malu naknadu za dostavu. Stari pločica prestaje raditi nakon aktivacije novog.";
+"help_faq_q17" = "Moj pločica se ne skenira — kako to popraviti?";
+"help_faq_a17" = "Pokušaj sljedeće: očisti površinu pločice vlažnom krpom, osiguraj dobro osvjetljenje, drži kameru telefona mirno na 10-15 cm od pločice i provjeri radi li aplikacija kamere ili QR skener. Ako je QR kôd ogreban ili izblijedio, možeš koristiti ručni unos kôda u aplikaciji pod 'Skeniraj pločica'. Ako je pločica previše oštećen za čitanje, naruči besplatnu zamjenu sa stranice Račun (Standard i Maximum paketi).";
+"help_faq_q18" = "Pronašao sam ljubimca bez Senra pločice — što mogu učiniti?";
 "help_faq_a18" = "Provjeri kartu nestalih ljubimaca na Senra web stranici (senra.pet) — ljubimac je možda prijavljen kao nestao u tvom području. Možeš pregledati uzbune o nestalim ljubimcima bez računa. Ako pronađeš podudaranje, možeš prijaviti viđenje sa svojom lokacijom da pomogneš spojiti ljubimca s vlasnikom. Također možeš odvesti ljubimca veterinaru na provjeru mikročipa.";
 "help_faq_q19" = "Mogu li promijeniti svoju e-mail adresu?";
 "help_faq_a19" = "Tvoja primarna e-mail adresa koristi se kao identitet računa i ne može se izravno promijeniti. Ako trebaš koristiti drugi e-mail, možeš dodati sekundarni e-mail u Postavke > Kontakt podaci — on će također biti prikazan na profilu ljubimca. Ako apsolutno trebaš promijeniti primarni e-mail, kontaktiraj naš tim za podršku i pomoći ćemo ti migrirati račun.";
-"help_faq_q20" = "Koja je razlika između mikročipa i Senra QR privjeska?";
-"help_faq_a20" = "Mikročip je sićušni implantat pod kožom ljubimca koji pohranjuje jedinstveni ID broj — ali zahtijeva poseban čitač (obično dostupan samo kod veterinara i u skloništima). Senra QR privjesak radi odmah s bilo kojom kamerom pametnog telefona, prikazujući potpun profil ljubimca, fotografiju i tvoje kontakt podatke na licu mjesta. Osoba koja pronađe tvog ljubimca može ti podijeliti i svoju GPS lokaciju. Preporučujemo korištenje obojeg: mikročip kao trajnu sigurnosnu kopiju, a Senra privjesak za trenutnu, svakodnevnu identifikaciju.";
+"help_faq_q20" = "Koja je razlika između mikročipa i Senra QR pločice?";
+"help_faq_a20" = "Mikročip je sićušni implantat pod kožom ljubimca koji pohranjuje jedinstveni ID broj — ali zahtijeva poseban čitač (obično dostupan samo kod veterinara i u skloništima). Senra QR pločica radi odmah s bilo kojom kamerom pametnog telefona, prikazujući potpun profil ljubimca, fotografiju i tvoje kontakt podatke na licu mjesta. Osoba koja pronađe tvog ljubimca može ti podijeliti i svoju GPS lokaciju. Preporučujemo korištenje obojeg: mikročip kao trajnu sigurnosnu kopiju, a Senra pločica za trenutnu, svakodnevnu identifikaciju.";
 "help_faq_q21" = "Što se događa s mojim podacima ako otkažem pretplatu?";
-"help_faq_a21" = "Ako otkažeš pretplatu, zadržavaš pristup plaćenim značajkama do kraja tekućeg obračunskog razdoblja. Nakon toga, tvoj račun automatski prelazi na besplatni Starter paket. Profili ljubimaca, fotografije i QR privjesci ostaju aktivni — samo gubiš pristup premium značajkama poput SMS obavijesti, veterinarskih uzbuna i besplatnih zamjena privjesaka. Tvoji podaci se nikad ne brišu kad otkažeš. Za trajno uklanjanje svih podataka, koristi opciju Brisanje računa u Postavkama.";
+"help_faq_a21" = "Ako otkažeš pretplatu, zadržavaš pristup plaćenim značajkama do kraja tekućeg obračunskog razdoblja. Nakon toga, tvoj račun automatski prelazi na besplatni Starter paket. Profili ljubimaca, fotografije i QR pločice ostaju aktivni — samo gubiš pristup premium značajkama poput SMS obavijesti, veterinarskih uzbuna i besplatnih zamjena pločica. Tvoji podaci se nikad ne brišu kad otkažeš. Za trajno uklanjanje svih podataka, koristi opciju Brisanje računa u Postavkama.";
 "help_faq_q22" = "Kako registrirati svog veterinara ili sklonište na Senri?";
 "help_faq_a22" = "Veterinari i skloništa mogu se registrirati na senra.pet/register-vet-shelter. Ispuni podatke o klinici ili organizaciji, a mi ćemo poslati e-mail za potvrdu. Nakon potvrde, automatski ćeš primati e-mail uzbune kada ljubimci nestanu u tvom području — pomažeš spojiti nestale ljubimce s njihovim obiteljima. Nema troškova i nije potrebna prijava. Vlasnici ljubimaca također mogu registrirati svog lokalnog veterinara u njihovo ime.";
 "help_faq_q23" = "Kako podijeliti priču o uspjehu kada je ljubimac pronađen?";
 "help_faq_a23" = "Kada označiš ljubimca kao pronađenog u 'Moji ljubimci', pitat ćemo te želiš li podijeliti svoju priču o spajanju. Možeš dodati kratku poruku o tome kako je ljubimac pronađen i potvrditi lokaciju spajanja. Javne priče pojavljuju se na karti pronađenih ljubimaca, inspirirajući zajednicu i pokazujući da sustav funkcionira. Priču o uspjehu možeš objaviti ili ukloniti i kasnije sa stranice profila ljubimca.";
 "help_faq_q24" = "Koji preglednici i uređaji su podržani?";
-"help_faq_a24" = "Senra radi na svim modernim web preglednicima uključujući Chrome, Safari, Firefox i Edge na mobilnim uređajima i stolnim računalima. Skeniranje QR privjeska radi s bilo kojom kamerom pametnog telefona — osoba koja pronađe tvog ljubimca ne treba Senra aplikaciju niti račun. Push obavijesti podržane su u Chromeu i Edgeu na stolnim računalima i Androidu. Za najbolje iskustvo preporučujemo korištenje ažurnog preglednika na telefonu.";
-"help_faq_q25" = "Mogu li naručiti privjeske za više ljubimaca odjednom?";
-"help_faq_a25" = "Svaka narudžba privjesaka uključuje privjeske za imena ljubimaca koje navedeš tijekom naručivanja. Možeš unijeti više imena ljubimaca u jednoj narudžbi. Nakon što privjesci stignu, skeniraj svaki za aktivaciju i povezivanje s odgovarajućim profilom ljubimca. Ako ti kasnije trebaju privjesci za više ljubimaca, možeš naručiti dodatne sa stranice Račun u bilo kojem trenutku.";
+"help_faq_a24" = "Senra radi na svim modernim web preglednicima uključujući Chrome, Safari, Firefox i Edge na mobilnim uređajima i stolnim računalima. Skeniranje QR pločice radi s bilo kojom kamerom pametnog telefona — osoba koja pronađe tvog ljubimca ne treba Senra aplikaciju niti račun. Push obavijesti podržane su u Chromeu i Edgeu na stolnim računalima i Androidu. Za najbolje iskustvo preporučujemo korištenje ažurnog preglednika na telefonu.";
+"help_faq_q25" = "Mogu li naručiti pločice za više ljubimaca odjednom?";
+"help_faq_a25" = "Svaka narudžba pločica uključuje pločice za imena ljubimaca koje navedeš tijekom naručivanja. Možeš unijeti više imena ljubimaca u jednoj narudžbi. Nakon što pločice stignu, skeniraj svaki za aktivaciju i povezivanje s odgovarajućim profilom ljubimca. Ako ti kasnije trebaju pločice za više ljubimaca, možeš naručiti dodatne sa stranice Račun u bilo kojem trenutku.";
 "help_faq_q26" = "Kako uzbune o nestalim ljubimcima dolaze do veterinara i skloništa?";
 "help_faq_a26" = "Kada označiš ljubimca kao nestalog, Senra automatski šalje e-mail uzbune svim verificiranim veterinarima i skloništima registriranim u tvom području. To znači da su lokalni stručnjaci za životinje odmah svjesni da je tvoj ljubimac nestao i mogu paziti na njega. Što je više veterinara i skloništa registrirano u tvom području, jača je sigurnosna mreža. Možeš pomoći potičući svog veterinara da se registrira na Senri.";
-"help_faq_q27" = "Mogu li prenijeti privjesak na drugog ljubimca?";
-"help_faq_a27" = "Svaki QR privjesak trajno je povezan s jednim profilom ljubimca i ne može se prenijeti. Ako ljubimac umine ili više ne trebaš privjesak, stari privjesak jednostavno postaje neaktivan. Za novog ljubimca naruči novi privjesak sa stranice Račun. Ako si na Standard ili Maximum paketu, možeš imati pravo na besplatni zamjenski privjesak za novog ljubimca.";
+"help_faq_q27" = "Mogu li prenijeti pločica na drugog ljubimca?";
+"help_faq_a27" = "Svaki QR pločica trajno je povezan s jednim profilom ljubimca i ne može se prenijeti. Ako ljubimac umine ili više ne trebaš pločica, stari pločica jednostavno postaje neaktivan. Za novog ljubimca naruči novi pločica sa stranice Račun. Ako si na Standard ili Maximum paketu, možeš imati pravo na besplatni zamjenski pločica za novog ljubimca.";
 // Guide Items
-"help_guide_qr_tags_title" = "QR privjesci za kućne ljubimce";
-"help_guide_qr_tags_desc" = "Svaki Senra privjesak ima jedinstveni QR kôd koji vodi na digitalni profil tvog ljubimca. Svatko tko pronađe tvog ljubimca može skenirati kôd kamerom telefona — nije potrebno preuzimanje aplikacije. Skener odmah vidi fotografiju, ime, zdravstvene podatke i tvoje kontakt podatke. Također mogu podijeliti svoju GPS lokaciju s tobom kako bi znao točno gdje je tvoj ljubimac. Privjesci rade sa svim modernim pametnim telefonima.";
-"help_guide_materials_title" = "Materijali i izdržljivost privjeska";
-"help_guide_materials_desc" = "Senra privjesci izrađeni su od izdržljivog, laganog metala s epoksi premazom za dodatnu zaštitu. Vodootporni su i UV-otporni, prikladni za sve vremenske uvjete. QR kôd otisnut je tintom otpornom na blijeđenje. Privjesci se sigurno pričvršćuju na ogrlicu ljubimca. Ako se privjesak ošteti ili QR kôd više nije čitljiv, možeš naručiti zamjenu sa stranice Račun — besplatno za Standard i Maximum pretplatnike.";
+"help_guide_qr_tags_title" = "QR pločice za kućne ljubimce";
+"help_guide_qr_tags_desc" = "Svaki Senra pločica ima jedinstveni QR kôd koji vodi na digitalni profil tvog ljubimca. Svatko tko pronađe tvog ljubimca može skenirati kôd kamerom telefona — nije potrebno preuzimanje aplikacije. Skener odmah vidi fotografiju, ime, zdravstvene podatke i tvoje kontakt podatke. Također mogu podijeliti svoju GPS lokaciju s tobom kako bi znao točno gdje je tvoj ljubimac. Privjesci rade sa svim modernim pametnim telefonima.";
+"help_guide_materials_title" = "Materijali i izdržljivost pločice";
+"help_guide_materials_desc" = "Senra pločice izrađeni su od izdržljivog, laganog metala s epoksi premazom za dodatnu zaštitu. Vodootporni su i UV-otporni, prikladni za sve vremenske uvjete. QR kôd otisnut je tintom otpornom na blijeđenje. Privjesci se sigurno pričvršćuju na ogrlicu ljubimca. Ako se pločica ošteti ili QR kôd više nije čitljiv, možeš naručiti zamjenu sa stranice Račun — besplatno za Standard i Maximum pretplatnike.";
 "help_guide_emergency_title" = "Hitni kontakt i uzbune";
-"help_guide_emergency_desc" = "Kada netko skenira privjesak tvog ljubimca, odmah primaš obavijest e-mailom s lokacijom pronalazača. Standard i Maximum pretplatnici također primaju SMS uzbune za brži odgovor. Ako označiš ljubimca kao nestalog, obavijest zajednice šalje se svim Senra korisnicima unutar 10 km, a registrirani veterinari i skloništa u tvom području također su obaviješteni. Svatko u zajednici može prijaviti viđenja sa svojom lokacijom, gradeći trag za pronalazak tvog ljubimca.";
+"help_guide_emergency_desc" = "Kada netko skenira pločica tvog ljubimca, odmah primaš obavijest e-mailom s lokacijom pronalazača. Standard i Maximum pretplatnici također primaju SMS uzbune za brži odgovor. Ako označiš ljubimca kao nestalog, obavijest zajednice šalje se svim Senra korisnicima unutar 10 km, a registrirani veterinari i skloništa u tvom području također su obaviješteni. Svatko u zajednici može prijaviti viđenja sa svojom lokacijom, gradeći trag za pronalazak tvog ljubimca.";
 "help_guide_profile_title" = "Upravljanje profilom ljubimca";
-"help_guide_profile_desc" = "Digitalni profil tvog ljubimca srce je Senre. Dodaj bitne podatke poput imena, vrste, pasmine, dobi i jasne fotografije. Možeš uključiti i zdravstvene podatke (alergije, lijekove, stanja), broj mikročipa i posebne značajke. Učitaj više fotografija u galeriju. Sve podatke možeš ažurirati u bilo kojem trenutku iz sekcije 'Moji ljubimci'. Ti kontroliraš koji od tvojih osobnih podataka (telefon, e-mail, adresa) su vidljivi ljudima koji skeniraju privjesak.";
+"help_guide_profile_desc" = "Digitalni profil tvog ljubimca srce je Senre. Dodaj bitne podatke poput imena, vrste, pasmine, dobi i jasne fotografije. Možeš uključiti i zdravstvene podatke (alergije, lijekove, stanja), broj mikročipa i posebne značajke. Učitaj više fotografija u galeriju. Sve podatke možeš ažurirati u bilo kojem trenutku iz sekcije 'Moji ljubimci'. Ti kontroliraš koji od tvojih osobnih podataka (telefon, e-mail, adresa) su vidljivi ljudima koji skeniraju pločica.";
 "help_guide_missing_alerts_title" = "Uzbune o nestalim ljubimcima i viđenja";
 "help_guide_missing_alerts_desc" = "Ako tvoj ljubimac nestane, označi ga kao nestalog iz 'Moji ljubimci' za trenutnu obavijest zajednice. Fotografija i podaci tvog ljubimca pojavljuju se na karti nestalih ljubimaca vidljivoj svim Senra korisnicima u tvom području. Članovi zajednice mogu prijaviti viđenja sa svojom GPS lokacijom, koja primaš kao obavijesti. Registrirani veterinari i skloništa također su obaviješteni. Kada je ljubimac pronađen, označi ga kao pronađenog i neobavezno podijeli priču o spajanju da inspiriraš zajednicu.";
 "help_guide_community_title" = "Zajednica i pronađeni ljubimci";
@@ -576,7 +576,7 @@
 "privacy_data_privacy" = "Privatnost podataka";
 "privacy_privacy_policy" = "Pravila privatnosti";
 "privacy_title" = "Privatnost";
-"privacy_mode_footer" = "Postavke privatnosti pomažu kontrolirati koje informacije se dijele kada netko skenira QR privjesak tvog ljubimca.";
+"privacy_mode_footer" = "Postavke privatnosti pomažu kontrolirati koje informacije se dijele kada netko skenira QR pločica tvog ljubimca.";
 "privacy_settings_updated" = "Postavke privatnosti ažurirane";
 "privacy_settings_failed" = "Ažuriranje postavki privatnosti nije uspjelo";
 
@@ -591,7 +591,7 @@
 // MARK: - Orders
 "orders_title" = "Narudžbe";
 "order_number" = "Narudžba #%@";
-"add_pet_first_replacement" = "Prvo dodaj ljubimca za narudžbu zamjenskog privjeska.";
+"add_pet_first_replacement" = "Prvo dodaj ljubimca za narudžbu zamjenskog pločice.";
 "orders_no_orders" = "Nema narudžbi";
 "orders_no_orders_message" = "Još nisi naručio ništa";
 "orders_information" = "Podaci o narudžbi";
@@ -601,16 +601,16 @@
 "orders_order_date" = "Datum narudžbe";
 "orders_items" = "Stavke";
 "orders_quantity %lld" = "Količina: %lld";
-"orders_tag_pending" = "QR privjesak na čekanju";
-"orders_tag_assigned" = "QR privjesak dodijeljen";
+"orders_tag_pending" = "QR pločica na čekanju";
+"orders_tag_assigned" = "QR pločica dodijeljen";
 "orders_detail_title" = "Detalji narudžbe";
 
 // MARK: - Order More Tags
-"order_more_title" = "Naruči više privjesaka";
+"order_more_title" = "Naruči više pločica";
 "order_more_complete" = "Narudžba dovršena!";
 "order_more_confirmation" = "Privjeske ćemo poslati nakon potvrde plaćanja.";
 "order_more_pet_names" = "Imena ljubimaca";
-"order_more_pet_names_footer" = "Unesi imena ljubimaca za koje želiš privjeske. Na svaki privjesak bit će ugravirano ime ljubimca.";
+"order_more_pet_names_footer" = "Unesi imena ljubimaca za koje želiš pločice. Na svaki pločica bit će ugravirano ime ljubimca.";
 "order_more_add_another" = "Dodaj još jednog ljubimca";
 "order_more_your_info" = "Tvoji podaci";
 "order_more_shipping" = "Adresa za dostavu";
@@ -627,15 +627,15 @@
 "order_more_redirecting" = "Preusmjeravanje...";
 
 // MARK: - Order Replacement Tag
-"order_replace_title" = "Naruči zamjenski privjesak";
+"order_replace_title" = "Naruči zamjenski pločica";
 "order_replace_complete" = "Narudžba dovršena!";
-"order_replace_confirmation" = "Zamjenski privjesak bit će poslan na navedenu adresu.";
+"order_replace_confirmation" = "Zamjenski pločica bit će poslan na navedenu adresu.";
 "order_replace_pet_info" = "Podaci o ljubimcu";
 "order_replace_important" = "Važne informacije";
 "order_replace_eligible_free" = "Prva zamjena je besplatna";
 "order_replace_additional_fee %@" = "Dodatne zamjene: %@";
 "order_replace_shipping" = "Adresa za dostavu";
-"order_replace_shipping_footer" = "Zamjenski privjesak bit će poslan na ovu adresu.";
+"order_replace_shipping_footer" = "Zamjenski pločica bit će poslan na ovu adresu.";
 "order_replace_street" = "Ulica i kućni broj";
 "order_replace_line2" = "Stan, kat itd. (neobavezno)";
 "order_replace_city" = "Grad";
@@ -643,7 +643,7 @@
 "order_replace_country" = "Država";
 "order_replace_phone" = "Broj telefona (neobavezno)";
 "order_replace_creating" = "Izrada narudžbe...";
-"order_replace_free_button" = "Potvrdi i naruči besplatni zamjenski privjesak";
+"order_replace_free_button" = "Potvrdi i naruči besplatni zamjenski pločica";
 "order_replace_paid_button %@" = "Potvrdi i plati %@";
 
 // MARK: - Delivery Method & PostaPont
@@ -723,27 +723,27 @@
 "edit_information" = "Uredi podatke";
 "registered_address" = "Registrirana adresa";
 "address_shipping_footer" = "Unesi potpunu adresu za dostavu i naplatu";
-"address_delivery_prompt" = "Dodaj adresu za omogućavanje dostave QR privjesaka";
-"contacts_info_full" = "Ovi kontakt podaci prikazuju se kada netko skenira QR privjesak tvog ljubimca. Možeš dodati do dvije e-mail adrese i telefonska broja.";
+"address_delivery_prompt" = "Dodaj adresu za omogućavanje dostave QR pločica";
+"contacts_info_full" = "Ovi kontakt podaci prikazuju se kada netko skenira QR pločica tvog ljubimca. Možeš dodati do dvije e-mail adrese i telefonska broja.";
 "contacts_primary_email_edit_footer" = "Tvoja glavna e-mail adresa računa";
 "contacts_secondary_email_edit_footer" = "Rezervni e-mail za obavijesti o pronalasku ljubimca";
 "contacts_primary_phone_edit_footer" = "Tvoj glavni kontakt broj";
 "contacts_secondary_phone_edit_footer" = "Rezervni telefon za hitne slučajeve";
-"contacts_visible_on_tag" = "Vidljivo na privjesku";
+"contacts_visible_on_tag" = "Vidljivo na pločici";
 "contacts_no_type_added" = "%@ nisu dodani";
 
 // MARK: - Additional Order Replacement Keys
 "order_replace_upgrade_hint" = "Nadogradi na Standard ili Maximum za besplatne zamjene";
 "order_replace_old_deactivated" = "Tvoj stari QR kôd bit će deaktiviran kada naručiš";
-"order_replace_delivery_time" = "Novi privjesak primit ćeš u roku 5-7 radnih dana";
-"order_replace_scan_activate" = "Kada primiš novi privjesak, trebat ćeš ga skenirati za aktivaciju";
+"order_replace_delivery_time" = "Novi pločica primit ćeš u roku 5-7 radnih dana";
+"order_replace_scan_activate" = "Kada primiš novi pločica, trebat ćeš ga skenirati za aktivaciju";
 
 // MARK: - Additional Offline Keys
 "offline_last_sync_label" = "Vrijeme zadnje sinkronizacije";
 
 // MARK: - Plan Selection
 "plan_choose_title" = "Odaberi paket";
-"plan_tag_activated" = "Privjesak aktiviran!";
+"plan_tag_activated" = "Pločica aktiviran!";
 "plan_choose_subtitle" = "Odaberi paket za pristup svim značajkama";
 "plan_upgrade_title" = "Nadogradi paket";
 "plan_upgrade_subtitle" = "Dobij više značajki za svoje ljubimce";
@@ -752,7 +752,7 @@
 "plan_skip_free" = "Preskoči za sada (besplatni paket)";
 "plan_all_include" = "Svi paketi uključuju:";
 "plan_paid_add" = "Plaćeni paketi dodaju:";
-"plan_feature_qr_tag" = "QR privjesak za tvog ljubimca";
+"plan_feature_qr_tag" = "QR pločica za tvog ljubimca";
 "plan_feature_scan_notif" = "Trenutne obavijesti pri skeniranju";
 "plan_feature_public_profile" = "Javni profil ljubimca";
 "plan_feature_secure_storage" = "Sigurna pohrana podataka";
@@ -760,7 +760,7 @@
 "plan_feature_lost_alerts_short" = "Uzbune o nestalom ljubimcu";
 "plan_feature_sms" = "SMS obavijesti";
 "plan_feature_photos" = "Do 10 fotografija po ljubimcu";
-"plan_feature_replacements" = "Besplatne zamjene privjesaka";
+"plan_feature_replacements" = "Besplatne zamjene pločica";
 "plan_popular" = "Popularan";
 "plan_current" = "Trenutni paket";
 "plan_select_free" = "Odaberi besplatni paket";
@@ -806,7 +806,7 @@
 
 // MARK: - Push Notification Prompt (Chunk 1)
 "push_prompt_title" = "Ostani povezan";
-"push_prompt_benefit_scan" = "Trenutne obavijesti kada je privjesak ljubimca skeniran";
+"push_prompt_benefit_scan" = "Trenutne obavijesti kada je pločica ljubimca skeniran";
 "push_prompt_benefit_sighting" = "Prijave viđenja od zajednice";
 "push_prompt_benefit_found" = "Saznaj odmah kada je tvoj ljubimac pronađen";
 "push_prompt_benefit_missing" = "Uzbune o nestalim ljubimcima u tvom području";
@@ -947,8 +947,8 @@
 
 // MARK: - Missing Localization Cleanup
 "login_required" = "Potrebna prijava";
-"login_required_activate_tag" = "Prijavi se za aktivaciju ovog privjeska za svog ljubimca";
-"login_activate_instructions" = "Nakon prijave, ponovo skeniraj privjesak ili idi na Moji ljubimci za aktivaciju";
+"login_required_activate_tag" = "Prijavi se za aktivaciju ovog pločice za svog ljubimca";
+"login_activate_instructions" = "Nakon prijave, ponovo skeniraj pločica ili idi na Moji ljubimci za aktivaciju";
 "free_price" = "BESPLATNO";
 "referral_expires %@" = "Istječe: %@";
 
@@ -995,8 +995,8 @@
 "order_more_shipping_calculated" = "Izračunato pri naplati";
 "order_more_total_shipping_only" = "Samo dostava";
 "checkout_subscription_success" = "Tvoja pretplata je sada aktivna!";
-"checkout_tag_order_success" = "Plaćanje uspješno! Tvoja narudžba privjeska se obrađuje.";
-"checkout_replacement_success" = "Plaćanje uspješno! Tvoj zamjenski privjesak je na putu.";
+"checkout_tag_order_success" = "Plaćanje uspješno! Tvoja narudžba pločice se obrađuje.";
+"checkout_replacement_success" = "Plaćanje uspješno! Tvoj zamjenski pločica je na putu.";
 "checkout_success" = "Plaćanje uspješno!";
 "order_status_completed" = "Dovršeno";
 "order_status_pending" = "Na čekanju";
@@ -1044,8 +1044,8 @@
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Naruči kao poklon";
-"order_gift_description" = "Za poklon narudžbe imena ljubimaca su neobavezna. Primatelj ih može dodati pri aktivaciji privjesaka.";
-"order_gift_quantity" = "Broj privjesaka";
+"order_gift_description" = "Za poklon narudžbe imena ljubimaca su neobavezna. Primatelj ih može dodati pri aktivaciji pločica.";
+"order_gift_quantity" = "Broj pločica";
 "order_gift_recipient_name" = "Ime primatelja (neobavezno)";
 "order_gift_message" = "Poruka za poklon (neobavezno)";
 "order_gift_message_placeholder" = "Dodaj osobnu poruku...";
@@ -1067,19 +1067,19 @@
 "pending_registrations_title" = "Privjesci na čekanju";
 "ready_to_activate" = "Spremni za aktivaciju";
 "still_processing" = "Još u obradi";
-"scan_tag_now" = "Skeniraj privjesak";
+"scan_tag_now" = "Skeniraj pločica";
 "create_profile_first" = "Izradi profil";
 "create_profile_while_waiting" = "Izradi profil dok čekaš";
 "all_caught_up" = "Sve je u redu!";
-"all_caught_up_description" = "Nemaš privjesaka na čekanju za registraciju.";
-"order_tags" = "Naruči privjeske";
+"all_caught_up_description" = "Nemaš pločica na čekanju za registraciju.";
+"order_tags" = "Naruči pločice";
 "status_shipped" = "Poslano";
 "status_delivered" = "Dostavljeno";
 "status_processing" = "U obradi";
 "status_pending" = "Na čekanju";
-"activation_help_title" = "Kako aktivirati privjesak";
-"activation_help_step1" = "Pričekaj da privjesak stigne";
-"activation_help_step2" = "Skeniraj QR kôd na privjesku";
+"activation_help_title" = "Kako aktivirati pločica";
+"activation_help_step1" = "Pričekaj da pločica stigne";
+"activation_help_step2" = "Skeniraj QR kôd na pločici";
 "activation_help_step3" = "Odaberi ljubimca za povezivanje";
 "activation_help_step4" = "Odaberi pretplatnički paket";
 
@@ -1092,7 +1092,7 @@
 "other_pets" = "Ostali ljubimci";
 "link_to_pet" = "Poveži s %@";
 "no_pets_yet" = "Još nema ljubimaca";
-"create_first_pet" = "Izradi profil prvog ljubimca za aktivaciju ovog privjeska.";
+"create_first_pet" = "Izradi profil prvog ljubimca za aktivaciju ovog pločice.";
 "create_new_pet" = "Izradi novog ljubimca";
 
 // MARK: - Public Profile Details
@@ -1103,16 +1103,16 @@
 // MARK: - Notifications Inbox
 "notifications_title" = "Obavijesti";
 "no_notifications" = "Nema obavijesti";
-"no_notifications_desc" = "Sve si pročitao! Obavijesti će se pojaviti ovdje kada netko skenira privjesak tvog ljubimca.";
+"no_notifications_desc" = "Sve si pročitao! Obavijesti će se pojaviti ovdje kada netko skenira pločica tvog ljubimca.";
 "mark_all_read" = "Označi sve pročitanim";
 "load_more" = "Učitaj više";
 "just_now" = "Upravo sada";
 
 // MARK: - Activation Error Messages
-"activation_error_qr_not_found" = "QR kôd nije prepoznat. Provjeri skeniraš li službeni Senra privjesak.";
-"activation_error_already_activated" = "Ovaj privjesak je već povezan s drugim ljubimcem. Kontaktiraj podršku ako misliš da je to tvoj privjesak.";
-"activation_error_not_linked" = "Ovaj privjesak još nije dodijeljen tvojoj narudžbi. Pričekaj potvrdu dostave.";
-"activation_error_not_shipped" = "Tvoja narudžba još nije poslana. Pričekaj dok ne primiš privjesak.";
+"activation_error_qr_not_found" = "QR kôd nije prepoznat. Provjeri skeniraš li službeni Senra pločica.";
+"activation_error_already_activated" = "Ovaj pločica je već povezan s drugim ljubimcem. Kontaktiraj podršku ako misliš da je to tvoj pločica.";
+"activation_error_not_linked" = "Ovaj pločica još nije dodijeljen tvojoj narudžbi. Pričekaj potvrdu dostave.";
+"activation_error_not_shipped" = "Tvoja narudžba još nije poslana. Pričekaj dok ne primiš pločica.";
 "activation_error_not_owner" = "Ovaj ljubimac nije tvoj. Odaberi jednog od svojih ljubimaca.";
 
 // MARK: - Dog Breeds
@@ -1233,12 +1233,12 @@
 "profile_incomplete_warning" = "Dovrši profil ljubimca";
 "profile_incomplete_desc" = "Nedostajući podaci otežavaju pronalazak ljubimca ako nestane. Molimo te ispuni težinu, boju i zdravstvene podatke.";
 "identity_locked_title" = "Ime, vrsta i pasmina su zaključani";
-"identity_locked_desc" = "Ova polja ne mogu se mijenjati nakon aktivacije privjeska. Kontaktiraj podršku ako trebaš napraviti promjene.";
+"identity_locked_desc" = "Ova polja ne mogu se mijenjati nakon aktivacije pločice. Kontaktiraj podršku ako trebaš napraviti promjene.";
 
 // MARK: - Subscription Management
 "cancel_subscription_title" = "Otkazati pretplatu?";
 "cancel_warning_a" = "Izgubit ćeš trenutačne obavijesti e-mailom, SMS-om i obavijesti zajednice";
-"cancel_warning_b" = "Besplatna zamjena privjesaka više neće biti dostupna";
+"cancel_warning_b" = "Besplatna zamjena pločica više neće biti dostupna";
 "cancel_warning_c" = "Izgubit ćeš pristup obavijestima veterinarima i skloništima";
 "cancel_warning_d" = "Tvoj račun i registracije ljubimaca ostaju aktivni";
 "cancel_access_until" = "Zadržat ćeš pristup do %@";
@@ -1262,7 +1262,7 @@
 "shelter_how_it_works" = "Kako funkcionira";
 "shelter_step_1" = "Udomi ljubimca iz partnerskog skloništa";
 "shelter_step_2" = "Unesi kôd koji si dobio pri udomljavanju";
-"shelter_step_3" = "Dobij 3 mjeseca besplatnog Standard paketa + besplatni QR privjesak";
+"shelter_step_3" = "Dobij 3 mjeseca besplatnog Standard paketa + besplatni QR pločica";
 
 // MARK: - Trial
 "trial_ends_on" = "Probno razdoblje završava %@";

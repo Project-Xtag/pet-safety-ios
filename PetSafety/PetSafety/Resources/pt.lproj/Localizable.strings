@@ -42,7 +42,7 @@
 "resend_code_cooldown" = "Reenviar código em %llds";
 "resend_code_prompt" = "Não recebeu o código? Reenviar";
 "dont_have_account" = "Não tem conta?";
-"start_here_order_free_tag" = "Comece aqui e peça a sua etiqueta grátis";
+"start_here_order_free_tag" = "Comece aqui e peça a sua placa grátis";
 "create_account" = "Criar conta";
 "enter_details_subtitle" = "Introduza os seus dados para começar.";
 "register" = "Registar";
@@ -128,12 +128,12 @@
 "delete_pet_button" = "Eliminar animal";
 "delete_pet_dialog_message" = "Tem a certeza que pretende eliminar este animal? Esta ação não pode ser desfeita.";
 "delete_pet_warning_title" = "Eliminar %@?";
-"delete_pet_warning_message" = "%@ será removido permanentemente da sua conta. A etiqueta QR será desativada imediatamente e deixará de funcionar ao ser digitalizada. Se este é o seu último animal, a sua subscrição também será cancelada.";
+"delete_pet_warning_message" = "%@ será removido permanentemente da sua conta. A placa QR será desativada imediatamente e deixará de funcionar ao ser digitalizada. Se este é o seu último animal, a sua subscrição também será cancelada.";
 "delete_pet_warning_confirm" = "Eliminar animal";
 "species_cat" = "Gato";
 "select_photo" = "Selecionar foto";
 "select_pet" = "Selecionar animal";
-"select_pet_for_replacement" = "Selecionar animal para etiqueta de substituição";
+"select_pet_for_replacement" = "Selecionar animal para placa de substituição";
 "weight" = "Peso";
 "weight_optional" = "Peso em kg (opcional)";
 "date_of_birth" = "Data de nascimento";
@@ -162,9 +162,9 @@
 
 // MARK: - Leitor QR
 "scan_qr_code" = "Ler código QR";
-"scan_qr_subtitle" = "Aponte a câmara para a etiqueta QR do animal";
+"scan_qr_subtitle" = "Aponte a câmara para a placa QR do animal";
 "hello_pet_name" = "Olá! Eu sou %@";
-"scanned_tag_thanks" = "Acabou de ler a minha etiqueta. Obrigado por me ajudar!";
+"scanned_tag_thanks" = "Acabou de ler a minha placa. Obrigado por me ajudar!";
 "share_location_with_owner" = "Partilhar a minha localização com o dono";
 "contact_owner" = "Contactar o dono";
 "call_phone" = "Ligar: %@";
@@ -200,24 +200,24 @@
 "scanner_notes" = "Notas";
 "scanner_how_it_works" = "Como funciona";
 
-// MARK: - Ativação de etiqueta
-"tag_activate_title" = "Ativar etiqueta";
+// MARK: - Ativação de placa
+"tag_activate_title" = "Ativar placa";
 "tag_loading_pets" = "A carregar os seus animais...";
-"tag_activated" = "Etiqueta ativada!";
-"tag_activated_message %@" = "A etiqueta de %@ está agora ativa";
+"tag_activated" = "Placa ativada!";
+"tag_activated_message %@" = "A placa de %@ está agora ativa";
 "tag_choose_plan" = "Complete o perfil do seu animal para facilitar a sua busca se se perder";
 "tag_choose_plan_button" = "Completar perfil do animal";
 "tag_skip_for_now" = "Faço isso mais tarde";
 "tag_no_pets" = "Ainda sem animais";
-"tag_no_pets_message" = "Adicione um animal antes de ativar uma etiqueta";
-"tag_code_label" = "Código da etiqueta";
-"tag_select_pet" = "Selecione um animal para associar a esta etiqueta";
+"tag_no_pets_message" = "Adicione um animal antes de ativar uma placa";
+"tag_code_label" = "Código da placa";
+"tag_select_pet" = "Selecione um animal para associar a esta placa";
 "tag_activating" = "A ativar...";
-"tag_activate_button" = "Ativar etiqueta";
-"tag_link_message" = "Esta etiqueta será associada ao animal selecionado";
+"tag_activate_button" = "Ativar placa";
+"tag_link_message" = "Esta placa será associada ao animal selecionado";
 
 // MARK: - Seleção de plano
-"plan_tag_activated" = "Etiqueta ativada!";
+"plan_tag_activated" = "Placa ativada!";
 "plan_choose_subtitle" = "Escolha um plano para desbloquear todas as funcionalidades";
 "plan_upgrade_title" = "Atualizar plano";
 "plan_upgrade_subtitle" = "Obtenha mais funcionalidades para os seus animais";
@@ -284,7 +284,7 @@
 // MARK: - Marcar perdido/encontrado
 
 // MARK: - Notificações
-"tag_scanned_message" = "A etiqueta de %@ foi lida em %@!";
+"tag_scanned_message" = "A placa de %@ foi lida em %@!";
 "sighting_message_with_location" = "%@ foi avistado em %@!";
 "sighting_message_no_location" = "%@ foi avistado!";
 
@@ -365,7 +365,7 @@
 
 // MARK: - Morada
 "address_details" = "Detalhes da morada";
-"address_details_footer" = "A sua morada é usada para envio de etiquetas e alertas próximos.";
+"address_details_footer" = "A sua morada é usada para envio de placas e alertas próximos.";
 "address_street" = "Rua e número";
 "address_street_placeholder" = "Introduza rua e número";
 "address_line2" = "Andar, apartamento (opcional)";
@@ -494,11 +494,11 @@
 "help_faq_a1" = "Vá a 'Os meus animais' e clique em 'Adicionar novo animal'.";
 "help_faq_q2" = "Que informações devo incluir?";
 "help_faq_a2" = "Nome, espécie, raça, idade, condições médicas e contactos de emergência.";
-"help_faq_q3" = "Como funciona a etiqueta QR?";
+"help_faq_q3" = "Como funciona a placa QR?";
 "help_faq_a3" = "Cada animal tem um QR único. Ao ler, mostram-se o perfil e contactos.";
 "help_faq_q4" = "Posso atualizar mais tarde?";
 "help_faq_a4" = "Sim, em 'Os meus animais' escolha o animal e 'Editar perfil'.";
-"help_faq_q5" = "Como pedir uma etiqueta de substituição?";
+"help_faq_q5" = "Como pedir uma placa de substituição?";
 "help_faq_a5" = "No perfil do animal, escolha 'Pedir substituição' e siga os passos.";
 // Itens de guia
 
@@ -518,7 +518,7 @@
 "privacy_data_privacy" = "Privacidade de dados";
 "privacy_privacy_policy" = "Política de Privacidade";
 "privacy_title" = "Modo de privacidade";
-"privacy_mode_footer" = "As definições de privacidade ajudam a controlar que informações são partilhadas quando alguém lê a etiqueta QR do seu animal.";
+"privacy_mode_footer" = "As definições de privacidade ajudam a controlar que informações são partilhadas quando alguém lê a placa QR do seu animal.";
 "privacy_settings_updated" = "Definições de privacidade atualizadas";
 "privacy_settings_failed" = "Falha ao atualizar definições de privacidade";
 
@@ -533,7 +533,7 @@
 // MARK: - Encomendas
 "orders_title" = "Encomendas";
 "order_number" = "Encomenda #%@";
-"add_pet_first_replacement" = "Adicione um animal antes de encomendar uma etiqueta de substituição.";
+"add_pet_first_replacement" = "Adicione um animal antes de encomendar uma placa de substituição.";
 "orders_no_orders" = "Sem encomendas";
 "orders_no_orders_message" = "Ainda não fez encomendas";
 "orders_information" = "Informação da encomenda";
@@ -543,16 +543,16 @@
 "orders_order_date" = "Data da encomenda";
 "orders_items" = "Itens";
 "orders_quantity %lld" = "Quantidade: %lld";
-"orders_tag_pending" = "Etiqueta QR pendente";
-"orders_tag_assigned" = "Etiqueta QR atribuída";
+"orders_tag_pending" = "Placa QR pendente";
+"orders_tag_assigned" = "Placa QR atribuída";
 "orders_detail_title" = "Detalhes da encomenda";
 
-// MARK: - Encomendar mais etiquetas
-"order_more_title" = "Encomendar mais etiquetas";
+// MARK: - Encomendar mais placas
+"order_more_title" = "Encomendar mais placas";
 "order_more_complete" = "Encomenda completa!";
-"order_more_confirmation" = "Enviaremos as etiquetas após confirmação do pagamento.";
+"order_more_confirmation" = "Enviaremos as placas após confirmação do pagamento.";
 "order_more_pet_names" = "Nomes dos animais";
-"order_more_pet_names_footer" = "Introduza os nomes dos animais para os quais pretende etiquetas. Vamos gravar o nome em cada etiqueta.";
+"order_more_pet_names_footer" = "Introduza os nomes dos animais para os quais pretende placas. Vamos gravar o nome em cada placa.";
 "order_more_add_another" = "Adicionar outro animal";
 "order_more_your_info" = "A sua informação";
 "order_more_shipping" = "Morada de envio";
@@ -562,22 +562,22 @@
 "order_more_postal" = "Código postal";
 "order_more_country" = "País";
 "order_more_summary" = "Resumo da encomenda";
-"order_more_tags_count %lld" = "Etiquetas (%lld)";
+"order_more_tags_count %lld" = "Placas (%lld)";
 "order_more_shipping_cost" = "Envio";
 "order_more_total" = "Total";
 "order_more_proceed_to_payment" = "Continuar para pagamento";
 "order_more_redirecting" = "Redirecionando...";
 
-// MARK: - Encomendar etiqueta de substituição
-"order_replace_title" = "Encomendar etiqueta de substituição";
+// MARK: - Encomendar placa de substituição
+"order_replace_title" = "Encomendar placa de substituição";
 "order_replace_complete" = "Encomenda completa!";
-"order_replace_confirmation" = "A sua etiqueta de substituição será enviada para a morada indicada.";
+"order_replace_confirmation" = "A sua placa de substituição será enviada para a morada indicada.";
 "order_replace_pet_info" = "Informação do animal";
 "order_replace_important" = "Informação importante";
 "order_replace_eligible_free" = "A primeira substituição é grátis";
 "order_replace_additional_fee %@" = "Substituições adicionais: %@";
 "order_replace_shipping" = "Morada de envio";
-"order_replace_shipping_footer" = "Enviaremos a etiqueta de substituição para esta morada.";
+"order_replace_shipping_footer" = "Enviaremos a placa de substituição para esta morada.";
 "order_replace_street" = "Rua e número";
 "order_replace_line2" = "Andar, apartamento (opcional)";
 "order_replace_city" = "Cidade";
@@ -585,7 +585,7 @@
 "order_replace_country" = "País";
 "order_replace_phone" = "Telefone (opcional)";
 "order_replace_creating" = "A criar encomenda...";
-"order_replace_free_button" = "Confirmar e encomendar etiqueta de substituição grátis";
+"order_replace_free_button" = "Confirmar e encomendar placa de substituição grátis";
 "order_replace_paid_button %@" = "Confirmar e pagar %@";
 
 // MARK: - Delivery Method & PostaPont
@@ -665,27 +665,27 @@
 "edit_information" = "Editar informação";
 "registered_address" = "Morada registada";
 "address_shipping_footer" = "Introduza a sua morada completa para envio e faturação";
-"address_delivery_prompt" = "Adicione a sua morada para permitir o envio de etiquetas QR";
-"contacts_info_full" = "Estes contactos serão mostrados quando alguém ler a etiqueta QR do seu animal. Pode adicionar até dois e-mails e números de telefone.";
+"address_delivery_prompt" = "Adicione a sua morada para permitir o envio de placas QR";
+"contacts_info_full" = "Estes contactos serão mostrados quando alguém ler a placa QR do seu animal. Pode adicionar até dois e-mails e números de telefone.";
 "contacts_primary_email_edit_footer" = "O seu e-mail principal da conta";
 "contacts_secondary_email_edit_footer" = "E-mail de backup para notificações de recuperação";
 "contacts_primary_phone_edit_footer" = "O seu número principal de contacto";
 "contacts_secondary_phone_edit_footer" = "Telefone de backup para emergências";
-"contacts_visible_on_tag" = "Visível na etiqueta";
+"contacts_visible_on_tag" = "Visível na placa";
 "contacts_no_type_added" = "Nenhum %@ adicionado";
 
 // MARK: - Chaves adicionais de substituição de encomenda
 "order_replace_upgrade_hint" = "Faça upgrade para Standard ou Maximum para substituições gratuitas";
 "order_replace_old_deactivated" = "O seu antigo código QR será desativado quando fizer esta encomenda";
-"order_replace_delivery_time" = "Receberá a sua nova etiqueta em 5-7 dias úteis";
-"order_replace_scan_activate" = "Assim que receber a nova etiqueta, deverá lê-la para a ativar";
+"order_replace_delivery_time" = "Receberá a sua nova placa em 5-7 dias úteis";
+"order_replace_scan_activate" = "Assim que receber a nova placa, deverá lê-la para a ativar";
 
 // MARK: - Chaves adicionais offline
 "offline_last_sync_label" = "Hora da última sincronização";
 
 // MARK: - Seleção de plano
 "plan_choose_title" = "Escolha o seu plano";
-"plan_tag_activated" = "Etiqueta ativada!";
+"plan_tag_activated" = "Placa ativada!";
 "plan_choose_subtitle" = "Escolha um plano para desbloquear todas as funcionalidades";
 "plan_upgrade_title" = "Melhore o seu plano";
 "plan_upgrade_subtitle" = "Obtenha mais funcionalidades para os seus animais";
@@ -694,7 +694,7 @@
 "plan_skip_free" = "Saltar por agora (Plano gratuito)";
 "plan_all_include" = "Todos os planos incluem:";
 "plan_paid_add" = "Os planos pagos adicionam:";
-"plan_feature_qr_tag" = "Etiqueta QR para o seu animal";
+"plan_feature_qr_tag" = "Placa QR para o seu animal";
 "plan_feature_scan_notif" = "Notificações instantâneas de leitura";
 "plan_feature_public_profile" = "Perfil público do animal";
 "plan_feature_secure_storage" = "Armazenamento seguro de dados";
@@ -702,7 +702,7 @@
 "plan_feature_lost_alerts_short" = "Alertas de animal perdido";
 "plan_feature_sms" = "Notificações por SMS";
 "plan_feature_photos" = "Até 10 fotos por animal";
-"plan_feature_replacements" = "Substituições gratuitas de etiquetas";
+"plan_feature_replacements" = "Substituições gratuitas de placas";
 "plan_popular" = "Popular";
 "plan_current" = "Plano atual";
 "plan_select_free" = "Selecionar plano gratuito";
@@ -748,7 +748,7 @@
 
 // MARK: - Pedido de notificação push (Bloco 1)
 "push_prompt_title" = "Mantenha-se ligado";
-"push_prompt_benefit_scan" = "Alertas instantâneos quando a etiqueta do seu animal é lida";
+"push_prompt_benefit_scan" = "Alertas instantâneos quando a placa do seu animal é lida";
 "push_prompt_benefit_sighting" = "Relatórios de avistamento da comunidade";
 "push_prompt_benefit_found" = "Saiba de imediato quando o seu animal é encontrado";
 "push_prompt_benefit_missing" = "Alertas de animais desaparecidos na sua área";
@@ -797,7 +797,7 @@
 "sighting_queued_offline" = "Relatório de avistamento em fila. Será sincronizado quando houver ligação.";
 "action_queued_offline" = "Ação em fila. Será sincronizado quando houver ligação.";
 
-// MARK: - Etiquetas de acessibilidade
+// MARK: - Placas de acessibilidade
 "accessibility_pet_photo" = "Foto do animal";
 "accessibility_share_location" = "Partilhar localização";
 "accessibility_call_owner" = "Ligar ao dono";
@@ -887,8 +887,8 @@
 
 // MARK: - Localização em falta
 "login_required" = "Login necessário";
-"login_required_activate_tag" = "Faça login para ativar esta etiqueta para o seu animal";
-"login_activate_instructions" = "Após o login, digitalize a etiqueta novamente ou vá a Os Meus Animais para a ativar";
+"login_required_activate_tag" = "Faça login para ativar esta placa para o seu animal";
+"login_activate_instructions" = "Após o login, digitalize a placa novamente ou vá a Os Meus Animais para a ativar";
 "free_price" = "GRÁTIS";
 "referral_expires %@" = "Expira: %@";
 
@@ -924,16 +924,16 @@
 "referral_status_subscribed" = "Subscrito";
 "referral_status_rewarded" = "Recompensado";
 "referral_share_message" = "Usa o meu código de indicação %@ para obter 2 meses grátis no Pet Safety! https://senra.pet/choose-plan?referral=%@";
-"help_faq_q6" = "Como ativo a minha etiqueta quando chegar?";
-"help_faq_a6" = "Vá a 'Ler etiqueta' na app e aponte a câmara do telemóvel para o código QR da sua etiqueta. Isto liga a etiqueta à sua conta. Depois será pedido que escolha um animal existente ou crie um novo perfil. Após a ativação, selecione o seu plano de subscrição.";
+"help_faq_q6" = "Como ativo a minha placa quando chegar?";
+"help_faq_a6" = "Vá a 'Ler placa' na app e aponte a câmara do telemóvel para o código QR da sua placa. Isto liga a placa à sua conta. Depois será pedido que escolha um animal existente ou crie um novo perfil. Após a ativação, selecione o seu plano de subscrição.";
 "help_faq_q7" = "Posso atualizar os dados do meu animal após o registo?";
 "help_faq_a7" = "Sim — pode editar o perfil do seu animal a qualquer momento. Vá a 'Os meus animais', selecione o animal e clique em 'Editar'. Pode atualizar qualquer campo, incluindo fotos. As alterações são guardadas imediatamente.";
 "help_faq_q8" = "O que devo fazer se o meu animal desaparecer?";
 "help_faq_a8" = "Vá a 'Os meus animais' e clique no menu do cartão do animal, depois selecione 'Marcar como desaparecido'. Isto cria um alerta visível para a comunidade Senra na sua área. As pessoas por perto verão o alerta e podem reportar avistamentos com localização. Será notificado imediatamente de qualquer avistamento.";
 "help_faq_q9" = "Como funcionam os alertas de animais desaparecidos?";
 "help_faq_a9" = "Quando marca um animal como desaparecido, é criado um alerta com a foto e detalhes do animal. Outros utilizadores Senra num raio de 10 km podem ver o alerta no mapa de Animais Desaparecidos. Qualquer pessoa da comunidade pode reportar um avistamento, que lhe envia a localização e informações de contacto. Veterinários e abrigos registados na Senra na sua área também recebem o alerta.";
-"help_faq_q10" = "Como peço uma etiqueta de substituição?";
-"help_faq_a10" = "Vá à página da Conta e clique em 'Pedir substituição'. Selecione o animal que precisa de uma nova etiqueta. Membros Maximum têm substituições gratuitas ilimitadas, membros Standard têm uma substituição grátis por ano, e membros Starter podem pedir substituições por uma pequena taxa de envio.";
+"help_faq_q10" = "Como peço uma placa de substituição?";
+"help_faq_a10" = "Vá à página da Conta e clique em 'Pedir substituição'. Selecione o animal que precisa de uma nova placa. Membros Maximum têm substituições gratuitas ilimitadas, membros Standard têm uma substituição grátis por ano, e membros Starter podem pedir substituições por uma pequena taxa de envio.";
 "help_faq_q11" = "O que é o programa de referência?";
 "help_faq_a11" = "Vá à página de Referências para gerar o seu código de referência pessoal. Partilhe-o com amigos e familiares. Quando alguém usar o seu código e subscrever um plano pago (Standard ou Maximum), ambos recebem 2 meses grátis. Pode acompanhar as suas referências na página de Referências.";
 "help_faq_q12" = "Para que países fazem envio?";
@@ -941,35 +941,35 @@
 "help_faq_q13" = "Posso ter vários animais numa conta?";
 "help_faq_a13" = "Sim. No plano Starter (gratuito) pode registar até 10 animais. O plano Standard suporta 1 animal. O plano Maximum suporta até 10 animais. Pode atualizar o plano a qualquer momento na página da Conta.";
 "help_faq_q14" = "Como reporto um animal que encontrei?";
-"help_faq_a14" = "Se o animal tiver uma etiqueta Senra, basta ler o código QR com a câmara do telemóvel — não precisa de app. Verá o perfil do animal e pode partilhar a sua localização com o dono. Se não houver etiqueta, pode verificar o mapa de Animais Desaparecidos no site da Senra para ver se o animal foi reportado na sua área.";
+"help_faq_a14" = "Se o animal tiver uma placa Senra, basta ler o código QR com a câmara do telemóvel — não precisa de app. Verá o perfil do animal e pode partilhar a sua localização com o dono. Se não houver placa, pode verificar o mapa de Animais Desaparecidos no site da Senra para ver se o animal foi reportado na sua área.";
 "help_faq_q15" = "As minhas informações pessoais estão seguras?";
-"help_faq_a15" = "Sim. Controla exatamente que informações ficam visíveis quando alguém lê a etiqueta do seu animal. Em Definições > Privacidade, pode escolher mostrar ou ocultar o telefone, e-mail e morada. O login é protegido por códigos de verificação únicos — não há palavras-passe para roubar. Pode eliminar a conta e todos os dados a qualquer momento.";
-"help_faq_q16" = "Perdi a minha etiqueta ou está danificada — o que devo fazer?";
-"help_faq_a16" = "Não se preocupe — o perfil digital do seu animal está seguro e não é guardado na etiqueta. Vá à página da Conta e clique em 'Pedir substituição'. Uma nova etiqueta com um novo código QR será ligada ao perfil existente. Membros Standard têm uma substituição grátis por ano, membros Maximum têm substituições gratuitas ilimitadas, e membros Starter pagam uma pequena taxa de envio. A etiqueta antiga deixará de funcionar quando a nova for ativada.";
-"help_faq_q17" = "A minha etiqueta não lê — como resolvo?";
-"help_faq_a17" = "Experimente estes passos: limpe a superfície da etiqueta com um pano húmido, garanta boa iluminação, mantenha a câmara do telemóvel estável a cerca de 10-15 cm da etiqueta e verifique se a câmara ou leitor QR está a funcionar. Se o código QR estiver riscado ou desbotado, pode usar a opção de entrada manual na app em 'Ler etiqueta'. Se a etiqueta estiver demasiado danificada para ler, peça uma substituição grátis na página da Conta (planos Standard e Maximum).";
-"help_faq_q18" = "Encontrei um animal sem etiqueta Senra — o que posso fazer?";
+"help_faq_a15" = "Sim. Controla exatamente que informações ficam visíveis quando alguém lê a placa do seu animal. Em Definições > Privacidade, pode escolher mostrar ou ocultar o telefone, e-mail e morada. O login é protegido por códigos de verificação únicos — não há palavras-passe para roubar. Pode eliminar a conta e todos os dados a qualquer momento.";
+"help_faq_q16" = "Perdi a minha placa ou está danificada — o que devo fazer?";
+"help_faq_a16" = "Não se preocupe — o perfil digital do seu animal está seguro e não é guardado na placa. Vá à página da Conta e clique em 'Pedir substituição'. Uma nova placa com um novo código QR será ligada ao perfil existente. Membros Standard têm uma substituição grátis por ano, membros Maximum têm substituições gratuitas ilimitadas, e membros Starter pagam uma pequena taxa de envio. A placa antiga deixará de funcionar quando a nova for ativada.";
+"help_faq_q17" = "A minha placa não lê — como resolvo?";
+"help_faq_a17" = "Experimente estes passos: limpe a superfície da placa com um pano húmido, garanta boa iluminação, mantenha a câmara do telemóvel estável a cerca de 10-15 cm da placa e verifique se a câmara ou leitor QR está a funcionar. Se o código QR estiver riscado ou desbotado, pode usar a opção de entrada manual na app em 'Ler placa'. Se a placa estiver demasiado danificada para ler, peça uma substituição grátis na página da Conta (planos Standard e Maximum).";
+"help_faq_q18" = "Encontrei um animal sem placa Senra — o que posso fazer?";
 "help_faq_a18" = "Verifique o mapa de Animais Desaparecidos no site da Senra (senra.pet) — o animal pode ter sido reportado como desaparecido na sua área. Pode ver os alertas sem conta. Se encontrar uma correspondência, pode reportar um avistamento com a sua localização para ajudar a reunir o animal com o dono. Também pode levar o animal a um veterinário local para verificar o microchip.";
 "help_faq_q19" = "Posso alterar o meu endereço de e-mail?";
 "help_faq_a19" = "O seu e-mail principal é usado como identidade da conta e não pode ser alterado diretamente. Se precisar de usar outro e-mail, pode adicionar um e-mail secundário em Definições > Detalhes de contacto — este também será mostrado no perfil do animal. Se precisar absolutamente de alterar o e-mail principal, contacte a nossa equipa de suporte e ajudaremos a migrar a conta.";
-"help_faq_q20" = "Qual é a diferença entre um microchip e uma etiqueta QR Senra?";
-"help_faq_a20" = "Um microchip é um pequeno implante sob a pele do animal que armazena um número de ID único — mas requer um leitor especial (geralmente só disponível em veterinários e abrigos) para ser lido. Uma etiqueta QR Senra funciona instantaneamente com qualquer câmara de smartphone, mostrando o perfil completo do animal, foto e os seus contactos no momento. A pessoa que encontrar o animal também pode partilhar a sua localização GPS consigo. Recomendamos usar ambos: o microchip como backup permanente, e a etiqueta Senra para identificação instantânea e diária.";
+"help_faq_q20" = "Qual é a diferença entre um microchip e uma placa QR Senra?";
+"help_faq_a20" = "Um microchip é um pequeno implante sob a pele do animal que armazena um número de ID único — mas requer um leitor especial (geralmente só disponível em veterinários e abrigos) para ser lido. Uma placa QR Senra funciona instantaneamente com qualquer câmara de smartphone, mostrando o perfil completo do animal, foto e os seus contactos no momento. A pessoa que encontrar o animal também pode partilhar a sua localização GPS consigo. Recomendamos usar ambos: o microchip como backup permanente, e a placa Senra para identificação instantânea e diária.";
 "help_faq_q21" = "O que acontece aos meus dados se cancelar a subscrição?";
-"help_faq_a21" = "Se cancelar a subscrição, mantém acesso às funcionalidades pagas até ao fim do período de faturação atual. Depois disso, a conta passa automaticamente para o plano Starter gratuito. Os perfis, fotos e etiquetas QR dos animais permanecem ativos — apenas perde acesso a funcionalidades premium como notificações SMS, alertas veterinários e substituições grátis. Os seus dados nunca são eliminados ao cancelar. Para remover permanentemente todos os dados, use a opção Eliminação de Conta nas Definições.";
+"help_faq_a21" = "Se cancelar a subscrição, mantém acesso às funcionalidades pagas até ao fim do período de faturação atual. Depois disso, a conta passa automaticamente para o plano Starter gratuito. Os perfis, fotos e placas QR dos animais permanecem ativos — apenas perde acesso a funcionalidades premium como notificações SMS, alertas veterinários e substituições grátis. Os seus dados nunca são eliminados ao cancelar. Para remover permanentemente todos os dados, use a opção Eliminação de Conta nas Definições.";
 "help_faq_q22" = "Como registo o meu veterinário ou abrigo na Senra?";
 "help_faq_a22" = "Veterinários e abrigos podem registar-se em senra.pet/register-vet-shelter. Preencha os dados da clínica ou organização e enviaremos um e-mail de verificação. Depois de confirmado, receberá automaticamente alertas por e-mail quando animais desaparecerem na sua área — ajudando a reunir animais perdidos com as suas famílias. Não tem custo e não requer login. Os donos também podem registar o seu veterinário local em seu nome.";
 "help_faq_q23" = "Como partilho uma história de sucesso quando o meu animal é encontrado?";
 "help_faq_a23" = "Quando marcar o animal como encontrado em 'Os meus animais', será perguntado se quer partilhar a história do reencontro. Pode adicionar uma mensagem curta sobre como o animal foi encontrado e confirmar a localização. As histórias públicas aparecem no mapa de Animais Encontrados, inspirando a comunidade. Também pode publicar ou remover uma história mais tarde no perfil do animal.";
 "help_faq_q24" = "Que navegadores e dispositivos são suportados?";
-"help_faq_a24" = "A Senra funciona em todos os navegadores modernos incluindo Chrome, Safari, Firefox e Edge em mobile e desktop. A leitura de etiquetas QR funciona com qualquer câmara de smartphone — a pessoa que encontrar o animal não precisa da app Senra nem de conta. As notificações push são suportadas no Chrome e Edge em desktop e Android. Para a melhor experiência, recomendamos usar um navegador atualizado no telemóvel.";
-"help_faq_q25" = "Posso pedir etiquetas para vários animais de uma vez?";
-"help_faq_a25" = "Cada encomenda inclui etiquetas para os nomes de animais que especificar durante o pagamento. Pode introduzir vários nomes numa única encomenda. Quando as etiquetas chegarem, leia cada uma para a ativar e ligar ao perfil correto. Se precisar de etiquetas para mais animais depois, pode fazer encomendas adicionais na página da Conta.";
+"help_faq_a24" = "A Senra funciona em todos os navegadores modernos incluindo Chrome, Safari, Firefox e Edge em mobile e desktop. A leitura de placas QR funciona com qualquer câmara de smartphone — a pessoa que encontrar o animal não precisa da app Senra nem de conta. As notificações push são suportadas no Chrome e Edge em desktop e Android. Para a melhor experiência, recomendamos usar um navegador atualizado no telemóvel.";
+"help_faq_q25" = "Posso pedir placas para vários animais de uma vez?";
+"help_faq_a25" = "Cada encomenda inclui placas para os nomes de animais que especificar durante o pagamento. Pode introduzir vários nomes numa única encomenda. Quando as placas chegarem, leia cada uma para a ativar e ligar ao perfil correto. Se precisar de placas para mais animais depois, pode fazer encomendas adicionais na página da Conta.";
 "help_faq_q26" = "Como é que os alertas de animais desaparecidos chegam aos veterinários e abrigos?";
 "help_faq_a26" = "Quando marca o animal como desaparecido, a Senra envia automaticamente alertas por e-mail a todos os veterinários e abrigos verificados registados na sua área. Isto significa que os profissionais de animais locais ficam imediatamente cientes de que o seu animal está desaparecido. Quanto mais veterinários e abrigos registados na sua área, mais forte é a rede de segurança. Pode ajudar incentivando o seu veterinário a registar-se na Senra.";
-"help_faq_q27" = "Posso transferir uma etiqueta para outro animal?";
-"help_faq_a27" = "Cada etiqueta QR está permanentemente ligada a um perfil de animal e não pode ser reassociada. Se um animal falecer ou já não precisar de uma etiqueta, a etiqueta antiga fica simplesmente inativa. Para etiquetar um novo animal, peça uma nova etiqueta na página da Conta. Se tiver um plano Standard ou Maximum, pode ter direito a uma etiqueta de substituição gratuita para o novo animal.";
-"help_guide_qr_tags_title" = "Etiquetas QR para animais";
-"help_guide_qr_tags_desc" = "Conheça as nossas etiquetas QR inteligentes.";
+"help_faq_q27" = "Posso transferir uma placa para outro animal?";
+"help_faq_a27" = "Cada placa QR está permanentemente ligada a um perfil de animal e não pode ser reassociada. Se um animal falecer ou já não precisar de uma placa, a placa antiga fica simplesmente inativa. Para etiquetar um novo animal, peça uma nova placa na página da Conta. Se tiver um plano Standard ou Maximum, pode ter direito a uma placa de substituição gratuita para o novo animal.";
+"help_guide_qr_tags_title" = "Placas QR para animais";
+"help_guide_qr_tags_desc" = "Conheça as nossas placas QR inteligentes.";
 "help_guide_materials_title" = "Materiais e durabilidade";
 "help_guide_materials_desc" = "Informação sobre materiais e cuidados.";
 "help_guide_emergency_title" = "Funcionalidades de contacto de emergência";
@@ -981,7 +981,7 @@
 "help_guide_community_title" = "Comunidade e animais encontrados";
 "help_guide_community_desc" = "A força da Senra é a sua comunidade. O mapa de Animais Desaparecidos mostra alertas ativos perto de si — verifique se algum animal foi reportado como desaparecido na sua área. A página de Animais Encontrados celebra reencontros bem-sucedidos com histórias de donos. Pode registar o seu veterinário ou abrigo local na Senra para que recebam alertas de animais desaparecidos automaticamente, ajudando a criar uma rede de segurança mais forte para todos os animais na sua área.";
 "help_faq_group_getting_started" = "Primeiros passos";
-"help_faq_group_tags_scanning" = "Etiquetas e leitura";
+"help_faq_group_tags_scanning" = "Placas e leitura";
 "help_faq_group_missing_pets" = "Animais desaparecidos e alertas";
 "help_faq_group_billing_plans" = "Faturação e planos";
 "help_faq_group_privacy_account" = "Privacidade e conta";
@@ -1060,22 +1060,22 @@
 "delivery_postapoint" = "Levantamento PostaPont";
 
 // MARK: - Pending Registrations
-"pending_registrations_title" = "Etiquetas pendentes";
+"pending_registrations_title" = "Placas pendentes";
 "ready_to_activate" = "Prontas para ativar";
 "still_processing" = "Em processamento";
-"scan_tag_now" = "Escanear etiqueta";
+"scan_tag_now" = "Escanear placa";
 "create_profile_first" = "Criar perfil";
 "create_profile_while_waiting" = "Criar perfil enquanto espera";
 "all_caught_up" = "Tudo em dia!";
-"all_caught_up_description" = "Não tem registos de etiquetas pendentes.";
-"order_tags" = "Encomendar etiquetas";
+"all_caught_up_description" = "Não tem registos de placas pendentes.";
+"order_tags" = "Encomendar placas";
 "status_shipped" = "Enviado";
 "status_delivered" = "Entregue";
 "status_processing" = "Em processamento";
 "status_pending" = "Pendente";
-"activation_help_title" = "Como ativar a sua etiqueta";
-"activation_help_step1" = "Aguarde a chegada da sua etiqueta";
-"activation_help_step2" = "Digitalize o código QR na etiqueta";
+"activation_help_title" = "Como ativar a sua placa";
+"activation_help_step1" = "Aguarde a chegada da sua placa";
+"activation_help_step2" = "Digitalize o código QR na placa";
 "activation_help_step3" = "Selecione o animal a associar";
 "activation_help_step4" = "Escolha o seu plano de subscrição";
 
@@ -1088,7 +1088,7 @@
 "other_pets" = "Outros animais";
 "link_to_pet" = "Associar a %@";
 "no_pets_yet" = "Ainda sem animais";
-"create_first_pet" = "Crie o perfil do seu animal para ativar a etiqueta.";
+"create_first_pet" = "Crie o perfil do seu animal para ativar a placa.";
 "create_new_pet" = "Criar novo animal";
 
 // MARK: - Public Profile Details
@@ -1099,15 +1099,15 @@
 // MARK: - Notifications Inbox
 "notifications_title" = "Notificações";
 "no_notifications" = "Sem notificações";
-"no_notifications_desc" = "Tudo em dia! As notificações aparecerão aqui quando a etiqueta do seu animal for escaneada.";
+"no_notifications_desc" = "Tudo em dia! As notificações aparecerão aqui quando a placa do seu animal for escaneada.";
 "mark_all_read" = "Marcar tudo como lido";
 "load_more" = "Carregar mais";
 "just_now" = "Agora mesmo";
 
 // MARK: - Activation Error Messages
-"activation_error_qr_not_found" = "Código QR não reconhecido. Certifique-se de que está a escanear uma etiqueta oficial Senra.";
-"activation_error_already_activated" = "Esta etiqueta já está associada a outro animal. Contacte o suporte.";
-"activation_error_not_linked" = "Esta etiqueta ainda não foi atribuída à sua encomenda. Aguarde a confirmação de envio.";
+"activation_error_qr_not_found" = "Código QR não reconhecido. Certifique-se de que está a escanear uma placa oficial Senra.";
+"activation_error_already_activated" = "Esta placa já está associada a outro animal. Contacte o suporte.";
+"activation_error_not_linked" = "Esta placa ainda não foi atribuída à sua encomenda. Aguarde a confirmação de envio.";
 "activation_error_not_shipped" = "A sua encomenda ainda não foi enviada. Aguarde a entrega.";
 "activation_error_not_owner" = "Este não é o seu animal. Selecione um dos seus próprios animais.";
 
@@ -1227,12 +1227,12 @@
 "profile_incomplete_warning" = "Complete o perfil do seu animal";
 "profile_incomplete_desc" = "Dados em falta dificultam encontrar o seu animal. Preencha peso, cor e informações médicas.";
 "identity_locked_title" = "Nome, espécie e raça estão bloqueados";
-"identity_locked_desc" = "Estes campos não podem ser alterados após ativação da etiqueta.";
+"identity_locked_desc" = "Estes campos não podem ser alterados após ativação da placa.";
 
 // MARK: - Subscription Management
 "cancel_subscription_title" = "Cancelar subscrição?";
 "cancel_warning_a" = "Perderá as notificações instantâneas por e-mail, SMS e alertas comunitários";
-"cancel_warning_b" = "As substituições gratuitas de etiquetas deixarão de estar disponíveis";
+"cancel_warning_b" = "As substituições gratuitas de placas deixarão de estar disponíveis";
 "cancel_warning_c" = "Perderá o acesso aos alertas veterinários e de abrigos";
 "cancel_warning_d" = "A sua conta e os registos de animais permanecerão ativos";
 "cancel_access_until" = "Manterá o acesso até %@";

@@ -42,7 +42,7 @@
 "resend_code_cooldown" = "Retrimite codul în %llds";
 "resend_code_prompt" = "Nu ai primit codul? Retrimite";
 "dont_have_account" = "Nu ai cont?";
-"start_here_order_free_tag" = "Începe aici și comandă eticheta gratuită";
+"start_here_order_free_tag" = "Începe aici și comandă medalonul gratuită";
 "create_account" = "Creează cont";
 "enter_details_subtitle" = "Introdu datele tale pentru a începe.";
 "register" = "Înregistrare";
@@ -133,7 +133,7 @@
 "species_cat" = "Pisică";
 "select_photo" = "Selectează foto";
 "select_pet" = "Selectează animal";
-"select_pet_for_replacement" = "Selectează animal pentru etichetă de înlocuire";
+"select_pet_for_replacement" = "Selectează animal pentru medalion de înlocuire";
 "weight" = "Greutate";
 "weight_optional" = "Greutate în kg (opțional)";
 "date_of_birth" = "Data nașterii";
@@ -162,9 +162,9 @@
 
 // MARK: - Scanner QR
 "scan_qr_code" = "Scanează cod QR";
-"scan_qr_subtitle" = "Îndreaptă camera către eticheta QR a animalului";
+"scan_qr_subtitle" = "Îndreaptă camera către medalonul QR a animalului";
 "hello_pet_name" = "Salut! Sunt %@";
-"scanned_tag_thanks" = "Tocmai ai scanat eticheta mea. Mulțumesc că mă ajuți!";
+"scanned_tag_thanks" = "Tocmai ai scanat medalonul mea. Mulțumesc că mă ajuți!";
 "share_location_with_owner" = "Partajează locația mea cu proprietarul";
 "contact_owner" = "Contactează proprietarul";
 "call_phone" = "Sună: %@";
@@ -200,8 +200,8 @@
 "scanner_notes" = "Note";
 "scanner_how_it_works" = "Cum funcționează";
 
-// MARK: - Activare etichetă
-"tag_activate_title" = "Activează eticheta";
+// MARK: - Activare medalion
+"tag_activate_title" = "Activează medalonul";
 "tag_loading_pets" = "Se încarcă animalele tale...";
 "tag_activated" = "Etichetă activată!";
 "tag_activated_message %@" = "Eticheta lui %@ este acum activă";
@@ -209,12 +209,12 @@
 "tag_choose_plan_button" = "Completează profilul animalului";
 "tag_skip_for_now" = "O fac mai târziu";
 "tag_no_pets" = "Încă nu ai animale";
-"tag_no_pets_message" = "Adaugă un animal înainte de a activa o etichetă";
-"tag_code_label" = "Cod etichetă";
-"tag_select_pet" = "Selectează un animal pentru a-l lega de această etichetă";
+"tag_no_pets_message" = "Adaugă un animal înainte de a activa o medalion";
+"tag_code_label" = "Cod medalion";
+"tag_select_pet" = "Selectează un animal pentru a-l lega de această medalion";
 "tag_activating" = "Se activează...";
-"tag_activate_button" = "Activează eticheta";
-"tag_link_message" = "Această etichetă va fi asociată cu animalul selectat";
+"tag_activate_button" = "Activează medalonul";
+"tag_link_message" = "Această medalion va fi asociată cu animalul selectat";
 
 // MARK: - Selectare plan
 "plan_tag_activated" = "Etichetă activată!";
@@ -494,11 +494,11 @@
 "help_faq_a1" = "Mergi la 'Animalele mele' și apasă 'Adaugă animal'.";
 "help_faq_q2" = "Ce informații trebuie să includ?";
 "help_faq_a2" = "Nume, specie, rasă, vârstă, informații medicale și contacte de urgență.";
-"help_faq_q3" = "Cum funcționează eticheta QR?";
+"help_faq_q3" = "Cum funcționează medalonul QR?";
 "help_faq_a3" = "Fiecare animal primește un QR unic. La scanare, se vede profilul.";
 "help_faq_q4" = "Pot actualiza informațiile ulterior?";
 "help_faq_a4" = "Da, în 'Animalele mele' selectează animalul și apasă 'Editează profil'.";
-"help_faq_q5" = "Cum comand o etichetă de înlocuire?";
+"help_faq_q5" = "Cum comand o medalion de înlocuire?";
 "help_faq_a5" = "În profilul animalului apasă 'Comandă înlocuire' și urmează pașii.";
 // Ghiduri
 
@@ -518,7 +518,7 @@
 "privacy_data_privacy" = "Confidențialitate date";
 "privacy_privacy_policy" = "Politica de confidențialitate";
 "privacy_title" = "Mod confidențialitate";
-"privacy_mode_footer" = "Setările de confidențialitate te ajută să controlezi ce informații sunt partajate când se scanează eticheta QR a animalului.";
+"privacy_mode_footer" = "Setările de confidențialitate te ajută să controlezi ce informații sunt partajate când se scanează medalonul QR a animalului.";
 "privacy_settings_updated" = "Setările de confidențialitate au fost actualizate";
 "privacy_settings_failed" = "Nu s-au putut actualiza setările de confidențialitate";
 
@@ -533,7 +533,7 @@
 // MARK: - Comenzi
 "orders_title" = "Comenzi";
 "order_number" = "Comanda #%@";
-"add_pet_first_replacement" = "Adaugă un animal înainte de a comanda o etichetă de înlocuire.";
+"add_pet_first_replacement" = "Adaugă un animal înainte de a comanda o medalion de înlocuire.";
 "orders_no_orders" = "Nu există comenzi";
 "orders_no_orders_message" = "Nu ai plasat încă nicio comandă";
 "orders_information" = "Informații comandă";
@@ -550,9 +550,9 @@
 // MARK: - Comandă etichete suplimentare
 "order_more_title" = "Comandă mai multe etichete";
 "order_more_complete" = "Comandă completă!";
-"order_more_confirmation" = "Vom expedia etichetele după confirmarea plății.";
+"order_more_confirmation" = "Vom expedia medalioanele după confirmarea plății.";
 "order_more_pet_names" = "Numele animalelor";
-"order_more_pet_names_footer" = "Introdu numele animalelor pentru care vrei etichete. Vom grava fiecare etichetă cu numele animalului.";
+"order_more_pet_names_footer" = "Introdu numele animalelor pentru care vrei etichete. Vom grava fiecare medalion cu numele animalului.";
 "order_more_add_another" = "Adaugă alt animal";
 "order_more_your_info" = "Informațiile tale";
 "order_more_shipping" = "Adresă de livrare";
@@ -568,8 +568,8 @@
 "order_more_proceed_to_payment" = "Continuă la plată";
 "order_more_redirecting" = "Redirecționare...";
 
-// MARK: - Comandă etichetă de înlocuire
-"order_replace_title" = "Comandă etichetă de înlocuire";
+// MARK: - Comandă medalion de înlocuire
+"order_replace_title" = "Comandă medalion de înlocuire";
 "order_replace_complete" = "Comandă completă!";
 "order_replace_confirmation" = "Eticheta de înlocuire va fi expediată la adresa furnizată.";
 "order_replace_pet_info" = "Informații animal";
@@ -577,7 +577,7 @@
 "order_replace_eligible_free" = "Prima înlocuire este gratuită";
 "order_replace_additional_fee %@" = "Înlocuiri suplimentare: %@";
 "order_replace_shipping" = "Adresă de livrare";
-"order_replace_shipping_footer" = "Vom expedia eticheta de înlocuire la această adresă.";
+"order_replace_shipping_footer" = "Vom expedia medalonul de înlocuire la această adresă.";
 "order_replace_street" = "Stradă și număr";
 "order_replace_line2" = "Etaj, apartament (opțional)";
 "order_replace_city" = "Oraș";
@@ -585,7 +585,7 @@
 "order_replace_country" = "Țară";
 "order_replace_phone" = "Telefon (opțional)";
 "order_replace_creating" = "Se creează comanda...";
-"order_replace_free_button" = "Confirmă și comandă eticheta de înlocuire gratuită";
+"order_replace_free_button" = "Confirmă și comandă medalonul de înlocuire gratuită";
 "order_replace_paid_button %@" = "Confirmă și plătește %@";
 
 // MARK: - Delivery Method & PostaPont
@@ -666,19 +666,19 @@
 "registered_address" = "Adresă înregistrată";
 "address_shipping_footer" = "Introdu adresa completă pentru livrare și facturare";
 "address_delivery_prompt" = "Adaugă adresa pentru a permite livrarea etichetelor QR";
-"contacts_info_full" = "Aceste detalii de contact vor fi afișate când cineva scanează eticheta QR a animalului. Poți adăuga până la două adrese de e-mail și numere de telefon.";
+"contacts_info_full" = "Aceste detalii de contact vor fi afișate când cineva scanează medalonul QR a animalului. Poți adăuga până la două adrese de e-mail și numere de telefon.";
 "contacts_primary_email_edit_footer" = "E-mailul principal al contului";
 "contacts_secondary_email_edit_footer" = "E-mail de rezervă pentru notificări de recuperare";
 "contacts_primary_phone_edit_footer" = "Numărul principal de contact";
 "contacts_secondary_phone_edit_footer" = "Telefon de rezervă pentru urgențe";
-"contacts_visible_on_tag" = "Vizibil pe etichetă";
+"contacts_visible_on_tag" = "Vizibil pe medalion";
 "contacts_no_type_added" = "Niciun %@ adăugat";
 
-// MARK: - Chei adiționale înlocuire etichetă
+// MARK: - Chei adiționale înlocuire medalion
 "order_replace_upgrade_hint" = "Fă upgrade la Standard sau Maximum pentru înlocuiri gratuite";
 "order_replace_old_deactivated" = "Codul QR vechi va fi dezactivat când plasezi această comandă";
-"order_replace_delivery_time" = "Vei primi noua etichetă în 5-7 zile lucrătoare";
-"order_replace_scan_activate" = "După ce primești noua etichetă, trebuie să o scanezi pentru activare";
+"order_replace_delivery_time" = "Vei primi noua medalion în 5-7 zile lucrătoare";
+"order_replace_scan_activate" = "După ce primești noua medalion, trebuie să o scanezi pentru activare";
 
 // MARK: - Chei adiționale offline
 "offline_last_sync_label" = "Timp ultima sincronizare";
@@ -748,7 +748,7 @@
 
 // MARK: - Prompt notificări push (Secțiunea 1)
 "push_prompt_title" = "Rămâi conectat";
-"push_prompt_benefit_scan" = "Alerte instant când eticheta animalului tău este scanată";
+"push_prompt_benefit_scan" = "Alerte instant când medalonul animalului tău este scanată";
 "push_prompt_benefit_sighting" = "Raportări de observații din comunitate";
 "push_prompt_benefit_found" = "Află imediat când animalul tău este găsit";
 "push_prompt_benefit_missing" = "Alerte pentru animale dispărute în zona ta";
@@ -887,8 +887,8 @@
 
 // MARK: - Localizare lipsă
 "login_required" = "Autentificare necesară";
-"login_required_activate_tag" = "Vă rugăm să vă autentificați pentru a activa această etichetă pentru animalul dvs.";
-"login_activate_instructions" = "După autentificare, scanați din nou eticheta sau mergeți la Animalele mele pentru a o activa";
+"login_required_activate_tag" = "Vă rugăm să vă autentificați pentru a activa această medalion pentru animalul dvs.";
+"login_activate_instructions" = "După autentificare, scanați din nou medalonul sau mergeți la Animalele mele pentru a o activa";
 "free_price" = "GRATUIT";
 "referral_expires %@" = "Expiră: %@";
 
@@ -924,16 +924,16 @@
 "referral_status_subscribed" = "Abonat";
 "referral_status_rewarded" = "Recompensat";
 "referral_share_message" = "Folosește codul meu de recomandare %@ pentru a primi 2 luni gratuit pe Pet Safety! https://senra.pet/choose-plan?referral=%@";
-"help_faq_q6" = "Cum activez eticheta după ce ajunge?";
-"help_faq_a6" = "Mergi la „Scaneață eticheta” în aplicație și îndreaptă camera telefonului spre codul QR de pe etichetă. Aceasta leagă eticheta de contul tău. Vei fi apoi rugat să alegi un animal existent sau să creezi un profil nou. După activare, selectează planul de abonament.";
+"help_faq_q6" = "Cum activez medalonul după ce ajunge?";
+"help_faq_a6" = "Mergi la „Scaneață medalonul” în aplicație și îndreaptă camera telefonului spre codul QR de pe medalion. Aceasta leagă medalonul de contul tău. Vei fi apoi rugat să alegi un animal existent sau să creezi un profil nou. După activare, selectează planul de abonament.";
 "help_faq_q7" = "Pot actualiza informațiile animalului meu după înregistrare?";
 "help_faq_a7" = "Da — poți edita profilul animalului oricând. Mergi la „Animalele mele”, selectează animalul și apasă „Editează”. Poți actualiza orice câmp, inclusiv fotografiile. Modificările sunt salvate imediat.";
 "help_faq_q8" = "Ce ar trebui să fac dacă animalul meu dispare?";
 "help_faq_a8" = "Mergi la „Animalele mele” și apasă meniul de pe cardul animalului, apoi selectează „Marchează ca dispărut”. Aceasta creează o alertă vizibilă pentru comunitatea Senra din zona ta. Persoanele din apropiere vor vedea alerta și pot raporta observări cu informații despre locație. Vei fi notificat imediat despre orice observare.";
 "help_faq_q9" = "Cum funcționează alertele pentru animale dispărute?";
 "help_faq_a9" = "Când marchezi un animal ca dispărut, se creează o alertă cu fotografia și detaliile animalului. Alți utilizatori Senra într-o rază de 10 km pot vedea alerta pe harta Animale dispărute. Oricine din comunitate poate raporta o observare, trimițându-ți locația și datele de contact. Veterinarii și adăposturile înregistrate la Senra din zona ta primesc de asemenea alerta.";
-"help_faq_q10" = "Cum comand o etichetă de înlocuire?";
-"help_faq_a10" = "Mergi la pagina Contul tău și apasă „Comandă înlocuire”. Selectează animalul care are nevoie de o etichetă nouă. Membrii Maximum primesc înlocuiri gratuite nelimitate, membrii Standard primesc o înlocuire gratuită pe an, iar membrii Starter pot comanda înlocuiri contra unei mici taxe de livrare.";
+"help_faq_q10" = "Cum comand o medalion de înlocuire?";
+"help_faq_a10" = "Mergi la pagina Contul tău și apasă „Comandă înlocuire”. Selectează animalul care are nevoie de o medalion nouă. Membrii Maximum primesc înlocuiri gratuite nelimitate, membrii Standard primesc o înlocuire gratuită pe an, iar membrii Starter pot comanda înlocuiri contra unei mici taxe de livrare.";
 "help_faq_q11" = "Ce este programul de recomandare?";
 "help_faq_a11" = "Accesează pagina Recomandări pentru a genera codul tău personal de recomandare. Distribuie-l prietenilor și familiei. Când cineva folosește codul tău și se abonează la un plan plătit (Standard sau Maximum), amândoi primiți 2 luni gratuite. Poți urmări recomandările pe pagina Recomandări.";
 "help_faq_q12" = "În ce țări livrați?";
@@ -941,35 +941,35 @@
 "help_faq_q13" = "Pot avea mai multe animale pe un singur cont?";
 "help_faq_a13" = "Da. Cu planul Starter (gratuit) poți înregistra până la 10 animale. Planul Standard permite 1 animal. Planul Maximum permite până la 10 animale. Poți face upgrade oricând din pagina Cont.";
 "help_faq_q14" = "Cum raportez un animal pe care l-am găsit?";
-"help_faq_a14" = "Dacă animalul are o etichetă Senra, pur și simplu scanează codul QR cu camera telefonului — nu ai nevoie de aplicație. Vei vedea profilul animalului și poți partaja locația cu proprietarul. Dacă nu are etichetă, poți verifica harta Animale dispărute pe site-ul Senra pentru a vedea dacă animalul a fost raportat ca dispărut în zona ta.";
+"help_faq_a14" = "Dacă animalul are o medalion Senra, pur și simplu scanează codul QR cu camera telefonului — nu ai nevoie de aplicație. Vei vedea profilul animalului și poți partaja locația cu proprietarul. Dacă nu are medalion, poți verifica harta Animale dispărute pe site-ul Senra pentru a vedea dacă animalul a fost raportat ca dispărut în zona ta.";
 "help_faq_q15" = "Sunt în siguranță informațiile mele personale?";
-"help_faq_a15" = "Da. Tu controlezi exact ce informații sunt vizibile când cineva scanează eticheta animalului tău. În Setări > Confidențialitate poți alege să afișezi sau să ascunzi numărul de telefon, e-mailul și adresa. Autentificarea este securizată cu coduri de verificare unice — nu există parole care să fie furate. Poți șterge contul și toate datele oricând.";
-"help_faq_q16" = "Am pierdut eticheta sau este deteriorată — ce ar trebui să fac?";
-"help_faq_a16" = "Nu-ți face griji — profilul digital al animalului este în siguranță și nu este stocat pe etichetă. Mergi la pagina Cont și apasă „Comandă înlocuire”. O etichetă nouă cu un cod QR proaspăt va fi legată de profilul existent al animalului. Membrii Standard primesc o înlocuire gratuită pe an, membrii Maximum primesc înlocuiri gratuite nelimitate, iar membrii Starter plătesc o mică taxă de livrare. Eticheta veche nu va mai funcționa odată ce cea nouă este activată.";
+"help_faq_a15" = "Da. Tu controlezi exact ce informații sunt vizibile când cineva scanează medalonul animalului tău. În Setări > Confidențialitate poți alege să afișezi sau să ascunzi numărul de telefon, e-mailul și adresa. Autentificarea este securizată cu coduri de verificare unice — nu există parole care să fie furate. Poți șterge contul și toate datele oricând.";
+"help_faq_q16" = "Am pierdut medalonul sau este deteriorată — ce ar trebui să fac?";
+"help_faq_a16" = "Nu-ți face griji — profilul digital al animalului este în siguranță și nu este stocat pe medalion. Mergi la pagina Cont și apasă „Comandă înlocuire”. O medalion nouă cu un cod QR proaspăt va fi legată de profilul existent al animalului. Membrii Standard primesc o înlocuire gratuită pe an, membrii Maximum primesc înlocuiri gratuite nelimitate, iar membrii Starter plătesc o mică taxă de livrare. Eticheta veche nu va mai funcționa odată ce cea nouă este activată.";
 "help_faq_q17" = "Eticheta mea nu se scanează — cum o repar?";
-"help_faq_a17" = "Încearcă acești pași: curăță suprafața etichetei cu o cârpă umedă, asigură-te că ai iluminare bună, ține camera telefonului stabilă la aproximativ 10-15 cm de etichetă și verifică dacă aplicația camerei sau scanerul QR funcționează. Dacă codul QR este zgâriat sau decolorat, poți folosi opțiunea de introducere manuală din aplicație, la „Scanează eticheta”. Dacă eticheta este prea deteriorată pentru a fi citită, comandă o înlocuire gratuită din pagina Cont (planurile Standard și Maximum).";
-"help_faq_q18" = "Am găsit un animal fără etichetă Senra — ce pot face?";
+"help_faq_a17" = "Încearcă acești pași: curăță suprafața medalonului cu o cârpă umedă, asigură-te că ai iluminare bună, ține camera telefonului stabilă la aproximativ 10-15 cm de medalion și verifică dacă aplicația camerei sau scanerul QR funcționează. Dacă codul QR este zgâriat sau decolorat, poți folosi opțiunea de introducere manuală din aplicație, la „Scanează medalonul”. Dacă medalonul este prea deteriorată pentru a fi citită, comandă o înlocuire gratuită din pagina Cont (planurile Standard și Maximum).";
+"help_faq_q18" = "Am găsit un animal fără medalion Senra — ce pot face?";
 "help_faq_a18" = "Verifică harta Animale dispărute de pe site-ul Senra (senra.pet) — animalul poate fi raportat ca dispărut în zona ta. Poți vedea alertele fără cont. Dacă găsești o potrivire, poți raporta o observare cu locația ta pentru a ajuta la reunirea animalului cu proprietarul. Poți de asemenea să duci animalul la un veterinar local pentru a verifica microcipul.";
 "help_faq_q19" = "Pot să-mi schimb adresa de e-mail?";
 "help_faq_a19" = "Adresa de e-mail principală este folosită ca identitate a contului și nu poate fi schimbată direct. Dacă ai nevoie să folosești un alt e-mail, poți adăuga un e-mail secundar în Setări > Detalii contact — acesta va fi afișat și pe profilul animalului. Dacă ai neapărat nevoie să schimbi e-mailul principal, contactează echipa de suport și te ajutăm să migrezi contul.";
-"help_faq_q20" = "Care este diferența dintre un microcip și o etichetă QR Senra?";
-"help_faq_a20" = "Un microcip este un implant minuscul sub pielea animalului care stochează un număr unic de identificare — dar necesită un scaner special (disponibil de obicei doar la veterinari și adăposturi) pentru a fi citit. O etichetă QR Senra funcționează instant cu orice cameră de smartphone, afișând profilul complet al animalului, fotografia și datele tale de contact pe loc. Persoana care găsește animalul poate partaja și locația GPS cu tine. Recomandăm utilizarea ambelor: microcipul ca backup permanent și eticheta Senra pentru identificare instantanee, zilnică.";
+"help_faq_q20" = "Care este diferența dintre un microcip și o medalion QR Senra?";
+"help_faq_a20" = "Un microcip este un implant minuscul sub pielea animalului care stochează un număr unic de identificare — dar necesită un scaner special (disponibil de obicei doar la veterinari și adăposturi) pentru a fi citit. O medalion QR Senra funcționează instant cu orice cameră de smartphone, afișând profilul complet al animalului, fotografia și datele tale de contact pe loc. Persoana care găsește animalul poate partaja și locația GPS cu tine. Recomandăm utilizarea ambelor: microcipul ca backup permanent și medalonul Senra pentru identificare instantanee, zilnică.";
 "help_faq_q21" = "Ce se întâmplă cu datele mele dacă anulez abonamentul?";
-"help_faq_a21" = "Dacă anulezi abonamentul, păstrezi accesul la funcțiile plătite până la sfârșitul perioadei curente de facturare. După aceea, contul trece automat pe planul gratuit Starter. Profilurile animalelor, fotografiile și etichetele QR rămân active — doar pierzi accesul la funcțiile premium precum notificările SMS, alertele veterinare și înlocuirile gratuite. Datele tale nu sunt niciodată șterse la anulare. Pentru a elimina permanent toate datele, folosește opțiunea de Ștergere cont din Setări.";
+"help_faq_a21" = "Dacă anulezi abonamentul, păstrezi accesul la funcțiile plătite până la sfârșitul perioadei curente de facturare. După aceea, contul trece automat pe planul gratuit Starter. Profilurile animalelor, fotografiile și medalioanele QR rămân active — doar pierzi accesul la funcțiile premium precum notificările SMS, alertele veterinare și înlocuirile gratuite. Datele tale nu sunt niciodată șterse la anulare. Pentru a elimina permanent toate datele, folosește opțiunea de Ștergere cont din Setări.";
 "help_faq_q22" = "Cum îmi înregistrez cabinetul veterinar sau adăpostul la Senra?";
 "help_faq_a22" = "Veterinarii și adăposturile se pot înregistra la senra.pet/register-vet-shelter. Completează detaliile cabinetului sau organizației, iar noi trimitem un e-mail de verificare. Odată confirmat, vei primi automat alerte prin e-mail când animale dispar în zona ta — ajutând la reunirea animalelor pierdute cu familiile lor. Nu există costuri și nu este necesară autentificarea. Proprietarii de animale pot înregistra veterinarul local în numele lor.";
 "help_faq_q23" = "Cum partajez o poveste de succes când animalul meu este găsit?";
 "help_faq_a23" = "Când marchezi animalul ca găsit în „Animalele mele”, vei fi întrebat dacă dorești să partajezi povestea de reunire. Poți adăuga un mesaj scurt despre cum a fost găsit animalul și confirma locația reunirii. Poveștile publice apar pe harta Animale găsite, inspirând comunitatea și arătând că sistemul funcționează. Poți publica sau elimina o poveste de succes ulterior din pagina de profil a animalului.";
 "help_faq_q24" = "Ce browsere și dispozitive sunt suportate?";
-"help_faq_a24" = "Senra funcționează pe toate browserele web moderne, inclusiv Chrome, Safari, Firefox și Edge, atât pe mobil cât și pe desktop. Scanarea etichetei QR funcționează cu orice cameră de smartphone — persoana care găsește animalul tău nu are nevoie de aplicația Senra sau de un cont. Notificările push sunt suportate în Chrome și Edge pe desktop și Android. Pentru cea mai bună experiență, recomandăm utilizarea unui browser actualizat pe telefon.";
+"help_faq_a24" = "Senra funcționează pe toate browserele web moderne, inclusiv Chrome, Safari, Firefox și Edge, atât pe mobil cât și pe desktop. Scanarea medalonului QR funcționează cu orice cameră de smartphone — persoana care găsește animalul tău nu are nevoie de aplicația Senra sau de un cont. Notificările push sunt suportate în Chrome și Edge pe desktop și Android. Pentru cea mai bună experiență, recomandăm utilizarea unui browser actualizat pe telefon.";
 "help_faq_q25" = "Pot comanda etichete pentru mai multe animale deodată?";
-"help_faq_a25" = "Fiecare comandă de etichete include etichete pentru numele animalelor specificate în timpul procesului de comandă. Poți introduce mai multe nume într-o singură comandă. După ce ajung etichetele, scanează fiecare pentru a o activa și a o lega de profilul corect. Dacă ai nevoie de etichete pentru mai multe animale ulterior, poți plasa comenzi suplimentare din pagina Cont oricând.";
+"help_faq_a25" = "Fiecare comandă de etichete include etichete pentru numele animalelor specificate în timpul procesului de comandă. Poți introduce mai multe nume într-o singură comandă. După ce ajung medalioanele, scanează fiecare pentru a o activa și a o lega de profilul corect. Dacă ai nevoie de etichete pentru mai multe animale ulterior, poți plasa comenzi suplimentare din pagina Cont oricând.";
 "help_faq_q26" = "Cum ajung alertele de animale dispărute la veterinari și adăposturi?";
 "help_faq_a26" = "Când marchezi animalul ca dispărut, Senra trimite automat alerte prin e-mail tuturor veterinarilor și adăposturilor verificate înregistrate în zona ta. Aceasta înseamnă că profesioniștii locali în domeniul animalelor sunt imediat conștienți că animalul tău este dispărut și pot fi atenți. Cu cât mai mulți veterinari și adăposturi sunt înregistrate în zona ta, cu atât rețeaua de siguranță este mai puternică. Poți ajuta încurajându-ți propriul veterinar să se înregistreze la Senra.";
-"help_faq_q27" = "Pot transfera o etichetă la un alt animal?";
-"help_faq_a27" = "Fiecare etichetă QR este legată permanent de un singur profil de animal și nu poate fi reatribuită. Dacă un animal trece la cele veșnice sau nu mai ai nevoie de o etichetă, eticheta veche devine pur și simplu inactivă. Pentru a eticheta un animal nou, comandă o etichetă nouă din pagina Cont. Dacă ai un plan Standard sau Maximum, poți beneficia de o etichetă de înlocuire gratuită pentru noul animal.";
+"help_faq_q27" = "Pot transfera o medalion la un alt animal?";
+"help_faq_a27" = "Fiecare medalion QR este legată permanent de un singur profil de animal și nu poate fi reatribuită. Dacă un animal trece la cele veșnice sau nu mai ai nevoie de o medalion, medalonul veche devine pur și simplu inactivă. Pentru a medalonul un animal nou, comandă o medalion nouă din pagina Cont. Dacă ai un plan Standard sau Maximum, poți beneficia de o medalion de înlocuire gratuită pentru noul animal.";
 "help_guide_qr_tags_title" = "Etichete QR pentru animale";
-"help_guide_qr_tags_desc" = "Află despre etichetele noastre smart QR.";
+"help_guide_qr_tags_desc" = "Află despre medalioanele noastre smart QR.";
 "help_guide_materials_title" = "Materiale și durabilitate";
 "help_guide_materials_desc" = "Informații despre materiale și îngrijire.";
 "help_guide_emergency_title" = "Funcții de contact de urgență";
@@ -1063,7 +1063,7 @@
 "pending_registrations_title" = "Etichete în așteptare";
 "ready_to_activate" = "Gata de activare";
 "still_processing" = "În procesare";
-"scan_tag_now" = "Scanează eticheta";
+"scan_tag_now" = "Scanează medalonul";
 "create_profile_first" = "Creează profil";
 "create_profile_while_waiting" = "Creează profil în timp ce aștepți";
 "all_caught_up" = "Totul e la zi!";
@@ -1073,9 +1073,9 @@
 "status_delivered" = "Livrat";
 "status_processing" = "În procesare";
 "status_pending" = "În așteptare";
-"activation_help_title" = "Cum să activezi eticheta";
-"activation_help_step1" = "Așteaptă să ajungă eticheta";
-"activation_help_step2" = "Scanează codul QR de pe etichetă";
+"activation_help_title" = "Cum să activezi medalonul";
+"activation_help_step1" = "Așteaptă să ajungă medalonul";
+"activation_help_step2" = "Scanează codul QR de pe medalion";
 "activation_help_step3" = "Selectează animalul de companie";
 "activation_help_step4" = "Alege planul de abonament";
 
@@ -1088,7 +1088,7 @@
 "other_pets" = "Alte animale";
 "link_to_pet" = "Asociază cu %@";
 "no_pets_yet" = "Niciun animal încă";
-"create_first_pet" = "Creează profilul animalului tău pentru a activa eticheta.";
+"create_first_pet" = "Creează profilul animalului tău pentru a activa medalonul.";
 "create_new_pet" = "Creează animal nou";
 
 // MARK: - Public Profile Details
@@ -1099,15 +1099,15 @@
 // MARK: - Notifications Inbox
 "notifications_title" = "Notificări";
 "no_notifications" = "Nicio notificare";
-"no_notifications_desc" = "Totul e la zi! Notificările vor apărea aici când cineva scanează eticheta animalului tău.";
+"no_notifications_desc" = "Totul e la zi! Notificările vor apărea aici când cineva scanează medalonul animalului tău.";
 "mark_all_read" = "Marchează toate ca citite";
 "load_more" = "Încarcă mai multe";
 "just_now" = "Chiar acum";
 
 // MARK: - Activation Error Messages
-"activation_error_qr_not_found" = "Codul QR nu a fost recunoscut. Asigurați-vă că scanați o etichetă oficială Senra.";
-"activation_error_already_activated" = "Această etichetă este deja asociată altui animal. Contactați suportul.";
-"activation_error_not_linked" = "Această etichetă nu a fost încă atribuită comenzii dumneavoastră. Așteptați confirmarea expedierii.";
+"activation_error_qr_not_found" = "Codul QR nu a fost recunoscut. Asigurați-vă că scanați o medalion oficială Senra.";
+"activation_error_already_activated" = "Această medalion este deja asociată altui animal. Contactați suportul.";
+"activation_error_not_linked" = "Această medalion nu a fost încă atribuită comenzii dumneavoastră. Așteptați confirmarea expedierii.";
 "activation_error_not_shipped" = "Comanda nu a fost încă expediată. Așteptați livrarea.";
 "activation_error_not_owner" = "Acesta nu este animalul dumneavoastră. Selectați unul dintre animalele proprii.";
 
@@ -1227,7 +1227,7 @@
 "profile_incomplete_warning" = "Completează profilul animalului";
 "profile_incomplete_desc" = "Detaliile lipsă îngreunează găsirea animalului. Completează greutatea, culoarea și informațiile medicale.";
 "identity_locked_title" = "Numele, specia și rasa sunt blocate";
-"identity_locked_desc" = "Aceste câmpuri nu pot fi modificate după activarea etichetei.";
+"identity_locked_desc" = "Aceste câmpuri nu pot fi modificate după activarea medalonului.";
 
 // MARK: - Subscription Management
 "cancel_subscription_title" = "Anulezi abonamentul?";
