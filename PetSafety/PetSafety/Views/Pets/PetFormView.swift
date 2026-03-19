@@ -78,7 +78,7 @@ struct PetFormView: View {
             }
 
             // Locked fields info banner
-            if mode.isEdit, let pet = existingPet, pet.qrCode != nil {
+            if mode.isEdit {
                 Section {
                     HStack(spacing: 12) {
                         Image(systemName: "lock.fill")
@@ -129,11 +129,25 @@ struct PetFormView: View {
             }
 
             Section("basic_information") {
-                HStack {
-                    Text("name")
-                        .frame(width: 80, alignment: .leading)
-                    TextField("pet_name", text: $name)
-                        .onChange(of: name) { _, new in if new.count > InputValidators.maxPetName { name = String(new.prefix(InputValidators.maxPetName)) } }
+                if mode.isEdit {
+                    // In edit mode, name is locked (read-only)
+                    HStack {
+                        Text("name")
+                            .frame(width: 80, alignment: .leading)
+                        Text(name)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Image(systemName: "lock.fill")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                } else {
+                    HStack {
+                        Text("name")
+                            .frame(width: 80, alignment: .leading)
+                        TextField("pet_name", text: $name)
+                            .onChange(of: name) { _, new in if new.count > InputValidators.maxPetName { name = String(new.prefix(InputValidators.maxPetName)) } }
+                    }
                 }
 
                 if mode.isEdit {
@@ -144,6 +158,9 @@ struct PetFormView: View {
                         Text(species)
                             .foregroundColor(.primary)
                         Spacer()
+                        Image(systemName: "lock.fill")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                     }
                 } else {
                     // In create mode, show species picker
@@ -154,10 +171,24 @@ struct PetFormView: View {
                     }
                 }
 
-                HStack {
-                    Text("breed")
-                        .frame(width: 80, alignment: .leading)
-                    BreedPickerButton(breed: $breed, species: species)
+                if mode.isEdit {
+                    // In edit mode, breed is locked (read-only)
+                    HStack {
+                        Text("breed")
+                            .frame(width: 80, alignment: .leading)
+                        Text(breed.isEmpty ? "-" : breed)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Image(systemName: "lock.fill")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                } else {
+                    HStack {
+                        Text("breed")
+                            .frame(width: 80, alignment: .leading)
+                        BreedPickerButton(breed: $breed, species: species)
+                    }
                 }
 
                 HStack {
