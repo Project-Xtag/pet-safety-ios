@@ -226,8 +226,11 @@ struct PetsListView: View {
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
 
-            // First row of quick actions
-            HStack(spacing: 12) {
+            // 2x2 grid for quick actions
+            LazyVGrid(columns: [
+                GridItem(.flexible(), spacing: 12),
+                GridItem(.flexible(), spacing: 12)
+            ], spacing: 12) {
                 QuickActionButton(
                     icon: "plus.circle.fill",
                     title: NSLocalizedString("action_add_pet", comment: ""),
@@ -355,7 +358,7 @@ struct PetCardView: View {
                             placeholderImage
                         }
                     }
-                    .frame(height: 120)
+                    .aspectRatio(1, contentMode: .fill)
                     .clipped()
 
                     // Missing Badge
@@ -516,7 +519,7 @@ struct QuickActionButton: View {
                 }
 
                 Text(title.uppercased())
-                    .font(.system(size: 9, weight: .bold))
+                    .font(.system(size: 11, weight: .bold))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)

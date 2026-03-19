@@ -20,6 +20,8 @@ struct PetDetailView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
 
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
@@ -35,7 +37,7 @@ struct PetDetailView: View {
                         .foregroundColor(.secondary)
                         .padding(40)
                 }
-                .frame(height: 300)
+                .frame(height: horizontalSizeClass == .regular ? 400 : 300)
                 .frame(maxWidth: .infinity)
                 .background(Color(.systemGray6))
                 .cornerRadius(20)
@@ -238,6 +240,7 @@ struct PetDetailView: View {
                 .padding(.bottom, 100) // Add padding to prevent button from being hidden under tab bar
             }
             .padding(.vertical)
+            .adaptiveContainer(maxWidth: horizontalSizeClass == .regular ? 600 : .infinity)
         }
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showingEditSheet, onDismiss: refreshPet) {

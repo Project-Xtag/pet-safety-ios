@@ -208,7 +208,7 @@ struct PetFormView: View {
 
             Section("health_information") {
                 TextEditor(text: $medicalInfo)
-                    .frame(minHeight: 120)
+                    .frame(minHeight: 80)
                     .onChange(of: medicalInfo) { _, new in if new.count > InputValidators.maxMedicalNotes { medicalInfo = String(new.prefix(InputValidators.maxMedicalNotes)) } }
                     .overlay(alignment: .topLeading) {
                         if medicalInfo.isEmpty {
@@ -220,7 +220,7 @@ struct PetFormView: View {
                     }
 
                 TextEditor(text: $allergies)
-                    .frame(minHeight: 60)
+                    .frame(minHeight: 80)
                     .onChange(of: allergies) { _, new in if new.count > InputValidators.maxAllergies { allergies = String(new.prefix(InputValidators.maxAllergies)) } }
                     .overlay(alignment: .topLeading) {
                         if allergies.isEmpty {
@@ -232,7 +232,7 @@ struct PetFormView: View {
                     }
 
                 TextEditor(text: $medications)
-                    .frame(minHeight: 60)
+                    .frame(minHeight: 80)
                     .onChange(of: medications) { _, new in if new.count > InputValidators.maxMedications { medications = String(new.prefix(InputValidators.maxMedications)) } }
                     .overlay(alignment: .topLeading) {
                         if medications.isEmpty {

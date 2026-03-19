@@ -93,7 +93,7 @@ struct PlanFeatures: Codable {
 }
 
 // MARK: - User Subscription
-struct UserSubscription: Codable {
+struct UserSubscription: Decodable {
     let id: String
     let userId: String
     let planId: String
@@ -108,11 +108,18 @@ struct UserSubscription: Codable {
     let createdAt: Date?
     let updatedAt: Date?
 
+    /// Nested plan object returned by the API
+    private struct NestedPlan: Codable {
+        let name: String
+    }
+
     enum CodingKeys: String, CodingKey {
         case id
         case userId = "user_id"
         case planId = "plan_id"
         case planName = "plan_name"
+        case plan
+        case tier
         case status
         case billingPeriod = "billing_period"
         case currentPeriodStart = "current_period_start"
@@ -122,6 +129,33 @@ struct UserSubscription: Codable {
         case trialEndsAt = "trial_ends_at"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        userId = try container.decode(String.self, forKey: .userId)
+        planId = try container.decodeIfPresent(String.self, forKey: .planId) ?? ""
+        status = try container.decode(SubscriptionStatus.self, forKey: .status)
+        billingPeriod = try container.decodeIfPresent(String.self, forKey: .billingPeriod)
+        currentPeriodStart = try container.decodeIfPresent(Date.self, forKey: .currentPeriodStart)
+        currentPeriodEnd = try container.decodeIfPresent(Date.self, forKey: .currentPeriodEnd)
+        cancelAtPeriodEnd = try container.decodeIfPresent(Bool.self, forKey: .cancelAtPeriodEnd)
+        stripeSubscriptionId = try container.decodeIfPresent(String.self, forKey: .stripeSubscriptionId)
+        trialEndsAt = try container.decodeIfPresent(Date.self, forKey: .trialEndsAt)
+        createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt)
+        updatedAt = try container.decodeIfPresent(Date.self, forKey: .updatedAt)
+
+        // plan_name can come from: flat "plan_name", nested "plan.name", or "tier"
+        if let flat = try container.decodeIfPresent(String.self, forKey: .planName) {
+            planName = flat
+        } else if let nested = try container.decodeIfPresent(NestedPlan.self, forKey: .plan) {
+            planName = nested.name
+        } else if let tier = try container.decodeIfPresent(String.self, forKey: .tier) {
+            planName = tier
+        } else {
+            planName = "starter"
+        }
     }
 
     var isActive: Bool {
@@ -222,7 +256,7 @@ struct SubscriptionPlansResponse: Codable {
     let plans: [SubscriptionPlan]
 }
 
-struct MySubscriptionResponse: Codable {
+struct MySubscriptionResponse: Decodable {
     let subscription: UserSubscription?
 }
 
@@ -338,12 +372,12 @@ struct UpgradeRequest: Codable {
     }
 }
 
-struct UpgradeResponse: Codable {
+struct UpgradeResponse: Decodable {
     let subscription: UserSubscription
     let message: String?
 }
 
-struct CancelSubscriptionResponse: Codable {
+struct CancelSubscriptionResponse: Decodable {
     let subscription: UserSubscription
     let message: String?
 }

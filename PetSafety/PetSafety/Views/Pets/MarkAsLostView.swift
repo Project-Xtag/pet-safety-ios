@@ -167,7 +167,7 @@ struct MarkAsLostView: View {
             }
         }
         .scrollDismissesKeyboard(.interactively)
-        .adaptiveList()
+        .adaptiveList(maxWidth: 600)
         .navigationTitle("mark_lost_title")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
