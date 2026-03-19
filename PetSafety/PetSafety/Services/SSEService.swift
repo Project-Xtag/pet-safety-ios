@@ -170,14 +170,19 @@ class SSEService: NSObject, ObservableObject {
     }
 
     private func handleWillEnterForeground() {
+        // Only reconnect if we have a valid auth token and aren't already connected
+        guard KeychainService.shared.getAuthToken() != nil else { return }
+        guard !isConnected else {
+            #if DEBUG
+            print("📡 SSE: App entering foreground — already connected")
+            #endif
+            return
+        }
         #if DEBUG
         print("📡 SSE: App entering foreground — reconnecting")
         #endif
-        // Only reconnect if we have a valid auth token
-        if KeychainService.shared.getAuthToken() != nil {
-            reconnectAttempts = 0
-            connect()
-        }
+        reconnectAttempts = 0
+        connect()
     }
 
     // MARK: - Private Methods
@@ -322,7 +327,19 @@ class SSEService: NSObject, ObservableObject {
         }
 
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+        decoder.dateDecodingStrategy = .custom { decoder in
+            let container = try decoder.singleValueContainer()
+            let str = try container.decode(String.self)
+            // Try ISO 8601 with fractional seconds first (JS Date default: "2026-03-19T15:30:00.000Z")
+            let fmtFrac = ISO8601DateFormatter()
+            fmtFrac.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            if let date = fmtFrac.date(from: str) { return date }
+            // Fallback to ISO 8601 without fractional seconds
+            let fmt = ISO8601DateFormatter()
+            fmt.formatOptions = [.withInternetDateTime]
+            if let date = fmt.date(from: str) { return date }
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot parse date: \(str)")
+        }
 
         do {
             switch type {
