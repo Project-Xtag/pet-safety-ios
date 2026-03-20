@@ -66,6 +66,10 @@ class AlertsViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
 
+        #if DEBUG
+        print("📡 AlertsVM: Fetching nearby alerts at \(latitude), \(longitude) radius \(radiusKm)km")
+        #endif
+
         do {
             let allAlerts = try await apiService.getNearbyAlerts(
                 latitude: latitude,
@@ -73,14 +77,21 @@ class AlertsViewModel: ObservableObject {
                 radiusKm: radiusKm
             )
 
+            #if DEBUG
+            print("📡 AlertsVM: Got \(allAlerts.count) alerts (\(allAlerts.filter { $0.status == "active" }.count) active)")
+            #endif
+
             // Separate missing and found alerts
-        missingAlerts = allAlerts.filter { $0.status == "active" }
-        foundAlerts = allAlerts.filter { $0.status == "found" }
+            missingAlerts = allAlerts.filter { $0.status == "active" }
+            foundAlerts = allAlerts.filter { $0.status == "found" }
 
             isLoading = false
         } catch {
             isLoading = false
             errorMessage = error.localizedDescription
+            #if DEBUG
+            print("❌ AlertsVM: Failed to fetch nearby alerts: \(error)")
+            #endif
         }
     }
 

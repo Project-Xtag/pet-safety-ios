@@ -113,12 +113,21 @@ struct AlertsTabView: View {
         let currentUser = authViewModel.currentUser
         async let geocodedFallback = geocodeUserAddressFallback(currentUser)
 
-        // Wait for device location (up to 3s, polling every 200ms)
+        // Wait for device location (up to 8s, polling every 200ms)
+        // iPad GPS can be slow, especially without cellular
         var attempts = 0
-        while locationManager.location == nil && attempts < 15 {
+        while locationManager.location == nil && attempts < 40 {
             try? await Task.sleep(nanoseconds: 200_000_000)
             attempts += 1
         }
+
+        #if DEBUG
+        if let loc = locationManager.location {
+            print("📍 AlertsTab: Device location: \(loc.latitude), \(loc.longitude) (after \(attempts) attempts)")
+        } else {
+            print("📍 AlertsTab: No device location after \(attempts) attempts, trying fallback")
+        }
+        #endif
 
         if let location = locationManager.location {
             showAddressRequiredMessage = false
@@ -128,6 +137,9 @@ struct AlertsTabView: View {
                 radiusKm: 10
             )
         } else if let coordinate = await geocodedFallback {
+            #if DEBUG
+            print("📍 AlertsTab: Using geocoded fallback: \(coordinate.latitude), \(coordinate.longitude)")
+            #endif
             showAddressRequiredMessage = false
             await viewModel.fetchNearbyAlerts(
                 latitude: coordinate.latitude,
