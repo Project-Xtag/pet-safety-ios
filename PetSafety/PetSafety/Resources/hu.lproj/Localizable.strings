@@ -1293,3 +1293,8 @@
 "edit_alert_location" = "Utoljára látott hely";
 "edit_alert_description" = "Leírás";
 "edit_alert_success" = "A riasztás sikeresen frissítve";
+// MARK: - Appearance
+"appearance_title" = "Megjelenés";
+"appearance_system" = "Rendszer";
+"appearance_light" = "Világos";
+"appearance_dark" = "Sötét";

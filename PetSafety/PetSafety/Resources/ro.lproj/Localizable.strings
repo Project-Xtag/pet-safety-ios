@@ -1294,3 +1294,8 @@
 "edit_alert_location" = "Ultima locație văzută";
 "edit_alert_description" = "Descriere";
 "edit_alert_success" = "Alertă actualizată cu succes";
+// MARK: - Appearance
+"appearance_title" = "Aspect";
+"appearance_system" = "Sistem";
+"appearance_light" = "Luminos";
+"appearance_dark" = "Întunecat";

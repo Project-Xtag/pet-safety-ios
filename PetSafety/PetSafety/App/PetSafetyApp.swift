@@ -22,6 +22,7 @@ struct PetSafetyApp: App {
     @StateObject private var subscriptionViewModel = SubscriptionViewModel()
     @StateObject private var notificationHandler = NotificationHandler.shared
     @Environment(\.scenePhase) private var scenePhase
+    @AppStorage("appearanceMode") private var appearanceMode: String = "system"
     @State private var showSplash = true
     @State private var lastSubscriptionRefresh: Date = .distantPast
 
@@ -115,6 +116,10 @@ struct PetSafetyApp: App {
                     .environmentObject(appState)
                     .environmentObject(subscriptionViewModel)
                     .environmentObject(notificationHandler)
+                    .preferredColorScheme(
+                        appearanceMode == "light" ? .light :
+                        appearanceMode == "dark" ? .dark : nil
+                    )
                     .tint(Color(UIColor.darkGray)) // Dark gray for alert buttons
                     .transition(.opacity)
                     .sheet(isPresented: $notificationHandler.showMapPicker) {

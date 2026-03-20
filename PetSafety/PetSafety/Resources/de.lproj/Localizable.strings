@@ -1294,3 +1294,8 @@
 "edit_alert_location" = "Zuletzt gesehener Ort";
 "edit_alert_description" = "Beschreibung";
 "edit_alert_success" = "Alarm erfolgreich aktualisiert";
+// MARK: - Appearance
+"appearance_title" = "Erscheinungsbild";
+"appearance_system" = "System";
+"appearance_light" = "Hell";
+"appearance_dark" = "Dunkel";

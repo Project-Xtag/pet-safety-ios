@@ -1294,3 +1294,8 @@
 "edit_alert_location" = "Naposledy viděné místo";
 "edit_alert_description" = "Popis";
 "edit_alert_success" = "Upozornění úspěšně aktualizováno";
+// MARK: - Appearance
+"appearance_title" = "Vzhled";
+"appearance_system" = "Systém";
+"appearance_light" = "Světlý";
+"appearance_dark" = "Tmavý";

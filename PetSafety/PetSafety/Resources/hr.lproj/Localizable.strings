@@ -1299,3 +1299,8 @@
 "edit_alert_location" = "Posljednja poznata lokacija";
 "edit_alert_description" = "Opis";
 "edit_alert_success" = "Obavijest uspješno ažurirana";
+// MARK: - Appearance
+"appearance_title" = "Izgled";
+"appearance_system" = "Sustav";
+"appearance_light" = "Svijetlo";
+"appearance_dark" = "Tamno";

@@ -1296,3 +1296,8 @@
 "edit_alert_location" = "Last Seen Location";
 "edit_alert_description" = "Description";
 "edit_alert_success" = "Alert updated successfully";
+// MARK: - Appearance
+"appearance_title" = "Appearance";
+"appearance_system" = "System";
+"appearance_light" = "Light";
+"appearance_dark" = "Dark";

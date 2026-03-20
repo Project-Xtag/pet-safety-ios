@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @AppStorage("appearanceMode") private var appearanceMode: String = "system"
     @State private var showingLogoutAlert = false
 
     var body: some View {
@@ -118,6 +119,31 @@ struct ProfileView: View {
             NavigationLink(destination: NotificationSettingsView()) {
                 ProfileMenuRow(icon: "bell", title: NSLocalizedString("profile_notifications", comment: ""))
             }
+
+            // Appearance / Dark Mode toggle
+            HStack(spacing: 16) {
+                Image(systemName: "moon.circle")
+                    .font(.system(size: 22))
+                    .foregroundColor(.brandOrange)
+                    .frame(width: 28)
+
+                Text("appearance_title")
+                    .font(.system(size: 16, weight: .medium))
+
+                Spacer()
+
+                Picker("", selection: $appearanceMode) {
+                    Text("appearance_system").tag("system")
+                    Text("appearance_light").tag("light")
+                    Text("appearance_dark").tag("dark")
+                }
+                .pickerStyle(.segmented)
+                .frame(maxWidth: 200)
+            }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 16)
+            .background(Color(UIColor.systemBackground))
+            .cornerRadius(12)
 
             NavigationLink(destination: HelpAndSupportView()) {
                 ProfileMenuRow(icon: "questionmark.circle", title: NSLocalizedString("profile_help_support", comment: ""))

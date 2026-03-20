@@ -1297,3 +1297,8 @@
 "edit_alert_location" = "Sist sett sted";
 "edit_alert_description" = "Beskrivelse";
 "edit_alert_success" = "Varsel oppdatert";
+// MARK: - Appearance
+"appearance_title" = "Utseende";
+"appearance_system" = "System";
+"appearance_light" = "Lys";
+"appearance_dark" = "Mørk";

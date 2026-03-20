@@ -1294,3 +1294,8 @@
 "edit_alert_location" = "Última ubicación vista";
 "edit_alert_description" = "Descripción";
 "edit_alert_success" = "Alerta actualizada correctamente";
+// MARK: - Appearance
+"appearance_title" = "Apariencia";
+"appearance_system" = "Sistema";
+"appearance_light" = "Claro";
+"appearance_dark" = "Oscuro";
