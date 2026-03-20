@@ -1272,3 +1272,22 @@
 // MARK: - Notification Actions
 "notif_promo_expiring_action" = "View Subscription";
 "notif_alert_reminder_action" = "View Alert";
+
+// MARK: - Pet Localization (species, breed, sex)
+"species_bird" = "Bird";
+"species_rabbit" = "Rabbit";
+"species_other" = "Other";
+"sex_dog_male" = "Male";
+"sex_dog_female" = "Female";
+"sex_cat_male" = "Male";
+"sex_cat_female" = "Female";
+"sex_male" = "Male";
+"sex_female" = "Female";
+"sex_unknown" = "Unknown";
+"breed_mixed" = "Mixed breed";
+"alert_success" = "Success";
+"alert_error" = "Error";
+"sse_tag_scanned_body" = "%1$@'s tag was scanned at %2$@!";
+"sse_sighting_body" = "%1$@ has been sighted%2$@!";
+"sse_sighting_at" = " at %@";
+"sse_pet_found_body" = "Great news! %@ has been found!";

@@ -234,13 +234,13 @@ class AppState: ObservableObject {
     }
 
     func showError(_ message: String) {
-        alertTitle = "Error"
+        alertTitle = String(localized: "alert_error")
         alertMessage = message
         showAlert = true
     }
 
     func showSuccess(_ message: String) {
-        alertTitle = "Success"
+        alertTitle = String(localized: "alert_success")
         alertMessage = message
         showAlert = true
     }
@@ -271,7 +271,7 @@ class AppState: ObservableObject {
 
             // Show in-app alert
             DispatchQueue.main.async {
-                self?.showSuccess("\(event.petName)'s tag was scanned at \(event.address ?? "an unknown location")!")
+                self?.showSuccess(String(format: NSLocalizedString("sse_tag_scanned_body", comment: ""), event.petName, event.address ?? ""))
             }
 
             // Note: Local notification is handled automatically by SSEService
@@ -285,7 +285,8 @@ class AppState: ObservableObject {
 
             // Show in-app alert
             DispatchQueue.main.async {
-                self?.showSuccess("\(event.petName) has been sighted\(event.address != nil ? " at \(event.address!)" : "")!")
+                let locationSuffix = event.address != nil ? String(format: NSLocalizedString("sse_sighting_at", comment: ""), event.address!) : ""
+                self?.showSuccess(String(format: NSLocalizedString("sse_sighting_body", comment: ""), event.petName, locationSuffix))
             }
 
             // Note: Local notification is handled automatically by SSEService
@@ -299,7 +300,7 @@ class AppState: ObservableObject {
 
             // Show in-app alert
             DispatchQueue.main.async {
-                self?.showSuccess("Great news! \(event.petName) has been found!")
+                self?.showSuccess(String(format: NSLocalizedString("sse_pet_found_body", comment: ""), event.petName))
             }
 
             // Note: Local notification is handled automatically by SSEService

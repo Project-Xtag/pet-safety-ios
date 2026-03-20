@@ -1270,3 +1270,22 @@
 // MARK: - Notification Actions
 "notif_promo_expiring_action" = "Abonnement anzeigen";
 "notif_alert_reminder_action" = "Warnung anzeigen";
+
+// MARK: - Pet Localization (species, breed, sex)
+"species_bird" = "Vogel";
+"species_rabbit" = "Kaninchen";
+"species_other" = "Sonstiges";
+"sex_dog_male" = "Rüde";
+"sex_dog_female" = "Hündin";
+"sex_cat_male" = "Kater";
+"sex_cat_female" = "Kätzin";
+"sex_male" = "männlich";
+"sex_female" = "weiblich";
+"sex_unknown" = "unbekannt";
+"breed_mixed" = "Mischling";
+"alert_success" = "Erfolg";
+"alert_error" = "Fehler";
+"sse_tag_scanned_body" = "%1$@s Namensschild wurde gescannt bei %2$@!";
+"sse_sighting_body" = "%1$@ wurde gesichtet%2$@!";
+"sse_sighting_at" = " bei %@";
+"sse_pet_found_body" = "Tolle Nachricht! %@ wurde gefunden!";

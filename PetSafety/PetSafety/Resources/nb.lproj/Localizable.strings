@@ -1273,3 +1273,22 @@
 // MARK: - Notification Actions
 "notif_promo_expiring_action" = "Se abonnement";
 "notif_alert_reminder_action" = "Se varsel";
+
+// MARK: - Pet Localization (species, breed, sex)
+"species_bird" = "Fugl";
+"species_rabbit" = "Kanin";
+"species_other" = "Annet";
+"sex_dog_male" = "hannhund";
+"sex_dog_female" = "tispe";
+"sex_cat_male" = "katt";
+"sex_cat_female" = "hunnkatt";
+"sex_male" = "hann";
+"sex_female" = "hunn";
+"sex_unknown" = "ukjent";
+"breed_mixed" = "blandingsrase";
+"alert_success" = "Suksess";
+"alert_error" = "Feil";
+"sse_tag_scanned_body" = "Kjæledyrmerket til %1$@ ble skannet ved %2$@!";
+"sse_sighting_body" = "%1$@ har blitt observert%2$@!";
+"sse_sighting_at" = " ved %@";
+"sse_pet_found_body" = "Gode nyheter! %@ er funnet!";

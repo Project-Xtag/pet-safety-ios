@@ -1270,3 +1270,22 @@
 // MARK: - Notification Actions
 "notif_promo_expiring_action" = "Vezi abonamentul";
 "notif_alert_reminder_action" = "Vezi alerta";
+
+// MARK: - Pet Localization (species, breed, sex)
+"species_bird" = "Pasăre";
+"species_rabbit" = "Iepure";
+"species_other" = "Altul";
+"sex_dog_male" = "câine";
+"sex_dog_female" = "cățea";
+"sex_cat_male" = "motan";
+"sex_cat_female" = "pisică";
+"sex_male" = "mascul";
+"sex_female" = "femelă";
+"sex_unknown" = "necunoscut";
+"breed_mixed" = "metis";
+"alert_success" = "Succes";
+"alert_error" = "Eroare";
+"sse_tag_scanned_body" = "Medalonul lui %1$@ a fost scanat la %2$@!";
+"sse_sighting_body" = "%1$@ a fost văzut%2$@!";
+"sse_sighting_at" = " la %@";
+"sse_pet_found_body" = "Veste grozavă! %@ a fost găsit!";

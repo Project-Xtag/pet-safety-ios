@@ -1273,3 +1273,22 @@
 // MARK: - Notification Actions
 "notif_promo_expiring_action" = "Zobacz subskrypcję";
 "notif_alert_reminder_action" = "Zobacz alert";
+
+// MARK: - Pet Localization (species, breed, sex)
+"species_bird" = "Ptak";
+"species_rabbit" = "Królik";
+"species_other" = "Inne";
+"sex_dog_male" = "pies";
+"sex_dog_female" = "suka";
+"sex_cat_male" = "kocur";
+"sex_cat_female" = "kotka";
+"sex_male" = "samiec";
+"sex_female" = "samica";
+"sex_unknown" = "nieznana";
+"breed_mixed" = "mieszaniec";
+"alert_success" = "Sukces";
+"alert_error" = "Błąd";
+"sse_tag_scanned_body" = "Nieśka %1$@ została zeskanowana w %2$@!";
+"sse_sighting_body" = "%1$@ został zauważony%2$@!";
+"sse_sighting_at" = " w %@";
+"sse_pet_found_body" = "Świetna wiadomość! %@ został znaleziony!";

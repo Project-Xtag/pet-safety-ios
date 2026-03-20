@@ -1269,3 +1269,22 @@
 // MARK: - Notification Actions
 "notif_promo_expiring_action" = "Előfizetés megtekintése";
 "notif_alert_reminder_action" = "Riasztás megtekintése";
+
+// MARK: - Pet Localization (species, breed, sex)
+"species_bird" = "Madár";
+"species_rabbit" = "Nyúl";
+"species_other" = "Egyéb";
+"sex_dog_male" = "hím";
+"sex_dog_female" = "nőstény";
+"sex_cat_male" = "kandúr";
+"sex_cat_female" = "nőstény";
+"sex_male" = "hím";
+"sex_female" = "nőstény";
+"sex_unknown" = "ismeretlen";
+"breed_mixed" = "keverék";
+"alert_success" = "Sikeres";
+"alert_error" = "Hiba";
+"sse_tag_scanned_body" = "%1$@ bilétáját beolvasták itt: %2$@!";
+"sse_sighting_body" = "%1$@-t észlelték%2$@!";
+"sse_sighting_at" = " itt: %@";
+"sse_pet_found_body" = "Nagyszerű hír! %@ megkerült!";

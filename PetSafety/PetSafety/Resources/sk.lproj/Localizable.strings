@@ -1270,3 +1270,22 @@
 // MARK: - Notification Actions
 "notif_promo_expiring_action" = "Zobraziť predplatné";
 "notif_alert_reminder_action" = "Zobraziť upozornenie";
+
+// MARK: - Pet Localization (species, breed, sex)
+"species_bird" = "Vták";
+"species_rabbit" = "Králik";
+"species_other" = "Iné";
+"sex_dog_male" = "pes";
+"sex_dog_female" = "suka";
+"sex_cat_male" = "kocúr";
+"sex_cat_female" = "mačka";
+"sex_male" = "samec";
+"sex_female" = "samica";
+"sex_unknown" = "neznáme";
+"breed_mixed" = "kríženie";
+"alert_success" = "Úspech";
+"alert_error" = "Chyba";
+"sse_tag_scanned_body" = "Známka %1$@ bola naskenovaná na %2$@!";
+"sse_sighting_body" = "%1$@ bol spozorovaný%2$@!";
+"sse_sighting_at" = " na %@";
+"sse_pet_found_body" = "Skvelá správa! %@ bol nájdený!";

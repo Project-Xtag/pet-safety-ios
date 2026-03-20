@@ -1275,3 +1275,22 @@
 // MARK: - Notification Actions
 "notif_promo_expiring_action" = "Pogledaj pretplatu";
 "notif_alert_reminder_action" = "Pogledaj uzbunu";
+
+// MARK: - Pet Localization (species, breed, sex)
+"species_bird" = "Ptica";
+"species_rabbit" = "Kunić";
+"species_other" = "Ostalo";
+"sex_dog_male" = "pas";
+"sex_dog_female" = "kuja";
+"sex_cat_male" = "mačak";
+"sex_cat_female" = "mačka";
+"sex_male" = "mužjak";
+"sex_female" = "ženka";
+"sex_unknown" = "nepoznato";
+"breed_mixed" = "mješanac";
+"alert_success" = "Uspjeh";
+"alert_error" = "Greška";
+"sse_tag_scanned_body" = "Pločica ljubimca %1$@ skenirana na lokaciji %2$@!";
+"sse_sighting_body" = "%1$@ je viđen%2$@!";
+"sse_sighting_at" = " na %@";
+"sse_pet_found_body" = "Sjajna vijest! %@ je pronađen!";

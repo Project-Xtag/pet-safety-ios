@@ -98,10 +98,10 @@ struct PetDetailView: View {
 
                 // Basic Info Cards
                 VStack(spacing: 16) {
-                    InfoCard(title: NSLocalizedString("species", comment: ""), value: pet.species.capitalized, icon: "pawprint.fill")
+                    InfoCard(title: NSLocalizedString("species", comment: ""), value: PetLocalizer.localizeSpecies(pet.species), icon: "pawprint.fill")
 
                     if let breed = pet.breed {
-                        InfoCard(title: NSLocalizedString("breed", comment: ""), value: breed, icon: "list.bullet")
+                        InfoCard(title: NSLocalizedString("breed", comment: ""), value: PetLocalizer.localizeBreed(breed, species: pet.species), icon: "list.bullet")
                     }
 
                     if let color = pet.color {
@@ -117,7 +117,7 @@ struct PetDetailView: View {
                     }
 
                     if let sex = pet.sex, sex.lowercased() != "unknown" {
-                        InfoCard(title: NSLocalizedString("sex", comment: ""), value: sex.capitalized, icon: "figure.stand")
+                        InfoCard(title: NSLocalizedString("sex", comment: ""), value: PetLocalizer.localizeSex(sex, species: pet.species), icon: "figure.stand")
                     }
 
                     if let isNeutered = pet.isNeutered, isNeutered {

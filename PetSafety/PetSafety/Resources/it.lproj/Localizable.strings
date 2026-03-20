@@ -1282,3 +1282,22 @@
 // MARK: - Notification Actions
 "notif_promo_expiring_action" = "Vedi abbonamento";
 "notif_alert_reminder_action" = "Vedi avviso";
+
+// MARK: - Pet Localization (species, breed, sex)
+"species_bird" = "Uccello";
+"species_rabbit" = "Coniglio";
+"species_other" = "Altro";
+"sex_dog_male" = "cane";
+"sex_dog_female" = "femmina";
+"sex_cat_male" = "gatto";
+"sex_cat_female" = "gatta";
+"sex_male" = "maschio";
+"sex_female" = "femmina";
+"sex_unknown" = "sconosciuto";
+"breed_mixed" = "meticcio";
+"alert_success" = "Successo";
+"alert_error" = "Errore";
+"sse_tag_scanned_body" = "La medaglietta di %1$@ è stata scansionata a %2$@!";
+"sse_sighting_body" = "%1$@ è stato avvistato%2$@!";
+"sse_sighting_at" = " a %@";
+"sse_pet_found_body" = "Ottima notizia! %@ è stato ritrovato!";
