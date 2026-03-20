@@ -1288,3 +1288,8 @@
 "sse_sighting_body" = "%1$@-t észlelték%2$@!";
 "sse_sighting_at" = " itt: %@";
 "sse_pet_found_body" = "Nagyszerű hír! %@ megkerült!";
+// MARK: - Edit Alert
+"edit_alert_title" = "Riasztás szerkesztése";
+"edit_alert_location" = "Utoljára látott hely";
+"edit_alert_description" = "Leírás";
+"edit_alert_success" = "A riasztás sikeresen frissítve";

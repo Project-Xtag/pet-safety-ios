@@ -13,6 +13,7 @@ struct AlertDetailView: View {
     @State private var showingReportFound = false
     @State private var showingMarkFoundConfirmation = false
     @State private var showingSuccessStoryPrompt = false
+    @State private var showingEditAlert = false
     @State private var isMarkingFound = false
     @State private var mapPosition: MapCameraPosition
     @State private var reverseGeocodedAddress: String?
@@ -203,7 +204,15 @@ struct AlertDetailView: View {
                 if alert.status == "active" {
                     VStack(spacing: 12) {
                         if isOwner {
-                            // Owner sees "Mark as Found" button
+                            // Owner sees "Edit Alert" + "Mark as Found" buttons
+                            Button(action: { showingEditAlert = true }) {
+                                HStack {
+                                    Image(systemName: "pencil")
+                                    Text("edit_alert_title")
+                                }
+                            }
+                            .buttonStyle(SecondaryButtonStyle())
+
                             Button(action: { showingMarkFoundConfirmation = true }) {
                                 HStack {
                                     if isMarkingFound {
@@ -238,6 +247,12 @@ struct AlertDetailView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .scrollDismissesKeyboard(.interactively)
+        .sheet(isPresented: $showingEditAlert) {
+            NavigationView {
+                EditAlertView(alert: alert)
+                    .environmentObject(appState)
+            }
+        }
         .sheet(isPresented: $showingReportSighting) {
             NavigationView {
                 ReportSightingView(alertId: alert.id)

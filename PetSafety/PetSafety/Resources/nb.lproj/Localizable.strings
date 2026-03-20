@@ -1292,3 +1292,8 @@
 "sse_sighting_body" = "%1$@ har blitt observert%2$@!";
 "sse_sighting_at" = " ved %@";
 "sse_pet_found_body" = "Gode nyheter! %@ er funnet!";
+// MARK: - Edit Alert
+"edit_alert_title" = "Rediger varsel";
+"edit_alert_location" = "Sist sett sted";
+"edit_alert_description" = "Beskrivelse";
+"edit_alert_success" = "Varsel oppdatert";

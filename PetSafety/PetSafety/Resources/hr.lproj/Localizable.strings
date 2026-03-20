@@ -1294,3 +1294,8 @@
 "sse_sighting_body" = "%1$@ je viđen%2$@!";
 "sse_sighting_at" = " na %@";
 "sse_pet_found_body" = "Sjajna vijest! %@ je pronađen!";
+// MARK: - Edit Alert
+"edit_alert_title" = "Uredi obavijest";
+"edit_alert_location" = "Posljednja poznata lokacija";
+"edit_alert_description" = "Opis";
+"edit_alert_success" = "Obavijest uspješno ažurirana";

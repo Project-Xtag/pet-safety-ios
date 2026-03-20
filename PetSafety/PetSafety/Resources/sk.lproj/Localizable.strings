@@ -1289,3 +1289,8 @@
 "sse_sighting_body" = "%1$@ bol spozorovaný%2$@!";
 "sse_sighting_at" = " na %@";
 "sse_pet_found_body" = "Skvelá správa! %@ bol nájdený!";
+// MARK: - Edit Alert
+"edit_alert_title" = "Upraviť upozornenie";
+"edit_alert_location" = "Naposledy videné miesto";
+"edit_alert_description" = "Popis";
+"edit_alert_success" = "Upozornenie úspešne aktualizované";

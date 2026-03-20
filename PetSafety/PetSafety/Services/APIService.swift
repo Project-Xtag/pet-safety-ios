@@ -727,6 +727,25 @@ class APIService {
         return response.alert
     }
 
+    func updateAlert(id: String, description: String?, lastSeenAddress: String?, rewardAmount: String?) async throws -> MissingPetAlert {
+        struct UpdateAlertRequest: Codable {
+            let description: String?
+            let lastSeenAddress: String?
+            let rewardAmount: String?
+        }
+        let request = try await buildRequest(
+            endpoint: "/alerts/\(id)",
+            method: "PUT",
+            body: UpdateAlertRequest(
+                description: description,
+                lastSeenAddress: lastSeenAddress,
+                rewardAmount: rewardAmount
+            )
+        )
+        let response = try await performRequest(request, responseType: AlertResponse.self)
+        return response.alert
+    }
+
     func reportSighting(alertId: String, sighting: ReportSightingRequest) async throws -> Sighting {
         let request = try await buildRequest(
             endpoint: "/alerts/\(alertId)/sightings",

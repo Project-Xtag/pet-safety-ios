@@ -1289,3 +1289,8 @@
 "sse_sighting_body" = "%1$@ a fost văzut%2$@!";
 "sse_sighting_at" = " la %@";
 "sse_pet_found_body" = "Veste grozavă! %@ a fost găsit!";
+// MARK: - Edit Alert
+"edit_alert_title" = "Editează alerta";
+"edit_alert_location" = "Ultima locație văzută";
+"edit_alert_description" = "Descriere";
+"edit_alert_success" = "Alertă actualizată cu succes";

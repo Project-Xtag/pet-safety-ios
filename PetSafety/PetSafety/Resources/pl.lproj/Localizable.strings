@@ -1292,3 +1292,8 @@
 "sse_sighting_body" = "%1$@ został zauważony%2$@!";
 "sse_sighting_at" = " w %@";
 "sse_pet_found_body" = "Świetna wiadomość! %@ został znaleziony!";
+// MARK: - Edit Alert
+"edit_alert_title" = "Edytuj alert";
+"edit_alert_location" = "Ostatnia znana lokalizacja";
+"edit_alert_description" = "Opis";
+"edit_alert_success" = "Alert zaktualizowany pomyślnie";
