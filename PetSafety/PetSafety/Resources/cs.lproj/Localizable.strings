@@ -1299,3 +1299,6 @@
 "appearance_system" = "Systém";
 "appearance_light" = "Světlý";
 "appearance_dark" = "Tmavý";
+// MARK: - Starter Plan Notice
+"mark_lost_starter_notice" = "Vylepši pro komunitní upozornění";
+"mark_lost_upgrade_prompt" = "V plánu Starter bude tvůj mazlíček označen jako ztracený, ale upozornění uživatelům, veterinářům a útulkům vyžadují předplatné Standard nebo Maximum.";

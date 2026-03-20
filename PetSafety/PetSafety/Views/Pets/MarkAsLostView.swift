@@ -24,6 +24,7 @@ struct MarkAsLostView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var subscriptionViewModel: SubscriptionViewModel
 
     @State private var lastSeenSource: LastSeenSource = .registeredAddress
     @State private var customAddress = ""
@@ -135,16 +136,29 @@ struct MarkAsLostView: View {
             }
 
             Section {
-                Text("mark_lost_sends_to")
-                    .font(.subheadline)
+                if subscriptionViewModel.isOnStarterPlan {
+                    // Starter plan: notifications are not sent
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label(String(localized: "mark_lost_starter_notice"), systemImage: "info.circle")
+                            .font(.subheadline)
+                            .foregroundColor(.brandOrange)
+                        Text("mark_lost_upgrade_prompt")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                } else {
+                    // Standard/Maximum: notifications will be sent
+                    Text("mark_lost_sends_to")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label(String(localized: "mark_lost_nearby_owners"), systemImage: "person.3.fill")
+                        Label(String(localized: "mark_lost_vet_clinics"), systemImage: "cross.case.fill")
+                        Label(String(localized: "mark_lost_shelters"), systemImage: "house.fill")
+                    }
+                    .font(.caption)
                     .foregroundColor(.secondary)
-                VStack(alignment: .leading, spacing: 8) {
-                    Label(String(localized: "mark_lost_nearby_owners"), systemImage: "person.3.fill")
-                    Label(String(localized: "mark_lost_vet_clinics"), systemImage: "cross.case.fill")
-                    Label(String(localized: "mark_lost_shelters"), systemImage: "house.fill")
                 }
-                .font(.caption)
-                .foregroundColor(.secondary)
             }
 
             Section {

@@ -1299,3 +1299,6 @@
 "appearance_system" = "Systém";
 "appearance_light" = "Svetlý";
 "appearance_dark" = "Tmavý";
+// MARK: - Starter Plan Notice
+"mark_lost_starter_notice" = "Vylepši pre komunitné upozornenia";
+"mark_lost_upgrade_prompt" = "V pláne Starter bude tvoje zviera označené ako stratené, ale upozornenia pre používateľov, veterinárov a útulky vyžadujú predplatné Standard alebo Maximum.";

@@ -1299,3 +1299,6 @@
 "appearance_system" = "Sistem";
 "appearance_light" = "Luminos";
 "appearance_dark" = "Întunecat";
+// MARK: - Starter Plan Notice
+"mark_lost_starter_notice" = "Actualizează pentru alerte comunitare";
+"mark_lost_upgrade_prompt" = "Cu planul Starter animalul tău va fi marcat ca dispărut, dar notificările către utilizatori, veterinari și adăposturi necesită un abonament Standard sau Maximum.";

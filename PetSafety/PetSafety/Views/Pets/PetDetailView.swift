@@ -19,6 +19,7 @@ struct PetDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var subscriptionViewModel: SubscriptionViewModel
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
@@ -255,6 +256,7 @@ struct PetDetailView: View {
             }
             .environmentObject(appState)
             .environmentObject(authViewModel)
+            .environmentObject(subscriptionViewModel)
         }
         .alert(String(format: NSLocalizedString("mark_found_confirm_title", comment: ""), pet.name), isPresented: $showingMarkFoundConfirmation) {
             Button("cancel", role: .cancel) { }

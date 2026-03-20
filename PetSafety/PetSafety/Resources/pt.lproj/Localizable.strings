@@ -1299,3 +1299,6 @@
 "appearance_system" = "Sistema";
 "appearance_light" = "Claro";
 "appearance_dark" = "Escuro";
+// MARK: - Starter Plan Notice
+"mark_lost_starter_notice" = "Atualiza para enviar alertas comunitários";
+"mark_lost_upgrade_prompt" = "Com o plano Starter o teu animal será marcado como desaparecido, mas as notificações a utilizadores, veterinários e abrigos requerem uma subscrição Standard ou Maximum.";

@@ -1304,3 +1304,6 @@
 "appearance_system" = "Sustav";
 "appearance_light" = "Svijetlo";
 "appearance_dark" = "Tamno";
+// MARK: - Starter Plan Notice
+"mark_lost_starter_notice" = "Nadogradi za slanje obavijesti zajednici";
+"mark_lost_upgrade_prompt" = "S planom Starter tvoj ljubimac bit će označen kao nestao, ali obavijesti korisnicima, veterinarima i skloništima zahtijevaju pretplatu Standard ili Maximum.";

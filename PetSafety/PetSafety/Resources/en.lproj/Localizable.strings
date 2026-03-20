@@ -1301,3 +1301,6 @@
 "appearance_system" = "System";
 "appearance_light" = "Light";
 "appearance_dark" = "Dark";
+// MARK: - Starter Plan Notice
+"mark_lost_starter_notice" = "Upgrade to send community alerts";
+"mark_lost_upgrade_prompt" = "On Starter plan, your pet will be marked as missing but notifications to nearby users, vets, and shelters require a Standard or Maximum subscription.";

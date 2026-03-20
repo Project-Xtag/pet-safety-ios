@@ -1298,3 +1298,6 @@
 "appearance_system" = "Rendszer";
 "appearance_light" = "Világos";
 "appearance_dark" = "Sötét";
+// MARK: - Starter Plan Notice
+"mark_lost_starter_notice" = "Frissíts a közösségi értesítésekhez";
+"mark_lost_upgrade_prompt" = "A Starter csomaggal a kedvencedet elveszettnek jelöljük, de a közeli felhasználók, állatorvosok és menhelyek értesítéséhez Standard vagy Maximum előfizetés szükséges.";

@@ -1302,3 +1302,6 @@
 "appearance_system" = "System";
 "appearance_light" = "Jasny";
 "appearance_dark" = "Ciemny";
+// MARK: - Starter Plan Notice
+"mark_lost_starter_notice" = "Ulepsz plan, aby wysyłać alerty";
+"mark_lost_upgrade_prompt" = "W planie Starter twoje zwierzę zostanie oznaczone jako zagubione, ale powiadomienia do użytkowników, weterynarzy i schronisk wymagają subskrypcji Standard lub Maximum.";
