@@ -130,7 +130,7 @@ struct PetFormView: View {
 
             Section("basic_information") {
                 if mode.isEdit {
-                    // In edit mode, name is locked (read-only)
+                    // In edit mode, name is locked (read-only) — no translation needed, it's a proper noun
                     HStack {
                         Text("name")
                             .frame(width: 80, alignment: .leading)
@@ -151,11 +151,11 @@ struct PetFormView: View {
                 }
 
                 if mode.isEdit {
-                    // In edit mode, show species as read-only text
+                    // In edit mode, show species as localized read-only text
                     HStack {
                         Text("species")
                             .frame(width: 80, alignment: .leading)
-                        Text(species)
+                        Text(PetLocalizer.localizeSpecies(species))
                             .foregroundColor(.primary)
                         Spacer()
                         Image(systemName: "lock.fill")
@@ -163,20 +163,20 @@ struct PetFormView: View {
                             .foregroundColor(.secondary)
                     }
                 } else {
-                    // In create mode, show species picker
+                    // In create mode, show species picker (localized labels, English tags)
                     Picker("species", selection: $species) {
                         ForEach(speciesOptions, id: \.self) { option in
-                            Text(option).tag(option)
+                            Text(PetLocalizer.localizeSpecies(option)).tag(option)
                         }
                     }
                 }
 
                 if mode.isEdit {
-                    // In edit mode, breed is locked (read-only)
+                    // In edit mode, breed is locked and localized
                     HStack {
                         Text("breed")
                             .frame(width: 80, alignment: .leading)
-                        Text(breed.isEmpty ? "-" : breed)
+                        Text(breed.isEmpty ? "-" : PetLocalizer.localizeBreed(breed, species: species))
                             .foregroundColor(.primary)
                         Spacer()
                         Image(systemName: "lock.fill")
@@ -230,7 +230,7 @@ struct PetFormView: View {
 
                 Picker("sex", selection: $sex) {
                     ForEach(sexOptions, id: \.self) { option in
-                        Text(option).tag(option)
+                        Text(PetLocalizer.localizeSex(option, species: species)).tag(option)
                     }
                 }
 
@@ -497,12 +497,12 @@ struct PetFormView: View {
                     print("✏️ Updating pet with ID: \(pet.id)")
                     #endif
 
-                    // Send all editable fields from the form
+                    // Send only editable fields — name, species, breed are locked after registration
                     let editWeightValue = Double(weight)
                     let request = UpdatePetRequest(
-                        name: name,
-                        species: nil,  // Species is read-only in edit mode, don't update it
-                        breed: breed.isEmpty ? nil : breed,
+                        name: nil,     // Locked after registration
+                        species: nil,  // Locked after registration
+                        breed: nil,    // Locked after registration
                         color: color.isEmpty ? nil : color,
                         age: nil,  // Age is derived from date of birth, don't send it
                         weight: editWeightValue,
