@@ -407,7 +407,7 @@ struct MissingAlertMapCard: View {
                 SuccessStoryPromptView(
                     pet: Pet(
                         id: pet.id,
-                        ownerId: alert.userId,
+                        ownerId: alert.userId ?? "",
                         name: pet.name,
                         species: pet.species,
                         breed: pet.breed,

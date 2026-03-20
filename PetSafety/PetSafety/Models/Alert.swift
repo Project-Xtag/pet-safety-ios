@@ -3,8 +3,8 @@ import CoreLocation
 
 struct MissingPetAlert: Codable, Identifiable {
     let id: String
-    let petId: String
-    let userId: String
+    let petId: String?
+    let userId: String?
     let status: String
     let lastSeenLocation: String?
     let lastSeenLatitude: Double?
@@ -56,8 +56,8 @@ struct MissingPetAlert: Codable, Identifiable {
     // Memberwise initializer (required since custom decoder/encoder removes auto-synthesis)
     init(
         id: String,
-        petId: String,
-        userId: String,
+        petId: String? = nil,
+        userId: String? = nil,
         status: String,
         lastSeenLocation: String? = nil,
         lastSeenLatitude: Double? = nil,
@@ -94,8 +94,8 @@ struct MissingPetAlert: Codable, Identifiable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         id = try container.decode(String.self, forKey: .id)
-        petId = try container.decode(String.self, forKey: .petId)
-        userId = try container.decode(String.self, forKey: .userId)
+        petId = try container.decodeIfPresent(String.self, forKey: .petId)
+        userId = try container.decodeIfPresent(String.self, forKey: .userId)
         status = try container.decode(String.self, forKey: .status)
         sightings = try container.decodeIfPresent([Sighting].self, forKey: .sightings)
         createdAt = try container.decode(String.self, forKey: .createdAt)
@@ -107,8 +107,8 @@ struct MissingPetAlert: Codable, Identifiable {
            let petName = try container.decodeIfPresent(String.self, forKey: .petName) {
             let petSpecies = try container.decodeIfPresent(String.self, forKey: .species) ?? "Unknown"
             decodedPet = Pet(
-                id: petId,
-                ownerId: userId,
+                id: petId ?? id,
+                ownerId: userId ?? "",
                 name: petName,
                 species: petSpecies,
                 breed: try container.decodeIfPresent(String.self, forKey: .breed),
@@ -163,8 +163,8 @@ struct MissingPetAlert: Codable, Identifiable {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(id, forKey: .id)
-        try container.encode(petId, forKey: .petId)
-        try container.encode(userId, forKey: .userId)
+        try container.encodeIfPresent(petId, forKey: .petId)
+        try container.encodeIfPresent(userId, forKey: .userId)
         try container.encode(status, forKey: .status)
         try container.encodeIfPresent(lastSeenLocation, forKey: .lastSeenLocation)
         try container.encodeIfPresent(lastSeenLatitude, forKey: .lastSeenLatitude)
