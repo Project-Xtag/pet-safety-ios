@@ -347,7 +347,7 @@ struct PetFormView: View {
                 }
             }
         }
-        .adaptiveList()
+        .adaptiveList(maxWidth: 900)
         .navigationTitle(mode.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

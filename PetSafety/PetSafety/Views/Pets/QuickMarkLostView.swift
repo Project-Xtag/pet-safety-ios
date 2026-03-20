@@ -63,7 +63,7 @@ struct QuickMarkLostView: View {
             }
         }
         .navigationTitle("quick_lost_title")
-        .adaptiveList()
+        .adaptiveList(maxWidth: 900)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
