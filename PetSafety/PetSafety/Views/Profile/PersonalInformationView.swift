@@ -7,16 +7,28 @@ struct PersonalInformationView: View {
     @State private var isEditing = false
     @State private var isLoading = false
 
-    // Form fields
+    // Personal details fields
     @State private var firstName = ""
     @State private var lastName = ""
     @State private var email = ""
     @State private var phone = ""
 
+    // Address fields
+    @State private var streetAddress = ""
+    @State private var addressLine2 = ""
+    @State private var city = ""
+    @State private var postalCode = ""
+    @State private var country = ""
+    @State private var showCountryPicker = false
+
+    private let countries = Locale.isoRegionCodes
+        .compactMap { Locale.current.localizedString(forRegionCode: $0) }
+        .sorted()
+
     var body: some View {
         List {
             if isEditing {
-                // Edit Mode
+                // Edit Mode — Personal Details
                 Section(header: Text("personal_details")) {
                     HStack {
                         Text("personal_first_name")
@@ -36,7 +48,7 @@ struct PersonalInformationView: View {
                         TextField(NSLocalizedString("personal_email_placeholder", comment: ""), text: $email)
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
-                            .disabled(true) // Email usually can't be changed
+                            .disabled(true)
                             .foregroundColor(.secondary)
                     }
 
@@ -46,6 +58,66 @@ struct PersonalInformationView: View {
                         TextField(NSLocalizedString("personal_phone_placeholder", comment: ""), text: $phone)
                             .keyboardType(.phonePad)
                     }
+                }
+
+                // Edit Mode — Address
+                Section(header: Text("profile_address"), footer: Text("address_shipping_footer")) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("address_street")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        TextField(NSLocalizedString("address_street_placeholder", comment: ""), text: $streetAddress)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    .padding(.vertical, 4)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("address_line2")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        TextField(NSLocalizedString("address_line2_placeholder", comment: ""), text: $addressLine2)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    .padding(.vertical, 4)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("address_city")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        TextField(NSLocalizedString("address_city_placeholder", comment: ""), text: $city)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    .padding(.vertical, 4)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("address_postal")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        TextField(NSLocalizedString("address_postal_placeholder", comment: ""), text: $postalCode)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(.allCharacters)
+                    }
+                    .padding(.vertical, 4)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("address_country")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Button(action: { showCountryPicker = true }) {
+                            HStack {
+                                Text(country.isEmpty ? NSLocalizedString("address_select_country", comment: "") : country)
+                                    .foregroundColor(country.isEmpty ? .secondary : .primary)
+                                Spacer()
+                                Image(systemName: "chevron.down")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding()
+                            .background(Color(UIColor.systemGray6))
+                            .cornerRadius(8)
+                        }
+                    }
+                    .padding(.vertical, 4)
                 }
 
                 Section {
@@ -82,7 +154,7 @@ struct PersonalInformationView: View {
                     .listRowBackground(Color.clear)
                 }
             } else {
-                // View Mode
+                // View Mode — Personal Details
                 Section(header: Text("personal_details")) {
                     InfoRow(label: NSLocalizedString("personal_first_name", comment: ""), value: firstName.isEmpty ? NSLocalizedString("not_set", comment: "") : firstName)
                     InfoRow(label: NSLocalizedString("personal_last_name", comment: ""), value: lastName.isEmpty ? NSLocalizedString("not_set", comment: "") : lastName)
@@ -90,15 +162,31 @@ struct PersonalInformationView: View {
                     InfoRow(label: NSLocalizedString("personal_phone", comment: ""), value: phone.isEmpty ? NSLocalizedString("not_set", comment: "") : phone)
                 }
 
-                // Address section (inline)
+                // View Mode — Address
                 Section(header: Text("profile_address")) {
-                    NavigationLink(destination: AddressView()) {
+                    if !streetAddress.isEmpty || !city.isEmpty {
+                        if !streetAddress.isEmpty {
+                            AddressFieldView(label: NSLocalizedString("address_street", comment: ""), value: streetAddress)
+                        }
+                        if !addressLine2.isEmpty {
+                            AddressFieldView(label: NSLocalizedString("address_line2_label", comment: ""), value: addressLine2)
+                        }
+                        if !city.isEmpty {
+                            AddressFieldView(label: NSLocalizedString("address_city", comment: ""), value: city)
+                        }
+                        if !postalCode.isEmpty {
+                            AddressFieldView(label: NSLocalizedString("address_postal_label", comment: ""), value: postalCode)
+                        }
+                        if !country.isEmpty {
+                            AddressFieldView(label: NSLocalizedString("address_country", comment: ""), value: country)
+                        }
+                    } else {
                         HStack {
-                            Image(systemName: "house")
+                            Image(systemName: "house.circle")
+                                .font(.system(size: 24))
                                 .foregroundColor(.secondary)
-                                .frame(width: 24)
-                            Text("address_details")
-                                .foregroundColor(.primary)
+                            Text("address_no_address")
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
@@ -138,13 +226,21 @@ struct PersonalInformationView: View {
         .onAppear {
             loadUserData()
         }
+        .sheet(isPresented: $showCountryPicker) {
+            CountryPickerView(selectedCountry: $country, countries: countries)
+        }
     }
 
     private var hasChanges: Bool {
         guard let user = authViewModel.currentUser else { return false }
         return firstName != (user.firstName ?? "") ||
                lastName != (user.lastName ?? "") ||
-               phone != (user.phone ?? "")
+               phone != (user.phone ?? "") ||
+               streetAddress != (user.address ?? "") ||
+               addressLine2 != (user.addressLine2 ?? "") ||
+               city != (user.city ?? "") ||
+               postalCode != (user.postalCode ?? "") ||
+               country != (user.country ?? "")
     }
 
     private func loadUserData() {
@@ -153,6 +249,11 @@ struct PersonalInformationView: View {
         lastName = user.lastName ?? ""
         email = user.email
         phone = user.phone ?? ""
+        streetAddress = user.address ?? ""
+        addressLine2 = user.addressLine2 ?? ""
+        city = user.city ?? ""
+        postalCode = user.postalCode ?? ""
+        country = user.country ?? ""
     }
 
     private func startEditing() {
@@ -160,7 +261,7 @@ struct PersonalInformationView: View {
     }
 
     private func cancelEditing() {
-        loadUserData() // Reset to original values
+        loadUserData()
         isEditing = false
     }
 
@@ -172,7 +273,12 @@ struct PersonalInformationView: View {
                 let updates: [String: Any] = [
                     "first_name": firstName,
                     "last_name": lastName,
-                    "phone": phone
+                    "phone": phone,
+                    "address": streetAddress.trimmingCharacters(in: .whitespaces),
+                    "address_line_2": addressLine2.trimmingCharacters(in: .whitespaces),
+                    "city": city.trimmingCharacters(in: .whitespaces),
+                    "postal_code": postalCode.trimmingCharacters(in: .whitespaces),
+                    "country": country.trimmingCharacters(in: .whitespaces)
                 ]
 
                 try await authViewModel.updateProfile(updates: updates)
