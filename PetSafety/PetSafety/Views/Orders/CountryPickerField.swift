@@ -7,14 +7,19 @@ struct CountryPickerField: View {
         SupportedCountries.findByCode(selectedCode)
     }
 
+    /// Device region used to place the user's country at the top.
+    private var deviceCountry: String? {
+        Locale.current.region?.identifier
+    }
+
     var body: some View {
         Menu {
-            ForEach(SupportedCountries.all) { country in
+            ForEach(SupportedCountries.sorted(priority: deviceCountry)) { country in
                 Button(action: { selectedCode = country.code }) {
                     if country.code == selectedCode {
-                        Label(country.name, systemImage: "checkmark")
+                        Label(country.localizedName, systemImage: "checkmark")
                     } else {
-                        Text(country.name)
+                        Text(country.localizedName)
                     }
                 }
             }
@@ -24,7 +29,7 @@ struct CountryPickerField: View {
                     .foregroundColor(.secondary)
                     .font(.system(size: 15))
 
-                Text(selectedCountry?.name ?? String(localized: "select_country"))
+                Text(selectedCountry?.localizedName ?? String(localized: "select_country"))
                     .foregroundColor(selectedCountry != nil ? .primary : .secondary)
 
                 Spacer()
