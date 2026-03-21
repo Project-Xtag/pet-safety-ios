@@ -118,7 +118,7 @@ struct PetDetailView: View {
                     }
 
                     if let sex = pet.sex, sex.lowercased() != "unknown" {
-                        InfoCard(title: NSLocalizedString("sex", comment: ""), value: PetLocalizer.localizeSex(sex, species: pet.species), icon: "figure.stand")
+                        InfoCard(title: NSLocalizedString("sex", comment: ""), value: PetLocalizer.localizeSex(sex, species: pet.species), icon: "circle.lefthalf.filled")
                     }
 
                     if let isNeutered = pet.isNeutered, isNeutered {
