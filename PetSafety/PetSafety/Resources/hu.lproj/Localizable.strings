@@ -83,7 +83,7 @@
 "empty_pets_message" = "Add hozzá az első kedvenced, hogy elkezdd a Senra Közösségi Biléta használatát";
 "missing_badge" = "ELTŰNT";
 "add_pet" = "Kedvenc hozzáadása";
-"pet_name" = "Kedvenc neve";
+"pet_name" = "Kedvenced neve";
 
 // MARK: - Kedvenc részletei
 "species_label" = "Faj: %@";
@@ -1319,4 +1319,5 @@
 "dob_set_date" = "Születési dátum megadása";
 "dob_approximate" = "Hozzávetőleges dátum";
 "weight_helper" = "Súly kg-ban (pl. 4,5)";
-"order_more_pet_name_placeholder" = "Kedvenc neve";
+"order_more_pet_name_placeholder" = "Kedvenced neve";
+"order_more_subtitle" = "Rendelj bilétát kedvenceidnek — a biléta ingyenes, csak a szállítást kell fizetni";
