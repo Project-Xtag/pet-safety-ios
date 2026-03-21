@@ -28,7 +28,15 @@ struct OrderMoreTagsView: View {
     @State private var street2 = ""
     @State private var city = ""
     @State private var postCode = ""
-    @State private var selectedCountryCode = ""
+    @State private var selectedCountryCode: String = {
+        // Pre-select device country synchronously so HU/NO users see correct
+        // prices and delivery options from the first render.
+        if let region = Locale.current.region?.identifier,
+           SupportedCountries.findByCode(region) != nil {
+            return region
+        }
+        return ""
+    }()
 
     // Delivery method (Hungary only)
     @State private var deliveryMethod = "home_delivery"

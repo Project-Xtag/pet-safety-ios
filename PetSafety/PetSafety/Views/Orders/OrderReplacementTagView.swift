@@ -21,7 +21,13 @@ struct OrderReplacementTagView: View {
     @State private var street2 = ""
     @State private var city = ""
     @State private var postCode = ""
-    @State private var selectedCountryCode = ""
+    @State private var selectedCountryCode: String = {
+        if let region = Locale.current.region?.identifier,
+           SupportedCountries.findByCode(region) != nil {
+            return region
+        }
+        return ""
+    }()
     @State private var phone = ""
 
     // Delivery method (Hungary only)
