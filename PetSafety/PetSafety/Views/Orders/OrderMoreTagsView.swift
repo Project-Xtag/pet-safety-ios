@@ -5,6 +5,7 @@ struct OrderMoreTagsView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var isLoading = false
+    @State private var showingCountryPicker = false
     @State private var orderComplete = false
     @State private var checkoutURL: URL?
     @State private var showCheckoutSheet = false
@@ -331,7 +332,54 @@ struct OrderMoreTagsView: View {
                     .autocapitalization(.allCharacters)
             }
 
-            CountryPickerField(selectedCode: $selectedCountryCode)
+            // Country picker — opens sheet with user's country at top
+            Button(action: { showingCountryPicker = true }) {
+                HStack(spacing: 10) {
+                    Image(systemName: "globe")
+                        .foregroundColor(.secondary)
+                        .font(.system(size: 15))
+                    Text(SupportedCountries.findByCode(selectedCountryCode)?.localizedName ?? String(localized: "address_select_country"))
+                        .foregroundColor(selectedCountryCode.isEmpty ? .secondary : .primary)
+                    Spacer()
+                    Image(systemName: "chevron.up.chevron.down")
+                        .foregroundColor(.secondary)
+                        .font(.system(size: 12))
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 12)
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(10)
+            }
+            .sheet(isPresented: $showingCountryPicker) {
+                NavigationView {
+                    List {
+                        ForEach(SupportedCountries.sorted(priority: Locale.current.region?.identifier)) { country in
+                            Button {
+                                selectedCountryCode = country.code
+                                showingCountryPicker = false
+                            } label: {
+                                HStack {
+                                    Text(country.localizedName)
+                                        .foregroundColor(.primary)
+                                    Spacer()
+                                    if country.code == selectedCountryCode {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(.brandOrange)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .navigationTitle("address_select_country_title")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("cancel") { showingCountryPicker = false }
+                                .foregroundColor(.brandOrange)
+                        }
+                    }
+                }
+            }
         }
     }
 

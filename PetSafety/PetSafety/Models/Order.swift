@@ -149,8 +149,8 @@ struct CreateTagCheckoutRequest: Codable {
         case quantity
         case countryCode = "country_code"
         case platform
-        case deliveryMethod
-        case postapointDetails
+        case deliveryMethod = "delivery_method"
+        case postapointDetails = "postapoint_details"
     }
 }
 
