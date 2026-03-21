@@ -51,8 +51,8 @@ struct OrderFlowTests {
         #expect(dict["quantity"] as? Int == 1)
         #expect(dict["country_code"] as? String == "HU")
         #expect(dict["platform"] as? String == "ios")
-        #expect(dict["deliveryMethod"] as? String == "home_delivery")
-        #expect(dict["postapointDetails"] == nil)
+        #expect(dict["delivery_method"] as? String == "home_delivery")
+        #expect(dict["postapoint_details"] == nil)
     }
 
     @Test("Scenario 2: HU, 2 pets, PostaPoint checkout request")
@@ -75,9 +75,9 @@ struct OrderFlowTests {
 
         #expect(dict["quantity"] as? Int == 2)
         #expect(dict["country_code"] as? String == "HU")
-        #expect(dict["deliveryMethod"] as? String == "postapoint")
+        #expect(dict["delivery_method"] as? String == "postapoint")
 
-        let ppDict = dict["postapointDetails"] as? [String: Any]
+        let ppDict = dict["postapoint_details"] as? [String: Any]
         #expect(ppDict?["id"] as? String == "pp-1")
         #expect(ppDict?["name"] as? String == "Budapest Posta 1")
         #expect(ppDict?["address"] as? String == "Kossuth u. 10")
@@ -99,7 +99,7 @@ struct OrderFlowTests {
         #expect(dict["quantity"] as? Int == 3)
         #expect(dict["country_code"] as? String == "DE")
         #expect(dict["platform"] as? String == "ios")
-        #expect(dict["deliveryMethod"] == nil)
+        #expect(dict["delivery_method"] == nil)
     }
 
     // MARK: - CreateOrderRequest Round-Trip (Scenario 4)

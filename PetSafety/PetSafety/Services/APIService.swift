@@ -1090,7 +1090,7 @@ struct SightingResponse: Codable {
     let message: String?
 }
 
-struct OrdersResponse: Codable {
+struct OrdersResponse: Decodable {
     let orders: [Order]
 }
 
@@ -1226,6 +1226,12 @@ struct ShippingPriceInfo: Decodable {
     let currency: String
     let label: String
 
+    init(amount: Double, currency: String, label: String) {
+        self.amount = amount
+        self.currency = currency
+        self.label = label
+    }
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if let d = try? container.decode(Double.self, forKey: .amount) {
@@ -1258,12 +1264,12 @@ struct ShippingPriceInfo: Decodable {
     }
 }
 
-struct ShippingPricesCountry: Codable {
+struct ShippingPricesCountry: Decodable {
     let home_delivery: ShippingPriceInfo?
     let postapoint: ShippingPriceInfo?
 }
 
-struct ShippingPricesResponse: Codable {
+struct ShippingPricesResponse: Decodable {
     let HU: ShippingPricesCountry?
 
     // `default` is a Swift keyword, so we use a CodingKey
@@ -1298,7 +1304,7 @@ struct ShippingAddressDetails: Codable {
     let phone: String?
 }
 
-struct CreateTagOrderResponse: Codable {
+struct CreateTagOrderResponse: Decodable {
     let order: Order
     let userCreated: Bool?
     let userId: String?

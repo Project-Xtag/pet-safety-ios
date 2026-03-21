@@ -254,8 +254,8 @@ struct SubscriptionModelTests {
             "amount": 495,
             "currency": "gbp",
             "date": 1700000000,
-            "pdfUrl": "https://invoice.stripe.com/pdf/inv_123",
-            "hostedUrl": "https://invoice.stripe.com/inv_123"
+            "pdf_url": "https://invoice.stripe.com/pdf/inv_123",
+            "hosted_url": "https://invoice.stripe.com/inv_123"
         }
         """.data(using: .utf8)!
 

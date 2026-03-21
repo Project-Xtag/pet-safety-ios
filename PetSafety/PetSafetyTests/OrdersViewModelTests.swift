@@ -103,9 +103,9 @@ struct OrdersViewModelTests {
 
         #expect(dict["quantity"] as? Int == 1)
         #expect(dict["country_code"] as? String == "HU")
-        #expect(dict["deliveryMethod"] as? String == "postapoint")
+        #expect(dict["delivery_method"] as? String == "postapoint")
 
-        let ppDetails = dict["postapointDetails"] as? [String: Any]
+        let ppDetails = dict["postapoint_details"] as? [String: Any]
         #expect(ppDetails?["id"] as? String == "pp-123")
         #expect(ppDetails?["name"] as? String == "PostaPont Budapest 1")
     }

@@ -131,7 +131,7 @@ struct CreateTagCheckoutRequestTests {
         )
         let dict = try encodeToDict(request)
 
-        #expect(dict["deliveryMethod"] as? String == "home_delivery")
+        #expect(dict["delivery_method"] as? String == "home_delivery")
     }
 
     @Test("Request encodes with postapoint method and details")
@@ -145,9 +145,9 @@ struct CreateTagCheckoutRequestTests {
         )
         let dict = try encodeToDict(request)
 
-        #expect(dict["deliveryMethod"] as? String == "postapoint")
+        #expect(dict["delivery_method"] as? String == "postapoint")
 
-        let details = dict["postapointDetails"] as? [String: Any]
+        let details = dict["postapoint_details"] as? [String: Any]
         #expect(details?["id"] as? String == "pp-1")
         #expect(details?["name"] as? String == "Posta 1")
         #expect(details?["address"] as? String == "Test St")
