@@ -511,7 +511,6 @@ class APIService {
             species: nil,
             breed: nil,
             color: nil,
-            age: nil,
             weight: nil,
             microchipNumber: nil,
             medicalNotes: nil,
@@ -521,7 +520,9 @@ class APIService {
             uniqueFeatures: nil,
             sex: nil,
             isNeutered: nil,
-            isMissing: false
+            isMissing: false,
+            dateOfBirth: nil,
+            dobIsApproximate: nil
         )
 
         let request = try await buildRequest(

@@ -290,7 +290,8 @@ class SyncService: ObservableObject {
         let species = action.data["species"] as? String
         let breed = action.data["breed"] as? String
         let color = action.data["color"] as? String
-        let age = action.data["age"] as? String
+        let dateOfBirth = action.data["dateOfBirth"] as? String
+        let dobIsApproximate = action.data["dobIsApproximate"] as? Bool
         let weight = action.data["weight"] as? Double
         let microchipNumber = action.data["microchipNumber"] as? String
         let medicalNotes = action.data["medicalNotes"] as? String
@@ -307,7 +308,6 @@ class SyncService: ObservableObject {
             species: species,
             breed: breed,
             color: color,
-            age: age,
             weight: weight,
             microchipNumber: microchipNumber,
             medicalNotes: medicalNotes,
@@ -317,7 +317,9 @@ class SyncService: ObservableObject {
             uniqueFeatures: uniqueFeatures,
             sex: sex,
             isNeutered: isNeutered,
-            isMissing: isMissing
+            isMissing: isMissing,
+            dateOfBirth: dateOfBirth,
+            dobIsApproximate: dobIsApproximate
         )
 
         _ = try await apiService.updatePet(id: petId, request)
