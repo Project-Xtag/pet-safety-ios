@@ -95,15 +95,8 @@ struct BreedPickerView: View {
                             dismiss()
                         } label: {
                             HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(breed.localizedName)
-                                        .foregroundColor(.primary)
-                                    if breed.localizedName != breed.name {
-                                        Text(breed.name)
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                    }
-                                }
+                                Text(breed.localizedName)
+                                    .foregroundColor(.primary)
                                 Spacer()
                                 if breed.name == selectedBreed {
                                     Image(systemName: "checkmark")
