@@ -1313,3 +1313,7 @@
 "accessibility_flashlight_on" = "Slå på lommelykt";
 "accessibility_flashlight_off" = "Slå av lommelykt";
 "location_label" = "Sted";
+"profile_notification_settings" = "Varslingsinnstillinger";
+"profile_orders_invoices" = "Bestillinger og fakturaer";
+"profile_contact_us" = "Kontakt oss";
+"billing_invoices" = "Fakturaer";

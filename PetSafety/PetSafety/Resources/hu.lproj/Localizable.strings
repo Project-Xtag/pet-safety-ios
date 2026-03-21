@@ -1061,15 +1061,15 @@
 "delivery_postapoint" = "PostaPont átvétel";
 
 // MARK: - Pending Registrations
-"pending_registrations_title" = "Függőben lévő címkék";
+"pending_registrations_title" = "Függőben lévő biléták";
 "ready_to_activate" = "Aktiválásra kész";
 "still_processing" = "Feldolgozás alatt";
-"scan_tag_now" = "Címke beolvasása";
+"scan_tag_now" = "Biléta beolvasása";
 "create_profile_first" = "Profil létrehozása";
 "create_profile_while_waiting" = "Profil létrehozása várakozás közben";
 "all_caught_up" = "Minden naprakész!";
-"all_caught_up_description" = "Nincsenek függőben lévő címke regisztrációk.";
-"order_tags" = "Címkék rendelése";
+"all_caught_up_description" = "Nincsenek függőben lévő biléta regisztrációk.";
+"order_tags" = "Biléta rendelése";
 "status_shipped" = "Feladva";
 "status_delivered" = "Kézbesítve";
 "status_processing" = "Feldolgozás alatt";
@@ -1089,7 +1089,7 @@
 "other_pets" = "Egyéb kedvencek";
 "link_to_pet" = "Kapcsolás: %@";
 "no_pets_yet" = "Még nincsenek kedvencek";
-"create_first_pet" = "Hozd létre első kedvenced profilját a címke aktiválásához.";
+"create_first_pet" = "Hozd létre első kedvenced profilját a biléta aktiválásához.";
 "create_new_pet" = "Új kedvenc létrehozása";
 
 // MARK: - Public Profile Details
@@ -1107,9 +1107,9 @@
 
 // MARK: - Activation Error Messages
 "activation_error_qr_not_found" = "A QR kód nem felismerhető. Kérjük, győződj meg róla, hogy hivatalos Senra címkét olvasol be.";
-"activation_error_already_activated" = "Ez a címke már egy másik kedvenchez van rendelve. Kérjük, lépj kapcsolatba az ügyfélszolgálattal.";
-"activation_error_not_linked" = "Ez a címke még nincs hozzárendelve a rendelésedhez. Kérjük, várd meg a szállítási visszaigazolást.";
-"activation_error_not_shipped" = "A rendelésed még nem lett feladva. Kérjük, várd meg a címke megérkezését.";
+"activation_error_already_activated" = "Ez a biléta már egy másik kedvenchez van rendelve. Kérjük, lépj kapcsolatba az ügyfélszolgálattal.";
+"activation_error_not_linked" = "Ez a biléta még nincs hozzárendelve a rendelésedhez. Kérjük, várd meg a szállítási visszaigazolást.";
+"activation_error_not_shipped" = "A rendelésed még nem lett feladva. Kérjük, várd meg a biléta megérkezését.";
 "activation_error_not_owner" = "Ez nem a te kedvenced. Kérjük, válassz egyet a saját kedvenceid közül.";
 
 // MARK: - Breed Names
@@ -1228,12 +1228,12 @@
 "profile_incomplete_warning" = "Töltsd ki a kedvenced profilját";
 "profile_incomplete_desc" = "A hiányzó adatok megnehezítik a kedvenced megtalálását, ha elveszne. Kérjük, add meg a súlyt, színt és egészségügyi információkat.";
 "identity_locked_title" = "A név, faj és fajta zárolva van";
-"identity_locked_desc" = "Ezek a mezők a címke aktiválása után nem módosíthatók. Kérjük, lépj kapcsolatba az ügyfélszolgálattal.";
+"identity_locked_desc" = "Ezek a mezők a biléta aktiválása után nem módosíthatók. Kérjük, lépj kapcsolatba az ügyfélszolgálattal.";
 
 // MARK: - Subscription Management
 "cancel_subscription_title" = "Előfizetés lemondása?";
 "cancel_warning_a" = "Elveszíted az azonnali e-mail, SMS értesítéseket és közösségi riasztásokat";
-"cancel_warning_b" = "Az ingyenes címkecserék többé nem lesznek elérhetők";
+"cancel_warning_b" = "Az ingyenes bilétacserék többé nem lesznek elérhetőek";
 "cancel_warning_c" = "Elveszíted a hozzáférést az állatorvosi és menhelyi riasztásokhoz";
 "cancel_warning_d" = "A fiókod és a kisállat-regisztrációk aktívak maradnak";
 "cancel_access_until" = "A hozzáférésed megmarad eddig: %@";
@@ -1309,3 +1309,7 @@
 "accessibility_flashlight_on" = "Zseblámpa bekapcsolása";
 "accessibility_flashlight_off" = "Zseblámpa kikapcsolása";
 "location_label" = "Helyszín";
+"profile_notification_settings" = "Értesítési beállítások";
+"profile_orders_invoices" = "Rendelések és számlák";
+"profile_contact_us" = "Kapcsolat";
+"billing_invoices" = "Számlák";

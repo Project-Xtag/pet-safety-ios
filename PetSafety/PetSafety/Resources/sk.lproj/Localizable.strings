@@ -1310,3 +1310,7 @@
 "accessibility_flashlight_on" = "Zapnúť baterku";
 "accessibility_flashlight_off" = "Vypnúť baterku";
 "location_label" = "Poloha";
+"profile_notification_settings" = "Nastavenia upozornení";
+"profile_orders_invoices" = "Objednávky a faktúry";
+"profile_contact_us" = "Kontaktujte nás";
+"billing_invoices" = "Faktúry";

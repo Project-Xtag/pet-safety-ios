@@ -1313,3 +1313,7 @@
 "accessibility_flashlight_on" = "Włącz latarkę";
 "accessibility_flashlight_off" = "Wyłącz latarkę";
 "location_label" = "Lokalizacja";
+"profile_notification_settings" = "Ustawienia powiadomień";
+"profile_orders_invoices" = "Zamówienia i faktury";
+"profile_contact_us" = "Kontakt";
+"billing_invoices" = "Faktury";

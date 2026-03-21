@@ -1312,3 +1312,6 @@
 "accessibility_flashlight_on" = "Turn on flashlight";
 "accessibility_flashlight_off" = "Turn off flashlight";
 "location_label" = "Location";
+"profile_notification_settings" = "Notification Settings";
+"profile_orders_invoices" = "Orders & Invoices";
+"profile_contact_us" = "Contact Us";

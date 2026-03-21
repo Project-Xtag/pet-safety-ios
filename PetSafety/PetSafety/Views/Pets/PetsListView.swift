@@ -146,6 +146,8 @@ struct PetsListView: View {
         }
     }
 
+    @State private var showingNotifications = false
+
     // MARK: - Header Section
     private var headerSection: some View {
         HStack {
@@ -159,6 +161,17 @@ struct PetsListView: View {
             }
 
             Spacer()
+
+            Button { showingNotifications = true } label: {
+                Image(systemName: "bell.fill")
+                    .font(.system(size: 20))
+                    .foregroundColor(.brandOrange)
+            }
+            .sheet(isPresented: $showingNotifications) {
+                NavigationView {
+                    NotificationsView()
+                }
+            }
         }
         .padding(.horizontal, 24)
         .padding(.top, 16)

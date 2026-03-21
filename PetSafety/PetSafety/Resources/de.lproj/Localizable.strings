@@ -1310,3 +1310,7 @@
 "accessibility_flashlight_on" = "Taschenlampe einschalten";
 "accessibility_flashlight_off" = "Taschenlampe ausschalten";
 "location_label" = "Standort";
+"profile_notification_settings" = "Benachrichtigungseinstellungen";
+"profile_orders_invoices" = "Bestellungen & Rechnungen";
+"profile_contact_us" = "Kontakt";
+"billing_invoices" = "Rechnungen";

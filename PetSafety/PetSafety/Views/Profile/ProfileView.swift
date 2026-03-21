@@ -119,40 +119,32 @@ struct ProfileView: View {
                 ProfileMenuRow(icon: "person", title: NSLocalizedString("profile_personal_info", comment: ""))
             }
 
-            NavigationLink(destination: AddressView()) {
-                ProfileMenuRow(icon: "house", title: NSLocalizedString("profile_address", comment: ""))
-            }
-
             NavigationLink(destination: ContactsView()) {
                 ProfileMenuRow(icon: "person.2", title: NSLocalizedString("profile_contacts", comment: ""))
+            }
+
+            NavigationLink(destination: NotificationSettingsView()) {
+                ProfileMenuRow(icon: "bell", title: NSLocalizedString("profile_notification_settings", comment: ""))
+            }
+
+            NavigationLink(destination: OrdersView()) {
+                ProfileMenuRow(icon: "bag", title: NSLocalizedString("profile_orders_invoices", comment: ""))
+            }
+
+            NavigationLink(destination: ShelterCodeView()) {
+                ProfileMenuRow(icon: "building.2", title: NSLocalizedString("profile_shelter_code", comment: ""))
+            }
+
+            NavigationLink(destination: ContactSupportView()) {
+                ProfileMenuRow(icon: "envelope", title: NSLocalizedString("profile_contact_us", comment: ""))
             }
 
             NavigationLink(destination: PrivacyModeView()) {
                 ProfileMenuRow(icon: "lock.shield", title: NSLocalizedString("profile_privacy_mode", comment: ""))
             }
 
-            NavigationLink(destination: NotificationSettingsView()) {
-                ProfileMenuRow(icon: "bell", title: NSLocalizedString("profile_notifications", comment: ""))
-            }
-
             NavigationLink(destination: HelpAndSupportView()) {
                 ProfileMenuRow(icon: "questionmark.circle", title: NSLocalizedString("profile_help_support", comment: ""))
-            }
-
-            NavigationLink(destination: NotificationsView()) {
-                ProfileMenuRow(icon: "bell.badge", title: NSLocalizedString("notifications_title", comment: ""))
-            }
-
-            NavigationLink(destination: OrdersView()) {
-                ProfileMenuRow(icon: "bag", title: NSLocalizedString("profile_orders", comment: ""))
-            }
-
-            NavigationLink(destination: BillingView()) {
-                ProfileMenuRow(icon: "creditcard", title: NSLocalizedString("profile_billing", comment: ""))
-            }
-
-            NavigationLink(destination: ShelterCodeView()) {
-                ProfileMenuRow(icon: "building.2", title: NSLocalizedString("profile_shelter_code", comment: ""))
             }
         }
         .background(Color(UIColor.systemBackground))

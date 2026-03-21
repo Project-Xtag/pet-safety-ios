@@ -1322,3 +1322,7 @@
 "accessibility_flashlight_on" = "Accendi torcia";
 "accessibility_flashlight_off" = "Spegni torcia";
 "location_label" = "Posizione";
+"profile_notification_settings" = "Impostazioni notifiche";
+"profile_orders_invoices" = "Ordini e fatture";
+"profile_contact_us" = "Contattaci";
+"billing_invoices" = "Fatture";

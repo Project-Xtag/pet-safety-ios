@@ -314,61 +314,52 @@ struct ContactSupportView: View {
     ]
 
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("help_category")) {
-                    Picker("help_category", selection: $selectedCategory) {
-                        ForEach(categories, id: \.key) { category in
-                            Text(category.label).tag(category.key)
-                        }
+        Form {
+            Section(header: Text("help_category")) {
+                Picker("help_category", selection: $selectedCategory) {
+                    ForEach(categories, id: \.key) { category in
+                        Text(category.label).tag(category.key)
                     }
-                }
-
-                Section(header: Text("help_subject")) {
-                    TextField("help_subject_placeholder", text: $subject)
-                }
-
-                Section(header: Text("help_message")) {
-                    TextEditor(text: $message)
-                        .frame(minHeight: 150)
-                }
-
-                Section {
-                    Button(action: { submitRequest() }) {
-                        HStack {
-                            Spacer()
-                            if isSubmitting {
-                                ProgressView()
-                                    .tint(.white)
-                                Text("help_sending")
-                                    .foregroundColor(.white)
-                            } else {
-                                Text("help_submit_request")
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.white)
-                            }
-                            Spacer()
-                        }
-                        .padding(.vertical, 8)
-                    }
-                    .listRowBackground(
-                        (subject.isEmpty || message.isEmpty || isSubmitting)
-                            ? Color.brandOrange.opacity(0.4)
-                            : Color.brandOrange
-                    )
-                    .disabled(subject.isEmpty || message.isEmpty || isSubmitting)
                 }
             }
-            .navigationTitle("help_contact_title")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("cancel") {
-                        dismiss()
+
+            Section(header: Text("help_subject")) {
+                TextField("help_subject_placeholder", text: $subject)
+            }
+
+            Section(header: Text("help_message")) {
+                TextEditor(text: $message)
+                    .frame(minHeight: 150)
+            }
+
+            Section {
+                Button(action: { submitRequest() }) {
+                    HStack {
+                        Spacer()
+                        if isSubmitting {
+                            ProgressView()
+                                .tint(.white)
+                            Text("help_sending")
+                                .foregroundColor(.white)
+                        } else {
+                            Text("help_submit_request")
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                        }
+                        Spacer()
                     }
+                    .padding(.vertical, 8)
                 }
+                .listRowBackground(
+                    (subject.isEmpty || message.isEmpty || isSubmitting)
+                        ? Color.brandOrange.opacity(0.4)
+                        : Color.brandOrange
+                )
+                .disabled(subject.isEmpty || message.isEmpty || isSubmitting)
             }
         }
+        .navigationTitle("help_contact_title")
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func submitRequest() {

@@ -1315,3 +1315,7 @@
 "accessibility_flashlight_on" = "Uključi baterijsku lampu";
 "accessibility_flashlight_off" = "Isključi baterijsku lampu";
 "location_label" = "Lokacija";
+"profile_notification_settings" = "Postavke obavijesti";
+"profile_orders_invoices" = "Narudžbe i računi";
+"profile_contact_us" = "Kontaktirajte nas";
+"billing_invoices" = "Računi";

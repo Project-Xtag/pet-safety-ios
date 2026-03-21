@@ -1310,3 +1310,7 @@
 "accessibility_flashlight_on" = "Zapnout svítilnu";
 "accessibility_flashlight_off" = "Vypnout svítilnu";
 "location_label" = "Poloha";
+"profile_notification_settings" = "Nastavení oznámení";
+"profile_orders_invoices" = "Objednávky a faktury";
+"profile_contact_us" = "Kontaktujte nás";
+"billing_invoices" = "Faktury";

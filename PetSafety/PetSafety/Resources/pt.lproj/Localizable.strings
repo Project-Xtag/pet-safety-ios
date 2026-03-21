@@ -1310,3 +1310,7 @@
 "accessibility_flashlight_on" = "Ligar lanterna";
 "accessibility_flashlight_off" = "Desligar lanterna";
 "location_label" = "Localização";
+"profile_notification_settings" = "Definições de notificações";
+"profile_orders_invoices" = "Encomendas e faturas";
+"profile_contact_us" = "Contacte-nos";
+"billing_invoices" = "Faturas";

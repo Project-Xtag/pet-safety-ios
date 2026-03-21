@@ -1310,3 +1310,7 @@
 "accessibility_flashlight_on" = "Pornește lanterna";
 "accessibility_flashlight_off" = "Oprește lanterna";
 "location_label" = "Locație";
+"profile_notification_settings" = "Setări notificări";
+"profile_orders_invoices" = "Comenzi și facturi";
+"profile_contact_us" = "Contactați-ne";
+"billing_invoices" = "Facturi";

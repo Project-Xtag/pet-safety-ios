@@ -90,6 +90,19 @@ struct PersonalInformationView: View {
                     InfoRow(label: NSLocalizedString("personal_phone", comment: ""), value: phone.isEmpty ? NSLocalizedString("not_set", comment: "") : phone)
                 }
 
+                // Address section (inline)
+                Section(header: Text("profile_address")) {
+                    NavigationLink(destination: AddressView()) {
+                        HStack {
+                            Image(systemName: "house")
+                                .foregroundColor(.secondary)
+                                .frame(width: 24)
+                            Text("address_details")
+                                .foregroundColor(.primary)
+                        }
+                    }
+                }
+
                 Section {
                     Button(action: { startEditing() }) {
                         Text("edit_information")

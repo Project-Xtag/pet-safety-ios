@@ -1313,3 +1313,7 @@
 "accessibility_flashlight_on" = "Allumer la lampe torche";
 "accessibility_flashlight_off" = "Éteindre la lampe torche";
 "location_label" = "Emplacement";
+"profile_notification_settings" = "Paramètres de notification";
+"profile_orders_invoices" = "Commandes et factures";
+"profile_contact_us" = "Contactez-nous";
+"billing_invoices" = "Factures";
