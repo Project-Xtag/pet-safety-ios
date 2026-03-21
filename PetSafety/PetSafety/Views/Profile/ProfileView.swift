@@ -37,14 +37,29 @@ struct ProfileView: View {
         }
     }
 
+    @Environment(\.colorScheme) private var colorScheme
+
     // MARK: - Header Section
     private var headerSection: some View {
         VStack(spacing: 16) {
-            // Title
-            Text("profile_title")
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(.primary)
-                .padding(.top, 60)
+            // Title + dark mode toggle
+            HStack {
+                Spacer()
+                Text("profile_title")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(.primary)
+                Spacer()
+                Button {
+                    // Toggle: if system or light → dark, if dark → light
+                    appearanceMode = (appearanceMode == "dark") ? "light" : "dark"
+                } label: {
+                    Image(systemName: appearanceMode == "dark" || (appearanceMode == "system" && colorScheme == .dark) ? "sun.max.fill" : "moon.fill")
+                        .font(.system(size: 20))
+                        .foregroundColor(.brandOrange)
+                }
+                .padding(.trailing, 16)
+            }
+            .padding(.top, 60)
 
             // Avatar and Info
             VStack(spacing: 16) {
@@ -119,31 +134,6 @@ struct ProfileView: View {
             NavigationLink(destination: NotificationSettingsView()) {
                 ProfileMenuRow(icon: "bell", title: NSLocalizedString("profile_notifications", comment: ""))
             }
-
-            // Appearance / Dark Mode toggle
-            HStack(spacing: 16) {
-                Image(systemName: "moon.circle")
-                    .font(.system(size: 22))
-                    .foregroundColor(.brandOrange)
-                    .frame(width: 28)
-
-                Text("appearance_title")
-                    .font(.system(size: 16, weight: .medium))
-
-                Spacer()
-
-                Picker("", selection: $appearanceMode) {
-                    Text("appearance_system").tag("system")
-                    Text("appearance_light").tag("light")
-                    Text("appearance_dark").tag("dark")
-                }
-                .pickerStyle(.segmented)
-                .frame(maxWidth: 200)
-            }
-            .padding(.vertical, 12)
-            .padding(.horizontal, 16)
-            .background(Color(UIColor.systemBackground))
-            .cornerRadius(12)
 
             NavigationLink(destination: HelpAndSupportView()) {
                 ProfileMenuRow(icon: "questionmark.circle", title: NSLocalizedString("profile_help_support", comment: ""))
