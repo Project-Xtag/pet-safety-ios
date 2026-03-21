@@ -145,7 +145,7 @@ struct PetFormView: View {
                     HStack {
                         Text("name")
                             .frame(width: 80, alignment: .leading)
-                        TextField("pet_name", text: $name)
+                        TextField(String(localized: "pet_name"), text: $name)
                             .onChange(of: name) { _, new in if new.count > InputValidators.maxPetName { name = String(new.prefix(InputValidators.maxPetName)) } }
                     }
                 }
@@ -194,21 +194,21 @@ struct PetFormView: View {
                 HStack {
                     Text("colour")
                         .frame(width: 80, alignment: .leading)
-                    TextField("colour_optional", text: $color)
+                    TextField(String(localized: "colour_optional"), text: $color)
                         .onChange(of: color) { _, new in if new.count > InputValidators.maxColor { color = String(new.prefix(InputValidators.maxColor)) } }
                 }
 
                 HStack {
                     Text("age")
                         .frame(width: 80, alignment: .leading)
-                    TextField("age_optional", text: $ageText)
+                    TextField(String(localized: "age_optional"), text: $ageText)
                         .onChange(of: ageText) { _, new in if new.count > 50 { ageText = String(new.prefix(50)) } }
                 }
 
                 HStack {
                     Text("microchip")
                         .frame(width: 80, alignment: .leading)
-                    TextField("microchip_optional", text: $microchipNumber)
+                    TextField(String(localized: "microchip_optional"), text: $microchipNumber)
                         .keyboardType(.numberPad)
                         .onChange(of: microchipNumber) { _, new in if new.count > InputValidators.maxMicrochip { microchipNumber = String(new.prefix(InputValidators.maxMicrochip)) } }
                 }
@@ -217,7 +217,7 @@ struct PetFormView: View {
                 HStack {
                     Text("weight")
                         .frame(width: 80, alignment: .leading)
-                    TextField("weight_optional", text: $weight)
+                    TextField(String(localized: "weight_optional"), text: $weight)
                         .keyboardType(.decimalPad)
                         .onChange(of: weight) { _, new in if new.count > 10 { weight = String(new.prefix(10)) } }
                 }
