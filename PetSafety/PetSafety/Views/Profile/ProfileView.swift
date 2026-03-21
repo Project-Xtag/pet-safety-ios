@@ -153,10 +153,6 @@ struct ProfileView: View {
                 ProfileMenuRow(icon: "bell.badge", title: NSLocalizedString("notifications_title", comment: ""))
             }
 
-            NavigationLink(destination: PendingRegistrationsView()) {
-                ProfileMenuRow(icon: "tag", title: NSLocalizedString("pending_registrations_title", comment: ""))
-            }
-
             NavigationLink(destination: OrdersView()) {
                 ProfileMenuRow(icon: "bag", title: NSLocalizedString("profile_orders", comment: ""))
             }

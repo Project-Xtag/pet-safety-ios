@@ -2,8 +2,31 @@ import SwiftUI
 
 struct OrdersView: View {
     @StateObject private var viewModel = OrdersViewModel()
+    @State private var selectedTab = 0
 
     var body: some View {
+        VStack(spacing: 0) {
+            Picker("", selection: $selectedTab) {
+                Text(String(localized: "orders_title")).tag(0)
+                Text(String(localized: "pending_registrations_title")).tag(1)
+            }
+            .pickerStyle(.segmented)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+
+            if selectedTab == 0 {
+                ordersContent
+            } else {
+                PendingRegistrationsView()
+            }
+        }
+        .navigationTitle(Text("profile_orders"))
+        .task {
+            await viewModel.fetchOrders()
+        }
+    }
+
+    private var ordersContent: some View {
         ZStack {
             if viewModel.orders.isEmpty && !viewModel.isLoading {
                 EmptyStateView(
@@ -22,10 +45,6 @@ struct OrdersView: View {
                 .listStyle(.inset)
                 .adaptiveList()
             }
-        }
-        .navigationTitle(Text("orders_title"))
-        .task {
-            await viewModel.fetchOrders()
         }
         .refreshable {
             await viewModel.fetchOrders()
