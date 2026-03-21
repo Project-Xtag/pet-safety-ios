@@ -161,10 +161,6 @@ struct ProfileView: View {
                 ProfileMenuRow(icon: "creditcard", title: NSLocalizedString("profile_billing", comment: ""))
             }
 
-            NavigationLink(destination: ReferralView()) {
-                ProfileMenuRow(icon: "gift", title: NSLocalizedString("profile_referral", comment: ""))
-            }
-
             NavigationLink(destination: ShelterCodeView()) {
                 ProfileMenuRow(icon: "building.2", title: NSLocalizedString("profile_shelter_code", comment: ""))
             }
