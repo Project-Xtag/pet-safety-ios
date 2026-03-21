@@ -624,6 +624,7 @@
 
 // MARK: - Zamówienie nieśki zamiennej
 "order_replace_title" = "Zamów zawieszk zamienną";
+"order_replace_subtitle" = "Wyślemy nową identyfikację dla Twojego zwierzęcia";
 "order_replace_complete" = "Zamówienie gotowe!";
 "order_replace_confirmation" = "Twoja nieśka zamienna zostanie wysłana na podany adres.";
 "order_replace_pet_info" = "Informacje o zwierzęciu";

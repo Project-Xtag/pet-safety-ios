@@ -551,7 +551,7 @@
 "order_more_title" = "További biléták rendelése";
 "order_more_complete" = "Rendelés kész!";
 "order_more_confirmation" = "A bilétákat a fizetés megerősítése és a rendelés feldolgozása után szállítjuk.";
-"order_more_pet_names" = "Kedvencek nevei";
+"order_more_pet_names" = "Kedvenced neve";
 "order_more_pet_names_footer" = "Add meg azoknak a kedvenceknek a nevét, akiknek bilétát szeretnél.";
 "order_more_add_another" = "Kedvenc hozzáadása";
 "order_more_your_info" = "Adataid";
@@ -570,6 +570,7 @@
 
 // MARK: - Cserebiléta rendelése
 "order_replace_title" = "Csere biléta rendelése";
+"order_replace_subtitle" = "Új bilétát küldünk a kedvencednek";
 "order_replace_complete" = "Rendelés kész!";
 "order_replace_confirmation" = "A cserebiléta a megadott címre szállítjuk.";
 "order_replace_pet_info" = "Kedvenc információ";

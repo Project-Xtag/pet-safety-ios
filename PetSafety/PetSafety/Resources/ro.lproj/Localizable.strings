@@ -570,6 +570,7 @@
 
 // MARK: - Comandă medalion de înlocuire
 "order_replace_title" = "Comandă medalion de înlocuire";
+"order_replace_subtitle" = "Vă trimitem o etichetă nouă pentru animalul dvs.";
 "order_replace_complete" = "Comandă completă!";
 "order_replace_confirmation" = "Eticheta de înlocuire va fi expediată la adresa furnizată.";
 "order_replace_pet_info" = "Informații animal";

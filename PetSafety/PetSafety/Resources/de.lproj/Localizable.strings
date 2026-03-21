@@ -570,6 +570,7 @@
 
 // MARK: - Ersatz-Namensschild bestellen
 "order_replace_title" = "Ersatz-Namensschild bestellen";
+"order_replace_subtitle" = "Wir senden Ihnen ein neues Schild für Ihr Haustier";
 "order_replace_complete" = "Bestellung abgeschlossen!";
 "order_replace_confirmation" = "Ihr Ersatz-Namensschild wird an die angegebene Adresse versendet.";
 "order_replace_pet_info" = "Haustierinformationen";

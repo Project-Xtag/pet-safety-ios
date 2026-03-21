@@ -625,6 +625,7 @@
 
 // MARK: - Commander une médaille de remplacement
 "order_replace_title" = "Commander une médaille de remplacement";
+"order_replace_subtitle" = "Nous vous enverrons une nouvelle médaille pour votre animal";
 "order_replace_complete" = "Commande effectuée !";
 "order_replace_confirmation" = "Ta médaille de remplacement sera expédiée à l'adresse indiquée.";
 "order_replace_pet_info" = "Informations sur l'animal";

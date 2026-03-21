@@ -634,6 +634,7 @@
 
 // MARK: - Ordina medaglietta sostitutiva
 "order_replace_title" = "Ordina medaglietta sostitutiva";
+"order_replace_subtitle" = "Ti invieremo una nuova medaglietta per il tuo animale";
 "order_replace_complete" = "Ordine completato!";
 "order_replace_confirmation" = "La tua medaglietta sostitutiva verrà spedita all'indirizzo fornito.";
 "order_replace_pet_info" = "Informazioni sull'animale";

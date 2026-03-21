@@ -225,7 +225,7 @@ struct OrderReplacementTagView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(pet.name)
                         .font(.system(size: 17, weight: .semibold))
-                    Text(pet.species.capitalized)
+                    Text(PetLocalizer.localizeSpecies(pet.species))
                         .font(.system(size: 14))
                         .foregroundColor(.secondary)
                     if let breed = pet.breed, !breed.isEmpty {

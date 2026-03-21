@@ -628,6 +628,7 @@
 
 // MARK: - Order Replacement Tag
 "order_replace_title" = "Naruči zamjenski pločica";
+"order_replace_subtitle" = "Poslat ćemo vam novu pločicu za vašeg ljubimca";
 "order_replace_complete" = "Narudžba dovršena!";
 "order_replace_confirmation" = "Zamjenski pločica bit će poslan na navedenu adresu.";
 "order_replace_pet_info" = "Podaci o ljubimcu";

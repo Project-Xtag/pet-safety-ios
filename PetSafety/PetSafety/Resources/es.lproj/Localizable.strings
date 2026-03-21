@@ -570,6 +570,7 @@
 
 // MARK: - Pedir placa de reemplazo
 "order_replace_title" = "Pedir placa de reemplazo";
+"order_replace_subtitle" = "Te enviaremos una nueva placa para tu mascota";
 "order_replace_complete" = "¡Pedido completado!";
 "order_replace_confirmation" = "Tu placa de reemplazo se enviará a la dirección proporcionada.";
 "order_replace_pet_info" = "Información de la mascota";

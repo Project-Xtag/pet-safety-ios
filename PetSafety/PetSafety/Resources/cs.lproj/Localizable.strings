@@ -570,6 +570,7 @@
 
 // MARK: - Objednat náhradní známku
 "order_replace_title" = "Objednat náhradní známku";
+"order_replace_subtitle" = "Pošleme vám nový štítek pro vašeho mazlíčka";
 "order_replace_complete" = "Objednávka dokončena!";
 "order_replace_confirmation" = "Náhradní známka bude odeslána na uvedenou adresu.";
 "order_replace_pet_info" = "Informace o mazlíčkovi";

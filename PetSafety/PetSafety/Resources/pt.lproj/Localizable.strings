@@ -570,6 +570,7 @@
 
 // MARK: - Encomendar placa de substituição
 "order_replace_title" = "Encomendar placa de substituição";
+"order_replace_subtitle" = "Enviaremos uma nova etiqueta para o seu animal";
 "order_replace_complete" = "Encomenda completa!";
 "order_replace_confirmation" = "A sua placa de substituição será enviada para a morada indicada.";
 "order_replace_pet_info" = "Informação do animal";

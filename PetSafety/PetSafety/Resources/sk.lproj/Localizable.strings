@@ -570,6 +570,7 @@
 
 // MARK: - Objednat nahradny stitok
 "order_replace_title" = "Objednat nahradny stitok";
+"order_replace_subtitle" = "Pošleme vám novú známku pre vaše zviera";
 "order_replace_complete" = "Objednavka dokoncena!";
 "order_replace_confirmation" = "Nahradny stitok bude odoslany na uvedenu adresu.";
 "order_replace_pet_info" = "Informacie o zvierati";

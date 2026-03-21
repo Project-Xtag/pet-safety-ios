@@ -627,6 +627,7 @@
 
 // MARK: - Bestill erstatningsmerke
 "order_replace_title" = "Bestill erstatningsmerke";
+"order_replace_subtitle" = "Vi sender deg et nytt merke for dyret ditt";
 "order_replace_complete" = "Bestilling fullført!";
 "order_replace_confirmation" = "Erstatningsmerket ditt sendes til adressen du oppga.";
 "order_replace_pet_info" = "Dyrinformasjon";
