@@ -312,14 +312,22 @@ struct OrderReplacementTagView: View {
 
     private var deliveryMethodCard: some View {
         ReplacementSectionCard(title: String(localized: "delivery_method_title"), icon: "truck.box.fill") {
-            Picker("", selection: $deliveryMethod) {
-                Text(deliveryOptionLabel(for: "home_delivery")).tag("home_delivery")
-                Text(deliveryOptionLabel(for: "postapoint")).tag("postapoint")
-            }
-            .pickerStyle(.segmented)
-            .onChange(of: deliveryMethod) { _, newValue in
-                if newValue != "postapoint" {
+            HStack(spacing: 10) {
+                DeliveryOptionCard(
+                    title: String(localized: "home_delivery_option"),
+                    price: shippingPriceLabel(for: "home_delivery"),
+                    isSelected: deliveryMethod == "home_delivery"
+                ) {
+                    deliveryMethod = "home_delivery"
                     selectedPostaPoint = nil
+                }
+
+                DeliveryOptionCard(
+                    title: String(localized: "postapoint_delivery_option"),
+                    price: shippingPriceLabel(for: "postapoint"),
+                    isSelected: deliveryMethod == "postapoint"
+                ) {
+                    deliveryMethod = "postapoint"
                 }
             }
 

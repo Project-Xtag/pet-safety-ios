@@ -329,14 +329,22 @@ struct OrderMoreTagsView: View {
 
     private var deliveryMethodCard: some View {
         SectionCard(title: String(localized: "delivery_method_title"), icon: "truck.box.fill") {
-            Picker("", selection: $deliveryMethod) {
-                Text(deliveryOptionLabel(for: "home_delivery")).tag("home_delivery")
-                Text(deliveryOptionLabel(for: "postapoint")).tag("postapoint")
-            }
-            .pickerStyle(.segmented)
-            .onChange(of: deliveryMethod) { _, newValue in
-                if newValue != "postapoint" {
+            HStack(spacing: 10) {
+                DeliveryOptionCard(
+                    title: String(localized: "home_delivery_option"),
+                    price: shippingPriceLabel(for: "home_delivery"),
+                    isSelected: deliveryMethod == "home_delivery"
+                ) {
+                    deliveryMethod = "home_delivery"
                     selectedPostaPoint = nil
+                }
+
+                DeliveryOptionCard(
+                    title: String(localized: "postapoint_delivery_option"),
+                    price: shippingPriceLabel(for: "postapoint"),
+                    isSelected: deliveryMethod == "postapoint"
+                ) {
+                    deliveryMethod = "postapoint"
                 }
             }
 
@@ -590,6 +598,38 @@ private struct SectionCard<Content: View>: View {
         .background(Color(UIColor.systemBackground))
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.06), radius: 8, x: 0, y: 4)
+    }
+}
+
+// MARK: - Delivery Option Card
+struct DeliveryOptionCard: View {
+    let title: String
+    let price: String
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Text(title)
+                    .font(.system(size: 14, weight: .semibold))
+                    .multilineTextAlignment(.center)
+                Text(price)
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .padding(.horizontal, 8)
+            .background(isSelected ? Color.brandOrange.opacity(0.12) : Color(UIColor.systemGray6))
+            .foregroundColor(isSelected ? .brandOrange : .primary)
+            .cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(isSelected ? Color.brandOrange : Color.clear, lineWidth: 1.5)
+            )
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
