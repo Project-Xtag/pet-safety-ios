@@ -70,8 +70,21 @@ struct Order: Codable, Identifiable {
         id = try container.decode(String.self, forKey: .id)
         userId = try container.decodeIfPresent(String.self, forKey: .userId)
         petName = try container.decodeIfPresent(String.self, forKey: .petName) ?? ""
-        totalAmount = try container.decodeIfPresent(Double.self, forKey: .totalAmount) ?? 0
-        shippingCost = try container.decodeIfPresent(Double.self, forKey: .shippingCost) ?? 0
+        // Handle DECIMAL values that PostgreSQL returns as strings (e.g. "2490.00")
+        if let d = try? container.decodeIfPresent(Double.self, forKey: .totalAmount) {
+            totalAmount = d
+        } else if let s = try? container.decodeIfPresent(String.self, forKey: .totalAmount), let d = Double(s) {
+            totalAmount = d
+        } else {
+            totalAmount = 0
+        }
+        if let d = try? container.decodeIfPresent(Double.self, forKey: .shippingCost) {
+            shippingCost = d
+        } else if let s = try? container.decodeIfPresent(String.self, forKey: .shippingCost), let d = Double(s) {
+            shippingCost = d
+        } else {
+            shippingCost = 0
+        }
         shippingAddress = try container.decodeIfPresent(AddressDetails.self, forKey: .shippingAddress)
         billingAddress = try container.decodeIfPresent(AddressDetails.self, forKey: .billingAddress)
         paymentMethod = try container.decodeIfPresent(String.self, forKey: .paymentMethod) ?? "card"
@@ -89,7 +102,7 @@ struct Order: Codable, Identifiable {
     }
 }
 
-struct OrderItem: Codable, Identifiable {
+struct OrderItem: Identifiable, Decodable {
     let id: String
     let orderId: String
     let itemType: String
@@ -107,6 +120,24 @@ struct OrderItem: Codable, Identifiable {
         case petId = "pet_id"
         case qrTagId = "qr_tag_id"
         case createdAt = "created_at"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        orderId = try container.decodeIfPresent(String.self, forKey: .orderId) ?? ""
+        itemType = try container.decodeIfPresent(String.self, forKey: .itemType) ?? "tag"
+        quantity = try container.decodeIfPresent(Int.self, forKey: .quantity) ?? 1
+        if let d = try? container.decodeIfPresent(Double.self, forKey: .price) {
+            price = d
+        } else if let s = try? container.decodeIfPresent(String.self, forKey: .price), let d = Double(s) {
+            price = d
+        } else {
+            price = 0
+        }
+        petId = try container.decodeIfPresent(String.self, forKey: .petId)
+        qrTagId = try container.decodeIfPresent(String.self, forKey: .qrTagId)
+        createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
     }
 }
 
