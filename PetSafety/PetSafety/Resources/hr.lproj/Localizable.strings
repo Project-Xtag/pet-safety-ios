@@ -1307,3 +1307,10 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Nadogradi za slanje obavijesti zajednici";
 "mark_lost_upgrade_prompt" = "S planom Starter tvoj ljubimac bit će označen kao nestao, ali obavijesti korisnicima, veterinarima i skloništima zahtijevaju pretplatu Standard ili Maximum.";
+// MARK: - Localization Audit Fixes
+"age_optional" = "npr. 3 godine, 6 mjeseci (neobavezno)";
+"create_pet_profile" = "Stvori profil ljubimca";
+"failed_load_pets" = "Nije moguće učitati ljubimce";
+"accessibility_flashlight_on" = "Uključi baterijsku lampu";
+"accessibility_flashlight_off" = "Isključi baterijsku lampu";
+"location_label" = "Lokacija";

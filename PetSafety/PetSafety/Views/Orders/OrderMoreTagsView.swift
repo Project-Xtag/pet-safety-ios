@@ -556,7 +556,7 @@ struct OrderMoreTagsView: View {
                     checkoutURL = url
                     showCheckoutSheet = true
                 } else {
-                    appState.showError("Invalid checkout URL")
+                    appState.showError(String(localized: "error_invalid_checkout_url"))
                 }
             } catch {
                 appState.showError(error.localizedDescription)

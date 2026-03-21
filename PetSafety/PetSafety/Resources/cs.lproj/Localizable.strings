@@ -1302,3 +1302,10 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Vylepši pro komunitní upozornění";
 "mark_lost_upgrade_prompt" = "V plánu Starter bude tvůj mazlíček označen jako ztracený, ale upozornění uživatelům, veterinářům a útulkům vyžadují předplatné Standard nebo Maximum.";
+// MARK: - Localization Audit Fixes
+"age_optional" = "např. 3 roky, 6 měsíců (volitelné)";
+"create_pet_profile" = "Vytvořit profil mazlíčka";
+"failed_load_pets" = "Nepodařilo se načíst mazlíčky";
+"accessibility_flashlight_on" = "Zapnout svítilnu";
+"accessibility_flashlight_off" = "Vypnout svítilnu";
+"location_label" = "Poloha";

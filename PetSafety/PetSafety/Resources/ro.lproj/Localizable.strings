@@ -1302,3 +1302,10 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Actualizează pentru alerte comunitare";
 "mark_lost_upgrade_prompt" = "Cu planul Starter animalul tău va fi marcat ca dispărut, dar notificările către utilizatori, veterinari și adăposturi necesită un abonament Standard sau Maximum.";
+// MARK: - Localization Audit Fixes
+"age_optional" = "ex. 3 ani, 6 luni (opțional)";
+"create_pet_profile" = "Creează profilul animalului";
+"failed_load_pets" = "Nu s-au putut încărca animalele";
+"accessibility_flashlight_on" = "Pornește lanterna";
+"accessibility_flashlight_off" = "Oprește lanterna";
+"location_label" = "Locație";

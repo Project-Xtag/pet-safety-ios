@@ -1302,3 +1302,10 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Atualiza para enviar alertas comunitários";
 "mark_lost_upgrade_prompt" = "Com o plano Starter o teu animal será marcado como desaparecido, mas as notificações a utilizadores, veterinários e abrigos requerem uma subscrição Standard ou Maximum.";
+// MARK: - Localization Audit Fixes
+"age_optional" = "ex. 3 anos, 6 meses (opcional)";
+"create_pet_profile" = "Criar perfil do animal";
+"failed_load_pets" = "Falha ao carregar os animais";
+"accessibility_flashlight_on" = "Ligar lanterna";
+"accessibility_flashlight_off" = "Desligar lanterna";
+"location_label" = "Localização";

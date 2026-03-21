@@ -1305,3 +1305,10 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Ulepsz plan, aby wysyłać alerty";
 "mark_lost_upgrade_prompt" = "W planie Starter twoje zwierzę zostanie oznaczone jako zagubione, ale powiadomienia do użytkowników, weterynarzy i schronisk wymagają subskrypcji Standard lub Maximum.";
+// MARK: - Localization Audit Fixes
+"age_optional" = "np. 3 lata, 6 miesięcy (opcjonalnie)";
+"create_pet_profile" = "Utwórz profil zwierzęcia";
+"failed_load_pets" = "Nie udało się załadować zwierząt";
+"accessibility_flashlight_on" = "Włącz latarkę";
+"accessibility_flashlight_off" = "Wyłącz latarkę";
+"location_label" = "Lokalizacja";

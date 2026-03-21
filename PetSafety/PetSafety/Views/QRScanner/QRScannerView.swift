@@ -85,7 +85,7 @@ struct QRScannerView: View {
                                     Circle()
                                         .fill(isTorchOn ? Color.brandOrange : Color.black.opacity(0.6))
                                 )
-                                .accessibilityLabel(isTorchOn ? "Turn off flashlight" : "Turn on flashlight")
+                                .accessibilityLabel(isTorchOn ? String(localized: "accessibility_flashlight_off") : String(localized: "accessibility_flashlight_on"))
                         }
                         .padding(.trailing, 24)
                         .padding(.bottom, 40)

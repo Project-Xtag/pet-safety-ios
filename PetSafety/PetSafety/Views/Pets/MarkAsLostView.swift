@@ -69,7 +69,7 @@ struct MarkAsLostView: View {
 
             Section(header: Text("mark_lost_last_seen"),
                     footer: Text("mark_lost_alerts_footer")) {
-                Picker("Location", selection: $lastSeenSource) {
+                Picker(String(localized: "location_label"), selection: $lastSeenSource) {
                     ForEach(LastSeenSource.allCases, id: \.self) { source in
                         Text(source.displayName).tag(source)
                     }

@@ -1301,3 +1301,10 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Frissíts a közösségi értesítésekhez";
 "mark_lost_upgrade_prompt" = "A Starter csomaggal a kedvencedet elveszettnek jelöljük, de a közeli felhasználók, állatorvosok és menhelyek értesítéséhez Standard vagy Maximum előfizetés szükséges.";
+// MARK: - Localization Audit Fixes
+"age_optional" = "pl. 3 éves, 6 hónapos (opcionális)";
+"create_pet_profile" = "Kisállat profil létrehozása";
+"failed_load_pets" = "Nem sikerült betölteni a kisállatokat";
+"accessibility_flashlight_on" = "Zseblámpa bekapcsolása";
+"accessibility_flashlight_off" = "Zseblámpa kikapcsolása";
+"location_label" = "Helyszín";

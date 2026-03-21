@@ -47,7 +47,7 @@ struct PetsListView: View {
                     ProgressView()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if viewModel.errorMessage != nil && viewModel.pets.isEmpty {
-                    ErrorRetryView(message: viewModel.errorMessage ?? "Failed to load pets") {
+                    ErrorRetryView(message: viewModel.errorMessage ?? String(localized: "failed_load_pets")) {
                         Task { await viewModel.fetchPets() }
                     }
                 } else if viewModel.pets.isEmpty {

@@ -1302,3 +1302,10 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Vylepši pre komunitné upozornenia";
 "mark_lost_upgrade_prompt" = "V pláne Starter bude tvoje zviera označené ako stratené, ale upozornenia pre používateľov, veterinárov a útulky vyžadujú predplatné Standard alebo Maximum.";
+// MARK: - Localization Audit Fixes
+"age_optional" = "napr. 3 roky, 6 mesiacov (voliteľné)";
+"create_pet_profile" = "Vytvoriť profil zvieraťa";
+"failed_load_pets" = "Nepodarilo sa načítať zvieratá";
+"accessibility_flashlight_on" = "Zapnúť baterku";
+"accessibility_flashlight_off" = "Vypnúť baterku";
+"location_label" = "Poloha";

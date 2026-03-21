@@ -1305,3 +1305,10 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Oppgrader for fellesskapsvarsler";
 "mark_lost_upgrade_prompt" = "Med Starter-planen blir kjæledyret ditt markert som savnet, men varsler til brukere, veterinærer og dyreinternat krever et Standard- eller Maximum-abonnement.";
+// MARK: - Localization Audit Fixes
+"age_optional" = "f.eks. 3 år, 6 måneder (valgfritt)";
+"create_pet_profile" = "Opprett dyreprofil";
+"failed_load_pets" = "Kunne ikke laste inn dyr";
+"accessibility_flashlight_on" = "Slå på lommelykt";
+"accessibility_flashlight_off" = "Slå av lommelykt";
+"location_label" = "Sted";

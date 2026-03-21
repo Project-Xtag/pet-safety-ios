@@ -1302,3 +1302,10 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Upgrade für Community-Benachrichtigungen";
 "mark_lost_upgrade_prompt" = "Mit dem Starter-Plan wird dein Haustier als vermisst markiert, aber Benachrichtigungen an Nutzer, Tierärzte und Tierheime erfordern ein Standard- oder Maximum-Abo.";
+// MARK: - Localization Audit Fixes
+"age_optional" = "z.B. 3 Jahre, 6 Monate (optional)";
+"create_pet_profile" = "Haustierprofil erstellen";
+"failed_load_pets" = "Haustiere konnten nicht geladen werden";
+"accessibility_flashlight_on" = "Taschenlampe einschalten";
+"accessibility_flashlight_off" = "Taschenlampe ausschalten";
+"location_label" = "Standort";
