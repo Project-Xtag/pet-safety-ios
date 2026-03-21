@@ -1314,3 +1314,5 @@
 "profile_orders_invoices" = "Bestellungen & Rechnungen";
 "profile_contact_us" = "Kontakt";
 "billing_invoices" = "Rechnungen";
+"identity_will_lock_title" = "Name, Art und Rasse werden gesperrt";
+"identity_will_lock_desc" = "Diese Felder können nach der Registrierung nicht geändert werden. Bitte überprüfen Sie sie vor dem Speichern.";

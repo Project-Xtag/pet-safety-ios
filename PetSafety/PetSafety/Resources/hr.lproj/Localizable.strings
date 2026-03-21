@@ -1319,3 +1319,5 @@
 "profile_orders_invoices" = "Narudžbe i računi";
 "profile_contact_us" = "Kontaktirajte nas";
 "billing_invoices" = "Računi";
+"identity_will_lock_title" = "Ime, vrsta i pasmina bit će zaključani";
+"identity_will_lock_desc" = "Ova polja se ne mogu mijenjati nakon registracije. Provjerite jesu li točna prije spremanja.";

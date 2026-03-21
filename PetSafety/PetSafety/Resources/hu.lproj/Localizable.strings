@@ -1313,3 +1313,5 @@
 "profile_orders_invoices" = "Rendelések és számlák";
 "profile_contact_us" = "Kapcsolat";
 "billing_invoices" = "Számlák";
+"identity_will_lock_title" = "A név, faj és fajta zárolásra kerül";
+"identity_will_lock_desc" = "Ezek a mezők a regisztráció után nem módosíthatók. Kérjük, mentés előtt ellenőrizd, hogy helyesek.";

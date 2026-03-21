@@ -1314,3 +1314,5 @@
 "profile_orders_invoices" = "Objednávky a faktúry";
 "profile_contact_us" = "Kontaktujte nás";
 "billing_invoices" = "Faktúry";
+"identity_will_lock_title" = "Meno, druh a plemeno budú uzamknuté";
+"identity_will_lock_desc" = "Tieto polia nie je možné po registrácii zmeniť. Uistite sa, že sú správne pred uložením.";

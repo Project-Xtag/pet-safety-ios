@@ -1315,3 +1315,5 @@
 "profile_notification_settings" = "Notification Settings";
 "profile_orders_invoices" = "Orders & Invoices";
 "profile_contact_us" = "Contact Us";
+"identity_will_lock_title" = "Name, species, and breed will be locked";
+"identity_will_lock_desc" = "These fields cannot be changed after registration. Please make sure they are correct before saving.";

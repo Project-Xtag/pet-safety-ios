@@ -78,19 +78,17 @@ struct PetFormView: View {
             }
 
             // Locked fields info banner
-            if mode.isEdit {
-                Section {
-                    HStack(spacing: 12) {
-                        Image(systemName: "lock.fill")
-                            .foregroundColor(.blue)
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("identity_locked_title")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                            Text("identity_locked_desc")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
+            Section {
+                HStack(spacing: 12) {
+                    Image(systemName: mode.isEdit ? "lock.fill" : "info.circle.fill")
+                        .foregroundColor(mode.isEdit ? .blue : .orange)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(mode.isEdit ? String(localized: "identity_locked_title") : String(localized: "identity_will_lock_title"))
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                        Text(mode.isEdit ? String(localized: "identity_locked_desc") : String(localized: "identity_will_lock_desc"))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
                     }
                 }
             }
