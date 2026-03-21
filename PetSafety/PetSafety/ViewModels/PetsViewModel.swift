@@ -5,6 +5,7 @@ import UIKit
 class PetsViewModel: ObservableObject {
     @Published var pets: [Pet] = []
     @Published var isLoading = false
+    @Published var hasCompletedInitialLoad = false
     @Published var errorMessage: String?
     @Published var isOfflineMode = false
     @Published var showUpgradePrompt = false
@@ -39,6 +40,7 @@ class PetsViewModel: ObservableObject {
                 errorMessage = String(localized: "cached_data_offline")
             }
             isLoading = false
+            hasCompletedInitialLoad = true
         } catch {
             isLoading = false
             // Try to load from cache if API fails
@@ -48,6 +50,7 @@ class PetsViewModel: ObservableObject {
             } catch {
                 errorMessage = error.localizedDescription
             }
+            hasCompletedInitialLoad = true
         }
     }
 

@@ -43,7 +43,7 @@ struct PetsListView: View {
             VStack(spacing: 0) {
                 OfflineIndicator()
 
-                if viewModel.isLoading && viewModel.pets.isEmpty {
+                if !viewModel.hasCompletedInitialLoad {
                     ProgressView()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if viewModel.errorMessage != nil && viewModel.pets.isEmpty {
