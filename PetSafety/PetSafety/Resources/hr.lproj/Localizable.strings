@@ -1325,3 +1325,4 @@
 "dob_set_date" = "Postavi datum rođenja";
 "dob_approximate" = "Približan datum";
 "weight_helper" = "Težina u kg (npr. 4,5)";
+"order_more_pet_name_placeholder" = "Ime ljubimca";

@@ -1332,3 +1332,4 @@
 "dob_set_date" = "Imposta data di nascita";
 "dob_approximate" = "Data approssimativa";
 "weight_helper" = "Peso in kg (es. 4,5)";
+"order_more_pet_name_placeholder" = "Nome dell'animale";

@@ -1323,3 +1323,4 @@
 "dob_set_date" = "Angi fødselsdato";
 "dob_approximate" = "Omtrentlig dato";
 "weight_helper" = "Vekt i kg (f.eks. 4,5)";
+"order_more_pet_name_placeholder" = "Dyrets navn";

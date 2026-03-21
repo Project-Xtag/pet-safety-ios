@@ -1320,3 +1320,4 @@
 "dob_set_date" = "Nastavit datum narození";
 "dob_approximate" = "Přibližné datum";
 "weight_helper" = "Hmotnost v kg (např. 4,5)";
+"order_more_pet_name_placeholder" = "Jméno mazlíčka";

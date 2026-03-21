@@ -1321,3 +1321,4 @@
 "dob_set_date" = "Set date of birth";
 "dob_approximate" = "Approximate date";
 "weight_helper" = "Weight in kg (e.g. 4.5)";
+"order_more_pet_name_placeholder" = "Pet's name";

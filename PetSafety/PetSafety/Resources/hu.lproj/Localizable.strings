@@ -1319,3 +1319,4 @@
 "dob_set_date" = "Születési dátum megadása";
 "dob_approximate" = "Hozzávetőleges dátum";
 "weight_helper" = "Súly kg-ban (pl. 4,5)";
+"order_more_pet_name_placeholder" = "Kedvenc neve";

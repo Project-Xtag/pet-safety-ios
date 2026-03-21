@@ -1323,3 +1323,4 @@
 "dob_set_date" = "Ustaw datę urodzenia";
 "dob_approximate" = "Przybliżona data";
 "weight_helper" = "Waga w kg (np. 4,5)";
+"order_more_pet_name_placeholder" = "Imię zwierzęcia";
