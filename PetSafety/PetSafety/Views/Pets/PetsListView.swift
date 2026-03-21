@@ -6,7 +6,6 @@ struct PetsListView: View {
     @State private var showingAddPet = false
     @State private var showingMarkLostSheet = false
     @State private var showingMarkFoundSheet = false
-    @State private var showingOrderMoreTags = false
     @State private var showingPetSelection = false
     @State private var showingSuccessStories = false
     @State private var selectedPetForReplacement: Pet?
@@ -55,7 +54,7 @@ struct PetsListView: View {
                         icon: "pawprint.fill",
                         title: NSLocalizedString("empty_pets_title", comment: ""),
                         message: NSLocalizedString("empty_pets_message", comment: ""),
-                        actionTitle: NSLocalizedString("add_pet", comment: ""),
+                        actionTitle: NSLocalizedString("action_order_tags", comment: ""),
                         action: { showingAddPet = true }
                     )
                 } else {
@@ -81,7 +80,9 @@ struct PetsListView: View {
         .navigationBarHidden(true)
         .sheet(isPresented: $showingAddPet) {
             NavigationView {
-                PetFormView(mode: .create)
+                OrderMoreTagsView()
+                    .environmentObject(appState)
+                    .environmentObject(authViewModel)
             }
         }
         .sheet(isPresented: $showingMarkLostSheet) {
@@ -94,13 +95,6 @@ struct PetsListView: View {
             NavigationView {
                 QuickMarkFoundView(pets: missingPets)
                     .environmentObject(appState)
-            }
-        }
-        .sheet(isPresented: $showingOrderMoreTags) {
-            NavigationView {
-                OrderMoreTagsView()
-                    .environmentObject(appState)
-                    .environmentObject(authViewModel)
             }
         }
         .sheet(item: $selectedPetForReplacement) { pet in
@@ -226,7 +220,7 @@ struct PetsListView: View {
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
 
-            // 2x2 grid for quick actions
+            // Quick actions grid
             LazyVGrid(columns: [
                 GridItem(.flexible(), spacing: 12),
                 GridItem(.flexible(), spacing: 12)
@@ -249,13 +243,6 @@ struct PetsListView: View {
                             showingMarkLostSheet = true
                         }
                     }
-                )
-
-                QuickActionButton(
-                    icon: "cart.badge.plus",
-                    title: NSLocalizedString("action_order_tags", comment: ""),
-                    color: .tealAccent,
-                    action: { showingOrderMoreTags = true }
                 )
 
                 QuickActionButton(

@@ -16,6 +16,7 @@ struct TagActivationView: View {
     @State private var errorMessage: String?
     @State private var showCreatePet = false
     @State private var orderItems: [UnactivatedOrderItem] = []
+    @State private var petIdsBeforeCreate: Set<String> = []
 
     private let grayBackground = Color(UIColor.systemGray6)
 
@@ -52,6 +53,23 @@ struct TagActivationView: View {
                 }()
                 await petsTask
                 orderItems = await orderTask
+            }
+            .sheet(isPresented: $showCreatePet, onDismiss: handlePetCreated) {
+                NavigationView {
+                    PetFormView(mode: .create)
+                        .environmentObject(appState)
+                }
+            }
+        }
+    }
+
+    /// After PetFormView dismisses, refresh pets and auto-activate the tag for the newly created pet.
+    private func handlePetCreated() {
+        Task {
+            await petsViewModel.fetchPets()
+            if let newPet = petsViewModel.pets.first(where: { !petIdsBeforeCreate.contains($0.id) }) {
+                selectedPet = newPet
+                activateTag()
             }
         }
     }
@@ -128,12 +146,6 @@ struct TagActivationView: View {
             }
             .padding(.bottom, 40)
         }
-        .sheet(isPresented: $showCreatePet) {
-            NavigationView {
-                PetFormView(mode: .create)
-                    .environmentObject(appState)
-            }
-        }
     }
 
     // MARK: - No Pets View
@@ -172,13 +184,22 @@ struct TagActivationView: View {
             Spacer()
 
             Button {
+                petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
+                showCreatePet = true
+            } label: {
+                Text("create_pet_profile")
+                    .fontWeight(.semibold)
+            }
+            .buttonStyle(TagPrimaryButtonStyle())
+            .padding(.horizontal, 24)
+
+            Button {
                 onDismiss()
             } label: {
                 Text("close")
-                    .fontWeight(.semibold)
+                    .fontWeight(.medium)
+                    .foregroundColor(.secondary)
             }
-            .buttonStyle(TagSecondaryButtonStyle())
-            .padding(.horizontal, 24)
             .padding(.bottom, 40)
         }
     }
@@ -273,6 +294,7 @@ struct TagActivationView: View {
 
                             ForEach(unmatchedNames, id: \.self) { name in
                                 UnmatchedPetCard(petName: name, onCreateProfile: {
+                                    petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
                                     showCreatePet = true
                                 })
                             }

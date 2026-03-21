@@ -30,7 +30,7 @@ struct PetFormView: View {
     @State private var species = "Dog"
     @State private var breed = ""
     @State private var color = ""
-    @State private var dateOfBirth = Date()
+    @State private var ageText = ""
     @State private var microchipNumber = ""
     @State private var medicalInfo = ""
     @State private var behaviorNotes = ""
@@ -198,17 +198,11 @@ struct PetFormView: View {
                         .onChange(of: color) { _, new in if new.count > InputValidators.maxColor { color = String(new.prefix(InputValidators.maxColor)) } }
                 }
 
-                // Age display
-                if mode.isEdit, case .edit(let pet) = mode, let age = pet.age {
-                    HStack {
-                        Text("age")
-                            .frame(width: 80, alignment: .leading)
-                        Text(age)
-                            .foregroundColor(.primary)
-                        Spacer()
-                    }
-                } else if !mode.isEdit {
-                    DatePicker("date_of_birth", selection: $dateOfBirth, displayedComponents: .date)
+                HStack {
+                    Text("age")
+                        .frame(width: 80, alignment: .leading)
+                    TextField("age_optional", text: $ageText)
+                        .onChange(of: ageText) { _, new in if new.count > 50 { ageText = String(new.prefix(50)) } }
                 }
 
                 HStack {
@@ -398,10 +392,7 @@ struct PetFormView: View {
         species = pet.species.capitalized
         breed = pet.breed ?? ""
         color = pet.color ?? ""
-        if let dobString = pet.dateOfBirth,
-           let dob = ISO8601DateFormatter().date(from: dobString) {
-            dateOfBirth = dob
-        }
+        ageText = pet.age ?? ""
         microchipNumber = pet.microchipNumber ?? ""
         medicalInfo = pet.medicalInfo ?? ""
         behaviorNotes = pet.behaviorNotes ?? ""
@@ -459,7 +450,7 @@ struct PetFormView: View {
                         species: species,
                         breed: breed.isEmpty ? nil : breed,
                         color: color.isEmpty ? nil : color,
-                        age: nil, // Age will be calculated from date of birth by backend
+                        age: ageText.isEmpty ? nil : ageText,
                         weight: weightValue,
                         microchipNumber: microchipNumber.isEmpty ? nil : microchipNumber,
                         medicalNotes: medicalInfo.isEmpty ? nil : medicalInfo,
@@ -504,7 +495,7 @@ struct PetFormView: View {
                         species: nil,  // Locked after registration
                         breed: nil,    // Locked after registration
                         color: color.isEmpty ? nil : color,
-                        age: nil,  // Age is derived from date of birth, don't send it
+                        age: ageText.isEmpty ? nil : ageText,
                         weight: editWeightValue,
                         microchipNumber: microchipNumber.isEmpty ? nil : microchipNumber,
                         medicalNotes: medicalInfo.isEmpty ? nil : medicalInfo,
