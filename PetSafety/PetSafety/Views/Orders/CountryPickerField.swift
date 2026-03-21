@@ -13,8 +13,12 @@ struct CountryPickerField: View {
     }
 
     var body: some View {
+        let countries = SupportedCountries.sorted(priority: deviceCountry)
+
         Menu {
-            ForEach(SupportedCountries.sorted(priority: deviceCountry)) { country in
+            // SwiftUI Menu renders buttons bottom-to-top, so reverse the list
+            // to display the priority country at the visual top.
+            ForEach(countries.reversed()) { country in
                 Button(action: { selectedCode = country.code }) {
                     if country.code == selectedCode {
                         Label(country.localizedName, systemImage: "checkmark")
@@ -29,7 +33,7 @@ struct CountryPickerField: View {
                     .foregroundColor(.secondary)
                     .font(.system(size: 15))
 
-                Text(selectedCountry?.localizedName ?? String(localized: "select_country"))
+                Text(selectedCountry?.localizedName ?? String(localized: "address_select_country"))
                     .foregroundColor(selectedCountry != nil ? .primary : .secondary)
 
                 Spacer()
