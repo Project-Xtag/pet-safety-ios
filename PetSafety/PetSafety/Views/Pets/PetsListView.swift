@@ -8,6 +8,7 @@ struct PetsListView: View {
     @State private var showingMarkFoundSheet = false
     @State private var showingPetSelection = false
     @State private var showingSuccessStories = false
+    @State private var showingReferral = false
     @State private var selectedPetForReplacement: Pet?
     @State private var searchText = ""
     @State private var debouncedSearchText = ""
@@ -121,6 +122,11 @@ struct PetsListView: View {
             NavigationView {
                 SuccessStoriesTabView()
                     .environmentObject(authViewModel)
+            }
+        }
+        .sheet(isPresented: $showingReferral) {
+            NavigationView {
+                ReferralView()
             }
         }
         .task {
@@ -250,6 +256,13 @@ struct PetsListView: View {
                     title: NSLocalizedString("action_replace_tag", comment: ""),
                     color: .brandOrange,
                     action: { showOrderReplacementMenu() }
+                )
+
+                QuickActionButton(
+                    icon: "gift.fill",
+                    title: NSLocalizedString("profile_referral", comment: ""),
+                    color: .tealAccent,
+                    action: { showingReferral = true }
                 )
             }
             .padding(.horizontal, 24)
