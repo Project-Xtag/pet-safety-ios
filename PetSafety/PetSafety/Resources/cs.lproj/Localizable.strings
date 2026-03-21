@@ -1316,3 +1316,7 @@
 "billing_invoices" = "Faktury";
 "identity_will_lock_title" = "Jméno, druh a plemeno budou uzamčeny";
 "identity_will_lock_desc" = "Tato pole nelze po registraci změnit. Před uložením se ujistěte, že jsou správná.";
+"date_of_birth" = "Datum narození";
+"dob_set_date" = "Nastavit datum narození";
+"dob_approximate" = "Přibližné datum";
+"weight_helper" = "Hmotnost v kg (např. 4,5)";

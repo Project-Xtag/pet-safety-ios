@@ -1315,3 +1315,7 @@
 "billing_invoices" = "Számlák";
 "identity_will_lock_title" = "A név, faj és fajta zárolásra kerül";
 "identity_will_lock_desc" = "Ezek a mezők a regisztráció után nem módosíthatók. Kérjük, mentés előtt ellenőrizd, hogy helyesek.";
+"date_of_birth" = "Születési dátum";
+"dob_set_date" = "Születési dátum megadása";
+"dob_approximate" = "Hozzávetőleges dátum";
+"weight_helper" = "Súly kg-ban (pl. 4,5)";

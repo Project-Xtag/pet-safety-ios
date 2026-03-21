@@ -1316,3 +1316,7 @@
 "billing_invoices" = "Faturas";
 "identity_will_lock_title" = "Nome, espécie e raça serão bloqueados";
 "identity_will_lock_desc" = "Estes campos não podem ser alterados após o registo. Verifique se estão corretos antes de guardar.";
+"date_of_birth" = "Data de nascimento";
+"dob_set_date" = "Definir data de nascimento";
+"dob_approximate" = "Data aproximada";
+"weight_helper" = "Peso em kg (ex. 4,5)";

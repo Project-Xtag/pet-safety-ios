@@ -1316,3 +1316,7 @@
 "billing_invoices" = "Facturi";
 "identity_will_lock_title" = "Numele, specia și rasa vor fi blocate";
 "identity_will_lock_desc" = "Aceste câmpuri nu pot fi modificate după înregistrare. Asigurați-vă că sunt corecte înainte de salvare.";
+"date_of_birth" = "Data nașterii";
+"dob_set_date" = "Setați data nașterii";
+"dob_approximate" = "Dată aproximativă";
+"weight_helper" = "Greutate în kg (ex. 4,5)";

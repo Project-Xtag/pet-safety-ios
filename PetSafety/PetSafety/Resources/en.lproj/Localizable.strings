@@ -1317,3 +1317,7 @@
 "profile_contact_us" = "Contact Us";
 "identity_will_lock_title" = "Name, species, and breed will be locked";
 "identity_will_lock_desc" = "These fields cannot be changed after registration. Please make sure they are correct before saving.";
+"date_of_birth" = "Date of Birth";
+"dob_set_date" = "Set date of birth";
+"dob_approximate" = "Approximate date";
+"weight_helper" = "Weight in kg (e.g. 4.5)";

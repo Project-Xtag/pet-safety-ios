@@ -1316,3 +1316,7 @@
 "billing_invoices" = "Rechnungen";
 "identity_will_lock_title" = "Name, Art und Rasse werden gesperrt";
 "identity_will_lock_desc" = "Diese Felder können nach der Registrierung nicht geändert werden. Bitte überprüfen Sie sie vor dem Speichern.";
+"date_of_birth" = "Geburtsdatum";
+"dob_set_date" = "Geburtsdatum angeben";
+"dob_approximate" = "Ungefähres Datum";
+"weight_helper" = "Gewicht in kg (z.B. 4,5)";

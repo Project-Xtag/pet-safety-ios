@@ -1321,3 +1321,7 @@
 "billing_invoices" = "Računi";
 "identity_will_lock_title" = "Ime, vrsta i pasmina bit će zaključani";
 "identity_will_lock_desc" = "Ova polja se ne mogu mijenjati nakon registracije. Provjerite jesu li točna prije spremanja.";
+"date_of_birth" = "Datum rođenja";
+"dob_set_date" = "Postavi datum rođenja";
+"dob_approximate" = "Približan datum";
+"weight_helper" = "Težina u kg (npr. 4,5)";

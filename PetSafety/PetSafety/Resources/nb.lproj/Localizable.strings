@@ -1319,3 +1319,7 @@
 "billing_invoices" = "Fakturaer";
 "identity_will_lock_title" = "Navn, art og rase blir låst";
 "identity_will_lock_desc" = "Disse feltene kan ikke endres etter registrering. Sørg for at de er riktige før du lagrer.";
+"date_of_birth" = "Fødselsdato";
+"dob_set_date" = "Angi fødselsdato";
+"dob_approximate" = "Omtrentlig dato";
+"weight_helper" = "Vekt i kg (f.eks. 4,5)";

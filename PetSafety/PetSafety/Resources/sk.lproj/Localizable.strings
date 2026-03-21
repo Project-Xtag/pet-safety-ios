@@ -1316,3 +1316,7 @@
 "billing_invoices" = "Faktúry";
 "identity_will_lock_title" = "Meno, druh a plemeno budú uzamknuté";
 "identity_will_lock_desc" = "Tieto polia nie je možné po registrácii zmeniť. Uistite sa, že sú správne pred uložením.";
+"date_of_birth" = "Dátum narodenia";
+"dob_set_date" = "Nastaviť dátum narodenia";
+"dob_approximate" = "Približný dátum";
+"weight_helper" = "Hmotnosť v kg (napr. 4,5)";

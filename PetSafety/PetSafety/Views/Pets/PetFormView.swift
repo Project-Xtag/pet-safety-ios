@@ -30,7 +30,9 @@ struct PetFormView: View {
     @State private var species = "Dog"
     @State private var breed = ""
     @State private var color = ""
-    @State private var ageText = ""
+    @State private var dateOfBirth = Date()
+    @State private var hasDob = false
+    @State private var dobIsApproximate = false
     @State private var microchipNumber = ""
     @State private var medicalInfo = ""
     @State private var behaviorNotes = ""
@@ -196,11 +198,12 @@ struct PetFormView: View {
                         .onChange(of: color) { _, new in if new.count > InputValidators.maxColor { color = String(new.prefix(InputValidators.maxColor)) } }
                 }
 
-                HStack {
-                    Text("age")
-                        .frame(width: 80, alignment: .leading)
-                    TextField(String(localized: "age_optional"), text: $ageText)
-                        .onChange(of: ageText) { _, new in if new.count > 50 { ageText = String(new.prefix(50)) } }
+                Toggle(String(localized: "dob_set_date"), isOn: $hasDob)
+
+                if hasDob {
+                    DatePicker(String(localized: "date_of_birth"), selection: $dateOfBirth, in: ...Date(), displayedComponents: .date)
+
+                    Toggle(String(localized: "dob_approximate"), isOn: $dobIsApproximate)
                 }
 
                 HStack {
@@ -390,7 +393,16 @@ struct PetFormView: View {
         species = pet.species.capitalized
         breed = pet.breed ?? ""
         color = pet.color ?? ""
-        ageText = pet.age ?? ""
+        if let dobString = pet.dateOfBirth,
+           let dob = ISO8601DateFormatter().date(from: dobString) ?? {
+               let f = DateFormatter()
+               f.dateFormat = "yyyy-MM-dd"
+               return f.date(from: dobString)
+           }() {
+            dateOfBirth = dob
+            hasDob = true
+        }
+        dobIsApproximate = pet.dobIsApproximate ?? false
         microchipNumber = pet.microchipNumber ?? ""
         medicalInfo = pet.medicalInfo ?? ""
         behaviorNotes = pet.behaviorNotes ?? ""
@@ -443,12 +455,16 @@ struct PetFormView: View {
                     #endif
 
                     let weightValue = Double(weight)
+                    let dobString: String? = hasDob ? {
+                        let f = DateFormatter()
+                        f.dateFormat = "yyyy-MM-dd"
+                        return f.string(from: dateOfBirth)
+                    }() : nil
                     let request = CreatePetRequest(
                         name: name,
                         species: species,
                         breed: breed.isEmpty ? nil : breed,
                         color: color.isEmpty ? nil : color,
-                        age: ageText.isEmpty ? nil : ageText,
                         weight: weightValue,
                         microchipNumber: microchipNumber.isEmpty ? nil : microchipNumber,
                         medicalNotes: medicalInfo.isEmpty ? nil : medicalInfo,
@@ -457,7 +473,9 @@ struct PetFormView: View {
                         notes: behaviorNotes.isEmpty ? nil : behaviorNotes,
                         uniqueFeatures: uniqueFeatures.isEmpty ? nil : uniqueFeatures,
                         sex: sex == "Unknown" ? nil : sex.lowercased(),
-                        isNeutered: isNeutered
+                        isNeutered: isNeutered,
+                        dateOfBirth: dobString,
+                        dobIsApproximate: hasDob ? dobIsApproximate : nil
                     )
 
                     #if DEBUG
@@ -488,12 +506,16 @@ struct PetFormView: View {
 
                     // Send only editable fields — name, species, breed are locked after registration
                     let editWeightValue = Double(weight)
+                    let editDobString: String? = hasDob ? {
+                        let f = DateFormatter()
+                        f.dateFormat = "yyyy-MM-dd"
+                        return f.string(from: dateOfBirth)
+                    }() : nil
                     let request = UpdatePetRequest(
                         name: nil,     // Locked after registration
                         species: nil,  // Locked after registration
                         breed: nil,    // Locked after registration
                         color: color.isEmpty ? nil : color,
-                        age: ageText.isEmpty ? nil : ageText,
                         weight: editWeightValue,
                         microchipNumber: microchipNumber.isEmpty ? nil : microchipNumber,
                         medicalNotes: medicalInfo.isEmpty ? nil : medicalInfo,
@@ -503,7 +525,9 @@ struct PetFormView: View {
                         uniqueFeatures: uniqueFeatures.isEmpty ? nil : uniqueFeatures,
                         sex: sex == "Unknown" ? nil : sex.lowercased(),
                         isNeutered: isNeutered,
-                        isMissing: nil  // Not in form - use mark lost/found feature
+                        isMissing: nil,
+                        dateOfBirth: editDobString,
+                        dobIsApproximate: hasDob ? dobIsApproximate : nil
                     )
 
                     #if DEBUG

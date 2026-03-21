@@ -30,6 +30,7 @@ struct Pet: Codable, Identifiable, Hashable {
     let isNeutered: Bool?
     let qrCode: String?
     let dateOfBirth: String?
+    let dobIsApproximate: Bool?
 
     // Public profile fields (only present when scanning QR code)
     let ownerName: String?
@@ -89,6 +90,7 @@ struct Pet: Codable, Identifiable, Hashable {
         case isNeutered = "is_neutered"
         case qrCode = "qr_code"
         case dateOfBirth = "date_of_birth"
+        case dobIsApproximate = "dob_is_approximate"
         case ownerName = "owner_name"
         case ownerPhone = "owner_phone"
         case ownerSecondaryPhone = "owner_secondary_phone"
@@ -128,6 +130,7 @@ struct Pet: Codable, Identifiable, Hashable {
         isNeutered: Bool? = nil,
         qrCode: String? = nil,
         dateOfBirth: String? = nil,
+        dobIsApproximate: Bool? = nil,
         ownerName: String? = nil,
         ownerPhone: String? = nil,
         ownerSecondaryPhone: String? = nil,
@@ -164,6 +167,7 @@ struct Pet: Codable, Identifiable, Hashable {
         self.isNeutered = isNeutered
         self.qrCode = qrCode
         self.dateOfBirth = dateOfBirth
+        self.dobIsApproximate = dobIsApproximate
         self.ownerName = ownerName
         self.ownerPhone = ownerPhone
         self.ownerSecondaryPhone = ownerSecondaryPhone
@@ -216,6 +220,7 @@ struct Pet: Codable, Identifiable, Hashable {
         isNeutered = try container.decodeIfPresent(Bool.self, forKey: .isNeutered)
         qrCode = try container.decodeIfPresent(String.self, forKey: .qrCode)
         dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth)
+        dobIsApproximate = try container.decodeIfPresent(Bool.self, forKey: .dobIsApproximate)
         ownerName = try container.decodeIfPresent(String.self, forKey: .ownerName)
         ownerPhone = try container.decodeIfPresent(String.self, forKey: .ownerPhone)
         ownerSecondaryPhone = try container.decodeIfPresent(String.self, forKey: .ownerSecondaryPhone)
@@ -257,6 +262,7 @@ struct Pet: Codable, Identifiable, Hashable {
         try container.encodeIfPresent(isNeutered, forKey: .isNeutered)
         try container.encodeIfPresent(qrCode, forKey: .qrCode)
         try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
+        try container.encodeIfPresent(dobIsApproximate, forKey: .dobIsApproximate)
         try container.encodeIfPresent(ownerName, forKey: .ownerName)
         try container.encodeIfPresent(ownerPhone, forKey: .ownerPhone)
         try container.encodeIfPresent(ownerSecondaryPhone, forKey: .ownerSecondaryPhone)
@@ -275,7 +281,6 @@ struct CreatePetRequest: Codable {
     let species: String
     let breed: String?
     let color: String?
-    let age: String? // Backend accepts flexible age string
     let weight: Double?
     let microchipNumber: String?
     let medicalNotes: String?
@@ -285,15 +290,19 @@ struct CreatePetRequest: Codable {
     let uniqueFeatures: String?
     let sex: String?
     let isNeutered: Bool?
+    let dateOfBirth: String?
+    let dobIsApproximate: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case name, species, breed, color, weight, age
+        case name, species, breed, color, weight
         case microchipNumber = "microchip_number"
         case medicalNotes = "medical_notes"
         case allergies, medications, notes
         case uniqueFeatures = "unique_features"
         case sex
         case isNeutered = "is_neutered"
+        case dateOfBirth = "date_of_birth"
+        case dobIsApproximate = "dob_is_approximate"
     }
 }
 
@@ -302,7 +311,6 @@ struct UpdatePetRequest: Codable {
     let species: String?
     let breed: String?
     let color: String?
-    let age: String?
     let weight: Double?
     let microchipNumber: String?
     let medicalNotes: String?
@@ -313,9 +321,11 @@ struct UpdatePetRequest: Codable {
     let sex: String?
     let isNeutered: Bool?
     let isMissing: Bool?
+    let dateOfBirth: String?
+    let dobIsApproximate: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case name, species, breed, color, weight, age
+        case name, species, breed, color, weight
         case microchipNumber = "microchip_number"
         case medicalNotes = "medical_notes"
         case allergies, medications, notes
@@ -323,5 +333,7 @@ struct UpdatePetRequest: Codable {
         case sex
         case isNeutered = "is_neutered"
         case isMissing = "is_missing"
+        case dateOfBirth = "date_of_birth"
+        case dobIsApproximate = "dob_is_approximate"
     }
 }
