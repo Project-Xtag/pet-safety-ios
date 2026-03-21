@@ -72,6 +72,14 @@ struct AlertRowView: View {
         }
     }
 
+    var localizedStatus: String {
+        switch alert.status {
+        case "active": return String(localized: "alert_status_missing")
+        case "found": return String(localized: "alert_status_found")
+        default: return alert.status.capitalized
+        }
+    }
+
     var body: some View {
         HStack(spacing: 16) {
             // Pet Photo or Icon
@@ -101,7 +109,7 @@ struct AlertRowView: View {
                         .fill(statusColor)
                         .frame(width: 8, height: 8)
 
-                    Text(alert.status.capitalized)
+                    Text(localizedStatus)
                         .font(.subheadline)
                         .foregroundColor(statusColor)
                 }

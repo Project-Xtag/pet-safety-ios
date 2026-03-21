@@ -113,7 +113,7 @@ struct AlertDetailView: View {
                         .fill(alert.status == "active" ? Color.red : Color.tealAccent)
                         .frame(width: 12, height: 12)
 
-                    Text(alert.status.capitalized)
+                    Text(alert.status == "active" ? String(localized: "alert_status_missing") : String(localized: "alert_status_found"))
                         .font(.headline)
 
                     Spacer()
