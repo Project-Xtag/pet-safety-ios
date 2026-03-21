@@ -1168,26 +1168,80 @@ struct CreateReplacementOrderRequest: Codable {
     let postapointDetails: PostaPointDetails?
 }
 
-struct ReplacementOrderResponse: Codable {
+struct ReplacementOrderResponse: Decodable {
     let order: Order
     let requiresPayment: Bool?
     let shippingCost: Double?
     let checkoutUrl: String?
     let message: String?
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        order = try container.decode(Order.self, forKey: .order)
+        requiresPayment = try container.decodeIfPresent(Bool.self, forKey: .requiresPayment)
+        if let d = try? container.decodeIfPresent(Double.self, forKey: .shippingCost) {
+            shippingCost = d
+        } else if let s = try? container.decodeIfPresent(String.self, forKey: .shippingCost), let d = Double(s) {
+            shippingCost = d
+        } else {
+            shippingCost = nil
+        }
+        checkoutUrl = try container.decodeIfPresent(String.self, forKey: .checkoutUrl)
+        message = try container.decodeIfPresent(String.self, forKey: .message)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case order, requiresPayment, shippingCost, checkoutUrl, message
+    }
 }
 
-struct ReplacementEligibilityResponse: Codable {
+struct ReplacementEligibilityResponse: Decodable {
     let isFreeReplacement: Bool
     let planName: String
     let shippingCost: Double
     let message: String
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        isFreeReplacement = try container.decode(Bool.self, forKey: .isFreeReplacement)
+        planName = try container.decode(String.self, forKey: .planName)
+        if let d = try? container.decode(Double.self, forKey: .shippingCost) {
+            shippingCost = d
+        } else if let s = try? container.decode(String.self, forKey: .shippingCost), let d = Double(s) {
+            shippingCost = d
+        } else {
+            shippingCost = 0
+        }
+        message = try container.decode(String.self, forKey: .message)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case isFreeReplacement, planName, shippingCost, message
+    }
 }
 
 // MARK: - Shipping Prices Types
-struct ShippingPriceInfo: Codable {
+struct ShippingPriceInfo: Decodable {
     let amount: Double
     let currency: String
     let label: String
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let d = try? container.decode(Double.self, forKey: .amount) {
+            amount = d
+        } else if let s = try? container.decode(String.self, forKey: .amount), let d = Double(s) {
+            amount = d
+        } else {
+            amount = 0
+        }
+        currency = try container.decode(String.self, forKey: .currency)
+        label = try container.decodeIfPresent(String.self, forKey: .label) ?? ""
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case amount, currency, label
+    }
 
     /// Format the price in a locale-aware way: HUF → "1 490 Ft", EUR → "€4.99"
     var formattedPrice: String {

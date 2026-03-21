@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - Subscription Plan
-struct SubscriptionPlan: Codable, Identifiable {
+struct SubscriptionPlan: Decodable, Identifiable {
     let id: String
     let name: String
     let displayName: String
@@ -13,15 +13,36 @@ struct SubscriptionPlan: Codable, Identifiable {
     let isPopular: Bool?
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case name
+        case id, name, description, currency, features
         case displayName = "display_name"
-        case description
         case priceMonthly = "price_monthly"
         case priceYearly = "price_yearly"
-        case currency
-        case features
         case isPopular = "is_popular"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        displayName = try container.decodeIfPresent(String.self, forKey: .displayName) ?? ""
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        if let d = try? container.decode(Double.self, forKey: .priceMonthly) {
+            priceMonthly = d
+        } else if let s = try? container.decode(String.self, forKey: .priceMonthly), let d = Double(s) {
+            priceMonthly = d
+        } else {
+            priceMonthly = 0
+        }
+        if let d = try? container.decode(Double.self, forKey: .priceYearly) {
+            priceYearly = d
+        } else if let s = try? container.decode(String.self, forKey: .priceYearly), let d = Double(s) {
+            priceYearly = d
+        } else {
+            priceYearly = 0
+        }
+        currency = try container.decode(String.self, forKey: .currency)
+        features = try container.decode(PlanFeatures.self, forKey: .features)
+        isPopular = try container.decodeIfPresent(Bool.self, forKey: .isPopular)
     }
 
     private func currencySymbol(for code: String) -> String {
@@ -60,7 +81,7 @@ struct SubscriptionPlan: Codable, Identifiable {
     }
 }
 
-struct PlanFeatures: Codable {
+struct PlanFeatures: Decodable {
     let maxPets: Int?
     let maxPhotosPerPet: Int?
     let maxEmergencyContacts: Int?
@@ -79,6 +100,36 @@ struct PlanFeatures: Codable {
         case communityAlerts = "community_alerts"
         case freeTagReplacement = "free_tag_replacement"
         case prioritySupport = "priority_support"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let i = try? container.decodeIfPresent(Int.self, forKey: .maxPets) {
+            maxPets = i
+        } else if let s = try? container.decodeIfPresent(String.self, forKey: .maxPets), let i = Int(s) {
+            maxPets = i
+        } else {
+            maxPets = nil
+        }
+        if let i = try? container.decodeIfPresent(Int.self, forKey: .maxPhotosPerPet) {
+            maxPhotosPerPet = i
+        } else if let s = try? container.decodeIfPresent(String.self, forKey: .maxPhotosPerPet), let i = Int(s) {
+            maxPhotosPerPet = i
+        } else {
+            maxPhotosPerPet = nil
+        }
+        if let i = try? container.decodeIfPresent(Int.self, forKey: .maxEmergencyContacts) {
+            maxEmergencyContacts = i
+        } else if let s = try? container.decodeIfPresent(String.self, forKey: .maxEmergencyContacts), let i = Int(s) {
+            maxEmergencyContacts = i
+        } else {
+            maxEmergencyContacts = nil
+        }
+        smsNotifications = try container.decodeIfPresent(Bool.self, forKey: .smsNotifications)
+        vetAlerts = try container.decodeIfPresent(Bool.self, forKey: .vetAlerts)
+        communityAlerts = try container.decodeIfPresent(Bool.self, forKey: .communityAlerts)
+        freeTagReplacement = try container.decodeIfPresent(Bool.self, forKey: .freeTagReplacement)
+        prioritySupport = try container.decodeIfPresent(Bool.self, forKey: .prioritySupport)
     }
 
     var maxPetsDisplay: String {
@@ -220,7 +271,7 @@ enum SubscriptionStatus: String, Codable {
 }
 
 // MARK: - Subscription Features
-struct SubscriptionFeatures: Codable {
+struct SubscriptionFeatures: Decodable {
     let planName: String?
     let canCreateAlerts: Bool?
     let canReceiveVetAlerts: Bool?
@@ -252,7 +303,7 @@ struct SubscriptionFeatures: Codable {
 }
 
 // MARK: - API Response Types
-struct SubscriptionPlansResponse: Codable {
+struct SubscriptionPlansResponse: Decodable {
     let plans: [SubscriptionPlan]
 }
 
@@ -290,7 +341,7 @@ struct PortalSessionResponse: Codable {
     let url: String
 }
 
-struct InvoiceItem: Codable, Identifiable {
+struct InvoiceItem: Decodable, Identifiable {
     let id: String
     let number: String?
     let status: String?
@@ -299,9 +350,41 @@ struct InvoiceItem: Codable, Identifiable {
     let date: Int
     let pdfUrl: String?
     let hostedUrl: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, number, status, amount, currency, date
+        case pdfUrl = "pdf_url"
+        case hostedUrl = "hosted_url"
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        number = try container.decodeIfPresent(String.self, forKey: .number)
+        status = try container.decodeIfPresent(String.self, forKey: .status)
+        if let i = try? container.decode(Int.self, forKey: .amount) {
+            amount = i
+        } else if let s = try? container.decode(String.self, forKey: .amount), let i = Int(s) {
+            amount = i
+        } else if let d = try? container.decode(Double.self, forKey: .amount) {
+            amount = Int(d)
+        } else {
+            amount = 0
+        }
+        currency = try container.decodeIfPresent(String.self, forKey: .currency) ?? "EUR"
+        if let i = try? container.decode(Int.self, forKey: .date) {
+            date = i
+        } else if let s = try? container.decode(String.self, forKey: .date), let i = Int(s) {
+            date = i
+        } else {
+            date = 0
+        }
+        pdfUrl = try container.decodeIfPresent(String.self, forKey: .pdfUrl)
+        hostedUrl = try container.decodeIfPresent(String.self, forKey: .hostedUrl)
+    }
 }
 
-struct InvoicesResponse: Codable {
+struct InvoicesResponse: Decodable {
     let invoices: [InvoiceItem]
 }
 

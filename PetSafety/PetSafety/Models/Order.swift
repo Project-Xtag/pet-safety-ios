@@ -1,6 +1,6 @@
 import Foundation
 
-struct Order: Codable, Identifiable {
+struct Order: Decodable, Identifiable {
     let id: String
     let userId: String?
     let petName: String
