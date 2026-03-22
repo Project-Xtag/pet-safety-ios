@@ -1,6 +1,12 @@
 import SwiftUI
 import UIKit
 
+/// Wrapper to pass pet name into sheet via .sheet(item:)
+private struct CreatePetContext: Identifiable {
+    let id = UUID()
+    let petName: String?
+}
+
 /// View for activating a QR tag and linking it to a pet.
 /// Supports multi-tag orders: after activating one tag, prompts to set up remaining tags.
 struct TagActivationView: View {
@@ -15,10 +21,9 @@ struct TagActivationView: View {
     @State private var isActivating = false
     @State private var activationSuccess = false
     @State private var errorMessage: String?
-    @State private var showCreatePet = false
+    @State private var createPetContext: CreatePetContext?
     @State private var orderItems: [UnactivatedOrderItem] = []
     @State private var petIdsBeforeCreate: Set<String> = []
-    @State private var selectedOrderPetName: String?
     @State private var currentTagCode: String
 
     private let grayBackground = Color(UIColor.systemGray6)
@@ -63,9 +68,9 @@ struct TagActivationView: View {
                 await petsTask
                 orderItems = await orderTask
             }
-            .sheet(isPresented: $showCreatePet, onDismiss: handlePetCreated) {
+            .sheet(item: $createPetContext, onDismiss: handlePetCreated) { context in
                 NavigationView {
-                    PetFormView(mode: .create, initialPetName: selectedOrderPetName)
+                    PetFormView(mode: .create, initialPetName: context.petName)
                         .environmentObject(appState)
                 }
             }
@@ -251,9 +256,8 @@ struct TagActivationView: View {
                 let uniqueNames = Array(Set(orderItems.compactMap { $0.petName })).sorted()
                 ForEach(uniqueNames, id: \.self) { petName in
                     Button {
-                        selectedOrderPetName = petName
                         petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
-                        showCreatePet = true
+                        createPetContext = CreatePetContext(petName: petName)
                     } label: {
                         HStack {
                             Image(systemName: "pawprint.fill")
@@ -289,7 +293,7 @@ struct TagActivationView: View {
 
                 Button {
                     petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
-                    showCreatePet = true
+                    createPetContext = CreatePetContext(petName: nil)
                 } label: {
                     Text("create_pet_profile")
                         .fontWeight(.semibold)
@@ -387,9 +391,8 @@ struct TagActivationView: View {
 
                             ForEach(unmatchedNames, id: \.self) { name in
                                 UnmatchedPetCard(petName: name, onCreateProfile: {
-                                    selectedOrderPetName = name
                                     petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
-                                    showCreatePet = true
+                                    createPetContext = CreatePetContext(petName: name)
                                 })
                             }
                         }
@@ -495,7 +498,6 @@ struct TagActivationView: View {
         // Reset state for the next tag
         currentTagCode = item.qrCode ?? tagCode
         selectedPet = nil
-        selectedOrderPetName = item.petName
         errorMessage = nil
         activationSuccess = false
 
