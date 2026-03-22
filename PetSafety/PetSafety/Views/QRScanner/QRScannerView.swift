@@ -18,7 +18,9 @@ struct QRScannerView: View {
                         UINotificationFeedbackGenerator().notificationOccurred(.success)
                         Task {
                             await viewModel.scanQRCode(code)
-                            showingScannedPet = true
+                            if viewModel.scanResult != nil {
+                                showingScannedPet = true
+                            }
                         }
                     }
                 )

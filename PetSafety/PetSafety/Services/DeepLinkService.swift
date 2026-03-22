@@ -106,8 +106,9 @@ class DeepLinkService: ObservableObject {
             pathComponents.removeFirst()
         }
 
-        // https://senra.pet/qr/{code} or https://senra.pet/{country}/qr/{code}
-        if pathComponents.count >= 2 && pathComponents[0] == "qr" {
+        // https://senra.pet/qr/{code}, https://senra.pet/t/{code}, or with country prefix
+        let firstLower = pathComponents.first?.lowercased() ?? ""
+        if pathComponents.count >= 2 && (firstLower == "qr" || firstLower == "t") {
             let code = pathComponents[1]
             handleTagScanned(code: code)
             return true
@@ -178,14 +179,15 @@ class DeepLinkService: ObservableObject {
 
         // Check if it's a URL
         if let url = URL(string: trimmed) {
-            // https://senra.pet/qr/{code} or https://senra.pet/{country}/qr/{code}
+            // https://senra.pet/qr/{code}, https://senra.pet/t/{code}, or with country prefix
             if url.scheme == "https" && (url.host == "senra.pet" || url.host == "www.senra.pet") {
                 var pathComponents = url.pathComponents.filter { $0 != "/" }
                 // Strip country prefix
                 if let first = pathComponents.first, WebURLHelper.validCountryCodes.contains(first) {
                     pathComponents.removeFirst()
                 }
-                if pathComponents.count >= 2 && pathComponents[0] == "qr" {
+                let firstLower = pathComponents.first?.lowercased() ?? ""
+                if pathComponents.count >= 2 && (firstLower == "qr" || firstLower == "t") {
                     return pathComponents[1]
                 }
             }
