@@ -1325,3 +1325,29 @@
 "weight_helper" = "Poids en kg (ex. 4,5)";
 "order_more_pet_name_placeholder" = "Nom de l'animal";
 "order_more_subtitle" = "Commandez des médailles pour vos animaux — médailles gratuites, frais de port uniquement";
+
+// MARK: - Welcome Screen
+"welcome_to_senra" = "Bienvenue sur Senra !";
+"welcome_subtitle" = "La sécurité de votre animal commence ici. Configurez votre premier badge.";
+"welcome_step_1" = "Scannez le code QR sur votre badge";
+"welcome_step_2" = "Créez le profil de votre animal";
+"welcome_step_3" = "Votre animal est protégé !";
+"welcome_scan_first_tag" = "Scanner le premier badge";
+"welcome_explore_account" = "Explorer votre compte";
+
+// MARK: - Tag Activation Flow
+"setup_your_tags" = "Configurer vos badges";
+"setup_your_tags_subtitle" = "Vous avez commandé des badges pour ces animaux :";
+"ready_to_setup" = "Prêt à configurer";
+"already_activated" = "Déjà activé";
+"setting_up_tag_for %@" = "Configuration du badge pour %@";
+"tag_activated_for %@" = "Badge activé pour %@ !";
+"pet_now_protected" = "Votre animal est maintenant protégé avec Senra";
+"more_tags_to_setup" = "Vous avez encore des badges à configurer";
+"setup_pet_tag %@" = "Configurer le badge de %@";
+"whats_next" = "Et ensuite ?";
+"choose_subscription_plan" = "Choisissez votre abonnement";
+"register_your_vet" = "Enregistrez votre vétérinaire";
+"update_contact_details" = "Mettez à jour vos coordonnées et confidentialité";
+"go_to_home" = "Retour à l'accueil";
+"thank_you_senra" = "Merci d'utiliser Senra !";

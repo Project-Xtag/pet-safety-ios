@@ -22,6 +22,7 @@ enum PetFormMode {
 
 struct PetFormView: View {
     let mode: PetFormMode
+    var initialPetName: String? = nil
     @StateObject private var viewModel = PetsViewModel()
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
@@ -60,6 +61,19 @@ struct PetFormView: View {
 
     var body: some View {
         Form {
+            // Tag activation context banner
+            if let tagPetName = initialPetName, !tagPetName.isEmpty {
+                Section {
+                    HStack(spacing: 10) {
+                        Image(systemName: "tag.fill")
+                            .foregroundColor(Color("BrandColor"))
+                        Text("setting_up_tag_for \(tagPetName)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+
             // Profile completion warning
             if mode.isEdit, let pet = existingPet, pet.qrCode != nil,
                pet.color == nil && pet.weight == nil {
@@ -383,6 +397,8 @@ struct PetFormView: View {
         .onAppear {
             if case .edit(let pet) = mode {
                 populateFields(with: pet)
+            } else if case .create = mode, let prefill = initialPetName, !prefill.isEmpty, name.isEmpty {
+                name = prefill
             }
         }
     }

@@ -1321,3 +1321,29 @@
 "weight_helper" = "Súly kg-ban (pl. 4,5)";
 "order_more_pet_name_placeholder" = "Kedvenced neve";
 "order_more_subtitle" = "Rendelj bilétát kedvenceidnek — a biléta ingyenes, csak a szállítást kell fizetni";
+
+// MARK: - Welcome Screen
+"welcome_to_senra" = "Üdvözlünk a Senrában!";
+"welcome_subtitle" = "Kedvenced biztonsága itt kezdődik. Állítsd be az első címkédet.";
+"welcome_step_1" = "Olvasd be a QR-kódot a címkédről";
+"welcome_step_2" = "Hozd létre kedvenced profilját";
+"welcome_step_3" = "Kedvenced védelem alatt áll!";
+"welcome_scan_first_tag" = "Első címke beolvasása";
+"welcome_explore_account" = "Fiók felfedezése";
+
+// MARK: - Tag Activation Flow
+"setup_your_tags" = "Címkék beállítása";
+"setup_your_tags_subtitle" = "Ezekhez az állatokhoz rendeltél címkét:";
+"ready_to_setup" = "Beállításra kész";
+"already_activated" = "Már aktiválva";
+"setting_up_tag_for %@" = "Címke beállítása: %@";
+"tag_activated_for %@" = "%@ címkéje aktiválva!";
+"pet_now_protected" = "Kedvenced mostantól Senra védelme alatt áll";
+"more_tags_to_setup" = "Még vannak beállítandó címkéid";
+"setup_pet_tag %@" = "%@ címkéjének beállítása";
+"whats_next" = "Mi a következő lépés?";
+"choose_subscription_plan" = "Válassz előfizetési csomagot";
+"register_your_vet" = "Regisztráld az állatorvosodat";
+"update_contact_details" = "Frissítsd az elérhetőségeidet és adatvédelmi beállításaidat";
+"go_to_home" = "Főoldal";
+"thank_you_senra" = "Köszönjük, hogy a Senrát választottad!";

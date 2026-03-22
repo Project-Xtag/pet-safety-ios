@@ -1322,3 +1322,29 @@
 "weight_helper" = "Gewicht in kg (z.B. 4,5)";
 "order_more_pet_name_placeholder" = "Name des Haustiers";
 "order_more_subtitle" = "Bestellen Sie Marken für Ihre Haustiere — kostenlose Marken, nur Versand";
+
+// MARK: - Welcome Screen
+"welcome_to_senra" = "Willkommen bei Senra!";
+"welcome_subtitle" = "Die Sicherheit deines Haustiers beginnt hier. Richte dein erstes Tag ein.";
+"welcome_step_1" = "Scanne den QR-Code auf deinem Tag";
+"welcome_step_2" = "Erstelle das Profil deines Haustiers";
+"welcome_step_3" = "Dein Haustier ist geschützt!";
+"welcome_scan_first_tag" = "Erstes Tag scannen";
+"welcome_explore_account" = "Konto erkunden";
+
+// MARK: - Tag Activation Flow
+"setup_your_tags" = "Tags einrichten";
+"setup_your_tags_subtitle" = "Du hast Tags für diese Haustiere bestellt:";
+"ready_to_setup" = "Bereit zur Einrichtung";
+"already_activated" = "Bereits aktiviert";
+"setting_up_tag_for %@" = "Tag einrichten für %@";
+"tag_activated_for %@" = "Tag für %@ aktiviert!";
+"pet_now_protected" = "Dein Haustier ist jetzt mit Senra geschützt";
+"more_tags_to_setup" = "Du hast noch Tags einzurichten";
+"setup_pet_tag %@" = "Tag für %@ einrichten";
+"whats_next" = "Was kommt als Nächstes?";
+"choose_subscription_plan" = "Wähle deinen Abo-Plan";
+"register_your_vet" = "Registriere deinen Tierarzt";
+"update_contact_details" = "Kontaktdaten und Datenschutz aktualisieren";
+"go_to_home" = "Zur Startseite";
+"thank_you_senra" = "Danke, dass du Senra nutzt!";

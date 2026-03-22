@@ -1327,3 +1327,29 @@
 "weight_helper" = "Težina u kg (npr. 4,5)";
 "order_more_pet_name_placeholder" = "Ime ljubimca";
 "order_more_subtitle" = "Naručite pločice za ljubimce — pločice besplatno, plaćate samo dostavu";
+
+// MARK: - Welcome Screen
+"welcome_to_senra" = "Dobrodošli u Senru!";
+"welcome_subtitle" = "Sigurnost vašeg ljubimca počinje ovdje. Postavite svoju prvu oznaku.";
+"welcome_step_1" = "Skenirajte QR kod na oznaci";
+"welcome_step_2" = "Stvorite profil svog ljubimca";
+"welcome_step_3" = "Vaš ljubimac je zaštićen!";
+"welcome_scan_first_tag" = "Skeniraj prvu oznaku";
+"welcome_explore_account" = "Istraži svoj račun";
+
+// MARK: - Tag Activation Flow
+"setup_your_tags" = "Postavi oznake";
+"setup_your_tags_subtitle" = "Naručili ste oznake za ove ljubimce:";
+"ready_to_setup" = "Spremno za postavljanje";
+"already_activated" = "Već aktivirano";
+"setting_up_tag_for %@" = "Postavljanje oznake za %@";
+"tag_activated_for %@" = "Oznaka aktivirana za %@!";
+"pet_now_protected" = "Vaš ljubimac je sada zaštićen sa Senrom";
+"more_tags_to_setup" = "Još imate oznaka za postavljanje";
+"setup_pet_tag %@" = "Postavi oznaku za %@";
+"whats_next" = "Što slijedi?";
+"choose_subscription_plan" = "Odaberite plan pretplate";
+"register_your_vet" = "Registrirajte svog veterinara";
+"update_contact_details" = "Ažurirajte kontakt podatke i privatnost";
+"go_to_home" = "Na početnu";
+"thank_you_senra" = "Hvala što koristite Senru!";

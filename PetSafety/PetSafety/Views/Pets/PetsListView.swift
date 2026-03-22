@@ -2,6 +2,9 @@ import SwiftUI
 import UIKit
 
 struct PetsListView: View {
+    var onScanTag: (() -> Void)?
+    var onExploreAccount: (() -> Void)?
+
     @StateObject private var viewModel = PetsViewModel()
     @State private var showingAddPet = false
     @State private var showingMarkLostSheet = false
@@ -51,12 +54,9 @@ struct PetsListView: View {
                         Task { await viewModel.fetchPets() }
                     }
                 } else if viewModel.pets.isEmpty {
-                    EmptyStateView(
-                        icon: "pawprint.fill",
-                        title: NSLocalizedString("empty_pets_title", comment: ""),
-                        message: NSLocalizedString("empty_pets_message", comment: ""),
-                        actionTitle: NSLocalizedString("action_order_tags", comment: ""),
-                        action: { showingAddPet = true }
+                    WelcomeView(
+                        onScanTag: { onScanTag?() },
+                        onExploreAccount: { onExploreAccount?() }
                     )
                 } else {
                     ScrollView {

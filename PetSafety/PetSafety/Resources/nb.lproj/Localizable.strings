@@ -1325,3 +1325,29 @@
 "weight_helper" = "Vekt i kg (f.eks. 4,5)";
 "order_more_pet_name_placeholder" = "Dyrets navn";
 "order_more_subtitle" = "Bestill merker for dyrene dine — gratis merker, betal kun for frakt";
+
+// MARK: - Welcome Screen
+"welcome_to_senra" = "Velkommen til Senra!";
+"welcome_subtitle" = "Sikkerheten til kjæledyret ditt starter her. Sett opp din første brikke.";
+"welcome_step_1" = "Skann QR-koden på brikken din";
+"welcome_step_2" = "Opprett profilen til kjæledyret ditt";
+"welcome_step_3" = "Kjæledyret ditt er beskyttet!";
+"welcome_scan_first_tag" = "Skann din første brikke";
+"welcome_explore_account" = "Utforsk kontoen din";
+
+// MARK: - Tag Activation Flow
+"setup_your_tags" = "Sett opp brikkene dine";
+"setup_your_tags_subtitle" = "Du bestilte brikker for disse kjæledyrene:";
+"ready_to_setup" = "Klar til oppsett";
+"already_activated" = "Allerede aktivert";
+"setting_up_tag_for %@" = "Setter opp brikke for %@";
+"tag_activated_for %@" = "Brikke aktivert for %@!";
+"pet_now_protected" = "Kjæledyret ditt er nå beskyttet med Senra";
+"more_tags_to_setup" = "Du har fortsatt brikker å sette opp";
+"setup_pet_tag %@" = "Sett opp brikken til %@";
+"whats_next" = "Hva er neste steg?";
+"choose_subscription_plan" = "Velg abonnementsplan";
+"register_your_vet" = "Registrer veterinæren din";
+"update_contact_details" = "Oppdater kontaktinfo og personvern";
+"go_to_home" = "Gå til hjem";
+"thank_you_senra" = "Takk for at du bruker Senra!";

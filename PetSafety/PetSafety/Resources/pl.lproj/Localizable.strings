@@ -1325,3 +1325,29 @@
 "weight_helper" = "Waga w kg (np. 4,5)";
 "order_more_pet_name_placeholder" = "Imię zwierzęcia";
 "order_more_subtitle" = "Zamów identyfikatory dla swoich zwierząt — identyfikatory za darmo, płacisz tylko za wysyłkę";
+
+// MARK: - Welcome Screen
+"welcome_to_senra" = "Witaj w Senra!";
+"welcome_subtitle" = "Bezpieczeństwo Twojego zwierzaka zaczyna się tutaj. Skonfiguruj swoją pierwszą plakietkę.";
+"welcome_step_1" = "Zeskanuj kod QR na plakietce";
+"welcome_step_2" = "Utwórz profil swojego zwierzaka";
+"welcome_step_3" = "Twój zwierzak jest chroniony!";
+"welcome_scan_first_tag" = "Skanuj pierwszą plakietkę";
+"welcome_explore_account" = "Przeglądaj swoje konto";
+
+// MARK: - Tag Activation Flow
+"setup_your_tags" = "Skonfiguruj plakietki";
+"setup_your_tags_subtitle" = "Zamówiłeś plakietki dla tych zwierząt:";
+"ready_to_setup" = "Gotowe do konfiguracji";
+"already_activated" = "Już aktywowana";
+"setting_up_tag_for %@" = "Konfiguracja plakietki dla %@";
+"tag_activated_for %@" = "Plakietka aktywowana dla %@!";
+"pet_now_protected" = "Twój zwierzak jest teraz chroniony przez Senra";
+"more_tags_to_setup" = "Masz jeszcze plakietki do skonfigurowania";
+"setup_pet_tag %@" = "Skonfiguruj plakietkę %@";
+"whats_next" = "Co dalej?";
+"choose_subscription_plan" = "Wybierz plan subskrypcji";
+"register_your_vet" = "Zarejestruj swojego weterynarza";
+"update_contact_details" = "Zaktualizuj dane kontaktowe i prywatność";
+"go_to_home" = "Przejdź na stronę główną";
+"thank_you_senra" = "Dziękujemy za korzystanie z Senra!";

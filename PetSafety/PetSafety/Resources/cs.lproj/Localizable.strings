@@ -1322,3 +1322,29 @@
 "weight_helper" = "Hmotnost v kg (např. 4,5)";
 "order_more_pet_name_placeholder" = "Jméno mazlíčka";
 "order_more_subtitle" = "Objednejte štítky pro mazlíčky — štítky zdarma, platíte jen poštovné";
+
+// MARK: - Welcome Screen
+"welcome_to_senra" = "Vítejte v Senra!";
+"welcome_subtitle" = "Bezpečnost vašeho mazlíčka začíná zde. Nastavte si první štítek.";
+"welcome_step_1" = "Naskenujte QR kód na štítku";
+"welcome_step_2" = "Vytvořte profil svého mazlíčka";
+"welcome_step_3" = "Váš mazlíček je chráněn!";
+"welcome_scan_first_tag" = "Naskenovat první štítek";
+"welcome_explore_account" = "Prozkoumat účet";
+
+// MARK: - Tag Activation Flow
+"setup_your_tags" = "Nastavení štítků";
+"setup_your_tags_subtitle" = "Objednali jste štítky pro tato zvířata:";
+"ready_to_setup" = "Připraveno k nastavení";
+"already_activated" = "Již aktivováno";
+"setting_up_tag_for %@" = "Nastavení štítku pro %@";
+"tag_activated_for %@" = "Štítek pro %@ aktivován!";
+"pet_now_protected" = "Váš mazlíček je nyní chráněn se Senra";
+"more_tags_to_setup" = "Ještě máte štítky k nastavení";
+"setup_pet_tag %@" = "Nastavit štítek pro %@";
+"whats_next" = "Co dál?";
+"choose_subscription_plan" = "Vyberte si předplatné";
+"register_your_vet" = "Zaregistrujte svého veterináře";
+"update_contact_details" = "Aktualizujte kontaktní údaje a soukromí";
+"go_to_home" = "Na úvodní stránku";
+"thank_you_senra" = "Děkujeme, že používáte Senra!";

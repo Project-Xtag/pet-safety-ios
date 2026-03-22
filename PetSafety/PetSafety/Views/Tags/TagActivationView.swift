@@ -1,7 +1,8 @@
 import SwiftUI
 import UIKit
 
-/// View for activating a QR tag and linking it to a pet
+/// View for activating a QR tag and linking it to a pet.
+/// Supports multi-tag orders: after activating one tag, prompts to set up remaining tags.
 struct TagActivationView: View {
     let tagCode: String
     let onDismiss: () -> Void
@@ -17,8 +18,16 @@ struct TagActivationView: View {
     @State private var showCreatePet = false
     @State private var orderItems: [UnactivatedOrderItem] = []
     @State private var petIdsBeforeCreate: Set<String> = []
+    @State private var selectedOrderPetName: String?
+    @State private var currentTagCode: String
 
     private let grayBackground = Color(UIColor.systemGray6)
+
+    init(tagCode: String, onDismiss: @escaping () -> Void) {
+        self.tagCode = tagCode
+        self.onDismiss = onDismiss
+        self._currentTagCode = State(initialValue: tagCode)
+    }
 
     var body: some View {
         NavigationView {
@@ -33,7 +42,7 @@ struct TagActivationView: View {
                     petSelectionView
                 }
             }
-            .navigationTitle(Text("tag_activate_title"))
+            .navigationTitle(Text(activationSuccess ? "tag_activated" : "setup_your_tags"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -46,7 +55,7 @@ struct TagActivationView: View {
                 async let petsTask: () = petsViewModel.fetchPets()
                 async let orderTask: [UnactivatedOrderItem] = {
                     do {
-                        return try await APIService.shared.getUnactivatedTagsForQRCode(tagCode)
+                        return try await APIService.shared.getUnactivatedTagsForQRCode(currentTagCode)
                     } catch {
                         return []
                     }
@@ -56,7 +65,7 @@ struct TagActivationView: View {
             }
             .sheet(isPresented: $showCreatePet, onDismiss: handlePetCreated) {
                 NavigationView {
-                    PetFormView(mode: .create)
+                    PetFormView(mode: .create, initialPetName: selectedOrderPetName)
                         .environmentObject(appState)
                 }
             }
@@ -88,64 +97,126 @@ struct TagActivationView: View {
 
     // MARK: - Success View
     private var successView: some View {
-        VStack(spacing: 24) {
-            Spacer()
+        ScrollView {
+            VStack(spacing: 24) {
+                Spacer().frame(height: 20)
 
-            Image(systemName: "checkmark.circle.fill")
-                .font(.system(size: 80))
-                .foregroundColor(.tealAccent)
+                // Celebration
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 80))
+                    .foregroundColor(.tealAccent)
 
-            Text("tag_activated")
-                .font(.title)
-                .fontWeight(.bold)
+                if let pet = selectedPet {
+                    Text("tag_activated_for \(pet.name)")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
 
-            if let pet = selectedPet {
-                Text("tag_activated_message \(pet.name)")
-                    .font(.body)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-
-                // Pet Photo
-                CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                } placeholder: {
-                    Image(systemName: pet.species.lowercased() == "dog" ? "dog.fill" : "cat.fill")
-                        .font(.system(size: 40))
+                    Text("pet_now_protected")
+                        .font(.body)
                         .foregroundColor(.secondary)
-                }
-                .frame(width: 100, height: 100)
-                .background(grayBackground)
-                .clipShape(Circle())
-            }
+                        .multilineTextAlignment(.center)
 
-            Text("tag_choose_plan")
+                    // Pet Photo
+                    CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    } placeholder: {
+                        Image(systemName: pet.species.lowercased() == "dog" ? "dog.fill" : "cat.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(width: 100, height: 100)
+                    .background(grayBackground)
+                    .clipShape(Circle())
+                }
+
+                // Remaining tags section
+                let remaining = orderItems.filter { $0.tagStatus != "active" }
+                if !remaining.isEmpty {
+                    VStack(spacing: 12) {
+                        HStack {
+                            Image(systemName: "tag.fill")
+                                .foregroundColor(Color("BrandColor"))
+                            Text("more_tags_to_setup")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                        }
+
+                        ForEach(remaining, id: \.orderItemId) { item in
+                            Button {
+                                setupNextTag(item)
+                            } label: {
+                                HStack {
+                                    Image(systemName: "pawprint.fill")
+                                        .foregroundColor(Color("BrandColor"))
+                                    Text("setup_pet_tag \(item.petName ?? "Pet")")
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                .padding()
+                                .background(Color("BrandColor").opacity(0.08))
+                                .cornerRadius(12)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                } else {
+                    // All done — show next steps
+                    allDoneView
+                }
+
+                Spacer().frame(height: 10)
+
+                // Go to Home button
+                Button {
+                    onDismiss()
+                } label: {
+                    Text("go_to_home")
+                        .fontWeight(.semibold)
+                }
+                .buttonStyle(TagPrimaryButtonStyle())
+                .padding(.horizontal, 24)
+                .padding(.bottom, 40)
+            }
+        }
+    }
+
+    // MARK: - All Done (no more tags to activate)
+    private var allDoneView: some View {
+        VStack(spacing: 16) {
+            Text("thank_you_senra")
+                .font(.headline)
+                .foregroundColor(.primary)
+
+            Text("whats_next")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
 
-            Spacer()
-
-            Button {
-                onDismiss()
-            } label: {
-                Text("tag_choose_plan_button")
-                    .fontWeight(.semibold)
+            // Action cards
+            NextStepCard(icon: "creditcard.fill", text: String(localized: "choose_subscription_plan")) {
+                if let url = URL(string: "https://senra.pet/choose-plan") {
+                    UIApplication.shared.open(url)
+                }
             }
-            .buttonStyle(TagPrimaryButtonStyle())
-            .padding(.horizontal, 24)
 
-            Button {
+            NextStepCard(icon: "cross.case.fill", text: String(localized: "register_your_vet")) {
+                // Navigate to vet section — for now dismiss
                 onDismiss()
-            } label: {
-                Text("tag_skip_for_now")
-                    .fontWeight(.medium)
-                    .foregroundColor(.secondary)
             }
-            .padding(.bottom, 40)
+
+            NextStepCard(icon: "person.crop.circle.fill", text: String(localized: "update_contact_details")) {
+                // Navigate to profile — for now dismiss
+                onDismiss()
+            }
         }
+        .padding(.horizontal, 24)
     }
 
     // MARK: - No Pets View
@@ -155,35 +226,66 @@ struct TagActivationView: View {
 
             Image(systemName: "pawprint.fill")
                 .font(.system(size: 60))
-                .foregroundColor(.secondary)
+                .foregroundColor(Color("BrandColor"))
 
-            Text("tag_no_pets")
-                .font(.title2)
-                .fontWeight(.bold)
+            // Show order pet names if available
+            if !orderItems.isEmpty {
+                Text("setup_your_tags")
+                    .font(.title2)
+                    .fontWeight(.bold)
 
-            Text("tag_no_pets_message")
-                .font(.body)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
-
-            VStack(spacing: 12) {
-                Text("tag_code_label")
-                    .font(.caption)
+                Text("setup_your_tags_subtitle")
+                    .font(.body)
                     .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
 
-                Text(tagCode)
-                    .font(.system(.title3, design: .monospaced))
-                    .fontWeight(.semibold)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(grayBackground)
-                    .cornerRadius(8)
+                // List pet names from order
+                ForEach(orderItems, id: \.orderItemId) { item in
+                    if let petName = item.petName {
+                        Button {
+                            selectedOrderPetName = petName
+                            petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
+                            showCreatePet = true
+                        } label: {
+                            HStack {
+                                Image(systemName: "pawprint.fill")
+                                    .foregroundColor(Color("BrandColor"))
+                                Text(petName)
+                                    .font(.headline)
+                                Spacer()
+                                Text("ready_to_setup")
+                                    .font(.caption)
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(Color.green)
+                                    .cornerRadius(6)
+                            }
+                            .padding()
+                            .background(grayBackground)
+                            .cornerRadius(14)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.horizontal, 24)
+                    }
+                }
+            } else {
+                Text("tag_no_pets")
+                    .font(.title2)
+                    .fontWeight(.bold)
+
+                Text("tag_no_pets_message")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
             }
 
             Spacer()
 
             Button {
+                selectedOrderPetName = orderItems.first?.petName
                 petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
                 showCreatePet = true
             } label: {
@@ -213,28 +315,13 @@ struct TagActivationView: View {
                     .font(.system(size: 40))
                     .foregroundColor(Color("BrandColor"))
 
-                Text("tag_code_label")
-                    .font(.caption)
+                Text("tag_select_pet")
+                    .font(.subheadline)
                     .foregroundColor(.secondary)
-
-                Text(tagCode)
-                    .font(.system(.title3, design: .monospaced))
-                    .fontWeight(.semibold)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(grayBackground)
-                    .cornerRadius(8)
             }
-            .padding(.vertical, 24)
+            .padding(.vertical, 20)
             .frame(maxWidth: .infinity)
             .background(grayBackground.opacity(0.5))
-
-            // Instructions
-            Text("tag_select_pet")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .padding(.top, 16)
-                .padding(.bottom, 8)
 
             // Error Message
             if let error = errorMessage {
@@ -250,6 +337,7 @@ struct TagActivationView: View {
                 .background(Color.orange.opacity(0.1))
                 .cornerRadius(10)
                 .padding(.horizontal)
+                .padding(.top, 8)
             }
 
             // Pet List
@@ -294,6 +382,7 @@ struct TagActivationView: View {
 
                             ForEach(unmatchedNames, id: \.self) { name in
                                 UnmatchedPetCard(petName: name, onCreateProfile: {
+                                    selectedOrderPetName = name
                                     petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
                                     showCreatePet = true
                                 })
@@ -372,7 +461,8 @@ struct TagActivationView: View {
         }
     }
 
-    // MARK: - Activate Tag
+    // MARK: - Actions
+
     private func activateTag() {
         guard let pet = selectedPet else { return }
 
@@ -381,7 +471,11 @@ struct TagActivationView: View {
 
         Task {
             do {
-                try await viewModel.activateTag(code: tagCode, petId: pet.id)
+                try await viewModel.activateTag(code: currentTagCode, petId: pet.id)
+                // Re-fetch unactivated items to update remaining count
+                if let refreshed = try? await APIService.shared.getUnactivatedTagsForQRCode(currentTagCode) {
+                    orderItems = refreshed
+                }
                 withAnimation {
                     activationSuccess = true
                 }
@@ -389,6 +483,21 @@ struct TagActivationView: View {
                 errorMessage = classifyActivationError(error.localizedDescription)
             }
             isActivating = false
+        }
+    }
+
+    private func setupNextTag(_ item: UnactivatedOrderItem) {
+        // Reset state for the next tag
+        currentTagCode = item.qrCode ?? tagCode
+        selectedPet = nil
+        selectedOrderPetName = item.petName
+        errorMessage = nil
+        activationSuccess = false
+
+        // If pet with this name already exists, pre-select it
+        if let petName = item.petName,
+           let matchingPet = petsViewModel.pets.first(where: { $0.name.lowercased() == petName.lowercased() }) {
+            selectedPet = matchingPet
         }
     }
 
@@ -408,6 +517,36 @@ struct TagActivationView: View {
     }
 }
 
+// MARK: - Next Step Card
+private struct NextStepCard: View {
+    let icon: String
+    let text: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 14) {
+                Image(systemName: icon)
+                    .font(.system(size: 18))
+                    .foregroundColor(Color("BrandColor"))
+                    .frame(width: 24)
+                Text(text)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+            .background(Color(UIColor.systemGray6))
+            .cornerRadius(12)
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+}
+
 // MARK: - Pet Selection Row
 struct TagPetSelectionRow: View {
     let pet: Pet
@@ -420,7 +559,6 @@ struct TagPetSelectionRow: View {
     var body: some View {
         Button(action: onSelect) {
             HStack(spacing: 16) {
-                // Pet Photo
                 CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
                     image
                         .resizable()
@@ -436,7 +574,6 @@ struct TagPetSelectionRow: View {
                 .background(grayBackground)
                 .cornerRadius(12)
 
-                // Pet Info
                 VStack(alignment: .leading, spacing: 4) {
                     Text(pet.name)
                         .font(.headline)
@@ -466,7 +603,6 @@ struct TagPetSelectionRow: View {
 
                 Spacer()
 
-                // Selection Indicator
                 ZStack {
                     Circle()
                         .stroke(isSelected ? Color("BrandColor") : Color(UIColor.systemGray4), lineWidth: 2)
@@ -548,7 +684,7 @@ struct UnmatchedPetCard: View {
     }
 }
 
-// MARK: - Button Styles (prefixed to avoid conflicts)
+// MARK: - Button Styles
 struct TagPrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

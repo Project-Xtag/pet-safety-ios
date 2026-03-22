@@ -1322,3 +1322,29 @@
 "weight_helper" = "Greutate în kg (ex. 4,5)";
 "order_more_pet_name_placeholder" = "Numele animalului";
 "order_more_subtitle" = "Comandă etichete pentru animalele tale — gratuite, plătești doar livrarea";
+
+// MARK: - Welcome Screen
+"welcome_to_senra" = "Bine ai venit la Senra!";
+"welcome_subtitle" = "Siguranța animalului tău începe aici. Configurează prima etichetă.";
+"welcome_step_1" = "Scanează codul QR de pe etichetă";
+"welcome_step_2" = "Creează profilul animalului tău";
+"welcome_step_3" = "Animalul tău este protejat!";
+"welcome_scan_first_tag" = "Scanează prima etichetă";
+"welcome_explore_account" = "Explorează contul tău";
+
+// MARK: - Tag Activation Flow
+"setup_your_tags" = "Configurare etichete";
+"setup_your_tags_subtitle" = "Ai comandat etichete pentru aceste animale:";
+"ready_to_setup" = "Gata de configurare";
+"already_activated" = "Deja activată";
+"setting_up_tag_for %@" = "Configurare etichetă pentru %@";
+"tag_activated_for %@" = "Etichetă activată pentru %@!";
+"pet_now_protected" = "Animalul tău este acum protejat cu Senra";
+"more_tags_to_setup" = "Mai ai etichete de configurat";
+"setup_pet_tag %@" = "Configurează eticheta lui %@";
+"whats_next" = "Ce urmează?";
+"choose_subscription_plan" = "Alege planul de abonament";
+"register_your_vet" = "Înregistrează-ți veterinarul";
+"update_contact_details" = "Actualizează datele de contact și confidențialitatea";
+"go_to_home" = "Acasă";
+"thank_you_senra" = "Mulțumim că folosești Senra!";

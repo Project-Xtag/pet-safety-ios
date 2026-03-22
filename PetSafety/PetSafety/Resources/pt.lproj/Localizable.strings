@@ -1322,3 +1322,29 @@
 "weight_helper" = "Peso em kg (ex. 4,5)";
 "order_more_pet_name_placeholder" = "Nome do animal";
 "order_more_subtitle" = "Encomende etiquetas para os seus animais — etiquetas grátis, pague apenas o envio";
+
+// MARK: - Welcome Screen
+"welcome_to_senra" = "Bem-vindo à Senra!";
+"welcome_subtitle" = "A segurança do seu animal começa aqui. Configure a sua primeira etiqueta.";
+"welcome_step_1" = "Leia o código QR na sua etiqueta";
+"welcome_step_2" = "Crie o perfil do seu animal";
+"welcome_step_3" = "O seu animal está protegido!";
+"welcome_scan_first_tag" = "Ler primeira etiqueta";
+"welcome_explore_account" = "Explorar a sua conta";
+
+// MARK: - Tag Activation Flow
+"setup_your_tags" = "Configurar etiquetas";
+"setup_your_tags_subtitle" = "Encomendou etiquetas para estes animais:";
+"ready_to_setup" = "Pronto para configurar";
+"already_activated" = "Já ativada";
+"setting_up_tag_for %@" = "Configurando etiqueta para %@";
+"tag_activated_for %@" = "Etiqueta ativada para %@!";
+"pet_now_protected" = "O seu animal está agora protegido com a Senra";
+"more_tags_to_setup" = "Ainda tem etiquetas por configurar";
+"setup_pet_tag %@" = "Configurar etiqueta de %@";
+"whats_next" = "O que vem a seguir?";
+"choose_subscription_plan" = "Escolha o seu plano de subscrição";
+"register_your_vet" = "Registe o seu veterinário";
+"update_contact_details" = "Atualize os seus contactos e privacidade";
+"go_to_home" = "Ir para o início";
+"thank_you_senra" = "Obrigado por usar a Senra!";

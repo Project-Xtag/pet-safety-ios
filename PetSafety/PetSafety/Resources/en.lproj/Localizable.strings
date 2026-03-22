@@ -1323,3 +1323,29 @@
 "weight_helper" = "Weight in kg (e.g. 4.5)";
 "order_more_pet_name_placeholder" = "Pet's name";
 "order_more_subtitle" = "Order tags for your pets — free tags, only pay for shipping";
+
+// MARK: - Welcome Screen
+"welcome_to_senra" = "Welcome to Senra!";
+"welcome_subtitle" = "Your pet's safety starts here. Let's set up your first tag.";
+"welcome_step_1" = "Scan the QR code on your tag";
+"welcome_step_2" = "Create your pet's profile";
+"welcome_step_3" = "Your pet is protected!";
+"welcome_scan_first_tag" = "Scan Your First Tag";
+"welcome_explore_account" = "Explore Your Account";
+
+// MARK: - Tag Activation Flow
+"setup_your_tags" = "Set Up Your Tags";
+"setup_your_tags_subtitle" = "You ordered tags for these pets:";
+"ready_to_setup" = "Ready to set up";
+"already_activated" = "Already activated";
+"setting_up_tag_for %@" = "Setting up tag for %@";
+"tag_activated_for %@" = "Tag activated for %@!";
+"pet_now_protected" = "Your pet is now protected with Senra";
+"more_tags_to_setup" = "You still have tags to set up";
+"setup_pet_tag %@" = "Set up %@'s tag";
+"whats_next" = "What's next?";
+"choose_subscription_plan" = "Choose your subscription plan";
+"register_your_vet" = "Register your vet";
+"update_contact_details" = "Update your contact details & privacy";
+"go_to_home" = "Go to Home";
+"thank_you_senra" = "Thank you for using Senra!";

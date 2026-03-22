@@ -176,7 +176,10 @@ struct MainTabView: View {
                 switch selectedTab {
                 case 0:
                     NavigationView {
-                        PetsListView()
+                        PetsListView(
+                            onScanTag: { selectedTab = 1 },
+                            onExploreAccount: { selectedTab = 3 }
+                        )
                     }
                     .navigationViewStyle(.stack)
                     .transition(.opacity)
