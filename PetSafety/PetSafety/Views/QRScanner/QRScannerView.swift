@@ -196,6 +196,16 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     var previewLayer: AVCaptureVideoPreviewLayer!
     var onCodeScanned: ((String) -> Void)?
 
+    /// Dedicated serial queue for all capture-session operations.
+    /// Avoids deadlocks from calling stopRunning on the main thread
+    /// and prevents races between start/stop/delegate calls.
+    private let sessionQueue = DispatchQueue(label: "pet.senra.scanner.session")
+
+    /// Guard flag so the callback fires exactly once per scan cycle.
+    private var isProcessing = false
+
+    private var metadataOutput: AVCaptureMetadataOutput?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -219,13 +229,15 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             return
         }
 
-        let metadataOutput = AVCaptureMetadataOutput()
+        let output = AVCaptureMetadataOutput()
 
-        if captureSession.canAddOutput(metadataOutput) {
-            captureSession.addOutput(metadataOutput)
+        if captureSession.canAddOutput(output) {
+            captureSession.addOutput(output)
 
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
+            // Deliver metadata on the session queue — never the main thread
+            output.setMetadataObjectsDelegate(self, queue: sessionQueue)
+            output.metadataObjectTypes = [.qr]
+            metadataOutput = output
         } else {
             return
         }
@@ -235,37 +247,48 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
 
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.captureSession.startRunning()
+        sessionQueue.async { [weak self] in
+            self?.captureSession.startRunning()
         }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        previewLayer?.frame = view.layer.bounds
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        sessionQueue.async { [weak self] in
             self?.captureSession.stopRunning()
         }
     }
 
     func resumeScanning() {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let session = self?.captureSession, !session.isRunning else { return }
-            session.startRunning()
+        sessionQueue.async { [weak self] in
+            guard let self else { return }
+            self.isProcessing = false
+            if !self.captureSession.isRunning {
+                self.captureSession.startRunning()
+            }
         }
     }
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        // Already on sessionQueue — guard against duplicate callbacks
+        guard !isProcessing else { return }
+
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
 
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            onCodeScanned?(stringValue)
+            isProcessing = true
+            captureSession.stopRunning()
 
-            // Stop scanning after first successful scan (must be off main thread)
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                self?.captureSession.stopRunning()
+            DispatchQueue.main.async { [weak self] in
+                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                self?.onCodeScanned?(stringValue)
             }
         }
     }
