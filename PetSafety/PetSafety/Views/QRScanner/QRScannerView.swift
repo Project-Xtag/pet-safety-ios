@@ -7,6 +7,7 @@ struct QRScannerView: View {
     @State private var showOverlay = true
     @State private var isTorchOn = false
     @State private var scannerController: QRScannerViewController?
+    @State private var showScanError = false
 
     var body: some View {
         ZStack {
@@ -22,8 +23,8 @@ struct QRScannerView: View {
                             if viewModel.scanResult != nil {
                                 showingScannedPet = true
                             } else {
-                                // Scan failed (unactivated tag, network error, etc.) — resume camera
-                                scannerController?.resumeScanning()
+                                // Scan failed — show error alert (do NOT auto-resume)
+                                showScanError = true
                             }
                         }
                     },
@@ -149,6 +150,18 @@ struct QRScannerView: View {
             if let result = viewModel.scanResult {
                 ScannedPetView(scanResult: result)
             }
+        }
+        .alert(
+            String(localized: "scan_error_title"),
+            isPresented: $showScanError
+        ) {
+            Button(String(localized: "scan_again")) {
+                viewModel.reset()
+                scannerController?.resumeScanning()
+            }
+            Button(String(localized: "cancel"), role: .cancel) {}
+        } message: {
+            Text(viewModel.errorMessage ?? String(localized: "scan_error_message"))
         }
         .onAppear {
             viewModel.checkCameraPermission()
