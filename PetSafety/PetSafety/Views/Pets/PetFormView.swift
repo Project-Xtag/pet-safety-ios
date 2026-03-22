@@ -27,7 +27,7 @@ struct PetFormView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
 
-    @State private var name = ""
+    @State private var name: String
     @State private var species = "Dog"
     @State private var breed = ""
     @State private var color = ""
@@ -53,6 +53,17 @@ struct PetFormView: View {
 
     let speciesOptions = ["Dog", "Cat", "Bird", "Rabbit", "Other"]
     let sexOptions = ["Unknown", "Male", "Female"]
+
+    init(mode: PetFormMode, initialPetName: String? = nil) {
+        self.mode = mode
+        self.initialPetName = initialPetName
+        // Pre-fill name from order context or existing pet
+        if case .edit(let pet) = mode {
+            _name = State(initialValue: pet.name)
+        } else {
+            _name = State(initialValue: initialPetName ?? "")
+        }
+    }
 
     private var existingPet: Pet? {
         if case .edit(let pet) = mode { return pet }
@@ -397,8 +408,6 @@ struct PetFormView: View {
         .onAppear {
             if case .edit(let pet) = mode {
                 populateFields(with: pet)
-            } else if case .create = mode, let prefill = initialPetName, !prefill.isEmpty, name.isEmpty {
-                name = prefill
             }
         }
     }
