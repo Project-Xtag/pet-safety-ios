@@ -3,30 +3,20 @@ import AVFoundation
 
 struct QRScannerView: View {
     @StateObject private var viewModel = QRScannerViewModel()
-    @State private var showingScannedPet = false
     @State private var showOverlay = true
     @State private var isTorchOn = false
     @State private var scannerController: QRScannerViewController?
-    @State private var showScanError = false
 
     var body: some View {
         ZStack {
             if viewModel.cameraPermissionGranted {
                 QRCodeScannerRepresentable(
                     onCodeScanned: { scannedValue in
-                        // Extract the tag code from the scanned value
-                        // It could be a full URL or just the code
                         let code = DeepLinkService.extractTagCode(from: scannedValue)
                         UINotificationFeedbackGenerator().notificationOccurred(.success)
-                        Task {
-                            await viewModel.scanQRCode(code)
-                            if viewModel.scanResult != nil {
-                                showingScannedPet = true
-                            } else {
-                                // Scan failed — show error alert (do NOT auto-resume)
-                                showScanError = true
-                            }
-                        }
+                        // Delegate to DeepLinkService — it handles all tag states:
+                        // active tag → public pet profile, shipped tag → activation flow
+                        DeepLinkService.shared.handleScannedCode(code)
                     },
                     onControllerReady: { controller in
                         scannerController = controller
@@ -143,28 +133,10 @@ struct QRScannerView: View {
             }
         }
         .navigationBarHidden(true)
-        .sheet(isPresented: $showingScannedPet, onDismiss: {
-            viewModel.reset()
-            scannerController?.resumeScanning()
-        }) {
-            if let result = viewModel.scanResult {
-                ScannedPetView(scanResult: result)
-            }
-        }
-        .alert(
-            String(localized: "scan_error_title"),
-            isPresented: $showScanError
-        ) {
-            Button(String(localized: "scan_again")) {
-                viewModel.reset()
-                scannerController?.resumeScanning()
-            }
-            Button(String(localized: "cancel"), role: .cancel) {}
-        } message: {
-            Text(viewModel.errorMessage ?? String(localized: "scan_error_message"))
-        }
         .onAppear {
             viewModel.checkCameraPermission()
+            // Resume camera if returning from activation/profile sheet
+            scannerController?.resumeScanning()
         }
         .onDisappear {
             // Turn off torch when leaving the scanner

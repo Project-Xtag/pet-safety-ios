@@ -117,6 +117,12 @@ class DeepLinkService: ObservableObject {
         return false
     }
 
+    /// Public entry point for the in-app QR scanner.
+    /// Routes through the same lookup flow as deep links.
+    func handleScannedCode(_ code: String) {
+        handleTagScanned(code: code)
+    }
+
     /// Process a scanned/deep-linked QR tag code.
     /// Performs a lookup first to determine the tag's status, then routes accordingly:
     /// - Active tag with pet → show public pet profile
