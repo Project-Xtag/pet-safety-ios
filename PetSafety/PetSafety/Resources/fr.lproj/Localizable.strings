@@ -1351,3 +1351,4 @@
 "update_contact_details" = "Mettez à jour vos coordonnées et confidentialité";
 "go_to_home" = "Retour à l'accueil";
 "thank_you_senra" = "Merci d'utiliser Senra !";
+"tap_pet_name_hint" = "Appuyez sur le nom de votre animal pour configurer son badge";

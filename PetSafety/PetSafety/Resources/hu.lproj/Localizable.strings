@@ -1347,3 +1347,4 @@
 "update_contact_details" = "Frissítsd az elérhetőségeidet és adatvédelmi beállításaidat";
 "go_to_home" = "Főoldal";
 "thank_you_senra" = "Köszönjük, hogy a Senrát választottad!";
+"tap_pet_name_hint" = "Csak koppints kedvenced nevére a címke beállításához";

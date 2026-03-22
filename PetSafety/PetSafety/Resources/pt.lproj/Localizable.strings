@@ -1348,3 +1348,4 @@
 "update_contact_details" = "Atualize os seus contactos e privacidade";
 "go_to_home" = "Ir para o início";
 "thank_you_senra" = "Obrigado por usar a Senra!";
+"tap_pet_name_hint" = "Basta tocar no nome do seu animal para configurar a etiqueta";

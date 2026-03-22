@@ -1351,3 +1351,4 @@
 "update_contact_details" = "Zaktualizuj dane kontaktowe i prywatność";
 "go_to_home" = "Przejdź na stronę główną";
 "thank_you_senra" = "Dziękujemy za korzystanie z Senra!";
+"tap_pet_name_hint" = "Dotknij imienia zwierzaka, aby skonfigurować plakietkę";

@@ -240,35 +240,41 @@ struct TagActivationView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
 
-                // List pet names from order
-                ForEach(orderItems, id: \.orderItemId) { item in
-                    if let petName = item.petName {
-                        Button {
-                            selectedOrderPetName = petName
-                            petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
-                            showCreatePet = true
-                        } label: {
-                            HStack {
-                                Image(systemName: "pawprint.fill")
-                                    .foregroundColor(Color("BrandColor"))
-                                Text(petName)
-                                    .font(.headline)
-                                Spacer()
-                                Text("ready_to_setup")
-                                    .font(.caption)
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 4)
-                                    .background(Color.green)
-                                    .cornerRadius(6)
-                            }
-                            .padding()
-                            .background(grayBackground)
-                            .cornerRadius(14)
+                Text("tap_pet_name_hint")
+                    .font(.subheadline)
+                    .foregroundColor(Color("BrandColor"))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 32)
+                    .padding(.top, 4)
+
+                // Deduplicated pet names from order
+                let uniqueNames = Array(Set(orderItems.compactMap { $0.petName })).sorted()
+                ForEach(uniqueNames, id: \.self) { petName in
+                    Button {
+                        selectedOrderPetName = petName
+                        petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
+                        showCreatePet = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "pawprint.fill")
+                                .foregroundColor(Color("BrandColor"))
+                            Text(petName)
+                                .font(.headline)
+                            Spacer()
+                            Text("ready_to_setup")
+                                .font(.caption)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(Color.green)
+                                .cornerRadius(6)
                         }
-                        .buttonStyle(PlainButtonStyle())
-                        .padding(.horizontal, 24)
+                        .padding()
+                        .background(grayBackground)
+                        .cornerRadius(14)
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.horizontal, 24)
                 }
             } else {
                 Text("tag_no_pets")
@@ -280,20 +286,19 @@ struct TagActivationView: View {
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
+
+                Button {
+                    petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
+                    showCreatePet = true
+                } label: {
+                    Text("create_pet_profile")
+                        .fontWeight(.semibold)
+                }
+                .buttonStyle(TagPrimaryButtonStyle())
+                .padding(.horizontal, 24)
             }
 
             Spacer()
-
-            Button {
-                selectedOrderPetName = orderItems.first?.petName
-                petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
-                showCreatePet = true
-            } label: {
-                Text("create_pet_profile")
-                    .fontWeight(.semibold)
-            }
-            .buttonStyle(TagPrimaryButtonStyle())
-            .padding(.horizontal, 24)
 
             Button {
                 onDismiss()
