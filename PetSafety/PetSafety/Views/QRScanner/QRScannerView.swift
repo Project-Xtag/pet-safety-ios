@@ -6,6 +6,7 @@ struct QRScannerView: View {
     @State private var showingScannedPet = false
     @State private var showOverlay = true
     @State private var isTorchOn = false
+    @State private var scannerController: QRScannerViewController?
 
     var body: some View {
         ZStack {
@@ -20,8 +21,14 @@ struct QRScannerView: View {
                             await viewModel.scanQRCode(code)
                             if viewModel.scanResult != nil {
                                 showingScannedPet = true
+                            } else {
+                                // Scan failed (unactivated tag, network error, etc.) — resume camera
+                                scannerController?.resumeScanning()
                             }
                         }
+                    },
+                    onControllerReady: { controller in
+                        scannerController = controller
                     }
                 )
                 .ignoresSafeArea()
@@ -135,7 +142,10 @@ struct QRScannerView: View {
             }
         }
         .navigationBarHidden(true)
-        .sheet(isPresented: $showingScannedPet) {
+        .sheet(isPresented: $showingScannedPet, onDismiss: {
+            viewModel.reset()
+            scannerController?.resumeScanning()
+        }) {
             if let result = viewModel.scanResult {
                 ScannedPetView(scanResult: result)
             }
@@ -169,10 +179,12 @@ struct QRScannerView: View {
 // UIViewControllerRepresentable for QR Code Scanner
 struct QRCodeScannerRepresentable: UIViewControllerRepresentable {
     let onCodeScanned: (String) -> Void
+    var onControllerReady: ((QRScannerViewController) -> Void)?
 
     func makeUIViewController(context: Context) -> QRScannerViewController {
         let controller = QRScannerViewController()
         controller.onCodeScanned = onCodeScanned
+        onControllerReady?(controller)
         return controller
     }
 
@@ -231,8 +243,15 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if captureSession.isRunning {
-            captureSession.stopRunning()
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.captureSession.stopRunning()
+        }
+    }
+
+    func resumeScanning() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let session = self?.captureSession, !session.isRunning else { return }
+            session.startRunning()
         }
     }
 
@@ -244,8 +263,10 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             onCodeScanned?(stringValue)
 
-            // Stop scanning after first successful scan
-            captureSession.stopRunning()
+            // Stop scanning after first successful scan (must be off main thread)
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                self?.captureSession.stopRunning()
+            }
         }
     }
 }
