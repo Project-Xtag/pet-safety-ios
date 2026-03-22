@@ -1348,3 +1348,9 @@
 "go_to_home" = "Főoldal";
 "thank_you_senra" = "Köszönjük, hogy a Senrát választottad!";
 "tap_pet_name_hint" = "Csak koppints kedvenced nevére a címke beállításához";
+
+// MARK: - Age Formatting
+"age_1_year" = "1 év";
+"age_n_years %d" = "%d év";
+"age_1_month" = "1 hónap";
+"age_n_months %d" = "%d hónap";

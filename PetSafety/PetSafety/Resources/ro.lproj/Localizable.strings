@@ -1349,3 +1349,9 @@
 "go_to_home" = "Acasă";
 "thank_you_senra" = "Mulțumim că folosești Senra!";
 "tap_pet_name_hint" = "Atinge numele animalului tău pentru a configura eticheta";
+
+// MARK: - Age Formatting
+"age_1_year" = "1 an";
+"age_n_years %d" = "%d ani";
+"age_1_month" = "1 lună";
+"age_n_months %d" = "%d luni";

@@ -68,16 +68,46 @@ struct TagActivationView: View {
                 await petsTask
                 orderItems = await orderTask
             }
-            .sheet(item: $createPetContext, onDismiss: handlePetCreated) { context in
-                NavigationView {
-                    PetFormView(mode: .create, initialPetName: context.petName)
-                        .environmentObject(appState)
-                }
-            }
+            .background(
+                // Hidden NavigationLink to push PetFormView within the existing NavigationView
+                NavigationLink(
+                    destination: Group {
+                        if let context = createPetContext {
+                            let otherNames = Array(Set(orderItems.compactMap { $0.petName }))
+                                .filter { $0.lowercased() != (context.petName ?? "").lowercased() }
+                                .sorted()
+                            PetFormView(
+                                mode: .create,
+                                initialPetName: context.petName,
+                                remainingPetNames: otherNames,
+                                onRegisterNextPet: { nextName in
+                                    createPetContext = nil
+                                    // Small delay to let navigation pop, then push again
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                        petIdsBeforeCreate = Set(petsViewModel.pets.map { $0.id })
+                                        createPetContext = CreatePetContext(petName: nextName)
+                                    }
+                                },
+                                onAllDone: {
+                                    createPetContext = nil
+                                    onDismiss()
+                                }
+                            )
+                            .environmentObject(appState)
+                        }
+                    },
+                    isActive: Binding(
+                        get: { createPetContext != nil },
+                        set: { if !$0 { createPetContext = nil } }
+                    ),
+                    label: { EmptyView() }
+                )
+                .hidden()
+            )
         }
     }
 
-    /// After PetFormView dismisses, refresh pets and auto-activate the tag for the newly created pet.
+    /// After PetFormView pops back, refresh pets and auto-activate the tag for the newly created pet.
     private func handlePetCreated() {
         Task {
             await petsViewModel.fetchPets()
@@ -205,10 +235,9 @@ struct TagActivationView: View {
                 .foregroundColor(.secondary)
 
             // Action cards
-            NextStepCard(icon: "creditcard.fill", text: String(localized: "choose_subscription_plan")) {
-                if let url = URL(string: "https://senra.pet/choose-plan") {
-                    UIApplication.shared.open(url)
-                }
+            NextStepCard(icon: "checkmark.shield.fill", text: String(localized: "choose_subscription_plan")) {
+                // Navigate to subscription screen (in-app, not external browser)
+                onDismiss()
             }
 
             NextStepCard(icon: "cross.case.fill", text: String(localized: "register_your_vet")) {

@@ -1354,3 +1354,9 @@
 "go_to_home" = "Na početnu";
 "thank_you_senra" = "Hvala što koristite Senru!";
 "tap_pet_name_hint" = "Dodirnite ime ljubimca za postavljanje oznake";
+
+// MARK: - Age Formatting
+"age_1_year" = "1 godina";
+"age_n_years %d" = "%d godina";
+"age_1_month" = "1 mjesec";
+"age_n_months %d" = "%d mjeseci";

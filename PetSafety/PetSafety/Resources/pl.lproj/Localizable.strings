@@ -1352,3 +1352,9 @@
 "go_to_home" = "Przejdź na stronę główną";
 "thank_you_senra" = "Dziękujemy za korzystanie z Senra!";
 "tap_pet_name_hint" = "Dotknij imienia zwierzaka, aby skonfigurować plakietkę";
+
+// MARK: - Age Formatting
+"age_1_year" = "1 rok";
+"age_n_years %d" = "%d lat";
+"age_1_month" = "1 miesiąc";
+"age_n_months %d" = "%d miesięcy";

@@ -44,19 +44,26 @@ struct Pet: Codable, Identifiable, Hashable {
     let ownerPostalCode: String?
     let ownerCountry: String?
 
-    // Computed property for displaying age
+    // Computed property for displaying age (localized from years/months)
     var age: String? {
-        if let text = ageText, !text.isEmpty {
-            return text
-        }
+        let prefix = (ageIsApproximate ?? false) ? "~" : ""
 
         if let years = ageYears, years > 0 {
+            let yearsStr = years == 1
+                ? NSLocalizedString("age_1_year", comment: "")
+                : String(format: NSLocalizedString("age_n_years %d", comment: ""), years)
             if let months = ageMonths, months > 0 {
-                return "\(years)y \(months)m"
+                let monthsStr = months == 1
+                    ? NSLocalizedString("age_1_month", comment: "")
+                    : String(format: NSLocalizedString("age_n_months %d", comment: ""), months)
+                return "\(prefix)\(yearsStr) \(monthsStr)"
             }
-            return "\(years) year\(years == 1 ? "" : "s")"
+            return "\(prefix)\(yearsStr)"
         } else if let months = ageMonths, months > 0 {
-            return "\(months) month\(months == 1 ? "" : "s")"
+            let monthsStr = months == 1
+                ? NSLocalizedString("age_1_month", comment: "")
+                : String(format: NSLocalizedString("age_n_months %d", comment: ""), months)
+            return "\(prefix)\(monthsStr)"
         }
         return nil
     }

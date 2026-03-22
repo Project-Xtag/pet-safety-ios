@@ -1352,3 +1352,9 @@
 "go_to_home" = "Gå til hjem";
 "thank_you_senra" = "Takk for at du bruker Senra!";
 "tap_pet_name_hint" = "Trykk på kjæledyrets navn for å sette opp brikken";
+
+// MARK: - Age Formatting
+"age_1_year" = "1 år";
+"age_n_years %d" = "%d år";
+"age_1_month" = "1 måned";
+"age_n_months %d" = "%d måneder";

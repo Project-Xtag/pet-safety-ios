@@ -1349,3 +1349,9 @@
 "go_to_home" = "Na úvodní stránku";
 "thank_you_senra" = "Děkujeme, že používáte Senra!";
 "tap_pet_name_hint" = "Stačí klepnout na jméno mazlíčka a nastavit jeho štítek";
+
+// MARK: - Age Formatting
+"age_1_year" = "1 rok";
+"age_n_years %d" = "%d let";
+"age_1_month" = "1 měsíc";
+"age_n_months %d" = "%d měsíců";

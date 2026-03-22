@@ -1352,3 +1352,9 @@
 "go_to_home" = "Retour à l'accueil";
 "thank_you_senra" = "Merci d'utiliser Senra !";
 "tap_pet_name_hint" = "Appuyez sur le nom de votre animal pour configurer son badge";
+
+// MARK: - Age Formatting
+"age_1_year" = "1 an";
+"age_n_years %d" = "%d ans";
+"age_1_month" = "1 mois";
+"age_n_months %d" = "%d mois";

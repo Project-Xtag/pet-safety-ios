@@ -1350,3 +1350,9 @@
 "go_to_home" = "Go to Home";
 "thank_you_senra" = "Thank you for using Senra!";
 "tap_pet_name_hint" = "Just tap on your pet's name to set up their tag";
+
+// MARK: - Age Formatting
+"age_1_year" = "1 year";
+"age_n_years %d" = "%d years";
+"age_1_month" = "1 month";
+"age_n_months %d" = "%d months";

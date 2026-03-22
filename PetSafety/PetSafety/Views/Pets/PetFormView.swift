@@ -23,11 +23,20 @@ enum PetFormMode {
 struct PetFormView: View {
     let mode: PetFormMode
     var initialPetName: String? = nil
+    /// Names of remaining pets to register (tag activation flow)
+    var remainingPetNames: [String] = []
+    /// Called when user taps "Register next pet" with the next pet's name
+    var onRegisterNextPet: ((String) -> Void)?
+    /// Called when all pets are done (show thank-you / go home)
+    var onAllDone: (() -> Void)?
+
     @StateObject private var viewModel = PetsViewModel()
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
 
     @State private var name: String
+    @State private var showPostSaveScreen = false
+    @State private var savedPetName: String = ""
     @State private var species = "Dog"
     @State private var breed = ""
     @State private var color = ""
@@ -54,10 +63,12 @@ struct PetFormView: View {
     let speciesOptions = ["Dog", "Cat", "Bird", "Rabbit", "Other"]
     let sexOptions = ["Unknown", "Male", "Female"]
 
-    init(mode: PetFormMode, initialPetName: String? = nil) {
+    init(mode: PetFormMode, initialPetName: String? = nil, remainingPetNames: [String] = [], onRegisterNextPet: ((String) -> Void)? = nil, onAllDone: (() -> Void)? = nil) {
         self.mode = mode
         self.initialPetName = initialPetName
-        // Pre-fill name from order context or existing pet
+        self.remainingPetNames = remainingPetNames
+        self.onRegisterNextPet = onRegisterNextPet
+        self.onAllDone = onAllDone
         if case .edit(let pet) = mode {
             _name = State(initialValue: pet.name)
         } else {
@@ -71,6 +82,9 @@ struct PetFormView: View {
     }
 
     var body: some View {
+        if showPostSaveScreen {
+            postSaveView
+        } else {
         Form {
             // Tag activation context banner
             if let tagPetName = initialPetName, !tagPetName.isEmpty {
@@ -410,6 +424,126 @@ struct PetFormView: View {
                 populateFields(with: pet)
             }
         }
+        } // end else (form vs postSaveView)
+    }
+
+    // MARK: - Post-Save Screen (tag activation flow)
+    private var postSaveView: some View {
+        ScrollView {
+            VStack(spacing: 24) {
+                Spacer().frame(height: 40)
+
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 70))
+                    .foregroundColor(.tealAccent)
+
+                Text("tag_activated_for \(savedPetName)")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+
+                Text("pet_now_protected")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 24)
+
+                if !remainingPetNames.isEmpty {
+                    // More pets to register
+                    VStack(spacing: 16) {
+                        Text("more_tags_to_setup")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.secondary)
+
+                        ForEach(remainingPetNames, id: \.self) { petName in
+                            Button {
+                                onRegisterNextPet?(petName)
+                            } label: {
+                                HStack {
+                                    Image(systemName: "pawprint.fill")
+                                        .foregroundColor(Color("BrandColor"))
+                                    Text("setup_pet_tag \(petName)")
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                .padding()
+                                .background(Color("BrandColor").opacity(0.08))
+                                .cornerRadius(12)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                } else {
+                    // All done
+                    VStack(spacing: 16) {
+                        Text("thank_you_senra")
+                            .font(.headline)
+
+                        Text("whats_next")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+
+                        VStack(spacing: 10) {
+                            postSaveActionCard(icon: "checkmark.shield.fill", text: String(localized: "choose_subscription_plan")) {
+                                // Navigate to subscription screen (same flow as existing app)
+                                onAllDone?()
+                            }
+                            postSaveActionCard(icon: "person.crop.circle.fill", text: String(localized: "update_contact_details")) {
+                                onAllDone?()
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                }
+
+                Spacer().frame(height: 20)
+
+                Button {
+                    onAllDone?() ?? dismiss()
+                } label: {
+                    Text("go_to_home")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color("BrandColor"))
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 40)
+            }
+        }
+        .navigationTitle(Text("tag_activated"))
+        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func postSaveActionCard(icon: String, text: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 14) {
+                Image(systemName: icon)
+                    .font(.system(size: 18))
+                    .foregroundColor(Color("BrandColor"))
+                    .frame(width: 24)
+                Text(text)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+            .background(Color(UIColor.systemGray6))
+            .cornerRadius(12)
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 
     private func populateFields(with pet: Pet) {
@@ -593,7 +727,13 @@ struct PetFormView: View {
                 #if DEBUG
                 print("✅ Save operation completed successfully")
                 #endif
-                dismiss()
+                // In tag activation context, show post-save screen instead of dismissing
+                if onRegisterNextPet != nil || onAllDone != nil {
+                    savedPetName = name
+                    withAnimation { showPostSaveScreen = true }
+                } else {
+                    dismiss()
+                }
             } catch let error as APIError {
                 #if DEBUG
                 print("❌ Save operation failed: \(error)")
