@@ -15,10 +15,10 @@ struct AddressView: View {
     @State private var country = ""
     @State private var showCountryPicker = false
 
-    // All countries (sorted alphabetically)
-    private let countries = Locale.isoRegionCodes
-        .compactMap { Locale.current.localizedString(forRegionCode: $0) }
-        .sorted()
+    private var countries: [String] {
+        SupportedCountries.sorted(priority: Locale.current.region?.identifier)
+            .map { $0.localizedName }
+    }
 
     var body: some View {
         List {

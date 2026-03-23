@@ -1,9 +1,13 @@
 import SwiftUI
+import PhotosUI
 
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @AppStorage("appearanceMode") private var appearanceMode: String = "system"
     @State private var showingLogoutAlert = false
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var profileImage: UIImage?
+    @State private var isUploadingPhoto = false
 
     var body: some View {
         ZStack {
@@ -69,24 +73,48 @@ struct ProfileView: View {
                         Circle()
                             .fill(Color.tealAccent)
                             .frame(width: 96, height: 96)
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 40))
-                            .foregroundColor(.white)
-                            .accessibilityLabel(String(localized: "accessibility_profile_avatar"))
+                        if let profileImage {
+                            Image(uiImage: profileImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 96, height: 96)
+                                .clipShape(Circle())
+                        } else {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 40))
+                                .foregroundColor(.white)
+                        }
                     }
+                    .accessibilityLabel(String(localized: "accessibility_profile_avatar"))
                     .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 4)
 
-                    // Edit Button
-                    Button(action: {
-                        // Edit profile photo
-                    }) {
-                        Image(systemName: "pencil")
+                    // Photo Picker Button
+                    PhotosPicker(selection: $selectedPhoto, matching: .images) {
+                        Image(systemName: isUploadingPhoto ? "arrow.triangle.2.circlepath" : "pencil")
                             .font(.system(size: 12, weight: .bold))
                             .foregroundColor(.white)
                             .frame(width: 28, height: 28)
                             .background(Color.brandOrange)
                             .clipShape(Circle())
                             .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 2)
+                    }
+                    .disabled(isUploadingPhoto)
+                    .onChange(of: selectedPhoto) { _, newValue in
+                        Task {
+                            if let data = try? await newValue?.loadTransferable(type: Data.self),
+                               let image = UIImage(data: data) {
+                                profileImage = image
+                                isUploadingPhoto = true
+                                do {
+                                    try await APIService.shared.uploadProfileImage(imageData: image.jpegData(compressionQuality: 0.8) ?? Data())
+                                } catch {
+                                    #if DEBUG
+                                    print("Profile image upload failed: \(error)")
+                                    #endif
+                                }
+                                isUploadingPhoto = false
+                            }
+                        }
                     }
                     .accessibilityLabel(String(localized: "accessibility_edit_profile_photo"))
                 }

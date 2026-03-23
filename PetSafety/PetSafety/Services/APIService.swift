@@ -396,6 +396,20 @@ class APIService {
         return response.user
     }
 
+    func uploadProfileImage(imageData: Data) async throws {
+        var request = try await buildRequest(endpoint: "/users/me/profile-image", method: "POST")
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        var body = Data()
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"image\"; filename=\"avatar.jpg\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        body.append(imageData)
+        body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        request.httpBody = body
+        _ = try await performRequest(request, responseType: ProfileImageResponse.self)
+    }
+
     func updateContactPreferences(
         showPhonePublicly: Bool?,
         showEmailPublicly: Bool?
@@ -1066,6 +1080,10 @@ struct EmptyBody: Codable {}
 
 struct UserResponse: Codable {
     let user: User
+}
+
+struct ProfileImageResponse: Decodable {
+    let profileImage: String
 }
 
 struct PetsResponse: Codable {
