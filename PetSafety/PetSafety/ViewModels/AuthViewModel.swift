@@ -65,6 +65,20 @@ class AuthViewModel: ObservableObject {
         }
     }
 
+    // MARK: - Profile Refresh
+
+    /// Re-fetch current user from server. Call after profile edits or when app returns to foreground.
+    func refreshCurrentUser() {
+        guard isAuthenticated else { return }
+        Task {
+            do {
+                currentUser = try await apiService.getCurrentUser()
+            } catch {
+                authLog.error("Failed to refresh user: \(error.localizedDescription)")
+            }
+        }
+    }
+
     // MARK: - Push Notifications & FCM Token Management
 
     /// Request push notification permission if not yet granted, then register FCM token.

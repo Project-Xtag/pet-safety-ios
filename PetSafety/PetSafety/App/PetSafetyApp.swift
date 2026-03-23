@@ -144,10 +144,11 @@ struct PetSafetyApp: App {
                     }
                     .onChange(of: scenePhase) { _, newPhase in
                         if newPhase == .active && authViewModel.isAuthenticated {
-                            // Refresh subscription when app comes to foreground (debounce 60s)
+                            // Refresh user profile + subscription when app comes to foreground (debounce 60s)
                             let now = Date()
                             if now.timeIntervalSince(lastSubscriptionRefresh) > 60 {
                                 lastSubscriptionRefresh = now
+                                authViewModel.refreshCurrentUser()
                                 Task {
                                     await subscriptionViewModel.loadCurrentSubscription()
                                 }
