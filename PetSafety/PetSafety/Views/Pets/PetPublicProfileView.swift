@@ -21,7 +21,7 @@ struct PetPublicProfileView: View {
     private var ownerEmails: [String] {
         var emails: [String] = []
         if let email = pet.ownerEmail { emails.append(email) }
-        else if let user = authViewModel.currentUser, user.showEmailPublicly ?? true, let email = user.email { emails.append(email) }
+        else if let user = authViewModel.currentUser, user.showEmailPublicly ?? true, !user.email.isEmpty { emails.append(user.email) }
         if let email = pet.ownerSecondaryEmail { emails.append(email) }
         return emails
     }
