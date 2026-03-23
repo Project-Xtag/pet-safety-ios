@@ -8,25 +8,27 @@ struct PetPublicProfileView: View {
 
     // Use owner info from pet if available (public scan), otherwise fall back to current user
     // Respects privacy settings when showing current user's info
-    private var ownerPhone: String? {
-        // If pet has owner phone (from public scan), use it (backend already filtered by privacy)
-        if let phone = pet.ownerPhone {
-            return phone
-        }
-        // For own pet preview, check privacy setting
-        guard let user = authViewModel.currentUser else { return nil }
-        let showPublicly = user.showPhonePublicly ?? true
-        return showPublicly ? user.phone : nil
+    // All public phone numbers (primary + secondary, filtered by backend privacy settings)
+    private var ownerPhones: [String] {
+        var phones: [String] = []
+        if let phone = pet.ownerPhone { phones.append(phone) }
+        else if let user = authViewModel.currentUser, user.showPhonePublicly ?? true, let phone = user.phone { phones.append(phone) }
+        if let phone = pet.ownerSecondaryPhone { phones.append(phone) }
+        return phones
     }
 
-    private var ownerEmail: String? {
-        if let email = pet.ownerEmail {
-            return email
-        }
-        guard let user = authViewModel.currentUser else { return nil }
-        let showPublicly = user.showEmailPublicly ?? true
-        return showPublicly ? user.email : nil
+    // All public email addresses (primary + secondary, filtered by backend privacy settings)
+    private var ownerEmails: [String] {
+        var emails: [String] = []
+        if let email = pet.ownerEmail { emails.append(email) }
+        else if let user = authViewModel.currentUser, user.showEmailPublicly ?? true, let email = user.email { emails.append(email) }
+        if let email = pet.ownerSecondaryEmail { emails.append(email) }
+        return emails
     }
+
+    // Backward-compatible computed properties
+    private var ownerPhone: String? { ownerPhones.first }
+    private var ownerEmail: String? { ownerEmails.first }
 
     private var ownerAddress: String? {
         if let address = pet.ownerAddress {
@@ -143,13 +145,13 @@ struct PetPublicProfileView: View {
                         let details: [String] = {
                             var items: [String] = []
                             if let breed = pet.breed, !breed.isEmpty {
-                                items.append(breed)
+                                items.append(PetLocalizer.localizeBreed(breed, species: pet.species))
                             }
                             if let age = pet.age, !age.isEmpty {
                                 items.append(age)
                             }
                             if let sex = pet.sex, sex.lowercased() != "unknown" {
-                                var sexText = sex.capitalized
+                                var sexText = PetLocalizer.localizeSex(sex, species: pet.species)
                                 if pet.isNeutered == true {
                                     sexText += ", " + NSLocalizedString("neutered", comment: "")
                                 }
@@ -195,7 +197,7 @@ struct PetPublicProfileView: View {
                 }
 
                 // Contact Owner Section
-                if ownerPhone != nil || ownerEmail != nil {
+                if !ownerPhones.isEmpty || !ownerEmails.isEmpty {
                     VStack(spacing: 16) {
                         Text("contact_owner")
                             .font(.system(size: 18, weight: .bold))
@@ -206,8 +208,8 @@ struct PetPublicProfileView: View {
                             .multilineTextAlignment(.center)
 
                         VStack(spacing: 12) {
-                            // Phone (tappable to call)
-                            if let phone = ownerPhone {
+                            // All public phone numbers
+                            ForEach(ownerPhones, id: \.self) { phone in
                                 Link(destination: URL(string: "tel:\(phone.replacingOccurrences(of: " ", with: ""))")!) {
                                     HStack(spacing: 12) {
                                         Image(systemName: "phone.fill")
@@ -226,8 +228,8 @@ struct PetPublicProfileView: View {
                                 }
                             }
 
-                            // Email (tappable to send email)
-                            if let email = ownerEmail {
+                            // All public email addresses
+                            ForEach(ownerEmails, id: \.self) { email in
                                 Link(destination: URL(string: "mailto:\(email)")!) {
                                     HStack(spacing: 12) {
                                         Image(systemName: "envelope.fill")
