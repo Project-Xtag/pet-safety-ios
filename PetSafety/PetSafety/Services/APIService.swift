@@ -1,6 +1,35 @@
 import Foundation
 import Sentry
 
+// MARK: - Flexible ISO 8601 date decoding (handles with/without timezone and fractional seconds)
+extension JSONDecoder.DateDecodingStrategy {
+    static var flexibleISO8601: JSONDecoder.DateDecodingStrategy {
+        .custom { decoder in
+            let container = try decoder.singleValueContainer()
+            let string = try container.decode(String.self)
+
+            // Try standard ISO8601 with fractional seconds first (2026-01-01T20:15:53.292Z)
+            let fmtFrac = ISO8601DateFormatter()
+            fmtFrac.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            if let date = fmtFrac.date(from: string) { return date }
+
+            // Try standard ISO8601 without fractional seconds (2026-01-01T20:15:53Z)
+            let fmt = ISO8601DateFormatter()
+            fmt.formatOptions = [.withInternetDateTime]
+            if let date = fmt.date(from: string) { return date }
+
+            // Try without timezone — append Z and retry (2026-01-01T20:15:53.292791)
+            if let date = fmtFrac.date(from: string + "Z") { return date }
+            if let date = fmt.date(from: string + "Z") { return date }
+
+            throw DecodingError.dataCorrupted(.init(
+                codingPath: decoder.codingPath,
+                debugDescription: "Unable to parse date: \(string)"
+            ))
+        }
+    }
+}
+
 struct SubscriptionLimitInfo {
     let currentPlan: String
     let currentPetCount: Int
@@ -203,7 +232,7 @@ class APIService {
             }
 
             let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
+            decoder.dateDecodingStrategy = .flexibleISO8601
 
             switch httpResponse.statusCode {
             case 200...299:
@@ -1429,7 +1458,7 @@ extension APIService {
         #endif
 
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+        decoder.dateDecodingStrategy = .flexibleISO8601
 
         if (200...299).contains(httpResponse.statusCode) {
             let envelope = try decoder.decode(ApiEnvelope<NotificationPreferencesResponse>.self, from: data)
@@ -1490,7 +1519,7 @@ extension APIService {
         #endif
 
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+        decoder.dateDecodingStrategy = .flexibleISO8601
 
         if (200...299).contains(httpResponse.statusCode) {
             let envelope = try decoder.decode(ApiEnvelope<NotificationPreferencesResponse>.self, from: data)
