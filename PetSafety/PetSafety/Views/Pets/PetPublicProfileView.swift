@@ -79,8 +79,8 @@ struct PetPublicProfileView: View {
     private var hasHiddenContactInfo: Bool {
         guard let user = authViewModel.currentUser else { return false }
         // Check if user has phone/email but privacy settings hide them
-        let hasPhone = user.phone != nil && !user.phone!.isEmpty
-        let hasEmail = user.email != nil && !user.email.isEmpty
+        let hasPhone = !(user.phone ?? "").isEmpty
+        let hasEmail = !user.email.isEmpty
         let phoneHidden = hasPhone && !(user.showPhonePublicly ?? true)
         let emailHidden = hasEmail && !(user.showEmailPublicly ?? true)
         return phoneHidden || emailHidden
