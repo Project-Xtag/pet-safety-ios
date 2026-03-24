@@ -3,10 +3,6 @@ import SwiftUI
 struct NotificationSettingsView: View {
     @StateObject private var viewModel = NotificationPreferencesViewModel()
 
-    // Alert Types (local-only preferences)
-    @AppStorage("notifyMissingPetAlerts") private var notifyMissingPetAlerts = true
-    @AppStorage("notifyNearbyAlerts") private var notifyNearbyAlerts = true
-
     // Updates (local-only preferences)
     @AppStorage("notifyOrderUpdates") private var notifyOrderUpdates = true
     @AppStorage("notifyAccountActivity") private var notifyAccountActivity = true
@@ -61,18 +57,10 @@ struct NotificationSettingsView: View {
             }
 
             Section(header: Text("notif_pet_alerts"), footer: Text("notif_pet_alerts_footer")) {
-                Toggle(isOn: $notifyMissingPetAlerts) {
+                Toggle(isOn: $viewModel.preferences.missingPetAlerts) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("notif_missing_pet_alerts")
                         Text("notif_missing_pet_alerts_subtitle")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                Toggle(isOn: $notifyNearbyAlerts) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("notif_nearby_alerts")
-                        Text("notif_nearby_alerts_subtitle")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }

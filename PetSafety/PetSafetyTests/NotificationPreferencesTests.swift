@@ -19,6 +19,54 @@ struct NotificationPreferencesTests {
         #expect(preferences.notifyByEmail == true)
         #expect(preferences.notifyBySms == true)
         #expect(preferences.notifyByPush == true)
+        #expect(preferences.missingPetAlerts == true)
+    }
+
+    @Test("missingPetAlerts defaults to true")
+    func testMissingPetAlertsDefault() {
+        let prefs = NotificationPreferences.default
+        #expect(prefs.missingPetAlerts == true)
+    }
+
+    @Test("missingPetAlerts can be set to false")
+    func testMissingPetAlertsFalse() {
+        let prefs = NotificationPreferences(
+            notifyByEmail: true,
+            notifyBySms: true,
+            notifyByPush: true,
+            missingPetAlerts: false
+        )
+        #expect(prefs.missingPetAlerts == false)
+    }
+
+    @Test("missingPetAlerts decodes from API response with field present")
+    func testMissingPetAlertsDecodePresent() throws {
+        let json = """
+        {"notifyByEmail":true,"notifyBySms":false,"notifyByPush":true,"missingPetAlerts":false}
+        """.data(using: .utf8)!
+        let prefs = try JSONDecoder().decode(NotificationPreferences.self, from: json)
+        #expect(prefs.missingPetAlerts == false)
+    }
+
+    @Test("missingPetAlerts defaults to true when missing from JSON")
+    func testMissingPetAlertsDecodeMissing() throws {
+        let json = """
+        {"notifyByEmail":true,"notifyBySms":false,"notifyByPush":true}
+        """.data(using: .utf8)!
+        let prefs = try JSONDecoder().decode(NotificationPreferences.self, from: json)
+        #expect(prefs.missingPetAlerts == true)
+    }
+
+    @Test("missingPetAlerts does not affect isValid or enabledCount")
+    func testMissingPetAlertsIndependent() {
+        let prefs = NotificationPreferences(
+            notifyByEmail: true,
+            notifyBySms: false,
+            notifyByPush: false,
+            missingPetAlerts: false
+        )
+        #expect(prefs.isValid == true)
+        #expect(prefs.enabledCount == 1)
     }
 
     @Test("NotificationPreferences should validate when at least one method enabled")

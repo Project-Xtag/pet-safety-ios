@@ -4,18 +4,36 @@ struct NotificationPreferences: Codable {
     var notifyByEmail: Bool
     var notifyBySms: Bool
     var notifyByPush: Bool
+    var missingPetAlerts: Bool
 
     enum CodingKeys: String, CodingKey {
         case notifyByEmail
         case notifyBySms
         case notifyByPush
+        case missingPetAlerts
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        notifyByEmail = try container.decodeIfPresent(Bool.self, forKey: .notifyByEmail) ?? true
+        notifyBySms = try container.decodeIfPresent(Bool.self, forKey: .notifyBySms) ?? true
+        notifyByPush = try container.decodeIfPresent(Bool.self, forKey: .notifyByPush) ?? true
+        missingPetAlerts = try container.decodeIfPresent(Bool.self, forKey: .missingPetAlerts) ?? true
+    }
+
+    init(notifyByEmail: Bool = true, notifyBySms: Bool = true, notifyByPush: Bool = true, missingPetAlerts: Bool = true) {
+        self.notifyByEmail = notifyByEmail
+        self.notifyBySms = notifyBySms
+        self.notifyByPush = notifyByPush
+        self.missingPetAlerts = missingPetAlerts
     }
 
     // Default values
     static let `default` = NotificationPreferences(
         notifyByEmail: true,
         notifyBySms: true,
-        notifyByPush: true
+        notifyByPush: true,
+        missingPetAlerts: true
     )
 
     // Validation: At least one method must be enabled
