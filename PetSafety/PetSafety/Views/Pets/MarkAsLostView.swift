@@ -60,7 +60,7 @@ struct MarkAsLostView: View {
                     VStack(alignment: .leading) {
                         Text(pet.name)
                             .font(.headline)
-                        Text(pet.species)
+                        Text(PetLocalizer.localizeSpecies(pet.species))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }

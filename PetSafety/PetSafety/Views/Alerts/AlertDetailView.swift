@@ -44,15 +44,15 @@ struct AlertDetailView: View {
     // Build pet details string with age and sex
     private func petDetailsString(_ pet: Pet) -> String {
         var details: [String] = []
-        details.append(pet.species)
+        details.append(PetLocalizer.localizeSpecies(pet.species))
         if let breed = pet.breed, !breed.isEmpty {
-            details.append(breed)
+            details.append(PetLocalizer.localizeBreed(breed, species: pet.species))
         }
         if let age = pet.age, !age.isEmpty {
             details.append(age)
         }
-        if let sex = pet.sex, !sex.isEmpty {
-            details.append(sex.capitalized)
+        if let sex = pet.sex, !sex.isEmpty, sex.lowercased() != "unknown" {
+            details.append(PetLocalizer.localizeSex(sex, species: pet.species))
         }
         return details.joined(separator: " • ")
     }

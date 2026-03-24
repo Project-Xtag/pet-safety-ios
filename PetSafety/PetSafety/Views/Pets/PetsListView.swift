@@ -423,7 +423,7 @@ struct PetCardView: View {
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(.mutedText)
                 .padding(35)
-                .accessibilityLabel(pet.species)
+                .accessibilityLabel(PetLocalizer.localizeSpecies(pet.species))
         }
     }
 }
@@ -601,7 +601,7 @@ struct PetSelectionView: View {
                                     .font(.headline)
                                     .foregroundColor(.primary)
 
-                                Text(pet.species.capitalized)
+                                Text(PetLocalizer.localizeSpecies(pet.species))
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                             }

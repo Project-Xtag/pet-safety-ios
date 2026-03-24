@@ -627,7 +627,7 @@ struct TagPetSelectionRow: View {
                     }
 
                     HStack(spacing: 4) {
-                        Text(pet.species.capitalized)
+                        Text(PetLocalizer.localizeSpecies(pet.species))
                         if let breed = pet.breed {
                             Text("-")
                             Text(breed)

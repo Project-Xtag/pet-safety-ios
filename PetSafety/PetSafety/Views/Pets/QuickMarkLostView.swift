@@ -39,7 +39,7 @@ struct QuickMarkLostView: View {
                                     .font(.headline)
                                     .foregroundColor(.primary)
 
-                                Text(pet.species.capitalized)
+                                Text(PetLocalizer.localizeSpecies(pet.species))
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                             }
