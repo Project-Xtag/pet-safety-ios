@@ -337,7 +337,7 @@
 "profile_personal_info" = "Személyes adatok";
 "profile_address" = "Cím";
 "profile_contacts" = "Kapcsolatok";
-"profile_privacy_mode" = "Adatvédelmi mód";
+"profile_privacy_mode" = "Adatvédelmi beállítások";
 "profile_notifications" = "Értesítések";
 "profile_billing" = "Számlázás";
 "profile_referral" = "Ajánlói program";
@@ -517,7 +517,7 @@
 "privacy_show_secondary_email_subtitle" = "Másodlagos e-mail címed megjelenítése a kisállatod nyilvános profilján";
 "privacy_data_privacy" = "Adatvédelem";
 "privacy_privacy_policy" = "Adatvédelmi szabályzat";
-"privacy_title" = "Adatvédelmi mód";
+"privacy_title" = "Adatvédelmi beállítások";
 "privacy_mode_footer" = "Az adatvédelmi beállítások segítenek szabályozni, milyen információk kerülnek megosztásra, amikor beolvassák a kedvenced QR bilétáját.";
 "privacy_settings_updated" = "Adatvédelmi beállítások frissítve";
 "privacy_settings_failed" = "Nem sikerült frissíteni az adatvédelmi beállításokat";
@@ -604,7 +604,7 @@
 "contact_owner_plea" = "Kérlek, tudasd a gazdámmal, hogy megtaláltál…";
 "contact_info_not_set" = "Az elérhetőségek még nincsenek beállítva";
 "contact_info_hidden" = "Az elérhetőségek rejtve vannak";
-"contact_info_hidden_hint" = "Az elérhetőségeid be vannak állítva, de az adatvédelmi beállításaid miatt rejtve vannak. Frissítés: Fiók > Adatvédelmi mód.";
+"contact_info_hidden_hint" = "Az elérhetőségeid be vannak állítva, de az adatvédelmi beállításaid miatt rejtve vannak. Frissítés: Fiók > Adatvédelmi beállítások.";
 "allergies" = "Allergiák";
 "medications" = "Gyógyszerek";
 "unique_features" = "Egyedi jegyek";
@@ -970,13 +970,13 @@
 "help_faq_q27" = "Áthelyezhetek egy bilétát másik kedvencre?";
 "help_faq_a27" = "Minden QR biléta véglegesen egy kedvenc profilhoz van kapcsolva, és nem regisztrálható át másik állathoz. Ha egy kedvenced elpusztul, vagy már nincs szükséged a bilétára, a régi biléta egyszerűen inaktívvá válik. Új kedvencednek új bilétát rendelhetsz a Fiókom oldalon.";
 "help_guide_qr_tags_title" = "QR-kódos kedvenc biléták";
-"help_guide_qr_tags_desc" = "Ismerd meg a QR-kódos közösségi kisállat bilétáinkat és működésüket.";
+"help_guide_qr_tags_desc" = "Minden Senra biléta egyedi QR kódot tartalmaz, amely a kedvenced digitális profiljához kapcsolódik. Bárki, aki megtalálja a kedvencedet, beolvashatja a kódot a telefonja kamerájával — nem szükséges alkalmazás. A biléta beolvasása értesítést küld neked a megtaláló helyzetével (ha megosztja). A bilétákat az alkalmazáson keresztül aktiválhatod, és bármikor kérhetsz csere bilétát, ha a régit elveszíted vagy megsérül.";
 "help_guide_materials_title" = "A biléta anyaga és tartóssága";
-"help_guide_materials_desc" = "Információ az általunk használt anyagokról és a biléta ápolásáról.";
+"help_guide_materials_desc" = "A Senra bilétákat tartós, könnyű fémből készítjük, epoxi bevonattal a fokozott védelemért. Vízállóak és UV-ellenállóak, minden időjárási körülmények között használhatók. A QR kód lézerrel van gravírozva a tartósság érdekében, így nem kopik el a mindennapos használat során. A bilétákat úgy terveztük, hogy kényelmesen illeszkedjenek a legtöbb nyakörvhöz és hámhoz.";
 "help_guide_emergency_title" = "Vészhelyzeti kontakt funkciók";
-"help_guide_emergency_desc" = "Hogyan működik a vészhelyzeti kontakt rendszerünk, hogy gyorsan hazajuttassa az elveszett kedvencedet.";
+"help_guide_emergency_desc" = "Amikor valaki leolvassa a kedvenced bilétáját, azonnal push értesítést és e-mailt kapsz a megtaláló helyzetével. A Standard és Maximum csomag tagjai SMS értesítést is kapnak a gyorsabb reakció érdekében. Ha eltűntként jelölöd a kedvencedet, közösségi riasztás megy a 10 km-en belüli Senra felhasználóknak, és a területen regisztrált állatorvosok és menhelyek is értesítést kapnak. Bárki a közösségből jelentheti az észleléseket a helyszínnel és fotókkal, segítve a kedvenced megtalálását.";
 "help_guide_profile_title" = "Profilkezelés";
-"help_guide_profile_desc" = "A kedvenced publikus profiljának kezelése és adatainak frissítése.";
+"help_guide_profile_desc" = "A kedvenced digitális profilja a Senra szíve. Add meg az alapvető adatokat: név, faj, fajta, kor és egy jó minőségű fotó. Egészségügyi információkat, allergiákat, gyógyszereket és különleges ismertető jegyeket is megadhatsz. Amikor valaki leolvassa a kedvenced bilétáját, ezt a profilt fogja látni, így fontos, hogy naprakész legyen. A profilod segíti a keresőket abban, hogy felismerjék a kedvencedet és tudják, mit tegyenek, ha megtalálják.";
 "help_guide_missing_alerts_title" = "Eltűnt kedvenc riasztások és észlelések";
 "help_guide_missing_alerts_desc" = "Ha a kedvenced elveszik, jelöld meg eltűntként a 'Saját állataim' menüben, hogy azonnali közösségi riasztást hozz létre. Kedvenced fotója és adatai megjelennek az Eltűnt kedvencek térképén és listán, amely minden Senra felhasználó számára látható a környékeden. Valamint minden regisztrált felhasználó 10km belül email és sms értesítést kap, és A közösség tagjai észleléseket jelenthetnek GPS helyadatokkal, amelyeket értesítésként kapsz meg. A regisztrált állatorvosok és menhelyek is riasztást kapnak. Ha megkerült a kedvenced, jelöld megtaláltként! Ha gondolod, oszd meg a hazatérése történetét, hogy reményt adj a többieknek is.";
 "help_guide_community_title" = "Közösség és megtalált kedvencek";
