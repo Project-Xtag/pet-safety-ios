@@ -254,6 +254,7 @@ struct PetDetailView: View {
             NavigationView {
                 MarkAsLostView(pet: pet)
             }
+            .navigationViewStyle(.stack)
             .environmentObject(appState)
             .environmentObject(authViewModel)
             .environmentObject(subscriptionViewModel)

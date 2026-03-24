@@ -76,6 +76,7 @@ struct QuickMarkLostView: View {
                 NavigationView {
                     MarkAsLostView(pet: pet)
                 }
+                .navigationViewStyle(.stack)
                 .environmentObject(appState)
                 .environmentObject(authViewModel)
             }

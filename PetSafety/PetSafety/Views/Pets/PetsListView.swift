@@ -91,12 +91,14 @@ struct PetsListView: View {
                 QuickMarkLostView(pets: viewModel.pets)
                     .environmentObject(appState)
             }
+            .navigationViewStyle(.stack)
         }
         .sheet(isPresented: $showingMarkFoundSheet) {
             NavigationView {
                 QuickMarkFoundView(pets: missingPets)
                     .environmentObject(appState)
             }
+            .navigationViewStyle(.stack)
         }
         .sheet(item: $selectedPetForReplacement) { pet in
             NavigationView {
