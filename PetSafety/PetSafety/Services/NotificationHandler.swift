@@ -31,7 +31,7 @@ class NotificationHandler: ObservableObject {
         guard let type = userInfo["type"] as? String else { return }
 
         switch type {
-        case "PET_SCANNED":
+        case "PET_SCANNED", "TAG_INITIAL_SCAN":
             handleTagScannedNotification(userInfo)
         case "MISSING_PET_ALERT":
             handleMissingPetAlert(userInfo)
