@@ -505,6 +505,8 @@
 // MARK: - Privatsphäre-Modus
 "privacy_contact_visibility" = "Sichtbarkeit der Kontakte";
 "privacy_contact_footer" = "Steuern Sie, welche Kontaktdaten auf dem öffentlichen Profil Ihres Haustiers sichtbar sind. Diese Einstellungen gelten sowohl für Ihre primären als auch sekundären Kontaktdaten.";
+"privacy_show_name" = "Ihren Namen anzeigen";
+"privacy_show_name_subtitle" = "Ihr Name wird auf dem öffentlichen Profil Ihres Haustiers sichtbar, wenn jemand den Tag scannt";
 "privacy_show_phone" = "Telefonnummern anzeigen";
 "privacy_show_phone_subtitle" = "Ihre primäre und sekundäre Telefonnummer werden auf dem öffentlichen Profil Ihres Haustiers sichtbar sein";
 "privacy_show_email" = "E-Mail-Adressen anzeigen";

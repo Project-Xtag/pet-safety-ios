@@ -559,6 +559,8 @@
 // MARK: - Tryb prywatności
 "privacy_contact_visibility" = "Widoczność danych kontaktowych";
 "privacy_contact_footer" = "Kontroluj, które dane kontaktowe są widoczne na publicznym profilu twojego zwierzęcia. Te ustawienia dotyczą zarówno głównych, jak i zapasowych danych kontaktowych.";
+"privacy_show_name" = "Wyświetlanie imienia";
+"privacy_show_name_subtitle" = "Twoje imię będzie widoczne na publicznym profilu pupila przy skanowaniu znacznika";
 "privacy_show_phone" = "Pokaż numery telefonu";
 "privacy_show_phone_subtitle" = "Twój główny i zapasowy numer telefonu będą widoczne na publicznym profilu twojego zwierzęcia";
 "privacy_show_email" = "Pokaż adresy e-mail";

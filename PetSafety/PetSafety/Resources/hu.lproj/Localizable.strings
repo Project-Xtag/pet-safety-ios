@@ -505,6 +505,8 @@
 // MARK: - Adatvédelmi mód
 "privacy_contact_visibility" = "Elérhetőségeid láthatósága";
 "privacy_contact_footer" = "Beállíthatod, hogy mely elérhetőségeid legyenek láthatóak a kedvenced nyilvános profilján. Ezek a beállítások az elsődleges és másodlagos elérhetőségekre egyaránt vonatkoznak.";
+"privacy_show_name" = "Neved megjelenítése";
+"privacy_show_name_subtitle" = "Neved megjelenik a kedvenced nyilvános profilján, amikor valaki beolvassa a bilétáját";
 "privacy_show_phone" = "Telefonszámok megjelenítése";
 "privacy_show_phone_subtitle" = "Az elsődleges és másodlagos telefonszámod látható lesz a kedvenced nyilvános profilján";
 "privacy_show_email" = "Email címek megjelenítése";

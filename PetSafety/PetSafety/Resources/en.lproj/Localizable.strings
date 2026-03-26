@@ -560,6 +560,8 @@
 // MARK: - Privacy Mode
 "privacy_contact_visibility" = "Contact Visibility";
 "privacy_contact_footer" = "Control which contact details are visible on your pet's public profile. These settings apply to both your primary and secondary contact details.";
+"privacy_show_name" = "Show Your Name";
+"privacy_show_name_subtitle" = "Your name will be visible on your pet's public profile when someone scans their tag";
 "privacy_show_phone" = "Show Phone Numbers";
 "privacy_show_phone_subtitle" = "Your primary and secondary phone numbers will be visible on your pet's public profile";
 "privacy_show_email" = "Show Email Addresses";

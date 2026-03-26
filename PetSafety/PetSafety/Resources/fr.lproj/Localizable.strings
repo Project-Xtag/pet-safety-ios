@@ -560,6 +560,8 @@
 // MARK: - Mode confidentialité
 "privacy_contact_visibility" = "Visibilité des coordonnées";
 "privacy_contact_footer" = "Contrôle quelles coordonnées sont visibles sur le profil public de ton animal. Ces paramètres s'appliquent à tes coordonnées principales et secondaires.";
+"privacy_show_name" = "Afficher votre nom";
+"privacy_show_name_subtitle" = "Votre nom sera visible sur le profil public de votre animal quand quelqu'un scanne la médaille";
 "privacy_show_phone" = "Afficher les numéros de téléphone";
 "privacy_show_phone_subtitle" = "Tes numéros de téléphone principal et secondaire seront visibles sur le profil public de ton animal";
 "privacy_show_email" = "Afficher les adresses e-mail";

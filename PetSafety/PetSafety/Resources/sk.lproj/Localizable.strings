@@ -505,6 +505,8 @@
 // MARK: - Rezim sukromia
 "privacy_contact_visibility" = "Viditelnost kontaktov";
 "privacy_contact_footer" = "Ovladajte, ktore kontaktne udaje su viditelne na verejnom profile vasho zvierata. Tieto nastavenia sa vztahuju na primarne aj sekundarne kontaktne udaje.";
+"privacy_show_name" = "Zobrazenie vášho mena";
+"privacy_show_name_subtitle" = "Vaše meno bude viditeľné na verejnom profile zvieraťa pri skenovaní známky";
 "privacy_show_phone" = "Zobrazit telefonne cisla";
 "privacy_show_phone_subtitle" = "Vase primarne a sekundarne telefonne cisla budu viditelne na verejnom profile vasho zvierata";
 "privacy_show_email" = "Zobrazit e-mailove adresy";

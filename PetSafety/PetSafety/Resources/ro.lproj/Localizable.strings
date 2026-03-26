@@ -505,6 +505,8 @@
 // MARK: - Mod confidențialitate
 "privacy_contact_visibility" = "Vizibilitatea contactelor";
 "privacy_contact_footer" = "Controlează ce contacte sunt vizibile pe profilul public al animalului. Aceste setări se aplică atât datelor de contact principale, cât și secundare.";
+"privacy_show_name" = "Afișează numele tău";
+"privacy_show_name_subtitle" = "Numele tău va fi vizibil pe profilul public al animalului tău când cineva scanează eticheta";
 "privacy_show_phone" = "Afișează numerele de telefon";
 "privacy_show_phone_subtitle" = "Numerele tale de telefon principale și secundare vor fi vizibile pe profilul public al animalului";
 "privacy_show_email" = "Afișează adresele de e-mail";

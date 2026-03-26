@@ -505,6 +505,8 @@
 // MARK: - Modo de privacidade
 "privacy_contact_visibility" = "Visibilidade de contacto";
 "privacy_contact_footer" = "Controle quais contactos são visíveis no perfil público do seu animal. Estas definições aplicam-se aos dados de contacto principais e secundários.";
+"privacy_show_name" = "Mostrar o seu nome";
+"privacy_show_name_subtitle" = "O seu nome será visível no perfil público do seu animal quando alguém ler a etiqueta";
 "privacy_show_phone" = "Mostrar números de telefone";
 "privacy_show_phone_subtitle" = "Os seus números de telefone principal e secundário serão visíveis no perfil público do seu animal";
 "privacy_show_email" = "Mostrar endereços de e-mail";

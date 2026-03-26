@@ -562,6 +562,8 @@
 // MARK: - Personvernmodus
 "privacy_contact_visibility" = "Kontaktsynlighet";
 "privacy_contact_footer" = "Kontroller hvilke kontaktdetaljer som er synlige på dyrets offentlige profil. Disse innstillingene gjelder for både primære og sekundære kontaktopplysninger.";
+"privacy_show_name" = "Vis navnet ditt";
+"privacy_show_name_subtitle" = "Navnet ditt vil være synlig på kjæledyrets offentlige profil når noen skanner merket";
 "privacy_show_phone" = "Vis telefonnumre";
 "privacy_show_phone_subtitle" = "Det primære og sekundære telefonnummeret ditt vil vises på dyrets offentlige profil";
 "privacy_show_email" = "Vis e-postadresser";

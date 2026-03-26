@@ -563,6 +563,8 @@
 // MARK: - Privacy Mode
 "privacy_contact_visibility" = "Vidljivost kontakta";
 "privacy_contact_footer" = "Kontroliraj koji kontakt podaci su vidljivi na javnom profilu tvog ljubimca. Ove postavke primjenjuju se na primarne i sekundarne kontakt podatke.";
+"privacy_show_name" = "Prikaži svoje ime";
+"privacy_show_name_subtitle" = "Vaše ime će biti vidljivo na javnom profilu ljubimca kada netko skenira pločicu";
 "privacy_show_phone" = "Prikaži telefonske brojeve";
 "privacy_show_phone_subtitle" = "Tvoji primarni i sekundarni telefonski brojevi bit će vidljivi na javnom profilu ljubimca";
 "privacy_show_email" = "Prikaži e-mail adrese";

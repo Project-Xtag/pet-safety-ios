@@ -505,6 +505,8 @@
 // MARK: - Režim soukromí
 "privacy_contact_visibility" = "Viditelnost kontaktů";
 "privacy_contact_footer" = "Ovládejte, které kontaktní údaje jsou viditelné na veřejném profilu vašeho mazlíčka. Tato nastavení platí pro primární i sekundární kontaktní údaje.";
+"privacy_show_name" = "Zobrazení vašeho jména";
+"privacy_show_name_subtitle" = "Vaše jméno bude viditelné na veřejném profilu mazlíčka při skenování štítku";
 "privacy_show_phone" = "Zobrazit telefonní čísla";
 "privacy_show_phone_subtitle" = "Vaše primární a sekundární telefonní čísla budou viditelná na veřejném profilu vašeho mazlíčka";
 "privacy_show_email" = "Zobrazit e-mailové adresy";

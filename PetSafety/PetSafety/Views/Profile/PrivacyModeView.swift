@@ -4,6 +4,7 @@ struct PrivacyModeView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var appState: AppState
 
+    @State private var showNamePublicly: Bool = true
     @State private var showPhonePublicly: Bool = true
     @State private var showEmailPublicly: Bool = true
     @State private var showAddressPublicly: Bool = true
@@ -21,6 +22,19 @@ struct PrivacyModeView: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }.padding(.bottom, 4)) {
+                Toggle(isOn: $showNamePublicly) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("privacy_show_name")
+                        Text("privacy_show_name_subtitle")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .disabled(isUpdating)
+                .onChange(of: showNamePublicly) { _, newValue in
+                    guard didInitialize else { return }
+                    updatePrivacySetting("show_name_publicly", value: newValue)
+                }
                 Toggle(isOn: $showPhonePublicly) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("privacy_show_phone")
@@ -123,6 +137,7 @@ struct PrivacyModeView: View {
         .onAppear {
             // Initialize from current user settings
             if let user = authViewModel.currentUser {
+                showNamePublicly = user.showNamePublicly ?? true
                 showPhonePublicly = user.showPhonePublicly ?? true
                 showEmailPublicly = user.showEmailPublicly ?? true
                 showAddressPublicly = user.showAddressPublicly ?? true
@@ -151,6 +166,7 @@ struct PrivacyModeView: View {
                     appState.showError(String(localized: "privacy_settings_failed"))
                     // Revert the toggle on failure
                     if let user = authViewModel.currentUser {
+                        showNamePublicly = user.showNamePublicly ?? true
                         showPhonePublicly = user.showPhonePublicly ?? true
                         showEmailPublicly = user.showEmailPublicly ?? true
                         showAddressPublicly = user.showAddressPublicly ?? true
