@@ -426,6 +426,11 @@ struct DeepLinkScannedPetView: View {
                             Text("contact_owner")
                                 .font(.system(size: 18, weight: .bold))
 
+                            if let ownerName = pet.ownerName, !ownerName.trimmingCharacters(in: .whitespaces).isEmpty {
+                                Text(ownerName)
+                                    .font(.system(size: 15, weight: .medium))
+                            }
+
                             Text("contact_owner_plea")
                                 .font(.system(size: 14))
                                 .foregroundColor(.mutedText)

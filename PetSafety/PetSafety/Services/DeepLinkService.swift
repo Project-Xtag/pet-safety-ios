@@ -150,6 +150,11 @@ class DeepLinkService: ObservableObject {
                     scannedTagLookup = lookup
                     isLookingUpTag = false
                     showScannedPetProfile = true
+
+                    // Log scan and notify owner (fire-and-forget)
+                    Task {
+                        _ = try? await APIService.shared.scanQRCode(code)
+                    }
                 } else {
                     // Tag exists but is not active/has no pet — show activation flow
                     isLookingUpTag = false

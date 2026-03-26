@@ -97,6 +97,7 @@ struct TagLookupPet: Codable {
     let profileImage: String?
     let qrCode: String?
     let isMissing: Bool?
+    let ownerName: String?
     let ownerPhone: String?
     let ownerEmail: String?
     let ownerAddress: String?
@@ -115,6 +116,7 @@ struct TagLookupPet: Codable {
         case profileImage = "profile_image"
         case qrCode = "qr_code"
         case isMissing = "is_missing"
+        case ownerName = "owner_name"
         case ownerPhone = "owner_phone"
         case ownerEmail = "owner_email"
         case ownerAddress = "owner_address"
