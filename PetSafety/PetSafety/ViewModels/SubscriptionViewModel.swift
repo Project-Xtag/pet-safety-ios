@@ -144,7 +144,9 @@ class SubscriptionViewModel: ObservableObject {
             } else {
                 // Paid plan - redirect to web app for subscription checkout
                 // Subscriptions are web-only (no in-app purchasing / no store entitlement needed)
-                if let url = URL(string: "https://senra.pet/choose-plan") {
+                let countryCode = Locale.current.region?.identifier ?? ""
+                let urlString = countryCode.isEmpty ? "https://senra.pet/choose-plan" : "https://senra.pet/choose-plan?country=\(countryCode)"
+                if let url = URL(string: urlString) {
                     checkoutURL = url
                     showCheckoutSheet = true
                     #if DEBUG
