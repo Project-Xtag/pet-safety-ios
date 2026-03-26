@@ -999,6 +999,7 @@
 "billing_past_due_title" = "Zaległa płatność";
 "billing_past_due_message" = "Płatność za subskrypcję jest zaległa. Zaktualizuj metodę płatności.";
 "billing_update_payment" = "Zaktualizuj płatność";
+"billing_portal_error" = "Nie udało się otworzyć portalu rozliczeniowego. Spróbuj ponownie lub skontaktuj się z pomocą techniczną.";
 
 // MARK: - Adres dodatkowy
 "address_search_country" = "Szukaj kraju";

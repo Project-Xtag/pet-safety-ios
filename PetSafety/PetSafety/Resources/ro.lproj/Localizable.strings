@@ -1013,6 +1013,7 @@
 "billing_past_due_title" = "Plată restantă";
 "billing_past_due_message" = "Plata abonamentului este restantă. Vă rugăm să actualizați metoda de plată.";
 "billing_update_payment" = "Actualizare plată";
+"billing_portal_error" = "Nu s-a putut deschide portalul de facturare. Încearcă din nou sau contactează suportul.";
 
 // MARK: - Address Additional
 "address_search_country" = "Căutare țară";

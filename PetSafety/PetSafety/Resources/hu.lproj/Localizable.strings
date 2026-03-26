@@ -1013,6 +1013,7 @@
 "billing_past_due_title" = "Lejárt fizetés";
 "billing_past_due_message" = "Az előfizetésed fizetése lejárt. Kérjük, frissítsd a fizetési módod.";
 "billing_update_payment" = "Fizetés frissítése";
+"billing_portal_error" = "Nem sikerült megnyitni a számlázási portált. Kérjük, próbáld újra vagy lépj kapcsolatba az ügyfélszolgálattal.";
 
 // MARK: - Address Additional
 "address_search_country" = "Ország keresése";

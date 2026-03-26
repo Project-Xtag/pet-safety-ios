@@ -1000,6 +1000,7 @@
 "billing_past_due_title" = "Paiement en retard";
 "billing_past_due_message" = "Le paiement de ton abonnement est en retard. Mets à jour ton mode de paiement.";
 "billing_update_payment" = "Mettre à jour le paiement";
+"billing_portal_error" = "Impossible d'ouvrir le portail de facturation. Veuillez réessayer ou contacter le support.";
 
 // MARK: - Adresse supplémentaire
 "address_search_country" = "Rechercher un pays";

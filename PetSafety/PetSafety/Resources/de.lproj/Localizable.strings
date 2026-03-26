@@ -1013,6 +1013,7 @@
 "billing_past_due_title" = "Zahlung überfällig";
 "billing_past_due_message" = "Ihre Abonnementzahlung ist überfällig. Bitte aktualisieren Sie Ihre Zahlungsmethode.";
 "billing_update_payment" = "Zahlung aktualisieren";
+"billing_portal_error" = "Das Abrechnungsportal konnte nicht geöffnet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie den Support.";
 
 // MARK: - Address Additional
 "address_search_country" = "Land suchen";

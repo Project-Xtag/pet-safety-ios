@@ -1013,6 +1013,7 @@
 "billing_past_due_title" = "Platba po splatnosti";
 "billing_past_due_message" = "Platba za predplatné je po splatnosti. Aktualizujte spôsob platby.";
 "billing_update_payment" = "Aktualizovať platbu";
+"billing_portal_error" = "Nepodarilo sa otvoriť fakturačný portál. Skúste to znova alebo kontaktujte podporu.";
 
 // MARK: - Address Additional
 "address_search_country" = "Hľadať krajinu";

@@ -1013,6 +1013,7 @@
 "billing_past_due_title" = "Pagamento em atraso";
 "billing_past_due_message" = "O pagamento da sua subscrição está em atraso. Por favor, atualize o seu método de pagamento.";
 "billing_update_payment" = "Atualizar pagamento";
+"billing_portal_error" = "Não foi possível abrir o portal de faturação. Tente novamente ou contacte o suporte.";
 
 // MARK: - Address Additional
 "address_search_country" = "Pesquisar país";

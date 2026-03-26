@@ -1013,6 +1013,7 @@
 "billing_past_due_title" = "Pago vencido";
 "billing_past_due_message" = "El pago de tu suscripción está vencido. Por favor, actualiza tu método de pago.";
 "billing_update_payment" = "Actualizar pago";
+"billing_portal_error" = "No se pudo abrir el portal de facturación. Inténtalo de nuevo o contacta con soporte.";
 
 // MARK: - Address Additional
 "address_search_country" = "Buscar país";

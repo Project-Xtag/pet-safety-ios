@@ -1016,6 +1016,7 @@
 "billing_past_due_title" = "Betaling forfalt";
 "billing_past_due_message" = "Abonnementsbetalingen din er forfalt. Oppdater betalingsmåten din.";
 "billing_update_payment" = "Oppdater betaling";
+"billing_portal_error" = "Kunne ikke åpne faktureringsportalen. Prøv igjen eller kontakt kundestøtte.";
 
 // MARK: - Adresse-tillegg
 "address_search_country" = "Søk land";

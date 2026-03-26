@@ -204,7 +204,13 @@ struct BillingView: View {
             await subscriptionViewModel.loadCurrentSubscription()
             await loadInvoices()
         }
-        .sheet(isPresented: $showSafari) {
+        .sheet(isPresented: $showSafari, onDismiss: {
+            // Refresh subscription data after returning from Stripe portal
+            Task {
+                await subscriptionViewModel.loadCurrentSubscription()
+                await loadInvoices()
+            }
+        }) {
             if let url = portalURL {
                 SafariView(url: url)
             }
@@ -299,7 +305,10 @@ struct BillingView: View {
                     showSafari = true
                 }
             } catch {
-                errorMessage = error.localizedDescription
+                errorMessage = NSLocalizedString("billing_portal_error", comment: "Failed to open billing portal")
+                #if DEBUG
+                print("Portal error: \(error.localizedDescription)")
+                #endif
             }
             isPortalLoading = false
         }

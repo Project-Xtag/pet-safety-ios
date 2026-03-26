@@ -1009,6 +1009,7 @@
 "billing_past_due_title" = "Pagamento scaduto";
 "billing_past_due_message" = "Il pagamento del tuo abbonamento è scaduto. Aggiorna il tuo metodo di pagamento.";
 "billing_update_payment" = "Aggiorna pagamento";
+"billing_portal_error" = "Impossibile aprire il portale di fatturazione. Riprova o contatta il supporto.";
 
 // MARK: - Indirizzo aggiuntivo
 "address_search_country" = "Cerca paese";

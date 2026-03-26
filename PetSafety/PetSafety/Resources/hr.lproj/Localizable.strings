@@ -1017,6 +1017,7 @@
 "billing_past_due_title" = "Dospjelo plaćanje";
 "billing_past_due_message" = "Plaćanje tvoje pretplate je dospjelo. Ažuriraj način plaćanja.";
 "billing_update_payment" = "Ažuriraj plaćanje";
+"billing_portal_error" = "Nije moguće otvoriti portal za naplatu. Pokušajte ponovo ili kontaktirajte podršku.";
 
 // MARK: - Address Additional
 "address_search_country" = "Pretraži državu";

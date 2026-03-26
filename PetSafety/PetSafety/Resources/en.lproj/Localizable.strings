@@ -1014,6 +1014,7 @@
 "billing_past_due_title" = "Payment Past Due";
 "billing_past_due_message" = "Your subscription payment is past due. Please update your payment method.";
 "billing_update_payment" = "Update Payment";
+"billing_portal_error" = "Unable to open billing portal. Please try again or contact support.";
 
 // MARK: - Address Additional
 "address_search_country" = "Search Country";
