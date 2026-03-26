@@ -33,6 +33,9 @@ class NotificationHandler: ObservableObject {
         switch type {
         case "PET_SCANNED", "TAG_INITIAL_SCAN":
             handleTagScannedNotification(userInfo)
+        case "TAG_ACTIVATED":
+            // Navigate to pet list — tag activation confirmed
+            NotificationCenter.default.post(name: .navigateToPet, object: nil, userInfo: userInfo as? [String: Any] ?? [:])
         case "MISSING_PET_ALERT":
             handleMissingPetAlert(userInfo)
         case "PET_FOUND":
