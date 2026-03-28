@@ -1255,13 +1255,13 @@
 
 
 // MARK: - Shelter Adoption
-"profile_shelter_code" = "Shelter Adoption Code";
-"shelter_code_title" = "Shelter Code";
-"shelter_code_enter_header" = "Enter Your Code";
-"shelter_code_enter_footer" = "Enter the ADOPT-XXXX code you received from the shelter.";
-"shelter_code_redeem" = "Redeem";
-"shelter_code_success" = "Code redeemed successfully!";
-"shelter_code_invalid" = "Invalid or already redeemed code.";
+"profile_shelter_code" = "Kód adopce z útulku";
+"shelter_code_title" = "Kód z útulku";
+"shelter_code_enter_header" = "Zadej svůj kód";
+"shelter_code_enter_footer" = "Zadej kód ADOPT-XXXX, který jsi dostal z útulku.";
+"shelter_code_redeem" = "Uplatnit";
+"shelter_code_success" = "Kód úspěšně uplatněn!";
+"shelter_code_invalid" = "Neplatný nebo již uplatněný kód.";
 "shelter_how_it_works" = "How It Works";
 "shelter_step_1" = "Adopt a pet from a partner shelter";
 "shelter_step_2" = "Enter the code you received at adoption";

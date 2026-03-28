@@ -1258,13 +1258,13 @@
 
 
 // MARK: - Shelter Adoption
-"profile_shelter_code" = "Shelter Adoption Code";
-"shelter_code_title" = "Shelter Code";
-"shelter_code_enter_header" = "Enter Your Code";
-"shelter_code_enter_footer" = "Enter the ADOPT-XXXX code you received from the shelter.";
-"shelter_code_redeem" = "Redeem";
-"shelter_code_success" = "Code redeemed successfully!";
-"shelter_code_invalid" = "Invalid or already redeemed code.";
+"profile_shelter_code" = "Adopsjonskode fra krisesenter";
+"shelter_code_title" = "Krisesenter-kode";
+"shelter_code_enter_header" = "Skriv inn koden din";
+"shelter_code_enter_footer" = "Skriv inn ADOPT-XXXX-koden du fikk fra krisesenteret.";
+"shelter_code_redeem" = "Løs inn";
+"shelter_code_success" = "Koden er innløst!";
+"shelter_code_invalid" = "Ugyldig eller allerede innløst kode.";
 "shelter_how_it_works" = "How It Works";
 "shelter_step_1" = "Adopt a pet from a partner shelter";
 "shelter_step_2" = "Enter the code you received at adoption";

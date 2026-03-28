@@ -1258,13 +1258,13 @@
 
 
 // MARK: - Shelter Adoption
-"profile_shelter_code" = "Shelter Adoption Code";
-"shelter_code_title" = "Shelter Code";
-"shelter_code_enter_header" = "Enter Your Code";
-"shelter_code_enter_footer" = "Enter the ADOPT-XXXX code you received from the shelter.";
-"shelter_code_redeem" = "Redeem";
-"shelter_code_success" = "Code redeemed successfully!";
-"shelter_code_invalid" = "Invalid or already redeemed code.";
+"profile_shelter_code" = "Kod adopcji ze schroniska";
+"shelter_code_title" = "Kod ze schroniska";
+"shelter_code_enter_header" = "Wpisz swój kod";
+"shelter_code_enter_footer" = "Wpisz kod ADOPT-XXXX otrzymany ze schroniska.";
+"shelter_code_redeem" = "Zrealizuj";
+"shelter_code_success" = "Kod zrealizowany pomyślnie!";
+"shelter_code_invalid" = "Nieprawidłowy lub już zrealizowany kod.";
 "shelter_how_it_works" = "How It Works";
 "shelter_step_1" = "Adopt a pet from a partner shelter";
 "shelter_step_2" = "Enter the code you received at adoption";
