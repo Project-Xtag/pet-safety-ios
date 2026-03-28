@@ -30,7 +30,7 @@
 
 // MARK: - Ověřování
 "welcome_back" = "Vítejte zpět!";
-"welcome_new_user" = "Vítej v Senra Pet!";
+"welcome_new_user" = "Vítej v SENRA Pet!";
 "enter_email_subtitle" = "Zadejte e-mail pro obdržení přihlašovacího kódu.";
 "email_address" = "E-mailová adresa";
 "send_login_code" = "Odeslat přihlašovací kód";
@@ -321,7 +321,7 @@
 "share_card_reunited" = "Nalezen!";
 "story_maybe_later" = "Možná později";
 "story_share_good_news" = "Sdílej dobrou zprávu";
-"story_social_caption %@" = "%@ se opět shledal se svou rodinou! Děkujeme komunitě Senra za pomoc s návratem %@ domů. senra.pet";
+"story_social_caption %@" = "%@ se opět shledal se svou rodinou! Děkujeme komunitě SENRA za pomoc s návratem %@ domů. senra.pet";
 "story_generating_card" = "Vytváření sdílecí karty...";
 "story_your_story" = "Váš příběh";
 "story_city_optional" = "Město/oblast (volitelné)";
@@ -932,9 +932,9 @@
 "help_faq_q7" = "Mohu po registraci aktualizovat informace o svém mazlíčkovi?";
 "help_faq_a7" = "Ano — profil svého mazlíčka můžete upravit kdykoli. Přejděte na 'Moji mazlíčci', vyberte mazlíčka a klepněte na 'Upravit'. Můžete aktualizovat libovolné pole včetně fotografií. Změny se uloží okamžitě.";
 "help_faq_q8" = "Co mám dělat, když se můj mazlíček ztratí?";
-"help_faq_a8" = "Přejděte na 'Moji mazlíčci' a klepněte na nabídku na kartě mazlíčka, pak vyberte 'Označit jako ztraceného'. Tím se vytvoří upozornění na ztraceného mazlíčka viditelné pro komunitu Senra ve vašem okolí. Lidé ve vašem okolí uvidí upozornění a mohou hlásit pozorování s informacemi o poloze. O jakémkoli pozorování budete okamžitě informováni.";
+"help_faq_a8" = "Přejděte na 'Moji mazlíčci' a klepněte na nabídku na kartě mazlíčka, pak vyberte 'Označit jako ztraceného'. Tím se vytvoří upozornění na ztraceného mazlíčka viditelné pro komunitu SENRA ve vašem okolí. Lidé ve vašem okolí uvidí upozornění a mohou hlásit pozorování s informacemi o poloze. O jakémkoli pozorování budete okamžitě informováni.";
 "help_faq_q9" = "Jak fungují upozornění na ztracené mazlíčky?";
-"help_faq_a9" = "Když označíte mazlíčka jako ztraceného, vytvoří se upozornění s fotografií a údaji vašeho mazlíčka. Ostatní uživatelé Senra v okruhu 10 km mohou upozornění vidět na mapě ztracených mazlíčků. Kdokoli z komunity může nahlásit pozorování, čímž vám zašle svou polohu a kontaktní údaje. Upozornění obdrží také veterináři a útulky registrovaní na Senra ve vašem okolí.";
+"help_faq_a9" = "Když označíte mazlíčka jako ztraceného, vytvoří se upozornění s fotografií a údaji vašeho mazlíčka. Ostatní uživatelé SENRA v okruhu 10 km mohou upozornění vidět na mapě ztracených mazlíčků. Kdokoli z komunity může nahlásit pozorování, čímž vám zašle svou polohu a kontaktní údaje. Upozornění obdrží také veterináři a útulky registrovaní na SENRA ve vašem okolí.";
 "help_faq_q10" = "Jak objednám náhradní známka?";
 "help_faq_a10" = "Přejděte na stránku Účet a klepněte na 'Objednat náhradu'. Vyberte mazlíčka, který potřebuje nový známka. Členové plánu Maximum mají neomezené bezplatné náhrady, členové plánu Standard mají jednu bezplatnou náhradu ročně a členové plánu Starter si mohou objednat náhrady za malý poplatek za dopravu.";
 "help_faq_q11" = "Co je to program doporučení?";
@@ -944,31 +944,31 @@
 "help_faq_q13" = "Mohu mít více mazlíčků na jednom účtu?";
 "help_faq_a13" = "Ano. Na plánu Starter (zdarma) můžete zaregistrovat až 10 domácích mazlíčků. Plán Standard podporuje 1 mazlíčka. Plán Maximum podporuje až 10 domácích mazlíčků. Svůj plán můžete kdykoli upgradovat na stránce Účet.";
 "help_faq_q14" = "Jak nahlásím nalezeného mazlíčka?";
-"help_faq_a14" = "Pokud má mazlíček známka Senra, jednoduše naskenujte QR kód kamerou telefonu — není potřeba žádná aplikace. Uvidíte profil mazlíčka a můžete sdílet svou polohu s majitelem. Pokud známka nemá, můžete zkontrolovat mapu ztracených mazlíčků na webu Senra a zjistit, zda byl mazlíček nahlášen jako ztracený ve vašem okolí.";
+"help_faq_a14" = "Pokud má mazlíček známka SENRA, jednoduše naskenujte QR kód kamerou telefonu — není potřeba žádná aplikace. Uvidíte profil mazlíčka a můžete sdílet svou polohu s majitelem. Pokud známka nemá, můžete zkontrolovat mapu ztracených mazlíčků na webu SENRA a zjistit, zda byl mazlíček nahlášen jako ztracený ve vašem okolí.";
 "help_faq_q15" = "Jsou mé osobní údaje v bezpečí?";
 "help_faq_a15" = "Ano. Máte plnou kontrolu nad tím, jaké informace jsou viditelné při naskenování známce vašeho mazlíčka. V Nastavení > Soukromí si můžete zvolit, zda zobrazit nebo skrýt telefonní číslo, e-mail a adresu. Vaše přihlášení je zabezpečeno jednorázovými ověřovacími kódy — žádná hesla, která by mohla být ukradena. Svůj účet a všechna data můžete kdykoli smazat.";
 "help_faq_q16" = "Ztratil jsem známka nebo je poškozený — co mám dělat?";
 "help_faq_a16" = "Nebojte se — digitální profil vašeho mazlíčka je v bezpečí a není uložen na samotném známce. Přejděte na stránku Účet a klepněte na 'Objednat náhradu'. Nový známka s novým QR kódem bude propojen s vaším stávajícím profilem mazlíčka. Členové plánu Standard mají jednu bezplatnou náhradu ročně, členové Maximum mají neomezené bezplatné náhrady a členové Starter zaplatí malý poplatek za dopravu. Váš starý známka přestane fungovat po aktivaci nového.";
 "help_faq_q17" = "Můj známka nejde naskenovat — jak to opravím?";
 "help_faq_a17" = "Zkuste tyto kroky: očistěte povrch známce vlhkým hadříkem, zajistěte dobré osvětlení, držte kameru telefonu stabilně asi 10–15 cm od známce a ujistěte se, že aplikace fotoaparátu nebo QR skener funguje. Pokud je QR kód poškrábaný nebo vybledlý, můžete použít možnost ručního zadání kódu v aplikaci pod 'Naskenovat známka'. Pokud je známka příliš poškozený na čtení, objednejte si bezplatnou náhradu na stránce Účet (plány Standard a Maximum).";
-"help_faq_q18" = "Našel jsem mazlíčka bez známce Senra — co mohu udělat?";
-"help_faq_a18" = "Zkontrolujte mapu ztracených mazlíčků na webu Senra (senra.pet) — mazlíček mohl být nahlášen jako ztracený ve vašem okolí. Upozornění na ztracené mazlíčky si můžete prohlédnout bez účtu. Pokud najdete shodu, můžete nahlásit pozorování se svou polohou a pomoci tak sjednotit mazlíčka s majitelem. Můžete také vzít mazlíčka k místnímu veterináři na kontrolu mikročipu.";
+"help_faq_q18" = "Našel jsem mazlíčka bez známce SENRA — co mohu udělat?";
+"help_faq_a18" = "Zkontrolujte mapu ztracených mazlíčků na webu SENRA (senra.pet) — mazlíček mohl být nahlášen jako ztracený ve vašem okolí. Upozornění na ztracené mazlíčky si můžete prohlédnout bez účtu. Pokud najdete shodu, můžete nahlásit pozorování se svou polohou a pomoci tak sjednotit mazlíčka s majitelem. Můžete také vzít mazlíčka k místnímu veterináři na kontrolu mikročipu.";
 "help_faq_q19" = "Mohu změnit svou e-mailovou adresu?";
 "help_faq_a19" = "Vaše primární e-mailová adresa slouží jako identita vašeho účtu a nelze ji přímo změnit. Pokud potřebujete použít jiný e-mail, můžete přidat sekundární e-mail v Nastavení > Kontaktní údaje — ten se také zobrazí na profilu vašeho mazlíčka. Pokud nezbytně potřebujete změnit primární e-mail, kontaktujte náš tým podpory a pomůžeme vám s migrací účtu.";
-"help_faq_q20" = "Jaký je rozdíl mezi mikročipem a QR známkou Senra?";
-"help_faq_a20" = "Mikročip je drobný implantát pod kůží vašeho mazlíčka, který ukládá jedinečné ID číslo — ale k jeho přečtení je potřeba speciální skener (obvykle dostupný pouze u veterinářů a v útulcích). QR známka Senra funguje okamžitě s jakoukoli kamerou chytrého telefonu a zobrazuje celý profil mazlíčka, fotografii a vaše kontaktní údaje na místě. Osoba, která vašeho mazlíčka najde, s vámi může sdílet i svou GPS polohu. Doporučujeme používat obojí: mikročip jako trvalou zálohu a známka Senra pro okamžitou každodenní identifikaci.";
+"help_faq_q20" = "Jaký je rozdíl mezi mikročipem a QR známkou SENRA?";
+"help_faq_a20" = "Mikročip je drobný implantát pod kůží vašeho mazlíčka, který ukládá jedinečné ID číslo — ale k jeho přečtení je potřeba speciální skener (obvykle dostupný pouze u veterinářů a v útulcích). QR známka SENRA funguje okamžitě s jakoukoli kamerou chytrého telefonu a zobrazuje celý profil mazlíčka, fotografii a vaše kontaktní údaje na místě. Osoba, která vašeho mazlíčka najde, s vámi může sdílet i svou GPS polohu. Doporučujeme používat obojí: mikročip jako trvalou zálohu a známka SENRA pro okamžitou každodenní identifikaci.";
 "help_faq_q21" = "Co se stane s mými daty, pokud zruším předplatné?";
 "help_faq_a21" = "Pokud zrušíte předplatné, budete mít přístup k placeným funkcím až do konce aktuálního fakturačního období. Poté se váš účet automaticky přesune na bezplatný plán Starter. Profily mazlíčků, fotografie a QR známky zůstanou aktivní — pouze ztratíte přístup k prémiovým funkcím jako SMS oznámení, upozornění veterinářů a bezplatné náhrady známek. Vaše data se při zrušení nikdy nemažou. Pro trvalé odstranění všech dat použijte možnost Smazání účtu v Nastavení.";
-"help_faq_q22" = "Jak zaregistruji svého veterináře nebo útulok na Senra?";
+"help_faq_q22" = "Jak zaregistruji svého veterináře nebo útulok na SENRA?";
 "help_faq_a22" = "Veterináři a útulky se mohou zaregistrovat na senra.pet/register-vet-shelter. Vyplňte údaje o vaší praxi nebo organizaci a my vám zašleme ověřovací e-mail. Po potvrzení budete automaticky dostávat e-mailová upozornění, když se ve vašem okolí ztratí mazlíčci — a pomáhat tak s jejich návratem k rodinám. Je to zdarma a není potřeba přihlášení. Majitelé mazlíčků mohou svého místního veterináře zaregistrovat také za něj.";
 "help_faq_q23" = "Jak sdílím příběh úspěchu, když je můj mazlíček nalezen?";
 "help_faq_a23" = "Když označíte svého mazlíčka jako nalezeného v 'Moji mazlíčci', budete dotázáni, zda chcete sdílet svůj příběh shledání. Můžete přidat krátkou zprávu o tom, jak byl váš mazlíček nalezen, a potvrdit místo shledání. Veřejné příběhy se zobrazují na mapě nalezených mazlíčků, inspirují komunitu a ukazují, že systém funguje. Příběh úspěchu můžete také přidat nebo odebrat později ze stránky profilu mazlíčka.";
 "help_faq_q24" = "Které prohlížeče a zařízení jsou podporovány?";
-"help_faq_a24" = "Senra funguje ve všech moderních webových prohlížečích včetně Chrome, Safari, Firefox a Edge na mobilních zařízeních i počítačích. Skenování QR známek funguje s jakoukoli kamerou chytrého telefonu — osoba, která najde vašeho mazlíčka, nepotřebuje aplikaci Senra ani účet. Push oznámení jsou podporována v Chrome a Edge na počítačích a Androidu. Pro nejlepší zážitek doporučujeme používat aktuální prohlížeč na vašem telefonu.";
+"help_faq_a24" = "SENRA funguje ve všech moderních webových prohlížečích včetně Chrome, Safari, Firefox a Edge na mobilních zařízeních i počítačích. Skenování QR známek funguje s jakoukoli kamerou chytrého telefonu — osoba, která najde vašeho mazlíčka, nepotřebuje aplikaci SENRA ani účet. Push oznámení jsou podporována v Chrome a Edge na počítačích a Androidu. Pro nejlepší zážitek doporučujeme používat aktuální prohlížeč na vašem telefonu.";
 "help_faq_q25" = "Mohu objednat známky pro více mazlíčků najednou?";
 "help_faq_a25" = "Každá objednávka známek zahrnuje známky pro jména mazlíčků, která zadáte při pokladně. V jedné objednávce můžete zadat více jmen mazlíčků. Po doručení známek naskenujte každý z nich pro aktivaci a propojení se správným profilem mazlíčka. Pokud později potřebujete známky pro další mazlíčky, můžete kdykoli zadat další objednávky na stránce Účet.";
 "help_faq_q26" = "Jak se upozornění na ztracené mazlíčky dostanou k veterinářům a útulkům?";
-"help_faq_a26" = "Když označíte svého mazlíčka jako ztraceného, Senra automaticky odešle e-mailová upozornění všem ověřeným veterinářům a útulkům registrovaným ve vašem okolí. To znamená, že místní odborníci na zvířata jsou okamžitě informováni o tom, že váš mazlíček je ztracený, a mohou po něm pátrat. Čím více veterinářů a útulků je ve vašem okolí registrováno, tím silnější je bezpečnostní síť. Můžete pomoci tím, že povzbudíte svého veterináře k registraci na Senra.";
+"help_faq_a26" = "Když označíte svého mazlíčka jako ztraceného, SENRA automaticky odešle e-mailová upozornění všem ověřeným veterinářům a útulkům registrovaným ve vašem okolí. To znamená, že místní odborníci na zvířata jsou okamžitě informováni o tom, že váš mazlíček je ztracený, a mohou po něm pátrat. Čím více veterinářů a útulků je ve vašem okolí registrováno, tím silnější je bezpečnostní síť. Můžete pomoci tím, že povzbudíte svého veterináře k registraci na SENRA.";
 "help_faq_q27" = "Mohu převést známka na jiného mazlíčka?";
 "help_faq_a27" = "Každý QR známka je trvale propojen s jedním profilem mazlíčka a nelze ho přeřadit. Pokud mazlíček zemře nebo známka již nepotřebujete, starý známka se jednoduše deaktivuje. Pro označení nového mazlíčka objednejte nový známka na stránce Účet. Pokud máte plán Standard nebo Maximum, můžete mít nárok na bezplatný náhradní známka pro svého nového mazlíčka.";
 "help_guide_qr_tags_title" = "QR známky pro mazlíčky";
@@ -980,9 +980,9 @@
 "help_guide_profile_title" = "Správa profilu";
 "help_guide_profile_desc" = "Správa a aktualizace profilu mazlíčka.";
 "help_guide_missing_alerts_title" = "Upozornění na ztracené mazlíčky a pozorování";
-"help_guide_missing_alerts_desc" = "Pokud se váš mazlíček ztratí, označte ho jako ztraceného v 'Moji mazlíčci' a vytvořte okamžité komunitní upozornění. Fotografie a údaje vašeho mazlíčka se zobrazí na mapě ztracených mazlíčků viditelné pro všechny uživatele Senra ve vašem okolí. Členové komunity mohou hlásit pozorování se svou GPS polohou, která obdržíte jako oznámení. Registrovaní veterináři a útulky jsou také upozorněni. Jakmile je váš mazlíček nalezen, označte ho jako nalezeného a volitelně sdílejte svůj příběh shledání pro inspiraci komunity.";
+"help_guide_missing_alerts_desc" = "Pokud se váš mazlíček ztratí, označte ho jako ztraceného v 'Moji mazlíčci' a vytvořte okamžité komunitní upozornění. Fotografie a údaje vašeho mazlíčka se zobrazí na mapě ztracených mazlíčků viditelné pro všechny uživatele SENRA ve vašem okolí. Členové komunity mohou hlásit pozorování se svou GPS polohou, která obdržíte jako oznámení. Registrovaní veterináři a útulky jsou také upozorněni. Jakmile je váš mazlíček nalezen, označte ho jako nalezeného a volitelně sdílejte svůj příběh shledání pro inspiraci komunity.";
 "help_guide_community_title" = "Komunita a nalezení mazlíčci";
-"help_guide_community_desc" = "Síla Senra je v její komunitě. Mapa ztracených mazlíčků zobrazuje aktivní upozornění ve vašem okolí — podívejte se, zda nebyli ve vašem okolí nahlášeni ztracení mazlíčci. Stránka nalezených mazlíčků oslavuje úspěšná shledání s příběhy majitelů. Můžete zaregistrovat svého místního veterináře nebo útulok na Senra, aby automaticky dostávali upozornění na ztracené mazlíčky, a pomoci tak vytvořit silnější bezpečnostní síť pro všechny mazlíčky ve vašem okolí.";
+"help_guide_community_desc" = "Síla SENRA je v její komunitě. Mapa ztracených mazlíčků zobrazuje aktivní upozornění ve vašem okolí — podívejte se, zda nebyli ve vašem okolí nahlášeni ztracení mazlíčci. Stránka nalezených mazlíčků oslavuje úspěšná shledání s příběhy majitelů. Můžete zaregistrovat svého místního veterináře nebo útulok na SENRA, aby automaticky dostávali upozornění na ztracené mazlíčky, a pomoci tak vytvořit silnější bezpečnostní síť pro všechny mazlíčky ve vašem okolí.";
 "help_faq_group_getting_started" = "Začínáme";
 "help_faq_group_tags_scanning" = "Známky a skenování";
 "help_faq_group_missing_pets" = "Ztracení mazlíčci a upozornění";
@@ -1109,7 +1109,7 @@
 "just_now" = "Právě teď";
 
 // MARK: - Activation Error Messages
-"activation_error_qr_not_found" = "QR kód nebyl rozpoznán. Ujistěte se, že skenujete oficiální Senra známku.";
+"activation_error_qr_not_found" = "QR kód nebyl rozpoznán. Ujistěte se, že skenujete oficiální SENRA známku.";
 "activation_error_already_activated" = "Tato známka je již přiřazena jinému zvířeti. Kontaktujte podporu.";
 "activation_error_not_linked" = "Tato známka zatím nebyla přiřazena k vaší objednávce. Počkejte na potvrzení odeslání.";
 "activation_error_not_shipped" = "Vaše objednávka ještě nebyla odeslána. Počkejte na doručení.";
@@ -1327,7 +1327,7 @@
 "order_more_subtitle" = "Objednejte štítky pro mazlíčky — štítky zdarma, platíte jen poštovné";
 
 // MARK: - Welcome Screen
-"welcome_to_senra" = "Vítejte v Senra!";
+"welcome_to_senra" = "Vítejte v SENRA!";
 "welcome_subtitle" = "Bezpečnost vašeho mazlíčka začíná zde. Nastavte si první štítek.";
 "welcome_step_1" = "Naskenujte QR kód na štítku";
 "welcome_step_2" = "Vytvořte profil svého mazlíčka";
@@ -1342,7 +1342,7 @@
 "already_activated" = "Již aktivováno";
 "setting_up_tag_for %@" = "Nastavení štítku pro %@";
 "tag_activated_for %@" = "Štítek pro %@ aktivován!";
-"pet_now_protected" = "Váš mazlíček je nyní chráněn se Senra";
+"pet_now_protected" = "Váš mazlíček je nyní chráněn se SENRA";
 "more_tags_to_setup" = "Ještě máte štítky k nastavení";
 "setup_pet_tag %@" = "Nastavit štítek pro %@";
 "whats_next" = "Co dál?";
@@ -1350,7 +1350,7 @@
 "register_your_vet" = "Zaregistrujte svého veterináře";
 "update_contact_details" = "Aktualizujte kontaktní údaje a soukromí";
 "go_to_home" = "Na úvodní stránku";
-"thank_you_senra" = "Děkujeme, že používáte Senra!";
+"thank_you_senra" = "Děkujeme, že používáte SENRA!";
 "tap_pet_name_hint" = "Stačí klepnout na jméno mazlíčka a nastavit jeho štítek";
 
 // MARK: - Age Formatting

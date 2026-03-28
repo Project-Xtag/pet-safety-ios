@@ -30,7 +30,7 @@
 
 // MARK: - Autenticación
 "welcome_back" = "¡Bienvenido de nuevo!";
-"welcome_new_user" = "¡Bienvenido a Senra Pet!";
+"welcome_new_user" = "¡Bienvenido a SENRA Pet!";
 "enter_email_subtitle" = "Introduce tu correo para recibir un código de acceso.";
 "email_address" = "Correo electrónico";
 "send_login_code" = "Enviar código de acceso";
@@ -321,7 +321,7 @@
 "share_card_reunited" = "¡Reunido!";
 "story_maybe_later" = "Tal vez más tarde";
 "story_share_good_news" = "Comparte la buena noticia";
-"story_social_caption %@" = "¡%@ se ha reunido con su familia! Gracias a la comunidad Senra por ayudar a traer a %@ a casa. senra.pet";
+"story_social_caption %@" = "¡%@ se ha reunido con su familia! Gracias a la comunidad SENRA por ayudar a traer a %@ a casa. senra.pet";
 "story_generating_card" = "Creando tarjeta para compartir...";
 "story_your_story" = "Tu historia";
 "story_city_optional" = "Ciudad/Área (opcional)";
@@ -932,9 +932,9 @@
 "help_faq_q7" = "¿Puedo actualizar la información de mi mascota después del registro?";
 "help_faq_a7" = "Sí, puedes editar el perfil de tu mascota en cualquier momento. Ve a \"Mis mascotas\", selecciona tu mascota y pulsa \"Editar\". Puedes actualizar cualquier campo incluyendo fotos. Los cambios se guardan inmediatamente.";
 "help_faq_q8" = "¿Qué debo hacer si mi mascota se pierde?";
-"help_faq_a8" = "Ve a \"Mis mascotas\" y pulsa el menú en la tarjeta de tu mascota, luego selecciona \"Marcar como perdido\". Esto crea una alerta visible para la comunidad Senra en tu zona. Los usuarios cercanos verán la alerta y podrán reportar avistamientos con información de ubicación. Serás notificado inmediatamente de cualquier avistamiento.";
+"help_faq_a8" = "Ve a \"Mis mascotas\" y pulsa el menú en la tarjeta de tu mascota, luego selecciona \"Marcar como perdido\". Esto crea una alerta visible para la comunidad SENRA en tu zona. Los usuarios cercanos verán la alerta y podrán reportar avistamientos con información de ubicación. Serás notificado inmediatamente de cualquier avistamiento.";
 "help_faq_q9" = "¿Cómo funcionan las alertas de mascotas perdidas?";
-"help_faq_a9" = "Al marcar una mascota como perdida, se crea una alerta con la foto y detalles. Otros usuarios de Senra en un radio de 10 km pueden ver la alerta en el mapa. Cualquier miembro de la comunidad puede reportar un avistamiento, enviándote su ubicación y contacto. Los veterinarios y refugios registrados en Senra también reciben la alerta.";
+"help_faq_a9" = "Al marcar una mascota como perdida, se crea una alerta con la foto y detalles. Otros usuarios de SENRA en un radio de 10 km pueden ver la alerta en el mapa. Cualquier miembro de la comunidad puede reportar un avistamiento, enviándote su ubicación y contacto. Los veterinarios y refugios registrados en SENRA también reciben la alerta.";
 "help_faq_q10" = "¿Cómo pido una placa de reemplazo?";
 "help_faq_a10" = "Ve a tu página de cuenta y pulsa \"Pedir reemplazo\". Selecciona la mascota que necesita una nueva placa. Los miembros Maximum obtienen reemplazos gratuitos ilimitados, los Standard uno gratis al año, y los Starter pueden pedir con un pequeño coste de envío.";
 "help_faq_q11" = "¿Qué es el programa de referidos?";
@@ -944,31 +944,31 @@
 "help_faq_q13" = "¿Puedo tener varias mascotas en una cuenta?";
 "help_faq_a13" = "Sí. En el plan Starter (gratis) puedes registrar hasta 10 mascotas. El plan Standard soporta 1 mascota. El plan Maximum soporta hasta 10 mascotas. Puedes mejorar tu plan en cualquier momento desde la página de cuenta.";
 "help_faq_q14" = "¿Cómo reporto una mascota encontrada?";
-"help_faq_a14" = "Si la mascota tiene una placa Senra, simplemente escanea el QR con la cámara de tu teléfono — no necesitas app. Verás el perfil y podrás compartir tu ubicación con el dueño. Si no tiene placa, revisa el mapa de mascotas perdidas en la web de Senra.";
+"help_faq_a14" = "Si la mascota tiene una placa SENRA, simplemente escanea el QR con la cámara de tu teléfono — no necesitas app. Verás el perfil y podrás compartir tu ubicación con el dueño. Si no tiene placa, revisa el mapa de mascotas perdidas en la web de SENRA.";
 "help_faq_q15" = "¿Mi información personal está segura?";
 "help_faq_a15" = "Sí. Tú controlas exactamente qué información es visible cuando alguien escanea la placa. En Ajustes > Privacidad, puedes mostrar u ocultar tu teléfono, correo y dirección. Tu inicio de sesión está protegido con códigos de un solo uso — no hay contraseñas que robar. Puedes eliminar tu cuenta en cualquier momento.";
 "help_faq_q16" = "Perdí mi placa o está dañada — ¿qué hago?";
 "help_faq_a16" = "No te preocupes — el perfil digital de tu mascota está seguro y no se almacena en la placa. Ve a tu cuenta y pulsa \"Pedir reemplazo\". Una nueva placa con QR nuevo se vinculará a tu perfil existente. Los miembros Standard obtienen un reemplazo gratis al año, los Maximum ilimitados, y los Starter pagan un pequeño coste de envío. Tu placa antigua dejará de funcionar al activar la nueva.";
 "help_faq_q17" = "Mi placa no se escanea — ¿cómo lo soluciono?";
 "help_faq_a17" = "Prueba estos pasos: limpia la superficie con un paño húmedo, asegura buena iluminación, mantén la cámara estable a unos 10-15 cm, y verifica que tu cámara o escáner QR funcione. Si el QR está rayado o descolorido, usa la entrada manual en \"Escanear placa\". Si está muy dañada, pide un reemplazo gratuito (planes Standard y Maximum).";
-"help_faq_q18" = "Encontré una mascota sin placa Senra — ¿qué puedo hacer?";
-"help_faq_a18" = "Revisa el mapa de mascotas perdidas en la web de Senra (senra.pet) — la mascota podría estar reportada como perdida en tu zona. Puedes ver alertas sin cuenta. Si encuentras coincidencia, reporta un avistamiento con tu ubicación. También puedes llevar la mascota al veterinario para revisar el microchip.";
+"help_faq_q18" = "Encontré una mascota sin placa SENRA — ¿qué puedo hacer?";
+"help_faq_a18" = "Revisa el mapa de mascotas perdidas en la web de SENRA (senra.pet) — la mascota podría estar reportada como perdida en tu zona. Puedes ver alertas sin cuenta. Si encuentras coincidencia, reporta un avistamiento con tu ubicación. También puedes llevar la mascota al veterinario para revisar el microchip.";
 "help_faq_q19" = "¿Puedo cambiar mi dirección de correo?";
 "help_faq_a19" = "Tu correo principal se usa como identidad de cuenta y no se puede cambiar directamente. Si necesitas usar otro correo, puedes añadir uno secundario en Ajustes > Datos de contacto. Si absolutamente necesitas cambiar el principal, contacta a nuestro equipo de soporte.";
-"help_faq_q20" = "¿Cuál es la diferencia entre un microchip y una placa QR Senra?";
-"help_faq_a20" = "Un microchip es un implante diminuto bajo la piel que almacena un número ID — pero requiere un escáner especial (generalmente solo disponible en veterinarios y refugios). Una placa QR Senra funciona al instante con cualquier cámara de smartphone, mostrando el perfil completo, foto y tus datos de contacto. Quien encuentre tu mascota también puede compartir su ubicación GPS contigo. Recomendamos usar ambos: el microchip como respaldo permanente, y la placa Senra para identificación diaria instantánea.";
+"help_faq_q20" = "¿Cuál es la diferencia entre un microchip y una placa QR SENRA?";
+"help_faq_a20" = "Un microchip es un implante diminuto bajo la piel que almacena un número ID — pero requiere un escáner especial (generalmente solo disponible en veterinarios y refugios). Una placa QR SENRA funciona al instante con cualquier cámara de smartphone, mostrando el perfil completo, foto y tus datos de contacto. Quien encuentre tu mascota también puede compartir su ubicación GPS contigo. Recomendamos usar ambos: el microchip como respaldo permanente, y la placa SENRA para identificación diaria instantánea.";
 "help_faq_q21" = "¿Qué pasa con mis datos si cancelo la suscripción?";
 "help_faq_a21" = "Si cancelas, mantienes acceso hasta el final del periodo de facturación actual. Después, tu cuenta pasa automáticamente al plan Starter gratuito. Los perfiles, fotos y placas QR siguen activos — solo pierdes funciones premium como SMS, alertas a veterinarios y reemplazos gratuitos. Tus datos nunca se eliminan al cancelar. Para eliminar todo permanentemente, usa la opción de eliminación de cuenta en Ajustes.";
-"help_faq_q22" = "¿Cómo registro mi veterinario o refugio en Senra?";
+"help_faq_q22" = "¿Cómo registro mi veterinario o refugio en SENRA?";
 "help_faq_a22" = "Los veterinarios y refugios pueden registrarse en senra.pet/register-vet-shelter. Completa los datos de tu clínica u organización y enviaremos un correo de verificación. Una vez confirmado, recibirás automáticamente alertas por correo cuando se pierdan mascotas en tu zona. No tiene coste ni requiere inicio de sesión. Los dueños también pueden registrar a su veterinario.";
 "help_faq_q23" = "¿Cómo comparto una historia de éxito cuando encuentran a mi mascota?";
 "help_faq_a23" = "Cuando marques a tu mascota como encontrada en \"Mis mascotas\", se te preguntará si deseas compartir tu historia. Puedes añadir un mensaje corto y confirmar la ubicación. Las historias públicas aparecen en el mapa de mascotas encontradas. También puedes publicar o eliminar una historia después.";
 "help_faq_q24" = "¿Qué navegadores y dispositivos son compatibles?";
-"help_faq_a24" = "Senra funciona en todos los navegadores modernos incluyendo Chrome, Safari, Firefox y Edge en móvil y escritorio. El escaneo de placas funciona con cualquier cámara de smartphone — quien encuentre tu mascota no necesita la app ni una cuenta. Las notificaciones push son compatibles con Chrome y Edge en escritorio y Android. Para la mejor experiencia, recomendamos un navegador actualizado.";
+"help_faq_a24" = "SENRA funciona en todos los navegadores modernos incluyendo Chrome, Safari, Firefox y Edge en móvil y escritorio. El escaneo de placas funciona con cualquier cámara de smartphone — quien encuentre tu mascota no necesita la app ni una cuenta. Las notificaciones push son compatibles con Chrome y Edge en escritorio y Android. Para la mejor experiencia, recomendamos un navegador actualizado.";
 "help_faq_q25" = "¿Puedo pedir placas para varias mascotas a la vez?";
 "help_faq_a25" = "Cada pedido incluye placas para los nombres de mascotas que especifiques al pagar. Puedes introducir varios nombres en un solo pedido. Cuando lleguen, escanea cada una para activarla y vincularla al perfil correcto. Si necesitas más placas después, puedes hacer pedidos adicionales en cualquier momento.";
 "help_faq_q26" = "¿Cómo llegan las alertas a veterinarios y refugios?";
-"help_faq_a26" = "Cuando marcas a tu mascota como perdida, Senra envía automáticamente alertas por correo a todos los veterinarios y refugios verificados en tu zona. Esto significa que los profesionales locales saben inmediatamente que tu mascota está perdida. Cuantos más veterinarios y refugios registrados, más fuerte es la red de seguridad. Puedes ayudar animando a tu propio veterinario a registrarse en Senra.";
+"help_faq_a26" = "Cuando marcas a tu mascota como perdida, SENRA envía automáticamente alertas por correo a todos los veterinarios y refugios verificados en tu zona. Esto significa que los profesionales locales saben inmediatamente que tu mascota está perdida. Cuantos más veterinarios y refugios registrados, más fuerte es la red de seguridad. Puedes ayudar animando a tu propio veterinario a registrarse en SENRA.";
 "help_faq_q27" = "¿Puedo transferir una placa a otra mascota?";
 "help_faq_a27" = "Cada placa QR está vinculada permanentemente a un perfil y no se puede reasignar. Si una mascota fallece o ya no necesitas la placa, simplemente queda inactiva. Para etiquetar una nueva mascota, pide una nueva placa desde tu cuenta. Si tienes un plan Standard o Maximum, podrías tener derecho a una placa de reemplazo gratuita.";
 "help_guide_qr_tags_title" = "Placas QR para mascotas";
@@ -980,9 +980,9 @@
 "help_guide_profile_title" = "Gestión de perfil";
 "help_guide_profile_desc" = "Gestiona y actualiza el perfil de tu mascota.";
 "help_guide_missing_alerts_title" = "Alertas de mascotas perdidas y avistamientos";
-"help_guide_missing_alerts_desc" = "Si tu mascota se pierde, márcala como perdida desde \"Mis mascotas\" para crear una alerta comunitaria instantánea. La foto y los detalles de tu mascota aparecen en el mapa de mascotas perdidas visible para todos los usuarios de Senra en tu zona. Los miembros de la comunidad pueden reportar avistamientos con su ubicación GPS, que recibes como notificaciones. Los veterinarios y refugios registrados también son alertados. Cuando tu mascota sea encontrada, márcala como encontrada y opcionalmente comparte tu historia de reencuentro para inspirar a la comunidad.";
+"help_guide_missing_alerts_desc" = "Si tu mascota se pierde, márcala como perdida desde \"Mis mascotas\" para crear una alerta comunitaria instantánea. La foto y los detalles de tu mascota aparecen en el mapa de mascotas perdidas visible para todos los usuarios de SENRA en tu zona. Los miembros de la comunidad pueden reportar avistamientos con su ubicación GPS, que recibes como notificaciones. Los veterinarios y refugios registrados también son alertados. Cuando tu mascota sea encontrada, márcala como encontrada y opcionalmente comparte tu historia de reencuentro para inspirar a la comunidad.";
 "help_guide_community_title" = "Comunidad y mascotas encontradas";
-"help_guide_community_desc" = "La fortaleza de Senra es su comunidad. El mapa de mascotas perdidas muestra alertas activas cerca de ti — revísalo para ver si alguna mascota ha sido reportada como perdida en tu zona. La página de mascotas encontradas celebra reencuentros exitosos con historias de dueños. Puedes registrar a tu veterinario o refugio en Senra para que reciban alertas automáticas, ayudando a crear una red de seguridad más fuerte para todas las mascotas de tu zona.";
+"help_guide_community_desc" = "La fortaleza de SENRA es su comunidad. El mapa de mascotas perdidas muestra alertas activas cerca de ti — revísalo para ver si alguna mascota ha sido reportada como perdida en tu zona. La página de mascotas encontradas celebra reencuentros exitosos con historias de dueños. Puedes registrar a tu veterinario o refugio en SENRA para que reciban alertas automáticas, ayudando a crear una red de seguridad más fuerte para todas las mascotas de tu zona.";
 "help_faq_group_getting_started" = "Primeros pasos";
 "help_faq_group_tags_scanning" = "Placas y escaneo";
 "help_faq_group_missing_pets" = "Mascotas perdidas y alertas";
@@ -1109,7 +1109,7 @@
 "just_now" = "Ahora mismo";
 
 // MARK: - Activation Error Messages
-"activation_error_qr_not_found" = "Código QR no reconocido. Asegúrate de escanear una placa oficial de Senra.";
+"activation_error_qr_not_found" = "Código QR no reconocido. Asegúrate de escanear una placa oficial de SENRA.";
 "activation_error_already_activated" = "Esta placa ya está vinculada a otra mascota. Contacta con soporte.";
 "activation_error_not_linked" = "Esta placa aún no ha sido asignada a tu pedido. Espera la confirmación de envío.";
 "activation_error_not_shipped" = "Tu pedido aún no ha sido enviado. Espera a recibir tu placa.";
@@ -1327,7 +1327,7 @@
 "order_more_subtitle" = "Pide placas para tus mascotas — placas gratis, solo pagas el envío";
 
 // MARK: - Welcome Screen
-"welcome_to_senra" = "¡Bienvenido a Senra!";
+"welcome_to_senra" = "¡Bienvenido a SENRA!";
 "welcome_subtitle" = "La seguridad de tu mascota empieza aquí. Configura tu primera etiqueta.";
 "welcome_step_1" = "Escanea el código QR de tu etiqueta";
 "welcome_step_2" = "Crea el perfil de tu mascota";
@@ -1342,7 +1342,7 @@
 "already_activated" = "Ya activada";
 "setting_up_tag_for %@" = "Configurando etiqueta para %@";
 "tag_activated_for %@" = "¡Etiqueta activada para %@!";
-"pet_now_protected" = "Tu mascota ahora está protegida con Senra";
+"pet_now_protected" = "Tu mascota ahora está protegida con SENRA";
 "more_tags_to_setup" = "Aún tienes etiquetas por configurar";
 "setup_pet_tag %@" = "Configurar etiqueta de %@";
 "whats_next" = "¿Qué sigue?";
@@ -1350,7 +1350,7 @@
 "register_your_vet" = "Registra a tu veterinario";
 "update_contact_details" = "Actualiza tus datos de contacto y privacidad";
 "go_to_home" = "Ir al inicio";
-"thank_you_senra" = "¡Gracias por usar Senra!";
+"thank_you_senra" = "¡Gracias por usar SENRA!";
 "tap_pet_name_hint" = "Solo toca el nombre de tu mascota para configurar su etiqueta";
 
 // MARK: - Age Formatting

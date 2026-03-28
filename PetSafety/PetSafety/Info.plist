@@ -80,8 +80,6 @@
 	<string>We need photo library access to upload pet profile photos.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We use your location to show nearby missing pet alerts and help locate found pets.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We use your location to notify you about missing pets in your area.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use Face ID to securely sign in to your account.</string>
 

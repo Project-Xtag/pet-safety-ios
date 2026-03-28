@@ -30,7 +30,7 @@
 
 // MARK: - Innlogging
 "welcome_back" = "Velkommen tilbake!";
-"welcome_new_user" = "Velkommen til Senra Pet!";
+"welcome_new_user" = "Velkommen til SENRA Pet!";
 "enter_email_subtitle" = "Skriv inn e-postadressen din for å motta en innloggingskode.";
 "email_address" = "E-postadresse";
 "send_login_code" = "Send innloggingskode";
@@ -80,7 +80,7 @@
 "action_order_tags" = "BESTILL MERKER";
 "action_replace_tag" = "BYTT MERKE";
 "empty_pets_title" = "Ingen dyr registrert ennå";
-"empty_pets_message" = "Legg til ditt første kjæledyr for å komme i gang med Senra";
+"empty_pets_message" = "Legg til ditt første kjæledyr for å komme i gang med SENRA";
 "missing_badge" = "SAVNET";
 "add_pet" = "Legg til dyr";
 "pet_name" = "Dyrets navn";
@@ -321,7 +321,7 @@
 "share_card_reunited" = "Gjenforent!";
 "story_maybe_later" = "Kanskje senere";
 "story_share_good_news" = "Del de gode nyhetene";
-"story_social_caption %@" = "%@ er gjenforent med familien sin! Takk til Senra-fellesskapet for å ha hjulpet %@ hjem. senra.pet";
+"story_social_caption %@" = "%@ er gjenforent med familien sin! Takk til SENRA-fellesskapet for å ha hjulpet %@ hjem. senra.pet";
 "story_generating_card" = "Lager delingskort...";
 "story_your_story" = "Din historie";
 "story_city_optional" = "By/område (valgfritt)";
@@ -491,13 +491,13 @@
 
 // FAQ-elementer
 "help_faq_q1" = "Hvordan oppretter jeg en konto?";
-"help_faq_a1" = "Senra bruker passordløs innlogging. Skriv inn e-postadressen din på innloggingssiden, så sender vi deg en 6-sifret bekreftelseskode. Skriv inn koden for å logge inn. Hvis du er ny, opprettes kontoen automatisk ved første innlogging – ingen separat registrering nødvendig.";
+"help_faq_a1" = "SENRA bruker passordløs innlogging. Skriv inn e-postadressen din på innloggingssiden, så sender vi deg en 6-sifret bekreftelseskode. Skriv inn koden for å logge inn. Hvis du er ny, opprettes kontoen automatisk ved første innlogging – ingen separat registrering nødvendig.";
 "help_faq_q2" = "Hvordan registrerer jeg dyret mitt?";
 "help_faq_a2" = "Gå til 'Dyrene mine' og trykk 'Legg til nytt dyr'. Skriv inn dyrets navn, art, rase og alder, og last opp et bilde. Hvis du allerede har mottatt QR-kjæledyrmerket, kan du skanne det under registreringen for å knytte det direkte til dyrets profil.";
 "help_faq_q3" = "Hvilken informasjon bør jeg inkludere i dyrets profil?";
 "help_faq_a3" = "Som et minimum, legg til dyrets navn, art og et tydelig bilde. For best sjanse for rask gjenforening hvis de forsvinner, legg også til: rase, alder, vekt, farge, mikrochipnummer, medisinske notater, allergier, medisiner og unike kjennetegn (kjæledyrmerker, arr osv.). Jo mer detaljer, desto lettere er det for noen å identifisere dyret ditt.";
 "help_faq_q4" = "Hvordan fungerer QR-kodemerket?";
-"help_faq_a4" = "Hvert Senra-kjæledyrmerke har en unik QR-kode. Når noen finner dyret ditt og skanner den med telefonkameraet, ser de umiddelbart dyrets profil – bilde, navn, medisinsk informasjon og kontaktopplysningene dine. De kan også dele posisjonen sin med deg slik at du vet nøyaktig hvor dyret ditt er. Ingen app-nedlasting er nødvendig for den som skanner.";
+"help_faq_a4" = "Hvert SENRA-kjæledyrmerke har en unik QR-kode. Når noen finner dyret ditt og skanner den med telefonkameraet, ser de umiddelbart dyrets profil – bilde, navn, medisinsk informasjon og kontaktopplysningene dine. De kan også dele posisjonen sin med deg slik at du vet nøyaktig hvor dyret ditt er. Ingen app-nedlasting er nødvendig for den som skanner.";
 "help_faq_q5" = "Hva skjer når noen skanner dyrets kjæledyrmerke?";
 "help_faq_a5" = "Skanneren ser dyrets offentlige profil med opplysningene du har valgt å dele (navn, bilde, medisinsk info, kontaktdetaljer). De kan trykke 'Jeg fant dette dyret!' for å dele posisjonen sin med deg. Du mottar umiddelbart et varsel på e-post (og SMS hvis du har Standard eller Maximum) med finders posisjon og detaljer.";
 "help_faq_q6" = "Hvordan aktiverer jeg kjæledyrmerket etter at det ankommer?";
@@ -505,9 +505,9 @@
 "help_faq_q7" = "Kan jeg oppdatere dyrets informasjon etter registreringen?";
 "help_faq_a7" = "Ja – du kan redigere dyrets profil når som helst. Gå til 'Dyrene mine', velg dyret ditt og trykk 'Rediger'. Du kan oppdatere alle felt inkludert bilder. Endringer lagres umiddelbart.";
 "help_faq_q8" = "Hva bør jeg gjøre hvis dyret mitt forsvinner?";
-"help_faq_a8" = "Gå til 'Dyrene mine' og trykk menyen på dyrets kort, og velg 'Merk som savnet'. Dette oppretter et savnet-varsel som er synlig for Senra-fellesskapet i ditt område. Folk i nærheten vil se varselet og kan rapportere observasjoner med posisjonsinformasjon. Du varsles umiddelbart om eventuelle observasjoner.";
+"help_faq_a8" = "Gå til 'Dyrene mine' og trykk menyen på dyrets kort, og velg 'Merk som savnet'. Dette oppretter et savnet-varsel som er synlig for SENRA-fellesskapet i ditt område. Folk i nærheten vil se varselet og kan rapportere observasjoner med posisjonsinformasjon. Du varsles umiddelbart om eventuelle observasjoner.";
 "help_faq_q9" = "Hvordan fungerer savnet-varsler?";
-"help_faq_a9" = "Når du kjæledyrmerker et dyr som savnet, opprettes et varsel med dyrets bilde og detaljer. Andre Senra-brukere innen 10 km kan se varselet på kartet over savnede dyr. Alle i fellesskapet kan rapportere en observasjon, som sender deg deres posisjon og kontaktinformasjon. Registrerte veterinærer og dyrevernorganisasjoner i ditt område mottar også varselet.";
+"help_faq_a9" = "Når du kjæledyrmerker et dyr som savnet, opprettes et varsel med dyrets bilde og detaljer. Andre SENRA-brukere innen 10 km kan se varselet på kartet over savnede dyr. Alle i fellesskapet kan rapportere en observasjon, som sender deg deres posisjon og kontaktinformasjon. Registrerte veterinærer og dyrevernorganisasjoner i ditt område mottar også varselet.";
 "help_faq_q10" = "Hvordan bestiller jeg et erstatningsmerke?";
 "help_faq_a10" = "Gå til kontosiden din og trykk 'Bestill erstatning'. Velg dyret som trenger et nytt kjæledyrmerke. Maximum-abonnenter får ubegrensede gratis erstatninger, Standard-abonnenter får én gratis erstatning per år, og Starter-abonnenter kan bestille erstatninger mot en liten fraktavgift.";
 "help_faq_q11" = "Hva er verveprogrammet?";
@@ -517,47 +517,47 @@
 "help_faq_q13" = "Kan jeg ha flere dyr på én konto?";
 "help_faq_a13" = "Ja. Med Starter (gratis) kan du registrere opptil 10 dyr. Standard støtter 1 dyr. Maximum støtter opptil 10 dyr. Du kan oppgradere abonnementet til enhver tid fra kontosiden.";
 "help_faq_q14" = "Hvordan rapporterer jeg et dyr jeg har funnet?";
-"help_faq_a14" = "Hvis dyret har et Senra-kjæledyrmerke, skann QR-koden med telefonkameraet – ingen app nødvendig. Du ser dyrets profil og kan dele posisjonen din med eieren. Hvis det ikke er noe kjæledyrmerke, kan du sjekke kartet over savnede dyr på Senra-nettstedet for å se om dyret er rapportert savnet i ditt område.";
+"help_faq_a14" = "Hvis dyret har et SENRA-kjæledyrmerke, skann QR-koden med telefonkameraet – ingen app nødvendig. Du ser dyrets profil og kan dele posisjonen din med eieren. Hvis det ikke er noe kjæledyrmerke, kan du sjekke kartet over savnede dyr på SENRA-nettstedet for å se om dyret er rapportert savnet i ditt område.";
 "help_faq_q15" = "Er personopplysningene mine trygge?";
 "help_faq_a15" = "Ja. Du kontrollerer nøyaktig hvilken informasjon som vises når noen skanner dyrets kjæledyrmerke. Under Innstillinger > Personvern kan du velge å vise eller skjule telefonnummeret, e-posten og adressen din. Innloggingen sikres med engangskoder – det finnes ingen passord å stjele. Du kan slette kontoen og alle data når som helst.";
 "help_faq_q16" = "Jeg mistet kjæledyrmerket eller det er skadet – hva bør jeg gjøre?";
 "help_faq_a16" = "Ikke bekymre deg – dyrets digitale profil er trygg og lagres ikke på selve kjæledyrmerket. Gå til kontosiden din og trykk 'Bestill erstatning'. Et nytt kjæledyrmerke med en fersk QR-kode kobles til den eksisterende dyreprofilen din. Standard-abonnenter får én gratis erstatning per år, Maximum-abonnenter får ubegrensede gratis erstatninger, og Starter-abonnenter betaler en liten fraktavgift. Det gamle kjæledyrmerket slutter å fungere når det nye aktiveres.";
 "help_faq_q17" = "Kjæledyrmerket mitt lar seg ikke skanne – hva gjør jeg?";
 "help_faq_a17" = "Prøv disse trinnene: rengjør merkoverflaten med en fuktig klut, sørg for god belysning, hold telefonkameraet stilt omtrent 10–15 cm fra kjæledyrmerket, og kontroller at kamera-appen eller QR-skanneren fungerer. Hvis QR-koden er ripet eller falmet, kan du bruke manuell koderegistrering i appen under 'Skann kjæledyrmerke'. Hvis kjæledyrmerket er for skadet til å leses, bestill gratis erstatning fra kontosiden (Standard og Maximum).";
-"help_faq_q18" = "Jeg fant et dyr uten Senra-kjæledyrmerke – hva kan jeg gjøre?";
-"help_faq_a18" = "Sjekk kartet over savnede dyr på Senra-nettstedet (senra.pet) – dyret kan ha blitt rapportert savnet i ditt område. Du kan se savnet-varsler uten konto. Hvis du finner en match, kan du rapportere en observasjon med posisjonen din for å hjelpe med gjenforeningene. Du kan også ta dyret til en lokal veterinær for å sjekke om det har mikrochip.";
+"help_faq_q18" = "Jeg fant et dyr uten SENRA-kjæledyrmerke – hva kan jeg gjøre?";
+"help_faq_a18" = "Sjekk kartet over savnede dyr på SENRA-nettstedet (senra.pet) – dyret kan ha blitt rapportert savnet i ditt område. Du kan se savnet-varsler uten konto. Hvis du finner en match, kan du rapportere en observasjon med posisjonen din for å hjelpe med gjenforeningene. Du kan også ta dyret til en lokal veterinær for å sjekke om det har mikrochip.";
 "help_faq_q19" = "Kan jeg endre e-postadressen min?";
 "help_faq_a19" = "Din primære e-postadresse brukes som kontoidentitet og kan ikke endres direkte. Hvis du trenger å bruke en annen e-post, kan du legge til en sekundær e-post under Innstillinger > Kontaktdetaljer – denne vil også vises på dyrets profil. Hvis du absolutt trenger å endre primær-e-posten, kontakt supportteamet vårt, så hjelper vi deg med å migrere kontoen.";
-"help_faq_q20" = "Hva er forskjellen mellom en mikrochip og et Senra QR-kjæledyrmerke?";
-"help_faq_a20" = "En mikrochip er et lite implantat under dyrets hud som lagrer et unikt ID-nummer – men det krever en spesialskanner (vanligvis bare tilgjengelig hos veterinærer og dyrevernorganisasjoner) for å lese. Et Senra QR-kjæledyrmerke fungerer umiddelbart med ethvert smarttelefonkamera, og viser dyrets fulle profil, bilde og kontaktopplysningene dine på stedet. Den som finner dyret ditt kan også dele GPS-posisjonen sin med deg. Vi anbefaler å bruke begge: mikrochipen som permanent sikkerhetskopi, og Senra-kjæledyrmerket for umiddelbar, hverdagslig identifikasjon.";
+"help_faq_q20" = "Hva er forskjellen mellom en mikrochip og et SENRA QR-kjæledyrmerke?";
+"help_faq_a20" = "En mikrochip er et lite implantat under dyrets hud som lagrer et unikt ID-nummer – men det krever en spesialskanner (vanligvis bare tilgjengelig hos veterinærer og dyrevernorganisasjoner) for å lese. Et SENRA QR-kjæledyrmerke fungerer umiddelbart med ethvert smarttelefonkamera, og viser dyrets fulle profil, bilde og kontaktopplysningene dine på stedet. Den som finner dyret ditt kan også dele GPS-posisjonen sin med deg. Vi anbefaler å bruke begge: mikrochipen som permanent sikkerhetskopi, og SENRA-kjæledyrmerket for umiddelbar, hverdagslig identifikasjon.";
 "help_faq_q21" = "Hva skjer med dataene mine hvis jeg avslutter abonnementet?";
 "help_faq_a21" = "Hvis du avslutter abonnementet, beholder du tilgang til betalte funksjoner frem til slutten av gjeldende faktureringsperiode. Deretter flyttes kontoen automatisk til det gratis Starter-abonnementet. Dyreprofilene, bildene og QR-merkene forblir aktive – du mister bare tilgang til premiumfunksjoner som SMS-varsler, veterinærvarsler og gratis merkebytte. Dataene dine slettes aldri ved kansellering. For å slette alle data permanent, bruk Slett konto-alternativet under Innstillinger.";
-"help_faq_q22" = "Hvordan registrerer jeg veterinæren eller dyrevernorganisasjonen min hos Senra?";
+"help_faq_q22" = "Hvordan registrerer jeg veterinæren eller dyrevernorganisasjonen min hos SENRA?";
 "help_faq_a22" = "Veterinærer og dyrevernorganisasjoner kan registrere seg på senra.pet/register-vet-shelter. Fyll ut opplysninger om praksisen eller organisasjonen, og vi sender en bekreftelses-e-post. Etter bekreftelse mottar du automatisk e-postvarsler når dyr forsvinner i ditt område – noe som hjelper deg å gjenforene savnede dyr med familiene deres. Det koster ingenting og krever ingen innlogging. Dyreeiere kan også registrere sin lokale veterinær på vegne av dem.";
 "help_faq_q23" = "Hvordan deler jeg en suksesshistorie når dyret mitt er funnet?";
 "help_faq_a23" = "Når du kjæledyrmerker dyret ditt som funnet under 'Dyrene mine', spørres du om du vil dele gjenforeningshistorien din. Du kan legge til en kort melding om hvordan dyret ble funnet og bekrefte gjenforeningsstedet. Offentlige historier vises på kartet over gjenforente dyr, og inspirerer fellesskapet. Du kan også poste eller fjerne en suksesshistorie senere fra dyrets profilside.";
 "help_faq_q24" = "Hvilke nettlesere og enheter støttes?";
-"help_faq_a24" = "Senra fungerer på alle moderne nettlesere inkludert Chrome, Safari, Firefox og Edge på både mobil og desktop. QR-merkeskanning fungerer med ethvert smarttelefonkamera – personen som finner dyret ditt trenger verken Senra-appen eller en konto. Push-varsler støttes i Chrome og Edge på desktop og Android. For best opplevelse anbefaler vi å bruke en oppdatert nettleser på telefonen.";
+"help_faq_a24" = "SENRA fungerer på alle moderne nettlesere inkludert Chrome, Safari, Firefox og Edge på både mobil og desktop. QR-merkeskanning fungerer med ethvert smarttelefonkamera – personen som finner dyret ditt trenger verken SENRA-appen eller en konto. Push-varsler støttes i Chrome og Edge på desktop og Android. For best opplevelse anbefaler vi å bruke en oppdatert nettleser på telefonen.";
 "help_faq_q25" = "Kan jeg bestille kjæledyrmerker til flere dyr samtidig?";
 "help_faq_a25" = "Hver merkebestilling inkluderer kjæledyrmerker for dyrenavnene du oppgir under betaling. Du kan skrive inn flere dyrenavn i én enkelt bestilling. Etter at merkene ankommer, skann hvert enkelt for å aktivere det og koble det til riktig dyreprofil. Hvis du trenger kjæledyrmerker til flere dyr senere, kan du legge inn ytterligere bestillinger fra kontosiden når som helst.";
 "help_faq_q26" = "Hvordan når savnet-varsler frem til veterinærer og dyrevernorganisasjoner?";
-"help_faq_a26" = "Når du kjæledyrmerker dyret ditt som savnet, sender Senra automatisk e-postvarsler til alle bekreftede veterinærer og dyrevernorganisasjoner i ditt område. Dette betyr at lokale dyreprofesjonelle umiddelbart vet at dyret ditt er savnet og kan holde utkikk. Jo flere veterinærer og dyrevernorganisasjoner som er registrert i ditt område, jo sterkere er sikkerhetsnettverket. Du kan hjelpe ved å oppmuntre din egen veterinær til å registrere seg hos Senra.";
+"help_faq_a26" = "Når du kjæledyrmerker dyret ditt som savnet, sender SENRA automatisk e-postvarsler til alle bekreftede veterinærer og dyrevernorganisasjoner i ditt område. Dette betyr at lokale dyreprofesjonelle umiddelbart vet at dyret ditt er savnet og kan holde utkikk. Jo flere veterinærer og dyrevernorganisasjoner som er registrert i ditt område, jo sterkere er sikkerhetsnettverket. Du kan hjelpe ved å oppmuntre din egen veterinær til å registrere seg hos SENRA.";
 "help_faq_q27" = "Kan jeg overføre et merke til et annet dyr?";
 "help_faq_a27" = "Hvert QR-kjæledyrmerke er permanent koblet til én dyreprofil og kan ikke tildeles på nytt. Hvis et dyr dør eller du ikke lenger trenger et kjæledyrmerke, blir det gamle kjæledyrmerket ganske enkelt inaktivt. For å kjæledyrmerke et nytt dyr, bestill et nytt kjæledyrmerke fra kontosiden. Hvis du har Standard eller Maximum, kan du ha rett til et gratis erstatningsmerke for det nye dyret ditt.";
 
 // Veiledningselementer
 "help_guide_qr_tags_title" = "QR-kode kjæledyrmerker";
-"help_guide_qr_tags_desc" = "Hvert Senra-kjæledyrmerke har en unik QR-kode som lenker til dyrets digitale profil. Alle som finner dyret ditt kan skanne koden med telefonkameraet – ingen app-nedlasting nødvendig. Skanneren ser umiddelbart dyrets bilde, navn, medisinsk informasjon og kontaktopplysningene dine. De kan også dele GPS-posisjonen sin med deg slik at du vet nøyaktig hvor dyret ditt er. Merkene fungerer med alle moderne smarttelefoner.";
+"help_guide_qr_tags_desc" = "Hvert SENRA-kjæledyrmerke har en unik QR-kode som lenker til dyrets digitale profil. Alle som finner dyret ditt kan skanne koden med telefonkameraet – ingen app-nedlasting nødvendig. Skanneren ser umiddelbart dyrets bilde, navn, medisinsk informasjon og kontaktopplysningene dine. De kan også dele GPS-posisjonen sin med deg slik at du vet nøyaktig hvor dyret ditt er. Merkene fungerer med alle moderne smarttelefoner.";
 "help_guide_materials_title" = "Merkets materiale og holdbarhet";
-"help_guide_materials_desc" = "Senra-kjæledyrmerker er laget av holdbart, lett metall med et epoksybelegg for ekstra beskyttelse. De er vanntette og UV-resistente, egnet for alle værforhold. QR-koden er trykt med blekkresistent blekk for å forbli skannbar over tid. Merkene festes trygt til dyrets halsbånd. Hvis et kjæledyrmerke blir skadet eller QR-koden ikke lenger lar seg skanne, kan du bestille erstatning fra kontosiden – gratis for Standard og Maximum.";
+"help_guide_materials_desc" = "SENRA-kjæledyrmerker er laget av holdbart, lett metall med et epoksybelegg for ekstra beskyttelse. De er vanntette og UV-resistente, egnet for alle værforhold. QR-koden er trykt med blekkresistent blekk for å forbli skannbar over tid. Merkene festes trygt til dyrets halsbånd. Hvis et kjæledyrmerke blir skadet eller QR-koden ikke lenger lar seg skanne, kan du bestille erstatning fra kontosiden – gratis for Standard og Maximum.";
 "help_guide_emergency_title" = "Nødkontakt og varsler";
-"help_guide_emergency_desc" = "Når noen skanner dyrets kjæledyrmerke, mottar du et øyeblikkelig varsel på e-post med finders posisjon. Standard og Maximum mottar også SMS-varsler for raskere respons. Hvis du kjæledyrmerker dyret ditt som savnet, sendes et fellesskapsvarsel til alle Senra-brukere innen 10 km, og registrerte veterinærer og dyrevernorganisasjoner i ditt område varsles også. Alle i fellesskapet kan rapportere observasjoner med posisjonen sin, og skaper et spor for å hjelpe deg å finne dyret.";
+"help_guide_emergency_desc" = "Når noen skanner dyrets kjæledyrmerke, mottar du et øyeblikkelig varsel på e-post med finders posisjon. Standard og Maximum mottar også SMS-varsler for raskere respons. Hvis du kjæledyrmerker dyret ditt som savnet, sendes et fellesskapsvarsel til alle SENRA-brukere innen 10 km, og registrerte veterinærer og dyrevernorganisasjoner i ditt område varsles også. Alle i fellesskapet kan rapportere observasjoner med posisjonen sin, og skaper et spor for å hjelpe deg å finne dyret.";
 "help_guide_profile_title" = "Administrasjon av dyreprofil";
-"help_guide_profile_desc" = "Dyrets digitale profil er hjertet i Senra. Legg til viktige detaljer som navn, art, rase, alder og et tydelig bilde. Du kan også inkludere medisinsk informasjon (allergier, medisiner, tilstander), mikrochipnummer og unike kjennetegn som hjelper med å identifisere dyret ditt. Last opp flere bilder til et galleri. All informasjon kan oppdateres når som helst fra seksjonen 'Dyrene mine'. Du kontrollerer hvilke av personopplysningene dine (telefon, e-post, adresse) som vises for folk som skanner kjæledyrmerket.";
+"help_guide_profile_desc" = "Dyrets digitale profil er hjertet i SENRA. Legg til viktige detaljer som navn, art, rase, alder og et tydelig bilde. Du kan også inkludere medisinsk informasjon (allergier, medisiner, tilstander), mikrochipnummer og unike kjennetegn som hjelper med å identifisere dyret ditt. Last opp flere bilder til et galleri. All informasjon kan oppdateres når som helst fra seksjonen 'Dyrene mine'. Du kontrollerer hvilke av personopplysningene dine (telefon, e-post, adresse) som vises for folk som skanner kjæledyrmerket.";
 "help_guide_missing_alerts_title" = "Savnet-varsler og observasjoner";
-"help_guide_missing_alerts_desc" = "Hvis dyret ditt forsvinner, merk det som savnet fra 'Dyrene mine' for å opprette et øyeblikkelig fellesskapsvarsel. Dyrets bilde og detaljer vises på kartet over savnede dyr som er synlig for alle Senra-brukere i ditt område. Fellesskapsmedlemmer kan rapportere observasjoner med GPS-posisjon, som du mottar som varsler. Registrerte veterinærer og dyrevernorganisasjoner varsles også. Når dyret er funnet, merk det som funnet og del gjerne gjenforeningshistorien din for å inspirere fellesskapet.";
+"help_guide_missing_alerts_desc" = "Hvis dyret ditt forsvinner, merk det som savnet fra 'Dyrene mine' for å opprette et øyeblikkelig fellesskapsvarsel. Dyrets bilde og detaljer vises på kartet over savnede dyr som er synlig for alle SENRA-brukere i ditt område. Fellesskapsmedlemmer kan rapportere observasjoner med GPS-posisjon, som du mottar som varsler. Registrerte veterinærer og dyrevernorganisasjoner varsles også. Når dyret er funnet, merk det som funnet og del gjerne gjenforeningshistorien din for å inspirere fellesskapet.";
 "help_guide_community_title" = "Fellesskap og gjenforente dyr";
-"help_guide_community_desc" = "Senras styrke er fellesskapet. Kartet over savnede dyr viser aktive varsler i nærheten – sjekk det for å se om noen dyr er rapportert savnet i ditt område. Siden for gjenforente dyr feirer vellykkede gjenforeninger med historier fra dyreeiere. Du kan registrere din lokale veterinær eller dyrevernorganisasjon hos Senra slik at de mottar savnet-varsler automatisk, og bidrar til å skape et sterkere sikkerhetsnett for alle dyr i ditt område.";
+"help_guide_community_desc" = "SENRAs styrke er fellesskapet. Kartet over savnede dyr viser aktive varsler i nærheten – sjekk det for å se om noen dyr er rapportert savnet i ditt område. Siden for gjenforente dyr feirer vellykkede gjenforeninger med historier fra dyreeiere. Du kan registrere din lokale veterinær eller dyrevernorganisasjon hos SENRA slik at de mottar savnet-varsler automatisk, og bidrar til å skape et sterkere sikkerhetsnett for alle dyr i ditt område.";
 
 // MARK: - Personvernmodus
 "privacy_contact_visibility" = "Kontaktsynlighet";
@@ -1112,7 +1112,7 @@
 "just_now" = "Akkurat nå";
 
 // MARK: - Activation Error Messages
-"activation_error_qr_not_found" = "QR-koden ble ikke gjenkjent. Sørg for at du skanner et offisielt Senra-kjæledyrmerke.";
+"activation_error_qr_not_found" = "QR-koden ble ikke gjenkjent. Sørg for at du skanner et offisielt SENRA-kjæledyrmerke.";
 "activation_error_already_activated" = "Dette kjæledyrmerket er allerede knyttet til et annet kjæledyr. Kontakt support.";
 "activation_error_not_linked" = "Dette kjæledyrmerket er ennå ikke tilordnet bestillingen din. Vent på forsendelsesbekreftelse.";
 "activation_error_not_shipped" = "Bestillingen din er ikke sendt ennå. Vent til du mottar kjæledyrmerket.";
@@ -1330,7 +1330,7 @@
 "order_more_subtitle" = "Bestill merker for dyrene dine — gratis merker, betal kun for frakt";
 
 // MARK: - Welcome Screen
-"welcome_to_senra" = "Velkommen til Senra!";
+"welcome_to_senra" = "Velkommen til SENRA!";
 "welcome_subtitle" = "Sikkerheten til kjæledyret ditt starter her. Sett opp din første brikke.";
 "welcome_step_1" = "Skann QR-koden på brikken din";
 "welcome_step_2" = "Opprett profilen til kjæledyret ditt";
@@ -1345,7 +1345,7 @@
 "already_activated" = "Allerede aktivert";
 "setting_up_tag_for %@" = "Setter opp brikke for %@";
 "tag_activated_for %@" = "Brikke aktivert for %@!";
-"pet_now_protected" = "Kjæledyret ditt er nå beskyttet med Senra";
+"pet_now_protected" = "Kjæledyret ditt er nå beskyttet med SENRA";
 "more_tags_to_setup" = "Du har fortsatt brikker å sette opp";
 "setup_pet_tag %@" = "Sett opp brikken til %@";
 "whats_next" = "Hva er neste steg?";
@@ -1353,7 +1353,7 @@
 "register_your_vet" = "Registrer veterinæren din";
 "update_contact_details" = "Oppdater kontaktinfo og personvern";
 "go_to_home" = "Gå til hjem";
-"thank_you_senra" = "Takk for at du bruker Senra!";
+"thank_you_senra" = "Takk for at du bruker SENRA!";
 "tap_pet_name_hint" = "Trykk på kjæledyrets navn for å sette opp brikken";
 
 // MARK: - Age Formatting
