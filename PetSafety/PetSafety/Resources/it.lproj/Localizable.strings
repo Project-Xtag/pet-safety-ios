@@ -478,6 +478,64 @@
 "help_cat_billing" = "Fatturazione";
 "help_cat_feature" = "Richiesta funzionalità";
 "help_cat_other" = "Altro";
+
+// FAQ Questions and Answers
+"help_faq_q1" = "Come registro il mio animale domestico?";
+"help_faq_a1" = "Puoi registrare il tuo animale nel menu 'I Miei Animali' toccando 'Aggiungi Nuovo Animale'. Compila le informazioni richieste e carica una o più foto.";
+"help_faq_q2" = "Quali informazioni devo fornire nel profilo del mio animale?";
+"help_faq_a2" = "Hai già fornito il nome del tuo animale quando hai ordinato la medaglietta, e apparirà nel profilo del tuo animale una volta attivata. Inserisci la specie e la razza. Per prevenire abusi, questi dati possono essere inseriti solo una volta. Se commetti un errore, contattaci e ti aiuteremo. Qui puoi anche aggiungere peso, età, colore e qualsiasi caratteristica distintiva o comportamento tipico del tuo gatto/cane. Puoi anche caricare foto. Tu decidi quali informazioni sono visibili sul tuo animale se si perde.";
+"help_faq_q3" = "Come funziona la medaglietta con codice QR?";
+"help_faq_a3" = "Ogni animale riceve una medaglietta con codice QR unico. Questo codice è collegato al profilo del tuo animale. Quando qualcuno scansiona il codice QR col telefono, può vedere istantaneamente il profilo e i dati di contatto che hai segnato come pubblici.";
+"help_faq_q4" = "Posso aggiornare i dati del mio animale in seguito?";
+"help_faq_a4" = "Sì! Puoi aggiornare i dati del tuo animale in qualsiasi momento nella sezione 'I Miei Animali' selezionando l'animale e toccando 'Modifica Profilo'. Puoi aggiornare tutti i campi tranne nome, specie e razza, incluse le foto. Le modifiche vengono salvate immediatamente.";
+"help_faq_q5" = "Come ordino una medaglietta sostitutiva?";
+"help_faq_a5" = "Vai alla pagina 'Home/Il Mio Account' e tocca 'Ordina Medaglietta Sostitutiva'. Seleziona quale animale ha bisogno di una nuova medaglietta. Gli abbonati Maximum e Standard possono richiedere medagliette sostitutive gratuite, mentre i membri Starter possono ordinare sostituzioni pagando le spese di spedizione.";
+"help_faq_q6" = "Come attivo la mia medaglietta dopo averla ricevuta?";
+"help_faq_a6" = "Scarica l'app mobile SENRA dal Google Play Store o App Store! Aprila e vai al menu 'Attivazione', punta la fotocamera del telefono sul codice QR della medaglietta! La scansione collega la medaglietta al tuo account. Poi seleziona il tuo animale esistente o crea un nuovo profilo. Dopo l'attivazione, puoi scegliere il piano di abbonamento.";
+"help_faq_q7" = "Posso regalare una medaglietta SENRA?";
+"help_faq_a7" = "Sì! Le medagliette SENRA sono ottimi regali per proprietari di animali. Ordina semplicemente la medaglietta dal tuo account — quando il destinatario la riceve, può scansionare il codice QR, creare il proprio account e attivare la medaglietta per il suo animale.";
+"help_faq_q8" = "Cosa devo fare se il mio animale scompare?";
+"help_faq_a8" = "Vai a 'I Miei Animali', tocca il menu sulla scheda del tuo animale e seleziona 'Segna come Smarrito'. Questo crea un 'avviso animale smarrito' inviato a tutti i membri della comunità SENRA registrati entro 10 km. Anche veterinari e rifugi vengono avvisati. Ricevi una notifica istantanea per ogni avvistamento.";
+"help_faq_q9" = "Come funzionano gli avvisi di animali smarriti?";
+"help_faq_a9" = "Quando segni il tuo gatto o cane come smarrito, viene creato un avviso con foto e dati del tuo animale. Gli utenti SENRA entro 10 km vengono avvisati immediatamente e il tuo animale appare sulla mappa 'Animali Smarriti'. Anche veterinari e rifugi registrati nella tua zona ricevono l'avviso.";
+"help_faq_q10" = "Come ordino una medaglietta sostitutiva?";
+"help_faq_a10" = "Vai alla pagina 'Home/Il Mio Account' e tocca 'Ordina Medaglietta Sostitutiva'. Gli abbonati Maximum e Standard possono richiedere sostituzioni gratuite, i membri Starter pagano le spese di spedizione.";
+"help_faq_q11" = "Cos'è il programma di referral?";
+"help_faq_a11" = "Nel menu Referral sulla tua pagina Profilo, puoi generare un codice di referral personale. Condividilo con amici e famiglia. Quando qualcuno usa il tuo codice e si abbona a un piano a pagamento (Standard o Maximum), tu e il tuo amico ottenete 2 mesi gratis.";
+"help_faq_q12" = "In quali paesi spedite?";
+"help_faq_a12" = "Attualmente spediamo in Ungheria, Slovacchia, Repubblica Ceca, Austria, Romania, Croazia, Spagna, Italia, Francia, Germania, Norvegia e Portogallo. Spedizione nazionale in Ungheria: {{huPostapoint}} (PostaPont) o {{huHome}} (consegna a domicilio). Spedizione internazionale: {{intlPrice}} per ordine.";
+"help_faq_q13" = "Posso avere più animali su un account?";
+"help_faq_a13" = "Sì. Col piano Starter (gratuito) puoi registrare fino a 10 animali con funzionalità limitate. Il piano Standard è per un gatto o cane con tutte le funzionalità. Il piano Maximum include tutto con fino a 10 animali.";
+"help_faq_q14" = "Come segnalo un animale trovato?";
+"help_faq_a14" = "Se l'animale ha una medaglietta SENRA, scansiona semplicemente il codice QR con la fotocamera — non serve l'app. Puoi vedere il profilo dell'animale e condividere la tua posizione col proprietario.";
+"help_faq_q15" = "I miei dati personali sono al sicuro?";
+"help_faq_a15" = "Sì. Tu controlli esattamente quali dati sono visibili quando qualcuno scansiona la medaglietta. In 'Impostazioni' > 'Impostazioni Privacy', puoi scegliere se mostrare telefono, email o indirizzo. Il tuo login è protetto da un codice di verifica unico ogni volta. Puoi eliminare account e dati in qualsiasi momento.";
+"help_faq_q16" = "Abbiamo perso la medaglietta o si è danneggiata — cosa faccio?";
+"help_faq_a16" = "Non preoccuparti — il profilo digitale del tuo animale è al sicuro e non è memorizzato sulla medaglietta. Vai alla pagina Account e tocca 'Ordina Sostituzione'. Colleghiamo una nuova medaglietta con codice QR nuovo al tuo profilo esistente. Abbonati Standard e Maximum possono richiedere sostituzioni illimitate gratuite. La vecchia medaglietta viene disattivata immediatamente.";
+"help_faq_q17" = "La mia medaglietta non si scansiona — cosa faccio?";
+"help_faq_a17" = "Prova: pulisci la superficie con un panno umido, assicura buona illuminazione, tieni la fotocamera stabile a circa 10-15 cm. Se il codice QR è graffiato o consumato, ordina una sostituzione gratuita da 'Home/Il Mio Account'.";
+"help_faq_q18" = "Ho trovato un animale senza medaglietta SENRA — cosa posso fare?";
+"help_faq_a18" = "Controlla la mappa Animali Smarriti sul sito SENRA (senra.pet). Puoi vedere gli avvisi anche nell'app. Porta l'animale dal veterinario più vicino per scansionare il microchip. Se ha medaglietta SENRA, scansiona il QR — appaiono i contatti del proprietario. Avvisa sempre anche le autorità locali e i rifugi.";
+"help_faq_q19" = "Posso cambiare il mio indirizzo email?";
+"help_faq_a19" = "Il tuo email principale serve come identificatore dell'account e non può essere cambiato direttamente. Puoi aggiungere un email secondario in 'Impostazioni' > 'Dati di Contatto'. Se hai assolutamente bisogno di cambiare l'email principale, contattaci a hello@senra.pet.";
+"help_faq_q20" = "Qual è la differenza tra un microchip e una medaglietta QR SENRA?";
+"help_faq_a20" = "Un microchip è un piccolo impianto sotto la pelle dell'animale che memorizza un identificatore unico di 15 cifre — ma richiede un lettore speciale. La medaglietta QR SENRA può essere scansionata con qualsiasi fotocamera di smartphone, mostrando istantaneamente il profilo completo, foto e contatti approvati. Chi trova può anche condividere le coordinate GPS.";
+"help_faq_q21" = "Cosa succede ai miei dati se annullo l'abbonamento?";
+"help_faq_a21" = "Se annulli, mantieni l'accesso alle funzionalità a pagamento fino alla fine del periodo di fatturazione. Poi l'account passa automaticamente al piano Starter gratuito. Profili, foto e medagliette QR restano attivi. I dati non vengono eliminati. Per eliminare tutto permanentemente, usa Elimina Account nelle Impostazioni.";
+"help_faq_q22" = "Come posso registrare la mia clinica o rifugio con SENRA?";
+"help_faq_a22" = "Cliniche veterinarie e rifugi possono registrarsi su senra.pet/register-vet-shelter. Compila i dati e inviamo un'email di verifica. Dopo la conferma, inviamo automaticamente notifiche quando animali si perdono nella zona. Senza costi e senza registrazione.";
+"help_faq_q23" = "Come posso condividere una storia di successo se il mio animale è stato trovato?";
+"help_faq_a23" = "Quando segni il tuo animale come 'Trovato', ti chiediamo se vuoi condividere la buona notizia. Puoi pubblicare una breve storia. Le storie pubbliche appaiono sulla mappa 'Animali Trovati'.";
+"help_faq_q24" = "Quali browser e dispositivi sono supportati?";
+"help_faq_a24" = "SENRA funziona su tutti i browser, inclusi Chrome, Safari, Firefox e Edge, su dispositivi mobili e desktop. La scansione della medaglietta QR funziona con qualsiasi fotocamera di smartphone — chi trova non ha bisogno dell'app SENRA né di un account.";
+"help_faq_q25" = "Posso ordinare più medagliette per i miei animali contemporaneamente?";
+"help_faq_a25" = "Sì, puoi ordinare medagliette per tutti i tuoi animali allo stesso tempo. Dopo l'arrivo, scansiona ciascuna per attivarla e assegnarla al profilo corretto.";
+"help_faq_q26" = "Come arrivano gli avvisi di animali smarriti a veterinari e rifugi?";
+"help_faq_a26" = "Quando segni il tuo animale come 'Smarrito', SENRA invia automaticamente avvisi email a tutti i veterinari e rifugi registrati nella tua zona. Più ce ne sono registrati, meglio funziona la rete.";
+"help_faq_q27" = "Posso trasferire una medaglietta a un altro animale?";
+"help_faq_a27" = "No. Ogni medaglietta QR è collegata permanentemente al profilo di un animale. Se un animale muore o non hai più bisogno della medaglietta, diventa semplicemente inattiva. Ordina una nuova medaglietta per il nuovo animale sul sito SENRA.";
+"help_faq_q28" = "Come posso registrare la clinica veterinaria del mio animale o il rifugio dove ho adottato il mio animale nella rete SENRA?";
+"help_faq_a28" = "Cliniche veterinarie e rifugi possono registrarsi su senra.pet/register-vet-shelter. Compila i dati e inviamo un'email di verifica. Dopo la conferma, inviamo automaticamente notifiche — aiutando gli animali smarriti a tornare a casa più velocemente. Senza costi e senza registrazione.";
 "help_faq_title" = "FAQ";
 "help_guides_title" = "Guide utente";
 "support_response_time" = "Il nostro team di supporto risponde solitamente entro 24 ore.";
@@ -490,22 +548,6 @@
 "support_category_other" = "Altro";
 
 // Domande frequenti
-"help_faq_q1" = "Come si crea un account?";
-"help_faq_a1" = "SENRA utilizza un accesso senza password. Inserisci semplicemente il tuo indirizzo email nella pagina di accesso e ti invieremo un codice di verifica a 6 cifre. Inserisci il codice per accedere. Se sei nuovo, il tuo account viene creato automaticamente al primo accesso — non è necessaria una registrazione separata.";
-"help_faq_q2" = "Come si registra il proprio animale?";
-"help_faq_a2" = "Vai su 'I miei animali' e tocca 'Aggiungi nuovo animale'. Inserisci nome, specie, razza ed età del tuo animale, poi carica una foto. Se hai già ricevuto la tua medaglietta QR, puoi scansionarla durante la registrazione per collegarla subito al profilo del tuo animale.";
-"help_faq_q3" = "Quali informazioni includere nel profilo del mio animale?";
-"help_faq_a3" = "Come minimo, aggiungi il nome, la specie e una foto nitida del tuo animale. Per massimizzare le possibilità di un rapido ritrovamento in caso di scomparsa, aggiungi anche: razza, età, peso, colore, numero microchip, note mediche, allergie, farmaci e qualsiasi caratteristica distintiva (macchie, cicatrici, ecc.). Più dettagli fornisci, più sarà facile identificare il tuo animale.";
-"help_faq_q4" = "Come funziona la medaglietta QR?";
-"help_faq_a4" = "Ogni medaglietta SENRA ha un QR code unico. Quando qualcuno trova il tuo animale e lo scansiona con il telefono, vede istantaneamente il suo profilo — foto, nome, informazioni mediche e i tuoi contatti. Può anche condividere la sua posizione con te, così sai esattamente dove si trova il tuo animale. Non è necessario scaricare nessuna app per scansionare.";
-"help_faq_q5" = "Cosa succede quando qualcuno scansiona la medaglietta del mio animale?";
-"help_faq_a5" = "Chi scansiona vede il profilo pubblico del tuo animale con le informazioni che hai scelto di condividere (nome, foto, info mediche, contatti). Può toccare 'Ho trovato questo animale!' per condividere la sua posizione con te. Riceverai immediatamente una notifica via email (e SMS se hai un abbonamento Standard o Maximum) con la posizione e i dati della persona.";
-"help_faq_q6" = "Come si attiva la medaglietta quando arriva?";
-"help_faq_a6" = "Vai su 'Scansiona medaglietta' nell'app e punta la fotocamera del telefono verso il QR code sulla tua medaglietta. Questo associa la medaglietta al tuo account. Ti verrà quindi chiesto di scegliere un animale esistente o di creare un nuovo profilo. Dopo l'attivazione, seleziona il tuo piano di abbonamento.";
-"help_faq_q7" = "Posso aggiornare le informazioni del mio animale dopo la registrazione?";
-"help_faq_a7" = "Sì — puoi modificare il profilo del tuo animale in qualsiasi momento. Vai su 'I miei animali', seleziona il tuo animale e tocca 'Modifica'. Puoi aggiornare qualsiasi campo, incluse le foto. Le modifiche vengono salvate immediatamente.";
-"help_faq_q8" = "Cosa devo fare se il mio animale scompare?";
-"help_faq_a8" = "Vai su 'I miei animali' e tocca il menu sulla scheda del tuo animale, poi seleziona 'Segna come scomparso'. Verrà creato un avviso di scomparsa visibile alla comunità SENRA nella tua zona. Le persone vicine a te vedranno l'avviso e potranno segnalare avvistamenti con la loro posizione. Verrai avvisato immediatamente di ogni avvistamento.";
 // ============================================================
 // PARTE 2 — Righe EN 500–1029
 // SENRA Pet Safety — Localizable.strings (Italiano)
@@ -513,44 +555,6 @@
 // Stile: informale (tu/tuo/tua), medaglietta = tag, animale/animale domestico = pet
 // ============================================================
 
-"help_faq_q9" = "Come funzionano gli avvisi di animali scomparsi?";
-"help_faq_a9" = "Quando segni un animale come scomparso, viene creato un avviso con la foto e i dati del tuo animale. Gli altri utenti SENRA nel raggio di 10 km possono vedere l'avviso sulla mappa degli animali scomparsi. Chiunque nella comunità può segnalare un avvistamento, che ti invia la sua posizione e i recapiti. Anche i veterinari e i rifugi registrati su SENRA nella tua zona ricevono l'avviso.";
-"help_faq_q10" = "Come ordino una medaglietta sostitutiva?";
-"help_faq_a10" = "Vai alla pagina Il mio account e tocca 'Ordina sostituzione'. Seleziona l'animale che ha bisogno di una nuova medaglietta. I membri del piano Maximum ottengono sostituzioni gratuite illimitate, i membri Standard hanno diritto a una sostituzione gratuita all'anno, e i membri Starter possono ordinare sostituzioni con un piccolo costo di spedizione.";
-"help_faq_q11" = "Cos'è il programma di referral?";
-"help_faq_a11" = "Vai alla pagina Referral per generare il tuo codice referral personale. Condividilo con amici e familiari. Quando qualcuno usa il tuo codice e sottoscrive un piano a pagamento (Standard o Maximum), entrambi ricevete 2 mesi gratis. Puoi monitorare i tuoi referral nella pagina Referral.";
-"help_faq_q12" = "In quali paesi spedite?";
-"help_faq_a12" = "Al momento spediamo in Ungheria, Slovacchia, Repubblica Ceca, Austria, Romania, Croazia, Spagna e Portogallo. La spedizione in Ungheria costa %1$@ (PostaPont) o %2$@ (consegna a domicilio). La spedizione internazionale è di %3$@ per ordine.";
-"help_faq_q13" = "Posso avere più animali su un unico account?";
-"help_faq_a13" = "Sì. Con il piano Starter (gratuito) puoi registrare fino a 10 animali. Il piano Standard supporta 1 animale. Il piano Maximum supporta fino a 10 animali. Puoi aggiornare il tuo piano in qualsiasi momento dalla pagina Il mio account.";
-"help_faq_q14" = "Come segnalo un animale che ho trovato?";
-"help_faq_a14" = "Se l'animale ha una medaglietta SENRA, scansiona semplicemente il QR con la fotocamera del tuo telefono — nessuna app necessaria. Vedrai il profilo dell'animale e potrai condividere la tua posizione con il proprietario. Se non c'è medaglietta, puoi controllare la mappa degli animali scomparsi sul sito SENRA per vedere se l'animale è stato segnalato scomparso nella tua zona.";
-"help_faq_q15" = "Le mie informazioni personali sono al sicuro?";
-"help_faq_a15" = "Sì. Tu controlli esattamente quali informazioni sono visibili quando qualcuno scansiona la medaglietta del tuo animale. In Impostazioni > Privacy puoi scegliere di mostrare o nascondere il tuo numero di telefono, l'email e l'indirizzo. L'accesso è protetto da codici di verifica monouso — non ci sono password da rubare. Puoi eliminare il tuo account e tutti i dati in qualsiasi momento.";
-"help_faq_q16" = "Ho perso la medaglietta o è danneggiata — cosa devo fare?";
-"help_faq_a16" = "Non preoccuparti — il profilo digitale del tuo animale è al sicuro e non è memorizzato sulla medaglietta. Vai alla pagina Il mio account e tocca 'Ordina sostituzione'. Una nuova medaglietta con un QR fresco verrà collegata al profilo esistente del tuo animale. I membri Standard e Maximum possono richiedere sostituzioni gratuite illimitate; i membri Starter pagano un piccolo costo di spedizione. La vecchia medaglietta smette di funzionare non appena viene attivata la nuova.";
-"help_faq_q17" = "La mia medaglietta non si scansiona — come posso risolvere?";
-"help_faq_a17" = "Prova questi passaggi: pulisci la superficie della medaglietta con un panno umido, assicurati di avere una buona illuminazione, tieni la fotocamera del telefono ferma a circa 10-15 cm dalla medaglietta e verifica che la tua app fotocamera o il lettore QR funzionino. Se il QR è graffiato o sbiadito, puoi usare l'opzione di inserimento manuale del codice nell'app sotto 'Scansiona medaglietta'. Se la medaglietta è troppo danneggiata per essere letta, ordina una sostituzione gratuita dalla pagina Il mio account (piani Standard e Maximum).";
-"help_faq_q18" = "Ho trovato un animale senza medaglietta SENRA — cosa posso fare?";
-"help_faq_a18" = "Controlla la mappa degli animali scomparsi sul sito SENRA (senra.pet) — l'animale potrebbe essere stato segnalato scomparso nella tua zona. Puoi visualizzare gli avvisi di animali scomparsi senza un account. Se trovi una corrispondenza, puoi segnalare un avvistamento con la tua posizione per aiutare a riunire l'animale con il suo proprietario. Puoi anche portare l'animale da un veterinario locale per verificare la presenza di un microchip.";
-"help_faq_q19" = "Posso cambiare il mio indirizzo email?";
-"help_faq_a19" = "Il tuo indirizzo email principale serve come identità dell'account e non può essere modificato direttamente. Se hai bisogno di usare un'altra email, puoi aggiungere un'email secondaria in Impostazioni > Dati di contatto — questa apparirà anche sul profilo del tuo animale. Se hai assolutamente bisogno di cambiare l'email principale, contatta il nostro team di supporto e ti aiuteremo a migrare l'account.";
-"help_faq_q20" = "Qual è la differenza tra un microchip e una medaglietta QR SENRA?";
-"help_faq_a20" = "Un microchip è un piccolo impianto sotto la pelle del tuo animale che memorizza un numero ID univoco — ma richiede uno scanner speciale (di solito disponibile solo presso veterinari e rifugi) per essere letto. Una medaglietta QR SENRA funziona istantaneamente con la fotocamera di qualsiasi smartphone, mostrando il profilo completo del tuo animale, la foto e i tuoi recapiti sul posto. Chi trova il tuo animale può anche condividere la sua posizione GPS con te. Ti consigliamo di usare entrambi: il microchip come backup permanente e la medaglietta SENRA per l'identificazione immediata di tutti i giorni.";
-"help_faq_q21" = "Cosa succede ai miei dati se disdico l'abbonamento?";
-"help_faq_a21" = "Se disdici l'abbonamento, mantieni l'accesso alle funzioni a pagamento fino alla fine del periodo di fatturazione corrente. Dopodiché, il tuo account passa automaticamente al piano Starter gratuito. I profili dei tuoi animali, le foto e le medagliette QR rimangono attivi — perdi solo l'accesso alle funzioni premium come le notifiche SMS, gli avvisi ai veterinari e le sostituzioni gratuite delle medagliette. I tuoi dati non vengono mai eliminati in caso di disdetta. Per eliminare definitivamente tutti i dati, usa l'opzione Elimina account nelle Impostazioni.";
-"help_faq_q22" = "Come registro il mio veterinario o rifugio con SENRA?";
-"help_faq_a22" = "I veterinari e i rifugi possono registrarsi su senra.pet/register-vet-shelter. Compila i dati dello studio o dell'organizzazione e ti invieremo un'email di verifica. Una volta confermato, riceverai automaticamente avvisi via email quando gli animali scompaiono nella tua zona — aiutandoti a riunire gli animali smarriti con le loro famiglie. Non ci sono costi e non è richiesto l'accesso. Anche i proprietari di animali possono registrare il loro veterinario per conto di questi.";
-"help_faq_q23" = "Come condivido una storia di successo quando il mio animale è stato ritrovato?";
-"help_faq_a23" = "Quando segni il tuo animale come ritrovato in 'I miei animali', ti verrà chiesto se vuoi condividere la storia del vostro ritrovamento. Puoi aggiungere un breve messaggio su come è stato trovato il tuo animale e confermare il luogo del ritrovamento. Le storie pubbliche appaiono sulla mappa degli animali ritrovati, ispirando la comunità e dimostrando che il sistema funziona. Puoi anche pubblicare o rimuovere una storia di successo in seguito dalla pagina del profilo del tuo animale.";
-"help_faq_q24" = "Quali browser e dispositivi sono supportati?";
-"help_faq_a24" = "SENRA funziona su tutti i browser moderni, inclusi Chrome, Safari, Firefox ed Edge sia su mobile che su desktop. La scansione della medaglietta QR funziona con la fotocamera di qualsiasi smartphone — chi trova il tuo animale non ha bisogno dell'app SENRA né di un account. Per la migliore esperienza, ti consigliamo di usare un browser aggiornato sul tuo telefono.";
-"help_faq_q25" = "Posso ordinare medagliette per più animali contemporaneamente?";
-"help_faq_a25" = "Ogni ordine di medagliette include le medagliette per i nomi degli animali che specifichi al momento del pagamento. Puoi inserire più nomi di animali in un unico ordine. Dopo che le medagliette arrivano, scansiona ciascuna per attivarla e collegarla al profilo corretto. Se in seguito hai bisogno di medagliette per altri animali, puoi effettuare ulteriori ordini dalla pagina Il mio account in qualsiasi momento.";
-"help_faq_q26" = "Come raggiungono veterinari e rifugi gli avvisi di animali scomparsi?";
-"help_faq_a26" = "Quando segni il tuo animale come scomparso, SENRA invia automaticamente avvisi via email a tutti i veterinari e rifugi verificati registrati nella tua zona. Questo significa che i professionisti locali del settore animali sono immediatamente a conoscenza della scomparsa e possono tenerlo d'occhio. Più veterinari e rifugi sono registrati nella tua zona, più forte è la rete di sicurezza. Puoi contribuire incoraggiando il tuo veterinario a registrarsi su SENRA.";
-"help_faq_q27" = "Posso trasferire una medaglietta a un animale diverso?";
-"help_faq_a27" = "Ogni medaglietta QR è collegata in modo permanente a un profilo animale e non può essere riassegnata. Se un animale muore o non hai più bisogno di una medaglietta, la vecchia medaglietta diventa semplicemente inattiva. Per dotare di medaglietta un nuovo animale, ordina una nuova medaglietta dalla pagina Il mio account. Se sei su un piano Standard o Maximum, potresti avere diritto a una medaglietta sostitutiva gratuita per il tuo nuovo animale.";
 
 // Voci della guida
 "help_guide_qr_tags_title" = "Medagliette QR per animali domestici";
