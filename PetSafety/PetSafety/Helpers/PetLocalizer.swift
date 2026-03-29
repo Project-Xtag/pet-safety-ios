@@ -16,43 +16,43 @@ enum PetLocalizer {
 
     // MARK: - Breed
 
+    /// Cached breed lookup map: lowercased English name → native name
+    private static var breedLookupCache: (locale: String, map: [String: String])?
+
+    private static func breedLookup() -> [String: String] {
+        let lang = Locale.current.language.languageCode?.identifier.lowercased().prefix(2).description ?? "en"
+        if let cache = breedLookupCache, cache.locale == lang { return cache.map }
+        var map: [String: String] = [:]
+        for species in ["dog", "cat"] {
+            for breed in BreedData.breeds(for: species, locale: lang) {
+                map[breed.name.lowercased()] = breed.nativeName
+            }
+        }
+        breedLookupCache = (locale: lang, map: map)
+        return map
+    }
+
     /// Maps English breed name from DB → localized display string.
-    /// Tries species-prefixed keys first, then common names.
+    /// Looks up the breed in the per-locale breed data.
     static func localizeBreed(_ raw: String?, species: String? = nil) -> String {
         guard let raw = raw, !raw.isEmpty else { return "" }
+        let lookup = breedLookup()
 
-        let normalized = raw.lowercased()
-            .replacingOccurrences(of: " ", with: "_")
-            .replacingOccurrences(of: "/", with: "_")
-            .replacingOccurrences(of: "-", with: "_")
+        if let native = lookup[raw.lowercased()] { return native }
 
-        // Try species-prefixed key (e.g., "breed_cat_domestic_shorthair")
-        let speciesLower = (species ?? "").lowercased()
-        if !speciesLower.isEmpty {
-            let prefixedKey = "breed_\(speciesLower)_\(normalized)"
-            let localized = NSLocalizedString(prefixedKey, comment: "")
-            if localized != prefixedKey { return localized }
-        }
-
-        // Try without species prefix
-        let plainKey = "breed_\(normalized)"
-        let localized = NSLocalizedString(plainKey, comment: "")
-        if localized != plainKey { return localized }
-
-        // Special aliases
+        // Special aliases for common abbreviations
         let aliases: [String: String] = [
-            "dsh": "breed_cat_domestic_shorthair",
-            "domestic shorthair": "breed_cat_domestic_shorthair",
-            "dlh": "breed_cat_domestic_longhair",
-            "domestic longhair": "breed_cat_domestic_longhair",
-            "cross": "breed_mixed",
-            "crossbreed": "breed_mixed",
-            "mixed": "breed_mixed",
-            "mixed breed": "breed_mixed",
+            "dsh": "european shorthair",
+            "domestic shorthair": "european shorthair",
+            "dlh": "european shorthair",
+            "domestic longhair": "european shorthair",
+            "cross": "mixed / crossbreed",
+            "crossbreed": "mixed / crossbreed",
+            "mixed": "mixed / crossbreed",
+            "mixed breed": "mixed / crossbreed",
         ]
-        if let aliasKey = aliases[normalized] {
-            let aliasLocalized = NSLocalizedString(aliasKey, comment: "")
-            if aliasLocalized != aliasKey { return aliasLocalized }
+        if let alias = aliases[raw.lowercased()], let native = lookup[alias] {
+            return native
         }
 
         return raw

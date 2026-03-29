@@ -47,14 +47,8 @@ struct PetOwnerInfo: Codable {
     }
 
     var displayName: String {
-        if let first = firstName, let last = lastName {
-            return "\(first) \(last)"
-        } else if let first = firstName {
-            return first
-        } else if let last = lastName {
-            return last
-        }
-        return email
+        let formatted = InputValidators.formatDisplayName(firstName: firstName, lastName: lastName)
+        return formatted.isEmpty ? email : formatted
     }
 }
 
