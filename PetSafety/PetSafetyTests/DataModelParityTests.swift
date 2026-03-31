@@ -214,6 +214,7 @@ struct DataModelParityTests {
             "id": "dog-labrador",
             "name": "Labrador Retriever",
             "species": "dog",
+            "native_name": "Labrador Retriever",
             "alternate_names": ["Lab", "Labrador"]
         }
         """.data(using: .utf8)!
@@ -228,7 +229,8 @@ struct DataModelParityTests {
         {
             "id": "cat-persian",
             "name": "Persian",
-            "species": "cat"
+            "species": "cat",
+            "native_name": "Persian"
         }
         """.data(using: .utf8)!
 
