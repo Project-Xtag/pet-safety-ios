@@ -371,6 +371,27 @@ struct PetPublicProfileView: View {
                     .padding(.horizontal, 24)
                 }
 
+                // Unique Features
+                if let features = pet.uniqueFeatures, !features.isEmpty {
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.tealAccent)
+                            Text("unique_features")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.tealAccent)
+                        }
+                        Text(features)
+                            .font(.system(size: 14))
+                            .foregroundColor(.primary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color.tealAccent.opacity(0.1))
+                    .cornerRadius(14)
+                    .padding(.horizontal, 24)
+                }
+
                 // Notes
                 if let notes = pet.notes, !notes.isEmpty {
                     VStack(alignment: .leading, spacing: 10) {
