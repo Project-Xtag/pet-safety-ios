@@ -51,7 +51,7 @@
 "terms_login_prefix" = "A bejelentkezéssel elfogadod a(z) ";
 "terms_and" = " és ";
 "terms_of_service" = "Felhasználási feltételeket";
-"privacy_policy" = "Adatvédelmi szabályzatot";
+"privacy_policy" = "Adatkezelési tájékoztatót";
 "first_name" = "Keresztnév";
 "last_name" = "Vezetéknév";
 "email" = "Email";
@@ -458,7 +458,7 @@
 "help_user_guides" = "Felhasználói útmutatók";
 "help_legal" = "Jogi nyilatkozat";
 "help_terms" = "Felhasználási feltételek";
-"help_privacy" = "Adatvédelmi szabályzat";
+"help_privacy" = "Adatkezelési tájékoztató";
 "help_app_info" = "Alkalmazás információk";
 "help_version" = "Verzió";
 "help_build" = "Build";
@@ -566,7 +566,7 @@
 "privacy_show_secondary_email" = "Másodlagos e-mail mutatása";
 "privacy_show_secondary_email_subtitle" = "Másodlagos e-mail címed megjelenítése a kisállatod nyilvános profilján";
 "privacy_data_privacy" = "Adatvédelem";
-"privacy_privacy_policy" = "Adatvédelmi szabályzat";
+"privacy_privacy_policy" = "Adatkezelési tájékoztató";
 "privacy_title" = "Adatvédelmi beállítások";
 "privacy_mode_footer" = "Az adatvédelmi beállítások segítenek szabályozni, milyen információk kerülnek megosztásra, amikor beolvassák a kedvenced QR bilétáját.";
 "privacy_settings_updated" = "Adatvédelmi beállítások frissítve";
