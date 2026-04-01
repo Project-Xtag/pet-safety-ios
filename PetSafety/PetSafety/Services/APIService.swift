@@ -50,19 +50,19 @@ enum APIError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return "Invalid URL"
+            return String(localized: "api_error_invalid_url")
         case .invalidResponse:
-            return "Invalid response from server"
+            return String(localized: "api_error_invalid_response")
         case .unauthorized:
-            return "Unauthorized. Please log in again."
+            return String(localized: "api_error_unauthorized")
         case .serverError(let message):
             return message
         case .petLimitExceeded:
-            return "Pet registration limit reached. Upgrade your plan to add more pets."
+            return String(localized: "api_error_pet_limit")
         case .decodingError:
-            return "Failed to decode server response"
+            return String(localized: "api_error_decoding")
         case .networkError(let error):
-            return "Network error: \(error.localizedDescription)"
+            return String(localized: "api_error_network \(error.localizedDescription)")
         }
     }
 }

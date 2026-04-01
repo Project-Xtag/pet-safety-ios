@@ -88,7 +88,7 @@ class SyncService: ObservableObject {
     /// Perform full synchronization (fetch remote data and process queue)
     func performFullSync() async {
         guard networkMonitor.isConnected else {
-            syncStatus = "Cannot sync: No internet connection"
+            syncStatus = String(localized: "sync_no_internet")
             return
         }
 
@@ -97,7 +97,7 @@ class SyncService: ObservableObject {
         }
 
         isSyncing = true
-        syncStatus = "Syncing..."
+        syncStatus = String(localized: "sync_in_progress")
 
         do {
             // 1. Process queued actions first
@@ -110,13 +110,13 @@ class SyncService: ObservableObject {
             lastSyncDate = Date()
             UserDefaults.standard.set(lastSyncDate, forKey: "lastSyncDate")
 
-            syncStatus = "Sync completed"
+            syncStatus = String(localized: "sync_completed")
             #if DEBUG
             print("✅ Full sync completed successfully")
             #endif
 
         } catch {
-            syncStatus = "Sync failed: \(error.localizedDescription)"
+            syncStatus = String(localized: "sync_failed \(error.localizedDescription)")
             #if DEBUG
             print("❌ Sync failed: \(error.localizedDescription)")
             #endif
@@ -454,15 +454,15 @@ class SyncService: ObservableObject {
     func actionTypeDescription(_ type: String) -> String {
         switch type {
         case "markPetLost":
-            return "Mark pet as lost"
+            return String(localized: "sync_action_mark_lost")
         case "markPetFound":
-            return "Mark pet as found"
+            return String(localized: "sync_action_mark_found")
         case "reportSighting":
-            return "Report sighting"
+            return String(localized: "sync_action_report_sighting")
         case "createAlert":
-            return "Create alert"
+            return String(localized: "sync_action_create_alert")
         case "updatePet":
-            return "Update pet"
+            return String(localized: "sync_action_update_pet")
         default:
             return type
         }
@@ -471,22 +471,22 @@ class SyncService: ObservableObject {
     /// Get time since last sync in human-readable format
     var timeSinceLastSync: String {
         guard let lastSync = lastSyncDate else {
-            return "Never"
+            return String(localized: "sync_time_never")
         }
 
         let interval = Date().timeIntervalSince(lastSync)
 
         if interval < 60 {
-            return "Just now"
+            return String(localized: "sync_time_just_now")
         } else if interval < 3600 {
             let minutes = Int(interval / 60)
-            return "\(minutes) minute\(minutes == 1 ? "" : "s") ago"
+            return String(localized: "sync_time_minutes_ago \(minutes)")
         } else if interval < 86400 {
             let hours = Int(interval / 3600)
-            return "\(hours) hour\(hours == 1 ? "" : "s") ago"
+            return String(localized: "sync_time_hours_ago \(hours)")
         } else {
             let days = Int(interval / 86400)
-            return "\(days) day\(days == 1 ? "" : "s") ago"
+            return String(localized: "sync_time_days_ago \(days)")
         }
     }
 
@@ -506,13 +506,13 @@ enum SyncError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidActionType:
-            return "Invalid action type"
+            return String(localized: "sync_error_invalid_action")
         case .missingData(let field):
-            return "Missing required data: \(field)"
+            return String(localized: "sync_error_missing_data \(field)")
         case .notImplemented:
-            return "Feature not yet implemented"
+            return String(localized: "sync_error_not_implemented")
         case .networkUnavailable:
-            return "Network connection unavailable"
+            return String(localized: "sync_error_network_unavailable")
         }
     }
 }

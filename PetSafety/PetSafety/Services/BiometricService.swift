@@ -60,13 +60,13 @@ class BiometricService {
         var displayName: String {
             switch self {
             case .faceID:
-                return "Face ID"
+                return String(localized: "biometric_face_id")
             case .touchID:
-                return "Touch ID"
+                return String(localized: "biometric_touch_id")
             case .opticID:
-                return "Optic ID"
+                return String(localized: "biometric_optic_id")
             case .none:
-                return "Biometric"
+                return String(localized: "biometric_generic")
             }
         }
 
@@ -107,14 +107,14 @@ class BiometricService {
     /// - Parameters:
     ///   - reason: The reason shown to the user for why biometric is needed
     ///   - completion: Completion handler with success result and optional error message
-    func authenticate(reason: String = "Log in to Pet Safety", completion: @escaping (Bool, String?) -> Void) {
+    func authenticate(reason: String = String(localized: "biometric_login_reason"), completion: @escaping (Bool, String?) -> Void) {
         let context = LAContext()
-        context.localizedFallbackTitle = "Use Email"
+        context.localizedFallbackTitle = String(localized: "biometric_use_email")
 
         var error: NSError?
 
         guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
-            completion(false, error?.localizedDescription ?? "Biometric authentication not available")
+            completion(false, error?.localizedDescription ?? String(localized: "biometric_not_available"))
             return
         }
 
@@ -130,11 +130,11 @@ class BiometricService {
                             // User cancelled - not an error to display
                             errorMessage = nil
                         case .biometryLockout:
-                            errorMessage = "Too many failed attempts. Please try again later."
+                            errorMessage = String(localized: "biometric_lockout")
                         case .biometryNotAvailable:
-                            errorMessage = "Biometric authentication is not available."
+                            errorMessage = String(localized: "biometric_not_available")
                         case .biometryNotEnrolled:
-                            errorMessage = "No biometric data enrolled. Please set up \(self.biometricType.displayName) in Settings."
+                            errorMessage = String(localized: "biometric_not_enrolled \(self.biometricType.displayName)")
                         default:
                             errorMessage = authError?.localizedDescription
                         }
@@ -148,7 +148,7 @@ class BiometricService {
     }
 
     /// Async version of authenticate
-    func authenticate(reason: String = "Log in to Pet Safety") async -> (success: Bool, error: String?) {
+    func authenticate(reason: String = String(localized: "biometric_login_reason")) async -> (success: Bool, error: String?) {
         await withCheckedContinuation { continuation in
             authenticate(reason: reason) { success, error in
                 continuation.resume(returning: (success, error))

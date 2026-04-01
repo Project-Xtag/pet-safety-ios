@@ -13,6 +13,11 @@ enum LocalizedLogo {
         "es": "ES",
         "pt": "PT",
         "ro": "RO",
+        "fr": "FR",
+        "it": "IT",
+        "pl": "PL",
+        "nb": "NO",
+        "hr": "HR",
     ]
 
     /// The xcassets image name for the current device language.
