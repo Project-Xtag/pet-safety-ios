@@ -32,6 +32,25 @@ enum PetLocalizer {
         return map
     }
 
+    /// Reverse map: any localized breed name (from any locale) → English name.
+    /// Used to translate breed names that were stored in a non-English locale.
+    private static var reverseBreedCache: [String: String]?
+
+    private static func reverseBreedLookup() -> [String: String] {
+        if let cache = reverseBreedCache { return cache }
+        var map: [String: String] = [:]
+        let allLocales = ["en", "hu", "sk", "cs", "de", "es", "pt", "ro", "fr", "it", "pl", "hr", "nb"]
+        for locale in allLocales {
+            for species in ["dog", "cat"] {
+                for breed in BreedData.breeds(for: species, locale: locale) {
+                    map[breed.nativeName.lowercased()] = breed.name.lowercased()
+                }
+            }
+        }
+        reverseBreedCache = map
+        return map
+    }
+
     /// Maps English breed name from DB → localized display string.
     /// Looks up the breed in the per-locale breed data.
     static func localizeBreed(_ raw: String?, species: String? = nil) -> String {
@@ -52,6 +71,13 @@ enum PetLocalizer {
             "mixed breed": "mixed / crossbreed",
         ]
         if let alias = aliases[raw.lowercased()], let native = lookup[alias] {
+            return native
+        }
+
+        // Reverse lookup: if the value is a localized breed name from another locale,
+        // map it back to English first, then translate to the current locale.
+        let reverseMap = reverseBreedLookup()
+        if let englishName = reverseMap[raw.lowercased()], let native = lookup[englishName] {
             return native
         }
 
