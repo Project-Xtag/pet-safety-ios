@@ -72,7 +72,7 @@
 "pet_owner_default" = "Dono do animal";
 "welcome_back_greeting" = "Bem-vindo de volta,";
 "view_all" = "Ver tudo";
-"search_pets_hint" = "Pesquisar por nome, raça, espécie\u2026";
+"search_pets_hint" = "Pesquisar por nome, raça, espécie…";
 "quick_actions" = "Ações rápidas";
 "action_add_pet" = "ADICIONAR ANIMAL";
 "action_mark_found" = "MARCAR ENCONTRADO";
@@ -276,7 +276,7 @@
 "getting_location" = "A obter localização...";
 "address_or_description" = "Morada ou descrição";
 "where_did_you_see" = "Onde viu o animal?";
-"sighting_notes_placeholder" = "Descreva o que viu, a condição do animal, a direção\u2026";
+"sighting_notes_placeholder" = "Descreva o que viu, a condição do animal, a direção…";
 "submit_sighting_report" = "Enviar relatório de avistamento";
 "sighting_reported_owner_notified" = "Avistamento reportado! O dono foi notificado.";
 "sighting_queued_offline" = "Avistamento em fila - será enviado quando estiver online.";
@@ -292,7 +292,7 @@
 "success_stories" = "Histórias de sucesso";
 "found_pets" = "Animais encontrados";
 "success_stories_subtitle" = "Veja reencontros felizes perto de si";
-"loading_success_stories" = "A carregar histórias de sucesso\u2026";
+"loading_success_stories" = "A carregar histórias de sucesso…";
 "no_success_stories" = "Sem histórias de sucesso nas proximidades";
 "no_success_stories_message" = "Seja o primeiro a partilhar um reencontro feliz na sua área!";
 "found_and_reunited" = "Encontrado e reunido";
@@ -651,7 +651,7 @@
 "public_profile_preview" = "Pré-visualização do perfil público";
 "public_profile_subtitle" = "É assim que os outros veem o perfil de %@";
 "owner_notified_sms_email" = "O dono de %@ receberá um SMS e um e-mail com a sua localização";
-"contact_owner_plea" = "Por favor, avise o meu dono que me encontrou\u2026";
+"contact_owner_plea" = "Por favor, avise o meu dono que me encontrou…";
 "contact_info_not_set" = "Informação de contacto ainda não definida";
 "contact_info_hidden" = "Informação de contacto está oculta";
 "contact_info_hidden_hint" = "Os seus contactos estão definidos mas ocultos devido às definições de privacidade. Atualize em Conta > Modo de privacidade.";
@@ -760,7 +760,7 @@
 "plan_select %@" = "Selecionar %@";
 
 // MARK: - Separador de alertas (Bloco 1)
-"alerts_loading" = "A carregar alertas\u2026";
+"alerts_loading" = "A carregar alertas…";
 "alerts_missing_pets_title" = "Alertas de animais desaparecidos";
 "alerts_list" = "Lista";
 "alerts_map" = "Mapa";
@@ -807,7 +807,7 @@
 "push_prompt_later" = "Talvez mais tarde";
 
 // MARK: - Referência (Bloco 1)
-"referral_loading" = "A carregar\u2026";
+"referral_loading" = "A carregar…";
 "referral_your_code" = "O seu código de indicação";
 "referral_share_footer" = "Partilhe o seu código com amigos. Quando subscreverem, ambos ganham uma recompensa!";
 "referral_how_it_works" = "Como funciona";
@@ -828,7 +828,7 @@
 "billing_subscription" = "Subscrição";
 "billing_portal_footer" = "Gira a sua subscrição, método de pagamento e faturação através do Stripe.";
 "billing_invoices" = "Faturas";
-"billing_loading_invoices" = "A carregar faturas\u2026";
+"billing_loading_invoices" = "A carregar faturas…";
 "billing_no_invoices" = "Ainda sem faturas";
 "billing_invoice" = "Fatura";
 "billing_unknown" = "Desconhecido";
@@ -837,7 +837,7 @@
 // MARK: - Banner de erro de sincronização (Bloco 1)
 "sync_retry_all" = "Tentar tudo novamente";
 "sync_dismiss_all" = "Dispensar tudo";
-"sync_syncing" = "A sincronizar\u2026";
+"sync_syncing" = "A sincronizar…";
 "sync_count_failed %lld" = "%lld falharam";
 "sync_count_pending %lld" = "%lld pendentes";
 
@@ -868,7 +868,7 @@
 
 // MARK: - Separador de histórias de sucesso (Bloco 1)
 "success_stories_title" = "Histórias de sucesso";
-"success_stories_loading" = "A carregar histórias\u2026";
+"success_stories_loading" = "A carregar histórias…";
 
 // MARK: - Pedido de história de sucesso (Bloco 1)
 "story_share_title" = "Partilhe a sua história";
@@ -882,7 +882,7 @@
 
 // MARK: - Seleção de raça (Bloco 1)
 "breed_select_title" = "Selecionar raça";
-"breed_search_placeholder" = "Pesquisar raças\u2026";
+"breed_search_placeholder" = "Pesquisar raças…";
 "breed_no_results" = "Nenhuma raça encontrada";
 "breed_use_custom %@" = "Usar \"%@\" como raça personalizada";
 "breed_manual_entry" = "Introduzir raça manualmente";
@@ -913,7 +913,7 @@
 "mark_lost_pet_info" = "Informação do animal";
 "mark_lost_last_seen" = "Localização onde foi visto pela última vez";
 "mark_lost_alerts_footer" = "Alertas serão enviados a utilizadores próximos, veterinários e abrigos num raio de 10 km.";
-"mark_lost_getting_location" = "A obter a sua localização\u2026";
+"mark_lost_getting_location" = "A obter a sua localização…";
 "mark_lost_no_address" = "Sem morada registada. Vá a Perfil > Morada.";
 "mark_lost_address_placeholder" = "Introduza a morada ou localização";
 "mark_lost_additional_info" = "Informação adicional";

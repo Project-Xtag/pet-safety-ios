@@ -72,7 +72,7 @@
 "pet_owner_default" = "Majitel zvierata";
 "welcome_back_greeting" = "Vitajte spat,";
 "view_all" = "Zobrazit vsetko";
-"search_pets_hint" = "Hladat podla mena, plemena, druhu\u2026";
+"search_pets_hint" = "Hladat podla mena, plemena, druhu…";
 "quick_actions" = "Rychle akcie";
 "action_add_pet" = "PRIDAT ZVIERA";
 "action_mark_found" = "OZNACIT NAJDENE";
@@ -122,7 +122,7 @@
 "neutered_spayed" = "Kastrovane/sterilizovane";
 "neutered" = "Kastrovane";
 "health_information" = "Zdravotne informacie";
-"health_info_hint" = "Alergie, lieky, zdravotne stavy\u2026";
+"health_info_hint" = "Alergie, lieky, zdravotne stavy…";
 "behavior_notes_hint" = "Poznamky k spravaniu (temperament, vycvik, atd.)";
 "save_changes" = "Ulozit zmeny";
 "delete_pet_button" = "Odstranit zviera";
@@ -292,7 +292,7 @@
 "success_stories" = "Uspesne pribehy";
 "found_pets" = "Najdene zvierata";
 "success_stories_subtitle" = "Pozrite si stastne navraty vo vasom okoli";
-"loading_success_stories" = "Nacitavam uspesne pribehy\u2026";
+"loading_success_stories" = "Nacitavam uspesne pribehy…";
 "no_success_stories" = "Ziadne uspesne pribehy v okoli";
 "no_success_stories_message" = "Budte prvi, kto zdiela stastne znovuzjednotenie vo vasom okoli!";
 "found_and_reunited" = "Najdene a znovuzjednotene";
@@ -651,7 +651,7 @@
 "public_profile_preview" = "Nahlad verejneho profilu";
 "public_profile_subtitle" = "Takto ostatni uvidia profil %@";
 "owner_notified_sms_email" = "Majitel %@ dostane SMS a e-mail s vasou polohou";
-"contact_owner_plea" = "Prosim, dajte mojmu majitelovi vediet, ze ste ma nasli\u2026";
+"contact_owner_plea" = "Prosim, dajte mojmu majitelovi vediet, ze ste ma nasli…";
 "contact_info_not_set" = "Kontaktne udaje este nie su nastavene";
 "contact_info_hidden" = "Kontaktne udaje su skryte";
 "contact_info_hidden_hint" = "Kontaktne udaje su nastavene, ale skryte kvoli nastaveniam sukromia. Aktualizujte v Ucet > Rezim sukromia.";
@@ -760,7 +760,7 @@
 "plan_select %@" = "Vybrat %@";
 
 // MARK: - Zalozka upozorneni (Cast 1)
-"alerts_loading" = "Nacitavaju sa upozornenia\u2026";
+"alerts_loading" = "Nacitavaju sa upozornenia…";
 "alerts_missing_pets_title" = "Upozornenia na stratene zvierata";
 "alerts_list" = "Zoznam";
 "alerts_map" = "Mapa";
@@ -807,7 +807,7 @@
 "push_prompt_later" = "Mozno neskor";
 
 // MARK: - Odporucanie (Cast 1)
-"referral_loading" = "Nacitava sa\u2026";
+"referral_loading" = "Nacitava sa…";
 "referral_your_code" = "Vas odporucaci kod";
 "referral_share_footer" = "Zdielajte kod s priatelmi. Ked si predplatia, obaja ziskate odmenu!";
 "referral_how_it_works" = "Ako to funguje";
@@ -828,7 +828,7 @@
 "billing_subscription" = "Predplatne";
 "billing_portal_footer" = "Spravujte predplatne, platobnu metodu a fakturacne udaje cez Stripe.";
 "billing_invoices" = "Faktury";
-"billing_loading_invoices" = "Nacitavaju sa faktury\u2026";
+"billing_loading_invoices" = "Nacitavaju sa faktury…";
 "billing_no_invoices" = "Zatial ziadne faktury";
 "billing_invoice" = "Faktura";
 "billing_unknown" = "Nezname";
@@ -837,7 +837,7 @@
 // MARK: - Banner chyby synchronizacie (Cast 1)
 "sync_retry_all" = "Skusit vsetko znova";
 "sync_dismiss_all" = "Zamietnut vsetko";
-"sync_syncing" = "Synchronizuje sa\u2026";
+"sync_syncing" = "Synchronizuje sa…";
 "sync_count_failed %lld" = "%lld zlyhalo";
 "sync_count_pending %lld" = "%lld caka";
 
@@ -868,7 +868,7 @@
 
 // MARK: - Zalozka uspesnych pribehov (Cast 1)
 "success_stories_title" = "Uspesne pribehy";
-"success_stories_loading" = "Nacitavam pribehy\u2026";
+"success_stories_loading" = "Nacitavam pribehy…";
 
 // MARK: - Vyzva na zdielanie pribehu (Cast 1)
 "story_share_title" = "Zdielajte svoj pribeh";
@@ -882,7 +882,7 @@
 
 // MARK: - Vyber plemena (Cast 1)
 "breed_select_title" = "Vybrat plemeno";
-"breed_search_placeholder" = "Hladat plemena\u2026";
+"breed_search_placeholder" = "Hladat plemena…";
 "breed_no_results" = "Nenasli sa ziadne plemena";
 "breed_use_custom %@" = "Pouzit \"%@\" ako vlastne plemeno";
 "breed_manual_entry" = "Zadat plemeno rucne";
@@ -913,7 +913,7 @@
 "mark_lost_pet_info" = "Informacie o zvierati";
 "mark_lost_last_seen" = "Naposledy videne miesto";
 "mark_lost_alerts_footer" = "Upozornenia sa odeslu blizkym pouzivatelom, veterinarom a utulkom v okruhu 10 km.";
-"mark_lost_getting_location" = "Ziskavam vasu polohu\u2026";
+"mark_lost_getting_location" = "Ziskavam vasu polohu…";
 "mark_lost_no_address" = "Nie je registrovana adresa. Prejdite na Profil > Adresa.";
 "mark_lost_address_placeholder" = "Zadajte adresu alebo miesto";
 "mark_lost_additional_info" = "Dalsie informacie";
