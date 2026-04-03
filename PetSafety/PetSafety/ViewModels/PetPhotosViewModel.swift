@@ -120,7 +120,7 @@ class PetPhotosViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            let response = try await apiService.setPrimaryPhoto(petId: petId, photoId: photoId)
+            _ = try await apiService.setPrimaryPhoto(petId: petId, photoId: photoId)
 
             // Update local photos array
             for index in photos.indices {
@@ -155,7 +155,7 @@ class PetPhotosViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            let response = try await apiService.deletePetPhoto(petId: petId, photoId: photoId)
+            _ = try await apiService.deletePetPhoto(petId: petId, photoId: photoId)
 
             // Remove from local array
             photos.removeAll { $0.id == photoId }

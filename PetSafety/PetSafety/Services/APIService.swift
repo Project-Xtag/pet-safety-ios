@@ -288,7 +288,7 @@ class APIService {
                 if isRetryAfterRefresh {
                     authToken = nil
                     KeychainService.shared.clearAuthToken()
-                    KeychainService.shared.clearRefreshToken()
+                    _ = KeychainService.shared.clearRefreshToken()
                     throw APIError.unauthorized
                 }
 
@@ -296,7 +296,7 @@ class APIService {
                 guard let storedRefreshToken = KeychainService.shared.getRefreshToken() else {
                     authToken = nil
                     KeychainService.shared.clearAuthToken()
-                    KeychainService.shared.clearRefreshToken()
+                    _ = KeychainService.shared.clearRefreshToken()
                     throw APIError.unauthorized
                 }
 
@@ -318,7 +318,7 @@ class APIService {
                     // Refresh failed — clear all tokens and throw unauthorized
                     authToken = nil
                     KeychainService.shared.clearAuthToken()
-                    KeychainService.shared.clearRefreshToken()
+                    _ = KeychainService.shared.clearRefreshToken()
                     throw APIError.unauthorized
                 }
 
@@ -405,7 +405,7 @@ class APIService {
     func logout() {
         authToken = nil
         KeychainService.shared.clearAuthToken()
-        KeychainService.shared.clearRefreshToken()
+        _ = KeychainService.shared.clearRefreshToken()
     }
 
     // MARK: - User
@@ -1210,7 +1210,7 @@ struct ShippingAddress: Codable {
 
 struct CreateReplacementOrderRequest: Codable {
     let shippingAddress: ShippingAddress
-    let platform: String = "ios"
+    var platform: String = "ios"
     let deliveryMethod: String?
     let postapointDetails: PostaPointDetails?
 }

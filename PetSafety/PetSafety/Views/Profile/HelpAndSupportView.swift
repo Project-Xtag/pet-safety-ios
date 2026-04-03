@@ -367,7 +367,7 @@ struct ContactSupportView: View {
 
         Task {
             do {
-                let response = try await APIService.shared.submitSupportRequest(
+                _ = try await APIService.shared.submitSupportRequest(
                     category: selectedCategory,
                     subject: subject,
                     message: message

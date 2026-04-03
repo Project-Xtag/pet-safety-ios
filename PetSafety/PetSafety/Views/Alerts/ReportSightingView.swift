@@ -152,7 +152,7 @@ struct ReportSightingView: View {
                     }
 
                     if useCurrentLocation {
-                        if let coordinate = locationManager.location {
+                        if locationManager.location != nil {
                             HStack(spacing: 8) {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(.tealAccent)
