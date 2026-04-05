@@ -374,6 +374,8 @@ struct PetCardView: View {
                         }
                     }
                     .aspectRatio(1, contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .aspectRatio(1, contentMode: .fit)
                     .clipped()
 
                     // Missing Badge
