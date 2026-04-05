@@ -1,6 +1,6 @@
 /* Info.plist localized strings — Portuguese */
 
-"CFBundleDisplayName" = "SENRA Pet";
+"CFBundleDisplayName" = "SENRA";
 "NSCameraUsageDescription" = "Precisamos de acesso à sua câmara para tirar fotos do seu animal de estimação e ler códigos QR nas etiquetas de identificação.";
 "NSPhotoLibraryUsageDescription" = "Precisamos de acesso à sua biblioteca de fotos para selecionar fotos do seu animal de estimação.";
 "NSLocationWhenInUseUsageDescription" = "Precisamos da sua localização para ajudar a encontrar animais perdidos e mostrar alertas próximos.";
