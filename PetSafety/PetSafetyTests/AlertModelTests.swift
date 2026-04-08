@@ -352,7 +352,10 @@ struct AlertModelTests {
             lastSeenAddress: "Baker Street, London",
             description: "Last seen near the park",
             rewardAmount: "500",
-            alertRadiusKm: 20.0
+            alertRadiusKm: 20.0,
+            notificationCenterSource: nil,
+            notificationCenterLocation: nil,
+            notificationCenterAddress: nil
         )
 
         let data = try JSONEncoder().encode(request)
@@ -379,7 +382,10 @@ struct AlertModelTests {
             lastSeenAddress: nil,
             description: nil,
             rewardAmount: nil,
-            alertRadiusKm: nil
+            alertRadiusKm: nil,
+            notificationCenterSource: nil,
+            notificationCenterLocation: nil,
+            notificationCenterAddress: nil
         )
 
         let data = try JSONEncoder().encode(request)

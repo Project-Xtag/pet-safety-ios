@@ -188,6 +188,9 @@ struct CreateAlertRequest: Codable {
     let description: String?
     let rewardAmount: String?
     let alertRadiusKm: Double?
+    let notificationCenterSource: String?
+    let notificationCenterLocation: LocationCoordinate?
+    let notificationCenterAddress: String?
 
     enum CodingKeys: String, CodingKey {
         case petId = "petId"
@@ -196,6 +199,9 @@ struct CreateAlertRequest: Codable {
         case description
         case rewardAmount
         case alertRadiusKm
+        case notificationCenterSource
+        case notificationCenterLocation
+        case notificationCenterAddress
     }
 }
 

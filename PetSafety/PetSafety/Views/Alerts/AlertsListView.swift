@@ -3,6 +3,8 @@ import MapKit
 
 struct AlertsListView: View {
     @StateObject private var viewModel = AlertsViewModel()
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var appState: AppState
     @State private var showingCreateAlert = false
 
     var body: some View {
@@ -50,6 +52,8 @@ struct AlertsListView: View {
         .sheet(isPresented: $showingCreateAlert) {
             NavigationView {
                 CreateAlertView()
+                    .environmentObject(authViewModel)
+                    .environmentObject(appState)
             }
         }
         .task {

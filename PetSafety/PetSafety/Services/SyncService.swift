@@ -224,15 +224,20 @@ class SyncService: ObservableObject {
         let lastSeenLongitude = action.data["longitude"] as? Double
         let additionalInfo = action.data["description"] as? String
 
+        let coords = (lastSeenLatitude != nil && lastSeenLongitude != nil)
+            ? LocationCoordinate(lat: lastSeenLatitude!, lng: lastSeenLongitude!)
+            : nil
+
         let request = CreateAlertRequest(
             petId: petId,
-            lastSeenLocation: (lastSeenLatitude != nil && lastSeenLongitude != nil)
-                ? LocationCoordinate(lat: lastSeenLatitude!, lng: lastSeenLongitude!)
-                : nil,
+            lastSeenLocation: coords,
             lastSeenAddress: lastSeenAddress,
             description: additionalInfo,
             rewardAmount: nil,
-            alertRadiusKm: nil
+            alertRadiusKm: nil,
+            notificationCenterSource: action.data["notificationCenterSource"] as? String,
+            notificationCenterLocation: coords,
+            notificationCenterAddress: lastSeenAddress
         )
 
         return try await apiService.createAlert(request)

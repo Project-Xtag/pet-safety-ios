@@ -30,7 +30,10 @@ struct AlertsViewModelTests {
             lastSeenAddress: "Budapest, Andrassy ut",
             description: "Last seen near Heroes' Square",
             rewardAmount: "200",
-            alertRadiusKm: 5.0
+            alertRadiusKm: 5.0,
+            notificationCenterSource: nil,
+            notificationCenterLocation: nil,
+            notificationCenterAddress: nil
         )
 
         let data = try JSONEncoder().encode(request)
@@ -55,7 +58,10 @@ struct AlertsViewModelTests {
             lastSeenAddress: "Some address",
             description: nil,
             rewardAmount: nil,
-            alertRadiusKm: nil
+            alertRadiusKm: nil,
+            notificationCenterSource: nil,
+            notificationCenterLocation: nil,
+            notificationCenterAddress: nil
         )
 
         let data = try JSONEncoder().encode(request)
@@ -139,7 +145,10 @@ struct AlertsViewModelTests {
             lastSeenAddress: "Sydney Opera House",
             description: nil,
             rewardAmount: "300",
-            alertRadiusKm: 25.0
+            alertRadiusKm: 25.0,
+            notificationCenterSource: nil,
+            notificationCenterLocation: nil,
+            notificationCenterAddress: nil
         )
 
         let data = try JSONEncoder().encode(request)

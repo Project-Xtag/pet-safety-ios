@@ -1,5 +1,6 @@
 import SwiftUI
 import MapKit
+import CoreLocation
 import UIKit
 
 struct CreateAlertView: View {
@@ -8,12 +9,35 @@ struct CreateAlertView: View {
     @StateObject private var locationManager = LocationManager()
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
+    @EnvironmentObject var authViewModel: AuthViewModel
 
     @State private var selectedPet: Pet?
-    @State private var location = ""
+    @State private var lastSeenSource: LastSeenSource = .registeredAddress
+    @State private var customAddress = ""
     @State private var additionalInfo = ""
     @State private var rewardAmount: String = ""
-    @State private var useCurrentLocation = false
+    @State private var isGeocoding = false
+
+    /// Formatted registered address from user profile
+    private var registeredAddress: String? {
+        guard let user = authViewModel.currentUser else { return nil }
+        let parts = [user.address, user.addressLine2, user.city, user.postalCode, user.country]
+        let address = parts.compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: ", ")
+        return address.isEmpty ? nil : address
+    }
+
+    /// Whether the submit button should be disabled
+    private var isSubmitDisabled: Bool {
+        if selectedPet == nil || viewModel.isLoading || isGeocoding { return true }
+        switch lastSeenSource {
+        case .currentLocation:
+            return locationManager.location == nil
+        case .registeredAddress:
+            return registeredAddress == nil
+        case .customAddress:
+            return customAddress.isEmpty
+        }
+    }
 
     var body: some View {
         Form {
@@ -31,16 +55,58 @@ struct CreateAlertView: View {
                 }
             }
 
-            Section(header: Text("last_seen_location_header")) {
-                Toggle("use_current_location", isOn: $useCurrentLocation)
+            Section(header: Text("mark_lost_last_seen"),
+                    footer: Text("mark_lost_alerts_footer")) {
+                Picker(String(localized: "location_label"), selection: $lastSeenSource) {
+                    ForEach(LastSeenSource.allCases, id: \.self) { source in
+                        Text(source.displayName).tag(source)
+                    }
+                }
+                .pickerStyle(.segmented)
 
-                if !useCurrentLocation {
-                    TextField(String(localized: "enter_location"), text: $location)
-                        .onChange(of: location) { _, new in if new.count > InputValidators.maxLocationText { location = String(new.prefix(InputValidators.maxLocationText)) } }
-                } else if let coordinate = locationManager.location {
-                    Text("Lat: \(String(format: "%.6f", coordinate.latitude)), Lon: \(String(format: "%.6f", coordinate.longitude))")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                switch lastSeenSource {
+                case .currentLocation:
+                    if let loc = locationManager.location {
+                        HStack {
+                            Image(systemName: "location.fill")
+                                .foregroundColor(.blue)
+                            Text(String(format: NSLocalizedString("coordinates_display", comment: ""), String(format: "%.6f", loc.latitude), String(format: "%.6f", loc.longitude)))
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    } else {
+                        HStack {
+                            ProgressView()
+                                .scaleEffect(0.8)
+                            Text("mark_lost_getting_location")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
+                case .registeredAddress:
+                    HStack {
+                        Image(systemName: "house.fill")
+                            .foregroundColor(.tealAccent)
+                        if let address = registeredAddress {
+                            Text(address)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        } else {
+                            Text("mark_lost_no_address")
+                                .font(.subheadline)
+                                .foregroundColor(.red)
+                        }
+                    }
+
+                case .customAddress:
+                    TextField(String(localized: "mark_lost_address_placeholder"), text: $customAddress)
+                        .autocapitalization(.words)
+                        .onChange(of: customAddress) { _, new in
+                            if new.count > InputValidators.maxLocationText {
+                                customAddress = String(new.prefix(InputValidators.maxLocationText))
+                            }
+                        }
                 }
             }
 
@@ -80,17 +146,21 @@ struct CreateAlertView: View {
                     createAlert()
                 }
                 .foregroundColor(.brandOrange)
-                .disabled(selectedPet == nil || viewModel.isLoading)
+                .disabled(isSubmitDisabled)
             }
         }
         .task {
             await petsViewModel.fetchPets()
-            if useCurrentLocation {
+        }
+        .onChange(of: lastSeenSource) { _, source in
+            if source == .currentLocation && locationManager.location == nil {
                 locationManager.requestLocation()
             }
         }
-        .onChange(of: useCurrentLocation) { _, isOn in
-            if isOn {
+        .onAppear {
+            // Default to registered address, but if none, switch to current location
+            if registeredAddress == nil {
+                lastSeenSource = .currentLocation
                 locationManager.requestLocation()
             }
         }
@@ -101,15 +171,60 @@ struct CreateAlertView: View {
 
         Task {
             do {
-                let coordinate = useCurrentLocation ? locationManager.location : nil
-                let locationText = useCurrentLocation ? nil : (location.isEmpty ? nil : location)
+                var coordinate: CLLocationCoordinate2D?
+                var addressText: String?
+
+                switch lastSeenSource {
+                case .currentLocation:
+                    coordinate = locationManager.location
+                    // Reverse geocode to get address text
+                    if let loc = coordinate {
+                        isGeocoding = true
+                        let geocoder = CLGeocoder()
+                        if let placemark = try? await geocoder.reverseGeocodeLocation(CLLocation(latitude: loc.latitude, longitude: loc.longitude)).first {
+                            addressText = [placemark.thoroughfare, placemark.subThoroughfare, placemark.locality, placemark.country]
+                                .compactMap { $0 }
+                                .joined(separator: ", ")
+                        }
+                        isGeocoding = false
+                    }
+
+                case .registeredAddress:
+                    addressText = registeredAddress
+                    // Forward geocode to get coordinates
+                    if let addr = addressText {
+                        isGeocoding = true
+                        let geocoder = CLGeocoder()
+                        if let placemark = try? await geocoder.geocodeAddressString(addr).first,
+                           let loc = placemark.location {
+                            coordinate = loc.coordinate
+                        }
+                        isGeocoding = false
+                    }
+
+                case .customAddress:
+                    addressText = customAddress
+                    // Forward geocode to get coordinates
+                    if !customAddress.isEmpty {
+                        isGeocoding = true
+                        let geocoder = CLGeocoder()
+                        if let placemark = try? await geocoder.geocodeAddressString(customAddress).first,
+                           let loc = placemark.location {
+                            coordinate = loc.coordinate
+                        }
+                        isGeocoding = false
+                    }
+                }
 
                 _ = try await viewModel.createAlert(
                     petId: pet.id,
-                    location: locationText,
+                    location: addressText,
                     coordinate: coordinate,
                     additionalInfo: additionalInfo.isEmpty ? nil : additionalInfo,
-                    rewardAmount: rewardAmount.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : rewardAmount.trimmingCharacters(in: .whitespacesAndNewlines)
+                    rewardAmount: rewardAmount.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : rewardAmount.trimmingCharacters(in: .whitespacesAndNewlines),
+                    notificationCenterSource: lastSeenSource.rawValue,
+                    notificationCenterLocation: coordinate,
+                    notificationCenterAddress: addressText
                 )
 
                 UINotificationFeedbackGenerator().notificationOccurred(.success)
@@ -133,5 +248,6 @@ struct CreateAlertView: View {
     NavigationView {
         CreateAlertView()
             .environmentObject(AppState())
+            .environmentObject(AuthViewModel())
     }
 }

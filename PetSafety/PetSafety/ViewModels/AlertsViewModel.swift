@@ -100,7 +100,10 @@ class AlertsViewModel: ObservableObject {
         location: String?,
         coordinate: CLLocationCoordinate2D?,
         additionalInfo: String?,
-        rewardAmount: String? = nil
+        rewardAmount: String? = nil,
+        notificationCenterSource: String? = nil,
+        notificationCenterLocation: CLLocationCoordinate2D? = nil,
+        notificationCenterAddress: String? = nil
     ) async throws -> MissingPetAlert {
         isLoading = true
         errorMessage = nil
@@ -159,7 +162,10 @@ class AlertsViewModel: ObservableObject {
             lastSeenAddress: location,
             description: additionalInfo,
             rewardAmount: rewardAmount,
-            alertRadiusKm: nil
+            alertRadiusKm: nil,
+            notificationCenterSource: notificationCenterSource,
+            notificationCenterLocation: notificationCenterLocation.map { LocationCoordinate(lat: $0.latitude, lng: $0.longitude) },
+            notificationCenterAddress: notificationCenterAddress
         )
 
         do {
