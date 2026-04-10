@@ -16,7 +16,7 @@ class ShelterPromoClaimViewModel: ObservableObject {
     func loadPets() async {
         isLoadingPets = true
         do {
-            pets = try await APIService.shared.fetchPets()
+            pets = try await APIService.shared.getPets()
         } catch {
             // Non-blocking — user can still register new pet
         }

@@ -215,8 +215,17 @@ struct ShelterPromoClaimView: View {
                     species: species,
                     breed: breed.isEmpty ? nil : breed,
                     color: color.isEmpty ? nil : color,
+                    weight: nil,
+                    microchipNumber: nil,
+                    medicalNotes: nil,
+                    allergies: nil,
+                    medications: nil,
+                    notes: nil,
+                    uniqueFeatures: nil,
                     sex: sex.isEmpty ? nil : sex,
-                    is_neutered: isNeutered
+                    isNeutered: isNeutered,
+                    dateOfBirth: nil,
+                    dobIsApproximate: nil
                 )
                 Task {
                     await viewModel.claimWithNewPet(qrCode: tagCode, petData: petData)
