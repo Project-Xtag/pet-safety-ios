@@ -30,7 +30,7 @@
 
 // MARK: - Auth
 "welcome_back" = "Welcome Back!";
-"welcome_new_user" = "Welcome to SENRA Pet!";
+"welcome_new_user" = "Welcome to SENRA!";
 "enter_email_subtitle" = "Enter your email to receive a login code.";
 "email_address" = "Email Address";
 "send_login_code" = "Send Login Code";
@@ -48,8 +48,8 @@
 "register" = "Register";
 "already_have_account" = "Already have an account?";
 "log_in" = "Log in";
-"terms_login_prefix" = "By logging in, you agree to our ";
-"terms_and" = " and ";
+"terms_login_prefix" = "By logging in, you agree to our";
+"terms_and" = "and";
 "terms_of_service" = "Terms of Service";
 "privacy_policy" = "Privacy Policy";
 "first_name" = "First Name";
@@ -279,7 +279,7 @@
 "sighting_notes_placeholder" = "Describe what you saw, the pet's condition, direction of travel...";
 "submit_sighting_report" = "Submit Sighting Report";
 "sighting_reported_owner_notified" = "Sighting reported! The owner has been notified.";
-"sighting_queued_offline" = "Sighting queued - will submit when online.";
+"sighting_queued_offline" = "Sighting report queued. Will sync when online.";
 
 // MARK: - Mark Lost/Found Sheet
 
@@ -301,7 +301,7 @@
 "success_story_marker" = "Success Story";
 "load_more" = "Load More";
 "missing_for" = "Missing for %@";
-"shared_via_pet_safety" = "Shared via Pet Safety App";
+"shared_via_senra" = "Shared via SENRA App";
 
 // MARK: - Success Story Time
 "success_just_now" = "Just now";
@@ -501,7 +501,7 @@
 "help_faq_q10" = "How do I order a replacement tag?";
 "help_faq_a10" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Maximum and Standard plan subscribers can request free replacement tags, while Starter plan members can order replacements for the shipping cost.";
 "help_faq_q11" = "What is the referral programme?";
-"help_faq_a11" = "In the Referral menu on your Profile page, you can generate a personal referral code. Share it with friends and family. When someone uses your code and subscribes to a paid plan (Standard or Maximum), both you and your friend get 2 months free on your subscription. You can track your referrals and their status on the Referral page.";
+"help_faq_a11" = "Choose your personal Referral Code from My Pets. Share it with friends and family. When someone uses your code and subscribes to a paid plan (Standard or Maximum), both you and your friend get 2 months free on your subscription. You can track your referrals and their status on the Referral  Program page.";
 "help_faq_q12" = "Which countries do you ship to?";
 "help_faq_a12" = "We currently ship to Hungary, Slovakia, Czech Republic, Austria, Romania, Croatia, Spain, Italy, France, Germany, Norway, and Portugal. Domestic shipping within Hungary: {{huPostapoint}} (PostaPont) or {{huHome}} (home delivery). International shipping: {{intlPrice}} per order.";
 "help_faq_q13" = "Can I have multiple pets on one account?";
@@ -511,15 +511,15 @@
 "help_faq_q15" = "Is my personal data safe?";
 "help_faq_a15" = "Yes. You control exactly which data is visible when someone scans your pet's tag. In 'Settings' > 'Privacy Settings', you can choose whether to show your phone number, email address, or home address. Your login is protected by a one-time verification code every time — there's no password that could be stolen. You can delete your account and all your data at any time.";
 "help_faq_q16" = "We lost the tag or it got damaged — what should I do?";
-"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Standard and Maximum plan subscribers can request unlimited free replacements, while Starter members need to pay the shipping cost for a replacement tag. The old tag is deactivated immediately when the replacement is ordered.";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Standard and Maximum plan subscribers can request free replacements, while Starter members need to pay the shipping cost for a replacement tag. The old tag is deactivated immediately when the replacement is ordered.";
 "help_faq_q17" = "My tag won't scan — what should I do?";
 "help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a free replacement from the 'Home/My Account' page (free replacement is available for Standard and Maximum plan subscribers — Starter members need to pay the shipping cost for a replacement tag).";
 "help_faq_q18" = "I found a pet without a SENRA tag — what can I do?";
-"help_faq_a18" = "Check the Missing Pets map on the SENRA website (senra.pet) — the pet may have been reported missing in your area. You can also view missing pet alerts within the app. Take the pet to the nearest vet clinic to have its microchip scanned. If the pet has a SENRA tag, scan the QR code with your phone's camera — the owner's contact details will appear. Always notify local authorities and nearby shelters as well.";
+"help_faq_a18" = "Check the Missing Pets map on the SENRA website (senra.pet) — the pet may have been reported missing in your area. You can also view missing pet alerts within the app. Take the pet to the nearest vet clinic to have its microchip scanned. If the pet has a SENRA tag, scan the QR code with your phone's camera — the owner's contact details will appear.";
 "help_faq_q19" = "Can I change my email address?";
 "help_faq_a19" = "Your primary email address serves as your account identifier and therefore cannot be changed directly. If you'd like to use a different email as your public contact, you can add a secondary email address in 'Settings' > 'Contact Details' — this can also appear on your pet's profile if you enable it, so the finder can see it immediately and contact you directly. If you absolutely need to change your primary email, contact us at hello@senra.pet and we'll help migrate your account.";
 "help_faq_q20" = "What's the difference between a microchip and a SENRA QR tag?";
-"help_faq_a20" = "A microchip is a tiny implant under your pet's skin that stores a unique 15-digit identifier — but it requires a special reader (usually only available at vets and shelters). The SENRA QR tag can be easily scanned with any smartphone camera, instantly displaying your pet's full profile, photo, and the contact details you've approved. The finder can also share the GPS coordinates of where they found your pet.";
+"help_faq_a20" = "A microchip is a tiny implant under your pet's skin that stores a unique 15-digit identifier — but it requires a special reader (usually only available at vets and shelters). The SENRA QR tag can be easily scanned with any smartphone camera, instantly displaying your pet's full profile, photo, and the contact details you've approved. The finder can also share where they found your pet.";
 "help_faq_q21" = "What happens to my data if I cancel my subscription?";
 "help_faq_a21" = "If you cancel your subscription, you retain access to paid features until the end of the current billing period. After that, your account automatically switches to the free Starter plan. Pet profiles, photos, and QR tags remain active — you only lose access to premium features (SMS notifications, vet alerts, free tag replacement, etc.). Your data is not deleted upon cancellation. To permanently delete all data, use the Delete Account option in Settings.";
 "help_faq_q22" = "How can I register my clinic or shelter with SENRA?";
@@ -552,7 +552,7 @@
 "help_guide_qr_tags_title" = "QR Code Pet Tags";
 "help_guide_qr_tags_desc" = "Each SENRA tag features a unique QR code that links to your pet's digital profile. Anyone who finds your pet can scan the code with their phone camera — no app download required. The scanner instantly sees your pet's photo, name, medical information, and your contact details. They can also share their GPS location with you so you know exactly where your pet is. Tags work with all modern smartphones.";
 "help_guide_materials_title" = "Tag Materials & Durability";
-"help_guide_materials_desc" = "SENRA tags are made from durable, lightweight metal with an epoxy coating for extra protection. They're waterproof and UV-resistant, suitable for all weather conditions. The QR code is printed with fade-resistant ink to remain scannable over time. Tags attach securely to your pet's collar. If a tag becomes damaged or the QR code is no longer scannable, you can order a replacement from your Account page — free for Standard and Maximum plan members.";
+"help_guide_materials_desc" = "SENRA tags are made from durable, lightweight metal with an epoxy coating for extra protection. They're waterproof and UV-resistant, suitable for all weather conditions. Tags attach securely to your pet's collar. If a tag becomes damaged or the QR code is no longer scannable, you can order a replacement from your Account page — free for Standard and Maximum plan members.";
 "help_guide_emergency_title" = "Emergency Contact & Alerts";
 "help_guide_emergency_desc" = "When someone scans your pet's tag, you receive an instant notification by email with the finder's location. Standard and Maximum plan members also receive SMS alerts for faster response. If you mark your pet as missing, a community alert is sent to all SENRA users within 10km, and registered vets and shelters in your area are also notified. Anyone in the community can report sightings with their location, building a trail to help you find your pet.";
 "help_guide_profile_title" = "Pet Profile Management";
@@ -705,7 +705,7 @@
 "try_again" = "Try Again";
 
 // MARK: - Map App Picker
-"map_approximate_notice" = "This is an approximate location (~500m). Search the surrounding area.";
+"map_approximate_notice" = "This is an approximate location (~100m). Search the surrounding area.";
 "map_coordinates" = "Coordinates";
 "map_open_in" = "Open in";
 "map_apple_maps" = "Apple Maps";
@@ -713,7 +713,7 @@
 "map_waze" = "Waze";
 "map_pet_location %@" = "%@ Location";
 "location_title" = "%@ Location";
-"approximate_location_note" = "This is an approximate location (~500m). Search the surrounding area.";
+"approximate_location_note" = "This is an approximate location (~100m). Search the surrounding area.";
 
 // MARK: - App Info
 
@@ -923,7 +923,7 @@
 "location_current" = "Current Location";
 "location_my_address" = "My Address";
 "location_custom" = "Custom Address";
-"mark_lost_pet_info" = "Pet Information";
+"mark_lost_pet_info" = "Lost Pet Information";
 "mark_lost_last_seen" = "Last Seen Location";
 "mark_lost_alerts_footer" = "Alerts will be sent to nearby users, vets, and shelters within 10km.";
 "mark_lost_getting_location" = "Getting your location…";
@@ -1297,7 +1297,7 @@
 "alert_error" = "Error";
 "sse_tag_scanned_body" = "%1$@'s tag was scanned at %2$@!";
 "sse_sighting_body" = "%1$@ has been sighted%2$@!";
-"sse_sighting_at" = " at %@";
+"sse_sighting_at" = "at %@";
 "sse_pet_found_body" = "Great news! %@ has been found!";
 // MARK: - Edit Alert
 "edit_alert_title" = "Edit Alert";
