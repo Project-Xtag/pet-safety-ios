@@ -71,12 +71,81 @@ struct TagLookupResponse: Codable {
     let isOwner: Bool?
     let canActivate: Bool?
     let pet: TagLookupPet?
+    var canClaimPromo: Bool?
+    var promo: PromoTagInfo?
 
     enum CodingKeys: String, CodingKey {
         case exists, status, pet
         case hasPet = "has_pet"
         case isOwner = "is_owner"
         case canActivate = "can_activate"
+        case canClaimPromo = "can_claim_promo"
+        case promo
+    }
+}
+
+struct PromoTagInfo: Codable {
+    let isPromoTag: Bool
+    let shelterName: String
+    let batchExpired: Bool
+    let promoDurationMonths: Int
+
+    enum CodingKeys: String, CodingKey {
+        case isPromoTag = "is_promo_tag"
+        case shelterName = "shelter_name"
+        case batchExpired = "batch_expired"
+        case promoDurationMonths = "promo_duration_months"
+    }
+}
+
+struct ClaimPromoTagRequest: Codable {
+    let qrCode: String
+    let pet: CreatePetRequest?
+    let petId: String?
+
+    enum CodingKeys: String, CodingKey {
+        case qrCode = "qrCode"
+        case pet
+        case petId
+    }
+}
+
+struct ClaimPromoTagResponse: Codable {
+    let success: Bool
+    let message: String
+    let pet: Pet?
+    let tag: ClaimedTag?
+    let subscriptionAction: String?
+    let promoDetails: PromoDetails?
+
+    struct ClaimedTag: Codable {
+        let qrCode: String
+        let status: String
+        let petId: String
+
+        enum CodingKeys: String, CodingKey {
+            case qrCode = "qr_code"
+            case status
+            case petId = "pet_id"
+        }
+    }
+
+    struct PromoDetails: Codable {
+        let shelterName: String
+        let trialEndDate: String
+        let promoDurationMonths: Int
+
+        enum CodingKeys: String, CodingKey {
+            case shelterName = "shelter_name"
+            case trialEndDate = "trial_end_date"
+            case promoDurationMonths = "promo_duration_months"
+        }
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case success, message, pet, tag
+        case subscriptionAction = "subscription_action"
+        case promoDetails = "promo_details"
     }
 }
 

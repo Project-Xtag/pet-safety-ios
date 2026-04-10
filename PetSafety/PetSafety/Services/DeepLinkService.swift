@@ -21,6 +21,15 @@ class DeepLinkService: ObservableObject {
     /// Whether to show the scanned pet public profile (for active tags with a pet)
     @Published var showScannedPetProfile = false
 
+    /// Whether to show the promo tag claim flow
+    @Published var showPromoClaimFlow = false
+
+    /// The tag code for the promo claim flow
+    @Published var promoClaimTagCode: String?
+
+    /// Promo info for the claim flow (shelter name, duration, etc.)
+    @Published var promoClaimInfo: PromoTagInfo?
+
     /// The pet data from a scanned active tag (populated by lookup)
     @Published var scannedTagLookup: TagLookupResponse?
 
@@ -145,7 +154,16 @@ class DeepLinkService: ObservableObject {
                 print("🔗 DeepLinkService: Lookup result - exists: \(lookup.exists), status: \(lookup.status ?? "nil"), hasPet: \(lookup.hasPet ?? false), isOwner: \(lookup.isOwner ?? false)")
                 #endif
 
-                if lookup.exists && lookup.status == "active" && lookup.hasPet == true && lookup.pet != nil {
+                if lookup.canClaimPromo == true, let promo = lookup.promo, !promo.batchExpired {
+                    // Promo-batch tag — show the promo claim flow
+                    #if DEBUG
+                    print("🔗 DeepLinkService: Promo tag detected from \(promo.shelterName)")
+                    #endif
+                    promoClaimTagCode = code
+                    promoClaimInfo = promo
+                    isLookingUpTag = false
+                    showPromoClaimFlow = true
+                } else if lookup.exists && lookup.status == "active" && lookup.hasPet == true && lookup.pet != nil {
                     // Active tag with a pet linked — show the public pet profile
                     scannedTagLookup = lookup
                     isLookingUpTag = false
@@ -176,6 +194,9 @@ class DeepLinkService: ObservableObject {
         pendingTagCode = nil
         showTagActivation = false
         showScannedPetProfile = false
+        showPromoClaimFlow = false
+        promoClaimTagCode = nil
+        promoClaimInfo = nil
         scannedTagLookup = nil
         isLookingUpTag = false
     }

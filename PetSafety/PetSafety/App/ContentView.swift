@@ -73,6 +73,17 @@ struct ContentView: View {
                 }
             }
         }
+        // Handle deep links for promo-batch tags — show claim flow
+        .sheet(isPresented: $deepLinkService.showPromoClaimFlow) {
+            if let tagCode = deepLinkService.promoClaimTagCode,
+               let promoInfo = deepLinkService.promoClaimInfo {
+                ShelterPromoClaimView(tagCode: tagCode, promoInfo: promoInfo)
+                    .environmentObject(authViewModel)
+                    .onDisappear {
+                        deepLinkService.clearPendingLink()
+                    }
+            }
+        }
         // Show loading overlay while looking up tag
         .overlay {
             if deepLinkService.isLookingUpTag {

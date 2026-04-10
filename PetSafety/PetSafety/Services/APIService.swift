@@ -843,6 +843,24 @@ class APIService {
         return response.tag
     }
 
+    /// Claim a promo-batch tag: register pet + activate tag + grant subscription
+    func claimPromoTag(qrCode: String, pet: CreatePetRequest? = nil, petId: String? = nil) async throws -> ClaimPromoTagResponse {
+        let body = ClaimPromoTagRequest(qrCode: qrCode, pet: pet, petId: petId)
+
+        struct ClaimEnvelope: Codable {
+            let data: ClaimPromoTagResponse
+        }
+
+        let request = try await buildRequest(
+            endpoint: "/qr-tags/claim-promo",
+            method: "POST",
+            body: body,
+            requiresAuth: true
+        )
+        let response = try await performRequest(request, responseType: ClaimEnvelope.self)
+        return response.data
+    }
+
     // Get active tag for a pet
     func getActiveTag(petId: String) async throws -> QRTag? {
         struct GetTagResponse: Codable {
