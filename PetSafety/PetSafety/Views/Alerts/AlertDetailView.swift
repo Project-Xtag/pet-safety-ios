@@ -263,6 +263,18 @@ struct AlertDetailView: View {
         .sheet(isPresented: $showingReportFound) {
             if let pet = alert.pet, let qrCode = pet.qrCode {
                 ShareLocationView(qrCode: qrCode, petName: pet.name)
+            } else {
+                VStack(spacing: 16) {
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 40))
+                        .foregroundColor(.secondary)
+                    Text(String(localized: "report_found_unavailable"))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.secondary)
+                    Button(String(localized: "close")) { showingReportFound = false }
+                        .buttonStyle(.borderedProminent)
+                }
+                .padding(32)
             }
         }
         .alert("alert_mark_found_title \(alert.pet?.name ?? String(localized: "pet_default"))", isPresented: $showingMarkFoundConfirmation) {

@@ -1396,3 +1396,4 @@
 "sync_error_missing_data %@" = "Hiányzó kötelező adat: %@";
 "sync_error_not_implemented" = "A funkció még nem elérhető";
 "sync_error_network_unavailable" = "Nincs hálózati kapcsolat";
+"report_found_unavailable" = "Ez a funkció nem érhető el ehhez a riasztáshoz. Kérjük, lépj kapcsolatba közvetlenül a gazdival, ha megtaláltad a kedvencet.";

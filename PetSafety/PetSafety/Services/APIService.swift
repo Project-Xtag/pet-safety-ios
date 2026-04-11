@@ -187,6 +187,10 @@ class APIService {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
 
+        // Send device locale so backend returns locale-appropriate content (seed alerts, etc.)
+        let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
+        request.setValue(languageCode, forHTTPHeaderField: "Accept-Language")
+
         // Add Firebase App Check token for API protection
         // This verifies the request comes from a legitimate app instance
         if let appCheckToken = await ConfigurationManager.shared.getAppCheckToken() {

@@ -1398,3 +1398,4 @@
 "sync_error_missing_data %@" = "Missing required data: %@";
 "sync_error_not_implemented" = "Feature not yet implemented";
 "sync_error_network_unavailable" = "Network connection unavailable";
+"report_found_unavailable" = "This feature is not available for this alert. Please contact the owner directly if you have found the pet.";
