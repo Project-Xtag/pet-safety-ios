@@ -488,10 +488,10 @@
 "help_faq_a3" = "Minden kisállat egyedi QR-kódos bilétát kap. Ez a kód kedvenced profiljával van összekapcsolva. Amikor valaki beolvassa a QR-kódot a telefonjával, azonnal megtekintheti a kedvenced profilját és az általad nyilvánosként megjelölt kapcsolatfelvételi adatokat.";
 "help_faq_q4" = "Később frissíthetem a kedvencem adatait?";
 "help_faq_a4" = "Igen! Bármikor frissítheted a kedvenced adatait a 'Saját kisállataim' menüpontban, kedvenced kiválasztása után a 'Profil szerkesztése' gombra kattintva. A név, faj, fajta mezők kivételével bármelyiket frissítheted, ideértve a fotókat is. A változtatások azonnal mentésre kerülnek.";
-"help_faq_q5" = "Hogyan rendelhetek cserebilétát?";
-"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
-"help_faq_q6" = "Hogyan aktiválom a bilétát miután megérkezett?";
-"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
+"help_faq_q5" = "Hogyan tudok cserebilétát rendelni?";
+"help_faq_a5" = "Menj a 'Kezdőlap / Fiókom' oldalra, és koppints a 'Cserebiléta rendelése' opcióra! Válaszd ki, melyik kedvencnek van szüksége új bilétára! A csere jogosultsága a Senra-fiókodtól függ; a részletekért látogass el a senra.pet oldalra.";
+"help_faq_q6" = "Hogyan tudom aktiválni a bilétát miután megkaptam?";
+"help_faq_a6" = "Töltsd le a SENRA mobilalkalmazást a Google Play Áruházból vagy az App Store-ból! Nyisd meg, majd menj az 'Aktiválás' menübe, és irányítsd a telefonod kameráját a bilétán található QR-kódra! A QR-kód beolvasása összekapcsolja a bilétát a fiókoddal. Ezután ki kell választanod egy meglévő kisállatodat, vagy létre kell hoznod egy új profilt.";
 "help_faq_q7" = "Ajándékozhatok SENRA bilétát?";
 "help_faq_a7" = "Igen! A SENRA biléták kiváló ajándékok kisállattartóknak. Egyszerűen rendeld meg a bilétát a saját fiókodból, amikor a megajándékozott megkapja, beolvashatja a QR-kódot, létrehozhatja saját fiókját és aktiválhatja a bilétát a kedvence számára. A megajándékozottnak nem kell előzetesen regisztrálnia — a biléta beolvasása végigvezeti a fiók létrehozásán és a biléta kedvencéhez való hozzárendelésén.";
 "help_faq_q8" = "Mi a teendő, ha eltűnik a kedvencem?";
@@ -504,16 +504,16 @@
 "help_faq_a11" = "A Saját Kisállataim oldalon az Ajánlói Program menüpont alatt  találod személyes Ajánlói Kódod. Oszd meg barátaiddal és családtagjaiddal! Amikor valaki felhasználja a kódodat és előfizet egy fizetős csomagra (Standard vagy Maximum), neked és a barátodnak is 2 hónapra díjmentessé válik az előfizetése. Az ajánlásaidat és azok állapotát az Ajánló Program oldalon követheted nyomon.";
 "help_faq_q12" = "Mely országokba szállítotok?";
 "help_faq_a12" = "Jelenleg Magyarországra, Szlovákiába, Csehországba, Ausztriába, Romániába, Horvátországba, Spanyolországba, Olaszországba, Franciaországba, Németországba, Norvégiába és Portugáliába szállítunk. Magyarországon belüli szállítás díja: {{huPostapoint}} (PostaPont) vagy {{huHome}} (házhozszállítás). A nemzetközi szállítás díja: {{intlPrice}} rendelésenként.";
-"help_faq_q13" = "Lehet több kedvencem egy fiókon?";
-"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
+"help_faq_q13" = "Lehet több kisállatom egy felhasználói fiókban?";
+"help_faq_a13" = "Igen. Egyetlen felhasználói fiókhoz több háziállatot is regisztrálhatsz. A fiók részleteiért látogass el a senra.pet oldalra.";
 "help_faq_q14" = "Hogyan jelenthetek egy megtalált kedvencet?";
 "help_faq_a14" = "Ha a kedvencnek van SENRA bilétája, egyszerűen olvasd be a QR-kódot okostelefonod kamerájával — nincs szükség alkalmazásra. Megtekintheted a kisállat profilját, és megoszthatod a tartózkodási helyed a gazdival.";
 "help_faq_q15" = "Biztonságban vannak a személyes adataim?";
 "help_faq_a15" = "Igen. Te határozod meg, pontosan mely adatok láthatóak, amikor valaki beolvassa a kedvenced bilétáját. A 'Beállítások' > 'Adatvédelmi beállítások' menüpontban kiválaszthatod, hogy megjelenjen-e a telefonszámod, e-mail címed vagy lakcímed. A bejelentkezésed minden alkalommal egyszeri ellenőrző kóddal védett — nincs jelszó, amit el lehetne lopni. A fiókodat és minden adatodat bármikor törölheted.";
-"help_faq_q16" = "Elvesztettük a bilétát vagy megsérült — mit tegyek?";
-"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
-"help_faq_q17" = "A bilétám nem olvasható be — mit csináljak?";
-"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
+"help_faq_q16" = "Elveszett a biléta, vagy megsérült — mit tegyek?";
+"help_faq_a16" = "Ne aggódj — a háziállatod digitális profilja biztonságban van, és nincs a bilétán tárolva. Menj a Fiókom oldalra, és koppints a 'Csere rendelése' opcióra. Egy új, friss QR-kóddal ellátott bilétát kapcsolunk a meglévő kisállat-profilodhoz. A csere jogosultsága a Senra-fiókodtól függ; a részletekért látogass el a senra.pet oldalra. A régi biléta a csere megrendelésekor azonnal deaktiválásra kerül.";
+"help_faq_q17" = "Nem sikerül leolvasni a bilétát - mit tegyek?";
+"help_faq_a17" = "Próbáld a következőket: tisztítsd meg a biléta felületét egy nedves ruhával, biztosíts megfelelő megvilágítást, tartsd a telefon kameráját stabilan, körülbelül 10–15 cm-re a bilétától, és ellenőrizd, hogy a kameraalkalmazásod vagy QR-kód olvasód megfelelően működik! Ha a QR-kód megkarcolódott vagy elkopott, rendelj cserét a 'Kezdőlap / Fiókom' oldalon!";
 "help_faq_q18" = "Találtam egy kedvencet SENRA biléta nélkül — mit tehetek?";
 "help_faq_a18" = "Ellenőrizd az Eltűnt Kedvencek térképet a SENRA weboldalán (senra.pet) — lehet, hogy a kisállatot eltűntként jelentették a környékeden. Az eltűnt kedvenc riasztásokat az alkalmazáson belül is megtekintheted. Vidd be az kisállatot a legközelebbi állatorvosi rendelőbe, hogy leolvassak a mikrochipjét. Ha a kedvencnek van SENRA bilétája, olvasd le a QR kódot  okostelefonod kamerájával — megjelenik a gazdi elérhetősége.";
 "help_faq_q19" = "Megváltoztathatom az e-mail címemet?";
@@ -809,10 +809,10 @@
 // MARK: - Ajánlás (1. rész)
 "referral_loading" = "Betöltés…";
 "referral_your_code" = "Ajánlókódod";
-"referral_share_footer" = "Share your referral code with friends.";
+"referral_share_footer" = "Oszd meg az ajánlói kódodat a barátaiddal!";
 "referral_how_it_works" = "Hogyan működik";
 "referral_step_1" = "Oszd meg az egyedi kódod a barátaiddal!";
-"referral_step_2" = "They sign up with your code";
+"referral_step_2" = "A te kódoddal regisztrálnak.";
 "referral_step_3" = "Mindketten 2 hónap ingyenes használatot kaptok";
 "referral_history" = "Ajánlási előzmények";
 "referral_no_referrals" = "Még nincs ajánlás";
@@ -972,7 +972,7 @@
 "plan_feature_photos_count" = "%lld fotó kisállatonként";
 "referral_status_pending" = "Függőben";
 "referral_status_signed_up" = "Regisztrált";
-"referral_status_subscribed" = "Active";
+"referral_status_subscribed" = "Aktív";
 "referral_status_rewarded" = "Jutalmazott";
 "referral_share_message" = "Használd az ajánlókódomat %@ és használd 2 hónapig ingyen a SENRA Közösségi Kisállat Bilétát Standard előfizetéssel! https://senra.pet/choose-plan?referral=%@";
 "help_guide_qr_tags_title" = "QR-kódos kedvenc biléták";
@@ -1027,7 +1027,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "A regisztrált kedvenceid száma elérte a limitet";
-"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
+"pet_limit_reached_info" = "Elérted az ehhez a fiókhoz tartozó kisállatok maximális számát. További információért látogass el a senra.pet oldalra.";
 "upgrade_to_ultimate" = "Váltás Maximum csomagra";
 "keep_current_plan" = "Jelenlegi csomag megtartása";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "A %@ csomagod %lld kedvencet engedélyez. Válts %@-ra %@ áron, hogy akár 10 kisállatot regisztrálhass!";
@@ -1044,7 +1044,7 @@
 "apply_code" = "Használd a kódot";
 "referral_code_applied" = "Ajánlókód alkalmazva! 2 hónapot kapsz ingyen.";
 "referral_code_invalid" = "Érvénytelen vagy lejárt ajánlókód";
-"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
+"referral_use_friend_footer" = "Add meg egy barátod ajánlókódját, hogy jutalmat kapj!";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Ajándékként rendelés";
@@ -1250,7 +1250,7 @@
 "current_plan" = "Jelenlegi csomag";
 "plan_renews" = "Megújul: %@";
 "plan_cancels_on" = "Lejár: %@";
-"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
+"delete_premium_warning" = "A fiókod törlése véglegesen törli a profilodat. Ha egy aktív Senra-előfizetést is szeretnél megszüntetni, kérjük, tedd ezt meg a törlés előtt a senra.pet oldalon.";
 "cancel_instead" = "Előfizetés lemondása ehelyett";
 
 // MARK: - Menhelyi örökbefogadás
@@ -1307,7 +1307,7 @@
 "appearance_light" = "Világos";
 "appearance_dark" = "Sötét";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
+"mark_lost_starter_notice" = "Közösségi riasztásokhoz Senra előfizetés szükséges.";
 "mark_lost_upgrade_prompt" = "A Starter csomaggal a kedvencedet elveszettnek jelöljük, de a közeli felhasználók, állatorvosok és menhelyek értesítéséhez Standard vagy Maximum előfizetés szükséges.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "pl. 3 éves, 6 hónapos (opcionális)";
@@ -1375,7 +1375,7 @@
 "api_error_invalid_url" = "Érvénytelen URL";
 "api_error_invalid_response" = "Érvénytelen válasz a szervertől";
 "api_error_unauthorized" = "Nincs jogosultság. Kérjük, jelentkezz be újra.";
-"api_error_pet_limit" = "Pet registration limit reached for this account.";
+"api_error_pet_limit" = "Elérted az ehhez a fiókhoz tartozó kisállat-regisztrációs limitet.";
 "api_error_decoding" = "Nem sikerült feldolgozni a szerver válaszát";
 "api_error_network %@" = "Hálózati hiba: %@";
 "sync_no_internet" = "Nem lehet szinkronizálni: Nincs internetkapcsolat";
