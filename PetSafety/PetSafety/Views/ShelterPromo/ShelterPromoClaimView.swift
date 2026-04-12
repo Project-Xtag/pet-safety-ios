@@ -61,7 +61,7 @@ struct ShelterPromoClaimView: View {
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
 
-                    Text(String(localized: "Register your pet to activate this tag and get \(promoInfo.promoDurationMonths) months of free Standard plan."))
+                    Text(String(localized: "Register your pet to activate this tag, courtesy of \(promoInfo.shelterName)."))
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -273,8 +273,8 @@ struct ShelterPromoClaimView: View {
                     }
                     if let details = result.promoDetails {
                         Label(
-                            String(localized: "Free Standard plan until \(formatDate(details.trialEndDate))"),
-                            systemImage: "crown.fill"
+                            String(localized: "Tag active until \(formatDate(details.trialEndDate))"),
+                            systemImage: "checkmark.seal.fill"
                         )
                         .font(.subheadline)
                         .foregroundColor(.brandOrange)
@@ -284,13 +284,6 @@ struct ShelterPromoClaimView: View {
                 .frame(maxWidth: .infinity)
                 .background(Color.green.opacity(0.1))
                 .cornerRadius(12)
-
-                if result.subscriptionAction == "override_only" {
-                    Text(String(localized: "Your new pet has Standard features for \(promoInfo.promoDurationMonths) months. Upgrade to Maximum to keep all pets covered."))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                }
 
                 Button(String(localized: "Done")) {
                     dismiss()

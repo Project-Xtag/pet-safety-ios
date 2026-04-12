@@ -4,14 +4,10 @@ import SwiftUI
 @MainActor
 class SubscriptionViewModel: ObservableObject {
     // MARK: - Published Properties
-    @Published var plans: [SubscriptionPlan] = []
     @Published var currentSubscription: UserSubscription?
     @Published var features: SubscriptionFeatures?
     @Published var isLoading = false
-    @Published var isProcessing = false
     @Published var error: String?
-    @Published var checkoutURL: URL?
-    @Published var showCheckoutSheet = false
 
     // MARK: - Computed Properties
     var currentPlanName: String {
@@ -30,18 +26,6 @@ class SubscriptionViewModel: ObservableObject {
         features?.canCreateAlerts ?? false
     }
 
-    var starterPlan: SubscriptionPlan? {
-        plans.first { $0.name.lowercased() == "starter" }
-    }
-
-    var standardPlan: SubscriptionPlan? {
-        plans.first { $0.name.lowercased() == "standard" }
-    }
-
-    var maximumPlan: SubscriptionPlan? {
-        plans.first { $0.name.lowercased() == "maximum" }
-    }
-
     // MARK: - Initialization
     init() {
         // Listen for SSE subscription_changed events and auto-refresh
@@ -51,45 +35,13 @@ class SubscriptionViewModel: ObservableObject {
                 await self?.loadFeatures()
             }
         }
-
-        // Listen for checkout deep link completion and refresh
-        NotificationCenter.default.addObserver(
-            forName: .checkoutCompleted,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            Task { @MainActor [weak self] in
-                await self?.handleCheckoutComplete()
-            }
-        }
     }
 
     deinit {
         SSEService.shared.onSubscriptionChanged = nil
-        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Data Loading
-    func loadPlans() async {
-        isLoading = true
-        error = nil
-
-        do {
-            let fetchedPlans = try await APIService.shared.getSubscriptionPlans()
-            plans = fetchedPlans
-            #if DEBUG
-            print("✅ Loaded \(plans.count) subscription plans")
-            #endif
-        } catch {
-            self.error = error.localizedDescription
-            #if DEBUG
-            print("❌ Failed to load plans: \(error)")
-            #endif
-        }
-
-        isLoading = false
-    }
-
     func loadCurrentSubscription() async {
         do {
             currentSubscription = try await APIService.shared.getMySubscription()
@@ -122,83 +74,9 @@ class SubscriptionViewModel: ObservableObject {
 
     func loadAll() async {
         isLoading = true
-        await loadPlans()
         await loadCurrentSubscription()
         await loadFeatures()
         isLoading = false
-    }
-
-    // MARK: - Plan Selection
-    func selectPlan(_ plan: SubscriptionPlan, billingPeriod: String = "monthly") async {
-        isProcessing = true
-        error = nil
-
-        do {
-            if plan.isFree {
-                // Free plan - direct upgrade
-                let subscription = try await APIService.shared.upgradeToStarter()
-                currentSubscription = subscription
-                #if DEBUG
-                print("✅ Upgraded to Starter plan")
-                #endif
-            } else {
-                // Paid plan - redirect to web app for subscription checkout
-                // Subscriptions are web-only (no in-app purchasing / no store entitlement needed)
-                let countryCode = Locale.current.region?.identifier ?? ""
-                let urlString = countryCode.isEmpty ? "https://senra.pet/choose-plan" : "https://senra.pet/choose-plan?country=\(countryCode)"
-                if let url = URL(string: urlString) {
-                    checkoutURL = url
-                    showCheckoutSheet = true
-                    #if DEBUG
-                    print("✅ Opening web checkout for paid plan: \(plan.name)")
-                    #endif
-                } else {
-                    error = NSLocalizedString("error_invalid_checkout_url", comment: "")
-                }
-            }
-        } catch {
-            self.error = error.localizedDescription
-            #if DEBUG
-            print("❌ Failed to select plan: \(error)")
-            #endif
-        }
-
-        isProcessing = false
-    }
-
-    // MARK: - Subscription Management
-    func cancelSubscription() async {
-        isProcessing = true
-        error = nil
-
-        do {
-            let subscription = try await APIService.shared.cancelSubscription()
-            currentSubscription = subscription
-            #if DEBUG
-            print("✅ Subscription cancelled")
-            #endif
-        } catch {
-            self.error = error.localizedDescription
-            #if DEBUG
-            print("❌ Failed to cancel subscription: \(error)")
-            #endif
-        }
-
-        isProcessing = false
-    }
-
-    // MARK: - Post-Checkout
-    func handleCheckoutComplete() async {
-        // Reload subscription status after Stripe checkout
-        await loadCurrentSubscription()
-        await loadFeatures()
-        showCheckoutSheet = false
-        checkoutURL = nil
-    }
-
-    func handleCheckoutCancelled() {
-        showCheckoutSheet = false
-        checkoutURL = nil
     }
 
     // MARK: - Feature Checks
@@ -207,7 +85,7 @@ class SubscriptionViewModel: ObservableObject {
         if let maxPets = features.maxPets {
             return currentPetCount < maxPets
         }
-        return true // Unlimited
+        return true
     }
 
     func checkPhotoLimit(currentPhotoCount: Int) -> Bool {

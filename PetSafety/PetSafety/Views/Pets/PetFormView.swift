@@ -490,10 +490,6 @@ struct PetFormView: View {
                             .foregroundColor(.secondary)
 
                         VStack(spacing: 10) {
-                            postSaveActionCard(icon: "checkmark.shield.fill", text: String(localized: "choose_subscription_plan")) {
-                                // Navigate to subscription screen (same flow as existing app)
-                                onAllDone?()
-                            }
                             postSaveActionCard(icon: "person.crop.circle.fill", text: String(localized: "update_contact_details")) {
                                 onAllDone?()
                             }

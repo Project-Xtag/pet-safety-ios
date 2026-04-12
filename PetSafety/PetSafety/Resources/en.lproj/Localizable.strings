@@ -489,9 +489,9 @@
 "help_faq_q4" = "Can I update my pet's details later?";
 "help_faq_a4" = "Yes! You can update your pet's details anytime in the 'My Pets' section by selecting your pet and tapping 'Edit Profile'. You can update any field except name, species, and breed, including photos. Changes are saved immediately.";
 "help_faq_q5" = "How do I order a replacement tag?";
-"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Maximum and Standard plan subscribers can request free replacement tags, while Starter plan members can order replacements for the shipping cost.";
+"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
 "help_faq_q6" = "How do I activate my tag after it arrives?";
-"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile. After completing activation, you can choose your subscription plan.";
+"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
 "help_faq_q7" = "Can I give a SENRA tag as a gift?";
 "help_faq_a7" = "Yes! SENRA tags make great gifts for pet owners. Simply order the tag from your own account — when the recipient receives it, they can scan the QR code, create their own account, and activate the tag for their pet. The recipient doesn't need to register in advance — scanning the tag guides them through account creation and linking the tag to their pet.";
 "help_faq_q8" = "What should I do if my pet goes missing?";
@@ -505,15 +505,15 @@
 "help_faq_q12" = "Which countries do you ship to?";
 "help_faq_a12" = "We currently ship to Hungary, Slovakia, Czech Republic, Austria, Romania, Croatia, Spain, Italy, France, Germany, Norway, and Portugal. Domestic shipping within Hungary: {{huPostapoint}} (PostaPont) or {{huHome}} (home delivery). International shipping: {{intlPrice}} per order.";
 "help_faq_q13" = "Can I have multiple pets on one account?";
-"help_faq_a13" = "Yes. With the Starter (free) plan, you can register up to 10 pets, but available features are limited. The Standard plan is designed for one cat or dog, but all features are included. The Maximum plan includes all features and you can register up to 10 pets. You can switch subscription plans anytime under 'Home/My Account'.";
+"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
 "help_faq_q14" = "How do I report a found pet?";
 "help_faq_a14" = "If the pet has a SENRA tag, simply scan the QR code with your phone's camera — no app needed. You can view the pet's profile and share your location with the owner.";
 "help_faq_q15" = "Is my personal data safe?";
 "help_faq_a15" = "Yes. You control exactly which data is visible when someone scans your pet's tag. In 'Settings' > 'Privacy Settings', you can choose whether to show your phone number, email address, or home address. Your login is protected by a one-time verification code every time — there's no password that could be stolen. You can delete your account and all your data at any time.";
 "help_faq_q16" = "We lost the tag or it got damaged — what should I do?";
-"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Standard and Maximum plan subscribers can request free replacements, while Starter members need to pay the shipping cost for a replacement tag. The old tag is deactivated immediately when the replacement is ordered.";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
 "help_faq_q17" = "My tag won't scan — what should I do?";
-"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a free replacement from the 'Home/My Account' page (free replacement is available for Standard and Maximum plan subscribers — Starter members need to pay the shipping cost for a replacement tag).";
+"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
 "help_faq_q18" = "I found a pet without a SENRA tag — what can I do?";
 "help_faq_a18" = "Check the Missing Pets map on the SENRA website (senra.pet) — the pet may have been reported missing in your area. You can also view missing pet alerts within the app. Take the pet to the nearest vet clinic to have its microchip scanned. If the pet has a SENRA tag, scan the QR code with your phone's camera — the owner's contact details will appear.";
 "help_faq_q19" = "Can I change my email address?";
@@ -820,10 +820,10 @@
 // MARK: - Referral (Chunk 1)
 "referral_loading" = "Loading…";
 "referral_your_code" = "Your Referral Code";
-"referral_share_footer" = "Share your code with friends. When they subscribe, you both get rewarded!";
+"referral_share_footer" = "Share your referral code with friends.";
 "referral_how_it_works" = "How It Works";
 "referral_step_1" = "Share your referral code with a friend";
-"referral_step_2" = "They sign up and subscribe using your code";
+"referral_step_2" = "They sign up with your code";
 "referral_step_3" = "You both get 2 months free!";
 "referral_history" = "Referral History";
 "referral_no_referrals" = "No referrals yet";
@@ -970,7 +970,7 @@
 
 // MARK: - SSE Subscription Events
 "sse_subscription_title" = "Subscription Updated";
-"sse_subscription_message" = "Your %@ plan is now %@.";
+"sse_subscription_message" = "Your Senra subscription has been updated.";
 "sse_referral_title" = "Referral Used!";
 "sse_referral_message" = "%@ used your referral code!";
 
@@ -985,7 +985,7 @@
 "plan_feature_photos_count" = "%lld photos per pet";
 "referral_status_pending" = "Pending";
 "referral_status_signed_up" = "Signed Up";
-"referral_status_subscribed" = "Subscribed";
+"referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Rewarded";
 "referral_share_message" = "Use my referral code %@ to get 2 months free on Pet Safety! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Getting Started";
@@ -1028,7 +1028,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Pet Limit Reached";
-"pet_limit_reached_info" = "You have reached the maximum number of pets for your current plan. Visit senra.pet to manage your subscription.";
+"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
 "upgrade_to_ultimate" = "Upgrade to Maximum";
 "keep_current_plan" = "Keep Current Plan";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Your %@ plan allows %lld pet. Upgrade to %@ for %@ to add up to 10 pets.";
@@ -1045,7 +1045,7 @@
 "apply_code" = "Apply";
 "referral_code_applied" = "Referral code applied! You'll get 2 months free.";
 "referral_code_invalid" = "Invalid or expired referral code";
-"referral_use_friend_footer" = "Enter a friend's referral code to get 2 months free when you subscribe.";
+"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Order as a gift";
@@ -1253,7 +1253,7 @@
 "current_plan" = "Current Plan";
 "plan_renews" = "Renews %@";
 "plan_cancels_on" = "Cancels on %@";
-"delete_premium_warning" = "You have an active %@ subscription until %@. Deleting your account will permanently erase your profile and you will immediately lose access to your remaining paid time. If you just want to stop future payments, please Cancel Subscription instead.";
+"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Cancel Subscription Instead";
 
 // MARK: - Shelter Adoption
@@ -1310,7 +1310,7 @@
 "appearance_light" = "Light";
 "appearance_dark" = "Dark";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Upgrade to send community alerts";
+"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
 "mark_lost_upgrade_prompt" = "On Starter plan, your pet will be marked as missing but notifications to nearby users, vets, and shelters require a Standard or Maximum subscription.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "e.g. 3 years, 6 months (optional)";
@@ -1377,7 +1377,7 @@
 "api_error_invalid_url" = "Invalid URL";
 "api_error_invalid_response" = "Invalid response from server";
 "api_error_unauthorized" = "Unauthorized. Please log in again.";
-"api_error_pet_limit" = "Pet registration limit reached. Upgrade your plan to add more pets.";
+"api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "Failed to decode server response";
 "api_error_network %@" = "Network error: %@";
 "sync_no_internet" = "Cannot sync: No internet connection";

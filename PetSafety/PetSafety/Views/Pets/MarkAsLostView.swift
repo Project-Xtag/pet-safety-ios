@@ -137,17 +137,12 @@ struct MarkAsLostView: View {
 
             Section {
                 if subscriptionViewModel.isOnStarterPlan {
-                    // Starter plan: notifications are not sent
                     VStack(alignment: .leading, spacing: 8) {
                         Label(String(localized: "mark_lost_starter_notice"), systemImage: "info.circle")
                             .font(.subheadline)
                             .foregroundColor(.brandOrange)
-                        Text("mark_lost_upgrade_prompt")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
                     }
                 } else {
-                    // Standard/Maximum: notifications will be sent
                     Text("mark_lost_sends_to")
                         .font(.subheadline)
                         .foregroundColor(.secondary)

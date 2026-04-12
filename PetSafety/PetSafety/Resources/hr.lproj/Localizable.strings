@@ -492,9 +492,9 @@
 "help_faq_q4" = "Mogu li kasnije ažurirati podatke svog ljubimca?";
 "help_faq_a4" = "Da! Možeš ažurirati podatke svog ljubimca u bilo kojem trenutku u sekciji 'Moji Ljubimci' odabirom ljubimca i klikom na 'Uredi Profil'. Možeš ažurirati sva polja osim imena, vrste i pasmine, uključujući fotografije. Promjene se spremaju odmah.";
 "help_faq_q5" = "Kako naručim zamjensku pločicu?";
-"help_faq_a5" = "Idi na stranicu 'Početna/Moj Račun' i klikni 'Naruči Zamjensku Pločicu'. Odaberi kojem ljubimcu treba nova pločica. Pretplatnici Maximum i Standard mogu zatražiti besplatne zamjenske pločice, dok članovi Starter mogu naručiti zamjenu uz cijenu dostave.";
+"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
 "help_faq_q6" = "Kako aktiviram svoju pločicu nakon što stigne?";
-"help_faq_a6" = "Preuzmi mobilnu aplikaciju SENRA iz Google Play Storea ili App Storea! Otvori je i idi na izbornik 'Aktivacija', usmjeri kameru telefona na QR kod na pločici! Skeniranje povezuje pločicu s tvojim računom. Zatim odaberi postojećeg ljubimca ili stvori novi profil. Nakon aktivacije možeš odabrati pretplatnički plan.";
+"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
 "help_faq_q7" = "Mogu li pokloniti SENRA pločicu?";
 "help_faq_a7" = "Da! SENRA pločice su izvrstan poklon za vlasnike kućnih ljubimaca. Jednostavno naruči pločicu sa svog računa — kada je primatelj primi, može skenirati QR kod, stvoriti vlastiti račun i aktivirati pločicu za svog ljubimca.";
 "help_faq_q8" = "Što trebam učiniti ako moj ljubimac nestane?";
@@ -508,15 +508,15 @@
 "help_faq_q12" = "U koje zemlje šaljete?";
 "help_faq_a12" = "Trenutno šaljemo u Mađarsku, Slovačku, Češku, Austriju, Rumunjsku, Hrvatsku, Španjolsku, Italiju, Francusku, Njemačku, Norvešku i Portugal. Dostava unutar Mađarske: {{huPostapoint}} (PostaPont) ili {{huHome}} (kućna dostava). Međunarodna dostava: {{intlPrice}} po narudžbi.";
 "help_faq_q13" = "Mogu li imati više ljubimaca na jednom računu?";
-"help_faq_a13" = "Da. S planom Starter (besplatno) možeš registrirati do 10 ljubimaca s ograničenim funkcijama. Plan Standard je za jednu mačku ili psa sa svim funkcijama. Plan Maximum uključuje sve s registracijom do 10 ljubimaca.";
+"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
 "help_faq_q14" = "Kako prijavim pronađenog ljubimca?";
 "help_faq_a14" = "Ako ljubimac ima SENRA pločicu, jednostavno skeniraj QR kod kamerom — nije potrebna aplikacija. Možeš vidjeti profil ljubimca i podijeliti svoju lokaciju s vlasnikom.";
 "help_faq_q15" = "Jesu li moji osobni podaci sigurni?";
 "help_faq_a15" = "Da. Ti kontroliraš točno koji podaci su vidljivi kada netko skenira pločicu. U 'Postavke' > 'Postavke Privatnosti' možeš odabrati prikazuje li se tvoj telefon, email ili adresa. Prijava je zaštićena jednokratnim kodom svaki put. Možeš obrisati račun i podatke u bilo kojem trenutku.";
 "help_faq_q16" = "Izgubili smo pločicu ili se oštetila — što da radim?";
-"help_faq_a16" = "Ne brini — digitalni profil tvog ljubimca je siguran i ne pohranjuje se na pločici. Idi na stranicu Račun i klikni 'Naruči Zamjenu'. Povezat ćemo novu pločicu s novim QR kodom s tvojim postojećim profilom. Pretplatnici Standard i Maximum mogu zatražiti neograničene besplatne zamjene. Stara pločica se odmah deaktivira.";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
 "help_faq_q17" = "Moja pločica se ne skenira — što da radim?";
-"help_faq_a17" = "Pokušaj: očisti površinu vlažnom krpom, osiguraj dobro osvjetljenje, drži kameru stabilno na udaljenosti 10-15 cm. Ako je QR kod ogreban ili istrošen, naruči besplatnu zamjenu s 'Početna/Moj Račun'.";
+"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
 "help_faq_q18" = "Pronašao sam ljubimca bez SENRA pločice — što mogu učiniti?";
 "help_faq_a18" = "Provjeri kartu Nestalih Ljubimaca na SENRA web stranici (senra.pet). Možeš vidjeti upozorenja i u aplikaciji. Odvedi životinju najbližem veterinaru za skeniranje mikročipa. Ako ima SENRA pločicu, skeniraj QR kod — prikazuju se kontakt podaci vlasnika. Uvijek obavijesti i lokalne vlasti i obližnja skloništa.";
 "help_faq_q19" = "Mogu li promijeniti svoju email adresu?";
@@ -823,10 +823,10 @@
 // MARK: - Referral (Chunk 1)
 "referral_loading" = "Učitavanje…";
 "referral_your_code" = "Tvoj kôd za preporuku";
-"referral_share_footer" = "Podijeli kôd s prijateljima. Kada se pretplate, oboje dobivate nagradu!";
+"referral_share_footer" = "Share your referral code with friends.";
 "referral_how_it_works" = "Kako funkcionira";
 "referral_step_1" = "Podijeli kôd za preporuku s prijateljem";
-"referral_step_2" = "Oni se registriraju i pretplate koristeći tvoj kôd";
+"referral_step_2" = "They sign up with your code";
 "referral_step_3" = "Oboje dobivate 2 mjeseca besplatno!";
 "referral_history" = "Povijest preporuka";
 "referral_no_referrals" = "Još nema preporuka";
@@ -973,7 +973,7 @@
 
 // MARK: - SSE Subscription Events
 "sse_subscription_title" = "Pretplata ažurirana";
-"sse_subscription_message" = "Tvoj %@ paket je sada %@.";
+"sse_subscription_message" = "Your Senra subscription has been updated.";
 "sse_referral_title" = "Preporuka iskorištena!";
 "sse_referral_message" = "%@ je iskoristio tvoj kôd za preporuku!";
 
@@ -988,7 +988,7 @@
 "plan_feature_photos_count" = "%lld fotografija po ljubimcu";
 "referral_status_pending" = "Na čekanju";
 "referral_status_signed_up" = "Registriran";
-"referral_status_subscribed" = "Pretplaćen";
+"referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Nagrađen";
 "referral_share_message" = "Koristi moj kôd za preporuku %@ za 2 mjeseca besplatno na Senri! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Prvi koraci";
@@ -1031,7 +1031,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Dosegnut limit ljubimaca";
-"pet_limit_reached_info" = "Dosegao si maksimalan broj ljubimaca za trenutni paket. Posjeti senra.pet za upravljanje pretplatom.";
+"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
 "upgrade_to_ultimate" = "Nadogradi na Maximum";
 "keep_current_plan" = "Zadrži trenutni paket";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Tvoj %@ paket dopušta %lld ljubimca. Nadogradi na %@ za %@ i registriraj do 10 ljubimaca.";
@@ -1048,7 +1048,7 @@
 "apply_code" = "Primijeni";
 "referral_code_applied" = "Kôd za preporuku primijenjen! Dobivaš 2 mjeseca besplatno.";
 "referral_code_invalid" = "Nevažeći ili istekli kôd za preporuku";
-"referral_use_friend_footer" = "Unesi kôd prijatelja za 2 mjeseca besplatne pretplate.";
+"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Naruči kao poklon";
@@ -1256,7 +1256,7 @@
 "current_plan" = "Trenutni paket";
 "plan_renews" = "Obnavlja se %@";
 "plan_cancels_on" = "Otkazuje se %@";
-"delete_premium_warning" = "Imaš aktivnu %@ pretplatu do %@. Brisanjem računa trajno ćeš izbrisati svoj profil i odmah izgubiti pristup preostalom plaćenom vremenu. Ako samo želiš zaustaviti buduća plaćanja, otkaži pretplatu.";
+"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Umjesto toga otkaži pretplatu";
 
 // MARK: - Shelter Adoption
@@ -1313,7 +1313,7 @@
 "appearance_light" = "Svijetlo";
 "appearance_dark" = "Tamno";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Nadogradi za slanje obavijesti zajednici";
+"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
 "mark_lost_upgrade_prompt" = "S planom Starter tvoj ljubimac bit će označen kao nestao, ali obavijesti korisnicima, veterinarima i skloništima zahtijevaju pretplatu Standard ili Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "npr. 3 godine, 6 mjeseci (neobavezno)";
@@ -1381,7 +1381,7 @@
 "api_error_invalid_url" = "Nevažeći URL";
 "api_error_invalid_response" = "Nevažeći odgovor poslužitelja";
 "api_error_unauthorized" = "Neovlašteno. Prijavite se ponovo.";
-"api_error_pet_limit" = "Dosegnut limit registracije ljubimaca. Nadogradite plan za dodavanje više.";
+"api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "Nije moguće obraditi odgovor poslužitelja";
 "api_error_network %@" = "Mrežna pogreška: %@";
 "sync_no_internet" = "Sinkronizacija nije moguća: Nema internetske veze";

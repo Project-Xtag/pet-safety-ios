@@ -95,30 +95,20 @@ struct OrderPaymentTests {
 
     @Test("Checkout notification names exist")
     func testNotificationNamesExist() {
-        #expect(Notification.Name.checkoutCompleted.rawValue == "checkoutCompleted")
         #expect(Notification.Name.tagOrderCompleted.rawValue == "tagOrderCompleted")
         #expect(Notification.Name.replacementCompleted.rawValue == "replacementCompleted")
     }
 
-    @Test("All three notification names are distinct")
+    @Test("Both notification names are distinct")
     func testNotificationNamesDistinct() {
         let names: Set<Notification.Name> = [
-            .checkoutCompleted,
             .tagOrderCompleted,
             .replacementCompleted,
         ]
-        #expect(names.count == 3, "All notification names should be distinct")
+        #expect(names.count == 2, "Notification names should be distinct")
     }
 
     // MARK: - Deep Link Checkout Type Extraction Tests
-
-    @Test("Checkout deep link extracts subscription type")
-    func testCheckoutTypeSubscription() {
-        let url = URL(string: "senra://checkout/success?session_id=cs_test&type=subscription")!
-        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        let type = components?.queryItems?.first(where: { $0.name == "type" })?.value
-        #expect(type == "subscription")
-    }
 
     @Test("Checkout deep link extracts qr_tag_order type")
     func testCheckoutTypeTagOrder() {
@@ -146,7 +136,7 @@ struct OrderPaymentTests {
 
     @Test("Checkout deep link extracts success path")
     func testCheckoutSuccessPath() {
-        let url = URL(string: "senra://checkout/success?session_id=cs_test&type=subscription")!
+        let url = URL(string: "senra://checkout/success?session_id=cs_test&type=qr_tag_order")!
         let path = url.path.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         #expect(path == "success")
     }
@@ -160,7 +150,7 @@ struct OrderPaymentTests {
 
     @Test("Checkout deep link host is checkout")
     func testCheckoutHost() {
-        let url = URL(string: "senra://checkout/success?type=subscription")!
+        let url = URL(string: "senra://checkout/success?type=qr_tag_order")!
         #expect(url.host == "checkout")
         #expect(url.scheme == "senra")
     }

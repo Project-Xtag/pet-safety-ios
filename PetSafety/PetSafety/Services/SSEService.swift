@@ -404,7 +404,7 @@ class SSEService: NSObject, ObservableObject {
                 }
                 showNotification(
                     title: NSLocalizedString("sse_subscription_title", comment: ""),
-                    body: String(format: NSLocalizedString("sse_subscription_message", comment: ""), event.planName, event.status)
+                    body: NSLocalizedString("sse_subscription_message", comment: "")
                 )
 
             case "referral_used":

@@ -234,19 +234,11 @@ struct TagActivationView: View {
                 .font(.subheadline)
                 .foregroundColor(.secondary)
 
-            // Action cards
-            NextStepCard(icon: "checkmark.shield.fill", text: String(localized: "choose_subscription_plan")) {
-                // Navigate to subscription screen (in-app, not external browser)
-                onDismiss()
-            }
-
             NextStepCard(icon: "cross.case.fill", text: String(localized: "register_your_vet")) {
-                // Navigate to vet section — for now dismiss
                 onDismiss()
             }
 
             NextStepCard(icon: "person.crop.circle.fill", text: String(localized: "update_contact_details")) {
-                // Navigate to profile — for now dismiss
                 onDismiss()
             }
         }

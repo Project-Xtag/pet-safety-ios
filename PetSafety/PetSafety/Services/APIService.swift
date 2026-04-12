@@ -1721,18 +1721,7 @@ extension APIService {
 
     // MARK: - Subscriptions
 
-    /// Get available subscription plans
-    func getSubscriptionPlans() async throws -> [SubscriptionPlan] {
-        #if DEBUG
-        print("📡 API: Fetching subscription plans...")
-        #endif
-
-        let request = try await buildRequest(endpoint: "/subscriptions/plans", requiresAuth: false)
-        let response = try await performRequest(request, responseType: SubscriptionPlansResponse.self)
-        return response.plans
-    }
-
-    /// Get user's current subscription
+    /// Get user's current subscription (read-only; purchase/cancel happens on senra.pet)
     func getMySubscription() async throws -> UserSubscription? {
         #if DEBUG
         print("📡 API: Fetching user subscription...")
@@ -1741,25 +1730,6 @@ extension APIService {
         let request = try await buildRequest(endpoint: "/subscriptions/my-subscription")
         let response = try await performRequest(request, responseType: MySubscriptionResponse.self)
         return response.subscription
-    }
-
-    /// Create Stripe checkout session for subscription
-    func createSubscriptionCheckout(
-        planName: String,
-        billingPeriod: String = "monthly",
-        countryCode: String? = nil,
-        promoCode: String? = nil
-    ) async throws -> SubscriptionCheckoutResponse {
-        #if DEBUG
-        print("📡 API: Creating subscription checkout for \(planName) (\(billingPeriod))...")
-        #endif
-
-        let request = try await buildRequest(
-            endpoint: "/subscriptions/checkout",
-            method: "POST",
-            body: CreateCheckoutRequest(planName: planName, billingPeriod: billingPeriod, platform: "ios", countryCode: countryCode, promoCode: promoCode)
-        )
-        return try await performRequest(request, responseType: SubscriptionCheckoutResponse.self)
     }
 
     /// Apply a referral code
@@ -1790,22 +1760,7 @@ extension APIService {
         return try await performRequest(request, responseType: ShelterCodeRedeemResponse.self)
     }
 
-    /// Upgrade to Starter plan (free, no payment required)
-    func upgradeToStarter() async throws -> UserSubscription {
-        #if DEBUG
-        print("📡 API: Upgrading to Starter plan...")
-        #endif
-
-        let request = try await buildRequest(
-            endpoint: "/subscriptions/upgrade",
-            method: "POST",
-            body: UpgradeRequest(planName: "starter")
-        )
-        let response = try await performRequest(request, responseType: UpgradeResponse.self)
-        return response.subscription
-    }
-
-    /// Get subscription features for current plan
+    /// Get subscription features for current plan (read-only feature flags)
     func getSubscriptionFeatures() async throws -> SubscriptionFeatures {
         #if DEBUG
         print("📡 API: Fetching subscription features...")
@@ -1813,48 +1768,6 @@ extension APIService {
 
         let request = try await buildRequest(endpoint: "/subscriptions/features")
         return try await performRequest(request, responseType: SubscriptionFeatures.self)
-    }
-
-    /// Cancel subscription
-    func cancelSubscription() async throws -> UserSubscription {
-        #if DEBUG
-        print("📡 API: Cancelling subscription...")
-        #endif
-
-        let request = try await buildRequest(
-            endpoint: "/subscriptions/cancel",
-            method: "POST",
-            body: EmptyBody()
-        )
-        let response = try await performRequest(request, responseType: CancelSubscriptionResponse.self)
-        return response.subscription
-    }
-
-    // MARK: - Billing Portal & Invoices
-
-    /// Create a Stripe Customer Portal session
-    func createPortalSession() async throws -> PortalSessionResponse {
-        #if DEBUG
-        print("📡 API: Creating billing portal session...")
-        #endif
-
-        let request = try await buildRequest(
-            endpoint: "/billing/portal-session",
-            method: "POST",
-            body: EmptyBody()
-        )
-        return try await performRequest(request, responseType: PortalSessionResponse.self)
-    }
-
-    /// Get user's invoices
-    func getInvoices(limit: Int = 24) async throws -> [InvoiceItem] {
-        #if DEBUG
-        print("📡 API: Fetching invoices...")
-        #endif
-
-        let request = try await buildRequest(endpoint: "/billing/invoices?limit=\(limit)")
-        let response = try await performRequest(request, responseType: InvoicesResponse.self)
-        return response.invoices
     }
 
     // MARK: - Referral Program

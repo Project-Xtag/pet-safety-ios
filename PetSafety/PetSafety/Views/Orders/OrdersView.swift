@@ -9,7 +9,6 @@ struct OrdersView: View {
             Picker("", selection: $selectedTab) {
                 Text(String(localized: "orders_title")).tag(0)
                 Text(String(localized: "pending_registrations_title")).tag(1)
-                Text(String(localized: "billing_invoices")).tag(2)
             }
             .pickerStyle(.segmented)
             .padding(.horizontal, 16)
@@ -20,8 +19,6 @@ struct OrdersView: View {
                 ordersContent
             case 1:
                 PendingRegistrationsView()
-            case 2:
-                BillingView()
             default:
                 ordersContent
             }

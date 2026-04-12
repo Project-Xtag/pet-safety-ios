@@ -489,9 +489,9 @@
 "help_faq_q4" = "Môžem neskôr aktualizovať údaje svojho miláčika?";
 "help_faq_a4" = "Áno! Údaje svojho miláčika môžeš kedykoľvek aktualizovať v sekcii 'Moji miláčikovia' výberom miláčika a kliknutím na 'Upraviť profil'. Môžeš aktualizovať všetky polia okrem mena, druhu a plemena, vrátane fotografií. Zmeny sa uložia okamžite.";
 "help_faq_q5" = "Ako si objednám náhradnú známku?";
-"help_faq_a5" = "Choď na stránku 'Domov/Môj účet' a klikni na 'Objednať náhradnú známku'. Vyber, ktorý miláčik potrebuje novú známku. Predplatitelia Maximum a Standard si môžu vyžiadať bezplatné náhradné známky, zatiaľ čo členovia Starter si môžu objednať náhradu za poštovné.";
+"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
 "help_faq_q6" = "Ako aktivujem svoju známku po jej doručení?";
-"help_faq_a6" = "Stiahni si mobilnú aplikáciu SENRA z Google Play alebo App Store! Otvor ju a choď do menu 'Aktivácia', namieru kameru telefónu na QR kód na známke! Naskenovanie QR kódu prepojí známku s tvojím účtom. Potom musíš vybrať existujúceho miláčika alebo vytvoriť nový profil. Po dokončení aktivácie si môžeš vybrať predplatný balík.";
+"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
 "help_faq_q7" = "Môžem darovať SENRA známku?";
 "help_faq_a7" = "Áno! SENRA známky sú skvelé darčeky pre majiteľov domácich zvierat. Jednoducho objednaj známku zo svojho účtu — keď ju obdarovaný dostane, môže naskenovať QR kód, vytvoriť si vlastný účet a aktivovať známku pre svojho miláčika. Obdarovaný sa nemusí vopred registrovať — naskenovanie známky ho prevedie vytvorením účtu a prepojením známky s jeho miláčikom.";
 "help_faq_q8" = "Čo mám robiť, ak sa môj miláčik stratí?";
@@ -505,15 +505,15 @@
 "help_faq_q12" = "Do ktorých krajín doručujete?";
 "help_faq_a12" = "Momentálne doručujeme do Maďarska, Slovenska, Česka, Rakúska, Rumunska, Chorvátska, Španielska, Talianska, Francúzska, Nemecka, Nórska a Portugalska. Domáce doručenie v rámci Maďarska: {{huPostapoint}} (PostaPont) alebo {{huHome}} (doručenie domov). Medzinárodné doručenie: {{intlPrice}} za objednávku.";
 "help_faq_q13" = "Môžem mať viacero miláčikov na jednom účte?";
-"help_faq_a13" = "Áno. S balíkom Starter (bezplatný) môžeš zaregistrovať až 10 miláčikov, ale dostupné funkcie sú obmedzené. Balík Standard je navrhnutý pre jednu mačku alebo psa, ale obsahuje všetky funkcie. Balík Maximum zahŕňa všetky funkcie a môžeš zaregistrovať až 10 miláčikov. Balík môžeš kedykoľvek zmeniť v sekcii 'Domov/Môj účet'.";
+"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
 "help_faq_q14" = "Ako nahlásim nájdeného miláčika?";
 "help_faq_a14" = "Ak má miláčik SENRA známku, jednoducho naskenuj QR kód kamerou telefónu — nie je potrebná žiadna aplikácia. Môžeš si pozrieť profil miláčika a zdieľať svoju polohu s majiteľom.";
 "help_faq_q15" = "Sú moje osobné údaje v bezpečí?";
 "help_faq_a15" = "Áno. Ty určuješ, presne ktoré údaje sú viditeľné, keď niekto naskenuje známku tvojho miláčika. V 'Nastavenia' > 'Nastavenia súkromia' si môžeš vybrať, či sa zobrazí tvoje telefónne číslo, e-mailová adresa alebo domáca adresa. Tvoje prihlásenie je zakaždým chránené jednorazovým overovacím kódom — neexistuje žiadne heslo, ktoré by sa dalo ukradnúť. Svoj účet a všetky údaje môžeš kedykoľvek vymazať.";
 "help_faq_q16" = "Stratili sme známku alebo sa poškodila — čo mám robiť?";
-"help_faq_a16" = "Neboj sa — digitálny profil tvojho miláčika je v bezpečí a nie je uložený na známke. Choď na stránku Účet a klikni na 'Objednať náhradu'. Prepojíme novú známku s novým QR kódom s tvojím existujúcim profilom miláčika. Predplatitelia Standard a Maximum si môžu vyžiadať neobmedzené bezplatné náhrady, zatiaľ čo členovia Starter musia zaplatiť poštovné. Stará známka sa deaktivuje okamžite pri objednaní náhrady.";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
 "help_faq_q17" = "Moja známka sa nedá naskenovať — čo mám robiť?";
-"help_faq_a17" = "Vyskúšaj nasledovné: vyčisti povrch známky vlhkou handričkou, zabezpeč dobré osvetlenie, drž kameru telefónu stabilne asi 10-15 cm od známky a over, či tvoja kamera alebo QR čítačka funguje. Ak je QR kód poškrabaný alebo opotrebovaný, objednaj bezplatnú náhradu na stránke 'Domov/Môj účet' (bezplatná náhrada je dostupná pre predplatiteľov Standard a Maximum — členovia Starter musia zaplatiť poštovné).";
+"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
 "help_faq_q18" = "Našiel som miláčika bez SENRA známky — čo môžem urobiť?";
 "help_faq_a18" = "Skontroluj mapu Stratených miláčikov na webe SENRA (senra.pet) — miláčik mohol byť nahlásený ako stratený vo tvojom okolí. Upozornenia na stratených miláčikov si môžeš pozrieť aj v aplikácii. Zaves zvieratko k najbližšiemu veterinárovi, aby naskenovali mikročip. Ak má miláčik SENRA známku, naskenuj QR kód kamerou telefónu — zobrazia sa kontaktné údaje majiteľa. Vždy informuj aj miestne úrady a blízke útulky.";
 "help_faq_q19" = "Môžem zmeniť svoju e-mailovú adresu?";
@@ -809,10 +809,10 @@
 // MARK: - Odporucanie (Cast 1)
 "referral_loading" = "Nacitava sa…";
 "referral_your_code" = "Vas odporucaci kod";
-"referral_share_footer" = "Zdielajte kod s priatelmi. Ked si predplatia, obaja ziskate odmenu!";
+"referral_share_footer" = "Share your referral code with friends.";
 "referral_how_it_works" = "Ako to funguje";
 "referral_step_1" = "Zdielajte svoj jedinecny kod s priatelmi";
-"referral_step_2" = "Pouziju ho pri predplateni plateneho planu";
+"referral_step_2" = "They sign up with your code";
 "referral_step_3" = "Obaja ziskate 2 mesiace zdarma!";
 "referral_history" = "Historia odporucani";
 "referral_no_referrals" = "Zatial ziadne odporucania";
@@ -957,7 +957,7 @@
 
 // MARK: - SSE Subscription Events
 "sse_subscription_title" = "Predplatné aktualizované";
-"sse_subscription_message" = "Váš %@ plán je teraz %@.";
+"sse_subscription_message" = "Your Senra subscription has been updated.";
 "sse_referral_title" = "Odporúčanie použité!";
 "sse_referral_message" = "%@ použil váš odporúčací kód!";
 
@@ -972,7 +972,7 @@
 "plan_feature_photos_count" = "%lld fotiek na zviera";
 "referral_status_pending" = "Čakajúce";
 "referral_status_signed_up" = "Zaregistrovaný";
-"referral_status_subscribed" = "Predplatený";
+"referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Odmenený";
 "referral_share_message" = "Použi môj odporúčací kód %@ a získaj 2 mesiace zadarmo na Pet Safety! https://senra.pet/choose-plan?referral=%@";
 "help_guide_qr_tags_title" = "QR známky pre zvieratá";
@@ -1027,7 +1027,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Limit domácich zvierat dosiahnutý";
-"pet_limit_reached_info" = "Dosiahli ste maximálny počet zvierat pre váš aktuálny plán. Navštívte senra.pet na správu predplatného.";
+"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
 "upgrade_to_ultimate" = "Prejsť na Maximum";
 "keep_current_plan" = "Ponechať aktuálny plán";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Váš plán %@ povoľuje %lld zviera. Prejdite na %@ za %@ pre až 10 domácich zvierat.";
@@ -1044,7 +1044,7 @@
 "apply_code" = "Použiť";
 "referral_code_applied" = "Odporúčací kód bol použitý! Získate 2 mesiace zadarmo.";
 "referral_code_invalid" = "Neplatný alebo vypršaný odporúčací kód";
-"referral_use_friend_footer" = "Zadajte odporúčací kód priateľa a získajte 2 mesiace predplatného zadarmo.";
+"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Objednať ako darček";
@@ -1250,7 +1250,7 @@
 "current_plan" = "Aktuálny plán";
 "plan_renews" = "Obnoví sa %@";
 "plan_cancels_on" = "Končí %@";
-"delete_premium_warning" = "Máte aktívne predplatné %@ do %@. Vymazanie účtu natrvalo odstráni váš profil a okamžite stratíte prístup k zostávajúcemu platenému obdobiu. Ak chcete len zastaviť budúce platby, zrušte predplatné.";
+"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Namiesto toho zrušiť predplatné";
 
 
@@ -1308,7 +1308,7 @@
 "appearance_light" = "Svetlý";
 "appearance_dark" = "Tmavý";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Vylepši pre komunitné upozornenia";
+"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
 "mark_lost_upgrade_prompt" = "V pláne Starter bude tvoje zviera označené ako stratené, ale upozornenia pre používateľov, veterinárov a útulky vyžadujú predplatné Standard alebo Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "napr. 3 roky, 6 mesiacov (voliteľné)";
@@ -1376,7 +1376,7 @@
 "api_error_invalid_url" = "Neplatná URL";
 "api_error_invalid_response" = "Neplatná odpoveď zo servera";
 "api_error_unauthorized" = "Neautorizované. Prihláste sa znova.";
-"api_error_pet_limit" = "Limit registrácie zvierat dosiahnutý. Aktualizujte plán pre pridanie ďalších.";
+"api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "Nepodarilo sa spracovať odpoveď servera";
 "api_error_network %@" = "Chyba siete: %@";
 "sync_no_internet" = "Synchronizácia nie je možná: Žiadne internetové pripojenie";

@@ -312,24 +312,6 @@ final class NotificationHandlerTests: XCTestCase {
         XCTAssertNil(notificationHandler.pendingScanNotification)
     }
 
-    // MARK: - PROMO_EXPIRING Notification Tests
-
-    func testHandlePromoExpiring() {
-        // Given
-        let userInfo: [AnyHashable: Any] = [
-            "type": "PROMO_EXPIRING",
-            "plan_name": "standard",
-            "days_left": "3"
-        ]
-
-        // When - should post navigateToBilling notification
-        let navExpectation = expectNavigationNotification(named: .navigateToBilling)
-        notificationHandler.handleNotificationTap(userInfo: userInfo)
-
-        // Then
-        waitForExpectations(timeout: 1.0)
-    }
-
     // MARK: - ALERT_REMINDER Notification Tests
 
     func testHandleAlertReminder() {
@@ -485,7 +467,6 @@ final class NotificationHandlerTests: XCTestCase {
         XCTAssertEqual(Notification.Name.navigateToAlert.rawValue, "navigateToAlert")
         XCTAssertEqual(Notification.Name.navigateToPet.rawValue, "navigateToPet")
         XCTAssertEqual(Notification.Name.navigateToScan.rawValue, "navigateToScan")
-        XCTAssertEqual(Notification.Name.navigateToBilling.rawValue, "navigateToBilling")
     }
 
     // MARK: - Thread Safety Tests

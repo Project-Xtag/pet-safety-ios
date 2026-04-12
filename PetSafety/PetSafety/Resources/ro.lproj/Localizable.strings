@@ -489,9 +489,9 @@
 "help_faq_q4" = "Pot actualiza datele animalului meu mai târziu?";
 "help_faq_a4" = "Da! Poți actualiza oricând datele animalului în secțiunea 'Animalele Mele' selectând animalul și apăsând 'Editează Profilul'. Poți actualiza toate câmpurile cu excepția numelui, speciei și rasei, inclusiv fotografiile. Modificările se salvează imediat.";
 "help_faq_q5" = "Cum comand un medalion de înlocuire?";
-"help_faq_a5" = "Mergi la pagina 'Acasă/Contul Meu' și apasă 'Comandă Medalion de Înlocuire'. Selectează care animal are nevoie de un medalion nou. Abonații Maximum și Standard pot solicita medalionae de înlocuire gratuite, iar membrii Starter pot comanda înlocuiri pentru costul livrării.";
+"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
 "help_faq_q6" = "Cum activez medalionul după ce ajunge?";
-"help_faq_a6" = "Descarcă aplicația mobilă SENRA din Google Play Store sau App Store! Deschide-o și mergi la meniul 'Activare', îndreaptă camera telefonului spre codul QR de pe medalion! Scanarea codului QR leagă medalionul de contul tău. Apoi trebuie să selectezi animalul existent sau să creezi un profil nou. După finalizarea activării, poți alege planul de abonament.";
+"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
 "help_faq_q7" = "Pot oferi cadou un medalion SENRA?";
 "help_faq_a7" = "Da! Medalionele SENRA sunt cadouri excelente pentru proprietarii de animale. Pur și simplu comandă medalionul din contul tău — când destinatarul îl primește, poate scana codul QR, își poate crea propriul cont și activa medalionul pentru animalul său.";
 "help_faq_q8" = "Ce trebuie să fac dacă animalul meu dispare?";
@@ -505,15 +505,15 @@
 "help_faq_q12" = "În ce țări livrați?";
 "help_faq_a12" = "Momentan livrăm în Ungaria, Slovacia, Cehia, Austria, România, Croația, Spania, Italia, Franța, Germania, Norvegia și Portugalia. Livrare internă în Ungaria: {{huPostapoint}} (PostaPont) sau {{huHome}} (livrare la domiciliu). Livrare internațională: {{intlPrice}} per comandă.";
 "help_faq_q13" = "Pot avea mai multe animale pe un cont?";
-"help_faq_a13" = "Da. Cu planul Starter (gratuit), poți înregistra până la 10 animale, dar funcționalitățile sunt limitate. Planul Standard este pentru o pisică sau un câine, cu toate funcționalitățile. Planul Maximum include totul și poți înregistra până la 10 animale.";
+"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
 "help_faq_q14" = "Cum raportez un animal găsit?";
 "help_faq_a14" = "Dacă animalul are un medalion SENRA, pur și simplu scanează codul QR cu camera telefonului — nu ai nevoie de aplicație. Poți vedea profilul animalului și partaja locația ta cu proprietarul.";
 "help_faq_q15" = "Sunt datele mele personale în siguranță?";
 "help_faq_a15" = "Da. Tu controlezi exact ce date sunt vizibile când cineva scanează medalionul animalului tău. În 'Setări' > 'Setări de Confidențialitate', poți alege dacă să afișezi numărul de telefon, emailul sau adresa. Conectarea ta este protejată de un cod de verificare unic de fiecare dată. Poți șterge contul și datele oricând.";
 "help_faq_q16" = "Am pierdut medalionul sau s-a deteriorat — ce fac?";
-"help_faq_a16" = "Nu-ți face griji — profilul digital al animalului tău este în siguranță și nu este stocat pe medalion. Mergi la pagina Cont și apasă 'Comandă Înlocuire'. Legăm un medalion nou cu cod QR nou de profilul existent. Abonații Standard și Maximum pot solicita înlocuiri nelimitate gratuite. Medalionul vechi se dezactivează imediat.";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
 "help_faq_q17" = "Medalionul meu nu se scanează — ce fac?";
-"help_faq_a17" = "Încearcă următoarele: curăță suprafața medalionului cu o cârpă umedă, asigură iluminare bună, ține camera stabilă la circa 10-15 cm de medalion. Dacă codul QR este zgâriat sau uzat, comandă o înlocuire gratuită din 'Acasă/Contul Meu'.";
+"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
 "help_faq_q18" = "Am găsit un animal fără medalion SENRA — ce pot face?";
 "help_faq_a18" = "Verifică harta Animalelor Pierdute pe site-ul SENRA (senra.pet). Poți vedea alertele și în aplicație. Du animalul la cel mai apropiat veterinar pentru scanarea microchipului. Dacă are medalion SENRA, scanează codul QR — apar datele proprietarului. Informează întotdeauna și autoritățile locale și adăposturile din apropiere.";
 "help_faq_q19" = "Pot schimba adresa mea de email?";
@@ -809,10 +809,10 @@
 // MARK: - Recomandare (Secțiunea 1)
 "referral_loading" = "Se încarcă…";
 "referral_your_code" = "Codul tău de recomandare";
-"referral_share_footer" = "Partajează codul cu prietenii. Când se abonează, amândoi primiți recompense!";
+"referral_share_footer" = "Share your referral code with friends.";
 "referral_how_it_works" = "Cum funcționează";
 "referral_step_1" = "Partajează codul tău unic cu prietenii";
-"referral_step_2" = "Îl folosesc când se abonează la un plan plătit";
+"referral_step_2" = "They sign up with your code";
 "referral_step_3" = "Amândoi beneficiați de 2 luni gratuite!";
 "referral_history" = "Istoric recomandări";
 "referral_no_referrals" = "Încă nu ai recomandări";
@@ -957,7 +957,7 @@
 
 // MARK: - SSE Subscription Events
 "sse_subscription_title" = "Abonament actualizat";
-"sse_subscription_message" = "Planul tău %@ este acum %@.";
+"sse_subscription_message" = "Your Senra subscription has been updated.";
 "sse_referral_title" = "Recomandare folosită!";
 "sse_referral_message" = "%@ a folosit codul tău de recomandare!";
 
@@ -972,7 +972,7 @@
 "plan_feature_photos_count" = "%lld fotografii per animal";
 "referral_status_pending" = "În așteptare";
 "referral_status_signed_up" = "Înregistrat";
-"referral_status_subscribed" = "Abonat";
+"referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Recompensat";
 "referral_share_message" = "Folosește codul meu de recomandare %@ pentru a primi 2 luni gratuit pe Pet Safety! https://senra.pet/choose-plan?referral=%@";
 "help_guide_qr_tags_title" = "Etichete QR pentru animale";
@@ -1027,7 +1027,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Limita de animale atinsă";
-"pet_limit_reached_info" = "Ai atins numărul maxim de animale pentru planul tău actual. Vizitează senra.pet pentru a-ți gestiona abonamentul.";
+"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
 "upgrade_to_ultimate" = "Upgrade la Maximum";
 "keep_current_plan" = "Păstrează planul actual";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Planul tău %@ permite %lld animal. Fă upgrade la %@ pentru %@ pentru până la 10 animale.";
@@ -1044,7 +1044,7 @@
 "apply_code" = "Aplică";
 "referral_code_applied" = "Cod de recomandare aplicat! Vei primi 2 luni gratuit.";
 "referral_code_invalid" = "Cod de recomandare invalid sau expirat";
-"referral_use_friend_footer" = "Introduceți codul de recomandare al unui prieten și primiți 2 luni de abonament gratuit.";
+"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Comandă ca și cadou";
@@ -1250,7 +1250,7 @@
 "current_plan" = "Planul curent";
 "plan_renews" = "Se reînnoiește pe %@";
 "plan_cancels_on" = "Se încheie pe %@";
-"delete_premium_warning" = "Ai un abonament %@ activ până la %@. Ștergerea contului va elimina permanent profilul tău și vei pierde imediat accesul la timpul plătit rămas. Dacă dorești doar să oprești plățile viitoare, anulează-ți abonamentul.";
+"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Anulează abonamentul în schimb";
 
 
@@ -1308,7 +1308,7 @@
 "appearance_light" = "Luminos";
 "appearance_dark" = "Întunecat";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Actualizează pentru alerte comunitare";
+"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
 "mark_lost_upgrade_prompt" = "Cu planul Starter animalul tău va fi marcat ca dispărut, dar notificările către utilizatori, veterinari și adăposturi necesită un abonament Standard sau Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "ex. 3 ani, 6 luni (opțional)";
@@ -1376,7 +1376,7 @@
 "api_error_invalid_url" = "URL invalid";
 "api_error_invalid_response" = "Răspuns invalid de la server";
 "api_error_unauthorized" = "Neautorizat. Vă rugăm să vă autentificați din nou.";
-"api_error_pet_limit" = "Limita de înregistrare a animalelor atinsă. Actualizați planul pentru a adăuga mai multe.";
+"api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "Nu s-a putut procesa răspunsul serverului";
 "api_error_network %@" = "Eroare de rețea: %@";
 "sync_no_internet" = "Nu se poate sincroniza: Fără conexiune la internet";

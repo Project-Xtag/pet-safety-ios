@@ -489,9 +489,9 @@
 "help_faq_q4" = "Kann ich die Daten meines Haustieres später aktualisieren?";
 "help_faq_a4" = "Ja! Du kannst die Daten deines Haustieres jederzeit im Bereich 'Meine Haustiere' aktualisieren, indem du dein Haustier auswählst und auf 'Profil bearbeiten' tippst. Du kannst alle Felder außer Name, Tierart und Rasse aktualisieren, einschließlich Fotos. Änderungen werden sofort gespeichert.";
 "help_faq_q5" = "Wie bestelle ich eine Ersatzmarke?";
-"help_faq_a5" = "Gehe zur Seite 'Startseite/Mein Konto' und tippe auf 'Ersatzmarke bestellen'. Wähle aus, welches Haustier eine neue Marke braucht. Maximum- und Standard-Abonnenten können kostenlose Ersatzmarken anfordern, während Starter-Mitglieder Ersatz für die Versandkosten bestellen können.";
+"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
 "help_faq_q6" = "Wie aktiviere ich meine Marke nach der Lieferung?";
-"help_faq_a6" = "Lade die SENRA-App aus dem Google Play Store oder App Store herunter! Öffne sie und gehe zum Menü 'Aktivierung', richte die Kamera deines Handys auf den QR-Code auf der Marke! Das Scannen des QR-Codes verknüpft die Marke mit deinem Konto. Dann musst du dein bestehendes Haustier auswählen oder ein neues Profil erstellen. Nach Abschluss der Aktivierung kannst du dein Abonnement wählen.";
+"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
 "help_faq_q7" = "Kann ich eine SENRA-Marke verschenken?";
 "help_faq_a7" = "Ja! SENRA-Marken sind tolle Geschenke für Haustierbesitzer. Bestelle die Marke einfach über dein eigenes Konto — wenn der Beschenkte sie erhält, kann er den QR-Code scannen, ein eigenes Konto erstellen und die Marke für sein Haustier aktivieren. Der Beschenkte muss sich nicht im Voraus registrieren — das Scannen der Marke führt ihn durch die Kontoerstellung und die Verknüpfung der Marke mit seinem Haustier.";
 "help_faq_q8" = "Was soll ich tun, wenn mein Haustier verschwindet?";
@@ -505,15 +505,15 @@
 "help_faq_q12" = "In welche Länder liefert ihr?";
 "help_faq_a12" = "Wir liefern derzeit nach Ungarn, Slowakei, Tschechien, Österreich, Rumänien, Kroatien, Spanien, Italien, Frankreich, Deutschland, Norwegen und Portugal. Inlandsversand innerhalb Ungarns: {{huPostapoint}} (PostaPont) oder {{huHome}} (Hauszustellung). Internationaler Versand: {{intlPrice}} pro Bestellung.";
 "help_faq_q13" = "Kann ich mehrere Haustiere in einem Konto haben?";
-"help_faq_a13" = "Ja. Mit dem Starter-Tarif (kostenlos) kannst du bis zu 10 Haustiere registrieren, aber die verfügbaren Funktionen sind begrenzt. Der Standard-Tarif ist für eine Katze oder einen Hund konzipiert, enthält aber alle Funktionen. Der Maximum-Tarif umfasst alle Funktionen und du kannst bis zu 10 Haustiere registrieren. Du kannst jederzeit unter 'Startseite/Mein Konto' den Tarif wechseln.";
+"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
 "help_faq_q14" = "Wie melde ich ein gefundenes Haustier?";
 "help_faq_a14" = "Wenn das Haustier eine SENRA-Marke hat, scanne einfach den QR-Code mit der Kamera deines Handys — keine App nötig. Du kannst das Profil des Haustieres einsehen und deinen Standort mit dem Besitzer teilen.";
 "help_faq_q15" = "Sind meine persönlichen Daten sicher?";
 "help_faq_a15" = "Ja. Du bestimmst genau, welche Daten sichtbar sind, wenn jemand die Marke deines Haustieres scannt. Unter 'Einstellungen' > 'Datenschutzeinstellungen' kannst du wählen, ob deine Telefonnummer, E-Mail-Adresse oder Wohnanschrift angezeigt werden. Dein Login wird jedes Mal durch einen Einmal-Verifizierungscode geschützt — es gibt kein Passwort, das gestohlen werden könnte. Du kannst dein Konto und alle Daten jederzeit löschen.";
 "help_faq_q16" = "Wir haben die Marke verloren oder sie ist beschädigt — was soll ich tun?";
-"help_faq_a16" = "Keine Sorge — das digitale Profil deines Haustieres ist sicher und wird nicht auf der Marke gespeichert. Gehe zur Kontoseite und tippe auf 'Ersatz bestellen'. Wir verknüpfen eine neue Marke mit frischem QR-Code mit deinem bestehenden Haustierprofil. Standard- und Maximum-Abonnenten können unbegrenzt kostenlose Ersatzmarken anfordern, während Starter-Mitglieder die Versandkosten zahlen müssen. Die alte Marke wird sofort bei Bestellung deaktiviert.";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
 "help_faq_q17" = "Meine Marke lässt sich nicht scannen — was soll ich tun?";
-"help_faq_a17" = "Versuche Folgendes: Reinige die Markenoberfläche mit einem feuchten Tuch, sorge für gute Beleuchtung, halte die Kamera deines Handys stabil etwa 10-15 cm von der Marke entfernt und überprüfe, ob deine Kamera-App oder dein QR-Reader funktioniert. Wenn der QR-Code zerkratzt oder abgenutzt ist, bestelle einen kostenlosen Ersatz auf der Seite 'Startseite/Mein Konto' (kostenloser Ersatz ist für Standard- und Maximum-Abonnenten verfügbar — Starter-Mitglieder müssen die Versandkosten zahlen).";
+"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
 "help_faq_q18" = "Ich habe ein Haustier ohne SENRA-Marke gefunden — was kann ich tun?";
 "help_faq_a18" = "Überprüfe die Karte 'Vermisste Haustiere' auf der SENRA-Website (senra.pet) — das Haustier könnte in deiner Gegend als vermisst gemeldet worden sein. Du kannst Vermisst-Meldungen auch in der App einsehen. Bringe das Tier zur nächsten Tierarztpraxis, um den Mikrochip scannen zu lassen. Wenn das Haustier eine SENRA-Marke hat, scanne den QR-Code mit der Kamera deines Handys — die Kontaktdaten des Besitzers werden angezeigt. Informiere auch immer die örtlichen Behörden und nahe gelegene Tierheime.";
 "help_faq_q19" = "Kann ich meine E-Mail-Adresse ändern?";
@@ -809,10 +809,10 @@
 // MARK: - Empfehlungsprogramm (Teil 1)
 "referral_loading" = "Wird geladen…";
 "referral_your_code" = "Ihr Empfehlungscode";
-"referral_share_footer" = "Teilen Sie Ihren Code mit Freunden. Wenn sie abonnieren, erhalten Sie beide eine Belohnung!";
+"referral_share_footer" = "Share your referral code with friends.";
 "referral_how_it_works" = "So funktioniert es";
 "referral_step_1" = "Teilen Sie Ihren Empfehlungscode mit einem Freund";
-"referral_step_2" = "Dieser registriert sich und abonniert mit Ihrem Code";
+"referral_step_2" = "They sign up with your code";
 "referral_step_3" = "Sie beide erhalten 2 Monate gratis!";
 "referral_history" = "Empfehlungshistorie";
 "referral_no_referrals" = "Noch keine Empfehlungen";
@@ -957,7 +957,7 @@
 
 // MARK: - SSE Subscription Events
 "sse_subscription_title" = "Abonnement aktualisiert";
-"sse_subscription_message" = "Ihr %@-Plan ist jetzt %@.";
+"sse_subscription_message" = "Your Senra subscription has been updated.";
 "sse_referral_title" = "Empfehlung genutzt!";
 "sse_referral_message" = "%@ hat Ihren Empfehlungscode verwendet!";
 
@@ -972,7 +972,7 @@
 "plan_feature_photos_count" = "%lld Fotos pro Haustier";
 "referral_status_pending" = "Ausstehend";
 "referral_status_signed_up" = "Registriert";
-"referral_status_subscribed" = "Abonniert";
+"referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Belohnt";
 "referral_share_message" = "Nutze meinen Empfehlungscode %@ und erhalte 2 Monate Pet Safety gratis! https://senra.pet/choose-plan?referral=%@";
 "help_guide_qr_tags_title" = "QR-Code Tier-Namensschilder";
@@ -1027,7 +1027,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Haustierlimit erreicht";
-"pet_limit_reached_info" = "Sie haben die maximale Anzahl an Haustieren für Ihren aktuellen Plan erreicht. Besuchen Sie senra.pet, um Ihr Abonnement zu verwalten.";
+"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
 "upgrade_to_ultimate" = "Auf Maximum upgraden";
 "keep_current_plan" = "Aktuellen Plan beibehalten";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Ihr %@-Plan erlaubt %lld Haustier. Upgraden Sie auf %@ für %@ für bis zu 10 Haustiere.";
@@ -1044,7 +1044,7 @@
 "apply_code" = "Anwenden";
 "referral_code_applied" = "Empfehlungscode angewendet! Sie erhalten 2 Monate gratis.";
 "referral_code_invalid" = "Ungültiger oder abgelaufener Empfehlungscode";
-"referral_use_friend_footer" = "Geben Sie den Empfehlungscode eines Freundes ein und erhalten Sie 2 Monate gratis.";
+"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Als Geschenk bestellen";
@@ -1250,7 +1250,7 @@
 "current_plan" = "Aktueller Plan";
 "plan_renews" = "Verlängert sich am %@";
 "plan_cancels_on" = "Endet am %@";
-"delete_premium_warning" = "Sie haben ein aktives %@-Abonnement bis %@. Das Löschen Ihres Kontos entfernt Ihr Profil dauerhaft und Sie verlieren sofort den Zugang zu Ihrer verbleibenden bezahlten Zeit. Wenn Sie nur zukünftige Zahlungen stoppen möchten, kündigen Sie stattdessen Ihr Abonnement.";
+"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Stattdessen Abonnement kündigen";
 
 
@@ -1308,7 +1308,7 @@
 "appearance_light" = "Hell";
 "appearance_dark" = "Dunkel";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Upgrade für Community-Benachrichtigungen";
+"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
 "mark_lost_upgrade_prompt" = "Mit dem Starter-Plan wird dein Haustier als vermisst markiert, aber Benachrichtigungen an Nutzer, Tierärzte und Tierheime erfordern ein Standard- oder Maximum-Abo.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "z.B. 3 Jahre, 6 Monate (optional)";
@@ -1376,7 +1376,7 @@
 "api_error_invalid_url" = "Ungültige URL";
 "api_error_invalid_response" = "Ungültige Antwort vom Server";
 "api_error_unauthorized" = "Nicht autorisiert. Bitte melden Sie sich erneut an.";
-"api_error_pet_limit" = "Registrierungslimit für Haustiere erreicht. Upgraden Sie Ihren Plan.";
+"api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "Serverantwort konnte nicht verarbeitet werden";
 "api_error_network %@" = "Netzwerkfehler: %@";
 "sync_no_internet" = "Synchronisierung nicht möglich: Keine Internetverbindung";

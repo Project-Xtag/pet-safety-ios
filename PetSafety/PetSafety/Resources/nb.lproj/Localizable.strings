@@ -489,9 +489,9 @@
 "help_faq_q4" = "Kan jeg oppdatere opplysningene om kjæledyret mitt senere?";
 "help_faq_a4" = "Ja! Du kan oppdatere opplysningene når som helst i seksjonen 'Mine Kjæledyr' ved å velge kjæledyret og trykke 'Rediger Profil'. Du kan oppdatere alle felt unntatt navn, art og rase, inkludert bilder. Endringer lagres umiddelbart.";
 "help_faq_q5" = "Hvordan bestiller jeg et erstatningsmerke?";
-"help_faq_a5" = "Gå til 'Hjem/Min Konto' og trykk 'Bestill Erstatningsmerke'. Velg hvilket kjæledyr som trenger et nytt merke. Maximum- og Standard-abonnenter kan be om gratis erstatningsmerker, mens Starter-medlemmer kan bestille erstatning for fraktkostnaden.";
+"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
 "help_faq_q6" = "Hvordan aktiverer jeg merket etter at det har kommet?";
-"help_faq_a6" = "Last ned SENRA-appen fra Google Play Store eller App Store! Åpne den og gå til menyen 'Aktivering', pek telefonkameraet mot QR-koden på merket! Skanningen knytter merket til kontoen din. Velg deretter eksisterende kjæledyr eller opprett en ny profil. Etter aktivering kan du velge abonnementsplan.";
+"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
 "help_faq_q7" = "Kan jeg gi et SENRA-merke i gave?";
 "help_faq_a7" = "Ja! SENRA-merker er flotte gaver til kjæledyreiere. Bestill merket fra din egen konto — når mottakeren får det, kan de skanne QR-koden, opprette sin egen konto og aktivere merket for sitt kjæledyr.";
 "help_faq_q8" = "Hva bør jeg gjøre hvis kjæledyret mitt forsvinner?";
@@ -505,15 +505,15 @@
 "help_faq_q12" = "Hvilke land sender dere til?";
 "help_faq_a12" = "Vi sender for tiden til Ungarn, Slovakia, Tsjekkia, Østerrike, Romania, Kroatia, Spania, Italia, Frankrike, Tyskland, Norge og Portugal. Innenlands frakt i Ungarn: {{huPostapoint}} (PostaPont) eller {{huHome}} (hjemmelevering). Internasjonal frakt: {{intlPrice}} per bestilling.";
 "help_faq_q13" = "Kan jeg ha flere kjæledyr på én konto?";
-"help_faq_a13" = "Ja. Med Starter-planen (gratis) kan du registrere opptil 10 kjæledyr med begrensede funksjoner. Standard-planen er for én katt eller hund med alle funksjoner. Maximum-planen inkluderer alt med opptil 10 kjæledyr.";
+"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
 "help_faq_q14" = "Hvordan melder jeg et funnet kjæledyr?";
 "help_faq_a14" = "Hvis kjæledyret har et SENRA-merke, skann bare QR-koden med telefonkameraet — ingen app nødvendig. Du kan se profilen og dele posisjonen din med eieren.";
 "help_faq_q15" = "Er mine personlige data trygge?";
 "help_faq_a15" = "Ja. Du bestemmer nøyaktig hvilke data som er synlige når noen skanner merket. I 'Innstillinger' > 'Personverninnstillinger' kan du velge om telefonnummer, e-post eller adresse vises. Innloggingen din er beskyttet med en engangskode hver gang. Du kan slette kontoen din når som helst.";
 "help_faq_q16" = "Vi mistet merket eller det ble skadet — hva gjør jeg?";
-"help_faq_a16" = "Ikke bekymre deg — den digitale profilen er trygg og lagres ikke på merket. Gå til Konto-siden og trykk 'Bestill Erstatning'. Vi knytter et nytt merke med ny QR-kode til den eksisterende profilen. Standard- og Maximum-abonnenter kan be om ubegrensede gratis erstatninger. Det gamle merket deaktiveres umiddelbart.";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
 "help_faq_q17" = "Merket mitt skannes ikke — hva gjør jeg?";
-"help_faq_a17" = "Prøv: rengjør overflaten med en fuktig klut, sørg for godt lys, hold kameraet stabilt ca. 10-15 cm fra merket. Hvis QR-koden er ripet eller slitt, bestill gratis erstatning fra 'Hjem/Min Konto'.";
+"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
 "help_faq_q18" = "Jeg fant et kjæledyr uten SENRA-merke — hva kan jeg gjøre?";
 "help_faq_a18" = "Sjekk kartet over Savnede Kjæledyr på SENRA-nettstedet (senra.pet). Du kan også se varsler i appen. Ta dyret til nærmeste veterinær for mikrochip-skanning. Hvis det har SENRA-merke, skann QR-koden — eierens kontaktinfo vises. Varsle alltid lokale myndigheter og nærliggende krisesentre.";
 "help_faq_q19" = "Kan jeg endre e-postadressen min?";
@@ -822,10 +822,10 @@
 // MARK: - Verving (del 1)
 "referral_loading" = "Laster…";
 "referral_your_code" = "Din vervekode";
-"referral_share_footer" = "Del koden din med venner. Når de abonnerer, får dere begge belønning!";
+"referral_share_footer" = "Share your referral code with friends.";
 "referral_how_it_works" = "Slik fungerer det";
 "referral_step_1" = "Del vervekoden din med en venn";
-"referral_step_2" = "De registrerer seg og abonnerer med koden din";
+"referral_step_2" = "They sign up with your code";
 "referral_step_3" = "Dere får begge 2 måneder gratis!";
 "referral_history" = "Vervehistorikk";
 "referral_no_referrals" = "Ingen vervinger ennå";
@@ -972,7 +972,7 @@
 
 // MARK: - SSE-abonnementshendelser
 "sse_subscription_title" = "Abonnement oppdatert";
-"sse_subscription_message" = "Abonnementet ditt på %@ er nå %@.";
+"sse_subscription_message" = "Your Senra subscription has been updated.";
 "sse_referral_title" = "Vervekode brukt!";
 "sse_referral_message" = "%@ brukte vervekoden din!";
 
@@ -987,7 +987,7 @@
 "plan_feature_photos_count" = "%lld bilder per dyr";
 "referral_status_pending" = "Venter";
 "referral_status_signed_up" = "Registrert";
-"referral_status_subscribed" = "Abonnent";
+"referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Belønnet";
 "referral_share_message" = "Bruk vervekoden min %@ og få 2 måneder gratis på Pet Safety! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Kom i gang";
@@ -1030,7 +1030,7 @@
 
 // MARK: - Dyreregistreringsskjema-tillegg
 "pet_limit_reached" = "Dyreantall nådd";
-"pet_limit_reached_info" = "Du har nådd maksimalt antall dyr for ditt nåværende abonnement. Besøk senra.pet for å administrere abonnementet ditt.";
+"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
 "upgrade_to_ultimate" = "Oppgrader til Maximum";
 "keep_current_plan" = "Behold gjeldende abonnement";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Abonnementet ditt på %@ tillater %lld dyr. Oppgrader til %@ for %@ for å legge til opptil 10 dyr.";
@@ -1047,7 +1047,7 @@
 "apply_code" = "Bruk";
 "referral_code_applied" = "Vervekode brukt! Du får 2 måneder gratis.";
 "referral_code_invalid" = "Ugyldig eller utløpt vervekode";
-"referral_use_friend_footer" = "Skriv inn en venns vervekode for å få 2 måneder gratis ved abonnering.";
+"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Bestill som gave";
@@ -1253,7 +1253,7 @@
 "current_plan" = "Nåværende plan";
 "plan_renews" = "Fornyes %@";
 "plan_cancels_on" = "Avsluttes %@";
-"delete_premium_warning" = "Du har et aktivt %@-abonnement til %@. Sletting av kontoen din vil permanent fjerne profilen din, og du mister umiddelbart tilgang til gjenværende betalt tid. Hvis du bare vil stoppe fremtidige betalinger, avbryt abonnementet i stedet.";
+"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Avbryt abonnement i stedet";
 
 
@@ -1311,7 +1311,7 @@
 "appearance_light" = "Lys";
 "appearance_dark" = "Mørk";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Oppgrader for fellesskapsvarsler";
+"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
 "mark_lost_upgrade_prompt" = "Med Starter-planen blir kjæledyret ditt markert som savnet, men varsler til brukere, veterinærer og dyreinternat krever et Standard- eller Maximum-abonnement.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "f.eks. 3 år, 6 måneder (valgfritt)";
@@ -1379,7 +1379,7 @@
 "api_error_invalid_url" = "Ugyldig URL";
 "api_error_invalid_response" = "Ugyldig svar fra serveren";
 "api_error_unauthorized" = "Ikke autorisert. Logg inn på nytt.";
-"api_error_pet_limit" = "Registreringsgrense for kjæledyr nådd. Oppgrader planen din for å legge til flere.";
+"api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "Kunne ikke behandle serversvaret";
 "api_error_network %@" = "Nettverksfeil: %@";
 "sync_no_internet" = "Kan ikke synkronisere: Ingen internettforbindelse";

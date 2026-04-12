@@ -32,8 +32,8 @@ struct PetsViewModelTests {
         )
         let error = APIError.petLimitExceeded(info)
 
-        #expect(error.errorDescription?.contains("Upgrade") == true, "Error should mention upgrade")
         #expect(error.errorDescription?.contains("limit") == true, "Error should mention limit")
+        #expect(error.errorDescription?.lowercased().contains("account") == true, "Error should reference the account")
     }
 
     @Test("SubscriptionLimitInfo stores correct values")

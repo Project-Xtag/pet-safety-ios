@@ -44,8 +44,6 @@ class NotificationHandler: ObservableObject {
             handleSightingNotification(userInfo)
         case "ALERT_CREATED":
             handleAlertConfirmation(userInfo)
-        case "PROMO_EXPIRING":
-            handlePromoExpiring(userInfo)
         case "ALERT_REMINDER":
             handleAlertReminder(userInfo)
         case "MULTIPLE_SIGHTINGS":
@@ -195,17 +193,6 @@ class NotificationHandler: ObservableObject {
         }
     }
 
-    // MARK: - Promo Expiring
-
-    private func handlePromoExpiring(_ userInfo: [AnyHashable: Any]) {
-        // Navigate to billing/subscription screen
-        NotificationCenter.default.post(
-            name: .navigateToBilling,
-            object: nil,
-            userInfo: userInfo as? [String: Any] ?? [:]
-        )
-    }
-
     // MARK: - Alert Reminder
 
     private func handleAlertReminder(_ userInfo: [AnyHashable: Any]) {
@@ -248,5 +235,4 @@ extension Notification.Name {
     static let navigateToAlert = Notification.Name("navigateToAlert")
     static let navigateToPet = Notification.Name("navigateToPet")
     static let navigateToScan = Notification.Name("navigateToScan")
-    static let navigateToBilling = Notification.Name("navigateToBilling")
 }

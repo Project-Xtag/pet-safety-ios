@@ -489,9 +489,9 @@
 "help_faq_q4" = "Posso aggiornare i dati del mio animale in seguito?";
 "help_faq_a4" = "Sì! Puoi aggiornare i dati del tuo animale in qualsiasi momento nella sezione 'I Miei Animali' selezionando l'animale e toccando 'Modifica Profilo'. Puoi aggiornare tutti i campi tranne nome, specie e razza, incluse le foto. Le modifiche vengono salvate immediatamente.";
 "help_faq_q5" = "Come ordino una medaglietta sostitutiva?";
-"help_faq_a5" = "Vai alla pagina 'Home/Il Mio Account' e tocca 'Ordina Medaglietta Sostitutiva'. Seleziona quale animale ha bisogno di una nuova medaglietta. Gli abbonati Maximum e Standard possono richiedere medagliette sostitutive gratuite, mentre i membri Starter possono ordinare sostituzioni pagando le spese di spedizione.";
+"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
 "help_faq_q6" = "Come attivo la mia medaglietta dopo averla ricevuta?";
-"help_faq_a6" = "Scarica l'app mobile SENRA dal Google Play Store o App Store! Aprila e vai al menu 'Attivazione', punta la fotocamera del telefono sul codice QR della medaglietta! La scansione collega la medaglietta al tuo account. Poi seleziona il tuo animale esistente o crea un nuovo profilo. Dopo l'attivazione, puoi scegliere il piano di abbonamento.";
+"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
 "help_faq_q7" = "Posso regalare una medaglietta SENRA?";
 "help_faq_a7" = "Sì! Le medagliette SENRA sono ottimi regali per proprietari di animali. Ordina semplicemente la medaglietta dal tuo account — quando il destinatario la riceve, può scansionare il codice QR, creare il proprio account e attivare la medaglietta per il suo animale.";
 "help_faq_q8" = "Cosa devo fare se il mio animale scompare?";
@@ -505,15 +505,15 @@
 "help_faq_q12" = "In quali paesi spedite?";
 "help_faq_a12" = "Attualmente spediamo in Ungheria, Slovacchia, Repubblica Ceca, Austria, Romania, Croazia, Spagna, Italia, Francia, Germania, Norvegia e Portogallo. Spedizione nazionale in Ungheria: {{huPostapoint}} (PostaPont) o {{huHome}} (consegna a domicilio). Spedizione internazionale: {{intlPrice}} per ordine.";
 "help_faq_q13" = "Posso avere più animali su un account?";
-"help_faq_a13" = "Sì. Col piano Starter (gratuito) puoi registrare fino a 10 animali con funzionalità limitate. Il piano Standard è per un gatto o cane con tutte le funzionalità. Il piano Maximum include tutto con fino a 10 animali.";
+"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
 "help_faq_q14" = "Come segnalo un animale trovato?";
 "help_faq_a14" = "Se l'animale ha una medaglietta SENRA, scansiona semplicemente il codice QR con la fotocamera — non serve l'app. Puoi vedere il profilo dell'animale e condividere la tua posizione col proprietario.";
 "help_faq_q15" = "I miei dati personali sono al sicuro?";
 "help_faq_a15" = "Sì. Tu controlli esattamente quali dati sono visibili quando qualcuno scansiona la medaglietta. In 'Impostazioni' > 'Impostazioni Privacy', puoi scegliere se mostrare telefono, email o indirizzo. Il tuo login è protetto da un codice di verifica unico ogni volta. Puoi eliminare account e dati in qualsiasi momento.";
 "help_faq_q16" = "Abbiamo perso la medaglietta o si è danneggiata — cosa faccio?";
-"help_faq_a16" = "Non preoccuparti — il profilo digitale del tuo animale è al sicuro e non è memorizzato sulla medaglietta. Vai alla pagina Account e tocca 'Ordina Sostituzione'. Colleghiamo una nuova medaglietta con codice QR nuovo al tuo profilo esistente. Abbonati Standard e Maximum possono richiedere sostituzioni illimitate gratuite. La vecchia medaglietta viene disattivata immediatamente.";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
 "help_faq_q17" = "La mia medaglietta non si scansiona — cosa faccio?";
-"help_faq_a17" = "Prova: pulisci la superficie con un panno umido, assicura buona illuminazione, tieni la fotocamera stabile a circa 10-15 cm. Se il codice QR è graffiato o consumato, ordina una sostituzione gratuita da 'Home/Il Mio Account'.";
+"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
 "help_faq_q18" = "Ho trovato un animale senza medaglietta SENRA — cosa posso fare?";
 "help_faq_a18" = "Controlla la mappa Animali Smarriti sul sito SENRA (senra.pet). Puoi vedere gli avvisi anche nell'app. Porta l'animale dal veterinario più vicino per scansionare il microchip. Se ha medaglietta SENRA, scansiona il QR — appaiono i contatti del proprietario. Avvisa sempre anche le autorità locali e i rifugi.";
 "help_faq_q19" = "Posso cambiare il mio indirizzo email?";
@@ -817,10 +817,10 @@
 // MARK: - Referral (Parte 1)
 "referral_loading" = "Caricamento…";
 "referral_your_code" = "Il tuo codice referral";
-"referral_share_footer" = "Condividi il tuo codice con gli amici. Quando si abbonano, entrambi ricevete una ricompensa!";
+"referral_share_footer" = "Share your referral code with friends.";
 "referral_how_it_works" = "Come funziona";
 "referral_step_1" = "Condividi il tuo codice referral con un amico";
-"referral_step_2" = "Si iscrive e si abbona usando il tuo codice";
+"referral_step_2" = "They sign up with your code";
 "referral_step_3" = "Entrambi ottenete 2 mesi gratuiti!";
 "referral_history" = "Storico referral";
 "referral_no_referrals" = "Nessun referral ancora";
@@ -965,7 +965,7 @@
 
 // MARK: - Eventi di abbonamento SSE
 "sse_subscription_title" = "Abbonamento aggiornato";
-"sse_subscription_message" = "Il tuo piano %@ è ora %@.";
+"sse_subscription_message" = "Your Senra subscription has been updated.";
 "sse_referral_title" = "Referral utilizzato!";
 "sse_referral_message" = "%@ ha usato il tuo codice referral!";
 
@@ -980,7 +980,7 @@
 "plan_feature_photos_count" = "%lld foto per animale";
 "referral_status_pending" = "In attesa";
 "referral_status_signed_up" = "Registrato";
-"referral_status_subscribed" = "Abbonato";
+"referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Premiato";
 "referral_share_message" = "Usa il mio codice referral %@ per ottenere 2 mesi gratuiti su Pet Safety! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Per iniziare";
@@ -1023,7 +1023,7 @@
 
 // MARK: - Modulo animale aggiuntivo
 "pet_limit_reached" = "Limite di animali raggiunto";
-"pet_limit_reached_info" = "Hai raggiunto il numero massimo di animali per il tuo piano attuale. Visita senra.pet per gestire il tuo abbonamento.";
+"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
 "upgrade_to_ultimate" = "Passa al piano Maximum";
 "keep_current_plan" = "Mantieni il piano attuale";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Il tuo piano %@ permette %lld animale. Passa al piano %@ per %@ e aggiungi fino a 10 animali.";
@@ -1040,7 +1040,7 @@
 "apply_code" = "Applica";
 "referral_code_applied" = "Codice referral applicato! Otterrai 2 mesi gratuiti.";
 "referral_code_invalid" = "Codice referral non valido o scaduto";
-"referral_use_friend_footer" = "Inserisci il codice referral di un amico per ottenere 2 mesi gratuiti quando ti abboni.";
+"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Ordina come regalo";
@@ -1262,7 +1262,7 @@
 "current_plan" = "Piano attuale";
 "plan_renews" = "Si rinnova il %@";
 "plan_cancels_on" = "Termina il %@";
-"delete_premium_warning" = "Hai un abbonamento %@ attivo fino al %@. L'eliminazione del tuo account cancellerà permanentemente il tuo profilo e perderai immediatamente l'accesso al tempo pagato rimanente. Se vuoi solo interrompere i pagamenti futuri, annulla il tuo abbonamento.";
+"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Annulla l'abbonamento invece";
 
 
@@ -1320,7 +1320,7 @@
 "appearance_light" = "Chiaro";
 "appearance_dark" = "Scuro";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Aggiorna per inviare avvisi alla comunità";
+"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
 "mark_lost_upgrade_prompt" = "Con il piano Starter il tuo animale sarà segnalato come smarrito, ma le notifiche a utenti, veterinari e rifugi richiedono un abbonamento Standard o Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "es. 3 anni, 6 mesi (facoltativo)";
@@ -1388,7 +1388,7 @@
 "api_error_invalid_url" = "URL non valido";
 "api_error_invalid_response" = "Risposta non valida dal server";
 "api_error_unauthorized" = "Non autorizzato. Effettua nuovamente l'accesso.";
-"api_error_pet_limit" = "Limite di registrazione animali raggiunto. Aggiorna il tuo piano.";
+"api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "Impossibile elaborare la risposta del server";
 "api_error_network %@" = "Errore di rete: %@";
 "sync_no_internet" = "Sincronizzazione impossibile: Nessuna connessione Internet";

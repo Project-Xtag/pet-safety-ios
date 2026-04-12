@@ -489,9 +489,9 @@
 "help_faq_q4" = "¿Puedo actualizar los datos de mi mascota más tarde?";
 "help_faq_a4" = "¡Sí! Puedes actualizar los datos de tu mascota en cualquier momento en la sección 'Mis Mascotas' seleccionando tu mascota y tocando 'Editar Perfil'. Puedes actualizar todos los campos excepto nombre, especie y raza, incluyendo fotos. Los cambios se guardan inmediatamente.";
 "help_faq_q5" = "¿Cómo pido una placa de repuesto?";
-"help_faq_a5" = "Ve a la página 'Inicio/Mi Cuenta' y toca 'Pedir Placa de Repuesto'. Selecciona qué mascota necesita una nueva placa. Los suscriptores Maximum y Standard pueden solicitar placas de repuesto gratuitas, mientras que los miembros Starter pueden pedir repuestos por el coste del envío.";
+"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
 "help_faq_q6" = "¿Cómo activo mi placa después de recibirla?";
-"help_faq_a6" = "¡Descarga la aplicación móvil SENRA de Google Play Store o App Store! Ábrela y ve al menú 'Activación', apunta la cámara de tu teléfono al código QR de la placa. El escaneo vincula la placa a tu cuenta. Luego debes seleccionar tu mascota existente o crear un nuevo perfil. Después de completar la activación, puedes elegir tu plan de suscripción.";
+"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
 "help_faq_q7" = "¿Puedo regalar una placa SENRA?";
 "help_faq_a7" = "¡Sí! Las placas SENRA son regalos geniales para dueños de mascotas. Simplemente pide la placa desde tu propia cuenta — cuando el destinatario la reciba, puede escanear el código QR, crear su propia cuenta y activar la placa para su mascota. El destinatario no necesita registrarse previamente — escanear la placa le guía en la creación de cuenta y vinculación.";
 "help_faq_q8" = "¿Qué debo hacer si mi mascota desaparece?";
@@ -505,15 +505,15 @@
 "help_faq_q12" = "¿A qué países enviáis?";
 "help_faq_a12" = "Actualmente enviamos a Hungría, Eslovaquia, República Checa, Austria, Rumanía, Croacia, España, Italia, Francia, Alemania, Noruega y Portugal. Envío nacional dentro de Hungría: {{huPostapoint}} (PostaPont) o {{huHome}} (entrega a domicilio). Envío internacional: {{intlPrice}} por pedido.";
 "help_faq_q13" = "¿Puedo tener varias mascotas en una cuenta?";
-"help_faq_a13" = "Sí. Con el plan Starter (gratuito), puedes registrar hasta 10 mascotas, pero las funciones disponibles son limitadas. El plan Standard está diseñado para un gato o perro, pero incluye todas las funciones. El plan Maximum incluye todas las funciones y puedes registrar hasta 10 mascotas. Puedes cambiar de plan en cualquier momento en 'Inicio/Mi Cuenta'.";
+"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
 "help_faq_q14" = "¿Cómo reporto una mascota encontrada?";
 "help_faq_a14" = "Si la mascota tiene una placa SENRA, simplemente escanea el código QR con la cámara de tu teléfono — no necesitas ninguna aplicación. Puedes ver el perfil de la mascota y compartir tu ubicación con el dueño.";
 "help_faq_q15" = "¿Están seguros mis datos personales?";
 "help_faq_a15" = "Sí. Tú controlas exactamente qué datos son visibles cuando alguien escanea la placa de tu mascota. En 'Ajustes' > 'Ajustes de Privacidad', puedes elegir si mostrar tu número de teléfono, correo electrónico o dirección. Tu inicio de sesión está protegido con un código de verificación de un solo uso cada vez — no hay contraseña que puedan robar. Puedes eliminar tu cuenta y todos tus datos en cualquier momento.";
 "help_faq_q16" = "Perdimos la placa o se dañó — ¿qué hago?";
-"help_faq_a16" = "No te preocupes — el perfil digital de tu mascota está seguro y no se almacena en la placa. Ve a la página de Cuenta y toca 'Pedir Repuesto'. Vincularemos una nueva placa con un código QR nuevo a tu perfil existente. Los suscriptores Standard y Maximum pueden solicitar repuestos ilimitados gratuitos, mientras que los miembros Starter deben pagar el envío. La placa antigua se desactiva inmediatamente al hacer el pedido.";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
 "help_faq_q17" = "Mi placa no se escanea — ¿qué hago?";
-"help_faq_a17" = "Prueba lo siguiente: limpia la superficie de la placa con un paño húmedo, asegura buena iluminación, mantén la cámara estable a unos 10-15 cm de la placa, y comprueba que tu cámara o lector QR funciona. Si el código QR está rayado o desgastado, pide un repuesto gratuito en 'Inicio/Mi Cuenta' (repuesto gratuito disponible para suscriptores Standard y Maximum — los miembros Starter deben pagar el envío).";
+"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
 "help_faq_q18" = "Encontré una mascota sin placa SENRA — ¿qué puedo hacer?";
 "help_faq_a18" = "Consulta el mapa de Mascotas Perdidas en la web de SENRA (senra.pet) — la mascota puede haber sido reportada como perdida en tu zona. También puedes ver las alertas en la aplicación. Lleva al animal a la clínica veterinaria más cercana para escanear su microchip. Si tiene placa SENRA, escanea el código QR — aparecerán los datos de contacto del dueño. Siempre notifica también a las autoridades locales y refugios cercanos.";
 "help_faq_q19" = "¿Puedo cambiar mi dirección de correo electrónico?";
@@ -809,10 +809,10 @@
 // MARK: - Referidos (Bloque 1)
 "referral_loading" = "Cargando…";
 "referral_your_code" = "Tu código de referidos";
-"referral_share_footer" = "Comparte tu código con amigos. Cuando se suscriban, ¡ambos reciben recompensa!";
+"referral_share_footer" = "Share your referral code with friends.";
 "referral_how_it_works" = "Cómo funciona";
 "referral_step_1" = "Comparte tu código único con amigos";
-"referral_step_2" = "Lo usan al suscribirse a un plan de pago";
+"referral_step_2" = "They sign up with your code";
 "referral_step_3" = "Ambos disfrutan de 2 meses gratis";
 "referral_history" = "Historial de referidos";
 "referral_no_referrals" = "Aún no hay referidos";
@@ -957,7 +957,7 @@
 
 // MARK: - SSE Subscription Events
 "sse_subscription_title" = "Suscripción actualizada";
-"sse_subscription_message" = "Tu plan %@ ahora es %@.";
+"sse_subscription_message" = "Your Senra subscription has been updated.";
 "sse_referral_title" = "¡Referido usado!";
 "sse_referral_message" = "¡%@ usó tu código de referido!";
 
@@ -972,7 +972,7 @@
 "plan_feature_photos_count" = "%lld fotos por mascota";
 "referral_status_pending" = "Pendiente";
 "referral_status_signed_up" = "Registrado";
-"referral_status_subscribed" = "Suscrito";
+"referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Recompensado";
 "referral_share_message" = "¡Usa mi código de referido %@ y obtén 2 meses gratis en Pet Safety! https://senra.pet/choose-plan?referral=%@";
 "help_guide_qr_tags_title" = "Placas QR para mascotas";
@@ -1027,7 +1027,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Límite de mascotas alcanzado";
-"pet_limit_reached_info" = "Has alcanzado el número máximo de mascotas para tu plan actual. Visita senra.pet para gestionar tu suscripción.";
+"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
 "upgrade_to_ultimate" = "Actualizar a Maximum";
 "keep_current_plan" = "Mantener plan actual";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Tu plan %@ permite %lld mascota. Actualiza a %@ por %@ para hasta 10 mascotas.";
@@ -1044,7 +1044,7 @@
 "apply_code" = "Aplicar";
 "referral_code_applied" = "¡Código de referencia aplicado! Obtendrás 2 meses gratis.";
 "referral_code_invalid" = "Código de referencia inválido o expirado";
-"referral_use_friend_footer" = "Ingresa el código de referencia de un amigo y obtén 2 meses gratis de suscripción.";
+"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Pedir como regalo";
@@ -1250,7 +1250,7 @@
 "current_plan" = "Plan actual";
 "plan_renews" = "Se renueva el %@";
 "plan_cancels_on" = "Finaliza el %@";
-"delete_premium_warning" = "Tienes una suscripción %@ activa hasta el %@. Eliminar tu cuenta borrará permanentemente tu perfil y perderás inmediatamente el acceso al tiempo pagado restante. Si solo quieres detener los pagos futuros, cancela tu suscripción.";
+"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Cancelar suscripción en su lugar";
 
 
@@ -1308,7 +1308,7 @@
 "appearance_light" = "Claro";
 "appearance_dark" = "Oscuro";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Mejora para enviar alertas comunitarias";
+"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
 "mark_lost_upgrade_prompt" = "Con el plan Starter tu mascota se marcará como perdida, pero las notificaciones a usuarios, veterinarios y refugios requieren una suscripción Standard o Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "ej. 3 años, 6 meses (opcional)";
@@ -1376,7 +1376,7 @@
 "api_error_invalid_url" = "URL no válida";
 "api_error_invalid_response" = "Respuesta no válida del servidor";
 "api_error_unauthorized" = "No autorizado. Inicie sesión de nuevo.";
-"api_error_pet_limit" = "Límite de registro de mascotas alcanzado. Mejore su plan para añadir más.";
+"api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "No se pudo procesar la respuesta del servidor";
 "api_error_network %@" = "Error de red: %@";
 "sync_no_internet" = "No se puede sincronizar: Sin conexión a internet";

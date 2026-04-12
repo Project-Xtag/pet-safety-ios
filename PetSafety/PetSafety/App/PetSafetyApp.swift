@@ -4,7 +4,6 @@ import Sentry
 import os
 
 extension Notification.Name {
-    static let checkoutCompleted = Notification.Name("checkoutCompleted")
     static let tagOrderCompleted = Notification.Name("tagOrderCompleted")
     static let replacementCompleted = Notification.Name("replacementCompleted")
 }
@@ -170,9 +169,6 @@ struct PetSafetyApp: App {
 
             if path == "success" {
                 switch type {
-                case "subscription":
-                    appState.showSuccess(String(localized: "checkout_subscription_success"))
-                    NotificationCenter.default.post(name: .checkoutCompleted, object: nil)
                 case "qr_tag_order":
                     appState.showSuccess(String(localized: "checkout_tag_order_success"))
                     NotificationCenter.default.post(name: .tagOrderCompleted, object: nil)
@@ -181,7 +177,6 @@ struct PetSafetyApp: App {
                     NotificationCenter.default.post(name: .replacementCompleted, object: nil)
                 default:
                     appState.showSuccess(String(localized: "checkout_success"))
-                    NotificationCenter.default.post(name: .checkoutCompleted, object: nil)
                 }
             } else if path == "cancelled" {
                 #if DEBUG

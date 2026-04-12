@@ -261,9 +261,6 @@ struct OrderReplacementTagView: View {
                     Label(String(format: String(localized: "order_replace_additional_fee %@"), formattedShippingCost), systemImage: "eurosign.circle.fill")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.brandOrange)
-                    Label(String(localized: "order_replace_upgrade_hint"), systemImage: "star.fill")
-                        .font(.system(size: 13))
-                        .foregroundColor(.secondary)
                 }
 
                 Label(String(localized: "order_replace_old_deactivated"), systemImage: "exclamationmark.triangle.fill")

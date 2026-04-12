@@ -488,9 +488,9 @@
 "help_faq_q4" = "Czy mogę później zaktualizować dane mojego zwierzaka?";
 "help_faq_a4" = "Tak! Możesz aktualizować dane zwierzaka w dowolnym momencie w sekcji 'Moje Zwierzaki' wybierając zwierzaka i klikając 'Edytuj Profil'. Możesz aktualizować wszystkie pola z wyjątkiem imienia, gatunku i rasy, łącznie ze zdjęciami. Zmiany są zapisywane natychmiast.";
 "help_faq_q5" = "Jak zamówić plakietkę zastępczą?";
-"help_faq_a5" = "Przejdź do 'Strona Główna/Moje Konto' i kliknij 'Zamów Plakietkę Zastępczą'. Wybierz, który zwierzak potrzebuje nowej plakietki. Subskrybenci Maximum i Standard mogą żądać bezpłatnych zamienników, członkowie Starter płacą koszt wysyłki.";
+"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
 "help_faq_q6" = "Jak aktywować plakietkę po jej otrzymaniu?";
-"help_faq_a6" = "Pobierz aplikację mobilną SENRA z Google Play lub App Store! Otwórz ją i przejdź do menu 'Aktywacja', skieruj aparat telefonu na kod QR na plakietce! Skanowanie łączy plakietkę z Twoim kontem. Następnie wybierz istniejącego zwierzaka lub utwórz nowy profil. Po aktywacji możesz wybrać plan subskrypcji.";
+"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
 "help_faq_q7" = "Czy mogę podarować plakietkę SENRA?";
 "help_faq_a7" = "Tak! Plakietki SENRA to świetne prezenty dla właścicieli zwierząt. Zamów plakietkę ze swojego konta — gdy obdarowany ją otrzyma, może zeskanować kod QR, utworzyć konto i aktywować plakietkę dla swojego zwierzaka.";
 "help_faq_q8" = "Co powinienem zrobić, jeśli mój zwierzak zaginął?";
@@ -504,15 +504,15 @@
 "help_faq_q12" = "Do jakich krajów wysyłacie?";
 "help_faq_a12" = "Obecnie wysyłamy do Węgier, Słowacji, Czech, Austrii, Rumunii, Chorwacji, Hiszpanii, Włoch, Francji, Niemiec, Norwegii i Portugalii. Wysyłka krajowa na Węgrzech: {{huPostapoint}} (PostaPont) lub {{huHome}} (dostawa do domu). Wysyłka międzynarodowa: {{intlPrice}} za zamówienie.";
 "help_faq_q13" = "Czy mogę mieć wiele zwierząt na jednym koncie?";
-"help_faq_a13" = "Tak. Z planem Starter (bezpłatnym) możesz zarejestrować do 10 zwierząt z ograniczonymi funkcjami. Plan Standard jest dla jednego kota lub psa ze wszystkimi funkcjami. Plan Maximum obejmuje wszystko z rejestracją do 10 zwierząt.";
+"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
 "help_faq_q14" = "Jak zgłosić znalezione zwierzę?";
 "help_faq_a14" = "Jeśli zwierzę ma plakietkę SENRA, po prostu zeskanuj kod QR aparatem — nie potrzebujesz aplikacji. Możesz zobaczyć profil zwierzaka i udostępnić swoją lokalizację właścicielowi.";
 "help_faq_q15" = "Czy moje dane osobowe są bezpieczne?";
 "help_faq_a15" = "Tak. Ty kontrolujesz, jakie dane są widoczne po zeskanowaniu plakietki. W 'Ustawienia' > 'Ustawienia Prywatności' możesz wybrać, czy pokazywać telefon, email czy adres. Logowanie jest chronione jednorazowym kodem weryfikacyjnym. Możesz usunąć konto i dane w dowolnym momencie.";
 "help_faq_q16" = "Zgubiliśmy plakietkę lub się uszkodziła — co robić?";
-"help_faq_a16" = "Nie martw się — profil cyfrowy jest bezpieczny i nie jest przechowywany na plakietce. Przejdź do strony Konto i kliknij 'Zamów Zamiennik'. Połączymy nową plakietkę z nowym kodem QR z istniejącym profilem. Subskrybenci Standard i Maximum mogą żądać nieograniczonych bezpłatnych zamienników. Stara plakietka jest natychmiast dezaktywowana.";
+"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
 "help_faq_q17" = "Moja plakietka nie skanuje się — co robić?";
-"help_faq_a17" = "Spróbuj: wyczyść powierzchnię wilgotną ściereczką, zapewnij dobre oświetlenie, trzymaj aparat stabilnie w odległości 10-15 cm. Jeśli kod QR jest porysowany lub zużyty, zamów bezpłatny zamiennik z 'Strona Główna/Moje Konto'.";
+"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
 "help_faq_q18" = "Znalazłem zwierzę bez plakietki SENRA — co mogę zrobić?";
 "help_faq_a18" = "Sprawdź mapę Zaginionych Zwierząt na stronie SENRA (senra.pet). Możesz też zobaczyć alerty w aplikacji. Zanieś zwierzę do najbliższego weterynarza, aby zeskanować mikrochip. Jeśli ma plakietkę SENRA, zeskanuj kod QR — pojawią się dane kontaktowe właściciela. Zawsze powiadom też lokalne władze i pobliskie schroniska.";
 "help_faq_q19" = "Czy mogę zmienić swój adres email?";
@@ -807,10 +807,10 @@
 // MARK: - Polecenia (Część 1)
 "referral_loading" = "Ładowanie…";
 "referral_your_code" = "Twój kod polecenia";
-"referral_share_footer" = "Udostępnij swój kod znajomym. Gdy subskrybują, oboje otrzymacie nagrodę!";
+"referral_share_footer" = "Share your referral code with friends.";
 "referral_how_it_works" = "Jak to działa";
 "referral_step_1" = "Udostępnij swój kod polecenia znajomemu";
-"referral_step_2" = "Rejestruje się i subskrybuje używając twojego kodu";
+"referral_step_2" = "They sign up with your code";
 "referral_step_3" = "Oboje otrzymujecie 2 miesiące za darmo!";
 "referral_history" = "Historia poleceń";
 "referral_no_referrals" = "Brak poleceń";
@@ -955,7 +955,7 @@
 
 // MARK: - Zdarzenia subskrypcji SSE
 "sse_subscription_title" = "Subskrypcja zaktualizowana";
-"sse_subscription_message" = "Twój plan %@ jest teraz %@.";
+"sse_subscription_message" = "Your Senra subscription has been updated.";
 "sse_referral_title" = "Użyto kodu polecenia!";
 "sse_referral_message" = "%@ użył/a twojego kodu polecenia!";
 
@@ -970,7 +970,7 @@
 "plan_feature_photos_count" = "%lld zdjęć na zwierzę";
 "referral_status_pending" = "Oczekujące";
 "referral_status_signed_up" = "Zarejestrowany/a";
-"referral_status_subscribed" = "Subskrybent/ka";
+"referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Nagrodzony/a";
 "referral_share_message" = "Użyj mojego kodu polecenia %@, aby uzyskać 2 miesiące za darmo w Pet Safety! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Pierwsze kroki";
@@ -1013,7 +1013,7 @@
 
 // MARK: - Formularz zwierzęcia dodatkowy
 "pet_limit_reached" = "Osiągnięto limit zwierząt";
-"pet_limit_reached_info" = "Osiągnięto maksymalną liczbę zwierząt dla bieżącego planu. Odwiedź senra.pet, aby zarządzać subskrypcją.";
+"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
 "upgrade_to_ultimate" = "Przejdź na plan Maximum";
 "keep_current_plan" = "Zachowaj bieżący plan";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Twój plan %@ pozwala na %lld zwierzę. Przejdź na %@ za %@, aby dodać do 10 zwierząt.";
@@ -1030,7 +1030,7 @@
 "apply_code" = "Zastosuj";
 "referral_code_applied" = "Kod polecenia zastosowany! Otrzymasz 2 miesiące za darmo.";
 "referral_code_invalid" = "Nieprawidłowy lub wygasły kod polecenia";
-"referral_use_friend_footer" = "Podaj kod polecenia znajomego, aby uzyskać 2 miesiące za darmo po subskrypcji.";
+"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Zamów jako prezent";
@@ -1253,7 +1253,7 @@
 "current_plan" = "Aktualny plan";
 "plan_renews" = "Odnawia się %@";
 "plan_cancels_on" = "Kończy się %@";
-"delete_premium_warning" = "Masz aktywną subskrypcję %@ do %@. Usunięcie konta trwale usunie Twój profil i natychmiast stracisz dostęp do pozostałego opłaconego czasu. Jeśli chcesz tylko zatrzymać przyszłe płatności, anuluj subskrypcję.";
+"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Anuluj subskrypcję zamiast tego";
 
 
@@ -1311,7 +1311,7 @@
 "appearance_light" = "Jasny";
 "appearance_dark" = "Ciemny";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Ulepsz plan, aby wysyłać alerty";
+"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
 "mark_lost_upgrade_prompt" = "W planie Starter twoje zwierzę zostanie oznaczone jako zagubione, ale powiadomienia do użytkowników, weterynarzy i schronisk wymagają subskrypcji Standard lub Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "np. 3 lata, 6 miesięcy (opcjonalnie)";
@@ -1379,7 +1379,7 @@
 "api_error_invalid_url" = "Nieprawidłowy URL";
 "api_error_invalid_response" = "Nieprawidłowa odpowiedź serwera";
 "api_error_unauthorized" = "Brak autoryzacji. Zaloguj się ponownie.";
-"api_error_pet_limit" = "Osiągnięto limit rejestracji zwierząt. Zaktualizuj plan, aby dodać więcej.";
+"api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "Nie udało się przetworzyć odpowiedzi serwera";
 "api_error_network %@" = "Błąd sieci: %@";
 "sync_no_internet" = "Brak możliwości synchronizacji: Brak połączenia z internetem";

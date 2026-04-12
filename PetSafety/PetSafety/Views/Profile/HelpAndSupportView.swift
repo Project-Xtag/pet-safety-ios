@@ -29,7 +29,6 @@ struct HelpAndSupportView: View {
     @State private var missingPetNames: [String] = []
     @State private var isCheckingDelete = false
     @State private var isDeleting = false
-    @State private var navigateToBilling = false
 
     private var hasPaidSubscription: Bool {
         guard let sub = subscriptionViewModel.currentSubscription else { return false }
@@ -37,14 +36,7 @@ struct HelpAndSupportView: View {
     }
 
     private var premiumDeleteWarning: String {
-        guard let sub = subscriptionViewModel.currentSubscription else { return "" }
-        let dateStr: String = {
-            guard let date = sub.currentPeriodEnd else { return "" }
-            let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            return formatter.string(from: date)
-        }()
-        return String(format: NSLocalizedString("delete_premium_warning", comment: ""), sub.planName, dateStr)
+        return NSLocalizedString("delete_premium_warning", comment: "")
     }
 
     var body: some View {
@@ -202,15 +194,6 @@ struct HelpAndSupportView: View {
                     }
                     .buttonStyle(.bordered)
 
-                    if hasPaidSubscription {
-                        Button(NSLocalizedString("cancel_instead", comment: "")) {
-                            showingDeleteConfirmation = false
-                            confirmDeleteChecked = false
-                            navigateToBilling = true
-                        }
-                        .buttonStyle(.bordered)
-                    }
-
                     Button("delete_account") {
                         showingDeleteConfirmation = false
                         confirmDeleteChecked = false
@@ -225,14 +208,6 @@ struct HelpAndSupportView: View {
             .padding(30)
             .presentationDetents([.medium])
         }
-        .background(
-            NavigationLink(
-                destination: BillingView()
-                    .environmentObject(subscriptionViewModel)
-                    .environmentObject(appState),
-                isActive: $navigateToBilling
-            ) { EmptyView() }
-        )
         .alert("profile_cannot_delete", isPresented: $showingDeleteError) {
             Button("ok", role: .cancel) { }
         } message: {
@@ -393,7 +368,6 @@ struct FAQView: View {
         FAQGroup(titleKey: "help_faq_group_getting_started", indices: [1, 2, 3, 13]),
         FAQGroup(titleKey: "help_faq_group_tags_scanning", indices: [4, 5, 6, 7, 25]),
         FAQGroup(titleKey: "help_faq_group_missing_pets", indices: [8, 9, 14, 18, 23, 26]),
-        FAQGroup(titleKey: "help_faq_group_billing_plans", indices: [10, 11, 12, 21]),
         FAQGroup(titleKey: "help_faq_group_privacy_account", indices: [15, 19, 22, 24]),
         FAQGroup(titleKey: "help_faq_group_troubleshooting", indices: [16, 17, 20, 27]),
     ]
