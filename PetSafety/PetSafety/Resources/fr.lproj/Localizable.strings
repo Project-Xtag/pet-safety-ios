@@ -1400,3 +1400,7 @@
 "sync_error_missing_data %@" = "Données requises manquantes : %@";
 "sync_error_not_implemented" = "Fonctionnalité pas encore implémentée";
 "sync_error_network_unavailable" = "Connexion réseau indisponible";
+
+// MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
+"tags_coming_soon_title" = "Les médailles physiques arrivent bientôt";
+"tags_coming_soon_body" = "Nous expédierons notre premier lot très bientôt. Reviens dans quelques jours.";

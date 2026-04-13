@@ -1011,6 +1011,15 @@ class APIService {
         return response.checkout
     }
 
+    // MARK: - App Config
+
+    /// Public runtime config exposed by the backend. Fetched at app start to
+    /// gate the proceed-to-payment buttons on `tagsAvailable`. No auth.
+    func getAppConfig() async throws -> AppConfig {
+        let request = try await buildRequest(endpoint: "/config", requiresAuth: false)
+        return try await performRequest(request, responseType: AppConfig.self)
+    }
+
     // MARK: - Notifications Inbox
 
     func getNotifications(page: Int = 1, limit: Int = 20) async throws -> NotificationsPageResponse {

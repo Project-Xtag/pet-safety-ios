@@ -226,12 +226,46 @@ class AppState: ObservableObject {
     @Published var alertTitle = "Notice"
     @Published var isLoading = false
 
+    /// Cached public runtime config from GET /api/config. `nil` means we
+    /// haven't received a successful response yet (loading or fetch failed)
+    /// and consumers should treat that as "do not enable gated actions" —
+    /// fail-closed semantics matching the backend gate.
+    @Published var appConfig: AppConfig?
+
+    /// Convenience for views: only an explicit true permits proceed-to-payment.
+    /// Loading state and fetch errors both block. Mirrors the web fail-closed.
+    var tagsAvailable: Bool { appConfig?.tagsAvailable == true }
+
     // SSE Service for real-time notifications
     private let sseService = SSEService.shared
 
     init() {
         // Setup SSE event handlers (connection is managed by AuthViewModel)
         setupSSEHandlers()
+
+        // Kick off the config fetch asynchronously. No await — we don't want
+        // to block app startup on the network round-trip. Views read
+        // `tagsAvailable` and re-render when @Published flips.
+        Task { await self.refreshConfig() }
+    }
+
+    /// Fetches the public runtime config and updates `appConfig`. Safe to
+    /// call repeatedly (e.g. on scenePhase .active) so a stockout flip
+    /// reaches users without a full app restart. Failure leaves the previous
+    /// value in place; callers using `tagsAvailable` continue to fail-closed.
+    @MainActor
+    func refreshConfig() async {
+        do {
+            let config = try await APIService.shared.getAppConfig()
+            self.appConfig = config
+        } catch {
+            #if DEBUG
+            print("⚠️ Failed to load app config: \(error.localizedDescription)")
+            #endif
+            // Leave appConfig as-is. If this is the first fetch (still nil),
+            // proceed buttons stay disabled. If a previous fetch succeeded,
+            // we keep using that value rather than regressing to nil.
+        }
     }
 
     func showError(_ message: String) {

@@ -1397,3 +1397,7 @@
 "sync_error_missing_data %@" = "Date obligatorii lipsă: %@";
 "sync_error_not_implemented" = "Funcționalitate neimplementată încă";
 "sync_error_network_unavailable" = "Conexiune de rețea indisponibilă";
+
+// MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
+"tags_coming_soon_title" = "Medalioanele fizice vor fi disponibile în curând";
+"tags_coming_soon_body" = "Vom expedia primul lot foarte curând. Revino peste câteva zile.";

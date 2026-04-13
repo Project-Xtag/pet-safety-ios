@@ -1402,3 +1402,7 @@
 "sync_error_missing_data %@" = "Nedostaju obavezni podaci: %@";
 "sync_error_not_implemented" = "Značajka još nije implementirana";
 "sync_error_network_unavailable" = "Mrežna veza nije dostupna";
+
+// MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
+"tags_coming_soon_title" = "Fizičke pločice uskoro stižu";
+"tags_coming_soon_body" = "Uskoro šaljemo prvu seriju. Vrati se za nekoliko dana.";

@@ -1409,3 +1409,7 @@
 "sync_error_missing_data %@" = "Dati obbligatori mancanti: %@";
 "sync_error_not_implemented" = "Funzionalità non ancora implementata";
 "sync_error_network_unavailable" = "Connessione di rete non disponibile";
+
+// MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
+"tags_coming_soon_title" = "Le medagliette fisiche arrivano presto";
+"tags_coming_soon_body" = "Spediremo il nostro primo lotto a breve. Torna tra qualche giorno.";

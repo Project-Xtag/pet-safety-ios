@@ -1400,3 +1400,7 @@
 "sync_error_missing_data %@" = "Manglende obligatoriske data: %@";
 "sync_error_not_implemented" = "Funksjonen er ikke implementert ennå";
 "sync_error_network_unavailable" = "Nettverkstilkobling utilgjengelig";
+
+// MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
+"tags_coming_soon_title" = "De fysiske kjæledyrmerkene kommer snart";
+"tags_coming_soon_body" = "Vi sender den første batchen veldig snart. Sjekk tilbake om noen dager.";

@@ -618,6 +618,10 @@
 "order_more_proceed_to_payment" = "Tovább a fizetéshez";
 "order_more_redirecting" = "Átirányítás...";
 
+// MARK: - Tags Coming Soon
+"tags_coming_soon_title" = "Hamarosan elérhető a biléta";
+"tags_coming_soon_body" = "Hamarosan kiszállítjuk az első tételt. Pár nap múlva nézz vissza.";
+
 // MARK: - Cserebiléta rendelése
 "order_replace_title" = "Csere biléta rendelése";
 "order_replace_subtitle" = "Új bilétát küldünk a kedvencednek";

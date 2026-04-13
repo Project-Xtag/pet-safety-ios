@@ -629,6 +629,10 @@
 "order_more_proceed_to_payment" = "Proceed to Payment";
 "order_more_redirecting" = "Redirecting...";
 
+// MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
+"tags_coming_soon_title" = "Physical tags are coming soon";
+"tags_coming_soon_body" = "We're shipping our first batch shortly. Check back in a few days.";
+
 // MARK: - Order Replacement Tag
 "order_replace_title" = "Order Replacement Tag";
 "order_replace_subtitle" = "We'll send you a new tag for your pet";

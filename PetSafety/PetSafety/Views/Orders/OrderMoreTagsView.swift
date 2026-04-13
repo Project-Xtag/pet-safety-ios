@@ -157,27 +157,60 @@ struct OrderMoreTagsView: View {
                 }
             }
 
-            // Floating CTA Button
+            // Floating CTA Button — gated on TAGS_AVAILABLE so we don't take
+            // orders we can't fulfil. Loading and fetch errors fail-closed
+            // (tagsAvailable becomes false), matching the backend gate.
             VStack(spacing: 0) {
                 Divider()
-                Button(action: { submitOrder() }) {
-                    if isLoading {
-                        HStack(spacing: 8) {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            Text("order_more_redirecting")
+                if appState.tagsAvailable {
+                    Button(action: { submitOrder() }) {
+                        if isLoading {
+                            HStack(spacing: 8) {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                Text("order_more_redirecting")
+                            }
+                        } else {
+                            Text("order_more_proceed_to_payment")
                         }
-                    } else {
-                        Text("order_more_proceed_to_payment")
                     }
+                    .buttonStyle(BrandButtonStyle(isDisabled: !isFormValid))
+                    .disabled(isLoading || !isFormValid)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
+                } else {
+                    tagsComingSoonBanner
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
                 }
-                .buttonStyle(BrandButtonStyle(isDisabled: !isFormValid))
-                .disabled(isLoading || !isFormValid)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 12)
             }
             .background(.ultraThinMaterial)
         }
+    }
+
+    // MARK: - Tags Coming Soon
+
+    /// Replaces the "Proceed to Payment" CTA when TAGS_AVAILABLE is off
+    /// (or the config fetch hasn't returned). Same vertical footprint as
+    /// the button so the bottom bar doesn't jump when the gate flips.
+    private var tagsComingSoonBanner: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: "pawprint.fill")
+                .foregroundColor(.orange)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("tags_coming_soon_title")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                Text("tags_coming_soon_body")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(12)
+        .background(Color.orange.opacity(0.1))
+        .cornerRadius(10)
     }
 
     // MARK: - Header

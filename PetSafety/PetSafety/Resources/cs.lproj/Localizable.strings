@@ -1397,3 +1397,7 @@
 "sync_error_missing_data %@" = "Chybějící údaje: %@";
 "sync_error_not_implemented" = "Funkce ještě není implementována";
 "sync_error_network_unavailable" = "Síťové připojení není dostupné";
+
+// MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
+"tags_coming_soon_title" = "Fyzické známky brzy dorazí";
+"tags_coming_soon_body" = "Brzy odešleme naši první sérii. Vrať se za pár dní.";

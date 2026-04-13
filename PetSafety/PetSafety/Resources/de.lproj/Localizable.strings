@@ -1397,3 +1397,7 @@
 "sync_error_missing_data %@" = "Fehlende Pflichtdaten: %@";
 "sync_error_not_implemented" = "Funktion noch nicht verfügbar";
 "sync_error_network_unavailable" = "Keine Netzwerkverbindung";
+
+// MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
+"tags_coming_soon_title" = "Physische Namensschilder kommen bald";
+"tags_coming_soon_body" = "Wir versenden bald unsere erste Charge. Schau in ein paar Tagen wieder vorbei.";

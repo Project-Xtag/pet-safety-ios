@@ -146,26 +146,34 @@ struct OrderReplacementTagView: View {
                 }
             }
 
-            // Floating CTA Button
+            // Floating CTA Button — gated on TAGS_AVAILABLE so we don't take
+            // replacement orders we can't ship. Loading and fetch errors
+            // fail-closed, matching the backend gate (503 TAGS_UNAVAILABLE).
             VStack(spacing: 0) {
                 Divider()
-                Button(action: { submitOrder() }) {
-                    if isLoading {
-                        HStack(spacing: 8) {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            Text("order_replace_creating")
+                if appState.tagsAvailable {
+                    Button(action: { submitOrder() }) {
+                        if isLoading {
+                            HStack(spacing: 8) {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                Text("order_replace_creating")
+                            }
+                        } else if isFreeReplacement {
+                            Text("order_replace_free_button")
+                        } else {
+                            Text(String(format: String(localized: "order_replace_paid_button %@"), formattedShippingCost))
                         }
-                    } else if isFreeReplacement {
-                        Text("order_replace_free_button")
-                    } else {
-                        Text(String(format: String(localized: "order_replace_paid_button %@"), formattedShippingCost))
                     }
+                    .buttonStyle(BrandButtonStyle(isDisabled: !isFormValid || isCheckingEligibility))
+                    .disabled(isLoading || !isFormValid || isCheckingEligibility)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
+                } else {
+                    tagsComingSoonBanner
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
                 }
-                .buttonStyle(BrandButtonStyle(isDisabled: !isFormValid || isCheckingEligibility))
-                .disabled(isLoading || !isFormValid || isCheckingEligibility)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 12)
             }
             .background(.ultraThinMaterial)
         }
@@ -483,6 +491,29 @@ struct OrderReplacementTagView: View {
         } catch {
             await MainActor.run { isLoadingPrices = false }
         }
+    }
+
+    /// Replaces the proceed CTA when TAGS_AVAILABLE is off (or config hasn't
+    /// loaded yet). Same vertical footprint as the button so the bottom bar
+    /// doesn't jump when the gate flips.
+    private var tagsComingSoonBanner: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: "pawprint.fill")
+                .foregroundColor(.orange)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("tags_coming_soon_title")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                Text("tags_coming_soon_body")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(12)
+        .background(Color.orange.opacity(0.1))
+        .cornerRadius(10)
     }
 
     private func submitOrder() {

@@ -1397,3 +1397,7 @@
 "sync_error_missing_data %@" = "Datos requeridos faltantes: %@";
 "sync_error_not_implemented" = "Función aún no implementada";
 "sync_error_network_unavailable" = "Conexión de red no disponible";
+
+// MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
+"tags_coming_soon_title" = "Las placas físicas llegarán pronto";
+"tags_coming_soon_body" = "Pronto enviaremos nuestro primer lote. Vuelve en unos días.";
