@@ -213,12 +213,12 @@ class AuthViewModel: ObservableObject {
         }
     }
 
-    func verifyOTP(email: String, code: String) async throws {
+    func verifyOTP(email: String, code: String, firstName: String? = nil, lastName: String? = nil) async throws {
         isLoading = true
         errorMessage = nil
 
         do {
-            let response = try await apiService.verifyOTP(email: email, code: code)
+            let response = try await apiService.verifyOTP(email: email, code: code, firstName: firstName, lastName: lastName)
             currentUser = response.user
             isAuthenticated = true
             isNewUser = response.isNewUser ?? false

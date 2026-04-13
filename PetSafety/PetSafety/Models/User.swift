@@ -76,15 +76,21 @@ struct LoginResponse: Codable {
 struct VerifyOTPRequest: Codable {
     let email: String
     let otp: String
+    let firstName: String?
+    let lastName: String?
 
     enum CodingKeys: String, CodingKey {
         case email
-        case otp = "otp"
+        case otp
+        case firstName = "first_name"
+        case lastName = "last_name"
     }
 
-    init(email: String, code: String) {
+    init(email: String, code: String, firstName: String? = nil, lastName: String? = nil) {
         self.email = email
         self.otp = code
+        self.firstName = firstName?.isEmpty == true ? nil : firstName
+        self.lastName = lastName?.isEmpty == true ? nil : lastName
     }
 }
 

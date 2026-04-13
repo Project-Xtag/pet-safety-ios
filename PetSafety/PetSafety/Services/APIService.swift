@@ -391,11 +391,11 @@ class APIService {
         return response
     }
 
-    func verifyOTP(email: String, code: String) async throws -> VerifyOTPResponse {
+    func verifyOTP(email: String, code: String, firstName: String? = nil, lastName: String? = nil) async throws -> VerifyOTPResponse {
         let request = try await buildRequest(
             endpoint: "/auth/verify-otp",
             method: "POST",
-            body: VerifyOTPRequest(email: email, code: code),
+            body: VerifyOTPRequest(email: email, code: code, firstName: firstName, lastName: lastName),
             requiresAuth: false
         )
         let response = try await performRequest(request, responseType: VerifyOTPResponse.self)

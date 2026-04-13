@@ -348,13 +348,12 @@ struct RegistrationView: View {
         let trimmedLastName = lastName.trimmingCharacters(in: .whitespacesAndNewlines)
         Task {
             do {
-                try await authViewModel.verifyOTP(email: trimmedEmail, code: otpCode)
-                // Update user profile with name after successful registration
-                var updates: [String: Any] = ["first_name": trimmedFirstName]
-                if !trimmedLastName.isEmpty {
-                    updates["last_name"] = trimmedLastName
-                }
-                try? await authViewModel.updateProfile(updates: updates)
+                try await authViewModel.verifyOTP(
+                    email: trimmedEmail,
+                    code: otpCode,
+                    firstName: trimmedFirstName.isEmpty ? nil : trimmedFirstName,
+                    lastName: trimmedLastName.isEmpty ? nil : trimmedLastName
+                )
                 // Show welcome message for new users
                 appState.showSuccess(String(localized: "welcome_new_user"))
                 // Offer biometric enrollment
