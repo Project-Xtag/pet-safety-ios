@@ -42,9 +42,9 @@ final class ConfigurationManager: ObservableObject {
 
     /// Reads a URL string from Info.plist. Returns `fallback` if missing, empty, or
     /// still contains an unresolved `$(...)` build variable (happens when xcconfig
-    /// isn't wired up yet).
-    private static func infoPlistURL(_ key: String, fallback: String) -> String {
-        guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? String,
+    /// isn't wired up yet). Internal visibility so tests can pass a fake bundle.
+    static func infoPlistURL(_ key: String, fallback: String, bundle: Bundle = .main) -> String {
+        guard let value = bundle.object(forInfoDictionaryKey: key) as? String,
               !value.isEmpty,
               !value.contains("$(")
         else { return fallback }
