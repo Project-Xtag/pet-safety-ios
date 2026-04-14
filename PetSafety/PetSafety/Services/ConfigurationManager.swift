@@ -31,12 +31,12 @@ final class ConfigurationManager: ObservableObject {
     /// Default comes from `API_BASE_URL` in Info.plist (injected by the active xcconfig).
     /// Falls back to prod if the Info.plist key is missing or unresolved, so builds work
     /// before xcconfig wiring is complete. Firebase Remote Config can override at runtime.
-    @Published private(set) var apiBaseURL: String = Self.infoPlistURL(
+    @Published private(set) var apiBaseURL: String = ConfigurationManager.infoPlistURL(
         "API_BASE_URL", fallback: "https://api.senra.pet/api"
     )
 
     /// SSE base URL for real-time events
-    @Published private(set) var sseBaseURL: String = Self.infoPlistURL(
+    @Published private(set) var sseBaseURL: String = ConfigurationManager.infoPlistURL(
         "SSE_BASE_URL", fallback: "https://api.senra.pet"
     )
 
