@@ -27,11 +27,29 @@ final class ConfigurationManager: ObservableObject {
     /// Sentry DSN for error tracking (empty string if not configured)
     @Published private(set) var sentryDSN: String = ""
 
-    /// API base URL for backend requests
-    @Published private(set) var apiBaseURL: String = "https://api.senra.pet/api"
+    /// API base URL for backend requests.
+    /// Default comes from `API_BASE_URL` in Info.plist (injected by the active xcconfig).
+    /// Falls back to prod if the Info.plist key is missing or unresolved, so builds work
+    /// before xcconfig wiring is complete. Firebase Remote Config can override at runtime.
+    @Published private(set) var apiBaseURL: String = Self.infoPlistURL(
+        "API_BASE_URL", fallback: "https://api.senra.pet/api"
+    )
 
     /// SSE base URL for real-time events
-    @Published private(set) var sseBaseURL: String = "https://api.senra.pet"
+    @Published private(set) var sseBaseURL: String = Self.infoPlistURL(
+        "SSE_BASE_URL", fallback: "https://api.senra.pet"
+    )
+
+    /// Reads a URL string from Info.plist. Returns `fallback` if missing, empty, or
+    /// still contains an unresolved `$(...)` build variable (happens when xcconfig
+    /// isn't wired up yet).
+    private static func infoPlistURL(_ key: String, fallback: String) -> String {
+        guard let value = Bundle.main.object(forInfoDictionaryKey: key) as? String,
+              !value.isEmpty,
+              !value.contains("$(")
+        else { return fallback }
+        return value
+    }
 
     // MARK: - Private Properties
 

@@ -1,0 +1,6 @@
+#include "Shared.xcconfig"
+
+API_BASE_URL = https:/$()/api.senra.pet/api
+SSE_BASE_URL = https:/$()/api.senra.pet
+APP_DISPLAY_NAME = SENRA
+PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_BASE)

@@ -1,0 +1,7 @@
+#include "Shared.xcconfig"
+
+API_BASE_URL = https:/$()/staging.senra.pet/api
+SSE_BASE_URL = https:/$()/staging.senra.pet
+APP_DISPLAY_NAME = SENRA Staging
+PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_BASE).staging
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) STAGING
