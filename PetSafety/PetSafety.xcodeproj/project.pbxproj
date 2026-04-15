@@ -61,15 +61,11 @@
 		};
 		1DAD369D2EB818CC001F54AA /* PetSafetyTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = PetSafetyTests;
 			sourceTree = "<group>";
 		};
 		1DAD36A72EB818CC001F54AA /* PetSafetyUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = PetSafetyUITests;
 			sourceTree = "<group>";
 		};

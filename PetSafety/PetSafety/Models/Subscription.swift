@@ -190,16 +190,3 @@ struct ReferralApplyResponse: Codable {
     }
 }
 
-struct ShelterCodeRedeemRequest: Codable {
-    let code: String
-}
-
-struct ShelterCodeRedeemResponse: Codable {
-    let message: String
-    let orderId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case message
-        case orderId = "order_id"
-    }
-}

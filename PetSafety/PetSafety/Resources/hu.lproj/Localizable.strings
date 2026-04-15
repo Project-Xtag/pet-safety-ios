@@ -1258,17 +1258,6 @@
 "cancel_instead" = "Előfizetés lemondása ehelyett";
 
 // MARK: - Menhelyi örökbefogadás
-"profile_shelter_code" = "Menhelyi kód beváltása";
-"shelter_code_title" = "Menhelyi kód";
-"shelter_code_enter_header" = "Írd be a kódodat!";
-"shelter_code_enter_footer" = "Írd be a menhelytől kapott ADOPT-XXXX kódot!";
-"shelter_code_redeem" = "Beváltás";
-"shelter_code_success" = "Kód sikeresen beváltva!";
-"shelter_code_invalid" = "Érvénytelen vagy már beváltott kód.";
-"shelter_how_it_works" = "Hogyan működik?";
-"shelter_step_1" = "Fogadj örökbe egy kisállatot egy partner menhelyről!";
-"shelter_step_2" = "Írd be az örökbefogadáskor kapott kódot!";
-"shelter_step_3" = "Élvezd 3 hónapig ingyen Standard csomagot + kapsz egy ingyenes QR bilétát";
 
 // MARK: - Próbaidőszak
 "trial_ends_on" = "A próbaidőszak vége: %@";

@@ -159,10 +159,6 @@ struct ProfileView: View {
                 ProfileMenuRow(icon: "bag", title: NSLocalizedString("profile_orders_invoices", comment: ""))
             }
 
-            NavigationLink(destination: ShelterCodeView()) {
-                ProfileMenuRow(icon: "building.2", title: NSLocalizedString("profile_shelter_code", comment: ""))
-            }
-
             NavigationLink(destination: ContactSupportView()) {
                 ProfileMenuRow(icon: "envelope", title: NSLocalizedString("profile_contact_us", comment: ""))
             }

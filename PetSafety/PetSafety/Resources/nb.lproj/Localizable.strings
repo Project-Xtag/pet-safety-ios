@@ -1258,17 +1258,6 @@
 
 
 // MARK: - Shelter Adoption
-"profile_shelter_code" = "Adopsjonskode fra krisesenter";
-"shelter_code_title" = "Krisesenter-kode";
-"shelter_code_enter_header" = "Skriv inn koden din";
-"shelter_code_enter_footer" = "Skriv inn ADOPT-XXXX-koden du fikk fra krisesenteret.";
-"shelter_code_redeem" = "Løs inn";
-"shelter_code_success" = "Koden er innløst!";
-"shelter_code_invalid" = "Ugyldig eller allerede innløst kode.";
-"shelter_how_it_works" = "How It Works";
-"shelter_step_1" = "Adopt a pet from a partner shelter";
-"shelter_step_2" = "Enter the code you received at adoption";
-"shelter_step_3" = "Get 3 months free Standard plan + a free QR tag";
 
 // MARK: - Trial
 "trial_ends_on" = "Trial ends on %@";

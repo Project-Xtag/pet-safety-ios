@@ -1267,17 +1267,6 @@
 
 
 // MARK: - Shelter Adoption
-"profile_shelter_code" = "Codice di adozione del rifugio";
-"shelter_code_title" = "Codice del rifugio";
-"shelter_code_enter_header" = "Inserisci il tuo codice";
-"shelter_code_enter_footer" = "Inserisci il codice ADOPT-XXXX ricevuto dal rifugio.";
-"shelter_code_redeem" = "Riscatta";
-"shelter_code_success" = "Codice riscattato con successo!";
-"shelter_code_invalid" = "Codice non valido o già riscattato.";
-"shelter_how_it_works" = "How It Works";
-"shelter_step_1" = "Adopt a pet from a partner shelter";
-"shelter_step_2" = "Enter the code you received at adoption";
-"shelter_step_3" = "Get 3 months free Standard plan + a free QR tag";
 
 // MARK: - Trial
 "trial_ends_on" = "Trial ends on %@";

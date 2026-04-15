@@ -1755,20 +1755,6 @@ extension APIService {
         return try await performRequest(request, responseType: ReferralApplyResponse.self)
     }
 
-    /// Redeem a shelter adoption code
-    func redeemShelterCode(_ code: String) async throws -> ShelterCodeRedeemResponse {
-        #if DEBUG
-        print("📡 API: Redeeming shelter code \(code)...")
-        #endif
-
-        let request = try await buildRequest(
-            endpoint: "/referrals/redeem-shelter-code",
-            method: "POST",
-            body: ShelterCodeRedeemRequest(code: code)
-        )
-        return try await performRequest(request, responseType: ShelterCodeRedeemResponse.self)
-    }
-
     /// Get subscription features for current plan (read-only feature flags)
     func getSubscriptionFeatures() async throws -> SubscriptionFeatures {
         #if DEBUG

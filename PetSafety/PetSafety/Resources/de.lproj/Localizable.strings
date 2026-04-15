@@ -1255,17 +1255,6 @@
 
 
 // MARK: - Shelter Adoption
-"profile_shelter_code" = "Tierheim-Adoptionscode";
-"shelter_code_title" = "Tierheim-Code";
-"shelter_code_enter_header" = "Code eingeben";
-"shelter_code_enter_footer" = "Gib den ADOPT-XXXX Code ein, den du vom Tierheim erhalten hast.";
-"shelter_code_redeem" = "Einlösen";
-"shelter_code_success" = "Code erfolgreich eingelöst!";
-"shelter_code_invalid" = "Ungültiger oder bereits eingelöster Code.";
-"shelter_how_it_works" = "How It Works";
-"shelter_step_1" = "Adopt a pet from a partner shelter";
-"shelter_step_2" = "Enter the code you received at adoption";
-"shelter_step_3" = "Get 3 months free Standard plan + a free QR tag";
 
 // MARK: - Trial
 "trial_ends_on" = "Trial ends on %@";

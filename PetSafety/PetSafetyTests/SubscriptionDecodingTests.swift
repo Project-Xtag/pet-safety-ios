@@ -2,8 +2,8 @@ import Testing
 import Foundation
 @testable import PetSafety
 
-@Suite("Shelter Code Tests")
-struct ShelterCodeTests {
+@Suite("Subscription Decoding Tests")
+struct SubscriptionDecodingTests {
 
     @Test("UserSubscription decodes trial_ends_at correctly")
     func testTrialEndsAtDecoding() throws {
@@ -55,17 +55,4 @@ struct ShelterCodeTests {
         #expect(sub.isActive == true)
     }
 
-    @Test("ShelterCodeRedeemResponse decodes correctly")
-    func testShelterCodeRedeemResponseDecoding() throws {
-        let json = """
-        {
-            "message": "Welcome! 3 months free Standard plan.",
-            "order_id": "order-123"
-        }
-        """.data(using: .utf8)!
-
-        let response = try JSONDecoder().decode(ShelterCodeRedeemResponse.self, from: json)
-        #expect(response.message == "Welcome! 3 months free Standard plan.")
-        #expect(response.orderId == "order-123")
-    }
 }

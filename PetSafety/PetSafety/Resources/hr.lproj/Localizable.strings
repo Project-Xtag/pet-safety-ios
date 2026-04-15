@@ -1260,17 +1260,6 @@
 "cancel_instead" = "Umjesto toga otkaži pretplatu";
 
 // MARK: - Shelter Adoption
-"profile_shelter_code" = "Kôd udomljavanja iz skloništa";
-"shelter_code_title" = "Kôd skloništa";
-"shelter_code_enter_header" = "Unesi svoj kôd";
-"shelter_code_enter_footer" = "Unesi ADOPT-XXXX kôd koji si dobio od skloništa.";
-"shelter_code_redeem" = "Iskoristi";
-"shelter_code_success" = "Kôd uspješno iskorišten!";
-"shelter_code_invalid" = "Nevažeći ili već iskorišteni kôd.";
-"shelter_how_it_works" = "Kako funkcionira";
-"shelter_step_1" = "Udomi ljubimca iz partnerskog skloništa";
-"shelter_step_2" = "Unesi kôd koji si dobio pri udomljavanju";
-"shelter_step_3" = "Dobij 3 mjeseca besplatnog Standard paketa + besplatni QR pločica";
 
 // MARK: - Trial
 "trial_ends_on" = "Probno razdoblje završava %@";
