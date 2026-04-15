@@ -69,8 +69,8 @@
 // MARK: - Session
 
 // MARK: - Accueil / Liste des animaux
-"pet_owner_default" = "Maître de l'animal";
 "welcome_back_greeting" = "Content de te revoir,";
+"welcome_back_no_name" = "Bon retour !";
 "view_all" = "Tout voir";
 "search_pets_hint" = "Rechercher par nom, race, espèce…";
 "quick_actions" = "Actions rapides";

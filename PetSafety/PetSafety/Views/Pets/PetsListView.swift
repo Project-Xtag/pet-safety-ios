@@ -154,12 +154,18 @@ struct PetsListView: View {
     private var headerSection: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("welcome_back_greeting")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(.mutedText)
-                Text(authViewModel.currentUser?.firstName ?? NSLocalizedString("pet_owner_default", comment: ""))
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.primary)
+                if let firstName = authViewModel.currentUser?.firstName, !firstName.isEmpty {
+                    Text("welcome_back_greeting")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.mutedText)
+                    Text(firstName)
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.primary)
+                } else {
+                    Text("welcome_back_no_name")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.primary)
+                }
             }
 
             Spacer()

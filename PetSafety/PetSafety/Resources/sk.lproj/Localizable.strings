@@ -69,8 +69,8 @@
 // MARK: - Relacia
 
 // MARK: - Domov / Zoznam zvierat
-"pet_owner_default" = "Majitel zvierata";
 "welcome_back_greeting" = "Vitajte spat,";
+"welcome_back_no_name" = "Vitajte späť!";
 "view_all" = "Zobrazit vsetko";
 "search_pets_hint" = "Hladat podla mena, plemena, druhu…";
 "quick_actions" = "Rychle akcie";

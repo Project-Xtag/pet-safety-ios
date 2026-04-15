@@ -69,8 +69,8 @@
 // MARK: - Sesja
 
 // MARK: - Strona główna / Lista zwierząt
-"pet_owner_default" = "Właściciel zwierzęcia";
 "welcome_back_greeting" = "Witaj z powrotem,";
+"welcome_back_no_name" = "Witaj ponownie!";
 "view_all" = "Pokaż wszystkie";
 "search_pets_hint" = "Szukaj po imieniu, rasie, gatunku…";
 "quick_actions" = "Szybkie akcje";

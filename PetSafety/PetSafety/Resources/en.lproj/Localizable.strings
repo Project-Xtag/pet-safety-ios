@@ -69,8 +69,8 @@
 // MARK: - Session
 
 // MARK: - Home / Pets List
-"pet_owner_default" = "Pet Owner";
 "welcome_back_greeting" = "Welcome back,";
+"welcome_back_no_name" = "Welcome back!";
 "view_all" = "View All";
 "search_pets_hint" = "Search by name, breed, species…";
 "quick_actions" = "Quick Actions";

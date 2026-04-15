@@ -69,8 +69,8 @@
 // MARK: - Sesiune
 
 // MARK: - Acasă / Lista animalelor
-"pet_owner_default" = "Proprietar animal";
 "welcome_back_greeting" = "Bine ai revenit,";
+"welcome_back_no_name" = "Bine ai revenit!";
 "view_all" = "Vezi tot";
 "search_pets_hint" = "Caută după nume, rasă, specie…";
 "quick_actions" = "Acțiuni rapide";

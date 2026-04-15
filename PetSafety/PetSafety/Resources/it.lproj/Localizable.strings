@@ -69,8 +69,8 @@
 // MARK: - Sessione
 
 // MARK: - Home / Lista animali
-"pet_owner_default" = "Proprietario dell'animale";
 "welcome_back_greeting" = "Bentornato,";
+"welcome_back_no_name" = "Bentornato/a!";
 "view_all" = "Vedi tutti";
 "search_pets_hint" = "Cerca per nome, razza, specie…";
 "quick_actions" = "Azioni rapide";

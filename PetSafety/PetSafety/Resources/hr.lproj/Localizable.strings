@@ -72,8 +72,8 @@
 // MARK: - Session
 
 // MARK: - Home / Pets List
-"pet_owner_default" = "Vlasnik ljubimca";
 "welcome_back_greeting" = "Dobrodošao natrag,";
+"welcome_back_no_name" = "Dobrodošli natrag!";
 "view_all" = "Pogledaj sve";
 "search_pets_hint" = "Pretraži po imenu, pasmini, vrsti…";
 "quick_actions" = "Brze radnje";

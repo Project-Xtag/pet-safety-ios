@@ -69,8 +69,8 @@
 // MARK: - Munkamenet
 
 // MARK: - Kezdőlap / Kedvencek listája
-"pet_owner_default" = "Kedvenc gazdája";
 "welcome_back_greeting" = "Üdv újra,";
+"welcome_back_no_name" = "Üdv újra!";
 "view_all" = "Összes megtekintése";
 "search_pets_hint" = "Keresés név, fajta, faj szerint…";
 "quick_actions" = "Gyors műveletek";

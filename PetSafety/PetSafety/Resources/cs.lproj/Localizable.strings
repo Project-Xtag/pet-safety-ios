@@ -69,8 +69,8 @@
 // MARK: - Relace
 
 // MARK: - Domů / Seznam mazlíčků
-"pet_owner_default" = "Majitel mazlíčka";
 "welcome_back_greeting" = "Vítejte zpět,";
+"welcome_back_no_name" = "Vítejte zpět!";
 "view_all" = "Zobrazit vše";
 "search_pets_hint" = "Hledat podle jména, plemene, druhu…";
 "quick_actions" = "Rychlé akce";

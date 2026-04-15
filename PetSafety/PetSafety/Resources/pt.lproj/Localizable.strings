@@ -69,8 +69,8 @@
 // MARK: - Sessão
 
 // MARK: - Início / Lista de animais
-"pet_owner_default" = "Dono do animal";
 "welcome_back_greeting" = "Bem-vindo de volta,";
+"welcome_back_no_name" = "Bem-vindo/a de volta!";
 "view_all" = "Ver tudo";
 "search_pets_hint" = "Pesquisar por nome, raça, espécie…";
 "quick_actions" = "Ações rápidas";

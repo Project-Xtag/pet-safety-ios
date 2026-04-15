@@ -69,8 +69,8 @@
 // MARK: - Økt
 
 // MARK: - Hjem / Dyreliste
-"pet_owner_default" = "Dyreeier";
 "welcome_back_greeting" = "Velkommen tilbake,";
+"welcome_back_no_name" = "Velkommen tilbake!";
 "view_all" = "Vis alle";
 "search_pets_hint" = "Søk etter navn, rase, art…";
 "quick_actions" = "Hurtighandlinger";

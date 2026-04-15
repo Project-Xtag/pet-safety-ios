@@ -69,8 +69,8 @@
 // MARK: - Sitzung
 
 // MARK: - Startseite / Haustierliste
-"pet_owner_default" = "Haustierbesitzer";
 "welcome_back_greeting" = "Willkommen zurück,";
+"welcome_back_no_name" = "Willkommen zurück!";
 "view_all" = "Alle anzeigen";
 "search_pets_hint" = "Suche nach Name, Rasse, Tierart…";
 "quick_actions" = "Schnellaktionen";

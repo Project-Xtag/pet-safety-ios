@@ -69,8 +69,8 @@
 // MARK: - Sesión
 
 // MARK: - Inicio / Lista de mascotas
-"pet_owner_default" = "Dueño de la mascota";
 "welcome_back_greeting" = "Bienvenido de nuevo,";
+"welcome_back_no_name" = "¡Bienvenido/a de nuevo!";
 "view_all" = "Ver todo";
 "search_pets_hint" = "Buscar por nombre, raza, especie…";
 "quick_actions" = "Acciones rápidas";
