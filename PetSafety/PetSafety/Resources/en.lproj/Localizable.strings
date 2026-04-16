@@ -1,4 +1,4 @@
-/* Pet Safety - English Localizable Strings */
+/* SENRA - English Localizable Strings */
 
 // MARK: - Common
 "cancel" = "Cancel";
@@ -80,7 +80,7 @@
 "action_order_tags" = "ORDER TAGS";
 "action_replace_tag" = "REPLACE TAG";
 "empty_pets_title" = "No Pets Yet";
-"empty_pets_message" = "Add your first pet to get started with Pet Safety";
+"empty_pets_message" = "Add your first pet to get started with SENRA";
 "missing_badge" = "MISSING";
 "add_pet" = "Add Pet";
 "pet_name" = "Pet Name";
@@ -122,7 +122,7 @@
 "neutered_spayed" = "Neutered/Spayed";
 "neutered" = "Neutered";
 "health_information" = "Health Information";
-"health_info_hint" = "Health info: conditions, allergies, medications...";
+"health_info_hint" = "Health info: conditions, allergies, medications…";
 "behavior_notes_hint" = "Behavior notes (temperament, training, etc.)";
 "save_changes" = "Save Changes";
 "delete_pet_button" = "Delete Pet";
@@ -136,7 +136,6 @@
 "select_pet_for_replacement" = "Select Pet for Replacement Tag";
 "weight" = "Weight";
 "weight_optional" = "Weight in kg (optional)";
-"date_of_birth" = "Date of Birth";
 "allergies_hint" = "e.g. Chicken, grain-free diet required";
 "medications_hint" = "e.g. Insulin twice daily, heart medication";
 "unique_features_hint" = "Unique features (markings, scars, etc.)";
@@ -180,11 +179,11 @@
 "share_exact_desc" = "Share your precise location for faster reunion";
 "share_your_location" = "Your Location";
 "share_accuracy" = "(~500m accuracy)";
-"share_getting_location" = "Getting your location...";
+"share_getting_location" = "Getting your location…";
 "share_location_unavailable" = "Location not available. Please ensure location services are enabled.";
 "share_owner_notified" = "Owner Notified!";
 "share_on_their_way" = "They're on their way!";
-"share_notifying" = "Notifying Owner...";
+"share_notifying" = "Notifying Owner…";
 "share_notify_with_location" = "Share & Notify Owner";
 "share_privacy_note" = "Your location is shared with the pet owner to help reunite them with their pet.";
 "share_found_pet %@" = "Found %@!";
@@ -202,7 +201,7 @@
 
 // MARK: - Tag Activation
 "tag_activate_title" = "Activate Tag";
-"tag_loading_pets" = "Loading your pets...";
+"tag_loading_pets" = "Loading your pets…";
 "tag_activated" = "Tag Activated!";
 "tag_activated_message %@" = "%@'s tag is now active";
 "tag_choose_plan" = "Complete your pet's profile to help find them if they go missing";
@@ -212,23 +211,11 @@
 "tag_no_pets_message" = "Add a pet first before activating a tag";
 "tag_code_label" = "Tag Code";
 "tag_select_pet" = "Select a pet to link with this tag";
-"tag_activating" = "Activating...";
+"tag_activating" = "Activating…";
 "tag_activate_button" = "Activate Tag";
 "tag_link_message" = "This tag will be linked to the selected pet";
 
 // MARK: - Plan Selection
-"plan_tag_activated" = "Tag Activated!";
-"plan_choose_subtitle" = "Choose a plan to unlock all features";
-"plan_upgrade_title" = "Upgrade Your Plan";
-"plan_upgrade_subtitle" = "Get more features for your pets";
-"plan_loading" = "Loading plans...";
-"plan_popular" = "Popular";
-"plan_current" = "Current Plan";
-"plan_select_free" = "Select Free Plan";
-"plan_select %@" = "Select %@";
-"plan_skip_free" = "Skip for now (Free Plan)";
-"plan_all_include" = "All plans include:";
-"plan_paid_add" = "Paid plans add:";
 
 // MARK: - Alerts
 "tab_missing" = "Missing";
@@ -263,9 +250,8 @@
 "last_seen_location_header" = "Last Seen Location";
 "enter_location" = "Enter location";
 "additional_information_header" = "Additional Information";
-"additional_details_placeholder" = "Provide any additional details about when and where your pet was last seen...";
+"additional_details_placeholder" = "Provide any additional details about when and where your pet was last seen…";
 "alert_created_success" = "Missing pet alert created successfully!";
-"alert_queued_offline" = "Alert queued. Will sync when online.";
 "report_sighting_header" = "Report a Sighting";
 "report_sighting_help" = "Help reunite this pet with their owner by sharing where you saw them.";
 "share_contact_info" = "Share My Contact Info";
@@ -273,13 +259,12 @@
 "your_name" = "Your name";
 "your_phone_number" = "Your phone number";
 "your_email" = "Your email";
-"getting_location" = "Getting location...";
+"getting_location" = "Getting location…";
 "address_or_description" = "Address or Description";
 "where_did_you_see" = "Where did you see the pet?";
-"sighting_notes_placeholder" = "Describe what you saw, the pet's condition, direction of travel...";
+"sighting_notes_placeholder" = "Describe what you saw, the pet's condition, direction of travel…";
 "submit_sighting_report" = "Submit Sighting Report";
 "sighting_reported_owner_notified" = "Sighting reported! The owner has been notified.";
-"sighting_queued_offline" = "Sighting report queued. Will sync when online.";
 
 // MARK: - Mark Lost/Found Sheet
 
@@ -299,7 +284,6 @@
 "distance_km" = "%.1f km away";
 "found_on" = "Found %@";
 "success_story_marker" = "Success Story";
-"load_more" = "Load More";
 "missing_for" = "Missing for %@";
 "shared_via_senra" = "Shared via SENRA App";
 
@@ -322,13 +306,13 @@
 "story_maybe_later" = "Maybe Later";
 "story_share_good_news" = "Share the Good News";
 "story_social_caption %@" = "%@ has been reunited with their family! Thank you to the SENRA community for helping bring %@ home. senra.pet";
-"story_generating_card" = "Creating share card...";
+"story_generating_card" = "Creating share card…";
 "story_your_story" = "Your Story";
 "story_city_optional" = "City/Area (Optional)";
 "story_city_placeholder" = "e.g. Budapest, District VII";
 "story_share_publicly" = "Share Publicly";
 "story_share_publicly_desc" = "Allow others nearby to see your story";
-"story_posting" = "Posting...";
+"story_posting" = "Posting…";
 "story_share_story" = "Share Story";
 
 // MARK: - Profile
@@ -348,7 +332,7 @@
 "profile_cannot_delete" = "Cannot Delete Account";
 "profile_cannot_delete_message" = "Please mark all missing pets as found before deleting your account.";
 "profile_danger_zone" = "Danger Zone";
-"profile_deleting" = "Deleting...";
+"profile_deleting" = "Deleting…";
 "log_out" = "Log Out";
 
 // MARK: - Personal Information
@@ -448,7 +432,7 @@
 "notif_pref_save" = "Save Changes";
 "notif_pref_title" = "Notification Settings";
 "notif_pref_success" = "Notification preferences saved successfully";
-"notif_pref_loading" = "Loading preferences...";
+"notif_pref_loading" = "Loading preferences…";
 
 // MARK: - Help & Support
 "help_quick_actions" = "Quick Actions";
@@ -468,7 +452,7 @@
 "help_subject" = "Subject";
 "help_subject_placeholder" = "Brief description of your issue";
 "help_message" = "Message";
-"help_sending" = "Sending...";
+"help_sending" = "Sending…";
 "help_submit_request" = "Submit Request";
 "help_contact_title" = "Contact Support";
 "help_request_submitted" = "Support request submitted! We'll get back to you within 24 hours.";
@@ -501,7 +485,7 @@
 "help_faq_q10" = "How do I order a replacement tag?";
 "help_faq_a10" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Maximum and Standard plan subscribers can request free replacement tags, while Starter plan members can order replacements for the shipping cost.";
 "help_faq_q11" = "What is the referral programme?";
-"help_faq_a11" = "Choose your personal Referral Code from My Pets. Share it with friends and family. When someone uses your code and subscribes to a paid plan (Standard or Maximum), both you and your friend get 2 months free on your subscription. You can track your referrals and their status on the Referral  Program page.";
+"help_faq_a11" = "Choose your personal Referral Code from My Pets. Share it with friends and family. When someone uses your code and subscribes to a paid plan (Standard or Maximum), both you and your friend get 2 months free on your subscription. You can track your referrals and their status on the Referral Program page.";
 "help_faq_q12" = "Which countries do you ship to?";
 "help_faq_a12" = "We currently ship to Hungary, Slovakia, Czech Republic, Austria, Romania, Croatia, Spain, Italy, France, Germany, Norway, and Portugal. Domestic shipping within Hungary: {{huPostapoint}} (PostaPont) or {{huHome}} (home delivery). International shipping: {{intlPrice}} per order.";
 "help_faq_q13" = "Can I have multiple pets on one account?";
@@ -627,7 +611,7 @@
 "order_more_shipping_cost" = "Shipping";
 "order_more_total" = "Total";
 "order_more_proceed_to_payment" = "Proceed to Payment";
-"order_more_redirecting" = "Redirecting...";
+"order_more_redirecting" = "Redirecting…";
 
 // MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
 "tags_coming_soon_title" = "Physical tags are coming soon";
@@ -650,7 +634,7 @@
 "order_replace_postal" = "Postal Code";
 "order_replace_country" = "Country";
 "order_replace_phone" = "Phone Number (Optional)";
-"order_replace_creating" = "Creating Order...";
+"order_replace_creating" = "Creating Order…";
 "order_replace_free_button" = "Confirm & Order Free Replacement Tag";
 "order_replace_paid_button %@" = "Confirm & Pay %@";
 
@@ -686,8 +670,7 @@
 
 // MARK: - Offline Mode
 "offline_mode" = "Offline Mode";
-"syncing" = "Syncing...";
-"sync_completed" = "Sync completed";
+"syncing" = "Syncing…";
 "sync_failed" = "Sync failed: %@";
 "sync_no_connection" = "Cannot sync: No internet connection";
 "offline_changes_sync" = "Changes will sync when online";
@@ -727,7 +710,7 @@
 
 // MARK: - Additional Profile Keys
 "not_set" = "Not set";
-"saving" = "Saving...";
+"saving" = "Saving…";
 "edit_information" = "Edit Information";
 "registered_address" = "Registered Address";
 "address_shipping_footer" = "Enter your complete address for shipping and billing purposes";
@@ -755,7 +738,7 @@
 "plan_choose_subtitle" = "Choose a plan to unlock all features";
 "plan_upgrade_title" = "Upgrade Your Plan";
 "plan_upgrade_subtitle" = "Get more features for your pets";
-"plan_loading" = "Loading plans...";
+"plan_loading" = "Loading plans…";
 "plan_load_failed" = "Failed to load plans";
 "plan_skip_free" = "Skip for now (Free Plan)";
 "plan_all_include" = "All plans include:";
@@ -944,8 +927,8 @@
 
 // MARK: - Photo Gallery extras (Chunk 1)
 "photo_count %lld" = "%lld photos";
-"photo_uploading_count %lld %lld" = "Uploading photo %lld of %lld...";
-"photo_uploading" = "Uploading photo...";
+"photo_uploading_count %lld %lld" = "Uploading photo %lld of %lld…";
+"photo_uploading" = "Uploading photo…";
 "photo_primary_updated" = "Primary photo updated";
 "photo_primary_failed" = "Failed to set primary photo";
 "photo_upload_success" = "%d photo(s) uploaded successfully";
@@ -991,7 +974,7 @@
 "referral_status_signed_up" = "Signed Up";
 "referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Rewarded";
-"referral_share_message" = "Use my referral code %@ to get 2 months free on Pet Safety! https://senra.pet/choose-plan?referral=%@";
+"referral_share_message" = "Use my referral code %@ to get 2 months free on SENRA! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Getting Started";
 "help_faq_group_tags_scanning" = "Tags & Scanning";
 "help_faq_group_missing_pets" = "Missing Pets & Alerts";
@@ -1057,7 +1040,7 @@
 "order_gift_quantity" = "Number of tags";
 "order_gift_recipient_name" = "Recipient Name (optional)";
 "order_gift_message" = "Gift Message (optional)";
-"order_gift_message_placeholder" = "Add a personal message...";
+"order_gift_message_placeholder" = "Add a personal message…";
 "order_gift_badge" = "Gift Order";
 
 // MARK: - Error Messages
@@ -1077,7 +1060,6 @@
 "ready_to_activate" = "Ready to Activate";
 "still_processing" = "Still Processing";
 "scan_tag_now" = "Scan Tag";
-"create_profile_first" = "Create Profile";
 "create_profile_while_waiting" = "Create Profile While Waiting";
 "all_caught_up" = "All Caught Up!";
 "all_caught_up_description" = "You don't have any pending tag registrations.";
@@ -1362,7 +1344,7 @@
 "biometric_touch_id" = "Touch ID";
 "biometric_optic_id" = "Optic ID";
 "biometric_generic" = "Biometric";
-"biometric_login_reason" = "Log in to Pet Safety";
+"biometric_login_reason" = "Log in to SENRA";
 "biometric_use_email" = "Use Email";
 "biometric_not_available" = "Biometric authentication not available";
 "biometric_lockout" = "Too many failed attempts. Please try again later.";
@@ -1374,7 +1356,7 @@
 "api_error_decoding" = "Failed to decode server response";
 "api_error_network %@" = "Network error: %@";
 "sync_no_internet" = "Cannot sync: No internet connection";
-"sync_in_progress" = "Syncing...";
+"sync_in_progress" = "Syncing…";
 "sync_completed" = "Sync completed";
 "sync_failed %@" = "Sync failed: %@";
 "sync_action_mark_lost" = "Mark pet as lost";

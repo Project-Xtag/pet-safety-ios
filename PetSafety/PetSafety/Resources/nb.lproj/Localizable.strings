@@ -1,4 +1,4 @@
-/* Pet Safety - Norwegian Bokmål Localizable Strings */
+/* SENRA - Norwegian Bokmål Localizable Strings */
 
 // MARK: - Generelt
 "cancel" = "Avbryt";
@@ -42,7 +42,7 @@
 "resend_code_cooldown" = "Send kode på nytt om %llds";
 "resend_code_prompt" = "Fikk du ikke koden? Send på nytt";
 "dont_have_account" = "Har du ikke en konto?";
-"start_here_order_free_tag" = "Start her og bestill ditt gratis kjæledyrmerke";
+"start_here_order_free_tag" = "Start her og bestill din gratis QR-brikke";
 "create_account" = "Opprett konto";
 "enter_details_subtitle" = "Skriv inn opplysningene dine for å komme i gang.";
 "register" = "Registrer";
@@ -77,8 +77,8 @@
 "action_add_pet" = "LEGG TIL DYR";
 "action_mark_found" = "MERK SOM FUNNET";
 "action_report_missing" = "MELD SAVNET";
-"action_order_tags" = "BESTILL MERKER";
-"action_replace_tag" = "BYTT MERKE";
+"action_order_tags" = "BESTILL QR-BRIKKER";
+"action_replace_tag" = "BYTT QR-BRIKKE";
 "empty_pets_title" = "Ingen dyr registrert ennå";
 "empty_pets_message" = "Legg til ditt første kjæledyr for å komme i gang med SENRA";
 "missing_badge" = "SAVNET";
@@ -89,7 +89,7 @@
 "species_label" = "Art: %@";
 "medical_information" = "Medisinsk informasjon";
 "additional_information" = "Tilleggsinformasjon";
-"edit_pet" = "Rediger dyrets profil";
+"edit_pet" = "Rediger dyr";
 "view_pet_photos" = "Se %@s bilder";
 "mark_as_found" = "Merk som funnet";
 "mark_as_lost" = "Merk som savnet";
@@ -99,8 +99,8 @@
 "cannot_delete_missing_pet" = "Kan ikke slette savnet dyr";
 "mark_found_confirm_title" = "Merk %@ som funnet?";
 "mark_found_confirm_message" = "Dette vil lukke savnet-varselet for %@. Er du sikker?";
-"marked_found_message" = "%@ kjæledyrmerket som funnet.";
-"mark_found_failed" = "Kunne ikke kjæledyrmerke som funnet";
+"marked_found_message" = "%@ er merket som funnet.";
+"mark_found_failed" = "Kunne ikke merke som funnet";
 "pet_deleted" = "%@ er slettet";
 "delete_pet_failed" = "Kunne ikke slette dyr";
 
@@ -122,24 +122,23 @@
 "neutered_spayed" = "Kastrert";
 "neutered" = "Kastrert";
 "health_information" = "Helseinformasjon";
-"health_info_hint" = "Helseopplysninger: tilstander, allergier, medisiner...";
+"health_info_hint" = "Helseopplysninger: tilstander, allergier, medisiner…";
 "behavior_notes_hint" = "Atferdsnotater (temperament, trening osv.)";
 "save_changes" = "Lagre endringer";
 "delete_pet_button" = "Slett dyr";
 "delete_pet_dialog_message" = "Er du sikker på at du vil slette dette dyret? Denne handlingen kan ikke angres.";
 "delete_pet_warning_title" = "Slette %@?";
-"delete_pet_warning_message" = "%@ vil bli permanent fjernet fra kontoen din. QR-kjæledyrmerket vil bli deaktivert umiddelbart og vil ikke lenger fungere ved skanning. Hvis dette er ditt siste kjæledyr, vil abonnementet ditt også bli kansellert.";
+"delete_pet_warning_message" = "%@ vil bli permanent fjernet fra kontoen din. QR-brikken vil bli deaktivert umiddelbart og vil ikke lenger fungere ved skanning. Hvis dette er ditt siste kjæledyr, vil abonnementet ditt også bli kansellert.";
 "delete_pet_warning_confirm" = "Slett kjæledyr";
 "species_cat" = "Katt";
 "select_photo" = "Velg bilde";
 "select_pet" = "Velg dyr";
-"select_pet_for_replacement" = "Velg dyr for erstatningsmerke";
+"select_pet_for_replacement" = "Velg dyr som trenger en ny QR-brikke";
 "weight" = "Vekt";
 "weight_optional" = "Vekt i kg (valgfritt)";
-"date_of_birth" = "Fødselsdato";
 "allergies_hint" = "f.eks. Kylling, kornfritt kosthold";
 "medications_hint" = "f.eks. Insulin to ganger daglig, hjertemedisin";
-"unique_features_hint" = "Unike kjennetegn (kjæledyrmerker, arr osv.)";
+"unique_features_hint" = "Unike kjennetegn (pelsmønster, arr osv.)";
 "pet_created" = "Dyr opprettet";
 "pet_updated" = "Dyr oppdatert";
 "pet_updated_photo_failed" = "Dyr oppdatert! Bildeopplasting mislyktes – prøv igjen senere.";
@@ -162,9 +161,9 @@
 
 // MARK: - QR-skanner
 "scan_qr_code" = "Skann QR-kode";
-"scan_qr_subtitle" = "Rett kameraet mot dyrets QR-kjæledyrmerke";
+"scan_qr_subtitle" = "Rett kameraet mot dyrets QR-brikke";
 "hello_pet_name" = "Hei! Jeg er %@";
-"scanned_tag_thanks" = "Du har nettopp skannet kjæledyrmerket mitt. Takk for at du hjelper meg!";
+"scanned_tag_thanks" = "Du har nettopp skannet QR-brikken min. Takk for at du hjelper meg!";
 "share_location_with_owner" = "Del min posisjon med eieren";
 "contact_owner" = "Kontakt eieren";
 "call_phone" = "Ring: %@";
@@ -180,11 +179,11 @@
 "share_exact_desc" = "Del din nøyaktige posisjon for raskere gjenforening";
 "share_your_location" = "Din posisjon";
 "share_accuracy" = "(~500 m nøyaktighet)";
-"share_getting_location" = "Henter posisjonen din...";
+"share_getting_location" = "Henter posisjonen din…";
 "share_location_unavailable" = "Posisjon ikke tilgjengelig. Kontroller at stedstjenester er aktivert.";
 "share_owner_notified" = "Eieren varslet!";
 "share_on_their_way" = "De er på vei!";
-"share_notifying" = "Varsler eieren...";
+"share_notifying" = "Varsler eieren…";
 "share_notify_with_location" = "Del og varsle eieren";
 "share_privacy_note" = "Posisjonen din deles med dyreeieren for å hjelpe dem å gjenforenes med dyret.";
 "share_found_pet %@" = "Fant %@!";
@@ -201,39 +200,27 @@
 "scanner_how_it_works" = "Slik fungerer det";
 
 // MARK: - Merkeaktivering
-"tag_activate_title" = "Aktiver kjæledyrmerke";
-"tag_loading_pets" = "Laster dyrene dine...";
-"tag_activated" = "Kjæledyrmerke aktivert!";
-"tag_activated_message %@" = "%@s kjæledyrmerke er nå aktivt";
+"tag_activate_title" = "Aktiver QR-brikke";
+"tag_loading_pets" = "Laster dyrene dine…";
+"tag_activated" = "QR-brikke aktivert!";
+"tag_activated_message %@" = "%@s QR-brikke er nå aktiv";
 "tag_choose_plan" = "Fullfør profilen til kjæledyret ditt for å gjøre det lettere å finne det";
 "tag_choose_plan_button" = "Fullfør kjæledyrprofil";
 "tag_skip_for_now" = "Jeg gjør det senere";
 "tag_no_pets" = "Ingen dyr registrert ennå";
-"tag_no_pets_message" = "Legg til et dyr først, og aktiver deretter kjæledyrmerket";
-"tag_code_label" = "Merkekode";
-"tag_select_pet" = "Velg et dyr å koble kjæledyrmerket til";
-"tag_activating" = "Aktiverer...";
-"tag_activate_button" = "Aktiver kjæledyrmerke";
-"tag_link_message" = "Dette kjæledyrmerket vil bli koblet til det valgte dyret";
+"tag_no_pets_message" = "Legg til et dyr først, og aktiver deretter QR-brikken";
+"tag_code_label" = "QR-brikkekode";
+"tag_select_pet" = "Velg et dyr å koble QR-brikken til";
+"tag_activating" = "Aktiverer…";
+"tag_activate_button" = "Aktiver QR-brikke";
+"tag_link_message" = "Denne QR-brikken vil bli koblet til det valgte dyret";
 
 // MARK: - Abonnementsvalg
-"plan_tag_activated" = "Kjæledyrmerke aktivert!";
-"plan_choose_subtitle" = "Velg et abonnement for å låse opp alle funksjoner";
-"plan_upgrade_title" = "Oppgrader abonnementet ditt";
-"plan_upgrade_subtitle" = "Få flere funksjoner for dyrene dine";
-"plan_loading" = "Laster abonnementer...";
-"plan_popular" = "Populær";
-"plan_current" = "Gjeldende abonnement";
-"plan_select_free" = "Velg gratis abonnement";
-"plan_select %@" = "Velg %@";
-"plan_skip_free" = "Hopp over for nå (Gratis abonnement)";
-"plan_all_include" = "Alle abonnementer inkluderer:";
-"plan_paid_add" = "Betalte abonnementer legger til:";
 
 // MARK: - Varsler
 "tab_missing" = "Savnet";
 "tab_found" = "Funnet";
-"tab_success" = "Gjenforente dyr";
+"tab_success" = "Funnet";
 "failed_load_alerts" = "Kunne ikke laste varsler";
 "no_active_alerts" = "Ingen aktive varsler";
 "no_active_alerts_message" = "Du har ingen aktive savnet-varsler for øyeblikket";
@@ -263,9 +250,8 @@
 "last_seen_location_header" = "Sted sist sett";
 "enter_location" = "Skriv inn sted";
 "additional_information_header" = "Tilleggsinformasjon";
-"additional_details_placeholder" = "Oppgi ytterligere detaljer om når og hvor dyret ditt ble sett sist...";
+"additional_details_placeholder" = "Oppgi ytterligere detaljer om når og hvor dyret ditt ble sett sist…";
 "alert_created_success" = "Savnet-varsel opprettet!";
-"alert_queued_offline" = "Varsel satt i kø. Synkroniseres når du er online.";
 "report_sighting_header" = "Rapporter en observasjon";
 "report_sighting_help" = "Hjelp dette dyret å komme hjem til eieren ved å dele hvor du så det.";
 "share_contact_info" = "Del kontaktinformasjonen min";
@@ -273,18 +259,17 @@
 "your_name" = "Ditt navn";
 "your_phone_number" = "Ditt telefonnummer";
 "your_email" = "Din e-post";
-"getting_location" = "Henter posisjon...";
+"getting_location" = "Henter posisjon…";
 "address_or_description" = "Adresse eller beskrivelse";
 "where_did_you_see" = "Hvor så du dyret?";
-"sighting_notes_placeholder" = "Beskriv hva du så, dyrets tilstand, bevegelsesretning...";
+"sighting_notes_placeholder" = "Beskriv hva du så, dyrets tilstand, bevegelsesretning…";
 "submit_sighting_report" = "Send inn observasjonsrapport";
 "sighting_reported_owner_notified" = "Observasjon rapportert! Eieren er blitt varslet.";
-"sighting_queued_offline" = "Observasjon satt i kø – sendes inn når du er online.";
 
 // MARK: - Merk savnet/funnet
 
 // MARK: - Varsler (push)
-"tag_scanned_message" = "%@s kjæledyrmerke ble skannet på %@!";
+"tag_scanned_message" = "%@s QR-brikke ble skannet på %@!";
 "sighting_message_with_location" = "%@ er blitt observert på %@!";
 "sighting_message_no_location" = "%@ er blitt observert!";
 
@@ -299,10 +284,8 @@
 "distance_km" = "%.1f km unna";
 "found_on" = "Funnet %@";
 "success_story_marker" = "Suksesshistorie";
-"load_more" = "Last inn flere";
 "missing_for" = "Savnet i %@";
-"shared_via_pet_safety" = "Delt via Pet Safety-appen";
-
+"shared_via_senra" = "Delt via SENRA-appen";
 // MARK: - Suksesshistorie-tid
 "success_just_now" = "Akkurat nå";
 "success_day_ago" = "1 dag siden";
@@ -322,13 +305,13 @@
 "story_maybe_later" = "Kanskje senere";
 "story_share_good_news" = "Del de gode nyhetene";
 "story_social_caption %@" = "%@ er gjenforent med familien sin! Takk til SENRA-fellesskapet for å ha hjulpet %@ hjem. senra.pet";
-"story_generating_card" = "Lager delingskort...";
+"story_generating_card" = "Lager delingskort…";
 "story_your_story" = "Din historie";
 "story_city_optional" = "By/område (valgfritt)";
 "story_city_placeholder" = "f.eks. Oslo eller Bergen";
 "story_share_publicly" = "Del offentlig";
 "story_share_publicly_desc" = "La andre i nærheten se historien din";
-"story_posting" = "Publiserer...";
+"story_posting" = "Publiserer…";
 "story_share_story" = "Del historien";
 
 // MARK: - Profil
@@ -348,7 +331,7 @@
 "profile_cannot_delete" = "Kan ikke slette konto";
 "profile_cannot_delete_message" = "Merk alle savnede dyr som funnet før du sletter kontoen.";
 "profile_danger_zone" = "Faresone";
-"profile_deleting" = "Sletter...";
+"profile_deleting" = "Sletter…";
 "log_out" = "Logg ut";
 
 // MARK: - Personopplysninger
@@ -365,7 +348,7 @@
 
 // MARK: - Adresse
 "address_details" = "Adressedetaljer";
-"address_details_footer" = "Adressen din brukes til å sende kjæledyrmerker og finne varsler i nærheten.";
+"address_details_footer" = "Adressen din brukes til å sende QR-brikker og finne varsler i nærheten.";
 "address_street" = "Gateadresse";
 "address_street_placeholder" = "Skriv inn gateadresse";
 "address_line2" = "Leilighet, suite osv. (valgfritt)";
@@ -448,7 +431,7 @@
 "notif_pref_save" = "Lagre endringer";
 "notif_pref_title" = "Varslingsinnstillinger";
 "notif_pref_success" = "Varslingsinnstillinger lagret";
-"notif_pref_loading" = "Laster innstillinger...";
+"notif_pref_loading" = "Laster innstillinger…";
 
 // MARK: - Hjelp og støtte
 "help_quick_actions" = "Hurtighandlinger";
@@ -468,7 +451,7 @@
 "help_subject" = "Emne";
 "help_subject_placeholder" = "Kort beskrivelse av problemet ditt";
 "help_message" = "Melding";
-"help_sending" = "Sender...";
+"help_sending" = "Sender…";
 "help_submit_request" = "Send forespørsel";
 "help_contact_title" = "Kontakt støtte";
 "help_request_submitted" = "Støtteforespørsel sendt! Vi svarer innen 24 timer.";
@@ -483,17 +466,17 @@
 "help_faq_q1" = "Hvordan registrerer jeg kjæledyret mitt?";
 "help_faq_a1" = "Du kan registrere kjæledyret ditt i menyen 'Mine Kjæledyr' ved å trykke på 'Legg til Nytt Kjæledyr'. Fyll ut nødvendig informasjon og last opp ett eller flere bilder.";
 "help_faq_q2" = "Hvilken informasjon bør jeg oppgi i profilen til kjæledyret mitt?";
-"help_faq_a2" = "Du oppga allerede navnet på kjæledyret ditt da du bestilte merket, og det vil vises i profilen til kjæledyret ditt når merket er aktivert. Skriv inn art og rase. For å forhindre misbruk kan disse opplysningene bare legges inn én gang. Hvis du gjør en feil, kontakt oss så hjelper vi deg. Her kan du også legge til vekt, alder, farge og eventuelle særtrekk eller typisk atferd. Du kan også laste opp bilder. Du bestemmer hvilken informasjon som er synlig om kjæledyret ditt hvis det blir borte.";
-"help_faq_q3" = "Hvordan fungerer QR-kodemerket?";
-"help_faq_a3" = "Hvert kjæledyr får et unikt QR-kodemerke. Denne koden er knyttet til profilen til kjæledyret ditt. Når noen skanner QR-koden med telefonen, kan de umiddelbart se profilen og kontaktopplysningene du har merket som offentlige.";
+"help_faq_a2" = "Du oppga allerede navnet på kjæledyret ditt da du bestilte QR-brikken, og det vil vises i profilen til kjæledyret ditt når QR-brikken er aktivert. Skriv inn art og rase. For å forhindre misbruk kan disse opplysningene bare legges inn én gang. Hvis du gjør en feil, kontakt oss så hjelper vi deg. Her kan du også legge til vekt, alder, farge og eventuelle særtrekk eller typisk atferd. Du kan også laste opp bilder. Du bestemmer hvilken informasjon som er synlig om kjæledyret ditt hvis det blir borte.";
+"help_faq_q3" = "Hvordan fungerer QR-brikken?";
+"help_faq_a3" = "Hvert kjæledyr får en unik QR-brikke. Koden er knyttet til profilen til kjæledyret ditt. Når noen skanner QR-koden med telefonen, kan de umiddelbart se profilen og kontaktopplysningene du har merket som offentlige.";
 "help_faq_q4" = "Kan jeg oppdatere opplysningene om kjæledyret mitt senere?";
 "help_faq_a4" = "Ja! Du kan oppdatere opplysningene når som helst i seksjonen 'Mine Kjæledyr' ved å velge kjæledyret og trykke 'Rediger Profil'. Du kan oppdatere alle felt unntatt navn, art og rase, inkludert bilder. Endringer lagres umiddelbart.";
 "help_faq_q5" = "Hvordan bestiller jeg et erstatningsmerke?";
-"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
-"help_faq_q6" = "Hvordan aktiverer jeg merket etter at det har kommet?";
-"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
-"help_faq_q7" = "Kan jeg gi et SENRA-merke i gave?";
-"help_faq_a7" = "Ja! SENRA-merker er flotte gaver til kjæledyreiere. Bestill merket fra din egen konto — når mottakeren får det, kan de skanne QR-koden, opprette sin egen konto og aktivere merket for sitt kjæledyr.";
+"help_faq_a5" = "Gå til 'Hjem / Min Konto' og trykk 'Bestill erstatnings-QR-brikke'. Velg hvilket kjæledyr som trenger en ny QR-brikke. Din rett til erstatning avhenger av SENRA-abonnementet ditt; besøk senra.pet for detaljer.";
+"help_faq_q6" = "Hvordan aktiverer jeg QR-brikken etter at den har kommet?";
+"help_faq_a6" = "Last ned SENRA-mobilappen fra Google Play Store eller App Store! Åpne den og gå til menyen 'Aktiver', og rett telefonkameraet mot QR-koden på QR-brikken! Skanning av QR-koden kobler QR-brikken til kontoen din. Deretter må du velge et eksisterende kjæledyr eller opprette en ny profil.";
+"help_faq_q7" = "Kan jeg gi en SENRA QR-brikke i gave?";
+"help_faq_a7" = "Ja! SENRA QR-brikker er flotte gaver til kjæledyreiere. Bestill QR-brikken fra din egen konto — når mottakeren får den, kan mottakeren skanne QR-koden, opprette sin egen konto og aktivere QR-brikken for sitt kjæledyr.";
 "help_faq_q8" = "Hva bør jeg gjøre hvis kjæledyret mitt forsvinner?";
 "help_faq_a8" = "Gå til 'Mine Kjæledyr', trykk menyen på kortet til kjæledyret og velg 'Merk som Savnet'. Dette oppretter et 'savnet kjæledyr-varsel' som sendes til alle SENRA-medlemmer innen 10 km. Veterinærer og krisesentre varsles også. Du får umiddelbar varsling for hvert observasjon.";
 "help_faq_q9" = "Hvordan fungerer varsler om savnede kjæledyr?";
@@ -505,35 +488,35 @@
 "help_faq_q12" = "Hvilke land sender dere til?";
 "help_faq_a12" = "Vi sender for tiden til Ungarn, Slovakia, Tsjekkia, Østerrike, Romania, Kroatia, Spania, Italia, Frankrike, Tyskland, Norge og Portugal. Innenlands frakt i Ungarn: {{huPostapoint}} (PostaPont) eller {{huHome}} (hjemmelevering). Internasjonal frakt: {{intlPrice}} per bestilling.";
 "help_faq_q13" = "Kan jeg ha flere kjæledyr på én konto?";
-"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
+"help_faq_a13" = "Ja. Du kan registrere flere kjæledyr på én konto. Besøk senra.pet for kontodetaljer.";
 "help_faq_q14" = "Hvordan melder jeg et funnet kjæledyr?";
-"help_faq_a14" = "Hvis kjæledyret har et SENRA-merke, skann bare QR-koden med telefonkameraet — ingen app nødvendig. Du kan se profilen og dele posisjonen din med eieren.";
+"help_faq_a14" = "Hvis kjæledyret har en SENRA QR-brikke, skann bare QR-koden med telefonkameraet — ingen app nødvendig. Du kan se profilen og dele posisjonen din med eieren.";
 "help_faq_q15" = "Er mine personlige data trygge?";
-"help_faq_a15" = "Ja. Du bestemmer nøyaktig hvilke data som er synlige når noen skanner merket. I 'Innstillinger' > 'Personverninnstillinger' kan du velge om telefonnummer, e-post eller adresse vises. Innloggingen din er beskyttet med en engangskode hver gang. Du kan slette kontoen din når som helst.";
-"help_faq_q16" = "Vi mistet merket eller det ble skadet — hva gjør jeg?";
-"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
+"help_faq_a15" = "Ja. Du bestemmer nøyaktig hvilke data som er synlige når noen skanner QR-brikken. I 'Innstillinger' > 'Personverninnstillinger' kan du velge om telefonnummer, e-post eller adresse vises. Innloggingen din er beskyttet med en engangskode hver gang. Du kan slette kontoen din når som helst.";
+"help_faq_q16" = "Vi mistet QR-brikken eller den ble skadet — hva gjør jeg?";
+"help_faq_a16" = "Ingen fare — kjæledyrets digitale profil er trygg og lagres ikke på QR-brikken. Gå til Konto-siden og trykk 'Bestill erstatning'. Vi kobler en ny QR-brikke med en fersk QR-kode til din eksisterende kjæledyrprofil. Din rett til erstatning avhenger av SENRA-abonnementet ditt; besøk senra.pet for detaljer. Den gamle QR-brikken deaktiveres umiddelbart når erstatningen bestilles.";
 "help_faq_q17" = "Merket mitt skannes ikke — hva gjør jeg?";
-"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
-"help_faq_q18" = "Jeg fant et kjæledyr uten SENRA-merke — hva kan jeg gjøre?";
-"help_faq_a18" = "Sjekk kartet over Savnede Kjæledyr på SENRA-nettstedet (senra.pet). Du kan også se varsler i appen. Ta dyret til nærmeste veterinær for mikrochip-skanning. Hvis det har SENRA-merke, skann QR-koden — eierens kontaktinfo vises. Varsle alltid lokale myndigheter og nærliggende krisesentre.";
+"help_faq_a17" = "Prøv følgende: rengjør QR-brikken med en fuktig klut, sørg for god belysning, hold telefonkameraet stabilt omtrent 10–15 cm fra QR-brikken, og sjekk at kameraappen eller QR-leseren virker. Hvis QR-koden er ripete eller slitt, bestill en erstatning fra siden 'Hjem / Min Konto'.";
+"help_faq_q18" = "Jeg fant et kjæledyr uten SENRA QR-brikke — hva kan jeg gjøre?";
+"help_faq_a18" = "Sjekk kartet over Savnede Kjæledyr på SENRA-nettstedet (senra.pet). Du kan også se varsler i appen. Ta dyret til nærmeste veterinær for mikrochip-skanning. Hvis det har en SENRA QR-brikke, skann QR-koden — eierens kontaktinfo vises. Varsle alltid lokale myndigheter og nærliggende krisesentre.";
 "help_faq_q19" = "Kan jeg endre e-postadressen min?";
 "help_faq_a19" = "Din primære e-postadresse fungerer som kontoidentifikator og kan ikke endres direkte. Du kan legge til en sekundær e-post i 'Innstillinger' > 'Kontaktopplysninger'. Hvis du absolutt må endre primær e-post, kontakt oss på hello@senra.pet.";
-"help_faq_q20" = "Hva er forskjellen mellom en mikrochip og et SENRA QR-merke?";
-"help_faq_a20" = "En mikrochip er et lite implantat under kjæledyrets hud som lagrer en unik 15-sifret identifikator — men krever en spesialleser. SENRA QR-merket kan enkelt skannes med et hvilket som helst smarttelefonkamera, og viser umiddelbart fullstendig profil, bilde og godkjente kontaktopplysninger. Finneren kan også dele GPS-koordinatene.";
+"help_faq_q20" = "Hva er forskjellen mellom en mikrochip og en SENRA QR-brikke?";
+"help_faq_a20" = "En mikrochip er et lite implantat under kjæledyrets hud som lagrer en unik 15-sifret identifikator — men krever en spesialleser. SENRA QR-brikken kan enkelt skannes med et hvilket som helst smarttelefonkamera, og viser umiddelbart fullstendig profil, bilde og godkjente kontaktopplysninger. Finneren kan også dele GPS-koordinatene.";
 "help_faq_q21" = "Hva skjer med dataene mine hvis jeg avslutter abonnementet?";
-"help_faq_a21" = "Hvis du avslutter, beholder du tilgang til betalte funksjoner til slutten av gjeldende faktureringsperiode. Deretter byttes kontoen automatisk til gratis Starter-plan. Profiler, bilder og QR-merker forblir aktive. Dataene slettes ikke. For permanent sletting, bruk Slett Konto i Innstillinger.";
+"help_faq_a21" = "Hvis du avslutter, beholder du tilgang til betalte funksjoner til slutten av gjeldende faktureringsperiode. Deretter byttes kontoen automatisk til gratis Starter-plan. Profiler, bilder og QR-brikker forblir aktive. Dataene slettes ikke. For permanent sletting, bruk Slett Konto i Innstillinger.";
 "help_faq_q22" = "Hvordan registrerer jeg klinikken eller krisesenteret mitt hos SENRA?";
 "help_faq_a22" = "Veterinærklinikker og krisesentre kan registrere seg på senra.pet/register-vet-shelter. Fyll ut opplysningene, og vi sender en bekreftelses-e-post. Etter bekreftelse sender vi automatisk varsler når kjæledyr blir borte i området. Uten kostnader og uten innlogging.";
 "help_faq_q23" = "Hvordan deler jeg en suksesshistorie hvis kjæledyret mitt ble funnet?";
 "help_faq_a23" = "Når du merker kjæledyret som 'Funnet', spør vi om du vil dele de gode nyhetene. Du kan publisere en kort historie. Offentlige historier vises på kartet 'Funne Kjæledyr'.";
 "help_faq_q24" = "Hvilke nettlesere og enheter støttes?";
 "help_faq_a24" = "SENRA fungerer på alle nettlesere, inkludert Chrome, Safari, Firefox og Edge, på mobile og stasjonære enheter. QR-skanning fungerer med et hvilket som helst smarttelefonkamera — finneren trenger ikke SENRA-appen eller en konto.";
-"help_faq_q25" = "Kan jeg bestille flere merker til kjæledyrene mine samtidig?";
-"help_faq_a25" = "Ja, du kan bestille merker til alle kjæledyrene dine samtidig. Etter levering, skann hvert merke for aktivering og tilordning til riktig profil.";
+"help_faq_q25" = "Kan jeg bestille flere QR-brikker til kjæledyrene mine samtidig?";
+"help_faq_a25" = "Ja, du kan bestille QR-brikker til alle kjæledyrene dine samtidig. Etter levering, skann hver QR-brikke for aktivering og tilordning til riktig profil.";
 "help_faq_q26" = "Hvordan når varsler om savnede kjæledyr veterinærer og krisesentre?";
 "help_faq_a26" = "Når du merker kjæledyret som 'Savnet', sender SENRA automatisk e-postvarsler til alle registrerte veterinærer og krisesentre i ditt område. Jo flere som er registrert, jo bedre fungerer nettverket.";
-"help_faq_q27" = "Kan jeg overføre et merke til et annet kjæledyr?";
-"help_faq_a27" = "Nei. Hvert QR-merke er permanent knyttet til én profil. Hvis et kjæledyr dør eller du ikke lenger trenger merket, blir det bare inaktivt. Bestill et nytt merke for det nye kjæledyret på SENRA-nettstedet.";
+"help_faq_q27" = "Kan jeg overføre en QR-brikke til et annet kjæledyr?";
+"help_faq_a27" = "Nei. Hver QR-brikke er permanent knyttet til én profil. Hvis et kjæledyr dør eller du ikke lenger trenger QR-brikken, blir den bare inaktiv. Bestill en ny QR-brikke for det nye kjæledyret på SENRA-nettstedet.";
 "help_faq_q28" = "Hvordan kan jeg registrere veterinærklinikken til kjæledyret mitt eller krisesenteret der jeg adopterte kjæledyret mitt i SENRA-nettverket?";
 "help_faq_a28" = "Veterinærklinikker og krisesentre kan registrere seg på senra.pet/register-vet-shelter. Fyll ut opplysningene, og vi sender en bekreftelses-e-post. Etter bekreftelse sender vi automatisk varsler — og hjelper savnede kjæledyr å komme hjem raskere. Uten kostnader og uten innlogging.";
 "help_faq_title" = "FAQ";
@@ -550,14 +533,14 @@
 // FAQ-elementer
 
 // Veiledningselementer
-"help_guide_qr_tags_title" = "QR-kode kjæledyrmerker";
-"help_guide_qr_tags_desc" = "Hvert SENRA-kjæledyrmerke har en unik QR-kode som lenker til dyrets digitale profil. Alle som finner dyret ditt kan skanne koden med telefonkameraet – ingen app-nedlasting nødvendig. Skanneren ser umiddelbart dyrets bilde, navn, medisinsk informasjon og kontaktopplysningene dine. De kan også dele GPS-posisjonen sin med deg slik at du vet nøyaktig hvor dyret ditt er. Merkene fungerer med alle moderne smarttelefoner.";
-"help_guide_materials_title" = "Merkets materiale og holdbarhet";
-"help_guide_materials_desc" = "SENRA-kjæledyrmerker er laget av holdbart, lett metall med et epoksybelegg for ekstra beskyttelse. De er vanntette og UV-resistente, egnet for alle værforhold. QR-koden er trykt med blekkresistent blekk for å forbli skannbar over tid. Merkene festes trygt til dyrets halsbånd. Hvis et kjæledyrmerke blir skadet eller QR-koden ikke lenger lar seg skanne, kan du bestille erstatning fra kontosiden – gratis for Standard og Maximum.";
+"help_guide_qr_tags_title" = "QR-brikker for kjæledyr";
+"help_guide_qr_tags_desc" = "Hver SENRA QR-brikke har en unik QR-kode som lenker til dyrets digitale profil. Alle som finner dyret ditt kan skanne koden med telefonkameraet – ingen app-nedlasting nødvendig. Skanneren ser umiddelbart dyrets bilde, navn, medisinsk informasjon og kontaktopplysningene dine. De kan også dele GPS-posisjonen sin med deg slik at du vet nøyaktig hvor dyret ditt er. QR-brikkene fungerer med alle moderne smarttelefoner.";
+"help_guide_materials_title" = "QR-brikkens materiale og holdbarhet";
+"help_guide_materials_desc" = "SENRA QR-brikker er laget av holdbart, lett metall med et epoksybelegg for ekstra beskyttelse. De er vanntette og UV-resistente, egnet for alle værforhold. QR-koden er trykt med blekkresistent blekk for å forbli skannbar over tid. QR-brikkene festes trygt til dyrets halsbånd. Hvis en QR-brikke blir skadet eller QR-koden ikke lenger lar seg skanne, kan du bestille erstatning fra kontosiden – gratis for Standard og Maximum.";
 "help_guide_emergency_title" = "Nødkontakt og varsler";
-"help_guide_emergency_desc" = "Når noen skanner dyrets kjæledyrmerke, mottar du et øyeblikkelig varsel på e-post med finders posisjon. Standard og Maximum mottar også SMS-varsler for raskere respons. Hvis du kjæledyrmerker dyret ditt som savnet, sendes et fellesskapsvarsel til alle SENRA-brukere innen 10 km, og registrerte veterinærer og dyrevernorganisasjoner i ditt område varsles også. Alle i fellesskapet kan rapportere observasjoner med posisjonen sin, og skaper et spor for å hjelpe deg å finne dyret.";
+"help_guide_emergency_desc" = "Når noen skanner dyrets QR-brikke, mottar du et øyeblikkelig varsel på e-post med finnerens posisjon. Standard og Maximum mottar også SMS-varsler for raskere respons. Hvis du merker dyret ditt som savnet, sendes et fellesskapsvarsel til alle SENRA-brukere innen 10 km, og registrerte veterinærer og dyrevernorganisasjoner i ditt område varsles også. Alle i fellesskapet kan rapportere observasjoner med posisjonen sin, og skaper et spor for å hjelpe deg å finne dyret.";
 "help_guide_profile_title" = "Administrasjon av dyreprofil";
-"help_guide_profile_desc" = "Dyrets digitale profil er hjertet i SENRA. Legg til viktige detaljer som navn, art, rase, alder og et tydelig bilde. Du kan også inkludere medisinsk informasjon (allergier, medisiner, tilstander), mikrochipnummer og unike kjennetegn som hjelper med å identifisere dyret ditt. Last opp flere bilder til et galleri. All informasjon kan oppdateres når som helst fra seksjonen 'Dyrene mine'. Du kontrollerer hvilke av personopplysningene dine (telefon, e-post, adresse) som vises for folk som skanner kjæledyrmerket.";
+"help_guide_profile_desc" = "Dyrets digitale profil er hjertet i SENRA. Legg til viktige detaljer som navn, art, rase, alder og et tydelig bilde. Du kan også inkludere medisinsk informasjon (allergier, medisiner, tilstander), mikrochipnummer og unike kjennetegn som hjelper med å identifisere dyret ditt. Last opp flere bilder til et galleri. All informasjon kan oppdateres når som helst fra seksjonen 'Dyrene mine'. Du kontrollerer hvilke av personopplysningene dine (telefon, e-post, adresse) som vises for folk som skanner QR-brikken.";
 "help_guide_missing_alerts_title" = "Savnet-varsler og observasjoner";
 "help_guide_missing_alerts_desc" = "Hvis dyret ditt forsvinner, merk det som savnet fra 'Dyrene mine' for å opprette et øyeblikkelig fellesskapsvarsel. Dyrets bilde og detaljer vises på kartet over savnede dyr som er synlig for alle SENRA-brukere i ditt område. Fellesskapsmedlemmer kan rapportere observasjoner med GPS-posisjon, som du mottar som varsler. Registrerte veterinærer og dyrevernorganisasjoner varsles også. Når dyret er funnet, merk det som funnet og del gjerne gjenforeningshistorien din for å inspirere fellesskapet.";
 "help_guide_community_title" = "Fellesskap og gjenforente dyr";
@@ -567,7 +550,7 @@
 "privacy_contact_visibility" = "Kontaktsynlighet";
 "privacy_contact_footer" = "Kontroller hvilke kontaktdetaljer som er synlige på dyrets offentlige profil. Disse innstillingene gjelder for både primære og sekundære kontaktopplysninger.";
 "privacy_show_name" = "Vis navnet ditt";
-"privacy_show_name_subtitle" = "Navnet ditt vil være synlig på kjæledyrets offentlige profil når noen skanner merket";
+"privacy_show_name_subtitle" = "Navnet ditt vil være synlig på kjæledyrets offentlige profil når noen skanner QR-brikken";
 "privacy_show_phone" = "Vis telefonnumre";
 "privacy_show_phone_subtitle" = "Det primære og sekundære telefonnummeret ditt vil vises på dyrets offentlige profil";
 "privacy_show_email" = "Vis e-postadresser";
@@ -581,7 +564,7 @@
 "privacy_data_privacy" = "Personvern";
 "privacy_privacy_policy" = "Personvernerklæring";
 "privacy_title" = "Personvernmodus";
-"privacy_mode_footer" = "Personverninnstillinger hjelper deg med å kontrollere hvilken informasjon som deles når noen skanner dyrets QR-kjæledyrmerke.";
+"privacy_mode_footer" = "Personverninnstillinger hjelper deg med å kontrollere hvilken informasjon som deles når noen skanner dyrets QR-brikke.";
 "privacy_settings_updated" = "Personverninnstillinger oppdatert";
 "privacy_settings_failed" = "Kunne ikke oppdatere personverninnstillinger";
 
@@ -596,7 +579,7 @@
 // MARK: - Bestillinger
 "orders_title" = "Bestillinger";
 "order_number" = "Bestilling #%@";
-"add_pet_first_replacement" = "Legg til et dyr først for å bestille erstatningsmerke.";
+"add_pet_first_replacement" = "Legg til et dyr først for å bestille erstatnings-QR-brikke.";
 "orders_no_orders" = "Ingen bestillinger";
 "orders_no_orders_message" = "Du har ikke lagt inn noen bestillinger ennå";
 "orders_information" = "Bestillingsinformasjon";
@@ -606,16 +589,16 @@
 "orders_order_date" = "Bestillingsdato";
 "orders_items" = "Varer";
 "orders_quantity %lld" = "Antall: %lld";
-"orders_tag_pending" = "QR-kjæledyrmerke venter";
-"orders_tag_assigned" = "QR-merke tildelt";
+"orders_tag_pending" = "QR-brikke venter";
+"orders_tag_assigned" = "QR-brikke tildelt";
 "orders_detail_title" = "Bestillingsdetaljer";
 
-// MARK: - Bestill flere kjæledyrmerker
-"order_more_title" = "Bestill flere kjæledyrmerker";
+// MARK: - Bestill flere QR-brikker
+"order_more_title" = "Bestill flere QR-brikker";
 "order_more_complete" = "Bestilling fullført!";
-"order_more_confirmation" = "Vi sender merkene dine når betalingen er bekreftet.";
+"order_more_confirmation" = "Vi sender QR-brikkene dine når betalingen er bekreftet.";
 "order_more_pet_names" = "Dyrenavn";
-"order_more_pet_names_footer" = "Skriv inn navnene på dyrene du vil ha kjæledyrmerker til. Vi graverer hvert kjæledyrmerke med dyrets navn.";
+"order_more_pet_names_footer" = "Skriv inn navnene på dyrene du vil ha QR-brikker til. Vi graverer hver QR-brikke med dyrets navn.";
 "order_more_add_another" = "Legg til et dyr til";
 "order_more_your_info" = "Din informasjon";
 "order_more_shipping" = "Leveringsadresse";
@@ -625,31 +608,31 @@
 "order_more_postal" = "Postnummer";
 "order_more_country" = "Land";
 "order_more_summary" = "Bestillingssammendrag";
-"order_more_tags_count %lld" = "Kjæledyrmerker (%lld)";
+"order_more_tags_count %lld" = "QR-brikker (%lld)";
 "order_more_shipping_cost" = "Frakt";
 "order_more_total" = "Totalt";
 "order_more_proceed_to_payment" = "Gå til betaling";
-"order_more_redirecting" = "Omdirigerer...";
+"order_more_redirecting" = "Omdirigerer…";
 
 // MARK: - Bestill erstatningsmerke
-"order_replace_title" = "Bestill erstatningsmerke";
-"order_replace_subtitle" = "Vi sender deg et nytt merke for dyret ditt";
+"order_replace_title" = "Bestill erstatning";
+"order_replace_subtitle" = "Vi sender deg en ny QR-brikke for dyret ditt";
 "order_replace_complete" = "Bestilling fullført!";
-"order_replace_confirmation" = "Erstatningsmerket ditt sendes til adressen du oppga.";
+"order_replace_confirmation" = "Erstatnings-QR-brikken sendes til adressen du oppga.";
 "order_replace_pet_info" = "Dyrinformasjon";
 "order_replace_important" = "Viktig informasjon";
-"order_replace_eligible_free" = "Erstatningsmerket er gratis";
+"order_replace_eligible_free" = "Erstatnings-QR-brikken er gratis";
 "order_replace_additional_fee %@" = "Ytterligere erstatning: %@";
 "order_replace_shipping" = "Leveringsadresse";
-"order_replace_shipping_footer" = "Vi sender erstatningsmerket til denne adressen.";
+"order_replace_shipping_footer" = "Vi sender erstatnings-QR-brikken til denne adressen.";
 "order_replace_street" = "Gateadresse";
 "order_replace_line2" = "Leilighet, suite osv. (valgfritt)";
 "order_replace_city" = "By";
 "order_replace_postal" = "Postnummer";
 "order_replace_country" = "Land";
 "order_replace_phone" = "Telefonnummer (valgfritt)";
-"order_replace_creating" = "Oppretter bestilling...";
-"order_replace_free_button" = "Bekreft og bestill gratis erstatningsmerke";
+"order_replace_creating" = "Oppretter bestilling…";
+"order_replace_free_button" = "Bekreft og bestill gratis erstatnings-QR-brikke";
 "order_replace_paid_button %@" = "Bekreft og betal %@";
 
 // MARK: - Leveringsmetode og PostaPont
@@ -684,8 +667,7 @@
 
 // MARK: - Frakoblet modus
 "offline_mode" = "Frakoblet modus";
-"syncing" = "Synkroniserer...";
-"sync_completed" = "Synkronisering fullført";
+"syncing" = "Synkroniserer…";
 "sync_failed" = "Synkronisering mislyktes: %@";
 "sync_no_connection" = "Kan ikke synkronisere: ingen internettforbindelse";
 "offline_changes_sync" = "Endringer synkroniseres når du er online";
@@ -725,40 +707,40 @@
 
 // MARK: - Ytterligere profilnøkler
 "not_set" = "Ikke angitt";
-"saving" = "Lagrer...";
+"saving" = "Lagrer…";
 "edit_information" = "Rediger informasjon";
 "registered_address" = "Registrert adresse";
 "address_shipping_footer" = "Skriv inn den fullstendige adressen din for frakt og fakturering";
-"address_delivery_prompt" = "Legg til adressen din for å aktivere frakt og levering av QR-kjæledyrmerker";
-"contacts_info_full" = "Disse kontaktopplysningene vises når noen skanner dyrets QR-kjæledyrmerke. Du kan legge til opptil to e-postadresser og telefonnumre.";
+"address_delivery_prompt" = "Legg til adressen din for å aktivere frakt og levering av QR-brikker";
+"contacts_info_full" = "Disse kontaktopplysningene vises når noen skanner dyrets QR-brikke. Du kan legge til opptil to e-postadresser og telefonnumre.";
 "contacts_primary_email_edit_footer" = "Din primære e-postadresse for kontoen";
 "contacts_secondary_email_edit_footer" = "Reserve-e-post for varsler om gjenforening med dyret";
 "contacts_primary_phone_edit_footer" = "Ditt primære kontaktnummer";
 "contacts_secondary_phone_edit_footer" = "Reserve-telefon for nødssituasjoner";
-"contacts_visible_on_tag" = "Synlig på kjæledyrmerke";
+"contacts_visible_on_tag" = "Synlig på QR-brikke";
 "contacts_no_type_added" = "Ingen %@ lagt til";
 
 // MARK: - Ytterligere nøkler for erstatningsmerke
 "order_replace_upgrade_hint" = "Oppgrader til Standard eller Maximum for gratis erstatninger";
 "order_replace_old_deactivated" = "Den gamle QR-koden deaktiveres når du legger inn denne bestillingen";
-"order_replace_delivery_time" = "Du mottar det nye kjæledyrmerket innen 5–7 virkedager";
-"order_replace_scan_activate" = "Når du mottar det nye kjæledyrmerket, må du skanne det for å aktivere det";
+"order_replace_delivery_time" = "Du mottar den nye QR-brikken innen 5–7 virkedager";
+"order_replace_scan_activate" = "Når du mottar den nye QR-brikken, må du skanne den for å aktivere den";
 
 // MARK: - Ytterligere frakoblet-nøkler
 "offline_last_sync_label" = "Tidspunkt for siste synkronisering";
 
 // MARK: - Abonnementsvalg
 "plan_choose_title" = "Velg abonnementet ditt";
-"plan_tag_activated" = "Kjæledyrmerke aktivert!";
+"plan_tag_activated" = "QR-brikke aktivert!";
 "plan_choose_subtitle" = "Velg et abonnement for å låse opp alle funksjoner";
 "plan_upgrade_title" = "Oppgrader abonnementet ditt";
 "plan_upgrade_subtitle" = "Få flere funksjoner for dyrene dine";
 "plan_loading" = "Laster abonnementer…";
 "plan_load_failed" = "Kunne ikke laste abonnementer";
-"plan_skip_free" = "Hopp over for nå (Gratis abonnement)";
+"plan_skip_free" = "Hopp over";
 "plan_all_include" = "Alle abonnementer inkluderer:";
 "plan_paid_add" = "Betalte abonnementer legger til:";
-"plan_feature_qr_tag" = "QR-merke til dyret ditt";
+"plan_feature_qr_tag" = "QR-brikke til dyret ditt";
 "plan_feature_scan_notif" = "Øyeblikkelige skannevarsler";
 "plan_feature_public_profile" = "Offentlig dyreprofil";
 "plan_feature_secure_storage" = "Sikker datalagring";
@@ -766,7 +748,7 @@
 "plan_feature_lost_alerts_short" = "Savnet-varsler";
 "plan_feature_sms" = "SMS-varsler";
 "plan_feature_photos" = "Opptil 10 bilder per dyr";
-"plan_feature_replacements" = "Gratis merkebytte";
+"plan_feature_replacements" = "Gratis bytte av QR-brikke";
 "plan_popular" = "Populær";
 "plan_current" = "Gjeldende abonnement";
 "plan_select_free" = "Velg gratis abonnement";
@@ -798,9 +780,9 @@
 "alert_mark_found_title %@" = "Merk %@ som funnet?";
 "alert_mark_found_message" = "Dette vil lukke savnet-varselet. Er du sikker?";
 "alert_mark_found_message %@" = "Dette vil lukke savnet-varselet for %@. Er du sikker?";
-"alert_mark_found_failed" = "Kunne ikke kjæledyrmerke som funnet";
-"alert_marked_found_success" = "%@ er kjæledyrmerket som funnet!";
-"alert_mark_found_error" = "Kunne ikke kjæledyrmerke som funnet: %@";
+"alert_mark_found_failed" = "Kunne ikke merke som funnet";
+"alert_marked_found_success" = "%@ er merket som funnet!";
+"alert_mark_found_error" = "Kunne ikke merke som funnet: %@";
 "pet_default" = "dyr";
 "report_found" = "Rapporter som funnet";
 
@@ -812,7 +794,7 @@
 
 // MARK: - Push-varseloppfordring (del 1)
 "push_prompt_title" = "Hold deg tilkoblet";
-"push_prompt_benefit_scan" = "Øyeblikkelige varsler når dyrets kjæledyrmerke skannes";
+"push_prompt_benefit_scan" = "Øyeblikkelige varsler når dyrets QR-brikke skannes";
 "push_prompt_benefit_sighting" = "Observasjonsrapporter fra fellesskapet";
 "push_prompt_benefit_found" = "Vit umiddelbart når dyret ditt er funnet";
 "push_prompt_benefit_missing" = "Savnet-varsler i ditt område";
@@ -822,10 +804,10 @@
 // MARK: - Verving (del 1)
 "referral_loading" = "Laster…";
 "referral_your_code" = "Din vervekode";
-"referral_share_footer" = "Share your referral code with friends.";
+"referral_share_footer" = "Del vervekoden din med venner.";
 "referral_how_it_works" = "Slik fungerer det";
 "referral_step_1" = "Del vervekoden din med en venn";
-"referral_step_2" = "They sign up with your code";
+"referral_step_2" = "De registrerer seg med koden din";
 "referral_step_3" = "Dere får begge 2 måneder gratis!";
 "referral_history" = "Vervehistorikk";
 "referral_no_referrals" = "Ingen vervinger ennå";
@@ -840,7 +822,6 @@
 "billing_manage_subscription" = "Administrer abonnement";
 "billing_subscription" = "Abonnement";
 "billing_portal_footer" = "Administrer abonnementet, betalingsmåten og faktureringsdetaljene gjennom Stripe.";
-"billing_invoices" = "Fakturaer";
 "billing_loading_invoices" = "Laster fakturaer…";
 "billing_no_invoices" = "Ingen fakturaer ennå";
 "billing_invoice" = "Faktura";
@@ -911,15 +892,15 @@
 
 // MARK: - Rask merk savnet (del 1)
 "quick_lost_select_pet" = "Velg et dyr å melde som savnet";
-"quick_lost_all_missing" = "Alle dyrene dine er allerede kjæledyrmerket som savnede.";
+"quick_lost_all_missing" = "Alle dyrene dine er allerede merket som savnet.";
 "quick_lost_title" = "Meld savnet";
 
 // MARK: - Rask merk funnet (del 1)
-"quick_found_select_pet" = "Velg et dyr å kjæledyrmerke som funnet";
+"quick_found_select_pet" = "Velg et dyr å merke som funnet";
 "quick_found_currently_missing" = "Savnet for øyeblikket";
-"quick_found_no_missing" = "Ingen savnede dyr å kjæledyrmerke som funnet.";
+"quick_found_no_missing" = "Ingen savnede dyr å merke som funnet.";
 "quick_found_title" = "Merk dyr som funnet";
-"quick_found_mark_failed" = "Kunne ikke kjæledyrmerke %@ som funnet: %@";
+"quick_found_mark_failed" = "Kunne ikke merke %@ som funnet: %@";
 
 // MARK: - Merk som savnet (del 1)
 "location_current" = "Gjeldende posisjon";
@@ -942,8 +923,8 @@
 
 // MARK: - Bildegalleri-tillegg (del 1)
 "photo_count %lld" = "%lld bilder";
-"photo_uploading_count %lld %lld" = "Laster opp bilde %lld av %lld...";
-"photo_uploading" = "Laster opp bilde...";
+"photo_uploading_count %lld %lld" = "Laster opp bilde %lld av %lld…";
+"photo_uploading" = "Laster opp bilde…";
 "photo_primary_updated" = "Primærbilde oppdatert";
 "photo_primary_failed" = "Kunne ikke angi primærbilde";
 "photo_upload_success" = "%d bilde(r) lastet opp";
@@ -953,8 +934,8 @@
 
 // MARK: - Manglende lokaliseringsopprydding
 "login_required" = "Innlogging kreves";
-"login_required_activate_tag" = "Logg inn for å aktivere dette kjæledyrmerket for dyret ditt";
-"login_activate_instructions" = "Etter innlogging, skann kjæledyrmerket på nytt eller gå til Dyrene mine for å aktivere det";
+"login_required_activate_tag" = "Logg inn for å aktivere denne QR-brikken for dyret ditt";
+"login_activate_instructions" = "Etter innlogging, skann QR-brikken på nytt eller gå til Dyrene mine for å aktivere den";
 "free_price" = "GRATIS";
 "referral_expires %@" = "Utløper: %@";
 
@@ -972,7 +953,7 @@
 
 // MARK: - SSE-abonnementshendelser
 "sse_subscription_title" = "Abonnement oppdatert";
-"sse_subscription_message" = "Your Senra subscription has been updated.";
+"sse_subscription_message" = "SENRA-abonnementet ditt er oppdatert.";
 "sse_referral_title" = "Vervekode brukt!";
 "sse_referral_message" = "%@ brukte vervekoden din!";
 
@@ -982,16 +963,16 @@
 "reward_badge" = "Belønning: %@";
 
 // MARK: - Ytterligere lokaliseringsnøkler
-"cannot_delete_missing_message_short" = "Du må kjæledyrmerke dette dyret som funnet før du sletter det.";
+"cannot_delete_missing_message_short" = "Du må merke dette dyret som funnet før du sletter det.";
 "plan_feature_pets_count" = "Dyr: %@";
 "plan_feature_photos_count" = "%lld bilder per dyr";
 "referral_status_pending" = "Venter";
 "referral_status_signed_up" = "Registrert";
-"referral_status_subscribed" = "Active";
+"referral_status_subscribed" = "Aktiv";
 "referral_status_rewarded" = "Belønnet";
-"referral_share_message" = "Bruk vervekoden min %@ og få 2 måneder gratis på Pet Safety! https://senra.pet/choose-plan?referral=%@";
+"referral_share_message" = "Bruk vervekoden min %@ og få 2 måneder gratis på SENRA! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Kom i gang";
-"help_faq_group_tags_scanning" = "Kjæledyrmerker og skanning";
+"help_faq_group_tags_scanning" = "QR-brikker og skanning";
 "help_faq_group_missing_pets" = "Savnede dyr og varsler";
 "help_faq_group_billing_plans" = "Fakturering og abonnementer";
 "help_faq_group_privacy_account" = "Personvern og konto";
@@ -1001,8 +982,8 @@
 "order_more_shipping_calculated" = "Beregnes ved betaling";
 "order_more_total_shipping_only" = "Kun frakt";
 "checkout_subscription_success" = "Abonnementet ditt er nå aktivt!";
-"checkout_tag_order_success" = "Betaling vellykket! Merkebestillingen din behandles.";
-"checkout_replacement_success" = "Betaling vellykket! Erstatningsmerket er på vei.";
+"checkout_tag_order_success" = "Betaling vellykket! QR-brikkebestillingen din behandles.";
+"checkout_replacement_success" = "Betaling vellykket! Erstatnings-QR-brikken er på vei.";
 "checkout_success" = "Betaling vellykket!";
 "order_status_completed" = "Fullført";
 "order_status_pending" = "Venter";
@@ -1030,7 +1011,7 @@
 
 // MARK: - Dyreregistreringsskjema-tillegg
 "pet_limit_reached" = "Dyreantall nådd";
-"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
+"pet_limit_reached_info" = "Du har nådd maksimalt antall kjæledyr for denne kontoen. Besøk senra.pet for mer informasjon.";
 "upgrade_to_ultimate" = "Oppgrader til Maximum";
 "keep_current_plan" = "Behold gjeldende abonnement";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Abonnementet ditt på %@ tillater %lld dyr. Oppgrader til %@ for %@ for å legge til opptil 10 dyr.";
@@ -1047,15 +1028,15 @@
 "apply_code" = "Bruk";
 "referral_code_applied" = "Vervekode brukt! Du får 2 måneder gratis.";
 "referral_code_invalid" = "Ugyldig eller utløpt vervekode";
-"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
+"referral_use_friend_footer" = "Skriv inn en venns vervekode for å få en belønning.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Bestill som gave";
 "order_gift_description" = "Dyrenavn er valgfritt for gavebestillinger. Mottakeren kan legge dem til ved aktivering.";
-"order_gift_quantity" = "Antall tagger";
+"order_gift_quantity" = "Antall QR-brikker";
 "order_gift_recipient_name" = "Mottakerens navn (valgfritt)";
 "order_gift_message" = "Gavemelding (valgfritt)";
-"order_gift_message_placeholder" = "Legg til en personlig melding...";
+"order_gift_message_placeholder" = "Legg til en personlig melding…";
 "order_gift_badge" = "Gavebestilling";
 
 // MARK: - Error Messages
@@ -1071,22 +1052,21 @@
 "delivery_postapoint" = "PostaPont henting";
 
 // MARK: - Pending Registrations
-"pending_registrations_title" = "Ventende kjæledyrmerker";
+"pending_registrations_title" = "Ventende QR-brikker";
 "ready_to_activate" = "Klar til aktivering";
 "still_processing" = "Under behandling";
-"scan_tag_now" = "Skann kjæledyrmerke";
-"create_profile_first" = "Opprett profil";
+"scan_tag_now" = "Skann QR-brikke";
 "create_profile_while_waiting" = "Opprett profil mens du venter";
 "all_caught_up" = "Alt oppdatert!";
-"all_caught_up_description" = "Du har ingen ventende merkeregistreringer.";
-"order_tags" = "Bestill kjæledyrmerker";
+"all_caught_up_description" = "Du har ingen ventende QR-brikkeregistreringer.";
+"order_tags" = "Bestill QR-brikker";
 "status_shipped" = "Sendt";
 "status_delivered" = "Levert";
 "status_processing" = "Under behandling";
 "status_pending" = "Ventende";
-"activation_help_title" = "Slik aktiverer du kjæledyrmerket ditt";
-"activation_help_step1" = "Vent på at kjæledyrmerket ditt ankommer";
-"activation_help_step2" = "Skann QR-koden på kjæledyrmerket";
+"activation_help_title" = "Slik aktiverer du QR-brikken din";
+"activation_help_step1" = "Vent på at QR-brikken din ankommer";
+"activation_help_step2" = "Skann QR-koden på QR-brikken";
 "activation_help_step3" = "Velg kjæledyret å knytte til";
 "activation_help_step4" = "Velg abonnementsplan";
 
@@ -1099,7 +1079,7 @@
 "other_pets" = "Andre kjæledyr";
 "link_to_pet" = "Koble til %@";
 "no_pets_yet" = "Ingen kjæledyr ennå";
-"create_first_pet" = "Opprett en kjæledyrprofil for å aktivere kjæledyrmerket.";
+"create_first_pet" = "Opprett en kjæledyrprofil for å aktivere QR-brikken.";
 "create_new_pet" = "Opprett nytt kjæledyr";
 
 // MARK: - Public Profile Details
@@ -1110,16 +1090,16 @@
 // MARK: - Notifications Inbox
 "notifications_title" = "Varsler";
 "no_notifications" = "Ingen varsler";
-"no_notifications_desc" = "Alt oppdatert! Varsler vil vises her når noen skanner kjæledyrmerket til kjæledyret ditt.";
+"no_notifications_desc" = "Alt oppdatert! Varsler vil vises her når noen skanner kjæledyrets QR-brikke.";
 "mark_all_read" = "Merk alle som lest";
 "load_more" = "Last inn mer";
 "just_now" = "Akkurat nå";
 
 // MARK: - Activation Error Messages
-"activation_error_qr_not_found" = "QR-koden ble ikke gjenkjent. Sørg for at du skanner et offisielt SENRA-kjæledyrmerke.";
-"activation_error_already_activated" = "Dette kjæledyrmerket er allerede knyttet til et annet kjæledyr. Kontakt support.";
-"activation_error_not_linked" = "Dette kjæledyrmerket er ennå ikke tilordnet bestillingen din. Vent på forsendelsesbekreftelse.";
-"activation_error_not_shipped" = "Bestillingen din er ikke sendt ennå. Vent til du mottar kjæledyrmerket.";
+"activation_error_qr_not_found" = "QR-koden ble ikke gjenkjent. Sørg for at du skanner en offisiell SENRA QR-brikke.";
+"activation_error_already_activated" = "Denne QR-brikken er allerede knyttet til et annet kjæledyr. Kontakt support.";
+"activation_error_not_linked" = "Denne QR-brikken er ennå ikke tilordnet bestillingen din. Vent på forsendelsesbekreftelse.";
+"activation_error_not_shipped" = "Bestillingen din er ikke sendt ennå. Vent til du mottar QR-brikken.";
 "activation_error_not_owner" = "Dette er ikke ditt kjæledyr. Velg et av dine egne kjæledyr.";
 
 // MARK: - Breed Names
@@ -1228,7 +1208,7 @@
 "coordinates_display" = "Br.: %@, Lg.: %@";
 "current_location_fallback" = "Nåværende posisjon";
 "mark_lost_success_with_alerts" = "%@ er rapportert som savnet. Varsler sendes til brukere i nærheten.";
-"mark_lost_success_no_location" = "%@ er kjæledyrmerket som savnet. Legg til plassering for å sende felleskapsvarsler.";
+"mark_lost_success_no_location" = "%@ er merket som savnet. Legg til plassering for å sende fellesskapsvarsler.";
 "mark_lost_address_required" = "Oppgi en adresse eller aktiver posisjonstjenester.";
 "reward_amount_label" = "Belønning (valgfritt)";
 "reward_amount_placeholder" = "f.eks. 500 kr";
@@ -1238,12 +1218,12 @@
 "profile_incomplete_warning" = "Fullfør kjæledyrprofilen";
 "profile_incomplete_desc" = "Manglende detaljer gjør det vanskeligere å gjenforene kjæledyret. Fyll inn vekt, farge og medisinsk informasjon.";
 "identity_locked_title" = "Navn, art og rase er låst";
-"identity_locked_desc" = "Disse feltene kan ikke endres etter merkeaktivering.";
+"identity_locked_desc" = "Disse feltene kan ikke endres etter QR-brikkeaktivering.";
 
 // MARK: - Subscription Management
 "cancel_subscription_title" = "Avbryte abonnementet?";
 "cancel_warning_a" = "Du mister umiddelbare e-post-, SMS-varsler og fellesskapsvarsler";
-"cancel_warning_b" = "Gratis erstatning av kjæledyrmerker vil ikke lenger være tilgjengelig";
+"cancel_warning_b" = "Gratis bytte av QR-brikker vil ikke lenger være tilgjengelig";
 "cancel_warning_c" = "Du mister tilgang til veterinær- og dyrehjem-varsler";
 "cancel_warning_d" = "Kontoen din og dyreregistreringene forblir aktive";
 "cancel_access_until" = "Du beholder tilgangen til %@";
@@ -1253,15 +1233,14 @@
 "current_plan" = "Nåværende plan";
 "plan_renews" = "Fornyes %@";
 "plan_cancels_on" = "Avsluttes %@";
-"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
+"delete_premium_warning" = "Sletting av kontoen din vil permanent fjerne profilen. Hvis du også vil avslutte et aktivt SENRA-abonnement, gjør det på senra.pet før du sletter.";
 "cancel_instead" = "Avbryt abonnement i stedet";
-
 
 // MARK: - Shelter Adoption
 
 // MARK: - Trial
-"trial_ends_on" = "Trial ends on %@";
-"trial_upgrade_now" = "Upgrade now to keep your features!";
+"trial_ends_on" = "Prøveperioden utløper %@";
+"trial_upgrade_now" = "Oppgrader nå for å beholde funksjonene dine!";
 
 // MARK: - Referral
 "referral_redeemed_on" = "Innløst: %@";
@@ -1285,7 +1264,7 @@
 "breed_mixed" = "blandingsrase";
 "alert_success" = "Suksess";
 "alert_error" = "Feil";
-"sse_tag_scanned_body" = "Kjæledyrmerket til %1$@ ble skannet ved %2$@!";
+"sse_tag_scanned_body" = "QR-brikken til %1$@ ble skannet ved %2$@!";
 "sse_sighting_body" = "%1$@ har blitt observert%2$@!";
 "sse_sighting_at" = " ved %@";
 "sse_pet_found_body" = "Gode nyheter! %@ er funnet!";
@@ -1300,11 +1279,11 @@
 "appearance_light" = "Lys";
 "appearance_dark" = "Mørk";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
+"mark_lost_starter_notice" = "Fellesskapsvarsler krever et SENRA-abonnement.";
 "mark_lost_upgrade_prompt" = "Med Starter-planen blir kjæledyret ditt markert som savnet, men varsler til brukere, veterinærer og dyreinternat krever et Standard- eller Maximum-abonnement.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "f.eks. 3 år, 6 måneder (valgfritt)";
-"create_pet_profile" = "Opprett dyreprofil";
+"create_pet_profile" = "Opprett profil";
 "failed_load_pets" = "Kunne ikke laste inn dyr";
 "accessibility_flashlight_on" = "Slå på lommelykt";
 "accessibility_flashlight_off" = "Slå av lommelykt";
@@ -1320,34 +1299,34 @@
 "dob_approximate" = "Omtrentlig dato";
 "weight_helper" = "Vekt i kg (f.eks. 4,5)";
 "order_more_pet_name_placeholder" = "Dyrets navn";
-"order_more_subtitle" = "Bestill merker for dyrene dine — gratis merker, betal kun for frakt";
+"order_more_subtitle" = "Bestill QR-brikker for dyrene dine — gratis QR-brikker, betal kun for frakt";
 
 // MARK: - Welcome Screen
 "welcome_to_senra" = "Velkommen til SENRA!";
-"welcome_subtitle" = "Sikkerheten til kjæledyret ditt starter her. Sett opp din første brikke.";
-"welcome_step_1" = "Skann QR-koden på brikken din";
+"welcome_subtitle" = "Sikkerheten til kjæledyret ditt starter her. Sett opp din første QR-brikke.";
+"welcome_step_1" = "Skann QR-koden på QR-brikken din";
 "welcome_step_2" = "Opprett profilen til kjæledyret ditt";
 "welcome_step_3" = "Kjæledyret ditt er beskyttet!";
-"welcome_scan_first_tag" = "Skann din første brikke";
+"welcome_scan_first_tag" = "Skann QR-brikke";
 "welcome_explore_account" = "Utforsk kontoen din";
 
 // MARK: - Tag Activation Flow
-"setup_your_tags" = "Sett opp brikkene dine";
-"setup_your_tags_subtitle" = "Du bestilte brikker for disse kjæledyrene:";
+"setup_your_tags" = "Sett opp QR-brikkene dine";
+"setup_your_tags_subtitle" = "Du bestilte QR-brikker for disse kjæledyrene:";
 "ready_to_setup" = "Klar til oppsett";
 "already_activated" = "Allerede aktivert";
-"setting_up_tag_for %@" = "Setter opp brikke for %@";
-"tag_activated_for %@" = "Brikke aktivert for %@!";
+"setting_up_tag_for %@" = "Setter opp QR-brikke for %@";
+"tag_activated_for %@" = "QR-brikke aktivert for %@!";
 "pet_now_protected" = "Kjæledyret ditt er nå beskyttet med SENRA";
-"more_tags_to_setup" = "Du har fortsatt brikker å sette opp";
-"setup_pet_tag %@" = "Sett opp brikken til %@";
+"more_tags_to_setup" = "Du har fortsatt QR-brikker å sette opp";
+"setup_pet_tag %@" = "Sett opp QR-brikken til %@";
 "whats_next" = "Hva er neste steg?";
 "choose_subscription_plan" = "Velg abonnementsplan";
 "register_your_vet" = "Registrer veterinæren din";
 "update_contact_details" = "Oppdater kontaktinfo og personvern";
 "go_to_home" = "Gå til hjem";
 "thank_you_senra" = "Takk for at du bruker SENRA!";
-"tap_pet_name_hint" = "Trykk på kjæledyrets navn for å sette opp brikken";
+"tap_pet_name_hint" = "Trykk på kjæledyrets navn for å sette opp QR-brikken";
 
 // MARK: - Age Formatting
 "age_1_year" = "1 år";
@@ -1360,7 +1339,7 @@
 "biometric_touch_id" = "Touch ID";
 "biometric_optic_id" = "Optic ID";
 "biometric_generic" = "Biometri";
-"biometric_login_reason" = "Logg inn på Pet Safety";
+"biometric_login_reason" = "Logg inn på SENRA";
 "biometric_use_email" = "Bruk e-post";
 "biometric_not_available" = "Biometrisk autentisering er ikke tilgjengelig";
 "biometric_lockout" = "For mange mislykkede forsøk. Prøv igjen senere.";
@@ -1368,11 +1347,11 @@
 "api_error_invalid_url" = "Ugyldig URL";
 "api_error_invalid_response" = "Ugyldig svar fra serveren";
 "api_error_unauthorized" = "Ikke autorisert. Logg inn på nytt.";
-"api_error_pet_limit" = "Pet registration limit reached for this account.";
+"api_error_pet_limit" = "Grensen for kjæledyrregistreringer er nådd for denne kontoen.";
 "api_error_decoding" = "Kunne ikke behandle serversvaret";
 "api_error_network %@" = "Nettverksfeil: %@";
 "sync_no_internet" = "Kan ikke synkronisere: Ingen internettforbindelse";
-"sync_in_progress" = "Synkroniserer...";
+"sync_in_progress" = "Synkroniserer…";
 "sync_completed" = "Synkronisering fullført";
 "sync_failed %@" = "Synkronisering mislyktes: %@";
 "sync_action_mark_lost" = "Merk kjæledyr som savnet";
@@ -1391,5 +1370,6 @@
 "sync_error_network_unavailable" = "Nettverkstilkobling utilgjengelig";
 
 // MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
-"tags_coming_soon_title" = "De fysiske kjæledyrmerkene kommer snart";
+"tags_coming_soon_title" = "De fysiske QR-brikkene kommer snart";
 "tags_coming_soon_body" = "Vi sender den første batchen veldig snart. Sjekk tilbake om noen dager.";
+"report_found_unavailable" = "Denne funksjonen er ikke tilgjengelig for dette varselet. Kontakt eieren direkte hvis du har funnet kjæledyret.";

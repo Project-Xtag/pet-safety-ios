@@ -1,4 +1,4 @@
-/* Pet Safety - Polish Localizable Strings */
+/* SENRA - Polish Localizable Strings */
 
 // MARK: - Ogólne
 "cancel" = "Anuluj";
@@ -22,7 +22,7 @@
 "move_down" = "Przenieś w dół";
 
 // MARK: - Pasek kart
-"tab_my_pets" = "Moje zwierzęta";
+"tab_my_pets" = "Moje pupile";
 "tab_scan_qr" = "Skanuj QR";
 "tab_alerts" = "Alerty";
 "tab_profile" = "Profil";
@@ -42,7 +42,7 @@
 "resend_code_cooldown" = "Wyślij kod ponownie za %llds";
 "resend_code_prompt" = "Nie otrzymałeś kodu? Wyślij ponownie";
 "dont_have_account" = "Nie masz jeszcze konta?";
-"start_here_order_free_tag" = "Zacznij tutaj i zamów bezpłatną zawieszk";
+"start_here_order_free_tag" = "Zacznij tutaj i zamów bezpłatną adresówkę";
 "create_account" = "Utwórz konto";
 "enter_details_subtitle" = "Podaj swoje dane, aby zacząć.";
 "register" = "Zarejestruj się";
@@ -79,30 +79,30 @@
 "action_report_missing" = "ZGŁOŚ ZAGINIĘCIE";
 "action_order_tags" = "ZAMÓW ZAWIESZKI";
 "action_replace_tag" = "WYMIEŃ ZAWIESZK";
-"empty_pets_title" = "Brak zarejestrowanych zwierząt";
+"empty_pets_title" = "Brak zarejestrowanych pupili";
 "empty_pets_message" = "Dodaj swojego pierwszego pupila, aby zacząć korzystać z SENRA";
 "missing_badge" = "ZAGINIONY";
-"add_pet" = "Dodaj zwierzę";
-"pet_name" = "Imię zwierzęcia";
+"add_pet" = "Dodaj pupila";
+"pet_name" = "Imię pupila";
 
 // MARK: - Szczegóły zwierzęcia
 "species_label" = "Gatunek: %@";
 "medical_information" = "Informacje medyczne";
 "additional_information" = "Dodatkowe informacje";
-"edit_pet" = "Edytuj profil zwierzęcia";
+"edit_pet" = "Edytuj pupila";
 "view_pet_photos" = "Pokaż zdjęcia %@";
 "mark_as_found" = "Oznacz jako znalezione";
 "mark_as_lost" = "Oznacz jako zaginione";
 "age" = "Wiek";
 "view_public_profile" = "Zobacz publiczny profil %@";
 "edit_pet_profile" = "Edytuj profil %@";
-"cannot_delete_missing_pet" = "Nie można usunąć zaginionego zwierzęcia";
+"cannot_delete_missing_pet" = "Nie można usunąć zaginionego pupila";
 "mark_found_confirm_title" = "Oznaczyć %@ jako znalezione?";
 "mark_found_confirm_message" = "Spowoduje to zamknięcie alertu o zaginięciu %@. Czy na pewno?";
 "marked_found_message" = "%@ oznaczone jako znalezione.";
 "mark_found_failed" = "Nie udało się oznaczyć jako znalezione";
 "pet_deleted" = "%@ zostało usunięte";
-"delete_pet_failed" = "Nie udało się usunąć zwierzęcia";
+"delete_pet_failed" = "Nie udało się usunąć pupila";
 
 // MARK: - Formularz zwierzęcia
 "name" = "Imię";
@@ -113,7 +113,7 @@
 "medical_notes" = "Uwagi medyczne";
 "photo" = "Zdjęcie";
 "edit_photo" = "Edytuj zdjęcie";
-"choose_photo_hint" = "Wybierz zdjęcie swojego zwierzęcia";
+"choose_photo_hint" = "Wybierz zdjęcie swojego pupila";
 "basic_information" = "Podstawowe informacje";
 "colour" = "Kolor";
 "colour_optional" = "Kolor (opcjonalnie)";
@@ -122,27 +122,26 @@
 "neutered_spayed" = "Wykastrowany/a";
 "neutered" = "Wykastrowany/a";
 "health_information" = "Informacje zdrowotne";
-"health_info_hint" = "Alergie, leki, schorzenia zdrowotne...";
+"health_info_hint" = "Alergie, leki, schorzenia zdrowotne…";
 "behavior_notes_hint" = "Uwagi o zachowaniu (temperament, szkolenie, itp.)";
 "save_changes" = "Zapisz zmiany";
-"delete_pet_button" = "Usuń zwierzę";
-"delete_pet_dialog_message" = "Czy na pewno chcesz usunąć to zwierzę? Tej operacji nie można cofnąć.";
+"delete_pet_button" = "Usuń pupila";
+"delete_pet_dialog_message" = "Czy na pewno chcesz usunąć to pupila? Tej operacji nie można cofnąć.";
 "delete_pet_warning_title" = "Usunąć %@?";
-"delete_pet_warning_message" = "%@ zostanie trwale usunięty z Twojego konta. Tag QR zostanie natychmiast dezaktywowany i nie będzie działał po zeskanowaniu. Jeśli to Twoje ostatnie zwierzę, Twoja subskrypcja również zostanie anulowana.";
-"delete_pet_warning_confirm" = "Usuń zwierzę";
+"delete_pet_warning_message" = "%@ zostanie trwale usunięty z Twojego konta. Adresówka QR zostanie natychmiast dezaktywowany i nie będzie działał po zeskanowaniu. Jeśli to Twoje ostatnie pupila, Twoja subskrypcja również zostanie anulowana.";
+"delete_pet_warning_confirm" = "Usuń pupila";
 "species_cat" = "Kot";
 "select_photo" = "Wybierz zdjęcie";
-"select_pet" = "Wybierz zwierzę";
-"select_pet_for_replacement" = "Wybierz zwierzę do wymiany nieśki";
+"select_pet" = "Wybierz pupila";
+"select_pet_for_replacement" = "Wybierz pupila do wymiany nieśki";
 "weight" = "Waga";
 "weight_optional" = "Waga w kg (opcjonalnie)";
-"date_of_birth" = "Data urodzenia";
 "allergies_hint" = "np. Kurczak, dieta bezzbożowa";
 "medications_hint" = "np. Insulina dwa razy dziennie, lek na serce";
 "unique_features_hint" = "Cechy charakterystyczne (wzory, blizny, itp.)";
-"pet_created" = "Zwierzę dodane";
-"pet_updated" = "Zwierzę zaktualizowane";
-"pet_updated_photo_failed" = "Zwierzę zaktualizowane! Przesłanie zdjęcia nie powiodło się — spróbuj ponownie później.";
+"pet_created" = "Pupila dodane";
+"pet_updated" = "Pupila zaktualizowane";
+"pet_updated_photo_failed" = "Pupila zaktualizowane! Przesłanie zdjęcia nie powiodło się — spróbuj ponownie później.";
 
 // MARK: - Galeria zdjęć
 "pet_photos_title" = "Zdjęcia %@";
@@ -162,31 +161,31 @@
 
 // MARK: - Skaner QR
 "scan_qr_code" = "Skanuj kod QR";
-"scan_qr_subtitle" = "Skieruj aparat na kod QR na zawieszce zwierzęcia";
+"scan_qr_subtitle" = "Skieruj aparat na kod QR na adresówce pupila";
 "hello_pet_name" = "Cześć! Jestem %@";
-"scanned_tag_thanks" = "Właśnie zeskanowałeś moją zawieszk. Dziękuję za pomoc!";
-"share_location_with_owner" = "Udostępnij moją lokalizację właścicielowi";
-"contact_owner" = "Kontakt z właścicielem";
+"scanned_tag_thanks" = "Właśnie zeskanowałeś moją adresówkę. Dziękuję za pomoc!";
+"share_location_with_owner" = "Udostępnij moją lokalizację opiekunowi";
+"contact_owner" = "Kontakt z opiekunem";
 "call_phone" = "Zadzwoń: %@";
 "email_contact" = "E-mail: %@";
-"privacy_notice" = "Twoja prywatność jest ważna. Udostępnimy Twoją lokalizację tylko właścicielowi %@, aby pomóc mu odnaleźć pupila.";
+"privacy_notice" = "Twoja prywatność jest ważna. Udostępnimy Twoją lokalizację tylko opiekunowi %@, aby pomóc mu odnaleźć pupila.";
 "found_pet_title" = "Znaleziono %@";
 
 // MARK: - Przepływ udostępniania lokalizacji
 "share_help_get_home %@" = "Pomóż %@ wrócić do domu";
-"share_location_subtitle" = "Twoja lokalizacja pomoże właścicielowi szybciej odnaleźć pupila.";
+"share_location_subtitle" = "Twoja lokalizacja pomoże opiekunowi szybciej odnaleźć pupila.";
 "share_exact_location_toggle" = "Udostępnij dokładną lokalizację";
 "share_approximate_desc" = "Udostępnij ogólny obszar (~500m promień)";
 "share_exact_desc" = "Udostępnij dokładną lokalizację dla szybszego zjednoczenia";
 "share_your_location" = "Twoja lokalizacja";
 "share_accuracy" = "(dokładność ~500m)";
-"share_getting_location" = "Pobieranie lokalizacji...";
+"share_getting_location" = "Pobieranie lokalizacji…";
 "share_location_unavailable" = "Lokalizacja niedostępna. Sprawdź, czy usługi lokalizacji są włączone.";
-"share_owner_notified" = "Właściciel powiadomiony!";
+"share_owner_notified" = "Opiekun powiadomiony!";
 "share_on_their_way" = "Już jedzie!";
-"share_notifying" = "Powiadamianie właściciela...";
-"share_notify_with_location" = "Udostępnij & powiadom właściciela";
-"share_privacy_note" = "Twoja lokalizacja zostanie udostępniona właścicielowi, aby pomóc mu odnaleźć pupila.";
+"share_notifying" = "Powiadamianie opiekuna…";
+"share_notify_with_location" = "Udostępnij & powiadom opiekuna";
+"share_privacy_note" = "Twoja lokalizacja zostanie udostępniona opiekunowi, aby pomóc mu odnaleźć pupila.";
 "share_found_pet %@" = "Znaleziono %@!";
 
 // MARK: - Szczegóły skanera
@@ -194,50 +193,38 @@
 "scanner_breed" = "Rasa";
 "scanner_age" = "Wiek";
 "scanner_color" = "Kolor";
-"scanner_owner_location" = "Dane właściciela";
+"scanner_owner_location" = "Dane opiekuna";
 "scanner_medical_info" = "Informacje medyczne";
 "scanner_allergies" = "Alergie";
 "scanner_notes" = "Uwagi";
 "scanner_how_it_works" = "Jak to działa";
 
 // MARK: - Aktywacja nieśki
-"tag_activate_title" = "Aktywuj zawieszk";
-"tag_loading_pets" = "Ładowanie zwierząt...";
+"tag_activate_title" = "Aktywuj adresówkę";
+"tag_loading_pets" = "Ładowanie pupili…";
 "tag_activated" = "Nieśka aktywowana!";
 "tag_activated_message %@" = "Nieśka %@ jest teraz aktywna";
-"tag_choose_plan" = "Uzupełnij profil zwierzęcia, aby ułatwić jego znalezienie w razie zaginięcia";
-"tag_choose_plan_button" = "Uzupełnij profil zwierzęcia";
+"tag_choose_plan" = "Uzupełnij profil pupila, aby ułatwić jego znalezienie w razie zaginięcia";
+"tag_choose_plan_button" = "Uzupełnij profil pupila";
 "tag_skip_for_now" = "Zrobię to później";
-"tag_no_pets" = "Brak zarejestrowanych zwierząt";
-"tag_no_pets_message" = "Najpierw dodaj zwierzę, a potem aktywuj zawieszk";
+"tag_no_pets" = "Brak zarejestrowanych pupili";
+"tag_no_pets_message" = "Najpierw dodaj pupila, a potem aktywuj adresówkę";
 "tag_code_label" = "Kod nieśki";
-"tag_select_pet" = "Wybierz zwierzę, aby aktywować zawieszk";
-"tag_activating" = "Aktywowanie...";
-"tag_activate_button" = "Aktywuj zawieszk";
-"tag_link_message" = "Nieśka zostanie przypisana do wybranego zwierzęcia";
+"tag_select_pet" = "Wybierz pupila, aby aktywować adresówkę";
+"tag_activating" = "Aktywowanie…";
+"tag_activate_button" = "Aktywuj adresówkę";
+"tag_link_message" = "Nieśka zostanie przypisana do wybranego pupila";
 
 // MARK: - Wybór planu
-"plan_tag_activated" = "Nieśka aktywowana!";
-"plan_choose_subtitle" = "Wybierz plan, aby odblokować wszystkie funkcje";
-"plan_upgrade_title" = "Zmień plan";
-"plan_upgrade_subtitle" = "Więcej funkcji dla twoich zwierząt";
-"plan_loading" = "Ładowanie planów...";
-"plan_popular" = "Popularny";
-"plan_current" = "Aktualny plan";
-"plan_select_free" = "Wybierz bezpłatny plan";
-"plan_select %@" = "Wybierz %@";
-"plan_skip_free" = "Pomiń na razie (Plan bezpłatny)";
-"plan_all_include" = "Wszystkie plany zawierają:";
-"plan_paid_add" = "Plany płatne zawierają dodatkowo:";
 
 // MARK: - Alerty
 "tab_missing" = "Zaginione";
 "tab_found" = "Znalezione";
-"tab_success" = "Odnalezione zwierzęta";
+"tab_success" = "Odnalezione";
 "failed_load_alerts" = "Nie udało się wczytać alertów";
 "no_active_alerts" = "Brak aktywnych alertów";
-"no_active_alerts_message" = "W tej chwili nie masz żadnych alertów o zaginionych zwierzętach";
-"missing_pet_alerts_title" = "Alerty o zaginionych zwierzętach";
+"no_active_alerts_message" = "W tej chwili nie masz żadnych alertów o zaginionych pupilach";
+"missing_pet_alerts_title" = "Alerty o zaginionych pupilach";
 "create_alert" = "Utwórz alert";
 "create_new_alert" = "Utwórz nowy alert";
 "sighting_count_singular" = "1 zgłoszenie";
@@ -255,31 +242,29 @@
 "sighting_location" = "Miejsce spostrzeżenia";
 "use_current_location" = "Użyj bieżącej lokalizacji";
 "location_captured" = "Lokalizacja pobrana z GPS";
-"report_missing_pet" = "Zgłoś zaginięcie zwierzęcia";
-"select_pet_to_report" = "Wybierz zwierzę";
+"report_missing_pet" = "Zgłoś zaginięcie pupila";
+"select_pet_to_report" = "Wybierz pupila";
 "additional_details" = "Dodatkowe szczegóły";
-"select_pet_header" = "Wybierz zwierzę";
-"no_pets_available" = "Brak dostępnych zwierząt. Najpierw dodaj zwierzę.";
+"select_pet_header" = "Wybierz pupila";
+"no_pets_available" = "Brak dostępnych pupili. Najpierw dodaj pupila.";
 "last_seen_location_header" = "Ostatnie znane miejsce";
 "enter_location" = "Podaj lokalizację";
 "additional_information_header" = "Dodatkowe informacje";
-"additional_details_placeholder" = "Podaj dodatkowe szczegóły dotyczące tego, kiedy i gdzie ostatnio widziałeś swoje zwierzę...";
-"alert_created_success" = "Alert o zaginionym zwierzęciu został pomyślnie utworzony!";
-"alert_queued_offline" = "Alert zakolejkowany. Zostanie wysłany po przywróceniu połączenia.";
+"additional_details_placeholder" = "Podaj dodatkowe szczegóły dotyczące tego, kiedy i gdzie ostatnio widziałeś swoje pupila…";
+"alert_created_success" = "Alert o zaginionym pupilowi został pomyślnie utworzony!";
 "report_sighting_header" = "Zgłoś spostrzeżenie";
-"report_sighting_help" = "Pomóż zagubionym zwierzętom wrócić do domu, dzieląc się miejscem, w którym je widziałeś.";
+"report_sighting_help" = "Pomóż zagubionym pupilom wrócić do domu, dzieląc się miejscem, w którym je widziałeś.";
 "share_contact_info" = "Udostępnij moje dane kontaktowe";
-"share_contact_info_desc" = "Zezwól właścicielowi na bezpośredni kontakt z tobą";
+"share_contact_info_desc" = "Zezwól opiekunowi na bezpośredni kontakt z tobą";
 "your_name" = "Twoje imię";
 "your_phone_number" = "Twój numer telefonu";
 "your_email" = "Twój adres e-mail";
-"getting_location" = "Pobieranie lokalizacji...";
+"getting_location" = "Pobieranie lokalizacji…";
 "address_or_description" = "Adres lub opis";
-"where_did_you_see" = "Gdzie widziałeś zwierzę?";
-"sighting_notes_placeholder" = "Opisz, co widziałeś, stan zwierzęcia, kierunek podróży...";
+"where_did_you_see" = "Gdzie widziałeś pupila?";
+"sighting_notes_placeholder" = "Opisz, co widziałeś, stan pupila, kierunek podróży…";
 "submit_sighting_report" = "Wyślij zgłoszenie spostrzeżenia";
-"sighting_reported_owner_notified" = "Spostrzeżenie zgłoszone! Właściciel został powiadomiony.";
-"sighting_queued_offline" = "Zgłoszenie zakolejkowane — zostanie wysłane po przywróceniu połączenia.";
+"sighting_reported_owner_notified" = "Spostrzeżenie zgłoszone! Opiekun został powiadomiony.";
 
 // MARK: - Oznaczanie jako zaginione/znalezione
 
@@ -290,19 +275,17 @@
 
 // MARK: - Historie sukcesu
 "success_stories" = "Historie sukcesu";
-"found_pets" = "Odnalezione zwierzęta";
+"found_pets" = "Odnalezione pupile";
 "success_stories_subtitle" = "Zobacz szczęśliwe powroty do domu w twoim pobliżu";
 "loading_success_stories" = "Ładowanie historii sukcesu…";
 "no_success_stories" = "Brak historii sukcesu w pobliżu";
 "no_success_stories_message" = "Bądź pierwszy, kto podzieli się szczęśliwym powrotem do domu w swoim rejonie!";
-"found_and_reunited" = "Znalezione i ponownie razem z właścicielem";
+"found_and_reunited" = "Znalezione i ponownie razem z opiekunem";
 "distance_km" = "%.1f km stąd";
 "found_on" = "Znaleziono %@";
 "success_story_marker" = "Historia sukcesu";
-"load_more" = "Załaduj więcej";
 "missing_for" = "Zaginiony/a od: %@";
-"shared_via_pet_safety" = "Udostępnione przez aplikację Pet Safety";
-
+"shared_via_senra" = "Udostępnione przez aplikację SENRA";
 // MARK: - Czas historii sukcesu
 "success_just_now" = "Przed chwilą";
 "success_day_ago" = "1 dzień temu";
@@ -321,13 +304,13 @@
 "story_maybe_later" = "Może później";
 "story_share_good_news" = "Podziel się dobrą nowiną";
 "story_social_caption %@" = "%@ wrócił/a do rodziny! Dziękujemy społeczności SENRA za pomoc w sprowadzeniu %@ do domu. senra.pet";
-"story_generating_card" = "Tworzenie karty do udostępnienia...";
+"story_generating_card" = "Tworzenie karty do udostępnienia…";
 "story_your_story" = "Twoja historia";
 "story_city_optional" = "Miasto/rejon (opcjonalnie)";
 "story_city_placeholder" = "np. Warszawa lub Kraków";
 "story_share_publicly" = "Udostępnij publicznie";
 "story_share_publicly_desc" = "Pozwól innym w pobliżu zobaczyć twoją historię";
-"story_posting" = "Publikowanie...";
+"story_posting" = "Publikowanie…";
 "story_share_story" = "Udostępnij historię";
 
 // MARK: - Profil
@@ -345,9 +328,9 @@
 "profile_log_out" = "Wyloguj się";
 "profile_delete_account" = "Usuń konto";
 "profile_cannot_delete" = "Nie można usunąć konta";
-"profile_cannot_delete_message" = "Przed usunięciem konta oznacz wszystkie zaginione zwierzęta jako znalezione.";
+"profile_cannot_delete_message" = "Przed usunięciem konta oznacz wszystkie zaginione pupile jako znalezione.";
 "profile_danger_zone" = "Strefa niebezpieczna";
-"profile_deleting" = "Usuwanie...";
+"profile_deleting" = "Usuwanie…";
 "log_out" = "Wyloguj się";
 
 // MARK: - Dane osobowe
@@ -415,12 +398,12 @@
 "notif_email_desc" = "Szczegółowe alerty e-mail";
 "notif_sms" = "Powiadomienia SMS";
 "notif_sms_desc" = "Alerty wiadomości tekstowych";
-"notif_pet_alerts" = "Alerty o zwierzętach";
-"notif_pet_alerts_footer" = "Powiadomienia o zaginionych zwierzętach w twoim rejonie";
-"notif_missing_pet_alerts" = "Alerty o zaginionych zwierzętach";
-"notif_missing_pet_alerts_subtitle" = "Otrzymuj powiadomienia o zaginionych zwierzętach w twoim rejonie";
+"notif_pet_alerts" = "Alerty o pupilach";
+"notif_pet_alerts_footer" = "Powiadomienia o zaginionych pupilach w twoim rejonie";
+"notif_missing_pet_alerts" = "Alerty o zaginionych pupilach";
+"notif_missing_pet_alerts_subtitle" = "Otrzymuj powiadomienia o zaginionych pupilach w twoim rejonie";
 "notif_nearby_alerts" = "Alerty w pobliżu (10km)";
-"notif_nearby_alerts_subtitle" = "Alerty o zwierzętach w promieniu 10km od twojej lokalizacji";
+"notif_nearby_alerts_subtitle" = "Alerty o pupilach w promieniu 10km od twojej lokalizacji";
 "notif_account_orders" = "Konto i zamówienia";
 "notif_account_orders_footer" = "Bądź na bieżąco z aktywnością konta i zamówieniami";
 "notif_order_updates" = "Aktualizacje zamówień";
@@ -431,11 +414,11 @@
 "notif_title" = "Powiadomienia";
 "notif_saved" = "Zapisano";
 "notif_saved_message" = "Preferencje powiadomień zostały pomyślnie zapisane";
-"notif_critical_footer" = "Możesz zmienić te ustawienia w dowolnym momencie. Ważne alerty dotyczące twoich zwierząt będą zawsze wysyłane.";
+"notif_critical_footer" = "Możesz zmienić te ustawienia w dowolnym momencie. Ważne alerty dotyczące twoich pupili będą zawsze wysyłane.";
 "notification_preferences_title" = "Preferencje powiadomień";
 
 // MARK: - Preferencje powiadomień (Ustawienia)
-"notif_pref_intro" = "Wybierz, w jaki sposób chcesz otrzymywać ważne aktualizacje dotyczące twoich zwierząt i konta.";
+"notif_pref_intro" = "Wybierz, w jaki sposób chcesz otrzymywać ważne aktualizacje dotyczące twoich pupili i konta.";
 "notif_pref_methods" = "Metody powiadomień";
 "notif_pref_email" = "Powiadomienia e-mail";
 "notif_pref_email_desc" = "Otrzymuj szczegółowe alerty e-mail";
@@ -447,7 +430,7 @@
 "notif_pref_save" = "Zapisz zmiany";
 "notif_pref_title" = "Ustawienia powiadomień";
 "notif_pref_success" = "Preferencje powiadomień zostały pomyślnie zapisane";
-"notif_pref_loading" = "Ładowanie preferencji...";
+"notif_pref_loading" = "Ładowanie preferencji…";
 
 // MARK: - Pomoc i wsparcie
 "help_quick_actions" = "Szybkie akcje";
@@ -467,7 +450,7 @@
 "help_subject" = "Temat";
 "help_subject_placeholder" = "Krótki opis problemu";
 "help_message" = "Wiadomość";
-"help_sending" = "Wysyłanie...";
+"help_sending" = "Wysyłanie…";
 "help_submit_request" = "Wyślij zgłoszenie";
 "help_contact_title" = "Kontakt z pomocą techniczną";
 "help_request_submitted" = "Zgłoszenie wysłane! Odpowiemy w ciągu 24 godzin.";
@@ -479,62 +462,62 @@
 "help_cat_other" = "Inne";
 
 // FAQ Questions and Answers
-"help_faq_q1" = "Jak zarejestrować mojego zwierzaka?";
-"help_faq_a1" = "Możesz zarejestrować swojego zwierzaka w menu 'Moje Zwierzaki' klikając 'Dodaj Nowego Zwierzaka'. Wypełnij wymagane informacje i prześlij jedno lub więcej zdjęć.";
-"help_faq_q2" = "Jakie informacje powinienem podać w profilu mojego zwierzaka?";
-"help_faq_a2" = "Imię zwierzaka podałeś już przy zamawianiu plakietki i pojawi się ono w profilu zwierzaka po aktywacji plakietki. Wprowadź gatunek i rasę. Aby zapobiec nadużyciom, te dane można wprowadzić tylko raz. Jeśli popełnisz błąd, skontaktuj się z nami, a pomożemy. Tutaj możesz też dodać wagę, wiek, kolor i wszelkie cechy szczególne lub typowe zachowania kota/psa. Możesz też przesłać zdjęcia. Ty decydujesz, jakie informacje będą widoczne o Twoim zwierzaku, jeśli się zgubi.";
-"help_faq_q3" = "Jak działa plakietka z kodem QR?";
-"help_faq_a3" = "Każdy zwierzak otrzymuje unikalną plakietkę z kodem QR. Ten kod jest powiązany z profilem Twojego zwierzaka. Gdy ktoś zeskanuje kod QR telefonem, może natychmiast zobaczyć profil zwierzaka i dane kontaktowe oznaczone jako publiczne.";
-"help_faq_q4" = "Czy mogę później zaktualizować dane mojego zwierzaka?";
-"help_faq_a4" = "Tak! Możesz aktualizować dane zwierzaka w dowolnym momencie w sekcji 'Moje Zwierzaki' wybierając zwierzaka i klikając 'Edytuj Profil'. Możesz aktualizować wszystkie pola z wyjątkiem imienia, gatunku i rasy, łącznie ze zdjęciami. Zmiany są zapisywane natychmiast.";
-"help_faq_q5" = "Jak zamówić plakietkę zastępczą?";
-"help_faq_a5" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Replacement eligibility depends on your Senra account; visit senra.pet for details.";
-"help_faq_q6" = "Jak aktywować plakietkę po jej otrzymaniu?";
-"help_faq_a6" = "Download the SENRA mobile app from the Google Play Store or App Store! Open it and go to the 'Activate' menu, point your phone's camera at the QR code on the tag! Scanning the QR code links the tag to your account. Then you need to select your existing pet or create a new profile.";
-"help_faq_q7" = "Czy mogę podarować plakietkę SENRA?";
-"help_faq_a7" = "Tak! Plakietki SENRA to świetne prezenty dla właścicieli zwierząt. Zamów plakietkę ze swojego konta — gdy obdarowany ją otrzyma, może zeskanować kod QR, utworzyć konto i aktywować plakietkę dla swojego zwierzaka.";
-"help_faq_q8" = "Co powinienem zrobić, jeśli mój zwierzak zaginął?";
-"help_faq_a8" = "Przejdź do 'Moje Zwierzaki', kliknij menu na karcie zwierzaka i wybierz 'Oznacz jako Zaginionego'. To tworzy 'alert o zaginionym zwierzaku' wysyłany do wszystkich członków społeczności SENRA w promieniu 10 km. Weterynarze i schroniska również są powiadamiani. Otrzymasz natychmiastowe powiadomienie o każdym spostrzeżeniu.";
-"help_faq_q9" = "Jak działają alerty o zaginionych zwierzakach?";
-"help_faq_a9" = "Gdy oznaczysz kota lub psa jako zaginionego, tworzony jest alert ze zdjęciem i danymi zwierzaka. Użytkownicy SENRA w promieniu 10 km są natychmiast powiadamiani, a zwierzak pojawia się na mapie 'Zaginione Zwierzaki'. Weterynarze i schroniska zarejestrowane w systemie SENRA również otrzymują alert.";
-"help_faq_q10" = "Jak zamówić plakietkę zastępczą?";
+"help_faq_q1" = "Jak zarejestrować mojego pupila?";
+"help_faq_a1" = "Możesz zarejestrować swojego pupila w menu 'Moje Pupile' klikając 'Dodaj Nowego Zwierzaka'. Wypełnij wymagane informacje i prześlij jedno lub więcej zdjęć.";
+"help_faq_q2" = "Jakie informacje powinienem podać w profilu mojego pupila?";
+"help_faq_a2" = "Imię pupila podałeś już przy zamawianiu adresówki i pojawi się ono w profilu pupila po aktywacji adresówki. Wprowadź gatunek i rasę. Aby zapobiec nadużyciom, te dane można wprowadzić tylko raz. Jeśli popełnisz błąd, skontaktuj się z nami, a pomożemy. Tutaj możesz też dodać wagę, wiek, kolor i wszelkie cechy szczególne lub typowe zachowania kota/psa. Możesz też przesłać zdjęcia. Ty decydujesz, jakie informacje będą widoczne o Twoim pupilu, jeśli się zgubi.";
+"help_faq_q3" = "Jak działa adresówka z kodem QR?";
+"help_faq_a3" = "Każdy pupil otrzymuje unikalną adresówkę z kodem QR. Ten kod jest powiązany z profilem Twojego pupila. Gdy ktoś zeskanuje kod QR telefonem, może natychmiast zobaczyć profil pupila i dane kontaktowe oznaczone jako publiczne.";
+"help_faq_q4" = "Czy mogę później zaktualizować dane mojego pupila?";
+"help_faq_a4" = "Tak! Możesz aktualizować dane pupila w dowolnym momencie w sekcji 'Moje Pupile' wybierając pupila i klikając 'Edytuj Profil'. Możesz aktualizować wszystkie pola z wyjątkiem imienia, gatunku i rasy, łącznie ze zdjęciami. Zmiany są zapisywane natychmiast.";
+"help_faq_q5" = "Jak zamówić adresówkę zastępczą?";
+"help_faq_a5" = "Przejdź do strony 'Strona główna / Moje konto' i dotknij 'Zamów adresówkę zastępczą'. Wybierz, który pupil potrzebuje nowej adresówki. Uprawnienia do wymiany zależą od Twojego konta SENRA; szczegóły na senra.pet.";
+"help_faq_q6" = "Jak aktywować adresówkę po jej otrzymaniu?";
+"help_faq_a6" = "Pobierz aplikację mobilną SENRA z Google Play Store lub App Store! Otwórz ją i przejdź do menu 'Aktywuj', skieruj aparat telefonu na kod QR na adresówce! Zeskanowanie kodu QR łączy adresówkę z Twoim kontem. Następnie musisz wybrać istniejącego pupila lub utworzyć nowy profil.";
+"help_faq_q7" = "Czy mogę podarować adresówkę SENRA?";
+"help_faq_a7" = "Tak! Plakietki SENRA to świetne prezenty dla opiekunów pupili. Zamów adresówkę ze swojego konta — gdy obdarowany ją otrzyma, może zeskanować kod QR, utworzyć konto i aktywować adresówkę dla swojego pupila.";
+"help_faq_q8" = "Co powinienem zrobić, jeśli mój pupil zaginął?";
+"help_faq_a8" = "Przejdź do 'Moje Pupile', kliknij menu na karcie pupila i wybierz 'Oznacz jako Zaginionego'. To tworzy 'alert o zaginionym pupilu' wysyłany do wszystkich członków społeczności SENRA w promieniu 10 km. Weterynarze i schroniska również są powiadamiani. Otrzymasz natychmiastowe powiadomienie o każdym spostrzeżeniu.";
+"help_faq_q9" = "Jak działają alerty o zaginionych pupilach?";
+"help_faq_a9" = "Gdy oznaczysz kota lub psa jako zaginionego, tworzony jest alert ze zdjęciem i danymi pupila. Użytkownicy SENRA w promieniu 10 km są natychmiast powiadamiani, a pupil pojawia się na mapie 'Zaginione Pupile'. Weterynarze i schroniska zarejestrowane w systemie SENRA również otrzymują alert.";
+"help_faq_q10" = "Jak zamówić adresówkę zastępczą?";
 "help_faq_a10" = "Przejdź do 'Strona Główna/Moje Konto' i kliknij 'Zamów Plakietkę Zastępczą'. Subskrybenci Maximum i Standard mogą żądać bezpłatnych zamienników, członkowie Starter płacą koszt wysyłki.";
 "help_faq_q11" = "Czym jest program poleceń?";
 "help_faq_a11" = "W menu Polecenia na stronie Profilu możesz wygenerować osobisty kod polecający. Podziel się nim z przyjaciółmi i rodziną. Gdy ktoś użyje Twojego kodu i wykupi płatny plan (Standard lub Maximum), Ty i Twój przyjaciel otrzymujecie 2 miesiące za darmo.";
 "help_faq_q12" = "Do jakich krajów wysyłacie?";
 "help_faq_a12" = "Obecnie wysyłamy do Węgier, Słowacji, Czech, Austrii, Rumunii, Chorwacji, Hiszpanii, Włoch, Francji, Niemiec, Norwegii i Portugalii. Wysyłka krajowa na Węgrzech: {{huPostapoint}} (PostaPont) lub {{huHome}} (dostawa do domu). Wysyłka międzynarodowa: {{intlPrice}} za zamówienie.";
-"help_faq_q13" = "Czy mogę mieć wiele zwierząt na jednym koncie?";
-"help_faq_a13" = "Yes. You can register multiple pets on a single account. Visit senra.pet for account details.";
-"help_faq_q14" = "Jak zgłosić znalezione zwierzę?";
-"help_faq_a14" = "Jeśli zwierzę ma plakietkę SENRA, po prostu zeskanuj kod QR aparatem — nie potrzebujesz aplikacji. Możesz zobaczyć profil zwierzaka i udostępnić swoją lokalizację właścicielowi.";
+"help_faq_q13" = "Czy mogę mieć wiele pupili na jednym koncie?";
+"help_faq_a13" = "Tak. Możesz zarejestrować wielu pupili na jednym koncie. Szczegóły konta na senra.pet.";
+"help_faq_q14" = "Jak zgłosić znalezione pupila?";
+"help_faq_a14" = "Jeśli pupila ma adresówkę SENRA, po prostu zeskanuj kod QR aparatem — nie potrzebujesz aplikacji. Możesz zobaczyć profil pupila i udostępnić swoją lokalizację opiekunowi.";
 "help_faq_q15" = "Czy moje dane osobowe są bezpieczne?";
-"help_faq_a15" = "Tak. Ty kontrolujesz, jakie dane są widoczne po zeskanowaniu plakietki. W 'Ustawienia' > 'Ustawienia Prywatności' możesz wybrać, czy pokazywać telefon, email czy adres. Logowanie jest chronione jednorazowym kodem weryfikacyjnym. Możesz usunąć konto i dane w dowolnym momencie.";
-"help_faq_q16" = "Zgubiliśmy plakietkę lub się uszkodziła — co robić?";
-"help_faq_a16" = "Don't worry — your pet's digital profile is safe and is not stored on the tag. Go to the Account page and tap 'Order Replacement'. We'll link a new tag with a fresh QR code to your existing pet profile. Replacement eligibility depends on your Senra account; visit senra.pet for details. The old tag is deactivated immediately when the replacement is ordered.";
-"help_faq_q17" = "Moja plakietka nie skanuje się — co robić?";
-"help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
-"help_faq_q18" = "Znalazłem zwierzę bez plakietki SENRA — co mogę zrobić?";
-"help_faq_a18" = "Sprawdź mapę Zaginionych Zwierząt na stronie SENRA (senra.pet). Możesz też zobaczyć alerty w aplikacji. Zanieś zwierzę do najbliższego weterynarza, aby zeskanować mikrochip. Jeśli ma plakietkę SENRA, zeskanuj kod QR — pojawią się dane kontaktowe właściciela. Zawsze powiadom też lokalne władze i pobliskie schroniska.";
+"help_faq_a15" = "Tak. Ty kontrolujesz, jakie dane są widoczne po zeskanowaniu adresówki. W 'Ustawienia' > 'Ustawienia Prywatności' możesz wybrać, czy pokazywać telefon, email czy adres. Logowanie jest chronione jednorazowym kodem weryfikacyjnym. Możesz usunąć konto i dane w dowolnym momencie.";
+"help_faq_q16" = "Zgubiliśmy adresówkę lub się uszkodziła — co robić?";
+"help_faq_a16" = "Nie martw się — cyfrowy profil Twojego pupila jest bezpieczny i nie jest przechowywany na adresówce. Przejdź do strony Konto i dotknij 'Zamów wymianę'. Połączymy nową adresówkę ze świeżym kodem QR z Twoim istniejącym profilem. Uprawnienia do wymiany zależą od Twojego konta SENRA; szczegóły na senra.pet. Stara adresówka jest dezaktywowana natychmiast po złożeniu zamówienia wymiany.";
+"help_faq_q17" = "Moja adresówka nie skanuje się — co robić?";
+"help_faq_a17" = "Spróbuj następujących rzeczy: wyczyść powierzchnię adresówki wilgotną ściereczką, zapewnij dobre oświetlenie, trzymaj aparat telefonu stabilnie około 10–15 cm od adresówki i sprawdź, czy aplikacja aparatu lub czytnik QR działa. Jeśli kod QR jest zarysowany lub zużyty, zamów wymianę na stronie 'Strona główna / Moje konto'.";
+"help_faq_q18" = "Znalazłem pupila bez adresówki SENRA — co mogę zrobić?";
+"help_faq_a18" = "Sprawdź mapę Zaginionych Zwierząt na stronie SENRA (senra.pet). Możesz też zobaczyć alerty w aplikacji. Zanieś pupila do najbliższego weterynarza, aby zeskanować mikrochip. Jeśli ma adresówkę SENRA, zeskanuj kod QR — pojawią się dane kontaktowe opiekuna. Zawsze powiadom też lokalne władze i pobliskie schroniska.";
 "help_faq_q19" = "Czy mogę zmienić swój adres email?";
 "help_faq_a19" = "Twój główny email służy jako identyfikator konta i nie można go bezpośrednio zmienić. Możesz dodać dodatkowy email w 'Ustawienia' > 'Dane Kontaktowe'. Jeśli koniecznie musisz zmienić główny email, skontaktuj się z nami na hello@senra.pet.";
-"help_faq_q20" = "Jaka jest różnica między mikrochipem a plakietką QR SENRA?";
-"help_faq_a20" = "Mikrochip to mały implant pod skórą zwierzaka przechowujący unikalny 15-cyfrowy identyfikator — ale wymaga specjalnego czytnika. Plakietka QR SENRA może być łatwo zeskanowana dowolnym aparatem smartfona, natychmiast wyświetlając pełny profil, zdjęcie i zatwierdzone dane kontaktowe. Znalazca może też udostępnić współrzędne GPS.";
+"help_faq_q20" = "Jaka jest różnica między mikrochipem a adresówką QR SENRA?";
+"help_faq_a20" = "Mikrochip to mały implant pod skórą pupila przechowujący unikalny 15-cyfrowy identyfikator — ale wymaga specjalnego czytnika. Adresówka QR SENRA może być łatwo zeskanowana dowolnym aparatem smartfona, natychmiast wyświetlając pełny profil, zdjęcie i zatwierdzone dane kontaktowe. Znalazca może też udostępnić współrzędne GPS.";
 "help_faq_q21" = "Co się stanie z moimi danymi, jeśli anuluję subskrypcję?";
-"help_faq_a21" = "Jeśli anulujesz, zachowujesz dostęp do płatnych funkcji do końca okresu rozliczeniowego. Potem konto przechodzi na bezpłatny plan Starter. Profile, zdjęcia i plakietki QR pozostają aktywne. Dane nie są usuwane. Aby trwale usunąć wszystko, użyj opcji Usuń Konto w Ustawieniach.";
+"help_faq_a21" = "Jeśli anulujesz, zachowujesz dostęp do płatnych funkcji do końca okresu rozliczeniowego. Potem konto przechodzi na bezpłatny plan Starter. Profile, zdjęcia i adresówki QR pozostają aktywne. Dane nie są usuwane. Aby trwale usunąć wszystko, użyj opcji Usuń Konto w Ustawieniach.";
 "help_faq_q22" = "Jak mogę zarejestrować moją klinikę lub schronisko w SENRA?";
-"help_faq_a22" = "Kliniki weterynaryjne i schroniska mogą się zarejestrować na senra.pet/register-vet-shelter. Wypełnij dane i wyślemy email weryfikacyjny. Po potwierdzeniu automatycznie wysyłamy powiadomienia gdy zwierzaki giną w okolicy. Bez opłat i bez logowania.";
-"help_faq_q23" = "Jak mogę podzielić się historią sukcesu, jeśli mój zwierzak został odnaleziony?";
-"help_faq_a23" = "Gdy oznaczysz zwierzaka jako 'Odnaleziony', zapytamy, czy chcesz podzielić się dobrą wiadomością. Możesz opublikować krótką historię. Publiczne historie pojawiają się na mapie 'Odnalezione Zwierzaki'.";
+"help_faq_a22" = "Kliniki weterynaryjne i schroniska mogą się zarejestrować na senra.pet/register-vet-shelter. Wypełnij dane i wyślemy email weryfikacyjny. Po potwierdzeniu automatycznie wysyłamy powiadomienia gdy pupile giną w okolicy. Bez opłat i bez logowania.";
+"help_faq_q23" = "Jak mogę podzielić się historią sukcesu, jeśli mój pupil został odnaleziony?";
+"help_faq_a23" = "Gdy oznaczysz pupila jako 'Odnaleziony', zapytamy, czy chcesz podzielić się dobrą wiadomością. Możesz opublikować krótką historię. Publiczne historie pojawiają się na mapie 'Odnalezione Pupile'.";
 "help_faq_q24" = "Jakie przeglądarki i urządzenia są obsługiwane?";
-"help_faq_a24" = "SENRA działa we wszystkich przeglądarkach, w tym Chrome, Safari, Firefox i Edge, na urządzeniach mobilnych i stacjonarnych. Skanowanie plakietki QR działa z dowolnym aparatem smartfona — znalazca nie potrzebuje aplikacji SENRA ani konta.";
-"help_faq_q25" = "Czy mogę zamówić wiele plakietek dla moich zwierząt naraz?";
-"help_faq_a25" = "Tak, możesz zamówić plakietki dla wszystkich zwierząt jednocześnie. Po dostawie zeskanuj każdą, aby aktywować i przypisać do odpowiedniego profilu.";
-"help_faq_q26" = "Jak alerty o zaginionych zwierzakach docierają do weterynarzy i schronisk?";
-"help_faq_a26" = "Gdy oznaczysz zwierzaka jako 'Zaginionego', SENRA automatycznie wysyła alerty emailowe do wszystkich zarejestrowanych weterynarzy i schronisk w okolicy. Im więcej zarejestrowanych, tym lepiej działa sieć.";
-"help_faq_q27" = "Czy mogę przenieść plakietkę na inne zwierzę?";
-"help_faq_a27" = "Nie. Każda plakietka QR jest trwale powiązana z profilem jednego zwierzaka. Jeśli zwierzak umrze lub nie potrzebujesz już plakietki, staje się po prostu nieaktywna. Zamów nową plakietkę dla nowego zwierzaka na stronie SENRA.";
-"help_faq_q28" = "Jak mogę zarejestrować klinikę weterynaryjną mojego zwierzaka lub schronisko, z którego adoptowałem zwierzaka, w sieci SENRA?";
-"help_faq_a28" = "Kliniki weterynaryjne i schroniska mogą się zarejestrować na senra.pet/register-vet-shelter. Wypełnij dane i wyślemy email weryfikacyjny. Po potwierdzeniu automatycznie wysyłamy powiadomienia — pomagając zaginionym zwierzakom szybciej wrócić do domu. Bez opłat i bez logowania.";
+"help_faq_a24" = "SENRA działa we wszystkich przeglądarkach, w tym Chrome, Safari, Firefox i Edge, na urządzeniach mobilnych i stacjonarnych. Skanowanie adresówki QR działa z dowolnym aparatem smartfona — znalazca nie potrzebuje aplikacji SENRA ani konta.";
+"help_faq_q25" = "Czy mogę zamówić wiele plakietek dla moich pupili naraz?";
+"help_faq_a25" = "Tak, możesz zamówić adresówki dla wszystkich pupili jednocześnie. Po dostawie zeskanuj każdą, aby aktywować i przypisać do odpowiedniego profilu.";
+"help_faq_q26" = "Jak alerty o zaginionych pupilach docierają do weterynarzy i schronisk?";
+"help_faq_a26" = "Gdy oznaczysz pupila jako 'Zaginionego', SENRA automatycznie wysyła alerty emailowe do wszystkich zarejestrowanych weterynarzy i schronisk w okolicy. Im więcej zarejestrowanych, tym lepiej działa sieć.";
+"help_faq_q27" = "Czy mogę przenieść adresówkę na inne pupila?";
+"help_faq_a27" = "Nie. Każda adresówka QR jest trwale powiązana z profilem jednego pupila. Jeśli pupil umrze lub nie potrzebujesz już adresówki, staje się po prostu nieaktywna. Zamów nową adresówkę dla nowego pupila na stronie SENRA.";
+"help_faq_q28" = "Jak mogę zarejestrować klinikę weterynaryjną mojego pupila lub schronisko, z którego adoptowałem pupila, w sieci SENRA?";
+"help_faq_a28" = "Kliniki weterynaryjne i schroniska mogą się zarejestrować na senra.pet/register-vet-shelter. Wypełnij dane i wyślemy email weryfikacyjny. Po potwierdzeniu automatycznie wysyłamy powiadomienia — pomagając zaginionym pupilom szybciej wrócić do domu. Bez opłat i bez logowania.";
 "help_faq_title" = "FAQ";
 "help_guides_title" = "Przewodniki użytkownika";
 "support_response_time" = "Nasz zespół wsparcia zazwyczaj odpowiada w ciągu 24 godzin.";
@@ -549,51 +532,51 @@
 // Elementy FAQ
 // Elementy przewodnika
 "help_guide_qr_tags_title" = "Nieśki z kodem QR";
-"help_guide_qr_tags_desc" = "Każda nieśka SENRA zawiera unikalny kod QR prowadzący do cyfrowego profilu twojego zwierzęcia. Każdy, kto znajdzie twoje zwierzę, może zeskanować kod aparatem telefonu — bez konieczności pobierania aplikacji. Skaner natychmiast widzi zdjęcie, imię, informacje medyczne i twoje dane kontaktowe. Może też udostępnić swoją lokalizację GPS, dzięki czemu będziesz wiedział/a dokładnie, gdzie jest twoje zwierzę. Nieśki działają ze wszystkimi nowoczesnymi smartfonami.";
+"help_guide_qr_tags_desc" = "Każda nieśka SENRA zawiera unikalny kod QR prowadzący do cyfrowego profilu twojego pupila. Każdy, kto znajdzie twoje pupila, może zeskanować kod aparatem telefonu — bez konieczności pobierania aplikacji. Skaner natychmiast widzi zdjęcie, imię, informacje medyczne i twoje dane kontaktowe. Może też udostępnić swoją lokalizację GPS, dzięki czemu będziesz wiedział/a dokładnie, gdzie jest twoje pupila. Nieśki działają ze wszystkimi nowoczesnymi smartfonami.";
 "help_guide_materials_title" = "Materiały i trwałość nieśek";
-"help_guide_materials_desc" = "Nieśki SENRA są wykonane z trwałego, lekkiego metalu z powłoką epoksydową zapewniającą dodatkową ochronę. Są wodoodporne i odporne na UV, odpowiednie na każde warunki pogodowe. Kod QR jest wydrukowany tuszem odpornym na blaknięcie, aby pozostać czytelnym przez długi czas. Nieśki bezpiecznie mocują się do obroży zwierzęcia. Jeśli nieśka ulegnie uszkodzeniu lub kod QR przestanie się skanować, możesz zamówić zamiennik na stronie Konto — bezpłatnie dla członków planów Standard i Maximum.";
+"help_guide_materials_desc" = "Nieśki SENRA są wykonane z trwałego, lekkiego metalu z powłoką epoksydową zapewniającą dodatkową ochronę. Są wodoodporne i odporne na UV, odpowiednie na każde warunki pogodowe. Kod QR jest wydrukowany tuszem odpornym na blaknięcie, aby pozostać czytelnym przez długi czas. Nieśki bezpiecznie mocują się do obroży pupila. Jeśli nieśka ulegnie uszkodzeniu lub kod QR przestanie się skanować, możesz zamówić zamiennik na stronie Konto — bezpłatnie dla członków planów Standard i Maximum.";
 "help_guide_emergency_title" = "Kontakt alarmowy i alerty";
-"help_guide_emergency_desc" = "Gdy ktoś zeskanuje zawieszk twojego zwierzęcia, otrzymasz natychmiastowe powiadomienie e-mailem z lokalizacją znalazcy. Członkowie planów Standard i Maximum otrzymują też alerty SMS dla szybszej reakcji. Jeśli oznaczysz zwierzę jako zaginione, alert społecznościowy jest wysyłany do wszystkich użytkowników SENRA w promieniu 10km, a zarejestrowani weterynarze i schroniska w twoim rejonie są również powiadamiani. Każdy ze społeczności może zgłaszać spostrzeżenia z lokalizacją, budując ślad, który pomoże ci odnaleźć zwierzę.";
-"help_guide_profile_title" = "Zarządzanie profilem zwierzęcia";
-"help_guide_profile_desc" = "Cyfrowy profil twojego zwierzęcia to serce SENRA. Dodaj podstawowe dane: imię, gatunek, rasę, wiek i wyraźne zdjęcie. Możesz też podać informacje medyczne (alergie, leki, schorzenia), numer mikrochipa i cechy charakterystyczne ułatwiające identyfikację. Prześlij wiele zdjęć do galerii. Wszystkie informacje można aktualizować w dowolnym momencie w sekcji „Moje zwierzęta”. Możesz kontrolować, które z twoich danych osobowych (telefon, e-mail, adres) są widoczne dla osób skanujących zawieszk.";
-"help_guide_missing_alerts_title" = "Alerty o zaginionych zwierzętach i spostrzeżenia";
-"help_guide_missing_alerts_desc" = "Jeśli twoje zwierzę zaginęło, oznacz je jako zaginione w „Moje zwierzęta”, aby natychmiast utworzyć alert społecznościowy. Zdjęcie i dane twojego pupila pojawią się na mapie zaginionych zwierząt widocznej dla wszystkich użytkowników SENRA w twoim rejonie. Członkowie społeczności mogą zgłaszać spostrzeżenia z lokalizacją GPS, które otrzymasz jako powiadomienia. Zarejestrowani weterynarze i schroniska są również alertowani. Po odnalezieniu zwierzęcia oznacz je jako znalezione i opcjonalnie podziel się historią powrotu do domu, aby zainspirować społeczność.";
-"help_guide_community_title" = "Społeczność i odnalezione zwierzęta";
-"help_guide_community_desc" = "Siłą SENRA jest jej społeczność. Mapa zaginionych zwierząt pokazuje aktywne alerty w pobliżu — sprawdź, czy w twoim rejonie zgłoszono jakieś zaginione zwierzęta. Strona odnalezionych zwierząt celebruje udane reunifikacje z historiami właścicieli. Możesz zarejestrować lokalnego weterynarza lub schronisko w SENRA, aby automatycznie otrzymywali alerty o zaginionych zwierzętach, pomagając tworzyć silniejszą sieć bezpieczeństwa dla wszystkich zwierząt w twoim rejonie.";
+"help_guide_emergency_desc" = "Gdy ktoś zeskanuje adresówkę twojego pupila, otrzymasz natychmiastowe powiadomienie e-mailem z lokalizacją znalazcy. Członkowie planów Standard i Maximum otrzymują też alerty SMS dla szybszej reakcji. Jeśli oznaczysz pupila jako zaginione, alert społecznościowy jest wysyłany do wszystkich użytkowników SENRA w promieniu 10km, a zarejestrowani weterynarze i schroniska w twoim rejonie są również powiadamiani. Każdy ze społeczności może zgłaszać spostrzeżenia z lokalizacją, budując ślad, który pomoże ci odnaleźć pupila.";
+"help_guide_profile_title" = "Zarządzanie profilem pupila";
+"help_guide_profile_desc" = "Cyfrowy profil twojego pupila to serce SENRA. Dodaj podstawowe dane: imię, gatunek, rasę, wiek i wyraźne zdjęcie. Możesz też podać informacje medyczne (alergie, leki, schorzenia), numer mikrochipa i cechy charakterystyczne ułatwiające identyfikację. Prześlij wiele zdjęć do galerii. Wszystkie informacje można aktualizować w dowolnym momencie w sekcji „Moje pupile”. Możesz kontrolować, które z twoich danych osobowych (telefon, e-mail, adres) są widoczne dla osób skanujących adresówkę.";
+"help_guide_missing_alerts_title" = "Alerty o zaginionych pupilach i spostrzeżenia";
+"help_guide_missing_alerts_desc" = "Jeśli twoje pupila zaginęło, oznacz je jako zaginione w „Moje pupile”, aby natychmiast utworzyć alert społecznościowy. Zdjęcie i dane twojego pupila pojawią się na mapie zaginionych pupili widocznej dla wszystkich użytkowników SENRA w twoim rejonie. Członkowie społeczności mogą zgłaszać spostrzeżenia z lokalizacją GPS, które otrzymasz jako powiadomienia. Zarejestrowani weterynarze i schroniska są również alertowani. Po odnalezieniu pupila oznacz je jako znalezione i opcjonalnie podziel się historią powrotu do domu, aby zainspirować społeczność.";
+"help_guide_community_title" = "Społeczność i odnalezione pupile";
+"help_guide_community_desc" = "Siłą SENRA jest jej społeczność. Mapa zaginionych pupili pokazuje aktywne alerty w pobliżu — sprawdź, czy w twoim rejonie zgłoszono jakieś zaginione pupile. Strona odnalezionych pupili celebruje udane reunifikacje z historiami opiekunów. Możesz zarejestrować lokalnego weterynarza lub schronisko w SENRA, aby automatycznie otrzymywali alerty o zaginionych pupilach, pomagając tworzyć silniejszą sieć bezpieczeństwa dla wszystkich pupili w twoim rejonie.";
 // MARK: - Tryb prywatności
 "privacy_contact_visibility" = "Widoczność danych kontaktowych";
-"privacy_contact_footer" = "Kontroluj, które dane kontaktowe są widoczne na publicznym profilu twojego zwierzęcia. Te ustawienia dotyczą zarówno głównych, jak i zapasowych danych kontaktowych.";
+"privacy_contact_footer" = "Kontroluj, które dane kontaktowe są widoczne na publicznym profilu twojego pupila. Te ustawienia dotyczą zarówno głównych, jak i zapasowych danych kontaktowych.";
 "privacy_show_name" = "Wyświetlanie imienia";
 "privacy_show_name_subtitle" = "Twoje imię będzie widoczne na publicznym profilu pupila przy skanowaniu znacznika";
 "privacy_show_phone" = "Pokaż numery telefonu";
-"privacy_show_phone_subtitle" = "Twój główny i zapasowy numer telefonu będą widoczne na publicznym profilu twojego zwierzęcia";
+"privacy_show_phone_subtitle" = "Twój główny i zapasowy numer telefonu będą widoczne na publicznym profilu twojego pupila";
 "privacy_show_email" = "Pokaż adresy e-mail";
-"privacy_show_email_subtitle" = "Twój główny i zapasowy adres e-mail będą widoczne na publicznym profilu twojego zwierzęcia";
+"privacy_show_email_subtitle" = "Twój główny i zapasowy adres e-mail będą widoczne na publicznym profilu twojego pupila";
 "privacy_show_address" = "Pokaż adres";
-"privacy_show_address_subtitle" = "Twój adres będzie widoczny na publicznym profilu twojego zwierzęcia";
+"privacy_show_address_subtitle" = "Twój adres będzie widoczny na publicznym profilu twojego pupila";
 "privacy_show_secondary_phone" = "Pokaż zapasowy telefon";
-"privacy_show_secondary_phone_subtitle" = "Wyświetl zapasowy numer telefonu na publicznym profilu twojego zwierzęcia";
+"privacy_show_secondary_phone_subtitle" = "Wyświetl zapasowy numer telefonu na publicznym profilu twojego pupila";
 "privacy_show_secondary_email" = "Pokaż zapasowy e-mail";
-"privacy_show_secondary_email_subtitle" = "Wyświetl zapasowy adres e-mail na publicznym profilu twojego zwierzęcia";
+"privacy_show_secondary_email_subtitle" = "Wyświetl zapasowy adres e-mail na publicznym profilu twojego pupila";
 "privacy_data_privacy" = "Ochrona danych";
 "privacy_privacy_policy" = "Polityka prywatności";
 "privacy_title" = "Tryb prywatności";
-"privacy_mode_footer" = "Ustawienia prywatności pomagają kontrolować, jakie informacje są udostępniane, gdy ktoś skanuje kod QR twojego zwierzęcia.";
+"privacy_mode_footer" = "Ustawienia prywatności pomagają kontrolować, jakie informacje są udostępniane, gdy ktoś skanuje kod QR twojego pupila.";
 "privacy_settings_updated" = "Ustawienia prywatności zaktualizowane";
 "privacy_settings_failed" = "Nie udało się zaktualizować ustawień prywatności";
 
 // MARK: - Usuwanie konta
 "delete_account" = "Usuń konto";
-"missing_pets_label" = "Zaginione zwierzęta: %@";
+"missing_pets_label" = "Zaginione pupile: %@";
 "logout_confirm" = "Czy na pewno chcesz się wylogować?";
 "delete_account_full_warning" = "Tej operacji nie można cofnąć. Twoje konto zostanie trwale usunięte, wszystkie dane osobowe zostaną usunięte, a wszelkie aktywne subskrypcje zostaną anulowane.";
 "delete_confirm_checkbox" = "Rozumiem, że ta akcja jest nieodwracalna i wszystkie moje dane zostaną trwale usunięte";
-"delete_warning_message" = "To trwale usunie Twoje konto, wszystkie Twoje zwierzęta i wszystkie powiązane dane. Tej operacji nie można cofnąć.";
+"delete_warning_message" = "To trwale usunie Twoje konto, wszystkie Twoje pupile i wszystkie powiązane dane. Tej operacji nie można cofnąć.";
 
 // MARK: - Zamówienia
 "orders_title" = "Zamówienia";
 "order_number" = "Zamówienie #%@";
-"add_pet_first_replacement" = "Najpierw dodaj zwierzę, aby zamówić zamiennik nieśki.";
+"add_pet_first_replacement" = "Najpierw dodaj pupila, aby zamówić zamiennik nieśki.";
 "orders_no_orders" = "Brak zamówień";
 "orders_no_orders_message" = "Nie złożyłeś/aś jeszcze żadnych zamówień";
 "orders_information" = "Informacje o zamówieniu";
@@ -611,9 +594,9 @@
 "order_more_title" = "Zamów więcej nieśek";
 "order_more_complete" = "Zamówienie gotowe!";
 "order_more_confirmation" = "Wyślemy nieśki po potwierdzeniu płatności.";
-"order_more_pet_names" = "Imiona zwierząt";
-"order_more_pet_names_footer" = "Podaj imiona zwierząt, dla których chcesz nieśki. Każda nieśka zostanie grawerowana z imieniem zwierzęcia.";
-"order_more_add_another" = "Dodaj kolejne zwierzę";
+"order_more_pet_names" = "Imiona pupili";
+"order_more_pet_names_footer" = "Podaj imiona pupili, dla których chcesz nieśki. Każda nieśka zostanie grawerowana z imieniem pupila.";
+"order_more_add_another" = "Dodaj kolejne pupila";
 "order_more_your_info" = "Twoje dane";
 "order_more_shipping" = "Adres dostawy";
 "order_more_street" = "Ulica i numer domu";
@@ -626,27 +609,27 @@
 "order_more_shipping_cost" = "Wysyłka";
 "order_more_total" = "Razem";
 "order_more_proceed_to_payment" = "Przejdź do płatności";
-"order_more_redirecting" = "Przekierowywanie...";
+"order_more_redirecting" = "Przekierowywanie…";
 
 // MARK: - Zamówienie nieśki zamiennej
-"order_replace_title" = "Zamów zawieszk zamienną";
-"order_replace_subtitle" = "Wyślemy nową identyfikację dla Twojego zwierzęcia";
+"order_replace_title" = "Zamów adresówkę zamienną";
+"order_replace_subtitle" = "Wyślemy nową identyfikację dla Twojego pupila";
 "order_replace_complete" = "Zamówienie gotowe!";
 "order_replace_confirmation" = "Twoja nieśka zamienna zostanie wysłana na podany adres.";
-"order_replace_pet_info" = "Informacje o zwierzęciu";
+"order_replace_pet_info" = "Informacje o pupilowi";
 "order_replace_important" = "Ważne informacje";
 "order_replace_eligible_free" = "Pierwszy zamiennik jest bezpłatny";
 "order_replace_additional_fee %@" = "Dodatkowe zamienniki: %@";
 "order_replace_shipping" = "Adres dostawy";
-"order_replace_shipping_footer" = "Wyślemy zawieszk zamienną na ten adres.";
+"order_replace_shipping_footer" = "Wyślemy adresówkę zamienną na ten adres.";
 "order_replace_street" = "Ulica i numer domu";
 "order_replace_line2" = "Mieszkanie, piętro itp. (opcjonalnie)";
 "order_replace_city" = "Miasto";
 "order_replace_postal" = "Kod pocztowy";
 "order_replace_country" = "Kraj";
 "order_replace_phone" = "Numer telefonu (opcjonalnie)";
-"order_replace_creating" = "Tworzenie zamówienia...";
-"order_replace_free_button" = "Potwierdź i zamów bezpłatną zawieszk zamienną";
+"order_replace_creating" = "Tworzenie zamówienia…";
+"order_replace_free_button" = "Potwierdź i zamów bezpłatną adresówkę zamienną";
 "order_replace_paid_button %@" = "Potwierdź i zapłać %@";
 
 // MARK: - Metoda dostawy i PostaPont
@@ -660,8 +643,8 @@
 // MARK: - Publiczny profil zwierzęcia
 "public_profile_preview" = "Podgląd profilu publicznego";
 "public_profile_subtitle" = "Tak inni widzą profil %@";
-"owner_notified_sms_email" = "Właściciel %@ otrzyma SMS i e-mail z twoją lokalizacją";
-"contact_owner_plea" = "Proszę, daj znać mojemu właścicielowi, że mnie znalazłeś/aś…";
+"owner_notified_sms_email" = "Opiekun %@ otrzyma SMS i e-mail z twoją lokalizacją";
+"contact_owner_plea" = "Proszę, daj znać mojemu opiekunowi, że mnie znalazłeś/aś…";
 "contact_info_not_set" = "Dane kontaktowe nie zostały jeszcze skonfigurowane";
 "contact_info_hidden" = "Dane kontaktowe są ukryte";
 "contact_info_hidden_hint" = "Twoje dane kontaktowe są skonfigurowane, ale ukryte ze względu na ustawienia prywatności. Zaktualizuj w Konto > Tryb prywatności.";
@@ -671,18 +654,17 @@
 "behavior_notes" = "Uwagi o zachowaniu";
 "yes" = "Tak";
 "how_it_works" = "Jak to działa";
-"help_reunite_pet" = "Pomóż bezpiecznie zreunifikować %@ z właścicielem";
+"help_reunite_pet" = "Pomóż bezpiecznie zreunifikować %@ z opiekunem";
 "step_share_location" = "Udostępnij swoją lokalizację";
-"step_share_location_desc" = "Dotknij przycisku powyżej, aby udostępnić swoją lokalizację właścicielowi";
-"step_owner_notified" = "Właściciel otrzymuje powiadomienie";
-"step_owner_notified_desc" = "Właściciel otrzymuje SMS i e-mail z twoją lokalizacją";
+"step_share_location_desc" = "Dotknij przycisku powyżej, aby udostępnić swoją lokalizację opiekunowi";
+"step_owner_notified" = "Opiekun otrzymuje powiadomienie";
+"step_owner_notified_desc" = "Opiekun otrzymuje SMS i e-mail z twoją lokalizacją";
 "step_quick_reunion" = "Szybka reunifikacja";
-"step_quick_reunion_desc" = "Właściciel może nawigować do twojej lokalizacji, aby odebrać zwierzę";
+"step_quick_reunion_desc" = "Opiekun może nawigować do twojej lokalizacji, aby odebrać pupila";
 
 // MARK: - Tryb offline
 "offline_mode" = "Tryb offline";
-"syncing" = "Synchronizowanie...";
-"sync_completed" = "Synchronizacja zakończona";
+"syncing" = "Synchronizowanie…";
 "sync_failed" = "Synchronizacja nie powiodła się: %@";
 "sync_no_connection" = "Nie można synchronizować: brak połączenia z internetem";
 "offline_changes_sync" = "Zmiany zostaną zsynchronizowane po przywróceniu połączenia";
@@ -718,27 +700,27 @@
 
 // MARK: - Dynamiczne opisy skanera
 "scanner_step1_dynamic_desc" = "Dotknij przycisku powyżej, aby udostępnić, gdzie znalazłeś/aś %@";
-"scanner_step3_dynamic_desc" = "Pozostań w pobliżu lokalizacji, aby właściciel mógł cię i %@ znaleźć";
+"scanner_step3_dynamic_desc" = "Pozostań w pobliżu lokalizacji, aby opiekun mógł cię i %@ znaleźć";
 
 // MARK: - Dodatkowe klucze profilu
 "not_set" = "Nie ustawiono";
-"saving" = "Zapisywanie...";
+"saving" = "Zapisywanie…";
 "edit_information" = "Edytuj informacje";
 "registered_address" = "Zarejestrowany adres";
 "address_shipping_footer" = "Podaj pełny adres do celów wysyłki i rozliczeń";
 "address_delivery_prompt" = "Dodaj adres, aby umożliwić wysyłkę i dostarczenie nieśek QR";
-"contacts_info_full" = "Te dane kontaktowe będą wyświetlane, gdy ktoś zeskanuje zawieszk QR twojego zwierzęcia. Możesz dodać do dwóch adresów e-mail i numerów telefonów.";
+"contacts_info_full" = "Te dane kontaktowe będą wyświetlane, gdy ktoś zeskanuje adresówkę QR twojego pupila. Możesz dodać do dwóch adresów e-mail i numerów telefonów.";
 "contacts_primary_email_edit_footer" = "Główny adres e-mail twojego konta";
-"contacts_secondary_email_edit_footer" = "Zapasowy e-mail do powiadomień o odnalezieniu zwierzęcia";
+"contacts_secondary_email_edit_footer" = "Zapasowy e-mail do powiadomień o odnalezieniu pupila";
 "contacts_primary_phone_edit_footer" = "Twój główny numer kontaktowy";
 "contacts_secondary_phone_edit_footer" = "Zapasowy telefon na wypadek nagłych sytuacji";
-"contacts_visible_on_tag" = "Widoczne na zawieszce";
+"contacts_visible_on_tag" = "Widoczne na adresówce";
 "contacts_no_type_added" = "Brak %@ dodanego/ej";
 
 // MARK: - Dodatkowe klucze zamówienia nieśki zamiennej
 "order_replace_upgrade_hint" = "Przejdź na plan Standard lub Maximum, aby uzyskać bezpłatne zamienniki";
 "order_replace_old_deactivated" = "Twój stary kod QR zostanie dezaktywowany po złożeniu zamówienia";
-"order_replace_delivery_time" = "Otrzymasz nową zawieszk w ciągu 5–7 dni roboczych";
+"order_replace_delivery_time" = "Otrzymasz nową adresówkę w ciągu 5–7 dni roboczych";
 "order_replace_scan_activate" = "Po otrzymaniu nowej nieśki będziesz musiał/a ją zeskanować, aby ją aktywować";
 
 // MARK: - Dodatkowe klucze offline
@@ -747,30 +729,30 @@
 // MARK: - Wybór planu
 "plan_choose_title" = "Wybierz swój plan";
 "plan_load_failed" = "Nie udało się wczytać planów";
-"plan_feature_qr_tag" = "Nieśka QR dla twojego zwierzęcia";
+"plan_feature_qr_tag" = "Nieśka QR dla twojego pupila";
 "plan_feature_scan_notif" = "Natychmiastowe powiadomienia o skanowaniu";
-"plan_feature_public_profile" = "Publiczny profil zwierzęcia";
+"plan_feature_public_profile" = "Publiczny profil pupila";
 "plan_feature_secure_storage" = "Bezpieczne przechowywanie danych";
-"plan_feature_lost_alerts" = "Alerty o zaginionych zwierzętach do weterynarzy i społeczności";
-"plan_feature_lost_alerts_short" = "Alerty o zaginionych zwierzętach";
+"plan_feature_lost_alerts" = "Alerty o zaginionych pupilach do weterynarzy i społeczności";
+"plan_feature_lost_alerts_short" = "Alerty o zaginionych pupilach";
 "plan_feature_sms" = "Powiadomienia SMS";
-"plan_feature_photos" = "Do 10 zdjęć na zwierzę";
+"plan_feature_photos" = "Do 10 zdjęć na pupila";
 "plan_feature_replacements" = "Bezpłatne zamienniki nieśek";
 
 // MARK: - Karta alertów (Część 1)
 "alerts_loading" = "Ładowanie alertów…";
-"alerts_missing_pets_title" = "Alerty o zaginionych zwierzętach";
+"alerts_missing_pets_title" = "Alerty o zaginionych pupilach";
 "alerts_list" = "Lista";
 "alerts_map" = "Mapa";
 "alerts_no_nearby_title %@" = "Brak alertów %@ w pobliżu";
 "alerts_no_nearby_message %@" = "Brak alertów %@ w twoim rejonie w tej chwili";
 "alerts_location_required" = "Wymagana lokalizacja";
-"alerts_location_required_message" = "Aby zobaczyć alerty o zaginionych zwierzętach w pobliżu, włącz usługi lokalizacji lub dodaj swój adres.";
+"alerts_location_required_message" = "Aby zobaczyć alerty o zaginionych pupilach w pobliżu, włącz usługi lokalizacji lub dodaj swój adres.";
 "alerts_enable_location" = "Włącz usługi lokalizacji w Ustawieniach";
 "alerts_or" = "LUB";
 "alerts_add_address_profile" = "Dodaj swój adres w profilu";
 "alerts_add_my_address" = "Dodaj mój adres";
-"alerts_no_missing_nearby" = "Brak alertów o zaginionych zwierzętach w pobliżu";
+"alerts_no_missing_nearby" = "Brak alertów o zaginionych pupilach w pobliżu";
 
 // MARK: - Status i szczegóły alertu (Część 1)
 "alert_status_missing" = "Zaginiony/a";
@@ -786,7 +768,7 @@
 "alert_mark_found_failed" = "Nie udało się oznaczyć jako znalezione";
 "alert_marked_found_success" = "%@ zostało oznaczone jako znalezione!";
 "alert_mark_found_error" = "Nie udało się oznaczyć jako znalezione: %@";
-"pet_default" = "zwierzę";
+"pet_default" = "pupila";
 "report_found" = "Zgłoś jako znalezione";
 
 // MARK: - Adnotacje mapy (Część 1)
@@ -797,20 +779,20 @@
 
 // MARK: - Monit o powiadomienia push (Część 1)
 "push_prompt_title" = "Pozostań w kontakcie";
-"push_prompt_benefit_scan" = "Natychmiastowe alerty, gdy nieśka twojego zwierzęcia zostanie zeskanowana";
+"push_prompt_benefit_scan" = "Natychmiastowe alerty, gdy nieśka twojego pupila zostanie zeskanowana";
 "push_prompt_benefit_sighting" = "Raporty spostrzeżeń ze społeczności";
-"push_prompt_benefit_found" = "Natychmiastowe powiadomienie, gdy twoje zwierzę zostanie odnalezione";
-"push_prompt_benefit_missing" = "Alerty o zaginionych zwierzętach w twoim rejonie";
+"push_prompt_benefit_found" = "Natychmiastowe powiadomienie, gdy twoje pupila zostanie odnalezione";
+"push_prompt_benefit_missing" = "Alerty o zaginionych pupilach w twoim rejonie";
 "push_prompt_enable" = "Włącz powiadomienia";
 "push_prompt_later" = "Może później";
 
 // MARK: - Polecenia (Część 1)
 "referral_loading" = "Ładowanie…";
 "referral_your_code" = "Twój kod polecenia";
-"referral_share_footer" = "Share your referral code with friends.";
+"referral_share_footer" = "Udostępnij swój kod polecający znajomym.";
 "referral_how_it_works" = "Jak to działa";
 "referral_step_1" = "Udostępnij swój kod polecenia znajomemu";
-"referral_step_2" = "They sign up with your code";
+"referral_step_2" = "Rejestrują się z Twoim kodem";
 "referral_step_3" = "Oboje otrzymujecie 2 miesiące za darmo!";
 "referral_history" = "Historia poleceń";
 "referral_no_referrals" = "Brak poleceń";
@@ -825,7 +807,6 @@
 "billing_manage_subscription" = "Zarządzaj subskrypcją";
 "billing_subscription" = "Subskrypcja";
 "billing_portal_footer" = "Zarządzaj subskrypcją, metodą płatności i danymi rozliczeniowymi przez Stripe.";
-"billing_invoices" = "Faktury";
 "billing_loading_invoices" = "Ładowanie faktur…";
 "billing_no_invoices" = "Brak faktur";
 "billing_invoice" = "Faktura";
@@ -845,11 +826,11 @@
 "action_queued_offline" = "Akcja zakolejkowana. Zostanie zsynchronizowana po przywróceniu połączenia.";
 
 // MARK: - Etykiety ułatwień dostępu
-"accessibility_pet_photo" = "Zdjęcie zwierzęcia";
+"accessibility_pet_photo" = "Zdjęcie pupila";
 "accessibility_share_location" = "Udostępnij lokalizację";
-"accessibility_call_owner" = "Zadzwoń do właściciela";
-"accessibility_email_owner" = "Napisz e-mail do właściciela";
-"accessibility_owner_address" = "Adres właściciela";
+"accessibility_call_owner" = "Zadzwoń do opiekuna";
+"accessibility_email_owner" = "Napisz e-mail do opiekuna";
+"accessibility_owner_address" = "Adres opiekuna";
 "accessibility_medical_info" = "Informacje medyczne";
 "accessibility_allergies" = "Alergie";
 "accessibility_notes" = "Uwagi";
@@ -858,7 +839,7 @@
 "accessibility_camera_required" = "Wymagany dostęp do aparatu";
 "accessibility_profile_avatar" = "Awatar profilu";
 "accessibility_edit_profile_photo" = "Edytuj zdjęcie profilowe";
-"accessibility_pet_photo_placeholder" = "Miejsce na zdjęcie zwierzęcia";
+"accessibility_pet_photo_placeholder" = "Miejsce na zdjęcie pupila";
 "accessibility_retry" = "Spróbuj ponownie";
 "accessibility_dismiss" = "Odrzuć";
 
@@ -872,7 +853,7 @@
 "story_share_title" = "Podziel się swoją historią";
 "story_pet_is_home %@" = "%@ jest już w domu!";
 "story_share_reunion" = "Podziel się historią powrotu do domu!";
-"story_inspire_others %@" = "Twoja historia o %@ może dać nadzieję innym właścicielom zwierząt.";
+"story_inspire_others %@" = "Twoja historia o %@ może dać nadzieję innym opiekunom pupili.";
 "story_share_my_story" = "Podziel się moją historią";
 "story_share_how %@" = "Podziel się, jak %@ zostało/a odnalezione/a i zreunifikowane/a";
 "story_privacy_note" = "Twoje dane kontaktowe nie zostaną udostępnione.";
@@ -893,40 +874,40 @@
 "breed_optional" = "Rasa (opcjonalnie)";
 
 // MARK: - Szybkie oznaczanie jako zaginione (Część 1)
-"quick_lost_select_pet" = "Wybierz zwierzę do zgłoszenia jako zaginione";
-"quick_lost_all_missing" = "Wszystkie twoje zwierzęta są już oznaczone jako zaginione.";
+"quick_lost_select_pet" = "Wybierz pupila do zgłoszenia jako zaginione";
+"quick_lost_all_missing" = "Wszystkie twoje pupile są już oznaczone jako zaginione.";
 "quick_lost_title" = "Zgłoś zaginięcie";
 
 // MARK: - Szybkie oznaczanie jako znalezione (Część 1)
-"quick_found_select_pet" = "Wybierz zwierzę do oznaczenia jako znalezione";
+"quick_found_select_pet" = "Wybierz pupila do oznaczenia jako znalezione";
 "quick_found_currently_missing" = "Aktualnie zaginione";
-"quick_found_no_missing" = "Brak zaginionych zwierząt do oznaczenia jako znalezione.";
-"quick_found_title" = "Oznacz zwierzę jako znalezione";
+"quick_found_no_missing" = "Brak zaginionych pupili do oznaczenia jako znalezione.";
+"quick_found_title" = "Oznacz pupila jako znalezione";
 "quick_found_mark_failed" = "Nie udało się oznaczyć %@ jako znalezione: %@";
 
 // MARK: - Oznaczanie jako zaginione (Część 1)
 "location_current" = "Bieżąca lokalizacja";
 "location_my_address" = "Mój adres";
 "location_custom" = "Własny adres";
-"mark_lost_pet_info" = "Informacje o zwierzęciu";
+"mark_lost_pet_info" = "Informacje o pupilowi";
 "mark_lost_last_seen" = "Ostatnie znane miejsce";
 "mark_lost_alerts_footer" = "Alerty zostaną wysłane do użytkowników, weterynarzy i schronisk w promieniu 10km.";
 "mark_lost_getting_location" = "Pobieranie lokalizacji…";
 "mark_lost_no_address" = "Brak zarejestrowanego adresu. Przejdź do Profil > Adres.";
 "mark_lost_address_placeholder" = "Podaj adres lub lokalizację";
 "mark_lost_additional_info" = "Dodatkowe informacje";
-"mark_lost_additional_placeholder" = "Opisz, kiedy i gdzie widziałeś/aś ostatnio swoje zwierzę, co miało na sobie itp.";
+"mark_lost_additional_placeholder" = "Opisz, kiedy i gdzie widziałeś/aś ostatnio swoje pupila, co miało na sobie itp.";
 "mark_lost_sends_to" = "Ten alert zostanie wysłany do:";
-"mark_lost_nearby_owners" = "Pobliskich właścicieli zwierząt";
+"mark_lost_nearby_owners" = "Pobliskich opiekunów pupili";
 "mark_lost_vet_clinics" = "Klinik weterynaryjnych w okolicy";
-"mark_lost_shelters" = "Pobliskich schronisk dla zwierząt";
+"mark_lost_shelters" = "Pobliskich schronisk dla pupili";
 "mark_lost_report" = "Zgłoś zaginięcie";
 "mark_lost_title" = "Zgłoś zaginięcie";
 
 // MARK: - Dodatki do galerii zdjęć (Część 1)
 "photo_count %lld" = "%lld zdjęć";
-"photo_uploading_count %lld %lld" = "Przesyłanie zdjęcia %lld z %lld...";
-"photo_uploading" = "Przesyłanie zdjęcia...";
+"photo_uploading_count %lld %lld" = "Przesyłanie zdjęcia %lld z %lld…";
+"photo_uploading" = "Przesyłanie zdjęcia…";
 "photo_primary_updated" = "Główne zdjęcie zaktualizowane";
 "photo_primary_failed" = "Nie udało się ustawić głównego zdjęcia";
 "photo_upload_success" = "%d zdjęcie(a) przesłane pomyślnie";
@@ -936,26 +917,26 @@
 
 // MARK: - Uzupełnienie brakujących lokalizacji
 "login_required" = "Wymagane logowanie";
-"login_required_activate_tag" = "Zaloguj się, aby aktywować tę zawieszk dla swojego zwierzęcia";
-"login_activate_instructions" = "Po zalogowaniu zeskanuj zawieszk ponownie lub przejdź do Moje zwierzęta, aby ją aktywować";
+"login_required_activate_tag" = "Zaloguj się, aby aktywować tę adresówkę dla swojego pupila";
+"login_activate_instructions" = "Po zalogowaniu zeskanuj adresówkę ponownie lub przejdź do Moje pupile, aby ją aktywować";
 "free_price" = "BEZPŁATNE";
 "referral_expires %@" = "Wygasa: %@";
 
 // MARK: - Reunifikacja w historiach sukcesu
 "reunion_template" = "%@ wrócił/a do domu. Po %@ zaginięcia %@ z powodzeniem zreunifikował/a się ze swoją rodziną. Dziękujemy naszej wspaniałej społeczności za sprowadzenie %@ do domu!";
 "reunion_template_no_time" = "%@ wrócił/a do swojej rodziny! Dziękujemy naszej wspaniałej społeczności za sprowadzenie %@ do domu!";
-"owners_story" = "Historia właściciela:";
+"owners_story" = "Historia opiekuna:";
 "some_time" = "jakiś czas";
 "list" = "Lista";
 "map" = "Mapa";
 "remove_from_success_stories" = "Usuń z historii sukcesu";
 "removed_from_success_stories" = "Usunięto z historii sukcesu";
 "remove_story_confirm_title" = "Usunąć historię sukcesu?";
-"remove_story_confirm_message" = "Spowoduje to usunięcie historii twojego zwierzęcia z publicznego kanału historii sukcesu.";
+"remove_story_confirm_message" = "Spowoduje to usunięcie historii twojego pupila z publicznego kanału historii sukcesu.";
 
 // MARK: - Zdarzenia subskrypcji SSE
 "sse_subscription_title" = "Subskrypcja zaktualizowana";
-"sse_subscription_message" = "Your Senra subscription has been updated.";
+"sse_subscription_message" = "Twoja subskrypcja SENRA została zaktualizowana.";
 "sse_referral_title" = "Użyto kodu polecenia!";
 "sse_referral_message" = "%@ użył/a twojego kodu polecenia!";
 
@@ -965,17 +946,17 @@
 "reward_badge" = "Nagroda: %@";
 
 // MARK: - Dodatkowe klucze lokalizacyjne
-"cannot_delete_missing_message_short" = "Przed usunięciem oznacz to zwierzę jako znalezione.";
-"plan_feature_pets_count" = "Zwierzęta: %@";
-"plan_feature_photos_count" = "%lld zdjęć na zwierzę";
+"cannot_delete_missing_message_short" = "Przed usunięciem oznacz to pupila jako znalezione.";
+"plan_feature_pets_count" = "Pupile: %@";
+"plan_feature_photos_count" = "%lld zdjęć na pupila";
 "referral_status_pending" = "Oczekujące";
 "referral_status_signed_up" = "Zarejestrowany/a";
 "referral_status_subscribed" = "Active";
 "referral_status_rewarded" = "Nagrodzony/a";
-"referral_share_message" = "Użyj mojego kodu polecenia %@, aby uzyskać 2 miesiące za darmo w Pet Safety! https://senra.pet/choose-plan?referral=%@";
+"referral_share_message" = "Użyj mojego kodu polecającego %@ i zdobądź 2 miesiące za darmo na SENRA! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Pierwsze kroki";
 "help_faq_group_tags_scanning" = "Nieśki i skanowanie";
-"help_faq_group_missing_pets" = "Zaginione zwierzęta i alerty";
+"help_faq_group_missing_pets" = "Zaginione pupile i alerty";
 "help_faq_group_billing_plans" = "Płatności i plany";
 "help_faq_group_privacy_account" = "Prywatność i konto";
 "help_faq_group_troubleshooting" = "Rozwiązywanie problemów";
@@ -997,7 +978,7 @@
 "orders_item_count %lld" = "%lld pozycji";
 
 // MARK: - Skaner dodatkowy
-"scanner_owner_address" = "Adres właściciela";
+"scanner_owner_address" = "Adres opiekuna";
 
 // MARK: - Płatności dodatkowe
 "billing_past_due_title" = "Zaległa płatność";
@@ -1012,12 +993,12 @@
 "sync_failed_count" = "Nie udało się zsynchronizować";
 
 // MARK: - Formularz zwierzęcia dodatkowy
-"pet_limit_reached" = "Osiągnięto limit zwierząt";
-"pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
+"pet_limit_reached" = "Osiągnięto limit pupili";
+"pet_limit_reached_info" = "Osiągnąłeś maksymalną liczbę pupili dla tego konta. Odwiedź senra.pet, aby uzyskać więcej informacji.";
 "upgrade_to_ultimate" = "Przejdź na plan Maximum";
 "keep_current_plan" = "Zachowaj bieżący plan";
-"pet_limit_upgrade_message %@ %lld %@ %@" = "Twój plan %@ pozwala na %lld zwierzę. Przejdź na %@ za %@, aby dodać do 10 zwierząt.";
-"pet_limit_upgrade_generic" = "Zmień plan, aby dodać więcej zwierząt.";
+"pet_limit_upgrade_message %@ %lld %@ %@" = "Twój plan %@ pozwala na %lld pupila. Przejdź na %@ za %@, aby dodać do 10 pupili.";
+"pet_limit_upgrade_generic" = "Zmień plan, aby dodać więcej pupili.";
 
 // MARK: - Nagłówki gatunków w wyborze rasy
 "species_dog" = "Pies";
@@ -1030,15 +1011,15 @@
 "apply_code" = "Zastosuj";
 "referral_code_applied" = "Kod polecenia zastosowany! Otrzymasz 2 miesiące za darmo.";
 "referral_code_invalid" = "Nieprawidłowy lub wygasły kod polecenia";
-"referral_use_friend_footer" = "Enter a friend's referral code to receive a reward.";
+"referral_use_friend_footer" = "Wprowadź kod polecający znajomego, aby otrzymać nagrodę.";
 
 // MARK: - Gift Orders
 "order_gift_toggle" = "Zamów jako prezent";
-"order_gift_description" = "Imiona zwierząt są opcjonalne w zamówieniach prezentowych. Odbiorca może je dodać podczas aktywacji.";
-"order_gift_quantity" = "Liczba tagów";
+"order_gift_description" = "Imiona pupili są opcjonalne w zamówieniach prezentowych. Odbiorca może je dodać podczas aktywacji.";
+"order_gift_quantity" = "Liczba adresówek";
 "order_gift_recipient_name" = "Imię odbiorcy (opcjonalne)";
 "order_gift_message" = "Wiadomość prezentowa (opcjonalne)";
-"order_gift_message_placeholder" = "Dodaj osobistą wiadomość...";
+"order_gift_message_placeholder" = "Dodaj osobistą wiadomość…";
 "order_gift_badge" = "Zamówienie prezentowe";
 
 // MARK: - Plans (missing keys)
@@ -1046,13 +1027,13 @@
 "plan_all_include" = "Wszystkie plany zawierają";
 "plan_choose_subtitle" = "Wybierz plan odpowiedni do Twoich potrzeb";
 "plan_current" = "Aktualny plan";
-"plan_loading" = "Ładowanie planów...";
+"plan_loading" = "Ładowanie planów…";
 "plan_paid_add" = "Płatne plany dodają";
 "plan_popular" = "Popularny";
 "plan_select %@" = "Wybierz %@";
 "plan_select_free" = "Zacznij za darmo";
-"plan_skip_free" = "Kontynuuj z darmowym planem";
-"plan_tag_activated" = "Twój tag został aktywowany!";
+"plan_skip_free" = "Pomiń";
+"plan_tag_activated" = "Adresówka aktywna!";
 "plan_upgrade_subtitle" = "Ulepsz, aby uzyskać dostęp do większej liczby funkcji";
 "plan_upgrade_title" = "Ulepsz swój plan";
 "sighting_queued_offline" = "Zgłoszenie w kolejce do synchronizacji";
@@ -1075,7 +1056,6 @@
 "ready_to_activate" = "Gotowe do aktywacji";
 "still_processing" = "W trakcie realizacji";
 "scan_tag_now" = "Skanuj nieśkę";
-"create_profile_first" = "Utwórz profil";
 "create_profile_while_waiting" = "Utwórz profil podczas oczekiwania";
 "all_caught_up" = "Wszystko aktualne!";
 "all_caught_up_description" = "Nie masz żadnych oczekujących rejestracji nieśek.";
@@ -1086,21 +1066,21 @@
 "status_pending" = "Oczekujące";
 "activation_help_title" = "Jak aktywować nieśkę";
 "activation_help_step1" = "Poczekaj na dostarczenie nieśki";
-"activation_help_step2" = "Zeskanuj kod QR na zawieszce";
-"activation_help_step3" = "Wybierz zwierzaka do powiązania";
+"activation_help_step2" = "Zeskanuj kod QR na adresówce";
+"activation_help_step3" = "Wybierz pupila do powiązania";
 "activation_help_step4" = "Wybierz plan subskrypcji";
 
 // MARK: - Tag Activation Pet Prioritization
-"pets_from_order" = "Zwierzęta z Twojego zamówienia";
+"pets_from_order" = "Pupile z Twojego zamówienia";
 "from_your_order" = "Z Twojego zamówienia";
 "needs_profile" = "Potrzebuje profilu";
 "create_profile_first" = "Utwórz profil";
 "create_profile_for" = "Utwórz profil dla %@";
-"other_pets" = "Inne zwierzęta";
+"other_pets" = "Inne pupile";
 "link_to_pet" = "Połącz z %@";
-"no_pets_yet" = "Jeszcze brak zwierząt";
-"create_first_pet" = "Utwórz profil zwierzęcia, aby aktywować nieśkę.";
-"create_new_pet" = "Utwórz nowe zwierzę";
+"no_pets_yet" = "Jeszcze brak pupili";
+"create_first_pet" = "Utwórz profil pupila, aby aktywować nieśkę.";
+"create_new_pet" = "Utwórz nowe pupila";
 
 // MARK: - Public Profile Details
 "sex_label" = "Płeć";
@@ -1110,17 +1090,17 @@
 // MARK: - Notifications Inbox
 "notifications_title" = "Powiadomienia";
 "no_notifications" = "Brak powiadomień";
-"no_notifications_desc" = "Wszystko aktualne! Powiadomienia pojawią się tutaj, gdy ktoś zeskanuje nieśkę Twojego zwierzęcia.";
+"no_notifications_desc" = "Wszystko aktualne! Powiadomienia pojawią się tutaj, gdy ktoś zeskanuje nieśkę Twojego pupila.";
 "mark_all_read" = "Oznacz wszystkie jako przeczytane";
 "load_more" = "Załaduj więcej";
 "just_now" = "Właśnie teraz";
 
 // MARK: - Activation Error Messages
 "activation_error_qr_not_found" = "Kod QR nie został rozpoznany. Upewnij się, że skanujesz oficjalną nieśkę SENRA.";
-"activation_error_already_activated" = "Ta nieśka jest już przypisana do innego zwierzęcia. Skontaktuj się ze wsparciem.";
+"activation_error_already_activated" = "Ta nieśka jest już przypisana do innego pupila. Skontaktuj się ze wsparciem.";
 "activation_error_not_linked" = "Ta nieśka nie została jeszcze przypisana do Twojego zamówienia. Poczekaj na potwierdzenie wysyłki.";
 "activation_error_not_shipped" = "Twoje zamówienie nie zostało jeszcze wysłane. Poczekaj na dostawę.";
-"activation_error_not_owner" = "To nie jest Twoje zwierzę. Wybierz jedno ze swoich zwierząt.";
+"activation_error_not_owner" = "To nie jest Twoje pupila. Wybierz jedno ze swoich pupili.";
 
 // MARK: - Breed Names
 "breed_dog_labrador_retriever" = "Labrador Retriever";
@@ -1235,8 +1215,8 @@
 "sighting_phone_invalid" = "Numer telefonu musi mieć od 5 do 30 znaków.";
 
 // Pet form warnings
-"profile_incomplete_warning" = "Uzupełnij profil zwierzęcia";
-"profile_incomplete_desc" = "Brakujące dane utrudniają odnalezienie zwierzęcia. Uzupełnij wagę, kolor i informacje medyczne.";
+"profile_incomplete_warning" = "Uzupełnij profil pupila";
+"profile_incomplete_desc" = "Brakujące dane utrudniają odnalezienie pupila. Uzupełnij wagę, kolor i informacje medyczne.";
 "identity_locked_title" = "Imię, gatunek i rasa są zablokowane";
 "identity_locked_desc" = "Tych pól nie można zmienić po aktywacji nieśki.";
 
@@ -1245,7 +1225,7 @@
 "cancel_warning_a" = "Stracisz natychmiastowe powiadomienia e-mail, SMS i alerty społecznościowe";
 "cancel_warning_b" = "Bezpłatna wymiana nieśek nie będzie już dostępna";
 "cancel_warning_c" = "Stracisz dostęp do alertów weterynaryjnych i schroniskowych";
-"cancel_warning_d" = "Twoje konto i rejestracje zwierząt pozostaną aktywne";
+"cancel_warning_d" = "Twoje konto i rejestracje pupili pozostaną aktywne";
 "cancel_access_until" = "Zachowasz dostęp do %@";
 "cancel_confirm" = "Anuluj subskrypcję";
 "keep_subscription" = "Zachowaj subskrypcję";
@@ -1253,15 +1233,14 @@
 "current_plan" = "Aktualny plan";
 "plan_renews" = "Odnawia się %@";
 "plan_cancels_on" = "Kończy się %@";
-"delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
+"delete_premium_warning" = "Usunięcie konta trwale usunie Twój profil. Jeśli chcesz również zakończyć aktywną subskrypcję SENRA, zrób to na senra.pet przed usunięciem.";
 "cancel_instead" = "Anuluj subskrypcję zamiast tego";
-
 
 // MARK: - Shelter Adoption
 
 // MARK: - Trial
-"trial_ends_on" = "Trial ends on %@";
-"trial_upgrade_now" = "Upgrade now to keep your features!";
+"trial_ends_on" = "Okres próbny kończy się %@";
+"trial_upgrade_now" = "Ulepsz teraz, aby zachować swoje funkcje!";
 
 // MARK: - Referral
 "referral_redeemed_on" = "Wykorzystano: %@";
@@ -1300,12 +1279,12 @@
 "appearance_light" = "Jasny";
 "appearance_dark" = "Ciemny";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
-"mark_lost_upgrade_prompt" = "W planie Starter twoje zwierzę zostanie oznaczone jako zagubione, ale powiadomienia do użytkowników, weterynarzy i schronisk wymagają subskrypcji Standard lub Maximum.";
+"mark_lost_starter_notice" = "Alerty społecznościowe wymagają subskrypcji SENRA.";
+"mark_lost_upgrade_prompt" = "W planie Starter twoje pupila zostanie oznaczone jako zagubione, ale powiadomienia do użytkowników, weterynarzy i schronisk wymagają subskrypcji Standard lub Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "np. 3 lata, 6 miesięcy (opcjonalnie)";
-"create_pet_profile" = "Utwórz profil zwierzęcia";
-"failed_load_pets" = "Nie udało się załadować zwierząt";
+"create_pet_profile" = "Utwórz profil";
+"failed_load_pets" = "Nie udało się załadować pupili";
 "accessibility_flashlight_on" = "Włącz latarkę";
 "accessibility_flashlight_off" = "Wyłącz latarkę";
 "location_label" = "Lokalizacja";
@@ -1319,35 +1298,35 @@
 "dob_set_date" = "Ustaw datę urodzenia";
 "dob_approximate" = "Przybliżona data";
 "weight_helper" = "Waga w kg (np. 4,5)";
-"order_more_pet_name_placeholder" = "Imię zwierzęcia";
-"order_more_subtitle" = "Zamów identyfikatory dla swoich zwierząt — identyfikatory za darmo, płacisz tylko za wysyłkę";
+"order_more_pet_name_placeholder" = "Imię pupila";
+"order_more_subtitle" = "Zamów identyfikatory dla swoich pupili — identyfikatory za darmo, płacisz tylko za wysyłkę";
 
 // MARK: - Welcome Screen
 "welcome_to_senra" = "Witaj w SENRA!";
-"welcome_subtitle" = "Bezpieczeństwo Twojego zwierzaka zaczyna się tutaj. Skonfiguruj swoją pierwszą plakietkę.";
-"welcome_step_1" = "Zeskanuj kod QR na plakietce";
-"welcome_step_2" = "Utwórz profil swojego zwierzaka";
-"welcome_step_3" = "Twój zwierzak jest chroniony!";
-"welcome_scan_first_tag" = "Skanuj pierwszą plakietkę";
+"welcome_subtitle" = "Bezpieczeństwo Twojego pupila zaczyna się tutaj. Skonfiguruj swoją pierwszą adresówkę.";
+"welcome_step_1" = "Zeskanuj kod QR na adresówce";
+"welcome_step_2" = "Utwórz profil swojego pupila";
+"welcome_step_3" = "Twój pupil jest chroniony!";
+"welcome_scan_first_tag" = "Skanuj adresówkę";
 "welcome_explore_account" = "Przeglądaj swoje konto";
 
 // MARK: - Tag Activation Flow
-"setup_your_tags" = "Skonfiguruj plakietki";
-"setup_your_tags_subtitle" = "Zamówiłeś plakietki dla tych zwierząt:";
+"setup_your_tags" = "Skonfiguruj adresówki";
+"setup_your_tags_subtitle" = "Zamówiłeś adresówki dla tych pupili:";
 "ready_to_setup" = "Gotowe do konfiguracji";
 "already_activated" = "Już aktywowana";
-"setting_up_tag_for %@" = "Konfiguracja plakietki dla %@";
-"tag_activated_for %@" = "Plakietka aktywowana dla %@!";
-"pet_now_protected" = "Twój zwierzak jest teraz chroniony przez SENRA";
-"more_tags_to_setup" = "Masz jeszcze plakietki do skonfigurowania";
-"setup_pet_tag %@" = "Skonfiguruj plakietkę %@";
+"setting_up_tag_for %@" = "Konfiguracja adresówki dla %@";
+"tag_activated_for %@" = "Adresówka aktywowana dla %@!";
+"pet_now_protected" = "Twój pupil jest teraz chroniony przez SENRA";
+"more_tags_to_setup" = "Masz jeszcze adresówki do skonfigurowania";
+"setup_pet_tag %@" = "Skonfiguruj adresówkę %@";
 "whats_next" = "Co dalej?";
 "choose_subscription_plan" = "Wybierz plan subskrypcji";
 "register_your_vet" = "Zarejestruj swojego weterynarza";
 "update_contact_details" = "Zaktualizuj dane kontaktowe i prywatność";
 "go_to_home" = "Przejdź na stronę główną";
 "thank_you_senra" = "Dziękujemy za korzystanie z SENRA!";
-"tap_pet_name_hint" = "Dotknij imienia zwierzaka, aby skonfigurować plakietkę";
+"tap_pet_name_hint" = "Dotknij imienia pupila, aby skonfigurować adresówkę";
 
 // MARK: - Age Formatting
 "age_1_year" = "1 rok";
@@ -1360,7 +1339,7 @@
 "biometric_touch_id" = "Touch ID";
 "biometric_optic_id" = "Optic ID";
 "biometric_generic" = "Biometria";
-"biometric_login_reason" = "Zaloguj się do Pet Safety";
+"biometric_login_reason" = "Zaloguj się do SENRA";
 "biometric_use_email" = "Użyj e-maila";
 "biometric_not_available" = "Uwierzytelnianie biometryczne niedostępne";
 "biometric_lockout" = "Zbyt wiele nieudanych prób. Spróbuj ponownie później.";
@@ -1368,18 +1347,18 @@
 "api_error_invalid_url" = "Nieprawidłowy URL";
 "api_error_invalid_response" = "Nieprawidłowa odpowiedź serwera";
 "api_error_unauthorized" = "Brak autoryzacji. Zaloguj się ponownie.";
-"api_error_pet_limit" = "Pet registration limit reached for this account.";
+"api_error_pet_limit" = "Osiągnięto limit rejestracji pupili dla tego konta.";
 "api_error_decoding" = "Nie udało się przetworzyć odpowiedzi serwera";
 "api_error_network %@" = "Błąd sieci: %@";
 "sync_no_internet" = "Brak możliwości synchronizacji: Brak połączenia z internetem";
-"sync_in_progress" = "Synchronizacja...";
+"sync_in_progress" = "Synchronizacja…";
 "sync_completed" = "Synchronizacja zakończona";
 "sync_failed %@" = "Synchronizacja nieudana: %@";
-"sync_action_mark_lost" = "Oznacz zwierzę jako zagubione";
-"sync_action_mark_found" = "Oznacz zwierzę jako znalezione";
+"sync_action_mark_lost" = "Oznacz pupila jako zagubione";
+"sync_action_mark_found" = "Oznacz pupila jako znalezione";
 "sync_action_report_sighting" = "Zgłoś obserwację";
 "sync_action_create_alert" = "Utwórz alert";
-"sync_action_update_pet" = "Zaktualizuj zwierzę";
+"sync_action_update_pet" = "Zaktualizuj pupila";
 "sync_time_never" = "Nigdy";
 "sync_time_just_now" = "Właśnie teraz";
 "sync_time_minutes_ago %lld" = "%lld min temu";
@@ -1393,3 +1372,4 @@
 // MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
 "tags_coming_soon_title" = "Fizyczne nieśki wkrótce dostępne";
 "tags_coming_soon_body" = "Już niedługo wyślemy pierwszą partię. Wróć za kilka dni.";
+"report_found_unavailable" = "Ta funkcja nie jest dostępna dla tego alertu. Skontaktuj się bezpośrednio z opiekunem, jeśli znalazłeś/aś pupila.";

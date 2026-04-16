@@ -1,7 +1,7 @@
 /* Info.plist localized strings — French */
 
 "CFBundleDisplayName" = "SENRA";
-"NSCameraUsageDescription" = "Nous avons besoin d'accéder à votre appareil photo pour prendre des photos de votre animal et scanner les codes QR sur les médaillons.";
-"NSPhotoLibraryUsageDescription" = "Nous avons besoin d'accéder à votre photothèque pour sélectionner des photos de votre animal.";
-"NSLocationWhenInUseUsageDescription" = "Nous avons besoin de votre position pour aider à retrouver les animaux perdus et afficher les alertes à proximité.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Nous avons besoin de votre position pour aider à retrouver les animaux perdus et afficher les alertes à proximité.";
+"NSCameraUsageDescription" = "Nous avons besoin d'accéder à ton appareil photo pour prendre des photos de ton animal de compagnie et scanner les codes QR sur les médailles connectées.";
+"NSPhotoLibraryUsageDescription" = "Nous avons besoin d'accéder à ta photothèque pour sélectionner des photos de ton animal de compagnie.";
+"NSLocationWhenInUseUsageDescription" = "Nous avons besoin de ta position pour aider à retrouver les animaux de compagnie perdus et afficher les alertes à proximité.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Nous avons besoin de ta position pour aider à retrouver les animaux de compagnie perdus et afficher les alertes à proximité.";

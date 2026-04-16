@@ -1,7 +1,7 @@
 /* Info.plist localized strings — Slovak */
 
 "CFBundleDisplayName" = "SENRA";
-"NSCameraUsageDescription" = "Potrebujeme prístup k vášmu fotoaparátu, aby ste mohli fotiť svojho miláčika a skenovať QR kódy na štítkoch pre zvieratá.";
-"NSPhotoLibraryUsageDescription" = "Potrebujeme prístup k vašej knižnici fotografií, aby ste mohli vybrať fotografie svojho miláčika.";
-"NSLocationWhenInUseUsageDescription" = "Potrebujeme vašu polohu, aby sme vám pomohli nájsť stratené zvieratá a zobrazili upozornenia v okolí.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Potrebujeme vašu polohu, aby sme vám pomohli nájsť stratené zvieratá a zobrazili upozornenia v okolí.";
+"NSCameraUsageDescription" = "Potrebujeme prístup k tvojmu fotoaparátu, aby si mohol fotiť svojho domáceho miláčika a skenovať QR kódy na známkach pre domáce miláčiky.";
+"NSPhotoLibraryUsageDescription" = "Potrebujeme prístup k tvojej knižnici fotografií, aby si mohol vybrať fotografie svojho domáceho miláčika.";
+"NSLocationWhenInUseUsageDescription" = "Potrebujeme tvoju polohu, aby sme ti pomohli nájsť stratených domácich miláčikov a zobrazili upozornenia v okolí.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Potrebujeme tvoju polohu, aby sme ti pomohli nájsť stratených domácich miláčikov a zobrazili upozornenia v okolí.";

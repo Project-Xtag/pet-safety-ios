@@ -1,7 +1,7 @@
 /* Info.plist localized strings — Polish */
 
 "CFBundleDisplayName" = "SENRA";
-"NSCameraUsageDescription" = "Potrzebujemy dostępu do aparatu, aby robić zdjęcia Twojego zwierzęcia i skanować kody QR na identyfikatorach.";
-"NSPhotoLibraryUsageDescription" = "Potrzebujemy dostępu do biblioteki zdjęć, aby wybrać zdjęcia Twojego zwierzęcia.";
-"NSLocationWhenInUseUsageDescription" = "Potrzebujemy Twojej lokalizacji, aby pomagać w znajdowaniu zagubionych zwierząt i wyświetlać pobliskie alerty.";
-"NSLocationAlwaysAndWhenInUseUsageDescription" = "Potrzebujemy Twojej lokalizacji, aby pomagać w znajdowaniu zagubionych zwierząt i wyświetlać pobliskie alerty.";
+"NSCameraUsageDescription" = "Potrzebujemy dostępu do aparatu, aby robić zdjęcia Twojego pupila i skanować kody QR na identyfikatorach.";
+"NSPhotoLibraryUsageDescription" = "Potrzebujemy dostępu do biblioteki zdjęć, aby wybrać zdjęcia Twojego pupila.";
+"NSLocationWhenInUseUsageDescription" = "Potrzebujemy Twojej lokalizacji, aby pomagać w znajdowaniu zagubionych pupili i wyświetlać pobliskie alerty.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Potrzebujemy Twojej lokalizacji, aby pomagać w znajdowaniu zagubionych pupili i wyświetlać pobliskie alerty.";
