@@ -11,15 +11,11 @@ struct WelcomeView: View {
             VStack(spacing: 32) {
                 Spacer().frame(height: 20)
 
-                // Hero icon
-                ZStack {
-                    Circle()
-                        .fill(Color("BrandColor").opacity(0.15))
-                        .frame(width: 120, height: 120)
-                    Image(systemName: "pawprint.fill")
-                        .font(.system(size: 50))
-                        .foregroundColor(Color("BrandColor"))
-                }
+                // Hero logo
+                Image("LaunchLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
 
                 // Headline
                 VStack(spacing: 10) {
@@ -52,7 +48,7 @@ struct WelcomeView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color("BrandColor"))
+                        .background(Color("TealAccent"))
                         .foregroundColor(.white)
                         .cornerRadius(14)
                     }
@@ -61,7 +57,7 @@ struct WelcomeView: View {
                     Button(action: onExploreAccount) {
                         Text("welcome_explore_account")
                             .font(.system(size: 15, weight: .medium))
-                            .foregroundColor(Color("BrandColor"))
+                            .foregroundColor(Color("TealAccent"))
                     }
                 }
 
@@ -82,7 +78,7 @@ private struct WelcomeStep: View {
         HStack(spacing: 16) {
             ZStack {
                 Circle()
-                    .fill(Color("BrandColor"))
+                    .fill(Color("TealAccent"))
                     .frame(width: 36, height: 36)
                 Text(number)
                     .font(.system(size: 16, weight: .bold))
@@ -92,7 +88,7 @@ private struct WelcomeStep: View {
             HStack(spacing: 10) {
                 Image(systemName: icon)
                     .font(.system(size: 18))
-                    .foregroundColor(Color("BrandColor"))
+                    .foregroundColor(Color("TealAccent"))
                     .frame(width: 24)
                 Text(text)
                     .font(.system(size: 15))
