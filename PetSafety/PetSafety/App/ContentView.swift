@@ -178,11 +178,20 @@ struct DeepLinkLoginPromptView: View {
 
 // MARK: - Main Tab View
 struct MainTabView: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var selectedTab = 0
 
     var body: some View {
+        if horizontalSizeClass == .regular {
+            iPadSidebarView
+        } else {
+            compactTabView
+        }
+    }
+
+    // MARK: iPhone — bottom tab bar (existing layout, unchanged)
+    private var compactTabView: some View {
         ZStack(alignment: .bottom) {
-            // Content
             Group {
                 switch selectedTab {
                 case 0:
@@ -215,10 +224,53 @@ struct MainTabView: View {
             }
             .animation(.easeInOut(duration: 0.2), value: selectedTab)
 
-            // Custom Tab Bar
             CustomTabBar(selectedTab: $selectedTab)
         }
         .ignoresSafeArea(.keyboard)
+    }
+
+    // MARK: iPad — sidebar rail navigation
+    private var iPadSidebarView: some View {
+        NavigationSplitView(columnVisibility: .constant(.doubleColumn)) {
+            List(selection: Binding(
+                get: { selectedTab },
+                set: { if let v = $0 { selectedTab = v } }
+            )) {
+                Label(String(localized: "tab_my_pets"), systemImage: "pawprint.fill")
+                    .tag(0)
+                Label(String(localized: "tab_scan_qr"), systemImage: "qrcode.viewfinder")
+                    .tag(1)
+                Label(String(localized: "tab_alerts"), systemImage: "exclamationmark.triangle.fill")
+                    .tag(2)
+                Label(String(localized: "tab_account"), systemImage: "person.fill")
+                    .tag(3)
+            }
+            .listStyle(.sidebar)
+            .navigationTitle("SENRA")
+        } detail: {
+            switch selectedTab {
+            case 0:
+                NavigationStack {
+                    PetsListView(
+                        onScanTag: { selectedTab = 1 },
+                        onExploreAccount: { selectedTab = 3 }
+                    )
+                }
+            case 1:
+                NavigationStack {
+                    QRScannerView()
+                }
+            case 2:
+                AlertsTabView()
+            case 3:
+                NavigationStack {
+                    ProfileView()
+                }
+            default:
+                EmptyView()
+            }
+        }
+        .navigationSplitViewStyle(.balanced)
     }
 }
 
