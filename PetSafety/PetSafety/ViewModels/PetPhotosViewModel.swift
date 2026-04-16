@@ -17,14 +17,25 @@ class PetPhotosViewModel: ObservableObject {
 
     // MARK: - Fetch Photos
 
-    /// Load all photos for a pet
-    func loadPhotos(for petId: String) async {
+    /// Load all photos for a pet, falling back to the profile image when the gallery is empty
+    func loadPhotos(for petId: String, profileImageUrl: String? = nil) async {
         isLoading = true
         errorMessage = nil
 
         do {
             let response = try await apiService.getPetPhotos(petId: petId)
             photos = response.photos.sorted { $0.displayOrder < $1.displayOrder }
+
+            if photos.isEmpty, let url = profileImageUrl, !url.isEmpty {
+                photos = [PetPhoto(
+                    id: "profile",
+                    petId: petId,
+                    photoUrl: url,
+                    isPrimary: true,
+                    displayOrder: 0,
+                    uploadedAt: ""
+                )]
+            }
 
             #if DEBUG
             print("✅ Loaded \(photos.count) photos for pet \(petId)")

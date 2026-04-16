@@ -198,10 +198,10 @@ struct PhotoGalleryView: View {
             Text("delete_photo_confirm")
         }
         .task {
-            await viewModel.loadPhotos(for: pet.id)
+            await viewModel.loadPhotos(for: pet.id, profileImageUrl: pet.photoUrl)
         }
         .refreshable {
-            await viewModel.loadPhotos(for: pet.id)
+            await viewModel.loadPhotos(for: pet.id, profileImageUrl: pet.photoUrl)
         }
     }
 
