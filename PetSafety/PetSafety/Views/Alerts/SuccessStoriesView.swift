@@ -349,17 +349,13 @@ struct SuccessStoriesMapView: View {
             }
         }
         .onAppear {
-            // Center map on user location or first story
-            var region = MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
-                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-            )
-            if let userLoc = userLocation {
-                region.center = userLoc
-            } else if let firstStory = stories.first, let coord = firstStory.coordinate {
-                region.center = coord
-            }
-            mapPosition = .region(region)
+            // Center on the user's registered address (~50 km radius).
+            // userLocation is set from GPS or geocoded address in loadSuccessStories().
+            let center = userLocation ?? CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278)
+            mapPosition = .region(MKCoordinateRegion(
+                center: center,
+                span: MKCoordinateSpan(latitudeDelta: 0.9, longitudeDelta: 0.9) // ~50 km radius
+            ))
         }
     }
 }
