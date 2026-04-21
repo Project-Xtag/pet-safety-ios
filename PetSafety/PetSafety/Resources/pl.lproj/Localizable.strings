@@ -236,7 +236,7 @@
 "contact_label" = "Kontakt: %@";
 
 // MARK: - Zgłoszenie zaginięcia / spostrzeżenia
-"last_seen_location" = "Ostatnio widziany/a w";
+"last_seen_location" = "Ostatnia znana lokalizacja";
 "report_sighting" = "Zgłoś spostrzeżenie";
 "notes" = "Uwagi";
 "sighting_location" = "Miejsce spostrzeżenia";
@@ -265,6 +265,8 @@
 "sighting_notes_placeholder" = "Opisz, co widziałeś, stan pupila, kierunek podróży…";
 "submit_sighting_report" = "Wyślij zgłoszenie spostrzeżenia";
 "sighting_reported_owner_notified" = "Spostrzeżenie zgłoszone! Opiekun został powiadomiony.";
+"sighting_address_not_found" = "Nie znaleźliśmy tego adresu. Sprawdź pisownię lub spróbuj pobliskiego punktu orientacyjnego.";
+"sighting_location_required" = "Udostępnij swoją obecną lokalizację lub wpisz adres.";
 
 // MARK: - Oznaczanie jako zaginione/znalezione
 
@@ -776,6 +778,10 @@
 "map_missing_alert" = "Alert o zaginionym";
 "map_found_alert" = "Alert o znalezionym";
 "time_less_than_hour" = "Mniej niż godzina";
+"time_duration_day" = "1 dzień";
+"time_duration_days %lld" = "%lld dni";
+"time_duration_hour" = "1 godzina";
+"time_duration_hours %lld" = "%lld godzin";
 
 // MARK: - Monit o powiadomienia push (Część 1)
 "push_prompt_title" = "Pozostań w kontakcie";

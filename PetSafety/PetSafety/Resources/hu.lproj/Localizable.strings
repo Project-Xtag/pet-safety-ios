@@ -236,7 +236,7 @@
 "contact_label" = "Kapcsolat: %@";
 
 // MARK: - Eltűnt bejelentés / Észlelés
-"last_seen_location" = "Utoljára látva";
+"last_seen_location" = "Utolsó ismert hely";
 "report_sighting" = "Észlelés bejelentése";
 "notes" = "Megjegyzések";
 "sighting_location" = "Észlelés helye";
@@ -265,6 +265,8 @@
 "sighting_notes_placeholder" = "Írd le, mit láttál, a kedvenc állapotát, haladási irányt…";
 "submit_sighting_report" = "Észlelés beküldése";
 "sighting_reported_owner_notified" = "Észlelés bejelentve! A gazdit értesítettük.";
+"sighting_address_not_found" = "Nem találjuk ezt a címet. Ellenőrizd a helyesírást vagy próbálj meg egy közeli nevezetességet.";
+"sighting_location_required" = "Oszd meg a jelenlegi helyzeted, vagy adj meg egy címet.";
 
 // MARK: - Eltűnt/Megtalált jelölés
 
@@ -783,6 +785,10 @@
 "map_missing_alert" = "Eltűnt riasztások";
 "map_found_alert" = "Megtalált kisállatok";
 "time_less_than_hour" = "Kevesebb mint egy óra";
+"time_duration_day" = "1 nap";
+"time_duration_days %lld" = "%lld nap";
+"time_duration_hour" = "1 óra";
+"time_duration_hours %lld" = "%lld óra";
 
 // MARK: - Push értesítés kérés (1. rész)
 "push_prompt_title" = "Maradj kapcsolatban";

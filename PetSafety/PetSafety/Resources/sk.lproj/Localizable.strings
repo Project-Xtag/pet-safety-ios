@@ -236,7 +236,7 @@
 "contact_label" = "Kontakt: %@";
 
 // MARK: - Nahlasenie straty / Pozorovanie
-"last_seen_location" = "Naposledy videne miesto";
+"last_seen_location" = "Posledné známe miesto";
 "report_sighting" = "Nahlásiť pozorovanie";
 "notes" = "Poznámky";
 "sighting_location" = "Miesto pozorovania";
@@ -265,6 +265,8 @@
 "sighting_notes_placeholder" = "Opíš, čo si videl, stav domáceho miláčika, smer pohybu…";
 "submit_sighting_report" = "Odoslať hlasenie o pozorovani";
 "sighting_reported_owner_notified" = "Pozorovanie nahlásené! Páníček bol informovaný.";
+"sighting_address_not_found" = "Túto adresu sme nenašli. Skontroluj pravopis alebo skús blízku pamätihodnosť.";
+"sighting_location_required" = "Zdieľaj svoju aktuálnu polohu alebo zadaj adresu.";
 
 // MARK: - Oznacenie stratene/najdene
 
@@ -778,6 +780,10 @@
 "map_missing_alert" = "Upozornenie na stratené";
 "map_found_alert" = "Upozornenie na nájdené";
 "time_less_than_hour" = "Menej ako hodina";
+"time_duration_day" = "1 deň";
+"time_duration_days %lld" = "%lld dní";
+"time_duration_hour" = "1 hodina";
+"time_duration_hours %lld" = "%lld hodín";
 
 // MARK: - Vyzva na push upozornenia (Cast 1)
 "push_prompt_title" = "Zostante v spojeni";

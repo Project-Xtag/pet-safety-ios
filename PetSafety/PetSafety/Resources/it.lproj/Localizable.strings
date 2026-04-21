@@ -265,6 +265,8 @@
 "sighting_notes_placeholder" = "Descrivi cosa hai visto, le condizioni dell'animale di compagnia, la direzione di movimento…";
 "submit_sighting_report" = "Invia segnalazione";
 "sighting_reported_owner_notified" = "Avvistamento segnalato! Il padrone è stato avvisato.";
+"sighting_address_not_found" = "Non abbiamo trovato questo indirizzo. Controlla l'ortografia o prova un punto di riferimento vicino.";
+"sighting_location_required" = "Condividi la tua posizione attuale o inserisci un indirizzo.";
 
 // MARK: - Foglio Scomparso/Trovato
 
@@ -785,6 +787,10 @@
 "map_missing_alert" = "Avviso di scomparsa";
 "map_found_alert" = "Avviso di ritrovamento";
 "time_less_than_hour" = "Meno di un'ora";
+"time_duration_day" = "1 giorno";
+"time_duration_days %lld" = "%lld giorni";
+"time_duration_hour" = "1 ora";
+"time_duration_hours %lld" = "%lld ore";
 
 // MARK: - Richiesta notifiche push (Parte 1)
 "push_prompt_title" = "Resta connesso";

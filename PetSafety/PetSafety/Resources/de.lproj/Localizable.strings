@@ -236,7 +236,7 @@
 "contact_label" = "Kontakt: %@";
 
 // MARK: - Vermisst melden / Sichtung
-"last_seen_location" = "Zuletzt gesehener Ort";
+"last_seen_location" = "Zuletzt bekannter Ort";
 "report_sighting" = "Sichtung melden";
 "notes" = "Notizen";
 "sighting_location" = "Sichtungsort";
@@ -265,6 +265,8 @@
 "sighting_notes_placeholder" = "Beschreiben du, was du gesehen haben, den Zustand des Haustiers, die Richtung…";
 "submit_sighting_report" = "Sichtungsbericht senden";
 "sighting_reported_owner_notified" = "Sichtung gemeldet! Der Halter wurde informiert.";
+"sighting_address_not_found" = "Diese Adresse konnten wir nicht finden. Prüfe die Schreibweise oder versuche einen nahegelegenen Orientierungspunkt.";
+"sighting_location_required" = "Teile deinen aktuellen Standort oder gib eine Adresse ein.";
 
 // MARK: - Vermisst/Gefunden-Dialog
 
@@ -778,6 +780,10 @@
 "map_missing_alert" = "Vermisstenwarnung";
 "map_found_alert" = "Fundmeldung";
 "time_less_than_hour" = "Weniger als eine Stunde";
+"time_duration_day" = "1 Tag";
+"time_duration_days %lld" = "%lld Tage";
+"time_duration_hour" = "1 Stunde";
+"time_duration_hours %lld" = "%lld Stunden";
 
 // MARK: - Push-Benachrichtigungs-Dialog (Teil 1)
 "push_prompt_title" = "Bleiben du verbunden";

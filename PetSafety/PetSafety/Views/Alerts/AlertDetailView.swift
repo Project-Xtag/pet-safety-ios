@@ -337,12 +337,21 @@ struct AlertDetailView: View {
     }
 
     private func markAsFound() {
-        guard let petId = alert.pet?.id else { return }
         isMarkingFound = true
 
         Task {
             do {
-                _ = try await petsViewModel.markPetFound(petId: petId)
+                // Single call to the dedicated endpoint — backend handler updates
+                // the alert status, flips pet.is_missing, sends owner email+SMS+FCM+SSE,
+                // notifies vets/shelters, strips sighting PII (GDPR), and triggers the
+                // social media reunited post.
+                _ = try await APIService.shared.updateAlertStatus(id: alert.id, status: "found")
+
+                // Reflect the change locally so the pets list updates without a refetch
+                if let petId = alert.pet?.id {
+                    await petsViewModel.applyPetFoundLocally(petId: petId)
+                }
+
                 await MainActor.run {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
                     isMarkingFound = false

@@ -236,7 +236,7 @@
 "contact_label" = "Contact : %@";
 
 // MARK: - Signalement disparition / Observation
-"last_seen_location" = "Lieu de dernière observation";
+"last_seen_location" = "Dernier lieu connu";
 "report_sighting" = "Signaler une observation";
 "notes" = "Notes";
 "sighting_location" = "Lieu de l'observation";
@@ -264,6 +264,8 @@
 "where_did_you_see" = "Où as-tu vu l'animal de compagnie ?";
 "sighting_notes_placeholder" = "Décris ce que tu as vu, l'état de l'animal de compagnie, la direction prise…";
 "submit_sighting_report" = "Envoyer le signalement";
+"sighting_address_not_found" = "Nous n'avons pas trouvé cette adresse. Vérifie l'orthographe ou essaie un repère à proximité.";
+"sighting_location_required" = "Partage ta position actuelle ou saisis une adresse.";
 "sighting_reported_owner_notified" = "Observation signalée ! Le propriétaire a été notifié.";
 
 // MARK: - Feuille Disparu/Retrouvé
@@ -777,6 +779,10 @@
 "map_missing_alert" = "Alerte de disparition";
 "map_found_alert" = "Alerte de retrouvaille";
 "time_less_than_hour" = "Moins d'une heure";
+"time_duration_day" = "1 jour";
+"time_duration_days %lld" = "%lld jours";
+"time_duration_hour" = "1 heure";
+"time_duration_hours %lld" = "%lld heures";
 
 // MARK: - Invite de notifications push (1ère partie)
 "push_prompt_title" = "Reste connecté";

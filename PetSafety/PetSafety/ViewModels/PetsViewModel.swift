@@ -352,4 +352,45 @@ class PetsViewModel: ObservableObject {
             throw error
         }
     }
+
+    /// Mark a pet as found in the local cache only.
+    /// Used by views that already performed the server-side alert resolution
+    /// (e.g. AlertDetailView calling POST /alerts/:id/found directly).
+    @MainActor
+    func applyPetFoundLocally(petId: String) async {
+        guard let index = pets.firstIndex(where: { $0.id == petId }) else { return }
+        let current = pets[index]
+        let updated = Pet(
+            id: current.id,
+            ownerId: current.ownerId,
+            name: current.name,
+            species: current.species,
+            breed: current.breed,
+            color: current.color,
+            weight: current.weight,
+            microchipNumber: current.microchipNumber,
+            medicalNotes: current.medicalNotes,
+            notes: current.notes,
+            profileImage: current.profileImage,
+            isMissing: false,
+            createdAt: current.createdAt,
+            updatedAt: current.updatedAt,
+            ageYears: current.ageYears,
+            ageMonths: current.ageMonths,
+            ageText: current.ageText,
+            ageIsApproximate: current.ageIsApproximate,
+            allergies: current.allergies,
+            medications: current.medications,
+            uniqueFeatures: current.uniqueFeatures,
+            sex: current.sex,
+            isNeutered: current.isNeutered,
+            qrCode: current.qrCode,
+            dateOfBirth: current.dateOfBirth,
+            ownerName: current.ownerName,
+            ownerPhone: current.ownerPhone,
+            ownerEmail: current.ownerEmail
+        )
+        pets[index] = updated
+        try? offlineManager.savePet(updated)
+    }
 }

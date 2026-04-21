@@ -126,7 +126,7 @@ struct MissingAlertsMapView: View {
     let alerts: [MissingPetAlert]
     var userLocation: CLLocationCoordinate2D?
     @State private var mapPosition: MapCameraPosition = .automatic
-    @State private var selectedAlert: MissingPetAlert?
+    @State private var navigationAlert: MissingPetAlert?
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -150,11 +150,9 @@ struct MissingAlertsMapView: View {
 
                 ForEach(alerts.filter { $0.coordinate != nil }) { alert in
                     Annotation(String(localized: "map_missing_alert"), coordinate: alert.coordinate!) {
-                        PetMapMarker(alert: alert, isSelected: selectedAlert?.id == alert.id)
+                        PetMapMarker(alert: alert, isSelected: false)
                             .onTapGesture {
-                                withAnimation(.spring(response: 0.3)) {
-                                    selectedAlert = alert
-                                }
+                                navigationAlert = alert
                             }
                     }
                 }
@@ -173,17 +171,9 @@ struct MissingAlertsMapView: View {
                         .padding(.bottom, 20)
                 }
             }
-
-            // Selected Alert Card
-            if let alert = selectedAlert {
-                VStack {
-                    Spacer()
-                    MissingAlertMapCard(alert: alert)
-                        .padding()
-                        .padding(.bottom, 80) // Extra padding to avoid tab bar overlap
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-            }
+        }
+        .navigationDestination(item: $navigationAlert) { alert in
+            AlertDetailView(alert: alert)
         }
         .onAppear {
             centerMap()
@@ -245,217 +235,6 @@ struct PetMapMarker: View {
     }
 }
 
-struct MissingAlertMapCard: View {
-    let alert: MissingPetAlert
-    @EnvironmentObject var authViewModel: AuthViewModel
-    @EnvironmentObject var appState: AppState
-    @Environment(\.dismiss) private var dismiss
-    @StateObject private var viewModel = PetsViewModel()
-    @StateObject private var alertsViewModel = AlertsViewModel()
-    @State private var showingReportSighting = false
-    @State private var showingReportFound = false
-    @State private var showingMarkFoundConfirmation = false
-    @State private var showingSuccessStoryPrompt = false
-    @State private var isMarkingFound = false
-
-    // Check if current user is the pet owner
-    private var isOwner: Bool {
-        guard let currentUserId = authViewModel.currentUser?.id else { return false }
-        return alert.userId == currentUserId
-    }
-
-    var body: some View {
-        VStack(spacing: 12) {
-            // Main card content - tappable to view details
-            NavigationLink(destination: AlertDetailView(alert: alert)) {
-                HStack(spacing: 16) {
-                    // Pet Photo
-                    if let pet = alert.pet {
-                        CachedAsyncImage(url: URL(string: pet.photoUrl ?? "")) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        } placeholder: {
-                            Image(systemName: "pawprint.fill")
-                                .foregroundColor(.white)
-                                .padding(15)
-                        }
-                        .frame(width: 70, height: 70)
-                        .background(Color.red.opacity(0.2))
-                        .cornerRadius(12)
-                        .clipped()
-                    }
-
-                    VStack(alignment: .leading, spacing: 6) {
-                        // Pet Name
-                        if let pet = alert.pet {
-                            Text(pet.name)
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                        }
-
-                        // Duration Missing
-                        if let createdAt = alert.createdAt.toDate() {
-                            let duration = Date().timeIntervalSince(createdAt)
-                            Text("alert_missing_for \(duration.formatDuration())")
-                                .font(.subheadline)
-                                .foregroundColor(.red)
-                                .fontWeight(.semibold)
-                        }
-
-                        // Location
-                        if let location = alert.lastSeenLocation {
-                            HStack(spacing: 4) {
-                                Image(systemName: "location.fill")
-                                    .font(.caption2)
-                                Text(location)
-                                    .font(.caption)
-                            }
-                            .foregroundColor(.secondary)
-                            .lineLimit(1)
-                        }
-                    }
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                }
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            // Action buttons
-            if isOwner {
-                // Owner only sees "Mark as Found" button
-                Button(action: { showingMarkFoundConfirmation = true }) {
-                    HStack {
-                        if isMarkingFound {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                .scaleEffect(0.8)
-                        } else {
-                            Image(systemName: "checkmark.circle.fill")
-                        }
-                        Text("mark_as_found")
-                    }
-                    .font(.system(size: 14, weight: .semibold))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
-                    .background(Color.tealAccent)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                }
-                .disabled(isMarkingFound)
-            } else {
-                // Non-owners see "Report Sighting" and "Report Found" buttons
-                VStack(spacing: 8) {
-                    Button(action: { showingReportSighting = true }) {
-                        HStack {
-                            Image(systemName: "eye.fill")
-                            Text("report_sighting")
-                        }
-                        .font(.system(size: 14, weight: .semibold))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .background(Color.brandOrange)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                    }
-
-                    Button(action: { showingReportFound = true }) {
-                        HStack {
-                            Image(systemName: "checkmark.circle.fill")
-                            Text("report_found")
-                        }
-                        .font(.system(size: 14, weight: .semibold))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .background(Color.tealAccent)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                    }
-                }
-            }
-        }
-        .padding()
-        .background(Color(.systemBackground))
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: -2)
-        .sheet(isPresented: $showingReportSighting) {
-            NavigationView {
-                ReportSightingView(alertId: alert.id)
-                    .environmentObject(appState)
-                    .environmentObject(alertsViewModel)
-            }
-        }
-        .sheet(isPresented: $showingReportFound) {
-            if let pet = alert.pet, let qrCode = pet.qrCode {
-                ShareLocationView(qrCode: qrCode, petName: pet.name)
-            }
-        }
-        .alert(String(format: String(localized: "alert_mark_found_title"), alert.pet?.name ?? String(localized: "pet_default")), isPresented: $showingMarkFoundConfirmation) {
-            Button("cancel", role: .cancel) { }
-            Button("mark_as_found") {
-                markAsFound()
-            }
-        } message: {
-            Text("alert_mark_found_message")
-        }
-        .fullScreenCover(isPresented: $showingSuccessStoryPrompt) {
-            if let pet = alert.pet {
-                SuccessStoryPromptView(
-                    pet: Pet(
-                        id: pet.id,
-                        ownerId: alert.userId ?? "",
-                        name: pet.name,
-                        species: pet.species,
-                        breed: pet.breed,
-                        color: pet.color,
-                        profileImage: pet.photoUrl,
-                        isMissing: false,
-                        createdAt: alert.createdAt,
-                        updatedAt: alert.updatedAt
-                    ),
-                    onDismiss: {
-                        showingSuccessStoryPrompt = false
-                        appState.showSuccess("\(pet.name) has been marked as found!")
-                    },
-                    onStorySubmitted: {
-                        showingSuccessStoryPrompt = false
-                    }
-                )
-                .environmentObject(appState)
-            }
-        }
-    }
-
-    private func markAsFound() {
-        guard let petId = alert.pet?.id else { return }
-        isMarkingFound = true
-
-        Task {
-            do {
-                _ = try await viewModel.markPetFound(petId: petId)
-                await MainActor.run {
-                    UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    isMarkingFound = false
-                }
-                // Small delay to allow alert to dismiss before showing fullScreenCover
-                try? await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
-                await MainActor.run {
-                    showingSuccessStoryPrompt = true
-                }
-            } catch {
-                await MainActor.run {
-                    appState.showError(String(localized: "alert_mark_found_failed") + ": \(error.localizedDescription)")
-                    isMarkingFound = false
-                }
-            }
-        }
-    }
-}
-
 // MARK: - Helper Extensions
 extension String {
     func toDate() -> Date? {
@@ -470,10 +249,14 @@ extension TimeInterval {
         let days = Int(self) / 86400
         let hours = Int(self) / 3600 % 24
 
-        if days > 0 {
-            return "\(days) day\(days == 1 ? "" : "s")"
+        if days == 1 {
+            return String(localized: "time_duration_day")
+        } else if days > 1 {
+            return String(format: NSLocalizedString("time_duration_days %lld", comment: ""), days)
+        } else if hours == 1 {
+            return String(localized: "time_duration_hour")
         } else if hours > 0 {
-            return "\(hours) hour\(hours == 1 ? "" : "s")"
+            return String(format: NSLocalizedString("time_duration_hours %lld", comment: ""), hours)
         } else {
             return String(localized: "time_less_than_hour")
         }

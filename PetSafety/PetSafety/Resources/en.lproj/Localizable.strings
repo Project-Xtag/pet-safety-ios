@@ -236,7 +236,7 @@
 "contact_label" = "Contact: %@";
 
 // MARK: - Report Missing / Sighting
-"last_seen_location" = "Last seen location";
+"last_seen_location" = "Last known location";
 "report_sighting" = "Report Sighting";
 "notes" = "Notes";
 "sighting_location" = "Sighting location";
@@ -265,6 +265,8 @@
 "sighting_notes_placeholder" = "Describe what you saw, the pet's condition, direction of travel…";
 "submit_sighting_report" = "Submit Sighting Report";
 "sighting_reported_owner_notified" = "Sighting reported! The owner has been notified.";
+"sighting_address_not_found" = "We couldn't find that address. Please check the spelling or try a nearby landmark.";
+"sighting_location_required" = "Please share your current location or enter an address.";
 
 // MARK: - Mark Lost/Found Sheet
 
@@ -794,6 +796,10 @@
 "map_missing_alert" = "Missing Alert";
 "map_found_alert" = "Found Alert";
 "time_less_than_hour" = "Less than an hour";
+"time_duration_day" = "1 day";
+"time_duration_days %lld" = "%lld days";
+"time_duration_hour" = "1 hour";
+"time_duration_hours %lld" = "%lld hours";
 
 // MARK: - Push Notification Prompt (Chunk 1)
 "push_prompt_title" = "Stay Connected";

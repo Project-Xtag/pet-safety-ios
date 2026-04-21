@@ -181,6 +181,16 @@ struct MissingPetAlert: Codable, Identifiable {
     }
 }
 
+extension MissingPetAlert: Hashable {
+    static func == (lhs: MissingPetAlert, rhs: MissingPetAlert) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
 struct CreateAlertRequest: Codable {
     let petId: String
     let lastSeenLocation: LocationCoordinate?

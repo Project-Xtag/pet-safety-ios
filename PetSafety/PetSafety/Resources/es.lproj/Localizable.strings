@@ -236,7 +236,7 @@
 "contact_label" = "Contacto: %@";
 
 // MARK: - Reportar pérdida / avistamiento
-"last_seen_location" = "Última ubicación vista";
+"last_seen_location" = "Última ubicación conocida";
 "report_sighting" = "Reportar avistamiento";
 "notes" = "Notas";
 "sighting_location" = "Ubicación del avistamiento";
@@ -265,6 +265,8 @@
 "sighting_notes_placeholder" = "Describe lo que viste, el estado de la mascota, dirección de movimiento…";
 "submit_sighting_report" = "Enviar reporte de avistamiento";
 "sighting_reported_owner_notified" = "¡Avistamiento reportado! Se notificó al tutor.";
+"sighting_address_not_found" = "No encontramos esa dirección. Revisa la ortografía o prueba con un punto de referencia cercano.";
+"sighting_location_required" = "Comparte tu ubicación actual o introduce una dirección.";
 
 // MARK: - Hoja de marcar perdida/encontrada
 
@@ -778,6 +780,10 @@
 "map_missing_alert" = "Alerta de pérdida";
 "map_found_alert" = "Alerta de encontrada";
 "time_less_than_hour" = "Menos de una hora";
+"time_duration_day" = "1 día";
+"time_duration_days %lld" = "%lld días";
+"time_duration_hour" = "1 hora";
+"time_duration_hours %lld" = "%lld horas";
 
 // MARK: - Indicador de notificaciones push (Bloque 1)
 "push_prompt_title" = "Mantente conectado";

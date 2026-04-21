@@ -236,7 +236,7 @@
 "contact_label" = "Kontakt: %@";
 
 // MARK: - Meld savnet / Observasjon
-"last_seen_location" = "Sted sist sett";
+"last_seen_location" = "Sist kjente sted";
 "report_sighting" = "Rapporter observasjon";
 "notes" = "Notater";
 "sighting_location" = "Sted for observasjon";
@@ -265,6 +265,8 @@
 "sighting_notes_placeholder" = "Beskriv hva du så, dyrets tilstand, bevegelsesretning…";
 "submit_sighting_report" = "Send inn observasjonsrapport";
 "sighting_reported_owner_notified" = "Observasjon rapportert! Eieren er blitt varslet.";
+"sighting_address_not_found" = "Vi fant ikke denne adressen. Sjekk stavemåten eller prøv et landemerke i nærheten.";
+"sighting_location_required" = "Del din nåværende posisjon, eller skriv inn en adresse.";
 
 // MARK: - Merk savnet/funnet
 
@@ -791,6 +793,10 @@
 "map_missing_alert" = "Savnet-varsel";
 "map_found_alert" = "Funnet-varsel";
 "time_less_than_hour" = "Mindre enn en time";
+"time_duration_day" = "1 dag";
+"time_duration_days %lld" = "%lld dager";
+"time_duration_hour" = "1 time";
+"time_duration_hours %lld" = "%lld timer";
 
 // MARK: - Push-varseloppfordring (del 1)
 "push_prompt_title" = "Hold deg tilkoblet";

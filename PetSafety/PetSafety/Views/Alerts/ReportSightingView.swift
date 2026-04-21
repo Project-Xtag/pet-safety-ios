@@ -276,18 +276,40 @@ struct ReportSightingView: View {
 
         isSubmitting = true
 
-        let coordinate = useCurrentLocation ? locationManager.location : nil
-        let address = useCurrentLocation ? nil : locationText.trimmingCharacters(in: .whitespaces)
+        let trimmedAddress = locationText.trimmingCharacters(in: .whitespaces)
+        let initialCoordinate = useCurrentLocation ? locationManager.location : nil
+        let initialAddress = useCurrentLocation ? nil : trimmedAddress
 
         Task {
             do {
+                // Backend requires coordinates — geocode the typed address when GPS wasn't used
+                var coordinate = initialCoordinate
+                if coordinate == nil, let addr = initialAddress, !addr.isEmpty {
+                    coordinate = await geocode(addr)
+                    if coordinate == nil {
+                        await MainActor.run {
+                            appState.showError(String(localized: "sighting_address_not_found"))
+                            isSubmitting = false
+                        }
+                        return
+                    }
+                }
+
+                guard let finalCoord = coordinate else {
+                    await MainActor.run {
+                        appState.showError(String(localized: "sighting_location_required"))
+                        isSubmitting = false
+                    }
+                    return
+                }
+
                 try await alertsViewModel.reportSighting(
                     alertId: alertId,
                     reporterName: shareContactInfo && !reporterName.isEmpty ? reporterName : nil,
                     reporterPhone: shareContactInfo && !reporterPhone.isEmpty ? reporterPhone : nil,
                     reporterEmail: shareContactInfo && !reporterEmail.isEmpty ? reporterEmail : nil,
-                    location: address,
-                    coordinate: coordinate,
+                    location: initialAddress,
+                    coordinate: finalCoord,
                     notes: notes.isEmpty ? nil : notes
                 )
                 UINotificationFeedbackGenerator().notificationOccurred(.success)
@@ -304,6 +326,19 @@ struct ReportSightingView: View {
                 }
             }
             isSubmitting = false
+        }
+    }
+
+    private func geocode(_ address: String) async -> CLLocationCoordinate2D? {
+        let geocoder = CLGeocoder()
+        do {
+            let placemarks = try await geocoder.geocodeAddressString(address)
+            return placemarks.first?.location?.coordinate
+        } catch {
+            #if DEBUG
+            print("⚠️ Geocoding failed for '\(address)': \(error.localizedDescription)")
+            #endif
+            return nil
         }
     }
 }
