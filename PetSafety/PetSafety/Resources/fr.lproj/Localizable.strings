@@ -887,9 +887,9 @@
 "quick_found_mark_failed" = "Échec du marquage de %@ comme retrouvé : %@";
 
 // MARK: - Signalement de perte (1ère partie)
-"location_current" = "Localisation actuelle";
-"location_my_address" = "Mon adresse";
-"location_custom" = "Adresse personnalisée";
+"location_current" = "Adresse de localisation actuelle";
+"location_my_address" = "Adresse enregistrée";
+"location_custom" = "Autre adresse";
 "mark_lost_pet_info" = "Informations sur l'animal de compagnie";
 "mark_lost_last_seen" = "Dernier lieu connu";
 "mark_lost_alerts_footer" = "Les alertes seront envoyées aux utilisateurs, vétérinaires et refuges dans un rayon de 10 km.";
@@ -897,13 +897,13 @@
 "mark_lost_no_address" = "Aucune adresse enregistrée. Va dans Profil > Adresse.";
 "mark_lost_address_placeholder" = "Saisis une adresse ou un lieu";
 "mark_lost_additional_info" = "Informations supplémentaires";
-"mark_lost_additional_placeholder" = "Décris quand et où tu as vu ton animal de compagnie pour la dernière fois, ce qu'il portait, etc.";
+"mark_lost_additional_placeholder" = "Tout détail pouvant aider à retrouver ton animal (couleur du collier, comportement, signes distinctifs…)";
 "mark_lost_sends_to" = "Cette alerte sera envoyée à :";
 "mark_lost_nearby_owners" = "Propriétaires d'animaux de compagnie à proximité";
 "mark_lost_vet_clinics" = "Cabinets vétérinaires de la zone";
 "mark_lost_shelters" = "Refuges animaliers à proximité";
 "mark_lost_report" = "Signaler la disparition";
-"mark_lost_title" = "Signaler la disparition";
+"mark_lost_title" = "Signaler %@ comme disparu";
 
 // MARK: - Extras de galerie photo (1ère partie)
 "photo_count %lld" = "%lld photos";

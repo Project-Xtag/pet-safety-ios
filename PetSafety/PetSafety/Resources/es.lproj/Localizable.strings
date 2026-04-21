@@ -888,9 +888,9 @@
 "quick_found_mark_failed" = "No se pudo marcar %@ como encontrada: %@";
 
 // MARK: - Marcar como perdida (Bloque 1)
-"location_current" = "Ubicación actual";
-"location_my_address" = "Mi dirección";
-"location_custom" = "Dirección personalizada";
+"location_current" = "Dirección actual de ubicación";
+"location_my_address" = "Dirección registrada";
+"location_custom" = "Otra dirección";
 "mark_lost_pet_info" = "Información de la mascota";
 "mark_lost_last_seen" = "Última ubicación vista";
 "mark_lost_alerts_footer" = "Las alertas se enviarán a usuarios cercanos, veterinarios y refugios en un radio de 10 km.";
@@ -898,13 +898,13 @@
 "mark_lost_no_address" = "No hay dirección registrada. Ve a Perfil > Dirección.";
 "mark_lost_address_placeholder" = "Introduce dirección o ubicación";
 "mark_lost_additional_info" = "Información adicional";
-"mark_lost_additional_placeholder" = "Describe cuándo y dónde viste a tu mascota por última vez, qué llevaba, etc.";
+"mark_lost_additional_placeholder" = "Detalles que puedan ayudar a encontrar a tu mascota (color del collar, comportamiento, marcas…)";
 "mark_lost_sends_to" = "Esta alerta se enviará a:";
 "mark_lost_nearby_owners" = "Tutores de mascotas cercanos";
 "mark_lost_vet_clinics" = "Clínicas veterinarias de la zona";
 "mark_lost_shelters" = "Refugios de animales cercanos";
 "mark_lost_report" = "Reportar pérdida";
-"mark_lost_title" = "Reportar pérdida";
+"mark_lost_title" = "Marcar a %@ como desaparecido";
 
 // MARK: - Galería de fotos extras (Bloque 1)
 "photo_count %lld" = "%lld fotos";

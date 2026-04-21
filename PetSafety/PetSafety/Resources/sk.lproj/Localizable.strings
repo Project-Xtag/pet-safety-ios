@@ -888,9 +888,9 @@
 "quick_found_mark_failed" = "Nepodarilo sa označiť %@ ako nájdeného: %@";
 
 // MARK: - Oznacenie ako stratene (Cast 1)
-"location_current" = "Aktualna poloha";
-"location_my_address" = "Moja adresa";
-"location_custom" = "Vlastna adresa";
+"location_current" = "Aktuálna adresa pobytu";
+"location_my_address" = "Registrovaná adresa";
+"location_custom" = "Iná adresa";
 "mark_lost_pet_info" = "Informácie o domácom miláčikovi";
 "mark_lost_last_seen" = "Naposledy videne miesto";
 "mark_lost_alerts_footer" = "Upozornenia sa odeslu blizkym pouzivatelom, veterinarom a utulkom v okruhu 10 km.";
@@ -898,13 +898,13 @@
 "mark_lost_no_address" = "Nie je registrovana adresa. Prejdite na Profil > Adresa.";
 "mark_lost_address_placeholder" = "Zadaj adresu alebo miesto";
 "mark_lost_additional_info" = "Ďalšie informácie";
-"mark_lost_additional_placeholder" = "Opíš, kedy a kde si naposledy videl svojho domáceho miláčika, čo mal na sebe atď.";
+"mark_lost_additional_placeholder" = "Akékoľvek detaily, ktoré by mohli pomôcť nájsť zviera (farba obojka, správanie, výrazné znaky…)";
 "mark_lost_sends_to" = "Toto upozornenie bude odoslané:";
 "mark_lost_nearby_owners" = "Páníčkovia v okolí";
 "mark_lost_vet_clinics" = "Veterinarnym klinikam v okolí";
 "mark_lost_shelters" = "Utulkom v okolí";
 "mark_lost_report" = "Nahlásiť stratené";
-"mark_lost_title" = "Nahlásiť stratené";
+"mark_lost_title" = "Označiť %@ ako stratené";
 
 // MARK: - Doplnky galerie fotografii (Cast 1)
 "photo_count %lld" = "%lld fotografií";

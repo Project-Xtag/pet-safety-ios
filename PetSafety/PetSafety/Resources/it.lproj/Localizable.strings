@@ -895,9 +895,9 @@
 "quick_found_mark_failed" = "Impossibile segnare %@ come ritrovato: %@";
 
 // MARK: - Segnala come scomparso (Parte 1)
-"location_current" = "Posizione attuale";
-"location_my_address" = "Il mio indirizzo";
-"location_custom" = "Indirizzo personalizzato";
+"location_current" = "Indirizzo di posizione attuale";
+"location_my_address" = "Indirizzo registrato";
+"location_custom" = "Altro indirizzo";
 "mark_lost_pet_info" = "Informazioni sull'animale di compagnia";
 "mark_lost_last_seen" = "Ultima posizione nota";
 "mark_lost_alerts_footer" = "Gli avvisi verranno inviati agli utenti, veterinari e rifugi nel raggio di 10 km.";
@@ -905,13 +905,13 @@
 "mark_lost_no_address" = "Nessun indirizzo registrato. Vai in Profilo > Indirizzo.";
 "mark_lost_address_placeholder" = "Inserisci un indirizzo o una posizione";
 "mark_lost_additional_info" = "Informazioni aggiuntive";
-"mark_lost_additional_placeholder" = "Descrivi quando e dove hai visto il tuo animale di compagnia per l'ultima volta, cosa indossava, ecc.";
+"mark_lost_additional_placeholder" = "Qualsiasi dettaglio utile a trovare il tuo animale di compagnia (colore del collare, comportamento, segni distintivi…)";
 "mark_lost_sends_to" = "Questo avviso verrà inviato a:";
 "mark_lost_nearby_owners" = "Padroni di animali di compagnia nelle vicinanze";
 "mark_lost_vet_clinics" = "Cliniche veterinarie della zona";
 "mark_lost_shelters" = "Rifugi animali di compagnia nelle vicinanze";
 "mark_lost_report" = "Segnala scomparsa";
-"mark_lost_title" = "Segnala scomparsa";
+"mark_lost_title" = "Segnalare %@ come scomparso";
 
 // MARK: - Extra galleria foto (Parte 1)
 "photo_count %lld" = "%lld foto";

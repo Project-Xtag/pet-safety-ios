@@ -907,9 +907,9 @@
 "quick_found_mark_failed" = "Failed to mark %@ as found: %@";
 
 // MARK: - Mark As Lost (Chunk 1)
-"location_current" = "Current Location";
-"location_my_address" = "My Address";
-"location_custom" = "Custom Address";
+"location_current" = "Current whereabouts address";
+"location_my_address" = "Registered address";
+"location_custom" = "Other address";
 "mark_lost_pet_info" = "Lost Pet Information";
 "mark_lost_last_seen" = "Last Seen Location";
 "mark_lost_alerts_footer" = "Alerts will be sent to nearby users, vets, and shelters within 10km.";
@@ -917,13 +917,13 @@
 "mark_lost_no_address" = "No address registered. Go to Profile > Address.";
 "mark_lost_address_placeholder" = "Enter address or location";
 "mark_lost_additional_info" = "Additional Information";
-"mark_lost_additional_placeholder" = "Describe when and where you last saw your pet, what they were wearing, etc.";
+"mark_lost_additional_placeholder" = "Any detail that could help find your pet (collar color, behavior, distinguishing features…)";
 "mark_lost_sends_to" = "This alert will be sent to:";
 "mark_lost_nearby_owners" = "Nearby pet owners";
 "mark_lost_vet_clinics" = "Vet clinics in the area";
 "mark_lost_shelters" = "Animal shelters nearby";
 "mark_lost_report" = "Report Missing";
-"mark_lost_title" = "Report Missing";
+"mark_lost_title" = "Mark %@ as Missing";
 
 // MARK: - Photo Gallery extras (Chunk 1)
 "photo_count %lld" = "%lld photos";

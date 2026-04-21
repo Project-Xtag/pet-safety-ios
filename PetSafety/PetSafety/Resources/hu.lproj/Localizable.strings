@@ -74,7 +74,7 @@
 "view_all" = "Összes megtekintése";
 "search_pets_hint" = "Keresés név, fajta, faj szerint…";
 "quick_actions" = "Gyors műveletek";
-"action_add_pet" = "ÚJ KISÁLLAT";
+"action_add_pet" = "ÚJ KEDVENC";
 "action_mark_found" = "MEGTALÁLTNAK JELÖLÉS";
 "action_report_missing" = "ELTŰNTNEK JELÖLÉS";
 "action_order_tags" = "BILÉTÁK RENDELÉSE";
@@ -465,7 +465,7 @@
 
 // FAQ Questions and Answers
 "help_faq_q1" = "Hogyan regisztrálhatom a kedvencemet?";
-"help_faq_a1" = "A kedvencedet a 'Saját kisállataim' menüben regisztrálhatod az 'Új kisállat hozzáadása' gombra kattintva. Töltsd ki a szükséges információkat és tölts fel egy vagy több fotót.";
+"help_faq_a1" = "A kedvencedet a 'Saját kisállataim' menüben regisztrálhatod az 'Új kedvenc' gombra kattintva. Töltsd ki a szükséges információkat és tölts fel egy vagy több fotót.";
 "help_faq_q2" = "Milyen információkat kell megadnom a kedvencem profiljában?";
 "help_faq_a2" = "Kedvenced nevét a biléta rendelésével egy időben megadtad és a biléta aktiválásával meg is jelenik a kedvenced profiljában. Add meg a kedvenced faját, fajtáját! Ezeket az adatokat a visszaélések elkerülésére – csak egyszer adhatod meg. Ha hibáznál, elütsz egy betűt, vedd fel a kapcsolatot velünk és segítünk. Itt adhatod meg cicád/kutyád súlyát, korát, színét és bármilyen sajátos jellemzőt vagy tipikus viselkedést. Fényképeket is tölthetsz fel róla. Ezek segíthetnek kedvenced gyors azonosításában és hazajuttatásában. Te döntöd el, milyen információk legyenek elérhetőek kedvencedről, ha elkóborolna.";
 "help_faq_q3" = "Hogyan működik a QR-kódos biléta?";
@@ -893,9 +893,9 @@
 "quick_found_mark_failed" = "Nem sikerült megtaláltként jelölni %@-t: %@";
 
 // MARK: - Eltűntként jelölés (1. rész)
-"location_current" = "Jelenlegi hely";
-"location_my_address" = "Saját cím";
-"location_custom" = "Egyéni cím";
+"location_current" = "Jelenlegi tartózkodási cím";
+"location_my_address" = "Regisztrált cím";
+"location_custom" = "Egyéb cím";
 "mark_lost_pet_info" = "Információk eltűnt kedvencedről";
 "mark_lost_last_seen" = "Utolsó ismert hely";
 "mark_lost_alerts_footer" = "A riasztásokat a 10 km-en belül lévő felhasználóknak, állatorvosoknak és menhelyeknek küldjük el.";
@@ -903,13 +903,13 @@
 "mark_lost_no_address" = "Nincs regisztrált cím. Menj a Profil > Cím menüpontra.";
 "mark_lost_address_placeholder" = "Adj meg címet vagy helyet";
 "mark_lost_additional_info" = "További információ";
-"mark_lost_additional_placeholder" = "Írd le, mikor és hol láttad utoljára a kedvenced, mit viselt, stb.";
+"mark_lost_additional_placeholder" = "Bármilyen részlet, ami segíthet megtalálni a kedvencedet (nyakörv színe, viselkedés, megkülönböztető jegyek…)";
 "mark_lost_sends_to" = "Ez a riasztás ide kerül elküldésre:";
 "mark_lost_nearby_owners" = "Közeli gazdik";
 "mark_lost_vet_clinics" = "Környékbeli állatorvosi rendelők";
 "mark_lost_shelters" = "Közeli állatmenhelyek";
 "mark_lost_report" = "Az eltűnés jelentése";
-"mark_lost_title" = "Az eltűnt jelentése";
+"mark_lost_title" = "%@ elveszettként jelölése";
 
 // MARK: - Fotógaléria kiegészítések (1. rész)
 "photo_count %lld" = "%lld fotó";

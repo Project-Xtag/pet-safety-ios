@@ -886,9 +886,9 @@
 "quick_found_mark_failed" = "Nie udało się oznaczyć %@ jako znalezione: %@";
 
 // MARK: - Oznaczanie jako zaginione (Część 1)
-"location_current" = "Bieżąca lokalizacja";
-"location_my_address" = "Mój adres";
-"location_custom" = "Własny adres";
+"location_current" = "Obecny adres pobytu";
+"location_my_address" = "Zarejestrowany adres";
+"location_custom" = "Inny adres";
 "mark_lost_pet_info" = "Informacje o pupilowi";
 "mark_lost_last_seen" = "Ostatnie znane miejsce";
 "mark_lost_alerts_footer" = "Alerty zostaną wysłane do użytkowników, weterynarzy i schronisk w promieniu 10km.";
@@ -896,13 +896,13 @@
 "mark_lost_no_address" = "Brak zarejestrowanego adresu. Przejdź do Profil > Adres.";
 "mark_lost_address_placeholder" = "Podaj adres lub lokalizację";
 "mark_lost_additional_info" = "Dodatkowe informacje";
-"mark_lost_additional_placeholder" = "Opisz, kiedy i gdzie widziałeś/aś ostatnio swoje pupila, co miało na sobie itp.";
+"mark_lost_additional_placeholder" = "Wszelkie szczegóły, które mogą pomóc znaleźć pupila (kolor obroży, zachowanie, charakterystyczne cechy…)";
 "mark_lost_sends_to" = "Ten alert zostanie wysłany do:";
 "mark_lost_nearby_owners" = "Pobliskich opiekunów pupili";
 "mark_lost_vet_clinics" = "Klinik weterynaryjnych w okolicy";
 "mark_lost_shelters" = "Pobliskich schronisk dla pupili";
 "mark_lost_report" = "Zgłoś zaginięcie";
-"mark_lost_title" = "Zgłoś zaginięcie";
+"mark_lost_title" = "Oznacz %@ jako zaginione";
 
 // MARK: - Dodatki do galerii zdjęć (Część 1)
 "photo_count %lld" = "%lld zdjęć";

@@ -903,9 +903,9 @@
 "quick_found_mark_failed" = "Kunne ikke merke %@ som funnet: %@";
 
 // MARK: - Merk som savnet (del 1)
-"location_current" = "Gjeldende posisjon";
-"location_my_address" = "Min adresse";
-"location_custom" = "Egendefinert adresse";
+"location_current" = "Nåværende oppholdsadresse";
+"location_my_address" = "Registrert adresse";
+"location_custom" = "Annen adresse";
 "mark_lost_pet_info" = "Dyrinformasjon";
 "mark_lost_last_seen" = "Sted sist sett";
 "mark_lost_alerts_footer" = "Varsler sendes til brukere, veterinærer og dyrevernorganisasjoner innen 10 km.";
@@ -913,13 +913,13 @@
 "mark_lost_no_address" = "Ingen adresse registrert. Gå til Profil > Adresse.";
 "mark_lost_address_placeholder" = "Skriv inn adresse eller sted";
 "mark_lost_additional_info" = "Tilleggsinformasjon";
-"mark_lost_additional_placeholder" = "Beskriv når og hvor du sist så dyret ditt, hva det hadde på seg osv.";
+"mark_lost_additional_placeholder" = "Detaljer som kan hjelpe med å finne kjæledyret ditt (halsbåndfarge, atferd, særkjennetegn…)";
 "mark_lost_sends_to" = "Dette varselet sendes til:";
 "mark_lost_nearby_owners" = "Dyreeiere i nærheten";
 "mark_lost_vet_clinics" = "Veterinærklinikker i området";
 "mark_lost_shelters" = "Dyrevernorganisasjoner i nærheten";
 "mark_lost_report" = "Meld savnet";
-"mark_lost_title" = "Meld savnet";
+"mark_lost_title" = "Merk %@ som savnet";
 
 // MARK: - Bildegalleri-tillegg (del 1)
 "photo_count %lld" = "%lld bilder";

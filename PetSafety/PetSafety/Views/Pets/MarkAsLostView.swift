@@ -31,6 +31,8 @@ struct MarkAsLostView: View {
     @State private var additionalInfo = ""
     @State private var rewardAmount = ""
     @State private var isGeocoding = false
+    @State private var currentLocationAddress: String? = nil
+    @State private var isReverseGeocodingCurrent = false
 
     /// Formatted registered address from user profile
     private var registeredAddress: String? {
@@ -82,9 +84,21 @@ struct MarkAsLostView: View {
                         HStack {
                             Image(systemName: "location.fill")
                                 .foregroundColor(.blue)
-                            Text(String(format: NSLocalizedString("coordinates_display", comment: ""), String(format: "%.6f", loc.latitude), String(format: "%.6f", loc.longitude)))
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                            if let addr = currentLocationAddress, !addr.isEmpty {
+                                Text(addr)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            } else if isReverseGeocodingCurrent {
+                                ProgressView()
+                                    .scaleEffect(0.7)
+                                Text("mark_lost_getting_location")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            } else {
+                                Text(String(format: NSLocalizedString("coordinates_display", comment: ""), String(format: "%.6f", loc.latitude), String(format: "%.6f", loc.longitude)))
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     } else {
                         HStack {
@@ -176,7 +190,7 @@ struct MarkAsLostView: View {
             }
         }
         .scrollDismissesKeyboard(.interactively)
-        .navigationTitle("mark_lost_title")
+        .navigationTitle(String(format: NSLocalizedString("mark_lost_title", comment: ""), pet.name))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -192,7 +206,14 @@ struct MarkAsLostView: View {
         .onChange(of: lastSeenSource) { _, source in
             if source == .currentLocation {
                 locationManager.requestLocation()
+                if let loc = locationManager.location {
+                    Task { await geocodeCurrentLocation(loc) }
+                }
             }
+        }
+        .onChange(of: locationManager.location?.latitude) { _, _ in
+            guard lastSeenSource == .currentLocation, let loc = locationManager.location else { return }
+            Task { await geocodeCurrentLocation(loc) }
         }
     }
 
@@ -219,6 +240,14 @@ struct MarkAsLostView: View {
             #endif
             return nil
         }
+    }
+
+    @MainActor
+    private func geocodeCurrentLocation(_ coordinate: CLLocationCoordinate2D) async {
+        isReverseGeocodingCurrent = true
+        let address = await reverseGeocodeLocation(coordinate)
+        isReverseGeocodingCurrent = false
+        currentLocationAddress = address
     }
 
     private func reverseGeocodeLocation(_ coordinate: CLLocationCoordinate2D) async -> String? {

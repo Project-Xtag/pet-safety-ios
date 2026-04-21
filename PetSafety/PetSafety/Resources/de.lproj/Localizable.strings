@@ -888,9 +888,9 @@
 "quick_found_mark_failed" = "Konnte %@ nicht als gefunden markieren: %@";
 
 // MARK: - Als vermisst markieren (Teil 1)
-"location_current" = "Aktueller Standort";
-"location_my_address" = "Meine Adresse";
-"location_custom" = "Benutzerdefinierte Adresse";
+"location_current" = "Aktuelle Aufenthaltsadresse";
+"location_my_address" = "Registrierte Adresse";
+"location_custom" = "Andere Adresse";
 "mark_lost_pet_info" = "Haustierinformationen";
 "mark_lost_last_seen" = "Zuletzt gesehener Ort";
 "mark_lost_alerts_footer" = "Warnungen werden an nahe Nutzer, Tierärzte und Tierheime im Umkreis von 10 km gesendet.";
@@ -898,13 +898,13 @@
 "mark_lost_no_address" = "Keine Adresse registriert. Gehe zu Profil > Adresse.";
 "mark_lost_address_placeholder" = "Adresse oder Ort eingeben";
 "mark_lost_additional_info" = "Zusätzliche Informationen";
-"mark_lost_additional_placeholder" = "Beschreiben du, wann und wo du dein Haustier zuletzt gesehen haben, was es trug usw.";
+"mark_lost_additional_placeholder" = "Details, die bei der Suche helfen könnten (Halsbandfarbe, Verhalten, besondere Merkmale…)";
 "mark_lost_sends_to" = "Diese Warnung wird gesendet an:";
 "mark_lost_nearby_owners" = "Haustierbesitzer in der Nähe";
 "mark_lost_vet_clinics" = "Tierarztpraxen in der Nähe";
 "mark_lost_shelters" = "Tierheime in der Nähe";
 "mark_lost_report" = "Vermisst melden";
-"mark_lost_title" = "Vermisst melden";
+"mark_lost_title" = "%@ als vermisst markieren";
 
 // MARK: - Fotogalerie-Extras (Teil 1)
 "photo_count %lld" = "%lld Fotos";

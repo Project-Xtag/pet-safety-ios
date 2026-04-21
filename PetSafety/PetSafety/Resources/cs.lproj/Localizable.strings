@@ -888,9 +888,9 @@
 "quick_found_mark_failed" = "Nepodařilo se označit %@ jako nalezeného: %@";
 
 // MARK: - Označení jako ztracený (Chunk 1)
-"location_current" = "Aktuální poloha";
-"location_my_address" = "Moje adresa";
-"location_custom" = "Vlastní adresa";
+"location_current" = "Aktuální adresa pobytu";
+"location_my_address" = "Registrovaná adresa";
+"location_custom" = "Jiná adresa";
 "mark_lost_pet_info" = "Informace o mazlíčkovi";
 "mark_lost_last_seen" = "Místo posledního výskytu";
 "mark_lost_alerts_footer" = "Upozornění budou odeslána blízkým uživatelům, veterinářům a útulkům v okruhu 10 km.";
@@ -898,13 +898,13 @@
 "mark_lost_no_address" = "Žádná registrovaná adresa. Jdi do Profil > Adresa.";
 "mark_lost_address_placeholder" = "Zadej adresu nebo místo";
 "mark_lost_additional_info" = "Další informace";
-"mark_lost_additional_placeholder" = "Popiš, kdy a kde jsi mazlíčka naposledy viděl/a, co měl na sobě, apod.";
+"mark_lost_additional_placeholder" = "Jakékoli podrobnosti, které by mohly pomoci najít tvého mazlíčka (barva obojku, chování, rozpoznávací znaky…)";
 "mark_lost_sends_to" = "Toto upozornění bude odesláno:";
 "mark_lost_nearby_owners" = "Páníčkům v okolí";
 "mark_lost_vet_clinics" = "Veterinárním klinikám v okolí";
 "mark_lost_shelters" = "Útulkům v okolí";
 "mark_lost_report" = "Nahlásit ztrátu";
-"mark_lost_title" = "Nahlásit ztrátu";
+"mark_lost_title" = "Označit %@ jako ztraceného";
 
 // MARK: - Doplnění fotogalerie (Chunk 1)
 "photo_count %lld" = "%lld fotek";

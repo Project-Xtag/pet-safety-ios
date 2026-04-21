@@ -888,9 +888,9 @@
 "quick_found_mark_failed" = "Nu s-a putut marca %@ ca găsit: %@";
 
 // MARK: - Marcare ca pierdut (Secțiunea 1)
-"location_current" = "Locația curentă";
-"location_my_address" = "Adresa mea";
-"location_custom" = "Adresă personalizată";
+"location_current" = "Adresa actuală de ședere";
+"location_my_address" = "Adresa înregistrată";
+"location_custom" = "Altă adresă";
 "mark_lost_pet_info" = "Informații despre animal de companie";
 "mark_lost_last_seen" = "Locația unde a fost văzut ultima dată";
 "mark_lost_alerts_footer" = "Alertele vor fi trimise utilizatorilor din apropiere, veterinarilor și adăposturilor pe o rază de 10 km.";
@@ -898,13 +898,13 @@
 "mark_lost_no_address" = "Nu există adresă înregistrată. Mergi la Profil > Adresă.";
 "mark_lost_address_placeholder" = "Introdu adresa sau locația";
 "mark_lost_additional_info" = "Informații suplimentare";
-"mark_lost_additional_placeholder" = "Descrie când și unde ai văzut ultima dată animalul de companie, ce purta, etc.";
+"mark_lost_additional_placeholder" = "Orice detaliu care ar putea ajuta la găsirea animalului de companie (culoarea zgărzii, comportament, semne distinctive…)";
 "mark_lost_sends_to" = "Această alertă va fi trimisă către:";
 "mark_lost_nearby_owners" = "Proprietari de animale de companie din apropiere";
 "mark_lost_vet_clinics" = "Clinici veterinare din zonă";
 "mark_lost_shelters" = "Adăposturi de animale de companie din apropiere";
 "mark_lost_report" = "Raportează dispariția";
-"mark_lost_title" = "Raportează dispariția";
+"mark_lost_title" = "Marchează pe %@ ca dispărut";
 
 // MARK: - Extra galerie foto (Secțiunea 1)
 "photo_count %lld" = "%lld fotografii";
