@@ -154,19 +154,11 @@ struct AlertDetailView: View {
                             .font(.headline)
 
                         Map(position: $mapPosition) {
-                            Annotation(String(localized: "last_seen_label"), coordinate: coordinate) {
-                                VStack {
-                                    Image(systemName: "mappin.circle.fill")
-                                        .font(.system(size: 40))
-                                        .foregroundColor(.red)
-                                        .accessibilityLabel(Text("last_seen_location"))
-
-                                    Text("last_seen_label")
-                                        .font(.caption)
-                                        .padding(4)
-                                        .background(Color.white)
-                                        .cornerRadius(4)
-                                }
+                            Annotation("", coordinate: coordinate) {
+                                Image(systemName: "mappin.circle.fill")
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.red)
+                                    .accessibilityLabel(Text("last_seen_location"))
                             }
                         }
                         .frame(height: 200)
