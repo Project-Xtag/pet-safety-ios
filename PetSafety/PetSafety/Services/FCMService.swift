@@ -1,16 +1,18 @@
 import Foundation
+import Sentry
 
 /**
  * FCM Service for Firebase Cloud Messaging
  *
- * Handles FCM token registration with the backend.
- * Tokens are sent to the server which uses them for push notifications.
+ * Handles FCM token registration with the backend. Delegates the actual HTTP
+ * call to APIService so the request participates in 401 auto-refresh, App
+ * Check, and Sentry breadcrumbs. Failures are reported to Sentry so silent
+ * auth hiccups are observable in production — the register path runs again
+ * on every app foreground / login restore, so transient failures recover.
  */
 
 actor FCMService {
     static let shared = FCMService()
-
-    private let baseURL = "https://api.senra.pet/api"
 
     private init() {}
 
@@ -20,7 +22,7 @@ actor FCMService {
     ///   - deviceName: Optional device name for identification
     func registerToken(_ token: String, deviceName: String? = nil) async {
         do {
-            try await registerTokenWithBackend(token, deviceName: deviceName)
+            try await APIService.shared.registerFCMToken(token: token, deviceName: deviceName)
             #if DEBUG
             print("FCM token registered successfully")
             #endif
@@ -28,6 +30,12 @@ actor FCMService {
             #if DEBUG
             print("Failed to register FCM token: \(error)")
             #endif
+            if SentrySDK.isEnabled {
+                SentrySDK.capture(error: error) { scope in
+                    scope.setTag(value: "fcm_register_failed", key: "operation")
+                    scope.setContext(value: ["token_prefix": String(token.prefix(20))], key: "fcm")
+                }
+            }
         }
     }
 
@@ -35,7 +43,7 @@ actor FCMService {
     /// - Parameter token: The FCM token to remove
     func removeToken(_ token: String) async {
         do {
-            try await removeTokenFromBackend(token)
+            try await APIService.shared.unregisterFCMToken(token: token)
             #if DEBUG
             print("FCM token removed successfully")
             #endif
@@ -43,63 +51,11 @@ actor FCMService {
             #if DEBUG
             print("Failed to remove FCM token: \(error)")
             #endif
-        }
-    }
-
-    // MARK: - Private API Methods
-
-    private func registerTokenWithBackend(_ token: String, deviceName: String?) async throws {
-        guard let url = URL(string: "https://api.senra.pet/api/users/me/fcm-tokens") else {
-            throw URLError(.badURL)
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        // Add auth token if available
-        if let authToken = KeychainService.shared.getAuthToken() {
-            request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
-        }
-
-        var body: [String: Any] = [
-            "token": token,
-            "platform": "ios"
-        ]
-
-        if let deviceName = deviceName {
-            body["deviceName"] = deviceName
-        }
-
-        request.httpBody = try JSONSerialization.data(withJSONObject: body)
-
-        let (_, response) = try await CertificatePinningService.shared.pinnedSession.data(for: request)
-
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
-        }
-    }
-
-    private func removeTokenFromBackend(_ token: String) async throws {
-        let encodedToken = token.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? token
-        guard let url = URL(string: "https://api.senra.pet/api/users/me/fcm-tokens/\(encodedToken)") else {
-            throw URLError(.badURL)
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
-
-        // Add auth token if available
-        if let authToken = KeychainService.shared.getAuthToken() {
-            request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
-        }
-
-        let (_, response) = try await CertificatePinningService.shared.pinnedSession.data(for: request)
-
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
+            if SentrySDK.isEnabled {
+                SentrySDK.capture(error: error) { scope in
+                    scope.setTag(value: "fcm_unregister_failed", key: "operation")
+                }
+            }
         }
     }
 }

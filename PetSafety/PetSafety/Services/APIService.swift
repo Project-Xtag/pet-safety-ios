@@ -1854,6 +1854,38 @@ struct SupportResponse: Codable {
     let message: String
 }
 
+// MARK: - FCM Tokens Extension
+extension APIService {
+    /// Register an FCM token with the backend. Uses the standard request
+    /// pipeline so the call gets 401 auto-refresh, App Check, and Sentry
+    /// breadcrumbs — previously FCMService had its own URLSession which
+    /// silently swallowed transient auth failures.
+    func registerFCMToken(token: String, deviceName: String?) async throws {
+        struct FCMRegisterRequest: Codable {
+            let token: String
+            let platform: String
+            let device_name: String?
+        }
+
+        let request = try await buildRequest(
+            endpoint: "/users/me/fcm-tokens",
+            method: "POST",
+            body: FCMRegisterRequest(token: token, platform: "ios", device_name: deviceName)
+        )
+        _ = try await performRequest(request, responseType: EmptyResponse.self)
+    }
+
+    /// Remove an FCM token from the backend (called on logout).
+    func unregisterFCMToken(token: String) async throws {
+        let encodedToken = token.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? token
+        let request = try await buildRequest(
+            endpoint: "/users/me/fcm-tokens/\(encodedToken)",
+            method: "DELETE"
+        )
+        _ = try await performRequest(request, responseType: EmptyResponse.self)
+    }
+}
+
 // MARK: - Support Contact Extension
 extension APIService {
     /// Submit a support request
