@@ -321,7 +321,7 @@
 "profile_title" = "Konto";
 "profile_personal_info" = "Personopplysninger";
 "profile_address" = "Adresse";
-"profile_contacts" = "Kontakter";
+"profile_contacts" = "Kontaktopplysninger";
 "profile_privacy_mode" = "Personvernmodus";
 "profile_notifications" = "Varsler";
 "profile_billing" = "Fakturering";
@@ -758,7 +758,7 @@
 
 // MARK: - Varsler-fane (del 1)
 "alerts_loading" = "Laster varsler…";
-"alerts_missing_pets_title" = "Savnet-varsler";
+"alerts_missing_pets_title" = "Savnede dyr";
 "alerts_list" = "Liste";
 "alerts_map" = "Kart";
 "alerts_no_nearby_title %@" = "Ingen %@-varsler i nærheten";

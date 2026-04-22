@@ -322,7 +322,7 @@
 "profile_title" = "Account";
 "profile_personal_info" = "Personal Information";
 "profile_address" = "Address";
-"profile_contacts" = "Contacts";
+"profile_contacts" = "Contact Details";
 "profile_privacy_mode" = "Privacy Mode";
 "profile_notifications" = "Notifications";
 "profile_billing" = "Billing";
@@ -761,7 +761,7 @@
 
 // MARK: - Alerts Tab (Chunk 1)
 "alerts_loading" = "Loading alerts…";
-"alerts_missing_pets_title" = "Missing Pet Alerts";
+"alerts_missing_pets_title" = "Missing Pets";
 "alerts_list" = "List";
 "alerts_map" = "Map";
 "alerts_no_nearby_title %@" = "No %@ Alerts Nearby";

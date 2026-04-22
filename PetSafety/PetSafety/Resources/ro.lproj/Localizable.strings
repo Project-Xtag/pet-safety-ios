@@ -321,7 +321,7 @@
 "profile_title" = "Cont";
 "profile_personal_info" = "Informații personale";
 "profile_address" = "Adresă";
-"profile_contacts" = "Contacte";
+"profile_contacts" = "Date de contact";
 "profile_privacy_mode" = "Mod confidențialitate";
 "profile_notifications" = "Notificări";
 "profile_billing" = "Facturare";
@@ -745,7 +745,7 @@
 
 // MARK: - Fila alerte (Secțiunea 1)
 "alerts_loading" = "Se încarcă alertele…";
-"alerts_missing_pets_title" = "Alerte animale de companie dispărute";
+"alerts_missing_pets_title" = "Animale de companie dispărute";
 "alerts_list" = "Listă";
 "alerts_map" = "Hartă";
 "alerts_no_nearby_title %@" = "Nicio alertă %@ în apropiere";

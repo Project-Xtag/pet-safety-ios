@@ -321,7 +321,7 @@
 "profile_title" = "Účet";
 "profile_personal_info" = "Osobní údaje";
 "profile_address" = "Adresa";
-"profile_contacts" = "Kontakty";
+"profile_contacts" = "Kontaktní údaje";
 "profile_privacy_mode" = "Režim soukromí";
 "profile_notifications" = "Oznámení";
 "profile_billing" = "Fakturace";
@@ -745,7 +745,7 @@
 
 // MARK: - Záložka upozornění (Chunk 1)
 "alerts_loading" = "Načítání upozornění…";
-"alerts_missing_pets_title" = "Upozornění na ztracené mazlíčky";
+"alerts_missing_pets_title" = "Ztracení mazlíčci";
 "alerts_list" = "Seznam";
 "alerts_map" = "Mapa";
 "alerts_no_nearby_title %@" = "Žádná upozornění %@ v okolí";

@@ -324,7 +324,7 @@
 "profile_title" = "Račun";
 "profile_personal_info" = "Osobni podaci";
 "profile_address" = "Adresa";
-"profile_contacts" = "Kontakti";
+"profile_contacts" = "Kontakt podaci";
 "profile_privacy_mode" = "Privatnost";
 "profile_notifications" = "Obavijesti";
 "profile_billing" = "Naplata";
@@ -759,7 +759,7 @@
 
 // MARK: - Alerts Tab (Chunk 1)
 "alerts_loading" = "Učitavanje uzbuna…";
-"alerts_missing_pets_title" = "Uzbune o nestalim kućnim ljubimcima";
+"alerts_missing_pets_title" = "Nestali kućni ljubimci";
 "alerts_list" = "Lista";
 "alerts_map" = "Karta";
 "alerts_no_nearby_title %@" = "Nema %@ uzbuna u blizini";

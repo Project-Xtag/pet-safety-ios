@@ -321,7 +321,7 @@
 "profile_title" = "Conta";
 "profile_personal_info" = "Informação pessoal";
 "profile_address" = "Morada";
-"profile_contacts" = "Contactos";
+"profile_contacts" = "Dados de contacto";
 "profile_privacy_mode" = "Modo de privacidade";
 "profile_notifications" = "Notificações";
 "profile_billing" = "Faturação";
@@ -745,7 +745,7 @@
 
 // MARK: - Separador de alertas (Bloco 1)
 "alerts_loading" = "A carregar alertas…";
-"alerts_missing_pets_title" = "Alertas de animais de estimação desaparecidos";
+"alerts_missing_pets_title" = "Animais de estimação desaparecidos";
 "alerts_list" = "Lista";
 "alerts_map" = "Mapa";
 "alerts_no_nearby_title %@" = "Sem alertas de %@ nas proximidades";

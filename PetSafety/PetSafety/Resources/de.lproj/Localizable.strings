@@ -321,7 +321,7 @@
 "profile_title" = "Benutzerkonto";
 "profile_personal_info" = "Persönliche Informationen";
 "profile_address" = "Adresse";
-"profile_contacts" = "Kontakte";
+"profile_contacts" = "Kontaktdaten";
 "profile_privacy_mode" = "Privatsphäre-Modus";
 "profile_notifications" = "Benachrichtigungen";
 "profile_billing" = "Abrechnung";
@@ -745,7 +745,7 @@
 
 // MARK: - Warnungen-Tab (Teil 1)
 "alerts_loading" = "Warnungen werden geladen…";
-"alerts_missing_pets_title" = "Vermisstenwarnungen";
+"alerts_missing_pets_title" = "Vermisste Tiere";
 "alerts_list" = "Liste";
 "alerts_map" = "Karte";
 "alerts_no_nearby_title %@" = "Keine %@-Warnungen in der Nähe";

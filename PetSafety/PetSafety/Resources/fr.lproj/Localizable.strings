@@ -321,7 +321,7 @@
 "profile_title" = "Compte";
 "profile_personal_info" = "Informations personnelles";
 "profile_address" = "Adresse";
-"profile_contacts" = "Contacts";
+"profile_contacts" = "Coordonnées";
 "profile_privacy_mode" = "Mode confidentialité";
 "profile_notifications" = "Notifications";
 "profile_billing" = "Facturation";
@@ -744,7 +744,7 @@
 
 // MARK: - Onglet alertes (1ère partie)
 "alerts_loading" = "Chargement des alertes…";
-"alerts_missing_pets_title" = "Alertes d'animaux de compagnie perdus";
+"alerts_missing_pets_title" = "Animaux de compagnie perdus";
 "alerts_list" = "Liste";
 "alerts_map" = "Carte";
 "alerts_no_nearby_title %@" = "Aucune alerte %@ à proximité";

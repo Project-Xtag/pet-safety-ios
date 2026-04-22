@@ -224,7 +224,7 @@
 "failed_load_alerts" = "Nem sikerült betölteni a riasztásokat";
 "no_active_alerts" = "Nincsenek aktív riasztások";
 "no_active_alerts_message" = "Jelenleg nincs eltűnt kedvenc riasztásod";
-"missing_pet_alerts_title" = "Eltűnt kedvenc riasztások";
+"missing_pet_alerts_title" = "Eltűnt kedvencek";
 "create_alert" = "Riasztás létrehozása";
 "create_new_alert" = "Új riasztás létrehozása";
 "sighting_count_singular" = "1 észlelés";
@@ -322,7 +322,7 @@
 "profile_title" = "Fiók";
 "profile_personal_info" = "Személyes adatok";
 "profile_address" = "Cím";
-"profile_contacts" = "Kapcsolatok";
+"profile_contacts" = "Elérhetőségek";
 "profile_privacy_mode" = "Adatvédelmi beállítások";
 "profile_notifications" = "Értesítések";
 "profile_billing" = "Számlázás";
@@ -750,7 +750,7 @@
 
 // MARK: - Riasztások fül (1. rész)
 "alerts_loading" = "Riasztások betöltése…";
-"alerts_missing_pets_title" = "Eltűnt kedvenc riasztások";
+"alerts_missing_pets_title" = "Eltűnt kedvencek";
 "alerts_list" = "Lista";
 "alerts_map" = "Térkép";
 "alerts_no_nearby_title %@" = "Nincs %@ riasztás a közelben";

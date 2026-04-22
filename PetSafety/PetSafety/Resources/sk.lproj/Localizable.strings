@@ -321,7 +321,7 @@
 "profile_title" = "Účet";
 "profile_personal_info" = "Osobne informácie";
 "profile_address" = "Adresa";
-"profile_contacts" = "Kontakty";
+"profile_contacts" = "Kontaktné údaje";
 "profile_privacy_mode" = "Rezim súkromia";
 "profile_notifications" = "Upozornenia";
 "profile_billing" = "Fakturácia";
@@ -745,7 +745,7 @@
 
 // MARK: - Zalozka upozorneni (Cast 1)
 "alerts_loading" = "Nacitavaju sa upozornenia…";
-"alerts_missing_pets_title" = "Upozornenia na stratených domácich miláčikov";
+"alerts_missing_pets_title" = "Stratené domáce miláčikovia";
 "alerts_list" = "Zoznam";
 "alerts_map" = "Mapa";
 "alerts_no_nearby_title %@" = "Žiadne upozornenia %@ nablizku";

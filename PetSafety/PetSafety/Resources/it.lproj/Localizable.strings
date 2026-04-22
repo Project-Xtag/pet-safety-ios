@@ -321,7 +321,7 @@
 "profile_title" = "Account";
 "profile_personal_info" = "Dati personali";
 "profile_address" = "Indirizzo";
-"profile_contacts" = "Contatti";
+"profile_contacts" = "Dati di contatto";
 "profile_privacy_mode" = "Modalità privacy";
 "profile_notifications" = "Notifiche";
 "profile_billing" = "Fatturazione";
@@ -752,7 +752,7 @@
 
 // MARK: - Scheda avvisi (Parte 1)
 "alerts_loading" = "Caricamento avvisi…";
-"alerts_missing_pets_title" = "Avvisi di animali di compagnia scomparsi";
+"alerts_missing_pets_title" = "Animali di compagnia scomparsi";
 "alerts_list" = "Lista";
 "alerts_map" = "Mappa";
 "alerts_no_nearby_title %@" = "Nessun avviso %@ nelle vicinanze";
