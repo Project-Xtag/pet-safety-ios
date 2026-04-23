@@ -269,14 +269,14 @@ class AppState: ObservableObject {
     }
 
     func showError(_ message: String) {
-        alertTitle = String(localized: "alert_error")
-        alertMessage = message
+        alertTitle = message
+        alertMessage = ""
         showAlert = true
     }
 
     func showSuccess(_ message: String) {
-        alertTitle = String(localized: "alert_success")
-        alertMessage = message
+        alertTitle = message
+        alertMessage = ""
         showAlert = true
     }
 
