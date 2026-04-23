@@ -946,6 +946,16 @@
 "sse_referral_title" = "Użyto kodu polecenia!";
 "sse_referral_message" = "%@ użył/a twojego kodu polecenia!";
 
+
+// MARK: - SSE Pet Notifications
+"sse_tag_scanned_title" = "%@ znaleziony!";
+"sse_tag_scanned_body_with_address" = "Ktoś zeskanował identyfikator twojego pupila w: %@";
+"sse_tag_scanned_body_no_address" = "Ktoś zeskanował identyfikator twojego pupila";
+"sse_sighting_title" = "%@ zauważony!";
+"sse_sighting_body_with_address" = "Ktoś zgłosił, że widział twojego pupila w: %@";
+"sse_sighting_body_no_address" = "Ktoś zgłosił, że widział twojego pupila";
+"sse_pet_found_title" = "Świetne wieści!";
+
 // MARK: - Nagroda
 "create_alert_reward" = "Nagroda (opcjonalnie)";
 "create_alert_reward_placeholder" = "np. 200 zł, €50 lub specjalny prezent";
@@ -1273,7 +1283,7 @@
 "sse_tag_scanned_body" = "Nieśka %1$@ została zeskanowana w %2$@!";
 "sse_sighting_body" = "%1$@ został zauważony%2$@!";
 "sse_sighting_at" = " w %@";
-"sse_pet_found_body" = "Świetna wiadomość! %@ został znaleziony!";
+"sse_pet_found_body" = "%@ został znaleziony!";
 // MARK: - Edit Alert
 "edit_alert_title" = "Edytuj alert";
 "edit_alert_location" = "Ostatnia znana lokalizacja";

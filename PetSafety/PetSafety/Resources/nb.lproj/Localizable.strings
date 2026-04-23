@@ -963,6 +963,16 @@
 "sse_referral_title" = "Vervekode brukt!";
 "sse_referral_message" = "%@ brukte vervekoden din!";
 
+
+// MARK: - SSE Pet Notifications
+"sse_tag_scanned_title" = "%@ funnet!";
+"sse_tag_scanned_body_with_address" = "Noen skannet kjæledyrets tag på: %@";
+"sse_tag_scanned_body_no_address" = "Noen skannet kjæledyrets tag";
+"sse_sighting_title" = "%@ observert!";
+"sse_sighting_body_with_address" = "Noen har meldt at de har sett kjæledyret ditt på: %@";
+"sse_sighting_body_no_address" = "Noen har meldt at de har sett kjæledyret ditt";
+"sse_pet_found_title" = "Gode nyheter!";
+
 // MARK: - Belønning
 "create_alert_reward" = "Belønning (valgfritt)";
 "create_alert_reward_placeholder" = "f.eks. €50, $100, eller en spesiell gave";
@@ -1273,7 +1283,7 @@
 "sse_tag_scanned_body" = "QR-brikken til %1$@ ble skannet ved %2$@!";
 "sse_sighting_body" = "%1$@ har blitt observert%2$@!";
 "sse_sighting_at" = " ved %@";
-"sse_pet_found_body" = "Gode nyheter! %@ er funnet!";
+"sse_pet_found_body" = "%@ er funnet!";
 // MARK: - Edit Alert
 "edit_alert_title" = "Rediger varsel";
 "edit_alert_location" = "Sist sett sted";

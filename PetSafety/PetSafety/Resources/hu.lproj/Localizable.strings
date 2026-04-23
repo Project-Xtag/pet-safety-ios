@@ -949,9 +949,19 @@
 
 // MARK: - SSE Subscription Events
 "sse_subscription_title" = "Előfizetés frissítve";
-"sse_subscription_message" = "Your Senra subscription has been updated.";
+"sse_subscription_message" = "A SENRA előfizetésed frissült.";
 "sse_referral_title" = "Ajánlás felhasználva!";
 "sse_referral_message" = "%@ felhasználta az ajánlókódodat!";
+
+
+// MARK: - SSE Pet Notifications
+"sse_tag_scanned_title" = "%@ bilétáját megtalálták!";
+"sse_tag_scanned_body_with_address" = "Valaki beolvasta a kedvenced bilétáját itt: %@";
+"sse_tag_scanned_body_no_address" = "Valaki beolvasta a kedvenced bilétáját";
+"sse_sighting_title" = "%@ észlelve!";
+"sse_sighting_body_with_address" = "Valaki látta a kedvencedet itt: %@";
+"sse_sighting_body_no_address" = "Valaki látta a kedvencedet";
+"sse_pet_found_title" = "Jó hír!";
 
 // MARK: - Jutalom
 "create_alert_reward" = "Jutalom (opcionális)";
@@ -1275,7 +1285,7 @@
 "sse_tag_scanned_body" = "%1$@ bilétáját beolvasták itt: %2$@!";
 "sse_sighting_body" = "%1$@-t észlelték%2$@!";
 "sse_sighting_at" = "itt: %@";
-"sse_pet_found_body" = "Nagyszerű hír! %@ megkerült!";
+"sse_pet_found_body" = "%@ megvan!";
 // MARK: - Edit Alert
 "edit_alert_title" = "Riasztás szerkesztése";
 "edit_alert_location" = "Utoljára látott hely";

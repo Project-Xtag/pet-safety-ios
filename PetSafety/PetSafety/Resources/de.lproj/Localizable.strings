@@ -948,6 +948,16 @@
 "sse_referral_title" = "Empfehlung genutzt!";
 "sse_referral_message" = "%@ hat deinen Empfehlungscode verwendet!";
 
+
+// MARK: - SSE Pet Notifications
+"sse_tag_scanned_title" = "%@ gefunden!";
+"sse_tag_scanned_body_with_address" = "Jemand hat die Marke deines Haustiers gescannt bei: %@";
+"sse_tag_scanned_body_no_address" = "Jemand hat die Marke deines Haustiers gescannt";
+"sse_sighting_title" = "%@ gesichtet!";
+"sse_sighting_body_with_address" = "Jemand hat dein Haustier gesehen bei: %@";
+"sse_sighting_body_no_address" = "Jemand hat dein Haustier gesehen";
+"sse_pet_found_title" = "Gute Nachrichten!";
+
 // MARK: - Belohnung
 "create_alert_reward" = "Belohnung (optional)";
 "create_alert_reward_placeholder" = "z.B. €50, $100 oder ein besonderes Geschenk";
@@ -1270,7 +1280,7 @@
 "sse_tag_scanned_body" = "%1$@s Haustiermarke wurde gescannt bei %2$@!";
 "sse_sighting_body" = "%1$@ wurde gesichtet%2$@!";
 "sse_sighting_at" = " bei %@";
-"sse_pet_found_body" = "Tolle Nachricht! %@ wurde gefunden!";
+"sse_pet_found_body" = "%@ wurde gefunden!";
 // MARK: - Edit Alert
 "edit_alert_title" = "Alarm bearbeiten";
 "edit_alert_location" = "Zuletzt gesehener Ort";

@@ -948,6 +948,16 @@
 "sse_referral_title" = "Recomandare folosită!";
 "sse_referral_message" = "%@ a folosit codul tău de recomandare!";
 
+
+// MARK: - SSE Pet Notifications
+"sse_tag_scanned_title" = "%@ găsit!";
+"sse_tag_scanned_body_with_address" = "Cineva a scanat medalionul animalului tău la: %@";
+"sse_tag_scanned_body_no_address" = "Cineva a scanat medalionul animalului tău";
+"sse_sighting_title" = "%@ observat!";
+"sse_sighting_body_with_address" = "Cineva ți-a văzut animalul la: %@";
+"sse_sighting_body_no_address" = "Cineva ți-a văzut animalul";
+"sse_pet_found_title" = "Vești bune!";
+
 // MARK: - Recompensă
 "create_alert_reward" = "Recompensă (opțional)";
 "create_alert_reward_placeholder" = "ex. €50, $100 sau un cadou special";
@@ -1270,7 +1280,7 @@
 "sse_tag_scanned_body" = "Medalonul lui %1$@ a fost scanat la %2$@!";
 "sse_sighting_body" = "%1$@ a fost văzut%2$@!";
 "sse_sighting_at" = " la %@";
-"sse_pet_found_body" = "Veste grozavă! %@ a fost găsit!";
+"sse_pet_found_body" = "%@ a fost găsit!";
 // MARK: - Edit Alert
 "edit_alert_title" = "Editează alerta";
 "edit_alert_location" = "Ultima locație văzută";

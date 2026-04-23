@@ -948,6 +948,16 @@
 "sse_referral_title" = "Odporúčanie použité!";
 "sse_referral_message" = "%@ použil váš odporúčací kód!";
 
+
+// MARK: - SSE Pet Notifications
+"sse_tag_scanned_title" = "%@ nájdený!";
+"sse_tag_scanned_body_with_address" = "Niekto naskenoval známku tvojho zvieratka na mieste: %@";
+"sse_tag_scanned_body_no_address" = "Niekto naskenoval známku tvojho zvieratka";
+"sse_sighting_title" = "%@ spozorovaný!";
+"sse_sighting_body_with_address" = "Niekto videl tvoje zvieratko na mieste: %@";
+"sse_sighting_body_no_address" = "Niekto videl tvoje zvieratko";
+"sse_pet_found_title" = "Skvelá správa!";
+
 // MARK: - Odmena
 "create_alert_reward" = "Odmena (voliteľné)";
 "create_alert_reward_placeholder" = "napr.. €50, $100 alebo špeciálny darček";
@@ -1270,7 +1280,7 @@
 "sse_tag_scanned_body" = "Známka %1$@ bola naskenovaná v %2$@!";
 "sse_sighting_body" = "%1$@ bol spozorovaný%2$@!";
 "sse_sighting_at" = " na %@";
-"sse_pet_found_body" = "Skvelá správa! %@ bol nájdený!";
+"sse_pet_found_body" = "%@ sa našiel!";
 // MARK: - Edit Alert
 "edit_alert_title" = "Upraviť upozornenie";
 "edit_alert_location" = "Naposledy videné miesto";

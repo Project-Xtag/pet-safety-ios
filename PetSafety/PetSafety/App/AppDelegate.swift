@@ -170,7 +170,10 @@ extension AppDelegate: MessagingDelegate {
         }
 
         #if DEBUG
-        print("FCM token received: \(token)")
+        // Only log a prefix — FCM tokens are bearer-equivalent for push, so
+        // anyone with the full token can send pushes to this device. Matches
+        // the Android DebugTree policy (20-char prefix).
+        print("FCM token received: \(token.prefix(20))…")
         #endif
 
         // Store token securely in Keychain (not UserDefaults)
@@ -192,7 +195,15 @@ extension AppDelegate: MessagingDelegate {
     }
 
     private func getDeviceName() -> String {
-        return UIDevice.current.name
+        // GDPR: UIDevice.current.name returns the user-assigned device name
+        // (e.g. "Viktor's iPhone") on iOS 16+ unless the app requests the
+        // userAssignedDeviceName entitlement. We don't — and even if we did,
+        // sending a personal name to the backend-side push token DB is PII
+        // we don't need. Use a generic model/system string instead; it's
+        // enough to tell an iPhone from an iPad for UX (multi-device list).
+        let model = UIDevice.current.model           // e.g. "iPhone", "iPad"
+        let systemVersion = UIDevice.current.systemVersion
+        return "\(model) iOS \(systemVersion)"
     }
 }
 

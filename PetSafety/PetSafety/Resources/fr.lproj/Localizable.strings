@@ -947,6 +947,16 @@
 "sse_referral_title" = "Parrainage utilisé !";
 "sse_referral_message" = "%@ a utilisé ton code de parrainage !";
 
+
+// MARK: - SSE Pet Notifications
+"sse_tag_scanned_title" = "%@ retrouvé !";
+"sse_tag_scanned_body_with_address" = "Quelqu'un a scanné la médaille de ton animal à : %@";
+"sse_tag_scanned_body_no_address" = "Quelqu'un a scanné la médaille de ton animal";
+"sse_sighting_title" = "%@ aperçu !";
+"sse_sighting_body_with_address" = "Quelqu'un a signalé avoir vu ton animal à : %@";
+"sse_sighting_body_no_address" = "Quelqu'un a signalé avoir vu ton animal";
+"sse_pet_found_title" = "Bonne nouvelle !";
+
 // MARK: - Récompense
 "create_alert_reward" = "Récompense (facultatif)";
 "create_alert_reward_placeholder" = "ex. 50€, 100$, ou un cadeau spécial";
@@ -1273,7 +1283,7 @@
 "sse_tag_scanned_body" = "La médaille connectée de %1$@ a été scannée à %2$@ !";
 "sse_sighting_body" = "%1$@ a été aperçu%2$@ !";
 "sse_sighting_at" = " à %@";
-"sse_pet_found_body" = "Bonne nouvelle ! %@ a été retrouvé !";
+"sse_pet_found_body" = "%@ a été retrouvé !";
 // MARK: - Edit Alert
 "edit_alert_title" = "Modifier l'alerte";
 "edit_alert_location" = "Dernier emplacement vu";

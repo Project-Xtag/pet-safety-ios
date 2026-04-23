@@ -964,6 +964,16 @@
 "sse_referral_title" = "Preporuka iskorištena!";
 "sse_referral_message" = "%@ je iskoristio tvoj kôd za preporuku!";
 
+
+// MARK: - SSE Pet Notifications
+"sse_tag_scanned_title" = "%@ pronađen!";
+"sse_tag_scanned_body_with_address" = "Netko je skenirao medalju tvog ljubimca na: %@";
+"sse_tag_scanned_body_no_address" = "Netko je skenirao medalju tvog ljubimca";
+"sse_sighting_title" = "%@ viđen!";
+"sse_sighting_body_with_address" = "Netko je prijavio da je vidio tvog ljubimca na: %@";
+"sse_sighting_body_no_address" = "Netko je prijavio da je vidio tvog ljubimca";
+"sse_pet_found_title" = "Sjajne vijesti!";
+
 // MARK: - Reward
 "create_alert_reward" = "Nagrada (neobavezno)";
 "create_alert_reward_placeholder" = "npr. €50 ili poseban poklon";
@@ -1276,7 +1286,7 @@
 "sse_tag_scanned_body" = "Privjesak kućnog ljubimca %1$@ skeniran na lokaciji %2$@!";
 "sse_sighting_body" = "%1$@ je viđen%2$@!";
 "sse_sighting_at" = " na %@";
-"sse_pet_found_body" = "Sjajna vijest! %@ je pronađen!";
+"sse_pet_found_body" = "%@ je pronađen!";
 // MARK: - Edit Alert
 "edit_alert_title" = "Uredi obavijest";
 "edit_alert_location" = "Posljednja poznata lokacija";

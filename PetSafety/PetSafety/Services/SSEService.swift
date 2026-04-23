@@ -2,6 +2,7 @@ import Foundation
 import Combine
 import UIKit
 import UserNotifications
+import Sentry
 
 /// Service for managing Server-Sent Events (SSE) connections
 /// Provides real-time notifications for tag scans, sightings, and pet updates
@@ -361,8 +362,9 @@ class SSEService: NSObject, ObservableObject {
                     self?.onTagScanned?(event)
                 }
                 showNotification(
-                    title: "\(event.petName) Found!",
-                    body: "Someone scanned your pet's tag at \(event.address ?? "an unknown location")"
+                    title: String(format: NSLocalizedString("sse_tag_scanned_title", comment: ""), event.petName),
+                    body: event.address.map { String(format: NSLocalizedString("sse_tag_scanned_body_with_address", comment: ""), $0) }
+                        ?? NSLocalizedString("sse_tag_scanned_body_no_address", comment: "")
                 )
 
             case "sighting_reported":
@@ -371,8 +373,9 @@ class SSEService: NSObject, ObservableObject {
                     self?.onSightingReported?(event)
                 }
                 showNotification(
-                    title: "\(event.petName) Sighted!",
-                    body: "Someone reported seeing your pet\(event.address != nil ? " at \(event.address!)" : "")"
+                    title: String(format: NSLocalizedString("sse_sighting_title", comment: ""), event.petName),
+                    body: event.address.map { String(format: NSLocalizedString("sse_sighting_body_with_address", comment: ""), $0) }
+                        ?? NSLocalizedString("sse_sighting_body_no_address", comment: "")
                 )
 
             case "pet_found":
@@ -381,8 +384,8 @@ class SSEService: NSObject, ObservableObject {
                     self?.onPetFound?(event)
                 }
                 showNotification(
-                    title: "Great News!",
-                    body: "\(event.petName) has been found!"
+                    title: NSLocalizedString("sse_pet_found_title", comment: ""),
+                    body: String(format: NSLocalizedString("sse_pet_found_body", comment: ""), event.petName)
                 )
 
             case "alert_created":
@@ -426,6 +429,15 @@ class SSEService: NSObject, ObservableObject {
             #if DEBUG
             print("❌ SSEService: Failed to decode event: \(error)")
             #endif
+            // Malformed SSE payloads are otherwise invisible in release
+            // builds. Capture so a backend schema drift surfaces as a real
+            // alert instead of manifesting only as a "my inbox never
+            // updates" user report.
+            if SentrySDK.isEnabled {
+                SentrySDK.capture(error: error) { scope in
+                    scope.setTag(value: "sse_decode_error", key: "operation")
+                }
+            }
         }
     }
 
@@ -494,6 +506,17 @@ extension SSEService: URLSessionDataDelegate {
             #if DEBUG
             print("❌ SSEService: Connection error: \(error.localizedDescription)")
             #endif
+
+            // Sentry: SSE runs its own URLSession (bypassing APIService), so
+            // errors here are otherwise invisible outside DEBUG builds. A
+            // silent SSE failure means the real-time inbox / scan toast
+            // pipeline is down for this device.
+            if SentrySDK.isEnabled {
+                SentrySDK.capture(error: error) { scope in
+                    scope.setTag(value: "sse_connection_error", key: "operation")
+                    scope.setContext(value: ["attempts": self.reconnectAttempts], key: "sse")
+                }
+            }
 
             DispatchQueue.main.async { [weak self] in
                 self?.isConnected = false
