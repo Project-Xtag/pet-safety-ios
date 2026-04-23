@@ -34,7 +34,7 @@ struct ProfileView: View {
         .alert("log_out", isPresented: $showingLogoutAlert) {
             Button("cancel", role: .cancel) { }
             Button("log_out", role: .destructive) {
-                authViewModel.logout()
+                Task { await authViewModel.logout() }
             }
         } message: {
             Text("logout_confirm")

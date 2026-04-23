@@ -26,6 +26,21 @@ struct ReferralView: View {
                         TextField(String(localized: "enter_friend_code"), text: $friendCode)
                             .textInputAutocapitalization(.characters)
                             .autocorrectionDisabled()
+                            // Filter keystrokes to [A-Z0-9] max 32 chars.
+                            // Previously accepted any input — a paste of a
+                            // 10k-char string reached the backend, and
+                            // emojis / punctuation produced cryptic backend
+                            // errors. Friend codes are alphanumeric by
+                            // design.
+                            .onChange(of: friendCode) { _, newValue in
+                                let filtered = newValue
+                                    .uppercased()
+                                    .filter { $0.isLetter || $0.isNumber }
+                                let capped = String(filtered.prefix(32))
+                                if capped != newValue {
+                                    friendCode = capped
+                                }
+                            }
                         Button(action: applyFriendCode) {
                             if isApplyingFriendCode {
                                 ProgressView()
@@ -35,7 +50,7 @@ struct ReferralView: View {
                         }
                         .buttonStyle(.borderedProminent)
                         .tint(.brandOrange)
-                        .disabled(friendCode.isEmpty || isApplyingFriendCode)
+                        .disabled(friendCode.count < 4 || isApplyingFriendCode)
                     }
                 }
             } header: {

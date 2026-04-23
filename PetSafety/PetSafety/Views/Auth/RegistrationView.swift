@@ -343,6 +343,11 @@ struct RegistrationView: View {
     }
 
     private func verifyOTP() {
+        // See AuthenticationView.verifyOTP for the double-tap rationale.
+        // Registration has the same race shape: two rapid taps before the
+        // isLoading flag propagates triggers two concurrent verify-OTP
+        // calls, one consumes and the other surfaces a confusing error.
+        guard !authViewModel.isLoading else { return }
         let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedFirstName = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedLastName = lastName.trimmingCharacters(in: .whitespacesAndNewlines)

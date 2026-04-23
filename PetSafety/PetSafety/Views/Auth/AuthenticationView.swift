@@ -309,6 +309,13 @@ struct AuthenticationView: View {
     }
 
     private func verifyOTP() {
+        // Guard against double-tap races: the SwiftUI .disabled() modifier
+        // flips on the next render pass, but two quick taps can both enter
+        // this function before authViewModel.isLoading goes true. Returning
+        // early when a verify is already in-flight prevents two concurrent
+        // POST /verify-otp calls for the same code (one consumes, the other
+        // races through and surfaces a confusing "invalid OTP" error).
+        guard !authViewModel.isLoading else { return }
         Task {
             do {
                 try await authViewModel.verifyOTP(email: email, code: otpCode)

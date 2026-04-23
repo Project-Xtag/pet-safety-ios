@@ -191,10 +191,20 @@ class APIService {
         let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
         request.setValue(languageCode, forHTTPHeaderField: "Accept-Language")
 
-        // Add Firebase App Check token for API protection
-        // This verifies the request comes from a legitimate app instance
+        // Add Firebase App Check token for API protection.
+        // This verifies the request comes from a legitimate app instance.
+        // Backend doesn't currently enforce App Check, but a missing token
+        // is still signal that Firebase config is drifting — log it so we
+        // can see outages in Sentry instead of only in local DEBUG prints.
         if let appCheckToken = await ConfigurationManager.shared.getAppCheckToken() {
             request.setValue(appCheckToken, forHTTPHeaderField: "X-Firebase-AppCheck")
+        } else {
+            #if DEBUG
+            print("⚠️ APIService: App Check token unavailable for \(endpoint)")
+            #endif
+            if SentrySDK.isEnabled {
+                SentrySDK.capture(message: "App Check token unavailable")
+            }
         }
 
         if let body = body {

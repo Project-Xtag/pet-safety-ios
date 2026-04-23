@@ -120,14 +120,11 @@ class AuthViewModel: ObservableObject {
         }
     }
 
-    private func unregisterFCMToken() {
+    private func unregisterFCMToken() async {
         guard let token = KeychainService.shared.getFCMToken() else {
             return
         }
-
-        Task {
-            await FCMService.shared.removeToken(token)
-        }
+        await FCMService.shared.removeToken(token)
     }
 
     // MARK: - Biometric Authentication
@@ -250,9 +247,14 @@ class AuthViewModel: ObservableObject {
         }
     }
 
-    func logout() {
-        // Unregister FCM token before logout
-        unregisterFCMToken()
+    /// GDPR-safe logout: awaits the backend FCM unregister BEFORE we drop
+    /// local auth so the next user on this device (shared household iPad,
+    /// demo phone, QA handoff) can't inherit the prior user's pushes.
+    /// Fire-and-forget Task here used to mean logout() returned before the
+    /// DELETE /users/me/fcm-tokens/:token actually landed — the token
+    /// stayed registered on the backend until it naturally rotated.
+    func logout() async {
+        await unregisterFCMToken()
         apiService.logout()
         currentUser = nil
         isAuthenticated = false

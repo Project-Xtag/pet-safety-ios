@@ -254,10 +254,18 @@ struct HelpAndSupportView: View {
 
         Task {
             do {
+                // If the backend deletion fails (Stripe outage, DB failure),
+                // performRequest throws and we DON'T log out locally — user
+                // sees a clear error and their account is still intact. If
+                // they were logged out on a local-only failure they'd be
+                // stuck: account alive on the server, session gone on this
+                // device.
                 _ = try await APIService.shared.deleteAccount()
-                await MainActor.run {
-                    authViewModel.logout()
-                }
+                // Await the full FCM-unregister + Keychain cleanup. The
+                // bare logout() used to be sync/fire-and-forget, which
+                // left a small window where the just-deleted user still
+                // had a live FCM token on the backend.
+                await authViewModel.logout()
             } catch {
                 await MainActor.run {
                     isDeleting = false
