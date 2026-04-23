@@ -266,6 +266,7 @@
 "submit_sighting_report" = "Észlelés beküldése";
 "sighting_reported_owner_notified" = "Észlelés bejelentve! A gazdit értesítettük.";
 "sighting_address_not_found" = "Nem találjuk ezt a címet. Ellenőrizd a helyesírást vagy próbálj meg egy közeli nevezetességet.";
+"sighting_location_invalid" = "Ez a hely érvénytelennek tűnik. Ossz meg jelenlegi GPS-helyzetet, vagy próbálj másik címet.";
 "sighting_location_required" = "Oszd meg a jelenlegi helyzeted, vagy adj meg egy címet.";
 
 // MARK: - Eltűnt/Megtalált jelölés
@@ -1387,3 +1388,5 @@
 "sync_error_not_implemented" = "A funkció még nem elérhető";
 "sync_error_network_unavailable" = "Nincs hálózati kapcsolat";
 "report_found_unavailable" = "Ez a funkció nem érhető el ehhez a riasztáshoz. Kérjük, lépj kapcsolatba közvetlenül a gazdival, ha megtaláltad a kedvencet.";
+
+"qr_torch_unavailable" = "A vaku nem érhető el ezen az eszközön.";

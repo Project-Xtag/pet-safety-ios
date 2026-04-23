@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import Sentry
 
 @MainActor
 class PetsViewModel: ObservableObject {
@@ -30,7 +31,20 @@ class PetsViewModel: ObservableObject {
                 let apiPetIds = Set(pets.map { $0.id })
                 for cachedPet in cachedPets {
                     if !apiPetIds.contains(cachedPet.id) {
-                        try? offlineManager.deletePet(withId: cachedPet.id)
+                        // Was try?; a persistent offline-cache corruption
+                        // kept the stale pet locally without any signal.
+                        // Capture so we can actually see cache drift in
+                        // Sentry before users complain.
+                        do {
+                            try offlineManager.deletePet(withId: cachedPet.id)
+                        } catch {
+                            if SentrySDK.isEnabled {
+                                SentrySDK.capture(error: error) { scope in
+                                    scope.setTag(value: "offline_cache_delete", key: "operation")
+                                    scope.setContext(value: ["petId": cachedPet.id], key: "pet")
+                                }
+                            }
+                        }
                     }
                 }
                 try offlineManager.savePets(pets)
@@ -104,7 +118,16 @@ class PetsViewModel: ObservableObject {
             try await apiService.deletePet(id: id)
             pets.removeAll { $0.id == id }
             // Also remove from offline cache
-            try? offlineManager.deletePet(withId: id)
+            do {
+                try offlineManager.deletePet(withId: id)
+            } catch {
+                if SentrySDK.isEnabled {
+                    SentrySDK.capture(error: error) { scope in
+                        scope.setTag(value: "offline_cache_delete_after_api_delete", key: "operation")
+                        scope.setContext(value: ["petId": id], key: "pet")
+                    }
+                }
+            }
             isLoading = false
         } catch {
             isLoading = false
@@ -329,10 +352,20 @@ class PetsViewModel: ObservableObject {
                     lastResolvedAlertId = activeAlert.id
                 }
             } catch {
-                // Alert resolution failed — continue with pet update so the user isn't blocked
+                // Alert resolution failed — continue with pet update so
+                // the user isn't blocked. But capture the mismatch: if
+                // markPetFound succeeds while the alert stays "active",
+                // the user sees a contradiction ("pet is home" + "alert
+                // still showing") and support has no trail.
                 #if DEBUG
                 print("⚠️ Failed to resolve alert for pet \(petId): \(error)")
                 #endif
+                if SentrySDK.isEnabled {
+                    SentrySDK.capture(error: error) { scope in
+                        scope.setTag(value: "mark_found_alert_resolution", key: "operation")
+                        scope.setContext(value: ["petId": petId], key: "pet")
+                    }
+                }
             }
 
             // Then update the pet status

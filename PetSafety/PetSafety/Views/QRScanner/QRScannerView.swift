@@ -6,6 +6,7 @@ struct QRScannerView: View {
     @State private var showOverlay = true
     @State private var isTorchOn = false
     @State private var scannerController: QRScannerViewController?
+    @State private var torchErrorMessage: String?
 
     var body: some View {
         ZStack {
@@ -142,12 +143,27 @@ struct QRScannerView: View {
             // Turn off torch when leaving the scanner
             if isTorchOn { toggleTorch() }
         }
+        .alert(
+            NSLocalizedString("qr_torch_unavailable", comment: ""),
+            isPresented: .constant(torchErrorMessage != nil),
+            presenting: torchErrorMessage
+        ) { _ in
+            Button("ok", role: .cancel) { torchErrorMessage = nil }
+        } message: { msg in
+            Text(msg)
+        }
         .secureScreen()
     }
 
     private func toggleTorch() {
         guard let device = AVCaptureDevice.default(for: .video),
-              device.hasTorch else { return }
+              device.hasTorch else {
+            // Device has no torch hardware — surface to the user
+            // instead of failing silently (previous behaviour only
+            // logged in DEBUG, so the toggle appeared "stuck" in prod).
+            torchErrorMessage = NSLocalizedString("qr_torch_unavailable", comment: "")
+            return
+        }
         do {
             try device.lockForConfiguration()
             isTorchOn.toggle()
@@ -157,6 +173,7 @@ struct QRScannerView: View {
             #if DEBUG
             print("Failed to toggle torch: \(error)")
             #endif
+            torchErrorMessage = NSLocalizedString("qr_torch_unavailable", comment: "")
         }
     }
 }
@@ -321,10 +338,14 @@ struct ScannedPetView: View {
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 24)
 
-                        // Pet details row
+                        // Pet details row. breed + sex are raw DB values
+                        // (e.g. "labrador", "male") — we must run them
+                        // through PetLocalizer so non-EN users see their
+                        // locale's breed / sex labels instead of English.
                         HStack(spacing: 16) {
                             if let breed = pet.breed {
-                                Text("**\(NSLocalizedString("scanner_breed", comment: "")):** \(breed)")
+                                let localized = PetLocalizer.localizeBreed(breed, species: pet.species)
+                                Text("**\(NSLocalizedString("scanner_breed", comment: "")):** \(localized)")
                                     .font(.system(size: 14))
                                     .foregroundColor(.mutedText)
                             }
@@ -334,12 +355,16 @@ struct ScannedPetView: View {
                                     .foregroundColor(.mutedText)
                             }
                             if let color = pet.color {
+                                // Color is user-entered free text (not an
+                                // enum), so no localizer lookup — but
+                                // rendered as-is.
                                 Text("**\(NSLocalizedString("scanner_color", comment: "")):** \(color)")
                                     .font(.system(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                             if let sex = pet.sex, !sex.isEmpty {
-                                Text("**\(NSLocalizedString("sex_label", comment: "")):** \(sex)")
+                                let localized = PetLocalizer.localizeSex(sex, species: pet.species)
+                                Text("**\(NSLocalizedString("sex_label", comment: "")):** \(localized)")
                                     .font(.system(size: 14))
                                     .foregroundColor(.mutedText)
                             }

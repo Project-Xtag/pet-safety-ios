@@ -266,6 +266,7 @@
 "submit_sighting_report" = "Enviar reporte de avistamiento";
 "sighting_reported_owner_notified" = "¡Avistamiento reportado! Se notificó al tutor.";
 "sighting_address_not_found" = "No encontramos esa dirección. Revisa la ortografía o prueba con un punto de referencia cercano.";
+"sighting_location_invalid" = "La ubicación no parece válida. Comparte tu ubicación GPS actual o prueba otra dirección.";
 "sighting_location_required" = "Comparte tu ubicación actual o introduce una dirección.";
 
 // MARK: - Hoja de marcar perdida/encontrada
@@ -1386,3 +1387,5 @@
 "tags_coming_soon_title" = "Las chapas inteligentes físicas llegarán pronto";
 "tags_coming_soon_body" = "Pronto enviaremos nuestro primer lote. Vuelve en unos días.";
 "report_found_unavailable" = "Esta función no está disponible para esta alerta. Por favor, contacta directamente con el tutor si has encontrado a la mascota.";
+
+"qr_torch_unavailable" = "La linterna no está disponible en este dispositivo.";

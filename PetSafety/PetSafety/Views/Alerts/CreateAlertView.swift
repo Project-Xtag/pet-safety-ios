@@ -191,13 +191,22 @@ struct CreateAlertView: View {
 
                 case .registeredAddress:
                     addressText = registeredAddress
-                    // Forward geocode to get coordinates
+                    // Forward geocode to get coordinates. try? used to
+                    // silently swallow CLGeocoder failures, leaving
+                    // `coordinate` nil — the alert was then created
+                    // without a location and no user-visible error.
                     if let addr = addressText {
                         isGeocoding = true
-                        let geocoder = CLGeocoder()
-                        if let placemark = try? await geocoder.geocodeAddressString(addr).first,
-                           let loc = placemark.location {
-                            coordinate = loc.coordinate
+                        do {
+                            if let placemark = try await CLGeocoder().geocodeAddressString(addr).first,
+                               let loc = placemark.location,
+                               InputValidators.isValidCoordinate(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude) {
+                                coordinate = loc.coordinate
+                            }
+                        } catch {
+                            #if DEBUG
+                            print("⚠️ Forward-geocode failed for registered address: \(error)")
+                            #endif
                         }
                         isGeocoding = false
                     }
@@ -207,10 +216,16 @@ struct CreateAlertView: View {
                     // Forward geocode to get coordinates
                     if !customAddress.isEmpty {
                         isGeocoding = true
-                        let geocoder = CLGeocoder()
-                        if let placemark = try? await geocoder.geocodeAddressString(customAddress).first,
-                           let loc = placemark.location {
-                            coordinate = loc.coordinate
+                        do {
+                            if let placemark = try await CLGeocoder().geocodeAddressString(customAddress).first,
+                               let loc = placemark.location,
+                               InputValidators.isValidCoordinate(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude) {
+                                coordinate = loc.coordinate
+                            }
+                        } catch {
+                            #if DEBUG
+                            print("⚠️ Forward-geocode failed for custom address: \(error)")
+                            #endif
                         }
                         isGeocoding = false
                     }

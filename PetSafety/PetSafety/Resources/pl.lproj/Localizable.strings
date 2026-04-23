@@ -266,6 +266,7 @@
 "submit_sighting_report" = "Wyślij zgłoszenie spostrzeżenia";
 "sighting_reported_owner_notified" = "Spostrzeżenie zgłoszone! Opiekun został powiadomiony.";
 "sighting_address_not_found" = "Nie znaleźliśmy tego adresu. Sprawdź pisownię lub spróbuj pobliskiego punktu orientacyjnego.";
+"sighting_location_invalid" = "Lokalizacja wygląda na nieprawidłową. Udostępnij aktualną lokalizację GPS lub spróbuj inny adres.";
 "sighting_location_required" = "Udostępnij swoją obecną lokalizację lub wpisz adres.";
 
 // MARK: - Oznaczanie jako zaginione/znalezione
@@ -1389,3 +1390,5 @@
 "tags_coming_soon_title" = "Fizyczne nieśki wkrótce dostępne";
 "tags_coming_soon_body" = "Już niedługo wyślemy pierwszą partię. Wróć za kilka dni.";
 "report_found_unavailable" = "Ta funkcja nie jest dostępna dla tego alertu. Skontaktuj się bezpośrednio z opiekunem, jeśli znalazłeś/aś pupila.";
+
+"qr_torch_unavailable" = "Latarka niedostępna na tym urządzeniu.";

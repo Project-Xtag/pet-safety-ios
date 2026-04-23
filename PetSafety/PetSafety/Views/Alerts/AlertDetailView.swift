@@ -269,13 +269,21 @@ struct AlertDetailView: View {
                 .padding(32)
             }
         }
-        .alert("alert_mark_found_title \(alert.pet?.name ?? String(localized: "pet_default"))", isPresented: $showingMarkFoundConfirmation) {
+        .alert(
+            // `"key \(value)"` as an alert title is Swift string
+            // interpolation — it just renders the literal key followed
+            // by the pet name instead of running the key through
+            // Localizable.strings. Use String(format:) + NSLocalizedString
+            // so the key is actually resolved per locale.
+            String(format: NSLocalizedString("alert_mark_found_title", comment: ""), alert.pet?.name ?? String(localized: "pet_default")),
+            isPresented: $showingMarkFoundConfirmation
+        ) {
             Button("cancel", role: .cancel) { }
             Button("mark_as_found") {
                 markAsFound()
             }
         } message: {
-            Text("alert_mark_found_message \(alert.pet?.name ?? String(localized: "pet_default"))")
+            Text(String(format: NSLocalizedString("alert_mark_found_message", comment: ""), alert.pet?.name ?? String(localized: "pet_default")))
         }
         .fullScreenCover(isPresented: $showingSuccessStoryPrompt) {
             if let pet = alert.pet {

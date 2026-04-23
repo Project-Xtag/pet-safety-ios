@@ -266,6 +266,7 @@
 "submit_sighting_report" = "Send inn observasjonsrapport";
 "sighting_reported_owner_notified" = "Observasjon rapportert! Eieren er blitt varslet.";
 "sighting_address_not_found" = "Vi fant ikke denne adressen. Sjekk stavemåten eller prøv et landemerke i nærheten.";
+"sighting_location_invalid" = "Denne plasseringen virker ugyldig. Del din nåværende GPS-posisjon eller prøv en annen adresse.";
 "sighting_location_required" = "Del din nåværende posisjon, eller skriv inn en adresse.";
 
 // MARK: - Merk savnet/funnet
@@ -1389,3 +1390,5 @@
 "tags_coming_soon_title" = "De fysiske QR-brikkene kommer snart";
 "tags_coming_soon_body" = "Vi sender den første batchen veldig snart. Sjekk tilbake om noen dager.";
 "report_found_unavailable" = "Denne funksjonen er ikke tilgjengelig for dette varselet. Kontakt eieren direkte hvis du har funnet kjæledyret.";
+
+"qr_torch_unavailable" = "Lommelykt er ikke tilgjengelig på denne enheten.";

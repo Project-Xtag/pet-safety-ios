@@ -265,6 +265,7 @@
 "sighting_notes_placeholder" = "Décris ce que tu as vu, l'état de l'animal de compagnie, la direction prise…";
 "submit_sighting_report" = "Envoyer le signalement";
 "sighting_address_not_found" = "Nous n'avons pas trouvé cette adresse. Vérifie l'orthographe ou essaie un repère à proximité.";
+"sighting_location_invalid" = "Ce lieu semble invalide. Partage ta position GPS actuelle ou essaie une autre adresse.";
 "sighting_location_required" = "Partage ta position actuelle ou saisis une adresse.";
 "sighting_reported_owner_notified" = "Observation signalée ! Le propriétaire a été notifié.";
 
@@ -1389,3 +1390,5 @@
 "tags_coming_soon_title" = "Les médailles connectées physiques arrivent bientôt";
 "tags_coming_soon_body" = "Nous expédierons notre premier lot très bientôt. Reviens dans quelques jours.";
 "report_found_unavailable" = "Cette fonctionnalité n'est pas disponible pour cette alerte. Merci de contacter directement le propriétaire si tu as trouvé l'animal de compagnie.";
+
+"qr_torch_unavailable" = "Lampe de poche indisponible sur cet appareil.";

@@ -265,10 +265,13 @@ struct ReportSightingView: View {
     }
 
     private func submitSighting() {
-        // Validate phone if provided (match backend: 5-30 chars)
+        // Validate phone if provided (format, not just length). A pure
+        // length gate used to accept "not-a-phone-14" because it's
+        // 14 chars; the InputValidators regex rejects non-phone shapes
+        // before they hit the backend normalizer.
         if shareContactInfo, !reporterPhone.isEmpty {
             let trimmedPhone = reporterPhone.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmedPhone.count < 5 || trimmedPhone.count > 30 {
+            if !InputValidators.isValidPhone(trimmedPhone) {
                 appState.showError(NSLocalizedString("sighting_phone_invalid", comment: ""))
                 return
             }
@@ -298,6 +301,18 @@ struct ReportSightingView: View {
                 guard let finalCoord = coordinate else {
                     await MainActor.run {
                         appState.showError(String(localized: "sighting_location_required"))
+                        isSubmitting = false
+                    }
+                    return
+                }
+
+                // Range + null-island guard on the resolved coordinate.
+                // A geocoder that returns (0,0) or NaN would otherwise
+                // post a Gulf-of-Guinea sighting that misroutes every
+                // downstream proximity notification.
+                guard InputValidators.isValidCoordinate(latitude: finalCoord.latitude, longitude: finalCoord.longitude) else {
+                    await MainActor.run {
+                        appState.showError(String(localized: "sighting_location_invalid"))
                         isSubmitting = false
                     }
                     return

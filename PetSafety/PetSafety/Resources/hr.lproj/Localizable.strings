@@ -269,6 +269,7 @@
 "submit_sighting_report" = "Pošalji prijavu viđenja";
 "sighting_reported_owner_notified" = "Viđenje prijavljeno! Vlasnik je obaviješten.";
 "sighting_address_not_found" = "Tu adresu nismo pronašli. Provjeri pravopis ili pokušaj s obližnjom znamenitošću.";
+"sighting_location_invalid" = "Ova lokacija izgleda neispravno. Podijeli trenutnu GPS lokaciju ili pokušaj drugu adresu.";
 "sighting_location_required" = "Podijeli trenutnu lokaciju ili unesi adresu.";
 
 // MARK: - Mark Lost/Found Sheet
@@ -1392,3 +1393,5 @@
 "tags_coming_soon_title" = "Fizički privjesci uskoro stižu";
 "tags_coming_soon_body" = "Uskoro šaljemo prvu seriju. Vrati se za nekoliko dana.";
 "report_found_unavailable" = "Ova funkcija nije dostupna za ovo upozorenje. Molimo te da izravno kontaktiraš vlasnika ako si pronašao/la kućnog ljubimca.";
+
+"qr_torch_unavailable" = "Svjetiljka nije dostupna na ovom uređaju.";

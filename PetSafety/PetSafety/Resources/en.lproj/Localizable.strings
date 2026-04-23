@@ -266,6 +266,7 @@
 "submit_sighting_report" = "Submit Sighting Report";
 "sighting_reported_owner_notified" = "Sighting reported! The owner has been notified.";
 "sighting_address_not_found" = "We couldn't find that address. Please check the spelling or try a nearby landmark.";
+"sighting_location_invalid" = "That location looks invalid. Please share your current GPS location or try a different address.";
 "sighting_location_required" = "Please share your current location or enter an address.";
 
 // MARK: - Mark Lost/Found Sheet
@@ -1390,3 +1391,5 @@
 "sync_error_not_implemented" = "Feature not yet implemented";
 "sync_error_network_unavailable" = "Network connection unavailable";
 "report_found_unavailable" = "This feature is not available for this alert. Please contact the owner directly if you have found the pet.";
+
+"qr_torch_unavailable" = "Flashlight unavailable on this device.";

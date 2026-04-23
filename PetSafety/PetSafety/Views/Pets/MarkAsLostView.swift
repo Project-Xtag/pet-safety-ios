@@ -128,6 +128,14 @@ struct MarkAsLostView: View {
                 case .customAddress:
                     TextField(String(localized: "mark_lost_address_placeholder"), text: $customAddress)
                         .autocapitalization(.words)
+                        // Backend alert schema bounds lastSeenAddress to
+                        // 500 chars; cap on-screen so a paste-bomb can't
+                        // silently truncate at submission.
+                        .onChange(of: customAddress) { _, newValue in
+                            if newValue.count > 500 {
+                                customAddress = String(newValue.prefix(500))
+                            }
+                        }
                 }
             }
 
@@ -146,7 +154,17 @@ struct MarkAsLostView: View {
 
             Section(header: Text("reward_amount_label")) {
                 TextField(String(localized: "reward_amount_placeholder"), text: $rewardAmount)
-                    .keyboardType(.default)
+                    // Decimal pad matches the backend regex
+                    // (/^\d{1,15}([.,]\d{1,2})?$/) and prevents users
+                    // from typing "£50 or best offer" that round-trips
+                    // through the alert body. Also cap length to match
+                    // the server's 20-char schema bound.
+                    .keyboardType(.decimalPad)
+                    .onChange(of: rewardAmount) { _, newValue in
+                        let filtered = newValue.filter { $0.isNumber || $0 == "." || $0 == "," }
+                        let capped = String(filtered.prefix(20))
+                        if capped != newValue { rewardAmount = capped }
+                    }
             }
 
             Section {

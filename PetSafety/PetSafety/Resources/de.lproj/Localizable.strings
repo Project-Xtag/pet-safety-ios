@@ -266,6 +266,7 @@
 "submit_sighting_report" = "Sichtungsbericht senden";
 "sighting_reported_owner_notified" = "Sichtung gemeldet! Der Halter wurde informiert.";
 "sighting_address_not_found" = "Diese Adresse konnten wir nicht finden. Prüfe die Schreibweise oder versuche einen nahegelegenen Orientierungspunkt.";
+"sighting_location_invalid" = "Dieser Standort scheint ungültig zu sein. Teile deine aktuelle GPS-Position oder versuche eine andere Adresse.";
 "sighting_location_required" = "Teile deinen aktuellen Standort oder gib eine Adresse ein.";
 
 // MARK: - Vermisst/Gefunden-Dialog
@@ -1386,3 +1387,5 @@
 "tags_coming_soon_title" = "Physische Namensschilder kommen bald";
 "tags_coming_soon_body" = "Wir versenden bald unsere erste Charge. Schau in ein paar Tagen wieder vorbei.";
 "report_found_unavailable" = "Diese Funktion ist für diese Meldung nicht verfügbar. Bitte wende dich direkt an den Halter, wenn du das Haustier gefunden hast.";
+
+"qr_torch_unavailable" = "Taschenlampe auf diesem Gerät nicht verfügbar.";

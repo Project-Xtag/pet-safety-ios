@@ -266,6 +266,7 @@
 "submit_sighting_report" = "Odeslat hlášení o pozorování";
 "sighting_reported_owner_notified" = "Pozorování nahlášeno! Páníček byl informován.";
 "sighting_address_not_found" = "Tuto adresu jsme nenašli. Zkontroluj pravopis nebo zkus blízkou památku.";
+"sighting_location_invalid" = "Toto místo vypadá neplatně. Sdílej aktuální GPS polohu nebo zkus jinou adresu.";
 "sighting_location_required" = "Sdílej svou aktuální polohu nebo zadej adresu.";
 
 // MARK: - Označení ztráty/nalezení
@@ -1386,3 +1387,5 @@
 "tags_coming_soon_title" = "Fyzické psí známky brzy dorazí";
 "tags_coming_soon_body" = "Brzy odešleme naši první sérii. Vrať se za pár dní.";
 "report_found_unavailable" = "Tato funkce není pro toto upozornění dostupná. Pokud jsi mazlíčka našel/našla, kontaktuj prosím přímo páníčka.";
+
+"qr_torch_unavailable" = "Svítilna není na tomto zařízení dostupná.";

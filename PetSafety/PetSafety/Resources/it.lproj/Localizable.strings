@@ -266,6 +266,7 @@
 "submit_sighting_report" = "Invia segnalazione";
 "sighting_reported_owner_notified" = "Avvistamento segnalato! Il padrone è stato avvisato.";
 "sighting_address_not_found" = "Non abbiamo trovato questo indirizzo. Controlla l'ortografia o prova un punto di riferimento vicino.";
+"sighting_location_invalid" = "La posizione sembra non valida. Condividi la tua posizione GPS attuale o prova un altro indirizzo.";
 "sighting_location_required" = "Condividi la tua posizione attuale o inserisci un indirizzo.";
 
 // MARK: - Foglio Scomparso/Trovato
@@ -1397,3 +1398,5 @@
 "tags_coming_soon_title" = "Ti medagliette fisiche arrivano presto";
 "tags_coming_soon_body" = "Spediremo il nostro primo lotto a breve. Torna tra qualche giorno.";
 "report_found_unavailable" = "Questa funzione non è disponibile per questa segnalazione. Contatta direttamente il padrone se hai trovato l'animale di compagnia.";
+
+"qr_torch_unavailable" = "Torcia non disponibile su questo dispositivo.";
