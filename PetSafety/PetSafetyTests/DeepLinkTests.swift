@@ -128,6 +128,54 @@ final class DeepLinkTests: XCTestCase {
         XCTAssertEqual(extracted, "PS-WWWCODE1")
     }
 
+    // MARK: - Regression: prod URL format contract
+    //
+    // These tests pin the extractor to the exact forms produced by
+    // physical prod QR tags and the legacy CSV import. If any break,
+    // the scan → API pipeline is misaligned with backend / web / Android.
+
+    @MainActor
+    func testExtractsFromProdShortCodeUrl() {
+        // Real prod format: 8-char nanoid inside /t/ path.
+        let extracted = DeepLinkService.extractTagCode(from: "https://senra.pet/t/T5NAJlr2")
+        XCTAssertEqual(extracted, "T5NAJlr2")
+    }
+
+    @MainActor
+    func testExtractsFromUppercaseUrlScaffolding() {
+        // Legacy CSV had uppercase URLs; extractor must tolerate casing
+        // in scheme/host/path while preserving the code's own case.
+        let extracted = DeepLinkService.extractTagCode(from: "HTTPS://SENRA.PET/T/TEST_OVYYMTPA")
+        XCTAssertEqual(extracted, "TEST_OVYYMTPA")
+    }
+
+    @MainActor
+    func testExtractsFromCountryPrefixedTPath() {
+        let extracted = DeepLinkService.extractTagCode(from: "https://senra.pet/hu/t/T5NAJlr2")
+        XCTAssertEqual(extracted, "T5NAJlr2")
+    }
+
+    @MainActor
+    func testIgnoresTrailingSlash() {
+        let extracted = DeepLinkService.extractTagCode(from: "https://senra.pet/t/T5NAJlr2/")
+        XCTAssertEqual(extracted, "T5NAJlr2")
+    }
+
+    @MainActor
+    func testIgnoresQueryAndFragment() {
+        let extracted = DeepLinkService.extractTagCode(from: "https://senra.pet/t/T5NAJlr2?utm=1#found")
+        XCTAssertEqual(extracted, "T5NAJlr2")
+    }
+
+    @MainActor
+    func testPathologicallyLongInputDoesNotHang() {
+        // Not a functional assertion so much as a liveness one — the
+        // URLComponents parse should bail out quickly on oversized input.
+        let long = "https://senra.pet/t/" + String(repeating: "X", count: 10000)
+        let result = DeepLinkService.extractTagCode(from: long)
+        XCTAssertFalse(result.isEmpty)
+    }
+
     // MARK: - Deep Link Type Tests
 
     func testDeepLinkTypeTagActivation() {
