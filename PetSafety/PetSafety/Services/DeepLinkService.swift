@@ -209,13 +209,20 @@ class DeepLinkService: ObservableObject {
     static func extractTagCode(from scannedValue: String) -> String {
         let trimmed = scannedValue.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        // Check if it's a URL
+        // Check if it's a URL. Scheme and host comparisons are
+        // case-insensitive because some handheld scanners and legacy
+        // imports produce uppercase URL scaffolding (e.g.
+        // "HTTPS://SENRA.PET/T/<CODE>"). The code itself is CASE-SENSITIVE
+        // (nanoid alphabet includes both cases) so we never fold it.
         if let url = URL(string: trimmed) {
+            let scheme = url.scheme?.lowercased()
+            let host = url.host?.lowercased()
+
             // https://senra.pet/qr/{code}, https://senra.pet/t/{code}, or with country prefix
-            if url.scheme == "https" && (url.host == "senra.pet" || url.host == "www.senra.pet") {
+            if (scheme == "https" || scheme == "http") && (host == "senra.pet" || host == "www.senra.pet") {
                 var pathComponents = url.pathComponents.filter { $0 != "/" }
                 // Strip country prefix
-                if let first = pathComponents.first, WebURLHelper.validCountryCodes.contains(first) {
+                if let first = pathComponents.first, WebURLHelper.validCountryCodes.contains(first.lowercased()) {
                     pathComponents.removeFirst()
                 }
                 let firstLower = pathComponents.first?.lowercased() ?? ""
@@ -225,7 +232,7 @@ class DeepLinkService: ObservableObject {
             }
 
             // senra://tag/{code}
-            if url.scheme == "senra" && url.host == "tag" {
+            if scheme == "senra" && host == "tag" {
                 let pathComponents = url.pathComponents.filter { $0 != "/" }
                 if let code = pathComponents.first {
                     return code

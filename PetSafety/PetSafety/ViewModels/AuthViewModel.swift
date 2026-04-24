@@ -59,7 +59,7 @@ class AuthViewModel: ObservableObject {
                     }
                 } catch {
                     // Token might be invalid, log out
-                    logout()
+                    await logout()
                 }
             }
         }
@@ -179,7 +179,7 @@ class AuthViewModel: ObservableObject {
                 ensurePushNotificationsEnabled()
             } catch {
                 // Token might be invalid
-                logout()
+                await logout()
             }
         } else {
             // Biometric failed or cancelled
@@ -303,7 +303,7 @@ class AuthViewModel: ObservableObject {
             _ = try await apiService.deleteAccount()
             isLoading = false
             // Log out after successful deletion
-            logout()
+            await logout()
         } catch {
             isLoading = false
             errorMessage = error.localizedDescription
