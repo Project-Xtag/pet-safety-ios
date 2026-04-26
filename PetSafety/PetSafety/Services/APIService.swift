@@ -1287,6 +1287,9 @@ struct ReplacementEligibilityResponse: Decodable {
     let isFreeReplacement: Bool
     let planName: String
     let shippingCost: Double
+    /// Backend-resolved currency (HUF for HU, NOK for NO, EUR otherwise).
+    /// Optional because older builds of the backend didn't return it.
+    let currency: String?
     let message: String
 
     init(from decoder: Decoder) throws {
@@ -1300,11 +1303,12 @@ struct ReplacementEligibilityResponse: Decodable {
         } else {
             shippingCost = 0
         }
+        currency = try container.decodeIfPresent(String.self, forKey: .currency)
         message = try container.decode(String.self, forKey: .message)
     }
 
     enum CodingKeys: String, CodingKey {
-        case isFreeReplacement, planName, shippingCost, message
+        case isFreeReplacement, planName, shippingCost, currency, message
     }
 }
 

@@ -15,6 +15,9 @@ struct OrderReplacementTagView: View {
     // Replacement eligibility
     @State private var isFreeReplacement = false
     @State private var shippingCost: Double = 0.0
+    /// Backend-resolved currency for the shipping cost (HUF / NOK / EUR).
+    /// Used by formattedShippingCost so HU users don't see "€2490".
+    @State private var shippingCurrency: String = "EUR"
     @State private var planName: String = "starter"
 
     // Shipping address fields
@@ -418,7 +421,11 @@ struct OrderReplacementTagView: View {
             let priceInfo = ShippingPriceInfo(amount: shippingCost, currency: defaultInfo.currency, label: "")
             return priceInfo.formattedPrice
         }
-        return String(format: "€%.2f", shippingCost)
+        // Fallback when shippingPrices hasn't loaded yet — use the
+        // backend-resolved currency from the eligibility response so HU
+        // users don't briefly see "€2490" before shippingPrices arrives.
+        let priceInfo = ShippingPriceInfo(amount: shippingCost, currency: shippingCurrency, label: "")
+        return priceInfo.formattedPrice
     }
 
     private func deliveryOptionLabel(for method: String) -> String {
@@ -446,6 +453,7 @@ struct OrderReplacementTagView: View {
             await MainActor.run {
                 isFreeReplacement = eligibility.isFreeReplacement
                 shippingCost = eligibility.shippingCost
+                shippingCurrency = eligibility.currency ?? "EUR"
                 planName = eligibility.planName
                 isCheckingEligibility = false
             }
