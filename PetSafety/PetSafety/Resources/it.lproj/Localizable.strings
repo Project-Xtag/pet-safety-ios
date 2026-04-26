@@ -1400,3 +1400,4 @@
 "report_found_unavailable" = "Questa funzione non è disponibile per questa segnalazione. Contatta direttamente il padrone se hai trovato l'animale di compagnia.";
 
 "qr_torch_unavailable" = "Torcia non disponibile su questo dispositivo.";
+"tag_pending_badge" = "IN ARRIVO";

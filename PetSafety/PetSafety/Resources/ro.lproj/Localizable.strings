@@ -1389,3 +1389,4 @@
 "report_found_unavailable" = "Această funcție nu este disponibilă pentru această alertă. Te rugăm să contactezi direct stăpânul dacă ai găsit animalul de companie.";
 
 "qr_torch_unavailable" = "Lanterna nu este disponibilă pe acest dispozitiv.";
+"tag_pending_badge" = "PE DRUM";

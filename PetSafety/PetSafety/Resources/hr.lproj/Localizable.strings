@@ -1395,3 +1395,4 @@
 "report_found_unavailable" = "Ova funkcija nije dostupna za ovo upozorenje. Molimo te da izravno kontaktiraš vlasnika ako si pronašao/la kućnog ljubimca.";
 
 "qr_torch_unavailable" = "Svjetiljka nije dostupna na ovom uređaju.";
+"tag_pending_badge" = "NA PUTU";

@@ -1389,3 +1389,4 @@
 "report_found_unavailable" = "Diese Funktion ist für diese Meldung nicht verfügbar. Bitte wende dich direkt an den Halter, wenn du das Haustier gefunden hast.";
 
 "qr_torch_unavailable" = "Taschenlampe auf diesem Gerät nicht verfügbar.";
+"tag_pending_badge" = "TAG UNTERWEGS";

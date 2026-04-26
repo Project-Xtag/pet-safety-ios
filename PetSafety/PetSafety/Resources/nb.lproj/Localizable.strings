@@ -1392,3 +1392,4 @@
 "report_found_unavailable" = "Denne funksjonen er ikke tilgjengelig for dette varselet. Kontakt eieren direkte hvis du har funnet kjæledyret.";
 
 "qr_torch_unavailable" = "Lommelykt er ikke tilgjengelig på denne enheten.";
+"tag_pending_badge" = "PÅ VEI";

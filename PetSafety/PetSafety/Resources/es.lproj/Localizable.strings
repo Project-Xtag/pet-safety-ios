@@ -1389,3 +1389,4 @@
 "report_found_unavailable" = "Esta función no está disponible para esta alerta. Por favor, contacta directamente con el tutor si has encontrado a la mascota.";
 
 "qr_torch_unavailable" = "La linterna no está disponible en este dispositivo.";
+"tag_pending_badge" = "EN CAMINO";
