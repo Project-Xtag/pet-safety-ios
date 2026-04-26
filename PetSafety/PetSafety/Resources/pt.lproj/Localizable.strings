@@ -1389,3 +1389,4 @@
 "report_found_unavailable" = "Esta funcionalidade não está disponível para este alerta. Por favor, contacte diretamente o tutor se encontrou o animal de estimação.";
 
 "qr_torch_unavailable" = "Lanterna não disponível neste dispositivo.";
+"tag_pending_badge" = "A CAMINHO";

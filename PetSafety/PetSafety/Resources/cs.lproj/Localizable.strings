@@ -1389,3 +1389,4 @@
 "report_found_unavailable" = "Tato funkce není pro toto upozornění dostupná. Pokud jsi mazlíčka našel/našla, kontaktuj prosím přímo páníčka.";
 
 "qr_torch_unavailable" = "Svítilna není na tomto zařízení dostupná.";
+"tag_pending_badge" = "NA CESTĚ";

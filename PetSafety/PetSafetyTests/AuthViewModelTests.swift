@@ -84,10 +84,11 @@ struct AuthViewModelTests {
     // MARK: - Logout
 
     @Test("logout clears currentUser and sets isAuthenticated to false")
-    func testLogoutClearsState() {
+    @MainActor
+    func testLogoutClearsState() async {
         let viewModel = AuthViewModel()
         // Simulate some state (directly setting published properties for unit test)
-        viewModel.logout()
+        await viewModel.logout()
 
         #expect(viewModel.currentUser == nil, "currentUser should be nil after logout")
         #expect(viewModel.isAuthenticated == false, "isAuthenticated should be false after logout")

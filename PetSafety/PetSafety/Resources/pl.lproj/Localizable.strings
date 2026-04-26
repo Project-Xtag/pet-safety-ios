@@ -1392,3 +1392,4 @@
 "report_found_unavailable" = "Ta funkcja nie jest dostępna dla tego alertu. Skontaktuj się bezpośrednio z opiekunem, jeśli znalazłeś/aś pupila.";
 
 "qr_torch_unavailable" = "Latarka niedostępna na tym urządzeniu.";
+"tag_pending_badge" = "W DRODZE";

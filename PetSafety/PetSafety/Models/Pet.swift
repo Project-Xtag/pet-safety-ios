@@ -29,6 +29,10 @@ struct Pet: Codable, Identifiable, Hashable {
     let sex: String?
     let isNeutered: Bool?
     let qrCode: String?
+    /// Server-computed flag: true once any qr_tag with status='active' is linked
+    /// to this pet. Nil/false means the user just ordered a tag and is waiting
+    /// for it to arrive — render the "tag on its way" placeholder card.
+    let hasActiveTag: Bool?
     let dateOfBirth: String?
     let dobIsApproximate: Bool?
 
@@ -96,6 +100,7 @@ struct Pet: Codable, Identifiable, Hashable {
         case sex
         case isNeutered = "is_neutered"
         case qrCode = "qr_code"
+        case hasActiveTag = "has_active_tag"
         case dateOfBirth = "date_of_birth"
         case dobIsApproximate = "dob_is_approximate"
         case ownerName = "owner_name"
@@ -136,6 +141,7 @@ struct Pet: Codable, Identifiable, Hashable {
         sex: String? = nil,
         isNeutered: Bool? = nil,
         qrCode: String? = nil,
+        hasActiveTag: Bool? = nil,
         dateOfBirth: String? = nil,
         dobIsApproximate: Bool? = nil,
         ownerName: String? = nil,
@@ -173,6 +179,7 @@ struct Pet: Codable, Identifiable, Hashable {
         self.sex = sex
         self.isNeutered = isNeutered
         self.qrCode = qrCode
+        self.hasActiveTag = hasActiveTag
         self.dateOfBirth = dateOfBirth
         self.dobIsApproximate = dobIsApproximate
         self.ownerName = ownerName
@@ -226,6 +233,7 @@ struct Pet: Codable, Identifiable, Hashable {
         sex = try container.decodeIfPresent(String.self, forKey: .sex)
         isNeutered = try container.decodeIfPresent(Bool.self, forKey: .isNeutered)
         qrCode = try container.decodeIfPresent(String.self, forKey: .qrCode)
+        hasActiveTag = try container.decodeIfPresent(Bool.self, forKey: .hasActiveTag)
         dateOfBirth = try container.decodeIfPresent(String.self, forKey: .dateOfBirth)
         dobIsApproximate = try container.decodeIfPresent(Bool.self, forKey: .dobIsApproximate)
         ownerName = try container.decodeIfPresent(String.self, forKey: .ownerName)

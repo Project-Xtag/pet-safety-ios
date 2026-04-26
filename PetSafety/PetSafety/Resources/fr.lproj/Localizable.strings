@@ -1392,3 +1392,4 @@
 "report_found_unavailable" = "Cette fonctionnalité n'est pas disponible pour cette alerte. Merci de contacter directement le propriétaire si tu as trouvé l'animal de compagnie.";
 
 "qr_torch_unavailable" = "Lampe de poche indisponible sur cet appareil.";
+"tag_pending_badge" = "EN ROUTE";

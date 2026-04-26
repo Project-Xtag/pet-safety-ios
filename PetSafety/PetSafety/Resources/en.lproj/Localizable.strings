@@ -1393,3 +1393,4 @@
 "report_found_unavailable" = "This feature is not available for this alert. Please contact the owner directly if you have found the pet.";
 
 "qr_torch_unavailable" = "Flashlight unavailable on this device.";
+"tag_pending_badge" = "TAG ON ITS WAY";
