@@ -712,7 +712,7 @@
 "contacts_secondary_email_edit_footer" = "Tartalék e-mail-cím: ide is elküldjük az értesítést, ha megkerül a kedvenced";
 "contacts_primary_phone_edit_footer" = "Az elsődleges telefonszámod, amin elérhetünk";
 "contacts_secondary_phone_edit_footer" = "Tartalék telefonszám vészhelyzet esetére";
-"contacts_visible_on_tag" = "Látható a bilétán";
+"contacts_visible_on_tag" = "Látható a kedvenced nyilvános profilján";
 "contacts_no_type_added" = "Nincs megadva: %@";
 
 // MARK: - További cserebiléta rendelés kulcsok
@@ -1299,6 +1299,7 @@
 "appearance_dark" = "Sötét";
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Közösségi riasztásokhoz Senra előfizetés szükséges.";
+"mark_lost_starter_upgrade_cta" = "Csomagok megtekintése";
 "mark_lost_upgrade_prompt" = "A Starter csomaggal a kedvencedet elveszettnek jelöljük, de a közeli felhasználók, állatorvosok és menhelyek értesítéséhez Standard vagy Maximum előfizetés szükséges.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "pl. 3 éves, 6 hónapos (opcionális)";

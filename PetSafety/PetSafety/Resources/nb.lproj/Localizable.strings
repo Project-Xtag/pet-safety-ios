@@ -1297,6 +1297,7 @@
 "appearance_dark" = "Mørk";
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Fellesskapsvarsler krever et SENRA-abonnement.";
+"mark_lost_starter_upgrade_cta" = "Se abonnementer";
 "mark_lost_upgrade_prompt" = "Med Starter-planen blir kjæledyret ditt markert som savnet, men varsler til brukere, veterinærer og dyreinternat krever et Standard- eller Maximum-abonnement.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "f.eks. 3 år, 6 måneder (valgfritt)";

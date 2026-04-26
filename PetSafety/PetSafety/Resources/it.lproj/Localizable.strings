@@ -1305,6 +1305,7 @@
 "appearance_dark" = "Scuro";
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Gli avvisi della community richiedono un abbonamento SENRA.";
+"mark_lost_starter_upgrade_cta" = "Vedi piani";
 "mark_lost_upgrade_prompt" = "Con il piano Starter il tuo animale di compagnia sarà segnalato come smarrito, ma le notifiche a utenti, veterinari e rifugi richiedono un abbonamento Standard o Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "es. 3 anni, 6 mesi (facoltativo)";

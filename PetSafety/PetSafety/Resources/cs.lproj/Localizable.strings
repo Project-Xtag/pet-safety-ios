@@ -1294,6 +1294,7 @@
 "appearance_dark" = "Tmavý";
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Komunitní upozornění vyžadují SENRA předplatné.";
+"mark_lost_starter_upgrade_cta" = "Zobrazit plány";
 "mark_lost_upgrade_prompt" = "V plánu Starter bude tvůj mazlíček označen jako ztracený, ale upozornění uživatelům, veterinářům a útulkům vyžadují předplatné Standard nebo Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "např. 3 roky, 6 měsíců (volitelné)";

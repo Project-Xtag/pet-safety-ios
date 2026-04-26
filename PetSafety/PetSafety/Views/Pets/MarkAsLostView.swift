@@ -43,6 +43,65 @@ struct MarkAsLostView: View {
     }
 
     var body: some View {
+        // Starter users can't mark a pet missing — backend rejects with 403
+        // (api.pet.missing_paid_plan_required) and previously this view
+        // would still let them fill in a form whose submission either
+        // bounced or, before the backend gate, leaked notifications. Show
+        // an upgrade-only prompt with a single CTA so the intent is clear.
+        if subscriptionViewModel.isOnStarterPlan {
+            starterUpgradeView
+        } else {
+            markMissingForm
+        }
+    }
+
+    private var starterUpgradeView: some View {
+        VStack(spacing: 24) {
+            Spacer()
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 48))
+                .foregroundColor(.brandOrange)
+            Text("mark_lost_starter_notice")
+                .font(.title3)
+                .fontWeight(.semibold)
+                .multilineTextAlignment(.center)
+            Text("mark_lost_upgrade_prompt")
+                .font(.body)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+            Spacer()
+            // Subscription management lives on the web app — link out to
+            // senra.pet/plans rather than navigate to a screen we don't ship.
+            if let url = URL(string: "https://senra.pet/plans") {
+                Link(destination: url) {
+                    Text("mark_lost_starter_upgrade_cta")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.brandOrange)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
+            }
+            Button(action: { dismiss() }) {
+                Text("cancel")
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+            }
+            .foregroundColor(.secondary)
+        }
+        .padding(24)
+        .navigationTitle(String(format: NSLocalizedString("mark_lost_title", comment: ""), pet.name))
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("cancel") { dismiss() }
+                    .foregroundColor(.brandOrange)
+            }
+        }
+    }
+
+    private var markMissingForm: some View {
         Form {
             Section(header: Text("mark_lost_pet_info")) {
                 HStack {

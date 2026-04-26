@@ -1294,6 +1294,7 @@
 "appearance_dark" = "Escuro";
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Os alertas da comunidade requerem uma subscrição SENRA.";
+"mark_lost_starter_upgrade_cta" = "Ver planos";
 "mark_lost_upgrade_prompt" = "Com o plano Starter o teu animal de estimação será marcado como desaparecido, mas as notificações a utilizadores, veterinários e abrigos requerem uma subscrição Standard ou Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "ex. 3 anos, 6 meses (opcional)";

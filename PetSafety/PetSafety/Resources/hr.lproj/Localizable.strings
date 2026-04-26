@@ -1300,6 +1300,7 @@
 "appearance_dark" = "Tamno";
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Uzbune zajednice zahtijevaju SENRA pretplatu.";
+"mark_lost_starter_upgrade_cta" = "Pogledaj pakete";
 "mark_lost_upgrade_prompt" = "S planom Starter tvoj kućni ljubimac bit će označen kao nestao, ali obavijesti korisnicima, veterinarima i skloništima zahtijevaju pretplatu Standard ili Maximum.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "npr. 3 godine, 6 mjeseci (neobavezno)";
