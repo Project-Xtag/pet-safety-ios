@@ -126,6 +126,7 @@ struct ProfileView: View {
                             Text(user.fullName)
                                 .font(.system(size: 24, weight: .bold))
                                 .foregroundColor(.primary)
+                                .accessibilityAddTraits(.isHeader)
                         }
 
                         Text(user.email)

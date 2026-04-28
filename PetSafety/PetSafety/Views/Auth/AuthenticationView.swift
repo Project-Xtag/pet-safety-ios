@@ -41,6 +41,7 @@ struct AuthenticationView: View {
                             Text("welcome_back")
                                 .font(.system(size: 26, weight: .bold))
                                 .foregroundColor(.primary)
+                                .accessibilityAddTraits(.isHeader)
 
                             Text("enter_email_subtitle")
                                 .font(.system(size: 15))

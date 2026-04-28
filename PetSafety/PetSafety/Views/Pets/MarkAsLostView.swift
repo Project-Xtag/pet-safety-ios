@@ -113,6 +113,7 @@ struct MarkAsLostView: View {
                         } placeholder: {
                             Image(systemName: "pawprint.fill")
                                 .foregroundColor(.secondary)
+                                .accessibilityHidden(true)
                         }
                         .frame(width: 60, height: 60)
                         .clipShape(Circle())
@@ -121,6 +122,7 @@ struct MarkAsLostView: View {
                     VStack(alignment: .leading) {
                         Text(pet.name)
                             .font(.headline)
+                            .accessibilityAddTraits(.isHeader)
                         Text(PetLocalizer.localizeSpecies(pet.species))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -143,6 +145,7 @@ struct MarkAsLostView: View {
                         HStack {
                             Image(systemName: "location.fill")
                                 .foregroundColor(.blue)
+                                .accessibilityHidden(true)
                             if let addr = currentLocationAddress, !addr.isEmpty {
                                 Text(addr)
                                     .font(.subheadline)
@@ -173,6 +176,7 @@ struct MarkAsLostView: View {
                     HStack {
                         Image(systemName: "house.fill")
                             .foregroundColor(.tealAccent)
+                            .accessibilityHidden(true)
                         if let address = registeredAddress {
                             Text(address)
                                 .font(.subheadline)
