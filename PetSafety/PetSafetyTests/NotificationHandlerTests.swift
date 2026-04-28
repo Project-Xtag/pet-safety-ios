@@ -184,6 +184,149 @@ final class NotificationHandlerTests: XCTestCase {
         waitForExpectations(timeout: 1.0)
     }
 
+    // MARK: - Coordinate Range Validation Tests (audit #67)
+
+    func testHandleTagScannedWithOutOfRangeLatitude() {
+        // Given - latitude > 90
+        let userInfo: [AnyHashable: Any] = [
+            "type": "PET_SCANNED",
+            "scan_id": "scan-bad-lat",
+            "pet_id": "pet-bad-lat",
+            "location_type": "precise",
+            "latitude": "120.0",
+            "longitude": "-74.0060"
+        ]
+
+        // When
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then - location dropped, no map picker
+        let expectation = self.expectation(description: "Main queue")
+        DispatchQueue.main.async {
+            XCTAssertNil(self.notificationHandler.pendingScanNotification?.location)
+            XCTAssertFalse(self.notificationHandler.showMapPicker)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func testHandleTagScannedWithOutOfRangeLongitude() {
+        // Given - longitude < -180
+        let userInfo: [AnyHashable: Any] = [
+            "type": "PET_SCANNED",
+            "scan_id": "scan-bad-lon",
+            "pet_id": "pet-bad-lon",
+            "location_type": "precise",
+            "latitude": "40.7128",
+            "longitude": "-200.0"
+        ]
+
+        // When
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then
+        let expectation = self.expectation(description: "Main queue")
+        DispatchQueue.main.async {
+            XCTAssertNil(self.notificationHandler.pendingScanNotification?.location)
+            XCTAssertFalse(self.notificationHandler.showMapPicker)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func testHandleTagScannedWithInfinityCoordinate() {
+        // Given - "inf" parses to .infinity in Double, which would crash MapKit
+        let userInfo: [AnyHashable: Any] = [
+            "type": "PET_SCANNED",
+            "scan_id": "scan-inf",
+            "pet_id": "pet-inf",
+            "location_type": "precise",
+            "latitude": "inf",
+            "longitude": "-74.0060"
+        ]
+
+        // When
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then
+        let expectation = self.expectation(description: "Main queue")
+        DispatchQueue.main.async {
+            XCTAssertNil(self.notificationHandler.pendingScanNotification?.location)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func testHandleTagScannedWithNaNCoordinate() {
+        // Given - "nan" parses to .nan, which would NaN-poison MapKit math
+        let userInfo: [AnyHashable: Any] = [
+            "type": "PET_SCANNED",
+            "scan_id": "scan-nan",
+            "pet_id": "pet-nan",
+            "location_type": "precise",
+            "latitude": "40.7128",
+            "longitude": "nan"
+        ]
+
+        // When
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then
+        let expectation = self.expectation(description: "Main queue")
+        DispatchQueue.main.async {
+            XCTAssertNil(self.notificationHandler.pendingScanNotification?.location)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func testHandleTagScannedRejectsNullIsland() {
+        // Given - (0, 0) is geographically valid but is the conventional "null"
+        // sentinel in our backend; InputValidators rejects it.
+        let userInfo: [AnyHashable: Any] = [
+            "type": "PET_SCANNED",
+            "scan_id": "scan-zero",
+            "pet_id": "pet-zero",
+            "location_type": "precise",
+            "latitude": "0",
+            "longitude": "0"
+        ]
+
+        // When
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then
+        let expectation = self.expectation(description: "Main queue")
+        DispatchQueue.main.async {
+            XCTAssertNil(self.notificationHandler.pendingScanNotification?.location)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func testHandleSightingWithOutOfRangeCoordinates() {
+        // Given - sighting with bogus lat/lng — must not show map picker
+        let userInfo: [AnyHashable: Any] = [
+            "type": "SIGHTING_REPORTED",
+            "alert_id": "alert-bad",
+            "sighting_id": "sighting-bad",
+            "latitude": "999.0",
+            "longitude": "999.0"
+        ]
+
+        // When
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        // Then - location dropped, no map picker (navigation still posts)
+        let expectation = self.expectation(description: "Main queue")
+        DispatchQueue.main.async {
+            XCTAssertFalse(self.notificationHandler.showMapPicker)
+            XCTAssertNil(self.notificationHandler.pendingScanNotification?.location)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0)
+    }
+
     // MARK: - MISSING_PET_ALERT Notification Tests
 
     func testHandleMissingPetAlert() {
