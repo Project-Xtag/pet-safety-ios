@@ -77,12 +77,20 @@ struct ShareLocationView: View {
                                 .font(.headline)
 
                             if shareExactLocation {
-                                Text("Lat: \(location.latitude, specifier: "%.6f"), Lng: \(location.longitude, specifier: "%.6f")")
+                                Text(String(
+                                    format: NSLocalizedString("coordinates_display", comment: "Lat/Lng label format"),
+                                    String(format: "%.6f", location.latitude),
+                                    String(format: "%.6f", location.longitude)
+                                ))
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             } else {
                                 let rounded = roundToApproximate(lat: location.latitude, lng: location.longitude)
-                                Text("Lat: \(rounded.lat, specifier: "%.3f"), Lng: \(rounded.lng, specifier: "%.3f")")
+                                Text(String(
+                                    format: NSLocalizedString("coordinates_display", comment: "Lat/Lng label format"),
+                                    String(format: "%.3f", rounded.lat),
+                                    String(format: "%.3f", rounded.lng)
+                                ))
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                 Text(NSLocalizedString("share_accuracy", comment: ""))

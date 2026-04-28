@@ -223,21 +223,21 @@ struct BreedPickerButton: View {
     Form {
         Section(String(localized: "species_dog")) {
             HStack {
-                Text("Breed")
+                Text("breed")
                     .frame(width: 80, alignment: .leading)
                 BreedPickerButton(breed: .constant(""), species: "Dog")
             }
         }
         Section(String(localized: "species_cat_header")) {
             HStack {
-                Text("Breed")
+                Text("breed")
                     .frame(width: 80, alignment: .leading)
                 BreedPickerButton(breed: .constant("Persian"), species: "Cat")
             }
         }
         Section(String(localized: "species_bird_no_picker")) {
             HStack {
-                Text("Breed")
+                Text("breed")
                     .frame(width: 80, alignment: .leading)
                 BreedPickerButton(breed: .constant(""), species: "Bird")
             }
