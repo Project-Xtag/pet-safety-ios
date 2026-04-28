@@ -27,9 +27,18 @@ class SubscriptionViewModel: ObservableObject {
     }
 
     // MARK: - Initialization
+
+    /// Audit #89 — token returned by SSEService.addSubscriptionChangedHandler.
+    /// Stored so we can remove THIS instance's handler in deinit without
+    /// affecting any other SubscriptionViewModel that's also observing.
+    /// Pre-fix the single-callback property got stomped between instances.
+    private var subscriptionHandlerToken: UUID?
+
     init() {
-        // Listen for SSE subscription_changed events and auto-refresh
-        SSEService.shared.onSubscriptionChanged = { [weak self] _ in
+        // Listen for SSE subscription_changed events and auto-refresh.
+        // Multiple SubscriptionViewModels (e.g. nav root + settings sheet)
+        // each get their own slot in the registry — none clobber the others.
+        subscriptionHandlerToken = SSEService.shared.addSubscriptionChangedHandler { [weak self] _ in
             Task { @MainActor [weak self] in
                 await self?.loadCurrentSubscription()
                 await self?.loadFeatures()
@@ -38,7 +47,9 @@ class SubscriptionViewModel: ObservableObject {
     }
 
     deinit {
-        SSEService.shared.onSubscriptionChanged = nil
+        if let token = subscriptionHandlerToken {
+            SSEService.shared.removeSubscriptionChangedHandler(token)
+        }
     }
 
     // MARK: - Data Loading

@@ -34,7 +34,24 @@ class SSEService: NSObject, ObservableObject {
     var onPetFound: ((PetFoundEvent) -> Void)?
     var onAlertCreated: ((AlertCreatedEvent) -> Void)?
     var onAlertUpdated: ((AlertUpdatedEvent) -> Void)?
-    var onSubscriptionChanged: ((SubscriptionChangedEvent) -> Void)?
+
+    /// Subscription-changed handler registry (audit #89).
+    ///
+    /// Pre-fix `onSubscriptionChanged` was a single closure property. Two
+    /// SubscriptionViewModel instances (e.g. one in the navigation root
+    /// and one in a settings sheet) would each assign the property in
+    /// their init, with the second assignment silently overwriting the
+    /// first — only the most-recently-instantiated VM saw the SSE event.
+    /// `deinit` then nilled the slot, also clobbering whichever other
+    /// VM was still observing.
+    ///
+    /// Registry pattern keyed by UUID so multiple observers coexist and
+    /// each removes ITS OWN handler on deinit without affecting others.
+    /// Use `addSubscriptionChangedHandler(_:)` to subscribe and stash the
+    /// returned token, then `removeSubscriptionChangedHandler(_:)` in
+    /// deinit.
+    private var subscriptionChangedHandlers: [UUID: (SubscriptionChangedEvent) -> Void] = [:]
+
     var onReferralUsed: ((ReferralUsedEvent) -> Void)?
     var onConnected: ((ConnectionEvent) -> Void)?
 
@@ -46,6 +63,25 @@ class SSEService: NSObject, ObservableObject {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Subscription Handler Registry (audit #89)
+
+    /// Register a closure to be invoked whenever a `subscription_changed`
+    /// SSE event arrives. The returned UUID is the cancellation token —
+    /// stash it on the caller and pass it to
+    /// `removeSubscriptionChangedHandler(_:)` in deinit.
+    @discardableResult
+    func addSubscriptionChangedHandler(_ handler: @escaping (SubscriptionChangedEvent) -> Void) -> UUID {
+        let token = UUID()
+        subscriptionChangedHandlers[token] = handler
+        return token
+    }
+
+    /// Remove a previously-registered handler. Idempotent: passing an
+    /// already-removed (or unknown) token is a no-op.
+    func removeSubscriptionChangedHandler(_ token: UUID) {
+        subscriptionChangedHandlers.removeValue(forKey: token)
     }
 
     // MARK: - Public Methods
@@ -402,8 +438,15 @@ class SSEService: NSObject, ObservableObject {
 
             case "subscription_changed":
                 let event = try decoder.decode(SubscriptionChangedEvent.self, from: jsonData)
+                // Fan out to every registered handler. Snapshot the
+                // dictionary's values to avoid mutation-during-iteration
+                // if a handler removes itself in response.
                 DispatchQueue.main.async { [weak self] in
-                    self?.onSubscriptionChanged?(event)
+                    guard let self = self else { return }
+                    let handlers = Array(self.subscriptionChangedHandlers.values)
+                    for handler in handlers {
+                        handler(event)
+                    }
                 }
                 showNotification(
                     title: NSLocalizedString("sse_subscription_title", comment: ""),
