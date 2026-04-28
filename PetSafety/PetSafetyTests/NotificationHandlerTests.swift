@@ -30,17 +30,22 @@ final class NotificationHandlerTests: XCTestCase {
     // MARK: - Notification Type Parsing Tests
 
     func testHandleUnknownNotificationType() {
-        // Given
+        // Given - audit #68: unknown type now navigates to a safe inbox/scan
+        // fallback instead of silently dropping. The Sentry capture is the
+        // primary signal; the fallback nav stops users landing on a dead
+        // screen if a new backend type ships before app catches up.
         let userInfo: [AnyHashable: Any] = [
             "type": "UNKNOWN_TYPE"
         ]
+        let navExpectation = expectNavigationNotification(named: .navigateToScan)
 
         // When
         notificationHandler.handleNotificationTap(userInfo: userInfo)
 
-        // Then - should not crash, silently ignore
+        // Then
         XCTAssertNil(notificationHandler.pendingScanNotification)
         XCTAssertFalse(notificationHandler.showMapPicker)
+        waitForExpectations(timeout: 1.0)
     }
 
     func testHandleMissingType() {
@@ -345,17 +350,83 @@ final class NotificationHandlerTests: XCTestCase {
     }
 
     func testHandleMissingPetAlertWithEmptyAlertId() {
-        // Given
+        // Audit #69: empty alert_id MUST NOT post a navigation event
+        // (`senra://alert/` would deep-link to a 404). The handler
+        // captures to Sentry and returns early.
+        var didNavigate = false
+        let observer = NotificationCenter.default.addObserver(
+            forName: .navigateToAlert, object: nil, queue: nil
+        ) { _ in
+            didNavigate = true
+        }
+        defer { NotificationCenter.default.removeObserver(observer) }
+
         let userInfo: [AnyHashable: Any] = [
             "type": "MISSING_PET_ALERT"
             // Missing alert_id
         ]
 
-        // When
         notificationHandler.handleNotificationTap(userInfo: userInfo)
 
-        // Then - should use empty string as default
-        // This is safe and won't crash
+        // Give the runloop a tick to flush any post; the handler is
+        // synchronous so this is a belt-and-braces wait.
+        let exp = self.expectation(description: "Allow runloop to settle")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { exp.fulfill() }
+        waitForExpectations(timeout: 1.0)
+
+        XCTAssertFalse(didNavigate, "Empty alert_id must not produce a navigateToAlert event")
+    }
+
+    func testHandlePetFoundWithEmptyPetIdDoesNotNavigate() {
+        // Audit #69: empty pet_id ⇒ no .navigateToPet post.
+        var didNavigate = false
+        let observer = NotificationCenter.default.addObserver(
+            forName: .navigateToPet, object: nil, queue: nil
+        ) { _ in
+            didNavigate = true
+        }
+        defer { NotificationCenter.default.removeObserver(observer) }
+
+        let userInfo: [AnyHashable: Any] = [
+            "type": "PET_FOUND",
+            "alert_id": "alert-x"
+            // Missing pet_id
+        ]
+
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        let exp = self.expectation(description: "Allow runloop to settle")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { exp.fulfill() }
+        waitForExpectations(timeout: 1.0)
+
+        XCTAssertFalse(didNavigate, "Empty pet_id must not produce a navigateToPet event")
+    }
+
+    func testHandleSightingWithEmptyAlertIdDoesNotNavigate() {
+        // Audit #69: empty alert_id on a sighting ⇒ no nav post.
+        var didNavigate = false
+        let observer = NotificationCenter.default.addObserver(
+            forName: .navigateToAlert, object: nil, queue: nil
+        ) { _ in
+            didNavigate = true
+        }
+        defer { NotificationCenter.default.removeObserver(observer) }
+
+        let userInfo: [AnyHashable: Any] = [
+            "type": "SIGHTING_REPORTED",
+            "sighting_id": "s-1",
+            "latitude": "40.7128",
+            "longitude": "-74.0060"
+            // Missing alert_id
+        ]
+
+        notificationHandler.handleNotificationTap(userInfo: userInfo)
+
+        let exp = self.expectation(description: "Allow runloop to settle")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { exp.fulfill() }
+        waitForExpectations(timeout: 1.0)
+
+        XCTAssertFalse(didNavigate, "Empty alert_id on sighting must not produce a navigateToAlert event")
     }
 
     // MARK: - PET_FOUND Notification Tests

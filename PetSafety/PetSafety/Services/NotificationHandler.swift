@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import UserNotifications
+import Sentry
 
 /**
  * Notification Handler for FCM Push Notifications
@@ -28,7 +29,14 @@ class NotificationHandler: ObservableObject {
     /// Handle notification tap from FCM
     /// - Parameter userInfo: The notification payload
     func handleNotificationTap(userInfo: [AnyHashable: Any]) {
-        guard let type = userInfo["type"] as? String else { return }
+        guard let type = userInfo["type"] as? String else {
+            // Payload arrived without a `type` discriminator — the user tapped
+            // a notification we don't know how to route. Surface to Sentry so
+            // we notice if backend ever ships an untyped payload, instead of
+            // the silent no-op pre-fix (audit #68).
+            Self.captureUnknownNotification(type: "<missing>", userInfo: userInfo)
+            return
+        }
 
         switch type {
         case "PET_SCANNED", "TAG_INITIAL_SCAN":
@@ -49,9 +57,32 @@ class NotificationHandler: ObservableObject {
         case "MULTIPLE_SIGHTINGS":
             handleMultipleSightings(userInfo)
         default:
-            #if DEBUG
-            print("Unknown notification type: \(type)")
-            #endif
+            // Unknown discriminator — usually means the backend rolled out a
+            // new event type before the iOS app knows how to render it. The
+            // user already tapped, so silently dropping leaves them on a
+            // dead-end screen with no telemetry. Capture to Sentry and post
+            // a generic navigation so they at least land somewhere sensible
+            // (audit #68).
+            Self.captureUnknownNotification(type: type, userInfo: userInfo)
+            NotificationCenter.default.post(name: .navigateToScan, object: nil, userInfo: ["type": type])
+        }
+    }
+
+    /// Telemetry helper: report an unrecognised FCM payload to Sentry.
+    /// Includes the keys but not the values (some keys carry PII).
+    private static func captureUnknownNotification(type: String, userInfo: [AnyHashable: Any]) {
+        #if DEBUG
+        print("Unknown notification type: \(type)")
+        #endif
+        if SentrySDK.isEnabled {
+            SentrySDK.capture(message: "Unknown FCM notification type: \(type)") { scope in
+                scope.setLevel(.warning)
+                scope.setTag(value: "notification_unknown_type", key: "operation")
+                scope.setContext(
+                    value: ["type": type, "keys": userInfo.keys.compactMap { $0 as? String }],
+                    key: "notification",
+                )
+            }
         }
     }
 
@@ -91,21 +122,43 @@ class NotificationHandler: ObservableObject {
         let alertId = userInfo["alert_id"] as? String ?? ""
         let petId = userInfo["pet_id"] as? String ?? ""
 
-        // Navigate to alert details
-        // This will be handled by the DeepLinkService
-        let deepLink = "senra://alert/\(alertId)"
+        // Audit #69: never construct or post a deep link with an empty id.
+        // `senra://alert/` would deep-link to the list page (or worse, a
+        // 404 detail screen) and feels like a broken notification. Surface
+        // the malformed payload to Sentry instead.
+        guard !alertId.isEmpty else {
+            Self.captureMalformedPayload(reason: "missing_alert_id", type: "MISSING_PET_ALERT", userInfo: userInfo)
+            return
+        }
 
         #if DEBUG
         print("Missing pet alert notification: alertId=\(alertId), petId=\(petId)")
-        print("Deep link: \(deepLink)")
+        print("Deep link: senra://alert/\(alertId)")
         #endif
 
-        // Post notification to navigate
         NotificationCenter.default.post(
             name: .navigateToAlert,
             object: nil,
             userInfo: ["alertId": alertId, "petId": petId]
         )
+    }
+
+    /// Telemetry helper: report a known-type payload that arrived missing
+    /// fields the route handler requires (audit #69).
+    private static func captureMalformedPayload(reason: String, type: String, userInfo: [AnyHashable: Any]) {
+        #if DEBUG
+        print("Malformed \(type) payload: \(reason)")
+        #endif
+        if SentrySDK.isEnabled {
+            SentrySDK.capture(message: "Malformed FCM payload: \(type) — \(reason)") { scope in
+                scope.setLevel(.warning)
+                scope.setTag(value: "notification_malformed_payload", key: "operation")
+                scope.setContext(
+                    value: ["type": type, "reason": reason, "keys": userInfo.keys.compactMap { $0 as? String }],
+                    key: "notification",
+                )
+            }
+        }
     }
 
     // MARK: - Pet Found Notification
@@ -114,11 +167,18 @@ class NotificationHandler: ObservableObject {
         let alertId = userInfo["alert_id"] as? String ?? ""
         let petId = userInfo["pet_id"] as? String ?? ""
 
+        // Audit #69: pet_id is required to deep-link to the pet detail page.
+        // An empty id would route to the empty-state pet list which is not
+        // what a "pet found" notification is communicating.
+        guard !petId.isEmpty else {
+            Self.captureMalformedPayload(reason: "missing_pet_id", type: "PET_FOUND", userInfo: userInfo)
+            return
+        }
+
         #if DEBUG
         print("Pet found notification: alertId=\(alertId), petId=\(petId)")
         #endif
 
-        // Navigate to pet details
         NotificationCenter.default.post(
             name: .navigateToPet,
             object: nil,
@@ -131,6 +191,13 @@ class NotificationHandler: ObservableObject {
     private func handleSightingNotification(_ userInfo: [AnyHashable: Any]) {
         let alertId = userInfo["alert_id"] as? String ?? ""
         let sightingId = userInfo["sighting_id"] as? String ?? ""
+
+        // Audit #69: alert_id is the routing primary-key for the navigation
+        // target. An empty id would deep-link to a 404 alert detail.
+        guard !alertId.isEmpty else {
+            Self.captureMalformedPayload(reason: "missing_alert_id", type: "SIGHTING_REPORTED", userInfo: userInfo)
+            return
+        }
 
         let location: LocationData? = Self.parseLocation(userInfo, isApproximate: false)
 
@@ -165,13 +232,16 @@ class NotificationHandler: ObservableObject {
         let alertId = userInfo["alert_id"] as? String ?? ""
         let petId = userInfo["pet_id"] as? String ?? ""
 
-        if !alertId.isEmpty {
-            NotificationCenter.default.post(
-                name: .navigateToAlert,
-                object: nil,
-                userInfo: ["alertId": alertId, "petId": petId]
-            )
+        guard !alertId.isEmpty else {
+            Self.captureMalformedPayload(reason: "missing_alert_id", type: "ALERT_CREATED", userInfo: userInfo)
+            return
         }
+
+        NotificationCenter.default.post(
+            name: .navigateToAlert,
+            object: nil,
+            userInfo: ["alertId": alertId, "petId": petId]
+        )
     }
 
     // MARK: - Alert Reminder
@@ -179,13 +249,16 @@ class NotificationHandler: ObservableObject {
     private func handleAlertReminder(_ userInfo: [AnyHashable: Any]) {
         let alertId = userInfo["alert_id"] as? String ?? ""
 
-        if !alertId.isEmpty {
-            NotificationCenter.default.post(
-                name: .navigateToAlert,
-                object: nil,
-                userInfo: ["alertId": alertId]
-            )
+        guard !alertId.isEmpty else {
+            Self.captureMalformedPayload(reason: "missing_alert_id", type: "ALERT_REMINDER", userInfo: userInfo)
+            return
         }
+
+        NotificationCenter.default.post(
+            name: .navigateToAlert,
+            object: nil,
+            userInfo: ["alertId": alertId]
+        )
     }
 
     // MARK: - Multiple Sightings
@@ -193,13 +266,16 @@ class NotificationHandler: ObservableObject {
     private func handleMultipleSightings(_ userInfo: [AnyHashable: Any]) {
         let alertId = userInfo["alert_id"] as? String ?? ""
 
-        if !alertId.isEmpty {
-            NotificationCenter.default.post(
-                name: .navigateToAlert,
-                object: nil,
-                userInfo: ["alertId": alertId]
-            )
+        guard !alertId.isEmpty else {
+            Self.captureMalformedPayload(reason: "missing_alert_id", type: "MULTIPLE_SIGHTINGS", userInfo: userInfo)
+            return
         }
+
+        NotificationCenter.default.post(
+            name: .navigateToAlert,
+            object: nil,
+            userInfo: ["alertId": alertId]
+        )
     }
 
     // MARK: - Clear Pending Notification
