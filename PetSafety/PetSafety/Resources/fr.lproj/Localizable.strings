@@ -1394,3 +1394,24 @@
 
 "qr_torch_unavailable" = "Lampe de poche indisponible sur cet appareil.";
 "tag_pending_badge" = "EN ROUTE";
+
+// MARK: - Shelter promo claim flow
+"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_welcome_format" = "Welcome from %@!";
+"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_pet_picker_label" = "Pet";
+"shelter_promo_new_pet" = "New Pet";
+"shelter_promo_existing_pet" = "Existing Pet";
+"shelter_promo_pet_name_placeholder" = "Pet name";
+"shelter_promo_neutered_spayed" = "Neutered / Spayed";
+"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
+"shelter_promo_claim_success_title" = "Tag Claimed!";
+"shelter_promo_active_until_format" = "Tag active until %@";
+
+// MARK: - Order more tags placeholders
+"order_more_owner_name" = "Owner name";
+"order_more_email" = "Email";
+"order_more_phone" = "Phone";
+
+// MARK: - Success stories sharing
+"shared_via_pet_safety" = "Shared via SENRA";

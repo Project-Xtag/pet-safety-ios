@@ -30,7 +30,7 @@ struct ShelterPromoClaimView: View {
                     claimFormView
                 }
             }
-            .navigationTitle(String(localized: "Claim Tag"))
+            .navigationTitle(String(localized: "shelter_promo_claim_tag_title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -56,12 +56,12 @@ struct ShelterPromoClaimView: View {
                         .font(.system(size: 40))
                         .foregroundColor(.brandOrange)
 
-                    Text(String(localized: "Welcome from \(promoInfo.shelterName)!"))
+                    Text(String(format: NSLocalizedString("shelter_promo_welcome_format", comment: ""), promoInfo.shelterName))
                         .font(.title2)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
 
-                    Text(String(localized: "Register your pet to activate this tag, courtesy of \(promoInfo.shelterName)."))
+                    Text(String(format: NSLocalizedString("shelter_promo_register_subtitle_format", comment: ""), promoInfo.shelterName))
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -73,9 +73,9 @@ struct ShelterPromoClaimView: View {
 
                 // Toggle: new vs existing pet
                 if !viewModel.pets.isEmpty {
-                    Picker(String(localized: "Pet"), selection: $useExistingPet) {
-                        Text(String(localized: "New Pet")).tag(false)
-                        Text(String(localized: "Existing Pet")).tag(true)
+                    Picker(String(localized: "shelter_promo_pet_picker_label"), selection: $useExistingPet) {
+                        Text(String(localized: "shelter_promo_new_pet")).tag(false)
+                        Text(String(localized: "shelter_promo_existing_pet")).tag(true)
                     }
                     .pickerStyle(.segmented)
                 }
@@ -158,7 +158,7 @@ struct ShelterPromoClaimView: View {
                     Text(String(localized: "Name *"))
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "Pet name"), text: $petName)
+                    TextField(String(localized: "shelter_promo_pet_name_placeholder"), text: $petName)
                         .textFieldStyle(.roundedBorder)
                 }
 
@@ -205,7 +205,7 @@ struct ShelterPromoClaimView: View {
                     .pickerStyle(.menu)
                 }
 
-                Toggle(String(localized: "Neutered / Spayed"), isOn: $isNeutered)
+                Toggle(String(localized: "shelter_promo_neutered_spayed"), isOn: $isNeutered)
             }
 
             Button {
@@ -237,7 +237,7 @@ struct ShelterPromoClaimView: View {
                             .tint(.white)
                     }
                     Image(systemName: "pawprint.fill")
-                    Text(String(localized: "Register Pet & Claim Tag"))
+                    Text(String(localized: "shelter_promo_register_and_claim_button"))
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -257,7 +257,7 @@ struct ShelterPromoClaimView: View {
                     .font(.system(size: 60))
                     .foregroundColor(.green)
 
-                Text(String(localized: "Tag Claimed!"))
+                Text(String(localized: "shelter_promo_claim_success_title"))
                     .font(.title)
                     .fontWeight(.bold)
 
@@ -273,7 +273,7 @@ struct ShelterPromoClaimView: View {
                     }
                     if let details = result.promoDetails {
                         Label(
-                            String(localized: "Tag active until \(formatDate(details.trialEndDate))"),
+                            String(format: NSLocalizedString("shelter_promo_active_until_format", comment: ""), formatDate(details.trialEndDate)),
                             systemImage: "checkmark.seal.fill"
                         )
                         .font(.subheadline)

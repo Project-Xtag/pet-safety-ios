@@ -1392,3 +1392,24 @@
 
 "qr_torch_unavailable" = "A vaku nem érhető el ezen az eszközön.";
 "tag_pending_badge" = "BILÉTA ÚTON";
+
+// MARK: - Shelter promo claim flow
+"shelter_promo_claim_tag_title" = "Címke aktiválása";
+"shelter_promo_welcome_format" = "Üdv tőlünk: %@!";
+"shelter_promo_register_subtitle_format" = "Regisztráld a kedvencedet a címke aktiválásához – %@ jóvoltából.";
+"shelter_promo_pet_picker_label" = "Kedvenc";
+"shelter_promo_new_pet" = "Új kedvenc";
+"shelter_promo_existing_pet" = "Meglévő kedvenc";
+"shelter_promo_pet_name_placeholder" = "Kedvenc neve";
+"shelter_promo_neutered_spayed" = "Ivartalanított";
+"shelter_promo_register_and_claim_button" = "Regisztráció és címke aktiválása";
+"shelter_promo_claim_success_title" = "Címke aktiválva!";
+"shelter_promo_active_until_format" = "Címke aktív eddig: %@";
+
+// MARK: - Order more tags placeholders
+"order_more_owner_name" = "Tulajdonos neve";
+"order_more_email" = "E-mail";
+"order_more_phone" = "Telefonszám";
+
+// MARK: - Success stories sharing
+"shared_via_pet_safety" = "Megosztva a SENRA-n keresztül";
