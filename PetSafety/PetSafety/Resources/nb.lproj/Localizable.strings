@@ -1407,6 +1407,10 @@
 "shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
 "shelter_promo_claim_success_title" = "Tag Claimed!";
 "shelter_promo_active_until_format" = "Tag active until %@";
+"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_name_label_required" = "Name *";
+"shelter_promo_species_label_required" = "Species *";
+"shelter_promo_select_placeholder" = "Select...";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Owner name";

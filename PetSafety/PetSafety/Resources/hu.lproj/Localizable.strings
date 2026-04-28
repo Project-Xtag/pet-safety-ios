@@ -1405,6 +1405,10 @@
 "shelter_promo_register_and_claim_button" = "Regisztráció és címke aktiválása";
 "shelter_promo_claim_success_title" = "Címke aktiválva!";
 "shelter_promo_active_until_format" = "Címke aktív eddig: %@";
+"shelter_promo_claim_tag_button" = "Címke aktiválása";
+"shelter_promo_name_label_required" = "Név *";
+"shelter_promo_species_label_required" = "Faj *";
+"shelter_promo_select_placeholder" = "Válassz...";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Tulajdonos neve";
