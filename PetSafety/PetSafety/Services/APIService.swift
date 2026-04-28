@@ -1920,7 +1920,10 @@ extension APIService {
 // MARK: - Token Refresh Coordinator
 /// Actor that serializes concurrent token refresh attempts so only one
 /// network call is made, and all waiting callers receive the same result.
-private actor TokenRefreshCoordinator {
+/// `internal` (not `private`) so XCTest can pin behaviour parity with
+/// the web TokenRefreshCoordinator and Android TokenAuthenticator
+/// without going through the full APIService stack (audit H50).
+internal actor TokenRefreshCoordinator {
     private var isRefreshing = false
     private var refreshTask: Task<(accessToken: String, refreshToken: String), Error>?
 
