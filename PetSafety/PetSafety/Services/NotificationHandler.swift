@@ -62,18 +62,9 @@ class NotificationHandler: ObservableObject {
         let petId = userInfo["pet_id"] as? String ?? ""
         let locationType = userInfo["location_type"] as? String ?? "none"
 
-        var location: LocationData?
-        if locationType != "none",
-           let latString = userInfo["latitude"] as? String,
-           let lonString = userInfo["longitude"] as? String,
-           let lat = Double(latString),
-           let lon = Double(lonString) {
-            location = LocationData(
-                latitude: lat,
-                longitude: lon,
-                isApproximate: locationType == "approximate"
-            )
-        }
+        let location: LocationData? = locationType == "none"
+            ? nil
+            : Self.parseLocation(userInfo, isApproximate: locationType == "approximate")
 
         DispatchQueue.main.async { [weak self] in
             self?.pendingScanNotification = ScanNotificationData(
@@ -141,17 +132,7 @@ class NotificationHandler: ObservableObject {
         let alertId = userInfo["alert_id"] as? String ?? ""
         let sightingId = userInfo["sighting_id"] as? String ?? ""
 
-        var location: LocationData?
-        if let latString = userInfo["latitude"] as? String,
-           let lonString = userInfo["longitude"] as? String,
-           let lat = Double(latString),
-           let lon = Double(lonString) {
-            location = LocationData(
-                latitude: lat,
-                longitude: lon,
-                isApproximate: false
-            )
-        }
+        let location: LocationData? = Self.parseLocation(userInfo, isApproximate: false)
 
         #if DEBUG
         print("Sighting notification: alertId=\(alertId), sightingId=\(sightingId)")
@@ -226,6 +207,25 @@ class NotificationHandler: ObservableObject {
     func clearPendingNotification() {
         pendingScanNotification = nil
         showMapPicker = false
+    }
+
+    // MARK: - Coordinate Parsing
+
+    /// Parse latitude/longitude strings from a notification payload, validating
+    /// that both are well-formed numbers within geographic ranges and not the
+    /// `(0, 0)` null-island sentinel. Returns nil for any invalid input — this
+    /// guards MapKit (`MKCoordinateRegion`, `CLLocationCoordinate2D`) from
+    /// NaN / Inf / out-of-range values that crash on use.
+    static func parseLocation(_ userInfo: [AnyHashable: Any], isApproximate: Bool) -> LocationData? {
+        guard let latString = userInfo["latitude"] as? String,
+              let lonString = userInfo["longitude"] as? String,
+              let lat = Double(latString),
+              let lon = Double(lonString),
+              InputValidators.isValidCoordinate(latitude: lat, longitude: lon)
+        else {
+            return nil
+        }
+        return LocationData(latitude: lat, longitude: lon, isApproximate: isApproximate)
     }
 }
 
