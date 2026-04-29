@@ -44,11 +44,23 @@ final class CertificatePinningService: NSObject {
         "++MBgDH5WGvL9Bcn5Be30cRcL0f5O+NyoXuWtQdX1aI=",
     ]
 
-    /// Whether to enforce pinning (disable for debugging only)
-    /// In production, this should always be true
+    /// Whether to enforce pinning (disable for debugging only).
+    /// In production, this is always true.
+    ///
+    /// Audit #170 — DEBUG override safety:
+    /// `DISABLE_CERT_PINNING=1` only takes effect under `#if DEBUG`. Release
+    /// builds (App Store, TestFlight) compile this branch out — `enforcePinning`
+    /// is the literal `true` in `#else`, so there is no runtime path to flip
+    /// pinning off in shipping binaries. The env var is set in the Xcode
+    /// scheme's "Run" arguments only, not embedded in the bundle, so it
+    /// cannot be smuggled into a release build via plist injection either.
+    /// If you ever need to test against a man-in-the-middle proxy (Charles,
+    /// Proxyman) for debugging, set `DISABLE_CERT_PINNING=1` in the scheme;
+    /// remove it before archiving — Release archives ignore it regardless.
     private var enforcePinning: Bool {
         #if DEBUG
-        // Allow disabling pinning in debug builds via environment variable
+        // Allow disabling pinning in debug builds via environment variable.
+        // See class-level comment for the safety guard against this leaking to Release.
         return ProcessInfo.processInfo.environment["DISABLE_CERT_PINNING"] != "1"
         #else
         return true
