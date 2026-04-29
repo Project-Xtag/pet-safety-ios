@@ -83,6 +83,7 @@ struct AlertDetailView: View {
 
                         Text(pet.name)
                             .font(.system(size: 32, weight: .bold))
+                            .accessibilityAddTraits(.isHeader)
 
                         Text(petDetailsString(pet))
                             .font(.title3)
