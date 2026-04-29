@@ -399,6 +399,21 @@ struct PetCardView: View {
                         .background(Color.red)
                         .cornerRadius(8)
                         .padding(8)
+                    } else if pet.hasActiveTag == false {
+                        // "Tag on its way" — pet was auto-registered from a paid order,
+                        // physical tag hasn't been scanned/activated yet.
+                        HStack(spacing: 4) {
+                            Image(systemName: "shippingbox.fill")
+                                .font(.system(size: 10))
+                            Text("tag_pending_badge")
+                                .font(.system(size: 10, weight: .bold))
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.orange)
+                        .cornerRadius(8)
+                        .padding(8)
                     }
                 }
                 .cornerRadius(16, corners: [.topLeft, .topRight])

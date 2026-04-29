@@ -30,11 +30,11 @@ struct ShelterPromoClaimView: View {
                     claimFormView
                 }
             }
-            .navigationTitle(String(localized: "Claim Tag"))
+            .navigationTitle(String(localized: "shelter_promo_claim_tag_title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(String(localized: "Close")) {
+                    Button(String(localized: "close")) {
                         dismiss()
                     }
                 }
@@ -56,12 +56,12 @@ struct ShelterPromoClaimView: View {
                         .font(.system(size: 40))
                         .foregroundColor(.brandOrange)
 
-                    Text(String(localized: "Welcome from \(promoInfo.shelterName)!"))
+                    Text(String(format: NSLocalizedString("shelter_promo_welcome_format", comment: ""), promoInfo.shelterName))
                         .font(.title2)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
 
-                    Text(String(localized: "Register your pet to activate this tag, courtesy of \(promoInfo.shelterName)."))
+                    Text(String(format: NSLocalizedString("shelter_promo_register_subtitle_format", comment: ""), promoInfo.shelterName))
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -73,9 +73,9 @@ struct ShelterPromoClaimView: View {
 
                 // Toggle: new vs existing pet
                 if !viewModel.pets.isEmpty {
-                    Picker(String(localized: "Pet"), selection: $useExistingPet) {
-                        Text(String(localized: "New Pet")).tag(false)
-                        Text(String(localized: "Existing Pet")).tag(true)
+                    Picker(String(localized: "shelter_promo_pet_picker_label"), selection: $useExistingPet) {
+                        Text(String(localized: "shelter_promo_new_pet")).tag(false)
+                        Text(String(localized: "shelter_promo_existing_pet")).tag(true)
                     }
                     .pickerStyle(.segmented)
                 }
@@ -138,7 +138,7 @@ struct ShelterPromoClaimView: View {
                         ProgressView()
                             .tint(.white)
                     }
-                    Text(String(localized: "Claim Tag"))
+                    Text(String(localized: "shelter_promo_claim_tag_button"))
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -155,57 +155,57 @@ struct ShelterPromoClaimView: View {
         VStack(spacing: 16) {
             Group {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(String(localized: "Name *"))
+                    Text(String(localized: "shelter_promo_name_label_required"))
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "Pet name"), text: $petName)
+                    TextField(String(localized: "shelter_promo_pet_name_placeholder"), text: $petName)
                         .textFieldStyle(.roundedBorder)
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(String(localized: "Species *"))
+                    Text(String(localized: "shelter_promo_species_label_required"))
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    Picker(String(localized: "Species"), selection: $species) {
-                        Text(String(localized: "Select...")).tag("")
-                        Text(String(localized: "Dog")).tag("dog")
-                        Text(String(localized: "Cat")).tag("cat")
-                        Text(String(localized: "Bird")).tag("bird")
-                        Text(String(localized: "Rabbit")).tag("rabbit")
-                        Text(String(localized: "Other")).tag("other")
+                    Picker(String(localized: "shelter_promo_species_label_required"), selection: $species) {
+                        Text(String(localized: "shelter_promo_select_placeholder")).tag("")
+                        Text(String(localized: "species_dog")).tag("dog")
+                        Text(String(localized: "species_cat")).tag("cat")
+                        Text(String(localized: "species_bird")).tag("bird")
+                        Text(String(localized: "species_rabbit")).tag("rabbit")
+                        Text(String(localized: "species_other")).tag("other")
                     }
                     .pickerStyle(.menu)
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(String(localized: "Breed"))
+                    Text(String(localized: "breed"))
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "Breed"), text: $breed)
+                    TextField(String(localized: "breed"), text: $breed)
                         .textFieldStyle(.roundedBorder)
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(String(localized: "Color"))
+                    Text(String(localized: "color"))
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    TextField(String(localized: "Color"), text: $color)
+                    TextField(String(localized: "color"), text: $color)
                         .textFieldStyle(.roundedBorder)
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(String(localized: "Sex"))
+                    Text(String(localized: "sex_label"))
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    Picker(String(localized: "Sex"), selection: $sex) {
-                        Text(String(localized: "Select...")).tag("")
-                        Text(String(localized: "Male")).tag("male")
-                        Text(String(localized: "Female")).tag("female")
+                    Picker(String(localized: "sex_label"), selection: $sex) {
+                        Text(String(localized: "shelter_promo_select_placeholder")).tag("")
+                        Text(String(localized: "sex_male")).tag("male")
+                        Text(String(localized: "sex_female")).tag("female")
                     }
                     .pickerStyle(.menu)
                 }
 
-                Toggle(String(localized: "Neutered / Spayed"), isOn: $isNeutered)
+                Toggle(String(localized: "shelter_promo_neutered_spayed"), isOn: $isNeutered)
             }
 
             Button {
@@ -237,7 +237,7 @@ struct ShelterPromoClaimView: View {
                             .tint(.white)
                     }
                     Image(systemName: "pawprint.fill")
-                    Text(String(localized: "Register Pet & Claim Tag"))
+                    Text(String(localized: "shelter_promo_register_and_claim_button"))
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -257,7 +257,7 @@ struct ShelterPromoClaimView: View {
                     .font(.system(size: 60))
                     .foregroundColor(.green)
 
-                Text(String(localized: "Tag Claimed!"))
+                Text(String(localized: "shelter_promo_claim_success_title"))
                     .font(.title)
                     .fontWeight(.bold)
 
@@ -273,7 +273,7 @@ struct ShelterPromoClaimView: View {
                     }
                     if let details = result.promoDetails {
                         Label(
-                            String(localized: "Tag active until \(formatDate(details.trialEndDate))"),
+                            String(format: NSLocalizedString("shelter_promo_active_until_format", comment: ""), formatDate(details.trialEndDate)),
                             systemImage: "checkmark.seal.fill"
                         )
                         .font(.subheadline)
@@ -285,7 +285,7 @@ struct ShelterPromoClaimView: View {
                 .background(Color.green.opacity(0.1))
                 .cornerRadius(12)
 
-                Button(String(localized: "Done")) {
+                Button(String(localized: "done")) {
                     dismiss()
                 }
                 .buttonStyle(.borderedProminent)

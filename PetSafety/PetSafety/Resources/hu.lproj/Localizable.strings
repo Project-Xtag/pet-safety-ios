@@ -712,7 +712,7 @@
 "contacts_secondary_email_edit_footer" = "Tartalék e-mail-cím: ide is elküldjük az értesítést, ha megkerül a kedvenced";
 "contacts_primary_phone_edit_footer" = "Az elsődleges telefonszámod, amin elérhetünk";
 "contacts_secondary_phone_edit_footer" = "Tartalék telefonszám vészhelyzet esetére";
-"contacts_visible_on_tag" = "Látható a bilétán";
+"contacts_visible_on_tag" = "Látható a kedvenced nyilvános profilján";
 "contacts_no_type_added" = "Nincs megadva: %@";
 
 // MARK: - További cserebiléta rendelés kulcsok
@@ -1109,7 +1109,7 @@
 // MARK: - Notifications Inbox
 "notifications_title" = "Értesítések";
 "no_notifications" = "Nincsenek értesítések";
-"no_notifications_desc" = "Minden naprakész! Az értesítések itt jelennek meg, ha beolvassák a kedvenced címkéjét.";
+"no_notifications_desc" = "Minden naprakész! Az értesítések itt jelennek meg, ha beolvassák a kedvenced bilétáját.";
 "mark_all_read" = "Összes olvasottnak jelölése";
 "load_more" = "Több betöltése";
 "just_now" = "Most";
@@ -1299,6 +1299,7 @@
 "appearance_dark" = "Sötét";
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Közösségi riasztásokhoz Senra előfizetés szükséges.";
+"mark_lost_starter_upgrade_cta" = "Csomagok megtekintése";
 "mark_lost_upgrade_prompt" = "A Starter csomaggal a kedvencedet elveszettnek jelöljük, de a közeli felhasználók, állatorvosok és menhelyek értesítéséhez Standard vagy Maximum előfizetés szükséges.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "pl. 3 éves, 6 hónapos (opcionális)";
@@ -1322,7 +1323,7 @@
 
 // MARK: - Welcome Screen
 "welcome_to_senra" = "Üdvözöl a SENRA!";
-"welcome_subtitle" = "Kedvenced biztonsága itt kezdődik. Állítsd be az első címkédet.";
+"welcome_subtitle" = "Kedvenced biztonsága itt kezdődik. Rendeld meg az ingyenes bilétádat.";
 "welcome_step_1" = "Olvasd be a QR-kódot a bilétádról";
 "welcome_step_2" = "Hozd létre kedvenced profilját";
 "welcome_step_3" = "Kedvenced védelem alatt áll!";
@@ -1335,7 +1336,7 @@
 "ready_to_setup" = "Beállításra kész";
 "already_activated" = "Már aktiválva";
 "setting_up_tag_for %@" = "Bitéta beállítása: %@";
-"tag_activated_for %@" = "%@ címkéje aktiválva!";
+"tag_activated_for %@" = "%@ bilétája aktiválva!";
 "pet_now_protected" = "Kedvenced mostantól SENRA védelme alatt áll";
 "more_tags_to_setup" = "Még vannak beállítandó bilétáid";
 "setup_pet_tag %@" = "%@ bilétájának beállítása";
@@ -1390,3 +1391,29 @@
 "report_found_unavailable" = "Ez a funkció nem érhető el ehhez a riasztáshoz. Kérjük, lépj kapcsolatba közvetlenül a gazdival, ha megtaláltad a kedvencet.";
 
 "qr_torch_unavailable" = "A vaku nem érhető el ezen az eszközön.";
+"tag_pending_badge" = "BILÉTA ÚTON";
+
+// MARK: - Shelter promo claim flow
+"shelter_promo_claim_tag_title" = "Címke aktiválása";
+"shelter_promo_welcome_format" = "Üdv tőlünk: %@!";
+"shelter_promo_register_subtitle_format" = "Regisztráld a kedvencedet a címke aktiválásához – %@ jóvoltából.";
+"shelter_promo_pet_picker_label" = "Kedvenc";
+"shelter_promo_new_pet" = "Új kedvenc";
+"shelter_promo_existing_pet" = "Meglévő kedvenc";
+"shelter_promo_pet_name_placeholder" = "Kedvenc neve";
+"shelter_promo_neutered_spayed" = "Ivartalanított";
+"shelter_promo_register_and_claim_button" = "Regisztráció és címke aktiválása";
+"shelter_promo_claim_success_title" = "Címke aktiválva!";
+"shelter_promo_active_until_format" = "Címke aktív eddig: %@";
+"shelter_promo_claim_tag_button" = "Címke aktiválása";
+"shelter_promo_name_label_required" = "Név *";
+"shelter_promo_species_label_required" = "Faj *";
+"shelter_promo_select_placeholder" = "Válassz...";
+
+// MARK: - Order more tags placeholders
+"order_more_owner_name" = "Tulajdonos neve";
+"order_more_email" = "E-mail";
+"order_more_phone" = "Telefonszám";
+
+// MARK: - Success stories sharing
+"shared_via_pet_safety" = "Megosztva a SENRA-n keresztül";

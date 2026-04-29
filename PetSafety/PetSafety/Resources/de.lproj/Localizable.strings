@@ -1294,6 +1294,7 @@
 "appearance_dark" = "Dunkel";
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Community-Warnungen erfordern ein SENRA-Abonnement.";
+"mark_lost_starter_upgrade_cta" = "Pläne ansehen";
 "mark_lost_upgrade_prompt" = "Mit dem Starter-Plan wird dein Haustier als vermisst markiert, aber Benachrichtigungen an Nutzer, Tierärzte und Tierheime erfordern ein Standard- oder Maximum-Abo.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "z.B. 3 Jahre, 6 Monate (optional)";
@@ -1389,3 +1390,29 @@
 "report_found_unavailable" = "Diese Funktion ist für diese Meldung nicht verfügbar. Bitte wende dich direkt an den Halter, wenn du das Haustier gefunden hast.";
 
 "qr_torch_unavailable" = "Taschenlampe auf diesem Gerät nicht verfügbar.";
+"tag_pending_badge" = "TAG UNTERWEGS";
+
+// MARK: - Shelter promo claim flow
+"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_welcome_format" = "Welcome from %@!";
+"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_pet_picker_label" = "Pet";
+"shelter_promo_new_pet" = "New Pet";
+"shelter_promo_existing_pet" = "Existing Pet";
+"shelter_promo_pet_name_placeholder" = "Pet name";
+"shelter_promo_neutered_spayed" = "Neutered / Spayed";
+"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
+"shelter_promo_claim_success_title" = "Tag Claimed!";
+"shelter_promo_active_until_format" = "Tag active until %@";
+"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_name_label_required" = "Name *";
+"shelter_promo_species_label_required" = "Species *";
+"shelter_promo_select_placeholder" = "Select...";
+
+// MARK: - Order more tags placeholders
+"order_more_owner_name" = "Owner name";
+"order_more_email" = "Email";
+"order_more_phone" = "Phone";
+
+// MARK: - Success stories sharing
+"shared_via_pet_safety" = "Shared via SENRA";
