@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Submit Sighting Report";
 "sighting_reported_owner_notified" = "Sighting reported! The owner has been notified.";
 "sighting_address_not_found" = "We couldn't find that address. Please check the spelling or try a nearby landmark.";
-"sighting_location_invalid" = "That location looks invalid. Please share your current GPS location or try a different address.";
+"sighting_location_invalid" = "That location looks invalid. Share your current GPS location, or try a different address.";
 "sighting_location_required" = "Please share your current location or enter an address.";
 
 // MARK: - Mark Lost/Found Sheet
@@ -502,7 +502,7 @@
 "help_faq_q17" = "My tag won't scan — what should I do?";
 "help_faq_a17" = "Try the following: clean the tag surface with a damp cloth, ensure good lighting, hold your phone camera steadily about 10-15 cm from the tag, and check that your camera app or QR reader is working. If the QR code is scratched or worn, order a replacement from the 'Home/My Account' page.";
 "help_faq_q18" = "I found a pet without a SENRA tag — what can I do?";
-"help_faq_a18" = "Check the Missing Pets map on the SENRA website (senra.pet) — the pet may have been reported missing in your area. You can also view missing pet alerts within the app. Take the pet to the nearest vet clinic to have its microchip scanned. If the pet has a SENRA tag, scan the QR code with your phone's camera — the owner's contact details will appear.";
+"help_faq_a18" = "Check the Missing Pets map on the SENRA website (senra.pet) — this pet may already have been reported missing in your area. You can also view missing pet alerts inside the app. Take the pet to the nearest vet clinic to have its microchip scanned. If the found pet has a SENRA tag, scan the QR code with your phone's camera — the owner's contact details will appear.";
 "help_faq_q19" = "Can I change my email address?";
 "help_faq_a19" = "Your primary email address serves as your account identifier and therefore cannot be changed directly. If you'd like to use a different email as your public contact, you can add a secondary email address in 'Settings' > 'Contact Details' — this can also appear on your pet's profile if you enable it, so the finder can see it immediately and contact you directly. If you absolutely need to change your primary email, contact us at hello@senra.pet and we'll help migrate your account.";
 "help_faq_q20" = "What's the difference between a microchip and a SENRA QR tag?";
@@ -970,7 +970,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ Found!";
+"sse_tag_scanned_title" = "%@ has been found!";
 "sse_tag_scanned_body_with_address" = "Someone scanned your pet's tag at %@";
 "sse_tag_scanned_body_no_address" = "Someone scanned your pet's tag";
 "sse_sighting_title" = "%@ Sighted!";
@@ -1397,18 +1397,18 @@
 "tag_pending_badge" = "TAG ON ITS WAY";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Activate Tag";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Register your pet to activate this offer — courtesy of %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "Register & Activate Tag";
+"shelter_promo_claim_success_title" = "Tag Activated!";
+"shelter_promo_active_until_format" = "Tag active until: %@";
+"shelter_promo_claim_tag_button" = "Activate Tag";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";

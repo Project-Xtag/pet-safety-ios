@@ -269,7 +269,7 @@
 "submit_sighting_report" = "Pošalji prijavu viđenja";
 "sighting_reported_owner_notified" = "Viđenje prijavljeno! Vlasnik je obaviješten.";
 "sighting_address_not_found" = "Tu adresu nismo pronašli. Provjeri pravopis ili pokušaj s obližnjom znamenitošću.";
-"sighting_location_invalid" = "Ova lokacija izgleda neispravno. Podijeli trenutnu GPS lokaciju ili pokušaj drugu adresu.";
+"sighting_location_invalid" = "Ova lokacija djeluje nevažećom. Podijeli svoju trenutnu GPS lokaciju ili pokušaj s drugom adresom.";
 "sighting_location_required" = "Podijeli trenutnu lokaciju ili unesi adresu.";
 
 // MARK: - Mark Lost/Found Sheet
@@ -504,7 +504,7 @@
 "help_faq_q17" = "Moj privjesak se ne skenira — što da radim?";
 "help_faq_a17" = "Pokušaj sljedeće: očisti površinu privjeska vlažnom krpom, osiguraj dobro osvjetljenje, drži kameru telefona mirno oko 10–15 cm od privjeska i provjeri radi li tvoja kamera aplikacija ili QR čitač. Ako je QR kôd ogreban ili istrošen, naruči zamjenu sa stranice 'Početna / Moj račun'.";
 "help_faq_q18" = "Pronašao sam kućnog ljubimca bez SENRA privjeska — što mogu učiniti?";
-"help_faq_a18" = "Provjeri kartu Nestalih kućnih ljubimaca na SENRA web stranici (senra.pet). Možeš vidjeti upozorenja i u aplikaciji. Odvedi životinju najbližem veterinaru za skeniranje mikročipa. Ako ima SENRA privjesak, skeniraj QR kôd — pojavit će se kontaktni podaci vlasnika. Uvijek obavijesti lokalne vlasti i obližnja skloništa.";
+"help_faq_a18" = "Pogledaj kartu Izgubljenih ljubimaca na SENRA web stranici (senra.pet) — možda je ovaj kućni ljubimac već prijavljen kao izgubljen u tvojoj okolici. Obavijesti o izgubljenim ljubimcima možeš pregledati i unutar aplikacije. Odvedi ljubimca do najbliže veterinarske klinike kako bi mu očitali mikročip. Ako pronađeni ljubimac ima SENRA privjesak, skeniraj QR kod kamerom telefona — pojavit će se kontaktni podaci vlasnika.";
 "help_faq_q19" = "Mogu li promijeniti svoju email adresu?";
 "help_faq_a19" = "Tvoja primarna email adresa služi kao identifikator računa i ne može se izravno promijeniti. Možeš dodati sekundaran email u 'Postavke' > 'Kontakt Podaci'. Ako apsolutno trebaš promijeniti primarni email, kontaktiraj nas na hello@senra.pet.";
 "help_faq_q20" = "Koja je razlika između mikročipa i SENRA QR privjeska?";
@@ -967,7 +967,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ pronađen!";
+"sse_tag_scanned_title" = "%@ je pronađen!";
 "sse_tag_scanned_body_with_address" = "Netko je skenirao medalju tvog ljubimca na: %@";
 "sse_tag_scanned_body_no_address" = "Netko je skenirao medalju tvog ljubimca";
 "sse_sighting_title" = "%@ viđen!";
@@ -1396,21 +1396,21 @@
 "report_found_unavailable" = "Ova funkcija nije dostupna za ovo upozorenje. Molimo te da izravno kontaktiraš vlasnika ako si pronašao/la kućnog ljubimca.";
 
 "qr_torch_unavailable" = "Svjetiljka nije dostupna na ovom uređaju.";
-"tag_pending_badge" = "NA PUTU";
+"tag_pending_badge" = "PRIVJESAK JE NA PUTU";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Aktiviraj privjesak";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Registriraj svog kućnog ljubimca kako bi aktivirao ovu ponudu — ljubaznošću %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "Registriraj i aktiviraj privjesak";
+"shelter_promo_claim_success_title" = "Privjesak aktiviran!";
+"shelter_promo_active_until_format" = "Privjesak aktivan do: %@";
+"shelter_promo_claim_tag_button" = "Aktiviraj privjesak";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";

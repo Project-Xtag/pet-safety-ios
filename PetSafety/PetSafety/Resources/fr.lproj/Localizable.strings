@@ -265,7 +265,7 @@
 "sighting_notes_placeholder" = "Décris ce que tu as vu, l'état de l'animal de compagnie, la direction prise…";
 "submit_sighting_report" = "Envoyer le signalement";
 "sighting_address_not_found" = "Nous n'avons pas trouvé cette adresse. Vérifie l'orthographe ou essaie un repère à proximité.";
-"sighting_location_invalid" = "Ce lieu semble invalide. Partage ta position GPS actuelle ou essaie une autre adresse.";
+"sighting_location_invalid" = "Cette localisation semble invalide. Partage ta position GPS actuelle, ou essaie une autre adresse.";
 "sighting_location_required" = "Partage ta position actuelle ou saisis une adresse.";
 "sighting_reported_owner_notified" = "Observation signalée ! Le propriétaire a été notifié.";
 
@@ -501,7 +501,7 @@
 "help_faq_q17" = "Ma médaille connectée ne se scanne pas — que dois-je faire ?";
 "help_faq_a17" = "Essaie ceci : nettoie la surface de la médaille connectée avec un chiffon humide, assure-toi d'un bon éclairage, tiens la caméra de ton téléphone stable à environ 10–15 cm de la médaille connectée, et vérifie que l'application caméra ou le lecteur QR fonctionne. Si le code QR est rayé ou usé, commande un remplacement depuis la page « Accueil / Mon compte ».";
 "help_faq_q18" = "J'ai trouvé un animal de compagnie sans médaille connectée SENRA — que puis-je faire ?";
-"help_faq_a18" = "Consulte la carte des Animaux de compagnie perdus sur le site SENRA (senra.pet). Tu peux aussi voir les alertes dans l'application. Amène l'animal chez le vétérinaire le plus proche pour un scan de la puce. S'il a une médaille connectée SENRA, scanne le code QR — les coordonnées du propriétaire apparaîtront. Informe toujours les autorités locales et les refuges voisins.";
+"help_faq_a18" = "Consulte la carte des Animaux Perdus sur le site SENRA (senra.pet) — cet animal de compagnie a peut-être déjà été signalé perdu dans ta zone. Tu peux aussi voir les alertes d'animaux perdus dans l'application. Emmène l'animal au cabinet vétérinaire le plus proche pour faire scanner sa puce électronique. Si l'animal trouvé porte une médaille connectée SENRA, scanne le code QR avec la caméra de ton téléphone — les coordonnées du propriétaire apparaîtront.";
 "help_faq_q19" = "Puis-je changer mon adresse email ?";
 "help_faq_a19" = "Ton email principal sert d'identifiant de compte et ne peut pas être changé directement. Tu peux ajouter un email secondaire dans 'Paramètres' > 'Coordonnées'. Si tu as absolument besoin de changer ton email principal, contacte-nous à hello@senra.pet.";
 "help_faq_q20" = "Quelle est la différence entre une puce et une médaille connectée QR SENRA ?";
@@ -950,7 +950,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ retrouvé !";
+"sse_tag_scanned_title" = "%@ a été retrouvé !";
 "sse_tag_scanned_body_with_address" = "Quelqu'un a scanné la médaille de ton animal à : %@";
 "sse_tag_scanned_body_no_address" = "Quelqu'un a scanné la médaille de ton animal";
 "sse_sighting_title" = "%@ aperçu !";
@@ -1393,21 +1393,21 @@
 "report_found_unavailable" = "Cette fonctionnalité n'est pas disponible pour cette alerte. Merci de contacter directement le propriétaire si tu as trouvé l'animal de compagnie.";
 
 "qr_torch_unavailable" = "Lampe de poche indisponible sur cet appareil.";
-"tag_pending_badge" = "EN ROUTE";
+"tag_pending_badge" = "MÉDAILLE CONNECTÉE EN ROUTE";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Activer la médaille connectée";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Enregistre ton animal de compagnie pour activer cette offre — gracieusement offerte par %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "S'inscrire et activer la médaille connectée";
+"shelter_promo_claim_success_title" = "Médaille connectée activée !";
+"shelter_promo_active_until_format" = "Médaille connectée active jusqu'au : %@";
+"shelter_promo_claim_tag_button" = "Activer la médaille connectée";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";

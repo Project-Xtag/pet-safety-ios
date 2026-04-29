@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Wyślij zgłoszenie spostrzeżenia";
 "sighting_reported_owner_notified" = "Spostrzeżenie zgłoszone! Opiekun został powiadomiony.";
 "sighting_address_not_found" = "Nie znaleźliśmy tego adresu. Sprawdź pisownię lub spróbuj pobliskiego punktu orientacyjnego.";
-"sighting_location_invalid" = "Lokalizacja wygląda na nieprawidłową. Udostępnij aktualną lokalizację GPS lub spróbuj inny adres.";
+"sighting_location_invalid" = "Ta lokalizacja wygląda na nieprawidłową. Udostępnij swoją bieżącą lokalizację GPS lub spróbuj inny adres.";
 "sighting_location_required" = "Udostępnij swoją obecną lokalizację lub wpisz adres.";
 
 // MARK: - Oznaczanie jako zaginione/znalezione
@@ -500,7 +500,7 @@
 "help_faq_q17" = "Moja adresówka nie skanuje się — co robić?";
 "help_faq_a17" = "Spróbuj następujących rzeczy: wyczyść powierzchnię adresówki wilgotną ściereczką, zapewnij dobre oświetlenie, trzymaj aparat telefonu stabilnie około 10–15 cm od adresówki i sprawdź, czy aplikacja aparatu lub czytnik QR działa. Jeśli kod QR jest zarysowany lub zużyty, zamów wymianę na stronie 'Strona główna / Moje konto'.";
 "help_faq_q18" = "Znalazłem pupila bez adresówki SENRA — co mogę zrobić?";
-"help_faq_a18" = "Sprawdź mapę Zaginionych Zwierząt na stronie SENRA (senra.pet). Możesz też zobaczyć alerty w aplikacji. Zanieś pupila do najbliższego weterynarza, aby zeskanować mikrochip. Jeśli ma adresówkę SENRA, zeskanuj kod QR — pojawią się dane kontaktowe opiekuna. Zawsze powiadom też lokalne władze i pobliskie schroniska.";
+"help_faq_a18" = "Sprawdź mapę Zaginionych zwierząt na stronie SENRA (senra.pet) — być może ten pupil został już zgłoszony jako zaginiony w twojej okolicy. Alerty o zaginionych zwierzętach możesz też przeglądać w aplikacji. Zawieź zwierzę do najbliższej kliniki weterynaryjnej, aby odczytano jego mikroczip. Jeśli odnaleziony pupil ma zawieszkę SENRA, zeskanuj kod QR aparatem telefonu — pojawią się dane kontaktowe właściciela.";
 "help_faq_q19" = "Czy mogę zmienić swój adres email?";
 "help_faq_a19" = "Twój główny email służy jako identyfikator konta i nie można go bezpośrednio zmienić. Możesz dodać dodatkowy email w 'Ustawienia' > 'Dane Kontaktowe'. Jeśli koniecznie musisz zmienić główny email, skontaktuj się z nami na hello@senra.pet.";
 "help_faq_q20" = "Jaka jest różnica między mikrochipem a adresówką QR SENRA?";
@@ -949,7 +949,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ znaleziony!";
+"sse_tag_scanned_title" = "%@ został odnaleziony!";
 "sse_tag_scanned_body_with_address" = "Ktoś zeskanował identyfikator twojego pupila w: %@";
 "sse_tag_scanned_body_no_address" = "Ktoś zeskanował identyfikator twojego pupila";
 "sse_sighting_title" = "%@ zauważony!";
@@ -1393,21 +1393,21 @@
 "report_found_unavailable" = "Ta funkcja nie jest dostępna dla tego alertu. Skontaktuj się bezpośrednio z opiekunem, jeśli znalazłeś/aś pupila.";
 
 "qr_torch_unavailable" = "Latarka niedostępna na tym urządzeniu.";
-"tag_pending_badge" = "W DRODZE";
+"tag_pending_badge" = "ZAWIESZKA W DRODZE";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Aktywuj zawieszkę";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Zarejestruj swojego pupila, aby aktywować tę ofertę — dzięki uprzejmości %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "Zarejestruj i aktywuj zawieszkę";
+"shelter_promo_claim_success_title" = "Zawieszka aktywowana!";
+"shelter_promo_active_until_format" = "Zawieszka aktywna do: %@";
+"shelter_promo_claim_tag_button" = "Aktywuj zawieszkę";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";

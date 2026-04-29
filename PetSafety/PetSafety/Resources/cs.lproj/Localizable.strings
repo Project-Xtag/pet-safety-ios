@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Odeslat hlášení o pozorování";
 "sighting_reported_owner_notified" = "Pozorování nahlášeno! Páníček byl informován.";
 "sighting_address_not_found" = "Tuto adresu jsme nenašli. Zkontroluj pravopis nebo zkus blízkou památku.";
-"sighting_location_invalid" = "Toto místo vypadá neplatně. Sdílej aktuální GPS polohu nebo zkus jinou adresu.";
+"sighting_location_invalid" = "Tato poloha vypadá neplatně. Sdílej svou aktuální GPS polohu, nebo zkus jinou adresu.";
 "sighting_location_required" = "Sdílej svou aktuální polohu nebo zadej adresu.";
 
 // MARK: - Označení ztráty/nalezení
@@ -501,7 +501,7 @@
 "help_faq_q17" = "Moje psí známka se nedá naskenovat — co mám dělat?";
 "help_faq_a17" = "Vyzkoušej následující: očisti povrch psí známky vlhkým hadříkem, zajisti dobré osvětlení, drž kameru telefonu stabilně asi 10–15 cm od psí známky a zkontroluj, že tvá kamerová aplikace nebo QR čtečka funguje. Pokud je QR kód poškrábaný nebo opotřebovaný, objednej si náhradu ze stránky 'Domů / Můj účet'.";
 "help_faq_q18" = "Našel jsem mazlíčka bez SENRA psí známky — co mohu udělat?";
-"help_faq_a18" = "Zkontroluj mapu Ztracených mazlíčků na webu SENRA (senra.pet) — mazlíček mohl být nahlášen jako ztracený ve tvém okolí. Upozornění na ztracené mazlíčky si můžeš prohlédnout i v aplikaci. Zaveď zvířátko k nejbližšímu veterináři, aby naskenovali mikročip. Pokud má mazlíček SENRA psí známku, naskenuj QR kód kamerou telefonu — zobrazí se kontaktní údaje páníčka. Vždy informuj i místní úřady a blízké útulky.";
+"help_faq_a18" = "Podívej se na mapu Ztracených mazlíčků na webu SENRA (senra.pet) — možná byl tento mazlíček ve tvém okolí už nahlášen jako ztracený. Upozornění o ztracených mazlíčcích si můžeš prohlédnout i v aplikaci. Vezmi mazlíčka k nejbližšímu veterináři, aby mu načetli mikročip. Pokud má nalezený mazlíček psí známku SENRA, naskenuj QR kód kamerou telefonu — zobrazí se kontaktní údaje majitele.";
 "help_faq_q19" = "Mohu změnit svou e-mailovou adresu?";
 "help_faq_a19" = "Tvá primární e-mailová adresa slouží jako identifikátor účtu, a proto se nedá přímo změnit. Pokud chceš jako veřejný kontakt použít jiný e-mail, můžeš přidat sekundární e-mailovou adresu v 'Nastavení' > 'Kontaktní údaje'. Pokud nevyhnutelně potřebuješ změnit primární e-mail, kontaktuj nás na hello@senra.pet a pomůžeme s migrací účtu.";
 "help_faq_q20" = "Jaký je rozdíl mezi mikročipem a SENRA QR psí známkou?";
@@ -951,7 +951,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ nalezen!";
+"sse_tag_scanned_title" = "%@ se našel!";
 "sse_tag_scanned_body_with_address" = "Někdo naskenoval známku tvého mazlíčka na místě: %@";
 "sse_tag_scanned_body_no_address" = "Někdo naskenoval známku tvého mazlíčka";
 "sse_sighting_title" = "%@ spatřen!";
@@ -1390,21 +1390,21 @@
 "report_found_unavailable" = "Tato funkce není pro toto upozornění dostupná. Pokud jsi mazlíčka našel/našla, kontaktuj prosím přímo páníčka.";
 
 "qr_torch_unavailable" = "Svítilna není na tomto zařízení dostupná.";
-"tag_pending_badge" = "NA CESTĚ";
+"tag_pending_badge" = "PSÍ ZNÁMKA JE NA CESTĚ";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Aktivovat psí známku";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Zaregistruj svého mazlíčka a aktivuj tuto nabídku — díky %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "Registrovat a aktivovat psí známku";
+"shelter_promo_claim_success_title" = "Psí známka aktivována!";
+"shelter_promo_active_until_format" = "Psí známka aktivní do: %@";
+"shelter_promo_claim_tag_button" = "Aktivovat psí známku";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";

@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Send inn observasjonsrapport";
 "sighting_reported_owner_notified" = "Observasjon rapportert! Eieren er blitt varslet.";
 "sighting_address_not_found" = "Vi fant ikke denne adressen. Sjekk stavemåten eller prøv et landemerke i nærheten.";
-"sighting_location_invalid" = "Denne plasseringen virker ugyldig. Del din nåværende GPS-posisjon eller prøv en annen adresse.";
+"sighting_location_invalid" = "Den posisjonen ser ugyldig ut. Del din nåværende GPS-posisjon, eller prøv en annen adresse.";
 "sighting_location_required" = "Del din nåværende posisjon, eller skriv inn en adresse.";
 
 // MARK: - Merk savnet/funnet
@@ -501,7 +501,7 @@
 "help_faq_q17" = "Merket mitt skannes ikke — hva gjør jeg?";
 "help_faq_a17" = "Prøv følgende: rengjør QR-brikken med en fuktig klut, sørg for god belysning, hold telefonkameraet stabilt omtrent 10–15 cm fra QR-brikken, og sjekk at kameraappen eller QR-leseren virker. Hvis QR-koden er ripete eller slitt, bestill en erstatning fra siden 'Hjem / Min Konto'.";
 "help_faq_q18" = "Jeg fant et kjæledyr uten SENRA QR-brikke — hva kan jeg gjøre?";
-"help_faq_a18" = "Sjekk kartet over Savnede Kjæledyr på SENRA-nettstedet (senra.pet). Du kan også se varsler i appen. Ta dyret til nærmeste veterinær for mikrochip-skanning. Hvis det har en SENRA QR-brikke, skann QR-koden — eierens kontaktinfo vises. Varsle alltid lokale myndigheter og nærliggende krisesentre.";
+"help_faq_a18" = "Sjekk kartet over savnede kjæledyr på SENRA-nettstedet (senra.pet) — det kan hende dette kjæledyret allerede er meldt savnet i området ditt. Du kan også se varsler om savnede kjæledyr i appen. Ta kjæledyret med til nærmeste veterinær for å få lest av mikrochippen. Hvis kjæledyret du fant har en SENRA QR-brikke, skann QR-koden med kameraet på telefonen — eierens kontaktinfo dukker opp.";
 "help_faq_q19" = "Kan jeg endre e-postadressen min?";
 "help_faq_a19" = "Din primære e-postadresse fungerer som kontoidentifikator og kan ikke endres direkte. Du kan legge til en sekundær e-post i 'Innstillinger' > 'Kontaktopplysninger'. Hvis du absolutt må endre primær e-post, kontakt oss på hello@senra.pet.";
 "help_faq_q20" = "Hva er forskjellen mellom en mikrochip og en SENRA QR-brikke?";
@@ -966,7 +966,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ funnet!";
+"sse_tag_scanned_title" = "%@ er funnet!";
 "sse_tag_scanned_body_with_address" = "Noen skannet kjæledyrets tag på: %@";
 "sse_tag_scanned_body_no_address" = "Noen skannet kjæledyrets tag";
 "sse_sighting_title" = "%@ observert!";
@@ -1393,21 +1393,21 @@
 "report_found_unavailable" = "Denne funksjonen er ikke tilgjengelig for dette varselet. Kontakt eieren direkte hvis du har funnet kjæledyret.";
 
 "qr_torch_unavailable" = "Lommelykt er ikke tilgjengelig på denne enheten.";
-"tag_pending_badge" = "PÅ VEI";
+"tag_pending_badge" = "QR-BRIKKEN ER PÅ VEI";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Aktiver QR-brikke";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Registrer kjæledyret ditt for å aktivere dette tilbudet — i samarbeid med %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "Registrer og aktiver QR-brikke";
+"shelter_promo_claim_success_title" = "QR-brikke aktivert!";
+"shelter_promo_active_until_format" = "QR-brikke aktiv til: %@";
+"shelter_promo_claim_tag_button" = "Aktiver QR-brikke";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";

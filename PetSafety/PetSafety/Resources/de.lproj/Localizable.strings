@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Sichtungsbericht senden";
 "sighting_reported_owner_notified" = "Sichtung gemeldet! Der Halter wurde informiert.";
 "sighting_address_not_found" = "Diese Adresse konnten wir nicht finden. Prüfe die Schreibweise oder versuche einen nahegelegenen Orientierungspunkt.";
-"sighting_location_invalid" = "Dieser Standort scheint ungültig zu sein. Teile deine aktuelle GPS-Position oder versuche eine andere Adresse.";
+"sighting_location_invalid" = "Dieser Standort sieht ungültig aus. Teile deinen aktuellen GPS-Standort oder versuche eine andere Adresse.";
 "sighting_location_required" = "Teile deinen aktuellen Standort oder gib eine Adresse ein.";
 
 // MARK: - Vermisst/Gefunden-Dialog
@@ -501,7 +501,7 @@
 "help_faq_q17" = "Meine Haustiermarke lässt sich nicht scannen — was soll ich tun?";
 "help_faq_a17" = "Versuche Folgendes: reinige die Oberfläche der Haustiermarke mit einem feuchten Tuch, sorge für gute Beleuchtung, halte die Telefonkamera ruhig in etwa 10–15 cm Abstand zur Haustiermarke und prüfe, ob die Kamera-App oder der QR-Leser funktioniert. Wenn der QR-Code zerkratzt oder abgenutzt ist, bestelle einen Ersatz von der Seite 'Startseite / Mein Benutzerkonto'.";
 "help_faq_q18" = "Ich habe ein Haustier ohne SENRA-Haustiermarke gefunden — was kann ich tun?";
-"help_faq_a18" = "Überprüfe die Karte 'Vermisste Haustiere' auf der SENRA-Website (senra.pet) — das Haustier könnte in deiner Gegend als vermisst gemeldet worden sein. Du kannst Vermisst-Meldungen auch in der App einsehen. Bringe das Tier zur nächsten Tierarztpraxis, um den Mikrochip scannen zu lassen. Wenn das Haustier eine SENRA-Haustiermarke hat, scanne den QR-Code mit der Kamera deines Handys — die Kontaktdaten des Halters werden angezeigt. Informiere auch immer die örtlichen Behörden und nahe gelegene Tierheime.";
+"help_faq_a18" = "Sieh auf der Karte vermisster Haustiere auf der SENRA-Website (senra.pet) nach — vielleicht wurde dieses Haustier in deiner Umgebung bereits als vermisst gemeldet. Du kannst Vermisstmeldungen auch in der App ansehen. Bring das Haustier zur nächsten Tierarztpraxis, damit der Mikrochip ausgelesen werden kann. Hat das gefundene Haustier eine SENRA-Haustiermarke, scanne den QR-Code mit der Kamera deines Handys — die Kontaktdaten des Besitzers erscheinen dann.";
 "help_faq_q19" = "Kann ich meine E-Mail-Adresse ändern?";
 "help_faq_a19" = "Deine primäre E-Mail-Adresse dient als Kontoidentifikator und kann daher nicht direkt geändert werden. Wenn du eine andere E-Mail als öffentlichen Kontakt verwenden möchtest, kannst du unter 'Einstellungen' > 'Kontaktdaten' eine sekundäre E-Mail-Adresse hinzufügen — diese kann auch im Profil deines Haustieres erscheinen, wenn du es aktivierst, damit der Finder sie sofort sehen und dich direkt kontaktieren kann. Wenn du unbedingt deine primäre E-Mail ändern musst, kontaktiere uns unter hello@senra.pet und wir helfen beim Umzug deines Benutzerkontos.";
 "help_faq_q20" = "Was ist der Unterschied zwischen einem Mikrochip und einer SENRA QR-Haustiermarke?";
@@ -951,7 +951,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ gefunden!";
+"sse_tag_scanned_title" = "%@ wurde gefunden!";
 "sse_tag_scanned_body_with_address" = "Jemand hat die Marke deines Haustiers gescannt bei: %@";
 "sse_tag_scanned_body_no_address" = "Jemand hat die Marke deines Haustiers gescannt";
 "sse_sighting_title" = "%@ gesichtet!";
@@ -1390,21 +1390,21 @@
 "report_found_unavailable" = "Diese Funktion ist für diese Meldung nicht verfügbar. Bitte wende dich direkt an den Halter, wenn du das Haustier gefunden hast.";
 
 "qr_torch_unavailable" = "Taschenlampe auf diesem Gerät nicht verfügbar.";
-"tag_pending_badge" = "TAG UNTERWEGS";
+"tag_pending_badge" = "HAUSTIERMARKE UNTERWEGS";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Haustiermarke aktivieren";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Registriere dein Haustier, um dieses Angebot zu aktivieren — mit freundlicher Unterstützung von %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "Registrieren & Haustiermarke aktivieren";
+"shelter_promo_claim_success_title" = "Haustiermarke aktiviert!";
+"shelter_promo_active_until_format" = "Haustiermarke aktiv bis: %@";
+"shelter_promo_claim_tag_button" = "Haustiermarke aktivieren";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";

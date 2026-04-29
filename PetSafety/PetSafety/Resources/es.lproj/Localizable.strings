@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Enviar reporte de avistamiento";
 "sighting_reported_owner_notified" = "¡Avistamiento reportado! Se notificó al tutor.";
 "sighting_address_not_found" = "No encontramos esa dirección. Revisa la ortografía o prueba con un punto de referencia cercano.";
-"sighting_location_invalid" = "La ubicación no parece válida. Comparte tu ubicación GPS actual o prueba otra dirección.";
+"sighting_location_invalid" = "Esa ubicación no parece válida. Comparte tu ubicación GPS actual o prueba con otra dirección.";
 "sighting_location_required" = "Comparte tu ubicación actual o introduce una dirección.";
 
 // MARK: - Hoja de marcar perdida/encontrada
@@ -501,7 +501,7 @@
 "help_faq_q17" = "Mi chapa inteligente no se escanea — ¿qué hago?";
 "help_faq_a17" = "Prueba lo siguiente: limpia la superficie de la chapa inteligente con un paño húmedo, asegura buena iluminación, sostén la cámara del teléfono de forma estable a unos 10–15 cm de la chapa inteligente y comprueba que la app de cámara o el lector QR funciona. Si el código QR está rayado o gastado, pide un reemplazo desde la página 'Inicio / Mi cuenta'.";
 "help_faq_q18" = "Encontré una mascota sin chapa inteligente SENRA — ¿qué puedo hacer?";
-"help_faq_a18" = "Consulta el mapa de Mascotas Perdidas en la web de SENRA (senra.pet) — la mascota puede haber sido reportada como perdida en tu zona. También puedes ver las alertas en la aplicación. Lleva al animal a la clínica veterinaria más cercana para escanear su microchip. Si tiene chapa inteligente SENRA, escanea el código QR — aparecerán los datos de contacto del tutor. Siempre notifica también a las autoridades locales y refugios cercanos.";
+"help_faq_a18" = "Consulta el mapa de Mascotas Desaparecidas en la web de SENRA (senra.pet) — puede que esta mascota ya haya sido reportada como desaparecida en tu zona. También puedes ver las alertas de mascotas desaparecidas dentro de la app. Lleva a la mascota a la clínica veterinaria más cercana para que le escaneen el microchip. Si la mascota encontrada lleva una chapa inteligente SENRA, escanea el código QR con la cámara de tu teléfono — aparecerán los datos de contacto del dueño.";
 "help_faq_q19" = "¿Puedo cambiar mi dirección de correo electrónico?";
 "help_faq_a19" = "Tu correo electrónico principal sirve como identificador de cuenta y no se puede cambiar directamente. Si quieres usar otro correo como contacto público, puedes añadir uno secundario en 'Ajustes' > 'Datos de Contacto'. Si necesitas cambiar tu correo principal, contáctanos en hello@senra.pet y te ayudaremos.";
 "help_faq_q20" = "¿Cuál es la diferencia entre un microchip y una chapa inteligente QR SENRA?";
@@ -951,7 +951,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "¡%@ encontrado!";
+"sse_tag_scanned_title" = "¡Han encontrado a %@!";
 "sse_tag_scanned_body_with_address" = "Alguien escaneó la chapa de tu mascota en: %@";
 "sse_tag_scanned_body_no_address" = "Alguien escaneó la chapa de tu mascota";
 "sse_sighting_title" = "¡%@ avistado!";
@@ -1390,21 +1390,21 @@
 "report_found_unavailable" = "Esta función no está disponible para esta alerta. Por favor, contacta directamente con el tutor si has encontrado a la mascota.";
 
 "qr_torch_unavailable" = "La linterna no está disponible en este dispositivo.";
-"tag_pending_badge" = "EN CAMINO";
+"tag_pending_badge" = "CHAPA INTELIGENTE EN CAMINO";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Activar chapa inteligente";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Registra a tu mascota para activar esta oferta — cortesía de %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "Registrarse y activar la chapa inteligente";
+"shelter_promo_claim_success_title" = "¡Chapa inteligente activada!";
+"shelter_promo_active_until_format" = "Chapa inteligente activa hasta: %@";
+"shelter_promo_claim_tag_button" = "Activar chapa inteligente";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";

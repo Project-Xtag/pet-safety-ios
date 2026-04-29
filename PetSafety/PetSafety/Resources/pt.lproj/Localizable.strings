@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Enviar relatório de avistamento";
 "sighting_reported_owner_notified" = "Avistamento reportado! O tutor foi notificado.";
 "sighting_address_not_found" = "Não encontramos esse endereço. Verifica a ortografia ou tenta um ponto de referência próximo.";
-"sighting_location_invalid" = "Essa localização parece inválida. Partilha a tua localização GPS atual ou tenta outro endereço.";
+"sighting_location_invalid" = "Essa localização parece inválida. Partilha a tua localização GPS atual ou tenta uma morada diferente.";
 "sighting_location_required" = "Partilha a tua localização atual ou insere uma morada.";
 
 // MARK: - Marcar perdido/encontrado
@@ -501,7 +501,7 @@
 "help_faq_q17" = "A minha plaquinha inteligente não lê — o que faço?";
 "help_faq_a17" = "Experimenta o seguinte: limpa a superfície da plaquinha inteligente com um pano húmido, garante boa iluminação, segura a câmara do telemóvel estável a cerca de 10–15 cm da plaquinha inteligente e verifica se a aplicação de câmara ou leitor QR está a funcionar. Se o código QR estiver riscado ou gasto, encomenda uma substituição na página 'Início / Minha conta'.";
 "help_faq_q18" = "Encontrei um animal de estimação sem plaquinha inteligente SENRA — o que posso fazer?";
-"help_faq_a18" = "Verifica o mapa de Animais de estimação Perdidos no site SENRA (senra.animal de estimação). Também podes ver os alertas na aplicação. Leva o animal de estimação ao veterinário mais próximo para ler o microchip. Se tem plaquinha inteligente SENRA, lê o código QR — aparecem os dados do tutor. Notifica sempre as autoridades locais e abrigos.";
+"help_faq_a18" = "Consulta o mapa de Animais Desaparecidos no site da SENRA (senra.pet) — este animal de estimação pode já ter sido reportado como desaparecido na tua zona. Também podes ver os alertas de animais desaparecidos dentro da app. Leva o animal à clínica veterinária mais próxima para que leiam o microchip. Se o animal encontrado tiver uma plaquinha inteligente SENRA, lê o código QR com a câmara do teu telemóvel — vão aparecer os contactos do dono.";
 "help_faq_q19" = "Posso mudar o meu endereço de email?";
 "help_faq_a19" = "O teu email principal serve como identificador da conta e não pode ser mudado diretamente. Podes adicionar um email secundário em 'Definições' > 'Dados de Contacto'. Se precisas mesmo de mudar o email principal, contacta-nos em hello@senra.animal de estimação.";
 "help_faq_q20" = "Qual é a diferença entre um microchip e uma plaquinha inteligente QR SENRA?";
@@ -951,7 +951,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ encontrado!";
+"sse_tag_scanned_title" = "%@ foi encontrado!";
 "sse_tag_scanned_body_with_address" = "Alguém digitalizou a chapa do teu animal em: %@";
 "sse_tag_scanned_body_no_address" = "Alguém digitalizou a chapa do teu animal";
 "sse_sighting_title" = "%@ avistado!";
@@ -1390,21 +1390,21 @@
 "report_found_unavailable" = "Esta funcionalidade não está disponível para este alerta. Por favor, contacte diretamente o tutor se encontrou o animal de estimação.";
 
 "qr_torch_unavailable" = "Lanterna não disponível neste dispositivo.";
-"tag_pending_badge" = "A CAMINHO";
+"tag_pending_badge" = "PLAQUINHA INTELIGENTE A CAMINHO";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Ativar plaquinha inteligente";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Regista o teu animal de estimação para ativar esta oferta — cortesia de %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "Registar e ativar plaquinha inteligente";
+"shelter_promo_claim_success_title" = "Plaquinha inteligente ativada!";
+"shelter_promo_active_until_format" = "Plaquinha inteligente ativa até: %@";
+"shelter_promo_claim_tag_button" = "Ativar plaquinha inteligente";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";

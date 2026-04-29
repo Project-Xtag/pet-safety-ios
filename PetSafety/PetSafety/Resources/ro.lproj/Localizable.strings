@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Trimite raportul de observație";
 "sighting_reported_owner_notified" = "Observație raportată! Stăpânul a fost notificat.";
 "sighting_address_not_found" = "Nu am găsit această adresă. Verifică ortografia sau încearcă un reper din apropiere.";
-"sighting_location_invalid" = "Locația pare invalidă. Partajează locația ta GPS curentă sau încearcă altă adresă.";
+"sighting_location_invalid" = "Locația aceea pare nevalidă. Partajează-ți locația GPS curentă sau încearcă o altă adresă.";
 "sighting_location_required" = "Distribuie locația curentă sau introdu o adresă.";
 
 // MARK: - Marcare pierdut/găsit
@@ -501,7 +501,7 @@
 "help_faq_q17" = "Plăcuța inteligentă meu nu se scanează — ce fac?";
 "help_faq_a17" = "Încearcă următoarele: curăță suprafața plăcuței inteligente cu o cârpă umedă, asigură-te că este bine iluminată, ține camera telefonului stabilă la aproximativ 10–15 cm de plăcuța inteligentă și verifică dacă aplicația de cameră sau cititorul QR funcționează. Dacă codul QR este zgâriat sau uzat, comandă o înlocuire de pe pagina 'Acasă / Contul meu'.";
 "help_faq_q18" = "Am găsit un animal de companie fără plăcuță inteligentă SENRA — ce pot face?";
-"help_faq_a18" = "Verifică harta Animalelor Pierdute pe site-ul SENRA (senra.pet). Poți vedea alertele și în aplicație. Du animalul de companie la cel mai apropiat veterinar pentru scanarea microchipului. Dacă are plăcuță inteligentă SENRA, scanează codul QR — apar datele stăpânului. Informează întotdeauna și autoritățile locale și adăposturile din apropiere.";
+"help_faq_a18" = "Verifică harta Animalelor Pierdute de pe site-ul SENRA (senra.pet) — acest animal de companie ar putea fi deja raportat ca pierdut în zona ta. Poți vedea alertele despre animalele pierdute și în aplicație. Du animalul la cel mai apropiat cabinet veterinar pentru a i se scana microcipul. Dacă animalul găsit are o plăcuță inteligentă SENRA, scanează codul QR cu camera telefonului tău — vor apărea datele de contact ale stăpânului.";
 "help_faq_q19" = "Pot schimba adresa mea de email?";
 "help_faq_a19" = "Emailul tău principal servește ca identificator de cont și nu poate fi schimbat direct. Poți adăuga un email secundar în 'Setări' > 'Date de Contact'. Dacă ai nevoie neapărat să schimbi emailul principal, contactează-ne la hello@senra.pet.";
 "help_faq_q20" = "Care este diferența dintre un microchip și un plăcuță inteligentă QR SENRA?";
@@ -951,7 +951,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ găsit!";
+"sse_tag_scanned_title" = "%@ a fost găsit!";
 "sse_tag_scanned_body_with_address" = "Cineva a scanat medalionul animalului tău la: %@";
 "sse_tag_scanned_body_no_address" = "Cineva a scanat medalionul animalului tău";
 "sse_sighting_title" = "%@ observat!";
@@ -1390,21 +1390,21 @@
 "report_found_unavailable" = "Această funcție nu este disponibilă pentru această alertă. Te rugăm să contactezi direct stăpânul dacă ai găsit animalul de companie.";
 
 "qr_torch_unavailable" = "Lanterna nu este disponibilă pe acest dispozitiv.";
-"tag_pending_badge" = "PE DRUM";
+"tag_pending_badge" = "PLĂCUȚA INTELIGENTĂ ESTE PE DRUM";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Activează plăcuța inteligentă";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Înregistrează-ți animalul de companie pentru a activa această ofertă — prin amabilitatea %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "Înregistrează-te și activează plăcuța inteligentă";
+"shelter_promo_claim_success_title" = "Plăcuță inteligentă activată!";
+"shelter_promo_active_until_format" = "Plăcuță inteligentă activă până la: %@";
+"shelter_promo_claim_tag_button" = "Activează plăcuța inteligentă";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";

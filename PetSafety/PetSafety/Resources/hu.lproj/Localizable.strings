@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Észlelés beküldése";
 "sighting_reported_owner_notified" = "Észlelés bejelentve! A gazdit értesítettük.";
 "sighting_address_not_found" = "Nem találjuk ezt a címet. Ellenőrizd a helyesírást vagy próbálj meg egy közeli nevezetességet.";
-"sighting_location_invalid" = "Ez a hely érvénytelennek tűnik. Ossz meg jelenlegi GPS-helyzetet, vagy próbálj másik címet.";
+"sighting_location_invalid" = "Ez a hely érvénytelennek tűnik. Oszd meg a jelenlegi GPS-helyzetet, vagy próbálj másik címet.";
 "sighting_location_required" = "Oszd meg a jelenlegi helyzeted, vagy adj meg egy címet.";
 
 // MARK: - Eltűnt/Megtalált jelölés
@@ -502,7 +502,7 @@
 "help_faq_q17" = "Nem sikerül leolvasni a bilétát - mit tegyek?";
 "help_faq_a17" = "Próbáld a következőket: tisztítsd meg a biléta felületét egy nedves ruhával, biztosíts megfelelő megvilágítást, tartsd a telefon kameráját stabilan, körülbelül 10–15 cm-re a bilétától, és ellenőrizd, hogy a kameraalkalmazásod vagy QR-kód olvasód megfelelően működik! Ha a QR-kód megkarcolódott vagy elkopott, rendelj cserét a 'Kezdőlap / Fiókom' oldalon!";
 "help_faq_q18" = "Találtam egy kedvencet SENRA biléta nélkül — mit tehetek?";
-"help_faq_a18" = "Ellenőrizd az Eltűnt Kedvencek térképet a SENRA weboldalán (senra.pet) — lehet, hogy a kisállatot eltűntként jelentették a környékeden. Az eltűnt kedvenc riasztásokat az alkalmazáson belül is megtekintheted. Vidd be az kisállatot a legközelebbi állatorvosi rendelőbe, hogy leolvassak a mikrochipjét. Ha a kedvencnek van SENRA bilétája, olvasd le a QR kódot okostelefonod kamerájával — megjelenik a gazdi elérhetősége.";
+"help_faq_a18" = "Ellenőrizd az Eltűnt Kedvencek térképet a SENRA weboldalán (senra.pet) — lehet, hogy ezt a kisállatot már eltűntként jelentették a környékeden. Az eltűnt kedvenc riasztásokat az alkalmazáson belül is megtekintheted. Vidd be az kisállatot a legközelebbi állatorvosi rendelőbe, hogy leolvassak a mikrochipjét. Ha a talált kisállatnak van SENRA bilétája, olvasd le a QR kódot okostelefonod kamerájával — megjelenik a gazdi elérhetősége.";
 "help_faq_q19" = "Megváltoztathatom az e-mail címemet?";
 "help_faq_a19" = "Az elsődleges e-mail címed a fiókod azonosítójaként szolgál, és ezért nem változtatható meg közvetlenül. Ha másik e-mailt címet szeretnél használni nyilvános elérhetőségként, megadhatsz egy másodlagos e-mailt címet is a 'Beállítások', 'Elérhetőségek' menüpontban — ez meg is jelenhet a kedvenced profilján, ha engedélyezed, hogy a megtaláló azonnal lássa és közvetlenül felvehesse veled a kapcsolatot. Ha feltétlenül szükséged van az elsődleges e-mail címed megváltoztatására, vedd fel velünk a kapcsolatot a hello@senra.pet email címen, és segítünk átköltöztetni a fiókodat.";
 "help_faq_q20" = "Mi a különbség a mikrochip és a SENRA QR biléta között?";
@@ -956,7 +956,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ bilétáját megtalálták!";
+"sse_tag_scanned_title" = "Megtalálták %@ -t!";
 "sse_tag_scanned_body_with_address" = "Valaki beolvasta a kedvenced bilétáját itt: %@";
 "sse_tag_scanned_body_no_address" = "Valaki beolvasta a kedvenced bilétáját";
 "sse_sighting_title" = "%@ észlelve!";
@@ -1391,21 +1391,21 @@
 "report_found_unavailable" = "Ez a funkció nem érhető el ehhez a riasztáshoz. Kérjük, lépj kapcsolatba közvetlenül a gazdival, ha megtaláltad a kedvencet.";
 
 "qr_torch_unavailable" = "A vaku nem érhető el ezen az eszközön.";
-"tag_pending_badge" = "BILÉTA ÚTON";
+"tag_pending_badge" = "A BILÉTA ÚTON VAN";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Címke aktiválása";
+"shelter_promo_claim_tag_title" = "Biléta aktiválása";
 "shelter_promo_welcome_format" = "Üdv tőlünk: %@!";
-"shelter_promo_register_subtitle_format" = "Regisztráld a kedvencedet a címke aktiválásához – %@ jóvoltából.";
+"shelter_promo_register_subtitle_format" = "Regisztráld a kedvencedet a kedvezmények aktiválásához – %@ jóvoltából.";
 "shelter_promo_pet_picker_label" = "Kedvenc";
 "shelter_promo_new_pet" = "Új kedvenc";
 "shelter_promo_existing_pet" = "Meglévő kedvenc";
 "shelter_promo_pet_name_placeholder" = "Kedvenc neve";
 "shelter_promo_neutered_spayed" = "Ivartalanított";
-"shelter_promo_register_and_claim_button" = "Regisztráció és címke aktiválása";
-"shelter_promo_claim_success_title" = "Címke aktiválva!";
-"shelter_promo_active_until_format" = "Címke aktív eddig: %@";
-"shelter_promo_claim_tag_button" = "Címke aktiválása";
+"shelter_promo_register_and_claim_button" = "Regisztráció és biléta aktiválása";
+"shelter_promo_claim_success_title" = "Biléta aktiválva!";
+"shelter_promo_active_until_format" = "Biléta aktív eddig: %@";
+"shelter_promo_claim_tag_button" = "Biléta aktiválása";
 "shelter_promo_name_label_required" = "Név *";
 "shelter_promo_species_label_required" = "Faj *";
 "shelter_promo_select_placeholder" = "Válassz...";

@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Invia segnalazione";
 "sighting_reported_owner_notified" = "Avvistamento segnalato! Il padrone è stato avvisato.";
 "sighting_address_not_found" = "Non abbiamo trovato questo indirizzo. Controlla l'ortografia o prova un punto di riferimento vicino.";
-"sighting_location_invalid" = "La posizione sembra non valida. Condividi la tua posizione GPS attuale o prova un altro indirizzo.";
+"sighting_location_invalid" = "Quella posizione non sembra valida. Condividi la tua posizione GPS attuale, oppure prova un altro indirizzo.";
 "sighting_location_required" = "Condividi la tua posizione attuale o inserisci un indirizzo.";
 
 // MARK: - Foglio Scomparso/Trovato
@@ -501,7 +501,7 @@
 "help_faq_q17" = "La mia medaglietta non si scansiona — cosa faccio?";
 "help_faq_a17" = "Prova quanto segue: pulisci la superficie della medaglietta con un panno umido, assicura una buona illuminazione, tieni la fotocamera del telefono stabile a circa 10–15 cm dalla medaglietta e verifica che l'app fotocamera o il lettore QR funzioni. Se il codice QR è graffiato o usurato, ordina un ricambio dalla pagina 'Home / Mio account'.";
 "help_faq_q18" = "Ho trovato un animale di compagnia senza medaglietta SENRA — cosa posso fare?";
-"help_faq_a18" = "Controlla la mappa Animali di compagnia Smarriti sul sito SENRA (senra.animale di compagnia). Puoi vedere gli avvisi anche nell'app. Porta l'animale di compagnia dal veterinario più vicino per scansionare il microchip. Se ha medaglietta SENRA, scansiona il QR — appaiono i contatti del padrone. Avvisa sempre anche le autorità locali e i rifugi.";
+"help_faq_a18" = "Consulta la mappa degli Animali Smarriti sul sito SENRA (senra.pet) — questo animale da compagnia potrebbe già essere stato segnalato come smarrito nella tua zona. Puoi vedere gli avvisi degli animali smarriti anche all'interno dell'app. Porta l'animale alla clinica veterinaria più vicina per fargli leggere il microchip. Se l'animale ritrovato ha una medaglietta SENRA, scansiona il codice QR con la fotocamera del tuo telefono — appariranno i contatti del proprietario.";
 "help_faq_q19" = "Posso cambiare il mio indirizzo email?";
 "help_faq_a19" = "Il tuo email principale serve come identificatore dell'account e non può essere cambiato direttamente. Puoi aggiungere un email secondario in 'Impostazioni' > 'Dati di Contatto'. Se hai assolutamente bisogno di cambiare l'email principale, contattaci a hello@senra.animale di compagnia.";
 "help_faq_q20" = "Qual è la differenza tra un microchip e una medaglietta QR SENRA?";
@@ -958,7 +958,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ trovato!";
+"sse_tag_scanned_title" = "%@ è stato ritrovato!";
 "sse_tag_scanned_body_with_address" = "Qualcuno ha scansionato la medaglietta del tuo animale a: %@";
 "sse_tag_scanned_body_no_address" = "Qualcuno ha scansionato la medaglietta del tuo animale";
 "sse_sighting_title" = "%@ avvistato!";
@@ -1401,21 +1401,21 @@
 "report_found_unavailable" = "Questa funzione non è disponibile per questa segnalazione. Contatta direttamente il padrone se hai trovato l'animale di compagnia.";
 
 "qr_torch_unavailable" = "Torcia non disponibile su questo dispositivo.";
-"tag_pending_badge" = "IN ARRIVO";
+"tag_pending_badge" = "MEDAGLIETTA IN ARRIVO";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Attiva la medaglietta";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Registra il tuo animale da compagnia per attivare questa offerta — per gentile concessione di %@.";
 "shelter_promo_pet_picker_label" = "Pet";
 "shelter_promo_new_pet" = "New Pet";
 "shelter_promo_existing_pet" = "Existing Pet";
 "shelter_promo_pet_name_placeholder" = "Pet name";
 "shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_register_and_claim_button" = "Registrati e attiva la medaglietta";
+"shelter_promo_claim_success_title" = "Medaglietta attivata!";
+"shelter_promo_active_until_format" = "Medaglietta attiva fino al: %@";
+"shelter_promo_claim_tag_button" = "Attiva la medaglietta";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Species *";
 "shelter_promo_select_placeholder" = "Select...";
