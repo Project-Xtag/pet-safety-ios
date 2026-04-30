@@ -475,7 +475,7 @@
 "help_faq_q4" = "Mohu později aktualizovat údaje svého mazlíčka?";
 "help_faq_a4" = "Ano! Údaje svého mazlíčka můžeš kdykoliv aktualizovat v sekci 'Moji mazlíčci' výběrem mazlíčka a kliknutím na 'Upravit profil'. Můžeš aktualizovat všechna pole kromě jména, druhu a plemene, včetně fotografií. Změny se uloží okamžitě.";
 "help_faq_q5" = "Jak si objednám náhradní psí známku?";
-"help_faq_a5" = "Jdi na stránku 'Domů / Můj účet' a klikni na 'Objednat náhradní psí známku'. Vyber, který mazlíček potřebuje novou psí známku. Nárok na výměnu závisí na tvém SENRA účtu; podrobnosti najdeš na senra.pet.";
+"help_faq_a5" = "Jdi na stránku 'Domů / Můj účet' a klikni na 'Objednat náhradní psí známku'. Vyber, který mazlíček potřebuje novou psí známku. Nárok na výměnu závisí na tvém Senra účtu; podrobnosti najdeš na senra.pet.";
 "help_faq_q6" = "Jak aktivuji svou psí známku po doručení?";
 "help_faq_a6" = "Stáhni si mobilní aplikaci SENRA z Google Play Store nebo App Store! Otevři ji a přejdi do menu 'Aktivovat', namiř kameru telefonu na QR kód na psí známce! Naskenování QR kódu propojí psí známku s tvým účtem. Poté vyber svého existujícího mazlíčka nebo si vytvoř nový profil.";
 "help_faq_q7" = "Mohu darovat SENRA psí známku?";
@@ -497,7 +497,7 @@
 "help_faq_q15" = "Jsou moje osobní údaje v bezpečí?";
 "help_faq_a15" = "Ano. Ty určuješ, přesně které údaje jsou viditelné, když někdo naskenuje psí známku tvého mazlíčka. V 'Nastavení' > 'Nastavení soukromí' si můžeš vybrat, zda se zobrazí tvé telefonní číslo, e-mailová adresa nebo domácí adresa. Tvé přihlášení je pokaždé chráněno jednorázovým ověřovacím kódem — neexistuje žádné heslo, které by se dalo ukrást. Svůj účet a všechny údaje můžeš kdykoliv smazat.";
 "help_faq_q16" = "Ztratili jsme psí známku nebo se poškodila — co mám dělat?";
-"help_faq_a16" = "Žádný strach — digitální profil tvého mazlíčka je v bezpečí a není uložen na psí známce. Jdi na stránku Účet a klikni na 'Objednat náhradu'. Novou psí známku s čerstvým QR kódem propojíme s tvým existujícím profilem mazlíčka. Nárok na výměnu závisí na tvém SENRA účtu; podrobnosti najdeš na senra.pet. Stará psí známka bude deaktivována okamžitě při objednání náhrady.";
+"help_faq_a16" = "Žádný strach — digitální profil tvého mazlíčka je v bezpečí a není uložen na psí známce. Jdi na stránku Účet a klikni na 'Objednat náhradu'. Novou psí známku s čerstvým QR kódem propojíme s tvým existujícím profilem mazlíčka. Nárok na výměnu závisí na tvém Senra účtu; podrobnosti najdeš na senra.pet. Stará psí známka bude deaktivována okamžitě při objednání náhrady.";
 "help_faq_q17" = "Moje psí známka se nedá naskenovat — co mám dělat?";
 "help_faq_a17" = "Vyzkoušej následující: očisti povrch psí známky vlhkým hadříkem, zajisti dobré osvětlení, drž kameru telefonu stabilně asi 10–15 cm od psí známky a zkontroluj, že tvá kamerová aplikace nebo QR čtečka funguje. Pokud je QR kód poškrábaný nebo opotřebovaný, objednej si náhradu ze stránky 'Domů / Můj účet'.";
 "help_faq_q18" = "Našel jsem mazlíčka bez SENRA psí známky — co mohu udělat?";
