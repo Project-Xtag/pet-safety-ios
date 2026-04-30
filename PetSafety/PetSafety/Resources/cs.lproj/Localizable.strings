@@ -407,7 +407,7 @@
 "notif_missing_pet_alerts" = "Upozornění na ztracené mazlíčky";
 "notif_missing_pet_alerts_subtitle" = "Upozornění o ztracených mazlíčcích ve tvém okolí";
 "notif_nearby_alerts" = "Upozornění v okolí (10 km)";
-"notif_nearby_alerts_subtitle" = "Upozornění na mazlíčky v okruhu 10 km od tvé polohy";
+"notif_nearby_alerts_subtitle" = "Upozornění na mazlíčky do 10 km od tvé polohy";
 "notif_account_orders" = "Účet a objednávky";
 "notif_account_orders_footer" = "Zůstaň informovaný o aktivitě účtu a objednávkách";
 "notif_order_updates" = "Aktualizace objednávek";
@@ -1176,7 +1176,7 @@
 "breed_cat_exotic_shorthair" = "Exotická krátkosrstá";
 "breed_cat_abyssinian" = "Habešská";
 "breed_cat_scottish_fold" = "Skotská klapouchá";
-"breed_cat_sphynx" = "Sphynx";
+"breed_cat_sphynx" = "Sfinx";
 "breed_cat_siamese" = "Siamská";
 "breed_cat_devon_rex" = "Devon rex";
 "breed_cat_oriental_shorthair" = "Orientální krátkosrstá";
@@ -1247,7 +1247,7 @@
 "current_plan" = "Aktuální plán";
 "plan_renews" = "Obnoví se %@";
 "plan_cancels_on" = "Končí %@";
-"delete_premium_warning" = "Smazání tvého účtu trvale odstraní tvůj profil. Pokud chceš také ukončit aktivní SENRA předplatné, udělej to na senra.pet před smazáním.";
+"delete_premium_warning" = "Smazání tvého účtu trvale odstraní tvůj profil. Pokud chceš také ukončit aktivní Senra předplatné, udělej to na senra.pet před smazáním.";
 "cancel_instead" = "Místo toho zrušit předplatné";
 
 // MARK: - Shelter Adoption
@@ -1293,7 +1293,7 @@
 "appearance_light" = "Světlý";
 "appearance_dark" = "Tmavý";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Komunitní upozornění vyžadují SENRA předplatné.";
+"mark_lost_starter_notice" = "Komunitní upozornění vyžadují Senra předplatné.";
 "mark_lost_starter_upgrade_cta" = "Zobrazit plány";
 "mark_lost_upgrade_prompt" = "V plánu Starter bude tvůj mazlíček označen jako ztracený, ale upozornění uživatelům, veterinářům a útulkům vyžadují předplatné Standard nebo Maximum.";
 // MARK: - Localization Audit Fixes
@@ -1397,22 +1397,22 @@
 "shelter_promo_welcome_format" = "Welcome from %@!";
 "shelter_promo_register_subtitle_format" = "Zaregistruj svého mazlíčka a aktivuj tuto nabídku — díky %@.";
 "shelter_promo_pet_picker_label" = "Pet";
-"shelter_promo_new_pet" = "New Pet";
-"shelter_promo_existing_pet" = "Existing Pet";
-"shelter_promo_pet_name_placeholder" = "Pet name";
-"shelter_promo_neutered_spayed" = "Neutered / Spayed";
+"shelter_promo_new_pet" = "Nový mazlíček";
+"shelter_promo_existing_pet" = "Stávající mazlíček";
+"shelter_promo_pet_name_placeholder" = "Jméno mazlíčka";
+"shelter_promo_neutered_spayed" = "Kastrovaný / Sterilizovaná";
 "shelter_promo_register_and_claim_button" = "Registrovat a aktivovat psí známku";
 "shelter_promo_claim_success_title" = "Psí známka aktivována!";
 "shelter_promo_active_until_format" = "Psí známka aktivní do: %@";
 "shelter_promo_claim_tag_button" = "Aktivovat psí známku";
-"shelter_promo_name_label_required" = "Name *";
-"shelter_promo_species_label_required" = "Species *";
-"shelter_promo_select_placeholder" = "Select...";
+"shelter_promo_name_label_required" = "Jméno *";
+"shelter_promo_species_label_required" = "Druh *";
+"shelter_promo_select_placeholder" = "Vyber...";
 
 // MARK: - Order more tags placeholders
-"order_more_owner_name" = "Owner name";
+"order_more_owner_name" = "Jméno majitele";
 "order_more_email" = "Email";
 "order_more_phone" = "Phone";
 
 // MARK: - Success stories sharing
-"shared_via_pet_safety" = "Shared via SENRA";
+"shared_via_pet_safety" = "Sdíleno přes SENRA";
