@@ -1247,7 +1247,7 @@
 "current_plan" = "Planul curent";
 "plan_renews" = "Se reînnoiește pe %@";
 "plan_cancels_on" = "Se încheie pe %@";
-"delete_premium_warning" = "Ștergerea contului tău va elimina permanent profilul. Dacă dorești și să închei un abonament SENRA activ, fă-o pe senra.pet înainte de ștergere.";
+"delete_premium_warning" = "Ștergerea contului tău va elimina permanent profilul. Dacă dorești și să închei un abonament Senra activ, fă-o pe senra.pet înainte de ștergere.";
 "cancel_instead" = "Anulează abonamentul în schimb";
 
 // MARK: - Shelter Adoption
@@ -1293,7 +1293,7 @@
 "appearance_light" = "Luminos";
 "appearance_dark" = "Întunecat";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Alertele comunității necesită un abonament SENRA.";
+"mark_lost_starter_notice" = "Alertele comunității necesită un abonament Senra.";
 "mark_lost_starter_upgrade_cta" = "Vezi planurile";
 "mark_lost_upgrade_prompt" = "Cu planul Starter animalul de companie tău va fi marcat ca dispărut, dar notificările către utilizatori, veterinari și adăposturi necesită un abonament Standard sau Maximum.";
 // MARK: - Localization Audit Fixes
