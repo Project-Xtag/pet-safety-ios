@@ -78,7 +78,7 @@
 "action_mark_found" = "ALS GEFUNDEN MARKIEREN";
 "action_report_missing" = "ALS VERMISST MELDEN";
 "action_order_tags" = "TAGS BESTELLEN";
-"action_replace_tag" = "TAG ERSETZEN";
+"action_replace_tag" = "HAUSTIERMARKE ERSETZEN";
 "empty_pets_title" = "Noch keine Haustiere";
 "empty_pets_message" = "Füge dein erstes Haustier hinzu, um mit SENRA zu starten";
 "missing_badge" = "VERMISST";
@@ -163,17 +163,17 @@
 "scan_qr_code" = "QR-Code scannen";
 "scan_qr_subtitle" = "Richten du deine Kamera auf den QR-Haustiermarke des Haustiers";
 "hello_pet_name" = "Hallo! Ich bin %@";
-"scanned_tag_thanks" = "Du hast gerade meinen Tag gescannt. Danke, dass du mir hilfst!";
-"share_location_with_owner" = "Meinen Standort mit dem Halter teilen";
-"contact_owner" = "Halter kontaktieren";
+"scanned_tag_thanks" = "Du hast gerade meine Haustiermarke gescannt. Danke, dass du mir hilfst!";
+"share_location_with_owner" = "Meinen Standort mit dem Besitzer teilen";
+"contact_owner" = "Besitzer kontaktieren";
 "call_phone" = "Anrufen: %@";
 "email_contact" = "E-Mail: %@";
-"privacy_notice" = "Deine Privatsphäre ist wichtig. Wir teilen deinen Standort nur mit dem Halter von %@, um die Wiedervereinigung zu erleichtern.";
+"privacy_notice" = "Deine Privatsphäre ist wichtig. Wir teilen deinen Standort nur mit dem Besitzer von %@, um die Wiedervereinigung zu erleichtern.";
 "found_pet_title" = "%@ gefunden";
 
 // MARK: - Standort-Freigabe
 "share_help_get_home %@" = "Hilf %@, nach Hause zu kommen";
-"share_location_subtitle" = "dein Standort hilft dem Halter, sein Haustier schneller zu finden.";
+"share_location_subtitle" = "Dein Standort hilft dem Besitzer, sein Haustier schneller zu finden.";
 "share_exact_location_toggle" = "Genauen Standort teilen";
 "share_approximate_desc" = "Teile deinen ungefähren Bereich (~500 m)";
 "share_exact_desc" = "Teile deinen genauen Standort für eine schnellere Wiedervereinigung";
@@ -181,11 +181,11 @@
 "share_accuracy" = "(~500 m Genauigkeit)";
 "share_getting_location" = "Standort wird ermittelt…";
 "share_location_unavailable" = "Standort nicht verfügbar. Bitte stellen du sicher, dass die Ortungsdienste aktiviert sind.";
-"share_owner_notified" = "Halter informiert!";
+"share_owner_notified" = "Besitzer informiert!";
 "share_on_their_way" = "du sind unterwegs!";
-"share_notifying" = "Halter wird informiert…";
-"share_notify_with_location" = "Teilen & Halter informieren";
-"share_privacy_note" = "dein Standort wird mit dem Halter geteilt, um bei der Wiedervereinigung zu helfen.";
+"share_notifying" = "Besitzer wird informiert…";
+"share_notify_with_location" = "Teilen & Besitzer informieren";
+"share_privacy_note" = "Dein Standort wird mit dem Besitzer geteilt.";
 "share_found_pet %@" = "%@ gefunden!";
 
 // MARK: - Scanner-Detail
@@ -203,17 +203,17 @@
 "tag_activate_title" = "Haustiermarke aktivieren";
 "tag_loading_pets" = "Haustiere werden geladen…";
 "tag_activated" = "Haustiermarke aktiviert!";
-"tag_activated_message %@" = "Der Tag von %@ ist jetzt aktiv";
+"tag_activated_message %@" = "Die Haustiermarke von %@ ist jetzt aktiv";
 "tag_choose_plan" = "Vervollständigen du das Profil, damit dein Haustier leichter gefunden werden kann";
 "tag_choose_plan_button" = "Haustierprofil vervollständigen";
 "tag_skip_for_now" = "Das mache ich später";
 "tag_no_pets" = "Noch keine Haustiere";
 "tag_no_pets_message" = "Füge zuerst ein Haustier hinzu, bevor du einen Haustiermarke aktivieren";
-"tag_code_label" = "Tag-Code";
-"tag_select_pet" = "Haustier auswählen, um diesen Tag zu verknüpfen";
+"tag_code_label" = "Markencode";
+"tag_select_pet" = "Wähle ein Haustier, um diese Haustiermarke zu verknüpfen";
 "tag_activating" = "Aktivierung…";
 "tag_activate_button" = "Haustiermarke aktivieren";
-"tag_link_message" = "Dieser Tag wird mit dem ausgewählten Haustier verknüpft";
+"tag_link_message" = "Diese Haustiermarke wird mit dem ausgewählten Haustier verknüpft";
 
 // MARK: - Plan-Auswahl
 
@@ -236,7 +236,7 @@
 "contact_label" = "Kontakt: %@";
 
 // MARK: - Vermisst melden / Sichtung
-"last_seen_location" = "Zuletzt bekannter Ort";
+"last_seen_location" = "Zuletzt bekannter Standort";
 "report_sighting" = "Sichtung melden";
 "notes" = "Notizen";
 "sighting_location" = "Sichtungsort";
@@ -247,15 +247,15 @@
 "additional_details" = "Weitere Details";
 "select_pet_header" = "Haustier auswählen";
 "no_pets_available" = "Keine Haustiere verfügbar. Bitte fügen du zuerst ein Haustier hinzu.";
-"last_seen_location_header" = "Zuletzt gesehener Ort";
-"enter_location" = "Ort eingeben";
+"last_seen_location_header" = "Zuletzt gesehener Standort";
+"enter_location" = "Standort eingeben";
 "additional_information_header" = "Zusätzliche Informationen";
 "additional_details_placeholder" = "Gib weitere Details an, wann und wo du dein Haustier zuletzt gesehen haben…";
 "alert_created_success" = "Vermisstenwarnung erfolgreich erstellt!";
 "report_sighting_header" = "Sichtung melden";
-"report_sighting_help" = "Helfen du, das Haustier mit dem Halter zu vereinen, indem du den Sichtungsort teilen.";
+"report_sighting_help" = "Hilf dabei, dass ein verlorenes Haustier wieder mit seinem Besitzer vereint wird.";
 "share_contact_info" = "Meine Kontaktdaten teilen";
-"share_contact_info_desc" = "Erlaube dem Halter, du direkt zu kontaktieren";
+"share_contact_info_desc" = "Erlaube dem Besitzer, dich direkt zu kontaktieren";
 "your_name" = "dein Name";
 "your_phone_number" = "deine Telefonnummer";
 "your_email" = "deine E-Mail";
@@ -264,15 +264,15 @@
 "where_did_you_see" = "Wo hast du das Haustier gesehen?";
 "sighting_notes_placeholder" = "Beschreiben du, was du gesehen haben, den Zustand des Haustiers, die Richtung…";
 "submit_sighting_report" = "Sichtungsbericht senden";
-"sighting_reported_owner_notified" = "Sichtung gemeldet! Der Halter wurde informiert.";
+"sighting_reported_owner_notified" = "Sichtung gemeldet! Der Besitzer wurde informiert.";
 "sighting_address_not_found" = "Diese Adresse konnten wir nicht finden. Prüfe die Schreibweise oder versuche einen nahegelegenen Orientierungspunkt.";
-"sighting_location_invalid" = "Dieser Standort scheint ungültig zu sein. Teile deine aktuelle GPS-Position oder versuche eine andere Adresse.";
+"sighting_location_invalid" = "Dieser Standort sieht ungültig aus. Teile deinen aktuellen GPS-Standort oder versuche eine andere Adresse.";
 "sighting_location_required" = "Teile deinen aktuellen Standort oder gib eine Adresse ein.";
 
 // MARK: - Vermisst/Gefunden-Dialog
 
 // MARK: - Benachrichtigungen
-"tag_scanned_message" = "Der Tag von %@ wurde um %@ gescannt!";
+"tag_scanned_message" = "Die Haustiermarke von %@ wurde um %@ gescannt!";
 "sighting_message_with_location" = "%@ wurde in %@ gesichtet!";
 "sighting_message_no_location" = "%@ wurde gesichtet!";
 
@@ -405,7 +405,7 @@
 "notif_pet_alerts" = "Haustier-Warnungen";
 "notif_pet_alerts_footer" = "Warnungen über vermisste Haustiere in deiner Nähe";
 "notif_missing_pet_alerts" = "Vermisstenwarnungen";
-"notif_missing_pet_alerts_subtitle" = "Benachrichtigungen über vermisste Haustiere in deiner Nähe";
+"notif_missing_pet_alerts_subtitle" = "Infos über vermisste Haustiere in deiner Nähe";
 "notif_nearby_alerts" = "Warnungen in der Nähe (10 km)";
 "notif_nearby_alerts_subtitle" = "Warnungen für Haustiere im Umkreis von 10 km";
 "notif_account_orders" = "Benutzerkonto & Bestellungen";
@@ -475,7 +475,7 @@
 "help_faq_q4" = "Kann ich die Daten meines Haustieres später aktualisieren?";
 "help_faq_a4" = "Ja! Du kannst die Daten deines Haustieres jederzeit im Bereich 'Meine Haustiere' aktualisieren, indem du dein Haustier auswählst und auf 'Profil bearbeiten' tippst. Du kannst alle Felder außer Name, Tierart und Rasse aktualisieren, einschließlich Fotos. Änderungen werden sofort gespeichert.";
 "help_faq_q5" = "Wie bestelle ich eine Ersatzmarke?";
-"help_faq_a5" = "Gehe zur Seite 'Startseite / Mein Benutzerkonto' und tippe auf 'Ersatz-Haustiermarke bestellen'. Wähle, welches Haustier eine neue Haustiermarke braucht. Die Ersatzberechtigung hängt von deinem SENRA-Benutzerkonto ab; Details auf senra.pet.";
+"help_faq_a5" = "Gehe zur Seite 'Startseite / Mein Benutzerkonto' und tippe auf 'Ersatz-Haustiermarke bestellen'. Wähle, welches Haustier eine neue Haustiermarke braucht. Die Ersatzberechtigung hängt von deinem Senra-Benutzerkonto ab; Details auf senra.pet.";
 "help_faq_q6" = "Wie aktiviere ich meine Haustiermarke nach der Lieferung?";
 "help_faq_a6" = "Lade die SENRA Mobile App aus dem Google Play Store oder App Store herunter! Öffne sie und gehe zum Menü 'Aktivieren', richte die Kamera deines Telefons auf den QR-Code der Haustiermarke! Das Scannen des QR-Codes verbindet die Haustiermarke mit deinem Benutzerkonto. Danach musst du dein bestehendes Haustier auswählen oder ein neues Profil erstellen.";
 "help_faq_q7" = "Kann ich eine SENRA-Haustiermarke verschenken?";
@@ -493,15 +493,15 @@
 "help_faq_q13" = "Kann ich mehrere Haustiere in einem Benutzerkonto haben?";
 "help_faq_a13" = "Ja. Du kannst mehrere Haustiere in einem Benutzerkonto registrieren. Benutzerkonto-Details auf senra.pet.";
 "help_faq_q14" = "Wie melde ich ein gefundenes Haustier?";
-"help_faq_a14" = "Wenn das Haustier eine SENRA-Haustiermarke hat, scanne einfach den QR-Code mit der Kamera deines Handys — keine App nötig. Du kannst das Profil des Haustieres einsehen und deinen Standort mit dem Halter teilen.";
+"help_faq_a14" = "Wenn das Haustier eine SENRA-Haustiermarke hat, scanne einfach den QR-Code mit der Kamera deines Handys — keine App nötig. Du kannst das Profil des Haustieres einsehen und deinen Standort mit dem Besitzer teilen.";
 "help_faq_q15" = "Sind meine persönlichen Daten sicher?";
 "help_faq_a15" = "Ja. Du bestimmst genau, welche Daten sichtbar sind, wenn jemand die Haustiermarke deines Haustieres scannt. Unter 'Einstellungen' > 'Datenschutzeinstellungen' kannst du wählen, ob deine Telefonnummer, E-Mail-Adresse oder Wohnanschrift angezeigt werden. Dein Login wird jedes Mal durch einen Einmal-Verifizierungscode geschützt — es gibt kein Passwort, das gestohlen werden könnte. Du kannst dein Benutzerkonto und alle Daten jederzeit löschen.";
 "help_faq_q16" = "Wir haben die Haustiermarke verloren oder sie ist beschädigt — was soll ich tun?";
-"help_faq_a16" = "Keine Sorge — das digitale Profil deines Haustiers ist sicher und wird nicht auf der Haustiermarke gespeichert. Gehe zur Benutzerkonto-Seite und tippe auf 'Ersatz bestellen'. Wir verbinden eine neue Haustiermarke mit einem frischen QR-Code mit deinem bestehenden Profil. Die Ersatzberechtigung hängt von deinem SENRA-Benutzerkonto ab; Details auf senra.pet. Die alte Haustiermarke wird sofort bei Bestellung des Ersatzes deaktiviert.";
+"help_faq_a16" = "Keine Sorge — das digitale Profil deines Haustiers ist sicher und wird nicht auf der Haustiermarke gespeichert. Gehe zur Benutzerkonto-Seite und tippe auf 'Ersatz bestellen'. Wir verbinden eine neue Haustiermarke mit einem frischen QR-Code mit deinem bestehenden Profil. Die Ersatzberechtigung hängt von deinem Senra-Benutzerkonto ab; Details auf senra.pet. Die alte Haustiermarke wird sofort bei Bestellung des Ersatzes deaktiviert.";
 "help_faq_q17" = "Meine Haustiermarke lässt sich nicht scannen — was soll ich tun?";
 "help_faq_a17" = "Versuche Folgendes: reinige die Oberfläche der Haustiermarke mit einem feuchten Tuch, sorge für gute Beleuchtung, halte die Telefonkamera ruhig in etwa 10–15 cm Abstand zur Haustiermarke und prüfe, ob die Kamera-App oder der QR-Leser funktioniert. Wenn der QR-Code zerkratzt oder abgenutzt ist, bestelle einen Ersatz von der Seite 'Startseite / Mein Benutzerkonto'.";
 "help_faq_q18" = "Ich habe ein Haustier ohne SENRA-Haustiermarke gefunden — was kann ich tun?";
-"help_faq_a18" = "Überprüfe die Karte 'Vermisste Haustiere' auf der SENRA-Website (senra.pet) — das Haustier könnte in deiner Gegend als vermisst gemeldet worden sein. Du kannst Vermisst-Meldungen auch in der App einsehen. Bringe das Tier zur nächsten Tierarztpraxis, um den Mikrochip scannen zu lassen. Wenn das Haustier eine SENRA-Haustiermarke hat, scanne den QR-Code mit der Kamera deines Handys — die Kontaktdaten des Halters werden angezeigt. Informiere auch immer die örtlichen Behörden und nahe gelegene Tierheime.";
+"help_faq_a18" = "Sieh auf der Karte vermisster Haustiere auf der SENRA-Website (senra.pet) nach — vielleicht wurde dieses Haustier in deiner Umgebung bereits als vermisst gemeldet. Du kannst Vermisstmeldungen auch in der App ansehen. Bring das Haustier zur nächsten Tierarztpraxis, damit der Mikrochip ausgelesen werden kann. Hat das gefundene Haustier eine SENRA-Haustiermarke, scanne den QR-Code mit der Kamera deines Handys — die Kontaktdaten des Besitzers erscheinen dann.";
 "help_faq_q19" = "Kann ich meine E-Mail-Adresse ändern?";
 "help_faq_a19" = "Deine primäre E-Mail-Adresse dient als Kontoidentifikator und kann daher nicht direkt geändert werden. Wenn du eine andere E-Mail als öffentlichen Kontakt verwenden möchtest, kannst du unter 'Einstellungen' > 'Kontaktdaten' eine sekundäre E-Mail-Adresse hinzufügen — diese kann auch im Profil deines Haustieres erscheinen, wenn du es aktivierst, damit der Finder sie sofort sehen und dich direkt kontaktieren kann. Wenn du unbedingt deine primäre E-Mail ändern musst, kontaktiere uns unter hello@senra.pet und wir helfen beim Umzug deines Benutzerkontos.";
 "help_faq_q20" = "Was ist der Unterschied zwischen einem Mikrochip und einer SENRA QR-Haustiermarke?";
@@ -540,7 +540,7 @@
 "privacy_contact_visibility" = "Sichtbarkeit der Kontakte";
 "privacy_contact_footer" = "Steuern du, welche Kontaktdaten auf dem öffentlichen Profil deines Haustiers sichtbar sind. Diese Einstellungen gelten sowohl für deine primären als auch sekundären Kontaktdaten.";
 "privacy_show_name" = "deinen Namen anzeigen";
-"privacy_show_name_subtitle" = "dein Name wird auf dem öffentlichen Profil deines Haustiers sichtbar, wenn jemand den Tag scannt";
+"privacy_show_name_subtitle" = "Dein Name wird auf dem öffentlichen Profil deines Haustiers sichtbar, wenn jemand die Haustiermarke scannt";
 "privacy_show_phone" = "Telefonnummern anzeigen";
 "privacy_show_phone_subtitle" = "deine primäre und sekundäre Telefonnummer werden auf dem öffentlichen Profil deines Haustiers sichtbar sein";
 "privacy_show_email" = "E-Mail-Adressen anzeigen";
@@ -636,8 +636,8 @@
 // MARK: - Öffentliches Haustierprofil
 "public_profile_preview" = "Vorschau des öffentlichen Profils";
 "public_profile_subtitle" = "So sehen andere das Profil von %@";
-"owner_notified_sms_email" = "Der Halter von %@ erhält eine SMS und eine E-Mail mit deinem Standort";
-"contact_owner_plea" = "Bitte informiere meinen Halter, dass du mich gefunden hast…";
+"owner_notified_sms_email" = "Der Besitzer von %@ erhält eine SMS und eine E-Mail mit deinem Standort";
+"contact_owner_plea" = "Bitte informiere meinen Besitzer, dass du mich gefunden hast…";
 "contact_info_not_set" = "Kontaktinfos noch nicht eingerichtet";
 "contact_info_hidden" = "Kontaktinfos sind verborgen";
 "contact_info_hidden_hint" = "deine Kontaktdaten sind eingestellt, aber aufgrund der Privatsphäre-Einstellungen verborgen. Aktualisiere in Benutzerkonto > Privatsphäre-Modus.";
@@ -647,13 +647,13 @@
 "behavior_notes" = "Verhaltensnotizen";
 "yes" = "Ja";
 "how_it_works" = "So funktioniert es";
-"help_reunite_pet" = "Helfen du, %@ sicher mit seinem Halter zu vereinen";
+"help_reunite_pet" = "Hilf, %@ sicher zu seinem Besitzer zurückzubringen!";
 "step_share_location" = "Standort teilen";
-"step_share_location_desc" = "Tippe oben, um deinen Standort mit dem Halter zu teilen";
-"step_owner_notified" = "Halter wird informiert";
-"step_owner_notified_desc" = "Der Halter erhält eine SMS und E-Mail mit deinem Standort";
+"step_share_location_desc" = "Tippe oben, um deinen Standort mit dem Besitzer zu teilen";
+"step_owner_notified" = "Besitzer wird informiert";
+"step_owner_notified_desc" = "Der Besitzer erhält eine SMS und E-Mail mit deinem Standort";
 "step_quick_reunion" = "Schnelle Wiedervereinigung";
-"step_quick_reunion_desc" = "Der Halter kann zu deinem Standort navigieren, um sein Haustier abzuholen";
+"step_quick_reunion_desc" = "Der Besitzer kann zu deinem Standort navigieren, um sein Haustier abzuholen";
 
 // MARK: - Offline-Modus
 "offline_mode" = "Offline-Modus";
@@ -693,7 +693,7 @@
 
 // MARK: - Scanner-Dynamische Beschreibungen
 "scanner_step1_dynamic_desc" = "Klicke oben, um zu teilen, wo du %@ gefunden haben";
-"scanner_step3_dynamic_desc" = "Bleiben du in der Nähe, damit der Halter du und %@ finden kann";
+"scanner_step3_dynamic_desc" = "Bleib in der Nähe, damit der Besitzer dich und %@ finden kann!";
 
 // MARK: - Zusätzliche Profil-Schlüssel
 "not_set" = "Nicht festgelegt";
@@ -707,14 +707,14 @@
 "contacts_secondary_email_edit_footer" = "Backup-E-Mail für Benachrichtigungen zur Wiedervereinigung";
 "contacts_primary_phone_edit_footer" = "deine Haupt-Telefonnummer";
 "contacts_secondary_phone_edit_footer" = "Backup-Nummer für Notfälle";
-"contacts_visible_on_tag" = "Sichtbar auf dem Tag";
+"contacts_visible_on_tag" = "Sichtbar auf der Haustiermarke";
 "contacts_no_type_added" = "Keine %@ hinzugefügt";
 
 // MARK: - Zusätzliche Ersatz-Namensschild-Schlüssel
 "order_replace_upgrade_hint" = "Upgrade auf Standard oder Maximum für kostenlose Ersatz-Namensschilder";
 "order_replace_old_deactivated" = "dein alter QR-Code wird deaktiviert, sobald du diese Bestellung aufgeben";
-"order_replace_delivery_time" = "du erhalten deinen neuen Tag innerhalb von 5–7 Werktagen";
-"order_replace_scan_activate" = "Sobald du den neuen Tag erhalten, musst du ihn zum Aktivieren scannen";
+"order_replace_delivery_time" = "Du erhältst deine neue Haustiermarke innerhalb von 5–7 Werktagen";
+"order_replace_scan_activate" = "Sobald du die neue Haustiermarke erhältst, musst du sie zum Aktivieren scannen";
 
 // MARK: - Zusätzliche Offline-Schlüssel
 "offline_last_sync_label" = "Letzte Synchronisationszeit";
@@ -738,7 +738,7 @@
 "plan_feature_lost_alerts_short" = "Vermisstenwarnungen";
 "plan_feature_sms" = "SMS-Benachrichtigungen";
 "plan_feature_photos" = "Bis zu 10 Fotos pro Haustier";
-"plan_feature_replacements" = "Kostenlose Tag-Ersatzlieferungen";
+"plan_feature_replacements" = "Kostenloser Haustiermarken-Ersatz";
 "plan_popular" = "Beliebt";
 "plan_current" = "Aktueller Plan";
 "plan_select_free" = "Gratis-Plan wählen";
@@ -839,8 +839,8 @@
 // MARK: - Barrierefreiheit
 "accessibility_pet_photo" = "Tierfoto";
 "accessibility_share_location" = "Standort teilen";
-"accessibility_call_owner" = "Halter anrufen";
-"accessibility_email_owner" = "E-Mail an Halter";
+"accessibility_call_owner" = "Besitzer anrufen";
+"accessibility_email_owner" = "E-Mail an Besitzer";
 "accessibility_owner_address" = "Adresse des Halters";
 "accessibility_medical_info" = "Medizinische Informationen";
 "accessibility_allergies" = "Allergien";
@@ -899,11 +899,11 @@
 "location_my_address" = "Registrierte Adresse";
 "location_custom" = "Andere Adresse";
 "mark_lost_pet_info" = "Haustierinformationen";
-"mark_lost_last_seen" = "Zuletzt gesehener Ort";
+"mark_lost_last_seen" = "Zuletzt gesehener Standort";
 "mark_lost_alerts_footer" = "Warnungen werden an nahe Nutzer, Tierärzte und Tierheime im Umkreis von 10 km gesendet.";
 "mark_lost_getting_location" = "Standort wird ermittelt…";
 "mark_lost_no_address" = "Keine Adresse registriert. Gehe zu Profil > Adresse.";
-"mark_lost_address_placeholder" = "Adresse oder Ort eingeben";
+"mark_lost_address_placeholder" = "Adresse oder Standort eingeben";
 "mark_lost_additional_info" = "Zusätzliche Informationen";
 "mark_lost_additional_placeholder" = "Details, die bei der Suche helfen könnten (Halsbandfarbe, Verhalten, besondere Merkmale…)";
 "mark_lost_sends_to" = "Diese Warnung wird gesendet an:";
@@ -926,7 +926,7 @@
 
 // MARK: - Fehlende Lokalisierung
 "login_required" = "Anmeldung erforderlich";
-"login_required_activate_tag" = "Bitte melden du sich an, um diesen Tag für dein Haustier zu aktivieren";
+"login_required_activate_tag" = "Bitte melde dich an, um diese Haustiermarke für dein Haustier zu aktivieren";
 "login_activate_instructions" = "Scanne den Haustiermarke nach der Anmeldung erneut oder gehen du zu Meine Haustiere, um ihn zu aktivieren";
 "free_price" = "KOSTENLOS";
 "referral_expires %@" = "Gültig bis: %@";
@@ -951,7 +951,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ gefunden!";
+"sse_tag_scanned_title" = "%@ wurde gefunden!";
 "sse_tag_scanned_body_with_address" = "Jemand hat die Marke deines Haustiers gescannt bei: %@";
 "sse_tag_scanned_body_no_address" = "Jemand hat die Marke deines Haustiers gescannt";
 "sse_sighting_title" = "%@ gesichtet!";
@@ -970,17 +970,17 @@
 "plan_feature_photos_count" = "%lld Fotos pro Haustier";
 "referral_status_pending" = "Ausstehend";
 "referral_status_signed_up" = "Registriert";
-"referral_status_subscribed" = "Active";
+"referral_status_subscribed" = "Aktiv";
 "referral_status_rewarded" = "Belohnt";
 "referral_share_message" = "Nutze meinen Empfehlungscode %@ und erhalte 2 Monate gratis bei SENRA! https://senra.pet/choose-plan?referral=%@";
 "help_guide_qr_tags_title" = "QR-Code Tier-Namensschilder";
-"help_guide_qr_tags_desc" = "Erfahre mehr über unsere smarten QR-Namensschilder.";
+"help_guide_qr_tags_desc" = "Jede SENRA Haustiermarke enthält einen einzigartigen QR-Code, der mit dem digitalen Profil deines Haustieres verknüpft ist. Jeder, der dein Haustier findet, kann den Code mit der Smartphone-Kamera scannen — keine App erforderlich. Das Scannen der Marke sendet dir eine Benachrichtigung mit dem Standort des Finders (falls geteilt). Du kannst die Marken über die App aktivieren und jederzeit eine Ersatzmarke anfordern, falls die alte verloren geht oder beschädigt wird.";
 "help_guide_materials_title" = "Materialien & Haltbarkeit";
-"help_guide_materials_desc" = "Informationen über Materialien und Pflege.";
+"help_guide_materials_desc" = "SENRA Haustiermarken bestehen aus strapazierfähigem, leichtem Metall mit einer Epoxidbeschichtung für zusätzlichen Schutz. Sie sind wasserfest und UV-beständig, geeignet für alle Wetterbedingungen. Sie nutzen sich nicht bei täglichem Gebrauch ab. Die Marken sind so gestaltet, dass sie bequem an die meisten Halsbänder und Geschirre passen.";
 "help_guide_emergency_title" = "Notfallkontakt-Funktionen";
-"help_guide_emergency_desc" = "Wie unser Notfallkontakt-System funktioniert.";
+"help_guide_emergency_desc" = "Wenn jemand die Haustiermarke deines Haustieres scannt, erhältst du sofort eine Push-Benachrichtigung und E-Mail mit dem Standort des Finders. Standard und Maximum Mitglieder erhalten auch SMS-Benachrichtigungen für schnellere Reaktion. Wenn du dein Haustier als vermisst markierst, wird eine Gemeinschaftswarnung an alle SENRA Nutzer im Umkreis von 10 km gesendet, und registrierte Tierärzte und Tierheime in deiner Nähe werden ebenfalls benachrichtigt. Jeder in der Gemeinschaft kann Sichtungen mit Standort und Fotos melden, um dir zu helfen, dein Haustier zu finden.";
 "help_guide_profile_title" = "Profilverwaltung";
-"help_guide_profile_desc" = "Profil verwalten und Informationen aktualisieren.";
+"help_guide_profile_desc" = "Das digitale Profil deines Haustieres ist das Herzstück von SENRA. Gib die grundlegenden Daten ein: Name ist bereits vorhanden, Art, Rasse, Alter und lade ein gutes Foto hoch. Du kannst auch Gesundheitsinformationen, Allergien, Medikamente und besondere Erkennungsmerkmale angeben. Wenn jemand die Haustiermarke deines Haustieres scannt, sieht er dieses Profil, daher ist es wichtig, es aktuell zu halten. Dein Profil hilft Findern, dein Haustier zu erkennen und zu wissen, was zu tun ist.";
 "help_guide_missing_alerts_title" = "Vermisstmeldungen & Sichtungen";
 "help_guide_missing_alerts_desc" = "Wenn dein Tier vermisst wird, markiere es unter \"Meine Tiere\" als vermisst, um eine sofortige Community-Warnung zu erstellen. Das Foto und die Details deines Tieres erscheinen auf der Vermisste-Tiere-Karte, die für alle SENRA-Nutzer in deiner Gegend sichtbar ist. Community-Mitglieder können Sichtungen mit ihrem GPS-Standort melden, die du als Benachrichtigungen erhältst. Registrierte Tierärzte und Tierheime werden ebenfalls benachrichtigt. Wenn dein Tier gefunden wird, markiere es als gefunden und teile optional deine Wiedervereinigungsgeschichte, um die Community zu inspirieren.";
 "help_guide_community_title" = "Community & Gefundene Tiere";
@@ -1141,7 +1141,7 @@
 "breed_dog_havanese" = "Havaneser";
 "breed_dog_shetland_sheepdog" = "Shetland Schäferhund";
 "breed_dog_brittany" = "Epagneul Breton";
-"breed_dog_english_springer_spaniel" = "English Springer Spaniel";
+"breed_dog_english_springer_spaniel" = "Englischer Springer Spaniel";
 "breed_dog_bernese_mountain_dog" = "Berner Sennenhund";
 "breed_dog_cocker_spaniel" = "Cocker Spaniel";
 "breed_dog_border_collie" = "Border Collie";
@@ -1163,7 +1163,7 @@
 "breed_dog_papillon" = "Papillon";
 "breed_dog_bullmastiff" = "Bullmastiff";
 "breed_dog_samoyed" = "Samojede";
-"breed_dog_scottish_terrier" = "Scottish Terrier";
+"breed_dog_scottish_terrier" = "Schottischer Terrier";
 "breed_dog_soft_coated_wheaten_terrier" = "Soft Coated Wheaten Terrier";
 "breed_dog_airedale_terrier" = "Airedale Terrier";
 "breed_dog_jack_russell_terrier" = "Jack Russell Terrier";
@@ -1175,21 +1175,21 @@
 "breed_cat_british_shorthair" = "Britisch Kurzhaar";
 "breed_cat_exotic_shorthair" = "Exotisch Kurzhaar";
 "breed_cat_abyssinian" = "Abessinier";
-"breed_cat_scottish_fold" = "Scottish Fold";
+"breed_cat_scottish_fold" = "Schottische Faltohrkatze";
 "breed_cat_sphynx" = "Sphynx";
 "breed_cat_siamese" = "Siamkatze";
 "breed_cat_devon_rex" = "Devon Rex";
 "breed_cat_oriental_shorthair" = "Orientalisch Kurzhaar";
 "breed_cat_burmese" = "Burma";
 "breed_cat_american_shorthair" = "Amerikanisch Kurzhaar";
-"breed_cat_bengal" = "Bengal";
+"breed_cat_bengal" = "Bengalkatze";
 "breed_cat_russian_blue" = "Russisch Blau";
 "breed_cat_norwegian_forest_cat" = "Norwegische Waldkatze";
 "breed_cat_birman" = "Birma";
 "breed_cat_tonkinese" = "Tonkanese";
 "breed_cat_cornish_rex" = "Cornish Rex";
 "breed_cat_siberian" = "Sibirische Katze";
-"breed_cat_balinese" = "Balinese";
+"breed_cat_balinese" = "Balinesenkatze";
 "breed_cat_somali" = "Somali";
 "breed_cat_turkish_angora" = "Türkisch Angora";
 "breed_cat_himalayan" = "Himalaya";
@@ -1247,7 +1247,7 @@
 "current_plan" = "Aktueller Plan";
 "plan_renews" = "Verlängert sich am %@";
 "plan_cancels_on" = "Endet am %@";
-"delete_premium_warning" = "Das Löschen deines Benutzerkontos löscht dauerhaft dein Profil. Wenn du auch ein aktives SENRA-Abonnement beenden möchtest, tu das auf senra.pet vor der Löschung.";
+"delete_premium_warning" = "Das Löschen deines Benutzerkontos löscht dauerhaft dein Profil. Wenn du auch ein aktives Senra-Abonnement beenden möchtest, tu das bitte vor der Löschung auf senra.pet.";
 "cancel_instead" = "Stattdessen Abonnement kündigen";
 
 // MARK: - Shelter Adoption
@@ -1278,7 +1278,7 @@
 "breed_mixed" = "Mischling";
 "alert_success" = "Erfolg";
 "alert_error" = "Fehler";
-"sse_tag_scanned_body" = "%1$@s Haustiermarke wurde gescannt bei %2$@!";
+"sse_tag_scanned_body" = "Die Haustiermarke von %1$@ wurde bei %2$@ gescannt!";
 "sse_sighting_body" = "%1$@ wurde gesichtet%2$@!";
 "sse_sighting_at" = " bei %@";
 "sse_pet_found_body" = "%@ wurde gefunden!";
@@ -1293,7 +1293,7 @@
 "appearance_light" = "Hell";
 "appearance_dark" = "Dunkel";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Community-Warnungen erfordern ein SENRA-Abonnement.";
+"mark_lost_starter_notice" = "Community-Warnungen erfordern ein Senra-Abonnement.";
 "mark_lost_starter_upgrade_cta" = "Pläne ansehen";
 "mark_lost_upgrade_prompt" = "Mit dem Starter-Plan wird dein Haustier als vermisst markiert, aber Benachrichtigungen an Nutzer, Tierärzte und Tierheime erfordern ein Standard- oder Maximum-Abo.";
 // MARK: - Localization Audit Fixes
@@ -1318,8 +1318,8 @@
 
 // MARK: - Welcome Screen
 "welcome_to_senra" = "Willkommen bei SENRA!";
-"welcome_subtitle" = "Die Sicherheit deines Haustiers beginnt hier. Richte dein erstes Tag ein.";
-"welcome_step_1" = "Scanne den QR-Code auf deinem Tag";
+"welcome_subtitle" = "Die Sicherheit deines Haustiers beginnt hier. Richte deine erste Haustiermarke ein.";
+"welcome_step_1" = "Scanne den QR-Code auf deiner Haustiermarke";
 "welcome_step_2" = "Erstelle das Profil deines Haustiers";
 "welcome_step_3" = "Dein Haustier ist geschützt!";
 "welcome_scan_first_tag" = "Marke scannen";
@@ -1330,18 +1330,18 @@
 "setup_your_tags_subtitle" = "Du hast Tags für diese Haustiere bestellt:";
 "ready_to_setup" = "Bereit zur Einrichtung";
 "already_activated" = "Bereits aktiviert";
-"setting_up_tag_for %@" = "Tag einrichten für %@";
-"tag_activated_for %@" = "Tag für %@ aktiviert!";
+"setting_up_tag_for %@" = "Haustiermarke einrichten für %@";
+"tag_activated_for %@" = "Haustiermarke für %@ aktiviert!";
 "pet_now_protected" = "Dein Haustier ist jetzt mit SENRA geschützt";
 "more_tags_to_setup" = "Du hast noch Tags einzurichten";
-"setup_pet_tag %@" = "Tag für %@ einrichten";
+"setup_pet_tag %@" = "Haustiermarke für %@ einrichten";
 "whats_next" = "Was kommt als Nächstes?";
 "choose_subscription_plan" = "Wähle deinen Abo-Plan";
 "register_your_vet" = "Registriere deinen Tierarzt";
 "update_contact_details" = "Kontaktdaten und Datenschutz aktualisieren";
 "go_to_home" = "Zur Startseite";
 "thank_you_senra" = "Danke, dass du SENRA nutzt!";
-"tap_pet_name_hint" = "Tippe einfach auf den Namen deines Haustiers, um das Tag einzurichten";
+"tap_pet_name_hint" = "Tippe einfach auf den Namen deines Haustiers, um die Haustiermarke einzurichten";
 
 // MARK: - Age Formatting
 "age_1_year" = "1 Jahr";
@@ -1387,32 +1387,32 @@
 // MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
 "tags_coming_soon_title" = "Physische Namensschilder kommen bald";
 "tags_coming_soon_body" = "Wir versenden bald unsere erste Charge. Schau in ein paar Tagen wieder vorbei.";
-"report_found_unavailable" = "Diese Funktion ist für diese Meldung nicht verfügbar. Bitte wende dich direkt an den Halter, wenn du das Haustier gefunden hast.";
+"report_found_unavailable" = "Diese Funktion ist für diese Meldung nicht verfügbar. Bitte wende dich direkt an den Besitzer, wenn du das Haustier gefunden hast.";
 
 "qr_torch_unavailable" = "Taschenlampe auf diesem Gerät nicht verfügbar.";
-"tag_pending_badge" = "TAG UNTERWEGS";
+"tag_pending_badge" = "HAUSTIERMARKE UNTERWEGS";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Haustiermarke aktivieren";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Registriere dein Haustier, um dieses Angebot zu aktivieren — mit freundlicher Unterstützung von %@.";
 "shelter_promo_pet_picker_label" = "Pet";
-"shelter_promo_new_pet" = "New Pet";
-"shelter_promo_existing_pet" = "Existing Pet";
-"shelter_promo_pet_name_placeholder" = "Pet name";
-"shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
+"shelter_promo_new_pet" = "Neues Haustier";
+"shelter_promo_existing_pet" = "Vorhandenes Haustier";
+"shelter_promo_pet_name_placeholder" = "Name des Haustiers";
+"shelter_promo_neutered_spayed" = "Kastriert / Sterilisiert";
+"shelter_promo_register_and_claim_button" = "Registrieren & Haustiermarke aktivieren";
+"shelter_promo_claim_success_title" = "Haustiermarke aktiviert!";
+"shelter_promo_active_until_format" = "Haustiermarke aktiv bis: %@";
+"shelter_promo_claim_tag_button" = "Haustiermarke aktivieren";
 "shelter_promo_name_label_required" = "Name *";
-"shelter_promo_species_label_required" = "Species *";
-"shelter_promo_select_placeholder" = "Select...";
+"shelter_promo_species_label_required" = "Tierart *";
+"shelter_promo_select_placeholder" = "Auswählen...";
 
 // MARK: - Order more tags placeholders
-"order_more_owner_name" = "Owner name";
+"order_more_owner_name" = "Name des Besitzers";
 "order_more_email" = "Email";
 "order_more_phone" = "Phone";
 
 // MARK: - Success stories sharing
-"shared_via_pet_safety" = "Shared via SENRA";
+"shared_via_pet_safety" = "Geteilt über SENRA";

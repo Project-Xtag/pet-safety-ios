@@ -181,7 +181,7 @@
 "share_accuracy" = "(dokładność ~500m)";
 "share_getting_location" = "Pobieranie lokalizacji…";
 "share_location_unavailable" = "Lokalizacja niedostępna. Sprawdź, czy usługi lokalizacji są włączone.";
-"share_owner_notified" = "Opiekun powiadomiony!";
+"share_owner_notified" = "Właściciel powiadomiony!";
 "share_on_their_way" = "Już jedzie!";
 "share_notifying" = "Powiadamianie opiekuna…";
 "share_notify_with_location" = "Udostępnij & powiadom opiekuna";
@@ -264,9 +264,9 @@
 "where_did_you_see" = "Gdzie widziałeś pupila?";
 "sighting_notes_placeholder" = "Opisz, co widziałeś, stan pupila, kierunek podróży…";
 "submit_sighting_report" = "Wyślij zgłoszenie spostrzeżenia";
-"sighting_reported_owner_notified" = "Spostrzeżenie zgłoszone! Opiekun został powiadomiony.";
+"sighting_reported_owner_notified" = "Spostrzeżenie zgłoszone! Właściciel został powiadomiony.";
 "sighting_address_not_found" = "Nie znaleźliśmy tego adresu. Sprawdź pisownię lub spróbuj pobliskiego punktu orientacyjnego.";
-"sighting_location_invalid" = "Lokalizacja wygląda na nieprawidłową. Udostępnij aktualną lokalizację GPS lub spróbuj inny adres.";
+"sighting_location_invalid" = "Ta lokalizacja wygląda na nieprawidłową. Udostępnij swoją bieżącą lokalizację GPS lub spróbuj inny adres.";
 "sighting_location_required" = "Udostępnij swoją obecną lokalizację lub wpisz adres.";
 
 // MARK: - Oznaczanie jako zaginione/znalezione
@@ -404,9 +404,9 @@
 "notif_pet_alerts" = "Alerty o pupilach";
 "notif_pet_alerts_footer" = "Powiadomienia o zaginionych pupilach w twoim rejonie";
 "notif_missing_pet_alerts" = "Alerty o zaginionych pupilach";
-"notif_missing_pet_alerts_subtitle" = "Otrzymuj powiadomienia o zaginionych pupilach w twoim rejonie";
+"notif_missing_pet_alerts_subtitle" = "Powiadomienia o zaginionych pupilach w okolicy";
 "notif_nearby_alerts" = "Alerty w pobliżu (10km)";
-"notif_nearby_alerts_subtitle" = "Alerty o pupilach w promieniu 10km od twojej lokalizacji";
+"notif_nearby_alerts_subtitle" = "Alerty o pupilach w promieniu 10km od ciebie";
 "notif_account_orders" = "Konto i zamówienia";
 "notif_account_orders_footer" = "Bądź na bieżąco z aktywnością konta i zamówieniami";
 "notif_order_updates" = "Aktualizacje zamówień";
@@ -474,7 +474,7 @@
 "help_faq_q4" = "Czy mogę później zaktualizować dane mojego pupila?";
 "help_faq_a4" = "Tak! Możesz aktualizować dane pupila w dowolnym momencie w sekcji 'Moje Pupile' wybierając pupila i klikając 'Edytuj Profil'. Możesz aktualizować wszystkie pola z wyjątkiem imienia, gatunku i rasy, łącznie ze zdjęciami. Zmiany są zapisywane natychmiast.";
 "help_faq_q5" = "Jak zamówić adresówkę zastępczą?";
-"help_faq_a5" = "Przejdź do strony 'Strona główna / Moje konto' i dotknij 'Zamów adresówkę zastępczą'. Wybierz, który pupil potrzebuje nowej adresówki. Uprawnienia do wymiany zależą od Twojego konta SENRA; szczegóły na senra.pet.";
+"help_faq_a5" = "Przejdź do strony 'Strona główna / Moje konto' i dotknij 'Zamów adresówkę zastępczą'. Wybierz, który pupil potrzebuje nowej adresówki. Uprawnienia do wymiany zależą od twojego konta Senra; szczegóły na senra.pet.";
 "help_faq_q6" = "Jak aktywować adresówkę po jej otrzymaniu?";
 "help_faq_a6" = "Pobierz aplikację mobilną SENRA z Google Play Store lub App Store! Otwórz ją i przejdź do menu 'Aktywuj', skieruj aparat telefonu na kod QR na adresówce! Zeskanowanie kodu QR łączy adresówkę z Twoim kontem. Następnie musisz wybrać istniejącego pupila lub utworzyć nowy profil.";
 "help_faq_q7" = "Czy mogę podarować adresówkę SENRA?";
@@ -496,11 +496,11 @@
 "help_faq_q15" = "Czy moje dane osobowe są bezpieczne?";
 "help_faq_a15" = "Tak. Ty kontrolujesz, jakie dane są widoczne po zeskanowaniu adresówki. W 'Ustawienia' > 'Ustawienia Prywatności' możesz wybrać, czy pokazywać telefon, email czy adres. Logowanie jest chronione jednorazowym kodem weryfikacyjnym. Możesz usunąć konto i dane w dowolnym momencie.";
 "help_faq_q16" = "Zgubiliśmy adresówkę lub się uszkodziła — co robić?";
-"help_faq_a16" = "Nie martw się — cyfrowy profil Twojego pupila jest bezpieczny i nie jest przechowywany na adresówce. Przejdź do strony Konto i dotknij 'Zamów wymianę'. Połączymy nową adresówkę ze świeżym kodem QR z Twoim istniejącym profilem. Uprawnienia do wymiany zależą od Twojego konta SENRA; szczegóły na senra.pet. Stara adresówka jest dezaktywowana natychmiast po złożeniu zamówienia wymiany.";
+"help_faq_a16" = "Nie martw się — cyfrowy profil twojego pupila jest bezpieczny i nie jest przechowywany na adresówce. Przejdź do strony Konto i dotknij 'Zamów wymianę'. Połączymy nową adresówkę ze świeżym kodem QR z twoim istniejącym profilem. Uprawnienia do wymiany zależą od twojego konta Senra; szczegóły na senra.pet. Stara adresówka jest dezaktywowana natychmiast po złożeniu zamówienia wymiany.";
 "help_faq_q17" = "Moja adresówka nie skanuje się — co robić?";
 "help_faq_a17" = "Spróbuj następujących rzeczy: wyczyść powierzchnię adresówki wilgotną ściereczką, zapewnij dobre oświetlenie, trzymaj aparat telefonu stabilnie około 10–15 cm od adresówki i sprawdź, czy aplikacja aparatu lub czytnik QR działa. Jeśli kod QR jest zarysowany lub zużyty, zamów wymianę na stronie 'Strona główna / Moje konto'.";
 "help_faq_q18" = "Znalazłem pupila bez adresówki SENRA — co mogę zrobić?";
-"help_faq_a18" = "Sprawdź mapę Zaginionych Zwierząt na stronie SENRA (senra.pet). Możesz też zobaczyć alerty w aplikacji. Zanieś pupila do najbliższego weterynarza, aby zeskanować mikrochip. Jeśli ma adresówkę SENRA, zeskanuj kod QR — pojawią się dane kontaktowe opiekuna. Zawsze powiadom też lokalne władze i pobliskie schroniska.";
+"help_faq_a18" = "Sprawdź mapę Zaginionych zwierząt na stronie SENRA (senra.pet) — być może ten pupil został już zgłoszony jako zaginiony w twojej okolicy. Alerty o zaginionych zwierzętach możesz też przeglądać w aplikacji. Zawieź zwierzę do najbliższej kliniki weterynaryjnej, aby odczytano jego mikroczip. Jeśli odnaleziony pupil ma zawieszkę SENRA, zeskanuj kod QR aparatem telefonu — pojawią się dane kontaktowe właściciela.";
 "help_faq_q19" = "Czy mogę zmienić swój adres email?";
 "help_faq_a19" = "Twój główny email służy jako identyfikator konta i nie można go bezpośrednio zmienić. Możesz dodać dodatkowy email w 'Ustawienia' > 'Dane Kontaktowe'. Jeśli koniecznie musisz zmienić główny email, skontaktuj się z nami na hello@senra.pet.";
 "help_faq_q20" = "Jaka jest różnica między mikrochipem a adresówką QR SENRA?";
@@ -646,7 +646,7 @@
 // MARK: - Publiczny profil zwierzęcia
 "public_profile_preview" = "Podgląd profilu publicznego";
 "public_profile_subtitle" = "Tak inni widzą profil %@";
-"owner_notified_sms_email" = "Opiekun %@ otrzyma SMS i e-mail z twoją lokalizacją";
+"owner_notified_sms_email" = "Właściciel %@ otrzyma SMS i e-mail z twoją lokalizacją";
 "contact_owner_plea" = "Proszę, daj znać mojemu opiekunowi, że mnie znalazłeś/aś…";
 "contact_info_not_set" = "Dane kontaktowe nie zostały jeszcze skonfigurowane";
 "contact_info_hidden" = "Dane kontaktowe są ukryte";
@@ -660,10 +660,10 @@
 "help_reunite_pet" = "Pomóż bezpiecznie zreunifikować %@ z opiekunem";
 "step_share_location" = "Udostępnij swoją lokalizację";
 "step_share_location_desc" = "Dotknij przycisku powyżej, aby udostępnić swoją lokalizację opiekunowi";
-"step_owner_notified" = "Opiekun otrzymuje powiadomienie";
-"step_owner_notified_desc" = "Opiekun otrzymuje SMS i e-mail z twoją lokalizacją";
+"step_owner_notified" = "Właściciel otrzymuje powiadomienie";
+"step_owner_notified_desc" = "Właściciel otrzymuje SMS i e-mail z twoją lokalizacją";
 "step_quick_reunion" = "Szybka reunifikacja";
-"step_quick_reunion_desc" = "Opiekun może nawigować do twojej lokalizacji, aby odebrać pupila";
+"step_quick_reunion_desc" = "Właściciel może nawigować do twojej lokalizacji, aby odebrać pupila";
 
 // MARK: - Tryb offline
 "offline_mode" = "Tryb offline";
@@ -703,7 +703,7 @@
 
 // MARK: - Dynamiczne opisy skanera
 "scanner_step1_dynamic_desc" = "Dotknij przycisku powyżej, aby udostępnić, gdzie znalazłeś/aś %@";
-"scanner_step3_dynamic_desc" = "Pozostań w pobliżu lokalizacji, aby opiekun mógł cię i %@ znaleźć";
+"scanner_step3_dynamic_desc" = "Pozostań w pobliżu lokalizacji, aby właściciel mógł cię i %@ znaleźć";
 
 // MARK: - Dodatkowe klucze profilu
 "not_set" = "Nie ustawiono";
@@ -943,13 +943,13 @@
 
 // MARK: - Zdarzenia subskrypcji SSE
 "sse_subscription_title" = "Subskrypcja zaktualizowana";
-"sse_subscription_message" = "Twoja subskrypcja SENRA została zaktualizowana.";
+"sse_subscription_message" = "Twoja subskrypcja Senra została zaktualizowana.";
 "sse_referral_title" = "Użyto kodu polecenia!";
 "sse_referral_message" = "%@ użył/a twojego kodu polecenia!";
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ znaleziony!";
+"sse_tag_scanned_title" = "%@ został odnaleziony!";
 "sse_tag_scanned_body_with_address" = "Ktoś zeskanował identyfikator twojego pupila w: %@";
 "sse_tag_scanned_body_no_address" = "Ktoś zeskanował identyfikator twojego pupila";
 "sse_sighting_title" = "%@ zauważony!";
@@ -968,7 +968,7 @@
 "plan_feature_photos_count" = "%lld zdjęć na pupila";
 "referral_status_pending" = "Oczekujące";
 "referral_status_signed_up" = "Zarejestrowany/a";
-"referral_status_subscribed" = "Active";
+"referral_status_subscribed" = "Aktywny";
 "referral_status_rewarded" = "Nagrodzony/a";
 "referral_share_message" = "Użyj mojego kodu polecającego %@ i zdobądź 2 miesiące za darmo na SENRA! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Pierwsze kroki";
@@ -1120,16 +1120,16 @@
 "activation_error_not_owner" = "To nie jest Twoje pupila. Wybierz jedno ze swoich pupili.";
 
 // MARK: - Breed Names
-"breed_dog_labrador_retriever" = "Labrador Retriever";
+"breed_dog_labrador_retriever" = "Labrador retriever";
 "breed_dog_german_shepherd" = "Owczarek Niemiecki";
-"breed_dog_golden_retriever" = "Golden Retriever";
+"breed_dog_golden_retriever" = "Golden retriever";
 "breed_dog_french_bulldog" = "Buldog Francuski";
 "breed_dog_bulldog" = "Buldog Angielski";
 "breed_dog_poodle" = "Pudel";
 "breed_dog_beagle" = "Beagle";
 "breed_dog_rottweiler" = "Rottweiler";
 "breed_dog_german_shorthaired_pointer" = "Wyżeł Niemiecki Krótkowłosy";
-"breed_dog_yorkshire_terrier" = "Yorkshire Terrier";
+"breed_dog_yorkshire_terrier" = "Yorkshire terrier";
 "breed_dog_boxer" = "Bokser";
 "breed_dog_dachshund" = "Jamnik";
 "breed_dog_siberian_husky" = "Husky Syberyjski";
@@ -1137,23 +1137,23 @@
 "breed_dog_doberman_pinscher" = "Doberman";
 "breed_dog_australian_shepherd" = "Owczarek Australijski";
 "breed_dog_miniature_schnauzer" = "Sznaucer Miniaturowy";
-"breed_dog_cavalier_king_charles_spaniel" = "Cavalier King Charles Spaniel";
+"breed_dog_cavalier_king_charles_spaniel" = "Cavalier King Charles spaniel";
 "breed_dog_shih_tzu" = "Shih Tzu";
-"breed_dog_boston_terrier" = "Boston Terrier";
+"breed_dog_boston_terrier" = "Boston terrier";
 "breed_dog_pomeranian" = "Szpic Miniaturowy";
 "breed_dog_havanese" = "Hawańczyk";
 "breed_dog_shetland_sheepdog" = "Owczarek Szetlandzki";
 "breed_dog_brittany" = "Bretończyk";
 "breed_dog_english_springer_spaniel" = "Springer Spaniel Angielski";
 "breed_dog_bernese_mountain_dog" = "Berneński Pies Pasterski";
-"breed_dog_cocker_spaniel" = "Cocker Spaniel";
-"breed_dog_border_collie" = "Border Collie";
+"breed_dog_cocker_spaniel" = "Cocker spaniel";
+"breed_dog_border_collie" = "Border collie";
 "breed_dog_vizsla" = "Wyżeł Węgierski";
 "breed_dog_weimaraner" = "Wyżeł Weimarski";
-"breed_dog_pembroke_welsh_corgi" = "Pembroke Welsh Corgi";
+"breed_dog_pembroke_welsh_corgi" = "Pembroke Welsh corgi";
 "breed_dog_maltese" = "Maltańczyk";
 "breed_dog_chihuahua" = "Chihuahua";
-"breed_dog_west_highland_white_terrier" = "West Highland White Terrier";
+"breed_dog_west_highland_white_terrier" = "West Highland white terrier";
 "breed_dog_collie" = "Collie";
 "breed_dog_basset_hound" = "Basset Hound";
 "breed_dog_rhodesian_ridgeback" = "Rhodesian Ridgeback";
@@ -1165,7 +1165,7 @@
 "breed_dog_bloodhound" = "Bloodhound";
 "breed_dog_papillon" = "Papillon";
 "breed_dog_bullmastiff" = "Bullmastiff";
-"breed_dog_samoyed" = "Samoyed";
+"breed_dog_samoyed" = "Samojed";
 "breed_dog_scottish_terrier" = "Terrier Szkocki";
 "breed_dog_soft_coated_wheaten_terrier" = "Soft Coated Wheaten Terrier";
 "breed_dog_airedale_terrier" = "Airedale Terrier";
@@ -1199,7 +1199,7 @@
 "breed_cat_manx" = "Manx";
 "breed_cat_selkirk_rex" = "Selkirk Rex";
 "breed_cat_ragamuffin" = "RagaMuffin";
-"breed_cat_american_curl" = "American Curl";
+"breed_cat_american_curl" = "Amerykański curl";
 "breed_cat_chartreux" = "Kartuski";
 "breed_cat_bombay" = "Bombajski";
 "breed_cat_egyptian_mau" = "Mau Egipski";
@@ -1207,7 +1207,7 @@
 "breed_cat_korat" = "Korat";
 "breed_cat_singapura" = "Singapura";
 "breed_cat_turkish_van" = "Turecki Van";
-"breed_cat_havana_brown" = "Havana Brown";
+"breed_cat_havana_brown" = "Havana brown";
 "breed_cat_japanese_bobtail" = "Bobtail Japoński";
 "breed_cat_laperm" = "LaPerm";
 "breed_cat_american_wirehair" = "Amerykański Szorstkowłosy";
@@ -1250,7 +1250,7 @@
 "current_plan" = "Aktualny plan";
 "plan_renews" = "Odnawia się %@";
 "plan_cancels_on" = "Kończy się %@";
-"delete_premium_warning" = "Usunięcie konta trwale usunie Twój profil. Jeśli chcesz również zakończyć aktywną subskrypcję SENRA, zrób to na senra.pet przed usunięciem.";
+"delete_premium_warning" = "Usunięcie konta trwale usunie Twój profil. Jeśli chcesz również zakończyć aktywną subskrypcję Senra, zrób to na senra.pet przed usunięciem.";
 "cancel_instead" = "Anuluj subskrypcję zamiast tego";
 
 // MARK: - Shelter Adoption
@@ -1292,11 +1292,11 @@
 "edit_alert_success" = "Alert zaktualizowany pomyślnie";
 // MARK: - Appearance
 "appearance_title" = "Wygląd";
-"appearance_system" = "System";
+"appearance_system" = "Systemowy";
 "appearance_light" = "Jasny";
 "appearance_dark" = "Ciemny";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Alerty społecznościowe wymagają subskrypcji SENRA.";
+"mark_lost_starter_notice" = "Alerty społecznościowe wymagają subskrypcji Senra.";
 "mark_lost_starter_upgrade_cta" = "Zobacz plany";
 "mark_lost_upgrade_prompt" = "W planie Starter twoje pupila zostanie oznaczone jako zagubione, ale powiadomienia do użytkowników, weterynarzy i schronisk wymagają subskrypcji Standard lub Maximum.";
 // MARK: - Localization Audit Fixes
@@ -1393,29 +1393,29 @@
 "report_found_unavailable" = "Ta funkcja nie jest dostępna dla tego alertu. Skontaktuj się bezpośrednio z opiekunem, jeśli znalazłeś/aś pupila.";
 
 "qr_torch_unavailable" = "Latarka niedostępna na tym urządzeniu.";
-"tag_pending_badge" = "W DRODZE";
+"tag_pending_badge" = "ZAWIESZKA W DRODZE";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Aktywuj zawieszkę";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Zarejestruj swojego pupila, aby aktywować tę ofertę — dzięki uprzejmości %@.";
 "shelter_promo_pet_picker_label" = "Pet";
-"shelter_promo_new_pet" = "New Pet";
-"shelter_promo_existing_pet" = "Existing Pet";
-"shelter_promo_pet_name_placeholder" = "Pet name";
-"shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
-"shelter_promo_name_label_required" = "Name *";
-"shelter_promo_species_label_required" = "Species *";
-"shelter_promo_select_placeholder" = "Select...";
+"shelter_promo_new_pet" = "Nowy pupil";
+"shelter_promo_existing_pet" = "Istniejący pupil";
+"shelter_promo_pet_name_placeholder" = "Imię pupila";
+"shelter_promo_neutered_spayed" = "Wykastrowany / Wysterylizowana";
+"shelter_promo_register_and_claim_button" = "Zarejestruj i aktywuj zawieszkę";
+"shelter_promo_claim_success_title" = "Zawieszka aktywowana!";
+"shelter_promo_active_until_format" = "Zawieszka aktywna do: %@";
+"shelter_promo_claim_tag_button" = "Aktywuj zawieszkę";
+"shelter_promo_name_label_required" = "Imię *";
+"shelter_promo_species_label_required" = "Gatunek *";
+"shelter_promo_select_placeholder" = "Wybierz...";
 
 // MARK: - Order more tags placeholders
-"order_more_owner_name" = "Owner name";
+"order_more_owner_name" = "Imię właściciela";
 "order_more_email" = "Email";
 "order_more_phone" = "Phone";
 
 // MARK: - Success stories sharing
-"shared_via_pet_safety" = "Shared via SENRA";
+"shared_via_pet_safety" = "Udostępniono przez SENRA";

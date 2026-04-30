@@ -269,7 +269,7 @@
 "submit_sighting_report" = "Pošalji prijavu viđenja";
 "sighting_reported_owner_notified" = "Viđenje prijavljeno! Vlasnik je obaviješten.";
 "sighting_address_not_found" = "Tu adresu nismo pronašli. Provjeri pravopis ili pokušaj s obližnjom znamenitošću.";
-"sighting_location_invalid" = "Ova lokacija izgleda neispravno. Podijeli trenutnu GPS lokaciju ili pokušaj drugu adresu.";
+"sighting_location_invalid" = "Ova lokacija djeluje nevažećom. Podijeli svoju trenutnu GPS lokaciju ili pokušaj s drugom adresom.";
 "sighting_location_required" = "Podijeli trenutnu lokaciju ili unesi adresu.";
 
 // MARK: - Mark Lost/Found Sheet
@@ -408,9 +408,9 @@
 "notif_pet_alerts" = "Uzbune o kućnim ljubimcima";
 "notif_pet_alerts_footer" = "Obavijesti o nestalim kućnim ljubimcima u tvom području";
 "notif_missing_pet_alerts" = "Uzbune o nestalim kućnim ljubimcima";
-"notif_missing_pet_alerts_subtitle" = "Primi obavijesti o nestalim kućnim ljubimcima u tvom području";
+"notif_missing_pet_alerts_subtitle" = "Obavijesti o nestalim ljubimcima u blizini";
 "notif_nearby_alerts" = "Obližnje uzbune (10 km)";
-"notif_nearby_alerts_subtitle" = "Uzbune za kućne ljubimce unutar 10 km od tvoje lokacije";
+"notif_nearby_alerts_subtitle" = "Uzbune za ljubimce unutar 10 km od tebe";
 "notif_account_orders" = "Račun i narudžbe";
 "notif_account_orders_footer" = "Budi u tijeku s aktivnostima računa i narudžbama";
 "notif_order_updates" = "Ažuriranja narudžbi";
@@ -478,7 +478,7 @@
 "help_faq_q4" = "Mogu li kasnije ažurirati podatke svog kućnog ljubimca?";
 "help_faq_a4" = "Da! Možeš ažurirati podatke svog kućnog ljubimca u bilo kojem trenutku u sekciji 'Moji kućni ljubimci' odabirom kućnog ljubimca i klikom na 'Uredi profil'. Možeš ažurirati sva polja osim imena, vrste i pasmine, uključujući fotografije. Promjene se spremaju odmah.";
 "help_faq_q5" = "Kako naručim zamjenski privjesak?";
-"help_faq_a5" = "Idi na stranicu 'Početna / Moj račun' i klikni 'Naruči zamjenski privjesak'. Odaberi koji kućni ljubimac treba novi privjesak. Pravo na zamjenu ovisi o tvom SENRA računu; detalje pronađi na senra.pet.";
+"help_faq_a5" = "Idi na stranicu 'Početna / Moj račun' i klikni 'Naruči zamjenski privjesak'. Odaberi koji kućni ljubimac treba novi privjesak. Pravo na zamjenu ovisi o tvom Senra računu; detalje pronađi na senra.pet.";
 "help_faq_q6" = "Kako aktiviram svoj privjesak nakon što stigne?";
 "help_faq_a6" = "Preuzmi SENRA mobilnu aplikaciju iz Google Play Store-a ili App Store-a! Otvori je i idi na izbornik 'Aktiviraj', usmjeri kameru telefona na QR kôd na privjesku! Skeniranje QR kôda povezuje privjesak s tvojim računom. Zatim trebaš odabrati postojećeg kućnog ljubimca ili izraditi novi profil.";
 "help_faq_q7" = "Mogu li pokloniti SENRA privjesak?";
@@ -500,11 +500,11 @@
 "help_faq_q15" = "Jesu li moji osobni podaci sigurni?";
 "help_faq_a15" = "Da. Ti kontroliraš točno koji su podaci vidljivi kada netko skenira privjesak tvog kućnog ljubimca. U 'Postavke' > 'Postavke privatnosti' možeš odabrati prikazuju li se tvoj telefon, e-mail ili adresa. Tvoja prijava je svaki put zaštićena jednokratnim kôdom. Svoj račun i sve podatke možeš obrisati u bilo kojem trenutku.";
 "help_faq_q16" = "Izgubili smo privjesak ili se oštetio — što da radim?";
-"help_faq_a16" = "Nema brige — digitalni profil tvog kućnog ljubimca je siguran i ne pohranjuje se na privjesku. Idi na stranicu Račun i klikni 'Naruči zamjenu'. Novi privjesak s novim QR kôdom povežemo s postojećim profilom tvog kućnog ljubimca. Pravo na zamjenu ovisi o tvom SENRA računu; detalje pronađi na senra.pet. Stari privjesak se deaktivira odmah po narudžbi zamjene.";
+"help_faq_a16" = "Nema brige — digitalni profil tvog kućnog ljubimca je siguran i ne pohranjuje se na privjesku. Idi na stranicu Račun i klikni 'Naruči zamjenu'. Novi privjesak s novim QR kôdom povežemo s postojećim profilom tvog kućnog ljubimca. Pravo na zamjenu ovisi o tvom Senra računu; detalje pronađi na senra.pet. Stari privjesak se deaktivira odmah po narudžbi zamjene.";
 "help_faq_q17" = "Moj privjesak se ne skenira — što da radim?";
 "help_faq_a17" = "Pokušaj sljedeće: očisti površinu privjeska vlažnom krpom, osiguraj dobro osvjetljenje, drži kameru telefona mirno oko 10–15 cm od privjeska i provjeri radi li tvoja kamera aplikacija ili QR čitač. Ako je QR kôd ogreban ili istrošen, naruči zamjenu sa stranice 'Početna / Moj račun'.";
 "help_faq_q18" = "Pronašao sam kućnog ljubimca bez SENRA privjeska — što mogu učiniti?";
-"help_faq_a18" = "Provjeri kartu Nestalih kućnih ljubimaca na SENRA web stranici (senra.pet). Možeš vidjeti upozorenja i u aplikaciji. Odvedi životinju najbližem veterinaru za skeniranje mikročipa. Ako ima SENRA privjesak, skeniraj QR kôd — pojavit će se kontaktni podaci vlasnika. Uvijek obavijesti lokalne vlasti i obližnja skloništa.";
+"help_faq_a18" = "Pogledaj kartu Izgubljenih ljubimaca na SENRA web stranici (senra.pet) — možda je ovaj kućni ljubimac već prijavljen kao izgubljen u tvojoj okolici. Obavijesti o izgubljenim ljubimcima možeš pregledati i unutar aplikacije. Odvedi ljubimca do najbliže veterinarske klinike kako bi mu očitali mikročip. Ako pronađeni ljubimac ima SENRA privjesak, skeniraj QR kod kamerom telefona — pojavit će se kontaktni podaci vlasnika.";
 "help_faq_q19" = "Mogu li promijeniti svoju email adresu?";
 "help_faq_a19" = "Tvoja primarna email adresa služi kao identifikator računa i ne može se izravno promijeniti. Možeš dodati sekundaran email u 'Postavke' > 'Kontakt Podaci'. Ako apsolutno trebaš promijeniti primarni email, kontaktiraj nas na hello@senra.pet.";
 "help_faq_q20" = "Koja je razlika između mikročipa i SENRA QR privjeska?";
@@ -588,7 +588,7 @@
 "orders_no_orders_message" = "Još nisi naručio ništa";
 "orders_information" = "Podaci o narudžbi";
 "orders_order_id" = "ID narudžbe";
-"orders_status" = "Status";
+"orders_status" = "Stanje";
 "orders_total_amount" = "Ukupni iznos";
 "orders_order_date" = "Datum narudžbe";
 "orders_items" = "Stavke";
@@ -696,8 +696,8 @@
 "map_approximate_notice" = "Ovo je približna lokacija (~500 m). Pretraži okolno područje.";
 "map_coordinates" = "Koordinate";
 "map_open_in" = "Otvori u";
-"map_apple_maps" = "Apple Maps";
-"map_google_maps" = "Google Maps";
+"map_apple_maps" = "Apple Karte";
+"map_google_maps" = "Google Karte";
 "map_waze" = "Waze";
 "map_pet_location %@" = "Lokacija kućnog ljubimca %@";
 "location_title" = "Lokacija kućnog ljubimca %@";
@@ -815,7 +815,7 @@
 "referral_share_footer" = "Podijeli svoj kôd preporuke s prijateljima.";
 "referral_how_it_works" = "Kako funkcionira";
 "referral_step_1" = "Podijeli kôd za preporuku s prijateljem";
-"referral_step_2" = "They sign up with your code";
+"referral_step_2" = "Registriraju se s tvojim kodom.";
 "referral_step_3" = "Oboje dobivate 2 mjeseca besplatno!";
 "referral_history" = "Povijest preporuka";
 "referral_no_referrals" = "Još nema preporuka";
@@ -961,13 +961,13 @@
 
 // MARK: - SSE Subscription Events
 "sse_subscription_title" = "Pretplata ažurirana";
-"sse_subscription_message" = "Tvoja SENRA pretplata je ažurirana.";
+"sse_subscription_message" = "Tvoja Senra pretplata je ažurirana.";
 "sse_referral_title" = "Preporuka iskorištena!";
 "sse_referral_message" = "%@ je iskoristio tvoj kôd za preporuku!";
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ pronađen!";
+"sse_tag_scanned_title" = "%@ je pronađen!";
 "sse_tag_scanned_body_with_address" = "Netko je skenirao medalju tvog ljubimca na: %@";
 "sse_tag_scanned_body_no_address" = "Netko je skenirao medalju tvog ljubimca";
 "sse_sighting_title" = "%@ viđen!";
@@ -986,7 +986,7 @@
 "plan_feature_photos_count" = "%lld fotografija po kućnom ljubimcu";
 "referral_status_pending" = "Na čekanju";
 "referral_status_signed_up" = "Registriran";
-"referral_status_subscribed" = "Active";
+"referral_status_subscribed" = "Aktivno";
 "referral_status_rewarded" = "Nagrađen";
 "referral_share_message" = "Koristi moj kôd preporuke %@ i dobij 2 mjeseca besplatno na SENRA! https://senra.pet/choose-plan?referral=%@";
 "help_faq_group_getting_started" = "Prvi koraci";
@@ -1182,7 +1182,7 @@
 "breed_cat_exotic_shorthair" = "Egzotična kratkodlaka";
 "breed_cat_abyssinian" = "Abesinka";
 "breed_cat_scottish_fold" = "Škotska klapouha";
-"breed_cat_sphynx" = "Sphynx";
+"breed_cat_sphynx" = "Sfinga";
 "breed_cat_siamese" = "Sijamska";
 "breed_cat_devon_rex" = "Devon rex";
 "breed_cat_oriental_shorthair" = "Orientalna kratkodlaka";
@@ -1253,7 +1253,7 @@
 "current_plan" = "Trenutni paket";
 "plan_renews" = "Obnavlja se %@";
 "plan_cancels_on" = "Otkazuje se %@";
-"delete_premium_warning" = "Brisanje računa trajno će ukloniti tvoj profil. Ako također želiš završiti aktivnu SENRA pretplatu, učini to na senra.pet prije brisanja.";
+"delete_premium_warning" = "Brisanje računa trajno će ukloniti tvoj profil. Ako također želiš završiti aktivnu Senra pretplatu, učini to na senra.pet prije brisanja.";
 "cancel_instead" = "Umjesto toga otkaži pretplatu";
 
 // MARK: - Shelter Adoption
@@ -1299,7 +1299,7 @@
 "appearance_light" = "Svijetlo";
 "appearance_dark" = "Tamno";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Uzbune zajednice zahtijevaju SENRA pretplatu.";
+"mark_lost_starter_notice" = "Uzbune zajednice zahtijevaju Senra pretplatu.";
 "mark_lost_starter_upgrade_cta" = "Pogledaj pakete";
 "mark_lost_upgrade_prompt" = "S planom Starter tvoj kućni ljubimac bit će označen kao nestao, ali obavijesti korisnicima, veterinarima i skloništima zahtijevaju pretplatu Standard ili Maximum.";
 // MARK: - Localization Audit Fixes
@@ -1346,7 +1346,7 @@
 "register_your_vet" = "Registrirajte svog veterinara";
 "update_contact_details" = "Ažuriraj kontakt podatke i privatnost";
 "go_to_home" = "Na početnu";
-"thank_you_senra" = "Hvala što koristite Senru!";
+"thank_you_senra" = "Hvala što koristiš SENRA!";
 "tap_pet_name_hint" = "Samo dotakni ime kućnog ljubimca za postavljanje privjeska";
 
 // MARK: - Age Formatting
@@ -1396,29 +1396,29 @@
 "report_found_unavailable" = "Ova funkcija nije dostupna za ovo upozorenje. Molimo te da izravno kontaktiraš vlasnika ako si pronašao/la kućnog ljubimca.";
 
 "qr_torch_unavailable" = "Svjetiljka nije dostupna na ovom uređaju.";
-"tag_pending_badge" = "NA PUTU";
+"tag_pending_badge" = "PRIVJESAK JE NA PUTU";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Aktiviraj privjesak";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Registriraj svog kućnog ljubimca kako bi aktivirao ovu ponudu — ljubaznošću %@.";
 "shelter_promo_pet_picker_label" = "Pet";
-"shelter_promo_new_pet" = "New Pet";
-"shelter_promo_existing_pet" = "Existing Pet";
-"shelter_promo_pet_name_placeholder" = "Pet name";
-"shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
-"shelter_promo_name_label_required" = "Name *";
-"shelter_promo_species_label_required" = "Species *";
-"shelter_promo_select_placeholder" = "Select...";
+"shelter_promo_new_pet" = "Novi ljubimac";
+"shelter_promo_existing_pet" = "Postojeći ljubimac";
+"shelter_promo_pet_name_placeholder" = "Ime ljubimca";
+"shelter_promo_neutered_spayed" = "Kastriran / Sterilizirana";
+"shelter_promo_register_and_claim_button" = "Registriraj i aktiviraj privjesak";
+"shelter_promo_claim_success_title" = "Privjesak aktiviran!";
+"shelter_promo_active_until_format" = "Privjesak aktivan do: %@";
+"shelter_promo_claim_tag_button" = "Aktiviraj privjesak";
+"shelter_promo_name_label_required" = "Ime *";
+"shelter_promo_species_label_required" = "Vrsta *";
+"shelter_promo_select_placeholder" = "Odaberi...";
 
 // MARK: - Order more tags placeholders
-"order_more_owner_name" = "Owner name";
+"order_more_owner_name" = "Ime vlasnika";
 "order_more_email" = "Email";
 "order_more_phone" = "Phone";
 
 // MARK: - Success stories sharing
-"shared_via_pet_safety" = "Shared via SENRA";
+"shared_via_pet_safety" = "Podijeljeno putem SENRA";

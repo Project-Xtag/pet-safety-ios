@@ -266,7 +266,7 @@
 "submit_sighting_report" = "Odeslat hlášení o pozorování";
 "sighting_reported_owner_notified" = "Pozorování nahlášeno! Páníček byl informován.";
 "sighting_address_not_found" = "Tuto adresu jsme nenašli. Zkontroluj pravopis nebo zkus blízkou památku.";
-"sighting_location_invalid" = "Toto místo vypadá neplatně. Sdílej aktuální GPS polohu nebo zkus jinou adresu.";
+"sighting_location_invalid" = "Tato poloha vypadá neplatně. Sdílej svou aktuální GPS polohu, nebo zkus jinou adresu.";
 "sighting_location_required" = "Sdílej svou aktuální polohu nebo zadej adresu.";
 
 // MARK: - Označení ztráty/nalezení
@@ -407,7 +407,7 @@
 "notif_missing_pet_alerts" = "Upozornění na ztracené mazlíčky";
 "notif_missing_pet_alerts_subtitle" = "Upozornění o ztracených mazlíčcích ve tvém okolí";
 "notif_nearby_alerts" = "Upozornění v okolí (10 km)";
-"notif_nearby_alerts_subtitle" = "Upozornění na mazlíčky v okruhu 10 km od tvé polohy";
+"notif_nearby_alerts_subtitle" = "Upozornění na mazlíčky do 10 km od tvé polohy";
 "notif_account_orders" = "Účet a objednávky";
 "notif_account_orders_footer" = "Zůstaň informovaný o aktivitě účtu a objednávkách";
 "notif_order_updates" = "Aktualizace objednávek";
@@ -475,7 +475,7 @@
 "help_faq_q4" = "Mohu později aktualizovat údaje svého mazlíčka?";
 "help_faq_a4" = "Ano! Údaje svého mazlíčka můžeš kdykoliv aktualizovat v sekci 'Moji mazlíčci' výběrem mazlíčka a kliknutím na 'Upravit profil'. Můžeš aktualizovat všechna pole kromě jména, druhu a plemene, včetně fotografií. Změny se uloží okamžitě.";
 "help_faq_q5" = "Jak si objednám náhradní psí známku?";
-"help_faq_a5" = "Jdi na stránku 'Domů / Můj účet' a klikni na 'Objednat náhradní psí známku'. Vyber, který mazlíček potřebuje novou psí známku. Nárok na výměnu závisí na tvém SENRA účtu; podrobnosti najdeš na senra.pet.";
+"help_faq_a5" = "Jdi na stránku 'Domů / Můj účet' a klikni na 'Objednat náhradní psí známku'. Vyber, který mazlíček potřebuje novou psí známku. Nárok na výměnu závisí na tvém Senra účtu; podrobnosti najdeš na senra.pet.";
 "help_faq_q6" = "Jak aktivuji svou psí známku po doručení?";
 "help_faq_a6" = "Stáhni si mobilní aplikaci SENRA z Google Play Store nebo App Store! Otevři ji a přejdi do menu 'Aktivovat', namiř kameru telefonu na QR kód na psí známce! Naskenování QR kódu propojí psí známku s tvým účtem. Poté vyber svého existujícího mazlíčka nebo si vytvoř nový profil.";
 "help_faq_q7" = "Mohu darovat SENRA psí známku?";
@@ -497,11 +497,11 @@
 "help_faq_q15" = "Jsou moje osobní údaje v bezpečí?";
 "help_faq_a15" = "Ano. Ty určuješ, přesně které údaje jsou viditelné, když někdo naskenuje psí známku tvého mazlíčka. V 'Nastavení' > 'Nastavení soukromí' si můžeš vybrat, zda se zobrazí tvé telefonní číslo, e-mailová adresa nebo domácí adresa. Tvé přihlášení je pokaždé chráněno jednorázovým ověřovacím kódem — neexistuje žádné heslo, které by se dalo ukrást. Svůj účet a všechny údaje můžeš kdykoliv smazat.";
 "help_faq_q16" = "Ztratili jsme psí známku nebo se poškodila — co mám dělat?";
-"help_faq_a16" = "Žádný strach — digitální profil tvého mazlíčka je v bezpečí a není uložen na psí známce. Jdi na stránku Účet a klikni na 'Objednat náhradu'. Novou psí známku s čerstvým QR kódem propojíme s tvým existujícím profilem mazlíčka. Nárok na výměnu závisí na tvém SENRA účtu; podrobnosti najdeš na senra.pet. Stará psí známka bude deaktivována okamžitě při objednání náhrady.";
+"help_faq_a16" = "Žádný strach — digitální profil tvého mazlíčka je v bezpečí a není uložen na psí známce. Jdi na stránku Účet a klikni na 'Objednat náhradu'. Novou psí známku s čerstvým QR kódem propojíme s tvým existujícím profilem mazlíčka. Nárok na výměnu závisí na tvém Senra účtu; podrobnosti najdeš na senra.pet. Stará psí známka bude deaktivována okamžitě při objednání náhrady.";
 "help_faq_q17" = "Moje psí známka se nedá naskenovat — co mám dělat?";
 "help_faq_a17" = "Vyzkoušej následující: očisti povrch psí známky vlhkým hadříkem, zajisti dobré osvětlení, drž kameru telefonu stabilně asi 10–15 cm od psí známky a zkontroluj, že tvá kamerová aplikace nebo QR čtečka funguje. Pokud je QR kód poškrábaný nebo opotřebovaný, objednej si náhradu ze stránky 'Domů / Můj účet'.";
 "help_faq_q18" = "Našel jsem mazlíčka bez SENRA psí známky — co mohu udělat?";
-"help_faq_a18" = "Zkontroluj mapu Ztracených mazlíčků na webu SENRA (senra.pet) — mazlíček mohl být nahlášen jako ztracený ve tvém okolí. Upozornění na ztracené mazlíčky si můžeš prohlédnout i v aplikaci. Zaveď zvířátko k nejbližšímu veterináři, aby naskenovali mikročip. Pokud má mazlíček SENRA psí známku, naskenuj QR kód kamerou telefonu — zobrazí se kontaktní údaje páníčka. Vždy informuj i místní úřady a blízké útulky.";
+"help_faq_a18" = "Podívej se na mapu Ztracených mazlíčků na webu SENRA (senra.pet) — možná byl tento mazlíček ve tvém okolí už nahlášen jako ztracený. Upozornění o ztracených mazlíčcích si můžeš prohlédnout i v aplikaci. Vezmi mazlíčka k nejbližšímu veterináři, aby mu načetli mikročip. Pokud má nalezený mazlíček psí známku SENRA, naskenuj QR kód kamerou telefonu — zobrazí se kontaktní údaje majitele.";
 "help_faq_q19" = "Mohu změnit svou e-mailovou adresu?";
 "help_faq_a19" = "Tvá primární e-mailová adresa slouží jako identifikátor účtu, a proto se nedá přímo změnit. Pokud chceš jako veřejný kontakt použít jiný e-mail, můžeš přidat sekundární e-mailovou adresu v 'Nastavení' > 'Kontaktní údaje'. Pokud nevyhnutelně potřebuješ změnit primární e-mail, kontaktuj nás na hello@senra.pet a pomůžeme s migrací účtu.";
 "help_faq_q20" = "Jaký je rozdíl mezi mikročipem a SENRA QR psí známkou?";
@@ -951,7 +951,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ nalezen!";
+"sse_tag_scanned_title" = "%@ se našel!";
 "sse_tag_scanned_body_with_address" = "Někdo naskenoval známku tvého mazlíčka na místě: %@";
 "sse_tag_scanned_body_no_address" = "Někdo naskenoval známku tvého mazlíčka";
 "sse_sighting_title" = "%@ spatřen!";
@@ -1176,7 +1176,7 @@
 "breed_cat_exotic_shorthair" = "Exotická krátkosrstá";
 "breed_cat_abyssinian" = "Habešská";
 "breed_cat_scottish_fold" = "Skotská klapouchá";
-"breed_cat_sphynx" = "Sphynx";
+"breed_cat_sphynx" = "Sfinx";
 "breed_cat_siamese" = "Siamská";
 "breed_cat_devon_rex" = "Devon rex";
 "breed_cat_oriental_shorthair" = "Orientální krátkosrstá";
@@ -1247,7 +1247,7 @@
 "current_plan" = "Aktuální plán";
 "plan_renews" = "Obnoví se %@";
 "plan_cancels_on" = "Končí %@";
-"delete_premium_warning" = "Smazání tvého účtu trvale odstraní tvůj profil. Pokud chceš také ukončit aktivní SENRA předplatné, udělej to na senra.pet před smazáním.";
+"delete_premium_warning" = "Smazání tvého účtu trvale odstraní tvůj profil. Pokud chceš také ukončit aktivní Senra předplatné, udělej to na senra.pet před smazáním.";
 "cancel_instead" = "Místo toho zrušit předplatné";
 
 // MARK: - Shelter Adoption
@@ -1293,7 +1293,7 @@
 "appearance_light" = "Světlý";
 "appearance_dark" = "Tmavý";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Komunitní upozornění vyžadují SENRA předplatné.";
+"mark_lost_starter_notice" = "Komunitní upozornění vyžadují Senra předplatné.";
 "mark_lost_starter_upgrade_cta" = "Zobrazit plány";
 "mark_lost_upgrade_prompt" = "V plánu Starter bude tvůj mazlíček označen jako ztracený, ale upozornění uživatelům, veterinářům a útulkům vyžadují předplatné Standard nebo Maximum.";
 // MARK: - Localization Audit Fixes
@@ -1390,29 +1390,29 @@
 "report_found_unavailable" = "Tato funkce není pro toto upozornění dostupná. Pokud jsi mazlíčka našel/našla, kontaktuj prosím přímo páníčka.";
 
 "qr_torch_unavailable" = "Svítilna není na tomto zařízení dostupná.";
-"tag_pending_badge" = "NA CESTĚ";
+"tag_pending_badge" = "PSÍ ZNÁMKA JE NA CESTĚ";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Aktivovat psí známku";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Zaregistruj svého mazlíčka a aktivuj tuto nabídku — díky %@.";
 "shelter_promo_pet_picker_label" = "Pet";
-"shelter_promo_new_pet" = "New Pet";
-"shelter_promo_existing_pet" = "Existing Pet";
-"shelter_promo_pet_name_placeholder" = "Pet name";
-"shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
-"shelter_promo_name_label_required" = "Name *";
-"shelter_promo_species_label_required" = "Species *";
-"shelter_promo_select_placeholder" = "Select...";
+"shelter_promo_new_pet" = "Nový mazlíček";
+"shelter_promo_existing_pet" = "Stávající mazlíček";
+"shelter_promo_pet_name_placeholder" = "Jméno mazlíčka";
+"shelter_promo_neutered_spayed" = "Kastrovaný / Sterilizovaná";
+"shelter_promo_register_and_claim_button" = "Registrovat a aktivovat psí známku";
+"shelter_promo_claim_success_title" = "Psí známka aktivována!";
+"shelter_promo_active_until_format" = "Psí známka aktivní do: %@";
+"shelter_promo_claim_tag_button" = "Aktivovat psí známku";
+"shelter_promo_name_label_required" = "Jméno *";
+"shelter_promo_species_label_required" = "Druh *";
+"shelter_promo_select_placeholder" = "Vyber...";
 
 // MARK: - Order more tags placeholders
-"order_more_owner_name" = "Owner name";
+"order_more_owner_name" = "Jméno majitele";
 "order_more_email" = "Email";
 "order_more_phone" = "Phone";
 
 // MARK: - Success stories sharing
-"shared_via_pet_safety" = "Shared via SENRA";
+"shared_via_pet_safety" = "Sdíleno přes SENRA";

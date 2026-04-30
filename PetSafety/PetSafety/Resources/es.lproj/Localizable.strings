@@ -164,16 +164,16 @@
 "scan_qr_subtitle" = "Apunta la cámara a la chapa inteligente QR de la mascota";
 "hello_pet_name" = "¡Hola! Soy %@";
 "scanned_tag_thanks" = "Acabas de escanear mi chapa inteligente. ¡Gracias por ayudarme!";
-"share_location_with_owner" = "Compartir mi ubicación con el tutor";
-"contact_owner" = "Contactar al tutor";
+"share_location_with_owner" = "Compartir mi ubicación con el dueño";
+"contact_owner" = "Contactar al dueño";
 "call_phone" = "Llamar: %@";
 "email_contact" = "Correo: %@";
-"privacy_notice" = "Tu privacidad importa. Solo compartiremos tu ubicación con el tutor de %@ para ayudar a reunirlos.";
+"privacy_notice" = "Tu privacidad importa. Solo compartiremos tu ubicación con el dueño de %@ para ayudar a reunirlos.";
 "found_pet_title" = "%@ encontrado";
 
 // MARK: - Flujo de compartir ubicación
 "share_help_get_home %@" = "Ayuda a %@ a volver a casa";
-"share_location_subtitle" = "Tu ubicación ayuda al tutor a encontrar a su mascota más rápido.";
+"share_location_subtitle" = "Tu ubicación ayuda al dueño a encontrar a su mascota más rápido.";
 "share_exact_location_toggle" = "Compartir ubicación exacta";
 "share_approximate_desc" = "Comparte tu área general (~500 m)";
 "share_exact_desc" = "Comparte tu ubicación exacta para una reunión más rápida";
@@ -181,11 +181,11 @@
 "share_accuracy" = "(~500 m de precisión)";
 "share_getting_location" = "Obteniendo tu ubicación…";
 "share_location_unavailable" = "Ubicación no disponible. Asegúrate de que los servicios de ubicación estén habilitados.";
-"share_owner_notified" = "¡Tutor notificado!";
+"share_owner_notified" = "¡Dueño notificado!";
 "share_on_their_way" = "¡Viene en camino!";
-"share_notifying" = "Notificando al tutor…";
-"share_notify_with_location" = "Compartir y notificar al tutor";
-"share_privacy_note" = "Tu ubicación se comparte con el tutor para ayudar a reunirlos con su mascota.";
+"share_notifying" = "Notificando al dueño…";
+"share_notify_with_location" = "Compartir y notificar al dueño";
+"share_privacy_note" = "Tu ubicación se comparte con el dueño de la mascota para ayudar a reunirlos.";
 "share_found_pet %@" = "¡%@ encontrado!";
 
 // MARK: - Detalle del escáner
@@ -193,7 +193,7 @@
 "scanner_breed" = "Raza";
 "scanner_age" = "Edad";
 "scanner_color" = "Color";
-"scanner_owner_location" = "Ubicación del tutor";
+"scanner_owner_location" = "Datos del dueño";
 "scanner_medical_info" = "Información médica";
 "scanner_allergies" = "Alergias";
 "scanner_notes" = "Notas";
@@ -253,9 +253,9 @@
 "additional_details_placeholder" = "Añade detalles sobre cuándo y dónde viste a tu mascota por última vez…";
 "alert_created_success" = "¡Alerta de mascota perdida creada correctamente!";
 "report_sighting_header" = "Reportar avistamiento";
-"report_sighting_help" = "Ayuda a reunir a esta mascota con su tutor compartiendo dónde la viste.";
+"report_sighting_help" = "Ayuda a reunir a esta mascota con su dueño compartiendo dónde la viste.";
 "share_contact_info" = "Compartir mis datos de contacto";
-"share_contact_info_desc" = "Permite que el tutor pueda contactarte directamente";
+"share_contact_info_desc" = "¡Permite que el dueño pueda contactarte directamente!";
 "your_name" = "Tu nombre";
 "your_phone_number" = "Tu teléfono";
 "your_email" = "Tu correo";
@@ -264,9 +264,9 @@
 "where_did_you_see" = "¿Dónde viste a la mascota?";
 "sighting_notes_placeholder" = "Describe lo que viste, el estado de la mascota, dirección de movimiento…";
 "submit_sighting_report" = "Enviar reporte de avistamiento";
-"sighting_reported_owner_notified" = "¡Avistamiento reportado! Se notificó al tutor.";
+"sighting_reported_owner_notified" = "¡Avistamiento reportado! Se notificó al dueño.";
 "sighting_address_not_found" = "No encontramos esa dirección. Revisa la ortografía o prueba con un punto de referencia cercano.";
-"sighting_location_invalid" = "La ubicación no parece válida. Comparte tu ubicación GPS actual o prueba otra dirección.";
+"sighting_location_invalid" = "Esa ubicación no parece válida. Comparte tu ubicación GPS actual o prueba con otra dirección.";
 "sighting_location_required" = "Comparte tu ubicación actual o introduce una dirección.";
 
 // MARK: - Hoja de marcar perdida/encontrada
@@ -405,9 +405,9 @@
 "notif_pet_alerts" = "Alertas de mascotas";
 "notif_pet_alerts_footer" = "Notificaciones sobre mascotas perdidas en tu zona";
 "notif_missing_pet_alerts" = "Alertas de mascotas perdidas";
-"notif_missing_pet_alerts_subtitle" = "Recibe notificaciones sobre mascotas perdidas en tu zona";
+"notif_missing_pet_alerts_subtitle" = "Avisos de mascotas perdidas en tu zona";
 "notif_nearby_alerts" = "Alertas cercanas (10 km)";
-"notif_nearby_alerts_subtitle" = "Alertas de mascotas en un radio de 10 km de tu ubicación";
+"notif_nearby_alerts_subtitle" = "Alertas de mascotas a 10 km de tu ubicación";
 "notif_account_orders" = "Cuenta y pedidos";
 "notif_account_orders_footer" = "Mantente al día con la actividad de tu cuenta y pedidos";
 "notif_order_updates" = "Actualizaciones de pedidos";
@@ -475,7 +475,7 @@
 "help_faq_q4" = "¿Puedo actualizar los datos de mi mascota más tarde?";
 "help_faq_a4" = "¡Sí! Puedes actualizar los datos de tu mascota en cualquier momento en la sección 'Mis Mascotas' seleccionando tu mascota y tocando 'Editar Perfil'. Puedes actualizar todos los campos excepto nombre, especie y raza, incluyendo fotos. Los cambios se guardan inmediatamente.";
 "help_faq_q5" = "¿Cómo pido una chapa inteligente de repuesto?";
-"help_faq_a5" = "Ve a la página 'Inicio / Mi cuenta' y pulsa 'Pedir chapa inteligente de reemplazo'. Selecciona qué mascota necesita una nueva chapa inteligente. La elegibilidad para el reemplazo depende de tu cuenta SENRA; visita senra.pet para más detalles.";
+"help_faq_a5" = "Ve a la página 'Inicio / Mi cuenta' y pulsa 'Pedir chapa inteligente de reemplazo'. Selecciona qué mascota necesita una nueva chapa inteligente. La elegibilidad para el reemplazo depende de tu cuenta Senra; visita senra.pet para más detalles.";
 "help_faq_q6" = "¿Cómo activo mi chapa inteligente después de recibirla?";
 "help_faq_a6" = "¡Descarga la app móvil SENRA desde Google Play Store o App Store! Ábrela y ve al menú 'Activar', apunta la cámara del teléfono al código QR de la chapa inteligente. Escanear el código QR vincula la chapa inteligente a tu cuenta. Luego debes seleccionar tu mascota existente o crear un nuevo perfil.";
 "help_faq_q7" = "¿Puedo regalar una chapa inteligente SENRA?";
@@ -493,15 +493,15 @@
 "help_faq_q13" = "¿Puedo tener varias mascotas en una cuenta?";
 "help_faq_a13" = "Sí. Puedes registrar varias mascotas en una sola cuenta. Visita senra.pet para más detalles.";
 "help_faq_q14" = "¿Cómo reporto una mascota encontrada?";
-"help_faq_a14" = "Si la mascota tiene una chapa inteligente SENRA, simplemente escanea el código QR con la cámara de tu teléfono — no necesitas ninguna aplicación. Puedes ver el perfil de la mascota y compartir tu ubicación con el tutor.";
+"help_faq_a14" = "Si la mascota tiene una chapa inteligente SENRA, simplemente escanea el código QR con la cámara de tu teléfono — no necesitas ninguna aplicación. Puedes ver el perfil de la mascota y compartir tu ubicación con el dueño.";
 "help_faq_q15" = "¿Están seguros mis datos personales?";
 "help_faq_a15" = "Sí. Tú controlas exactamente qué datos son visibles cuando alguien escanea la chapa inteligente de tu mascota. En 'Ajustes' > 'Ajustes de Privacidad', puedes elegir si mostrar tu número de teléfono, correo electrónico o dirección. Tu inicio de sesión está protegido con un código de verificación de un solo uso cada vez — no hay contraseña que puedan robar. Puedes eliminar tu cuenta y todos tus datos en cualquier momento.";
 "help_faq_q16" = "Perdimos la chapa inteligente o se dañó — ¿qué hago?";
-"help_faq_a16" = "No te preocupes — el perfil digital de tu mascota está seguro y no se almacena en la chapa inteligente. Ve a la página Cuenta y pulsa 'Pedir reemplazo'. Vincularemos una nueva chapa inteligente con un QR nuevo a tu perfil existente. La elegibilidad para el reemplazo depende de tu cuenta SENRA; visita senra.pet para más detalles. La chapa inteligente antigua se desactiva de inmediato al pedir el reemplazo.";
+"help_faq_a16" = "No te preocupes — el perfil digital de tu mascota está seguro y no se almacena en la chapa inteligente. Ve a la página Cuenta y pulsa 'Pedir reemplazo'. Vincularemos una nueva chapa inteligente con un QR nuevo a tu perfil existente. La elegibilidad para el reemplazo depende de tu cuenta Senra; visita senra.pet para más detalles. La chapa inteligente antigua se desactiva de inmediato al pedir el reemplazo.";
 "help_faq_q17" = "Mi chapa inteligente no se escanea — ¿qué hago?";
 "help_faq_a17" = "Prueba lo siguiente: limpia la superficie de la chapa inteligente con un paño húmedo, asegura buena iluminación, sostén la cámara del teléfono de forma estable a unos 10–15 cm de la chapa inteligente y comprueba que la app de cámara o el lector QR funciona. Si el código QR está rayado o gastado, pide un reemplazo desde la página 'Inicio / Mi cuenta'.";
 "help_faq_q18" = "Encontré una mascota sin chapa inteligente SENRA — ¿qué puedo hacer?";
-"help_faq_a18" = "Consulta el mapa de Mascotas Perdidas en la web de SENRA (senra.pet) — la mascota puede haber sido reportada como perdida en tu zona. También puedes ver las alertas en la aplicación. Lleva al animal a la clínica veterinaria más cercana para escanear su microchip. Si tiene chapa inteligente SENRA, escanea el código QR — aparecerán los datos de contacto del tutor. Siempre notifica también a las autoridades locales y refugios cercanos.";
+"help_faq_a18" = "Consulta el mapa de Mascotas Desaparecidas en la web de SENRA (senra.pet) — puede que esta mascota ya haya sido reportada como desaparecida en tu zona. También puedes ver las alertas de mascotas desaparecidas dentro de la app. Lleva a la mascota a la clínica veterinaria más cercana para que le escaneen el microchip. Si la mascota encontrada lleva una chapa inteligente SENRA, escanea el código QR con la cámara de tu teléfono — aparecerán los datos de contacto del dueño.";
 "help_faq_q19" = "¿Puedo cambiar mi dirección de correo electrónico?";
 "help_faq_a19" = "Tu correo electrónico principal sirve como identificador de cuenta y no se puede cambiar directamente. Si quieres usar otro correo como contacto público, puedes añadir uno secundario en 'Ajustes' > 'Datos de Contacto'. Si necesitas cambiar tu correo principal, contáctanos en hello@senra.pet y te ayudaremos.";
 "help_faq_q20" = "¿Cuál es la diferencia entre un microchip y una chapa inteligente QR SENRA?";
@@ -636,8 +636,8 @@
 // MARK: - Perfil público de mascota
 "public_profile_preview" = "Vista previa del perfil público";
 "public_profile_subtitle" = "Así ven los demás el perfil de %@";
-"owner_notified_sms_email" = "El tutor de %@ recibirá un SMS y un correo con tu ubicación";
-"contact_owner_plea" = "Por favor, avisa a mi tutor de que me has encontrado…";
+"owner_notified_sms_email" = "El dueño de %@ recibirá un SMS y un correo con tu ubicación";
+"contact_owner_plea" = "Por favor, avisa a mi dueño de que me has encontrado…";
 "contact_info_not_set" = "La información de contacto aún no está configurada";
 "contact_info_hidden" = "La información de contacto está oculta";
 "contact_info_hidden_hint" = "Tus datos de contacto están configurados pero ocultos por ajustes de privacidad. Actualiza en Cuenta > Modo de privacidad.";
@@ -647,13 +647,13 @@
 "behavior_notes" = "Notas de comportamiento";
 "yes" = "Sí";
 "how_it_works" = "Cómo funciona";
-"help_reunite_pet" = "Ayuda a reunir de forma segura a %@ con su tutor";
+"help_reunite_pet" = "¡Ayuda a reunir de forma segura a %@ con su dueño!";
 "step_share_location" = "Compartir tu ubicación";
-"step_share_location_desc" = "Toca el botón de arriba para compartir tu ubicación con el tutor";
-"step_owner_notified" = "Tutor notificado";
-"step_owner_notified_desc" = "El tutor recibe un SMS y un correo con tu ubicación";
+"step_share_location_desc" = "Toca el botón de arriba para compartir tu ubicación con el dueño";
+"step_owner_notified" = "Dueño notificado";
+"step_owner_notified_desc" = "El dueño recibe un SMS y un correo con tu ubicación";
 "step_quick_reunion" = "Reunión rápida";
-"step_quick_reunion_desc" = "El tutor puede navegar hasta tu ubicación para recoger a su mascota";
+"step_quick_reunion_desc" = "El dueño puede navegar hasta tu ubicación para recoger a su mascota";
 
 // MARK: - Modo sin conexión
 "offline_mode" = "Modo sin conexión";
@@ -693,7 +693,7 @@
 
 // MARK: - Descripciones dinámicas del escáner
 "scanner_step1_dynamic_desc" = "Haz clic arriba para compartir dónde encontraste a %@";
-"scanner_step3_dynamic_desc" = "Quédate cerca para que el tutor pueda encontrarte a ti y a %@";
+"scanner_step3_dynamic_desc" = "¡Quédate cerca para que el dueño pueda encontrarte a ti y a %@!";
 
 // MARK: - Claves adicionales de perfil
 "not_set" = "No establecido";
@@ -839,9 +839,9 @@
 // MARK: - Placas de accesibilidad
 "accessibility_pet_photo" = "Foto de mascota";
 "accessibility_share_location" = "Compartir ubicación";
-"accessibility_call_owner" = "Llamar al tutor";
-"accessibility_email_owner" = "Enviar email al tutor";
-"accessibility_owner_address" = "Dirección del tutor";
+"accessibility_call_owner" = "Llamar al dueño";
+"accessibility_email_owner" = "Enviar email al dueño";
+"accessibility_owner_address" = "Dirección del dueño";
 "accessibility_medical_info" = "Información médica";
 "accessibility_allergies" = "Alergias";
 "accessibility_notes" = "Notas";
@@ -934,7 +934,7 @@
 // MARK: - Historias de Éxito Reunión
 "reunion_template" = "%@ ha sido reunido. Después de %@ desaparecido, %@ se reunió exitosamente con su familia. ¡Gracias a nuestra increíble comunidad por traer a %@ a casa!";
 "reunion_template_no_time" = "¡%@ se ha reunido con su familia! ¡Gracias a nuestra increíble comunidad por traer a %@ a casa!";
-"owners_story" = "Historia del tutor:";
+"owners_story" = "Historia del dueño:";
 "some_time" = "algún tiempo";
 "list" = "Lista";
 "map" = "Mapa";
@@ -951,7 +951,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "¡%@ encontrado!";
+"sse_tag_scanned_title" = "¡Han encontrado a %@!";
 "sse_tag_scanned_body_with_address" = "Alguien escaneó la chapa de tu mascota en: %@";
 "sse_tag_scanned_body_no_address" = "Alguien escaneó la chapa de tu mascota";
 "sse_sighting_title" = "¡%@ avistado!";
@@ -970,17 +970,17 @@
 "plan_feature_photos_count" = "%lld fotos por mascota";
 "referral_status_pending" = "Pendiente";
 "referral_status_signed_up" = "Registrado";
-"referral_status_subscribed" = "Active";
+"referral_status_subscribed" = "Activo";
 "referral_status_rewarded" = "Recompensado";
 "referral_share_message" = "Usa mi código de referencia %@ y obtén 2 meses gratis en SENRA! https://senra.pet/choose-plan?referral=%@";
 "help_guide_qr_tags_title" = "Chapas inteligentes QR para mascotas";
-"help_guide_qr_tags_desc" = "Conoce nuestras chapas inteligentes QR inteligentes.";
+"help_guide_qr_tags_desc" = "Cada chapa inteligente SENRA tiene un código QR único que enlaza con el perfil digital de tu mascota. Cualquiera que encuentre a tu mascota puede escanear el código con la cámara de su teléfono — no es necesario descargar ninguna aplicación. Al escanear, recibes una notificación con la ubicación del encontrador (si la comparte). Puedes activar las chapas inteligentes a través de la aplicación y solicitar una de repuesto en cualquier momento si pierdes o se daña la original.";
 "help_guide_materials_title" = "Materiales y durabilidad";
-"help_guide_materials_desc" = "Información sobre materiales y cuidado.";
+"help_guide_materials_desc" = "Las chapas inteligentes SENRA están hechas de metal ligero y duradero con un revestimiento epoxi para mayor protección. Son resistentes al agua y a los rayos UV, aptas para cualquier condición climática. No se desgastan con el uso diario. Las chapas inteligentes están diseñadas para ajustarse cómodamente a la mayoría de collares y arneses.";
 "help_guide_emergency_title" = "Funciones de contacto de emergencia";
-"help_guide_emergency_desc" = "Cómo funciona nuestro sistema de contacto.";
+"help_guide_emergency_desc" = "Cuando alguien escanea la chapa inteligente de tu mascota, recibes una notificación push instantánea y un email con la ubicación del encontrador. Los miembros de los planes Standard y Maximum también reciben alertas por SMS para una respuesta más rápida. Si marcas a tu mascota como perdida, se envía una alerta comunitaria a todos los usuarios de SENRA en un radio de 10 km, y los veterinarios y refugios registrados en tu zona también son notificados. Cualquiera de la comunidad puede reportar avistamientos con su ubicación y fotos, ayudándote a encontrar a tu mascota.";
 "help_guide_profile_title" = "Gestión de perfil";
-"help_guide_profile_desc" = "Gestiona y actualiza el perfil de tu mascota.";
+"help_guide_profile_desc" = "El perfil digital de tu mascota es el corazón de SENRA. Añade los datos esenciales: el nombre ya está, especie, raza, edad y sube una foto de buena calidad. También puedes incluir información médica, alergias, medicamentos y características especiales. Cuando alguien escanee la chapa inteligente de tu mascota, verá este perfil, por lo que es importante mantenerlo actualizado. Tu perfil ayuda a quienes encuentren a tu mascota a reconocerla y saber qué hacer.";
 "help_guide_missing_alerts_title" = "Alertas de mascotas perdidas y avistamientos";
 "help_guide_missing_alerts_desc" = "Si tu mascota se pierde, márcala como perdida desde \"Mis mascotas\" para crear una alerta comunitaria instantánea. La foto y los detalles de tu mascota aparecen en el mapa de mascotas perdidas visible para todos los usuarios de SENRA en tu zona. Los miembros de la comunidad pueden reportar avistamientos con su ubicación GPS, que recibes como notificaciones. Los veterinarios y refugios registrados también son alertados. Cuando tu mascota sea encontrada, márcala como encontrada y opcionalmente comparte tu historia de reencuentro para inspirar a la comunidad.";
 "help_guide_community_title" = "Comunidad y mascotas encontradas";
@@ -1009,7 +1009,7 @@
 "orders_item_count %lld" = "%lld artículos";
 
 // MARK: - Scanner Additional
-"scanner_owner_address" = "Dirección del tutor";
+"scanner_owner_address" = "Dirección del dueño";
 
 // MARK: - Billing Additional
 "billing_past_due_title" = "Pago vencido";
@@ -1126,7 +1126,7 @@
 "breed_dog_beagle" = "Beagle";
 "breed_dog_rottweiler" = "Rottweiler";
 "breed_dog_german_shorthaired_pointer" = "Braco Alemán de Pelo Corto";
-"breed_dog_yorkshire_terrier" = "Yorkshire Terrier";
+"breed_dog_yorkshire_terrier" = "Yorkshire terrier";
 "breed_dog_boxer" = "Bóxer";
 "breed_dog_dachshund" = "Teckel";
 "breed_dog_siberian_husky" = "Husky Siberiano";
@@ -1134,26 +1134,26 @@
 "breed_dog_doberman_pinscher" = "Dóberman";
 "breed_dog_australian_shepherd" = "Pastor Australiano";
 "breed_dog_miniature_schnauzer" = "Schnauzer Miniatura";
-"breed_dog_cavalier_king_charles_spaniel" = "Cavalier King Charles Spaniel";
+"breed_dog_cavalier_king_charles_spaniel" = "Cavalier King Charles spaniel";
 "breed_dog_shih_tzu" = "Shih Tzu";
-"breed_dog_boston_terrier" = "Boston Terrier";
+"breed_dog_boston_terrier" = "Boston terrier";
 "breed_dog_pomeranian" = "Pomerania";
 "breed_dog_havanese" = "Bichón Habanero";
 "breed_dog_shetland_sheepdog" = "Pastor de Shetland";
 "breed_dog_brittany" = "Bretón";
 "breed_dog_english_springer_spaniel" = "Springer Spaniel Inglés";
 "breed_dog_bernese_mountain_dog" = "Boyero de Berna";
-"breed_dog_cocker_spaniel" = "Cocker Spaniel";
-"breed_dog_border_collie" = "Border Collie";
+"breed_dog_cocker_spaniel" = "Cocker spaniel";
+"breed_dog_border_collie" = "Border collie";
 "breed_dog_vizsla" = "Vizsla";
 "breed_dog_weimaraner" = "Weimaraner";
 "breed_dog_pembroke_welsh_corgi" = "Corgi Galés de Pembroke";
 "breed_dog_maltese" = "Maltés";
 "breed_dog_chihuahua" = "Chihuahua";
-"breed_dog_west_highland_white_terrier" = "West Highland White Terrier";
+"breed_dog_west_highland_white_terrier" = "West Highland white terrier";
 "breed_dog_collie" = "Collie";
-"breed_dog_basset_hound" = "Basset Hound";
-"breed_dog_rhodesian_ridgeback" = "Rhodesian Ridgeback";
+"breed_dog_basset_hound" = "Basset hound";
+"breed_dog_rhodesian_ridgeback" = "Rhodesian ridgeback";
 "breed_dog_newfoundland" = "Terranova";
 "breed_dog_belgian_malinois" = "Pastor Belga Malinois";
 "breed_dog_bichon_frise" = "Bichón Frisé";
@@ -1163,7 +1163,7 @@
 "breed_dog_papillon" = "Papillón";
 "breed_dog_bullmastiff" = "Bullmastiff";
 "breed_dog_samoyed" = "Samoyedo";
-"breed_dog_scottish_terrier" = "Scottish Terrier";
+"breed_dog_scottish_terrier" = "Terrier escocés";
 "breed_dog_soft_coated_wheaten_terrier" = "Terrier Irlandés de Pelo Suave";
 "breed_dog_airedale_terrier" = "Airedale Terrier";
 "breed_dog_jack_russell_terrier" = "Jack Russell Terrier";
@@ -1172,16 +1172,16 @@
 "breed_cat_persian" = "Persa";
 "breed_cat_maine_coon" = "Maine Coon";
 "breed_cat_ragdoll" = "Ragdoll";
-"breed_cat_british_shorthair" = "British Shorthair";
-"breed_cat_exotic_shorthair" = "Exotic Shorthair";
+"breed_cat_british_shorthair" = "Británico de pelo corto";
+"breed_cat_exotic_shorthair" = "Exótico de pelo corto";
 "breed_cat_abyssinian" = "Abisinio";
-"breed_cat_scottish_fold" = "Scottish Fold";
-"breed_cat_sphynx" = "Sphynx";
+"breed_cat_scottish_fold" = "Fold escocés";
+"breed_cat_sphynx" = "Esfinge";
 "breed_cat_siamese" = "Siamés";
 "breed_cat_devon_rex" = "Devon Rex";
 "breed_cat_oriental_shorthair" = "Oriental de pelo corto";
 "breed_cat_burmese" = "Burmés";
-"breed_cat_american_shorthair" = "American Shorthair";
+"breed_cat_american_shorthair" = "Americano de pelo corto";
 "breed_cat_bengal" = "Bengalí";
 "breed_cat_russian_blue" = "Azul Ruso";
 "breed_cat_norwegian_forest_cat" = "Bosque de Noruega";
@@ -1196,7 +1196,7 @@
 "breed_cat_manx" = "Manx";
 "breed_cat_selkirk_rex" = "Selkirk Rex";
 "breed_cat_ragamuffin" = "RagaMuffin";
-"breed_cat_american_curl" = "American Curl";
+"breed_cat_american_curl" = "Curl americano";
 "breed_cat_chartreux" = "Chartreux";
 "breed_cat_bombay" = "Bombay";
 "breed_cat_egyptian_mau" = "Mau Egipcio";
@@ -1207,10 +1207,10 @@
 "breed_cat_havana_brown" = "Habana Marrón";
 "breed_cat_japanese_bobtail" = "Bobtail Japonés";
 "breed_cat_laperm" = "LaPerm";
-"breed_cat_american_wirehair" = "American Wirehair";
+"breed_cat_american_wirehair" = "Americano de pelo áspero";
 "breed_cat_european_burmese" = "Burmés Europeo";
 "breed_cat_burmilla" = "Burmilla";
-"breed_cat_colorpoint_shorthair" = "Colorpoint Shorthair";
+"breed_cat_colorpoint_shorthair" = "Colorpoint de pelo corto";
 "breed_cat_javanese" = "Javanés";
 "breed_cat_nebelung" = "Nebelung";
 "breed_cat_pixie_bob" = "Pixie-Bob";
@@ -1247,7 +1247,7 @@
 "current_plan" = "Plan actual";
 "plan_renews" = "Se renueva el %@";
 "plan_cancels_on" = "Finaliza el %@";
-"delete_premium_warning" = "Eliminar tu cuenta borrará permanentemente tu perfil. Si también deseas finalizar una suscripción SENRA activa, hazlo en senra.pet antes de eliminar.";
+"delete_premium_warning" = "Eliminar tu cuenta borrará permanentemente tu perfil. Si también deseas finalizar una suscripción Senra activa, hazlo en senra.pet antes de eliminar.";
 "cancel_instead" = "Cancelar suscripción en su lugar";
 
 // MARK: - Shelter Adoption
@@ -1293,7 +1293,7 @@
 "appearance_light" = "Claro";
 "appearance_dark" = "Oscuro";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Las alertas comunitarias requieren una suscripción SENRA.";
+"mark_lost_starter_notice" = "Las alertas comunitarias requieren una suscripción Senra.";
 "mark_lost_starter_upgrade_cta" = "Ver planes";
 "mark_lost_upgrade_prompt" = "Con el plan Starter tu mascota se marcará como perdida, pero las notificaciones a usuarios, veterinarios y refugios requieren una suscripción Standard o Maximum.";
 // MARK: - Localization Audit Fixes
@@ -1387,32 +1387,32 @@
 // MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
 "tags_coming_soon_title" = "Las chapas inteligentes físicas llegarán pronto";
 "tags_coming_soon_body" = "Pronto enviaremos nuestro primer lote. Vuelve en unos días.";
-"report_found_unavailable" = "Esta función no está disponible para esta alerta. Por favor, contacta directamente con el tutor si has encontrado a la mascota.";
+"report_found_unavailable" = "Esta función no está disponible para esta alerta. Por favor, contacta directamente con el dueño si has encontrado a la mascota.";
 
 "qr_torch_unavailable" = "La linterna no está disponible en este dispositivo.";
-"tag_pending_badge" = "EN CAMINO";
+"tag_pending_badge" = "CHAPA INTELIGENTE EN CAMINO";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Activar chapa inteligente";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Registra a tu mascota para activar esta oferta — cortesía de %@.";
 "shelter_promo_pet_picker_label" = "Pet";
-"shelter_promo_new_pet" = "New Pet";
-"shelter_promo_existing_pet" = "Existing Pet";
-"shelter_promo_pet_name_placeholder" = "Pet name";
-"shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
-"shelter_promo_name_label_required" = "Name *";
-"shelter_promo_species_label_required" = "Species *";
-"shelter_promo_select_placeholder" = "Select...";
+"shelter_promo_new_pet" = "Nueva mascota";
+"shelter_promo_existing_pet" = "Mascota existente";
+"shelter_promo_pet_name_placeholder" = "Nombre de la mascota";
+"shelter_promo_neutered_spayed" = "Esterilizado/a";
+"shelter_promo_register_and_claim_button" = "Registrarse y activar la chapa inteligente";
+"shelter_promo_claim_success_title" = "¡Chapa inteligente activada!";
+"shelter_promo_active_until_format" = "Chapa inteligente activa hasta: %@";
+"shelter_promo_claim_tag_button" = "Activar chapa inteligente";
+"shelter_promo_name_label_required" = "Nombre *";
+"shelter_promo_species_label_required" = "Especie *";
+"shelter_promo_select_placeholder" = "Selecciona...";
 
 // MARK: - Order more tags placeholders
-"order_more_owner_name" = "Owner name";
+"order_more_owner_name" = "Nombre del dueño";
 "order_more_email" = "Email";
 "order_more_phone" = "Phone";
 
 // MARK: - Success stories sharing
-"shared_via_pet_safety" = "Shared via SENRA";
+"shared_via_pet_safety" = "Compartido a través de SENRA";

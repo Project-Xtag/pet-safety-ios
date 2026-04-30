@@ -164,16 +164,16 @@
 "scan_qr_subtitle" = "Aponte a câmara para a plaquinha inteligente QR do animal de estimação";
 "hello_pet_name" = "Olá! Eu sou %@";
 "scanned_tag_thanks" = "Acabou de ler a minha plaquinha inteligente. Obrigado por me ajudar!";
-"share_location_with_owner" = "Partilhar a minha localização com o tutor";
-"contact_owner" = "Contactar o tutor";
+"share_location_with_owner" = "Partilhar a minha localização com o dono";
+"contact_owner" = "Contactar o dono";
 "call_phone" = "Ligar: %@";
 "email_contact" = "E-mail: %@";
-"privacy_notice" = "A sua privacidade é importante. Só partilharemos a sua localização com o tutor de %@ para ajudar a reuni-los.";
+"privacy_notice" = "A tua privacidade é importante. Só partilharemos a tua localização com o dono de %@ para ajudar a reuni-los.";
 "found_pet_title" = "%@ encontrado";
 
 // MARK: - Fluxo de partilha de localização
 "share_help_get_home %@" = "Ajude %@ a voltar para casa";
-"share_location_subtitle" = "A sua localização ajuda o tutor a encontrar o seu animal de estimação mais depressa.";
+"share_location_subtitle" = "A tua localização ajuda o dono a encontrar o seu animal de estimação mais depressa.";
 "share_exact_location_toggle" = "Partilhar localização exata";
 "share_approximate_desc" = "Partilhe a sua área geral (~500 m)";
 "share_exact_desc" = "Partilhe a localização exata para uma reunião mais rápida";
@@ -181,11 +181,11 @@
 "share_accuracy" = "(~500 m de precisão)";
 "share_getting_location" = "A obter a sua localização…";
 "share_location_unavailable" = "Localização não disponível. Certifique-se de que os serviços de localização estão ativados.";
-"share_owner_notified" = "Tutor notificado!";
+"share_owner_notified" = "Dono notificado!";
 "share_on_their_way" = "Está a caminho!";
-"share_notifying" = "A notificar o tutor…";
-"share_notify_with_location" = "Partilhar e notificar o tutor";
-"share_privacy_note" = "A sua localização é partilhada com o tutor para ajudar a reunir-se com o seu animal de estimação.";
+"share_notifying" = "A notificar o dono…";
+"share_notify_with_location" = "Partilhar e notificar o dono";
+"share_privacy_note" = "A tua localização é partilhada com o dono.";
 "share_found_pet %@" = "%@ encontrado!";
 
 // MARK: - Detalhe do leitor
@@ -193,7 +193,7 @@
 "scanner_breed" = "Raça";
 "scanner_age" = "Idade";
 "scanner_color" = "Cor";
-"scanner_owner_location" = "Localização do tutor";
+"scanner_owner_location" = "Dados do dono";
 "scanner_medical_info" = "Informação médica";
 "scanner_allergies" = "Alergias";
 "scanner_notes" = "Notas";
@@ -253,9 +253,9 @@
 "additional_details_placeholder" = "Forneça detalhes sobre quando e onde viu o seu animal de estimação pela última vez…";
 "alert_created_success" = "Alerta de animal de estimação desaparecido criado com sucesso!";
 "report_sighting_header" = "Reportar avistamento";
-"report_sighting_help" = "Ajude a reunir este animal de estimação com o tutor partilhando onde o viu.";
+"report_sighting_help" = "Ajuda a reunir este animal de estimação com o dono partilhando onde o viste.";
 "share_contact_info" = "Partilhar os meus contactos";
-"share_contact_info_desc" = "Permita que o tutor o contacte diretamente";
+"share_contact_info_desc" = "Permite que o dono te contacte diretamente!";
 "your_name" = "O seu nome";
 "your_phone_number" = "O seu telefone";
 "your_email" = "O seu e-mail";
@@ -264,9 +264,9 @@
 "where_did_you_see" = "Onde viu o animal de estimação?";
 "sighting_notes_placeholder" = "Descreva o que viu, a condição do animal de estimação, a direção…";
 "submit_sighting_report" = "Enviar relatório de avistamento";
-"sighting_reported_owner_notified" = "Avistamento reportado! O tutor foi notificado.";
+"sighting_reported_owner_notified" = "Avistamento reportado! O dono foi notificado.";
 "sighting_address_not_found" = "Não encontramos esse endereço. Verifica a ortografia ou tenta um ponto de referência próximo.";
-"sighting_location_invalid" = "Essa localização parece inválida. Partilha a tua localização GPS atual ou tenta outro endereço.";
+"sighting_location_invalid" = "Essa localização parece inválida. Partilha a tua localização GPS atual ou tenta uma morada diferente.";
 "sighting_location_required" = "Partilha a tua localização atual ou insere uma morada.";
 
 // MARK: - Marcar perdido/encontrado
@@ -307,7 +307,7 @@
 "share_card_reunited" = "Reunido!";
 "story_maybe_later" = "Talvez mais tarde";
 "story_share_good_news" = "Partilha a boa notícia";
-"story_social_caption %@" = "%@ reencontrou a sua família! Obrigado à comunidade SENRA por ajudar a trazer %@ para casa. senra.animal de estimação";
+"story_social_caption %@" = "%@ reencontrou a sua família! Obrigado à comunidade SENRA por ajudar a trazer %@ para casa. senra.pet";
 "story_generating_card" = "A criar cartão de partilha…";
 "story_your_story" = "A sua história";
 "story_city_optional" = "Cidade/Área (opcional)";
@@ -405,9 +405,9 @@
 "notif_pet_alerts" = "Alertas de animais de estimação";
 "notif_pet_alerts_footer" = "Notificações sobre animais de estimação desaparecidos na sua área";
 "notif_missing_pet_alerts" = "Alertas de animais de estimação desaparecidos";
-"notif_missing_pet_alerts_subtitle" = "Receba notificações sobre animais de estimação desaparecidos na sua área";
+"notif_missing_pet_alerts_subtitle" = "Alertas de animais desaparecidos na tua zona";
 "notif_nearby_alerts" = "Alertas nas proximidades (10 km)";
-"notif_nearby_alerts_subtitle" = "Alertas de animais de estimação num raio de 10 km da sua localização";
+"notif_nearby_alerts_subtitle" = "Alertas num raio de 10 km da tua localização";
 "notif_account_orders" = "Conta e encomendas";
 "notif_account_orders_footer" = "Mantenha-se atualizado sobre a atividade da sua conta e encomendas";
 "notif_order_updates" = "Atualizações de encomendas";
@@ -475,7 +475,7 @@
 "help_faq_q4" = "Posso atualizar os dados do meu animal de estimação mais tarde?";
 "help_faq_a4" = "Sim! Podes atualizar os dados do teu animal de estimação a qualquer momento na secção 'Os Meus Animais de estimação' selecionando o teu animal de estimação e tocando em 'Editar Perfil'. Podes atualizar todos os campos exceto nome, espécie e raça, incluindo fotos. As alterações são guardadas imediatamente.";
 "help_faq_q5" = "Como peço uma plaquinha inteligente de substituição?";
-"help_faq_a5" = "Vai à página 'Início / Minha conta' e toca em 'Encomendar plaquinha inteligente de substituição'. Seleciona qual o animal de estimação precisa de uma nova plaquinha inteligente. A elegibilidade para substituição depende da tua conta SENRA; visita senra.animal de estimação para mais detalhes.";
+"help_faq_a5" = "Vai à página 'Início / Minha conta' e toca em 'Encomendar plaquinha inteligente de substituição'. Seleciona qual o animal de estimação que precisa de uma nova plaquinha inteligente. A elegibilidade para substituição depende da tua conta Senra; visita senra.pet para mais detalhes.";
 "help_faq_q6" = "Como ativo a minha plaquinha inteligente depois de chegar?";
 "help_faq_a6" = "Transfere a aplicação móvel SENRA da Google Play Store ou App Store! Abre-a e vai ao menu 'Ativar', aponta a câmara do telemóvel ao código QR na plaquinha inteligente! Ler o código QR liga a plaquinha inteligente à tua conta. Depois tens de selecionar o teu animal de estimação existente ou criar um novo perfil.";
 "help_faq_q7" = "Posso oferecer uma plaquinha inteligente SENRA?";
@@ -491,25 +491,25 @@
 "help_faq_q12" = "Para que países enviam?";
 "help_faq_a12" = "Atualmente enviamos para Hungria, Eslováquia, República Checa, Áustria, Roménia, Croácia, Espanha, Itália, França, Alemanha, Noruega e Portugal. Envio nacional na Hungria: {{huPostapoint}} (PostaPont) ou {{huHome}} (entrega ao domicílio). Envio internacional: {{intlPrice}} por encomenda.";
 "help_faq_q13" = "Posso ter vários animais de estimação numa conta?";
-"help_faq_a13" = "Sim. Podes registar vários animais de estimação numa única conta. Visita senra.animal de estimação para detalhes da conta.";
+"help_faq_a13" = "Sim. Podes registar vários animais de estimação numa única conta. Visita senra.pet para detalhes da conta.";
 "help_faq_q14" = "Como reporto um animal de estimação encontrado?";
-"help_faq_a14" = "Se o animal de estimação tem uma plaquinha inteligente SENRA, simplesmente lê o código QR com a câmara do telemóvel — não é precisa aplicação. Podes ver o perfil do animal de estimação e partilhar a tua localização com o tutor.";
+"help_faq_a14" = "Se o animal de estimação tem uma plaquinha inteligente SENRA, simplesmente lê o código QR com a câmara do telemóvel — não é precisa aplicação. Podes ver o perfil do animal de estimação e partilhar a tua localização com o dono.";
 "help_faq_q15" = "Os meus dados pessoais estão seguros?";
 "help_faq_a15" = "Sim. Tu controlas exatamente que dados são visíveis quando alguém lê a plaquinha inteligente do teu animal de estimação. Em 'Definições' > 'Definições de Privacidade', podes escolher se mostras o teu número de telefone, email ou morada. O teu login é protegido por um código de verificação único de cada vez. Podes apagar a tua conta e dados a qualquer momento.";
 "help_faq_q16" = "Perdemos a plaquinha inteligente ou ficou danificada — o que faço?";
-"help_faq_a16" = "Sem preocupações — o perfil digital do teu animal de estimação está seguro e não é armazenado na plaquinha inteligente. Vai à página Conta e toca em 'Encomendar substituição'. Ligaremos uma nova plaquinha inteligente com um QR novo ao teu perfil. A elegibilidade para substituição depende da tua conta SENRA; visita senra.animal de estimação para detalhes. A plaquinha inteligente antiga é desativada imediatamente ao encomendar a substituição.";
+"help_faq_a16" = "Sem preocupações — o perfil digital do teu animal de estimação está seguro e não é armazenado na plaquinha inteligente. Vai à página Conta e toca em 'Encomendar substituição'. Ligaremos uma nova plaquinha inteligente com um QR novo ao teu perfil. A elegibilidade para substituição depende da tua conta Senra; visita senra.pet para detalhes. A plaquinha inteligente antiga é desativada imediatamente ao encomendar a substituição.";
 "help_faq_q17" = "A minha plaquinha inteligente não lê — o que faço?";
 "help_faq_a17" = "Experimenta o seguinte: limpa a superfície da plaquinha inteligente com um pano húmido, garante boa iluminação, segura a câmara do telemóvel estável a cerca de 10–15 cm da plaquinha inteligente e verifica se a aplicação de câmara ou leitor QR está a funcionar. Se o código QR estiver riscado ou gasto, encomenda uma substituição na página 'Início / Minha conta'.";
 "help_faq_q18" = "Encontrei um animal de estimação sem plaquinha inteligente SENRA — o que posso fazer?";
-"help_faq_a18" = "Verifica o mapa de Animais de estimação Perdidos no site SENRA (senra.animal de estimação). Também podes ver os alertas na aplicação. Leva o animal de estimação ao veterinário mais próximo para ler o microchip. Se tem plaquinha inteligente SENRA, lê o código QR — aparecem os dados do tutor. Notifica sempre as autoridades locais e abrigos.";
+"help_faq_a18" = "Consulta o mapa de Animais Desaparecidos no site da SENRA (senra.pet) — este animal de estimação pode já ter sido reportado como desaparecido na tua zona. Também podes ver os alertas de animais desaparecidos dentro da app. Leva o animal à clínica veterinária mais próxima para que leiam o microchip. Se o animal encontrado tiver uma plaquinha inteligente SENRA, lê o código QR com a câmara do teu telemóvel — vão aparecer os contactos do dono.";
 "help_faq_q19" = "Posso mudar o meu endereço de email?";
-"help_faq_a19" = "O teu email principal serve como identificador da conta e não pode ser mudado diretamente. Podes adicionar um email secundário em 'Definições' > 'Dados de Contacto'. Se precisas mesmo de mudar o email principal, contacta-nos em hello@senra.animal de estimação.";
+"help_faq_a19" = "O teu email principal serve como identificador da conta e não pode ser mudado diretamente. Se quiseres usar outro email como contacto público, podes adicionar um email secundário em 'Definições' > 'Dados de Contacto' — este também pode aparecer no perfil do teu animal de estimação se o ativares, para que quem o encontrar o veja imediatamente e te contacte diretamente. Se precisas mesmo de mudar o email principal, contacta-nos em hello@senra.pet e ajudamos a migrar a tua conta.";
 "help_faq_q20" = "Qual é a diferença entre um microchip e uma plaquinha inteligente QR SENRA?";
 "help_faq_a20" = "Um microchip é um pequeno implante sob a pele do teu animal de estimação que armazena um identificador único de 15 dígitos — mas requer um leitor especial. A plaquinha inteligente QR SENRA pode ser lida com qualquer câmara de smartphone, mostrando instantaneamente o perfil completo, foto e dados de contacto aprovados. Quem encontrar também pode partilhar as coordenadas GPS.";
 "help_faq_q21" = "O que acontece aos meus dados se cancelar a subscrição?";
 "help_faq_a21" = "Se cancelares a subscrição, manténs acesso às funcionalidades pagas até ao final do período de faturação atual. Depois, a conta muda automaticamente para o plano Starter gratuito. Perfis, fotos e plaquinhas inteligentes QR permanecem ativos. Os teus dados não são eliminados ao cancelar. Para eliminar tudo permanentemente, usa Eliminar Conta nas Definições.";
 "help_faq_q22" = "Como posso registar a minha clínica ou abrigo na SENRA?";
-"help_faq_a22" = "Clínicas veterinárias e abrigos podem registar-se em senra.animal de estimação/register-vet-shelter. Preenche os dados e enviamos um email de verificação. Após confirmação, enviamos automaticamente notificações quando animais de estimação se perdem na zona. Sem custos e sem necessidade de login.";
+"help_faq_a22" = "Clínicas veterinárias e abrigos podem registar-se em senra.pet/register-vet-shelter. Preenche os dados da clínica ou organização e enviamos um email de verificação. Após confirmação, enviamos automaticamente notificações quando animais de estimação se perdem na tua zona — ajudando os animais de estimação perdidos a voltar para casa. Sem custos e sem necessidade de login.";
 "help_faq_q23" = "Como posso partilhar uma história de sucesso se o meu animal de estimação foi encontrado?";
 "help_faq_a23" = "Quando marcas o teu animal de estimação como 'Encontrado', perguntamos se queres partilhar a boa notícia. Podes publicar uma breve história. As histórias públicas aparecem no mapa 'Animais de estimação Encontrados'.";
 "help_faq_q24" = "Que navegadores e dispositivos são suportados?";
@@ -521,11 +521,11 @@
 "help_faq_q27" = "Posso transferir uma plaquinha inteligente para outro animal de estimação?";
 "help_faq_a27" = "Não. Cada plaquinha inteligente QR está permanentemente vinculada ao perfil de um animal de estimação. Se um animal de estimação falece ou já não precisas da plaquinha inteligente, ela torna-se inativa. Encomenda uma nova plaquinha inteligente para o novo animal de estimação no site SENRA.";
 "help_faq_q28" = "Como posso registar a clínica veterinária do meu animal de estimação ou o abrigo onde adotei o meu animal de estimação na rede SENRA?";
-"help_faq_a28" = "Clínicas veterinárias e abrigos podem registar-se em senra.animal de estimação/register-vet-shelter. Preenche os dados e enviamos um email de verificação. Após confirmação, enviamos notificações quando animais de estimação se perdem na zona — ajudando os animais de estimação perdidos a voltar para casa mais depressa. Sem custos e sem login.";
+"help_faq_a28" = "Clínicas veterinárias e abrigos podem registar-se em senra.pet/register-vet-shelter. Preenche os dados da clínica ou organização e enviamos um email de verificação. Após confirmação, enviamos automaticamente notificações quando animais de estimação se perdem na tua zona — ajudando os animais de estimação perdidos a voltar para casa mais depressa. Sem custos e sem login.";
 "help_faq_title" = "FAQ";
 "help_guides_title" = "Guias do utilizador";
 "support_response_time" = "A nossa equipa de suporte responde normalmente em 24 horas.";
-"support_email" = "Suporte: hello@senra.animal de estimação";
+"support_email" = "Suporte: hello@senra.pet";
 "support_category_general" = "Geral";
 "support_category_technical" = "Problema técnico";
 "support_category_account" = "Conta";
@@ -636,8 +636,8 @@
 // MARK: - Perfil público do animal
 "public_profile_preview" = "Pré-visualização do perfil público";
 "public_profile_subtitle" = "É assim que os outros veem o perfil de %@";
-"owner_notified_sms_email" = "O tutor de %@ receberá um SMS e um e-mail com a sua localização";
-"contact_owner_plea" = "Por favor, avise o meu tutor que me encontrou…";
+"owner_notified_sms_email" = "O dono de %@ receberá um SMS e um e-mail com a tua localização";
+"contact_owner_plea" = "Por favor, avisa o meu dono que me encontraste…";
 "contact_info_not_set" = "Informação de contacto ainda não definida";
 "contact_info_hidden" = "Informação de contacto está oculta";
 "contact_info_hidden_hint" = "Os seus contactos estão definidos mas ocultos devido às definições de privacidade. Atualize em Conta > Modo de privacidade.";
@@ -647,13 +647,13 @@
 "behavior_notes" = "Notas de comportamento";
 "yes" = "Sim";
 "how_it_works" = "Como funciona";
-"help_reunite_pet" = "Ajude a reunir %@ com o tutor em segurança";
+"help_reunite_pet" = "Ajuda a reunir %@ com o dono em segurança";
 "step_share_location" = "Partilhar a sua localização";
-"step_share_location_desc" = "Toque no botão acima para partilhar a sua localização com o tutor";
-"step_owner_notified" = "Tutor notificado";
-"step_owner_notified_desc" = "O tutor recebe um SMS e um e-mail com a sua localização";
+"step_share_location_desc" = "Toca no botão acima para partilhares a tua localização com o dono";
+"step_owner_notified" = "Dono notificado";
+"step_owner_notified_desc" = "O dono recebe um SMS e um e-mail com a tua localização";
 "step_quick_reunion" = "Reunião rápida";
-"step_quick_reunion_desc" = "O tutor pode navegar até à sua localização para recolher o animal de estimação";
+"step_quick_reunion_desc" = "O dono pode navegar até à tua localização para recolher o animal de estimação";
 
 // MARK: - Modo offline
 "offline_mode" = "Modo offline";
@@ -693,7 +693,7 @@
 
 // MARK: - Descrições dinâmicas do leitor
 "scanner_step1_dynamic_desc" = "Clique no botão acima para partilhar onde encontrou %@";
-"scanner_step3_dynamic_desc" = "Fique por perto para o tutor poder encontrá-lo a si e a %@";
+"scanner_step3_dynamic_desc" = "Fica por perto para o dono poder encontrar-te a ti e a %@";
 
 // MARK: - Chaves adicionais do perfil
 "not_set" = "Não definido";
@@ -839,9 +839,9 @@
 // MARK: - Placas de acessibilidade
 "accessibility_pet_photo" = "Foto do animal de estimação";
 "accessibility_share_location" = "Partilhar localização";
-"accessibility_call_owner" = "Ligar ao tutor";
-"accessibility_email_owner" = "Enviar email ao tutor";
-"accessibility_owner_address" = "Morada do tutor";
+"accessibility_call_owner" = "Ligar ao dono";
+"accessibility_email_owner" = "Enviar email ao dono";
+"accessibility_owner_address" = "Morada do dono";
 "accessibility_medical_info" = "Informação médica";
 "accessibility_allergies" = "Alergias";
 "accessibility_notes" = "Notas";
@@ -934,7 +934,7 @@
 // MARK: - Success Stories Reunion (stubs)
 "reunion_template" = "%@ foi reencontrado. Após %@ desaparecido, %@ foi reunido com sucesso com a sua família. Obrigado à nossa comunidade incrível por trazer %@ de volta para casa!";
 "reunion_template_no_time" = "%@ foi reunido com a sua família! Obrigado à nossa comunidade incrível por trazer %@ de volta para casa!";
-"owners_story" = "História do tutor:";
+"owners_story" = "História do dono:";
 "some_time" = "algum tempo";
 "list" = "Lista";
 "map" = "Mapa";
@@ -951,7 +951,7 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ encontrado!";
+"sse_tag_scanned_title" = "%@ foi encontrado!";
 "sse_tag_scanned_body_with_address" = "Alguém digitalizou a chapa do teu animal em: %@";
 "sse_tag_scanned_body_no_address" = "Alguém digitalizou a chapa do teu animal";
 "sse_sighting_title" = "%@ avistado!";
@@ -970,17 +970,17 @@
 "plan_feature_photos_count" = "%lld fotos por animal de estimação";
 "referral_status_pending" = "Pendente";
 "referral_status_signed_up" = "Registado";
-"referral_status_subscribed" = "Active";
+"referral_status_subscribed" = "Ativo";
 "referral_status_rewarded" = "Recompensado";
-"referral_share_message" = "Usa o meu código de recomendação %@ e obtém 2 meses grátis no SENRA! https://senra.animal de estimação/choose-plan?referral=%@";
+"referral_share_message" = "Usa o meu código de recomendação %@ e obtém 2 meses grátis no SENRA! https://senra.pet/choose-plan?referral=%@";
 "help_guide_qr_tags_title" = "Plaquinhas inteligentes QR para animais de estimação";
-"help_guide_qr_tags_desc" = "Conheça as nossas plaquinhas inteligentes QR inteligentes.";
+"help_guide_qr_tags_desc" = "Cada plaquinha inteligente SENRA tem um código QR único que se liga ao perfil digital do teu animal de estimação. Qualquer pessoa que encontre o teu animal de estimação pode ler o código com a câmara do telemóvel — não é necessário descarregar nenhuma aplicação. O leitor mostra instantaneamente a foto do teu animal de estimação, nome, informações médicas e os teus dados de contacto. Também podem partilhar a localização GPS contigo para saberes exatamente onde está o teu animal de estimação. As plaquinhas inteligentes funcionam com todos os smartphones modernos.";
 "help_guide_materials_title" = "Materiais e durabilidade";
-"help_guide_materials_desc" = "Informação sobre materiais e cuidados.";
+"help_guide_materials_desc" = "As plaquinhas inteligentes SENRA são feitas de metal durável e leve, com revestimento epóxi para proteção extra. São à prova de água e resistentes aos raios UV, adequadas para todas as condições meteorológicas. As plaquinhas inteligentes prendem-se de forma segura à coleira do teu animal de estimação. Se uma plaquinha inteligente ficar danificada ou o código QR já não for legível, podes encomendar uma substituição na tua página de Conta — grátis para membros dos planos Standard e Maximum.";
 "help_guide_emergency_title" = "Funcionalidades de contacto de emergência";
-"help_guide_emergency_desc" = "Como funciona o nosso sistema de contacto.";
+"help_guide_emergency_desc" = "Quando alguém lê a plaquinha inteligente do teu animal de estimação, recebes instantaneamente uma notificação push e um e-mail com a localização de quem o encontrou. Os membros dos planos Standard e Maximum também recebem alertas por SMS para uma resposta mais rápida. Se marcares o teu animal de estimação como desaparecido, é enviado um alerta comunitário a todos os utilizadores SENRA num raio de 10 km, e os veterinários e abrigos registados na tua área também são notificados. Qualquer pessoa na comunidade pode reportar avistamentos com a localização e fotos, ajudando-te a encontrar o teu animal de estimação.";
 "help_guide_profile_title" = "Gestão de perfil";
-"help_guide_profile_desc" = "Gerir e atualizar o perfil do animal de estimação.";
+"help_guide_profile_desc" = "O perfil digital do teu animal de estimação é o coração da SENRA. Adiciona os dados essenciais: o nome já lá está, espécie, raça, idade e carrega uma foto de boa qualidade. Também podes incluir informações de saúde, alergias, medicamentos e características especiais que ajudem a identificar o teu animal de estimação. Quando alguém lê a plaquinha inteligente do teu animal de estimação, verá este perfil, por isso é importante que esteja atualizado. O teu perfil ajuda quem procura a reconhecer o teu animal de estimação e a saber o que fazer se o encontrar.";
 "help_guide_missing_alerts_title" = "Alertas de animais de estimação desaparecidos e avistamentos";
 "help_guide_missing_alerts_desc" = "Se o seu animal de estimação desaparecer, marque-o como desaparecido em 'Os meus animais de estimação' para criar um alerta comunitário instantâneo. A foto e detalhes do animal de estimação aparecem no mapa de Animais de estimação Desaparecidos visível a todos os utilizadores SENRA na sua área. Membros da comunidade podem reportar avistamentos com localização GPS, que recebe como notificações. Veterinários e abrigos registados também são alertados. Quando o animal de estimação for encontrado, marque-o como encontrado e partilhe opcionalmente a história do reencontro para inspirar a comunidade.";
 "help_guide_community_title" = "Comunidade e animais de estimação encontrados";
@@ -1009,7 +1009,7 @@
 "orders_item_count %lld" = "%lld artigos";
 
 // MARK: - Scanner Additional
-"scanner_owner_address" = "Morada do tutor";
+"scanner_owner_address" = "Morada do dono";
 
 // MARK: - Billing Additional
 "billing_past_due_title" = "Pagamento em atraso";
@@ -1025,7 +1025,7 @@
 
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Limite de animais de estimação atingido";
-"pet_limit_reached_info" = "Atingiste o número máximo de animais de estimação para esta conta. Visita senra.animal de estimação para mais informações.";
+"pet_limit_reached_info" = "Atingiste o número máximo de animais de estimação para esta conta. Visita senra.pet para mais informações.";
 "upgrade_to_ultimate" = "Atualizar para Maximum";
 "keep_current_plan" = "Manter plano atual";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "O seu plano %@ permite %lld animal de estimação. Atualize para %@ por %@ para até 10 animais de estimação.";
@@ -1150,10 +1150,10 @@
 "breed_dog_pembroke_welsh_corgi" = "Corgi Galês de Pembroke";
 "breed_dog_maltese" = "Maltês";
 "breed_dog_chihuahua" = "Chihuahua";
-"breed_dog_west_highland_white_terrier" = "West Highland White Terrier";
+"breed_dog_west_highland_white_terrier" = "West Highland white terrier";
 "breed_dog_collie" = "Collie";
-"breed_dog_basset_hound" = "Basset Hound";
-"breed_dog_rhodesian_ridgeback" = "Rhodesian Ridgeback";
+"breed_dog_basset_hound" = "Basset hound";
+"breed_dog_rhodesian_ridgeback" = "Rhodesian ridgeback";
 "breed_dog_newfoundland" = "Terra Nova";
 "breed_dog_belgian_malinois" = "Pastor Belga Malinois";
 "breed_dog_bichon_frise" = "Bichon Frisé";
@@ -1163,17 +1163,17 @@
 "breed_dog_papillon" = "Papillon";
 "breed_dog_bullmastiff" = "Bullmastiff";
 "breed_dog_samoyed" = "Samoieda";
-"breed_dog_scottish_terrier" = "Scottish Terrier";
+"breed_dog_scottish_terrier" = "Terrier escocês";
 "breed_dog_soft_coated_wheaten_terrier" = "Wheaten Terrier de Pelo Macio";
-"breed_dog_airedale_terrier" = "Airedale Terrier";
-"breed_dog_jack_russell_terrier" = "Jack Russell Terrier";
+"breed_dog_airedale_terrier" = "Airedale terrier";
+"breed_dog_jack_russell_terrier" = "Jack Russell terrier";
 "breed_cat_domestic_shorthair" = "Doméstico de pelo curto";
 "breed_cat_domestic_longhair" = "Doméstico de pelo longo";
 "breed_cat_persian" = "Persa";
 "breed_cat_maine_coon" = "Maine Coon";
 "breed_cat_ragdoll" = "Ragdoll";
-"breed_cat_british_shorthair" = "British Shorthair";
-"breed_cat_exotic_shorthair" = "Exotic Shorthair";
+"breed_cat_british_shorthair" = "Britânico de pelo curto";
+"breed_cat_exotic_shorthair" = "Exótico de Pelo Curto";
 "breed_cat_abyssinian" = "Abissínio";
 "breed_cat_scottish_fold" = "Scottish Fold";
 "breed_cat_sphynx" = "Sphynx";
@@ -1181,8 +1181,8 @@
 "breed_cat_devon_rex" = "Devon Rex";
 "breed_cat_oriental_shorthair" = "Oriental de pelo curto";
 "breed_cat_burmese" = "Burmês";
-"breed_cat_american_shorthair" = "American Shorthair";
-"breed_cat_bengal" = "Bengal";
+"breed_cat_american_shorthair" = "Americano de Pelo Curto";
+"breed_cat_bengal" = "Bengala";
 "breed_cat_russian_blue" = "Azul Russo";
 "breed_cat_norwegian_forest_cat" = "Gato da Floresta Norueguesa";
 "breed_cat_birman" = "Birmânia";
@@ -1196,7 +1196,7 @@
 "breed_cat_manx" = "Manx";
 "breed_cat_selkirk_rex" = "Selkirk Rex";
 "breed_cat_ragamuffin" = "RagaMuffin";
-"breed_cat_american_curl" = "American Curl";
+"breed_cat_american_curl" = "Americano Curl";
 "breed_cat_chartreux" = "Chartreux";
 "breed_cat_bombay" = "Bombaim";
 "breed_cat_egyptian_mau" = "Mau Egípcio";
@@ -1210,7 +1210,7 @@
 "breed_cat_american_wirehair" = "American Wirehair";
 "breed_cat_european_burmese" = "Burmês Europeu";
 "breed_cat_burmilla" = "Burmilla";
-"breed_cat_colorpoint_shorthair" = "Colorpoint Shorthair";
+"breed_cat_colorpoint_shorthair" = "Colorpoint de Pelo Curto";
 "breed_cat_javanese" = "Javanês";
 "breed_cat_nebelung" = "Nebelung";
 "breed_cat_pixie_bob" = "Pixie-Bob";
@@ -1247,7 +1247,7 @@
 "current_plan" = "Plano atual";
 "plan_renews" = "Renova a %@";
 "plan_cancels_on" = "Termina a %@";
-"delete_premium_warning" = "Eliminar a tua conta apagará permanentemente o teu perfil. Se também quiseres terminar uma subscrição SENRA ativa, fá-lo em senra.animal de estimação antes de eliminar.";
+"delete_premium_warning" = "Eliminar a tua conta apagará permanentemente o teu perfil. Se também quiseres terminar uma subscrição Senra ativa, fá-lo em senra.pet antes de eliminar.";
 "cancel_instead" = "Cancelar subscrição em vez disso";
 
 // MARK: - Shelter Adoption
@@ -1293,7 +1293,7 @@
 "appearance_light" = "Claro";
 "appearance_dark" = "Escuro";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Os alertas da comunidade requerem uma subscrição SENRA.";
+"mark_lost_starter_notice" = "Os alertas da comunidade requerem uma subscrição Senra.";
 "mark_lost_starter_upgrade_cta" = "Ver planos";
 "mark_lost_upgrade_prompt" = "Com o plano Starter o teu animal de estimação será marcado como desaparecido, mas as notificações a utilizadores, veterinários e abrigos requerem uma subscrição Standard ou Maximum.";
 // MARK: - Localization Audit Fixes
@@ -1387,32 +1387,32 @@
 // MARK: - Tags Coming Soon (gates proceed-to-payment when TAGS_AVAILABLE=false)
 "tags_coming_soon_title" = "As plaquinhas inteligentes físicas estão a chegar";
 "tags_coming_soon_body" = "Em breve enviaremos o nosso primeiro lote. Volta dentro de alguns dias.";
-"report_found_unavailable" = "Esta funcionalidade não está disponível para este alerta. Por favor, contacte diretamente o tutor se encontrou o animal de estimação.";
+"report_found_unavailable" = "Esta funcionalidade não está disponível para este alerta. Por favor, contacta diretamente o dono se encontraste o animal de estimação.";
 
 "qr_torch_unavailable" = "Lanterna não disponível neste dispositivo.";
-"tag_pending_badge" = "A CAMINHO";
+"tag_pending_badge" = "PLAQUINHA INTELIGENTE A CAMINHO";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Ativar plaquinha inteligente";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
-"shelter_promo_pet_picker_label" = "Pet";
-"shelter_promo_new_pet" = "New Pet";
-"shelter_promo_existing_pet" = "Existing Pet";
-"shelter_promo_pet_name_placeholder" = "Pet name";
-"shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
-"shelter_promo_name_label_required" = "Name *";
-"shelter_promo_species_label_required" = "Species *";
-"shelter_promo_select_placeholder" = "Select...";
+"shelter_promo_register_subtitle_format" = "Regista o teu animal de estimação para ativar esta oferta — cortesia de %@.";
+"shelter_promo_pet_picker_label" = "Animal de estimação";
+"shelter_promo_new_pet" = "Novo animal de estimação";
+"shelter_promo_existing_pet" = "Animal de estimação existente";
+"shelter_promo_pet_name_placeholder" = "Nome do animal de estimação";
+"shelter_promo_neutered_spayed" = "Esterilizado/a";
+"shelter_promo_register_and_claim_button" = "Registar e ativar plaquinha inteligente";
+"shelter_promo_claim_success_title" = "Plaquinha inteligente ativada!";
+"shelter_promo_active_until_format" = "Plaquinha inteligente ativa até: %@";
+"shelter_promo_claim_tag_button" = "Ativar plaquinha inteligente";
+"shelter_promo_name_label_required" = "Nome *";
+"shelter_promo_species_label_required" = "Espécie *";
+"shelter_promo_select_placeholder" = "Seleciona...";
 
 // MARK: - Order more tags placeholders
-"order_more_owner_name" = "Owner name";
+"order_more_owner_name" = "Nome do dono";
 "order_more_email" = "Email";
 "order_more_phone" = "Phone";
 
 // MARK: - Success stories sharing
-"shared_via_pet_safety" = "Shared via SENRA";
+"shared_via_pet_safety" = "Partilhado via SENRA";

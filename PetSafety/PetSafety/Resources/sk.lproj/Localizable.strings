@@ -181,7 +181,7 @@
 "share_accuracy" = "(~500 m presnost)";
 "share_getting_location" = "Ziskavam vasu polohu…";
 "share_location_unavailable" = "Poloha nie je k dispozícii. Skontroluj, či sú povolené služby určovania polohy.";
-"share_owner_notified" = "Páníček informovaný!";
+"share_owner_notified" = "Majiteľ informovaný!";
 "share_on_their_way" = "Je na ceste!";
 "share_notifying" = "Informovanie páníčka…";
 "share_notify_with_location" = "Zdieľať a informovať páníčka";
@@ -264,9 +264,9 @@
 "where_did_you_see" = "Kde si videl domáceho miláčika?";
 "sighting_notes_placeholder" = "Opíš, čo si videl, stav domáceho miláčika, smer pohybu…";
 "submit_sighting_report" = "Odoslať hlasenie o pozorovani";
-"sighting_reported_owner_notified" = "Pozorovanie nahlásené! Páníček bol informovaný.";
+"sighting_reported_owner_notified" = "Pozorovanie nahlásené! Majiteľ bol informovaný.";
 "sighting_address_not_found" = "Túto adresu sme nenašli. Skontroluj pravopis alebo skús blízku pamätihodnosť.";
-"sighting_location_invalid" = "Toto miesto sa zdá neplatné. Zdieľaj aktuálnu GPS polohu alebo skús inú adresu.";
+"sighting_location_invalid" = "Táto poloha vyzerá neplatná. Zdieľaj svoju aktuálnu GPS polohu, alebo skús inú adresu.";
 "sighting_location_required" = "Zdieľaj svoju aktuálnu polohu alebo zadaj adresu.";
 
 // MARK: - Oznacenie stratene/najdene
@@ -405,9 +405,9 @@
 "notif_pet_alerts" = "Upozornenia o domácich miláčikoch";
 "notif_pet_alerts_footer" = "Upozornenia o stratených domácich miláčikoch v tvojom okolí";
 "notif_missing_pet_alerts" = "Upozornenia na stratených domácich miláčikov";
-"notif_missing_pet_alerts_subtitle" = "Dostávaj upozornenia o stratených domácich miláčikoch v tvojom okolí";
+"notif_missing_pet_alerts_subtitle" = "Upozornenia o stratených miláčikoch v okolí";
 "notif_nearby_alerts" = "Upozornenia v okolí (10 km)";
-"notif_nearby_alerts_subtitle" = "Upozornenia na domácich miláčikov v okruhu 10 km od tvojej polohy";
+"notif_nearby_alerts_subtitle" = "Upozornenia do 10 km od tvojej polohy";
 "notif_account_orders" = "Účet a objednávky";
 "notif_account_orders_footer" = "Budte informovani o aktivite účtu a objednavkach";
 "notif_order_updates" = "Aktualizacie objednavok";
@@ -497,11 +497,11 @@
 "help_faq_q15" = "Sú moje osobné údaje v bezpečí?";
 "help_faq_a15" = "Áno. Ty rozhoduješ, ktoré údaje sú viditeľné, keď niekto naskenuje známku tvojho domáceho miláčika. V 'Nastavenia' > 'Nastavenia súkromia' si môžeš vybrať, či sa zobrazí tvoj telefón, e-mail alebo adresa. Tvoje prihlásenie je chránené jednorazovým overovacím kódom. Svoj účet a všetky údaje môžeš kedykoľvek zmazať.";
 "help_faq_q16" = "Stratili sme známku alebo sa poškodila — čo mám robiť?";
-"help_faq_a16" = "Žiadne obavy — digitálny profil tvojho domáceho miláčika je v bezpečí a nie je uložený na známke. Choď na stránku Účet a klepni na 'Objednať náhradu'. Prepojíme novú známku s čerstvým QR kódom s tvojím existujúcim profilom. Nárok na výmenu závisí od tvojho SENRA účtu; detaily na senra.pet. Stará známka sa deaktivuje okamžite pri objednaní náhrady.";
+"help_faq_a16" = "Žiadne obavy — digitálny profil tvojho domáceho miláčika je v bezpečí a nie je uložený na známke. Choď na stránku Účet a klepni na 'Objednať náhradu'. Prepojíme novú známku s čerstvým QR kódom s tvojím existujúcim profilom domáceho miláčika. Nárok na výmenu závisí od tvojho Senra účtu; detaily na senra.pet. Stará známka sa deaktivuje okamžite pri objednaní náhrady.";
 "help_faq_q17" = "Moja známka sa neskenuje — čo mám robiť?";
 "help_faq_a17" = "Vyskúšaj nasledovné: očisti povrch známky vlhkou handričkou, zabezpeč dobré osvetlenie, drž kameru telefónu stabilne asi 10–15 cm od známky a skontroluj, či funguje tvoja kamerová aplikácia alebo QR čítačka. Ak je QR kód poškriabaný alebo opotrebovaný, objednaj si náhradu zo stránky 'Domov / Môj účet'.";
 "help_faq_q18" = "Našiel som domáceho miláčika bez SENRA známky — čo môžem urobiť?";
-"help_faq_a18" = "Skontroluj mapu Stratených domácich miláčikov na webe SENRA (senra.pet). Upozornenia si môžeš pozrieť aj v aplikácii. Odvez zviera k najbližšiemu veterinárovi na skenovanie mikročipu. Ak má SENRA známku, naskenuj QR kód — zobrazia sa kontaktné údaje páníčka. Vždy informuj aj miestne úrady a blízke útulky.";
+"help_faq_a18" = "Pozri si mapu Stratených domácich miláčikov na webe SENRA (senra.pet) — možno bol tento miláčik už nahlásený ako stratený v tvojom okolí. Upozornenia o stratených miláčikoch si môžeš pozrieť aj v aplikácii. Vezmi miláčika k najbližšiemu veterinárovi, aby mu načítali mikročip. Ak má nájdený miláčik známku SENRA, naskenuj QR kód kamerou telefónu — zobrazia sa kontaktné údaje majiteľa.";
 "help_faq_q19" = "Môžem zmeniť svoju e-mailovú adresu?";
 "help_faq_a19" = "Tvoja primárna e-mailová adresa slúži ako identifikátor účtu, a preto sa nedá priamo zmeniť. Ak chceš ako verejný kontakt použiť iný e-mail, môžeš pridať sekundárnu e-mailovú adresu v 'Nastavenia' > 'Kontaktné údaje' — tá sa môže zobraziť aj v profile tvojho miláčika, ak to povolíš, aby ju nálezca okamžite videl a mohol ťa priamo kontaktovať. Ak nevyhnutne potrebuješ zmeniť primárny e-mail, kontaktuj nás na hello@senra.pet a pomôžeme s migráciou účtu.";
 "help_faq_q20" = "Aký je rozdiel medzi mikročipom a SENRA QR známkou?";
@@ -636,7 +636,7 @@
 // MARK: - Verejny profil zvierata
 "public_profile_preview" = "Nahlad verejneho profilu";
 "public_profile_subtitle" = "Takto ostatni uvidia profil %@";
-"owner_notified_sms_email" = "Páníček domáceho miláčika %@ dostane SMS a e-mail s tvojou polohou";
+"owner_notified_sms_email" = "Majiteľ domáceho miláčika %@ dostane SMS a e-mail s tvojou polohou";
 "contact_owner_plea" = "Prosím, daj môjmu páníčkovi vedieť, že si ma našiel…";
 "contact_info_not_set" = "Kontaktné údaje ešte nie sú nastavene";
 "contact_info_hidden" = "Kontaktné údaje su skryte";
@@ -650,10 +650,10 @@
 "help_reunite_pet" = "Pomôž bezpečne spojiť %@ s páníčkom";
 "step_share_location" = "Zdieľaj svoju polohu";
 "step_share_location_desc" = "Klepni na tlačidlo vyššie pre zdieľanie polohy s páníčkom";
-"step_owner_notified" = "Páníček je informovaný";
-"step_owner_notified_desc" = "Páníček dostane SMS a e-mail s tvojou polohou";
+"step_owner_notified" = "Majiteľ je informovaný";
+"step_owner_notified_desc" = "Majiteľ dostane SMS a e-mail s tvojou polohou";
 "step_quick_reunion" = "Rychle znovuzjednotenie";
-"step_quick_reunion_desc" = "Páníček môže navigovať na tvoju polohu a vyzdvihnúť svojho domáceho miláčika";
+"step_quick_reunion_desc" = "Majiteľ môže navigovať na tvoju polohu a vyzdvihnúť svojho domáceho miláčika";
 
 // MARK: - Offline rezim
 "offline_mode" = "Offline rezim";
@@ -693,7 +693,7 @@
 
 // MARK: - Dynamicke popisy skenera
 "scanner_step1_dynamic_desc" = "Klepni na tlačidlo vyššie a zdieľaj, kde si našiel %@";
-"scanner_step3_dynamic_desc" = "Zostaň v blízkosti, aby ťa páníček mohol nájsť aj s %@";
+"scanner_step3_dynamic_desc" = "Zostaň v blízkosti, aby ťa majiteľ mohol nájsť aj s %@";
 
 // MARK: - Dalsie kluce profilu
 "not_set" = "Nenastavene";
@@ -712,7 +712,7 @@
 
 // MARK: - Dalsie kluce objednavky nahradneho stitka
 "order_replace_upgrade_hint" = "Upgraduj na Standard alebo Maximum pre bezplatné náhrady";
-"order_replace_old_deactivated" = "Váš stary QR kód bude deaktivovany po odoslani tejto objednávky";
+"order_replace_old_deactivated" = "Tvoj starý QR kód bude deaktivovaný po odoslaní tejto objednávky";
 "order_replace_delivery_time" = "Novú známku dostaneš do 5–7 pracovných dní";
 "order_replace_scan_activate" = "Keď dostaneš novú známku, budeš ju musieť naskenovať pre aktiváciu";
 
@@ -797,7 +797,7 @@
 
 // MARK: - Odporucanie (Cast 1)
 "referral_loading" = "Nacitava sa…";
-"referral_your_code" = "Váš odporúčací kód";
+"referral_your_code" = "Tvoj odporúčací kód";
 "referral_share_footer" = "Zdieľaj svoj odporúčací kód s priateľmi.";
 "referral_how_it_works" = "Ako to funguje";
 "referral_step_1" = "Zdieľaj svoj jedinečný kód s priatelmi";
@@ -866,7 +866,7 @@
 "story_share_my_story" = "Zdieľať moj príbeh";
 "story_share_how %@" = "Zdieľaj, ako bol %@ nájdený a znovuzjednoteny";
 "story_privacy_note" = "Tvoje kontaktné údaje nebudú zdieľané.";
-"story_shared_success" = "Váš úspešný príbeh bol zdieľaný!";
+"story_shared_success" = "Tvoj úspešný príbeh bol zdieľaný!";
 
 // MARK: - Vyber plemena (Cast 1)
 "breed_select_title" = "Vybrať plemeno";
@@ -905,7 +905,7 @@
 "mark_lost_no_address" = "Nie je registrovana adresa. Prejdite na Profil > Adresa.";
 "mark_lost_address_placeholder" = "Zadaj adresu alebo miesto";
 "mark_lost_additional_info" = "Ďalšie informácie";
-"mark_lost_additional_placeholder" = "Akékoľvek detaily, ktoré by mohli pomôcť nájsť zviera (farba obojka, správanie, výrazné znaky…)";
+"mark_lost_additional_placeholder" = "Akékoľvek detaily, ktoré by mohli pomôcť nájsť tvojho domáceho miláčika (farba obojka, správanie, výrazné znaky…)";
 "mark_lost_sends_to" = "Toto upozornenie bude odoslané:";
 "mark_lost_nearby_owners" = "Páníčkovia v okolí";
 "mark_lost_vet_clinics" = "Veterinarnym klinikam v okolí";
@@ -951,12 +951,12 @@
 
 
 // MARK: - SSE Pet Notifications
-"sse_tag_scanned_title" = "%@ nájdený!";
+"sse_tag_scanned_title" = "%@ sa našiel!";
 "sse_tag_scanned_body_with_address" = "Niekto naskenoval známku tvojho zvieratka na mieste: %@";
 "sse_tag_scanned_body_no_address" = "Niekto naskenoval známku tvojho zvieratka";
 "sse_sighting_title" = "%@ spozorovaný!";
-"sse_sighting_body_with_address" = "Niekto videl tvoje zvieratko na mieste: %@";
-"sse_sighting_body_no_address" = "Niekto videl tvoje zvieratko";
+"sse_sighting_body_with_address" = "Niekto videl tvojho domáceho miláčika na mieste: %@";
+"sse_sighting_body_no_address" = "Niekto videl tvojho domáceho miláčika";
 "sse_pet_found_title" = "Skvelá správa!";
 
 // MARK: - Odmena
@@ -1009,7 +1009,7 @@
 "orders_item_count %lld" = "%lld položiek";
 
 // MARK: - Scanner Additional
-"scanner_owner_address" = "Adresa páníček";
+"scanner_owner_address" = "Adresa majiteľa";
 
 // MARK: - Billing Additional
 "billing_past_due_title" = "Platba po splatnosti";
@@ -1176,7 +1176,7 @@
 "breed_cat_exotic_shorthair" = "Exotická krátkosrstá";
 "breed_cat_abyssinian" = "Habešská";
 "breed_cat_scottish_fold" = "Škótska sklopená";
-"breed_cat_sphynx" = "Sphynx";
+"breed_cat_sphynx" = "Sfynx";
 "breed_cat_siamese" = "Siamská";
 "breed_cat_devon_rex" = "Devon rex";
 "breed_cat_oriental_shorthair" = "Orientálna krátkosrstá";
@@ -1247,7 +1247,7 @@
 "current_plan" = "Aktuálny plán";
 "plan_renews" = "Obnoví sa %@";
 "plan_cancels_on" = "Končí %@";
-"delete_premium_warning" = "Zmazanie tvojho účtu natrvalo odstráni tvoj profil. Ak chceš tiež ukončiť aktívne SENRA predplatné, urob to na senra.pet pred zmazaním.";
+"delete_premium_warning" = "Zmazanie tvojho účtu natrvalo odstráni tvoj profil. Ak chceš tiež ukončiť aktívne Senra predplatné, urob to na senra.pet pred zmazaním.";
 "cancel_instead" = "Namiesto toho zrušiť predplatné";
 
 // MARK: - Shelter Adoption
@@ -1293,7 +1293,7 @@
 "appearance_light" = "Svetlý";
 "appearance_dark" = "Tmavý";
 // MARK: - Starter Plan Notice
-"mark_lost_starter_notice" = "Komunitné upozornenia vyžadujú SENRA predplatné.";
+"mark_lost_starter_notice" = "Komunitné upozornenia vyžadujú Senra predplatné.";
 "mark_lost_starter_upgrade_cta" = "Zobraziť plány";
 "mark_lost_upgrade_prompt" = "V pláne Starter bude tvoj domáci miláčik označený ako stratený, ale upozornenia používateľom, veterinárom a útulkom vyžadujú predplatné Standard alebo Maximum.";
 // MARK: - Localization Audit Fixes
@@ -1369,11 +1369,11 @@
 "sync_in_progress" = "Synchronizácia…";
 "sync_completed" = "Synchronizácia dokončená";
 "sync_failed %@" = "Synchronizácia zlyhala: %@";
-"sync_action_mark_lost" = "Označiť zviera ako stratené";
-"sync_action_mark_found" = "Označiť zviera ako nájdené";
+"sync_action_mark_lost" = "Označiť domáceho miláčika ako strateného";
+"sync_action_mark_found" = "Označiť domáceho miláčika ako nájdeného";
 "sync_action_report_sighting" = "Nahlásiť pozorovanie";
 "sync_action_create_alert" = "Vytvoriť upozornenie";
-"sync_action_update_pet" = "Aktualizovať zviera";
+"sync_action_update_pet" = "Aktualizovať domáceho miláčika";
 "sync_time_never" = "Nikdy";
 "sync_time_just_now" = "Práve teraz";
 "sync_time_minutes_ago %lld" = "pred %lld min";
@@ -1390,29 +1390,29 @@
 "report_found_unavailable" = "Táto funkcia nie je dostupná pre toto upozornenie. Ak si našiel/našla domáceho miláčika, kontaktuj prosím priamo páníčka.";
 
 "qr_torch_unavailable" = "Na tomto zariadení nie je dostupné osvetlenie.";
-"tag_pending_badge" = "NA CESTE";
+"tag_pending_badge" = "ZNÁMKA JE NA CESTE";
 
 // MARK: - Shelter promo claim flow
-"shelter_promo_claim_tag_title" = "Claim Tag";
+"shelter_promo_claim_tag_title" = "Aktivovať známku";
 "shelter_promo_welcome_format" = "Welcome from %@!";
-"shelter_promo_register_subtitle_format" = "Register your pet to activate this tag, courtesy of %@.";
+"shelter_promo_register_subtitle_format" = "Zaregistruj svojho domáceho miláčika a aktivuj túto ponuku — vďaka %@.";
 "shelter_promo_pet_picker_label" = "Pet";
-"shelter_promo_new_pet" = "New Pet";
-"shelter_promo_existing_pet" = "Existing Pet";
-"shelter_promo_pet_name_placeholder" = "Pet name";
-"shelter_promo_neutered_spayed" = "Neutered / Spayed";
-"shelter_promo_register_and_claim_button" = "Register Pet & Claim Tag";
-"shelter_promo_claim_success_title" = "Tag Claimed!";
-"shelter_promo_active_until_format" = "Tag active until %@";
-"shelter_promo_claim_tag_button" = "Claim Tag";
-"shelter_promo_name_label_required" = "Name *";
-"shelter_promo_species_label_required" = "Species *";
-"shelter_promo_select_placeholder" = "Select...";
+"shelter_promo_new_pet" = "Nový domáci miláčik";
+"shelter_promo_existing_pet" = "Existujúci domáci miláčik";
+"shelter_promo_pet_name_placeholder" = "Meno domáceho miláčika";
+"shelter_promo_neutered_spayed" = "Kastrovaný / Sterilizovaná";
+"shelter_promo_register_and_claim_button" = "Registrovať a aktivovať známku";
+"shelter_promo_claim_success_title" = "Známka aktivovaná!";
+"shelter_promo_active_until_format" = "Známka aktívna do: %@";
+"shelter_promo_claim_tag_button" = "Aktivovať známku";
+"shelter_promo_name_label_required" = "Meno *";
+"shelter_promo_species_label_required" = "Druh *";
+"shelter_promo_select_placeholder" = "Vyber...";
 
 // MARK: - Order more tags placeholders
-"order_more_owner_name" = "Owner name";
+"order_more_owner_name" = "Meno majiteľa";
 "order_more_email" = "Email";
 "order_more_phone" = "Phone";
 
 // MARK: - Success stories sharing
-"shared_via_pet_safety" = "Shared via SENRA";
+"shared_via_pet_safety" = "Zdieľané cez SENRA";
