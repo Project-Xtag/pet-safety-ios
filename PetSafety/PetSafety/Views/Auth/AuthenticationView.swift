@@ -67,6 +67,7 @@ struct AuthenticationView: View {
                                             .textContentType(.emailAddress)
                                             .autocapitalization(.none)
                                             .keyboardType(.emailAddress)
+                                            .accessibilityLabel(Text("email_address"))
                                     }
                                     .padding(.horizontal, 16)
                                     .padding(.vertical, 14)
@@ -189,14 +190,24 @@ struct AuthenticationView: View {
                                 .font(.system(size: 12))
                                 .foregroundColor(.mutedText)
                             HStack(spacing: 4) {
+                                // Apple HIG / WCAG 2.1 AA require a 44×44 pt
+                                // minimum touch target. The visible 12 pt
+                                // disclaimer text is intentionally small, so
+                                // we expand the tappable region with frame +
+                                // contentShape without changing the visual
+                                // size of the link copy.
                                 Link("terms_of_service", destination: WebURLHelper.termsURL)
                                     .font(.system(size: 12, weight: .medium))
                                     .foregroundColor(.brandOrange)
+                                    .frame(minHeight: 44)
+                                    .contentShape(Rectangle())
                                 Text("terms_and")
                                     .font(.system(size: 12))
                                     .foregroundColor(.mutedText)
                                 Link("privacy_policy", destination: WebURLHelper.privacyURL)
                                     .font(.system(size: 12, weight: .medium))
+                                    .frame(minHeight: 44)
+                                    .contentShape(Rectangle())
                                     .foregroundColor(.brandOrange)
                             }
                         }
@@ -218,6 +229,8 @@ struct AuthenticationView: View {
                             Text("register")
                                 .font(.system(size: 14, weight: .semibold))
                                 .foregroundColor(.brandOrange)
+                                .frame(minHeight: 44)
+                                .contentShape(Rectangle())
                         }
 
                         Button(action: { showOrderTagSheet = true }) {
@@ -228,6 +241,8 @@ struct AuthenticationView: View {
                                     .font(.system(size: 14, weight: .semibold))
                             }
                             .foregroundColor(.brandOrange)
+                            .frame(minHeight: 44)
+                            .contentShape(Rectangle())
                         }
                     }
                     .padding(.top, 24)

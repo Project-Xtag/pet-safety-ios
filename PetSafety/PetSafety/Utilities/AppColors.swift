@@ -45,7 +45,11 @@ struct BrandButtonStyle: ButtonStyle {
                     ? Color.brandOrange.opacity(0.5)
                     : (configuration.isPressed ? Color.brandOrange.opacity(0.8) : Color.brandOrange)
             )
-            .foregroundColor(.white)
+            // Dark navy on brand orange — matches the web chunk-4 fix
+            // (audit H65). White on #FF914D is ~2.5:1, fails WCAG AA;
+            // a near-black foreground hits ~6:1 while keeping the brand
+            // orange visually intact.
+            .foregroundColor(Color(red: 0.13, green: 0.13, blue: 0.18))
             .font(.system(size: 16, weight: .bold))
             .cornerRadius(16)
             .shadow(color: Color.brandOrange.opacity(0.3), radius: 8, x: 0, y: 4)
