@@ -166,7 +166,7 @@
 "scan_qr_code" = "Skeniraj QR kôd";
 "scan_qr_subtitle" = "Usmjeri kameru na QR privjesak kućnog ljubimca";
 "hello_pet_name" = "Bok! Ja sam %@";
-"scanned_tag_thanks" = "Upravo si skenirao moj privjesak. Hvala ti što mi pomažeš!";
+"scanned_tag_thanks" = "Upravo si skenirao moj privjesak.\nHvala ti što mi pomažeš!";
 "share_location_with_owner" = "Podijeli lokaciju s vlasnikom";
 "contact_owner" = "Kontakt vlasnika";
 "call_phone" = "Nazovi: %@";
@@ -664,7 +664,7 @@
 "help_reunite_pet" = "Pomozi sigurno spojiti %@ s vlasnikom";
 "step_share_location" = "Podijeli svoju lokaciju";
 "step_share_location_desc" = "Klikni gumb iznad da podijeliš svoju lokaciju s vlasnikom";
-"step_owner_notified" = "Vlasnik prima obavijest";
+"step_owner_notified" = "Vlasnik %@ je obaviješten";
 "step_owner_notified_desc" = "Vlasnik prima SMS i e-mail s tvojom lokacijom";
 "step_quick_reunion" = "Brzo spajanje";
 "step_quick_reunion_desc" = "Vlasnik može navigirati do tvoje lokacije da pokupi svog kućnog ljubimca";

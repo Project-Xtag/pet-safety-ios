@@ -163,7 +163,7 @@
 "scan_qr_code" = "Skenovat QR kód";
 "scan_qr_subtitle" = "Nasmeruj kameru na QR známku domáceho miláčika";
 "hello_pet_name" = "Ahoj! Som %@";
-"scanned_tag_thanks" = "Práve si naskenoval moju známku. Ďakujem, že mi pomáhaš!";
+"scanned_tag_thanks" = "Práve si naskenoval moju známku.\nĎakujem, že mi pomáhaš!";
 "share_location_with_owner" = "Zdieľať moju polohu s páníčkom";
 "contact_owner" = "Kontaktovať páníčka";
 "call_phone" = "Volanie: %@";
@@ -475,7 +475,7 @@
 "help_faq_q4" = "Môžem neskôr aktualizovať údaje svojho domáceho miláčika?";
 "help_faq_a4" = "Áno! Údaje svojho domáceho miláčika môžeš kedykoľvek aktualizovať v sekcii 'Moji domáci miláčikovia' výberom domáceho miláčika a klepnutím na 'Upraviť profil'. Môžeš aktualizovať všetky polia okrem mena, druhu a plemena, vrátane fotografií. Zmeny sa uložia okamžite.";
 "help_faq_q5" = "Ako si objednám náhradnú známku?";
-"help_faq_a5" = "Choď na stránku 'Domov / Môj účet' a klepni na 'Objednať náhradnú známku'. Vyber, ktorý domáci miláčik potrebuje novú známku. Nárok na výmenu závisí od tvojho SENRA účtu; detaily nájdeš na senra.pet.";
+"help_faq_a5" = "Choď na stránku 'Domov / Môj účet' a klepni na 'Objednať náhradnú známku'. Vyber, ktorý domáci miláčik potrebuje novú známku. Nárok na výmenu závisí od tvojho Senra účtu; detaily nájdeš na senra.pet.";
 "help_faq_q6" = "Ako aktivujem svoju známku po doručení?";
 "help_faq_a6" = "Stiahni si SENRA mobilnú aplikáciu z Google Play Store alebo App Store! Otvor ju a choď do menu 'Aktivovať', namier kameru telefónu na QR kód na známke! Naskenovanie QR kódu prepojí známku s tvojím účtom. Potom vyber svojho existujúceho domáceho miláčika alebo vytvor nový profil.";
 "help_faq_q7" = "Môžem darovať SENRA známku?";
@@ -650,7 +650,7 @@
 "help_reunite_pet" = "Pomôž bezpečne spojiť %@ s páníčkom";
 "step_share_location" = "Zdieľaj svoju polohu";
 "step_share_location_desc" = "Klepni na tlačidlo vyššie pre zdieľanie polohy s páníčkom";
-"step_owner_notified" = "Majiteľ je informovaný";
+"step_owner_notified" = "Majiteľ %@ je informovaný";
 "step_owner_notified_desc" = "Majiteľ dostane SMS a e-mail s tvojou polohou";
 "step_quick_reunion" = "Rychle znovuzjednotenie";
 "step_quick_reunion_desc" = "Majiteľ môže navigovať na tvoju polohu a vyzdvihnúť svojho domáceho miláčika";

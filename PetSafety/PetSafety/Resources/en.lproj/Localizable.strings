@@ -163,7 +163,7 @@
 "scan_qr_code" = "Scan QR Code";
 "scan_qr_subtitle" = "Point your camera at a pet's QR tag";
 "hello_pet_name" = "Hello! I'm %@";
-"scanned_tag_thanks" = "You've just scanned my tag. Thank you for helping me!";
+"scanned_tag_thanks" = "You've just scanned my tag.\nThank you for helping me!";
 "share_location_with_owner" = "Share My Location with Owner";
 "contact_owner" = "Contact Owner";
 "call_phone" = "Call: %@";
@@ -666,7 +666,7 @@
 "help_reunite_pet" = "Help reunite %@ with their owner safely";
 "step_share_location" = "Share Your Location";
 "step_share_location_desc" = "Tap the button above to share your location with the owner";
-"step_owner_notified" = "Owner Gets Notified";
+"step_owner_notified" = "%@'s owner notified";
 "step_owner_notified_desc" = "The owner receives an SMS and email with your location";
 "step_quick_reunion" = "Quick Reunion";
 "step_quick_reunion_desc" = "The owner can navigate to your location to collect their pet";

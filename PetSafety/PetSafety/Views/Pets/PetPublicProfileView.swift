@@ -425,7 +425,7 @@ struct PetPublicProfileView: View {
 
                     VStack(alignment: .leading, spacing: 12) {
                         HowItWorksStep(number: "1", title: NSLocalizedString("step_share_location", comment: ""), description: String(format: NSLocalizedString("scanner_step1_dynamic_desc", comment: ""), pet.name))
-                        HowItWorksStep(number: "2", title: NSLocalizedString("step_owner_notified", comment: ""), description: NSLocalizedString("step_owner_notified_desc", comment: ""))
+                        HowItWorksStep(number: "2", title: String(format: NSLocalizedString("step_owner_notified", comment: ""), pet.name), description: NSLocalizedString("step_owner_notified_desc", comment: ""))
                         HowItWorksStep(number: "3", title: NSLocalizedString("step_quick_reunion", comment: ""), description: String(format: NSLocalizedString("scanner_step3_dynamic_desc", comment: ""), pet.name))
                     }
                 }

@@ -123,9 +123,24 @@ struct MarkAsLostView: View {
                         Text(pet.name)
                             .font(.headline)
                             .accessibilityAddTraits(.isHeader)
-                        Text(PetLocalizer.localizeSpecies(pet.species))
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        let petDetails: String = {
+                            var items: [String] = []
+                            if let breed = pet.breed, !breed.isEmpty {
+                                items.append(PetLocalizer.localizeBreed(breed, species: pet.species))
+                            }
+                            if let age = pet.age, !age.isEmpty {
+                                items.append(age)
+                            }
+                            if let sex = pet.sex, sex.lowercased() != "unknown" {
+                                items.append(PetLocalizer.localizeSex(sex, species: pet.species))
+                            }
+                            return items.joined(separator: " · ")
+                        }()
+                        if !petDetails.isEmpty {
+                            Text(petDetails)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
             }
