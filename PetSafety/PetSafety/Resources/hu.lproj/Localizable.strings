@@ -163,9 +163,9 @@
 "scan_qr_code" = "QR-kód beolvasása";
 "scan_qr_subtitle" = "Irányítsd a kamerát a QR kódra a bilétán";
 "hello_pet_name" = "Szia! %@ vagyok";
-"scanned_tag_thanks" = "Épp most olvastad be a bilétámat. Köszönöm, hogy segítesz!";
+"scanned_tag_thanks" = "Épp most olvastad be a bilétámat.\nKöszönöm, hogy segítesz!";
 "share_location_with_owner" = "A hely adatainak megosztása a gazdival";
-"contact_owner" = "Gazdi elérhetősége";
+"contact_owner" = "Gazdi elérhetőségei";
 "call_phone" = "Hívás: %@";
 "email_contact" = "Email: %@";
 "privacy_notice" = "Fontos az adatvédelem. A hely adatait csak %@ gazdijával osztjuk meg, hogy segítsünk nekik újra együtt lenni.";
@@ -585,12 +585,12 @@
 "orders_detail_title" = "Rendelés részletei";
 
 // MARK: - További biléták rendelése
-"order_more_title" = "Több rendelése";
+"order_more_title" = "Új biléta rendelése";
 "order_more_complete" = "Rendelés kész!";
 "order_more_confirmation" = "A bilétákat a fizetés megerősítése és a rendelés feldolgozása után szállítjuk.";
 "order_more_pet_names" = "Kedvenced neve";
 "order_more_pet_names_footer" = "Add meg azoknak a kedvenceknek a nevét, akiknek bilétát szeretnél!";
-"order_more_add_another" = "Kedvenc hozzáadása";
+"order_more_add_another" = "Újabb kedvenc";
 "order_more_your_info" = "Adataid";
 "order_more_shipping" = "Szállítási cím";
 "order_more_street" = "Utca, házszám";
@@ -606,7 +606,7 @@
 "order_more_redirecting" = "Átirányítás…";
 
 // MARK: - Tags Coming Soon
-"tags_coming_soon_title" = "Hamarosan elérhető a biléta";
+"tags_coming_soon_title" = "A bilétáink hamarosan elérhetőek";
 "tags_coming_soon_body" = "Hamarosan kiszállítjuk az első tételt. Pár nap múlva nézz vissza.";
 
 // MARK: - Cserebiléta rendelése
@@ -653,9 +653,9 @@
 "yes" = "Igen";
 "how_it_works" = "Hogyan működik";
 "help_reunite_pet" = "Segíts %@t biztonságban visszatalálni a gazdijához!";
-"step_share_location" = "Tartózkodási helyed megosztása";
+"step_share_location" = "Lépj kapcsolatba a gazdival vagy oszd meg a tartózkodási helyed";
 "step_share_location_desc" = "Koppints a fenti gombra, hogy megoszd a tartózkodási helyed a gazdival";
-"step_owner_notified" = "A gazdi megkapta az értesítést";
+"step_owner_notified" = "%@ gazdija megkapta az értesítést";
 "step_owner_notified_desc" = "A gazdi SMS-t és emailt is kap a tartózkodási helyedről";
 "step_quick_reunion" = "Gyors hazajutás";
 "step_quick_reunion_desc" = "A gazdi a megadott helyszínre mehet, hogy hazavigye a kedvencét";
@@ -697,8 +697,8 @@
 // MARK: - Alkalmazás információ
 
 // MARK: - Beolvasó dinamikus leírások
-"scanner_step1_dynamic_desc" = "Kattints a fenti gombra, hogy megoszd, hol találtad meg %@-t!";
-"scanner_step3_dynamic_desc" = "Maradj a hely közelében, hogy a gazda megtalálhasson téged és %@-t!";
+"scanner_step1_dynamic_desc" = "Használd a gazdi elérhetőségeit vagy kattints a fenti gombra, hogy megoszd, hol találtad meg %@-t!";
+"scanner_step3_dynamic_desc" = "Maradj a hely közelében, hogy a gazdi megtalálhasson téged és %@-t!";
 
 // MARK: - További profil kulcsok
 "not_set" = "Nincs megadva";
@@ -1014,7 +1014,7 @@
 "orders_item_count %lld" = "%lld tétel";
 
 // MARK: - Scanner Additional
-"scanner_owner_address" = "Tulajdonos címe";
+"scanner_owner_address" = "Gazdi címe";
 
 // MARK: - Billing Additional
 "billing_past_due_title" = "Lejárt fizetés";
@@ -1319,7 +1319,7 @@
 "dob_approximate" = "Hozzávetőleges dátum";
 "weight_helper" = "Súly kg-ban (pl. 4,5)";
 "order_more_pet_name_placeholder" = "Kedvenced neve";
-"order_more_subtitle" = "Rendelj bilétát kedvenceidnek — a biléta ingyenes, csak a szállításért és csomagolásért kell fizetni";
+"order_more_subtitle" = "Rendelj bilétát kedvenceidnek — a biléta ingyenes, csak a szállításért és csomagolásért kell fizetned";
 
 // MARK: - Welcome Screen
 "welcome_to_senra" = "Üdvözöl a SENRA!";

@@ -163,7 +163,7 @@
 "scan_qr_code" = "Skann QR-kode";
 "scan_qr_subtitle" = "Rett kameraet mot kjæledyrets QR-brikke";
 "hello_pet_name" = "Hei! Jeg er %@";
-"scanned_tag_thanks" = "Du har nettopp skannet QR-brikken min. Takk for at du hjelper meg!";
+"scanned_tag_thanks" = "Du har nettopp skannet QR-brikken min.\nTakk for at du hjelper meg!";
 "share_location_with_owner" = "Del min posisjon med eieren";
 "contact_owner" = "Kontakt eieren";
 "call_phone" = "Ring: %@";
@@ -663,7 +663,7 @@
 "help_reunite_pet" = "Hjelp %@ trygt tilbake til eieren";
 "step_share_location" = "Del posisjonen din";
 "step_share_location_desc" = "Trykk på knappen ovenfor for å dele posisjonen din med eieren";
-"step_owner_notified" = "Eieren varsles";
+"step_owner_notified" = "Eieren til %@ er varslet";
 "step_owner_notified_desc" = "Eieren mottar SMS og e-post med posisjonen din";
 "step_quick_reunion" = "Rask gjenforening";
 "step_quick_reunion_desc" = "Eieren kan navigere til posisjonen din for å hente dyret";

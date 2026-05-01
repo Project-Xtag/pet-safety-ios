@@ -191,39 +191,38 @@ struct MainTabView: View {
 
     // MARK: iPhone — bottom tab bar (existing layout, unchanged)
     private var compactTabView: some View {
-        ZStack(alignment: .bottom) {
-            Group {
-                switch selectedTab {
-                case 0:
-                    NavigationView {
-                        PetsListView(
-                            onScanTag: { selectedTab = 1 },
-                            onExploreAccount: { selectedTab = 3 }
-                        )
-                    }
-                    .navigationViewStyle(.stack)
-                    .transition(.opacity)
-                case 1:
-                    NavigationView {
-                        QRScannerView()
-                    }
-                    .navigationViewStyle(.stack)
-                    .transition(.opacity)
-                case 2:
-                    AlertsTabView()
-                        .transition(.opacity)
-                case 3:
-                    NavigationView {
-                        ProfileView()
-                    }
-                    .navigationViewStyle(.stack)
-                    .transition(.opacity)
-                default:
-                    EmptyView()
+        Group {
+            switch selectedTab {
+            case 0:
+                NavigationView {
+                    PetsListView(
+                        onScanTag: { selectedTab = 1 },
+                        onExploreAccount: { selectedTab = 3 }
+                    )
                 }
+                .navigationViewStyle(.stack)
+                .transition(.opacity)
+            case 1:
+                NavigationView {
+                    QRScannerView()
+                }
+                .navigationViewStyle(.stack)
+                .transition(.opacity)
+            case 2:
+                AlertsTabView()
+                    .transition(.opacity)
+            case 3:
+                NavigationView {
+                    ProfileView()
+                }
+                .navigationViewStyle(.stack)
+                .transition(.opacity)
+            default:
+                EmptyView()
             }
-            .animation(.easeInOut(duration: 0.2), value: selectedTab)
-
+        }
+        .animation(.easeInOut(duration: 0.2), value: selectedTab)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
             CustomTabBar(selectedTab: $selectedTab)
         }
         .ignoresSafeArea(.keyboard)
@@ -666,7 +665,7 @@ struct DeepLinkScannedPetView: View {
 
                         VStack(alignment: .leading, spacing: 12) {
                             HowItWorksStep(number: "1", title: NSLocalizedString("step_share_location", comment: ""), description: String(format: NSLocalizedString("scanner_step1_dynamic_desc", comment: ""), pet.name))
-                            HowItWorksStep(number: "2", title: NSLocalizedString("step_owner_notified", comment: ""), description: NSLocalizedString("step_owner_notified_desc", comment: ""))
+                            HowItWorksStep(number: "2", title: String(format: NSLocalizedString("step_owner_notified", comment: ""), pet.name), description: NSLocalizedString("step_owner_notified_desc", comment: ""))
                             HowItWorksStep(number: "3", title: NSLocalizedString("step_quick_reunion", comment: ""), description: String(format: NSLocalizedString("scanner_step3_dynamic_desc", comment: ""), pet.name))
                         }
                     }

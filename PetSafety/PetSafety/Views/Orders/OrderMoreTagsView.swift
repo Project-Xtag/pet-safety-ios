@@ -243,7 +243,7 @@ struct OrderMoreTagsView: View {
     // MARK: - Section Cards
 
     private var giftToggleCard: some View {
-        SectionCard(title: String(localized: "order_gift_toggle"), icon: "gift.fill") {
+        VStack(alignment: .leading, spacing: 14) {
             Toggle(isOn: $isGift) {
                 HStack(spacing: 10) {
                     Image(systemName: "gift.fill")
@@ -294,6 +294,11 @@ struct OrderMoreTagsView: View {
                 }
             }
         }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.06), radius: 8, x: 0, y: 4)
     }
 
     private var petNamesCard: some View {

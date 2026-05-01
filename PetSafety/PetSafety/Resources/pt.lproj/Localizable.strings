@@ -163,7 +163,7 @@
 "scan_qr_code" = "Ler código QR";
 "scan_qr_subtitle" = "Aponte a câmara para a plaquinha inteligente QR do animal de estimação";
 "hello_pet_name" = "Olá! Eu sou %@";
-"scanned_tag_thanks" = "Acabou de ler a minha plaquinha inteligente. Obrigado por me ajudar!";
+"scanned_tag_thanks" = "Acabou de ler a minha plaquinha inteligente.\nObrigado por me ajudar!";
 "share_location_with_owner" = "Partilhar a minha localização com o dono";
 "contact_owner" = "Contactar o dono";
 "call_phone" = "Ligar: %@";
@@ -650,7 +650,7 @@
 "help_reunite_pet" = "Ajuda a reunir %@ com o dono em segurança";
 "step_share_location" = "Partilhar a sua localização";
 "step_share_location_desc" = "Toca no botão acima para partilhares a tua localização com o dono";
-"step_owner_notified" = "Dono notificado";
+"step_owner_notified" = "Dono de %@ notificado";
 "step_owner_notified_desc" = "O dono recebe um SMS e um e-mail com a tua localização";
 "step_quick_reunion" = "Reunião rápida";
 "step_quick_reunion_desc" = "O dono pode navegar até à tua localização para recolher o animal de estimação";

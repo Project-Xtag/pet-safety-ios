@@ -42,7 +42,7 @@ struct SuccessStoriesTabView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button("done") {
+                Button("close") {
                     dismiss()
                 }
             }

@@ -163,7 +163,7 @@
 "scan_qr_code" = "Escanear código QR";
 "scan_qr_subtitle" = "Apunta la cámara a la chapa inteligente QR de la mascota";
 "hello_pet_name" = "¡Hola! Soy %@";
-"scanned_tag_thanks" = "Acabas de escanear mi chapa inteligente. ¡Gracias por ayudarme!";
+"scanned_tag_thanks" = "Acabas de escanear mi chapa inteligente.\n¡Gracias por ayudarme!";
 "share_location_with_owner" = "Compartir mi ubicación con el dueño";
 "contact_owner" = "Contactar al dueño";
 "call_phone" = "Llamar: %@";
@@ -650,7 +650,7 @@
 "help_reunite_pet" = "¡Ayuda a reunir de forma segura a %@ con su dueño!";
 "step_share_location" = "Compartir tu ubicación";
 "step_share_location_desc" = "Toca el botón de arriba para compartir tu ubicación con el dueño";
-"step_owner_notified" = "Dueño notificado";
+"step_owner_notified" = "Dueño de %@ notificado";
 "step_owner_notified_desc" = "El dueño recibe un SMS y un correo con tu ubicación";
 "step_quick_reunion" = "Reunión rápida";
 "step_quick_reunion_desc" = "El dueño puede navegar hasta tu ubicación para recoger a su mascota";

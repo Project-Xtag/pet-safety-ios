@@ -163,7 +163,7 @@
 "scan_qr_code" = "Scansiona QR code";
 "scan_qr_subtitle" = "Punta la fotocamera verso il QR code sulla medaglietta";
 "hello_pet_name" = "Ciao! Sono %@";
-"scanned_tag_thanks" = "Hai appena scansionato la mia medaglietta. Grazie per avermi aiutato!";
+"scanned_tag_thanks" = "Hai appena scansionato la mia medaglietta.\nGrazie per avermi aiutato!";
 "share_location_with_owner" = "Condividi la mia posizione con il proprietario";
 "contact_owner" = "Contatti del proprietario";
 "call_phone" = "Chiama: %@";
@@ -669,7 +669,7 @@
 "help_reunite_pet" = "Aiuta %@ a ritrovare il suo proprietario in sicurezza";
 "step_share_location" = "Condividi la tua posizione";
 "step_share_location_desc" = "Tocca il pulsante qui sopra per condividere la tua posizione con il proprietario";
-"step_owner_notified" = "Il proprietario viene notificato";
+"step_owner_notified" = "Proprietario di %@ notificato";
 "step_owner_notified_desc" = "Il proprietario riceve un SMS e un'email con la tua posizione";
 "step_quick_reunion" = "Ritrovamento rapido";
 "step_quick_reunion_desc" = "Il proprietario può navigare fino alla tua posizione per recuperare il suo animale da compagnia";

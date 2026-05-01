@@ -163,7 +163,7 @@
 "scan_qr_code" = "QR-Code scannen";
 "scan_qr_subtitle" = "Richten du deine Kamera auf den QR-Haustiermarke des Haustiers";
 "hello_pet_name" = "Hallo! Ich bin %@";
-"scanned_tag_thanks" = "Du hast gerade meine Haustiermarke gescannt. Danke, dass du mir hilfst!";
+"scanned_tag_thanks" = "Du hast gerade meine Haustiermarke gescannt.\nDanke, dass du mir hilfst!";
 "share_location_with_owner" = "Meinen Standort mit dem Besitzer teilen";
 "contact_owner" = "Besitzer kontaktieren";
 "call_phone" = "Anrufen: %@";
@@ -650,7 +650,7 @@
 "help_reunite_pet" = "Hilf, %@ sicher zu seinem Besitzer zurückzubringen!";
 "step_share_location" = "Standort teilen";
 "step_share_location_desc" = "Tippe oben, um deinen Standort mit dem Besitzer zu teilen";
-"step_owner_notified" = "Besitzer wird informiert";
+"step_owner_notified" = "Besitzer von %@ benachrichtigt";
 "step_owner_notified_desc" = "Der Besitzer erhält eine SMS und E-Mail mit deinem Standort";
 "step_quick_reunion" = "Schnelle Wiedervereinigung";
 "step_quick_reunion_desc" = "Der Besitzer kann zu deinem Standort navigieren, um sein Haustier abzuholen";

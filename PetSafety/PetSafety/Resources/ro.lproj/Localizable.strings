@@ -163,7 +163,7 @@
 "scan_qr_code" = "Scanează cod QR";
 "scan_qr_subtitle" = "Îndreaptă camera către medalonul QR a animalului de companie";
 "hello_pet_name" = "Salut! Sunt %@";
-"scanned_tag_thanks" = "Tocmai ai scanat medalonul mea. Mulțumesc că mă ajuți!";
+"scanned_tag_thanks" = "Tocmai ai scanat medalonul mea.\nMulțumesc că mă ajuți!";
 "share_location_with_owner" = "Partajează locația mea cu stăpânul";
 "contact_owner" = "Contactează stăpânul";
 "call_phone" = "Sună: %@";
@@ -650,7 +650,7 @@
 "help_reunite_pet" = "Ajută la reunirea în siguranță a lui %@ cu stăpânul";
 "step_share_location" = "Partajează locația";
 "step_share_location_desc" = "Apasă butonul de mai sus pentru a partaja locația cu stăpânul";
-"step_owner_notified" = "Stăpânul este notificat";
+"step_owner_notified" = "Stăpânul lui %@ este notificat";
 "step_owner_notified_desc" = "Stăpânul primește SMS și e-mail cu locația ta";
 "step_quick_reunion" = "Reunire rapidă";
 "step_quick_reunion_desc" = "Stăpânul poate naviga către locația ta pentru a-și recupera animalul de companie";

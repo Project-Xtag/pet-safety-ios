@@ -163,7 +163,7 @@
 "scan_qr_code" = "Skanuj kod QR";
 "scan_qr_subtitle" = "Skieruj aparat na kod QR na adresówce pupila";
 "hello_pet_name" = "Cześć! Jestem %@";
-"scanned_tag_thanks" = "Właśnie zeskanowałeś moją adresówkę. Dziękuję za pomoc!";
+"scanned_tag_thanks" = "Właśnie zeskanowałeś moją adresówkę.\nDziękuję za pomoc!";
 "share_location_with_owner" = "Udostępnij moją lokalizację opiekunowi";
 "contact_owner" = "Kontakt z opiekunem";
 "call_phone" = "Zadzwoń: %@";
@@ -660,7 +660,7 @@
 "help_reunite_pet" = "Pomóż bezpiecznie zreunifikować %@ z opiekunem";
 "step_share_location" = "Udostępnij swoją lokalizację";
 "step_share_location_desc" = "Dotknij przycisku powyżej, aby udostępnić swoją lokalizację opiekunowi";
-"step_owner_notified" = "Właściciel otrzymuje powiadomienie";
+"step_owner_notified" = "Właściciel %@ został powiadomiony";
 "step_owner_notified_desc" = "Właściciel otrzymuje SMS i e-mail z twoją lokalizacją";
 "step_quick_reunion" = "Szybka reunifikacja";
 "step_quick_reunion_desc" = "Właściciel może nawigować do twojej lokalizacji, aby odebrać pupila";

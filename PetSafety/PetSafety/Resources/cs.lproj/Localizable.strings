@@ -163,7 +163,7 @@
 "scan_qr_code" = "Skenovat QR kód";
 "scan_qr_subtitle" = "Namiř kameru na QR psí známku mazlíčka";
 "hello_pet_name" = "Ahoj! Jmenuji se %@";
-"scanned_tag_thanks" = "Právě jsi naskenoval mou psí známku. Děkuji, že mi pomáháš!";
+"scanned_tag_thanks" = "Právě jsi naskenoval mou psí známku.\nDěkuji, že mi pomáháš!";
 "share_location_with_owner" = "Sdílet moji polohu s páníčkem";
 "contact_owner" = "Kontaktovat páníčka";
 "call_phone" = "Volat: %@";
@@ -650,7 +650,7 @@
 "help_reunite_pet" = "Pomoz bezpečně shledat %@ s páníčkem";
 "step_share_location" = "Sdílej svou polohu";
 "step_share_location_desc" = "Klepni na tlačítko výše pro sdílení polohy s páníčkem";
-"step_owner_notified" = "Páníček je informován";
+"step_owner_notified" = "Páníček %@ je informován";
 "step_owner_notified_desc" = "Páníček obdrží SMS a e-mail s tvou polohou";
 "step_quick_reunion" = "Rychlé shledání";
 "step_quick_reunion_desc" = "Páníček může navigovat k tvé poloze a vyzvednout svého mazlíčka";
