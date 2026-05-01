@@ -387,11 +387,14 @@ class APIService {
 
     // MARK: - Authentication
     func login(email: String) async throws -> LoginResponse {
+        // Canonical lowercased email — matches backend lookup so iOS, web
+        // and Android all resolve to the same user row.
+        let normalizedEmail = EmailNormalizer.normalize(email)
         let locale = Locale.current.language.languageCode?.identifier
         let request = try await buildRequest(
             endpoint: "/auth/send-otp",
             method: "POST",
-            body: LoginRequest(email: email, locale: locale),
+            body: LoginRequest(email: normalizedEmail, locale: locale),
             requiresAuth: false
         )
         let response = try await performRequest(request, responseType: LoginResponse.self)
@@ -402,10 +405,11 @@ class APIService {
     }
 
     func verifyOTP(email: String, code: String, firstName: String? = nil, lastName: String? = nil) async throws -> VerifyOTPResponse {
+        let normalizedEmail = EmailNormalizer.normalize(email)
         let request = try await buildRequest(
             endpoint: "/auth/verify-otp",
             method: "POST",
-            body: VerifyOTPRequest(email: email, code: code, firstName: firstName, lastName: lastName),
+            body: VerifyOTPRequest(email: normalizedEmail, code: code, firstName: firstName, lastName: lastName),
             requiresAuth: false
         )
         let response = try await performRequest(request, responseType: VerifyOTPResponse.self)
