@@ -47,6 +47,10 @@ struct Pet: Codable, Identifiable, Hashable {
     let ownerCity: String?
     let ownerPostalCode: String?
     let ownerCountry: String?
+    /// Server-resolved tier flag: false on Starter (no notifications) so the
+    /// finder UI can hide the share-location button entirely. nil on
+    /// auth'd / non-public-profile contexts where the field isn't sent.
+    let ownerCanReceiveNotifications: Bool?
 
     // Computed property for displaying age (localized from years/months)
     var age: String? {
@@ -113,6 +117,7 @@ struct Pet: Codable, Identifiable, Hashable {
         case ownerCity = "owner_city"
         case ownerPostalCode = "owner_postal_code"
         case ownerCountry = "owner_country"
+        case ownerCanReceiveNotifications = "owner_can_receive_notifications"
     }
 
     // Memberwise initializer for creating Pet instances (e.g., in previews)
@@ -153,7 +158,8 @@ struct Pet: Codable, Identifiable, Hashable {
         ownerAddressLine2: String? = nil,
         ownerCity: String? = nil,
         ownerPostalCode: String? = nil,
-        ownerCountry: String? = nil
+        ownerCountry: String? = nil,
+        ownerCanReceiveNotifications: Bool? = nil
     ) {
         self.id = id
         self.ownerId = ownerId
@@ -192,6 +198,7 @@ struct Pet: Codable, Identifiable, Hashable {
         self.ownerCity = ownerCity
         self.ownerPostalCode = ownerPostalCode
         self.ownerCountry = ownerCountry
+        self.ownerCanReceiveNotifications = ownerCanReceiveNotifications
     }
 
     // Custom decoder to handle weight as either String or Double
@@ -246,6 +253,7 @@ struct Pet: Codable, Identifiable, Hashable {
         ownerCity = try container.decodeIfPresent(String.self, forKey: .ownerCity)
         ownerPostalCode = try container.decodeIfPresent(String.self, forKey: .ownerPostalCode)
         ownerCountry = try container.decodeIfPresent(String.self, forKey: .ownerCountry)
+        ownerCanReceiveNotifications = try container.decodeIfPresent(Bool.self, forKey: .ownerCanReceiveNotifications)
     }
 
     // Custom encoder to handle photoUrl key (only used for decoding legacy API responses)
@@ -288,6 +296,7 @@ struct Pet: Codable, Identifiable, Hashable {
         try container.encodeIfPresent(ownerCity, forKey: .ownerCity)
         try container.encodeIfPresent(ownerPostalCode, forKey: .ownerPostalCode)
         try container.encodeIfPresent(ownerCountry, forKey: .ownerCountry)
+        try container.encodeIfPresent(ownerCanReceiveNotifications, forKey: .ownerCanReceiveNotifications)
     }
 }
 

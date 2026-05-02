@@ -91,11 +91,10 @@ class NotificationHandler: ObservableObject {
     private func handleTagScannedNotification(_ userInfo: [AnyHashable: Any]) {
         let scanId = userInfo["scan_id"] as? String ?? ""
         let petId = userInfo["pet_id"] as? String ?? ""
-        let locationType = userInfo["location_type"] as? String ?? "none"
-
-        let location: LocationData? = locationType == "none"
-            ? nil
-            : Self.parseLocation(userInfo, isApproximate: locationType == "approximate")
+        // 2026-05-02: backend dropped the `location_type` discriminator.
+        // Coordinates may still be absent (manual-address path with failed
+        // geocoding), so probe lat/lng directly. Always precise when present.
+        let location: LocationData? = Self.parseLocation(userInfo)
 
         DispatchQueue.main.async { [weak self] in
             self?.pendingScanNotification = ScanNotificationData(
@@ -105,14 +104,13 @@ class NotificationHandler: ObservableObject {
                 location: location
             )
 
-            // If there's a location, show the map picker
             if location != nil {
                 self?.showMapPicker = true
             }
         }
 
         #if DEBUG
-        print("Tag scanned notification handled: petId=\(petId), location=\(locationType)")
+        print("Tag scanned notification handled: petId=\(petId), hasLocation=\(location != nil)")
         #endif
     }
 
@@ -199,7 +197,7 @@ class NotificationHandler: ObservableObject {
             return
         }
 
-        let location: LocationData? = Self.parseLocation(userInfo, isApproximate: false)
+        let location: LocationData? = Self.parseLocation(userInfo)
 
         #if DEBUG
         print("Sighting notification: alertId=\(alertId), sightingId=\(sightingId)")
@@ -292,7 +290,7 @@ class NotificationHandler: ObservableObject {
     /// `(0, 0)` null-island sentinel. Returns nil for any invalid input — this
     /// guards MapKit (`MKCoordinateRegion`, `CLLocationCoordinate2D`) from
     /// NaN / Inf / out-of-range values that crash on use.
-    static func parseLocation(_ userInfo: [AnyHashable: Any], isApproximate: Bool) -> LocationData? {
+    static func parseLocation(_ userInfo: [AnyHashable: Any]) -> LocationData? {
         guard let latString = userInfo["latitude"] as? String,
               let lonString = userInfo["longitude"] as? String,
               let lat = Double(latString),
@@ -301,7 +299,7 @@ class NotificationHandler: ObservableObject {
         else {
             return nil
         }
-        return LocationData(latitude: lat, longitude: lon, isApproximate: isApproximate)
+        return LocationData(latitude: lat, longitude: lon)
     }
 }
 

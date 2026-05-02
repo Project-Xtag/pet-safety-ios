@@ -174,11 +174,7 @@
 // MARK: - Helymegosztás folyamat
 "share_help_get_home %@" = "Segíts, hogy %@ hazajusson!";
 "share_location_subtitle" = "A hely megadása ¡ a gazdinak megtalálni a kedvencét.";
-"share_exact_location_toggle" = "Pontos hely megosztása";
-"share_approximate_desc" = "Oszd meg a környék adatait (~100m sugarú terület)";
-"share_exact_desc" = "Oszd meg a pontos helyzeted, hogy a gazdi gyorsabban rá találjon kedvencére!";
 "share_your_location" = "Tartózkodási helyed";
-"share_accuracy" = "(~100m pontosság)";
 "share_getting_location" = "Hely lekérése…";
 "share_location_unavailable" = "A hely adatai nem elérhetőek. Kérjük, ellenőrizd, hogy a helymeghatározás engedélyezve van-e!";
 "share_owner_notified" = "A gazdi értesítve!";
@@ -187,6 +183,10 @@
 "share_notify_with_location" = "Megosztás & gazdi értesítése";
 "share_privacy_note" = "A helyed megosztásra kerül a gazdival.";
 "share_found_pet %@" = "%@ megtalálva!";
+"share_address_instead" = "Vagy add meg a címet kézzel";
+"share_manual_address_title" = "Add meg a címet";
+"share_manual_address_desc" = "Ha nem tudod megosztani a GPS-t, írd be a címet vagy a helyszínt, ahol megtaláltad a kisállatot. Továbbítjuk a gazdinak.";
+"owner_communication_disabled" = "A kisállat gazdája nem engedélyezte a kommunikációt a megtalálóval.";
 
 // MARK: - Beolvasó részletei
 "scanner_open_settings" = "Beállítások megnyitása";

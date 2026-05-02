@@ -174,11 +174,7 @@
 // MARK: - Průběh sdílení polohy
 "share_help_get_home %@" = "Pomozte %@ dostat se domů";
 "share_location_subtitle" = "Tvá poloha pomůže páníčkovi najít jeho mazlíčka.";
-"share_exact_location_toggle" = "Sdílet přesnou polohu";
-"share_approximate_desc" = "Sdílej svou přibližnou oblast (~500 m)";
-"share_exact_desc" = "Sdílej přesnou polohu pro rychlejší shledání";
 "share_your_location" = "Tvá poloha";
-"share_accuracy" = "(~500 m přesnost)";
 "share_getting_location" = "Získávání polohy…";
 "share_location_unavailable" = "Poloha není dostupná. Ujisti se, že jsou povoleny služby určení polohy.";
 "share_owner_notified" = "Páníček informován!";
@@ -187,6 +183,10 @@
 "share_notify_with_location" = "Sdílet a informovat páníčka";
 "share_privacy_note" = "Tvá poloha je sdílena s páníčkem, aby se mu pomohlo shledat se s mazlíčkem.";
 "share_found_pet %@" = "%@ nalezen!";
+"share_address_instead" = "[NEEDS_TRANSLATION] Or type the address instead";
+"share_manual_address_title" = "[NEEDS_TRANSLATION] Type the Address";
+"share_manual_address_desc" = "[NEEDS_TRANSLATION] If you can't share GPS, type the address or a description of where you found the pet. We'll send it to the owner.";
+"owner_communication_disabled" = "[NEEDS_TRANSLATION] This pet's owner has not enabled finder communication.";
 
 // MARK: - Detail skeneru
 "scanner_open_settings" = "Otevřít nastavení";

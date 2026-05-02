@@ -177,11 +177,7 @@
 // MARK: - Share Location Flow
 "share_help_get_home %@" = "Pomozi %@ da se vrati kući";
 "share_location_subtitle" = "Tvoja lokacija pomaže vlasniku brže pronaći kućnog ljubimca.";
-"share_exact_location_toggle" = "Podijeli točnu lokaciju";
-"share_approximate_desc" = "Podijeli približno područje (~100 m radijus)";
-"share_exact_desc" = "Podijeli svoju točnu lokaciju za brže spajanje";
 "share_your_location" = "Tvoja lokacija";
-"share_accuracy" = "(~100 m točnost)";
 "share_getting_location" = "Dohvaćanje lokacije…";
 "share_location_unavailable" = "Lokacija nije dostupna. Provjeri jesu li lokacijske usluge omogućene.";
 "share_owner_notified" = "Vlasnik je obaviješten!";
@@ -190,6 +186,10 @@
 "share_notify_with_location" = "Podijeli i obavijesti vlasnika";
 "share_privacy_note" = "Tvoja lokacija se dijeli s vlasnikom kućnog ljubimca.";
 "share_found_pet %@" = "%@ pronađen!";
+"share_address_instead" = "[NEEDS_TRANSLATION] Or type the address instead";
+"share_manual_address_title" = "[NEEDS_TRANSLATION] Type the Address";
+"share_manual_address_desc" = "[NEEDS_TRANSLATION] If you can't share GPS, type the address or a description of where you found the pet. We'll send it to the owner.";
+"owner_communication_disabled" = "[NEEDS_TRANSLATION] This pet's owner has not enabled finder communication.";
 
 // MARK: - Scanner Detail
 "scanner_open_settings" = "Otvori postavke";

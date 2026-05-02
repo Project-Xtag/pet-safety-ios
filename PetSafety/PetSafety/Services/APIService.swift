@@ -895,17 +895,21 @@ class APIService {
         return response.tag
     }
 
-    // Share finder's location with pet owner (no auth required)
-    // Supports 2-tier location consent: approximate or precise (toggle-based)
+    /// Share finder's location with pet owner (no auth required).
+    ///
+    /// Either `location` (precise GPS) or `manualAddress` (free-text the
+    /// server geocodes via Google Places → Nominatim) must be supplied —
+    /// the backend rejects calls with neither. Both can coexist when the
+    /// finder shares GPS plus a "near the playground" hint.
     func shareLocation(
         qrCode: String,
         location: LocationConsentData? = nil,
-        address: String? = nil
+        manualAddress: String? = nil
     ) async throws -> ShareLocationResponse {
         struct ShareLocationRequest: Codable {
             let qrCode: String
             let location: LocationConsentData?
-            let address: String?
+            let manual_address: String?
         }
 
         let request = try await buildRequest(
@@ -914,29 +918,11 @@ class APIService {
             body: ShareLocationRequest(
                 qrCode: qrCode,
                 location: location,
-                address: address
+                manual_address: manualAddress
             ),
             requiresAuth: false
         )
         return try await performRequest(request, responseType: ShareLocationResponse.self)
-    }
-
-    /// Legacy share location method for backwards compatibility
-    func shareLocationLegacy(
-        qrCode: String,
-        latitude: Double,
-        longitude: Double,
-        address: String? = nil
-    ) async throws -> ShareLocationResponse {
-        // Convert to 3-tier format with precise location
-        let location = LocationConsentData(
-            latitude: latitude,
-            longitude: longitude,
-            accuracy_meters: 10,
-            is_approximate: false,
-            consent_type: .precise
-        )
-        return try await shareLocation(qrCode: qrCode, location: location, address: address)
     }
 
     // MARK: - Orders
@@ -1407,58 +1393,31 @@ struct CreateTagOrderResponse: Decodable {
     let message: String
 }
 
-// MARK: - Location Sharing Types (2-Tier Toggle Consent)
+// MARK: - Location Sharing Types
 
-/// Location consent type for GDPR compliance
-enum LocationConsentType: String, Codable {
-    case approximate = "approximate"
-    case precise = "precise"
-}
-
-/// Location data with consent type for GDPR compliance
+/// Precise GPS coordinates supplied with the share-location request.
+/// 2026-05-02 missing-pet flow overhaul removed the precise/approximate
+/// toggle — the backend rejects any payload that includes the legacy
+/// `is_approximate`, `consent_type`, or `share_exact_location` fields.
 struct LocationConsentData: Codable {
     let latitude: Double
     let longitude: Double
     let accuracy_meters: Double
-    let is_approximate: Bool
-    let consent_type: LocationConsentType
-    /// New field for 2-tier toggle: true = precise, false = approximate
-    let share_exact_location: Bool
-
-    /// Backwards-compatible initializer (defaults share_exact_location based on consent_type)
-    init(
-        latitude: Double,
-        longitude: Double,
-        accuracy_meters: Double,
-        is_approximate: Bool,
-        consent_type: LocationConsentType,
-        share_exact_location: Bool? = nil
-    ) {
-        self.latitude = latitude
-        self.longitude = longitude
-        self.accuracy_meters = accuracy_meters
-        self.is_approximate = is_approximate
-        self.consent_type = consent_type
-        self.share_exact_location = share_exact_location ?? (consent_type == .precise)
-    }
 }
 
-/// Updated response for share-location endpoint
+/// Response for /qr-tags/share-location.
 struct ShareLocationResponse: Codable {
-    // New format fields
     let scan_id: String?
     let pet: PetSummary?
     let is_missing: Bool?
     let owner_notified: Bool?
     let location_shared: Bool?
-    let location_type: String?
-
-    // Legacy format fields (for backwards compatibility)
-    let message: String?
-    let sightingId: String?
-    let sentSMS: Bool?
-    let sentEmail: Bool?
-    let sentPush: Bool?
+    /// 'not_attempted' (GPS path), 'success' (manual address geocoded), or
+    /// 'failed' (manual address kept as text only). Clients usually don't
+    /// branch on this — the success toast wording is identical — but it's
+    /// surfaced so future analytics / UI hints can use it.
+    let geocoding_status: String?
+    let manual_address_recorded: Bool?
 
     struct PetSummary: Codable {
         let name: String

@@ -174,11 +174,7 @@
 // MARK: - Flux de partage de position
 "share_help_get_home %@" = "Aide %@ à rentrer à la maison";
 "share_location_subtitle" = "Ta localisation aide le propriétaire à retrouver son animal de compagnie plus vite.";
-"share_exact_location_toggle" = "Partager la localisation exacte";
-"share_approximate_desc" = "Partage ta zone générale (~100 m de rayon)";
-"share_exact_desc" = "Partage ta localisation précise pour des retrouvailles plus rapides";
 "share_your_location" = "Ta localisation";
-"share_accuracy" = "(~100 m de précision)";
 "share_getting_location" = "Récupération de la localisation…";
 "share_location_unavailable" = "Position non disponible. Vérifie que les services de localisation sont activés.";
 "share_owner_notified" = "Propriétaire notifié !";
@@ -187,6 +183,10 @@
 "share_notify_with_location" = "Partager et notifier le propriétaire";
 "share_privacy_note" = "Ta localisation est partagée avec le propriétaire pour faciliter les retrouvailles.";
 "share_found_pet %@" = "%@ trouvé !";
+"share_address_instead" = "[NEEDS_TRANSLATION] Or type the address instead";
+"share_manual_address_title" = "[NEEDS_TRANSLATION] Type the Address";
+"share_manual_address_desc" = "[NEEDS_TRANSLATION] If you can't share GPS, type the address or a description of where you found the pet. We'll send it to the owner.";
+"owner_communication_disabled" = "[NEEDS_TRANSLATION] This pet's owner has not enabled finder communication.";
 
 // MARK: - Détail du scanner
 "scanner_open_settings" = "Ouvrir les paramètres";
