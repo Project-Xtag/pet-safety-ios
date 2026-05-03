@@ -52,8 +52,6 @@ class NotificationHandler: ObservableObject {
             handleSightingNotification(userInfo)
         case "ALERT_CREATED":
             handleAlertConfirmation(userInfo)
-        case "ALERT_REMINDER":
-            handleAlertReminder(userInfo)
         case "MULTIPLE_SIGHTINGS":
             handleMultipleSightings(userInfo)
         default:
@@ -239,23 +237,6 @@ class NotificationHandler: ObservableObject {
             name: .navigateToAlert,
             object: nil,
             userInfo: ["alertId": alertId, "petId": petId]
-        )
-    }
-
-    // MARK: - Alert Reminder
-
-    private func handleAlertReminder(_ userInfo: [AnyHashable: Any]) {
-        let alertId = userInfo["alert_id"] as? String ?? ""
-
-        guard !alertId.isEmpty else {
-            Self.captureMalformedPayload(reason: "missing_alert_id", type: "ALERT_REMINDER", userInfo: userInfo)
-            return
-        }
-
-        NotificationCenter.default.post(
-            name: .navigateToAlert,
-            object: nil,
-            userInfo: ["alertId": alertId]
         )
     }
 

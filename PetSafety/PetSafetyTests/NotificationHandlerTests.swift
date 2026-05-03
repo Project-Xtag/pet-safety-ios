@@ -527,35 +527,13 @@ final class NotificationHandlerTests: XCTestCase {
         XCTAssertNil(notificationHandler.pendingScanNotification)
     }
 
-    // MARK: - ALERT_REMINDER Notification Tests
-
-    func testHandleAlertReminder() {
-        // Given
-        let userInfo: [AnyHashable: Any] = [
-            "type": "ALERT_REMINDER",
-            "alert_id": "alert-789"
-        ]
-
-        // When - should post navigateToAlert notification
-        let navExpectation = expectNavigationNotification(named: .navigateToAlert)
-        notificationHandler.handleNotificationTap(userInfo: userInfo)
-
-        // Then
-        waitForExpectations(timeout: 1.0)
-    }
-
-    func testHandleAlertReminderWithEmptyAlertId() {
-        // Given - missing alert_id
-        let userInfo: [AnyHashable: Any] = [
-            "type": "ALERT_REMINDER"
-        ]
-
-        // When
-        notificationHandler.handleNotificationTap(userInfo: userInfo)
-
-        // Then - should not crash, no navigation posted
-        XCTAssertNil(notificationHandler.pendingScanNotification)
-    }
+    // MARK: - ALERT_REMINDER Removed
+    //
+    // Backend stopped sending ALERT_REMINDER in commit 0238357 (audit fix
+    // 2026-04). The client routing case was removed; any in-flight reminder
+    // payloads from older backend builds now fall through to the default
+    // branch (captureUnknownNotification + navigateToScan) and surface in
+    // Sentry. Default-branch behaviour is covered by the unknown-type tests.
 
     // MARK: - MULTIPLE_SIGHTINGS Notification Tests
 
