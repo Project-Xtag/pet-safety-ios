@@ -48,8 +48,8 @@
 "register" = "Registrarse";
 "already_have_account" = "¿Ya tienes cuenta?";
 "log_in" = "Iniciar sesión";
-"terms_login_prefix" = "Al iniciar sesión, aceptas nuestros ";
-"terms_and" = " y ";
+"terms_login_prefix" = "Al iniciar sesión, aceptas nuestros";
+"terms_and" = " y";
 "terms_of_service" = "Términos de servicio";
 "privacy_policy" = "Política de privacidad";
 "first_name" = "Nombre";
@@ -1166,8 +1166,8 @@
 "breed_dog_samoyed" = "Samoyedo";
 "breed_dog_scottish_terrier" = "Terrier escocés";
 "breed_dog_soft_coated_wheaten_terrier" = "Terrier Irlandés de Pelo Suave";
-"breed_dog_airedale_terrier" = "Airedale Terrier";
-"breed_dog_jack_russell_terrier" = "Jack Russell Terrier";
+"breed_dog_airedale_terrier" = "Airedale terrier";
+"breed_dog_jack_russell_terrier" = "Jack Russell terrier";
 "breed_cat_domestic_shorthair" = "Doméstico de pelo corto";
 "breed_cat_domestic_longhair" = "Doméstico de pelo largo";
 "breed_cat_persian" = "Persa";
@@ -1179,7 +1179,7 @@
 "breed_cat_scottish_fold" = "Fold escocés";
 "breed_cat_sphynx" = "Esfinge";
 "breed_cat_siamese" = "Siamés";
-"breed_cat_devon_rex" = "Devon Rex";
+"breed_cat_devon_rex" = "Devon rex";
 "breed_cat_oriental_shorthair" = "Oriental de pelo corto";
 "breed_cat_burmese" = "Burmés";
 "breed_cat_american_shorthair" = "Americano de pelo corto";
@@ -1188,14 +1188,14 @@
 "breed_cat_norwegian_forest_cat" = "Bosque de Noruega";
 "breed_cat_birman" = "Birmano";
 "breed_cat_tonkinese" = "Tonkinés";
-"breed_cat_cornish_rex" = "Cornish Rex";
+"breed_cat_cornish_rex" = "Cornish rex";
 "breed_cat_siberian" = "Siberiano";
 "breed_cat_balinese" = "Balinés";
 "breed_cat_somali" = "Somalí";
 "breed_cat_turkish_angora" = "Angora Turco";
 "breed_cat_himalayan" = "Himalayo";
 "breed_cat_manx" = "Manx";
-"breed_cat_selkirk_rex" = "Selkirk Rex";
+"breed_cat_selkirk_rex" = "Selkirk rex";
 "breed_cat_ragamuffin" = "RagaMuffin";
 "breed_cat_american_curl" = "Curl americano";
 "breed_cat_chartreux" = "Chartreux";
@@ -1408,7 +1408,7 @@
 "shelter_promo_claim_tag_button" = "Activar chapa inteligente";
 "shelter_promo_name_label_required" = "Nombre *";
 "shelter_promo_species_label_required" = "Especie *";
-"shelter_promo_select_placeholder" = "Selecciona...";
+"shelter_promo_select_placeholder" = "Selecciona…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Nombre del dueño";

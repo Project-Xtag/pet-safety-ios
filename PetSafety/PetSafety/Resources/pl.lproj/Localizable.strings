@@ -48,8 +48,8 @@
 "register" = "Zarejestruj się";
 "already_have_account" = "Masz już konto?";
 "log_in" = "Zaloguj się";
-"terms_login_prefix" = "Logując się, akceptujesz nasze ";
-"terms_and" = " i ";
+"terms_login_prefix" = "Logując się, akceptujesz nasze";
+"terms_and" = " i";
 "terms_of_service" = "Warunki korzystania z usługi";
 "privacy_policy" = "Politykę prywatności";
 "first_name" = "Imię";
@@ -585,7 +585,7 @@
 "orders_no_orders_message" = "Nie złożyłeś/aś jeszcze żadnych zamówień";
 "orders_information" = "Informacje o zamówieniu";
 "orders_order_id" = "ID zamówienia";
-"orders_status" = "Status";
+"orders_status" = "Stan";
 "orders_total_amount" = "Łączna kwota";
 "orders_order_date" = "Data zamówienia";
 "orders_items" = "Pozycje";
@@ -693,8 +693,8 @@
 "map_approximate_notice" = "To jest przybliżona lokalizacja (~500m). Przeszukaj okoliczny obszar.";
 "map_coordinates" = "Współrzędne";
 "map_open_in" = "Otwórz w";
-"map_apple_maps" = "Apple Maps";
-"map_google_maps" = "Google Maps";
+"map_apple_maps" = "Apple Mapy";
+"map_google_maps" = "Google Mapy";
 "map_waze" = "Waze";
 "map_pet_location %@" = "Lokalizacja %@";
 "location_title" = "Lokalizacja %@";
@@ -1156,11 +1156,11 @@
 "breed_dog_chihuahua" = "Chihuahua";
 "breed_dog_west_highland_white_terrier" = "West Highland white terrier";
 "breed_dog_collie" = "Collie";
-"breed_dog_basset_hound" = "Basset Hound";
-"breed_dog_rhodesian_ridgeback" = "Rhodesian Ridgeback";
+"breed_dog_basset_hound" = "Basset hound";
+"breed_dog_rhodesian_ridgeback" = "Rhodesian ridgeback";
 "breed_dog_newfoundland" = "Nowofundlandczyk";
 "breed_dog_belgian_malinois" = "Owczarek Belgijski Malinois";
-"breed_dog_bichon_frise" = "Bichon Frise";
+"breed_dog_bichon_frise" = "Bichon frise";
 "breed_dog_akita" = "Akita";
 "breed_dog_st_bernard" = "Bernardyn";
 "breed_dog_bloodhound" = "Bloodhound";
@@ -1168,9 +1168,9 @@
 "breed_dog_bullmastiff" = "Bullmastiff";
 "breed_dog_samoyed" = "Samojed";
 "breed_dog_scottish_terrier" = "Terrier Szkocki";
-"breed_dog_soft_coated_wheaten_terrier" = "Soft Coated Wheaten Terrier";
-"breed_dog_airedale_terrier" = "Airedale Terrier";
-"breed_dog_jack_russell_terrier" = "Jack Russell Terrier";
+"breed_dog_soft_coated_wheaten_terrier" = "Soft Coated Wheaten terrier";
+"breed_dog_airedale_terrier" = "Airedale terrier";
+"breed_dog_jack_russell_terrier" = "Jack Russell terrier";
 "breed_cat_domestic_shorthair" = "Kot domowy krótkowłosy";
 "breed_cat_domestic_longhair" = "Kot domowy długowłosy";
 "breed_cat_persian" = "Perski";
@@ -1182,7 +1182,7 @@
 "breed_cat_scottish_fold" = "Szkocki Zwisłouchy";
 "breed_cat_sphynx" = "Sfinks";
 "breed_cat_siamese" = "Syjamski";
-"breed_cat_devon_rex" = "Devon Rex";
+"breed_cat_devon_rex" = "Devon rex";
 "breed_cat_oriental_shorthair" = "Orientalny Krótkowłosy";
 "breed_cat_burmese" = "Burmański";
 "breed_cat_american_shorthair" = "Amerykański Krótkowłosy";
@@ -1191,14 +1191,14 @@
 "breed_cat_norwegian_forest_cat" = "Kot Norweski Leśny";
 "breed_cat_birman" = "Birmański";
 "breed_cat_tonkinese" = "Tonkijski";
-"breed_cat_cornish_rex" = "Cornish Rex";
+"breed_cat_cornish_rex" = "Cornish rex";
 "breed_cat_siberian" = "Syberyjski";
 "breed_cat_balinese" = "Balinezyjski";
 "breed_cat_somali" = "Somalijski";
 "breed_cat_turkish_angora" = "Angora Turecka";
 "breed_cat_himalayan" = "Himalajski";
 "breed_cat_manx" = "Manx";
-"breed_cat_selkirk_rex" = "Selkirk Rex";
+"breed_cat_selkirk_rex" = "Selkirk rex";
 "breed_cat_ragamuffin" = "RagaMuffin";
 "breed_cat_american_curl" = "Amerykański curl";
 "breed_cat_chartreux" = "Kartuski";
@@ -1411,7 +1411,7 @@
 "shelter_promo_claim_tag_button" = "Aktywuj zawieszkę";
 "shelter_promo_name_label_required" = "Imię *";
 "shelter_promo_species_label_required" = "Gatunek *";
-"shelter_promo_select_placeholder" = "Wybierz...";
+"shelter_promo_select_placeholder" = "Wybierz…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Imię właściciela";

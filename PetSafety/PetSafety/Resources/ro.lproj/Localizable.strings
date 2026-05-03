@@ -48,8 +48,8 @@
 "register" = "Înregistrare";
 "already_have_account" = "Ai deja cont?";
 "log_in" = "Autentificare";
-"terms_login_prefix" = "Prin autentificare, ești de acord cu ";
-"terms_and" = " și ";
+"terms_login_prefix" = "Prin autentificare, ești de acord cu";
+"terms_and" = " și";
 "terms_of_service" = "Termenii de utilizare";
 "privacy_policy" = "Politica de confidențialitate";
 "first_name" = "Prenume";
@@ -1155,7 +1155,7 @@
 "breed_dog_collie" = "Collie";
 "breed_dog_basset_hound" = "Basset hound";
 "breed_dog_rhodesian_ridgeback" = "Rhodesian ridgeback";
-"breed_dog_newfoundland" = "Newfoundland";
+"breed_dog_newfoundland" = "Newfoundlandezi";
 "breed_dog_belgian_malinois" = "Ciobănesc Belgian Malinois";
 "breed_dog_bichon_frise" = "Bichon frise";
 "breed_dog_akita" = "Akita";
@@ -1208,7 +1208,7 @@
 "breed_cat_havana_brown" = "Havana brown";
 "breed_cat_japanese_bobtail" = "Bobtail Japonez";
 "breed_cat_laperm" = "LaPerm";
-"breed_cat_american_wirehair" = "American Wirehair";
+"breed_cat_american_wirehair" = "Amerikai drótszőrű";
 "breed_cat_european_burmese" = "Burmeză Europeană";
 "breed_cat_burmilla" = "Burmilla";
 "breed_cat_colorpoint_shorthair" = "Colorpoint cu păr scurt";
@@ -1408,7 +1408,7 @@
 "shelter_promo_claim_tag_button" = "Activează plăcuța inteligentă";
 "shelter_promo_name_label_required" = "Nume *";
 "shelter_promo_species_label_required" = "Specie *";
-"shelter_promo_select_placeholder" = "Selectează...";
+"shelter_promo_select_placeholder" = "Selectează…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Numele stăpânului";

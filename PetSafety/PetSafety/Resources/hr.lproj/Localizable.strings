@@ -51,8 +51,8 @@
 "register" = "Registracija";
 "already_have_account" = "Već imaš račun?";
 "log_in" = "Prijava";
-"terms_login_prefix" = "Prijavom prihvaćaš naše ";
-"terms_and" = " i ";
+"terms_login_prefix" = "Prijavom prihvaćaš naše";
+"terms_and" = " i";
 "terms_of_service" = "Uvjete korištenja";
 "privacy_policy" = "Pravila privatnosti";
 "first_name" = "Ime";
@@ -1189,7 +1189,7 @@
 "breed_cat_oriental_shorthair" = "Orientalna kratkodlaka";
 "breed_cat_burmese" = "Burmanska";
 "breed_cat_american_shorthair" = "Američka kratkodlaka";
-"breed_cat_bengal" = "Bengal";
+"breed_cat_bengal" = "Bengalska";
 "breed_cat_russian_blue" = "Ruska plava";
 "breed_cat_norwegian_forest_cat" = "Norveška šumska mačka";
 "breed_cat_birman" = "Sveta birma";
@@ -1414,7 +1414,7 @@
 "shelter_promo_claim_tag_button" = "Aktiviraj privjesak";
 "shelter_promo_name_label_required" = "Ime *";
 "shelter_promo_species_label_required" = "Vrsta *";
-"shelter_promo_select_placeholder" = "Odaberi...";
+"shelter_promo_select_placeholder" = "Odaberi…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Ime vlasnika";
