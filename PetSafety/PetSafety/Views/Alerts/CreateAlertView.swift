@@ -10,6 +10,7 @@ struct CreateAlertView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var subscriptionViewModel: SubscriptionViewModel
 
     @State private var selectedPet: Pet?
     @State private var lastSeenSource: LastSeenSource = .registeredAddress
@@ -40,6 +41,63 @@ struct CreateAlertView: View {
     }
 
     var body: some View {
+        // M11 — mirror Android MarkAsMissingScreen + iOS MarkAsLostView:
+        // gate the form upfront so Starter users see a single upgrade CTA
+        // instead of filling out a form whose submission gets a 403.
+        if subscriptionViewModel.isOnStarterPlan {
+            starterUpgradeView
+        } else {
+            alertForm
+        }
+    }
+
+    private var starterUpgradeView: some View {
+        VStack(spacing: 24) {
+            Spacer()
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 48))
+                .foregroundColor(.brandOrange)
+            Text("mark_lost_starter_notice")
+                .font(.title3)
+                .fontWeight(.semibold)
+                .multilineTextAlignment(.center)
+            Text("mark_lost_upgrade_prompt")
+                .font(.body)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+            Spacer()
+            // Subscription management lives on the web app — link out to
+            // senra.pet/plans rather than navigate to a screen we don't ship.
+            if let url = URL(string: "https://senra.pet/plans") {
+                Link(destination: url) {
+                    Text("mark_lost_starter_upgrade_cta")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.brandOrange)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
+            }
+            Button(action: { dismiss() }) {
+                Text("cancel")
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+            }
+            .foregroundColor(.secondary)
+        }
+        .padding(24)
+        .navigationTitle(Text("report_missing_pet"))
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("cancel") { dismiss() }
+                    .foregroundColor(.brandOrange)
+            }
+        }
+    }
+
+    private var alertForm: some View {
         Form {
             Section(header: Text("select_pet_header")) {
                 if petsViewModel.pets.isEmpty {
