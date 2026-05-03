@@ -166,12 +166,27 @@ struct ShareLocationView: View {
                 .font(.caption)
                 .foregroundColor(.secondary)
 
-            TextEditor(text: $manualAddress)
-                .frame(minHeight: 80)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                )
+            // SwiftUI's TextEditor has no native placeholder, so overlay the
+            // hint text behind the field and hide it once the user starts
+            // typing. Allow taps through (allowsHitTesting false) so the
+            // placeholder doesn't intercept the editor's tap target.
+            ZStack(alignment: .topLeading) {
+                if manualAddress.isEmpty {
+                    Text(NSLocalizedString("share_manual_address_placeholder", comment: ""))
+                        .font(.body)
+                        .foregroundColor(.secondary.opacity(0.6))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 12)
+                        .allowsHitTesting(false)
+                }
+                TextEditor(text: $manualAddress)
+                    .frame(minHeight: 80)
+                    .opacity(manualAddress.isEmpty ? 0.95 : 1)
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+            )
 
             Button(action: submitManualAddress) {
                 if isSharing {

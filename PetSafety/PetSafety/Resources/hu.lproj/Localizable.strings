@@ -185,7 +185,8 @@
 "share_found_pet %@" = "%@ megtalálva!";
 "share_address_instead" = "Vagy add meg a címet kézzel";
 "share_manual_address_title" = "Add meg a címet";
-"share_manual_address_desc" = "Ha nem tudod megosztani a GPS-t, írd be a címet vagy a helyszínt, ahol megtaláltad a kisállatot. Továbbítjuk a gazdinak.";
+"share_manual_address_desc" = "Ha nem tudod megosztani a GPS-t, írd be a címet vagy a helyszínt, ahol megtaláltad a kisállatot. Telefonszámodat is megadhatod itt, ha szeretnéd, hogy a gazdi vissza tudjon hívni.";
+"share_manual_address_placeholder" = "pl. Budapest, Pine utca 123 — a játszótér mellett. Telefonszámod is megadhatod, ha szeretnéd, hogy a gazdi visszahívhasson.";
 "owner_communication_disabled" = "A kisállat gazdája nem engedélyezte a kommunikációt a megtalálóval.";
 
 // MARK: - Beolvasó részletei
