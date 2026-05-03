@@ -231,6 +231,16 @@ struct CreateAlertView: View {
                     }
                 }
 
+                // M19 — non-blocking visibility into silent geocode failures.
+                // Pre-fix the alert would ship without coordinates and the
+                // user only learned about it from a subtly different success
+                // message. Surface a warning when a typed address didn't
+                // resolve, so they understand why their map pin will be
+                // missing and can opt to retry with current location.
+                if coordinate == nil && (lastSeenSource == .registeredAddress || lastSeenSource == .customAddress) {
+                    appState.showError(String(localized: "alert_geocode_failed_warning"))
+                }
+
                 _ = try await viewModel.createAlert(
                     petId: pet.id,
                     location: addressText,

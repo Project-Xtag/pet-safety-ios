@@ -253,6 +253,7 @@
 "additional_information_header" = "Additional Information";
 "additional_details_placeholder" = "Provide any additional details about when and where your pet was last seen…";
 "alert_created_success" = "Missing pet alert created successfully!";
+"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
 "report_sighting_header" = "Report a Sighting";
 "report_sighting_help" = "Help reunite this pet with their owner by sharing where you saw them.";
 "share_contact_info" = "Share My Contact Info";
