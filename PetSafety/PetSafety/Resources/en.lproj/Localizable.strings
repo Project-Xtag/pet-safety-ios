@@ -1260,6 +1260,8 @@
 "plan_cancels_on" = "Cancels on %@";
 "delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Cancel Subscription Instead";
+"delete_confirm_type_delete" = "Type DELETE to confirm";
+"type_delete_to_confirm" = "Type DELETE";
 
 // MARK: - Shelter Adoption
 

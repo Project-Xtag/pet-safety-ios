@@ -24,6 +24,7 @@ struct HelpAndSupportView: View {
     @State private var showingContactForm = false
     @State private var showingDeleteConfirmation = false
     @State private var confirmDeleteChecked = false
+    @State private var deleteConfirmText = ""
     @State private var showingDeleteError = false
     @State private var deleteErrorMessage = ""
     @State private var missingPetNames: [String] = []
@@ -159,6 +160,11 @@ struct HelpAndSupportView: View {
             ContactSupportView()
         }
         .sheet(isPresented: $showingDeleteConfirmation) {
+            // M15 — adopt the Android pattern: stricter confirmation
+            // (checkbox PLUS literal "DELETE" typed) and a "cancel
+            // subscription instead" branch when the user has an active
+            // paid plan, so paying customers don't accidentally lose
+            // their subscription via the delete-account path.
             VStack(spacing: 20) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.system(size: 48))
@@ -179,6 +185,21 @@ struct HelpAndSupportView: View {
                         .foregroundColor(.orange)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
+
+                    // Subscription management lives on the web — link out
+                    // rather than duplicate the cancel flow here.
+                    if let url = URL(string: "https://senra.pet/account") {
+                        Link(destination: url) {
+                            Text("cancel_instead")
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 10)
+                                .background(Color.brandOrange)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        .padding(.horizontal)
+                    }
                 }
 
                 Toggle(isOn: $confirmDeleteChecked) {
@@ -187,26 +208,37 @@ struct HelpAndSupportView: View {
                 }
                 .padding(.horizontal)
 
+                TextField("type_delete_to_confirm", text: $deleteConfirmText)
+                    .textFieldStyle(.roundedBorder)
+                    .autocorrectionDisabled(true)
+                    .textInputAutocapitalization(.characters)
+                    .padding(.horizontal)
+                Text("delete_confirm_type_delete")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+
                 HStack(spacing: 16) {
                     Button("cancel") {
                         showingDeleteConfirmation = false
                         confirmDeleteChecked = false
+                        deleteConfirmText = ""
                     }
                     .buttonStyle(.bordered)
 
                     Button("delete_account") {
                         showingDeleteConfirmation = false
                         confirmDeleteChecked = false
+                        deleteConfirmText = ""
                         performDeleteAccount()
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(.red)
-                    .disabled(!confirmDeleteChecked)
+                    .disabled(!confirmDeleteChecked || deleteConfirmText.trimmingCharacters(in: .whitespacesAndNewlines) != "DELETE")
                 }
                 .padding(.top)
             }
             .padding(30)
-            .presentationDetents([.medium])
+            .presentationDetents([.medium, .large])
         }
         .alert("profile_cannot_delete", isPresented: $showingDeleteError) {
             Button("ok", role: .cancel) { }
