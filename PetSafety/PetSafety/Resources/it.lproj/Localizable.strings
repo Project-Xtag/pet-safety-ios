@@ -48,8 +48,8 @@
 "register" = "Registrati";
 "already_have_account" = "Hai già un account?";
 "log_in" = "Accedi";
-"terms_login_prefix" = "Accedendo, accetti i nostri ";
-"terms_and" = " e ";
+"terms_login_prefix" = "Accedendo, accetti i nostri";
+"terms_and" = " e";
 "terms_of_service" = "Termini di servizio";
 "privacy_policy" = "Informativa sulla privacy";
 "first_name" = "Nome";
@@ -468,7 +468,7 @@
 
 // FAQ Questions and Answers
 "help_faq_q1" = "Come registro il mio animale da compagnia?";
-"help_faq_a1" = "Puoi registrare il tuo animale di compagnia nel menu 'I Miei Animali di compagnia' toccando 'Aggiungi Nuovo Animale di compagnia'. Compila le informazioni richieste e carica una o più foto.";
+"help_faq_a1" = "Puoi registrare il tuo animale da compagnia nel menu 'I Miei Animali da compagnia' toccando 'Aggiungi Nuovo Animale da compagnia'. Compila le informazioni richieste e carica una o più foto.";
 "help_faq_q2" = "Quali informazioni devo fornire nel profilo del mio animale di compagnia?";
 "help_faq_a2" = "Hai già fornito il nome del tuo animale di compagnia quando hai ordinato la medaglietta, e apparirà nel profilo del tuo animale di compagnia una volta attivata. Inserisci la specie e la razza. Per prevenire abusi, questi dati possono essere inseriti solo una volta. Se commetti un errore, contattaci e ti aiuteremo. Qui puoi anche aggiungere peso, età, colore e qualsiasi caratteristica distintiva o comportamento tipico del tuo gatto/cane. Puoi anche caricare foto. Tu decidi quali informazioni sono visibili sul tuo animale di compagnia se si perde.";
 "help_faq_q3" = "Come funziona la medaglietta con codice QR?";
@@ -504,7 +504,7 @@
 "help_faq_q18" = "Ho trovato un animale di compagnia senza medaglietta SENRA — cosa posso fare?";
 "help_faq_a18" = "Consulta la mappa degli Animali Smarriti sul sito SENRA (senra.pet) — questo animale da compagnia potrebbe già essere stato segnalato come smarrito nella tua zona. Puoi vedere gli avvisi degli animali smarriti anche all'interno dell'app. Porta l'animale alla clinica veterinaria più vicina per fargli leggere il microchip. Se l'animale ritrovato ha una medaglietta SENRA, scansiona il codice QR con la fotocamera del tuo telefono — appariranno i contatti del proprietario.";
 "help_faq_q19" = "Posso cambiare il mio indirizzo email?";
-"help_faq_a19" = "Il tuo email principale serve come identificatore dell'account e non può essere cambiato direttamente. Se vuoi usare un altro email come contatto pubblico, puoi aggiungere un email secondario in 'Impostazioni' > 'Dati di Contatto' — questo può anche apparire sul profilo del tuo animale da compagnia se lo abiliti, così chi lo trova può vederlo subito e contattarti direttamente. Se hai assolutamente bisogno di cambiare l'email principale, contattaci a hello@senra.pet e ti aiuteremo a migrare il tuo account.";
+"help_faq_a19" = "Il tuo indirizzo email principale serve come identificatore dell'account e non può essere modificato direttamente. Se vuoi usare un altro indirizzo email come contatto pubblico, puoi aggiungere un indirizzo email secondario in 'Impostazioni' > 'Dati di Contatto' — questo può anche apparire sul profilo del tuo animale da compagnia se lo abiliti, così chi lo trova può vederlo subito e contattarti direttamente. Se hai assolutamente bisogno di cambiare l'indirizzo email principale, contattaci a hello@senra.pet e ti aiuteremo a migrare il tuo account.";
 "help_faq_q20" = "Qual è la differenza tra un microchip e una medaglietta QR SENRA?";
 "help_faq_a20" = "Un microchip è un piccolo impianto sotto la pelle dell'animale di compagnia che memorizza un identificatore unico di 15 cifre — ma richiede un lettore speciale. La medaglietta QR SENRA può essere scansionata con qualsiasi fotocamera di smartphone, mostrando istantaneamente il profilo completo, foto e contatti approvati. Chi trova può anche condividere le coordinate GPS.";
 "help_faq_q21" = "Cosa succede ai miei dati se annullo l'abbonamento?";
@@ -1188,11 +1188,11 @@
 "breed_cat_exotic_shorthair" = "Exotic Shorthair";
 "breed_cat_abyssinian" = "Abissino";
 "breed_cat_scottish_fold" = "Scottish Fold";
-"breed_cat_sphynx" = "Sphynx";
+"breed_cat_sphynx" = "Sfinge";
 "breed_cat_siamese" = "Siamese";
 "breed_cat_devon_rex" = "Devon Rex";
 "breed_cat_oriental_shorthair" = "Orientale a pelo corto";
-"breed_cat_burmese" = "Burmese";
+"breed_cat_burmese" = "Birmano";
 "breed_cat_american_shorthair" = "Americano a pelo corto";
 "breed_cat_bengal" = "Bengala";
 "breed_cat_russian_blue" = "Blu di Russia";
@@ -1219,7 +1219,7 @@
 "breed_cat_havana_brown" = "Havana brown";
 "breed_cat_japanese_bobtail" = "Bobtail Giapponese";
 "breed_cat_laperm" = "LaPerm";
-"breed_cat_american_wirehair" = "American Wirehair";
+"breed_cat_american_wirehair" = "Americano a pelo duro";
 "breed_cat_european_burmese" = "Burmese Europeo";
 "breed_cat_burmilla" = "Burmilla";
 "breed_cat_colorpoint_shorthair" = "Colorpoint a pelo corto";
@@ -1419,7 +1419,7 @@
 "shelter_promo_claim_tag_button" = "Attiva la medaglietta";
 "shelter_promo_name_label_required" = "Nome *";
 "shelter_promo_species_label_required" = "Specie *";
-"shelter_promo_select_placeholder" = "Seleziona...";
+"shelter_promo_select_placeholder" = "Seleziona…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Nome del proprietario";
@@ -1428,7 +1428,7 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Condiviso tramite SENRA";
-"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
+"alert_geocode_failed_warning" = "Impossibile individuare quell'indirizzo — l'avviso verrà inviato senza una posizione precisa. Prova \"posizione attuale\" per risultati migliori.";
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
-"delete_confirm_type_delete" = "Type DELETE to confirm";
+"delete_confirm_type_delete" = "Digita DELETE per confermare";
 "type_delete_to_confirm" = "Type DELETE";

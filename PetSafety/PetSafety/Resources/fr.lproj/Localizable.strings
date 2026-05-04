@@ -42,14 +42,14 @@
 "resend_code_cooldown" = "Renvoyer le code dans %lld s";
 "resend_code_prompt" = "Tu n'as pas reçu le code ? Renvoyer";
 "dont_have_account" = "Tu n'as pas encore de compte ?";
-"start_here_order_free_tag" = "Commence ici et commande ta médaille connectée gratuite";
+"start_here_order_free_tag" = "Commence ici & commande ta médaille connectée gratuite !";
 "create_account" = "Créer un compte";
 "enter_details_subtitle" = "Entre tes informations pour commencer.";
 "register" = "S'inscrire";
 "already_have_account" = "Tu as déjà un compte ?";
 "log_in" = "Se connecter";
-"terms_login_prefix" = "En te connectant, tu acceptes nos ";
-"terms_and" = " et ";
+"terms_login_prefix" = "En te connectant, tu acceptes nos";
+"terms_and" = " et";
 "terms_of_service" = "Conditions d'utilisation";
 "privacy_policy" = "Politique de confidentialité";
 "first_name" = "Prénom";
@@ -161,7 +161,7 @@
 
 // MARK: - Scanner QR
 "scan_qr_code" = "Scanner un QR code";
-"scan_qr_subtitle" = "Dirige ta caméra vers la médaille connectée QR d'un animal de compagnie";
+"scan_qr_subtitle" = "Dirige ta caméra vers le QR sur la médaille connectée d'un animal de compagnie";
 "hello_pet_name" = "Bonjour ! Je suis %@";
 "scanned_tag_thanks" = "Tu viens de scanner ma médaille connectée.\nMerci de m'aider !";
 "share_location_with_owner" = "Partager ma localisation avec le propriétaire";
@@ -176,7 +176,7 @@
 "share_location_subtitle" = "Ta localisation aide le propriétaire à retrouver son animal de compagnie plus vite.";
 "share_your_location" = "Ta localisation";
 "share_getting_location" = "Récupération de la localisation…";
-"share_location_unavailable" = "Position non disponible. Vérifie que les services de localisation sont activés.";
+"share_location_unavailable" = "Localisation non disponible. Vérifie que les services de localisation sont activés.";
 "share_owner_notified" = "Propriétaire notifié !";
 "share_on_their_way" = "Il est en chemin !";
 "share_notifying" = "Notification du propriétaire…";
@@ -267,7 +267,7 @@
 "submit_sighting_report" = "Envoyer le signalement";
 "sighting_address_not_found" = "Nous n'avons pas trouvé cette adresse. Vérifie l'orthographe ou essaie un repère à proximité.";
 "sighting_location_invalid" = "Cette localisation semble invalide. Partage ta localisation GPS actuelle, ou essaie une autre adresse.";
-"sighting_location_required" = "Partage ta position actuelle ou saisis une adresse.";
+"sighting_location_required" = "Partage ta localisation actuelle ou saisis une adresse.";
 "sighting_reported_owner_notified" = "Observation signalée ! Le propriétaire a été notifié.";
 
 // MARK: - Feuille Disparu/Retrouvé
@@ -408,7 +408,7 @@
 "notif_missing_pet_alerts" = "Alertes d'animaux de compagnie perdus";
 "notif_missing_pet_alerts_subtitle" = "Alertes animaux perdus dans ta région";
 "notif_nearby_alerts" = "Alertes à proximité (10 km)";
-"notif_nearby_alerts_subtitle" = "Alertes pour les animaux de compagnie dans un rayon de 10 km de ta localisation";
+"notif_nearby_alerts_subtitle" = "Alertes pour animaux dans un rayon de 10 km";
 "notif_account_orders" = "Compte & commandes";
 "notif_account_orders_footer" = "Reste informé de ton activité de compte et de tes commandes";
 "notif_order_updates" = "Mises à jour des commandes";
@@ -496,17 +496,17 @@
 "help_faq_q14" = "Comment signaler un animal de compagnie trouvé ?";
 "help_faq_a14" = "Si l'animal de compagnie a une médaille connectée SENRA, scanne simplement le code QR avec la caméra de ton téléphone — aucune application nécessaire. Tu peux voir le profil de l'animal de compagnie et partager ta position avec le propriétaire.";
 "help_faq_q15" = "Mes données personnelles sont-elles en sécurité ?";
-"help_faq_a15" = "Oui. Tu contrôles exactement quelles données sont visibles lorsque quelqu'un scanne la médaille connectée de ton animal de compagnie. Dans « Paramètres » > « Paramètres de confidentialité », tu peux choisir si ton numéro de téléphone, ton adresse e-mail ou ton adresse postale sont affichés. Ta connexion est protégée par un code de vérification à usage unique à chaque fois. Tu peux supprimer ton compte et toutes tes données à tout moment.";
+"help_faq_a15" = "Oui. Tu contrôles exactement quelles données sont visibles lorsque quelqu'un scanne la médaille connectée de ton animal de compagnie. Dans « Paramètres » > « Paramètres de confidentialité », tu peux choisir si ton numéro de téléphone, ton adresse e-mail ou ton adresse postale sont affichés. Ta connexion est protégée par un code de vérification à usage unique à chaque fois — il n'y a pas de mot de passe qui pourrait être volé. Tu peux supprimer ton compte et toutes tes données à tout moment.";
 "help_faq_q16" = "Nous avons perdu la médaille connectée ou elle est endommagée — que dois-je faire ?";
-"help_faq_a16" = "Aucune inquiétude — le profil numérique de ton animal de compagnie est en sécurité et n'est pas stocké sur la médaille connectée. Va à la page Compte et appuie sur « Commander un remplacement ». Nous lierons une nouvelle médaille connectée avec un nouveau code QR à ton profil existant. L'éligibilité au remplacement dépend de ton compte Senra ; visite senra.pet pour plus de détails. L'ancienne médaille connectée est désactivée immédiatement dès la commande du remplacement.";
+"help_faq_a16" = "Aucune inquiétude — le profil numérique de ton animal de compagnie est en sécurité et n'est pas stocké sur la médaille connectée. Va à la page Compte et appuie sur « Commander un remplacement ». Nous lierons une nouvelle médaille connectée avec un nouveau code QR à ton profil d'animal de compagnie existant. L'éligibilité au remplacement dépend de ton compte Senra ; visite senra.pet pour plus de détails. L'ancienne médaille connectée est désactivée immédiatement dès la commande du remplacement.";
 "help_faq_q17" = "Ma médaille connectée ne se scanne pas — que dois-je faire ?";
 "help_faq_a17" = "Essaie ceci : nettoie la surface de la médaille connectée avec un chiffon humide, assure-toi d'un bon éclairage, tiens la caméra de ton téléphone stable à environ 10–15 cm de la médaille connectée, et vérifie que l'application caméra ou le lecteur QR fonctionne. Si le code QR est rayé ou usé, commande un remplacement depuis la page « Accueil / Mon compte ».";
 "help_faq_q18" = "J'ai trouvé un animal de compagnie sans médaille connectée SENRA — que puis-je faire ?";
-"help_faq_a18" = "Consulte la carte des Animaux Perdus sur le site SENRA (senra.pet) — cet animal de compagnie a peut-être déjà été signalé perdu dans ta zone. Tu peux aussi voir les alertes d'animaux perdus dans l'application. Emmène l'animal au cabinet vétérinaire le plus proche pour faire scanner sa puce électronique. Si l'animal trouvé porte une médaille connectée SENRA, scanne le code QR avec la caméra de ton téléphone — les coordonnées du propriétaire apparaîtront.";
+"help_faq_a18" = "Consulte la carte des Animaux Perdus sur le site SENRA (senra.pet) — cet animal de compagnie a peut-être déjà été signalé perdu dans ta zone. Tu peux aussi voir les alertes d'animaux perdus dans l'application. Emmène l'animal de compagnie au cabinet vétérinaire le plus proche pour faire scanner sa puce électronique. Si l'animal de compagnie trouvé porte une médaille connectée SENRA, scanne le code QR avec la caméra de ton téléphone — les coordonnées du propriétaire apparaîtront.";
 "help_faq_q19" = "Puis-je changer mon adresse email ?";
 "help_faq_a19" = "Ton email principal sert d'identifiant de compte et ne peut pas être changé directement. Tu peux ajouter un email secondaire dans 'Paramètres' > 'Coordonnées'. Si tu as absolument besoin de changer ton email principal, contacte-nous à hello@senra.pet.";
 "help_faq_q20" = "Quelle est la différence entre une puce et une médaille connectée QR SENRA ?";
-"help_faq_a20" = "Une puce est un petit implant sous la peau de ton animal de compagnie qui stocke un identifiant unique de 15 chiffres — mais nécessite un lecteur spécial (généralement disponible uniquement chez les vétérinaires et les refuges). La médaille connectée QR SENRA peut être facilement scannée avec n'importe quel appareil photo de smartphone, affichant immédiatement le profil complet de ton animal de compagnie, sa photo et les coordonnées que tu as approuvées. Le découvreur peut aussi partager l'endroit où il a trouvé ton animal de compagnie.";
+"help_faq_a20" = "Une puce est un petit implant sous la peau de ton animal de compagnie qui stocke un identifiant unique de 15 chiffres — mais elle nécessite un lecteur spécial (généralement disponible uniquement chez les vétérinaires et dans les refuges). La médaille connectée QR SENRA peut être facilement scannée avec n'importe quel appareil photo de smartphone, affichant immédiatement le profil complet de ton animal de compagnie, sa photo et les coordonnées que tu as approuvées. La personne qui te trouve peut aussi partager l'endroit où elle a trouvé ton animal de compagnie.";
 "help_faq_q21" = "Que se passe-t-il avec mes données si j'annule mon abonnement ?";
 "help_faq_a21" = "Si tu annules ton abonnement, tu conserves l'accès aux fonctionnalités payantes jusqu'à la fin de la période de facturation en cours. Après cela, ton compte passe automatiquement au plan gratuit Starter. Les profils, photos et médailles connectées QR restent actifs. Les données ne sont pas supprimées. Pour une suppression permanente, utilise l'option Supprimer le compte dans les Paramètres.";
 "help_faq_q22" = "Comment enregistrer ma clinique ou mon refuge chez SENRA ?";
@@ -516,7 +516,7 @@
 "help_faq_q24" = "Quels navigateurs et appareils sont supportés ?";
 "help_faq_a24" = "SENRA fonctionne sur tous les navigateurs, y compris Chrome, Safari, Firefox et Edge, sur mobile et desktop. Le scan de la médaille connectée QR fonctionne avec n'importe quel appareil photo de smartphone — la personne qui trouve ton animal de compagnie n'a pas besoin de l'application SENRA, ni même d'un compte.";
 "help_faq_q25" = "Puis-je commander plusieurs médailles connectées pour mes animaux de compagnie en même temps ?";
-"help_faq_a25" = "Oui, tu peux commander des médailles connectées pour tous tes animaux de compagnie en même temps. Après réception, scanne chaque médaille connectée pour l'activer et l'attribuer au bon profil.";
+"help_faq_a25" = "Oui, tu peux commander des médailles connectées pour tous tes animaux de compagnie en même temps. Après réception des médailles connectées, scanne chaque médaille connectée pour l'activer et l'attribuer au bon profil d'animal de compagnie. Tu peux aussi passer des commandes supplémentaires à tout moment si tu souhaites enregistrer d'autres animaux de compagnie plus tard.";
 "help_faq_q26" = "Comment les alertes d'animaux perdus atteignent-elles les vétérinaires et refuges ?";
 "help_faq_a26" = "Lorsque tu marques ton animal de compagnie comme « Perdu », SENRA envoie automatiquement des alertes par e-mail à tous les vétérinaires et refuges enregistrés dans ta région. Plus il y a de vétérinaires et refuges enregistrés, mieux ce réseau fonctionne.";
 "help_faq_q27" = "Puis-je transférer une médaille connectée à un autre animal de compagnie ?";
@@ -537,13 +537,13 @@
 // Questions fréquentes
 // Guide Items
 "help_guide_qr_tags_title" = "Médailles connectées QR pour animaux de compagnie";
-"help_guide_qr_tags_desc" = "Chaque médaille connectée SENRA présente un code QR unique qui renvoie au profil numérique de ton animal de compagnie. Toute personne qui trouve ton animal de compagnie peut scanner le code avec l'appareil photo de son téléphone — aucun téléchargement d'application nécessaire. Le scanner voit immédiatement la photo, le nom, les informations médicales de ton animal de compagnie et tes coordonnées. Il peut aussi partager sa position GPS avec toi pour que tu saches exactement où se trouve ton animal de compagnie. Les médailles connectées fonctionnent avec tous les smartphones modernes.";
+"help_guide_qr_tags_desc" = "Chaque médaille connectée SENRA présente un code QR unique qui renvoie au profil numérique de ton animal de compagnie. Toute personne qui trouve ton animal de compagnie peut scanner le code avec l'appareil photo de son téléphone — aucun téléchargement d'application nécessaire. La lecture de la médaille connectée t'envoie une notification avec la localisation du découvreur (s'il la partage). Tu peux activer les médailles connectées via l'application et demander une médaille connectée de remplacement à tout moment si tu perds l'ancienne ou si elle est endommagée.";
 "help_guide_materials_title" = "Matériau et durabilité de la médaille connectée";
-"help_guide_materials_desc" = "Les médailles connectées SENRA sont fabriquées en métal léger et durable avec un revêtement époxy pour une protection supplémentaire. Elles sont imperméables et résistantes aux UV, adaptées à toutes les conditions météorologiques. Le code QR est imprimé avec une encre résistante à l'usure pour rester scannable dans le temps. Les médailles connectées s'attachent solidement au collier de ton animal de compagnie. Si une médaille connectée est endommagée ou si le code QR ne peut plus être scanné, tu peux commander un remplacement depuis la page Compte — gratuit pour les membres Standard et Maximum.";
+"help_guide_materials_desc" = "Les médailles connectées SENRA sont fabriquées en métal léger et durable avec un revêtement époxy pour une protection supplémentaire. Elles sont imperméables et résistantes aux UV, utilisables dans toutes les conditions météorologiques. Elles ne s'usent pas avec une utilisation quotidienne. Les médailles connectées sont conçues pour s'adapter confortablement à la plupart des colliers et harnais.";
 "help_guide_emergency_title" = "Contact d'urgence et alertes";
-"help_guide_emergency_desc" = "Lorsque quelqu'un scanne la médaille connectée de ton animal de compagnie, tu reçois instantanément une notification par e-mail avec la position du découvreur. Les membres Standard et Maximum reçoivent aussi des alertes SMS pour une réaction plus rapide. Si tu marques ton animal de compagnie comme perdu, une alerte communautaire est envoyée à tous les utilisateurs SENRA dans un rayon de 10 km, et les vétérinaires et refuges enregistrés dans ta région sont également notifiés. Toute personne de la communauté peut signaler des observations avec sa position, créant une piste pour t'aider à retrouver ton animal de compagnie.";
+"help_guide_emergency_desc" = "Lorsque quelqu'un scanne la médaille connectée de ton animal de compagnie, tu reçois instantanément une notification push et un e-mail avec la position du découvreur. Les membres Standard et Maximum reçoivent aussi des alertes SMS pour une réaction plus rapide. Si tu marques ton animal de compagnie comme perdu, une alerte communautaire est envoyée à tous les utilisateurs SENRA dans un rayon de 10 km, et les vétérinaires et refuges enregistrés dans ta région sont également notifiés. Toute personne de la communauté peut signaler des observations avec sa position et des photos, t'aidant à retrouver ton animal de compagnie.";
 "help_guide_profile_title" = "Gestion du profil de l'animal de compagnie";
-"help_guide_profile_desc" = "Le profil numérique de ton animal de compagnie est le cœur de SENRA. Ajoute des informations essentielles comme le nom, l'espèce, la race, l'âge et une photo nette. Tu peux aussi inclure des informations médicales (allergies, médicaments, pathologies), le numéro de puce et les traits distinctifs qui aident à identifier ton animal de compagnie. Téléverse plusieurs photos dans une galerie. Toutes les informations peuvent être mises à jour à tout moment depuis la section « Mes animaux de compagnie ». Tu contrôles lesquelles de tes coordonnées personnelles (téléphone, e-mail, adresse) sont visibles pour les personnes qui scannent la médaille connectée.";
+"help_guide_profile_desc" = "Le profil numérique de ton animal de compagnie est le cœur de SENRA. Saisis les informations essentielles : nom, espèce, race, âge, et téléverse une photo de qualité. Tu peux aussi indiquer des informations médicales, des allergies, des médicaments et des signes distinctifs. Lorsque quelqu'un scanne la médaille connectée de ton animal de compagnie, c'est ce profil qu'il verra — il est donc important de le garder à jour. Ton profil aide les découvreurs à reconnaître ton animal de compagnie et à savoir quoi faire s'ils le trouvent.";
 "help_guide_missing_alerts_title" = "Alertes d'animaux disparus et observations";
 "help_guide_missing_alerts_desc" = "Si ton animal de compagnie se perd, marque-le comme perdu depuis « Mes animaux de compagnie » pour créer une alerte communautaire instantanée. La photo et les détails de ton animal de compagnie apparaissent sur la carte des animaux de compagnie perdus visible par tous les utilisateurs SENRA de ta région. Les membres de la communauté peuvent signaler des observations avec leur localisation GPS, que tu reçois sous forme de notifications. Les vétérinaires et refuges enregistrés sont également alertés. Une fois ton animal de compagnie retrouvé, marque-le comme trouvé et, si tu le souhaites, partage ton histoire de retrouvailles pour inspirer la communauté.";
 "help_guide_community_title" = "Communauté et animaux retrouvés";
@@ -600,7 +600,7 @@
 "order_more_complete" = "Commande effectuée !";
 "order_more_confirmation" = "Nous expédierons tes médailles connectées une fois le paiement confirmé.";
 "order_more_pet_names" = "Noms des animaux";
-"order_more_pet_names_footer" = "Saisis les noms des animaux de compagnie pour lesquels tu veux des médailles connectées. Nous graverons chaque médaille connectée avec le nom.";
+"order_more_pet_names_footer" = "Saisis les noms des animaux de compagnie pour lesquels tu veux des médailles connectées. Nous graverons chaque médaille connectée avec le nom de l'animal de compagnie.";
 "order_more_add_another" = "Ajouter un autre animal de compagnie";
 "order_more_your_info" = "Tes informations";
 "order_more_shipping" = "Adresse de livraison";
@@ -926,7 +926,7 @@
 
 // MARK: - Nettoyage de localisation manquante
 "login_required" = "Connexion requise";
-"login_required_activate_tag" = "Connecte-toi pour activer cette médaille connectée !";
+"login_required_activate_tag" = "Connecte-toi pour activer cette médaille connectée pour ton animal de compagnie !";
 "login_activate_instructions" = "Après connexion, scanne à nouveau la médaille connectée ou va dans Mes animaux de compagnie pour l'activer !";
 "free_price" = "GRATUIT";
 "referral_expires %@" = "Expire le : %@";
@@ -952,7 +952,7 @@
 
 // MARK: - SSE Pet Notifications
 "sse_tag_scanned_title" = "%@ a été retrouvé !";
-"sse_tag_scanned_body_with_address" = "Quelqu'un a scanné la médaille connectée de ton animal de compagnie ici : %@";
+"sse_tag_scanned_body_with_address" = "Quelqu'un a scanné la médaille connectée de ton animal de compagnie à %@";
 "sse_tag_scanned_body_no_address" = "Quelqu'un a scanné la médaille connectée de ton animal de compagnie";
 "sse_sighting_title" = "%@ aperçu !";
 "sse_sighting_body_with_address" = "Quelqu'un a signalé avoir vu ton animal à : %@";
@@ -1115,7 +1115,7 @@
 
 // MARK: - Activation Error Messages
 "activation_error_qr_not_found" = "Code QR non reconnu. Assure-toi de scanner une médaille connectée SENRA officielle.";
-"activation_error_already_activated" = "Cette médaille connectée est déjà liée à un autre animal de compagnie. Contacte le support.";
+"activation_error_already_activated" = "Cette médaille connectée est déjà liée à un autre animal de compagnie. Contacte le support si tu penses que cette médaille connectée t'appartient.";
 "activation_error_not_linked" = "Cette médaille connectée n'est pas encore attribuée à ta commande. Attends la confirmation d'expédition.";
 "activation_error_not_shipped" = "Ta commande n'a pas encore été expédiée. Attends de recevoir ta médaille connectée.";
 "activation_error_not_owner" = "Cet animal de compagnie ne t'appartient pas. Sélectionne un de tes propres animaux de compagnie.";
@@ -1184,9 +1184,9 @@
 "breed_cat_siamese" = "Siamois";
 "breed_cat_devon_rex" = "Devon rex";
 "breed_cat_oriental_shorthair" = "Oriental à poil court";
-"breed_cat_burmese" = "Burmese";
+"breed_cat_burmese" = "Burmais";
 "breed_cat_american_shorthair" = "American shorthair";
-"breed_cat_bengal" = "Bengal";
+"breed_cat_bengal" = "Bengale";
 "breed_cat_russian_blue" = "Bleu Russe";
 "breed_cat_norwegian_forest_cat" = "Chat des Forêts Norvégiennes";
 "breed_cat_birman" = "Sacré de Birmanie";
@@ -1411,7 +1411,7 @@
 "shelter_promo_claim_tag_button" = "Activer la médaille connectée";
 "shelter_promo_name_label_required" = "Nom *";
 "shelter_promo_species_label_required" = "Espèce *";
-"shelter_promo_select_placeholder" = "Sélectionner...";
+"shelter_promo_select_placeholder" = "Sélectionner…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Nom du propriétaire";
@@ -1420,7 +1420,7 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Partagé via SENRA";
-"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
+"alert_geocode_failed_warning" = "Impossible de localiser cette adresse — ton alerte sera envoyée sans localisation précise. Essaie « localisation actuelle » pour de meilleurs résultats.";
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
-"delete_confirm_type_delete" = "Type DELETE to confirm";
-"type_delete_to_confirm" = "Type DELETE";
+"delete_confirm_type_delete" = "Tape DELETE pour confirmer";
+"type_delete_to_confirm" = "Tape DELETE";
