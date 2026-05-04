@@ -51,8 +51,8 @@
 "register" = "Registracija";
 "already_have_account" = "Već imaš račun?";
 "log_in" = "Prijava";
-"terms_login_prefix" = "Prijavom prihvaćaš naše ";
-"terms_and" = " i ";
+"terms_login_prefix" = "Prijavom prihvaćaš naše";
+"terms_and" = " i";
 "terms_of_service" = "Uvjete korištenja";
 "privacy_policy" = "Pravila privatnosti";
 "first_name" = "Ime";
@@ -1189,7 +1189,7 @@
 "breed_cat_oriental_shorthair" = "Orientalna kratkodlaka";
 "breed_cat_burmese" = "Burmanska";
 "breed_cat_american_shorthair" = "Američka kratkodlaka";
-"breed_cat_bengal" = "Bengal";
+"breed_cat_bengal" = "Bengalska";
 "breed_cat_russian_blue" = "Ruska plava";
 "breed_cat_norwegian_forest_cat" = "Norveška šumska mačka";
 "breed_cat_birman" = "Sveta birma";
@@ -1414,7 +1414,7 @@
 "shelter_promo_claim_tag_button" = "Aktiviraj privjesak";
 "shelter_promo_name_label_required" = "Ime *";
 "shelter_promo_species_label_required" = "Vrsta *";
-"shelter_promo_select_placeholder" = "Odaberi...";
+"shelter_promo_select_placeholder" = "Odaberi…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Ime vlasnika";
@@ -1423,7 +1423,7 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Podijeljeno putem SENRA";
-"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
+"alert_geocode_failed_warning" = "Nismo mogli odrediti tu adresu — tvoj će se upozorenje poslati bez precizne lokacije. Pokušaj s \"trenutnom lokacijom\" za bolje rezultate.";
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
-"delete_confirm_type_delete" = "Type DELETE to confirm";
-"type_delete_to_confirm" = "Type DELETE";
+"delete_confirm_type_delete" = "Upiši DELETE za potvrdu";
+"type_delete_to_confirm" = "Upiši DELETE";

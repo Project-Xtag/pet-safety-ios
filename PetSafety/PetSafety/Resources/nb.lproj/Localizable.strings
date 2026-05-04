@@ -48,8 +48,8 @@
 "register" = "Registrer";
 "already_have_account" = "Har du allerede en konto?";
 "log_in" = "Logg inn";
-"terms_login_prefix" = "Ved å logge inn godtar du våre ";
-"terms_and" = " og ";
+"terms_login_prefix" = "Ved å logge inn godtar du våre";
+"terms_and" = " og";
 "terms_of_service" = "Brukervilkår";
 "privacy_policy" = "Personvernerklæring";
 "first_name" = "Fornavn";
@@ -237,10 +237,10 @@
 "contact_label" = "Kontakt: %@";
 
 // MARK: - Meld savnet / Observasjon
-"last_seen_location" = "Sist kjente sted";
+"last_seen_location" = "Sist kjente posisjon";
 "report_sighting" = "Rapporter observasjon";
 "notes" = "Notater";
-"sighting_location" = "Sted for observasjon";
+"sighting_location" = "Posisjon for observasjon";
 "use_current_location" = "Bruk gjeldende posisjon";
 "location_captured" = "Posisjon hentet fra GPS";
 "report_missing_pet" = "Meld savnet dyr";
@@ -248,8 +248,8 @@
 "additional_details" = "Ytterligere detaljer";
 "select_pet_header" = "Velg dyr";
 "no_pets_available" = "Ingen dyr tilgjengelig. Legg til et dyr først.";
-"last_seen_location_header" = "Sted sist sett";
-"enter_location" = "Skriv inn sted";
+"last_seen_location_header" = "Posisjon sist sett";
+"enter_location" = "Skriv inn posisjon";
 "additional_information_header" = "Tilleggsinformasjon";
 "additional_details_placeholder" = "Oppgi ytterligere detaljer om når og hvor dyret ditt ble sett sist…";
 "alert_created_success" = "Savnet-varsel opprettet!";
@@ -538,11 +538,11 @@
 
 // Veiledningselementer
 "help_guide_qr_tags_title" = "QR-brikker for kjæledyr";
-"help_guide_qr_tags_desc" = "Hver SENRA QR-brikke har en unik QR-kode som lenker til dyrets digitale profil. Alle som finner dyret ditt kan skanne koden med telefonkameraet – ingen app-nedlasting nødvendig. Skanneren ser umiddelbart dyrets bilde, navn, medisinsk informasjon og kontaktopplysningene dine. De kan også dele GPS-posisjonen sin med deg slik at du vet nøyaktig hvor dyret ditt er. QR-brikkene fungerer med alle moderne smarttelefoner.";
+"help_guide_qr_tags_desc" = "Hver SENRA QR-brikke har en unik QR-kode som er koblet til kjæledyrets digitale profil. Alle som finner kjæledyret ditt kan skanne koden med kameraet på smarttelefonen — ingen app nødvendig. Skanningen sender deg et varsel med finnerens posisjon (hvis de deler den). Du kan aktivere QR-brikken via appen, og du kan når som helst bestille en ny QR-brikke hvis den gamle går tapt eller blir skadet.";
 "help_guide_materials_title" = "QR-brikkens materiale og holdbarhet";
-"help_guide_materials_desc" = "SENRA QR-brikker er laget av holdbart, lett metall med et epoksybelegg for ekstra beskyttelse. De er vanntette og UV-resistente, egnet for alle værforhold. QR-koden er trykt med blekkresistent blekk for å forbli skannbar over tid. QR-brikkene festes trygt til dyrets halsbånd. Hvis en QR-brikke blir skadet eller QR-koden ikke lenger lar seg skanne, kan du bestille erstatning fra kontosiden – gratis for Standard og Maximum.";
+"help_guide_materials_desc" = "SENRA QR-brikker er laget av holdbart, lett metall med et epoksybelegg for ekstra beskyttelse. De er vanntette og UV-bestandige, og passer til alle værforhold. De slites ikke ut ved daglig bruk. QR-brikkene er designet for å passe komfortabelt til de fleste halsbånd og seler.";
 "help_guide_emergency_title" = "Nødkontakt og varsler";
-"help_guide_emergency_desc" = "Når noen skanner dyrets QR-brikke, mottar du et øyeblikkelig varsel på e-post med finnerens posisjon. Standard og Maximum mottar også SMS-varsler for raskere respons. Hvis du merker dyret ditt som savnet, sendes et fellesskapsvarsel til alle SENRA-brukere innen 10 km, og registrerte veterinærer og dyrevernorganisasjoner i ditt område varsles også. Alle i fellesskapet kan rapportere observasjoner med posisjonen sin, og skaper et spor for å hjelpe deg å finne dyret.";
+"help_guide_emergency_desc" = "Når noen skanner kjæledyrets QR-brikke, mottar du umiddelbart et push-varsel og en e-post med finnerens posisjon. Standard og Maximum-medlemmer mottar også SMS-varsler for raskere respons. Hvis du merker kjæledyret ditt som savnet, sendes et fellesskapsvarsel til alle SENRA-brukere innen 10 km, og registrerte veterinærer og dyrevernorganisasjoner i ditt område varsles også. Alle i fellesskapet kan rapportere observasjoner med posisjon og bilder, og hjelper deg med å finne kjæledyret ditt.";
 "help_guide_profile_title" = "Administrasjon av dyreprofil";
 "help_guide_profile_desc" = "Dyrets digitale profil er hjertet i SENRA. Legg til viktige detaljer som navn, art, rase, alder og et tydelig bilde. Du kan også inkludere medisinsk informasjon (allergier, medisiner, tilstander), mikrochipnummer og unike kjennetegn som hjelper med å identifisere dyret ditt. Last opp flere bilder til et galleri. All informasjon kan oppdateres når som helst fra seksjonen 'Dyrene mine'. Du kontrollerer hvilke av personopplysningene dine (telefon, e-post, adresse) som vises for folk som skanner QR-brikken.";
 "help_guide_missing_alerts_title" = "Savnet-varsler og observasjoner";
@@ -568,7 +568,7 @@
 "privacy_data_privacy" = "Personvern";
 "privacy_privacy_policy" = "Personvernerklæring";
 "privacy_title" = "Personvernmodus";
-"privacy_mode_footer" = "Personverninnstillinger hjelper deg med å kontrollere hvilken informasjon som deles når noen skanner dyrets QR-brikke.";
+"privacy_mode_footer" = "Personverninnstillinger hjelper deg med å kontrollere hvilken informasjon som deles når noen skanner kjæledyrets QR-brikke.";
 "privacy_settings_updated" = "Personverninnstillinger oppdatert";
 "privacy_settings_failed" = "Kunne ikke oppdatere personverninnstillinger";
 
@@ -744,7 +744,7 @@
 "plan_skip_free" = "Hopp over";
 "plan_all_include" = "Alle abonnementer inkluderer:";
 "plan_paid_add" = "Betalte abonnementer legger til:";
-"plan_feature_qr_tag" = "QR-brikke til dyret ditt";
+"plan_feature_qr_tag" = "QR-brikke til kjæledyret ditt";
 "plan_feature_scan_notif" = "Øyeblikkelige skannevarsler";
 "plan_feature_public_profile" = "Offentlig dyreprofil";
 "plan_feature_secure_storage" = "Sikker datalagring";
@@ -1180,13 +1180,13 @@
 "breed_cat_exotic_shorthair" = "Eksotisk Korthår";
 "breed_cat_abyssinian" = "Abyssinier";
 "breed_cat_scottish_fold" = "Skotsk klapøre";
-"breed_cat_sphynx" = "Sphynx";
+"breed_cat_sphynx" = "Sfinks";
 "breed_cat_siamese" = "Siameser";
 "breed_cat_devon_rex" = "Devon rex";
 "breed_cat_oriental_shorthair" = "Orientalsk Korthår";
 "breed_cat_burmese" = "Burmesisk";
 "breed_cat_american_shorthair" = "Amerikansk Korthår";
-"breed_cat_bengal" = "Bengal";
+"breed_cat_bengal" = "Bengalsk";
 "breed_cat_russian_blue" = "Russisk Blå";
 "breed_cat_norwegian_forest_cat" = "Norsk Skogkatt";
 "breed_cat_birman" = "Birma";
@@ -1411,7 +1411,7 @@
 "shelter_promo_claim_tag_button" = "Aktiver QR-brikke";
 "shelter_promo_name_label_required" = "Navn *";
 "shelter_promo_species_label_required" = "Art *";
-"shelter_promo_select_placeholder" = "Velg...";
+"shelter_promo_select_placeholder" = "Velg…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Eiers navn";
@@ -1420,7 +1420,7 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Delt via SENRA";
-"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
+"alert_geocode_failed_warning" = "Kunne ikke finne den adressen nøyaktig — varselet ditt sendes uten en presis posisjon. Prøv «nåværende posisjon» for bedre resultater.";
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
-"delete_confirm_type_delete" = "Type DELETE to confirm";
-"type_delete_to_confirm" = "Type DELETE";
+"delete_confirm_type_delete" = "Skriv DELETE for å bekrefte";
+"type_delete_to_confirm" = "Skriv DELETE";

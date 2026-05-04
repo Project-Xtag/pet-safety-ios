@@ -48,8 +48,8 @@
 "register" = "Registrovat";
 "already_have_account" = "Už máš účet?";
 "log_in" = "Přihlásit se";
-"terms_login_prefix" = "Přihlášením souhlasíš s našimi ";
-"terms_and" = " a ";
+"terms_login_prefix" = "Přihlášením souhlasíš s našimi";
+"terms_and" = " a";
 "terms_of_service" = "Podmínkami služby";
 "privacy_policy" = "Zásadami ochrany soukromí";
 "first_name" = "Jméno";
@@ -1408,7 +1408,7 @@
 "shelter_promo_claim_tag_button" = "Aktivovat psí známku";
 "shelter_promo_name_label_required" = "Jméno *";
 "shelter_promo_species_label_required" = "Druh *";
-"shelter_promo_select_placeholder" = "Vyber...";
+"shelter_promo_select_placeholder" = "Vyber…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Jméno majitele";

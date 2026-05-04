@@ -48,8 +48,8 @@
 "register" = "Înregistrare";
 "already_have_account" = "Ai deja cont?";
 "log_in" = "Autentificare";
-"terms_login_prefix" = "Prin autentificare, ești de acord cu ";
-"terms_and" = " și ";
+"terms_login_prefix" = "Prin autentificare, ești de acord cu";
+"terms_and" = " și";
 "terms_of_service" = "Termenii de utilizare";
 "privacy_policy" = "Politica de confidențialitate";
 "first_name" = "Prenume";
@@ -1155,7 +1155,7 @@
 "breed_dog_collie" = "Collie";
 "breed_dog_basset_hound" = "Basset hound";
 "breed_dog_rhodesian_ridgeback" = "Rhodesian ridgeback";
-"breed_dog_newfoundland" = "Newfoundland";
+"breed_dog_newfoundland" = "Newfoundlandi";
 "breed_dog_belgian_malinois" = "Ciobănesc Belgian Malinois";
 "breed_dog_bichon_frise" = "Bichon frise";
 "breed_dog_akita" = "Akita";
@@ -1176,7 +1176,7 @@
 "breed_cat_british_shorthair" = "Britanic cu păr scurt";
 "breed_cat_exotic_shorthair" = "Exotic cu păr scurt";
 "breed_cat_abyssinian" = "Abisinian";
-"breed_cat_scottish_fold" = "Scottish Fold";
+"breed_cat_scottish_fold" = "Skót lógófülű";
 "breed_cat_sphynx" = "Sfinx";
 "breed_cat_siamese" = "Siameză";
 "breed_cat_devon_rex" = "Devon rex";
@@ -1197,7 +1197,7 @@
 "breed_cat_manx" = "Manx";
 "breed_cat_selkirk_rex" = "Selkirk rex";
 "breed_cat_ragamuffin" = "RagaMuffin";
-"breed_cat_american_curl" = "American Curl";
+"breed_cat_american_curl" = "Amerikai göndörfülű";
 "breed_cat_chartreux" = "Chartreux";
 "breed_cat_bombay" = "Bombay";
 "breed_cat_egyptian_mau" = "Mau Egiptean";
@@ -1408,7 +1408,7 @@
 "shelter_promo_claim_tag_button" = "Activează plăcuța inteligentă";
 "shelter_promo_name_label_required" = "Nume *";
 "shelter_promo_species_label_required" = "Specie *";
-"shelter_promo_select_placeholder" = "Selectează...";
+"shelter_promo_select_placeholder" = "Selectează…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Numele stăpânului";
