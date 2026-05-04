@@ -1420,3 +1420,7 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Delt via SENRA";
+"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
+"api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
+"delete_confirm_type_delete" = "Type DELETE to confirm";
+"type_delete_to_confirm" = "Type DELETE";

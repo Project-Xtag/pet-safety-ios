@@ -112,25 +112,22 @@ struct PrivacyAndContactsTests {
     }
 
     private func sourceContents(_ relativePath: String) throws -> String {
-        let prefixCandidates = [
-            "PetSafety/PetSafety",
-            "PetSafety",
-            ".",
-        ]
-        var dir = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-        for _ in 0..<6 {
-            for prefix in prefixCandidates {
-                let candidate = dir.appendingPathComponent("\(prefix)/\(relativePath)")
-                if FileManager.default.fileExists(atPath: candidate.path) {
-                    return try String(contentsOf: candidate, encoding: .utf8)
-                }
-            }
-            dir.deleteLastPathComponent()
+        // Use #filePath to anchor relative to the test file at compile
+        // time — xcodebuild test sandboxes the working directory, so
+        // FileManager.currentDirectoryPath isn't the project root.
+        let testFile = URL(fileURLWithPath: #filePath)
+        let candidate = testFile
+            .deletingLastPathComponent()           // PetSafetyTests/
+            .deletingLastPathComponent()           // PetSafety/
+            .appendingPathComponent("PetSafety")
+            .appendingPathComponent(relativePath)
+        guard FileManager.default.fileExists(atPath: candidate.path) else {
+            throw NSError(
+                domain: "PrivacyAndContactsTests",
+                code: 1,
+                userInfo: [NSLocalizedDescriptionKey: "Could not locate \(relativePath) at \(candidate.path)"]
+            )
         }
-        throw NSError(
-            domain: "PrivacyAndContactsTests",
-            code: 1,
-            userInfo: [NSLocalizedDescriptionKey: "Could not locate \(relativePath)"]
-        )
+        return try String(contentsOf: candidate, encoding: .utf8)
     }
 }

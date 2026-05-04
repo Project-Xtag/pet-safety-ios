@@ -79,29 +79,25 @@ struct AppCheckEnforcementTests {
         #expect(source.contains("\"api_error_app_check_required\""))
     }
 
-    /// Walks up from the test bundle's working directory to find the
-    /// PetSafety source tree. Tests run from the project root in CI but
-    /// from various nested scratch dirs locally; this scan tolerates both.
+    /// Resolves a path inside the PetSafety app source tree relative to
+    /// this test file's location at compile time. xcodebuild test runs
+    /// in a sandbox where FileManager.currentDirectoryPath isn't the
+    /// project root, so #filePath is the only reliable anchor — same
+    /// pattern as LocalizationParityTests.loadKeysViaPath.
     private func sourceFile(_ relativePath: String) throws -> URL {
-        let prefixCandidates = [
-            "PetSafety/PetSafety",
-            "PetSafety",
-            ".",
-        ]
-        var dir = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-        for _ in 0..<6 {
-            for prefix in prefixCandidates {
-                let candidate = dir.appendingPathComponent("\(prefix)/\(relativePath)")
-                if FileManager.default.fileExists(atPath: candidate.path) {
-                    return candidate
-                }
-            }
-            dir.deleteLastPathComponent()
+        let testFile = URL(fileURLWithPath: #filePath)
+        let candidate = testFile
+            .deletingLastPathComponent()           // PetSafetyTests/
+            .deletingLastPathComponent()           // PetSafety/ (xcodeproj level)
+            .appendingPathComponent("PetSafety")
+            .appendingPathComponent(relativePath)
+        guard FileManager.default.fileExists(atPath: candidate.path) else {
+            throw NSError(
+                domain: "AppCheckEnforcementTests",
+                code: 1,
+                userInfo: [NSLocalizedDescriptionKey: "Could not locate \(relativePath) at \(candidate.path)"]
+            )
         }
-        throw NSError(
-            domain: "AppCheckEnforcementTests",
-            code: 1,
-            userInfo: [NSLocalizedDescriptionKey: "Could not locate \(relativePath)"]
-        )
+        return candidate
     }
 }
