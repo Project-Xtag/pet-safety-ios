@@ -48,8 +48,8 @@
 "register" = "Zarejestruj się";
 "already_have_account" = "Masz już konto?";
 "log_in" = "Zaloguj się";
-"terms_login_prefix" = "Logując się, akceptujesz nasze ";
-"terms_and" = " i ";
+"terms_login_prefix" = "Logując się, akceptujesz nasze";
+"terms_and" = " i";
 "terms_of_service" = "Warunki korzystania z usługi";
 "privacy_policy" = "Politykę prywatności";
 "first_name" = "Imię";
@@ -585,7 +585,7 @@
 "orders_no_orders_message" = "Nie złożyłeś/aś jeszcze żadnych zamówień";
 "orders_information" = "Informacje o zamówieniu";
 "orders_order_id" = "ID zamówienia";
-"orders_status" = "Status";
+"orders_status" = "Stan";
 "orders_total_amount" = "Łączna kwota";
 "orders_order_date" = "Data zamówienia";
 "orders_items" = "Pozycje";
@@ -693,8 +693,8 @@
 "map_approximate_notice" = "To jest przybliżona lokalizacja (~500m). Przeszukaj okoliczny obszar.";
 "map_coordinates" = "Współrzędne";
 "map_open_in" = "Otwórz w";
-"map_apple_maps" = "Apple Maps";
-"map_google_maps" = "Google Maps";
+"map_apple_maps" = "Apple Mapy";
+"map_google_maps" = "Google Mapy";
 "map_waze" = "Waze";
 "map_pet_location %@" = "Lokalizacja %@";
 "location_title" = "Lokalizacja %@";
@@ -1156,11 +1156,11 @@
 "breed_dog_chihuahua" = "Chihuahua";
 "breed_dog_west_highland_white_terrier" = "West Highland white terrier";
 "breed_dog_collie" = "Collie";
-"breed_dog_basset_hound" = "Basset Hound";
-"breed_dog_rhodesian_ridgeback" = "Rhodesian Ridgeback";
+"breed_dog_basset_hound" = "Basset hound";
+"breed_dog_rhodesian_ridgeback" = "Rhodesian ridgeback";
 "breed_dog_newfoundland" = "Nowofundlandczyk";
 "breed_dog_belgian_malinois" = "Owczarek Belgijski Malinois";
-"breed_dog_bichon_frise" = "Bichon Frise";
+"breed_dog_bichon_frise" = "Bichon frise";
 "breed_dog_akita" = "Akita";
 "breed_dog_st_bernard" = "Bernardyn";
 "breed_dog_bloodhound" = "Bloodhound";
@@ -1411,7 +1411,7 @@
 "shelter_promo_claim_tag_button" = "Aktywuj zawieszkę";
 "shelter_promo_name_label_required" = "Imię *";
 "shelter_promo_species_label_required" = "Gatunek *";
-"shelter_promo_select_placeholder" = "Wybierz...";
+"shelter_promo_select_placeholder" = "Wybierz…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Imię właściciela";
