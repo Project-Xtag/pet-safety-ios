@@ -46,6 +46,10 @@ enum APIError: Error, LocalizedError {
     case petLimitExceeded(SubscriptionLimitInfo)
     case decodingError
     case networkError(Error)
+    /// App Check token unavailable while Remote Config has flipped enforcement
+    /// on. Synthesised locally without ever hitting the network — mirrors
+    /// the Android AppCheckInterceptor fail-closed behaviour (audit H47).
+    case appCheckRequired
 
     var errorDescription: String? {
         switch self {
@@ -63,6 +67,8 @@ enum APIError: Error, LocalizedError {
             return String(localized: "api_error_decoding")
         case .networkError(let error):
             return String(localized: "api_error_network \(error.localizedDescription)")
+        case .appCheckRequired:
+            return String(localized: "api_error_app_check_required")
         }
     }
 }
@@ -193,9 +199,28 @@ class APIService {
 
         // Add Firebase App Check token for API protection.
         // This verifies the request comes from a legitimate app instance.
-        // Backend doesn't currently enforce App Check, but a missing token
-        // is still signal that Firebase config is drifting — log it so we
-        // can see outages in Sentry instead of only in local DEBUG prints.
+        //
+        // Behaviour matrix (mirrors Android AppCheckInterceptor):
+        //
+        //   DEBUG build              — getAppCheckToken returns nil to avoid
+        //                              the latency / 403 of Firebase's debug
+        //                              token exchange. We never enforce here.
+        //
+        //   Release, token available — attach the X-Firebase-AppCheck header.
+        //
+        //   Release, token missing,
+        //     enforcement OFF        — proceed without the header (legacy
+        //                              fail-open). Logged to Sentry as a
+        //                              warning so config drift is visible.
+        //
+        //   Release, token missing,
+        //     enforcement ON         — fail-closed locally with appCheckRequired
+        //                              before the request ever leaves the device.
+        //                              The Remote Config flag
+        //                              `app_check_enforce_client_ios` ships at
+        //                              false; flipping it on is a release-free
+        //                              cutover once backend WS8.7 enforcement
+        //                              ships. Audit H47.
         if let appCheckToken = await ConfigurationManager.shared.getAppCheckToken() {
             request.setValue(appCheckToken, forHTTPHeaderField: "X-Firebase-AppCheck")
         } else {
@@ -205,6 +230,11 @@ class APIService {
             if SentrySDK.isEnabled {
                 SentrySDK.capture(message: "App Check token unavailable")
             }
+            #if !DEBUG
+            if ConfigurationManager.shared.shouldEnforceAppCheckClient() {
+                throw APIError.appCheckRequired
+            }
+            #endif
         }
 
         if let body = body {

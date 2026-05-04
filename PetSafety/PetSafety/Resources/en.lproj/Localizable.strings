@@ -1377,6 +1377,7 @@
 "api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "Failed to decode server response";
 "api_error_network %@" = "Network error: %@";
+"api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
 "sync_no_internet" = "Cannot sync: No internet connection";
 "sync_in_progress" = "Syncing…";
 "sync_completed" = "Sync completed";
