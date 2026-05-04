@@ -183,11 +183,11 @@
 "share_notify_with_location" = "Del og varsle eieren";
 "share_privacy_note" = "Posisjonen din deles med dyreeieren for å hjelpe dem å gjenforenes med dyret.";
 "share_found_pet %@" = "Fant %@!";
-"share_address_instead" = "[NEEDS_TRANSLATION] Or type the address instead";
-"share_manual_address_title" = "[NEEDS_TRANSLATION] Type the Address";
-"share_manual_address_desc" = "[NEEDS_TRANSLATION] If you can't share GPS, type the address or a description of where you found the pet. You can also share your phone number here if you want the owner to be able to call you back.";
-"share_manual_address_placeholder" = "[NEEDS_TRANSLATION] e.g. 123 Pine St, Budapest — near the playground. You can leave your phone number too if you want the owner to call you.";
-"owner_communication_disabled" = "[NEEDS_TRANSLATION] This pet's owner has not enabled finder communication.";
+"share_address_instead" = "Eller skriv inn adressen manuelt";
+"share_manual_address_title" = "Skriv inn adressen";
+"share_manual_address_desc" = "Hvis du ikke kan dele GPS-posisjon, kan du skrive inn adressen eller stedet der du fant kjæledyret. Du kan også oppgi telefonnummeret ditt her hvis du ønsker at eieren skal kunne ringe deg tilbake.";
+"share_manual_address_placeholder" = "f.eks. Oslo, Parkveien 123 — ved lekeplassen. Du kan også oppgi telefonnummeret ditt hvis du vil at eieren skal kunne ringe deg tilbake.";
+"owner_communication_disabled" = "Eieren av kjæledyret har ikke tillatt kommunikasjon med finneren.";
 
 // MARK: - Skannerdetaljer
 "scanner_open_settings" = "Åpne innstillinger";

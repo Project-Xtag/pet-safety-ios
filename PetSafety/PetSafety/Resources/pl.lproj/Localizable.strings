@@ -183,11 +183,11 @@
 "share_notify_with_location" = "Udostępnij & powiadom opiekuna";
 "share_privacy_note" = "Twoja lokalizacja zostanie udostępniona opiekunowi, aby pomóc mu odnaleźć pupila.";
 "share_found_pet %@" = "Znaleziono %@!";
-"share_address_instead" = "[NEEDS_TRANSLATION] Or type the address instead";
-"share_manual_address_title" = "[NEEDS_TRANSLATION] Type the Address";
-"share_manual_address_desc" = "[NEEDS_TRANSLATION] If you can't share GPS, type the address or a description of where you found the pet. You can also share your phone number here if you want the owner to be able to call you back.";
-"share_manual_address_placeholder" = "[NEEDS_TRANSLATION] e.g. 123 Pine St, Budapest — near the playground. You can leave your phone number too if you want the owner to call you.";
-"owner_communication_disabled" = "[NEEDS_TRANSLATION] This pet's owner has not enabled finder communication.";
+"share_address_instead" = "Lub podaj adres ręcznie";
+"share_manual_address_title" = "Podaj adres";
+"share_manual_address_desc" = "Jeśli nie możesz udostępnić GPS, wpisz adres lub miejsce, w którym znalazłeś zwierzę domowe. Możesz też podać swój numer telefonu, jeśli chcesz, żeby właściciel mógł do ciebie oddzwonić.";
+"share_manual_address_placeholder" = "np. Warszawa, ul. Marszałkowska 123 — przy placu zabaw. Możesz też podać swój numer telefonu, jeśli chcesz, żeby właściciel mógł oddzwonić.";
+"owner_communication_disabled" = "Właściciel tego zwierzęcia domowego nie zezwolił na kontakt ze znalazcą.";
 
 // MARK: - Szczegóły skanera
 "scanner_open_settings" = "Otwórz ustawienia";
