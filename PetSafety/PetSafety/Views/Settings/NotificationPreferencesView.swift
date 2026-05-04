@@ -185,7 +185,16 @@ class NotificationPreferencesViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            let updatedPreferences = try await apiService.updateNotificationPreferences(preferences)
+            // Pass `originalPreferences` so the API service sends ONLY
+            // the channels that changed since the last server load.
+            // Pre-fix the call sent all three fields, which let stale
+            // local state clobber another device's recent toggle —
+            // user got SMS despite turning it off on web, or vice
+            // versa.
+            let updatedPreferences = try await apiService.updateNotificationPreferences(
+                preferences,
+                previous: originalPreferences
+            )
             originalPreferences = updatedPreferences
             preferences = updatedPreferences
             showSuccess = true
