@@ -3,10 +3,6 @@ import SwiftUI
 struct NotificationSettingsView: View {
     @StateObject private var viewModel = NotificationPreferencesViewModel()
 
-    // Updates (local-only preferences)
-    @AppStorage("notifyOrderUpdates") private var notifyOrderUpdates = true
-    @AppStorage("notifyAccountActivity") private var notifyAccountActivity = true
-
     var body: some View {
         List {
             Section(header: Text("notif_channels"), footer: Text("notif_channels_footer")) {
@@ -61,25 +57,6 @@ struct NotificationSettingsView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("notif_missing_pet_alerts")
                         Text("notif_missing_pet_alerts_subtitle")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
-            }
-
-            Section(header: Text("notif_account_orders"), footer: Text("notif_account_orders_footer")) {
-                Toggle(isOn: $notifyOrderUpdates) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("notif_order_updates")
-                        Text("notif_order_updates_subtitle")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                Toggle(isOn: $notifyAccountActivity) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("notif_account_activity")
-                        Text("notif_account_activity_subtitle")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }

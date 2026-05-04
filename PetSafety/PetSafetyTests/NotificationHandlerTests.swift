@@ -116,8 +116,11 @@ final class NotificationHandlerTests: XCTestCase {
         waitForExpectations(timeout: 1.0)
     }
 
-    func testHandleTagScannedWithApproximateLocation() {
-        // Given
+    func testHandleTagScannedAlwaysParsesAsPrecise() {
+        // 2026-05-02 missing-pet flow overhaul: backend dropped the
+        // `location_type` discriminator. Even if a legacy payload still
+        // includes it, the client treats every PET_SCANNED location as
+        // precise — `isApproximate` stays false.
         let userInfo: [AnyHashable: Any] = [
             "type": "PET_SCANNED",
             "scan_id": "scan-999",
@@ -127,14 +130,12 @@ final class NotificationHandlerTests: XCTestCase {
             "longitude": "-73.9900"
         ]
 
-        // When
         notificationHandler.handleNotificationTap(userInfo: userInfo)
 
-        // Then
         let expectation = self.expectation(description: "Main queue")
         DispatchQueue.main.async {
             XCTAssertNotNil(self.notificationHandler.pendingScanNotification?.location)
-            XCTAssertTrue(self.notificationHandler.pendingScanNotification?.location?.isApproximate ?? false)
+            XCTAssertFalse(self.notificationHandler.pendingScanNotification?.location?.isApproximate ?? true)
             XCTAssertTrue(self.notificationHandler.showMapPicker)
             expectation.fulfill()
         }
@@ -526,35 +527,13 @@ final class NotificationHandlerTests: XCTestCase {
         XCTAssertNil(notificationHandler.pendingScanNotification)
     }
 
-    // MARK: - ALERT_REMINDER Notification Tests
-
-    func testHandleAlertReminder() {
-        // Given
-        let userInfo: [AnyHashable: Any] = [
-            "type": "ALERT_REMINDER",
-            "alert_id": "alert-789"
-        ]
-
-        // When - should post navigateToAlert notification
-        let navExpectation = expectNavigationNotification(named: .navigateToAlert)
-        notificationHandler.handleNotificationTap(userInfo: userInfo)
-
-        // Then
-        waitForExpectations(timeout: 1.0)
-    }
-
-    func testHandleAlertReminderWithEmptyAlertId() {
-        // Given - missing alert_id
-        let userInfo: [AnyHashable: Any] = [
-            "type": "ALERT_REMINDER"
-        ]
-
-        // When
-        notificationHandler.handleNotificationTap(userInfo: userInfo)
-
-        // Then - should not crash, no navigation posted
-        XCTAssertNil(notificationHandler.pendingScanNotification)
-    }
+    // MARK: - ALERT_REMINDER Removed
+    //
+    // Backend stopped sending ALERT_REMINDER in commit 0238357 (audit fix
+    // 2026-04). The client routing case was removed; any in-flight reminder
+    // payloads from older backend builds now fall through to the default
+    // branch (captureUnknownNotification + navigateToScan) and surface in
+    // Sentry. Default-branch behaviour is covered by the unknown-type tests.
 
     // MARK: - MULTIPLE_SIGHTINGS Notification Tests
 
@@ -735,24 +714,28 @@ final class NotificationHandlerTests: XCTestCase {
         // Then - should handle gracefully with empty string default
     }
 
-    func testLocationTypeNoneExplicit() {
-        // Given - explicit "none" location type
+    func testLocationTypeFieldIsIgnoredWhenCoordinatesPresent() {
+        // 2026-05-02 missing-pet flow overhaul: backend dropped the
+        // `location_type` discriminator. The client now parses lat/lng
+        // directly and treats them as precise — even if a legacy payload
+        // still includes "location_type": "none" alongside coordinates,
+        // the coordinates are honoured.
         let userInfo: [AnyHashable: Any] = [
             "type": "PET_SCANNED",
             "scan_id": "scan-none",
             "pet_id": "pet-none",
             "location_type": "none",
-            "latitude": "40.7128", // These should be ignored
+            "latitude": "40.7128",
             "longitude": "-74.0060"
         ]
 
-        // When
         notificationHandler.handleNotificationTap(userInfo: userInfo)
 
-        // Then - location should be nil despite lat/lng present
         let expectation = self.expectation(description: "Main queue")
         DispatchQueue.main.async {
-            XCTAssertNil(self.notificationHandler.pendingScanNotification?.location)
+            XCTAssertNotNil(self.notificationHandler.pendingScanNotification?.location)
+            XCTAssertEqual(self.notificationHandler.pendingScanNotification?.location?.latitude, 40.7128)
+            XCTAssertFalse(self.notificationHandler.pendingScanNotification?.location?.isApproximate ?? true)
             expectation.fulfill()
         }
         waitForExpectations(timeout: 1.0)

@@ -376,8 +376,14 @@ struct ScannedPetView: View {
                         }
                     }
 
-                    // Share Location Button
-                    if pet.qrCode != nil {
+                    // Share Location Button.
+                    //
+                    // Tier-gated: hidden when the backend reports the pet's
+                    // owner can't receive notifications (Starter tier — no
+                    // FCM/email/SMS for them, so surfacing the button would
+                    // silently store an unactionable scan). Direct-contact
+                    // buttons below stay live regardless.
+                    if pet.qrCode != nil && pet.ownerCanReceiveNotifications != false {
                         VStack(spacing: 8) {
                             Button(action: {
                                 showingShareLocation = true
@@ -397,6 +403,28 @@ struct ScannedPetView: View {
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 32)
                         }
+                    }
+
+                    // Starter-tier no-contact fallback: when the owner
+                    // can't be notified AND has no public contact channels
+                    // exposed, show an empathetic message rather than a
+                    // dead-end blank state.
+                    if pet.ownerCanReceiveNotifications == false
+                        && pet.ownerPhone == nil
+                        && pet.ownerEmail == nil
+                        && pet.ownerSecondaryPhone == nil
+                        && pet.ownerSecondaryEmail == nil {
+                        VStack(spacing: 8) {
+                            Image(systemName: "exclamationmark.circle")
+                                .font(.system(size: 28))
+                                .foregroundColor(.mutedText)
+                            Text("owner_communication_disabled")
+                                .font(.system(size: 14))
+                                .foregroundColor(.mutedText)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 32)
+                        }
+                        .padding(.vertical, 16)
                     }
 
                     // Contact Owner Section

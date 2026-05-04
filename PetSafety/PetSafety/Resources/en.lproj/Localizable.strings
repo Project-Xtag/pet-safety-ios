@@ -174,11 +174,7 @@
 // MARK: - Share Location Flow
 "share_help_get_home %@" = "Help %@ Get Home";
 "share_location_subtitle" = "Your location helps the owner find their pet faster.";
-"share_exact_location_toggle" = "Share exact location";
-"share_approximate_desc" = "Share your general area (~500m radius)";
-"share_exact_desc" = "Share your precise location for faster reunion";
 "share_your_location" = "Your Location";
-"share_accuracy" = "(~500m accuracy)";
 "share_getting_location" = "Getting your location…";
 "share_location_unavailable" = "Location not available. Please ensure location services are enabled.";
 "share_owner_notified" = "Owner Notified!";
@@ -187,6 +183,11 @@
 "share_notify_with_location" = "Share & Notify Owner";
 "share_privacy_note" = "Your location is shared with the pet owner to help reunite them with their pet.";
 "share_found_pet %@" = "Found %@!";
+"share_address_instead" = "Or type the address instead";
+"share_manual_address_title" = "Type the Address";
+"share_manual_address_desc" = "If you can't share GPS, type the address or a description of where you found the pet. You can also share your phone number here if you want the owner to be able to call you back.";
+"share_manual_address_placeholder" = "e.g. 123 Pine St, Budapest — near the playground. You can leave your phone number too if you want the owner to call you.";
+"owner_communication_disabled" = "This pet's owner has not enabled finder communication.";
 
 // MARK: - Scanner Detail
 "scanner_open_settings" = "Open Settings";
@@ -252,6 +253,7 @@
 "additional_information_header" = "Additional Information";
 "additional_details_placeholder" = "Provide any additional details about when and where your pet was last seen…";
 "alert_created_success" = "Missing pet alert created successfully!";
+"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
 "report_sighting_header" = "Report a Sighting";
 "report_sighting_help" = "Help reunite this pet with their owner by sharing where you saw them.";
 "share_contact_info" = "Share My Contact Info";
@@ -1258,6 +1260,8 @@
 "plan_cancels_on" = "Cancels on %@";
 "delete_premium_warning" = "Deleting your account will permanently erase your profile. If you also wish to end an active Senra subscription, please do so at senra.pet before deleting.";
 "cancel_instead" = "Cancel Subscription Instead";
+"delete_confirm_type_delete" = "Type DELETE to confirm";
+"type_delete_to_confirm" = "Type DELETE";
 
 // MARK: - Shelter Adoption
 
@@ -1373,6 +1377,7 @@
 "api_error_pet_limit" = "Pet registration limit reached for this account.";
 "api_error_decoding" = "Failed to decode server response";
 "api_error_network %@" = "Network error: %@";
+"api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
 "sync_no_internet" = "Cannot sync: No internet connection";
 "sync_in_progress" = "Syncing…";
 "sync_completed" = "Sync completed";

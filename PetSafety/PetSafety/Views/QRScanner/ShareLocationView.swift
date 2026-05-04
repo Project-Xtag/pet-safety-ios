@@ -1,23 +1,23 @@
 import SwiftUI
 import CoreLocation
 
-/**
- * Share Location View with 2-Tier Location Toggle
- *
- * Simplified from the 3-card GDPR layout to a single toggle:
- * - Toggle ON (default): Share exact GPS location (precise)
- * - Toggle OFF: Share approximate ~500m area (coordinates rounded)
- *
- * Location is always shared when the user taps "Share Location".
- * The "Decline" option has been removed.
- */
-
+/// Share-Location sheet (post 2026-05-02 missing-pet flow overhaul).
+///
+/// The precision toggle is gone — finders can either share their precise
+/// GPS fix (default path) or fall back to typing an address as free text
+/// when GPS is denied / unavailable. The backend geocodes manual addresses
+/// server-side; on geocoding failure the owner gets the typed text with a
+/// "no map coordinates" note rather than nothing.
+///
+/// `Decline to share` is no longer offered. The whole reason this sheet
+/// exists is for the finder to help the owner; opening it is consent.
 struct ShareLocationView: View {
     let qrCode: String
     let petName: String
 
     @StateObject private var locationManager = LocationManager()
-    @State private var shareExactLocation = true
+    @State private var manualAddress: String = ""
+    @State private var showManualAddress = false
     @State private var isSharing = false
     @State private var shared = false
     @State private var errorMessage: String?
@@ -27,91 +27,9 @@ struct ShareLocationView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 24) {
-                    // Header
-                    VStack(spacing: 12) {
-                        Image(systemName: "location.circle.fill")
-                            .font(.system(size: 60))
-                            .foregroundColor(.blue)
+                    header
+                    locationDisplay
 
-                        Text(String(format: NSLocalizedString("share_help_get_home %@", comment: ""), petName))
-                            .font(.title2)
-                            .bold()
-
-                        Text(NSLocalizedString("share_location_subtitle", comment: "Your location helps the owner find their pet faster."))
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.secondary)
-                            .padding(.horizontal)
-                    }
-
-                    // Location toggle
-                    VStack(spacing: 12) {
-                        Toggle(isOn: $shareExactLocation) {
-                            HStack(spacing: 12) {
-                                Image(systemName: shareExactLocation ? "location.fill" : "location.circle")
-                                    .font(.title3)
-                                    .foregroundColor(shareExactLocation ? .blue : .orange)
-                                    .frame(width: 24)
-
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(NSLocalizedString("share_exact_location_toggle", comment: "Share exact location"))
-                                        .font(.headline)
-                                    Text(shareExactLocation
-                                         ? NSLocalizedString("share_exact_desc", comment: "")
-                                         : NSLocalizedString("share_approximate_desc", comment: ""))
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                }
-                            }
-                        }
-                        .tint(.blue)
-                        .padding()
-                        .background(Color.gray.opacity(0.05))
-                        .cornerRadius(12)
-                    }
-                    .padding(.horizontal)
-
-                    // Current location display
-                    if let location = locationManager.location {
-                        VStack(spacing: 8) {
-                            Text(NSLocalizedString("share_your_location", comment: ""))
-                                .font(.headline)
-
-                            if shareExactLocation {
-                                Text(String(
-                                    format: NSLocalizedString("coordinates_display", comment: "Lat/Lng label format"),
-                                    String(format: "%.6f", location.latitude),
-                                    String(format: "%.6f", location.longitude)
-                                ))
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            } else {
-                                let rounded = roundToApproximate(lat: location.latitude, lng: location.longitude)
-                                Text(String(
-                                    format: NSLocalizedString("coordinates_display", comment: "Lat/Lng label format"),
-                                    String(format: "%.3f", rounded.lat),
-                                    String(format: "%.3f", rounded.lng)
-                                ))
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                Text(NSLocalizedString("share_accuracy", comment: ""))
-                                    .font(.caption2)
-                                    .foregroundColor(.orange)
-                            }
-                        }
-                        .padding()
-                        .background(Color.gray.opacity(0.1))
-                        .cornerRadius(10)
-                    } else {
-                        VStack(spacing: 8) {
-                            ProgressView()
-                            Text(NSLocalizedString("share_getting_location", comment: ""))
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding()
-                    }
-
-                    // Error message
                     if let error = errorMessage {
                         Text(error)
                             .font(.caption)
@@ -120,45 +38,21 @@ struct ShareLocationView: View {
                             .padding(.horizontal)
                     }
 
-                    // Success state
                     if shared {
-                        VStack(spacing: 10) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .font(.system(size: 50))
-                                .foregroundColor(.tealAccent)
-                            Text(NSLocalizedString("share_owner_notified", comment: ""))
-                                .font(.headline)
-                            Text(NSLocalizedString("share_on_their_way", comment: ""))
-                        }
-                        .foregroundColor(.secondary)
-                        .padding()
+                        successState
                     } else {
-                        // Share button
-                        Button(action: submitLocation) {
-                            if isSharing {
-                                HStack {
-                                    ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                    Text(NSLocalizedString("share_notifying", comment: ""))
-                                        .foregroundColor(.white)
-                                }
-                            } else {
-                                Label(
-                                    NSLocalizedString("share_notify_with_location", comment: ""),
-                                    systemImage: "location.fill"
-                                )
+                        primaryAction
+                        if !showManualAddress {
+                            Button(action: { showManualAddress = true }) {
+                                Text(NSLocalizedString("share_address_instead", comment: ""))
+                                    .font(.subheadline)
                             }
+                            .padding(.top, 4)
+                        } else {
+                            manualAddressBlock
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(buttonDisabled ? Color.gray : Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .disabled(buttonDisabled)
-                        .padding(.horizontal)
                     }
 
-                    // Privacy note
                     Text(NSLocalizedString("share_privacy_note", comment: ""))
                         .font(.caption2)
                         .foregroundColor(.secondary)
@@ -173,28 +67,164 @@ struct ShareLocationView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("done") {
-                        dismiss()
-                    }
+                    Button("done") { dismiss() }
                 }
             }
-            .onAppear {
-                locationManager.requestLocation()
+            .onAppear { locationManager.requestLocation() }
+        }
+    }
+
+    // MARK: - View pieces
+
+    private var header: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "location.circle.fill")
+                .font(.system(size: 60))
+                .foregroundColor(.blue)
+
+            Text(String(format: NSLocalizedString("share_help_get_home %@", comment: ""), petName))
+                .font(.title2)
+                .bold()
+
+            Text(NSLocalizedString("share_location_subtitle", comment: ""))
+                .multilineTextAlignment(.center)
+                .foregroundColor(.secondary)
+                .padding(.horizontal)
+        }
+    }
+
+    @ViewBuilder
+    private var locationDisplay: some View {
+        if let location = locationManager.location {
+            VStack(spacing: 8) {
+                Text(NSLocalizedString("share_your_location", comment: ""))
+                    .font(.headline)
+                Text(String(
+                    format: NSLocalizedString("coordinates_display", comment: ""),
+                    String(format: "%.6f", location.latitude),
+                    String(format: "%.6f", location.longitude)
+                ))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+            .background(Color.gray.opacity(0.1))
+            .cornerRadius(10)
+        } else if !showManualAddress {
+            VStack(spacing: 8) {
+                ProgressView()
+                Text(NSLocalizedString("share_getting_location", comment: ""))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+        }
+    }
+
+    private var successState: some View {
+        VStack(spacing: 10) {
+            Image(systemName: "checkmark.circle.fill")
+                .font(.system(size: 50))
+                .foregroundColor(.tealAccent)
+            Text(NSLocalizedString("share_owner_notified", comment: ""))
+                .font(.headline)
+            Text(NSLocalizedString("share_on_their_way", comment: ""))
+        }
+        .foregroundColor(.secondary)
+        .padding()
+    }
+
+    private var primaryAction: some View {
+        Button(action: submitGPSLocation) {
+            if isSharing {
+                HStack {
+                    ProgressView().progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    Text(NSLocalizedString("share_notifying", comment: ""))
+                        .foregroundColor(.white)
+                }
+            } else {
+                Label(
+                    NSLocalizedString("share_notify_with_location", comment: ""),
+                    systemImage: "location.fill"
+                )
             }
         }
+        .frame(maxWidth: .infinity)
+        .padding()
+        .background(gpsButtonDisabled ? Color.gray : Color.blue)
+        .foregroundColor(.white)
+        .cornerRadius(10)
+        .disabled(gpsButtonDisabled)
+        .padding(.horizontal)
+    }
+
+    private var manualAddressBlock: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(NSLocalizedString("share_manual_address_title", comment: ""))
+                .font(.headline)
+            Text(NSLocalizedString("share_manual_address_desc", comment: ""))
+                .font(.caption)
+                .foregroundColor(.secondary)
+
+            // SwiftUI's TextEditor has no native placeholder, so overlay the
+            // hint text behind the field and hide it once the user starts
+            // typing. Allow taps through (allowsHitTesting false) so the
+            // placeholder doesn't intercept the editor's tap target.
+            ZStack(alignment: .topLeading) {
+                if manualAddress.isEmpty {
+                    Text(NSLocalizedString("share_manual_address_placeholder", comment: ""))
+                        .font(.body)
+                        .foregroundColor(.secondary.opacity(0.6))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 12)
+                        .allowsHitTesting(false)
+                }
+                TextEditor(text: $manualAddress)
+                    .frame(minHeight: 80)
+                    .opacity(manualAddress.isEmpty ? 0.95 : 1)
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+            )
+
+            Button(action: submitManualAddress) {
+                if isSharing {
+                    HStack {
+                        ProgressView().progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        Text(NSLocalizedString("share_notifying", comment: ""))
+                            .foregroundColor(.white)
+                    }
+                } else {
+                    Text(NSLocalizedString("share_notify_with_location", comment: ""))
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(manualButtonDisabled ? Color.gray : Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .disabled(manualButtonDisabled)
+        }
+        .padding(.horizontal)
     }
 
     // MARK: - Computed Properties
 
-    private var buttonDisabled: Bool {
+    private var gpsButtonDisabled: Bool {
         if isSharing { return true }
         if locationManager.location == nil { return true }
         return false
     }
 
+    private var manualButtonDisabled: Bool {
+        if isSharing { return true }
+        return manualAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
     // MARK: - Actions
 
-    private func submitLocation() {
+    private func submitGPSLocation() {
         isSharing = true
         errorMessage = nil
 
@@ -202,53 +232,32 @@ struct ShareLocationView: View {
             do {
                 guard let location = locationManager.location else {
                     await MainActor.run {
-                        errorMessage = NSLocalizedString("share_location_unavailable", comment: "Location not available. Please ensure location services are enabled.")
+                        errorMessage = NSLocalizedString("share_location_unavailable", comment: "")
                         isSharing = false
                     }
                     return
                 }
 
-                let locationData: LocationConsentData
-
-                if shareExactLocation {
-                    locationData = LocationConsentData(
-                        latitude: location.latitude,
-                        longitude: location.longitude,
-                        accuracy_meters: locationManager.accuracy ?? 10,
-                        is_approximate: false,
-                        consent_type: .precise,
-                        share_exact_location: true
-                    )
-                } else {
-                    let rounded = roundToApproximate(lat: location.latitude, lng: location.longitude)
-                    locationData = LocationConsentData(
-                        latitude: rounded.lat,
-                        longitude: rounded.lng,
-                        accuracy_meters: locationManager.accuracy ?? 500,
-                        is_approximate: true,
-                        consent_type: .approximate,
-                        share_exact_location: false
-                    )
-                }
+                let payload = LocationConsentData(
+                    latitude: location.latitude,
+                    longitude: location.longitude,
+                    accuracy_meters: locationManager.accuracy ?? 10
+                )
 
                 _ = try await APIService.shared.shareLocation(
                     qrCode: qrCode,
-                    location: locationData,
-                    address: nil
+                    location: payload
                 )
 
                 await MainActor.run {
                     shared = true
                     isSharing = false
-                    // Auto-dismiss after 2.5 seconds
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                        dismiss()
-                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { dismiss() }
                 }
             } catch {
                 await MainActor.run {
                     #if DEBUG
-                    print("Error sharing location: \(error)")
+                    print("Error sharing GPS location: \(error)")
                     #endif
                     errorMessage = error.localizedDescription
                     isSharing = false
@@ -257,14 +266,35 @@ struct ShareLocationView: View {
         }
     }
 
-    // MARK: - Helpers
+    private func submitManualAddress() {
+        let trimmed = manualAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
 
-    private func roundToApproximate(lat: Double, lng: Double) -> (lat: Double, lng: Double) {
-        // Round to 3 decimal places (~111m precision at equator)
-        return (
-            lat: (lat * 1000).rounded() / 1000,
-            lng: (lng * 1000).rounded() / 1000
-        )
+        isSharing = true
+        errorMessage = nil
+
+        Task {
+            do {
+                _ = try await APIService.shared.shareLocation(
+                    qrCode: qrCode,
+                    manualAddress: trimmed
+                )
+
+                await MainActor.run {
+                    shared = true
+                    isSharing = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { dismiss() }
+                }
+            } catch {
+                await MainActor.run {
+                    #if DEBUG
+                    print("Error sharing manual address: \(error)")
+                    #endif
+                    errorMessage = error.localizedDescription
+                    isSharing = false
+                }
+            }
+        }
     }
 }
 

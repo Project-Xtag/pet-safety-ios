@@ -174,11 +174,7 @@
 // MARK: - Flujo de compartir ubicación
 "share_help_get_home %@" = "Ayuda a %@ a volver a casa";
 "share_location_subtitle" = "Tu ubicación ayuda al dueño a encontrar a su mascota más rápido.";
-"share_exact_location_toggle" = "Compartir ubicación exacta";
-"share_approximate_desc" = "Comparte tu área general (~500 m)";
-"share_exact_desc" = "Comparte tu ubicación exacta para una reunión más rápida";
 "share_your_location" = "Tu ubicación";
-"share_accuracy" = "(~500 m de precisión)";
 "share_getting_location" = "Obteniendo tu ubicación…";
 "share_location_unavailable" = "Ubicación no disponible. Asegúrate de que los servicios de ubicación estén habilitados.";
 "share_owner_notified" = "¡Dueño notificado!";
@@ -187,6 +183,11 @@
 "share_notify_with_location" = "Compartir y notificar al dueño";
 "share_privacy_note" = "Tu ubicación se comparte con el dueño de la mascota para ayudar a reunirlos.";
 "share_found_pet %@" = "¡%@ encontrado!";
+"share_address_instead" = "[NEEDS_TRANSLATION] Or type the address instead";
+"share_manual_address_title" = "[NEEDS_TRANSLATION] Type the Address";
+"share_manual_address_desc" = "[NEEDS_TRANSLATION] If you can't share GPS, type the address or a description of where you found the pet. You can also share your phone number here if you want the owner to be able to call you back.";
+"share_manual_address_placeholder" = "[NEEDS_TRANSLATION] e.g. 123 Pine St, Budapest — near the playground. You can leave your phone number too if you want the owner to call you.";
+"owner_communication_disabled" = "[NEEDS_TRANSLATION] This pet's owner has not enabled finder communication.";
 
 // MARK: - Detalle del escáner
 "scanner_open_settings" = "Abrir ajustes";
@@ -1416,3 +1417,7 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Compartido a través de SENRA";
+"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
+"api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
+"delete_confirm_type_delete" = "Type DELETE to confirm";
+"type_delete_to_confirm" = "Type DELETE";

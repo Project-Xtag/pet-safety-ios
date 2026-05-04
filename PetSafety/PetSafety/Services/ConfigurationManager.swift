@@ -62,11 +62,19 @@ final class ConfigurationManager: ObservableObject {
     private let firebaseLock = NSLock()
     private var firebaseReady = false
 
-    /// Default values used when Remote Config is unavailable
+    /// Default values used when Remote Config is unavailable.
+    ///
+    /// `app_check_enforce_client_ios` mirrors Android's `app_check_enforce_client`
+    /// flag (audit H47, M10) — defaults to `false` so client behaviour stays
+    /// fail-open until the backend's App Check validation (WS8.7) ships.
+    /// Flipping to `true` in Remote Config will then make the API client
+    /// fail-closed when the App Check token is unavailable, without an app
+    /// release. See backend/docs/app-check-enforcement.md for the rollout.
     private let defaults: [String: NSObject] = [
         "sentry_dsn_ios": "" as NSObject,
         "api_base_url": "https://api.senra.pet/api" as NSObject,
-        "sse_base_url": "https://api.senra.pet" as NSObject
+        "sse_base_url": "https://api.senra.pet" as NSObject,
+        "app_check_enforce_client_ios": false as NSObject
     ]
 
     // MARK: - Initialization
@@ -266,6 +274,25 @@ final class ConfigurationManager: ObservableObject {
             return nil
         }
         #endif
+    }
+
+    /**
+     * Whether APIService should refuse requests when an App Check token is
+     * unavailable. Read from Remote Config so we can flip it on once the
+     * backend validates the X-Firebase-AppCheck header (WS8.7) without
+     * shipping an app release. Mirrors Android `shouldEnforceAppCheckClient`.
+     *
+     * Synchronous because the API request builder can't suspend on every
+     * call. The underlying RemoteConfig.configValue is in-memory after the
+     * first successful fetch.
+     *
+     * Defaults to `false` (fail-open) when Remote Config is unavailable
+     * — better availability than synthetic 503s on a cold start before
+     * the first fetch lands.
+     */
+    func shouldEnforceAppCheckClient() -> Bool {
+        guard let config = remoteConfig else { return false }
+        return config.configValue(forKey: "app_check_enforce_client_ios").boolValue
     }
 
     // MARK: - Status
