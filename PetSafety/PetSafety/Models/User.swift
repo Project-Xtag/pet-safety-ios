@@ -28,6 +28,7 @@ struct User: Codable, Identifiable {
     let preferredLanguage: String?
     let showSecondaryPhonePublicly: Bool?
     let showSecondaryEmailPublicly: Bool?
+    let profileImage: String?
 
     enum CodingKeys: String, CodingKey {
         case id, email, role, phone, address, city, country
@@ -51,6 +52,7 @@ struct User: Codable, Identifiable {
         case showAddressPublicly = "show_address_publicly"
         case showSecondaryPhonePublicly = "show_secondary_phone_publicly"
         case showSecondaryEmailPublicly = "show_secondary_email_publicly"
+        case profileImage = "profile_image"
     }
 
     var fullName: String {
