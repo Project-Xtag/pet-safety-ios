@@ -3,6 +3,7 @@ import PhotosUI
 
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @StateObject private var subscriptionViewModel = SubscriptionViewModel()
     @AppStorage("appearanceMode") private var appearanceMode: String = "system"
     @State private var showingLogoutAlert = false
     @State private var selectedPhoto: PhotosPickerItem?
@@ -38,6 +39,9 @@ struct ProfileView: View {
             }
         } message: {
             Text("logout_confirm")
+        }
+        .task {
+            await subscriptionViewModel.loadCurrentSubscription()
         }
     }
 
@@ -150,7 +154,7 @@ struct ProfileView: View {
                                 .accessibilityAddTraits(.isHeader)
                         }
 
-                        Text(user.email)
+                        Text(subscriptionViewModel.currentPlanName.capitalized)
                             .font(.system(size: 14))
                             .foregroundColor(.mutedText)
                     }
