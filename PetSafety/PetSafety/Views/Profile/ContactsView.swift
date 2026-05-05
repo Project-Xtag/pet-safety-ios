@@ -374,26 +374,27 @@ struct ContactRowView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(value)
                     .font(.body)
-                    .lineLimit(2)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
-                if isPrimary {
-                    Text("contacts_primary_badge")
-                        .font(.system(size: 9, weight: .bold))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(Color.brandOrange)
-                        .cornerRadius(4)
+                HStack(spacing: 8) {
+                    if isPrimary {
+                        Text("contacts_primary_badge")
+                            .font(.system(size: 9, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color.brandOrange)
+                            .cornerRadius(4)
+                    }
+                    Spacer(minLength: 0)
+                    Text(isVisible ? "contacts_visible_on_tag" : "contacts_hidden_badge")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.trailing)
                 }
             }
-
-            Spacer(minLength: 8)
-
-            Text(isVisible ? "contacts_visible_on_tag" : "contacts_hidden_badge")
-                .font(.caption2)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.trailing)
-                .frame(maxWidth: 130, alignment: .trailing)
         }
         .padding(.vertical, 8)
     }
