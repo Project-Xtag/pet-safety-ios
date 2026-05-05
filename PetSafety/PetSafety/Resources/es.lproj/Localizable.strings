@@ -127,7 +127,7 @@
 "save_changes" = "Guardar cambios";
 "delete_pet_button" = "Eliminar mascota";
 "delete_pet_dialog_message" = "¿Seguro que quieres eliminar esta mascota? Esta acción no se puede deshacer.";
-"delete_pet_warning_title" = "%@ eliminar?";
+"delete_pet_warning_title" = "¿Seguro que quieres eliminar el perfil de %@?";
 "delete_pet_warning_message" = "%@ será eliminado permanentemente de tu cuenta. La chapa inteligente QR se desactivará inmediatamente y dejará de funcionar al escanearla. Si esta es tu última mascota, tu suscripción también será cancelada.";
 "delete_pet_warning_confirm" = "Eliminar mascota";
 "species_cat" = "Gato";
@@ -456,14 +456,14 @@
 "help_subject_placeholder" = "Descripción breve de tu problema";
 "help_message" = "Mensaje";
 "help_sending" = "Enviando…";
-"help_submit_request" = "Enviar solicitud";
+"help_submit_request" = "Enviar";
 "help_contact_title" = "Contactar soporte";
 "help_request_submitted" = "¡Solicitud enviada! Te responderemos en un plazo de 24 horas.";
 "help_cat_general" = "General";
 "help_cat_technical" = "Problema técnico";
 "help_cat_account" = "Cuenta";
 "help_cat_billing" = "Facturación";
-"help_cat_feature" = "Solicitud de función";
+"help_cat_feature" = "Sugerencias";
 "help_cat_other" = "Otro";
 
 // FAQ Questions and Answers
@@ -531,7 +531,7 @@
 "support_category_technical" = "Problema técnico";
 "support_category_account" = "Cuenta";
 "support_category_billing" = "Facturación";
-"support_category_feature" = "Sugerencia de función";
+"support_category_feature" = "Sugerencias";
 "support_category_other" = "Otro";
 
 // Preguntas frecuentes
@@ -542,10 +542,10 @@
 "privacy_contact_footer" = "Controla qué datos de contacto son visibles en el perfil público de tu mascota. Estos ajustes se aplican tanto a los datos de contacto principales como secundarios.";
 "privacy_show_name" = "Mostrar tu nombre";
 "privacy_show_name_subtitle" = "Tu nombre será visible en el perfil público de tu mascota cuando alguien escanee la chapa inteligente";
-"privacy_show_phone" = "Mostrar números de teléfono";
-"privacy_show_phone_subtitle" = "Tus números de teléfono principal y secundario serán visibles en el perfil público de tu mascota";
-"privacy_show_email" = "Mostrar correos electrónicos";
-"privacy_show_email_subtitle" = "Tus direcciones de correo principal y secundaria serán visibles en el perfil público de tu mascota";
+"privacy_show_phone" = "Mostrar número de teléfono";
+"privacy_show_phone_subtitle" = "Tu número de teléfono principal será visible en el perfil público de tu mascota.";
+"privacy_show_email" = "Mostrar dirección de correo electrónico";
+"privacy_show_email_subtitle" = "Tu dirección de correo electrónico principal será visible en el perfil público de tu mascota.";
 "privacy_show_address" = "Mostrar dirección";
 "privacy_show_address_subtitle" = "Tu dirección será visible en el perfil público de tu mascota";
 "privacy_show_secondary_phone" = "Mostrar teléfono secundario";
@@ -752,6 +752,10 @@
 "alerts_map" = "Mapa";
 "alerts_no_nearby_title %@" = "No hay alertas de %@ cerca";
 "alerts_no_nearby_message %@" = "No hay alertas de mascotas %@ en tu zona ahora mismo";
+"alerts_no_nearby_missing_title" = "No hay alertas de mascotas perdidas cerca";
+"alerts_no_nearby_missing_message" = "Ahora mismo no hay alertas activas de mascotas perdidas en tu zona.";
+"alerts_no_nearby_found_title" = "No hay alertas de mascotas encontradas cerca";
+"alerts_no_nearby_found_message" = "Ahora mismo no hay alertas activas de mascotas encontradas en tu zona.";
 "alerts_location_required" = "Ubicación requerida";
 "alerts_location_required_message" = "Para ver alertas de mascotas perdidas cerca, habilita la ubicación o añade tu dirección.";
 "alerts_enable_location" = "Habilitar ubicación en Ajustes";
@@ -901,13 +905,13 @@
 "location_custom" = "Otra dirección";
 "mark_lost_pet_info" = "Información de la mascota";
 "mark_lost_last_seen" = "Última ubicación vista";
-"mark_lost_alerts_footer" = "Las alertas se enviarán a usuarios cercanos, veterinarios y refugios en un radio de 10 km.";
+"mark_lost_alerts_footer" = "";
 "mark_lost_getting_location" = "Obteniendo tu ubicación…";
 "mark_lost_no_address" = "No hay dirección registrada. Ve a Perfil > Dirección.";
 "mark_lost_address_placeholder" = "Introduce dirección o ubicación";
 "mark_lost_additional_info" = "Información adicional";
 "mark_lost_additional_placeholder" = "Detalles que puedan ayudar a encontrar a tu mascota (color del collar, comportamiento, marcas…)";
-"mark_lost_sends_to" = "Esta alerta se enviará a:";
+"mark_lost_sends_to" = "Enviaremos la alerta a: usuarios de SENRA, veterinarios y refugios en un radio de 10 km, y la publicaremos en nuestras páginas de Facebook, Instagram y X.";
 "mark_lost_nearby_owners" = "Tutores de mascotas cercanos";
 "mark_lost_vet_clinics" = "Clínicas veterinarias de la zona";
 "mark_lost_shelters" = "Refugios de animales cercanos";
@@ -1222,8 +1226,8 @@
 // MARK: - Mark as Lost
 "coordinates_display" = "Lat: %@, Lng: %@";
 "current_location_fallback" = "Ubicación actual";
-"mark_lost_success_with_alerts" = "%@ ha sido reportado como perdido. Se están enviando alertas a usuarios cercanos.";
-"mark_lost_success_no_location" = "%@ ha sido marcado como perdido. Añade ubicación para enviar alertas comunitarias.";
+"mark_lost_success_with_alerts" = "Has marcado a %@ como desaparecido/a.";
+"mark_lost_success_no_location" = "Has marcado a %@ como desaparecido/a.";
 "mark_lost_address_required" = "Por favor, proporciona una dirección o activa los servicios de ubicación.";
 "reward_amount_label" = "Recompensa (opcional)";
 "reward_amount_placeholder" = "ej. 50 €";

@@ -127,7 +127,7 @@
 "save_changes" = "Save Changes";
 "delete_pet_button" = "Delete Pet";
 "delete_pet_dialog_message" = "Are you sure you want to delete this pet? This action cannot be undone.";
-"delete_pet_warning_title" = "Delete %@?";
+"delete_pet_warning_title" = "Are you sure you want to delete %@'s profile?";
 "delete_pet_warning_message" = "This will permanently remove %@ from your account. The QR tag will be deactivated immediately and will no longer work when scanned. If this is your last pet, your subscription will also be cancelled.";
 "delete_pet_warning_confirm" = "Delete Pet";
 "species_cat" = "Cat";
@@ -458,14 +458,14 @@
 "help_subject_placeholder" = "Brief description of your issue";
 "help_message" = "Message";
 "help_sending" = "Sending…";
-"help_submit_request" = "Submit Request";
+"help_submit_request" = "Send";
 "help_contact_title" = "Contact Support";
 "help_request_submitted" = "Support request submitted! We'll get back to you within 24 hours.";
 "help_cat_general" = "General";
 "help_cat_technical" = "Technical Issue";
 "help_cat_account" = "Account";
 "help_cat_billing" = "Billing";
-"help_cat_feature" = "Feature Request";
+"help_cat_feature" = "Suggestions";
 "help_cat_other" = "Other";
 
 // FAQ Questions and Answers
@@ -533,7 +533,7 @@
 "support_category_technical" = "Technical Issue";
 "support_category_account" = "Account";
 "support_category_billing" = "Billing";
-"support_category_feature" = "Feature Request";
+"support_category_feature" = "Suggestions";
 "support_category_other" = "Other";
 
 // FAQ Items
@@ -555,10 +555,10 @@
 "privacy_contact_footer" = "Control which contact details are visible on your pet's public profile. These settings apply to both your primary and secondary contact details.";
 "privacy_show_name" = "Show Your Name";
 "privacy_show_name_subtitle" = "Your name will be visible on your pet's public profile when someone scans their tag";
-"privacy_show_phone" = "Show Phone Numbers";
-"privacy_show_phone_subtitle" = "Your primary and secondary phone numbers will be visible on your pet's public profile";
-"privacy_show_email" = "Show Email Addresses";
-"privacy_show_email_subtitle" = "Your primary and secondary email addresses will be visible on your pet's public profile";
+"privacy_show_phone" = "Show phone number";
+"privacy_show_phone_subtitle" = "Your primary phone number will be visible on your pet's public profile.";
+"privacy_show_email" = "Show email address";
+"privacy_show_email_subtitle" = "Your primary email address will be visible on your pet's public profile.";
 "privacy_show_address" = "Show Address";
 "privacy_show_address_subtitle" = "Your address will be visible on your pet's public profile";
 "privacy_show_secondary_phone" = "Show Secondary Phone";
@@ -769,6 +769,10 @@
 "alerts_map" = "Map";
 "alerts_no_nearby_title %@" = "No %@ Alerts Nearby";
 "alerts_no_nearby_message %@" = "No %@ pet alerts in your area right now";
+"alerts_no_nearby_missing_title" = "No missing pet alerts nearby";
+"alerts_no_nearby_missing_message" = "There are no active missing pet alerts in your area right now.";
+"alerts_no_nearby_found_title" = "No found pet alerts nearby";
+"alerts_no_nearby_found_message" = "There are no active found pet alerts in your area right now.";
 "alerts_location_required" = "Location Required";
 "alerts_location_required_message" = "To see missing pet alerts near you, please enable location services or add your address.";
 "alerts_enable_location" = "Enable Location Services in Settings";
@@ -921,13 +925,13 @@
 "location_custom" = "Other address";
 "mark_lost_pet_info" = "Lost Pet Information";
 "mark_lost_last_seen" = "Last Seen Location";
-"mark_lost_alerts_footer" = "Alerts will be sent to nearby users, vets, and shelters within 10km.";
+"mark_lost_alerts_footer" = "";
 "mark_lost_getting_location" = "Getting your location…";
 "mark_lost_no_address" = "No address registered. Go to Profile > Address.";
 "mark_lost_address_placeholder" = "Enter address or location";
 "mark_lost_additional_info" = "Additional Information";
 "mark_lost_additional_placeholder" = "Any detail that could help find your pet (collar color, behavior, distinguishing features…)";
-"mark_lost_sends_to" = "This alert will be sent to:";
+"mark_lost_sends_to" = "We'll send the alert to: SENRA users, vets, and shelters within 10 km, and we'll also post it on our Facebook, Instagram, and X pages.";
 "mark_lost_nearby_owners" = "Nearby pet owners";
 "mark_lost_vet_clinics" = "Vet clinics in the area";
 "mark_lost_shelters" = "Animal shelters nearby";
@@ -1232,8 +1236,8 @@
 // MARK: - Mark as Lost
 "coordinates_display" = "Lat: %@, Lng: %@";
 "current_location_fallback" = "Current location";
-"mark_lost_success_with_alerts" = "%@ has been reported as missing. Alerts are being sent to nearby users, vets, and shelters.";
-"mark_lost_success_no_location" = "%@ has been marked as missing. Add location to send community alerts.";
+"mark_lost_success_with_alerts" = "%@ has been marked as missing.";
+"mark_lost_success_no_location" = "%@ has been marked as missing.";
 "mark_lost_address_required" = "Please provide an address or enable location services.";
 "reward_amount_label" = "Reward (optional)";
 "reward_amount_placeholder" = "e.g. €50";

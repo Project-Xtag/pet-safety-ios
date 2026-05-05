@@ -19,7 +19,7 @@ struct FoundAlertsView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if viewModel.foundAlerts.isEmpty {
-                EmptyAlertsStateView(alertType: String(localized: "alert_status_found"))
+                EmptyAlertsStateView(kind: .found)
             } else {
                 FoundAlertsListView(alerts: viewModel.foundAlerts)
             }

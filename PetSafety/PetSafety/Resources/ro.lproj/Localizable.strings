@@ -127,7 +127,7 @@
 "save_changes" = "Salvează modificările";
 "delete_pet_button" = "Șterge animalul de companie";
 "delete_pet_dialog_message" = "Sigur dorești să ștergi acest animal de companie? Această acțiune nu poate fi anulată.";
-"delete_pet_warning_title" = "Ștergi pe %@?";
+"delete_pet_warning_title" = "Sigur vrei să ștergi profilul lui %@?";
 "delete_pet_warning_message" = "%@ va fi eliminat permanent din contul tău. Plăcuța inteligentă QR va fi dezactivată imediat și nu va mai funcționa la scanare. Dacă acesta este ultimul tău animal de companie, abonamentul va fi și el anulat.";
 "delete_pet_warning_confirm" = "Șterge animalul de companie";
 "species_cat" = "Pisică";
@@ -456,14 +456,14 @@
 "help_subject_placeholder" = "Descriere scurtă a problemei";
 "help_message" = "Mesaj";
 "help_sending" = "Se trimite…";
-"help_submit_request" = "Trimite solicitarea";
+"help_submit_request" = "Trimite";
 "help_contact_title" = "Contactează suportul";
 "help_request_submitted" = "Solicitare trimisă! Vom răspunde în 24 de ore.";
 "help_cat_general" = "General";
 "help_cat_technical" = "Problemă tehnică";
 "help_cat_account" = "Cont";
 "help_cat_billing" = "Facturare";
-"help_cat_feature" = "Cerere de funcționalitate";
+"help_cat_feature" = "Sugestii";
 "help_cat_other" = "Altele";
 
 // FAQ Questions and Answers
@@ -531,7 +531,7 @@
 "support_category_technical" = "Problemă tehnică";
 "support_category_account" = "Cont";
 "support_category_billing" = "Facturare";
-"support_category_feature" = "Cerere funcționalitate";
+"support_category_feature" = "Sugestii";
 "support_category_other" = "Altele";
 
 // Întrebări frecvente
@@ -542,10 +542,10 @@
 "privacy_contact_footer" = "Controlează ce contacte sunt vizibile pe profilul public al animalului de companie. Aceste setări se aplică atât datelor de contact principale, cât și secundare.";
 "privacy_show_name" = "Afișează numele tău";
 "privacy_show_name_subtitle" = "Numele tău va fi vizibil pe profilul public al animalului de companie tău când cineva scanează plăcuța inteligentă";
-"privacy_show_phone" = "Afișează numerele de telefon";
-"privacy_show_phone_subtitle" = "Numerele tale de telefon principale și secundare vor fi vizibile pe profilul public al animalului de companie";
-"privacy_show_email" = "Afișează adresele de e-mail";
-"privacy_show_email_subtitle" = "Adresele tale de e-mail principale și secundare vor fi vizibile pe profilul public al animalului de companie";
+"privacy_show_phone" = "Afișează numărul de telefon";
+"privacy_show_phone_subtitle" = "Numărul tău de telefon principal va fi vizibil pe profilul public al animalului tău de companie.";
+"privacy_show_email" = "Afișează adresa de e-mail";
+"privacy_show_email_subtitle" = "Adresa ta principală de e-mail va fi vizibilă pe profilul public al animalului tău de companie.";
 "privacy_show_address" = "Afișează adresa";
 "privacy_show_address_subtitle" = "Adresa ta va fi vizibilă pe profilul public al animalului de companie";
 "privacy_show_secondary_phone" = "Afișează telefonul secundar";
@@ -752,6 +752,10 @@
 "alerts_map" = "Hartă";
 "alerts_no_nearby_title %@" = "Nicio alertă %@ în apropiere";
 "alerts_no_nearby_message %@" = "Nu există alerte pentru animale de companie %@ în zona ta acum";
+"alerts_no_nearby_missing_title" = "Nicio alertă pentru animale dispărute în apropiere";
+"alerts_no_nearby_missing_message" = "Momentan nu există alerte active pentru animale dispărute în zona ta.";
+"alerts_no_nearby_found_title" = "Nicio alertă pentru animale găsite în apropiere";
+"alerts_no_nearby_found_message" = "Momentan nu există alerte active pentru animale găsite în zona ta.";
 "alerts_location_required" = "Locație necesară";
 "alerts_location_required_message" = "Pentru a vedea alertele din apropiere, activează locația sau adaugă adresa ta.";
 "alerts_enable_location" = "Activează locația în Setări";
@@ -901,13 +905,13 @@
 "location_custom" = "Altă adresă";
 "mark_lost_pet_info" = "Informații despre animal de companie";
 "mark_lost_last_seen" = "Locația unde a fost văzut ultima dată";
-"mark_lost_alerts_footer" = "Alertele vor fi trimise utilizatorilor din apropiere, veterinarilor și adăposturilor pe o rază de 10 km.";
+"mark_lost_alerts_footer" = "";
 "mark_lost_getting_location" = "Se obține locația…";
 "mark_lost_no_address" = "Nu există adresă înregistrată. Mergi la Profil > Adresă.";
 "mark_lost_address_placeholder" = "Introdu adresa sau locația";
 "mark_lost_additional_info" = "Informații suplimentare";
 "mark_lost_additional_placeholder" = "Orice detaliu care ar putea ajuta la găsirea animalului de companie (culoarea zgărzii, comportament, semne distinctive…)";
-"mark_lost_sends_to" = "Această alertă va fi trimisă către:";
+"mark_lost_sends_to" = "Trimitem alerta către: utilizatorii SENRA, veterinari și adăposturi pe o rază de 10 km și o postăm și pe paginile noastre de Facebook, Instagram și X.";
 "mark_lost_nearby_owners" = "Proprietari de animale de companie din apropiere";
 "mark_lost_vet_clinics" = "Clinici veterinare din zonă";
 "mark_lost_shelters" = "Adăposturi de animale de companie din apropiere";
@@ -1222,8 +1226,8 @@
 // MARK: - Mark as Lost
 "coordinates_display" = "Lat: %@, Lng: %@";
 "current_location_fallback" = "Locație curentă";
-"mark_lost_success_with_alerts" = "%@ a fost raportat ca dispărut. Se trimit alerte utilizatorilor din apropiere.";
-"mark_lost_success_no_location" = "%@ a fost marcat ca dispărut. Adăugați locația pentru a trimite alerte comunitare.";
+"mark_lost_success_with_alerts" = "Ai marcat %@ ca dispărut.";
+"mark_lost_success_no_location" = "Ai marcat %@ ca dispărut.";
 "mark_lost_address_required" = "Vă rugăm să furnizați o adresă sau activați serviciile de localizare.";
 "reward_amount_label" = "Recompensă (opțional)";
 "reward_amount_placeholder" = "ex. 50 €";

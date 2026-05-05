@@ -127,7 +127,7 @@
 "save_changes" = "Változások mentése";
 "delete_pet_button" = "Kedvenc törlése";
 "delete_pet_dialog_message" = "Biztosan törlöd ezt a kedvencet? Ez a művelet nem vonható vissza.";
-"delete_pet_warning_title" = "%@ törlése?";
+"delete_pet_warning_title" = "Biztosan törlöd %@ profilját?";
 "delete_pet_warning_message" = "%@ véglegesen eltávolításra kerül a fiókodból. A QR biléta azonnal inaktiválódik és a beolvasás nem fog működni. Ha ez az utolsó kedvenced, az előfizetésed is törlődik.";
 "delete_pet_warning_confirm" = "Kedvenc törlése";
 "species_cat" = "Macska";
@@ -457,14 +457,14 @@
 "help_subject_placeholder" = "A probléma rövid leírása";
 "help_message" = "Üzenet";
 "help_sending" = "Küldés…";
-"help_submit_request" = "Kérés beküldése";
+"help_submit_request" = "Küldés";
 "help_contact_title" = "Írj nekünk";
 "help_request_submitted" = "Kérés elküldve! 24 órán belül válaszolunk.";
 "help_cat_general" = "Általános";
 "help_cat_technical" = "Technikai probléma";
 "help_cat_account" = "Fiók";
 "help_cat_billing" = "Számlázás";
-"help_cat_feature" = "Funkció kérés";
+"help_cat_feature" = "Javaslatok";
 "help_cat_other" = "Egyéb";
 
 // FAQ Questions and Answers
@@ -532,7 +532,7 @@
 "support_category_technical" = "Technikai probléma";
 "support_category_account" = "Fiók";
 "support_category_billing" = "Számlázás";
-"support_category_feature" = "Funkció kérés";
+"support_category_feature" = "Javaslatok";
 "support_category_other" = "Egyéb";
 
 // GYIK elemek
@@ -543,10 +543,10 @@
 "privacy_contact_footer" = "Beállíthatod, hogy mely elérhetőségeid legyenek láthatóak a kedvenced nyilvános profilján. Ezek a beállítások az elsődleges és másodlagos elérhetőségekre egyaránt vonatkoznak.";
 "privacy_show_name" = "Neved megjelenítése";
 "privacy_show_name_subtitle" = "Neved megjelenik a kedvenced nyilvános profilján, amikor valaki beolvassa a bilétáját";
-"privacy_show_phone" = "Telefonszámok megjelenítése";
-"privacy_show_phone_subtitle" = "Az elsődleges és másodlagos telefonszámod látható lesz a kedvenced nyilvános profilján";
-"privacy_show_email" = "Email címek megjelenítése";
-"privacy_show_email_subtitle" = "Az elsődleges és másodlagos email címed látható lesz a kedvenced nyilvános profilján";
+"privacy_show_phone" = "Telefonszám megjelenítése";
+"privacy_show_phone_subtitle" = "Az elsődlegesnek megadott telefonszámod látható lesz a kedvenced nyilvános profilján.";
+"privacy_show_email" = "Email cím megjelenítése";
+"privacy_show_email_subtitle" = "Az elsődlegesnek megadott email címed látható lesz a kedvenced nyilvános profilján.";
 "privacy_show_address" = "Cím megjelenítése";
 "privacy_show_address_subtitle" = "A címed látható lesz a kedvenced nyilvános profilján";
 "privacy_show_secondary_phone" = "Másodlagos telefonszám mutatása";
@@ -757,6 +757,10 @@
 "alerts_map" = "Térkép";
 "alerts_no_nearby_title %@" = "Nincs %@ riasztás a közelben";
 "alerts_no_nearby_message %@" = "Jelenleg nincs %@ riasztás a környékeden";
+"alerts_no_nearby_missing_title" = "Nincs eltűnt riasztás a környéken";
+"alerts_no_nearby_missing_message" = "Jelenleg nincs aktív eltűnt riasztás a környékeden.";
+"alerts_no_nearby_found_title" = "Nincs megtalált riasztás a környéken";
+"alerts_no_nearby_found_message" = "Jelenleg nincs aktív megtalált riasztás a környékeden.";
 "alerts_location_required" = "Helymeghatározás szükséges";
 "alerts_location_required_message" = "A közeledben lévő eltűnt riasztásokhoz engedélyezd a helymeghatározást vagy add meg a címed.";
 "alerts_enable_location" = "Helymeghatározás engedélyezése a beállításokban";
@@ -906,13 +910,13 @@
 "location_custom" = "Egyéb cím";
 "mark_lost_pet_info" = "Információk eltűnt kedvencedről";
 "mark_lost_last_seen" = "Utolsó ismert hely";
-"mark_lost_alerts_footer" = "A riasztásokat a 10 km-en belül lévő felhasználóknak, állatorvosoknak és menhelyeknek küldjük el.";
+"mark_lost_alerts_footer" = "";
 "mark_lost_getting_location" = "Hely lekérése…";
 "mark_lost_no_address" = "Nincs regisztrált cím. Menj a Profil > Cím menüpontra.";
 "mark_lost_address_placeholder" = "Adj meg címet vagy helyet";
 "mark_lost_additional_info" = "További információ";
 "mark_lost_additional_placeholder" = "Bármilyen részlet, ami segíthet megtalálni a kedvencedet (nyakörv színe, viselkedés, megkülönböztető jegyek…)";
-"mark_lost_sends_to" = "Ez a riasztás ide kerül elküldésre:";
+"mark_lost_sends_to" = "A riasztást elküldjük: SENRA felhasználók, állatorvosok és menhelyek 10 km körzetben, valamint posztoljuk a Facebook, Instagram és X oldalunkon.";
 "mark_lost_nearby_owners" = "Közeli gazdik";
 "mark_lost_vet_clinics" = "Környékbeli állatorvosi rendelők";
 "mark_lost_shelters" = "Közeli állatmenhelyek";
@@ -1227,8 +1231,8 @@
 // MARK: - Mark as Lost
 "coordinates_display" = "Szél.: %@, Hossz.: %@";
 "current_location_fallback" = "Jelenlegi tartózkodási hely";
-"mark_lost_success_with_alerts" = "%@ elveszettként lett bejelentve. Értesítések küldése a közeli felhasználóknak, állatorvosoknak és menhelyeknek.";
-"mark_lost_success_no_location" = "%@ elveszettként lett megjelölve. Add meg a helyet a közösségi riasztások küldéséhez!";
+"mark_lost_success_with_alerts" = "Eltűntként jelölted meg %@-t.";
+"mark_lost_success_no_location" = "Eltűntként jelölted meg %@-t.";
 "mark_lost_address_required" = "Kérjük, add meg a címet vagy engedélyezd a helymeghatározást!";
 "reward_amount_label" = "Jutalom (nem kötelező)";
 "reward_amount_placeholder" = "pl. 10 000 Ft";

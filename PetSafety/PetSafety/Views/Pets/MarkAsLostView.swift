@@ -145,8 +145,10 @@ struct MarkAsLostView: View {
                 }
             }
 
-            Section(header: Text("mark_lost_last_seen"),
-                    footer: Text("mark_lost_alerts_footer")) {
+            // Footer (mark_lost_alerts_footer) removed 2026-05-05 — the
+            // recipient list is now in `mark_lost_sends_to` further
+            // down, which also covers the social-media fan-out.
+            Section(header: Text("mark_lost_last_seen")) {
                 Picker(String(localized: "location_label"), selection: $lastSeenSource) {
                     ForEach(LastSeenSource.allCases, id: \.self) { source in
                         Text(source.displayName).tag(source)
@@ -253,16 +255,15 @@ struct MarkAsLostView: View {
                             .foregroundColor(.brandOrange)
                     }
                 } else {
+                    // 2026-05-05 copy update: replaced the icon-list
+                    // (nearby users / vets / shelters) with a single
+                    // explanatory sentence that also mentions the
+                    // social-media fan-out (Facebook / Instagram / X).
+                    // Keeps the section visually quieter and matches
+                    // the marketing copy elsewhere in the app.
                     Text("mark_lost_sends_to")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    VStack(alignment: .leading, spacing: 8) {
-                        Label(String(localized: "mark_lost_nearby_owners"), systemImage: "person.3.fill")
-                        Label(String(localized: "mark_lost_vet_clinics"), systemImage: "cross.case.fill")
-                        Label(String(localized: "mark_lost_shelters"), systemImage: "house.fill")
-                    }
-                    .font(.caption)
-                    .foregroundColor(.secondary)
                 }
             }
 

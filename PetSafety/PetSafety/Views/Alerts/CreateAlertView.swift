@@ -113,8 +113,10 @@ struct CreateAlertView: View {
                 }
             }
 
-            Section(header: Text("mark_lost_last_seen"),
-                    footer: Text("mark_lost_alerts_footer")) {
+            // Footer (mark_lost_alerts_footer) removed 2026-05-05 — the
+            // recipient explainer is now consolidated into
+            // `mark_lost_sends_to` on the parent screen.
+            Section(header: Text("mark_lost_last_seen")) {
                 Picker(String(localized: "location_label"), selection: $lastSeenSource) {
                     ForEach(LastSeenSource.allCases, id: \.self) { source in
                         Text(source.displayName).tag(source)
