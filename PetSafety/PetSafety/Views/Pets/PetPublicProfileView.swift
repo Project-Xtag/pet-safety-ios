@@ -175,7 +175,9 @@ struct PetPublicProfileView: View {
                     }
                 }
 
-                // Share Location Button (placeholder - shown in preview)
+                // Share Location + manual-address (placeholders — preview only).
+                // The live scan flow (DeepLinkScannedPetView → ShareLocationView)
+                // is the one that wires both as functional CTAs.
                 VStack(spacing: 8) {
                     HStack(spacing: 8) {
                         Image(systemName: "location.fill")
@@ -188,6 +190,11 @@ struct PetPublicProfileView: View {
                     .background(Color.tealAccent)
                     .cornerRadius(14)
                     .padding(.horizontal, 24)
+
+                    Text(NSLocalizedString("share_address_instead", comment: ""))
+                        .font(.subheadline)
+                        .foregroundColor(.tealAccent)
+                        .padding(.top, 4)
 
                     Text(String(format: NSLocalizedString("owner_notified_sms_email", comment: ""), pet.name))
                         .font(.system(size: 12))
