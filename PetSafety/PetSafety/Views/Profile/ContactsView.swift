@@ -388,11 +388,10 @@ struct ContactRowView: View {
                             .background(Color.brandOrange)
                             .cornerRadius(4)
                     }
-                    Spacer(minLength: 0)
                     Text(isVisible ? "contacts_visible_on_tag" : "contacts_hidden_badge")
                         .font(.caption2)
                         .foregroundColor(.secondary)
-                        .multilineTextAlignment(.trailing)
+                    Spacer(minLength: 0)
                 }
             }
         }
