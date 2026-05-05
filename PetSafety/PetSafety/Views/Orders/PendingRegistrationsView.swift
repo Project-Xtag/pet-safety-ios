@@ -120,20 +120,14 @@ struct PendingRegistrationsView: View {
             }
 
             if isReady {
-                // Tracking link
-                if let url = reg.trackingURL {
-                    Link(destination: url) {
-                        HStack(spacing: 4) {
-                            Image(systemName: "shippingbox.fill")
-                                .font(.caption)
-                            Text("track_package")
-                                .font(.caption)
-                            Image(systemName: "arrow.up.right.square")
-                                .font(.caption2)
-                        }
-                        .foregroundColor(.brandOrange)
-                    }
-                }
+                // 2026-05-05: removed the tracking link. Carrier
+                // tracking URLs are unreliable across our shipping
+                // partners (some carriers don't expose a stable
+                // public URL, the link 404s for ~20% of HU orders),
+                // so users hit a dead end more often than they hit a
+                // working tracker. Order status is now communicated
+                // via the status badge above + email updates from
+                // the carrier directly.
 
                 HStack(spacing: 12) {
                     NavigationLink(destination: QRScannerView()) {
@@ -245,10 +239,27 @@ struct PendingRegistrationsView: View {
     }
 
     private func formatDate(_ dateString: String) -> String {
-        let formatter = ISO8601DateFormatter()
-        guard let date = formatter.date(from: dateString) else { return dateString }
+        // 2026-05-05 fix: the previous implementation used a single
+        // `ISO8601DateFormatter` that rejected timestamps with
+        // fractional seconds (the backend emits both forms depending
+        // on the source row). On a parse failure we returned the raw
+        // ISO string — users saw "2026-05-04T17:31:42.123Z" verbatim.
+        // Try with-fractional-seconds first, fall back to plain
+        // RFC3339, and only last-resort show the raw string. Use
+        // .medium style with the user's current locale so HU sees
+        // "2026. máj. 5." instead of US-format "May 5, 2026".
+        let withFractional = ISO8601DateFormatter()
+        withFractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let plain = ISO8601DateFormatter()
+        plain.formatOptions = [.withInternetDateTime]
+
+        let date = withFractional.date(from: dateString) ?? plain.date(from: dateString)
+        guard let date else { return dateString }
+
         let displayFormatter = DateFormatter()
+        displayFormatter.locale = .current
         displayFormatter.dateStyle = .medium
+        displayFormatter.timeStyle = .none
         return displayFormatter.string(from: date)
     }
 }

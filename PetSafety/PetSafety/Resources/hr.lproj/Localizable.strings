@@ -130,7 +130,7 @@
 "save_changes" = "Spremi promjene";
 "delete_pet_button" = "Obriši kućnog ljubimca";
 "delete_pet_dialog_message" = "Sigurno želiš obrisati ovog kućnog ljubimca? Ova radnja se ne može poništiti.";
-"delete_pet_warning_title" = "Obrisati %@?";
+"delete_pet_warning_title" = "Sigurno želiš obrisati profil ljubimca %@?";
 "delete_pet_warning_message" = "%@ će biti trajno uklonjen s tvog računa. QR privjesak odmah prestaje raditi. Ako je ovo tvoj posljednji kućni ljubimac, pretplata će također biti otkazana.";
 "delete_pet_warning_confirm" = "Obriši kućnog ljubimca";
 "species_cat" = "Mačka";
@@ -459,14 +459,14 @@
 "help_subject_placeholder" = "Kratki opis problema";
 "help_message" = "Poruka";
 "help_sending" = "Slanje…";
-"help_submit_request" = "Pošalji zahtjev";
+"help_submit_request" = "Pošalji";
 "help_contact_title" = "Kontaktiraj podršku";
 "help_request_submitted" = "Zahtjev za podršku poslan! Javit ćemo ti se unutar 24 sata.";
 "help_cat_general" = "Općenito";
 "help_cat_technical" = "Tehnički problem";
 "help_cat_account" = "Račun";
 "help_cat_billing" = "Naplata";
-"help_cat_feature" = "Prijedlog";
+"help_cat_feature" = "Prijedlozi";
 "help_cat_other" = "Ostalo";
 
 // FAQ Questions and Answers
@@ -534,7 +534,7 @@
 "support_category_technical" = "Tehnički problem";
 "support_category_account" = "Račun";
 "support_category_billing" = "Naplata";
-"support_category_feature" = "Prijedlog";
+"support_category_feature" = "Prijedlozi";
 "support_category_other" = "Ostalo";
 
 // FAQ Items
@@ -556,10 +556,10 @@
 "privacy_contact_footer" = "Kontroliraj koji su kontaktni podaci vidljivi na javnom profilu tvog kućnog ljubimca. Ove postavke primjenjuju se na primarne i sekundarne kontaktne podatke.";
 "privacy_show_name" = "Prikaži svoje ime";
 "privacy_show_name_subtitle" = "Tvoje ime će biti vidljivo na javnom profilu kućnog ljubimca kada netko skenira privjesak";
-"privacy_show_phone" = "Prikaži telefonske brojeve";
-"privacy_show_phone_subtitle" = "Tvoji primarni i sekundarni telefonski brojevi bit će vidljivi na javnom profilu kućnog ljubimca";
-"privacy_show_email" = "Prikaži e-mail adrese";
-"privacy_show_email_subtitle" = "Tvoje primarne i sekundarne e-mail adrese bit će vidljive na javnom profilu kućnog ljubimca";
+"privacy_show_phone" = "Prikaži telefonski broj";
+"privacy_show_phone_subtitle" = "Tvoj primarni telefonski broj bit će vidljiv na javnom profilu tvog kućnog ljubimca.";
+"privacy_show_email" = "Prikaži e-mail adresu";
+"privacy_show_email_subtitle" = "Tvoja primarna e-mail adresa bit će vidljiva na javnom profilu tvog kućnog ljubimca.";
 "privacy_show_address" = "Prikaži adresu";
 "privacy_show_address_subtitle" = "Tvoja adresa bit će vidljiva na javnom profilu kućnog ljubimca";
 "privacy_show_secondary_phone" = "Prikaži sekundarni telefon";
@@ -766,6 +766,10 @@
 "alerts_map" = "Karta";
 "alerts_no_nearby_title %@" = "Nema %@ uzbuna u blizini";
 "alerts_no_nearby_message %@" = "Nema %@ uzbuna o kućnim ljubimcima u tvom području trenutno";
+"alerts_no_nearby_missing_title" = "Nema obavijesti o nestalim ljubimcima u blizini";
+"alerts_no_nearby_missing_message" = "Trenutno u tvojoj okolici nema aktivnih obavijesti o nestalim ljubimcima.";
+"alerts_no_nearby_found_title" = "Nema obavijesti o pronađenim ljubimcima u blizini";
+"alerts_no_nearby_found_message" = "Trenutno u tvojoj okolici nema aktivnih obavijesti o pronađenim ljubimcima.";
 "alerts_location_required" = "Lokacija je potrebna";
 "alerts_location_required_message" = "Za prikaz uzbuna o nestalim kućnim ljubimcima u tvojoj blizini, omogući lokacijske usluge ili dodaj svoju adresu.";
 "alerts_enable_location" = "Omogući lokacijske usluge u Postavkama";
@@ -917,13 +921,13 @@
 "location_custom" = "Druga adresa";
 "mark_lost_pet_info" = "Podaci o kućnom ljubimcu";
 "mark_lost_last_seen" = "Posljednje poznato mjesto";
-"mark_lost_alerts_footer" = "Uzbune će biti poslane korisnicima, veterinarima i skloništima unutar 10 km.";
+"mark_lost_alerts_footer" = "";
 "mark_lost_getting_location" = "Dohvaćanje lokacije…";
 "mark_lost_no_address" = "Nema registrirane adrese. Idi na Profil > Adresa.";
 "mark_lost_address_placeholder" = "Unesi adresu ili lokaciju";
 "mark_lost_additional_info" = "Dodatne informacije";
 "mark_lost_additional_placeholder" = "Bilo koji detalj koji bi mogao pomoći u pronalaženju kućnog ljubimca (boja ogrlice, ponašanje, razlikovna obilježja…)";
-"mark_lost_sends_to" = "Ova uzbuna bit će poslana na:";
+"mark_lost_sends_to" = "Obavijest šaljemo: SENRA korisnicima, veterinarima i skloništima u krugu od 10 km, te je objavljujemo i na našim stranicama na Facebooku, Instagramu i X.";
 "mark_lost_nearby_owners" = "Vlasnici kućnih ljubimaca u blizini";
 "mark_lost_vet_clinics" = "Veterinarske klinike u području";
 "mark_lost_shelters" = "Skloništa za životinje u blizini";
@@ -1228,8 +1232,8 @@
 // MARK: - Mark as Lost
 "coordinates_display" = "Šir.: %@, Dlž.: %@";
 "current_location_fallback" = "Trenutna lokacija";
-"mark_lost_success_with_alerts" = "%@ je prijavljen kao nestao. Uzbune se šalju korisnicima, veterinarima i skloništima u blizini.";
-"mark_lost_success_no_location" = "%@ je označen kao nestao. Dodaj lokaciju za slanje obavijesti zajednici.";
+"mark_lost_success_with_alerts" = "%@ je označen kao nestao.";
+"mark_lost_success_no_location" = "%@ je označen kao nestao.";
 "mark_lost_address_required" = "Navedi adresu ili omogući lokacijske usluge.";
 "reward_amount_label" = "Nagrada (neobavezno)";
 "reward_amount_placeholder" = "npr. €50";

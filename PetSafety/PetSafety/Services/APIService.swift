@@ -1523,8 +1523,21 @@ extension APIService {
         throw APIError.serverError("Failed to get notification preferences")
     }
 
-    /// Update user's notification preferences
-    func updateNotificationPreferences(_ preferences: NotificationPreferences) async throws -> NotificationPreferences {
+    /// Update user's notification preferences.
+    ///
+    /// 2026-05-05 fix: optionally takes a `previous` snapshot. When
+    /// supplied, only the channels whose values DIFFER from the snapshot
+    /// are sent in the body. The pre-fix code always sent all three
+    /// fields, so a stale local copy could clobber a change made from
+    /// another device (Android, web) — last-write-wins on full state.
+    /// Backend already supports partial PUT (each `if (notifyByX !==
+    /// undefined)` branch independently), so the fix is client-side.
+    /// Pass nil for `previous` to keep the legacy "send everything"
+    /// behaviour (one remaining caller does that intentionally).
+    func updateNotificationPreferences(
+        _ preferences: NotificationPreferences,
+        previous: NotificationPreferences? = nil
+    ) async throws -> NotificationPreferences {
         #if DEBUG
         print("📡 API: Updating notification preferences...")
         #endif
@@ -1534,11 +1547,29 @@ extension APIService {
             throw APIError.serverError("At least one notification method must be enabled")
         }
 
-        let body = [
-            "notifyByEmail": preferences.notifyByEmail,
-            "notifyBySms": preferences.notifyBySms,
-            "notifyByPush": preferences.notifyByPush
-        ]
+        var body: [String: Bool] = [:]
+        if let previous {
+            if preferences.notifyByEmail != previous.notifyByEmail {
+                body["notifyByEmail"] = preferences.notifyByEmail
+            }
+            if preferences.notifyBySms != previous.notifyBySms {
+                body["notifyBySms"] = preferences.notifyBySms
+            }
+            if preferences.notifyByPush != previous.notifyByPush {
+                body["notifyByPush"] = preferences.notifyByPush
+            }
+            // No fields actually changed — short-circuit and return the
+            // preferences as-is so the caller's "saved!" toast still fires.
+            if body.isEmpty {
+                return preferences
+            }
+        } else {
+            body = [
+                "notifyByEmail": preferences.notifyByEmail,
+                "notifyBySms": preferences.notifyBySms,
+                "notifyByPush": preferences.notifyByPush,
+            ]
+        }
 
         let request = try await buildRequest(
             endpoint: "/users/me/notification-preferences",

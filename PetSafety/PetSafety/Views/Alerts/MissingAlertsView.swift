@@ -23,7 +23,7 @@ struct MissingAlertsView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if viewModel.missingAlerts.isEmpty {
-                EmptyAlertsStateView(alertType: String(localized: "alert_status_missing"))
+                EmptyAlertsStateView(kind: .missing)
             } else {
                 MissingAlertsListView(alerts: viewModel.missingAlerts)
             }

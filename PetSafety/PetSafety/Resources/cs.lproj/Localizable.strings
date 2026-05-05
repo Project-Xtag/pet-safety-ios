@@ -127,7 +127,7 @@
 "save_changes" = "Uložit změny";
 "delete_pet_button" = "Smazat mazlíčka";
 "delete_pet_dialog_message" = "Opravdu chceš smazat tohoto mazlíčka? Tuto akci nelze vrátit.";
-"delete_pet_warning_title" = "Smazat %@?";
+"delete_pet_warning_title" = "Opravdu chceš smazat profil %@?";
 "delete_pet_warning_message" = "%@ bude trvale odstraněn z tvého účtu. QR psí známka bude okamžitě deaktivovánaa a při naskenování přestane fungovat. Pokud je to tvůj poslední mazlíček, tvé předplatné bude také zrušeno.";
 "delete_pet_warning_confirm" = "Smazat mazlíčka";
 "species_cat" = "Kočka";
@@ -456,14 +456,14 @@
 "help_subject_placeholder" = "Krátký popis problému";
 "help_message" = "Zpráva";
 "help_sending" = "Odesílání…";
-"help_submit_request" = "Odeslat žádost";
+"help_submit_request" = "Odeslat";
 "help_contact_title" = "Kontaktovat podporu";
 "help_request_submitted" = "Žádost odeslána! Odpovíme do 24 hodin.";
 "help_cat_general" = "Obecné";
 "help_cat_technical" = "Technický problém";
 "help_cat_account" = "Účet";
 "help_cat_billing" = "Fakturace";
-"help_cat_feature" = "Žádost o funkci";
+"help_cat_feature" = "Návrhy";
 "help_cat_other" = "Jiné";
 
 // FAQ Questions and Answers
@@ -531,7 +531,7 @@
 "support_category_technical" = "Technický problém";
 "support_category_account" = "Účet";
 "support_category_billing" = "Fakturace";
-"support_category_feature" = "Požadavek na funkci";
+"support_category_feature" = "Návrhy";
 "support_category_other" = "Jiné";
 
 // Položky FAQ
@@ -542,10 +542,10 @@
 "privacy_contact_footer" = "Ovládej, které kontaktní údaje jsou viditelné na veřejném profilu tvého mazlíčka. Tato nastavení platí pro primární i sekundární kontaktní údaje.";
 "privacy_show_name" = "Zobrazit tvé jméno";
 "privacy_show_name_subtitle" = "Tvé jméno bude viditelné na veřejném profilu mazlíčka při skenování psí známky";
-"privacy_show_phone" = "Zobrazit telefonní čísla";
-"privacy_show_phone_subtitle" = "Tvá primární a sekundární telefonní čísla budou viditelná na veřejném profilu tvého mazlíčka";
-"privacy_show_email" = "Zobrazit e-mailové adresy";
-"privacy_show_email_subtitle" = "Tvé primární a sekundární e-mailové adresy budou viditelné na veřejném profilu tvého mazlíčka";
+"privacy_show_phone" = "Zobrazit telefonní číslo";
+"privacy_show_phone_subtitle" = "Tvé hlavní telefonní číslo bude viditelné na veřejném profilu tvého mazlíčka.";
+"privacy_show_email" = "Zobrazit e-mailovou adresu";
+"privacy_show_email_subtitle" = "Tvá hlavní e-mailová adresa bude viditelná na veřejném profilu tvého mazlíčka.";
 "privacy_show_address" = "Zobrazit adresu";
 "privacy_show_address_subtitle" = "Tvá adresa bude viditelná na veřejném profilu tvého mazlíčka";
 "privacy_show_secondary_phone" = "Zobrazit sekundární telefon";
@@ -752,6 +752,10 @@
 "alerts_map" = "Mapa";
 "alerts_no_nearby_title %@" = "Žádná upozornění %@ v okolí";
 "alerts_no_nearby_message %@" = "V okolí nejsou žádná upozornění na mazlíčky %@";
+"alerts_no_nearby_missing_title" = "Žádná upozornění na ztracená zvířata v okolí";
+"alerts_no_nearby_missing_message" = "Momentálně nejsou žádná aktivní upozornění na ztracená zvířata ve tvém okolí.";
+"alerts_no_nearby_found_title" = "Žádná upozornění na nalezená zvířata v okolí";
+"alerts_no_nearby_found_message" = "Momentálně nejsou žádná aktivní upozornění na nalezená zvířata ve tvém okolí.";
 "alerts_location_required" = "Vyžadována poloha";
 "alerts_location_required_message" = "Pro zobrazení upozornění v okolí povol polohu nebo přidej adresu.";
 "alerts_enable_location" = "Povolit služby polohy v Nastavení";
@@ -901,13 +905,13 @@
 "location_custom" = "Jiná adresa";
 "mark_lost_pet_info" = "Informace o mazlíčkovi";
 "mark_lost_last_seen" = "Místo posledního výskytu";
-"mark_lost_alerts_footer" = "Upozornění budou odeslána blízkým uživatelům, veterinářům a útulkům v okruhu 10 km.";
+"mark_lost_alerts_footer" = "";
 "mark_lost_getting_location" = "Získávání polohy…";
 "mark_lost_no_address" = "Žádná registrovaná adresa. Jdi do Profil > Adresa.";
 "mark_lost_address_placeholder" = "Zadej adresu nebo místo";
 "mark_lost_additional_info" = "Další informace";
 "mark_lost_additional_placeholder" = "Jakékoli podrobnosti, které by mohly pomoci najít tvého mazlíčka (barva obojku, chování, rozpoznávací znaky…)";
-"mark_lost_sends_to" = "Toto upozornění bude odesláno:";
+"mark_lost_sends_to" = "Upozornění pošleme: uživatelům SENRA, veterinářům a útulkům v okruhu 10 km a také ho zveřejníme na naší stránce na Facebooku, Instagramu a X.";
 "mark_lost_nearby_owners" = "Páníčkům v okolí";
 "mark_lost_vet_clinics" = "Veterinárním klinikám v okolí";
 "mark_lost_shelters" = "Útulkům v okolí";
@@ -1222,8 +1226,8 @@
 // MARK: - Mark as Lost
 "coordinates_display" = "Šíř.: %@, Dél.: %@";
 "current_location_fallback" = "Aktuální poloha";
-"mark_lost_success_with_alerts" = "%@ byl nahlášen jako ztracený. Upozornění se posílají blízkým uživatelům.";
-"mark_lost_success_no_location" = "%@ byl označen jako ztracený. Přidej polohu k odeslání upozornění.";
+"mark_lost_success_with_alerts" = "Označil/-a jsi %@ jako ztraceného.";
+"mark_lost_success_no_location" = "Označil/-a jsi %@ jako ztraceného.";
 "mark_lost_address_required" = "Zadej adresu nebo povol služby určování polohy.";
 "reward_amount_label" = "Odměna (volitelné)";
 "reward_amount_placeholder" = "např. 50 €";

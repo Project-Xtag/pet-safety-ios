@@ -18,7 +18,14 @@ struct AlertsTabView: View {
                     // Header
                     headerSection
 
-                    // Content
+                    // Content. `.frame(maxWidth/maxHeight: .infinity)` is
+                    // load-bearing — without `maxHeight: .infinity` the
+                    // inner VStack only takes its intrinsic size, which
+                    // means the List inside `contentView` ends up sized
+                    // to its content rather than filling the screen,
+                    // and rows below the fold are unreachable. Reported
+                    // 2026-05-05: "On the missing pets list screen the
+                    // scrolling is not working."
                     VStack(spacing: 20) {
                         // View Mode Segmented Control (List / Map)
                         segmentedControl(
@@ -34,6 +41,7 @@ struct AlertsTabView: View {
                             contentView
                         }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.top, 24)
                 }
             }
@@ -188,8 +196,35 @@ struct AlertsTabView: View {
 
 
 // MARK: - Empty Alerts State
+//
+// 2026-05-05 copy update: the previous version interpolated an alert-type
+// noun into "Nincs %@ riasztás a közelben" — the noun was capitalised
+// ("Eltűnt") which produced ungrammatical Hungarian "Nincs Eltűnt
+// riasztás" (the second word should be lowercase mid-sentence). Splitting
+// into per-type keys lets each locale phrase the empty state naturally
+// without a placeholder (and incidentally also lets us update the
+// "közelben" → "környéken" wording for HU at the same time).
+enum EmptyAlertsKind {
+    case missing
+    case found
+
+    var titleKey: String.LocalizationValue {
+        switch self {
+        case .missing: return "alerts_no_nearby_missing_title"
+        case .found: return "alerts_no_nearby_found_title"
+        }
+    }
+
+    var messageKey: String.LocalizationValue {
+        switch self {
+        case .missing: return "alerts_no_nearby_missing_message"
+        case .found: return "alerts_no_nearby_found_message"
+        }
+    }
+}
+
 struct EmptyAlertsStateView: View {
-    let alertType: String
+    let kind: EmptyAlertsKind
 
     var body: some View {
         VStack(spacing: 20) {
@@ -205,11 +240,11 @@ struct EmptyAlertsStateView: View {
             }
 
             VStack(spacing: 8) {
-                Text("alerts_no_nearby_title \(alertType)")
+                Text(String(localized: kind.titleKey))
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.primary)
 
-                Text("alerts_no_nearby_message \(alertType)")
+                Text(String(localized: kind.messageKey))
                     .font(.system(size: 14))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)

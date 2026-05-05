@@ -22,6 +22,11 @@ struct PrivacyModeView: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }.padding(.bottom, 4)) {
+                // 2026-05-05 reorder: name, address, phone (primary +
+                // secondary), email (primary + secondary). Groups
+                // similar contact methods together so the user can
+                // toggle "show ALL phone" or "show ALL email" without
+                // jumping back and forth across the list.
                 Toggle(isOn: $showNamePublicly) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("privacy_show_name")
@@ -34,32 +39,6 @@ struct PrivacyModeView: View {
                 .onChange(of: showNamePublicly) { _, newValue in
                     guard didInitialize else { return }
                     updatePrivacySetting("show_name_publicly", value: newValue)
-                }
-                Toggle(isOn: $showPhonePublicly) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("privacy_show_phone")
-                        Text("privacy_show_phone_subtitle")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .disabled(isUpdating)
-                .onChange(of: showPhonePublicly) { _, newValue in
-                    guard didInitialize else { return }
-                    updatePrivacySetting("show_phone_publicly", value: newValue)
-                }
-                Toggle(isOn: $showEmailPublicly) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("privacy_show_email")
-                        Text("privacy_show_email_subtitle")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .disabled(isUpdating)
-                .onChange(of: showEmailPublicly) { _, newValue in
-                    guard didInitialize else { return }
-                    updatePrivacySetting("show_email_publicly", value: newValue)
                 }
                 Toggle(isOn: $showAddressPublicly) {
                     VStack(alignment: .leading, spacing: 2) {
@@ -74,8 +53,19 @@ struct PrivacyModeView: View {
                     guard didInitialize else { return }
                     updatePrivacySetting("show_address_publicly", value: newValue)
                 }
-
-                // Secondary contact toggles (only shown when secondary contacts exist)
+                Toggle(isOn: $showPhonePublicly) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("privacy_show_phone")
+                        Text("privacy_show_phone_subtitle")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .disabled(isUpdating)
+                .onChange(of: showPhonePublicly) { _, newValue in
+                    guard didInitialize else { return }
+                    updatePrivacySetting("show_phone_publicly", value: newValue)
+                }
                 if let secondaryPhone = authViewModel.currentUser?.secondaryPhone, !secondaryPhone.isEmpty {
                     Toggle(isOn: $showSecondaryPhonePublicly) {
                         VStack(alignment: .leading, spacing: 2) {
@@ -91,7 +81,19 @@ struct PrivacyModeView: View {
                         updatePrivacySetting("show_secondary_phone_publicly", value: newValue)
                     }
                 }
-
+                Toggle(isOn: $showEmailPublicly) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("privacy_show_email")
+                        Text("privacy_show_email_subtitle")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .disabled(isUpdating)
+                .onChange(of: showEmailPublicly) { _, newValue in
+                    guard didInitialize else { return }
+                    updatePrivacySetting("show_email_publicly", value: newValue)
+                }
                 if let secondaryEmail = authViewModel.currentUser?.secondaryEmail, !secondaryEmail.isEmpty {
                     Toggle(isOn: $showSecondaryEmailPublicly) {
                         VStack(alignment: .leading, spacing: 2) {
