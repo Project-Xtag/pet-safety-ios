@@ -21,7 +21,6 @@ struct SuccessStoryPromptView: View {
     @State private var isGeneratingShareCard = false
     @State private var showSocialShareSheet = false
     @State private var shareCardImage: UIImage?
-    @State private var serverCardUrl: String?
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appState: AppState
@@ -42,17 +41,6 @@ struct SuccessStoryPromptView: View {
             .onAppear {
                 // Request location when view appears
                 locationManager.requestLocation()
-                // Pre-fetch server-generated share card (same image posted to official social accounts)
-                if let alertId = alertId {
-                    Task {
-                        do {
-                            let url = try await APIService.shared.getShareCardUrl(alertId: alertId)
-                            await MainActor.run { serverCardUrl = url }
-                        } catch {
-                            // Server card unavailable — local generator will be used as fallback
-                        }
-                    }
-                }
             }
             .onReceive(locationManager.$location) { newLocation in
                 if let location = newLocation {
@@ -356,42 +344,31 @@ struct SuccessStoryPromptView: View {
     }
 
     // MARK: - Social Share Card
-    /// Generates the share card, preferring the server-generated image (same as official social posts).
-    /// Falls back to local generation if the server card is unavailable.
+    /// Generate the share card locally. Per 2026-05-05 ux: the user-share
+    /// path always renders the on-device Android-style card (single-image
+    /// design across iOS / Android / Web), independently of whatever the
+    /// server's broadcaster image looks like for FB/IG/X auto-posting.
     private func generateAndShareCard() {
         isGeneratingShareCard = true
         Task {
             var cardImage: UIImage?
 
-            // Try server-generated card first (matches what's posted to FB/IG/X)
-            if let urlString = serverCardUrl, let url = URL(string: urlString) {
+            var petImage: UIImage?
+            if let urlString = pet.photoUrl, let url = URL(string: urlString) {
                 do {
                     let (data, _) = try await URLSession.shared.data(from: url)
-                    cardImage = UIImage(data: data)
+                    petImage = UIImage(data: data)
                 } catch {
-                    // Server card fetch failed — will fall back to local generation
+                    // Use placeholder if photo fails to load
                 }
             }
 
-            // Fallback: generate locally
-            if cardImage == nil {
-                var petImage: UIImage?
-                if let urlString = pet.photoUrl, let url = URL(string: urlString) {
-                    do {
-                        let (data, _) = try await URLSession.shared.data(from: url)
-                        petImage = UIImage(data: data)
-                    } catch {
-                        // Use placeholder if photo fails to load
-                    }
-                }
-
-                cardImage = ShareCardGenerator.generate(
-                    petName: pet.name,
-                    petImage: petImage,
-                    petSpecies: pet.species,
-                    city: pet.ownerCity
-                )
-            }
+            cardImage = ShareCardGenerator.generate(
+                petName: pet.name,
+                petImage: petImage,
+                petSpecies: pet.species,
+                city: pet.ownerCity
+            )
 
             await MainActor.run {
                 shareCardImage = cardImage
