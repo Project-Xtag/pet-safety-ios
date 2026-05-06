@@ -187,7 +187,7 @@
 "share_manual_address_title" = "Add meg a címet";
 "share_manual_address_desc" = "Ha nem tudod megosztani a GPS-t, írd be a címet vagy a helyszínt, ahol megtaláltad a kisállatot. Telefonszámodat is megadhatod itt, ha szeretnéd, hogy a gazdi vissza tudjon hívni.";
 "share_manual_address_placeholder" = "pl. Budapest, Pauler utca 123 — a játszótér mellett. Telefonszámod is megadhatod, ha szeretnéd, hogy a gazdi visszahívhasson.";
-"owner_communication_disabled" = "A kisállat gazdája nem engedélyezte a kommunikációt a megtalálóval.";
+"owner_communication_disabled" = "A kisállat gazdija nem engedélyezte a kommunikációt a megtalálóval.";
 
 // MARK: - Beolvasó részletei
 "scanner_open_settings" = "Beállítások megnyitása";
@@ -642,7 +642,7 @@
 // MARK: - Nyilvános kedvenc profil
 "public_profile_preview" = "Nyilvános profil előnézet";
 "public_profile_subtitle" = "Így látják mások %@ profilját";
-"owner_notified_sms_email" = "%@ gazdája SMS-t és emailt kap a tartózkodási helyedről";
+"owner_notified_sms_email" = "%@ gazdija SMS-t és emailt kap a tartózkodási helyedről";
 "contact_owner_plea" = "Kérlek, tudasd a gazdimmal, hogy megtaláltál…";
 "contact_info_not_set" = "Az elérhetőségek még nincsenek beállítva";
 "contact_info_hidden" = "Az elérhetőségek rejtve vannak";
