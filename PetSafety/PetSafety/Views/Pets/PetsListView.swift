@@ -156,14 +156,14 @@ struct PetsListView: View {
             VStack(alignment: .leading, spacing: 4) {
                 if let firstName = authViewModel.currentUser?.firstName, !firstName.isEmpty {
                     Text("welcome_back_greeting")
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.appFont(size: 14, weight: .medium))
                         .foregroundColor(.mutedText)
                     Text(firstName)
-                        .font(.system(size: 24, weight: .bold))
+                        .font(.appFont(size: 24, weight: .bold))
                         .foregroundColor(.primary)
                 } else {
                     Text("welcome_back_no_name")
-                        .font(.system(size: 24, weight: .bold))
+                        .font(.appFont(size: 24, weight: .bold))
                         .foregroundColor(.primary)
                 }
             }
@@ -172,7 +172,7 @@ struct PetsListView: View {
 
             Button { showingNotifications = true } label: {
                 Image(systemName: "bell.fill")
-                    .font(.system(size: 20))
+                    .font(.appFont(size: 20))
                     .foregroundColor(.brandOrange)
             }
             .sheet(isPresented: $showingNotifications) {
@@ -192,14 +192,14 @@ struct PetsListView: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Text("tab_my_pets")
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.appFont(size: 20, weight: .bold))
                     .foregroundColor(.primary)
                 Spacer()
                 if viewModel.pets.count > 4 && searchText.isEmpty {
                     Button("view_all") {
                         // Show all pets
                     }
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.appFont(size: 14, weight: .semibold))
                     .foregroundColor(.brandOrange)
                 }
             }
@@ -212,7 +212,7 @@ struct PetsListView: View {
                         .foregroundColor(.mutedText)
                     TextField("search_pets_hint", text: $searchText)
                         .textFieldStyle(.plain)
-                        .font(.system(size: 15))
+                        .font(.appFont(size: 15))
                     if !searchText.isEmpty {
                         Button(action: { searchText = "" }) {
                             Image(systemName: "xmark.circle.fill")
@@ -243,7 +243,7 @@ struct PetsListView: View {
     private var quickActionsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("quick_actions")
-                .font(.system(size: 20, weight: .bold))
+                .font(.appFont(size: 20, weight: .bold))
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
 
@@ -294,7 +294,7 @@ struct PetsListView: View {
     private var successStoriesSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("success_stories")
-                .font(.system(size: 20, weight: .bold))
+                .font(.appFont(size: 20, weight: .bold))
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
 
@@ -307,7 +307,7 @@ struct PetsListView: View {
                             .fill(Color.successColor.opacity(0.15))
                             .frame(width: 60, height: 60)
                         Image(systemName: "heart.circle.fill")
-                            .font(.system(size: 30))
+                            .font(.appFont(size: 30))
                             .foregroundColor(.successColor)
                             .accessibilityLabel(NSLocalizedString("success_stories", comment: ""))
                     }
@@ -315,10 +315,10 @@ struct PetsListView: View {
                     // Text
                     VStack(alignment: .leading, spacing: 4) {
                         Text("found_pets")
-                            .font(.system(size: 17, weight: .semibold))
+                            .font(.appFont(size: 17, weight: .semibold))
                             .foregroundColor(.primary)
                         Text("success_stories_subtitle")
-                            .font(.system(size: 14))
+                            .font(.appFont(size: 14))
                             .foregroundColor(.mutedText)
                     }
 
@@ -326,7 +326,7 @@ struct PetsListView: View {
 
                     // Chevron
                     Image(systemName: "chevron.right")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.appFont(size: 14, weight: .semibold))
                         .foregroundColor(.mutedText)
                         .accessibilityHidden(true)
                 }
@@ -388,10 +388,10 @@ struct PetCardView: View {
                     if pet.isMissing {
                         HStack(spacing: 4) {
                             Image(systemName: "exclamationmark.triangle.fill")
-                                .font(.system(size: 10))
+                                .font(.appFont(size: 10))
                                 .accessibilityLabel(NSLocalizedString("missing_badge", comment: ""))
                             Text("missing_badge")
-                                .font(.system(size: 10, weight: .bold))
+                                .font(.appFont(size: 10, weight: .bold))
                         }
                         .foregroundColor(.white)
                         .padding(.horizontal, 8)
@@ -404,9 +404,9 @@ struct PetCardView: View {
                         // physical tag hasn't been scanned/activated yet.
                         HStack(spacing: 4) {
                             Image(systemName: "shippingbox.fill")
-                                .font(.system(size: 10))
+                                .font(.appFont(size: 10))
                             Text("tag_pending_badge")
-                                .font(.system(size: 10, weight: .bold))
+                                .font(.appFont(size: 10, weight: .bold))
                         }
                         .foregroundColor(.white)
                         .padding(.horizontal, 8)
@@ -420,7 +420,7 @@ struct PetCardView: View {
 
                 // Pet Name
                 Text(pet.name)
-                    .font(.system(size: 15, weight: .bold))
+                    .font(.appFont(size: 15, weight: .bold))
                     .foregroundColor(pet.isMissing ? .red : .primary)
                     .lineLimit(1)
                     .padding(.vertical, 12)
@@ -461,11 +461,11 @@ struct AddPetCard: View {
         Button(action: action) {
             VStack(spacing: 8) {
                 Image(systemName: "plus.circle")
-                    .font(.system(size: 32))
+                    .font(.appFont(size: 32))
                     .foregroundColor(.mutedText)
                     .accessibilityLabel(NSLocalizedString("add_pet", comment: ""))
                 Text("add_pet")
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.appFont(size: 14, weight: .medium))
                     .foregroundColor(.mutedText)
             }
             .frame(maxWidth: .infinity)
@@ -507,18 +507,18 @@ struct EmptyStateView: View {
                     .fill(Color(UIColor.systemGray6))
                     .frame(width: 100, height: 100)
                 Image(systemName: icon)
-                    .font(.system(size: 40))
+                    .font(.appFont(size: 40))
                     .foregroundColor(.tealAccent)
                     .accessibilityHidden(true)
             }
 
             VStack(spacing: 8) {
                 Text(title)
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.appFont(size: 20, weight: .bold))
                     .foregroundColor(.primary)
 
                 Text(message)
-                    .font(.system(size: 15))
+                    .font(.appFont(size: 15))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
@@ -551,13 +551,13 @@ struct QuickActionButton: View {
                         .fill(color.opacity(0.1))
                         .frame(width: 48, height: 48)
                     Image(systemName: icon)
-                        .font(.system(size: 20))
+                        .font(.appFont(size: 20))
                         .foregroundColor(color)
                         .accessibilityLabel(title)
                 }
 
                 Text(title.uppercased())
-                    .font(.system(size: 11, weight: .bold))
+                    .font(.appFont(size: 11, weight: .bold))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
@@ -623,18 +623,18 @@ struct PetSelectionView: View {
 
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(pet.name)
-                                    .font(.headline)
+                                    .font(.appFont(.headline))
                                     .foregroundColor(.primary)
 
                                 Text(PetLocalizer.localizeSpecies(pet.species))
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .foregroundColor(.secondary)
                             }
 
                             Spacer()
 
                             Image(systemName: "chevron.right")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                                 .accessibilityHidden(true)
                         }

@@ -117,12 +117,12 @@ struct SuccessStoryPromptView: View {
                         .frame(width: 90, height: 90)
 
                     Image(systemName: "heart.fill")
-                        .font(.system(size: 44))
+                        .font(.appFont(size: 44))
                         .foregroundColor(.tealAccent)
                 }
 
                 Text("story_pet_is_home \(pet.name)")
-                    .font(.title)
+                    .font(.appFont(.title))
                     .fontWeight(.bold)
             }
 
@@ -133,7 +133,7 @@ struct SuccessStoryPromptView: View {
                     .aspectRatio(contentMode: .fill)
             } placeholder: {
                 Image(systemName: pet.species.lowercased() == "dog" ? "dog.fill" : "cat.fill")
-                    .font(.system(size: 40))
+                    .font(.appFont(size: 40))
                     .foregroundColor(.secondary)
             }
             .frame(width: 100, height: 100)
@@ -147,11 +147,11 @@ struct SuccessStoryPromptView: View {
             // Message
             VStack(spacing: 12) {
                 Text("story_share_reunion")
-                    .font(.title3)
+                    .font(.appFont(.title3))
                     .fontWeight(.semibold)
 
                 Text("story_inspire_others \(pet.name)")
-                    .font(.body)
+                    .font(.appFont(.body))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 24)
@@ -221,7 +221,7 @@ struct SuccessStoryPromptView: View {
                             .aspectRatio(contentMode: .fill)
                     } placeholder: {
                         Image(systemName: pet.species.lowercased() == "dog" ? "dog.fill" : "cat.fill")
-                            .font(.system(size: 20))
+                            .font(.appFont(size: 20))
                             .foregroundColor(.secondary)
                     }
                     .frame(width: 50, height: 50)
@@ -230,16 +230,16 @@ struct SuccessStoryPromptView: View {
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text(pet.name)
-                            .font(.headline)
+                            .font(.appFont(.headline))
                         Text("story_reunited")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.tealAccent)
                     }
 
                     Spacer()
 
                     Image(systemName: "checkmark.seal.fill")
-                        .font(.title2)
+                        .font(.appFont(.title2))
                         .foregroundColor(.tealAccent)
                 }
                 .padding()
@@ -249,7 +249,7 @@ struct SuccessStoryPromptView: View {
                 // Story Text
                 VStack(alignment: .leading, spacing: 8) {
                     Text("story_your_story")
-                        .font(.headline)
+                        .font(.appFont(.headline))
 
                     TextEditor(text: $storyText)
                         .frame(minHeight: 120)
@@ -264,11 +264,11 @@ struct SuccessStoryPromptView: View {
 
                     HStack {
                         Text("story_share_how \(pet.name)")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                         Spacer()
                         Text("\(storyText.count)/\(maxStoryLength)")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(storyText.count >= maxStoryLength ? .orange : .secondary)
                     }
                 }
@@ -276,7 +276,7 @@ struct SuccessStoryPromptView: View {
                 // Reunion City
                 VStack(alignment: .leading, spacing: 8) {
                     Text("story_city_optional")
-                        .font(.headline)
+                        .font(.appFont(.headline))
 
                     TextField(String(localized: "story_city_placeholder"), text: $reunionCity)
                         .textFieldStyle(.roundedBorder)
@@ -287,9 +287,9 @@ struct SuccessStoryPromptView: View {
                     Toggle(isOn: $isPublic) {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("story_share_publicly")
-                                .font(.headline)
+                                .font(.appFont(.headline))
                             Text("story_share_publicly_desc")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -302,7 +302,7 @@ struct SuccessStoryPromptView: View {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .foregroundColor(.orange)
                         Text(error)
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.orange)
                     }
                     .padding()
@@ -335,7 +335,7 @@ struct SuccessStoryPromptView: View {
                     Image(systemName: "info.circle")
                         .foregroundColor(.secondary)
                     Text("story_privacy_note")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                 }
             }

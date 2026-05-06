@@ -46,7 +46,7 @@ struct PetDetailView: View {
 
                 // Pet Name
                 Text(pet.name)
-                    .font(.system(size: 32, weight: .bold))
+                    .font(.appFont(size: 32, weight: .bold))
 
                 // View Photos Button (under pet name)
                 NavigationLink(destination: PhotoGalleryView(pet: pet)) {
@@ -54,7 +54,7 @@ struct PetDetailView: View {
                         Image(systemName: "photo.on.rectangle")
                         Text(String(format: NSLocalizedString("view_pet_photos", comment: ""), pet.name))
                     }
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.appFont(size: 16, weight: .semibold))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
@@ -135,15 +135,15 @@ struct PetDetailView: View {
                 if pet.medicalInfo != nil || pet.allergies != nil || pet.medications != nil {
                     VStack(alignment: .leading, spacing: 12) {
                         Label("health_information", systemImage: "cross.case.fill")
-                            .font(.headline)
+                            .font(.appFont(.headline))
 
                         if let medical = pet.medicalInfo, !medical.isEmpty {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("medical_notes")
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .fontWeight(.medium)
                                 Text(medical)
-                                    .font(.body)
+                                    .font(.appFont(.body))
                                     .foregroundColor(.secondary)
                             }
                         }
@@ -151,10 +151,10 @@ struct PetDetailView: View {
                         if let allergies = pet.allergies, !allergies.isEmpty {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("allergies")
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .fontWeight(.medium)
                                 Text(allergies)
-                                    .font(.body)
+                                    .font(.appFont(.body))
                                     .foregroundColor(.secondary)
                             }
                         }
@@ -162,10 +162,10 @@ struct PetDetailView: View {
                         if let medications = pet.medications, !medications.isEmpty {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("medications")
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .fontWeight(.medium)
                                 Text(medications)
-                                    .font(.body)
+                                    .font(.appFont(.body))
                                     .foregroundColor(.secondary)
                             }
                         }
@@ -181,15 +181,15 @@ struct PetDetailView: View {
                 if pet.behaviorNotes != nil || pet.uniqueFeatures != nil {
                     VStack(alignment: .leading, spacing: 12) {
                         Label("additional_information", systemImage: "text.bubble.fill")
-                            .font(.headline)
+                            .font(.appFont(.headline))
 
                         if let uniqueFeatures = pet.uniqueFeatures, !uniqueFeatures.isEmpty {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("unique_features")
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .fontWeight(.medium)
                                 Text(uniqueFeatures)
-                                    .font(.body)
+                                    .font(.appFont(.body))
                                     .foregroundColor(.secondary)
                             }
                         }
@@ -197,10 +197,10 @@ struct PetDetailView: View {
                         if let behavior = pet.behaviorNotes, !behavior.isEmpty {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("behavior_notes")
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .fontWeight(.medium)
                                 Text(behavior)
-                                    .font(.body)
+                                    .font(.appFont(.body))
                                     .foregroundColor(.secondary)
                             }
                         }
@@ -220,7 +220,7 @@ struct PetDetailView: View {
                             Image(systemName: "eye")
                             Text(String(format: NSLocalizedString("view_public_profile", comment: ""), pet.name))
                         }
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.appFont(size: 16, weight: .semibold))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)
@@ -353,14 +353,14 @@ struct InfoCard: View {
     var body: some View {
         HStack {
             Label(title, systemImage: icon)
-                .font(.subheadline)
+                .font(.appFont(.subheadline))
                 .foregroundColor(.secondary)
                 .frame(width: 120, alignment: .leading)
 
             Spacer()
 
             Text(value)
-                .font(.body)
+                .font(.appFont(.body))
                 .fontWeight(.medium)
         }
         .padding()
@@ -397,7 +397,7 @@ struct LostButtonStyle: ButtonStyle {
 struct FoundButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.system(size: 16, weight: .semibold))
+            .font(.appFont(size: 16, weight: .semibold))
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)

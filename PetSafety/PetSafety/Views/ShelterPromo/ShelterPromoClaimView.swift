@@ -53,16 +53,16 @@ struct ShelterPromoClaimView: View {
                 // Welcome banner
                 VStack(spacing: 8) {
                     Image(systemName: "heart.fill")
-                        .font(.system(size: 40))
+                        .font(.appFont(size: 40))
                         .foregroundColor(.brandOrange)
 
                     Text(String(format: NSLocalizedString("shelter_promo_welcome_format", comment: ""), promoInfo.shelterName))
-                        .font(.title2)
+                        .font(.appFont(.title2))
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
 
                     Text(String(format: NSLocalizedString("shelter_promo_register_subtitle_format", comment: ""), promoInfo.shelterName))
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                 }
@@ -90,7 +90,7 @@ struct ShelterPromoClaimView: View {
                 if case .error(let message) = viewModel.state {
                     Text(message)
                         .foregroundColor(.red)
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .padding()
                 }
             }
@@ -111,7 +111,7 @@ struct ShelterPromoClaimView: View {
                             Text(pet.name)
                                 .fontWeight(.medium)
                             Text(pet.species ?? "")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                         Spacer()
@@ -156,7 +156,7 @@ struct ShelterPromoClaimView: View {
             Group {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(String(localized: "shelter_promo_name_label_required"))
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                     TextField(String(localized: "shelter_promo_pet_name_placeholder"), text: $petName)
                         .textFieldStyle(.roundedBorder)
@@ -164,7 +164,7 @@ struct ShelterPromoClaimView: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(String(localized: "shelter_promo_species_label_required"))
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                     Picker(String(localized: "shelter_promo_species_label_required"), selection: $species) {
                         Text(String(localized: "shelter_promo_select_placeholder")).tag("")
@@ -179,7 +179,7 @@ struct ShelterPromoClaimView: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(String(localized: "breed"))
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                     TextField(String(localized: "breed"), text: $breed)
                         .textFieldStyle(.roundedBorder)
@@ -187,7 +187,7 @@ struct ShelterPromoClaimView: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(String(localized: "color"))
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                     TextField(String(localized: "color"), text: $color)
                         .textFieldStyle(.roundedBorder)
@@ -195,7 +195,7 @@ struct ShelterPromoClaimView: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(String(localized: "sex_label"))
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                     Picker(String(localized: "sex_label"), selection: $sex) {
                         Text(String(localized: "shelter_promo_select_placeholder")).tag("")
@@ -254,21 +254,21 @@ struct ShelterPromoClaimView: View {
         ScrollView {
             VStack(spacing: 24) {
                 Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 60))
+                    .font(.appFont(size: 60))
                     .foregroundColor(.green)
 
                 Text(String(localized: "shelter_promo_claim_success_title"))
-                    .font(.title)
+                    .font(.appFont(.title))
                     .fontWeight(.bold)
 
                 VStack(spacing: 12) {
                     if let pet = result.pet {
                         Label(pet.name, systemImage: "pawprint.fill")
-                            .font(.headline)
+                            .font(.appFont(.headline))
                     }
                     if let tag = result.tag {
                         Label(tag.qrCode, systemImage: "qrcode")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                     }
                     if let details = result.promoDetails {
@@ -276,7 +276,7 @@ struct ShelterPromoClaimView: View {
                             String(format: NSLocalizedString("shelter_promo_active_until_format", comment: ""), formatDate(details.trialEndDate)),
                             systemImage: "checkmark.seal.fill"
                         )
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .foregroundColor(.brandOrange)
                     }
                 }

@@ -180,6 +180,11 @@
 "share_owner_notified" = "Dono notificado!";
 "share_on_their_way" = "Está a caminho!";
 "share_notifying" = "A notificar o dono…";
+"share_success_title" = "Obrigado pela tua ajuda!";
+"share_success_subtitle %@" = "A família de %@ foi notificada de que o encontraste.";
+"share_success_what_next" = "O que acontece a seguir";
+"share_success_step_contact" = "O dono entrará em contacto contigo o quanto antes usando os dados do ecrã anterior.";
+"share_success_step_safe" = "Por favor, mantém o animal em segurança até o dono chegar.";
 "share_notify_with_location" = "Partilhar e notificar o dono";
 "share_privacy_note" = "A tua localização é partilhada com o dono.";
 "share_found_pet %@" = "%@ encontrado!";

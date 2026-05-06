@@ -55,14 +55,14 @@ struct CreateAlertView: View {
         VStack(spacing: 24) {
             Spacer()
             Image(systemName: "exclamationmark.triangle.fill")
-                .font(.system(size: 48))
+                .font(.appFont(size: 48))
                 .foregroundColor(.brandOrange)
             Text("mark_lost_starter_notice")
-                .font(.title3)
+                .font(.appFont(.title3))
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
             Text("mark_lost_upgrade_prompt")
-                .font(.body)
+                .font(.appFont(.body))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
             Spacer()
@@ -131,7 +131,7 @@ struct CreateAlertView: View {
                             Image(systemName: "location.fill")
                                 .foregroundColor(.blue)
                             Text(String(format: NSLocalizedString("coordinates_display", comment: ""), String(format: "%.6f", loc.latitude), String(format: "%.6f", loc.longitude)))
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                     } else {
@@ -139,7 +139,7 @@ struct CreateAlertView: View {
                             ProgressView()
                                 .scaleEffect(0.8)
                             Text("mark_lost_getting_location")
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -150,11 +150,11 @@ struct CreateAlertView: View {
                             .foregroundColor(.tealAccent)
                         if let address = registeredAddress {
                             Text(address)
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .foregroundColor(.secondary)
                         } else {
                             Text("mark_lost_no_address")
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .foregroundColor(.red)
                         }
                     }

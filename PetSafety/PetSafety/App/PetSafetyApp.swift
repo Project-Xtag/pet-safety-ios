@@ -152,6 +152,14 @@ struct PetSafetyApp: App {
                                     await subscriptionViewModel.loadCurrentSubscription()
                                 }
                             }
+
+                            // Re-attempt FCM token fetch + backend registration.
+                            // Idempotent: same token across launches; backend
+                            // dedupes by token string. Defends against cold-
+                            // launch races where Messaging.delegate never
+                            // delivered the token, OR a previous auth-time
+                            // register call failed silently.
+                            AppDelegate.fetchAndRegisterFCMToken()
                         }
                     }
             }

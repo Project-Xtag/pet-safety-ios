@@ -11,7 +11,7 @@ struct NotificationSettingsView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("notif_push")
                             Text("notif_push_desc")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                     } icon: {
@@ -26,7 +26,7 @@ struct NotificationSettingsView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("notif_email")
                             Text("notif_email_desc")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                     } icon: {
@@ -41,7 +41,7 @@ struct NotificationSettingsView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("notif_sms")
                             Text("notif_sms_desc")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                     } icon: {
@@ -57,7 +57,7 @@ struct NotificationSettingsView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("notif_missing_pet_alerts")
                         Text("notif_missing_pet_alerts_subtitle")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }

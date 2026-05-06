@@ -30,12 +30,12 @@ struct ContactsView: View {
                 // Info banner
                 VStack(alignment: .leading, spacing: 8) {
                     Label("contacts_settings", systemImage: "info.circle")
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .fontWeight(.semibold)
                         .foregroundColor(.brandOrange)
 
                     Text("contacts_info_full")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -85,7 +85,7 @@ struct ContactsView: View {
         // Email Section
         VStack(alignment: .leading, spacing: 12) {
             Text("contacts_email_section")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.appFont(size: 17, weight: .semibold))
 
             VStack(spacing: 0) {
                 if !primaryEmail.isEmpty || !secondaryEmail.isEmpty {
@@ -121,7 +121,7 @@ struct ContactsView: View {
         // Phone Section
         VStack(alignment: .leading, spacing: 12) {
             Text("contacts_phone_section")
-                .font(.system(size: 17, weight: .semibold))
+                .font(.appFont(size: 17, weight: .semibold))
 
             VStack(spacing: 0) {
                 if !primaryPhone.isEmpty || !secondaryPhone.isEmpty {
@@ -159,7 +159,7 @@ struct ContactsView: View {
             HStack {
                 Spacer()
                 Text("contacts_edit_title")
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.appFont(size: 16, weight: .semibold))
                     .foregroundColor(.white)
                 Spacer()
             }
@@ -225,7 +225,7 @@ struct ContactsView: View {
                             .foregroundColor(.white)
                     } else {
                         Text("save_changes")
-                            .font(.system(size: 16, weight: .semibold))
+                            .font(.appFont(size: 16, weight: .semibold))
                             .foregroundColor(.white)
                     }
                     Spacer()
@@ -262,7 +262,7 @@ struct ContactsView: View {
     ) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(header)
-                .font(.system(size: 13, weight: .semibold))
+                .font(.appFont(size: 13, weight: .semibold))
                 .foregroundColor(.secondary)
                 .textCase(.uppercase)
 
@@ -283,7 +283,7 @@ struct ContactsView: View {
             .cornerRadius(16)
 
             Text(footer)
-                .font(.caption)
+                .font(.appFont(.caption))
                 .foregroundColor(.secondary)
         }
     }
@@ -373,7 +373,7 @@ struct ContactRowView: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(value)
-                    .font(.body)
+                    .font(.appFont(.body))
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -381,7 +381,7 @@ struct ContactRowView: View {
                 HStack(spacing: 8) {
                     if isPrimary {
                         Text("contacts_primary_badge")
-                            .font(.system(size: 9, weight: .bold))
+                            .font(.appFont(size: 9, weight: .bold))
                             .foregroundColor(.white)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
@@ -389,7 +389,7 @@ struct ContactRowView: View {
                             .cornerRadius(4)
                     }
                     Text(isVisible ? "contacts_visible_on_tag" : "contacts_hidden_badge")
-                        .font(.caption2)
+                        .font(.appFont(.caption2))
                         .foregroundColor(.secondary)
                     Spacer(minLength: 0)
                 }
@@ -405,11 +405,11 @@ struct EmptyContactView: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: type.contains(NSLocalizedString("email", comment: "").lowercased()) ? "envelope" : "phone")
-                .font(.system(size: 32))
+                .font(.appFont(size: 32))
                 .foregroundColor(.secondary)
 
             Text(String(format: NSLocalizedString("contacts_no_type_added", comment: ""), type))
-                .font(.subheadline)
+                .font(.appFont(.subheadline))
                 .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity)

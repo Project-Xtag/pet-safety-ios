@@ -180,6 +180,11 @@
 "share_owner_notified" = "Stăpân notificat!";
 "share_on_their_way" = "Este pe drum!";
 "share_notifying" = "Se notifică stăpânul…";
+"share_success_title" = "Mulțumim pentru ajutor!";
+"share_success_subtitle %@" = "Familia lui %@ a fost anunțată că l-ai găsit.";
+"share_success_what_next" = "Ce urmează";
+"share_success_step_contact" = "Proprietarul te va contacta cât mai curând posibil, folosind datele de contact din ecranul anterior.";
+"share_success_step_safe" = "Te rugăm să ai grijă de el până când ajunge proprietarul.";
 "share_notify_with_location" = "Partajează și notifică stăpânul";
 "share_privacy_note" = "Locația ta este partajată cu stăpânul pentru a ajuta la reunire.";
 "share_found_pet %@" = "%@ găsit!";

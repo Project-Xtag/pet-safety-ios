@@ -15,18 +15,18 @@ struct OfflineIndicator: View {
                     // Status icon
                     Image(systemName: statusIcon)
                         .foregroundColor(statusColor)
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.appFont(size: 16, weight: .semibold))
                         .accessibilityLabel(statusTitle)
 
                     // Status text
                     VStack(alignment: .leading, spacing: 2) {
                         Text(statusTitle)
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .fontWeight(.semibold)
                             .foregroundColor(.primary)
 
                         Text(statusSubtitle)
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
 
@@ -35,7 +35,7 @@ struct OfflineIndicator: View {
                     // Expand/collapse button
                     Button(action: { withAnimation { isExpanded.toggle() } }) {
                         Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                            .font(.system(size: 12, weight: .semibold))
+                            .font(.appFont(size: 12, weight: .semibold))
                             .foregroundColor(.secondary)
                             .accessibilityHidden(true)
                     }
@@ -55,7 +55,7 @@ struct OfflineIndicator: View {
                                 Image(systemName: "tray.full")
                                     .foregroundColor(.orange)
                                 Text("offline_actions_queued \(syncService.pendingActionsCount)")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                             }
                         }
 
@@ -66,7 +66,7 @@ struct OfflineIndicator: View {
                                     .foregroundColor(.secondary)
                                     .accessibilityLabel(String(localized: "offline_last_sync_label"))
                                 Text("offline_last_synced \(syncService.timeSinceLastSync)")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                             }
                         }
 
@@ -85,7 +85,7 @@ struct OfflineIndicator: View {
                                         Image(systemName: "arrow.clockwise")
                                     }
                                     Text(syncService.isSyncing ? String(localized: "syncing") : String(localized: "offline_sync_now"))
-                                        .font(.caption)
+                                        .font(.appFont(.caption))
                                         .fontWeight(.medium)
                                 }
                                 .padding(.horizontal, 12)
@@ -100,7 +100,7 @@ struct OfflineIndicator: View {
                         // Sync status message
                         if !syncService.syncStatus.isEmpty {
                             Text(syncService.syncStatus)
-                                .font(.caption2)
+                                .font(.appFont(.caption2))
                                 .foregroundColor(.secondary)
                                 .italic()
                         }
@@ -180,12 +180,12 @@ struct OfflineBadge: View {
         if !networkMonitor.isConnected || syncService.pendingActionsCount > 0 {
             HStack(spacing: 6) {
                 Image(systemName: icon)
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.appFont(size: 12, weight: .semibold))
                     .accessibilityHidden(true)
 
                 if syncService.pendingActionsCount > 0 {
                     Text("\(syncService.pendingActionsCount)")
-                        .font(.caption2)
+                        .font(.appFont(.caption2))
                         .fontWeight(.bold)
                 }
             }

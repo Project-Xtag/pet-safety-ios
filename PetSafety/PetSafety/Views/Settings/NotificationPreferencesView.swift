@@ -9,7 +9,7 @@ struct NotificationPreferencesView: View {
             Form {
                 Section {
                     Text("notif_pref_intro")
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .foregroundColor(.secondary)
                         .padding(.vertical, 4)
                 }
@@ -19,9 +19,9 @@ struct NotificationPreferencesView: View {
                         Label {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("notif_pref_email")
-                                    .font(.body)
+                                    .font(.appFont(.body))
                                 Text("notif_pref_email_desc")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                             }
                         } icon: {
@@ -35,9 +35,9 @@ struct NotificationPreferencesView: View {
                         Label {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("notif_pref_sms")
-                                    .font(.body)
+                                    .font(.appFont(.body))
                                 Text("notif_pref_sms_desc")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                             }
                         } icon: {
@@ -51,9 +51,9 @@ struct NotificationPreferencesView: View {
                         Label {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("notif_pref_push")
-                                    .font(.body)
+                                    .font(.appFont(.body))
                                 Text("notif_pref_push_desc")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                             }
                         } icon: {
@@ -66,7 +66,7 @@ struct NotificationPreferencesView: View {
 
                 Section {
                     Text("notif_pref_warning")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                         .padding(.vertical, 4)
                 }

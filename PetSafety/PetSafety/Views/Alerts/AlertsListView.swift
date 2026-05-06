@@ -105,7 +105,7 @@ struct AlertRowView: View {
             VStack(alignment: .leading, spacing: 4) {
                 if let pet = alert.pet {
                     Text(pet.name)
-                        .font(.headline)
+                        .font(.appFont(.headline))
                 }
 
                 HStack {
@@ -114,20 +114,20 @@ struct AlertRowView: View {
                         .frame(width: 8, height: 8)
 
                     Text(localizedStatus)
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .foregroundColor(statusColor)
                 }
 
                 if let location = alert.lastSeenLocation {
                     Text(location)
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                         .lineLimit(1)
                 }
 
                 if let sightings = alert.sightings, !sightings.isEmpty {
                     Text(sightings.count == 1 ? String(localized: "sighting_count_singular") : String(format: NSLocalizedString("sighting_count_plural", comment: ""), sightings.count))
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.blue)
                 }
             }

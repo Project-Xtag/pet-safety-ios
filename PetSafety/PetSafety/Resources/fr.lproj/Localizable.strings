@@ -180,6 +180,11 @@
 "share_owner_notified" = "Propriétaire notifié !";
 "share_on_their_way" = "Il est en chemin !";
 "share_notifying" = "Notification du propriétaire…";
+"share_success_title" = "Merci de votre aide !";
+"share_success_subtitle %@" = "La famille de %@ a été informée que vous l'avez trouvé(e).";
+"share_success_what_next" = "Et maintenant ?";
+"share_success_step_contact" = "Le propriétaire vous contactera dès que possible avec les coordonnées de l'écran précédent.";
+"share_success_step_safe" = "Veuillez garder l'animal en sécurité jusqu'à l'arrivée du propriétaire.";
 "share_notify_with_location" = "Partager et notifier le propriétaire";
 "share_privacy_note" = "Ta localisation est partagée avec le propriétaire pour faciliter les retrouvailles.";
 "share_found_pet %@" = "%@ trouvé !";

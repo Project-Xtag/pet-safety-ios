@@ -2,6 +2,7 @@ import UIKit
 import UserNotifications
 import FirebaseCore
 import FirebaseMessaging
+import Sentry
 import os
 
 private let delegateLog = Logger(subsystem: "com.petsafety.PetSafety", category: "AppDelegate")
@@ -104,6 +105,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let tokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("APNs device token: \(tokenString)")
         #endif
+
+        // Belt-and-braces: explicitly request the current FCM token instead
+        // of waiting for the MessagingDelegate callback. We've seen prod
+        // installs where Allow Notifications was ON but no FCM token ever
+        // hit the backend — the delegate didn't fire on cold launch and
+        // there was no fallback. With APNs now bound, Firebase has every-
+        // thing it needs to mint an FCM token; if it errors, Sentry sees
+        // the failure instead of it disappearing into a DEBUG-only print.
+        AppDelegate.fetchAndRegisterFCMToken()
     }
 
     func application(
@@ -113,6 +123,64 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         #if DEBUG
         print("Failed to register for remote notifications: \(error)")
         #endif
+
+        // APNs registration failure was previously DEBUG-only print; in
+        // prod that meant a permission-on / token-never-arrives state was
+        // completely invisible. Capture to Sentry so the silent path is
+        // diagnosable. Common causes: missing aps-environment entitlement,
+        // sandbox/prod env mismatch on TestFlight, network unreachable
+        // during the APNs handshake.
+        if SentrySDK.isEnabled {
+            SentrySDK.capture(error: error) { scope in
+                scope.setTag(value: "apns_register_failed", key: "operation")
+            }
+        }
+    }
+
+    // MARK: - FCM token: explicit fetch + register
+
+    /// Fetch the current FCM token from Firebase and register it with the
+    /// backend. Called from `didRegisterForRemoteNotificationsWithDevice-
+    /// Token` after APNs is bound, and from `scenePhase == .active` on
+    /// every authenticated foreground — defends against the cold-launch
+    /// race where MessagingDelegate's `didReceiveRegistrationToken`
+    /// doesn't fire and the user ends up with permission ON but no token
+    /// ever sent to the backend.
+    ///
+    /// Idempotent: Firebase returns the same FCM token until it rotates;
+    /// the backend dedupes by token string, so re-registering the same
+    /// token on every foreground is cheap.
+    static func fetchAndRegisterFCMToken() {
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                #if DEBUG
+                print("FCM token fetch failed: \(error)")
+                #endif
+                if SentrySDK.isEnabled {
+                    SentrySDK.capture(error: error) { scope in
+                        scope.setTag(value: "fcm_token_fetch_failed", key: "operation")
+                    }
+                }
+                return
+            }
+            guard let token = token, !token.isEmpty else { return }
+
+            _ = KeychainService.shared.saveFCMToken(token)
+
+            if KeychainService.shared.isAuthenticated {
+                Task {
+                    await FCMService.shared.registerToken(token, deviceName: AppDelegate.staticDeviceName())
+                }
+            }
+        }
+    }
+
+    /// Same shape as the instance `getDeviceName()` but callable from the
+    /// static `fetchAndRegisterFCMToken` path.
+    private static func staticDeviceName() -> String {
+        let model = UIDevice.current.model
+        let systemVersion = UIDevice.current.systemVersion
+        return "\(model) iOS \(systemVersion)"
     }
 }
 

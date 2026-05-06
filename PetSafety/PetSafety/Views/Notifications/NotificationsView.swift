@@ -42,7 +42,7 @@ struct NotificationsView: View {
                         Task { await viewModel.markAllAsRead() }
                     } label: {
                         Text("mark_all_read")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.brandOrange)
                     }
                 }
@@ -66,13 +66,13 @@ struct NotificationsView: View {
     private var emptyState: some View {
         VStack(spacing: 16) {
             Image(systemName: "bell.fill")
-                .font(.system(size: 60))
+                .font(.appFont(size: 60))
                 .foregroundColor(.secondary)
             Text("no_notifications")
-                .font(.title2)
+                .font(.appFont(.title2))
                 .fontWeight(.bold)
             Text("no_notifications_desc")
-                .font(.body)
+                .font(.appFont(.body))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
@@ -89,7 +89,7 @@ struct NotificationRow: View {
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: iconName(for: notification.type))
-                .font(.system(size: 16))
+                .font(.appFont(size: 16))
                 .foregroundColor(iconColor(for: notification.type))
                 .frame(width: 36, height: 36)
                 .background(iconColor(for: notification.type).opacity(0.12))
@@ -98,7 +98,7 @@ struct NotificationRow: View {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text(notification.title)
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .fontWeight(notification.isRead ? .regular : .bold)
 
                     Spacer()
@@ -115,13 +115,13 @@ struct NotificationRow: View {
                 // showed the truncated preview and the user couldn't read
                 // the rest.
                 Text(notification.body)
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
                     .lineLimit(expanded ? nil : 2)
                     .fixedSize(horizontal: false, vertical: expanded)
 
                 Text(formatDate(notification.createdAt))
-                    .font(.caption2)
+                    .font(.appFont(.caption2))
                     .foregroundColor(.secondary.opacity(0.7))
             }
         }

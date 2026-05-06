@@ -180,6 +180,11 @@
 "share_owner_notified" = "Páníček informován!";
 "share_on_their_way" = "Je na cestě!";
 "share_notifying" = "Informování páníčka…";
+"share_success_title" = "Děkujeme za pomoc!";
+"share_success_subtitle %@" = "Informovali jsme rodinu mazlíčka %@, že jsi ho našel.";
+"share_success_what_next" = "Co bude dál";
+"share_success_step_contact" = "Majitel se s tebou co nejdříve spojí pomocí kontaktů z předchozí obrazovky.";
+"share_success_step_safe" = "Prosíme, postarej se o mazlíčka, dokud majitel nedorazí.";
 "share_notify_with_location" = "Sdílet a informovat páníčka";
 "share_privacy_note" = "Tvá poloha je sdílena s páníčkem, aby se mu pomohlo shledat se s mazlíčkem.";
 "share_found_pet %@" = "%@ nalezen!";

@@ -17,7 +17,7 @@ struct MissingAlertsView: View {
                     ProgressView()
                         .scaleEffect(1.2)
                     Text("alerts_loading")
-                        .font(.system(size: 15))
+                        .font(.appFont(size: 15))
                         .foregroundColor(.mutedText)
                     Spacer()
                 }
@@ -72,17 +72,17 @@ struct MissingAlertRowView: View {
                 // Pet Name
                 if let pet = alert.pet {
                     Text(pet.name)
-                        .font(.headline)
+                        .font(.appFont(.headline))
                         .foregroundColor(.primary)
                 }
 
                 // Status Badge
                 HStack(spacing: 4) {
                     Image(systemName: "exclamationmark.triangle.fill")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.red)
                     Text("alert_status_missing")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .fontWeight(.semibold)
                         .foregroundColor(.red)
                 }
@@ -94,7 +94,7 @@ struct MissingAlertRowView: View {
                 // Missing Since
                 if let createdAt = alert.createdAt.toDate() {
                     Text("alert_missing_since \(createdAt.formatted(date: .abbreviated, time: .omitted))")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                 }
 
@@ -102,9 +102,9 @@ struct MissingAlertRowView: View {
                 if let location = alert.lastSeenLocation {
                     HStack(spacing: 4) {
                         Image(systemName: "location.fill")
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                         Text(location)
-                            .font(.caption)
+                            .font(.appFont(.caption))
                     }
                     .foregroundColor(.secondary)
                     .lineLimit(1)
@@ -114,7 +114,7 @@ struct MissingAlertRowView: View {
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.caption)
+                .font(.appFont(.caption))
                 .foregroundColor(.secondary)
         }
         .padding(.vertical, 8)
@@ -163,7 +163,7 @@ struct MissingAlertsMapView: View {
                 VStack {
                     Spacer()
                     Text("alerts_no_missing_nearby")
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .foregroundColor(.secondary)
                         .padding()
                         .background(.ultraThinMaterial)
@@ -213,7 +213,7 @@ struct PetMapMarker: View {
                 } placeholder: {
                     Image(systemName: "pawprint.fill")
                         .foregroundColor(.white)
-                        .font(.system(size: 16))
+                        .font(.appFont(size: 16))
                 }
                 .frame(width: isSelected ? 60 : 50, height: isSelected ? 60 : 50)
                 .clipShape(Circle())
@@ -226,7 +226,7 @@ struct PetMapMarker: View {
 
             // Arrow pointing down
             Image(systemName: "arrowtriangle.down.fill")
-                .font(.system(size: 12))
+                .font(.appFont(size: 12))
                 .foregroundColor(.red)
                 .offset(y: -6)
         }

@@ -104,7 +104,7 @@ struct ReferralView: View {
                 Section {
                     Text(errorMessage)
                         .foregroundColor(.red)
-                        .font(.footnote)
+                        .font(.appFont(.footnote))
                 }
             }
         }
@@ -151,7 +151,7 @@ struct ReferralView: View {
 
             if let expiresAt {
                 Text(String(format: String(localized: "referral_expires %@"), formatExpiryDate(expiresAt)))
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
         }
@@ -182,18 +182,18 @@ struct ReferralView: View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(referral.refereeEmail ?? String(localized: "referral_pending"))
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                 Text(statusText(referral.status))
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(statusColor(referral.status))
                 if let redeemed = referral.redeemedAt {
                     Text(String(format: NSLocalizedString("referral_redeemed_on", comment: ""), formatExpiryDate(redeemed)))
-                        .font(.caption2)
+                        .font(.appFont(.caption2))
                         .foregroundColor(.secondary)
                 }
                 if let rewarded = referral.rewardedAt {
                     Text(String(format: NSLocalizedString("referral_rewarded_on", comment: ""), formatExpiryDate(rewarded)))
-                        .font(.caption2)
+                        .font(.appFont(.caption2))
                         .foregroundColor(.green)
                 }
             }

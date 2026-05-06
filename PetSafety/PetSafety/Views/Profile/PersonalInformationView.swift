@@ -65,7 +65,7 @@ struct PersonalInformationView: View {
                 Section(header: Text("profile_address"), footer: Text("address_shipping_footer")) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("address_street")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                         TextField(NSLocalizedString("address_street_placeholder", comment: ""), text: $streetAddress)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -74,7 +74,7 @@ struct PersonalInformationView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text("address_line2")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                         TextField(NSLocalizedString("address_line2_placeholder", comment: ""), text: $addressLine2)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -83,7 +83,7 @@ struct PersonalInformationView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text("address_city")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                         TextField(NSLocalizedString("address_city_placeholder", comment: ""), text: $city)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -92,7 +92,7 @@ struct PersonalInformationView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text("address_postal")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                         TextField(NSLocalizedString("address_postal_placeholder", comment: ""), text: $postalCode)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -102,7 +102,7 @@ struct PersonalInformationView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text("address_country")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                         Button(action: { showCountryPicker = true }) {
                             HStack {
@@ -110,7 +110,7 @@ struct PersonalInformationView: View {
                                     .foregroundColor(country.isEmpty ? .secondary : .primary)
                                 Spacer()
                                 Image(systemName: "chevron.down")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                             }
                             .padding()
@@ -184,7 +184,7 @@ struct PersonalInformationView: View {
                     } else {
                         HStack {
                             Image(systemName: "house.circle")
-                                .font(.system(size: 24))
+                                .font(.appFont(size: 24))
                                 .foregroundColor(.secondary)
                             Text("address_no_address")
                                 .foregroundColor(.secondary)

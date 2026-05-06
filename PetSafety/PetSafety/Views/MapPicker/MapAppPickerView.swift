@@ -22,7 +22,7 @@ struct MapAppPickerView: View {
                     Section {
                         Label {
                             Text("map_approximate_notice")
-                                .font(.callout)
+                                .font(.appFont(.callout))
                                 .foregroundStyle(.orange)
                         } icon: {
                             Image(systemName: "exclamationmark.triangle.fill")
@@ -38,7 +38,7 @@ struct MapAppPickerView: View {
                             .foregroundStyle(.secondary)
                         Spacer()
                         Text(formatCoordinates())
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundStyle(.secondary)
                     }
                 }

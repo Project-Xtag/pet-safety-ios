@@ -197,7 +197,7 @@ struct BreedPickerButton: View {
                         .foregroundColor(breed.isEmpty ? .secondary : .primary)
                     Spacer()
                     Image(systemName: "chevron.right")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                 }
             }

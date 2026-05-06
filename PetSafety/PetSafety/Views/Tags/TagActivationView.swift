@@ -124,7 +124,7 @@ struct TagActivationView: View {
             ProgressView()
                 .scaleEffect(1.5)
             Text("tag_loading_pets")
-                .font(.body)
+                .font(.appFont(.body))
                 .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -138,17 +138,17 @@ struct TagActivationView: View {
 
                 // Celebration
                 Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 80))
+                    .font(.appFont(size: 80))
                     .foregroundColor(.tealAccent)
 
                 if let pet = selectedPet {
                     Text("tag_activated_for \(pet.name)")
-                        .font(.title2)
+                        .font(.appFont(.title2))
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
 
                     Text("pet_now_protected")
-                        .font(.body)
+                        .font(.appFont(.body))
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
 
@@ -159,7 +159,7 @@ struct TagActivationView: View {
                             .aspectRatio(contentMode: .fill)
                     } placeholder: {
                         Image(systemName: pet.species.lowercased() == "dog" ? "dog.fill" : "cat.fill")
-                            .font(.system(size: 40))
+                            .font(.appFont(size: 40))
                             .foregroundColor(.secondary)
                     }
                     .frame(width: 100, height: 100)
@@ -175,7 +175,7 @@ struct TagActivationView: View {
                             Image(systemName: "tag.fill")
                                 .foregroundColor(Color("BrandColor"))
                             Text("more_tags_to_setup")
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .fontWeight(.semibold)
                         }
 
@@ -187,11 +187,11 @@ struct TagActivationView: View {
                                     Image(systemName: "pawprint.fill")
                                         .foregroundColor(Color("BrandColor"))
                                     Text("setup_pet_tag \(item.petName ?? "Pet")")
-                                        .font(.subheadline)
+                                        .font(.appFont(.subheadline))
                                         .fontWeight(.medium)
                                     Spacer()
                                     Image(systemName: "chevron.right")
-                                        .font(.caption)
+                                        .font(.appFont(.caption))
                                         .foregroundColor(.secondary)
                                 }
                                 .padding()
@@ -227,11 +227,11 @@ struct TagActivationView: View {
     private var allDoneView: some View {
         VStack(spacing: 16) {
             Text("thank_you_senra")
-                .font(.headline)
+                .font(.appFont(.headline))
                 .foregroundColor(.primary)
 
             Text("whats_next")
-                .font(.subheadline)
+                .font(.appFont(.subheadline))
                 .foregroundColor(.secondary)
 
             NextStepCard(icon: "cross.case.fill", text: String(localized: "register_your_vet")) {
@@ -251,23 +251,23 @@ struct TagActivationView: View {
             Spacer()
 
             Image(systemName: "pawprint.fill")
-                .font(.system(size: 60))
+                .font(.appFont(size: 60))
                 .foregroundColor(Color("BrandColor"))
 
             // Show order pet names if available
             if !orderItems.isEmpty {
                 Text("setup_your_tags")
-                    .font(.title2)
+                    .font(.appFont(.title2))
                     .fontWeight(.bold)
 
                 Text("setup_your_tags_subtitle")
-                    .font(.body)
+                    .font(.appFont(.body))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
 
                 Text("tap_pet_name_hint")
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .foregroundColor(Color("BrandColor"))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
@@ -284,10 +284,10 @@ struct TagActivationView: View {
                             Image(systemName: "pawprint.fill")
                                 .foregroundColor(Color("BrandColor"))
                             Text(petName)
-                                .font(.headline)
+                                .font(.appFont(.headline))
                             Spacer()
                             Text("ready_to_setup")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
@@ -303,11 +303,11 @@ struct TagActivationView: View {
                 }
             } else {
                 Text("tag_no_pets")
-                    .font(.title2)
+                    .font(.appFont(.title2))
                     .fontWeight(.bold)
 
                 Text("tag_no_pets_message")
-                    .font(.body)
+                    .font(.appFont(.body))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
@@ -342,11 +342,11 @@ struct TagActivationView: View {
             // Tag Info Header
             VStack(spacing: 12) {
                 Image(systemName: "qrcode")
-                    .font(.system(size: 40))
+                    .font(.appFont(size: 40))
                     .foregroundColor(Color("BrandColor"))
 
                 Text("tag_select_pet")
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .foregroundColor(.secondary)
             }
             .padding(.vertical, 20)
@@ -359,7 +359,7 @@ struct TagActivationView: View {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundColor(.orange)
                     Text(error)
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .foregroundColor(.orange)
                 }
                 .padding()
@@ -389,7 +389,7 @@ struct TagActivationView: View {
                         if !matchingPets.isEmpty || !unmatchedNames.isEmpty {
                             HStack {
                                 Text("pets_from_order")
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .fontWeight(.semibold)
                                     .foregroundColor(.secondary)
                                 Spacer()
@@ -421,7 +421,7 @@ struct TagActivationView: View {
                         if !otherPets.isEmpty {
                             HStack {
                                 Text("other_pets")
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .fontWeight(.semibold)
                                     .foregroundColor(.secondary)
                                 Spacer()
@@ -481,7 +481,7 @@ struct TagActivationView: View {
                 .opacity(selectedPet == nil ? 0.6 : 1.0)
 
                 Text("tag_link_message")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
             .padding(.horizontal, 24)
@@ -555,16 +555,16 @@ private struct NextStepCard: View {
         Button(action: action) {
             HStack(spacing: 14) {
                 Image(systemName: icon)
-                    .font(.system(size: 18))
+                    .font(.appFont(size: 18))
                     .foregroundColor(Color("BrandColor"))
                     .frame(width: 24)
                 Text(text)
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .fontWeight(.medium)
                     .foregroundColor(.primary)
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
             .padding()
@@ -604,12 +604,12 @@ struct TagPetSelectionRow: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(pet.name)
-                        .font(.headline)
+                        .font(.appFont(.headline))
                         .foregroundColor(.primary)
 
                     if let badge = badge {
                         Text(badge)
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                             .fontWeight(.medium)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
@@ -625,7 +625,7 @@ struct TagPetSelectionRow: View {
                             Text(breed)
                         }
                     }
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .foregroundColor(.secondary)
                 }
 
@@ -669,7 +669,7 @@ struct UnmatchedPetCard: View {
     var body: some View {
         HStack(spacing: 16) {
             Image(systemName: "pawprint.fill")
-                .font(.system(size: 24))
+                .font(.appFont(size: 24))
                 .foregroundColor(.orange)
                 .frame(width: 56, height: 56)
                 .background(Color.orange.opacity(0.1))
@@ -677,11 +677,11 @@ struct UnmatchedPetCard: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(petName)
-                    .font(.headline)
+                    .font(.appFont(.headline))
                     .foregroundColor(.primary)
 
                 Text("needs_profile")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .fontWeight(.medium)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -694,7 +694,7 @@ struct UnmatchedPetCard: View {
 
             Button(action: onCreateProfile) {
                 Text("create_profile_first")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .fontWeight(.semibold)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)

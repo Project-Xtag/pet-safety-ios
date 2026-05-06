@@ -42,15 +42,15 @@ struct QuickMarkFoundView: View {
                             // Pet Info
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(pet.name)
-                                    .font(.headline)
+                                    .font(.appFont(.headline))
                                     .foregroundColor(.primary)
 
                                 Text(PetLocalizer.localizeSpecies(pet.species))
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .foregroundColor(.secondary)
 
                                 Text("quick_found_currently_missing")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.orange)
                             }
 

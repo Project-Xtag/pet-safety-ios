@@ -120,23 +120,23 @@ struct DeepLinkLoginPromptView: View {
                         .fill(Color.brandOrange.opacity(0.1))
                         .frame(width: 100, height: 100)
                     Image(systemName: "person.crop.circle.badge.exclamationmark")
-                        .font(.system(size: 48))
+                        .font(.appFont(size: 48))
                         .foregroundColor(.brandOrange)
                 }
 
                 Text(String(localized: "login_required"))
-                    .font(.system(size: 22, weight: .bold))
+                    .font(.appFont(size: 22, weight: .bold))
                     .foregroundColor(.primary)
 
                 Text(String(localized: "login_required_activate_tag"))
-                    .font(.system(size: 15))
+                    .font(.appFont(size: 15))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
 
                 VStack(spacing: 8) {
                     Text(String(localized: "tag_code_label"))
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.appFont(size: 12, weight: .medium))
                         .foregroundColor(.mutedText)
 
                     Text(tagCode)
@@ -149,7 +149,7 @@ struct DeepLinkLoginPromptView: View {
                 .padding(.vertical)
 
                 Text(String(localized: "login_activate_instructions"))
-                    .font(.system(size: 13))
+                    .font(.appFont(size: 13))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
@@ -328,9 +328,9 @@ struct TabBarItem: View {
         Button(action: action) {
             VStack(spacing: 4) {
                 Image(systemName: icon)
-                    .font(.system(size: 20))
+                    .font(.appFont(size: 20))
                 Text(title)
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.appFont(size: 10, weight: .medium))
             }
             .foregroundColor(isSelected ? .brandOrange : .mutedText)
             .frame(maxWidth: .infinity)
@@ -405,7 +405,7 @@ struct DeepLinkScannedPetView: View {
                             Circle()
                                 .fill(Color.tealAccent.opacity(0.2))
                             Image(systemName: "pawprint.fill")
-                                .font(.system(size: 50))
+                                .font(.appFont(size: 50))
                                 .foregroundColor(.tealAccent)
                                 .accessibilityLabel(String(localized: "accessibility_pet_photo"))
                         }
@@ -417,11 +417,11 @@ struct DeepLinkScannedPetView: View {
                     // Pet Name & Info
                     VStack(spacing: 8) {
                         Text(String(format: NSLocalizedString("hello_pet_name", comment: ""), pet.name))
-                            .font(.system(size: 26, weight: .bold))
+                            .font(.appFont(size: 26, weight: .bold))
                             .multilineTextAlignment(.center)
 
                         Text("scanned_tag_thanks")
-                            .font(.system(size: 15))
+                            .font(.appFont(size: 15))
                             .foregroundColor(.mutedText)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 24)
@@ -430,27 +430,27 @@ struct DeepLinkScannedPetView: View {
                         HStack(spacing: 16) {
                             if let breed = pet.breed {
                                 Text("**\(NSLocalizedString("scanner_breed", comment: "")):** \(breed)")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                             if let age = pet.age {
                                 Text("**\(NSLocalizedString("scanner_age", comment: "")):** \(age)")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                             if let color = pet.color {
                                 Text("**\(NSLocalizedString("scanner_color", comment: "")):** \(color)")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                             if let sex = pet.sex, !sex.isEmpty {
                                 Text("**\(NSLocalizedString("sex_label", comment: "")):** \(sex)")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                             if let neutered = pet.isNeutered {
                                 Text("**\(NSLocalizedString("neutered_label", comment: "")):** \(neutered ? NSLocalizedString("yes", comment: "") : NSLocalizedString("no", comment: ""))")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                         }
@@ -472,7 +472,7 @@ struct DeepLinkScannedPetView: View {
                             .padding(.horizontal, 24)
 
                             Text(String(format: NSLocalizedString("owner_notified_sms_email", comment: ""), pet.name))
-                                .font(.system(size: 12))
+                                .font(.appFont(size: 12))
                                 .foregroundColor(.mutedText)
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 32)
@@ -486,15 +486,15 @@ struct DeepLinkScannedPetView: View {
                     if pet.ownerPhone != nil || pet.ownerEmail != nil {
                         VStack(spacing: 16) {
                             Text("contact_owner")
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.appFont(size: 18, weight: .bold))
 
                             if let ownerName = pet.ownerName, !ownerName.trimmingCharacters(in: .whitespaces).isEmpty {
                                 Text(ownerName)
-                                    .font(.system(size: 15, weight: .medium))
+                                    .font(.appFont(size: 15, weight: .medium))
                             }
 
                             Text("contact_owner_plea")
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.mutedText)
                                 .multilineTextAlignment(.center)
 
@@ -506,11 +506,11 @@ struct DeepLinkScannedPetView: View {
                                                 .foregroundColor(.tealAccent)
                                                 .accessibilityLabel(String(localized: "accessibility_call_owner"))
                                             Text(String(format: NSLocalizedString("call_phone", comment: ""), phone))
-                                                .font(.system(size: 15, weight: .medium))
+                                                .font(.appFont(size: 15, weight: .medium))
                                                 .foregroundColor(.primary)
                                             Spacer()
                                             Image(systemName: "chevron.right")
-                                                .font(.system(size: 14))
+                                                .font(.appFont(size: 14))
                                                 .foregroundColor(.mutedText)
                                                 .accessibilityHidden(true)
                                         }
@@ -527,11 +527,11 @@ struct DeepLinkScannedPetView: View {
                                                 .foregroundColor(.tealAccent)
                                                 .accessibilityLabel(String(localized: "accessibility_email_owner"))
                                             Text(String(format: NSLocalizedString("email_contact", comment: ""), email))
-                                                .font(.system(size: 15, weight: .medium))
+                                                .font(.appFont(size: 15, weight: .medium))
                                                 .foregroundColor(.primary)
                                             Spacer()
                                             Image(systemName: "chevron.right")
-                                                .font(.system(size: 14))
+                                                .font(.appFont(size: 14))
                                                 .foregroundColor(.mutedText)
                                                 .accessibilityHidden(true)
                                         }
@@ -549,7 +549,7 @@ struct DeepLinkScannedPetView: View {
                     if let address = pet.ownerAddress {
                         VStack(spacing: 12) {
                             Text("scanner_owner_location")
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.appFont(size: 18, weight: .bold))
 
                             HStack(alignment: .top, spacing: 12) {
                                 Image(systemName: "house.fill")
@@ -559,21 +559,21 @@ struct DeepLinkScannedPetView: View {
 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(address)
-                                        .font(.system(size: 15, weight: .medium))
+                                        .font(.appFont(size: 15, weight: .medium))
                                     if let line2 = pet.ownerAddressLine2, !line2.isEmpty {
                                         Text(line2)
-                                            .font(.system(size: 14))
+                                            .font(.appFont(size: 14))
                                             .foregroundColor(.mutedText)
                                     }
                                     let cityLine = [pet.ownerCity, pet.ownerPostalCode].compactMap { $0 }.joined(separator: ", ")
                                     if !cityLine.isEmpty {
                                         Text(cityLine)
-                                            .font(.system(size: 14))
+                                            .font(.appFont(size: 14))
                                             .foregroundColor(.mutedText)
                                     }
                                     if let country = pet.ownerCountry {
                                         Text(country)
-                                            .font(.system(size: 14))
+                                            .font(.appFont(size: 14))
                                             .foregroundColor(.mutedText)
                                     }
                                 }
@@ -595,11 +595,11 @@ struct DeepLinkScannedPetView: View {
                                     .foregroundColor(.red)
                                     .accessibilityLabel(String(localized: "accessibility_medical_info"))
                                 Text("scanner_medical_info")
-                                    .font(.system(size: 16, weight: .bold))
+                                    .font(.appFont(size: 16, weight: .bold))
                                     .foregroundColor(.red)
                             }
                             Text(medical)
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.primary)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -617,11 +617,11 @@ struct DeepLinkScannedPetView: View {
                                     .foregroundColor(.orange)
                                     .accessibilityLabel(String(localized: "accessibility_allergies"))
                                 Text("scanner_allergies")
-                                    .font(.system(size: 16, weight: .bold))
+                                    .font(.appFont(size: 16, weight: .bold))
                                     .foregroundColor(.orange)
                             }
                             Text(allergies)
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.primary)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -639,11 +639,11 @@ struct DeepLinkScannedPetView: View {
                                     .foregroundColor(.blue)
                                     .accessibilityLabel(String(localized: "accessibility_notes"))
                                 Text("scanner_notes")
-                                    .font(.system(size: 16, weight: .bold))
+                                    .font(.appFont(size: 16, weight: .bold))
                                     .foregroundColor(.blue)
                             }
                             Text(notes)
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.primary)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -657,9 +657,9 @@ struct DeepLinkScannedPetView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("scanner_how_it_works")
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.appFont(size: 18, weight: .bold))
                             Text(String(format: NSLocalizedString("help_reunite_pet", comment: ""), pet.name))
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.mutedText)
                         }
 
@@ -677,11 +677,11 @@ struct DeepLinkScannedPetView: View {
                     // Privacy Notice
                     HStack(spacing: 8) {
                         Image(systemName: "lock.fill")
-                            .font(.system(size: 12))
+                            .font(.appFont(size: 12))
                             .foregroundColor(.mutedText)
                             .accessibilityLabel(String(localized: "accessibility_privacy_notice"))
                         Text(String(format: NSLocalizedString("privacy_notice", comment: ""), pet.name))
-                            .font(.system(size: 12))
+                            .font(.appFont(size: 12))
                             .foregroundColor(.mutedText)
                     }
                     .padding()
@@ -699,7 +699,7 @@ struct DeepLinkScannedPetView: View {
                         onDismiss()
                         dismiss()
                     }
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.appFont(size: 16, weight: .semibold))
                     .foregroundColor(.brandOrange)
                 }
             }

@@ -9,6 +9,7 @@ struct OrdersView: View {
             Picker("", selection: $selectedTab) {
                 Text(String(localized: "orders_title")).tag(0)
                 Text(String(localized: "pending_registrations_title")).tag(1)
+                Text(String(localized: "billing_invoices")).tag(2)
             }
             .pickerStyle(.segmented)
             .padding(.horizontal, 16)
@@ -19,6 +20,8 @@ struct OrdersView: View {
                 ordersContent
             case 1:
                 PendingRegistrationsView()
+            case 2:
+                InvoicesView()
             default:
                 ordersContent
             }
@@ -77,12 +80,12 @@ struct OrderRowView: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text("order_number \(order.id)")
-                    .font(.headline)
+                    .font(.appFont(.headline))
 
                 Spacer()
 
                 Text(order.formattedAmount)
-                    .font(.headline)
+                    .font(.appFont(.headline))
                     .foregroundColor(.primary)
             }
 
@@ -92,23 +95,23 @@ struct OrderRowView: View {
                     .frame(width: 8, height: 8)
 
                 Text(localizedStatus(order.orderStatus))
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .foregroundColor(statusColor)
 
                 Spacer()
 
                 Text(formatDate(order.createdAt))
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
 
             if order.orderStatus == "shipped" && order.mplTrackingNumber != nil {
                 HStack(spacing: 4) {
                     Image(systemName: "shippingbox.fill")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.brandOrange)
                     Text("track_package")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.brandOrange)
                 }
             }
@@ -116,7 +119,7 @@ struct OrderRowView: View {
             if let items = order.items, !items.isEmpty {
                 let totalItems = items.reduce(0) { $0 + $1.quantity }
                 Text(String(localized: "orders_item_count \(totalItems)"))
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
         }
@@ -142,8 +145,12 @@ struct OrderRowView: View {
             return dateString
         }
 
+        // Long date, locale-aware, no time. EN: "May 6, 2026".
+        // HU: "2026. május 6." — drops the previous "at HH:mm" tail
+        // that wasn't worth showing for an order timestamp.
         let displayFormatter = DateFormatter()
-        displayFormatter.dateStyle = .medium
+        displayFormatter.dateStyle = .long
+        displayFormatter.timeStyle = .none
         return displayFormatter.string(from: date)
     }
 }
@@ -198,19 +205,11 @@ struct OrderDetailView: View {
                             .font(.system(.body, design: .monospaced))
                     }
 
-                    if let url = order.trackingURL {
-                        Link(destination: url) {
-                            HStack {
-                                Image(systemName: "shippingbox.fill")
-                                    .foregroundColor(.brandOrange)
-                                Text("track_package")
-                                    .foregroundColor(.brandOrange)
-                                Spacer()
-                                Image(systemName: "arrow.up.right.square")
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                    }
+                    // 2026-05-06: dropped the "Track package" deep link.
+                    // The MPL international tracking page returned 404
+                    // on fresh tracking numbers and confused users — we
+                    // keep the tracking number visible so they can paste
+                    // it into whichever carrier site fits their region.
 
                     if let method = order.deliveryMethod {
                         HStack {
@@ -228,21 +227,21 @@ struct OrderDetailView: View {
                     ForEach(items) { item in
                         VStack(alignment: .leading, spacing: 4) {
                             Text(item.itemType.capitalized)
-                                .font(.headline)
+                                .font(.appFont(.headline))
 
                             Text("orders_quantity \(item.quantity)")
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .foregroundColor(.secondary)
 
                             HStack {
                                 Text(item.qrTagId == nil ? String(localized: "orders_tag_pending") : String(localized: "orders_tag_assigned"))
-                                        .font(.caption)
+                                        .font(.appFont(.caption))
                                     .foregroundColor(item.qrTagId == nil ? .orange : .blue)
 
                                 Spacer()
 
                                 Text(formatCurrency(item.price))
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .fontWeight(.medium)
                             }
                         }

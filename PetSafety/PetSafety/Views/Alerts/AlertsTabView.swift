@@ -60,7 +60,7 @@ struct AlertsTabView: View {
     private var headerSection: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("alerts_missing_pets_title")
-                .font(.system(size: 28, weight: .bold))
+                .font(.appFont(size: 28, weight: .bold))
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
                 .padding(.top, 60)
@@ -80,7 +80,7 @@ struct AlertsTabView: View {
                     }
                 }) {
                     Text(options[index])
-                        .font(.system(size: 14, weight: selection.wrappedValue == index ? .bold : .medium))
+                        .font(.appFont(size: 14, weight: selection.wrappedValue == index ? .bold : .medium))
                         .foregroundColor(selection.wrappedValue == index ? .white : .mutedText)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
@@ -235,17 +235,17 @@ struct EmptyAlertsStateView: View {
                     .fill(Color(UIColor.systemGray6))
                     .frame(width: 96, height: 96)
                 Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 48))
+                    .font(.appFont(size: 48))
                     .foregroundColor(.tealAccent)
             }
 
             VStack(spacing: 8) {
                 Text(String(localized: kind.titleKey))
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.appFont(size: 20, weight: .bold))
                     .foregroundColor(.primary)
 
                 Text(String(localized: kind.messageKey))
-                    .font(.system(size: 14))
+                    .font(.appFont(size: 14))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
@@ -268,17 +268,17 @@ struct AddressRequiredView: View {
                     .fill(Color.brandOrange.opacity(0.1))
                     .frame(width: 100, height: 100)
                 Image(systemName: "location.slash.circle.fill")
-                    .font(.system(size: 48))
+                    .font(.appFont(size: 48))
                     .foregroundColor(.brandOrange)
             }
 
             VStack(spacing: 12) {
                 Text("alerts_location_required")
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.appFont(size: 20, weight: .bold))
                     .foregroundColor(.primary)
 
                 Text("alerts_location_required_message")
-                    .font(.system(size: 15))
+                    .font(.appFont(size: 15))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
@@ -292,16 +292,16 @@ struct AddressRequiredView: View {
                                 .fill(Color.tealAccent.opacity(0.1))
                                 .frame(width: 32, height: 32)
                             Text("1")
-                                .font(.system(size: 14, weight: .bold))
+                                .font(.appFont(size: 14, weight: .bold))
                                 .foregroundColor(.tealAccent)
                         }
                         Text("alerts_enable_location")
-                            .font(.system(size: 14))
+                            .font(.appFont(size: 14))
                             .foregroundColor(.primary)
                     }
 
                     Text("alerts_or")
-                        .font(.system(size: 12, weight: .bold))
+                        .font(.appFont(size: 12, weight: .bold))
                         .foregroundColor(.mutedText)
                         .frame(maxWidth: .infinity, alignment: .center)
 
@@ -311,11 +311,11 @@ struct AddressRequiredView: View {
                                 .fill(Color.tealAccent.opacity(0.1))
                                 .frame(width: 32, height: 32)
                             Text("2")
-                                .font(.system(size: 14, weight: .bold))
+                                .font(.appFont(size: 14, weight: .bold))
                                 .foregroundColor(.tealAccent)
                         }
                         Text("alerts_add_address_profile")
-                            .font(.system(size: 14))
+                            .font(.appFont(size: 14))
                             .foregroundColor(.primary)
                     }
                 }

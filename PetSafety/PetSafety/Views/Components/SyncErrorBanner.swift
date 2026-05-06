@@ -15,7 +15,7 @@ struct SyncErrorBanner: View {
                             .foregroundColor(.white)
 
                         Text("sync_failed_count \(syncService.failedActionsCount)")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .fontWeight(.medium)
                             .foregroundColor(.white)
 
@@ -23,7 +23,7 @@ struct SyncErrorBanner: View {
 
                         Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                             .foregroundColor(.white.opacity(0.8))
-                            .font(.caption)
+                            .font(.appFont(.caption))
                     }
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
@@ -45,7 +45,7 @@ struct SyncErrorBanner: View {
                                     Image(systemName: "arrow.clockwise")
                                     Text("sync_retry_all")
                                 }
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .fontWeight(.medium)
                                 .foregroundColor(.orange)
                                 .padding(.horizontal, 16)
@@ -64,7 +64,7 @@ struct SyncErrorBanner: View {
                                     Image(systemName: "xmark")
                                     Text("sync_dismiss_all")
                                 }
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .fontWeight(.medium)
                                 .foregroundColor(.secondary)
                                 .padding(.horizontal, 16)
@@ -108,18 +108,18 @@ struct SyncErrorRow: View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(syncService.actionTypeDescription(action.type))
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .fontWeight(.medium)
 
                 if let errorMessage = action.errorMessage {
                     Text(errorMessage)
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                         .lineLimit(2)
                 }
 
                 Text("sync_tried_count \(action.retryCount)")
-                    .font(.caption2)
+                    .font(.appFont(.caption2))
                     .foregroundColor(.secondary)
             }
 
@@ -180,21 +180,21 @@ struct SyncStatusIndicator: View {
                 ProgressView()
                     .scaleEffect(0.7)
                 Text("sync_syncing")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             } else if syncService.failedActionsCount > 0 {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundColor(.orange)
-                    .font(.caption)
+                    .font(.appFont(.caption))
                 Text("sync_count_failed \(syncService.failedActionsCount)")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.orange)
             } else if syncService.pendingActionsCount > 0 {
                 Image(systemName: "arrow.triangle.2.circlepath")
                     .foregroundColor(.blue)
-                    .font(.caption)
+                    .font(.appFont(.caption))
                 Text("sync_count_pending \(syncService.pendingActionsCount)")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.blue)
             }
         }

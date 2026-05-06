@@ -100,10 +100,10 @@ struct OrderReplacementTagView: View {
             }
 
             Text("order_replace_complete")
-                .font(.system(size: 28, weight: .bold))
+                .font(.appFont(size: 28, weight: .bold))
 
             Text("order_replace_confirmation")
-                .font(.body)
+                .font(.appFont(.body))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
@@ -191,15 +191,15 @@ struct OrderReplacementTagView: View {
                     .fill(Color.brandOrange.opacity(0.15))
                     .frame(width: 70, height: 70)
                 Image(systemName: "arrow.triangle.2.circlepath")
-                    .font(.system(size: 28))
+                    .font(.appFont(size: 28))
                     .foregroundColor(.brandOrange)
             }
 
             Text("order_replace_title")
-                .font(.system(size: 24, weight: .bold))
+                .font(.appFont(size: 24, weight: .bold))
 
             Text("order_replace_subtitle")
-                .font(.system(size: 15))
+                .font(.appFont(size: 15))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
         }
@@ -229,20 +229,20 @@ struct OrderReplacementTagView: View {
                             .fill(Color(UIColor.systemGray6))
                             .frame(width: 56, height: 56)
                         Image(systemName: pet.species.lowercased() == "dog" ? "dog.fill" : "cat.fill")
-                            .font(.system(size: 24))
+                            .font(.appFont(size: 24))
                             .foregroundColor(.mutedText)
                     }
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(pet.name)
-                        .font(.system(size: 17, weight: .semibold))
+                        .font(.appFont(size: 17, weight: .semibold))
                     Text(PetLocalizer.localizeSpecies(pet.species))
-                        .font(.system(size: 14))
+                        .font(.appFont(size: 14))
                         .foregroundColor(.secondary)
                     if let breed = pet.breed, !breed.isEmpty {
                         Text(breed)
-                            .font(.system(size: 13))
+                            .font(.appFont(size: 13))
                             .foregroundColor(.mutedText)
                     }
                 }
@@ -258,7 +258,7 @@ struct OrderReplacementTagView: View {
                 HStack {
                     ProgressView()
                     Text("order_replace_checking")
-                        .font(.system(size: 14))
+                        .font(.appFont(size: 14))
                         .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity)
@@ -266,22 +266,22 @@ struct OrderReplacementTagView: View {
             } else {
                 if isFreeReplacement {
                     Label(String(localized: "order_replace_eligible_free"), systemImage: "checkmark.circle.fill")
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.appFont(size: 14, weight: .medium))
                         .foregroundColor(.tealAccent)
                 } else {
                     Label(String(format: String(localized: "order_replace_additional_fee %@"), formattedShippingCost), systemImage: "eurosign.circle.fill")
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.appFont(size: 14, weight: .medium))
                         .foregroundColor(.brandOrange)
                 }
 
                 Label(String(localized: "order_replace_old_deactivated"), systemImage: "exclamationmark.triangle.fill")
-                    .font(.system(size: 13))
+                    .font(.appFont(size: 13))
                     .foregroundColor(.secondary)
                 Label(String(localized: "order_replace_delivery_time"), systemImage: "shippingbox.fill")
-                    .font(.system(size: 13))
+                    .font(.appFont(size: 13))
                     .foregroundColor(.secondary)
                 Label(String(localized: "order_replace_scan_activate"), systemImage: "qrcode")
-                    .font(.system(size: 13))
+                    .font(.appFont(size: 13))
                     .foregroundColor(.secondary)
             }
         }
@@ -320,13 +320,13 @@ struct OrderReplacementTagView: View {
                 HStack(spacing: 10) {
                     Image(systemName: "globe")
                         .foregroundColor(.secondary)
-                        .font(.system(size: 15))
+                        .font(.appFont(size: 15))
                     Text(SupportedCountries.findByCode(selectedCountryCode)?.localizedName ?? String(localized: "address_select_country"))
                         .foregroundColor(selectedCountryCode.isEmpty ? .secondary : .primary)
                     Spacer()
                     Image(systemName: "chevron.up.chevron.down")
                         .foregroundColor(.secondary)
-                        .font(.system(size: 12))
+                        .font(.appFont(size: 12))
                 }
                 .padding(.horizontal, 14)
                 .padding(.vertical, 12)
@@ -510,10 +510,10 @@ struct OrderReplacementTagView: View {
                 .foregroundColor(.orange)
             VStack(alignment: .leading, spacing: 4) {
                 Text("tags_coming_soon_title")
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .fontWeight(.semibold)
                 Text("tags_coming_soon_body")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -574,10 +574,10 @@ private struct ReplacementSectionCard<Content: View>: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 10) {
                 Image(systemName: icon)
-                    .font(.system(size: 16))
+                    .font(.appFont(size: 16))
                     .foregroundColor(.tealAccent)
                 Text(title)
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.appFont(size: 17, weight: .semibold))
             }
             content()
         }

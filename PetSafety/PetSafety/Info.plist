@@ -55,6 +55,13 @@
 	<string>We use your location to show nearby missing pet alerts and help locate found pets.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need photo library access to upload pet profile photos.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Inter-Regular.ttf</string>
+		<string>Inter-Medium.ttf</string>
+		<string>Inter-SemiBold.ttf</string>
+		<string>Inter-Bold.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

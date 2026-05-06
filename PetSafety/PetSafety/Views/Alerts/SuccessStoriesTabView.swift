@@ -59,7 +59,7 @@ struct SuccessStoriesTabView: View {
     private var headerSection: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("success_stories_title")
-                .font(.system(size: 28, weight: .bold))
+                .font(.appFont(size: 28, weight: .bold))
                 .foregroundColor(.primary)
                 .padding(.horizontal, 24)
                 .padding(.top, 16)
@@ -79,7 +79,7 @@ struct SuccessStoriesTabView: View {
                     }
                 }) {
                     Text(options[index])
-                        .font(.system(size: 14, weight: selection.wrappedValue == index ? .bold : .medium))
+                        .font(.appFont(size: 14, weight: selection.wrappedValue == index ? .bold : .medium))
                         .foregroundColor(selection.wrappedValue == index ? .white : .mutedText)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
@@ -106,7 +106,7 @@ struct SuccessStoriesTabView: View {
                 ProgressView()
                     .scaleEffect(1.2)
                 Text("success_stories_loading")
-                    .font(.system(size: 15))
+                    .font(.appFont(size: 15))
                     .foregroundColor(.mutedText)
                 Spacer()
             }

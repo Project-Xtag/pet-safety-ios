@@ -14,11 +14,11 @@ struct PushNotificationPromptView: View {
             Spacer()
 
             Image(systemName: "bell.badge.fill")
-                .font(.system(size: 60))
+                .font(.appFont(size: 60))
                 .foregroundColor(.brandOrange)
 
             Text("push_prompt_title")
-                .font(.title2)
+                .font(.appFont(.title2))
                 .fontWeight(.bold)
 
             VStack(alignment: .leading, spacing: 12) {
@@ -49,7 +49,7 @@ struct PushNotificationPromptView: View {
                     dismiss()
                 } label: {
                     Text("push_prompt_enable")
-                        .font(.headline)
+                        .font(.appFont(.headline))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
                 }
@@ -61,7 +61,7 @@ struct PushNotificationPromptView: View {
                     dismiss()
                 } label: {
                     Text("push_prompt_later")
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .foregroundStyle(.secondary)
                 }
             }
@@ -79,11 +79,11 @@ private struct BenefitRow: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .font(.title3)
+                .font(.appFont(.title3))
                 .foregroundColor(.brandOrange)
                 .frame(width: 28)
             Text(text)
-                .font(.subheadline)
+                .font(.appFont(.subheadline))
         }
     }
 }

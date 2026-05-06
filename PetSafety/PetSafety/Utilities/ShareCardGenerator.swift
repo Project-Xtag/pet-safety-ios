@@ -25,7 +25,7 @@ struct ShareCardGenerator {
                 logo.draw(in: logoRect)
             } else {
                 let attrs: [NSAttributedString.Key: Any] = [
-                    .font: UIFont.boldSystemFont(ofSize: 36),
+                    .font: UIFont.appFont(size: 36, weight: .bold),
                     .foregroundColor: UIColor.white
                 ]
                 let text = "Senra"
@@ -35,7 +35,7 @@ struct ShareCardGenerator {
 
             // "Reunited!" text
             let reunitedAttrs: [NSAttributedString.Key: Any] = [
-                .font: UIFont.boldSystemFont(ofSize: 48),
+                .font: UIFont.appFont(size: 48, weight: .bold),
                 .foregroundColor: UIColor.white
             ]
             let reunitedText = String(localized: "share_card_reunited")
@@ -90,7 +90,7 @@ struct ShareCardGenerator {
                     height: photoRadius * 2
                 ))
                 let pawAttrs: [NSAttributedString.Key: Any] = [
-                    .font: UIFont.systemFont(ofSize: 140),
+                    .font: UIFont.appFont(size: 140),
                     .foregroundColor: UIColor.white
                 ]
                 let paw = "🐾"
@@ -109,7 +109,7 @@ struct ShareCardGenerator {
                 nameText = petName
             }
             let nameAttrs: [NSAttributedString.Key: Any] = [
-                .font: UIFont.boldSystemFont(ofSize: 44),
+                .font: UIFont.appFont(size: 44, weight: .bold),
                 .foregroundColor: UIColor.white
             ]
             let nameSize = nameText.size(withAttributes: nameAttrs)
@@ -127,7 +127,7 @@ struct ShareCardGenerator {
 
             // Website URL
             let urlAttrs: [NSAttributedString.Key: Any] = [
-                .font: UIFont.systemFont(ofSize: 28),
+                .font: UIFont.appFont(size: 28),
                 .foregroundColor: UIColor.white
             ]
             let urlText = "senra.pet"
