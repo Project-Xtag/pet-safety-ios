@@ -183,6 +183,11 @@
 "share_owner_notified" = "Vlasnik je obaviješten!";
 "share_on_their_way" = "Na putu je!";
 "share_notifying" = "Obavještavanje vlasnika…";
+"share_success_title" = "Hvala na pomoći!";
+"share_success_subtitle %@" = "Obavijestili smo obitelj ljubimca %@ da si ga pronašao.";
+"share_success_what_next" = "Što slijedi";
+"share_success_step_contact" = "Vlasnik će te kontaktirati što je prije moguće koristeći podatke s prethodnog zaslona.";
+"share_success_step_safe" = "Molimo pobrini se za ljubimca dok vlasnik ne dođe.";
 "share_notify_with_location" = "Podijeli i obavijesti vlasnika";
 "share_privacy_note" = "Tvoja lokacija se dijeli s vlasnikom kućnog ljubimca.";
 "share_found_pet %@" = "%@ pronađen!";

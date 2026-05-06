@@ -25,52 +25,60 @@ struct ShareLocationView: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 24) {
-                    header
-                    locationDisplay
-
-                    if let error = errorMessage {
-                        Text(error)
-                            .font(.appFont(.caption))
-                            .foregroundColor(.red)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
-                    }
-
-                    if shared {
-                        successState
-                    } else {
-                        primaryAction
-                        if !showManualAddress {
-                            Button(action: { showManualAddress = true }) {
-                                Text(NSLocalizedString("share_address_instead", comment: ""))
-                                    .font(.appFont(.subheadline))
-                            }
-                            .padding(.top, 4)
-                        } else {
-                            manualAddressBlock
-                        }
-                    }
-
-                    Text(NSLocalizedString("share_privacy_note", comment: ""))
-                        .font(.appFont(.caption2))
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-
-                    Spacer(minLength: 40)
+            Group {
+                if shared {
+                    successScreen
+                } else {
+                    formContent
                 }
-                .padding()
             }
             .navigationTitle(Text(String(format: NSLocalizedString("share_found_pet %@", comment: ""), petName)))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("done") { dismiss() }
+                if !shared {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("done") { dismiss() }
+                    }
                 }
             }
             .onAppear { locationManager.requestLocation() }
+        }
+    }
+
+    private var formContent: some View {
+        ScrollView {
+            VStack(spacing: 24) {
+                header
+                locationDisplay
+
+                if let error = errorMessage {
+                    Text(error)
+                        .font(.appFont(.caption))
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                }
+
+                primaryAction
+                if !showManualAddress {
+                    Button(action: { showManualAddress = true }) {
+                        Text(NSLocalizedString("share_address_instead", comment: ""))
+                            .font(.appFont(.subheadline))
+                    }
+                    .padding(.top, 4)
+                } else {
+                    manualAddressBlock
+                }
+
+                Text(NSLocalizedString("share_privacy_note", comment: ""))
+                    .font(.appFont(.caption2))
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+
+                Spacer(minLength: 40)
+            }
+            .padding()
         }
     }
 
@@ -121,17 +129,71 @@ struct ShareLocationView: View {
         }
     }
 
-    private var successState: some View {
-        VStack(spacing: 10) {
-            Image(systemName: "checkmark.circle.fill")
-                .font(.appFont(size: 50))
-                .foregroundColor(.tealAccent)
-            Text(NSLocalizedString("share_owner_notified", comment: ""))
-                .font(.appFont(.headline))
-            Text(NSLocalizedString("share_on_their_way", comment: ""))
+    private var successScreen: some View {
+        ScrollView {
+            VStack(spacing: 24) {
+                Spacer(minLength: 24)
+
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.appFont(size: 88))
+                    .foregroundColor(.tealAccent)
+                    .padding(.top, 12)
+
+                Text(NSLocalizedString("share_success_title", comment: ""))
+                    .font(.appFont(.title))
+                    .bold()
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+
+                Text(String(
+                    format: NSLocalizedString("share_success_subtitle %@", comment: ""),
+                    petName
+                ))
+                    .font(.appFont(.body))
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 24)
+
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(NSLocalizedString("share_success_what_next", comment: ""))
+                        .font(.appFont(.headline))
+                    successBullet(text: NSLocalizedString("share_success_step_contact", comment: ""))
+                    successBullet(text: NSLocalizedString("share_success_step_safe", comment: ""))
+                }
+                .padding(20)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.gray.opacity(0.08))
+                .cornerRadius(14)
+                .padding(.horizontal, 16)
+
+                Button(action: { dismiss() }) {
+                    Text("close")
+                        .font(.appFont(.headline))
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.brandOrange)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 4)
+
+                Spacer(minLength: 24)
+            }
         }
-        .foregroundColor(.secondary)
-        .padding()
+    }
+
+    private func successBullet(text: String) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundColor(.tealAccent)
+                .font(.appFont(.subheadline))
+                .padding(.top, 2)
+            Text(text)
+                .font(.appFont(.subheadline))
+                .foregroundColor(.primary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 
     private var primaryAction: some View {
@@ -252,7 +314,6 @@ struct ShareLocationView: View {
                 await MainActor.run {
                     shared = true
                     isSharing = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { dismiss() }
                 }
             } catch {
                 await MainActor.run {
@@ -283,7 +344,6 @@ struct ShareLocationView: View {
                 await MainActor.run {
                     shared = true
                     isSharing = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { dismiss() }
                 }
             } catch {
                 await MainActor.run {

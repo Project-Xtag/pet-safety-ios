@@ -180,6 +180,11 @@
 "share_owner_notified" = "Eieren varslet!";
 "share_on_their_way" = "De er på vei!";
 "share_notifying" = "Varsler eieren…";
+"share_success_title" = "Takk for hjelpen!";
+"share_success_subtitle %@" = "Vi har varslet %@s familie om at du har funnet kjæledyret.";
+"share_success_what_next" = "Hva skjer nå";
+"share_success_step_contact" = "Eieren tar kontakt med deg så snart som mulig med kontaktinformasjonen fra forrige skjerm.";
+"share_success_step_safe" = "Vær snill og pass på kjæledyret til eieren kommer.";
 "share_notify_with_location" = "Del og varsle eieren";
 "share_privacy_note" = "Posisjonen din deles med dyreeieren for å hjelpe dem å gjenforenes med dyret.";
 "share_found_pet %@" = "Fant %@!";

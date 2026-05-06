@@ -180,6 +180,11 @@
 "share_owner_notified" = "A gazdi értesítve!";
 "share_on_their_way" = "Úton van!";
 "share_notifying" = "A gazdi értesítése…";
+"share_success_title" = "Köszönjük a segítséget!";
+"share_success_subtitle %@" = "%@ gazdiját értesítettük, hogy megtaláltad.";
+"share_success_what_next" = "Mi történik ezután";
+"share_success_step_contact" = "A gazdi az előző oldalon látható elérhetőségen veszi fel veled a kapcsolatot, amint tudja.";
+"share_success_step_safe" = "Kérjük, vigyázz rá, amíg a gazdi megérkezik.";
 "share_notify_with_location" = "Megosztás & gazdi értesítése";
 "share_privacy_note" = "A helyed megosztásra kerül a gazdival.";
 "share_found_pet %@" = "%@ megtalálva!";

@@ -180,6 +180,11 @@
 "share_owner_notified" = "Besitzer informiert!";
 "share_on_their_way" = "du sind unterwegs!";
 "share_notifying" = "Besitzer wird informiert…";
+"share_success_title" = "Danke für deine Hilfe!";
+"share_success_subtitle %@" = "Wir haben %@s Familie benachrichtigt, dass du das Tier gefunden hast.";
+"share_success_what_next" = "So geht es weiter";
+"share_success_step_contact" = "Der Besitzer meldet sich so bald wie möglich mit den Kontaktdaten von der vorherigen Seite.";
+"share_success_step_safe" = "Bitte behüte das Tier, bis der Besitzer eintrifft.";
 "share_notify_with_location" = "Teilen & Besitzer informieren";
 "share_privacy_note" = "Dein Standort wird mit dem Besitzer geteilt.";
 "share_found_pet %@" = "%@ gefunden!";

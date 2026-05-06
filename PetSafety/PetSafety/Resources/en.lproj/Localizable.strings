@@ -180,6 +180,11 @@
 "share_owner_notified" = "Owner Notified!";
 "share_on_their_way" = "They're on their way!";
 "share_notifying" = "Notifying Owner…";
+"share_success_title" = "Thank you for helping!";
+"share_success_subtitle %@" = "%@'s family has been notified that you found them.";
+"share_success_what_next" = "What happens next";
+"share_success_step_contact" = "The owner will reach out using the contact details from the previous screen as soon as they can.";
+"share_success_step_safe" = "Please keep them safe and comfortable until the owner arrives.";
 "share_notify_with_location" = "Share & Notify Owner";
 "share_privacy_note" = "Your location is shared with the pet owner to help reunite them with their pet.";
 "share_found_pet %@" = "Found %@!";
