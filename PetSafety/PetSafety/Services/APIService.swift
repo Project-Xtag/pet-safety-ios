@@ -1779,6 +1779,19 @@ extension APIService {
         return response.subscription
     }
 
+    /// Fetch the user's Stripe-billed invoices.
+    /// Backend caps `limit` at 100; the default of 24 covers two years
+    /// of monthly billing comfortably.
+    func getInvoices(limit: Int = 24) async throws -> [Invoice] {
+        #if DEBUG
+        print("📡 API: Fetching invoices…")
+        #endif
+
+        let request = try await buildRequest(endpoint: "/billing/invoices?limit=\(limit)")
+        let response = try await performRequest(request, responseType: InvoicesResponse.self)
+        return response.invoices
+    }
+
     /// Apply a referral code
     func applyReferralCode(_ code: String) async throws -> ReferralApplyResponse {
         #if DEBUG
