@@ -10,15 +10,14 @@ struct NotificationsView: View {
             } else {
                 List {
                     ForEach(viewModel.notifications) { notification in
-                        NotificationRow(notification: notification)
-                            .onTapGesture {
-                                if !notification.isRead {
-                                    Task { await viewModel.markAsRead(notification.id) }
-                                }
+                        NotificationRow(notification: notification) {
+                            if !notification.isRead {
+                                Task { await viewModel.markAsRead(notification.id) }
                             }
-                            .listRowBackground(
-                                notification.isRead ? Color.clear : Color.blue.opacity(0.05)
-                            )
+                        }
+                        .listRowBackground(
+                            notification.isRead ? Color.clear : Color.blue.opacity(0.05)
+                        )
                     }
 
                     if viewModel.hasMore {
@@ -84,6 +83,8 @@ struct NotificationsView: View {
 
 struct NotificationRow: View {
     let notification: NotificationItem
+    let onTap: () -> Void
+    @State private var expanded = false
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
@@ -109,10 +110,15 @@ struct NotificationRow: View {
                     }
                 }
 
+                // Body collapses to 2 lines by default; tapping the row
+                // toggles the full text — previously the row only ever
+                // showed the truncated preview and the user couldn't read
+                // the rest.
                 Text(notification.body)
                     .font(.caption)
                     .foregroundColor(.secondary)
-                    .lineLimit(2)
+                    .lineLimit(expanded ? nil : 2)
+                    .fixedSize(horizontal: false, vertical: expanded)
 
                 Text(formatDate(notification.createdAt))
                     .font(.caption2)
@@ -120,6 +126,11 @@ struct NotificationRow: View {
             }
         }
         .padding(.vertical, 4)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            withAnimation(.easeInOut(duration: 0.15)) { expanded.toggle() }
+            onTap()
+        }
     }
 
     private func iconName(for type: String) -> String {

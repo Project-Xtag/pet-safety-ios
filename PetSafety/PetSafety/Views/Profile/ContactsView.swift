@@ -25,9 +25,9 @@ struct ContactsView: View {
     @State private var primaryPhoneContact = 1 // 1 = primary, 2 = secondary
 
     var body: some View {
-        List {
-            // Info Section
-            Section {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                // Info banner
                 VStack(alignment: .leading, spacing: 8) {
                     Label("contacts_settings", systemImage: "info.circle")
                         .font(.subheadline)
@@ -38,14 +38,19 @@ struct ContactsView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
-                .padding(.vertical, 4)
-            }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(16)
+                .background(Color.tealAccent.opacity(0.1))
+                .cornerRadius(14)
 
-            if isEditing {
-                editingView
-            } else {
-                displayView
+                if isEditing {
+                    editingView
+                } else {
+                    displayView
+                }
             }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 20)
         }
         .adaptiveList()
         .navigationTitle("contact_details")
@@ -78,148 +83,156 @@ struct ContactsView: View {
     @ViewBuilder
     private var displayView: some View {
         // Email Section
-        Section(header: Text("contacts_email_section")) {
-            if !primaryEmail.isEmpty || !secondaryEmail.isEmpty {
-                if !primaryEmail.isEmpty {
-                    ContactRowView(
-                        type: "Email",
-                        value: primaryEmail,
-                        isPrimary: primaryEmailContact == 1,
-                        isVisible: showPrimaryEmail
-                    )
-                }
+        VStack(alignment: .leading, spacing: 12) {
+            Text("contacts_email_section")
+                .font(.system(size: 17, weight: .semibold))
 
-                if !secondaryEmail.isEmpty {
-                    ContactRowView(
-                        type: "Email",
-                        value: secondaryEmail,
-                        isPrimary: primaryEmailContact == 2,
-                        isVisible: showSecondaryEmail
-                    )
+            VStack(spacing: 0) {
+                if !primaryEmail.isEmpty || !secondaryEmail.isEmpty {
+                    if !primaryEmail.isEmpty {
+                        ContactRowView(
+                            type: "Email",
+                            value: primaryEmail,
+                            isPrimary: primaryEmailContact == 1,
+                            isVisible: showPrimaryEmail
+                        )
+                    }
+                    if !primaryEmail.isEmpty && !secondaryEmail.isEmpty {
+                        Divider()
+                    }
+                    if !secondaryEmail.isEmpty {
+                        ContactRowView(
+                            type: "Email",
+                            value: secondaryEmail,
+                            isPrimary: primaryEmailContact == 2,
+                            isVisible: showSecondaryEmail
+                        )
+                    }
+                } else {
+                    EmptyContactView(type: NSLocalizedString("email_addresses", comment: "").lowercased())
                 }
-            } else {
-                EmptyContactView(type: NSLocalizedString("email_addresses", comment: "").lowercased())
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .cornerRadius(16)
         }
 
         // Phone Section
-        Section(header: Text("contacts_phone_section")) {
-            if !primaryPhone.isEmpty || !secondaryPhone.isEmpty {
-                if !primaryPhone.isEmpty {
-                    ContactRowView(
-                        type: "Phone",
-                        value: primaryPhone,
-                        isPrimary: primaryPhoneContact == 1,
-                        isVisible: showPrimaryPhone
-                    )
-                }
+        VStack(alignment: .leading, spacing: 12) {
+            Text("contacts_phone_section")
+                .font(.system(size: 17, weight: .semibold))
 
-                if !secondaryPhone.isEmpty {
-                    ContactRowView(
-                        type: "Phone",
-                        value: secondaryPhone,
-                        isPrimary: primaryPhoneContact == 2,
-                        isVisible: showSecondaryPhone
-                    )
+            VStack(spacing: 0) {
+                if !primaryPhone.isEmpty || !secondaryPhone.isEmpty {
+                    if !primaryPhone.isEmpty {
+                        ContactRowView(
+                            type: "Phone",
+                            value: primaryPhone,
+                            isPrimary: primaryPhoneContact == 1,
+                            isVisible: showPrimaryPhone
+                        )
+                    }
+                    if !primaryPhone.isEmpty && !secondaryPhone.isEmpty {
+                        Divider()
+                    }
+                    if !secondaryPhone.isEmpty {
+                        ContactRowView(
+                            type: "Phone",
+                            value: secondaryPhone,
+                            isPrimary: primaryPhoneContact == 2,
+                            isVisible: showSecondaryPhone
+                        )
+                    }
+                } else {
+                    EmptyContactView(type: NSLocalizedString("phone_numbers", comment: "").lowercased())
                 }
-            } else {
-                EmptyContactView(type: NSLocalizedString("phone_numbers", comment: "").lowercased())
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .cornerRadius(16)
         }
 
         // Edit Button
-        Section {
-            Button(action: { isEditing = true }) {
-                HStack {
-                    Spacer()
-                    Text("contacts_edit_title")
-                        .fontWeight(.semibold)
-                    Spacer()
-                }
+        Button(action: { isEditing = true }) {
+            HStack {
+                Spacer()
+                Text("contacts_edit_title")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.white)
+                Spacer()
             }
+            .padding(.vertical, 14)
+            .background(Color.brandOrange)
+            .cornerRadius(16)
         }
     }
 
     // MARK: - Editing View
     @ViewBuilder
     private var editingView: some View {
-        // Primary Email
-        Section(header: Text("contacts_primary_email"), footer: Text("contacts_primary_email_edit_footer")) {
-            VStack(alignment: .leading, spacing: 8) {
-                TextField(NSLocalizedString("contacts_email_placeholder", comment: ""), text: $primaryEmail)
-                    .keyboardType(.emailAddress)
-                    .textContentType(.emailAddress)
-                    .autocapitalization(.none)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                Toggle("contacts_show_on_tag", isOn: $showPrimaryEmail)
-                    .tint(.brandOrange)
-            }
-            .padding(.vertical, 4)
-        }
-
-        // Secondary Email
-        Section(header: Text("contacts_secondary_email"), footer: Text("contacts_secondary_email_edit_footer")) {
-            VStack(alignment: .leading, spacing: 8) {
-                TextField(NSLocalizedString("contacts_secondary_email_placeholder", comment: ""), text: $secondaryEmail)
-                    .keyboardType(.emailAddress)
-                    .textContentType(.emailAddress)
-                    .autocapitalization(.none)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                if !secondaryEmail.isEmpty {
-                    Toggle("contacts_show_on_tag", isOn: $showSecondaryEmail)
-                        .tint(.brandOrange)
-                }
-            }
-            .padding(.vertical, 4)
-        }
-
-        // Primary Phone
-        Section(header: Text("contacts_primary_phone"), footer: Text("contacts_primary_phone_edit_footer")) {
-            VStack(alignment: .leading, spacing: 8) {
-                TextField(NSLocalizedString("contacts_phone_placeholder", comment: ""), text: $primaryPhone)
-                    .keyboardType(.phonePad)
-                    .textContentType(.telephoneNumber)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                Toggle("contacts_show_on_tag", isOn: $showPrimaryPhone)
-                    .tint(.brandOrange)
-            }
-            .padding(.vertical, 4)
-        }
-
-        // Secondary Phone
-        Section(header: Text("contacts_secondary_phone"), footer: Text("contacts_secondary_phone_edit_footer")) {
-            VStack(alignment: .leading, spacing: 8) {
-                TextField(NSLocalizedString("contacts_secondary_phone_placeholder", comment: ""), text: $secondaryPhone)
-                    .keyboardType(.phonePad)
-                    .textContentType(.telephoneNumber)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                if !secondaryPhone.isEmpty {
-                    Toggle("contacts_show_on_tag", isOn: $showSecondaryPhone)
-                        .tint(.brandOrange)
-                }
-            }
-            .padding(.vertical, 4)
-        }
+        editingFieldCard(
+            header: "contacts_primary_email",
+            footer: "contacts_primary_email_edit_footer",
+            placeholderKey: "contacts_email_placeholder",
+            text: $primaryEmail,
+            keyboardType: .emailAddress,
+            textContentType: .emailAddress,
+            visibilityBinding: $showPrimaryEmail,
+            showVisibilityToggle: true
+        )
+        editingFieldCard(
+            header: "contacts_secondary_email",
+            footer: "contacts_secondary_email_edit_footer",
+            placeholderKey: "contacts_secondary_email_placeholder",
+            text: $secondaryEmail,
+            keyboardType: .emailAddress,
+            textContentType: .emailAddress,
+            visibilityBinding: $showSecondaryEmail,
+            showVisibilityToggle: !secondaryEmail.isEmpty
+        )
+        editingFieldCard(
+            header: "contacts_primary_phone",
+            footer: "contacts_primary_phone_edit_footer",
+            placeholderKey: "contacts_phone_placeholder",
+            text: $primaryPhone,
+            keyboardType: .phonePad,
+            textContentType: .telephoneNumber,
+            visibilityBinding: $showPrimaryPhone,
+            showVisibilityToggle: true
+        )
+        editingFieldCard(
+            header: "contacts_secondary_phone",
+            footer: "contacts_secondary_phone_edit_footer",
+            placeholderKey: "contacts_secondary_phone_placeholder",
+            text: $secondaryPhone,
+            keyboardType: .phonePad,
+            textContentType: .telephoneNumber,
+            visibilityBinding: $showSecondaryPhone,
+            showVisibilityToggle: !secondaryPhone.isEmpty
+        )
 
         // Save/Cancel buttons
-        Section {
+        VStack(spacing: 12) {
             Button(action: { saveChanges() }) {
                 HStack {
                     Spacer()
                     if isLoading {
                         ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         Text("saving")
+                            .foregroundColor(.white)
                     } else {
                         Text("save_changes")
-                            .fontWeight(.semibold)
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(.white)
                     }
                     Spacer()
                 }
+                .padding(.vertical, 14)
+                .background(Color.brandOrange.opacity(isLoading || !isFormValid ? 0.5 : 1.0))
+                .cornerRadius(16)
             }
             .disabled(isLoading || !isFormValid)
 
@@ -227,11 +240,51 @@ struct ContactsView: View {
                 HStack {
                     Spacer()
                     Text("cancel")
+                        .foregroundColor(.secondary)
                     Spacer()
                 }
+                .padding(.vertical, 14)
             }
-            .foregroundColor(.secondary)
             .disabled(isLoading)
+        }
+    }
+
+    @ViewBuilder
+    private func editingFieldCard(
+        header: LocalizedStringKey,
+        footer: LocalizedStringKey,
+        placeholderKey: String,
+        text: Binding<String>,
+        keyboardType: UIKeyboardType,
+        textContentType: UITextContentType?,
+        visibilityBinding: Binding<Bool>,
+        showVisibilityToggle: Bool
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(header)
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundColor(.secondary)
+                .textCase(.uppercase)
+
+            VStack(alignment: .leading, spacing: 12) {
+                TextField(NSLocalizedString(placeholderKey, comment: ""), text: text)
+                    .keyboardType(keyboardType)
+                    .textContentType(textContentType)
+                    .autocapitalization(keyboardType == .emailAddress ? .none : .sentences)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                if showVisibilityToggle {
+                    Toggle("contacts_show_on_tag", isOn: visibilityBinding)
+                        .tint(.brandOrange)
+                }
+            }
+            .padding(16)
+            .background(Color(UIColor.secondarySystemGroupedBackground))
+            .cornerRadius(16)
+
+            Text(footer)
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
     }
 
@@ -312,14 +365,18 @@ struct ContactRowView: View {
     let isVisible: Bool
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(alignment: .top, spacing: 12) {
             Image(systemName: type == "Email" ? "envelope.fill" : "phone.fill")
                 .foregroundColor(.tealAccent)
                 .frame(width: 24)
+                .padding(.top, 2)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(value)
                     .font(.body)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
                 HStack(spacing: 8) {
                     if isPrimary {
@@ -331,22 +388,14 @@ struct ContactRowView: View {
                             .background(Color.brandOrange)
                             .cornerRadius(4)
                     }
-
-                    if isVisible {
-                        Text("contacts_visible_on_tag")
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
-                    } else {
-                        Text("contacts_hidden_badge")
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
-                    }
+                    Text(isVisible ? "contacts_visible_on_tag" : "contacts_hidden_badge")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                    Spacer(minLength: 0)
                 }
             }
-
-            Spacer()
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 8)
     }
 }
 

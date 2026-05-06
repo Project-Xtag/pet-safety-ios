@@ -41,21 +41,23 @@ struct ShareCardGenerator {
             let reunitedText = String(localized: "share_card_reunited")
             let reunitedSize = reunitedText.size(withAttributes: reunitedAttrs)
             reunitedText.draw(
-                at: CGPoint(x: (size.width - reunitedSize.width) / 2, y: 95),
+                at: CGPoint(x: (size.width - reunitedSize.width) / 2, y: 75),
                 withAttributes: reunitedAttrs
             )
 
             // Top divider
             ctx.setStrokeColor(UIColor.white.withAlphaComponent(0.4).cgColor)
             ctx.setLineWidth(2)
-            ctx.move(to: CGPoint(x: 140, y: 155))
-            ctx.addLine(to: CGPoint(x: size.width - 140, y: 155))
+            ctx.move(to: CGPoint(x: 140, y: 140))
+            ctx.addLine(to: CGPoint(x: size.width - 140, y: 140))
             ctx.strokePath()
 
-            // Pet photo (circular) — maximized
-            let photoRadius: CGFloat = 270
+            // Pet photo — +25% radius (270 → 338) per 2026-05-05 ux ask.
+            // Center bumped down so the larger circle clears the divider
+            // above; pet name + url below shifted to match.
+            let photoRadius: CGFloat = 338
             let photoCenterX = size.width / 2
-            let photoCenterY: CGFloat = 460
+            let photoCenterY: CGFloat = 510
 
             // White border circle
             ctx.setFillColor(UIColor.white.cgColor)
@@ -112,15 +114,15 @@ struct ShareCardGenerator {
             ]
             let nameSize = nameText.size(withAttributes: nameAttrs)
             nameText.draw(
-                at: CGPoint(x: (size.width - nameSize.width) / 2, y: 768),
+                at: CGPoint(x: (size.width - nameSize.width) / 2, y: 880),
                 withAttributes: nameAttrs
             )
 
             // Bottom divider
             ctx.setStrokeColor(UIColor.white.withAlphaComponent(0.4).cgColor)
             ctx.setLineWidth(2)
-            ctx.move(to: CGPoint(x: 140, y: 845))
-            ctx.addLine(to: CGPoint(x: size.width - 140, y: 845))
+            ctx.move(to: CGPoint(x: 140, y: 955))
+            ctx.addLine(to: CGPoint(x: size.width - 140, y: 955))
             ctx.strokePath()
 
             // Website URL
@@ -131,7 +133,7 @@ struct ShareCardGenerator {
             let urlText = "senra.pet"
             let urlSize = urlText.size(withAttributes: urlAttrs)
             urlText.draw(
-                at: CGPoint(x: (size.width - urlSize.width) / 2, y: 880),
+                at: CGPoint(x: (size.width - urlSize.width) / 2, y: 1000),
                 withAttributes: urlAttrs
             )
         }

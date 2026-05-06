@@ -3,6 +3,7 @@ import PhotosUI
 
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @StateObject private var subscriptionViewModel = SubscriptionViewModel()
     @AppStorage("appearanceMode") private var appearanceMode: String = "system"
     @State private var showingLogoutAlert = false
     @State private var selectedPhoto: PhotosPickerItem?
@@ -39,6 +40,9 @@ struct ProfileView: View {
         } message: {
             Text("logout_confirm")
         }
+        .task {
+            await subscriptionViewModel.loadCurrentSubscription()
+        }
     }
 
     @Environment(\.colorScheme) private var colorScheme
@@ -74,11 +78,26 @@ struct ProfileView: View {
                             .fill(Color.tealAccent)
                             .frame(width: 96, height: 96)
                         if let profileImage {
+                            // Local UIImage from a fresh pick — wins until
+                            // the server URL lands on the user object.
                             Image(uiImage: profileImage)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 96, height: 96)
                                 .clipShape(Circle())
+                        } else if let urlString = authViewModel.currentUser?.profileImage,
+                                  let url = URL(string: urlString) {
+                            CachedAsyncImage(url: url) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            } placeholder: {
+                                Image(systemName: "person.fill")
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.white)
+                            }
+                            .frame(width: 96, height: 96)
+                            .clipShape(Circle())
                         } else {
                             Image(systemName: "person.fill")
                                 .font(.system(size: 40))
@@ -107,7 +126,13 @@ struct ProfileView: View {
                                 isUploadingPhoto = true
                                 do {
                                     try await APIService.shared.uploadProfileImage(imageData: image.jpegData(compressionQuality: 0.8) ?? Data())
+                                    // Pull /me so currentUser.profileImage carries
+                                    // the server URL — survives navigation / launch
+                                    // and syncs across devices.
+                                    authViewModel.refreshCurrentUser()
+                                    profileImage = nil
                                 } catch {
+                                    profileImage = nil
                                     #if DEBUG
                                     print("Profile image upload failed: \(error)")
                                     #endif
@@ -129,7 +154,7 @@ struct ProfileView: View {
                                 .accessibilityAddTraits(.isHeader)
                         }
 
-                        Text(user.email)
+                        Text(subscriptionViewModel.currentPlanName.capitalized)
                             .font(.system(size: 14))
                             .foregroundColor(.mutedText)
                     }
