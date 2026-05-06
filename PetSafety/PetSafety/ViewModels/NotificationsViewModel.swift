@@ -46,7 +46,7 @@ class NotificationsViewModel: ObservableObject {
             try await apiService.markNotificationAsRead(id)
             if let index = notifications.firstIndex(where: { $0.id == id }) {
                 let old = notifications[index]
-                let updated = NotificationItem(id: old.id, type: old.type, title: old.title, body: old.body, isRead: true, createdAt: old.createdAt)
+                let updated = NotificationItem(id: old.id, type: old.type, title: old.title, body: old.body, isRead: true, createdAt: old.createdAt, data: old.data)
                 notifications[index] = updated
                 unreadCount = max(0, unreadCount - 1)
             }
@@ -57,7 +57,7 @@ class NotificationsViewModel: ObservableObject {
         do {
             try await apiService.markAllNotificationsAsRead()
             notifications = notifications.map { old in
-                NotificationItem(id: old.id, type: old.type, title: old.title, body: old.body, isRead: true, createdAt: old.createdAt)
+                NotificationItem(id: old.id, type: old.type, title: old.title, body: old.body, isRead: true, createdAt: old.createdAt, data: old.data)
             }
             unreadCount = 0
         } catch {}
