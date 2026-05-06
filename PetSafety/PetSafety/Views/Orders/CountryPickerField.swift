@@ -18,7 +18,7 @@ struct CountryPickerField: View {
             HStack(spacing: 10) {
                 Image(systemName: "globe")
                     .foregroundColor(.secondary)
-                    .font(.system(size: 15))
+                    .font(.appFont(size: 15))
 
                 Text(selectedCountry?.localizedName ?? String(localized: "address_select_country"))
                     .foregroundColor(selectedCountry != nil ? .primary : .secondary)
@@ -27,7 +27,7 @@ struct CountryPickerField: View {
 
                 Image(systemName: "chevron.up.chevron.down")
                     .foregroundColor(.secondary)
-                    .font(.system(size: 12))
+                    .font(.appFont(size: 12))
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 12)

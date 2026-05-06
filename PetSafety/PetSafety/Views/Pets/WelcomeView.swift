@@ -20,11 +20,11 @@ struct WelcomeView: View {
                 // Headline
                 VStack(spacing: 10) {
                     Text("welcome_to_senra")
-                        .font(.system(size: 28, weight: .bold))
+                        .font(.appFont(size: 28, weight: .bold))
                         .foregroundColor(.primary)
 
                     Text("welcome_subtitle")
-                        .font(.system(size: 16))
+                        .font(.appFont(size: 16))
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 24)
@@ -56,7 +56,7 @@ struct WelcomeView: View {
 
                     Button(action: onExploreAccount) {
                         Text("welcome_explore_account")
-                            .font(.system(size: 15, weight: .medium))
+                            .font(.appFont(size: 15, weight: .medium))
                             .foregroundColor(Color("TealAccent"))
                     }
                 }
@@ -81,17 +81,17 @@ private struct WelcomeStep: View {
                     .fill(Color("TealAccent"))
                     .frame(width: 36, height: 36)
                 Text(number)
-                    .font(.system(size: 16, weight: .bold))
+                    .font(.appFont(size: 16, weight: .bold))
                     .foregroundColor(.white)
             }
 
             HStack(spacing: 10) {
                 Image(systemName: icon)
-                    .font(.system(size: 18))
+                    .font(.appFont(size: 18))
                     .foregroundColor(Color("TealAccent"))
                     .frame(width: 24)
                 Text(text)
-                    .font(.system(size: 15))
+                    .font(.appFont(size: 15))
                     .foregroundColor(.primary)
             }
 

@@ -52,7 +52,7 @@ struct HelpAndSupportView: View {
                             .foregroundColor(.primary)
                         Spacer()
                         Image(systemName: "chevron.right")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -87,7 +87,7 @@ struct HelpAndSupportView: View {
                         Text("help_terms")
                         Spacer()
                         Image(systemName: "arrow.up.right")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -100,7 +100,7 @@ struct HelpAndSupportView: View {
                         Text("help_privacy")
                         Spacer()
                         Image(systemName: "arrow.up.right")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -167,21 +167,21 @@ struct HelpAndSupportView: View {
             // their subscription via the delete-account path.
             VStack(spacing: 20) {
                 Image(systemName: "exclamationmark.triangle.fill")
-                    .font(.system(size: 48))
+                    .font(.appFont(size: 48))
                     .foregroundColor(.red)
 
                 Text("profile_delete_account")
                     .font(.title2.bold())
 
                 Text("delete_warning_message")
-                    .font(.body)
+                    .font(.appFont(.body))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
 
                 if hasPaidSubscription {
                     Text(premiumDeleteWarning)
-                        .font(.callout)
+                        .font(.appFont(.callout))
                         .foregroundColor(.orange)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
@@ -204,7 +204,7 @@ struct HelpAndSupportView: View {
 
                 Toggle(isOn: $confirmDeleteChecked) {
                     Text("delete_confirm_checkbox")
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                 }
                 .padding(.horizontal)
 
@@ -214,7 +214,7 @@ struct HelpAndSupportView: View {
                     .textInputAutocapitalization(.characters)
                     .padding(.horizontal)
                 Text("delete_confirm_type_delete")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
 
                 HStack(spacing: 16) {
@@ -423,9 +423,9 @@ struct FAQView: View {
                         NavigationLink(destination: FAQDetailView(faq: resolvedFaq)) {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(resolvedFaq.question)
-                                    .font(.headline)
+                                    .font(.appFont(.headline))
                                 Text(resolvedFaq.answer)
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                                     .lineLimit(2)
                             }
@@ -462,11 +462,11 @@ struct FAQDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 Text(faq.question)
-                    .font(.title2)
+                    .font(.appFont(.title2))
                     .fontWeight(.bold)
 
                 Text(faq.answer)
-                    .font(.body)
+                    .font(.appFont(.body))
                     .foregroundColor(.secondary)
 
                 Spacer()
@@ -532,11 +532,11 @@ struct GuideDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 Text(title)
-                    .font(.title)
+                    .font(.appFont(.title))
                     .fontWeight(.bold)
 
                 Text(content)
-                    .font(.body)
+                    .font(.appFont(.body))
                     .foregroundColor(.secondary)
 
                 Spacer()

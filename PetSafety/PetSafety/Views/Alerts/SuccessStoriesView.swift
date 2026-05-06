@@ -18,7 +18,7 @@ struct SuccessStoriesView: View {
                     ProgressView()
                         .scaleEffect(1.2)
                     Text("loading_success_stories")
-                        .font(.system(size: 15))
+                        .font(.appFont(size: 15))
                         .foregroundColor(.mutedText)
                     Spacer()
                 }
@@ -206,17 +206,17 @@ struct SuccessStoryRowView: View {
                     // Pet Name
                     if let petName = story.petName {
                         Text(petName)
-                            .font(.headline)
+                            .font(.appFont(.headline))
                             .foregroundColor(.primary)
                     }
 
                     // Found Badge
                     HStack(spacing: 4) {
                         Image(systemName: "checkmark.circle.fill")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.tealAccent)
                         Text("found_and_reunited")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .fontWeight(.semibold)
                             .foregroundColor(.tealAccent)
                     }
@@ -229,9 +229,9 @@ struct SuccessStoryRowView: View {
                     if let city = story.reunionCity {
                         HStack(spacing: 4) {
                             Image(systemName: "location.fill")
-                                .font(.caption2)
+                                .font(.appFont(.caption2))
                             Text(city)
-                                .font(.caption)
+                                .font(.appFont(.caption))
                         }
                         .foregroundColor(.secondary)
                     }
@@ -239,7 +239,7 @@ struct SuccessStoryRowView: View {
                     // Distance
                     if let distance = story.distanceKm {
                         Text(String(format: NSLocalizedString("distance_km", comment: ""), distance))
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -252,12 +252,12 @@ struct SuccessStoryRowView: View {
             let timeMissing = story.timeMissingText ?? String(localized: "some_time")
             if story.missingSinceDate != nil {
                 Text(String(format: NSLocalizedString("reunion_template", comment: ""), petName, timeMissing, petName, petName))
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .foregroundColor(.secondary)
                     .lineLimit(4)
             } else {
                 Text(String(format: NSLocalizedString("reunion_template_no_time", comment: ""), petName, petName))
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .foregroundColor(.secondary)
                     .lineLimit(3)
             }
@@ -266,11 +266,11 @@ struct SuccessStoryRowView: View {
             if let storyText = story.storyText {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("owners_story")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .fontWeight(.semibold)
                         .foregroundColor(.primary)
                     Text(storyText)
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                         .italic()
                         .lineLimit(2)
@@ -282,9 +282,9 @@ struct SuccessStoryRowView: View {
                 if let timeMissing = story.timeMissingText {
                     HStack(spacing: 4) {
                         Image(systemName: "clock.fill")
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                         Text(String(format: NSLocalizedString("missing_for", comment: ""), timeMissing))
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                     }
                     .foregroundColor(.secondary)
                 }
@@ -292,9 +292,9 @@ struct SuccessStoryRowView: View {
                 if let foundDate = story.foundAtDate {
                     HStack(spacing: 4) {
                         Image(systemName: "calendar")
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                         Text(String(format: NSLocalizedString("found_on", comment: ""), foundDate.timeAgoDisplay()))
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                     }
                     .foregroundColor(.secondary)
                 }
@@ -375,7 +375,7 @@ struct SuccessStoryMapMarker: View {
                 } placeholder: {
                     Image(systemName: "heart.fill")
                         .foregroundColor(.white)
-                        .font(.system(size: 16))
+                        .font(.appFont(size: 16))
                 }
                 .frame(width: isSelected ? 60 : 50, height: isSelected ? 60 : 50)
                 .clipShape(Circle())
@@ -388,7 +388,7 @@ struct SuccessStoryMapMarker: View {
 
             // Arrow pointing down
             Image(systemName: "arrowtriangle.down.fill")
-                .font(.system(size: 12))
+                .font(.appFont(size: 12))
                 .foregroundColor(.tealAccent)
                 .offset(y: -6)
         }
@@ -431,17 +431,17 @@ struct SuccessStoryMapCard: View {
                     // Pet Name
                     if let petName = story.petName {
                         Text(petName)
-                            .font(.headline)
+                            .font(.appFont(.headline))
                             .foregroundColor(.primary)
                     }
 
                     // Found Badge
                     HStack(spacing: 4) {
                         Image(systemName: "checkmark.circle.fill")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.tealAccent)
                         Text("found_and_reunited")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .fontWeight(.semibold)
                             .foregroundColor(.tealAccent)
                     }
@@ -454,9 +454,9 @@ struct SuccessStoryMapCard: View {
                     if let city = story.reunionCity {
                         HStack(spacing: 4) {
                             Image(systemName: "location.fill")
-                                .font(.caption2)
+                                .font(.appFont(.caption2))
                             Text(city)
-                                .font(.caption)
+                                .font(.appFont(.caption))
                         }
                         .foregroundColor(.secondary)
                     }
@@ -464,7 +464,7 @@ struct SuccessStoryMapCard: View {
                     // Distance
                     if let distance = story.distanceKm {
                         Text(String(format: NSLocalizedString("distance_km", comment: ""), distance))
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -477,12 +477,12 @@ struct SuccessStoryMapCard: View {
             let timeMissing = story.timeMissingText ?? String(localized: "some_time")
             if story.missingSinceDate != nil {
                 Text(String(format: NSLocalizedString("reunion_template", comment: ""), petName, timeMissing, petName, petName))
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .foregroundColor(.secondary)
                     .lineLimit(4)
             } else {
                 Text(String(format: NSLocalizedString("reunion_template_no_time", comment: ""), petName, petName))
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .foregroundColor(.secondary)
                     .lineLimit(3)
             }
@@ -491,11 +491,11 @@ struct SuccessStoryMapCard: View {
             if let storyText = story.storyText {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("owners_story")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .fontWeight(.semibold)
                         .foregroundColor(.primary)
                     Text(storyText)
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                         .italic()
                         .lineLimit(2)
@@ -507,9 +507,9 @@ struct SuccessStoryMapCard: View {
                 if let timeMissingText = story.timeMissingText {
                     HStack(spacing: 4) {
                         Image(systemName: "clock.fill")
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                         Text(String(format: NSLocalizedString("missing_for", comment: ""), timeMissingText))
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                     }
                     .foregroundColor(.secondary)
                 }
@@ -517,9 +517,9 @@ struct SuccessStoryMapCard: View {
                 if let foundDate = story.foundAtDate {
                     HStack(spacing: 4) {
                         Image(systemName: "calendar")
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                         Text(String(format: NSLocalizedString("found_on", comment: ""), foundDate.timeAgoDisplay()))
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                     }
                     .foregroundColor(.secondary)
                 }
@@ -543,17 +543,17 @@ struct EmptySuccessStoriesView: View {
                     .fill(Color(UIColor.systemGray6))
                     .frame(width: 100, height: 100)
                 Image(systemName: "heart.circle.fill")
-                    .font(.system(size: 48))
+                    .font(.appFont(size: 48))
                     .foregroundColor(.tealAccent)
             }
 
             VStack(spacing: 12) {
                 Text("no_success_stories")
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.appFont(size: 20, weight: .bold))
                     .foregroundColor(.primary)
 
                 Text("no_success_stories_message")
-                    .font(.system(size: 15))
+                    .font(.appFont(size: 15))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)

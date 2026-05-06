@@ -32,7 +32,7 @@ struct ShareLocationView: View {
 
                     if let error = errorMessage {
                         Text(error)
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.red)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal)
@@ -45,7 +45,7 @@ struct ShareLocationView: View {
                         if !showManualAddress {
                             Button(action: { showManualAddress = true }) {
                                 Text(NSLocalizedString("share_address_instead", comment: ""))
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                             }
                             .padding(.top, 4)
                         } else {
@@ -54,7 +54,7 @@ struct ShareLocationView: View {
                     }
 
                     Text(NSLocalizedString("share_privacy_note", comment: ""))
-                        .font(.caption2)
+                        .font(.appFont(.caption2))
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
@@ -79,11 +79,11 @@ struct ShareLocationView: View {
     private var header: some View {
         VStack(spacing: 12) {
             Image(systemName: "location.circle.fill")
-                .font(.system(size: 60))
+                .font(.appFont(size: 60))
                 .foregroundColor(.blue)
 
             Text(String(format: NSLocalizedString("share_help_get_home %@", comment: ""), petName))
-                .font(.title2)
+                .font(.appFont(.title2))
                 .bold()
 
             Text(NSLocalizedString("share_location_subtitle", comment: ""))
@@ -98,13 +98,13 @@ struct ShareLocationView: View {
         if let location = locationManager.location {
             VStack(spacing: 8) {
                 Text(NSLocalizedString("share_your_location", comment: ""))
-                    .font(.headline)
+                    .font(.appFont(.headline))
                 Text(String(
                     format: NSLocalizedString("coordinates_display", comment: ""),
                     String(format: "%.6f", location.latitude),
                     String(format: "%.6f", location.longitude)
                 ))
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
             .padding()
@@ -114,7 +114,7 @@ struct ShareLocationView: View {
             VStack(spacing: 8) {
                 ProgressView()
                 Text(NSLocalizedString("share_getting_location", comment: ""))
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
             .padding()
@@ -124,10 +124,10 @@ struct ShareLocationView: View {
     private var successState: some View {
         VStack(spacing: 10) {
             Image(systemName: "checkmark.circle.fill")
-                .font(.system(size: 50))
+                .font(.appFont(size: 50))
                 .foregroundColor(.tealAccent)
             Text(NSLocalizedString("share_owner_notified", comment: ""))
-                .font(.headline)
+                .font(.appFont(.headline))
             Text(NSLocalizedString("share_on_their_way", comment: ""))
         }
         .foregroundColor(.secondary)
@@ -161,9 +161,9 @@ struct ShareLocationView: View {
     private var manualAddressBlock: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(NSLocalizedString("share_manual_address_title", comment: ""))
-                .font(.headline)
+                .font(.appFont(.headline))
             Text(NSLocalizedString("share_manual_address_desc", comment: ""))
-                .font(.caption)
+                .font(.appFont(.caption))
                 .foregroundColor(.secondary)
 
             // SwiftUI's TextEditor has no native placeholder, so overlay the
@@ -173,7 +173,7 @@ struct ShareLocationView: View {
             ZStack(alignment: .topLeading) {
                 if manualAddress.isEmpty {
                     Text(NSLocalizedString("share_manual_address_placeholder", comment: ""))
-                        .font(.body)
+                        .font(.appFont(.body))
                         .foregroundColor(.secondary.opacity(0.6))
                         .padding(.horizontal, 8)
                         .padding(.vertical, 12)

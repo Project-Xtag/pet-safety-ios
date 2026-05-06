@@ -30,15 +30,15 @@ struct ReportSightingView: View {
                             .fill(Color.brandOrange.opacity(0.1))
                             .frame(width: 80, height: 80)
                         Image(systemName: "eye.fill")
-                            .font(.system(size: 32))
+                            .font(.appFont(size: 32))
                             .foregroundColor(.brandOrange)
                     }
 
                     Text("report_sighting_header")
-                        .font(.system(size: 22, weight: .bold))
+                        .font(.appFont(size: 22, weight: .bold))
 
                     Text("report_sighting_help")
-                        .font(.system(size: 14))
+                        .font(.appFont(size: 14))
                         .foregroundColor(.mutedText)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 16)
@@ -50,9 +50,9 @@ struct ReportSightingView: View {
                     Toggle(isOn: $shareContactInfo) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("share_contact_info")
-                                .font(.system(size: 15, weight: .semibold))
+                                .font(.appFont(size: 15, weight: .semibold))
                             Text("share_contact_info_desc")
-                                .font(.system(size: 12))
+                                .font(.appFont(size: 12))
                                 .foregroundColor(.mutedText)
                         }
                     }
@@ -61,7 +61,7 @@ struct ReportSightingView: View {
                     if shareContactInfo {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("name")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.appFont(size: 14, weight: .semibold))
                                 .foregroundColor(.primary)
 
                             HStack(spacing: 12) {
@@ -84,7 +84,7 @@ struct ReportSightingView: View {
 
                         VStack(alignment: .leading, spacing: 8) {
                             Text("phone")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.appFont(size: 14, weight: .semibold))
                                 .foregroundColor(.primary)
 
                             HStack(spacing: 12) {
@@ -107,7 +107,7 @@ struct ReportSightingView: View {
 
                         VStack(alignment: .leading, spacing: 8) {
                             Text("email")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.appFont(size: 14, weight: .semibold))
                                 .foregroundColor(.primary)
 
                             HStack(spacing: 12) {
@@ -137,12 +137,12 @@ struct ReportSightingView: View {
                 // Location Section
                 VStack(alignment: .leading, spacing: 16) {
                     Text("sighting_location")
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.appFont(size: 16, weight: .semibold))
                         .foregroundColor(.primary)
 
                     Toggle(isOn: $useCurrentLocation) {
                         Label("use_current_location", systemImage: "location.fill")
-                            .font(.system(size: 15))
+                            .font(.appFont(size: 15))
                     }
                     .tint(.brandOrange)
                     .onChange(of: useCurrentLocation) { _, isOn in
@@ -157,7 +157,7 @@ struct ReportSightingView: View {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(.tealAccent)
                                 Text("location_captured")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.secondary)
                             }
                         } else {
@@ -165,14 +165,14 @@ struct ReportSightingView: View {
                                 ProgressView()
                                     .scaleEffect(0.8)
                                 Text("getting_location")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.secondary)
                             }
                         }
                     } else {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("address_or_description")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.appFont(size: 14, weight: .semibold))
                                 .foregroundColor(.primary)
 
                             HStack(spacing: 12) {
@@ -200,7 +200,7 @@ struct ReportSightingView: View {
                 // Notes Section
                 VStack(alignment: .leading, spacing: 8) {
                     Text("additional_details")
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.appFont(size: 16, weight: .semibold))
                         .foregroundColor(.primary)
 
                     TextEditor(text: $notes)
@@ -215,7 +215,7 @@ struct ReportSightingView: View {
                         .overlay(alignment: .topLeading) {
                             if notes.isEmpty {
                                 Text("sighting_notes_placeholder")
-                                    .font(.system(size: 15))
+                                    .font(.appFont(size: 15))
                                     .foregroundColor(Color(.placeholderText))
                                     .padding(.horizontal, 16)
                                     .padding(.vertical, 20)

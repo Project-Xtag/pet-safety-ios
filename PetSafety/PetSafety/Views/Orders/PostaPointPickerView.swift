@@ -19,11 +19,11 @@ struct PostaPointPickerView: View {
                         .foregroundColor(.tealAccent)
                     VStack(alignment: .leading, spacing: 2) {
                         Text(point.name)
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .fontWeight(.semibold)
                         if let address = point.address {
                             Text(address)
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -65,14 +65,14 @@ struct PostaPointPickerView: View {
             // Error message
             if let error = errorMessage {
                 Text(error)
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.red)
             }
 
             // Results
             if hasSearched && deliveryPoints.isEmpty && !isSearching {
                 Text("postapoint_no_results")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
                     .padding(.vertical, 4)
             }
@@ -88,21 +88,21 @@ struct PostaPointPickerView: View {
                     HStack(spacing: 12) {
                         Image(systemName: "mappin.circle.fill")
                             .foregroundColor(.brandOrange)
-                            .font(.title3)
+                            .font(.appFont(.title3))
 
                         VStack(alignment: .leading, spacing: 2) {
                             Text(point.name)
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .fontWeight(.medium)
                                 .foregroundColor(.primary)
                             if let address = point.address {
                                 Text(address)
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                             }
                             if let city = point.city, let postcode = point.postcode {
                                 Text("\(postcode) \(city)")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                             }
                         }

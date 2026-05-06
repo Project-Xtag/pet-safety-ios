@@ -13,7 +13,7 @@ struct FoundAlertsView: View {
                     ProgressView()
                         .scaleEffect(1.2)
                     Text("alerts_loading")
-                        .font(.system(size: 15))
+                        .font(.appFont(size: 15))
                         .foregroundColor(.mutedText)
                     Spacer()
                 }
@@ -68,17 +68,17 @@ struct FoundAlertRowView: View {
                 // Pet Name
                 if let pet = alert.pet {
                     Text(pet.name)
-                        .font(.headline)
+                        .font(.appFont(.headline))
                         .foregroundColor(.primary)
                 }
 
                 // Status Badge
                 HStack(spacing: 4) {
                     Image(systemName: "checkmark.circle.fill")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.tealAccent)
                     Text("alert_status_found")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .fontWeight(.semibold)
                         .foregroundColor(.tealAccent)
                 }
@@ -90,7 +90,7 @@ struct FoundAlertRowView: View {
                 // Found Date
                 if let updatedAt = alert.updatedAt.toDate() {
                     Text("alert_found_on \(updatedAt.formatted(date: .abbreviated, time: .omitted))")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                 }
 
@@ -98,9 +98,9 @@ struct FoundAlertRowView: View {
                 if let location = alert.lastSeenLocation {
                     HStack(spacing: 4) {
                         Image(systemName: "location.fill")
-                            .font(.caption2)
+                            .font(.appFont(.caption2))
                         Text(location)
-                            .font(.caption)
+                            .font(.appFont(.caption))
                     }
                     .foregroundColor(.secondary)
                     .lineLimit(1)
@@ -110,7 +110,7 @@ struct FoundAlertRowView: View {
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.caption)
+                .font(.appFont(.caption))
                 .foregroundColor(.secondary)
         }
         .padding(.vertical, 8)
@@ -184,7 +184,7 @@ struct FoundPetMapMarker: View {
                 } placeholder: {
                     Image(systemName: "pawprint.fill")
                         .foregroundColor(.white)
-                        .font(.system(size: 16))
+                        .font(.appFont(size: 16))
                 }
                 .frame(width: isSelected ? 60 : 50, height: isSelected ? 60 : 50)
                 .clipShape(Circle())
@@ -197,7 +197,7 @@ struct FoundPetMapMarker: View {
 
             // Arrow pointing down
             Image(systemName: "arrowtriangle.down.fill")
-                .font(.system(size: 12))
+                .font(.appFont(size: 12))
                 .foregroundColor(.tealAccent)
                 .offset(y: -6)
         }
@@ -234,16 +234,16 @@ struct FoundAlertMapCard: View {
                     // Pet Name
                     if let pet = alert.pet {
                         Text(pet.name)
-                            .font(.headline)
+                            .font(.appFont(.headline))
                             .foregroundColor(.primary)
                     }
 
                     // Found Status
                     HStack(spacing: 4) {
                         Image(systemName: "checkmark.circle.fill")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                         Text("alert_found_reunited")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .fontWeight(.semibold)
                     }
                     .foregroundColor(.tealAccent)
@@ -252,9 +252,9 @@ struct FoundAlertMapCard: View {
                     if let location = alert.lastSeenLocation {
                         HStack(spacing: 4) {
                             Image(systemName: "location.fill")
-                                .font(.caption2)
+                                .font(.appFont(.caption2))
                             Text(location)
-                                .font(.caption)
+                                .font(.appFont(.caption))
                         }
                         .foregroundColor(.secondary)
                         .lineLimit(1)
@@ -264,7 +264,7 @@ struct FoundAlertMapCard: View {
                 Spacer()
 
                 Image(systemName: "chevron.right")
-                    .font(.body)
+                    .font(.appFont(.body))
                     .foregroundColor(.secondary)
             }
             .padding()

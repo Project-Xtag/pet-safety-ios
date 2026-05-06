@@ -27,7 +27,7 @@ struct AddressView: View {
                 Section(header: Text("address_details"), footer: Text("address_shipping_footer")) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("address_street")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                         TextField(NSLocalizedString("address_street_placeholder", comment: ""), text: $streetAddress)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -36,7 +36,7 @@ struct AddressView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text("address_line2")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                         TextField(NSLocalizedString("address_line2_placeholder", comment: ""), text: $addressLine2)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -45,7 +45,7 @@ struct AddressView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text("address_city")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                         TextField(NSLocalizedString("address_city_placeholder", comment: ""), text: $city)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -54,7 +54,7 @@ struct AddressView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text("address_postal")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                         TextField(NSLocalizedString("address_postal_placeholder", comment: ""), text: $postalCode)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -64,7 +64,7 @@ struct AddressView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Text("address_country")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                         Button(action: { showCountryPicker = true }) {
                             HStack {
@@ -72,7 +72,7 @@ struct AddressView: View {
                                     .foregroundColor(country.isEmpty ? .secondary : .primary)
                                 Spacer()
                                 Image(systemName: "chevron.down")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                             }
                             .padding()
@@ -139,15 +139,15 @@ struct AddressView: View {
                     } else {
                         VStack(spacing: 12) {
                             Image(systemName: "house.circle")
-                                .font(.system(size: 50))
+                                .font(.appFont(size: 50))
                                 .foregroundColor(.secondary)
 
                             Text("address_no_address")
-                                .font(.headline)
+                                .font(.appFont(.headline))
                                 .foregroundColor(.secondary)
 
                             Text("address_delivery_prompt")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                                 .multilineTextAlignment(.center)
                         }
@@ -317,12 +317,12 @@ struct AddressFieldView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(label)
-                .font(.caption)
+                .font(.appFont(.caption))
                 .fontWeight(.medium)
                 .foregroundColor(.secondary)
                 .textCase(.uppercase)
             Text(value)
-                .font(.body)
+                .font(.appFont(.body))
         }
     }
 }

@@ -46,13 +46,13 @@ struct PendingRegistrationsView: View {
     private var emptyState: some View {
         VStack(spacing: 16) {
             Image(systemName: "checkmark.circle.fill")
-                .font(.system(size: 60))
+                .font(.appFont(size: 60))
                 .foregroundColor(.green)
             Text("all_caught_up")
-                .font(.title2)
+                .font(.appFont(.title2))
                 .fontWeight(.bold)
             Text("all_caught_up_description")
-                .font(.body)
+                .font(.appFont(.body))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
@@ -77,7 +77,7 @@ struct PendingRegistrationsView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.green)
                 Text("ready_to_activate")
-                    .font(.title3)
+                    .font(.appFont(.title3))
                     .fontWeight(.semibold)
             }
 
@@ -94,7 +94,7 @@ struct PendingRegistrationsView: View {
                 Image(systemName: "shippingbox")
                     .foregroundColor(.secondary)
                 Text("still_processing")
-                    .font(.title3)
+                    .font(.appFont(.title3))
                     .fontWeight(.semibold)
             }
 
@@ -110,9 +110,9 @@ struct PendingRegistrationsView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(reg.petName)
-                        .font(.headline)
+                        .font(.appFont(.headline))
                     Text(formatDate(reg.createdAt))
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.secondary)
                 }
                 Spacer()
@@ -135,7 +135,7 @@ struct PendingRegistrationsView: View {
                             Image(systemName: "qrcode.viewfinder")
                             Text("scan_tag_now")
                         }
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .fontWeight(.semibold)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)
@@ -146,7 +146,7 @@ struct PendingRegistrationsView: View {
 
                     NavigationLink(destination: PetFormView(mode: .create)) {
                         Text("create_profile_first")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .fontWeight(.medium)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 10)
@@ -161,7 +161,7 @@ struct PendingRegistrationsView: View {
             } else {
                 NavigationLink(destination: PetFormView(mode: .create)) {
                     Text("create_profile_while_waiting")
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .fontWeight(.medium)
                         .padding(.vertical, 10)
                         .padding(.horizontal, 16)
@@ -189,7 +189,7 @@ struct PendingRegistrationsView: View {
     private var helpSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("activation_help_title")
-                .font(.headline)
+                .font(.appFont(.headline))
 
             VStack(alignment: .leading, spacing: 6) {
                 helpStep(number: "1", text: String(localized: "activation_help_step1"))
@@ -206,14 +206,14 @@ struct PendingRegistrationsView: View {
     private func helpStep(number: String, text: String) -> some View {
         HStack(alignment: .top, spacing: 8) {
             Text(number)
-                .font(.caption)
+                .font(.appFont(.caption))
                 .fontWeight(.bold)
                 .frame(width: 20, height: 20)
                 .background(Color.brandOrange.opacity(0.15))
                 .foregroundColor(.brandOrange)
                 .cornerRadius(10)
             Text(text)
-                .font(.subheadline)
+                .font(.appFont(.subheadline))
                 .foregroundColor(.secondary)
         }
     }
@@ -229,7 +229,7 @@ struct PendingRegistrationsView: View {
         }()
 
         return Text(text)
-            .font(.caption)
+            .font(.appFont(.caption))
             .fontWeight(.medium)
             .padding(.horizontal, 8)
             .padding(.vertical, 4)

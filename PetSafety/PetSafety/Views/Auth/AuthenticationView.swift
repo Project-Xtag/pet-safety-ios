@@ -39,12 +39,12 @@ struct AuthenticationView: View {
                         // Header
                         VStack(alignment: .leading, spacing: 8) {
                             Text("welcome_back")
-                                .font(.system(size: 26, weight: .bold))
+                                .font(.appFont(size: 26, weight: .bold))
                                 .foregroundColor(.primary)
                                 .accessibilityAddTraits(.isHeader)
 
                             Text("enter_email_subtitle")
-                                .font(.system(size: 15))
+                                .font(.appFont(size: 15))
                                 .foregroundColor(.mutedText)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -55,7 +55,7 @@ struct AuthenticationView: View {
                                 // Email Field
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text("email_address")
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(.appFont(size: 14, weight: .semibold))
                                         .foregroundColor(.primary)
 
                                     HStack(spacing: 12) {
@@ -80,7 +80,7 @@ struct AuthenticationView: View {
 
                                     if !email.isEmpty && !isValidEmail {
                                         Text("invalid_email")
-                                            .font(.system(size: 12))
+                                            .font(.appFont(size: 12))
                                             .foregroundColor(.red)
                                             .padding(.top, 2)
                                     }
@@ -108,10 +108,10 @@ struct AuthenticationView: View {
                                     }) {
                                         HStack(spacing: 8) {
                                             Image(systemName: authViewModel.biometricIconName)
-                                                .font(.system(size: 18))
+                                                .font(.appFont(size: 18))
                                                 .accessibilityLabel(NSLocalizedString("biometric_login_title", comment: ""))
                                             Text(String(format: NSLocalizedString("login_with_biometric_type", comment: ""), authViewModel.biometricTypeName))
-                                                .font(.system(size: 15, weight: .medium))
+                                                .font(.appFont(size: 15, weight: .medium))
                                         }
                                         .foregroundColor(.brandOrange)
                                     }
@@ -123,10 +123,10 @@ struct AuthenticationView: View {
                             VStack(spacing: 20) {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text("otp_sent_to")
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(.appFont(size: 14, weight: .semibold))
                                         .foregroundColor(.primary)
                                     Text(email)
-                                        .font(.system(size: 14))
+                                        .font(.appFont(size: 14))
                                         .foregroundColor(.brandOrange)
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -162,12 +162,12 @@ struct AuthenticationView: View {
                                 VStack(spacing: 8) {
                                     if resendCooldown > 0 {
                                         Text(String(format: NSLocalizedString("resend_code_cooldown", comment: ""), resendCooldown))
-                                            .font(.system(size: 14))
+                                            .font(.appFont(size: 14))
                                             .foregroundColor(.mutedText)
                                     } else {
                                         Button(action: resendOTP) {
                                             Text("resend_code_prompt")
-                                                .font(.system(size: 14, weight: .medium))
+                                                .font(.appFont(size: 14, weight: .medium))
                                                 .foregroundColor(.brandOrange)
                                         }
                                         .disabled(authViewModel.isLoading)
@@ -179,7 +179,7 @@ struct AuthenticationView: View {
                                     otpCode = ""
                                     stopResendTimer()
                                 }
-                                .font(.system(size: 14, weight: .medium))
+                                .font(.appFont(size: 14, weight: .medium))
                                 .foregroundColor(.mutedText)
                             }
                         }
@@ -187,7 +187,7 @@ struct AuthenticationView: View {
                         // T&Cs and Privacy Policy Disclaimer
                         VStack(spacing: 4) {
                             Text("terms_login_prefix")
-                                .font(.system(size: 12))
+                                .font(.appFont(size: 12))
                                 .foregroundColor(.mutedText)
                             HStack(spacing: 4) {
                                 // Apple HIG / WCAG 2.1 AA require a 44×44 pt
@@ -197,15 +197,15 @@ struct AuthenticationView: View {
                                 // contentShape without changing the visual
                                 // size of the link copy.
                                 Link("terms_of_service", destination: WebURLHelper.termsURL)
-                                    .font(.system(size: 12, weight: .medium))
+                                    .font(.appFont(size: 12, weight: .medium))
                                     .foregroundColor(.brandOrange)
                                     .frame(minHeight: 44)
                                     .contentShape(Rectangle())
                                 Text("terms_and")
-                                    .font(.system(size: 12))
+                                    .font(.appFont(size: 12))
                                     .foregroundColor(.mutedText)
                                 Link("privacy_policy", destination: WebURLHelper.privacyURL)
-                                    .font(.system(size: 12, weight: .medium))
+                                    .font(.appFont(size: 12, weight: .medium))
                                     .frame(minHeight: 44)
                                     .contentShape(Rectangle())
                                     .foregroundColor(.brandOrange)
@@ -222,12 +222,12 @@ struct AuthenticationView: View {
                     // Register & Order Tag CTAs for new users (outside card)
                     VStack(spacing: 8) {
                         Text("dont_have_account")
-                            .font(.system(size: 14))
+                            .font(.appFont(size: 14))
                             .foregroundColor(.mutedText)
 
                         Button(action: { onNavigateToRegister?() }) {
                             Text("register")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.appFont(size: 14, weight: .semibold))
                                 .foregroundColor(.brandOrange)
                                 .frame(minHeight: 44)
                                 .contentShape(Rectangle())
@@ -236,9 +236,9 @@ struct AuthenticationView: View {
                         Button(action: { showOrderTagSheet = true }) {
                             HStack(spacing: 6) {
                                 Image(systemName: "tag.fill")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                 Text("start_here_order_free_tag")
-                                    .font(.system(size: 14, weight: .semibold))
+                                    .font(.appFont(size: 14, weight: .semibold))
                             }
                             .foregroundColor(.brandOrange)
                             .frame(minHeight: 44)

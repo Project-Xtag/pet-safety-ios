@@ -100,10 +100,10 @@ struct OrderMoreTagsView: View {
             }
 
             Text("order_more_complete")
-                .font(.system(size: 28, weight: .bold))
+                .font(.appFont(size: 28, weight: .bold))
 
             Text("order_more_confirmation")
-                .font(.body)
+                .font(.appFont(.body))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
@@ -199,10 +199,10 @@ struct OrderMoreTagsView: View {
                 .foregroundColor(.orange)
             VStack(alignment: .leading, spacing: 4) {
                 Text("tags_coming_soon_title")
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .fontWeight(.semibold)
                 Text("tags_coming_soon_body")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -222,15 +222,15 @@ struct OrderMoreTagsView: View {
                     .fill(Color.tealAccent.opacity(0.15))
                     .frame(width: 70, height: 70)
                 Image(systemName: "shippingbox.fill")
-                    .font(.system(size: 28))
+                    .font(.appFont(size: 28))
                     .foregroundColor(.tealAccent)
             }
 
             Text("order_more_title")
-                .font(.system(size: 24, weight: .bold))
+                .font(.appFont(size: 24, weight: .bold))
 
             Text("order_more_subtitle")
-                .font(.system(size: 15))
+                .font(.appFont(size: 15))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
         }
@@ -247,27 +247,27 @@ struct OrderMoreTagsView: View {
             Toggle(isOn: $isGift) {
                 HStack(spacing: 10) {
                     Image(systemName: "gift.fill")
-                        .font(.system(size: 18))
+                        .font(.appFont(size: 18))
                         .foregroundColor(.brandOrange)
                     Text("order_gift_toggle")
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.appFont(size: 16, weight: .medium))
                 }
             }
             .tint(.brandOrange)
 
             if isGift {
                 Text("order_gift_description")
-                    .font(.system(size: 13))
+                    .font(.appFont(size: 13))
                     .foregroundColor(.secondary)
                     .padding(.top, 2)
 
                 Stepper(value: $giftQuantity, in: 1...20) {
                     HStack {
                         Text("order_gift_quantity")
-                            .font(.system(size: 15))
+                            .font(.appFont(size: 15))
                         Spacer()
                         Text("\(giftQuantity)")
-                            .font(.system(size: 15, weight: .semibold))
+                            .font(.appFont(size: 15, weight: .semibold))
                             .foregroundColor(.tealAccent)
                     }
                 }
@@ -287,7 +287,7 @@ struct OrderMoreTagsView: View {
                         }
                     if !giftMessage.isEmpty {
                         Text("\(giftMessage.count)/500")
-                            .font(.system(size: 11))
+                            .font(.appFont(size: 11))
                             .foregroundColor(.secondary)
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
@@ -310,7 +310,7 @@ struct OrderMoreTagsView: View {
                     if petNames.count > 1 {
                         Button(action: { removePetName(at: index) }) {
                             Image(systemName: "minus.circle.fill")
-                                .font(.title3)
+                                .font(.appFont(.title3))
                                 .foregroundColor(.errorColor.opacity(0.7))
                         }
                     }
@@ -320,9 +320,9 @@ struct OrderMoreTagsView: View {
             Button(action: addPetName) {
                 HStack(spacing: 6) {
                     Image(systemName: "plus.circle.fill")
-                        .font(.system(size: 16))
+                        .font(.appFont(size: 16))
                     Text("order_more_add_another")
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.appFont(size: 15, weight: .medium))
                 }
                 .foregroundColor(.tealAccent)
             }
@@ -375,13 +375,13 @@ struct OrderMoreTagsView: View {
                 HStack(spacing: 10) {
                     Image(systemName: "globe")
                         .foregroundColor(.secondary)
-                        .font(.system(size: 15))
+                        .font(.appFont(size: 15))
                     Text(SupportedCountries.findByCode(selectedCountryCode)?.localizedName ?? String(localized: "address_select_country"))
                         .foregroundColor(selectedCountryCode.isEmpty ? .secondary : .primary)
                     Spacer()
                     Image(systemName: "chevron.up.chevron.down")
                         .foregroundColor(.secondary)
-                        .font(.system(size: 12))
+                        .font(.appFont(size: 12))
                 }
                 .padding(.horizontal, 14)
                 .padding(.vertical, 12)
@@ -458,10 +458,10 @@ struct OrderMoreTagsView: View {
             if isGift {
                 HStack(spacing: 6) {
                     Image(systemName: "gift.fill")
-                        .font(.system(size: 12))
+                        .font(.appFont(size: 12))
                         .foregroundColor(.brandOrange)
                     Text("order_gift_badge")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.appFont(size: 13, weight: .semibold))
                         .foregroundColor(.brandOrange)
                 }
                 .padding(.horizontal, 10)
@@ -475,11 +475,11 @@ struct OrderMoreTagsView: View {
 
             HStack {
                 Text("order_more_tags_count \(isGift ? giftQuantity : validPetCount)")
-                    .font(.system(size: 15))
+                    .font(.appFont(size: 15))
                     .foregroundColor(.secondary)
                 Spacer()
                 Text(String(localized: "free_price"))
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.appFont(size: 15, weight: .semibold))
                     .foregroundColor(.tealAccent)
             }
             .padding(.horizontal, 16)
@@ -489,7 +489,7 @@ struct OrderMoreTagsView: View {
 
             HStack {
                 Text("order_more_shipping_cost")
-                    .font(.system(size: 15))
+                    .font(.appFont(size: 15))
                     .foregroundColor(.secondary)
                 Spacer()
                 if isLoadingPrices {
@@ -497,7 +497,7 @@ struct OrderMoreTagsView: View {
                         .scaleEffect(0.8)
                 } else {
                     Text(currentShippingPriceLabel)
-                        .font(.system(size: 15, weight: .semibold))
+                        .font(.appFont(size: 15, weight: .semibold))
                 }
             }
             .padding(.horizontal, 16)
@@ -679,10 +679,10 @@ private struct SectionCard<Content: View>: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 10) {
                 Image(systemName: icon)
-                    .font(.system(size: 16))
+                    .font(.appFont(size: 16))
                     .foregroundColor(.tealAccent)
                 Text(title)
-                    .font(.system(size: 17, weight: .semibold))
+                    .font(.appFont(size: 17, weight: .semibold))
             }
 
             content()
@@ -706,10 +706,10 @@ struct DeliveryOptionCard: View {
         Button(action: action) {
             VStack(spacing: 4) {
                 Text(title)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.appFont(size: 14, weight: .semibold))
                     .multilineTextAlignment(.center)
                 Text(price)
-                    .font(.system(size: 12))
+                    .font(.appFont(size: 12))
                     .foregroundColor(.secondary)
             }
             .frame(maxWidth: .infinity)

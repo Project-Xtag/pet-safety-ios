@@ -59,14 +59,14 @@ struct MarkAsLostView: View {
         VStack(spacing: 24) {
             Spacer()
             Image(systemName: "exclamationmark.triangle.fill")
-                .font(.system(size: 48))
+                .font(.appFont(size: 48))
                 .foregroundColor(.brandOrange)
             Text("mark_lost_starter_notice")
-                .font(.title3)
+                .font(.appFont(.title3))
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
             Text("mark_lost_upgrade_prompt")
-                .font(.body)
+                .font(.appFont(.body))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
             Spacer()
@@ -121,7 +121,7 @@ struct MarkAsLostView: View {
 
                     VStack(alignment: .leading) {
                         Text(pet.name)
-                            .font(.headline)
+                            .font(.appFont(.headline))
                             .accessibilityAddTraits(.isHeader)
                         let petDetails: String = {
                             var items: [String] = []
@@ -138,7 +138,7 @@ struct MarkAsLostView: View {
                         }()
                         if !petDetails.isEmpty {
                             Text(petDetails)
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -165,17 +165,17 @@ struct MarkAsLostView: View {
                                 .accessibilityHidden(true)
                             if let addr = currentLocationAddress, !addr.isEmpty {
                                 Text(addr)
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .foregroundColor(.secondary)
                             } else if isReverseGeocodingCurrent {
                                 ProgressView()
                                     .scaleEffect(0.7)
                                 Text("mark_lost_getting_location")
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .foregroundColor(.secondary)
                             } else {
                                 Text(String(format: NSLocalizedString("coordinates_display", comment: ""), String(format: "%.6f", loc.latitude), String(format: "%.6f", loc.longitude)))
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                             }
                         }
@@ -184,7 +184,7 @@ struct MarkAsLostView: View {
                             ProgressView()
                                 .scaleEffect(0.8)
                             Text("mark_lost_getting_location")
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -196,11 +196,11 @@ struct MarkAsLostView: View {
                             .accessibilityHidden(true)
                         if let address = registeredAddress {
                             Text(address)
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .foregroundColor(.secondary)
                         } else {
                             Text("mark_lost_no_address")
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .foregroundColor(.red)
                         }
                     }
@@ -251,7 +251,7 @@ struct MarkAsLostView: View {
                 if subscriptionViewModel.isOnStarterPlan {
                     VStack(alignment: .leading, spacing: 8) {
                         Label(String(localized: "mark_lost_starter_notice"), systemImage: "info.circle")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.brandOrange)
                     }
                 } else {
@@ -262,7 +262,7 @@ struct MarkAsLostView: View {
                     // Keeps the section visually quieter and matches
                     // the marketing copy elsewhere in the app.
                     Text("mark_lost_sends_to")
-                        .font(.subheadline)
+                        .font(.appFont(.subheadline))
                         .foregroundColor(.secondary)
                 }
             }

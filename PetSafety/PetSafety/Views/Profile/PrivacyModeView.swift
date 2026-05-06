@@ -19,7 +19,7 @@ struct PrivacyModeView: View {
                 Text("privacy_contact_visibility")
                 Text("privacy_contact_footer")
                     .textCase(nil)
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .foregroundColor(.secondary)
             }.padding(.bottom, 4)) {
                 // 2026-05-05 reorder: name, address, phone (primary +
@@ -31,7 +31,7 @@ struct PrivacyModeView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("privacy_show_name")
                         Text("privacy_show_name_subtitle")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -44,7 +44,7 @@ struct PrivacyModeView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("privacy_show_address")
                         Text("privacy_show_address_subtitle")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -57,7 +57,7 @@ struct PrivacyModeView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("privacy_show_phone")
                         Text("privacy_show_phone_subtitle")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -71,7 +71,7 @@ struct PrivacyModeView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("privacy_show_secondary_phone")
                             Text("privacy_show_secondary_phone_subtitle")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -85,7 +85,7 @@ struct PrivacyModeView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         Text("privacy_show_email")
                         Text("privacy_show_email_subtitle")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -99,7 +99,7 @@ struct PrivacyModeView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text("privacy_show_secondary_email")
                             Text("privacy_show_secondary_email_subtitle")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -123,7 +123,7 @@ struct PrivacyModeView: View {
                             .foregroundColor(.primary)
                         Spacer()
                         Image(systemName: "arrow.up.right.square")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }

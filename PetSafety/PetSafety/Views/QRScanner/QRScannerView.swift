@@ -36,17 +36,17 @@ struct QRScannerView: View {
                                     .fill(Color.white.opacity(0.2))
                                     .frame(width: 80, height: 80)
                                 Image(systemName: "qrcode.viewfinder")
-                                    .font(.system(size: 40))
+                                    .font(.appFont(size: 40))
                                     .foregroundColor(.white)
                                     .accessibilityLabel(String(localized: "accessibility_qr_scanner"))
                             }
 
                             Text("scan_qr_code")
-                                .font(.system(size: 22, weight: .bold))
+                                .font(.appFont(size: 22, weight: .bold))
                                 .foregroundColor(.white)
 
                             Text("scan_qr_subtitle")
-                                .font(.system(size: 15))
+                                .font(.appFont(size: 15))
                                 .foregroundColor(.white.opacity(0.8))
                         }
                         .padding(.horizontal, 32)
@@ -79,7 +79,7 @@ struct QRScannerView: View {
                         Spacer()
                         Button(action: { toggleTorch() }) {
                             Image(systemName: isTorchOn ? "flashlight.on.fill" : "flashlight.off.fill")
-                                .font(.system(size: 22))
+                                .font(.appFont(size: 22))
                                 .foregroundColor(.white)
                                 .frame(width: 50, height: 50)
                                 .background(
@@ -102,18 +102,18 @@ struct QRScannerView: View {
                             .fill(Color(UIColor.systemGray6))
                             .frame(width: 100, height: 100)
                         Image(systemName: "camera.fill")
-                            .font(.system(size: 40))
+                            .font(.appFont(size: 40))
                             .foregroundColor(.tealAccent)
                             .accessibilityLabel(String(localized: "accessibility_camera_required"))
                     }
 
                     VStack(spacing: 12) {
                         Text("camera_access_required")
-                            .font(.system(size: 22, weight: .bold))
+                            .font(.appFont(size: 22, weight: .bold))
                             .foregroundColor(.primary)
 
                         Text("camera_access_message")
-                            .font(.system(size: 15))
+                            .font(.appFont(size: 15))
                             .foregroundColor(.mutedText)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
@@ -317,7 +317,7 @@ struct ScannedPetView: View {
                             Circle()
                                 .fill(Color.tealAccent.opacity(0.2))
                             Image(systemName: "pawprint.fill")
-                                .font(.system(size: 50))
+                                .font(.appFont(size: 50))
                                 .foregroundColor(.tealAccent)
                                 .accessibilityLabel(String(localized: "accessibility_pet_photo"))
                         }
@@ -329,11 +329,11 @@ struct ScannedPetView: View {
                     // Pet Name & Info
                     VStack(spacing: 8) {
                         Text(String(format: NSLocalizedString("hello_pet_name", comment: ""), pet.name))
-                            .font(.system(size: 26, weight: .bold))
+                            .font(.appFont(size: 26, weight: .bold))
                             .multilineTextAlignment(.center)
 
                         Text("scanned_tag_thanks")
-                            .font(.system(size: 15))
+                            .font(.appFont(size: 15))
                             .foregroundColor(.mutedText)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 24)
@@ -346,12 +346,12 @@ struct ScannedPetView: View {
                             if let breed = pet.breed {
                                 let localized = PetLocalizer.localizeBreed(breed, species: pet.species)
                                 Text("**\(NSLocalizedString("scanner_breed", comment: "")):** \(localized)")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                             if let age = pet.age {
                                 Text("**\(NSLocalizedString("scanner_age", comment: "")):** \(age)")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                             if let color = pet.color {
@@ -359,18 +359,18 @@ struct ScannedPetView: View {
                                 // enum), so no localizer lookup — but
                                 // rendered as-is.
                                 Text("**\(NSLocalizedString("scanner_color", comment: "")):** \(color)")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                             if let sex = pet.sex, !sex.isEmpty {
                                 let localized = PetLocalizer.localizeSex(sex, species: pet.species)
                                 Text("**\(NSLocalizedString("sex_label", comment: "")):** \(localized)")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                             if let neutered = pet.isNeutered {
                                 Text("**\(NSLocalizedString("neutered_label", comment: "")):** \(neutered ? NSLocalizedString("yes", comment: "") : NSLocalizedString("no", comment: ""))")
-                                    .font(.system(size: 14))
+                                    .font(.appFont(size: 14))
                                     .foregroundColor(.mutedText)
                             }
                         }
@@ -398,7 +398,7 @@ struct ScannedPetView: View {
                             .padding(.horizontal, 24)
 
                             Text(String(format: NSLocalizedString("owner_notified_sms_email", comment: ""), pet.name))
-                                .font(.system(size: 12))
+                                .font(.appFont(size: 12))
                                 .foregroundColor(.mutedText)
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 32)
@@ -416,10 +416,10 @@ struct ScannedPetView: View {
                         && pet.ownerSecondaryEmail == nil {
                         VStack(spacing: 8) {
                             Image(systemName: "exclamationmark.circle")
-                                .font(.system(size: 28))
+                                .font(.appFont(size: 28))
                                 .foregroundColor(.mutedText)
                             Text("owner_communication_disabled")
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.mutedText)
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 32)
@@ -431,10 +431,10 @@ struct ScannedPetView: View {
                     if pet.ownerPhone != nil || pet.ownerEmail != nil {
                         VStack(spacing: 16) {
                             Text("contact_owner")
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.appFont(size: 18, weight: .bold))
 
                             Text("contact_owner_plea")
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.mutedText)
                                 .multilineTextAlignment(.center)
 
@@ -447,11 +447,11 @@ struct ScannedPetView: View {
                                                 .foregroundColor(.tealAccent)
                                                 .accessibilityLabel(String(localized: "accessibility_call_owner"))
                                             Text(String(format: NSLocalizedString("call_phone", comment: ""), phone))
-                                                .font(.system(size: 15, weight: .medium))
+                                                .font(.appFont(size: 15, weight: .medium))
                                                 .foregroundColor(.primary)
                                             Spacer()
                                             Image(systemName: "chevron.right")
-                                                .font(.system(size: 14))
+                                                .font(.appFont(size: 14))
                                                 .foregroundColor(.mutedText)
                                                 .accessibilityHidden(true)
                                         }
@@ -469,11 +469,11 @@ struct ScannedPetView: View {
                                                 .foregroundColor(.tealAccent)
                                                 .accessibilityLabel(String(localized: "accessibility_email_owner"))
                                             Text(String(format: NSLocalizedString("email_contact", comment: ""), email))
-                                                .font(.system(size: 15, weight: .medium))
+                                                .font(.appFont(size: 15, weight: .medium))
                                                 .foregroundColor(.primary)
                                             Spacer()
                                             Image(systemName: "chevron.right")
-                                                .font(.system(size: 14))
+                                                .font(.appFont(size: 14))
                                                 .foregroundColor(.mutedText)
                                                 .accessibilityHidden(true)
                                         }
@@ -491,7 +491,7 @@ struct ScannedPetView: View {
                     if let address = pet.ownerAddress {
                         VStack(spacing: 12) {
                             Text("scanner_owner_location")
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.appFont(size: 18, weight: .bold))
 
                             HStack(alignment: .top, spacing: 12) {
                                 Image(systemName: "house.fill")
@@ -501,21 +501,21 @@ struct ScannedPetView: View {
 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(address)
-                                        .font(.system(size: 15, weight: .medium))
+                                        .font(.appFont(size: 15, weight: .medium))
                                     if let line2 = pet.ownerAddressLine2, !line2.isEmpty {
                                         Text(line2)
-                                            .font(.system(size: 14))
+                                            .font(.appFont(size: 14))
                                             .foregroundColor(.mutedText)
                                     }
                                     let cityLine = [pet.ownerCity, pet.ownerPostalCode].compactMap { $0 }.joined(separator: ", ")
                                     if !cityLine.isEmpty {
                                         Text(cityLine)
-                                            .font(.system(size: 14))
+                                            .font(.appFont(size: 14))
                                             .foregroundColor(.mutedText)
                                     }
                                     if let country = pet.ownerCountry {
                                         Text(country)
-                                            .font(.system(size: 14))
+                                            .font(.appFont(size: 14))
                                             .foregroundColor(.mutedText)
                                     }
                                 }
@@ -537,11 +537,11 @@ struct ScannedPetView: View {
                                     .foregroundColor(.red)
                                     .accessibilityLabel(String(localized: "accessibility_medical_info"))
                                 Text("scanner_medical_info")
-                                    .font(.system(size: 16, weight: .bold))
+                                    .font(.appFont(size: 16, weight: .bold))
                                     .foregroundColor(.red)
                             }
                             Text(medical)
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.primary)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -559,11 +559,11 @@ struct ScannedPetView: View {
                                     .foregroundColor(.orange)
                                     .accessibilityLabel(String(localized: "accessibility_allergies"))
                                 Text("scanner_allergies")
-                                    .font(.system(size: 16, weight: .bold))
+                                    .font(.appFont(size: 16, weight: .bold))
                                     .foregroundColor(.orange)
                             }
                             Text(allergies)
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.primary)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -581,11 +581,11 @@ struct ScannedPetView: View {
                                     .foregroundColor(.blue)
                                     .accessibilityLabel(String(localized: "accessibility_notes"))
                                 Text("scanner_notes")
-                                    .font(.system(size: 16, weight: .bold))
+                                    .font(.appFont(size: 16, weight: .bold))
                                     .foregroundColor(.blue)
                             }
                             Text(notes)
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.primary)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -599,9 +599,9 @@ struct ScannedPetView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("scanner_how_it_works")
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.appFont(size: 18, weight: .bold))
                             Text(String(format: NSLocalizedString("help_reunite_pet", comment: ""), pet.name))
-                                .font(.system(size: 14))
+                                .font(.appFont(size: 14))
                                 .foregroundColor(.mutedText)
                         }
 
@@ -619,11 +619,11 @@ struct ScannedPetView: View {
                     // Privacy Notice
                     HStack(spacing: 8) {
                         Image(systemName: "lock.fill")
-                            .font(.system(size: 12))
+                            .font(.appFont(size: 12))
                             .foregroundColor(.mutedText)
                             .accessibilityLabel(String(localized: "accessibility_privacy_notice"))
                         Text(String(format: NSLocalizedString("privacy_notice", comment: ""), pet.name))
-                            .font(.system(size: 12))
+                            .font(.appFont(size: 12))
                             .foregroundColor(.mutedText)
                     }
                     .padding()
@@ -640,7 +640,7 @@ struct ScannedPetView: View {
                     Button("done") {
                         dismiss()
                     }
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.appFont(size: 16, weight: .semibold))
                     .foregroundColor(.brandOrange)
                 }
             }

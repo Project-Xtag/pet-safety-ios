@@ -42,11 +42,11 @@ struct RegistrationView: View {
                         // Header
                         VStack(alignment: .leading, spacing: 8) {
                             Text("create_account")
-                                .font(.system(size: 26, weight: .bold))
+                                .font(.appFont(size: 26, weight: .bold))
                                 .foregroundColor(.primary)
 
                             Text("enter_details_subtitle")
-                                .font(.system(size: 15))
+                                .font(.appFont(size: 15))
                                 .foregroundColor(.mutedText)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -57,7 +57,7 @@ struct RegistrationView: View {
                                 // First Name Field
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text("first_name")
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(.appFont(size: 14, weight: .semibold))
                                         .foregroundColor(.primary)
 
                                     HStack(spacing: 12) {
@@ -81,7 +81,7 @@ struct RegistrationView: View {
                                 // Last Name Field
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text("last_name")
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(.appFont(size: 14, weight: .semibold))
                                         .foregroundColor(.primary)
 
                                     HStack(spacing: 12) {
@@ -105,7 +105,7 @@ struct RegistrationView: View {
                                 // Email Field
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text("email_address")
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(.appFont(size: 14, weight: .semibold))
                                         .foregroundColor(.primary)
 
                                     HStack(spacing: 12) {
@@ -128,7 +128,7 @@ struct RegistrationView: View {
 
                                     if !email.isEmpty && !isValidEmail {
                                         Text("invalid_email")
-                                            .font(.system(size: 12))
+                                            .font(.appFont(size: 12))
                                             .foregroundColor(.red)
                                             .padding(.top, 2)
                                     }
@@ -152,10 +152,10 @@ struct RegistrationView: View {
                             VStack(spacing: 20) {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Text("otp_sent_to")
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(.appFont(size: 14, weight: .semibold))
                                         .foregroundColor(.primary)
                                     Text(email)
-                                        .font(.system(size: 14))
+                                        .font(.appFont(size: 14))
                                         .foregroundColor(.brandOrange)
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -191,12 +191,12 @@ struct RegistrationView: View {
                                 VStack(spacing: 8) {
                                     if resendCooldown > 0 {
                                         Text(String(format: NSLocalizedString("resend_code_cooldown", comment: ""), resendCooldown))
-                                            .font(.system(size: 14))
+                                            .font(.appFont(size: 14))
                                             .foregroundColor(.mutedText)
                                     } else {
                                         Button(action: resendOTP) {
                                             Text("resend_code_prompt")
-                                                .font(.system(size: 14, weight: .medium))
+                                                .font(.appFont(size: 14, weight: .medium))
                                                 .foregroundColor(.brandOrange)
                                         }
                                         .disabled(authViewModel.isLoading)
@@ -208,7 +208,7 @@ struct RegistrationView: View {
                                     otpCode = ""
                                     stopResendTimer()
                                 }
-                                .font(.system(size: 14, weight: .medium))
+                                .font(.appFont(size: 14, weight: .medium))
                                 .foregroundColor(.mutedText)
                             }
                         }
@@ -216,17 +216,17 @@ struct RegistrationView: View {
                         // T&Cs and Privacy Policy Disclaimer
                         VStack(spacing: 4) {
                             Text("by_creating_account_agree")
-                                .font(.system(size: 12))
+                                .font(.appFont(size: 12))
                                 .foregroundColor(.mutedText)
                             HStack(spacing: 4) {
                                 Link("terms_of_service", destination: WebURLHelper.termsURL)
-                                    .font(.system(size: 12, weight: .medium))
+                                    .font(.appFont(size: 12, weight: .medium))
                                     .foregroundColor(.brandOrange)
                                 Text("terms_and")
-                                    .font(.system(size: 12))
+                                    .font(.appFont(size: 12))
                                     .foregroundColor(.mutedText)
                                 Link("privacy_policy", destination: WebURLHelper.privacyURL)
-                                    .font(.system(size: 12, weight: .medium))
+                                    .font(.appFont(size: 12, weight: .medium))
                                     .foregroundColor(.brandOrange)
                             }
                         }
@@ -240,12 +240,12 @@ struct RegistrationView: View {
                     // Already have an account? Log in
                     VStack(spacing: 8) {
                         Text("already_have_account")
-                            .font(.system(size: 14))
+                            .font(.appFont(size: 14))
                             .foregroundColor(.mutedText)
 
                         Button(action: onBackToLogin) {
                             Text("log_in")
-                                .font(.system(size: 14, weight: .semibold))
+                                .font(.appFont(size: 14, weight: .semibold))
                                 .foregroundColor(.brandOrange)
                         }
                     }

@@ -77,12 +77,12 @@ struct OrderRowView: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text("order_number \(order.id)")
-                    .font(.headline)
+                    .font(.appFont(.headline))
 
                 Spacer()
 
                 Text(order.formattedAmount)
-                    .font(.headline)
+                    .font(.appFont(.headline))
                     .foregroundColor(.primary)
             }
 
@@ -92,23 +92,23 @@ struct OrderRowView: View {
                     .frame(width: 8, height: 8)
 
                 Text(localizedStatus(order.orderStatus))
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .foregroundColor(statusColor)
 
                 Spacer()
 
                 Text(formatDate(order.createdAt))
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
 
             if order.orderStatus == "shipped" && order.mplTrackingNumber != nil {
                 HStack(spacing: 4) {
                     Image(systemName: "shippingbox.fill")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.brandOrange)
                     Text("track_package")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                         .foregroundColor(.brandOrange)
                 }
             }
@@ -116,7 +116,7 @@ struct OrderRowView: View {
             if let items = order.items, !items.isEmpty {
                 let totalItems = items.reduce(0) { $0 + $1.quantity }
                 Text(String(localized: "orders_item_count \(totalItems)"))
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
         }
@@ -228,21 +228,21 @@ struct OrderDetailView: View {
                     ForEach(items) { item in
                         VStack(alignment: .leading, spacing: 4) {
                             Text(item.itemType.capitalized)
-                                .font(.headline)
+                                .font(.appFont(.headline))
 
                             Text("orders_quantity \(item.quantity)")
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .foregroundColor(.secondary)
 
                             HStack {
                                 Text(item.qrTagId == nil ? String(localized: "orders_tag_pending") : String(localized: "orders_tag_assigned"))
-                                        .font(.caption)
+                                        .font(.appFont(.caption))
                                     .foregroundColor(item.qrTagId == nil ? .orange : .blue)
 
                                 Spacer()
 
                                 Text(formatCurrency(item.price))
-                                    .font(.subheadline)
+                                    .font(.appFont(.subheadline))
                                     .fontWeight(.medium)
                             }
                         }

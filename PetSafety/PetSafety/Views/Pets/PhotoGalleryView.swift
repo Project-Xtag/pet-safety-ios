@@ -29,12 +29,12 @@ struct PhotoGalleryView: View {
                     // Header with pet info
                     VStack(spacing: 8) {
                         Text(String(format: NSLocalizedString("pet_photos_title", comment: ""), pet.name))
-                            .font(.system(size: 24, weight: .bold))
+                            .font(.appFont(size: 24, weight: .bold))
                             .foregroundColor(.primary)
 
                         if viewModel.hasPhotos {
                             Text("photo_count \(viewModel.photoCount)")
-                                .font(.system(size: 15))
+                                .font(.appFont(size: 15))
                                 .foregroundColor(.mutedText)
                         }
                     }
@@ -46,7 +46,7 @@ struct PhotoGalleryView: View {
                             Image(systemName: "photo.badge.plus")
                             Text("add_photos")
                         }
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.appFont(size: 16, weight: .semibold))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)
@@ -65,11 +65,11 @@ struct PhotoGalleryView: View {
 
                             if viewModel.totalUploadCount > 1 {
                                 Text("photo_uploading_count \(viewModel.uploadedCount) \(viewModel.totalUploadCount)")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                             } else {
                                 Text("photo_uploading")
-                                    .font(.caption)
+                                    .font(.appFont(.caption))
                                     .foregroundColor(.secondary)
                             }
 
@@ -125,7 +125,7 @@ struct PhotoGalleryView: View {
 
                         // Edit mode hint
                         Text("photo_tip")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                             .padding()
                     } else {
@@ -137,16 +137,16 @@ struct PhotoGalleryView: View {
                                     .fill(Color(UIColor.systemGray6))
                                     .frame(width: 100, height: 100)
                                 Image(systemName: "photo.on.rectangle")
-                                    .font(.system(size: 44))
+                                    .font(.appFont(size: 44))
                                     .foregroundColor(.tealAccent)
                             }
 
                             Text("no_photos_yet")
-                                .font(.system(size: 20, weight: .bold))
+                                .font(.appFont(size: 20, weight: .bold))
                                 .foregroundColor(.primary)
 
                             Text(String(format: NSLocalizedString("add_photos_gallery_hint", comment: ""), pet.name))
-                                .font(.system(size: 15))
+                                .font(.appFont(size: 15))
                                 .foregroundColor(.mutedText)
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 32)
@@ -362,9 +362,9 @@ struct PhotoGridItem: View {
             if photo.isPrimary {
                 HStack(spacing: 4) {
                     Image(systemName: "star.fill")
-                        .font(.caption)
+                        .font(.appFont(.caption))
                     Text("primary")
-                        .font(.caption2)
+                        .font(.appFont(.caption2))
                         .fontWeight(.semibold)
                 }
                 .padding(.horizontal, 8)
@@ -405,7 +405,7 @@ struct FullScreenPhotoView: View {
                     Spacer()
                     Button(action: { isPresented = false }) {
                         Image(systemName: "xmark.circle.fill")
-                            .font(.title)
+                            .font(.appFont(.title))
                             .foregroundColor(.white)
                             .padding()
                     }

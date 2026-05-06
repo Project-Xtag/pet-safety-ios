@@ -14,16 +14,16 @@ struct ErrorRetryView: View {
                     .fill(Color(UIColor.systemGray6))
                     .frame(width: 100, height: 100)
                 Image(systemName: "wifi.exclamationmark")
-                    .font(.system(size: 44))
+                    .font(.appFont(size: 44))
                     .foregroundColor(.brandOrange)
             }
 
             Text("something_went_wrong")
-                .font(.system(size: 20, weight: .bold))
+                .font(.appFont(size: 20, weight: .bold))
                 .foregroundColor(.primary)
 
             Text(message)
-                .font(.system(size: 15))
+                .font(.appFont(size: 15))
                 .foregroundColor(.mutedText)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)

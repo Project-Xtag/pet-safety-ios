@@ -54,7 +54,7 @@ struct ProfileView: View {
             HStack {
                 Spacer()
                 Text("profile_title")
-                    .font(.system(size: 20, weight: .semibold))
+                    .font(.appFont(size: 20, weight: .semibold))
                     .foregroundColor(.primary)
                 Spacer()
                 Button {
@@ -62,7 +62,7 @@ struct ProfileView: View {
                     appearanceMode = (appearanceMode == "dark") ? "light" : "dark"
                 } label: {
                     Image(systemName: appearanceMode == "dark" || (appearanceMode == "system" && colorScheme == .dark) ? "sun.max.fill" : "moon.fill")
-                        .font(.system(size: 20))
+                        .font(.appFont(size: 20))
                         .foregroundColor(.brandOrange)
                 }
                 .padding(.trailing, 16)
@@ -93,14 +93,14 @@ struct ProfileView: View {
                                     .scaledToFill()
                             } placeholder: {
                                 Image(systemName: "person.fill")
-                                    .font(.system(size: 40))
+                                    .font(.appFont(size: 40))
                                     .foregroundColor(.white)
                             }
                             .frame(width: 96, height: 96)
                             .clipShape(Circle())
                         } else {
                             Image(systemName: "person.fill")
-                                .font(.system(size: 40))
+                                .font(.appFont(size: 40))
                                 .foregroundColor(.white)
                         }
                     }
@@ -110,7 +110,7 @@ struct ProfileView: View {
                     // Photo Picker Button
                     PhotosPicker(selection: $selectedPhoto, matching: .images) {
                         Image(systemName: isUploadingPhoto ? "arrow.triangle.2.circlepath" : "pencil")
-                            .font(.system(size: 12, weight: .bold))
+                            .font(.appFont(size: 12, weight: .bold))
                             .foregroundColor(.white)
                             .frame(width: 28, height: 28)
                             .background(Color.brandOrange)
@@ -149,13 +149,13 @@ struct ProfileView: View {
                     VStack(spacing: 6) {
                         if !user.fullName.isEmpty {
                             Text(user.fullName)
-                                .font(.system(size: 24, weight: .bold))
+                                .font(.appFont(size: 24, weight: .bold))
                                 .foregroundColor(.primary)
                                 .accessibilityAddTraits(.isHeader)
                         }
 
                         Text(subscriptionViewModel.currentPlanName.capitalized)
-                            .font(.system(size: 14))
+                            .font(.appFont(size: 14))
                             .foregroundColor(.mutedText)
                     }
                 }
@@ -207,9 +207,9 @@ struct ProfileView: View {
         Button(action: { showingLogoutAlert = true }) {
             HStack(spacing: 12) {
                 Image(systemName: "rectangle.portrait.and.arrow.right")
-                    .font(.system(size: 18))
+                    .font(.appFont(size: 18))
                 Text("profile_log_out")
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.appFont(size: 16, weight: .semibold))
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
@@ -230,18 +230,18 @@ struct ProfileMenuRow: View {
     var body: some View {
         HStack(spacing: 16) {
             Image(systemName: icon)
-                .font(.system(size: 18))
+                .font(.appFont(size: 18))
                 .foregroundColor(.mutedText)
                 .frame(width: 24)
 
             Text(title)
-                .font(.system(size: 15, weight: .medium))
+                .font(.appFont(size: 15, weight: .medium))
                 .foregroundColor(.primary)
 
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.system(size: 14, weight: .medium))
+                .font(.appFont(size: 14, weight: .medium))
                 .foregroundColor(Color(UIColor.systemGray3))
                 .accessibilityHidden(true)
         }

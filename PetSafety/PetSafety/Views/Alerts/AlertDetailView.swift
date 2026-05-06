@@ -69,7 +69,7 @@ struct AlertDetailView: View {
                                 .aspectRatio(contentMode: .fill)
                         } placeholder: {
                             Image(systemName: "pawprint.fill")
-                                .font(.system(size: 60))
+                                .font(.appFont(size: 60))
                                 .foregroundColor(.white)
                                 .accessibilityLabel(String(localized: "accessibility_pet_photo_placeholder"))
                         }
@@ -82,11 +82,11 @@ struct AlertDetailView: View {
                         )
 
                         Text(pet.name)
-                            .font(.system(size: 32, weight: .bold))
+                            .font(.appFont(size: 32, weight: .bold))
                             .accessibilityAddTraits(.isHeader)
 
                         Text(petDetailsString(pet))
-                            .font(.title3)
+                            .font(.appFont(.title3))
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                     }
@@ -115,14 +115,14 @@ struct AlertDetailView: View {
                         .frame(width: 12, height: 12)
 
                     Text(alert.status == "active" ? String(localized: "alert_status_missing") : String(localized: "alert_status_found"))
-                        .font(.headline)
+                        .font(.appFont(.headline))
 
                     Spacer()
 
                     // Missing since date
                     if let createdAt = alert.createdAt.toDate() {
                         Text("alert_missing_since \(createdAt.formatted(date: .abbreviated, time: .omitted))")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -135,10 +135,10 @@ struct AlertDetailView: View {
                 if let info = alert.additionalInfo, !info.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
                         Label("additional_information", systemImage: "info.circle.fill")
-                            .font(.headline)
+                            .font(.appFont(.headline))
 
                         Text(info)
-                            .font(.body)
+                            .font(.appFont(.body))
                             .foregroundColor(.secondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -152,12 +152,12 @@ struct AlertDetailView: View {
                 if let coordinate = alert.coordinate {
                     VStack(alignment: .leading, spacing: 12) {
                         Label("last_seen_location", systemImage: "location.fill")
-                            .font(.headline)
+                            .font(.appFont(.headline))
 
                         Map(position: $mapPosition) {
                             Annotation("", coordinate: coordinate) {
                                 Image(systemName: "mappin.circle.fill")
-                                    .font(.system(size: 40))
+                                    .font(.appFont(size: 40))
                                     .foregroundColor(.red)
                                     .accessibilityLabel(Text("last_seen_location"))
                             }
@@ -167,7 +167,7 @@ struct AlertDetailView: View {
 
                         if let address = reverseGeocodedAddress ?? alert.lastSeenLocation {
                             Text(address)
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -184,7 +184,7 @@ struct AlertDetailView: View {
                 if let sightings = alert.sightings, !sightings.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
                         Label(String(format: NSLocalizedString("reported_sightings_count", comment: ""), sightings.count), systemImage: "eye.fill")
-                            .font(.headline)
+                            .font(.appFont(.headline))
                             .padding(.horizontal)
 
                         ForEach(sightings) { sighting in
@@ -259,7 +259,7 @@ struct AlertDetailView: View {
             } else {
                 VStack(spacing: 16) {
                     Image(systemName: "info.circle")
-                        .font(.system(size: 40))
+                        .font(.appFont(size: 40))
                         .foregroundColor(.secondary)
                     Text(String(localized: "report_found_unavailable"))
                         .multilineTextAlignment(.center)
@@ -381,31 +381,31 @@ struct SightingCard: View {
                     sighting.reporterName ?? String(localized: "anonymous"),
                     systemImage: "person.fill"
                 )
-                .font(.subheadline)
+                .font(.appFont(.subheadline))
                 .fontWeight(.medium)
 
                 Spacer()
 
                 Text(formatDate(sighting.createdAt))
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
 
             if let location = sighting.sightingLocation {
                 Label(location, systemImage: "location.fill")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
 
             if let notes = sighting.sightingNotes {
                 Text(notes)
-                    .font(.body)
+                    .font(.appFont(.body))
                     .foregroundColor(.secondary)
             }
 
             if let contact = sighting.reporterPhone ?? sighting.reporterEmail {
                 Text(String(format: NSLocalizedString("contact_label", comment: ""), contact))
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.blue)
             }
         }

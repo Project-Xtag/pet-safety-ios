@@ -15,11 +15,11 @@ struct SecureScreenModifier: ViewModifier {
             if isCaptured {
                 VStack(spacing: 16) {
                     Image(systemName: "eye.slash.fill")
-                        .font(.system(size: 48))
+                        .font(.appFont(size: 48))
                         .foregroundColor(.secondary)
                         .accessibilityHidden(true)
                     Text("screen_protected")
-                        .font(.headline)
+                        .font(.appFont(.headline))
                         .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

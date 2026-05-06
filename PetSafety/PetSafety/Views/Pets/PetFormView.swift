@@ -93,7 +93,7 @@ struct PetFormView: View {
                         Image(systemName: "tag.fill")
                             .foregroundColor(Color("BrandColor"))
                         Text("setting_up_tag_for \(tagPetName)")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -108,10 +108,10 @@ struct PetFormView: View {
                             .foregroundColor(.orange)
                         VStack(alignment: .leading, spacing: 4) {
                             Text("profile_incomplete_warning")
-                                .font(.subheadline)
+                                .font(.appFont(.subheadline))
                                 .fontWeight(.semibold)
                             Text("profile_incomplete_desc")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -125,10 +125,10 @@ struct PetFormView: View {
                         .foregroundColor(mode.isEdit ? .blue : .orange)
                     VStack(alignment: .leading, spacing: 4) {
                         Text(mode.isEdit ? String(localized: "identity_locked_title") : String(localized: "identity_will_lock_title"))
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .fontWeight(.semibold)
                         Text(mode.isEdit ? String(localized: "identity_locked_desc") : String(localized: "identity_will_lock_desc"))
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 }
@@ -146,7 +146,7 @@ struct PetFormView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                         } else {
                             Image(systemName: "photo")
-                                .font(.largeTitle)
+                                .font(.appFont(.largeTitle))
                                 .foregroundColor(.secondary)
                                 .frame(width: 100, height: 100)
                                 .background(Color(.systemGray6))
@@ -155,9 +155,9 @@ struct PetFormView: View {
 
                         VStack(alignment: .leading) {
                             Text(mode.isEdit ? "edit_photo" : "select_photo")
-                                .font(.headline)
+                                .font(.appFont(.headline))
                             Text("choose_photo_hint")
-                                .font(.caption)
+                                .font(.appFont(.caption))
                                 .foregroundColor(.secondary)
                         }
                         .padding(.leading, 8)
@@ -177,7 +177,7 @@ struct PetFormView: View {
                             .foregroundColor(.primary)
                         Spacer()
                         Image(systemName: "lock.fill")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 } else {
@@ -198,7 +198,7 @@ struct PetFormView: View {
                             .foregroundColor(.primary)
                         Spacer()
                         Image(systemName: "lock.fill")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 } else {
@@ -219,7 +219,7 @@ struct PetFormView: View {
                             .foregroundColor(.primary)
                         Spacer()
                         Image(systemName: "lock.fill")
-                            .font(.caption)
+                            .font(.appFont(.caption))
                             .foregroundColor(.secondary)
                     }
                 } else {
@@ -434,16 +434,16 @@ struct PetFormView: View {
                 Spacer().frame(height: 40)
 
                 Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 70))
+                    .font(.appFont(size: 70))
                     .foregroundColor(.tealAccent)
 
                 Text("tag_activated_for \(savedPetName)")
-                    .font(.title2)
+                    .font(.appFont(.title2))
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
 
                 Text("pet_now_protected")
-                    .font(.body)
+                    .font(.appFont(.body))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 24)
@@ -452,7 +452,7 @@ struct PetFormView: View {
                     // More pets to register
                     VStack(spacing: 16) {
                         Text("more_tags_to_setup")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .fontWeight(.semibold)
                             .foregroundColor(.secondary)
 
@@ -464,11 +464,11 @@ struct PetFormView: View {
                                     Image(systemName: "pawprint.fill")
                                         .foregroundColor(Color("BrandColor"))
                                     Text("setup_pet_tag \(petName)")
-                                        .font(.subheadline)
+                                        .font(.appFont(.subheadline))
                                         .fontWeight(.medium)
                                     Spacer()
                                     Image(systemName: "chevron.right")
-                                        .font(.caption)
+                                        .font(.appFont(.caption))
                                         .foregroundColor(.secondary)
                                 }
                                 .padding()
@@ -483,10 +483,10 @@ struct PetFormView: View {
                     // All done
                     VStack(spacing: 16) {
                         Text("thank_you_senra")
-                            .font(.headline)
+                            .font(.appFont(.headline))
 
                         Text("whats_next")
-                            .font(.subheadline)
+                            .font(.appFont(.subheadline))
                             .foregroundColor(.secondary)
 
                         VStack(spacing: 10) {
@@ -523,16 +523,16 @@ struct PetFormView: View {
         Button(action: action) {
             HStack(spacing: 14) {
                 Image(systemName: icon)
-                    .font(.system(size: 18))
+                    .font(.appFont(size: 18))
                     .foregroundColor(Color("BrandColor"))
                     .frame(width: 24)
                 Text(text)
-                    .font(.subheadline)
+                    .font(.appFont(.subheadline))
                     .fontWeight(.medium)
                     .foregroundColor(.primary)
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .font(.caption)
+                    .font(.appFont(.caption))
                     .foregroundColor(.secondary)
             }
             .padding()
