@@ -144,27 +144,27 @@ struct SuccessStoriesTabView: View {
             attempts += 1
         }
 
-        var latitude = 51.5074 // Default: London
-        var longitude = -0.1278
-
-        if let location = locationManager.location {
-            latitude = location.latitude
-            longitude = location.longitude
-            userLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            showAddressRequiredMessage = false
-        } else if let addressCoordinate = await geocodedFallback {
-            latitude = addressCoordinate.latitude
-            longitude = addressCoordinate.longitude
-            userLocation = addressCoordinate
-            showAddressRequiredMessage = false
+        let gpsCoordinate: CLLocationCoordinate2D? = locationManager.location.map {
+            CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
+        }
+        let resolvedCoordinate: CLLocationCoordinate2D?
+        if let coord = gpsCoordinate {
+            resolvedCoordinate = coord
         } else {
+            resolvedCoordinate = await geocodedFallback
+        }
+
+        guard let coordinate = resolvedCoordinate else {
             showAddressRequiredMessage = true
             return
         }
 
+        userLocation = coordinate
+        showAddressRequiredMessage = false
+
         await viewModel.fetchSuccessStories(
-            latitude: latitude,
-            longitude: longitude,
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude,
             radiusKm: 10,
             page: 1
         )

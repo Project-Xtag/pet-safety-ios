@@ -17,6 +17,7 @@ struct AlertDetailView: View {
     @State private var isMarkingFound = false
     @State private var mapPosition: MapCameraPosition
     @State private var reverseGeocodedAddress: String?
+    @State private var displayCoordinate: CLLocationCoordinate2D?
 
     // Check if current user is the pet owner
     private var isOwner: Bool {
@@ -26,19 +27,18 @@ struct AlertDetailView: View {
 
     init(alert: MissingPetAlert) {
         self.alert = alert
-        let region: MKCoordinateRegion
         if let coordinate = alert.coordinate {
-            region = MKCoordinateRegion(
+            _mapPosition = State(initialValue: .region(MKCoordinateRegion(
                 center: coordinate,
                 span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            )
+            )))
+            _displayCoordinate = State(initialValue: coordinate)
         } else {
-            region = MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
-                span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            )
+            // No coordinates yet — let SwiftUI auto-frame and try to forward-geocode
+            // the manual address (lastSeenLocation) once the view appears.
+            _mapPosition = State(initialValue: .automatic)
+            _displayCoordinate = State(initialValue: nil)
         }
-        _mapPosition = State(initialValue: .region(region))
     }
 
     // Build pet details string with age and sex
@@ -149,7 +149,7 @@ struct AlertDetailView: View {
                 }
 
                 // Last Seen Location (moved after Additional Info)
-                if let coordinate = alert.coordinate {
+                if let coordinate = displayCoordinate {
                     VStack(alignment: .leading, spacing: 12) {
                         Label("last_seen_location", systemImage: "location.fill")
                             .font(.appFont(.headline))
@@ -178,6 +178,22 @@ struct AlertDetailView: View {
                     .task {
                         await reverseGeocodeCoordinate(coordinate)
                     }
+                } else if let address = alert.lastSeenLocation, !address.isEmpty {
+                    // Coordinates missing but a manual address is recorded — show the
+                    // address as text while we attempt to forward-geocode it for the map.
+                    VStack(alignment: .leading, spacing: 12) {
+                        Label("last_seen_location", systemImage: "location.fill")
+                            .font(.appFont(.headline))
+
+                        Text(address)
+                            .font(.appFont(.subheadline))
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
+                    .padding(.horizontal)
                 }
 
                 // Sightings
@@ -240,6 +256,9 @@ struct AlertDetailView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .scrollDismissesKeyboard(.interactively)
+        .task {
+            await resolveCoordinateIfNeeded()
+        }
         .sheet(isPresented: $showingEditAlert) {
             NavigationView {
                 EditAlertView(alert: alert)
@@ -313,6 +332,29 @@ struct AlertDetailView: View {
                 )
                 .environmentObject(appState)
             }
+        }
+    }
+
+    private func resolveCoordinateIfNeeded() async {
+        // If the alert already has coordinates, nothing to do.
+        guard alert.coordinate == nil else { return }
+        guard let address = alert.lastSeenLocation, !address.isEmpty else { return }
+
+        let geocoder = CLGeocoder()
+        do {
+            let placemarks = try await geocoder.geocodeAddressString(address)
+            if let location = placemarks.first?.location {
+                let coordinate = location.coordinate
+                await MainActor.run {
+                    displayCoordinate = coordinate
+                    mapPosition = .region(MKCoordinateRegion(
+                        center: coordinate,
+                        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                    ))
+                }
+            }
+        } catch {
+            // Forward geocoding failed — the text address still renders below the map placeholder.
         }
     }
 
