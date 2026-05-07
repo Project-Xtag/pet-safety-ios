@@ -60,25 +60,34 @@ struct SuccessStoriesView: View {
             attempts += 1
         }
 
-        var latitude = 51.5074 // Default: London
-        var longitude = -0.1278
-
-        if let location = locationManager.location {
-            latitude = location.latitude
-            longitude = location.longitude
-            userLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        } else if let addressCoordinate = await geocodedFallback {
-            latitude = addressCoordinate.latitude
-            longitude = addressCoordinate.longitude
-            userLocation = addressCoordinate
+        let gpsCoordinate: CLLocationCoordinate2D? = locationManager.location.map {
+            CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
+        }
+        let resolvedCoordinate: CLLocationCoordinate2D?
+        if let coord = gpsCoordinate {
+            resolvedCoordinate = coord
+        } else {
+            resolvedCoordinate = await geocodedFallback
         }
 
-        await viewModel.fetchSuccessStories(
-            latitude: latitude,
-            longitude: longitude,
-            radiusKm: 50,
-            page: 1
-        )
+        if let coordinate = resolvedCoordinate {
+            userLocation = coordinate
+            await viewModel.fetchSuccessStories(
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude,
+                radiusKm: 50,
+                page: 1
+            )
+        } else {
+            // No GPS permission and no resolvable address — fetch globally so the
+            // user still sees content rather than a UK-centered empty view.
+            await viewModel.fetchSuccessStories(
+                latitude: 0,
+                longitude: 0,
+                radiusKm: 20015,
+                page: 1
+            )
+        }
     }
 
     private func geocodeUserAddressFallback(_ user: User?) async -> CLLocationCoordinate2D? {
@@ -309,12 +318,7 @@ struct SuccessStoriesMapView: View {
     let stories: [SuccessStory]
     let userLocation: CLLocationCoordinate2D?
 
-    @State private var mapPosition: MapCameraPosition = .region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278),
-            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        )
-    )
+    @State private var mapPosition: MapCameraPosition = .automatic
     @State private var selectedStory: SuccessStory?
 
     var body: some View {
@@ -349,13 +353,17 @@ struct SuccessStoriesMapView: View {
             }
         }
         .onAppear {
-            // Center on the user's registered address (~50 km radius).
+            // Center on the user's registered address (~50 km radius) when known;
+            // otherwise let SwiftUI auto-frame the map to fit the story annotations.
             // userLocation is set from GPS or geocoded address in loadSuccessStories().
-            let center = userLocation ?? CLLocationCoordinate2D(latitude: 51.5074, longitude: -0.1278)
-            mapPosition = .region(MKCoordinateRegion(
-                center: center,
-                span: MKCoordinateSpan(latitudeDelta: 0.9, longitudeDelta: 0.9) // ~50 km radius
-            ))
+            if let center = userLocation {
+                mapPosition = .region(MKCoordinateRegion(
+                    center: center,
+                    span: MKCoordinateSpan(latitudeDelta: 0.9, longitudeDelta: 0.9) // ~50 km radius
+                ))
+            } else {
+                mapPosition = .automatic
+            }
         }
     }
 }
