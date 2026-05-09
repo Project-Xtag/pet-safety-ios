@@ -1026,7 +1026,8 @@ class APIService {
         quantity: Int,
         countryCode: String? = nil,
         deliveryMethod: String? = nil,
-        postapointDetails: PostaPointDetails? = nil
+        postapointDetails: PostaPointDetails? = nil,
+        promoCode: String? = nil
     ) async throws -> TagCheckoutData {
         #if DEBUG
         print("📡 API: Creating tag checkout for \(quantity) tags...")
@@ -1035,7 +1036,14 @@ class APIService {
         let request = try await buildRequest(
             endpoint: "/orders/create-checkout",
             method: "POST",
-            body: CreateTagCheckoutRequest(quantity: quantity, countryCode: countryCode, platform: "ios", deliveryMethod: deliveryMethod, postapointDetails: postapointDetails)
+            body: CreateTagCheckoutRequest(
+                quantity: quantity,
+                countryCode: countryCode,
+                platform: "ios",
+                deliveryMethod: deliveryMethod,
+                postapointDetails: postapointDetails,
+                promoCode: promoCode
+            )
         )
         let response: TagCheckoutResponse = try await performRequest(request, responseType: TagCheckoutResponse.self)
         return response.checkout

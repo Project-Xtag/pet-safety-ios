@@ -1434,3 +1434,7 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Shared via SENRA";
+"order_promo_code_title" = "Promo code";
+"order_promo_code_label" = "Have a promo code?";
+"order_promo_code_placeholder" = "Enter your code";
+"order_promo_code_hint" = "If valid, the discount is applied at checkout.";

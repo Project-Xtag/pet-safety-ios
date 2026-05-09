@@ -1430,3 +1430,7 @@
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
 "delete_confirm_type_delete" = "Type DELETE to confirm";
 "type_delete_to_confirm" = "Type DELETE";
+"order_promo_code_title" = "Promo-Code";
+"order_promo_code_label" = "Hast du einen Promo-Code?";
+"order_promo_code_placeholder" = "Code eingeben";
+"order_promo_code_hint" = "Wenn er gültig ist, wird der Rabatt an der Kasse angewendet.";

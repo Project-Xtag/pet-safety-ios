@@ -175,6 +175,7 @@ struct CreateTagCheckoutRequest: Codable {
     let platform: String
     let deliveryMethod: String?
     let postapointDetails: PostaPointDetails?
+    let promoCode: String?
 
     enum CodingKeys: String, CodingKey {
         case quantity
@@ -182,6 +183,7 @@ struct CreateTagCheckoutRequest: Codable {
         case platform
         case deliveryMethod = "delivery_method"
         case postapointDetails = "postapoint_details"
+        case promoCode = "promo_code"
     }
 }
 

@@ -839,7 +839,7 @@
 // MARK: - Billing (Chunk 1)
 "billing_manage_subscription" = "Upravljaj pretplatom";
 "billing_subscription" = "Pretplata";
-"billing_portal_footer" = "Upravljaj pretplatom, načinom plaćanja i detaljima naplate putem Stripea.";
+"billing_portal_footer" = "Upravljaj pretplatom, načinom plaćanja i detaljima naplate putem platforme Stripe.";
 "billing_loading_invoices" = "Učitavanje računa…";
 "billing_no_invoices" = "Još nema računa";
 "billing_invoice" = "Račun";
@@ -1436,3 +1436,7 @@
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
 "delete_confirm_type_delete" = "Type DELETE to confirm";
 "type_delete_to_confirm" = "Type DELETE";
+"order_promo_code_title" = "Promo kod";
+"order_promo_code_label" = "Imaš promo kod?";
+"order_promo_code_placeholder" = "Unesi svoj kod";
+"order_promo_code_hint" = "Ako je valjan, popust se primjenjuje na blagajni.";

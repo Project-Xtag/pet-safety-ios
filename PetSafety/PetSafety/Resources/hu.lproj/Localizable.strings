@@ -1431,3 +1431,7 @@
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
 "delete_confirm_type_delete" = "Type DELETE to confirm";
 "type_delete_to_confirm" = "Type DELETE";
+"order_promo_code_title" = "Kuponkód";
+"order_promo_code_label" = "Van kuponkódod?";
+"order_promo_code_placeholder" = "Add meg a kódot";
+"order_promo_code_hint" = "Ha érvényes, a kedvezmény a fizetésnél kerül levonásra.";

@@ -42,6 +42,11 @@ struct OrderMoreTagsView: View {
     // Delivery method (Hungary only)
     @State private var deliveryMethod = "home_delivery"
     @State private var selectedPostaPoint: PostaPointDetails?
+    // Welcome promo (free shipping at tag order). Backend matches
+    // against env.WELCOME_PROMO_CODE (live: "Budapesti Kutyasok") and
+    // swaps the shipping rate to a 0-amount inline rate when valid.
+    // Empty string = no promo applied; backend silently ignores.
+    @State private var promoCode = ""
 
     // Shipping prices (fetched from API)
     @State private var shippingPrices: ShippingPricesResponse?
@@ -147,6 +152,9 @@ struct OrderMoreTagsView: View {
                         if isHungary {
                             deliveryMethodCard
                         }
+
+                        // Promo Code (free shipping when valid)
+                        promoCodeCard
 
                         // Order Summary
                         orderSummaryCard
@@ -421,6 +429,26 @@ struct OrderMoreTagsView: View {
         }
     }
 
+    private var promoCodeCard: some View {
+        SectionCard(title: String(localized: "order_promo_code_title"), icon: "tag.fill") {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("order_promo_code_label")
+                    .font(.appFont(.subheadline))
+                    .foregroundColor(.secondary)
+                TextField(
+                    String(localized: "order_promo_code_placeholder"),
+                    text: $promoCode
+                )
+                .textFieldStyle(.roundedBorder)
+                .autocapitalization(.none)
+                .autocorrectionDisabled(true)
+                Text("order_promo_code_hint")
+                    .font(.appFont(.caption))
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+
     private var deliveryMethodCard: some View {
         SectionCard(title: String(localized: "delivery_method_title"), icon: "truck.box.fill") {
             HStack(spacing: 10) {
@@ -647,11 +675,13 @@ struct OrderMoreTagsView: View {
                 _ = try await APIService.shared.createOrder(orderRequest)
 
                 // Step 2: Create Stripe checkout session
+                let trimmedPromo = promoCode.trimmingCharacters(in: .whitespacesAndNewlines)
                 let checkout = try await APIService.shared.createTagCheckout(
                     quantity: quantity,
                     countryCode: selectedCountryCode.uppercased(),
                     deliveryMethod: isHungary ? deliveryMethod : nil,
-                    postapointDetails: selectedPostaPoint
+                    postapointDetails: selectedPostaPoint,
+                    promoCode: trimmedPromo.isEmpty ? nil : trimmedPromo
                 )
 
                 if let url = URL(string: checkout.url) {
