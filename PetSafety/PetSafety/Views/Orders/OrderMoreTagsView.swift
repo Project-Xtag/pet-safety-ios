@@ -42,6 +42,17 @@ struct OrderMoreTagsView: View {
     // Delivery method (Hungary only)
     @State private var deliveryMethod = "home_delivery"
     @State private var selectedPostaPoint: PostaPointDetails?
+    // Welcome promo (free shipping at tag order). Backend matches
+    // against env.WELCOME_PROMO_CODE (live: "Budapesti Kutyasok") and
+    // swaps the shipping rate to a 0-amount inline rate when valid.
+    // `promoApplied` is set after a successful validate-promo
+    // round-trip so the user sees the discount BEFORE the Stripe
+    // redirect; the Apply button locks the input + the order summary
+    // strikes the original shipping price.
+    @State private var promoCode = ""
+    @State private var promoApplied = false
+    @State private var promoValidating = false
+    @State private var promoError: String?
 
     // Shipping prices (fetched from API)
     @State private var shippingPrices: ShippingPricesResponse?
@@ -147,6 +158,9 @@ struct OrderMoreTagsView: View {
                         if isHungary {
                             deliveryMethodCard
                         }
+
+                        // Promo Code (free shipping when valid)
+                        promoCodeCard
 
                         // Order Summary
                         orderSummaryCard
@@ -421,6 +435,102 @@ struct OrderMoreTagsView: View {
         }
     }
 
+    private var promoCodeCard: some View {
+        SectionCard(title: String(localized: "order_promo_code_title"), icon: "tag.fill") {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("order_promo_code_label")
+                    .font(.appFont(.subheadline))
+                    .foregroundColor(.secondary)
+
+                HStack(spacing: 8) {
+                    TextField(
+                        String(localized: "order_promo_code_placeholder"),
+                        text: $promoCode
+                    )
+                    .textFieldStyle(.roundedBorder)
+                    .autocapitalization(.none)
+                    .autocorrectionDisabled(true)
+                    .disabled(promoApplied || promoValidating)
+                    .onChange(of: promoCode) { _ in
+                        if promoError != nil { promoError = nil }
+                    }
+
+                    if promoApplied {
+                        Button(action: removePromo) {
+                            Text("order_promo_code_remove")
+                                .font(.appFont(.subheadline))
+                        }
+                        .buttonStyle(.bordered)
+                    } else {
+                        Button(action: applyPromo) {
+                            if promoValidating {
+                                Text("order_promo_code_validating")
+                                    .font(.appFont(.subheadline))
+                            } else {
+                                Text("order_promo_code_apply")
+                                    .font(.appFont(.subheadline))
+                            }
+                        }
+                        .buttonStyle(.bordered)
+                        .disabled(promoCode.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || promoValidating)
+                    }
+                }
+
+                if promoApplied {
+                    HStack(spacing: 6) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.green)
+                        Text("order_promo_code_applied_free_shipping")
+                            .font(.appFont(.caption))
+                            .foregroundColor(.green)
+                    }
+                } else if let promoError {
+                    Text(promoError)
+                        .font(.appFont(.caption))
+                        .foregroundColor(.red)
+                } else {
+                    Text("order_promo_code_hint")
+                        .font(.appFont(.caption))
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+    }
+
+    private func applyPromo() {
+        let trimmed = promoCode.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty, !promoValidating else { return }
+        promoValidating = true
+        promoError = nil
+        Task {
+            do {
+                let response = try await APIService.shared.validateTagPromo(code: trimmed)
+                await MainActor.run {
+                    if response.data?.valid == true {
+                        promoApplied = true
+                        promoError = nil
+                    } else {
+                        promoApplied = false
+                        promoError = String(localized: "order_promo_code_invalid")
+                    }
+                    promoValidating = false
+                }
+            } catch {
+                await MainActor.run {
+                    promoApplied = false
+                    promoError = String(localized: "order_promo_code_invalid")
+                    promoValidating = false
+                }
+            }
+        }
+    }
+
+    private func removePromo() {
+        promoApplied = false
+        promoCode = ""
+        promoError = nil
+    }
+
     private var deliveryMethodCard: some View {
         SectionCard(title: String(localized: "delivery_method_title"), icon: "truck.box.fill") {
             HStack(spacing: 10) {
@@ -495,6 +605,20 @@ struct OrderMoreTagsView: View {
                 if isLoadingPrices {
                     ProgressView()
                         .scaleEffect(0.8)
+                } else if promoApplied {
+                    // Original price struck through, "free" in green
+                    // next to it. Mirrors the web /get-your-tag summary
+                    // so the discount is visible before redirecting
+                    // the user out to Stripe.
+                    HStack(spacing: 6) {
+                        Text(currentShippingPriceLabel)
+                            .font(.appFont(size: 14))
+                            .foregroundColor(.secondary)
+                            .strikethrough()
+                        Text("free_price")
+                            .font(.appFont(size: 15, weight: .semibold))
+                            .foregroundColor(.green)
+                    }
                 } else {
                     Text(currentShippingPriceLabel)
                         .font(.appFont(size: 15, weight: .semibold))
@@ -646,14 +770,31 @@ struct OrderMoreTagsView: View {
 
                 _ = try await APIService.shared.createOrder(orderRequest)
 
-                // Step 2: Create Stripe checkout session
+                // Step 2: Create Stripe checkout session.
+                // Forward the typed code only when the user has clicked
+                // Apply and the backend confirmed validity. The same
+                // server-side check runs again at /create-checkout, so
+                // this is a UX-sync gate, not a trust boundary.
+                let trimmedPromo = promoCode.trimmingCharacters(in: .whitespacesAndNewlines)
                 let checkout = try await APIService.shared.createTagCheckout(
                     quantity: quantity,
                     countryCode: selectedCountryCode.uppercased(),
                     deliveryMethod: isHungary ? deliveryMethod : nil,
-                    postapointDetails: selectedPostaPoint
+                    postapointDetails: selectedPostaPoint,
+                    promoCode: (promoApplied && !trimmedPromo.isEmpty) ? trimmedPromo : nil
                 )
 
+                if checkout.url.hasPrefix("senra://") {
+                    // Welcome-promo bypass — backend completed the
+                    // order server-side (0-total), no Stripe redirect
+                    // needed. Mirror the same notification that fires
+                    // when the SafariCheckoutView intercepts a Stripe
+                    // success URL so the rest of the app updates.
+                    appState.showSuccess(String(localized: "checkout_tag_order_success"))
+                    NotificationCenter.default.post(name: .tagOrderCompleted, object: nil)
+                    isLoading = false
+                    return
+                }
                 if let url = URL(string: checkout.url) {
                     checkoutURL = url
                     showCheckoutSheet = true

@@ -1430,3 +1430,12 @@
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
 "delete_confirm_type_delete" = "Type DELETE to confirm";
 "type_delete_to_confirm" = "Type DELETE";
+"order_promo_code_title" = "Promo kód";
+"order_promo_code_label" = "Máš promo kód?";
+"order_promo_code_placeholder" = "Zadaj svoj kód";
+"order_promo_code_hint" = "Ak je platný, zľava sa uplatní pri platbe.";
+"order_promo_code_apply" = "Použiť";
+"order_promo_code_validating" = "Overujem…";
+"order_promo_code_remove" = "Odstrániť";
+"order_promo_code_applied_free_shipping" = "Zľava aktivovaná — Doprava zdarma";
+"order_promo_code_invalid" = "Tento promo kód nie je platný.";

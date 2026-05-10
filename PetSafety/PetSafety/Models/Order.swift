@@ -168,6 +168,28 @@ struct AddressDetails: Codable {
     var phone: String? = nil
 }
 
+// MARK: - Promo validation (free-shipping welcome code)
+struct ValidatePromoRequest: Codable {
+    let code: String
+}
+
+struct ValidatePromoData: Codable {
+    let valid: Bool
+    let discountType: String?
+    let label: String?
+
+    enum CodingKeys: String, CodingKey {
+        case valid
+        case discountType = "discount_type"
+        case label
+    }
+}
+
+struct ValidatePromoResponse: Codable {
+    let success: Bool
+    let data: ValidatePromoData?
+}
+
 // MARK: - Tag Checkout (Stripe Checkout redirect)
 struct CreateTagCheckoutRequest: Codable {
     let quantity: Int
@@ -175,6 +197,7 @@ struct CreateTagCheckoutRequest: Codable {
     let platform: String
     let deliveryMethod: String?
     let postapointDetails: PostaPointDetails?
+    let promoCode: String?
 
     enum CodingKeys: String, CodingKey {
         case quantity
@@ -182,6 +205,7 @@ struct CreateTagCheckoutRequest: Codable {
         case platform
         case deliveryMethod = "delivery_method"
         case postapointDetails = "postapoint_details"
+        case promoCode = "promo_code"
     }
 }
 

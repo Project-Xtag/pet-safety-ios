@@ -1431,3 +1431,12 @@
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
 "delete_confirm_type_delete" = "Type DELETE to confirm";
 "type_delete_to_confirm" = "Type DELETE";
+"order_promo_code_title" = "Kuponkód";
+"order_promo_code_label" = "Van kuponkódod?";
+"order_promo_code_placeholder" = "Add meg a kódot";
+"order_promo_code_hint" = "Ha érvényes, a kedvezmény a fizetésnél kerül levonásra.";
+"order_promo_code_apply" = "Alkalmaz";
+"order_promo_code_validating" = "Ellenőrzés…";
+"order_promo_code_remove" = "Eltávolítás";
+"order_promo_code_applied_free_shipping" = "Kedvezmény érvényesítve — Ingyenes szállítás";
+"order_promo_code_invalid" = "Ez a kuponkód nem érvényes.";

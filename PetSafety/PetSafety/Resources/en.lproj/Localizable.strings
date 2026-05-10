@@ -1434,3 +1434,12 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Shared via SENRA";
+"order_promo_code_title" = "Promo code";
+"order_promo_code_label" = "Have a promo code?";
+"order_promo_code_placeholder" = "Enter your code";
+"order_promo_code_hint" = "If valid, the discount is applied at checkout.";
+"order_promo_code_apply" = "Apply";
+"order_promo_code_validating" = "Checking…";
+"order_promo_code_remove" = "Remove";
+"order_promo_code_applied_free_shipping" = "Discount applied — Free shipping";
+"order_promo_code_invalid" = "This promo code isn't valid.";

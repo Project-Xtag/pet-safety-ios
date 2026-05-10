@@ -1433,3 +1433,12 @@
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
 "delete_confirm_type_delete" = "Type DELETE to confirm";
 "type_delete_to_confirm" = "Type DELETE";
+"order_promo_code_title" = "Code promo";
+"order_promo_code_label" = "Tu as un code promo ?";
+"order_promo_code_placeholder" = "Saisis ton code";
+"order_promo_code_hint" = "S'il est valide, la remise s'applique au paiement.";
+"order_promo_code_apply" = "Appliquer";
+"order_promo_code_validating" = "Vérification…";
+"order_promo_code_remove" = "Retirer";
+"order_promo_code_applied_free_shipping" = "Remise appliquée — Livraison gratuite";
+"order_promo_code_invalid" = "Ce code promo n'est pas valide.";
