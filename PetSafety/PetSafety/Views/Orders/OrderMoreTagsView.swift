@@ -784,6 +784,17 @@ struct OrderMoreTagsView: View {
                     promoCode: (promoApplied && !trimmedPromo.isEmpty) ? trimmedPromo : nil
                 )
 
+                if checkout.url.hasPrefix("senra://") {
+                    // Welcome-promo bypass — backend completed the
+                    // order server-side (0-total), no Stripe redirect
+                    // needed. Mirror the same notification that fires
+                    // when the SafariCheckoutView intercepts a Stripe
+                    // success URL so the rest of the app updates.
+                    appState.showSuccess(String(localized: "checkout_tag_order_success"))
+                    NotificationCenter.default.post(name: .tagOrderCompleted, object: nil)
+                    isLoading = false
+                    return
+                }
                 if let url = URL(string: checkout.url) {
                     checkoutURL = url
                     showCheckoutSheet = true
