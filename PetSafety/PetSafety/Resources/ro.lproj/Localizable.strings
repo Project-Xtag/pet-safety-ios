@@ -1434,3 +1434,8 @@
 "order_promo_code_label" = "Ai un cod promoțional?";
 "order_promo_code_placeholder" = "Introdu codul";
 "order_promo_code_hint" = "Dacă este valabil, reducerea se aplică la finalizare.";
+"order_promo_code_apply" = "Aplică";
+"order_promo_code_validating" = "Se verifică…";
+"order_promo_code_remove" = "Elimină";
+"order_promo_code_applied_free_shipping" = "Reducere aplicată — Livrare gratuită";
+"order_promo_code_invalid" = "Acest cod promoțional nu este valabil.";

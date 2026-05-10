@@ -1022,6 +1022,22 @@ class APIService {
         return try await performRequest(request, responseType: CreateTagOrderResponse.self)
     }
 
+    /// Server-side promo validation. Used by the Apply button on the
+    /// tag-order screen so the user sees a "Discount applied" preview
+    /// before the Stripe redirect. Server returns `valid: false` (HTTP
+    /// 200) on miss — not a network error — so the UI distinguishes
+    /// between "wrong code" (show red error) and "couldn't reach
+    /// server" (show network-error toast).
+    func validateTagPromo(code: String) async throws -> ValidatePromoResponse {
+        let request = try await buildRequest(
+            endpoint: "/orders/validate-promo",
+            method: "POST",
+            body: ValidatePromoRequest(code: code),
+            requiresAuth: false
+        )
+        return try await performRequest(request, responseType: ValidatePromoResponse.self)
+    }
+
     func createTagCheckout(
         quantity: Int,
         countryCode: String? = nil,

@@ -1434,3 +1434,8 @@
 "order_promo_code_label" = "¿Tienes un código promocional?";
 "order_promo_code_placeholder" = "Introduce tu código";
 "order_promo_code_hint" = "Si es válido, el descuento se aplica al pagar.";
+"order_promo_code_apply" = "Aplicar";
+"order_promo_code_validating" = "Comprobando…";
+"order_promo_code_remove" = "Quitar";
+"order_promo_code_applied_free_shipping" = "Descuento aplicado — Envío gratis";
+"order_promo_code_invalid" = "Este código promocional no es válido.";

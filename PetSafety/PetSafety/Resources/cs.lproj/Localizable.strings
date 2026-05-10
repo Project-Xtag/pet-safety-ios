@@ -1434,3 +1434,8 @@
 "order_promo_code_label" = "Máš promo kód?";
 "order_promo_code_placeholder" = "Zadej svůj kód";
 "order_promo_code_hint" = "Pokud je platný, sleva se uplatní při platbě.";
+"order_promo_code_apply" = "Použít";
+"order_promo_code_validating" = "Ověřuji…";
+"order_promo_code_remove" = "Odebrat";
+"order_promo_code_applied_free_shipping" = "Sleva aktivována — Doprava zdarma";
+"order_promo_code_invalid" = "Tento promo kód není platný.";

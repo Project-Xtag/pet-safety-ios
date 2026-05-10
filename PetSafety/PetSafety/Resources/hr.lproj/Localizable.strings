@@ -1440,3 +1440,8 @@
 "order_promo_code_label" = "Imaš promo kod?";
 "order_promo_code_placeholder" = "Unesi svoj kod";
 "order_promo_code_hint" = "Ako je valjan, popust se primjenjuje na blagajni.";
+"order_promo_code_apply" = "Primijeni";
+"order_promo_code_validating" = "Provjera…";
+"order_promo_code_remove" = "Ukloni";
+"order_promo_code_applied_free_shipping" = "Popust primijenjen — Besplatna dostava";
+"order_promo_code_invalid" = "Ovaj promo kod nije valjan.";
