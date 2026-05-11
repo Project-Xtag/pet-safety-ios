@@ -48,8 +48,8 @@
 "register" = "Registrer";
 "already_have_account" = "Har du allerede en konto?";
 "log_in" = "Logg inn";
-"terms_login_prefix" = "Ved å logge inn godtar du våre ";
-"terms_and" = " og ";
+"terms_login_prefix" = "Ved å logge inn godtar du våre";
+"terms_and" = " og";
 "terms_of_service" = "Brukervilkår";
 "privacy_policy" = "Personvernerklæring";
 "first_name" = "Fornavn";
@@ -242,10 +242,10 @@
 "contact_label" = "Kontakt: %@";
 
 // MARK: - Meld savnet / Observasjon
-"last_seen_location" = "Sist kjente sted";
+"last_seen_location" = "Sist kjente posisjon";
 "report_sighting" = "Rapporter observasjon";
 "notes" = "Notater";
-"sighting_location" = "Sted for observasjon";
+"sighting_location" = "Posisjon for observasjon";
 "use_current_location" = "Bruk gjeldende posisjon";
 "location_captured" = "Posisjon hentet fra GPS";
 "report_missing_pet" = "Meld savnet dyr";
@@ -253,8 +253,8 @@
 "additional_details" = "Ytterligere detaljer";
 "select_pet_header" = "Velg dyr";
 "no_pets_available" = "Ingen dyr tilgjengelig. Legg til et dyr først.";
-"last_seen_location_header" = "Sted sist sett";
-"enter_location" = "Skriv inn sted";
+"last_seen_location_header" = "Posisjon sist sett";
+"enter_location" = "Skriv inn posisjon";
 "additional_information_header" = "Tilleggsinformasjon";
 "additional_details_placeholder" = "Oppgi ytterligere detaljer om når og hvor dyret ditt ble sett sist…";
 "alert_created_success" = "Savnet-varsel opprettet!";
@@ -749,7 +749,7 @@
 "plan_skip_free" = "Hopp over";
 "plan_all_include" = "Alle abonnementer inkluderer:";
 "plan_paid_add" = "Betalte abonnementer legger til:";
-"plan_feature_qr_tag" = "QR-brikke til dyret ditt";
+"plan_feature_qr_tag" = "QR-brikke til kjæledyret ditt";
 "plan_feature_scan_notif" = "Øyeblikkelige skannevarsler";
 "plan_feature_public_profile" = "Offentlig dyreprofil";
 "plan_feature_secure_storage" = "Sikker datalagring";
@@ -927,7 +927,7 @@
 "mark_lost_address_placeholder" = "Skriv inn adresse eller posisjon";
 "mark_lost_additional_info" = "Tilleggsinformasjon";
 "mark_lost_additional_placeholder" = "Detaljer som kan hjelpe med å finne kjæledyret ditt (halsbåndfarge, atferd, særkjennetegn…)";
-"mark_lost_sends_to" = "Dette varselet sendes til:";
+"mark_lost_sends_to" = "Dette varselet sendes til: SENRA-brukere, veterinærer og dyrevernorganisasjoner innen 10 km, og vi legger det også ut på Facebook-, Instagram- og X-sidene våre.";
 "mark_lost_nearby_owners" = "Dyreeiere i nærheten";
 "mark_lost_vet_clinics" = "Veterinærklinikker i området";
 "mark_lost_shelters" = "Dyrevernorganisasjoner i nærheten";
@@ -1185,13 +1185,13 @@
 "breed_cat_exotic_shorthair" = "Eksotisk Korthår";
 "breed_cat_abyssinian" = "Abyssinier";
 "breed_cat_scottish_fold" = "Skotsk klapøre";
-"breed_cat_sphynx" = "Sphynx";
+"breed_cat_sphynx" = "Sfinks";
 "breed_cat_siamese" = "Siameser";
 "breed_cat_devon_rex" = "Devon rex";
 "breed_cat_oriental_shorthair" = "Orientalsk Korthår";
 "breed_cat_burmese" = "Burmesisk";
 "breed_cat_american_shorthair" = "Amerikansk Korthår";
-"breed_cat_bengal" = "Bengal";
+"breed_cat_bengal" = "Bengalsk";
 "breed_cat_russian_blue" = "Russisk Blå";
 "breed_cat_norwegian_forest_cat" = "Norsk Skogkatt";
 "breed_cat_birman" = "Birma";
@@ -1416,7 +1416,7 @@
 "shelter_promo_claim_tag_button" = "Aktiver QR-brikke";
 "shelter_promo_name_label_required" = "Navn *";
 "shelter_promo_species_label_required" = "Art *";
-"shelter_promo_select_placeholder" = "Velg...";
+"shelter_promo_select_placeholder" = "Velg…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Eiers navn";
@@ -1425,10 +1425,10 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Delt via SENRA";
-"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
+"alert_geocode_failed_warning" = "Kunne ikke finne den adressen nøyaktig — varselet ditt sendes uten en presis posisjon. Prøv «gjeldende posisjon» for bedre resultater.";
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
-"delete_confirm_type_delete" = "Type DELETE to confirm";
-"type_delete_to_confirm" = "Type DELETE";
+"delete_confirm_type_delete" = "Skriv DELETE for å bekrefte";
+"type_delete_to_confirm" = "Skriv DELETE";
 "order_promo_code_title" = "Kampanjekode";
 "order_promo_code_label" = "Har du en kampanjekode?";
 "order_promo_code_placeholder" = "Skriv inn koden";

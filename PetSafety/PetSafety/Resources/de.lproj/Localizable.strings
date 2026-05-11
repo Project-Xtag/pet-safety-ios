@@ -48,8 +48,8 @@
 "register" = "Registrieren";
 "already_have_account" = "du haben bereits ein Benutzerkonto?";
 "log_in" = "Einloggen";
-"terms_login_prefix" = "Mit dem Einloggen stimmen du unseren ";
-"terms_and" = " und ";
+"terms_login_prefix" = "Mit dem Einloggen stimmen du unseren";
+"terms_and" = " und";
 "terms_of_service" = "Nutzungsbedingungen";
 "privacy_policy" = "Datenschutzrichtlinie";
 "first_name" = "Vorname";
@@ -689,7 +689,7 @@
 "map_coordinates" = "Koordinaten";
 "map_open_in" = "Öffnen in";
 "map_apple_maps" = "Apple Karten";
-"map_google_maps" = "Google Maps";
+"map_google_maps" = "Google Karten";
 "map_waze" = "Waze";
 "map_pet_location %@" = "Standort von %@";
 "location_title" = "Standort von %@";
@@ -986,7 +986,7 @@
 "help_guide_qr_tags_title" = "QR-Code Tier-Namensschilder";
 "help_guide_qr_tags_desc" = "Jede SENRA Haustiermarke enthält einen einzigartigen QR-Code, der mit dem digitalen Profil deines Haustieres verknüpft ist. Jeder, der dein Haustier findet, kann den Code mit der Smartphone-Kamera scannen — keine App erforderlich. Das Scannen der Marke sendet dir eine Benachrichtigung mit dem Standort des Finders (falls geteilt). Du kannst die Marken über die App aktivieren und jederzeit eine Ersatzmarke anfordern, falls die alte verloren geht oder beschädigt wird.";
 "help_guide_materials_title" = "Materialien & Haltbarkeit";
-"help_guide_materials_desc" = "SENRA Haustiermarken bestehen aus strapazierfähigem, leichtem Metall mit einer Epoxidbeschichtung für zusätzlichen Schutz. Sie sind wasserfest und UV-beständig, geeignet für alle Wetterbedingungen. Sie nutzen sich nicht bei täglichem Gebrauch ab. Die Marken sind so gestaltet, dass sie bequem an die meisten Halsbänder und Geschirre passen.";
+"help_guide_materials_desc" = "SENRA Haustiermarken bestehen aus strapazierfähigem, leichtem Metall mit einer Epoxidbeschichtung für zusätzlichen Schutz. Sie sind wasserfest und UV-beständig, geeignet für alle Wetterbedingungen. Die Haustiermarken nutzen sich nicht beim täglichen Gebrauch ab. Sie sind so gestaltet, dass sie bequem an die meisten Halsbänder und Geschirre passen.";
 "help_guide_emergency_title" = "Notfallkontakt-Funktionen";
 "help_guide_emergency_desc" = "Wenn jemand die Haustiermarke deines Haustieres scannt, erhältst du sofort eine Push-Benachrichtigung und E-Mail mit dem Standort des Finders. Standard und Maximum Mitglieder erhalten auch SMS-Benachrichtigungen für schnellere Reaktion. Wenn du dein Haustier als vermisst markierst, wird eine Gemeinschaftswarnung an alle SENRA Nutzer im Umkreis von 10 km gesendet, und registrierte Tierärzte und Tierheime in deiner Nähe werden ebenfalls benachrichtigt. Jeder in der Gemeinschaft kann Sichtungen mit Standort und Fotos melden, um dir zu helfen, dein Haustier zu finden.";
 "help_guide_profile_title" = "Profilverwaltung";
@@ -1186,7 +1186,7 @@
 "breed_cat_exotic_shorthair" = "Exotisch Kurzhaar";
 "breed_cat_abyssinian" = "Abessinier";
 "breed_cat_scottish_fold" = "Schottische Faltohrkatze";
-"breed_cat_sphynx" = "Sphynx";
+"breed_cat_sphynx" = "Sphinx";
 "breed_cat_siamese" = "Siamkatze";
 "breed_cat_devon_rex" = "Devon Rex";
 "breed_cat_oriental_shorthair" = "Orientalisch Kurzhaar";
@@ -1417,7 +1417,7 @@
 "shelter_promo_claim_tag_button" = "Haustiermarke aktivieren";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Tierart *";
-"shelter_promo_select_placeholder" = "Auswählen...";
+"shelter_promo_select_placeholder" = "Auswählen…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Name des Besitzers";

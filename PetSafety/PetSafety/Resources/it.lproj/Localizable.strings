@@ -48,8 +48,8 @@
 "register" = "Registrati";
 "already_have_account" = "Hai già un account?";
 "log_in" = "Accedi";
-"terms_login_prefix" = "Accedendo, accetti i nostri ";
-"terms_and" = " e ";
+"terms_login_prefix" = "Accedendo, accetti i nostri";
+"terms_and" = " e";
 "terms_of_service" = "Termini di servizio";
 "privacy_policy" = "Informativa sulla privacy";
 "first_name" = "Nome";
@@ -473,7 +473,7 @@
 
 // FAQ Questions and Answers
 "help_faq_q1" = "Come registro il mio animale da compagnia?";
-"help_faq_a1" = "Puoi registrare il tuo animale di compagnia nel menu 'I Miei Animali di compagnia' toccando 'Aggiungi Nuovo Animale di compagnia'. Compila le informazioni richieste e carica una o più foto.";
+"help_faq_a1" = "Puoi registrare il tuo animale da compagnia nel menu 'I Miei Animali da compagnia' toccando 'Aggiungi Nuovo Animale da compagnia'. Compila le informazioni richieste e carica una o più foto.";
 "help_faq_q2" = "Quali informazioni devo fornire nel profilo del mio animale di compagnia?";
 "help_faq_a2" = "Hai già fornito il nome del tuo animale di compagnia quando hai ordinato la medaglietta, e apparirà nel profilo del tuo animale di compagnia una volta attivata. Inserisci la specie e la razza. Per prevenire abusi, questi dati possono essere inseriti solo una volta. Se commetti un errore, contattaci e ti aiuteremo. Qui puoi anche aggiungere peso, età, colore e qualsiasi caratteristica distintiva o comportamento tipico del tuo gatto/cane. Puoi anche caricare foto. Tu decidi quali informazioni sono visibili sul tuo animale di compagnia se si perde.";
 "help_faq_q3" = "Come funziona la medaglietta con codice QR?";
@@ -1155,9 +1155,9 @@
 "breed_dog_doberman_pinscher" = "Dobermann";
 "breed_dog_australian_shepherd" = "Pastore Australiano";
 "breed_dog_miniature_schnauzer" = "Schnauzer Nano";
-"breed_dog_cavalier_king_charles_spaniel" = "Cavalier King Charles Spaniel";
+"breed_dog_cavalier_king_charles_spaniel" = "Cavalier King Charles spániel";
 "breed_dog_shih_tzu" = "Shih Tzu";
-"breed_dog_boston_terrier" = "Boston Terrier";
+"breed_dog_boston_terrier" = "Boston terrier";
 "breed_dog_pomeranian" = "Pomerania";
 "breed_dog_havanese" = "Havanese";
 "breed_dog_shetland_sheepdog" = "Pastore Shetland";
@@ -1169,7 +1169,7 @@
 "breed_dog_vizsla" = "Vizsla";
 "breed_dog_weimaraner" = "Weimaraner";
 "breed_dog_pembroke_welsh_corgi" = "Pembroke Welsh corgi";
-"breed_dog_maltese" = "Maltese";
+"breed_dog_maltese" = "Máltai";
 "breed_dog_chihuahua" = "Chihuahua";
 "breed_dog_west_highland_white_terrier" = "West Highland white terrier";
 "breed_dog_collie" = "Collie";
@@ -1185,7 +1185,7 @@
 "breed_dog_bullmastiff" = "Bullmastiff";
 "breed_dog_samoyed" = "Samoiedo";
 "breed_dog_scottish_terrier" = "Scottish terrier";
-"breed_dog_soft_coated_wheaten_terrier" = "Soft Coated Wheaten Terrier";
+"breed_dog_soft_coated_wheaten_terrier" = "Soft Coated Wheaten terrier";
 "breed_dog_airedale_terrier" = "Airedale Terrier";
 "breed_dog_jack_russell_terrier" = "Jack Russell Terrier";
 "breed_cat_domestic_shorthair" = "Domestico a pelo corto";
@@ -1197,11 +1197,11 @@
 "breed_cat_exotic_shorthair" = "Exotic Shorthair";
 "breed_cat_abyssinian" = "Abissino";
 "breed_cat_scottish_fold" = "Scottish Fold";
-"breed_cat_sphynx" = "Sphynx";
+"breed_cat_sphynx" = "Sfinge";
 "breed_cat_siamese" = "Siamese";
 "breed_cat_devon_rex" = "Devon Rex";
 "breed_cat_oriental_shorthair" = "Orientale a pelo corto";
-"breed_cat_burmese" = "Burmese";
+"breed_cat_burmese" = "Birmano";
 "breed_cat_american_shorthair" = "Americano a pelo corto";
 "breed_cat_bengal" = "Bengala";
 "breed_cat_russian_blue" = "Blu di Russia";
@@ -1228,7 +1228,7 @@
 "breed_cat_havana_brown" = "Havana brown";
 "breed_cat_japanese_bobtail" = "Bobtail Giapponese";
 "breed_cat_laperm" = "LaPerm";
-"breed_cat_american_wirehair" = "American Wirehair";
+"breed_cat_american_wirehair" = "Americano a pelo duro";
 "breed_cat_european_burmese" = "Burmese Europeo";
 "breed_cat_burmilla" = "Burmilla";
 "breed_cat_colorpoint_shorthair" = "Colorpoint a pelo corto";
@@ -1428,7 +1428,7 @@
 "shelter_promo_claim_tag_button" = "Attiva la medaglietta";
 "shelter_promo_name_label_required" = "Nome *";
 "shelter_promo_species_label_required" = "Specie *";
-"shelter_promo_select_placeholder" = "Seleziona...";
+"shelter_promo_select_placeholder" = "Seleziona…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Nome del proprietario";
@@ -1437,7 +1437,7 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Condiviso tramite SENRA";
-"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
+"alert_geocode_failed_warning" = "Impossibile individuare quell'indirizzo — l'avviso verrà inviato senza una posizione precisa. Prova \"posizione attuale\" per risultati migliori.";
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
 "delete_confirm_type_delete" = "Type DELETE to confirm";
 "type_delete_to_confirm" = "Type DELETE";
