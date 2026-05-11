@@ -48,8 +48,8 @@
 "register" = "Registrovat";
 "already_have_account" = "Už máš účet?";
 "log_in" = "Prihlásiť sa";
-"terms_login_prefix" = "Prihlásením súhlasíš s našimi ";
-"terms_and" = " a ";
+"terms_login_prefix" = "Prihlásením súhlasíš s našimi";
+"terms_and" = " a";
 "terms_of_service" = "Podmienkami používania";
 "privacy_policy" = "Zasadami ochrany súkromia";
 "first_name" = "Meno";
@@ -1417,7 +1417,7 @@
 "shelter_promo_claim_tag_button" = "Aktivovať známku";
 "shelter_promo_name_label_required" = "Meno *";
 "shelter_promo_species_label_required" = "Druh *";
-"shelter_promo_select_placeholder" = "Vyber...";
+"shelter_promo_select_placeholder" = "Vyber…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Meno majiteľa";
