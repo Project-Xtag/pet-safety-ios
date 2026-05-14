@@ -81,6 +81,11 @@ struct TagActivationView: View {
                                 initialPetName: context.petName,
                                 remainingPetNames: otherNames,
                                 onRegisterNextPet: { nextName in
+                                    // Activate the tag for the pet that was just created
+                                    // BEFORE moving on to the next pet. Without this the
+                                    // tag stays at status='shipped' on the backend even
+                                    // though PetFormView showed "Tag activated for X".
+                                    handlePetCreated()
                                     createPetContext = nil
                                     // Small delay to let navigation pop, then push again
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -89,6 +94,9 @@ struct TagActivationView: View {
                                     }
                                 },
                                 onAllDone: {
+                                    // Same reason as above — fire the activation before
+                                    // dismissing, otherwise the tag never gets activated.
+                                    handlePetCreated()
                                     createPetContext = nil
                                     onDismiss()
                                 }
