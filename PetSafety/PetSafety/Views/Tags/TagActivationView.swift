@@ -505,6 +505,10 @@ struct TagActivationView: View {
                 if let refreshed = try? await APIService.shared.getUnactivatedTagsForQRCode(currentTagCode) {
                     orderItems = refreshed
                 }
+                // Tell PetsListView's PetsViewModel to refresh so the
+                // "TAG ON ITS WAY" badge drops immediately rather than
+                // waiting for the next view-appear/pull-to-refresh.
+                NotificationCenter.default.post(name: .tagActivated, object: nil)
                 withAnimation {
                     activationSuccess = true
                 }

@@ -137,6 +137,11 @@ struct PetsListView: View {
         .refreshable {
             await viewModel.fetchPets()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .tagActivated)) { _ in
+            // A tag was activated elsewhere — refresh so the "TAG ON ITS WAY"
+            // badge drops without requiring view-appear or pull-to-refresh.
+            Task { await viewModel.fetchPets() }
+        }
         .task(id: searchText) {
             try? await Task.sleep(for: .milliseconds(300))
             debouncedSearchText = searchText
