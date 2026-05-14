@@ -6,6 +6,7 @@ import os
 extension Notification.Name {
     static let tagOrderCompleted = Notification.Name("tagOrderCompleted")
     static let replacementCompleted = Notification.Name("replacementCompleted")
+    static let tagActivated = Notification.Name("tagActivated")
 }
 
 private let appLog = Logger(subsystem: "com.petsafety.PetSafety", category: "AppStartup")
