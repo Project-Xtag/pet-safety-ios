@@ -29,6 +29,12 @@ struct PetFormView: View {
     var onRegisterNextPet: ((String) -> Void)?
     /// Called when all pets are done (show thank-you / go home)
     var onAllDone: (() -> Void)?
+    /// Tag activation flow: after a pet is created, perform any follow-up work
+    /// (typically activate the QR tag) and wait for it to succeed BEFORE the
+    /// "Tag activated for X" success screen is shown. If this throws, the
+    /// success screen is suppressed and the caller's onAllDone is invoked so
+    /// the user is dismissed back with the error visible.
+    var onPetCreated: ((Pet) async throws -> Void)?
 
     @StateObject private var viewModel = PetsViewModel()
     @Environment(\.dismiss) private var dismiss
@@ -37,6 +43,9 @@ struct PetFormView: View {
     @State private var name: String
     @State private var showPostSaveScreen = false
     @State private var savedPetName: String = ""
+    /// Active while the post-create hook (e.g. tag activation) is running so the
+    /// save button stays disabled until we know whether to show success or error.
+    @State private var isRunningPostCreateHook = false
     @State private var species = "Dog"
     @State private var breed = ""
     @State private var color = ""
@@ -63,12 +72,13 @@ struct PetFormView: View {
     let speciesOptions = ["Dog", "Cat", "Bird", "Rabbit", "Other"]
     let sexOptions = ["Unknown", "Male", "Female"]
 
-    init(mode: PetFormMode, initialPetName: String? = nil, remainingPetNames: [String] = [], onRegisterNextPet: ((String) -> Void)? = nil, onAllDone: (() -> Void)? = nil) {
+    init(mode: PetFormMode, initialPetName: String? = nil, remainingPetNames: [String] = [], onRegisterNextPet: ((String) -> Void)? = nil, onAllDone: (() -> Void)? = nil, onPetCreated: ((Pet) async throws -> Void)? = nil) {
         self.mode = mode
         self.initialPetName = initialPetName
         self.remainingPetNames = remainingPetNames
         self.onRegisterNextPet = onRegisterNextPet
         self.onAllDone = onAllDone
+        self.onPetCreated = onPetCreated
         if case .edit(let pet) = mode {
             _name = State(initialValue: pet.name)
         } else {
@@ -340,7 +350,7 @@ struct PetFormView: View {
                 Button(action: { savePet() }) {
                     HStack {
                         Spacer()
-                        if viewModel.isLoading {
+                        if viewModel.isLoading || isRunningPostCreateHook {
                             ProgressView()
                                 .tint(.white)
                         } else {
@@ -353,10 +363,10 @@ struct PetFormView: View {
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 12)
-                        .fill(name.isEmpty || viewModel.isLoading ? Color.brandOrange.opacity(0.4) : Color.brandOrange)
+                        .fill(name.isEmpty || viewModel.isLoading || isRunningPostCreateHook ? Color.brandOrange.opacity(0.4) : Color.brandOrange)
                 )
                 .foregroundColor(.white)
-                .disabled(name.isEmpty || viewModel.isLoading)
+                .disabled(name.isEmpty || viewModel.isLoading || isRunningPostCreateHook)
             }
 
             // Delete Pet button - only show in edit mode
@@ -654,6 +664,37 @@ struct PetFormView: View {
 
                     appState.showSuccess(NSLocalizedString("pet_created", comment: ""))
 
+                    // Tag-activation context: run the post-create hook (activate the
+                    // QR tag) BEFORE the "Tag activated for X" success screen
+                    // appears. Without this gate the success copy used to render
+                    // even when activation never happened, leaving the tag stuck
+                    // at status='shipped' on the backend.
+                    if let onPetCreated = onPetCreated {
+                        isRunningPostCreateHook = true
+                        do {
+                            try await onPetCreated(newPet)
+                            isRunningPostCreateHook = false
+                        } catch {
+                            isRunningPostCreateHook = false
+                            #if DEBUG
+                            print("❌ Post-create hook (tag activation) failed: \(error)")
+                            #endif
+                            // Pet was created; tag activation failed. Tell the
+                            // user honestly and dismiss back so they can retry
+                            // by re-scanning — the new pet shows up in their
+                            // list with the "TAG ON ITS WAY" badge.
+                            appState.showError(
+                                String(format: NSLocalizedString("pet_created_tag_activation_failed", comment: ""), error.localizedDescription)
+                            )
+                            if let onAllDone = onAllDone {
+                                onAllDone()
+                            } else {
+                                dismiss()
+                            }
+                            return
+                        }
+                    }
+
                 case .edit(let pet):
                     #if DEBUG
                     print("✏️ Updating pet with ID: \(pet.id)")
@@ -723,7 +764,12 @@ struct PetFormView: View {
                 #if DEBUG
                 print("✅ Save operation completed successfully")
                 #endif
-                // In tag activation context, show post-save screen instead of dismissing
+
+                // In tag activation context, show post-save screen instead of dismissing.
+                // By this point, if onPetCreated was provided, the tag activation
+                // has already succeeded (the .create branch above awaits it before
+                // continuing), so the postSaveView's "Tag activated for X" copy
+                // is accurate.
                 if onRegisterNextPet != nil || onAllDone != nil {
                     savedPetName = name
                     withAnimation { showPostSaveScreen = true }

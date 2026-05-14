@@ -140,6 +140,7 @@
 "medications_hint" = "např. Inzulín dvakrát denně, srdeční lék";
 "unique_features_hint" = "Jedinečné znaky (skvrny, jizvy, výrazné rysy…)";
 "pet_created" = "Mazlíček vytvořen";
+"pet_created_tag_activation_failed" = "Mazlíček vytvořen, ale aktivace psí známky selhala: %@";
 "pet_updated" = "Mazlíček aktualizován";
 "pet_updated_photo_failed" = "Mazlíček aktualizován! Nahrání fotky se nezdařilo – zkus to později.";
 

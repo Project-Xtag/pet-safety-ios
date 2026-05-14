@@ -140,6 +140,7 @@
 "medications_hint" = "f.eks. Insulin to ganger daglig, hjertemedisin";
 "unique_features_hint" = "Unike kjennetegn (pelsmønster, arr osv.)";
 "pet_created" = "Dyr opprettet";
+"pet_created_tag_activation_failed" = "Dyr opprettet, men aktivering av QR-brikke mislyktes: %@";
 "pet_updated" = "Dyr oppdatert";
 "pet_updated_photo_failed" = "Dyr oppdatert! Bildeopplasting mislyktes – prøv igjen senere.";
 

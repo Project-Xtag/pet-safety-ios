@@ -140,6 +140,7 @@
 "medications_hint" = "z.B. Insulin zweimal täglich, Herzmedikament";
 "unique_features_hint" = "Besondere Merkmale (Zeichnungen, Narben usw.)";
 "pet_created" = "Haustier erstellt";
+"pet_created_tag_activation_failed" = "Haustier erstellt, aber Aktivierung der Haustiermarke fehlgeschlagen: %@";
 "pet_updated" = "Haustier aktualisiert";
 "pet_updated_photo_failed" = "Haustier aktualisiert! Foto-Upload fehlgeschlagen – bitte später erneut versuchen.";
 

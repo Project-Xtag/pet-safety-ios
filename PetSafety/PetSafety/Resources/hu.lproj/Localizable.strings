@@ -140,6 +140,7 @@
 "medications_hint" = "pl. Inzulin naponta kétszer, szívgyógyszer";
 "unique_features_hint" = "Egyedi jegyek (mintázatok, hegek stb.)";
 "pet_created" = "Kedvenc létrehozva";
+"pet_created_tag_activation_failed" = "Kedvenc létrehozva, de a biléta aktiválása nem sikerült: %@";
 "pet_updated" = "Kedvenc frissítve";
 "pet_updated_photo_failed" = "Kedvenc frissítve! A fotó feltöltése nem sikerült - kérjük, próbáld meg később!";
 

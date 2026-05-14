@@ -140,6 +140,7 @@
 "medications_hint" = "ex. Insulina duas vezes ao dia, medicamento cardíaco";
 "unique_features_hint" = "Características únicas (marcas, cicatrizes, etc.)";
 "pet_created" = "Animal de estimação criado";
+"pet_created_tag_activation_failed" = "Animal criado, mas a ativação da plaquinha inteligente falhou: %@";
 "pet_updated" = "Animal de estimação atualizado";
 "pet_updated_photo_failed" = "Animal de estimação atualizado! O upload da foto falhou - tente mais tarde.";
 

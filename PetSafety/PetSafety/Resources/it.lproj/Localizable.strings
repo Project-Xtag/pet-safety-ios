@@ -140,6 +140,7 @@
 "medications_hint" = "es. Insulina due volte al giorno, farmaco cardiaco";
 "unique_features_hint" = "Caratteristiche distintive (macchie, cicatrici, ecc.)";
 "pet_created" = "Animale di compagnia creato";
+"pet_created_tag_activation_failed" = "Animale creato, ma l'attivazione del tag non è riuscita: %@";
 "pet_updated" = "Animale di compagnia aggiornato";
 "pet_updated_photo_failed" = "Animale di compagnia aggiornato! Il caricamento della foto non è riuscito - riprova più tardi.";
 

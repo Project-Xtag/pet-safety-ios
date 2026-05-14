@@ -140,6 +140,7 @@
 "medications_hint" = "ex. Insuline deux fois par jour, médicament cardiaque";
 "unique_features_hint" = "Traits distinctifs (taches, cicatrices, etc.)";
 "pet_created" = "Animal de compagnie créé";
+"pet_created_tag_activation_failed" = "Animal créé, mais l'activation de la médaille connectée a échoué : %@";
 "pet_updated" = "Animal de compagnie mis à jour";
 "pet_updated_photo_failed" = "Animal de compagnie mis à jour ! Échec du téléchargement de la photo — réessaie plus tard.";
 
