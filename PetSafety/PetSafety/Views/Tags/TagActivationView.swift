@@ -81,11 +81,7 @@ struct TagActivationView: View {
                                 initialPetName: context.petName,
                                 remainingPetNames: otherNames,
                                 onRegisterNextPet: { nextName in
-                                    // Activate the tag for the pet that was just created
-                                    // BEFORE moving on to the next pet. Without this the
-                                    // tag stays at status='shipped' on the backend even
-                                    // though PetFormView showed "Tag activated for X".
-                                    handlePetCreated()
+                                    // Activation already completed in onPetCreated.
                                     createPetContext = nil
                                     // Small delay to let navigation pop, then push again
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -94,11 +90,19 @@ struct TagActivationView: View {
                                     }
                                 },
                                 onAllDone: {
-                                    // Same reason as above — fire the activation before
-                                    // dismissing, otherwise the tag never gets activated.
-                                    handlePetCreated()
+                                    // Activation already completed in onPetCreated.
                                     createPetContext = nil
                                     onDismiss()
+                                },
+                                onPetCreated: { newPet in
+                                    // Hard precondition for the post-save "Tag activated"
+                                    // screen: actually activate the tag and let the call
+                                    // throw if it fails. PetFormView awaits this and only
+                                    // shows the success screen on success; if it throws,
+                                    // the user is bounced back with an error.
+                                    try await viewModel.activateTag(code: currentTagCode, petId: newPet.id)
+                                    NotificationCenter.default.post(name: .tagActivated, object: nil)
+                                    selectedPet = newPet
                                 }
                             )
                             .environmentObject(appState)

@@ -140,6 +140,7 @@
 "medications_hint" = "np. Insulina dwa razy dziennie, lek na serce";
 "unique_features_hint" = "Cechy charakterystyczne (wzory, blizny, itp.)";
 "pet_created" = "Pupila dodane";
+"pet_created_tag_activation_failed" = "Pupil dodany, ale aktywacja adresówki nie powiodła się: %@";
 "pet_updated" = "Pupila zaktualizowane";
 "pet_updated_photo_failed" = "Pupila zaktualizowane! Przesłanie zdjęcia nie powiodło się — spróbuj ponownie później.";
 

@@ -143,6 +143,7 @@
 "medications_hint" = "npr. inzulin dva puta dnevno, lijekovi za srce";
 "unique_features_hint" = "Posebne značajke (šare, ožiljci itd.)";
 "pet_created" = "Kućni kućni ljubimac izrađen";
+"pet_created_tag_activation_failed" = "Ljubimac stvoren, ali aktivacija privjeska nije uspjela: %@";
 "pet_updated" = "Kućni kućni ljubimac ažuriran";
 "pet_updated_photo_failed" = "Kućni kućni ljubimac ažuriran! Učitavanje fotografije nije uspjelo — pokušaj ponovo kasnije.";
 

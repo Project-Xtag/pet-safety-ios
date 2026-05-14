@@ -140,6 +140,7 @@
 "medications_hint" = "e.g. Insulin twice daily, heart medication";
 "unique_features_hint" = "Unique features (markings, scars, etc.)";
 "pet_created" = "Pet created";
+"pet_created_tag_activation_failed" = "Pet created, but tag activation failed: %@";
 "pet_updated" = "Pet updated";
 "pet_updated_photo_failed" = "Pet updated! Photo upload failed - please try again later.";
 

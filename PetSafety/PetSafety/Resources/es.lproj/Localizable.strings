@@ -140,6 +140,7 @@
 "medications_hint" = "ej. Insulina dos veces al día, medicamento cardíaco";
 "unique_features_hint" = "Rasgos únicos (marcas, cicatrices, etc.)";
 "pet_created" = "Mascota creada";
+"pet_created_tag_activation_failed" = "Mascota creada, pero la activación de la chapa inteligente falló: %@";
 "pet_updated" = "Mascota actualizada";
 "pet_updated_photo_failed" = "¡Mascota actualizada! La carga de la foto falló; inténtalo más tarde.";
 

@@ -140,6 +140,7 @@
 "medications_hint" = "ex. Insulină de două ori pe zi, medicament cardiac";
 "unique_features_hint" = "Caracteristici unice (semne, cicatrici, trăsături distinctive…)";
 "pet_created" = "Animal de companie creat";
+"pet_created_tag_activation_failed" = "Animal creat, dar activarea plăcuței inteligente a eșuat: %@";
 "pet_updated" = "Animal de companie actualizat";
 "pet_updated_photo_failed" = "Animal de companie actualizat! Încărcarea fotografiei a eșuat - încearcă din nou mai târziu.";
 

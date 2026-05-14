@@ -140,6 +140,7 @@
 "medications_hint" = "napr.. Inzulín dvakrát denne, srdcový liek";
 "unique_features_hint" = "Jedinečné znaky (škvrny, jazvy apod.)";
 "pet_created" = "Domáci domáci miláčik vytvorený";
+"pet_created_tag_activation_failed" = "Maznáčik vytvorený, ale aktivácia známky zlyhala: %@";
 "pet_updated" = "Domáci domáci miláčik aktualizovaný";
 "pet_updated_photo_failed" = "Domáci domáci miláčik aktualizovaný! Nahratie fotky zlyhalo – skús neskôr.";
 
