@@ -723,7 +723,7 @@
 "contacts_no_type_added" = "Nincs megadva: %@";
 
 // MARK: - További cserebiléta rendelés kulcsok
-"order_replace_upgrade_hint" = "Válts Standard vagy Maximum csomagra ingyenes cserékért!";
+"order_replace_upgrade_hint" = "Válts Kedvenc csomagra ingyenes cserékért!";
 "order_replace_old_deactivated" = "A régi QR kód deaktiválva lesz a rendelés leadásakor";
 "order_replace_delivery_time" = "Az új bilétád 2-3 munkanapon belül megérkezik";
 "order_replace_scan_activate" = "A biléta azonnal használatra kész, azt már nem kell aktiválnod";
@@ -1042,7 +1042,7 @@
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "A regisztrált kedvenceid száma elérte a limitet";
 "pet_limit_reached_info" = "Elérted az ehhez a fiókhoz tartozó kisállatok maximális számát. További információért látogass el a senra.pet oldalra.";
-"upgrade_to_ultimate" = "Váltás Maximum csomagra";
+"upgrade_to_ultimate" = "Váltás Kedvenc csomagra";
 "keep_current_plan" = "Jelenlegi csomag megtartása";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "A %@ csomagod %lld kedvencet engedélyez. Válts %@-ra %@ áron, hogy akár 10 kisállatot regisztrálhass!";
 "pet_limit_upgrade_generic" = "Válts csomagot több kedvenc hozzáadásához!";
@@ -1311,7 +1311,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Közösségi riasztásokhoz Senra előfizetés szükséges.";
 "mark_lost_starter_upgrade_cta" = "Csomagok megtekintése";
-"mark_lost_upgrade_prompt" = "A Starter csomaggal a kedvencedet elveszettnek jelöljük, de a közeli felhasználók, állatorvosok és menhelyek értesítéséhez Standard vagy Maximum előfizetés szükséges.";
+"mark_lost_upgrade_prompt" = "Az Induló csomaggal a kedvencedet elveszettnek jelöljük, de a közeli felhasználók, állatorvosok és menhelyek értesítéséhez Kedvenc csomag előfizetés szükséges.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "pl. 3 éves, 6 hónapos (opcionális)";
 "create_pet_profile" = "Profil létrehozása";
