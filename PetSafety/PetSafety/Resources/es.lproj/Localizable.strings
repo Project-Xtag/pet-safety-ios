@@ -492,9 +492,9 @@
 "help_faq_q9" = "¿Cómo funcionan las alertas de mascotas perdidas?";
 "help_faq_a9" = "Cuando marcas a tu gato o perro como perdido, se crea una alerta con la foto y datos de tu mascota. Los usuarios de SENRA en un radio de 10 km son notificados inmediatamente y tu mascota aparece en el mapa de 'Mascotas Perdidas'. Los veterinarios y refugios registrados en el sistema SENRA en tu zona también reciben la alerta. Cualquiera que escanee la chapa inteligente de tu mascota puede enviarte la ubicación donde la encontró y sus datos de contacto.";
 "help_faq_q10" = "¿Cómo pido una chapa inteligente de repuesto?";
-"help_faq_a10" = "Ve a la página 'Inicio/Mi Cuenta' y toca 'Pedir Chapa inteligente de Repuesto'. Selecciona qué mascota necesita una nueva chapa inteligente. Los suscriptores Maximum y Standard pueden solicitar chapas inteligentes de repuesto gratuitas, mientras que los miembros Starter pueden pedir repuestos por el coste del envío.";
+"help_faq_a10" = "Ve a la página 'Inicio/Mi Cuenta' y toca 'Pedir Chapa inteligente de Repuesto'. Selecciona qué mascota necesita una nueva chapa inteligente. Los suscriptores Kedvenc pueden solicitar chapas inteligentes de repuesto gratuitas, mientras que los miembros Starter pueden pedir repuestos por el coste del envío.";
 "help_faq_q11" = "¿Qué es el programa de referidos?";
-"help_faq_a11" = "En el menú de Referidos en tu página de Perfil, puedes generar un código de referido personal. Compártelo con amigos y familia. Cuando alguien use tu código y se suscriba a un plan de pago (Standard o Maximum), tanto tú como tu amigo obtendréis 2 meses gratis. Puedes seguir tus referidos y su estado en la página de Referidos.";
+"help_faq_a11" = "En el menú de Referidos en tu página de Perfil, puedes generar un código de referido personal. Compártelo con amigos y familia. Cuando alguien use tu código y se suscriba a un plan de pago (Kedvenc), tanto tú como tu amigo obtendréis 2 meses gratis. Puedes seguir tus referidos y su estado en la página de Referidos.";
 "help_faq_q12" = "¿A qué países enviáis?";
 "help_faq_a12" = "Actualmente enviamos a Hungría, Eslovaquia, República Checa, Austria, Rumanía, Croacia, España, Italia, Francia, Alemania, Noruega y Portugal. Envío nacional dentro de Hungría: {{huPostapoint}} (PostaPont) o {{huHome}} (entrega a domicilio). Envío internacional: {{intlPrice}} por pedido.";
 "help_faq_q13" = "¿Puedo tener varias mascotas en una cuenta?";
@@ -718,7 +718,7 @@
 "contacts_no_type_added" = "No hay %@ añadidos";
 
 // MARK: - Claves adicionales de placa de reemplazo
-"order_replace_upgrade_hint" = "Mejora a Standard o Maximum para reemplazos gratis";
+"order_replace_upgrade_hint" = "Mejora a Kedvenc para reemplazos gratis";
 "order_replace_old_deactivated" = "Tu código QR anterior se desactivará cuando realices este pedido";
 "order_replace_delivery_time" = "Recibirás tu nueva chapa inteligente en 5-7 días laborables";
 "order_replace_scan_activate" = "Cuando recibas la nueva chapa inteligente, deberás escanearla para activarla";
@@ -989,7 +989,7 @@
 "help_guide_materials_title" = "Materiales y durabilidad";
 "help_guide_materials_desc" = "Las chapas inteligentes SENRA están hechas de metal ligero y duradero con un revestimiento epoxi para mayor protección. Son resistentes al agua y a los rayos UV, aptas para cualquier condición climática. No se desgastan con el uso diario. Las chapas inteligentes están diseñadas para ajustarse cómodamente a la mayoría de collares y arneses.";
 "help_guide_emergency_title" = "Funciones de contacto de emergencia";
-"help_guide_emergency_desc" = "Cuando alguien escanea la chapa inteligente de tu mascota, recibes una notificación push instantánea y un email con la ubicación del encontrador. Los miembros de los planes Standard y Maximum también reciben alertas por SMS para una respuesta más rápida. Si marcas a tu mascota como perdida, se envía una alerta comunitaria a todos los usuarios de SENRA en un radio de 10 km, y los veterinarios y refugios registrados en tu zona también son notificados. Cualquiera de la comunidad puede reportar avistamientos con su ubicación y fotos, ayudándote a encontrar a tu mascota.";
+"help_guide_emergency_desc" = "Cuando alguien escanea la chapa inteligente de tu mascota, recibes una notificación push instantánea y un email con la ubicación del encontrador. Los miembros de los planes Kedvenc también reciben alertas por SMS para una respuesta más rápida. Si marcas a tu mascota como perdida, se envía una alerta comunitaria a todos los usuarios de SENRA en un radio de 10 km, y los veterinarios y refugios registrados en tu zona también son notificados. Cualquiera de la comunidad puede reportar avistamientos con su ubicación y fotos, ayudándote a encontrar a tu mascota.";
 "help_guide_profile_title" = "Gestión de perfil";
 "help_guide_profile_desc" = "El perfil digital de tu mascota es el corazón de SENRA. Añade los datos esenciales: el nombre ya está, especie, raza, edad y sube una foto de buena calidad. También puedes incluir información médica, alergias, medicamentos y características especiales. Cuando alguien escanee la chapa inteligente de tu mascota, verá este perfil, por lo que es importante mantenerlo actualizado. Tu perfil ayuda a quienes encuentren a tu mascota a reconocerla y saber qué hacer.";
 "help_guide_missing_alerts_title" = "Alertas de mascotas perdidas y avistamientos";
@@ -1306,7 +1306,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Las alertas comunitarias requieren una suscripción Senra.";
 "mark_lost_starter_upgrade_cta" = "Ver planes";
-"mark_lost_upgrade_prompt" = "Con el plan Starter tu mascota se marcará como perdida, pero las notificaciones a usuarios, veterinarios y refugios requieren una suscripción Standard o Maximum.";
+"mark_lost_upgrade_prompt" = "Con el plan Starter tu mascota se marcará como perdida, pero las notificaciones a usuarios, veterinarios y refugios requieren una suscripción Kedvenc.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "ej. 3 años, 6 meses (opcional)";
 "create_pet_profile" = "Crear perfil";

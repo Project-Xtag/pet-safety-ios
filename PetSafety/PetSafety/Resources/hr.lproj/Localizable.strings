@@ -495,9 +495,9 @@
 "help_faq_q9" = "Kako funkcioniraju upozorenja o nestalim kućnim ljubimcima?";
 "help_faq_a9" = "Kada označiš svoju mačku ili psa kao nestalog, stvara se upozorenje s fotografijom i podacima tvog kućnog ljubimca. Korisnici SENRA u krugu od 10 km su odmah obaviješteni i tvoj kućni ljubimac se pojavljuje na karti 'Nestali kućni ljubimci'. Veterinari i skloništa registrirani u sustavu SENRA u tvom području također dobivaju upozorenje.";
 "help_faq_q10" = "Kako naručim zamjenski privjesak?";
-"help_faq_a10" = "Idi na stranicu 'Početna / Moj račun' i klikni 'Naruči zamjenski privjesak'. Pretplatnici Maximum i Standard mogu zatražiti besplatne zamjene, članovi Starter plaćaju troškove dostave.";
+"help_faq_a10" = "Idi na stranicu 'Početna / Moj račun' i klikni 'Naruči zamjenski privjesak'. Pretplatnici Kedvenc mogu zatražiti besplatne zamjene, članovi Starter plaćaju troškove dostave.";
 "help_faq_q11" = "Što je program preporuka?";
-"help_faq_a11" = "U izborniku Preporuke na stranici Profila možeš generirati osobni kod za preporuku. Podijeli ga s prijateljima i obitelji. Kada netko koristi tvoj kod i pretplati se na plaćeni plan (Standard ili Maximum), ti i tvoj prijatelj dobivate 2 mjeseca besplatno.";
+"help_faq_a11" = "U izborniku Preporuke na stranici Profila možeš generirati osobni kod za preporuku. Podijeli ga s prijateljima i obitelji. Kada netko koristi tvoj kod i pretplati se na plaćeni plan (Kedvenc), ti i tvoj prijatelj dobivate 2 mjeseca besplatno.";
 "help_faq_q12" = "U koje zemlje šaljete?";
 "help_faq_a12" = "Trenutno šaljemo u Mađarsku, Slovačku, Češku, Austriju, Rumunjsku, Hrvatsku, Španjolsku, Italiju, Francusku, Njemačku, Norvešku i Portugal. Dostava unutar Mađarske: {{huPostapoint}} (PostaPont) ili {{huHome}} (kućna dostava). Međunarodna dostava: {{intlPrice}} po narudžbi.";
 "help_faq_q13" = "Mogu li imati više kućnih ljubimaca na jednom računu?";
@@ -548,9 +548,9 @@
 "help_guide_qr_tags_title" = "QR privjesci za kućne ljubimce";
 "help_guide_qr_tags_desc" = "Svaki SENRA privjesak ima jedinstveni QR kôd koji vodi na digitalni profil tvog kućnog ljubimca. Svatko tko pronađe tvog kućnog ljubimca može skenirati kôd kamerom telefona — nije potrebno preuzimanje aplikacije. Skener odmah vidi fotografiju, ime, zdravstvene podatke i tvoje kontaktne podatke. Može također s tobom podijeliti GPS lokaciju tako da točno znaš gdje je tvoj kućni ljubimac. Privjesci rade sa svim modernim pametnim telefonima.";
 "help_guide_materials_title" = "Materijali i izdržljivost privjeska";
-"help_guide_materials_desc" = "SENRA privjesci izrađeni su od izdržljivog, laganog metala s epoksi premazom za dodatnu zaštitu. Vodootporni su i UV-otporni, prikladni za sve vremenske uvjete. QR kôd je tiskan tintom otpornom na habanje kako bi ostao čitljiv. Privjesci se sigurno pričvršćuju na ovratnik kućnog ljubimca. Ako se privjesak ošteti ili QR kôd više nije čitljiv, možeš naručiti zamjenu sa stranice Račun — besplatno za članove Standard i Maximum.";
+"help_guide_materials_desc" = "SENRA privjesci izrađeni su od izdržljivog, laganog metala s epoksi premazom za dodatnu zaštitu. Vodootporni su i UV-otporni, prikladni za sve vremenske uvjete. QR kôd je tiskan tintom otpornom na habanje kako bi ostao čitljiv. Privjesci se sigurno pričvršćuju na ovratnik kućnog ljubimca. Ako se privjesak ošteti ili QR kôd više nije čitljiv, možeš naručiti zamjenu sa stranice Račun — besplatno za članove Kedvenc.";
 "help_guide_emergency_title" = "Hitni kontakt i uzbune";
-"help_guide_emergency_desc" = "Kada netko skenira privjesak tvog kućnog ljubimca, odmah primaš obavijest e-mailom s lokacijom pronalazača. Standard i Maximum pretplatnici također primaju SMS uzbune za bržu reakciju. Ako označiš kućnog ljubimca kao nestalog, uzbuna zajednice šalje se svim SENRA korisnicima u krugu od 10 km, a obavješćuju se i registrirani veterinari i skloništa u tvom području. Bilo tko iz zajednice može prijaviti viđenje sa svojom lokacijom, gradeći trag koji ti pomaže pronaći kućnog ljubimca.";
+"help_guide_emergency_desc" = "Kada netko skenira privjesak tvog kućnog ljubimca, odmah primaš obavijest e-mailom s lokacijom pronalazača. Kedvenc pretplatnici također primaju SMS uzbune za bržu reakciju. Ako označiš kućnog ljubimca kao nestalog, uzbuna zajednice šalje se svim SENRA korisnicima u krugu od 10 km, a obavješćuju se i registrirani veterinari i skloništa u tvom području. Bilo tko iz zajednice može prijaviti viđenje sa svojom lokacijom, gradeći trag koji ti pomaže pronaći kućnog ljubimca.";
 "help_guide_profile_title" = "Upravljanje profilom kućnog ljubimca";
 "help_guide_profile_desc" = "Digitalni profil tvog kućnog ljubimca srce je SENRA. Dodaj bitne podatke poput imena, vrste, pasmine, dobi i jasne fotografije. Možeš uključiti i zdravstvene podatke (alergije, lijekovi, stanja), broj mikročipa i jedinstvene značajke koje pomažu u identifikaciji tvog kućnog ljubimca. Učitaj više fotografija u galeriju. Svi podaci mogu se ažurirati u bilo kojem trenutku iz sekcije 'Moji kućni ljubimci'. Ti kontroliraš koji tvoji osobni podaci (telefon, e-mail, adresa) su vidljivi ljudima koji skeniraju privjesak.";
 "help_guide_missing_alerts_title" = "Uzbune o nestalim kućnim ljubimcima i viđenja";
@@ -732,7 +732,7 @@
 "contacts_no_type_added" = "%@ nisu dodani";
 
 // MARK: - Additional Order Replacement Keys
-"order_replace_upgrade_hint" = "Nadogradi na Standard ili Maximum za besplatne zamjene";
+"order_replace_upgrade_hint" = "Nadogradi na Kedvenc za besplatne zamjene";
 "order_replace_old_deactivated" = "Tvoj stari QR kôd bit će deaktiviran kada naručiš";
 "order_replace_delivery_time" = "Novi privjesak primit ćeš u roku 5–7 radnih dana";
 "order_replace_scan_activate" = "Kada primiš novi privjesak, trebat ćeš ga skenirati za aktivaciju";
@@ -1312,7 +1312,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Uzbune zajednice zahtijevaju Senra pretplatu.";
 "mark_lost_starter_upgrade_cta" = "Pogledaj pakete";
-"mark_lost_upgrade_prompt" = "S planom Starter tvoj kućni ljubimac bit će označen kao nestao, ali obavijesti korisnicima, veterinarima i skloništima zahtijevaju pretplatu Standard ili Maximum.";
+"mark_lost_upgrade_prompt" = "S planom Starter tvoj kućni ljubimac bit će označen kao nestao, ali obavijesti korisnicima, veterinarima i skloništima zahtijevaju pretplatu Kedvenc.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "npr. 3 godine, 6 mjeseci (neobavezno)";
 "create_pet_profile" = "Stvori profil";

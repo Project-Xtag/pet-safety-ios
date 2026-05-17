@@ -492,9 +492,9 @@
 "help_faq_q9" = "Ako fungujú upozornenia na stratených domácich miláčikov?";
 "help_faq_a9" = "Keď označíš svoju mačku alebo psa ako strateného, vytvorí sa upozornenie s fotografiou a údajmi tvojho domáceho miláčika. Používatelia SENRA v okruhu 10 km sú okamžite upozornení a tvoj domáci miláčik sa zobrazí na mape 'Stratení domáci miláčikovia'. Veterinári a útulky registrované v systéme SENRA v tvojom okolí tiež dostanú upozornenie.";
 "help_faq_q10" = "Ako si objednám náhradnú známku?";
-"help_faq_a10" = "Choď na stránku 'Domov / Môj účet' a klepni na 'Objednať náhradnú známku'. Vyber, ktorý domáci miláčik potrebuje novú známku. Predplatitelia Maximum a Standard si môžu vyžiadať bezplatné náhrady, členovia Starter platia za poštovné.";
+"help_faq_a10" = "Choď na stránku 'Domov / Môj účet' a klepni na 'Objednať náhradnú známku'. Vyber, ktorý domáci miláčik potrebuje novú známku. Predplatitelia Kedvenc si môžu vyžiadať bezplatné náhrady, členovia Starter platia za poštovné.";
 "help_faq_q11" = "Čo je to odporúčací program?";
-"help_faq_a11" = "V menu Odporúčania na stránke svojho profilu môžeš vygenerovať osobný odporúčací kód. Zdieľaj ho s priateľmi a rodinou. Keď niekto použije tvoj kód a predplatí si platený balík (Standard alebo Maximum), ty aj tvoj priateľ získate 2 mesiace zadarmo. Svoje odporúčania a ich stav môžeš sledovať na stránke Odporúčania.";
+"help_faq_a11" = "V menu Odporúčania na stránke svojho profilu môžeš vygenerovať osobný odporúčací kód. Zdieľaj ho s priateľmi a rodinou. Keď niekto použije tvoj kód a predplatí si platený balík (Kedvenc), ty aj tvoj priateľ získate 2 mesiace zadarmo. Svoje odporúčania a ich stav môžeš sledovať na stránke Odporúčania.";
 "help_faq_q12" = "Do ktorých krajín doručujete?";
 "help_faq_a12" = "Momentálne doručujeme do Maďarska, Slovenska, Česka, Rakúska, Rumunska, Chorvátska, Španielska, Talianska, Francúzska, Nemecka, Nórska a Portugalska. Domáce doručenie v rámci Maďarska: {{huPostapoint}} (PostaPont) alebo {{huHome}} (doručenie domov). Medzinárodné doručenie: {{intlPrice}} za objednávku.";
 "help_faq_q13" = "Môžem mať viac domácich miláčikov na jednom účte?";
@@ -718,7 +718,7 @@
 "contacts_no_type_added" = "Nepridane: %@";
 
 // MARK: - Dalsie kluce objednavky nahradneho stitka
-"order_replace_upgrade_hint" = "Upgraduj na Standard alebo Maximum pre bezplatné náhrady";
+"order_replace_upgrade_hint" = "Upgraduj na Kedvenc pre bezplatné náhrady";
 "order_replace_old_deactivated" = "Tvoj starý QR kód bude deaktivovaný po odoslaní tejto objednávky";
 "order_replace_delivery_time" = "Novú známku dostaneš do 5–7 pracovných dní";
 "order_replace_scan_activate" = "Keď dostaneš novú známku, budeš ju musieť naskenovať pre aktiváciu";
@@ -987,9 +987,9 @@
 "help_guide_qr_tags_title" = "QR známky pre domácich miláčikov";
 "help_guide_qr_tags_desc" = "Každá SENRA známka má jedinečný QR kód, ktorý vedie na digitálny profil domáceho miláčika. Každý, kto nájde tvojho domáceho miláčika, môže naskenovať kód kamerou telefónu — netreba sťahovať aplikáciu. Skener okamžite vidí fotografiu, meno, zdravotné informácie a tvoje kontaktné údaje. Môže s tebou tiež zdieľať svoju GPS polohu, aby si vedel, kde presne je tvoj domáci miláčik. Známky fungujú so všetkými modernými smartfónmi.";
 "help_guide_materials_title" = "Materiál a odolnosť známky";
-"help_guide_materials_desc" = "SENRA známky sú vyrobené z odolného, ľahkého kovu s epoxidovým povlakom pre dodatočnú ochranu. Sú vodotesné a odolné voči UV žiareniu, vhodné pre všetky poveternostné podmienky. QR kód je vytlačený inkustom odolným proti oderu. Známky sa bezpečne pripevňujú na obojok domáceho miláčika. Ak sa známka poškodí alebo QR kód už nemožno naskenovať, môžeš si objednať náhradu zo stránky Účet — zdarma pre členov Standard a Maximum.";
+"help_guide_materials_desc" = "SENRA známky sú vyrobené z odolného, ľahkého kovu s epoxidovým povlakom pre dodatočnú ochranu. Sú vodotesné a odolné voči UV žiareniu, vhodné pre všetky poveternostné podmienky. QR kód je vytlačený inkustom odolným proti oderu. Známky sa bezpečne pripevňujú na obojok domáceho miláčika. Ak sa známka poškodí alebo QR kód už nemožno naskenovať, môžeš si objednať náhradu zo stránky Účet — zdarma pre členov Kedvenc.";
 "help_guide_emergency_title" = "Núdzový kontakt a upozornenia";
-"help_guide_emergency_desc" = "Keď niekto naskenuje známku tvojho domáceho miláčika, okamžite dostaneš upozornenie e-mailom s polohou nálezcu. Členovia Standard a Maximum dostávajú aj SMS upozornenia pre rýchlejšiu reakciu. Ak označíš domáceho miláčika ako strateného, komunitné upozornenie sa pošle všetkým používateľom SENRA v okruhu 10 km a registrovaní veterinári a útulky vo tvojej oblasti sú tiež informovaní. Ktokoľvek z komunity môže hlásiť pozorovania so svojou polohou, budujúc stopu, ktorá ti pomôže nájsť domáceho miláčika.";
+"help_guide_emergency_desc" = "Keď niekto naskenuje známku tvojho domáceho miláčika, okamžite dostaneš upozornenie e-mailom s polohou nálezcu. Členovia Kedvenc dostávajú aj SMS upozornenia pre rýchlejšiu reakciu. Ak označíš domáceho miláčika ako strateného, komunitné upozornenie sa pošle všetkým používateľom SENRA v okruhu 10 km a registrovaní veterinári a útulky vo tvojej oblasti sú tiež informovaní. Ktokoľvek z komunity môže hlásiť pozorovania so svojou polohou, budujúc stopu, ktorá ti pomôže nájsť domáceho miláčika.";
 "help_guide_profile_title" = "Správa profilu domáceho miláčika";
 "help_guide_profile_desc" = "Digitálny profil tvojho domáceho miláčika je srdcom SENRA. Pridaj základné údaje ako meno, druh, plemeno, vek a jasnú fotografiu. Môžeš zahrnúť aj zdravotné informácie (alergie, lieky, stavy), číslo mikročipu a jedinečné znaky, ktoré pomáhajú identifikovať tvojho domáceho miláčika. Nahraj viac fotografií do galérie. Všetky údaje možno kedykoľvek aktualizovať zo sekcie 'Moji domáci miláčikovia'. Ty ovládaš, ktoré tvoje osobné údaje (telefón, e-mail, adresa) sú viditeľné pre ľudí, ktorí skenujú známku.";
 "help_guide_missing_alerts_title" = "Upozornenia na stratených domácich miláčikov a pozorovania";
@@ -1306,7 +1306,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Komunitné upozornenia vyžadujú Senra predplatné.";
 "mark_lost_starter_upgrade_cta" = "Zobraziť plány";
-"mark_lost_upgrade_prompt" = "V pláne Starter bude tvoj domáci miláčik označený ako stratený, ale upozornenia používateľom, veterinárom a útulkom vyžadujú predplatné Standard alebo Maximum.";
+"mark_lost_upgrade_prompt" = "V pláne Starter bude tvoj domáci miláčik označený ako stratený, ale upozornenia používateľom, veterinárom a útulkom vyžadujú predplatné Kedvenc.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "napr.. 3 roky, 6 mesiacov (voliteľné)";
 "create_pet_profile" = "Vytvoriť profil";

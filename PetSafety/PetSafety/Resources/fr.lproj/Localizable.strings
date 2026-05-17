@@ -492,9 +492,9 @@
 "help_faq_q9" = "Comment fonctionnent les alertes d'animaux de compagnie perdus ?";
 "help_faq_a9" = "Lorsque tu marques ton chat ou ton chien comme perdu, une alerte est créée avec la photo et les détails de ton animal de compagnie. Les utilisateurs SENRA dans un rayon de 10 km sont immédiatement notifiés et ton animal de compagnie apparaît sur la carte « Animaux de compagnie perdus ». Les vétérinaires et refuges enregistrés dans le système SENRA de ta région reçoivent également l'alerte.";
 "help_faq_q10" = "Comment commander une médaille connectée de remplacement ?";
-"help_faq_a10" = "Va à la page « Accueil / Mon compte » et appuie sur « Commander une médaille connectée de remplacement ». Sélectionne l'animal de compagnie qui a besoin d'une nouvelle médaille connectée. Les abonnés Maximum et Standard peuvent demander des remplacements gratuits, les membres Starter paient les frais de port.";
+"help_faq_a10" = "Va à la page « Accueil / Mon compte » et appuie sur « Commander une médaille connectée de remplacement ». Sélectionne l'animal de compagnie qui a besoin d'une nouvelle médaille connectée. Les abonnés Kedvenc peuvent demander des remplacements gratuits, les membres Starter paient les frais de port.";
 "help_faq_q11" = "Qu'est-ce que le programme de parrainage ?";
-"help_faq_a11" = "Dans le menu Parrainage sur ta page de Profil, tu peux générer un code de parrainage personnel. Partage-le avec tes amis et ta famille. Quand quelqu'un utilise ton code et s'abonne à un plan payant (Standard ou Maximum), toi et ton ami obtenez 2 mois gratuits.";
+"help_faq_a11" = "Dans le menu Parrainage sur ta page de Profil, tu peux générer un code de parrainage personnel. Partage-le avec tes amis et ta famille. Quand quelqu'un utilise ton code et s'abonne à un plan payant (Kedvenc), toi et ton ami obtenez 2 mois gratuits.";
 "help_faq_q12" = "Dans quels pays livrez-tu ?";
 "help_faq_a12" = "Nous livrons actuellement en Hongrie, Slovaquie, République tchèque, Autriche, Roumanie, Croatie, Espagne, Italie, France, Allemagne, Norvège et Portugal. Livraison nationale en Hongrie : {{huPostapoint}} (PostaPont) ou {{huHome}} (livraison à domicile). Livraison internationale : {{intlPrice}} par commande.";
 "help_faq_q13" = "Puis-je avoir plusieurs animaux de compagnie sur un seul compte ?";
@@ -545,9 +545,9 @@
 "help_guide_qr_tags_title" = "Médailles connectées QR pour animaux de compagnie";
 "help_guide_qr_tags_desc" = "Chaque médaille connectée SENRA présente un code QR unique qui renvoie au profil numérique de ton animal de compagnie. Toute personne qui trouve ton animal de compagnie peut scanner le code avec l'appareil photo de son téléphone — aucun téléchargement d'application nécessaire. Le scanner voit immédiatement la photo, le nom, les informations médicales de ton animal de compagnie et tes coordonnées. Il peut aussi partager sa position GPS avec toi pour que tu saches exactement où se trouve ton animal de compagnie. Les médailles connectées fonctionnent avec tous les smartphones modernes.";
 "help_guide_materials_title" = "Matériau et durabilité de la médaille connectée";
-"help_guide_materials_desc" = "Les médailles connectées SENRA sont fabriquées en métal léger et durable avec un revêtement époxy pour une protection supplémentaire. Elles sont imperméables et résistantes aux UV, adaptées à toutes les conditions météorologiques. Le code QR est imprimé avec une encre résistante à l'usure pour rester scannable dans le temps. Les médailles connectées s'attachent solidement au collier de ton animal de compagnie. Si une médaille connectée est endommagée ou si le code QR ne peut plus être scanné, tu peux commander un remplacement depuis la page Compte — gratuit pour les membres Standard et Maximum.";
+"help_guide_materials_desc" = "Les médailles connectées SENRA sont fabriquées en métal léger et durable avec un revêtement époxy pour une protection supplémentaire. Elles sont imperméables et résistantes aux UV, adaptées à toutes les conditions météorologiques. Le code QR est imprimé avec une encre résistante à l'usure pour rester scannable dans le temps. Les médailles connectées s'attachent solidement au collier de ton animal de compagnie. Si une médaille connectée est endommagée ou si le code QR ne peut plus être scanné, tu peux commander un remplacement depuis la page Compte — gratuit pour les membres Kedvenc.";
 "help_guide_emergency_title" = "Contact d'urgence et alertes";
-"help_guide_emergency_desc" = "Lorsque quelqu'un scanne la médaille connectée de ton animal de compagnie, tu reçois instantanément une notification par e-mail avec la position du découvreur. Les membres Standard et Maximum reçoivent aussi des alertes SMS pour une réaction plus rapide. Si tu marques ton animal de compagnie comme perdu, une alerte communautaire est envoyée à tous les utilisateurs SENRA dans un rayon de 10 km, et les vétérinaires et refuges enregistrés dans ta région sont également notifiés. Toute personne de la communauté peut signaler des observations avec sa position, créant une piste pour t'aider à retrouver ton animal de compagnie.";
+"help_guide_emergency_desc" = "Lorsque quelqu'un scanne la médaille connectée de ton animal de compagnie, tu reçois instantanément une notification par e-mail avec la position du découvreur. Les membres Kedvenc reçoivent aussi des alertes SMS pour une réaction plus rapide. Si tu marques ton animal de compagnie comme perdu, une alerte communautaire est envoyée à tous les utilisateurs SENRA dans un rayon de 10 km, et les vétérinaires et refuges enregistrés dans ta région sont également notifiés. Toute personne de la communauté peut signaler des observations avec sa position, créant une piste pour t'aider à retrouver ton animal de compagnie.";
 "help_guide_profile_title" = "Gestion du profil de l'animal de compagnie";
 "help_guide_profile_desc" = "Le profil numérique de ton animal de compagnie est le cœur de SENRA. Ajoute des informations essentielles comme le nom, l'espèce, la race, l'âge et une photo nette. Tu peux aussi inclure des informations médicales (allergies, médicaments, pathologies), le numéro de puce et les traits distinctifs qui aident à identifier ton animal de compagnie. Téléverse plusieurs photos dans une galerie. Toutes les informations peuvent être mises à jour à tout moment depuis la section « Mes animaux de compagnie ». Tu contrôles lesquelles de tes coordonnées personnelles (téléphone, e-mail, adresse) sont visibles pour les personnes qui scannent la médaille connectée.";
 "help_guide_missing_alerts_title" = "Alertes d'animaux disparus et observations";
@@ -729,7 +729,7 @@
 "contacts_no_type_added" = "Aucun(e) %@ ajouté(e)";
 
 // MARK: - Clés supplémentaires pour la commande de remplacement
-"order_replace_upgrade_hint" = "Passe au forfait Standard ou Maximum pour des remplacements gratuits";
+"order_replace_upgrade_hint" = "Passe au forfait Kedvenc pour des remplacements gratuits";
 "order_replace_old_deactivated" = "Ton ancien QR code sera désactivé lors de la commande";
 "order_replace_delivery_time" = "Tu recevras ta nouvelle médaille connectée sous 2–3 jours ouvrés";
 "order_replace_scan_activate" = "La médaille connectée est prête à l'emploi, tu n'as pas besoin de l'activer";
@@ -1309,7 +1309,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Les alertes communautaires nécessitent un abonnement Senra.";
 "mark_lost_starter_upgrade_cta" = "Voir les forfaits";
-"mark_lost_upgrade_prompt" = "Avec le plan Starter ton animal sera marqué comme disparu, mais les notifications aux utilisateurs, vétérinaires et refuges nécessitent un abonnement Standard ou Maximum.";
+"mark_lost_upgrade_prompt" = "Avec le plan Starter ton animal sera marqué comme disparu, mais les notifications aux utilisateurs, vétérinaires et refuges nécessitent un abonnement Kedvenc.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "ex. 3 ans, 6 mois (facultatif)";
 "create_pet_profile" = "Créer profil";
