@@ -492,9 +492,9 @@
 "help_faq_q9" = "Jak fungují upozornění na ztracené mazlíčky?";
 "help_faq_a9" = "Když označíš svou kočku nebo psa jako ztraceného, vytvoří se upozornění s fotkou a údaji tvého mazlíčka. Uživatelé SENRA v okruhu 10 km jsou okamžitě upozorněni a tvůj mazlíček se objeví na mapě 'Ztracení mazlíčci'. Veterináři a útulky registrované v systému SENRA v tvém okolí také dostanou upozornění. Kdokoliv, kdo naskenuje psí známku tvého mazlíčka, ti může poslat místo nálezu a své kontaktní údaje.";
 "help_faq_q10" = "Jak si objednám náhradní psí známku?";
-"help_faq_a10" = "Jdi na stránku 'Domů / Můj účet' a klikni na 'Objednat náhradní psí známku'. Vyber, který mazlíček potřebuje novou psí známku. Předplatitelé Maximum a Standard si mohou vyžádat bezplatné náhradní psí známky, zatímco členové Starter si mohou objednat náhradu za poštovné.";
+"help_faq_a10" = "Jdi na stránku 'Domů / Můj účet' a klikni na 'Objednat náhradní psí známku'. Vyber, který mazlíček potřebuje novou psí známku. Předplatitelé Kedvenc si mohou vyžádat bezplatné náhradní psí známky, zatímco členové Starter si mohou objednat náhradu za poštovné.";
 "help_faq_q11" = "Co je to doporučovací program?";
-"help_faq_a11" = "V menu Doporučení na stránce svého profilu můžeš vygenerovat osobní doporučovací kód. Sdílej ho s přáteli a rodinou. Když někdo použije tvůj kód a předplatí si placený balíček (Standard nebo Maximum), ty i tvůj přítel získáš 2 měsíce zdarma. Svá doporučení a jejich stav můžeš sledovat na stránce Doporučení.";
+"help_faq_a11" = "V menu Doporučení na stránce svého profilu můžeš vygenerovat osobní doporučovací kód. Sdílej ho s přáteli a rodinou. Když někdo použije tvůj kód a předplatí si placený balíček (Kedvenc), ty i tvůj přítel získáš 2 měsíce zdarma. Svá doporučení a jejich stav můžeš sledovat na stránce Doporučení.";
 "help_faq_q12" = "Do kterých zemí doručujete?";
 "help_faq_a12" = "Momentálně doručujeme do Maďarska, Slovenska, Česka, Rakouska, Rumunska, Chorvatska, Španělska, Itálie, Francie, Německa, Norska a Portugalska. Domácí doručení v rámci Maďarska: {{huPostapoint}} (PostaPont) nebo {{huHome}} (doručení domů). Mezinárodní doručení: {{intlPrice}} za objednávku.";
 "help_faq_q13" = "Mohu mít více mazlíčků na jednom účtu?";
@@ -718,7 +718,7 @@
 "contacts_no_type_added" = "Žádné %@ nebyly přidány";
 
 // MARK: - Další klíče náhradní objednávky
-"order_replace_upgrade_hint" = "Upgraduj na Standard nebo Maximum pro bezplatné náhrady";
+"order_replace_upgrade_hint" = "Upgraduj na Kedvenc pro bezplatné náhrady";
 "order_replace_old_deactivated" = "Tvůj starý QR kód bude deaktivován po odeslání této objednávky";
 "order_replace_delivery_time" = "Novou psí známku obdržíš do 5–7 pracovních dnů";
 "order_replace_scan_activate" = "Jakmile obdržíš novou psí známku, musíš ji naskenovat pro aktivaci";
@@ -987,9 +987,9 @@
 "help_guide_qr_tags_title" = "QR psí známky pro mazlíčky";
 "help_guide_qr_tags_desc" = "Každá SENRA psí známka má unikátní QR kód, který odkazuje na digitální profil mazlíčka. Každý, kdo najde tvého mazlíčka, může naskenovat kód kamerou telefonu — není nutné stahovat žádnou aplikaci. Skener okamžitě vidí fotku mazlíčka, jméno, zdravotní informace a tvé kontaktní údaje. Může také sdílet svou GPS polohu s tebou, abys věděl, kde přesně mazlíček je. Psí známky fungují se všemi moderními smartphony.";
 "help_guide_materials_title" = "Materiál a odolnost psí známky";
-"help_guide_materials_desc" = "SENRA psí známky jsou vyrobeny z odolného lehkého kovu s epoxidovým povlakem pro dodatečnou ochranu. Jsou vodotěsné a odolné vůči UV záření, vhodné pro všechny povětrnostní podmínky. QR kód je vytištěn inkoustem odolným proti oděru, aby zůstal čitelný po celou dobu. Psí známky se bezpečně připevňují na obojek mazlíčka. Pokud se psí známka poškodí nebo QR kód již nelze naskenovat, můžeš si objednat náhradu ze stránky Účet — zdarma pro členy Standard a Maximum.";
+"help_guide_materials_desc" = "SENRA psí známky jsou vyrobeny z odolného lehkého kovu s epoxidovým povlakem pro dodatečnou ochranu. Jsou vodotěsné a odolné vůči UV záření, vhodné pro všechny povětrnostní podmínky. QR kód je vytištěn inkoustem odolným proti oděru, aby zůstal čitelný po celou dobu. Psí známky se bezpečně připevňují na obojek mazlíčka. Pokud se psí známka poškodí nebo QR kód již nelze naskenovat, můžeš si objednat náhradu ze stránky Účet — zdarma pro členy Kedvenc.";
 "help_guide_emergency_title" = "Nouzové kontakty a upozornění";
-"help_guide_emergency_desc" = "Když někdo naskenuje psí známku tvého mazlíčka, dostaneš okamžité upozornění e-mailem s polohou nálezce. Členové Standard a Maximum dostávají také SMS pro rychlejší reakci. Pokud označíš svého mazlíčka jako ztraceného, komunitní upozornění se pošle všem uživatelům SENRA v okruhu 10 km a registrovaní veterináři a útulky v tvé oblasti jsou také informováni. Kdokoliv z komunity může hlásit pozorování se svou polohou, čímž se buduje stopa, která ti pomůže najít mazlíčka.";
+"help_guide_emergency_desc" = "Když někdo naskenuje psí známku tvého mazlíčka, dostaneš okamžité upozornění e-mailem s polohou nálezce. Členové Kedvenc dostávají také SMS pro rychlejší reakci. Pokud označíš svého mazlíčka jako ztraceného, komunitní upozornění se pošle všem uživatelům SENRA v okruhu 10 km a registrovaní veterináři a útulky v tvé oblasti jsou také informováni. Kdokoliv z komunity může hlásit pozorování se svou polohou, čímž se buduje stopa, která ti pomůže najít mazlíčka.";
 "help_guide_profile_title" = "Správa profilu mazlíčka";
 "help_guide_profile_desc" = "Digitální profil tvého mazlíčka je srdcem SENRA. Přidej základní údaje, jako je jméno, druh, plemeno, věk a jasná fotka. Můžeš zahrnout i zdravotní informace (alergie, léky, stavy), číslo mikročipu a jedinečné znaky, které pomohou identifikovat tvého mazlíčka. Nahraj více fotek do galerie. Všechny údaje lze kdykoliv aktualizovat ze sekce 'Moji mazlíčci'. Ty ovládáš, které tvé osobní údaje (telefon, e-mail, adresa) jsou viditelné pro lidi, kteří naskenují psí známku.";
 "help_guide_missing_alerts_title" = "Upozornění na ztracené mazlíčky a pozorování";
@@ -1306,7 +1306,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Komunitní upozornění vyžadují Senra předplatné.";
 "mark_lost_starter_upgrade_cta" = "Zobrazit plány";
-"mark_lost_upgrade_prompt" = "V plánu Starter bude tvůj mazlíček označen jako ztracený, ale upozornění uživatelům, veterinářům a útulkům vyžadují předplatné Standard nebo Maximum.";
+"mark_lost_upgrade_prompt" = "V plánu Starter bude tvůj mazlíček označen jako ztracený, ale upozornění uživatelům, veterinářům a útulkům vyžadují předplatné Kedvenc.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "např. 3 roky, 6 měsíců (volitelné)";
 "create_pet_profile" = "Vytvořit profil";

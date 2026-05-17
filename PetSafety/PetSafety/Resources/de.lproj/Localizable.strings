@@ -492,9 +492,9 @@
 "help_faq_q9" = "Wie funktionieren Vermisst-Meldungen?";
 "help_faq_a9" = "Wenn du deine Katze oder deinen Hund als vermisst markierst, wird eine Meldung mit dem Foto und den Daten deines Haustieres erstellt. SENRA-Nutzer im Umkreis von 10 km werden sofort benachrichtigt, und dein Haustier erscheint auf der Karte 'Vermisste Haustiere'. Auch im SENRA-System registrierte Tierärzte und Tierheime in deiner Gegend erhalten die Meldung. Jeder, der die Haustiermarke deines Haustieres scannt, kann dir den Fundort und seine Kontaktdaten senden. Er kann dich auch direkt kontaktieren, wenn du deine Kontaktdaten in deinem Profil öffentlich gemacht hast.";
 "help_faq_q10" = "Wie bestelle ich eine Ersatzmarke?";
-"help_faq_a10" = "Gehe zur Seite 'Startseite/Mein Benutzerkonto' und tippe auf 'Ersatzmarke bestellen'. Wähle aus, welches Haustier eine neue Haustiermarke braucht. Maximum- und Standard-Abonnenten können kostenlose Ersatzmarken anfordern, während Starter-Mitglieder Ersatz für die Versandkosten bestellen können.";
+"help_faq_a10" = "Gehe zur Seite 'Startseite/Mein Benutzerkonto' und tippe auf 'Ersatzmarke bestellen'. Wähle aus, welches Haustier eine neue Haustiermarke braucht. Kedvenc-Abonnenten können kostenlose Ersatzmarken anfordern, während Starter-Mitglieder Ersatz für die Versandkosten bestellen können.";
 "help_faq_q11" = "Was ist das Empfehlungsprogramm?";
-"help_faq_a11" = "Im Empfehlungsmenü auf deiner Profilseite kannst du einen persönlichen Empfehlungscode generieren. Teile ihn mit Freunden und Familie. Wenn jemand deinen Code verwendet und ein bezahltes Abo (Standard oder Maximum) abschließt, erhalten du und dein Freund 2 Monate kostenlos. Du kannst deine Empfehlungen und deren Status auf der Empfehlungsseite verfolgen.";
+"help_faq_a11" = "Im Empfehlungsmenü auf deiner Profilseite kannst du einen persönlichen Empfehlungscode generieren. Teile ihn mit Freunden und Familie. Wenn jemand deinen Code verwendet und ein bezahltes Abo (Kedvenc) abschließt, erhalten du und dein Freund 2 Monate kostenlos. Du kannst deine Empfehlungen und deren Status auf der Empfehlungsseite verfolgen.";
 "help_faq_q12" = "In welche Länder liefert ihr?";
 "help_faq_a12" = "Wir liefern derzeit nach Ungarn, Slowakei, Tschechien, Österreich, Rumänien, Kroatien, Spanien, Italien, Frankreich, Deutschland, Norwegen und Portugal. Inlandsversand innerhalb Ungarns: {{huPostapoint}} (PostaPont) oder {{huHome}} (Hauszustellung). Internationaler Versand: {{intlPrice}} pro Bestellung.";
 "help_faq_q13" = "Kann ich mehrere Haustiere in einem Benutzerkonto haben?";
@@ -718,7 +718,7 @@
 "contacts_no_type_added" = "Keine %@ hinzugefügt";
 
 // MARK: - Zusätzliche Ersatz-Namensschild-Schlüssel
-"order_replace_upgrade_hint" = "Upgrade auf Standard oder Maximum für kostenlose Ersatz-Namensschilder";
+"order_replace_upgrade_hint" = "Upgrade auf Kedvenc für kostenlose Ersatz-Namensschilder";
 "order_replace_old_deactivated" = "dein alter QR-Code wird deaktiviert, sobald du diese Bestellung aufgeben";
 "order_replace_delivery_time" = "Du erhältst deine neue Haustiermarke innerhalb von 5–7 Werktagen";
 "order_replace_scan_activate" = "Sobald du die neue Haustiermarke erhältst, musst du sie zum Aktivieren scannen";
@@ -989,7 +989,7 @@
 "help_guide_materials_title" = "Materialien & Haltbarkeit";
 "help_guide_materials_desc" = "SENRA Haustiermarken bestehen aus strapazierfähigem, leichtem Metall mit einer Epoxidbeschichtung für zusätzlichen Schutz. Sie sind wasserfest und UV-beständig, geeignet für alle Wetterbedingungen. Sie nutzen sich nicht bei täglichem Gebrauch ab. Die Marken sind so gestaltet, dass sie bequem an die meisten Halsbänder und Geschirre passen.";
 "help_guide_emergency_title" = "Notfallkontakt-Funktionen";
-"help_guide_emergency_desc" = "Wenn jemand die Haustiermarke deines Haustieres scannt, erhältst du sofort eine Push-Benachrichtigung und E-Mail mit dem Standort des Finders. Standard und Maximum Mitglieder erhalten auch SMS-Benachrichtigungen für schnellere Reaktion. Wenn du dein Haustier als vermisst markierst, wird eine Gemeinschaftswarnung an alle SENRA Nutzer im Umkreis von 10 km gesendet, und registrierte Tierärzte und Tierheime in deiner Nähe werden ebenfalls benachrichtigt. Jeder in der Gemeinschaft kann Sichtungen mit Standort und Fotos melden, um dir zu helfen, dein Haustier zu finden.";
+"help_guide_emergency_desc" = "Wenn jemand die Haustiermarke deines Haustieres scannt, erhältst du sofort eine Push-Benachrichtigung und E-Mail mit dem Standort des Finders. Kedvenc Mitglieder erhalten auch SMS-Benachrichtigungen für schnellere Reaktion. Wenn du dein Haustier als vermisst markierst, wird eine Gemeinschaftswarnung an alle SENRA Nutzer im Umkreis von 10 km gesendet, und registrierte Tierärzte und Tierheime in deiner Nähe werden ebenfalls benachrichtigt. Jeder in der Gemeinschaft kann Sichtungen mit Standort und Fotos melden, um dir zu helfen, dein Haustier zu finden.";
 "help_guide_profile_title" = "Profilverwaltung";
 "help_guide_profile_desc" = "Das digitale Profil deines Haustieres ist das Herzstück von SENRA. Gib die grundlegenden Daten ein: Name ist bereits vorhanden, Art, Rasse, Alter und lade ein gutes Foto hoch. Du kannst auch Gesundheitsinformationen, Allergien, Medikamente und besondere Erkennungsmerkmale angeben. Wenn jemand die Haustiermarke deines Haustieres scannt, sieht er dieses Profil, daher ist es wichtig, es aktuell zu halten. Dein Profil hilft Findern, dein Haustier zu erkennen und zu wissen, was zu tun ist.";
 "help_guide_missing_alerts_title" = "Vermisstmeldungen & Sichtungen";
@@ -1306,7 +1306,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Community-Warnungen erfordern ein Senra-Abonnement.";
 "mark_lost_starter_upgrade_cta" = "Pläne ansehen";
-"mark_lost_upgrade_prompt" = "Mit dem Starter-Plan wird dein Haustier als vermisst markiert, aber Benachrichtigungen an Nutzer, Tierärzte und Tierheime erfordern ein Standard- oder Maximum-Abo.";
+"mark_lost_upgrade_prompt" = "Mit dem Starter-Plan wird dein Haustier als vermisst markiert, aber Benachrichtigungen an Nutzer, Tierärzte und Tierheime erfordern ein Kedvenc-Abo.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "z.B. 3 Jahre, 6 Monate (optional)";
 "create_pet_profile" = "Profil erstellen";
