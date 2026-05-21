@@ -269,9 +269,9 @@ final class DeepLinkTests: XCTestCase {
         // 1. Deep link received (senra://tag/CODE or https://senra.pet/qr/CODE)
         // 2. DeepLinkService sets pendingTagCode and showTagActivation
         // 3. ContentView checks authentication:
-        //    - If authenticated: shows TagActivationView
+        //    - If authenticated: shows PetSetupWizardView
         //    - If not authenticated: shows DeepLinkLoginPromptView
-        // 4. After login, user is directed to TagActivationView
+        // 4. After login, user is directed to PetSetupWizardView
         // 5. QRScannerViewModel.activateTag() is called (requires auth)
 
         XCTAssertTrue(true, "Tag activation flow requires authentication")
