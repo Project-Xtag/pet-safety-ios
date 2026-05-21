@@ -7,6 +7,9 @@ import UIKit
 /// at order time, walk through the pet's details, then in one commit
 /// create the pet, upload the photo and activate the scanned tag.
 /// Multi-tag orders loop back to scan the next tag.
+///
+/// Copy is Hungarian (the canonical locale); other locales follow via
+/// the standard Localizable.strings extraction.
 struct PetSetupWizardView: View {
     let tagCode: String
     let onDismiss: () -> Void
@@ -81,7 +84,7 @@ struct PetSetupWizardView: View {
                     }
                 }
             }
-            .navigationTitle(Text("Set up your tag"))
+            .navigationTitle(Text("Biléta beállítása"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -114,7 +117,7 @@ struct PetSetupWizardView: View {
     private var progressBar: some View {
         VStack(spacing: 6) {
             HStack {
-                Text("Step \(step) of \(totalSteps)")
+                Text("\(step). lépés / \(totalSteps)")
                     .font(.appFont(.caption))
                     .foregroundColor(.secondary)
                 Spacer()
@@ -148,7 +151,7 @@ struct PetSetupWizardView: View {
                 } label: {
                     HStack(spacing: 6) {
                         Image(systemName: "chevron.left")
-                        Text("Back")
+                        Text("Vissza")
                     }
                     .font(.appFont(size: 15, weight: .semibold))
                     .foregroundColor(.secondary)
@@ -166,7 +169,7 @@ struct PetSetupWizardView: View {
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
                                 .scaleEffect(0.8)
                         }
-                        Text(step == totalSteps ? "Finish" : "Next")
+                        Text(step == totalSteps ? "Befejezés" : "Tovább")
                             .fontWeight(.bold)
                     }
                 }
@@ -269,7 +272,7 @@ struct PetSetupWizardView: View {
 
     // MARK: - Step metadata
 
-    private var displayName: String { petName.isEmpty ? "your pet" : petName }
+    private var displayName: String { petName.isEmpty ? "a kedvenced" : petName }
 
     private var stepSymbol: String {
         switch step {
@@ -290,34 +293,34 @@ struct PetSetupWizardView: View {
 
     private var stepTitle: String {
         switch step {
-        case 1: return "Which pet is this tag for?"
-        case 2: return "Great to have \(displayName) on board!"
-        case 3: return "Dog or cat?"
-        case 4: return "What breed is \(displayName)?"
-        case 5: return "Boy or girl?"
-        case 6: return "How old is \(displayName)?"
-        case 7: return "What colour is \(displayName)?"
-        case 8: return "Add a photo"
-        case 9: return "Allergies or medications?"
-        case 10: return "Any unique features?"
-        case 11: return "\(displayName)'s tag is ready!"
-        default: return "Congratulations!"
+        case 1: return "Melyik kedvenced ez?"
+        case 2: return "Nagyszerű, hogy \(displayName) csatlakozott!"
+        case 3: return "Kutya vagy macska?"
+        case 4: return "Milyen fajta \(displayName)?"
+        case 5: return "Fiú vagy lány?"
+        case 6: return "Hány éves \(displayName)?"
+        case 7: return "Milyen színű?"
+        case 8: return "Tölts fel egy fotót"
+        case 9: return "Allergia vagy gyógyszer?"
+        case 10: return "Egyedi ismertetőjelek"
+        case 11: return "\(displayName) bilétája kész!"
+        default: return "Gratulálunk!"
         }
     }
 
     private var stepSubtitle: String {
         switch step {
-        case 1: return "Pick which pet you're setting this tag up for."
-        case 2: return "Set up your SENRA tag in a few quick steps. Let's go!"
-        case 4: return "If it's a mix or you're not sure, leave it blank."
-        case 6: return "A rough age is fine."
-        case 8: return "Optional — you can skip this and add one later."
-        case 9: return "Important health information for whoever finds your pet."
-        case 10: return "Anything that helps someone recognise your pet."
+        case 1: return "Válaszd ki, melyik kedvenced bilétáját állítjuk be most."
+        case 2: return "Pár pillanat, és beállítjuk a SENRA bilétáját. Kezdjük is!"
+        case 4: return "Ha keverék vagy nem tudod, hagyd üresen."
+        case 6: return "Elég egy nagyjábóli érték is."
+        case 8: return "Nem kötelező — ki is hagyhatod, és később pótolhatod."
+        case 9: return "Fontos egészségügyi tudnivalók a megtaláló számára."
+        case 10: return "Bármi, ami segít felismerni a kedvenced."
         case 11: return remainingAfterThis == 1
-            ? "There's 1 more tag left to set up."
-            : "There are \(remainingAfterThis) more tags left to set up."
-        case 12: return "\(displayName) is now protected by the SENRA community."
+            ? "Még 1 biléta van hátra a rendelésből."
+            : "Még \(remainingAfterThis) biléta van hátra a rendelésből."
+        case 12: return "\(displayName) mostantól védve van a SENRA közösségével."
         default: return ""
         }
     }
@@ -330,7 +333,7 @@ struct PetSetupWizardView: View {
         case 1: nameStep
         case 2: introStep
         case 3: speciesStep
-        case 4: textFieldStep(text: $breed, placeholder: "e.g. Hungarian Vizsla, mixed")
+        case 4: textFieldStep(text: $breed, placeholder: "Pl. magyar vizsla, keverék")
         case 5: sexStep
         case 6: ageStep
         case 7: colorStep
@@ -345,13 +348,13 @@ struct PetSetupWizardView: View {
     private var nameStep: some View {
         VStack(spacing: 10) {
             if orderItems.isEmpty {
-                Text("There's no tag to set up for this code — it may already be activated, or it belongs to a different account.")
+                Text("Ehhez a kódhoz nincs beállítható biléta — lehet, hogy már aktiváltad, vagy nem ehhez a fiókhoz tartozik.")
                     .font(.appFont(.subheadline))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
             } else {
                 ForEach(orderItems) { item in
-                    let name = item.petName ?? "Pet"
+                    let name = item.petName ?? "Kedvenc"
                     let selected = !(item.petName ?? "").isEmpty && petName == item.petName
                     Button {
                         petName = item.petName ?? ""
@@ -386,7 +389,7 @@ struct PetSetupWizardView: View {
     }
 
     private var introStep: some View {
-        Text("A few quick questions about your pet. You can go back any time — we'll activate the tag at the end.")
+        Text("Néhány gyors kérdés a kedvencedről. Bármikor visszaléphetsz — a végén aktiváljuk a bilétát.")
             .font(.appFont(.subheadline))
             .foregroundColor(.primary)
             .multilineTextAlignment(.center)
@@ -398,29 +401,29 @@ struct PetSetupWizardView: View {
 
     private var speciesStep: some View {
         HStack(spacing: 12) {
-            WizardChoiceCard(symbol: "dog.fill", label: "Dog", selected: species == "dog") { species = "dog" }
-            WizardChoiceCard(symbol: "cat.fill", label: "Cat", selected: species == "cat") { species = "cat" }
+            WizardChoiceCard(symbol: "dog.fill", label: "Kutya", selected: species == "dog") { species = "dog" }
+            WizardChoiceCard(symbol: "cat.fill", label: "Macska", selected: species == "cat") { species = "cat" }
         }
     }
 
     private var sexStep: some View {
         HStack(spacing: 10) {
-            WizardChoiceCard(symbol: nil, label: "Boy", selected: sex == "male") { sex = "male" }
-            WizardChoiceCard(symbol: nil, label: "Girl", selected: sex == "female") { sex = "female" }
-            WizardChoiceCard(symbol: nil, label: "Not sure", selected: sex == "unknown") { sex = "unknown" }
+            WizardChoiceCard(symbol: nil, label: "Fiú", selected: sex == "male") { sex = "male" }
+            WizardChoiceCard(symbol: nil, label: "Lány", selected: sex == "female") { sex = "female" }
+            WizardChoiceCard(symbol: nil, label: "Nem tudom", selected: sex == "unknown") { sex = "unknown" }
         }
     }
 
     private var ageStep: some View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
-                Text("Years").font(.appFont(.caption)).foregroundColor(.secondary)
+                Text("Év").font(.appFont(.caption)).foregroundColor(.secondary)
                 TextField("0", text: $ageYears)
                     .keyboardType(.numberPad)
                     .textFieldStyle(BrandTextFieldStyle())
             }
             VStack(alignment: .leading, spacing: 6) {
-                Text("Months").font(.appFont(.caption)).foregroundColor(.secondary)
+                Text("Hónap").font(.appFont(.caption)).foregroundColor(.secondary)
                 TextField("0", text: $ageMonths)
                     .keyboardType(.numberPad)
                     .textFieldStyle(BrandTextFieldStyle())
@@ -430,9 +433,9 @@ struct PetSetupWizardView: View {
 
     private var colorStep: some View {
         VStack(spacing: 12) {
-            TextField("e.g. black and white", text: $color)
+            TextField("Pl. fekete-fehér", text: $color)
                 .textFieldStyle(BrandTextFieldStyle())
-            let chips = ["Black", "White", "Brown", "Grey", "Golden", "Tabby"]
+            let chips = ["Fekete", "Fehér", "Barna", "Szürke", "Arany", "Cirmos"]
             FlowChips(options: chips, selected: color) { color = $0 }
         }
     }
@@ -449,7 +452,7 @@ struct PetSetupWizardView: View {
                     photoImage = nil
                     photoItem = nil
                 } label: {
-                    Label("Remove photo", systemImage: "trash")
+                    Label("Fotó eltávolítása", systemImage: "trash")
                         .font(.appFont(.subheadline))
                         .foregroundColor(.errorColor)
                 }
@@ -459,7 +462,7 @@ struct PetSetupWizardView: View {
                         Image(systemName: "square.and.arrow.up")
                             .font(.appFont(size: 30))
                             .foregroundColor(.secondary)
-                        Text("Choose a photo")
+                        Text("Fotó kiválasztása")
                             .font(.appFont(.headline))
                             .foregroundColor(.primary)
                     }
@@ -478,13 +481,13 @@ struct PetSetupWizardView: View {
     private var healthStep: some View {
         VStack(spacing: 14) {
             VStack(alignment: .leading, spacing: 6) {
-                Text("Allergies").font(.appFont(.caption)).foregroundColor(.secondary)
-                TextField("e.g. chicken, certain medication", text: $allergies)
+                Text("Allergiák").font(.appFont(.caption)).foregroundColor(.secondary)
+                TextField("Pl. csirke, bizonyos gyógyszerek", text: $allergies)
                     .textFieldStyle(BrandTextFieldStyle())
             }
             VStack(alignment: .leading, spacing: 6) {
-                Text("Medications").font(.appFont(.caption)).foregroundColor(.secondary)
-                TextField("Any regular medication", text: $medications)
+                Text("Gyógyszerek").font(.appFont(.caption)).foregroundColor(.secondary)
+                TextField("Rendszeresen szedett gyógyszerek", text: $medications)
                     .textFieldStyle(BrandTextFieldStyle())
             }
         }
@@ -492,8 +495,8 @@ struct PetSetupWizardView: View {
 
     private var featuresStep: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("Unique features").font(.appFont(.caption)).foregroundColor(.secondary)
-            TextField("e.g. white chest patch, shy with strangers", text: $uniqueFeatures, axis: .vertical)
+            Text("Egyedi ismertetőjelek").font(.appFont(.caption)).foregroundColor(.secondary)
+            TextField("Pl. fehér folt a mellkason, félénk idegenekkel", text: $uniqueFeatures, axis: .vertical)
                 .lineLimit(3, reservesSpace: true)
                 .textFieldStyle(BrandTextFieldStyle())
         }
@@ -507,10 +510,10 @@ struct PetSetupWizardView: View {
     private var scanNextStep: some View {
         VStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Next steps").font(.appFont(.headline))
-                Label("Point your camera at the QR code on the next tag", systemImage: "1.circle.fill")
-                Label("Tap the link when it appears on screen", systemImage: "2.circle.fill")
-                Label("Follow the steps to set up your next pet", systemImage: "3.circle.fill")
+                Text("Következő lépések").font(.appFont(.headline))
+                Label("Irányítsd a kamerát a következő biléta QR-kódjára", systemImage: "1.circle.fill")
+                Label("Koppints a linkre, amikor megjelenik a képernyőn", systemImage: "2.circle.fill")
+                Label("Kövesd a lépéseket a következő kedvenc beállításához", systemImage: "3.circle.fill")
             }
             .font(.appFont(.subheadline))
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -521,7 +524,7 @@ struct PetSetupWizardView: View {
             Button {
                 onDismiss()
             } label: {
-                Text("Done for now").fontWeight(.bold)
+                Text("Később folytatom").fontWeight(.bold)
             }
             .buttonStyle(TagPrimaryButtonStyle())
         }
@@ -529,7 +532,7 @@ struct PetSetupWizardView: View {
 
     private var congratulationsStep: some View {
         VStack(spacing: 12) {
-            Text("Set up your contact details and privacy settings so the right information shows when someone finds your pet.")
+            Text("Állítsd be az elérhetőségeidet és az adatvédelmi beállításokat, hogy a megfelelő információk jelenjenek meg, ha valaki megtalálja a kedvenced.")
                 .font(.appFont(.subheadline))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -537,7 +540,7 @@ struct PetSetupWizardView: View {
             Button {
                 onDismiss()
             } label: {
-                Text("Go to my pets").fontWeight(.bold)
+                Text("Ugrás a kedvenceimhez").fontWeight(.bold)
             }
             .buttonStyle(TagPrimaryButtonStyle())
         }
