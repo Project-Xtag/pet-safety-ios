@@ -51,7 +51,7 @@ struct ContentView: View {
         .sheet(isPresented: $deepLinkService.showTagActivation) {
             if let tagCode = deepLinkService.pendingTagCode {
                 if authViewModel.isAuthenticated {
-                    TagActivationView(tagCode: tagCode) {
+                    PetSetupWizardView(tagCode: tagCode) {
                         deepLinkService.clearPendingLink()
                     }
                     .environmentObject(appState)
