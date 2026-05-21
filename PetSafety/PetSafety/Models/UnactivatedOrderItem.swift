@@ -1,17 +1,16 @@
 import Foundation
 
+/// A pet from a tag order that still needs setup — auto-registered
+/// (name only) at order time, with no active tag yet. The setup wizard
+/// completes the pet's details and activates the scanned tag for it.
 struct UnactivatedOrderItem: Codable, Identifiable {
-    var id: String { orderItemId }
-    let orderItemId: String
-    let petName: String?
-    let qrCode: String?
-    let tagStatus: String?
+    var id: String { petId }
+    let petId: String
+    let petName: String
 
     enum CodingKeys: String, CodingKey {
-        case orderItemId = "order_item_id"
+        case petId = "pet_id"
         case petName = "pet_name"
-        case qrCode = "qr_code"
-        case tagStatus = "tag_status"
     }
 }
 

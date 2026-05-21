@@ -73,7 +73,7 @@ struct PetDetailView: View {
                             }
                         }
                         .buttonStyle(FoundButtonStyle())
-                    } else {
+                    } else if pet.hasActiveTag == true {
                         Button(action: { showingMarkLostSheet = true }) {
                             HStack {
                                 Image(systemName: "exclamationmark.triangle.fill")

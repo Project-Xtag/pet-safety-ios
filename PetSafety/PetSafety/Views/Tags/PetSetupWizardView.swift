@@ -3,9 +3,9 @@ import PhotosUI
 import UIKit
 
 /// Guided, one-step-per-screen pet-onboarding wizard. Runs after a user
-/// scans a new SENRA tag from their order: pick the pet name registered
-/// at order time, walk through the pet's details, then in one commit
-/// create the pet, upload the photo and activate the scanned tag.
+/// scans a new SENRA tag from their order. The pet was auto-registered
+/// (name only) at order time; the wizard fills in its details, uploads
+/// the photo and activates the scanned tag for it.
 /// Multi-tag orders loop back to scan the next tag.
 ///
 /// Copy is Hungarian (the canonical locale); other locales follow via
@@ -22,6 +22,7 @@ struct PetSetupWizardView: View {
     @State private var loadingItems = true
     @State private var committing = false
     @State private var committedPetId: String?
+    @State private var selectedPetId: String?
     @State private var orderItems: [UnactivatedOrderItem] = []
     @State private var errorMessage: String?
 
@@ -97,8 +98,11 @@ struct PetSetupWizardView: View {
                 } catch {
                     orderItems = []
                 }
-                let names = orderItems.compactMap { $0.petName }
-                if names.count == 1 { petName = names[0] }
+                // Single-pet order — pre-select it so step 1 is a confirmation.
+                if orderItems.count == 1 {
+                    selectedPetId = orderItems[0].petId
+                    petName = orderItems[0].petName
+                }
                 loadingItems = false
             }
             .task(id: photoItem) {
@@ -187,7 +191,7 @@ struct PetSetupWizardView: View {
 
     private var canProceed: Bool {
         switch step {
-        case 1: return !petName.trimmingCharacters(in: .whitespaces).isEmpty
+        case 1: return selectedPetId != nil
         case 3: return !species.isEmpty
         default: return true
         }
@@ -214,14 +218,16 @@ struct PetSetupWizardView: View {
     // MARK: - Commit
 
     private func commit() async {
+        guard let petId = selectedPetId else { return }
         committing = true
         defer { committing = false }
         do {
-            var petId = committedPetId
-            if petId == nil {
-                let request = CreatePetRequest(
+            // The pet already exists (auto-registered at order time) — fill
+            // in its details, then activate the scanned tag for it.
+            if committedPetId != petId {
+                let request = UpdatePetRequest(
                     name: petName.trimmingCharacters(in: .whitespaces),
-                    species: species,
+                    species: species.isEmpty ? nil : species,
                     breed: nilIfEmpty(breed),
                     color: nilIfEmpty(color),
                     weight: nil,
@@ -233,18 +239,17 @@ struct PetSetupWizardView: View {
                     uniqueFeatures: nilIfEmpty(uniqueFeatures),
                     sex: (sex.isEmpty || sex == "unknown") ? nil : sex,
                     isNeutered: nil,
+                    isMissing: nil,
                     dateOfBirth: computeDateOfBirth(),
                     dobIsApproximate: computeDateOfBirth() != nil ? true : nil
                 )
-                let newPet = try await petsViewModel.createPet(request)
-                petId = newPet.id
-                committedPetId = newPet.id
+                _ = try await petsViewModel.updatePet(id: petId, updates: request)
+                committedPetId = petId
                 if let img = photoImage {
-                    _ = try? await petsViewModel.uploadPhoto(for: newPet.id, image: img)
+                    _ = try? await petsViewModel.uploadPhoto(for: petId, image: img)
                 }
             }
-            guard let resolvedId = petId else { return }
-            try await scannerVM.activateTag(code: tagCode, petId: resolvedId)
+            try await scannerVM.activateTag(code: tagCode, petId: petId)
             NotificationCenter.default.post(name: .tagActivated, object: nil)
             withAnimation { step = remainingAfterThis > 0 ? 11 : 12 }
         } catch {
@@ -354,10 +359,11 @@ struct PetSetupWizardView: View {
                     .multilineTextAlignment(.center)
             } else {
                 ForEach(orderItems) { item in
-                    let name = item.petName ?? "Kedvenc"
-                    let selected = !(item.petName ?? "").isEmpty && petName == item.petName
+                    let name = item.petName.isEmpty ? "Kedvenc" : item.petName
+                    let selected = selectedPetId == item.petId
                     Button {
-                        petName = item.petName ?? ""
+                        selectedPetId = item.petId
+                        petName = item.petName
                     } label: {
                         HStack(spacing: 12) {
                             ZStack {
@@ -638,5 +644,19 @@ private struct FlowChips: View {
                 .buttonStyle(PlainButtonStyle())
             }
         }
+    }
+}
+
+// MARK: - Primary button style
+
+private struct TagPrimaryButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(configuration.isPressed ? Color("BrandColor").opacity(0.8) : Color("BrandColor"))
+            .foregroundColor(.white)
+            .cornerRadius(12)
+            .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
     }
 }
