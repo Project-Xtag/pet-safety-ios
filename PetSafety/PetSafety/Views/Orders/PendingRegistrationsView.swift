@@ -129,48 +129,23 @@ struct PendingRegistrationsView: View {
                 // via the status badge above + email updates from
                 // the carrier directly.
 
-                HStack(spacing: 12) {
-                    NavigationLink(destination: QRScannerView()) {
-                        HStack {
-                            Image(systemName: "qrcode.viewfinder")
-                            Text("scan_tag_now")
-                        }
-                        .font(.appFont(.subheadline))
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .background(Color.brandOrange)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                // A pet is only registered by activating its tag — the
+                // pet for this order already exists (auto-created at
+                // checkout) and is filled in by the scan wizard. The
+                // old "create profile first/while waiting" shortcuts
+                // are gone: there is no tagless pet-creation path.
+                NavigationLink(destination: QRScannerView()) {
+                    HStack {
+                        Image(systemName: "qrcode.viewfinder")
+                        Text("scan_tag_now")
                     }
-
-                    NavigationLink(destination: PetFormView(mode: .create)) {
-                        Text("create_profile_first")
-                            .font(.appFont(.subheadline))
-                            .fontWeight(.medium)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 10)
-                            .background(Color.clear)
-                            .foregroundColor(.primary)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
-                            )
-                    }
-                }
-            } else {
-                NavigationLink(destination: PetFormView(mode: .create)) {
-                    Text("create_profile_while_waiting")
-                        .font(.appFont(.subheadline))
-                        .fontWeight(.medium)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 16)
-                        .background(Color.clear)
-                        .foregroundColor(.primary)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
-                        )
+                    .font(.appFont(.subheadline))
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .background(Color.brandOrange)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
                 }
             }
         }
