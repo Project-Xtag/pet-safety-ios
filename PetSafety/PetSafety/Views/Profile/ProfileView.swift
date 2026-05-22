@@ -4,6 +4,7 @@ import PhotosUI
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject private var subscriptionViewModel = SubscriptionViewModel()
+    @StateObject private var petsViewModel = PetsViewModel()
     @AppStorage("appearanceMode") private var appearanceMode: String = "system"
     @State private var showingLogoutAlert = false
     @State private var selectedPhoto: PhotosPickerItem?
@@ -42,6 +43,7 @@ struct ProfileView: View {
         }
         .task {
             await subscriptionViewModel.loadCurrentSubscription()
+            await petsViewModel.fetchPets()
         }
     }
 
@@ -154,9 +156,13 @@ struct ProfileView: View {
                                 .accessibilityAddTraits(.isHeader)
                         }
 
-                        Text(subscriptionViewModel.currentPlanName.capitalized)
-                            .font(.appFont(size: 14))
-                            .foregroundColor(.mutedText)
+                        // The plan only means something once the user has a
+                        // pet on an activated tag — until then, show nothing.
+                        if petsViewModel.pets.contains(where: { $0.hasActiveTag == true }) {
+                            Text(subscriptionViewModel.currentPlanName.capitalized)
+                                .font(.appFont(size: 14))
+                                .foregroundColor(.mutedText)
+                        }
                     }
                 }
             }
