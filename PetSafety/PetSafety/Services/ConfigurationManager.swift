@@ -210,17 +210,21 @@ final class ConfigurationManager: ObservableObject {
             sentryDSN = dsn
         }
 
-        // API Base URL
+        // API / SSE Base URL — skipped for staging builds. Remote Config
+        // lives in the single (production) Firebase project, so its
+        // api_base_url points at prod; a staging build pins its URLs via
+        // xcconfig and must not be silently overridden back to production.
+        #if !STAGING
         let apiURL = remoteConfig["api_base_url"].stringValue
         if !apiURL.isEmpty {
             apiBaseURL = apiURL
         }
 
-        // SSE Base URL
         let sseURL = remoteConfig["sse_base_url"].stringValue
         if !sseURL.isEmpty {
             sseBaseURL = sseURL
         }
+        #endif
 
         #if DEBUG
         print("[ConfigurationManager] Config values updated:")
