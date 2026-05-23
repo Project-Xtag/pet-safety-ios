@@ -848,6 +848,58 @@ class APIService {
         return response.sighting
     }
 
+    // MARK: - Community Found Pets
+
+    /// Fetch community-submitted found-pet reports within `radiusKm` of a point.
+    /// Public endpoint; mirrors the web Lost & Found board.
+    func getNearbyFoundPets(
+        latitude: Double,
+        longitude: Double,
+        radiusKm: Double = 25,
+        species: CommunityFoundPet.Species? = nil
+    ) async throws -> [CommunityFoundPet] {
+        struct NearbyFoundPetsResponse: Codable {
+            let reports: [CommunityFoundPet]
+            let count: Int
+        }
+
+        var endpoint = "/community/found-pets/nearby?lat=\(latitude)&lng=\(longitude)&radius=\(radiusKm)"
+        if let species {
+            endpoint += "&species=\(species.rawValue)"
+        }
+        let request = try await buildRequest(
+            endpoint: endpoint,
+            method: "GET",
+            requiresAuth: false
+        )
+        let response = try await performRequest(request, responseType: NearbyFoundPetsResponse.self)
+        return response.reports
+    }
+
+    /// Submit a community found-pet report. Public — anonymous reporters
+    /// allowed; logged-in users are matched by auth cookie/bearer if present.
+    /// Returns the created report plus a single-use manage token the caller
+    /// should persist (see `FoundPetManageTokenStore`) so the same device
+    /// can mark the report as reunited / remove it later without an account.
+    func createFoundPet(_ payload: CreateFoundPetRequest) async throws -> (report: CommunityFoundPet, manageToken: String) {
+        struct CreateFoundPetResponse: Codable {
+            let report: CommunityFoundPet
+            let manageToken: String
+        }
+
+        var request = try await buildRequest(
+            endpoint: "/community/found-pets",
+            method: "POST",
+            requiresAuth: false
+        )
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpBody = payload.multipartBody(boundary: boundary)
+
+        let response = try await performRequest(request, responseType: CreateFoundPetResponse.self)
+        return (response.report, response.manageToken)
+    }
+
     // MARK: - QR Tags
 
     /// Look up a QR tag by code to determine its status before deciding what to show
