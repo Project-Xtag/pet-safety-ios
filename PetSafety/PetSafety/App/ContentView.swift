@@ -73,15 +73,24 @@ struct ContentView: View {
                 }
             }
         }
-        // Handle deep links for promo-batch tags — show claim flow
+        // Handle deep links for promo-batch tags — route them into the
+        // same PetSetupWizardView the ordered flow uses, with mode=.promo.
+        // The wizard's step 1 collects a pet name (instead of picking from
+        // the order) and the final commit uses /claim-promo to create the
+        // pet, activate the tag, and grant any subscription trial in one
+        // atomic call. Strict web parity (web's PetSetup.tsx).
         .sheet(isPresented: $deepLinkService.showPromoClaimFlow) {
-            if let tagCode = deepLinkService.promoClaimTagCode,
-               let promoInfo = deepLinkService.promoClaimInfo {
-                ShelterPromoClaimView(tagCode: tagCode, promoInfo: promoInfo)
-                    .environmentObject(authViewModel)
-                    .onDisappear {
+            if let tagCode = deepLinkService.promoClaimTagCode {
+                if authViewModel.isAuthenticated {
+                    PetSetupWizardView(tagCode: tagCode, mode: .promo) {
                         deepLinkService.clearPendingLink()
                     }
+                    .environmentObject(appState)
+                } else {
+                    DeepLinkLoginPromptView(tagCode: tagCode) {
+                        deepLinkService.clearPendingLink()
+                    }
+                }
             }
         }
         // Show loading overlay while looking up tag

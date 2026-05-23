@@ -10,8 +10,21 @@ import UIKit
 ///
 /// Copy is Hungarian (the canonical locale); other locales follow via
 /// the standard Localizable.strings extraction.
+/// Two branches the wizard can take. Ordered (default) is the flow
+/// after a tag the user paid for arrives — the pet was auto-registered
+/// at order time and we just fill in its details + activate the tag.
+/// Promo is the flow after a shelter/event tag scan — there is no
+/// pre-registered pet, so step 1 collects a name and the final commit
+/// uses /qr-tags/claim-promo to create the pet, activate the tag, and
+/// grant any subscription trial atomically.
+enum PetSetupWizardMode {
+    case ordered
+    case promo
+}
+
 struct PetSetupWizardView: View {
     let tagCode: String
+    var mode: PetSetupWizardMode = .ordered
     let onDismiss: () -> Void
 
     @StateObject private var petsViewModel = PetsViewModel()
@@ -105,18 +118,23 @@ struct PetSetupWizardView: View {
                 }
             }
             .task {
-                do {
-                    orderItems = try await APIService.shared.getUnactivatedTagsForQRCode(tagCode)
-                } catch {
-                    orderItems = []
-                }
-                // Single-pet order — pre-select and skip step 1 entirely
-                // so the user lands on the intro screen, matching the web
-                // wizard's stepOffset=1 behaviour for single-pet orders.
-                if orderItems.count == 1 {
-                    selectedPetId = orderItems[0].petId
-                    petName = orderItems[0].petName
-                    step = 2
+                // Promo tags have no pre-registered order items — skip the
+                // /unactivated-for-qr fetch entirely. Step 1 will collect
+                // the new pet's name; the final commit calls /claim-promo.
+                if mode == .ordered {
+                    do {
+                        orderItems = try await APIService.shared.getUnactivatedTagsForQRCode(tagCode)
+                    } catch {
+                        orderItems = []
+                    }
+                    // Single-pet order — pre-select and skip step 1 entirely
+                    // so the user lands on the intro screen, matching the web
+                    // wizard's stepOffset=1 behaviour for single-pet orders.
+                    if orderItems.count == 1 {
+                        selectedPetId = orderItems[0].petId
+                        petName = orderItems[0].petName
+                        step = 2
+                    }
                 }
                 loadingItems = false
             }
@@ -229,7 +247,11 @@ struct PetSetupWizardView: View {
 
     private var canProceed: Bool {
         switch step {
-        case 1: return selectedPetId != nil
+        case 1:
+            // Ordered: must pick a pet from the order. Promo: must type a name.
+            return mode == .promo
+                ? !petName.trimmingCharacters(in: .whitespaces).isEmpty
+                : selectedPetId != nil
         case 3: return !species.isEmpty
         default: return true
         }
@@ -256,38 +278,15 @@ struct PetSetupWizardView: View {
     // MARK: - Commit
 
     private func commit() async {
-        guard let petId = selectedPetId else { return }
         committing = true
         defer { committing = false }
         do {
-            // The pet already exists (auto-registered at order time) — fill
-            // in its details, then activate the scanned tag for it.
-            if committedPetId != petId {
-                let request = UpdatePetRequest(
-                    name: petName.trimmingCharacters(in: .whitespaces),
-                    species: species.isEmpty ? nil : species,
-                    breed: nilIfEmpty(breed),
-                    color: nilIfEmpty(color),
-                    weight: nil,
-                    microchipNumber: nil,
-                    medicalNotes: nil,
-                    allergies: nilIfEmpty(allergies),
-                    medications: nilIfEmpty(medications),
-                    notes: nil,
-                    uniqueFeatures: nilIfEmpty(uniqueFeatures),
-                    sex: (sex.isEmpty || sex == "unknown") ? nil : sex,
-                    isNeutered: nil,
-                    isMissing: nil,
-                    dateOfBirth: computeDateOfBirth(),
-                    dobIsApproximate: computeDateOfBirth() != nil ? true : nil
-                )
-                _ = try await petsViewModel.updatePet(id: petId, updates: request)
-                committedPetId = petId
-                if let img = photoImage {
-                    _ = try? await petsViewModel.uploadPhoto(for: petId, image: img)
-                }
+            switch mode {
+            case .ordered:
+                try await commitOrdered()
+            case .promo:
+                try await commitPromo()
             }
-            try await scannerVM.activateTag(code: tagCode, petId: petId)
             NotificationCenter.default.post(name: .tagActivated, object: nil)
             // Pull subscription state fresh so screens that gate on
             // eligible_for_paid_plans (ManageSubscription, ChoosePlan)
@@ -295,9 +294,77 @@ struct PetSetupWizardView: View {
             // round-trips. Web parity: redesign7's PetSetup calls
             // refreshSubscription() at the same point.
             Task { await subscriptionVM.loadAll() }
-            withAnimation { step = remainingAfterThis > 0 ? 11 : 12 }
+            // Promo claims are always single-tag; ordered claims may be
+            // part of a multi-tag order.
+            let next = (mode == .ordered && remainingAfterThis > 0) ? 11 : 12
+            withAnimation { step = next }
         } catch {
             errorMessage = error.localizedDescription
+        }
+    }
+
+    /// Ordered flow: the pet already exists (auto-registered at order
+    /// time). Fill in the details, upload the photo, then activate the tag.
+    private func commitOrdered() async throws {
+        guard let petId = selectedPetId else { return }
+        if committedPetId != petId {
+            let request = UpdatePetRequest(
+                name: petName.trimmingCharacters(in: .whitespaces),
+                species: species.isEmpty ? nil : species,
+                breed: nilIfEmpty(breed),
+                color: nilIfEmpty(color),
+                weight: nil,
+                microchipNumber: nil,
+                medicalNotes: nil,
+                allergies: nilIfEmpty(allergies),
+                medications: nilIfEmpty(medications),
+                notes: nil,
+                uniqueFeatures: nilIfEmpty(uniqueFeatures),
+                sex: (sex.isEmpty || sex == "unknown") ? nil : sex,
+                isNeutered: nil,
+                isMissing: nil,
+                dateOfBirth: computeDateOfBirth(),
+                dobIsApproximate: computeDateOfBirth() != nil ? true : nil
+            )
+            _ = try await petsViewModel.updatePet(id: petId, updates: request)
+            committedPetId = petId
+            if let img = photoImage {
+                _ = try? await petsViewModel.uploadPhoto(for: petId, image: img)
+            }
+        }
+        try await scannerVM.activateTag(code: tagCode, petId: petId)
+    }
+
+    /// Promo flow: the pet does NOT exist yet. One atomic backend call
+    /// (/qr-tags/claim-promo) creates the pet, activates the tag, and
+    /// applies any subscription trial baked into the batch. The photo
+    /// uploads afterwards (failure is non-fatal, same as the ordered
+    /// path — the user can add a photo later from the pet profile).
+    private func commitPromo() async throws {
+        guard committedPetId == nil else { return }
+        let petData = CreatePetRequest(
+            name: petName.trimmingCharacters(in: .whitespaces),
+            species: species.isEmpty ? "dog" : species,
+            breed: nilIfEmpty(breed),
+            color: nilIfEmpty(color),
+            weight: nil,
+            microchipNumber: nil,
+            medicalNotes: nil,
+            allergies: nilIfEmpty(allergies),
+            medications: nilIfEmpty(medications),
+            notes: nil,
+            uniqueFeatures: nilIfEmpty(uniqueFeatures),
+            sex: (sex.isEmpty || sex == "unknown") ? nil : sex,
+            isNeutered: nil,
+            dateOfBirth: computeDateOfBirth(),
+            dobIsApproximate: computeDateOfBirth() != nil ? true : nil
+        )
+        let response = try await APIService.shared.claimPromoTag(qrCode: tagCode, pet: petData)
+        let petId = response.pet?.id
+        committedPetId = petId
+        selectedPetId = petId
+        if let petId, let img = photoImage {
+            _ = try? await petsViewModel.uploadPhoto(for: petId, image: img)
         }
     }
 
@@ -342,7 +409,7 @@ struct PetSetupWizardView: View {
 
     private var stepTitle: String {
         switch step {
-        case 1: return "Melyik kedvenced ez?"
+        case 1: return mode == .promo ? "Mi a kedvenced neve?" : "Melyik kedvenced ez?"
         case 2: return "Nagyszerű, hogy \(displayName) csatlakozott!"
         case 3: return "Kutya vagy macska?"
         case 4: return "Milyen fajta \(displayName)?"
@@ -359,7 +426,9 @@ struct PetSetupWizardView: View {
 
     private var stepSubtitle: String {
         switch step {
-        case 1: return "Válaszd ki, melyik kedvenced bilétáját állítjuk be most."
+        case 1: return mode == .promo
+            ? "Add meg a kedvenced nevét. A többi adatot a következő lépésekben kérjük."
+            : "Válaszd ki, melyik kedvenced bilétáját állítjuk be most."
         case 2: return "Pár pillanat, és beállítjuk a SENRA bilétáját. Kezdjük is!"
         case 4: return "Ha keverék vagy nem tudod, hagyd üresen."
         case 6: return "Elég egy nagyjábóli érték is."
@@ -396,7 +465,13 @@ struct PetSetupWizardView: View {
 
     private var nameStep: some View {
         VStack(spacing: 10) {
-            if orderItems.isEmpty {
+            if mode == .promo {
+                // Promo flow: single text input. No picker — the pet does
+                // not yet exist; we create it on commit via /claim-promo.
+                TextField("Pl. Bodri", text: $petName)
+                    .textFieldStyle(BrandTextFieldStyle())
+                    .submitLabel(.next)
+            } else if orderItems.isEmpty {
                 Text("Ehhez a kódhoz nincs beállítható biléta — lehet, hogy már aktiváltad, vagy nem ehhez a fiókhoz tartozik.")
                     .font(.appFont(.subheadline))
                     .foregroundColor(.secondary)
