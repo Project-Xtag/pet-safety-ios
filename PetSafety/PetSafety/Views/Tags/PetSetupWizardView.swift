@@ -16,7 +16,18 @@ struct PetSetupWizardView: View {
 
     @StateObject private var petsViewModel = PetsViewModel()
     @StateObject private var scannerVM = QRScannerViewModel()
+    @StateObject private var subscriptionVM = SubscriptionViewModel()
     @EnvironmentObject var appState: AppState
+
+    /// Optional navigation callbacks for the success screen. When the
+    /// wizard is hosted from a sheet that can't navigate (e.g. a deep
+    /// link sheet on top of the splash), the caller can leave these nil
+    /// and the buttons collapse to the "Go to my pets" CTA only —
+    /// matching the web wizard's behaviour when the route stack is
+    /// shallow.
+    var onSetContactDetails: (() -> Void)?
+    var onSetPrivacySettings: (() -> Void)?
+    var onScanNextTag: (() -> Void)?
 
     @State private var step = 1
     @State private var loadingItems = true
@@ -55,6 +66,7 @@ struct PetSetupWizardView: View {
                 } else {
                     if step <= totalSteps {
                         progressBar
+                        identityLockBanner
                     }
                     ScrollView {
                         VStack(spacing: 0) {
@@ -98,10 +110,13 @@ struct PetSetupWizardView: View {
                 } catch {
                     orderItems = []
                 }
-                // Single-pet order — pre-select it so step 1 is a confirmation.
+                // Single-pet order — pre-select and skip step 1 entirely
+                // so the user lands on the intro screen, matching the web
+                // wizard's stepOffset=1 behaviour for single-pet orders.
                 if orderItems.count == 1 {
                     selectedPetId = orderItems[0].petId
                     petName = orderItems[0].petName
+                    step = 2
                 }
                 loadingItems = false
             }
@@ -114,6 +129,29 @@ struct PetSetupWizardView: View {
             }
         }
         .navigationViewStyle(.stack)
+    }
+
+    // MARK: - Identity-lock notice (web parity)
+
+    /// Standing notice above the step content that warns the user the
+    /// pet's name / species / breed get locked once registration completes.
+    /// Mirrors the orange banner the web wizard shows on every step 1-10.
+    private var identityLockBanner: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "lock.fill")
+                .font(.system(size: 11, weight: .bold))
+            Text("A kedvenc neve, faja és fajtája a regisztráció után már nem módosítható — válaszd ki őket gondosan.")
+                .font(.appFont(size: 11, weight: .semibold))
+                .multilineTextAlignment(.leading)
+        }
+        .foregroundColor(Color(red: 0.65, green: 0.32, blue: 0.06))
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(brand.opacity(0.10))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.horizontal, 24)
+        .padding(.top, 10)
     }
 
     // MARK: - Progress bar
@@ -251,6 +289,12 @@ struct PetSetupWizardView: View {
             }
             try await scannerVM.activateTag(code: tagCode, petId: petId)
             NotificationCenter.default.post(name: .tagActivated, object: nil)
+            // Pull subscription state fresh so screens that gate on
+            // eligible_for_paid_plans (ManageSubscription, ChoosePlan)
+            // see "tag active" immediately, not after the SSE event
+            // round-trips. Web parity: redesign7's PetSetup calls
+            // refreshSubscription() at the same point.
+            Task { await subscriptionVM.loadAll() }
             withAnimation { step = remainingAfterThis > 0 ? 11 : 12 }
         } catch {
             errorMessage = error.localizedDescription
@@ -527,28 +571,90 @@ struct PetSetupWizardView: View {
             .background(Color.peachBackground)
             .cornerRadius(14)
 
+            // Primary CTA — open the scanner directly when the host
+            // provided a callback (typically pops the wizard sheet and
+            // switches to the Scan tab). Falls back to closing so the
+            // user can navigate manually.
             Button {
-                onDismiss()
+                if let onScanNextTag {
+                    onScanNextTag()
+                } else {
+                    onDismiss()
+                }
             } label: {
-                Text("Később folytatom").fontWeight(.bold)
+                HStack {
+                    Image(systemName: "qrcode.viewfinder")
+                    Text("Következő biléta beolvasása").fontWeight(.bold)
+                }
             }
             .buttonStyle(TagPrimaryButtonStyle())
+
+            Button { onDismiss() } label: {
+                Text("Később folytatom")
+                    .font(.appFont(size: 15, weight: .semibold))
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+            }
         }
     }
 
     private var congratulationsStep: some View {
         VStack(spacing: 12) {
-            Text("Állítsd be az elérhetőségeidet és az adatvédelmi beállításokat, hogy a megfelelő információk jelenjenek meg, ha valaki megtalálja a kedvenced.")
+            Text("\(displayName) mostantól védve van a SENRA közösségével. Állítsd be az elérhetőségeidet és az adatvédelmi beállításokat, hogy a megfelelő információk jelenjenek meg, ha valaki megtalálja.")
                 .font(.appFont(.subheadline))
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 6)
+
+            // Primary: contact details. The handler is optional so a
+            // sheet-hosted wizard without a destination can still close
+            // cleanly; when set it typically dismisses the sheet and
+            // pushes the Account → Contacts screen.
             Button {
-                onDismiss()
+                if let onSetContactDetails {
+                    onSetContactDetails()
+                } else {
+                    onDismiss()
+                }
             } label: {
-                Text("Ugrás a kedvenceimhez").fontWeight(.bold)
+                HStack {
+                    Image(systemName: "person.crop.circle.badge.plus")
+                    Text("Elérhetőségek beállítása").fontWeight(.bold)
+                }
             }
             .buttonStyle(TagPrimaryButtonStyle())
+
+            // Secondary: privacy settings.
+            Button {
+                if let onSetPrivacySettings {
+                    onSetPrivacySettings()
+                } else {
+                    onDismiss()
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "lock.shield")
+                    Text("Adatvédelmi beállítások").fontWeight(.bold)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .foregroundColor(brand)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(brand, lineWidth: 2)
+                )
+            }
+            .buttonStyle(.plain)
+
+            // Tertiary: just go to My Pets.
+            Button { onDismiss() } label: {
+                Text("Ugrás a kedvenceimhez")
+                    .font(.appFont(size: 15, weight: .semibold))
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+            }
         }
     }
 }
