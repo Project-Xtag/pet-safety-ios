@@ -798,8 +798,39 @@
 "lost_and_found_legend_radius %lld" = "%lld km-es körzet";
 "lost_and_found_unknown_pet" = "Eltűnt kisállat";
 "found_pet_unknown_breed" = "Ismeretlen fajta";
-"found_pet_form_coming_soon" = "A talált kisállat bejelentő űrlap a következő frissítésben érkezik.";
 "common_done" = "Kész";
+"common_cancel" = "Mégse";
+
+// MARK: - Talált kisállat bejelentő űrlap
+"found_pet_form_title" = "Talált kisállat bejelentése";
+"found_pet_form_submit" = "Beküldés";
+"found_pet_form_species" = "Faj";
+"found_pet_form_sex" = "Nem";
+"found_pet_form_sex_male" = "Hím";
+"found_pet_form_sex_female" = "Nőstény";
+"found_pet_form_sex_unknown" = "Nem tudom";
+"found_pet_form_details" = "Részletek";
+"found_pet_form_breed_placeholder" = "Fajta (pl. tacskó keverék)";
+"found_pet_form_color_placeholder" = "Szín (pl. barna, fehér mellfolt)";
+"found_pet_form_found_at" = "Mikor találtad?";
+"found_pet_form_location" = "Hol találtad?";
+"found_pet_form_use_gps" = "Pillanatnyi helyzetem";
+"found_pet_form_address_placeholder" = "Vagy írd be a címet";
+"found_pet_form_location_hint" = "GPS vagy cím megadása szükséges.";
+"found_pet_form_photo" = "Fotó (opcionális)";
+"found_pet_form_add_photo" = "Fotó hozzáadása";
+"found_pet_form_change_photo" = "Fotó cseréje";
+"found_pet_form_remove_photo" = "Fotó eltávolítása";
+"found_pet_form_photo_hint" = "Egy fotóval sokkal könnyebb a gazdinak felismerni a kedvencét.";
+"found_pet_form_contact" = "Elérhetőséged (opcionális)";
+"found_pet_form_share_contact" = "Megosztom az elérhetőségeimet";
+"found_pet_form_name_placeholder" = "Neved";
+"found_pet_form_email_placeholder" = "Email";
+"found_pet_form_phone_placeholder" = "Telefon";
+"found_pet_form_validation_location" = "Koppints a „Pillanatnyi helyzetem” gombra, vagy írj be egy címet.";
+"found_pet_form_validation_evidence" = "Adj hozzá fotót vagy egy rövid leírást, hogy a gazdi felismerhesse a kedvencét.";
+"found_pet_form_gps_unavailable" = "Nem sikerült lekérni a helyzeted. Kérlek, írd be a címet kézzel.";
+"found_pet_form_geocode_failed" = "Nem találom ezt a címet a térképen. Próbálj meg pontosabbat megadni.";
 
 // MARK: - Riasztás állapot és részletek (1. rész)
 "alert_status_missing" = "Eltűnt";

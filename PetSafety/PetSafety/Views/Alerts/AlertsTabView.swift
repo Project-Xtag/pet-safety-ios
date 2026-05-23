@@ -69,17 +69,8 @@ struct AlertsTabView: View {
             .task { await loadNearby() }
             .refreshable { await loadNearby() }
             .sheet(isPresented: $showFoundForm) {
-                // Placeholder until chunk 4 lands — see FoundPetFormView.
-                NavigationView {
-                    Text("found_pet_form_coming_soon")
-                        .multilineTextAlignment(.center)
-                        .padding(40)
-                        .navigationBarTitleDisplayMode(.inline)
-                        .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button(String(localized: "common_done")) { showFoundForm = false }
-                            }
-                        }
+                FoundPetFormView { newReport in
+                    viewModel.prependLocalFoundReport(newReport)
                 }
             }
             .sheet(item: $selectedFoundReport) { report in

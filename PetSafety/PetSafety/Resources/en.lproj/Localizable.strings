@@ -810,8 +810,39 @@
 "lost_and_found_legend_radius %lld" = "%lld km radius";
 "lost_and_found_unknown_pet" = "Missing pet";
 "found_pet_unknown_breed" = "Unknown breed";
-"found_pet_form_coming_soon" = "The found-pet report form is coming in the next update.";
 "common_done" = "Done";
+"common_cancel" = "Cancel";
+
+// MARK: - Found-pet report form
+"found_pet_form_title" = "Report a found pet";
+"found_pet_form_submit" = "Submit";
+"found_pet_form_species" = "Species";
+"found_pet_form_sex" = "Sex";
+"found_pet_form_sex_male" = "Male";
+"found_pet_form_sex_female" = "Female";
+"found_pet_form_sex_unknown" = "Don't know";
+"found_pet_form_details" = "Details";
+"found_pet_form_breed_placeholder" = "Breed (e.g. dachshund mix)";
+"found_pet_form_color_placeholder" = "Color (e.g. brown with white chest)";
+"found_pet_form_found_at" = "When did you find it?";
+"found_pet_form_location" = "Where did you find it?";
+"found_pet_form_use_gps" = "Use my location";
+"found_pet_form_address_placeholder" = "Or type the address";
+"found_pet_form_location_hint" = "Either GPS or an address is required.";
+"found_pet_form_photo" = "Photo (optional)";
+"found_pet_form_add_photo" = "Add photo";
+"found_pet_form_change_photo" = "Change photo";
+"found_pet_form_remove_photo" = "Remove photo";
+"found_pet_form_photo_hint" = "A photo makes it much easier for the owner to recognize their pet.";
+"found_pet_form_contact" = "Your contact (optional)";
+"found_pet_form_share_contact" = "Share my contact details";
+"found_pet_form_name_placeholder" = "Your name";
+"found_pet_form_email_placeholder" = "Email";
+"found_pet_form_phone_placeholder" = "Phone";
+"found_pet_form_validation_location" = "Tap \"Use my location\" or type an address.";
+"found_pet_form_validation_evidence" = "Add a photo or a short description so the owner can recognize the pet.";
+"found_pet_form_gps_unavailable" = "Couldn't get your location. Please type an address instead.";
+"found_pet_form_geocode_failed" = "Couldn't find that address on the map. Try a more specific one.";
 
 // MARK: - Alert Status & Details (Chunk 1)
 "alert_status_missing" = "Missing";
