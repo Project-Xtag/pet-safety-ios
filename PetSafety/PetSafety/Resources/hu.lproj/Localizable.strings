@@ -832,6 +832,20 @@
 "found_pet_form_gps_unavailable" = "Nem sikerült lekérni a helyzeted. Kérlek, írd be a címet kézzel.";
 "found_pet_form_geocode_failed" = "Nem találom ezt a címet a térképen. Próbálj meg pontosabbat megadni.";
 
+// MARK: - Talált kisállat részletek
+"found_pet_detail_title" = "Talált kisállat";
+"found_pet_detail_breed" = "Fajta";
+"found_pet_detail_color" = "Szín";
+"found_pet_detail_found_at" = "Megtalálva";
+"found_pet_detail_address" = "Helyszín";
+"found_pet_detail_distance" = "Távolság";
+"found_pet_detail_finder_contact" = "MEGTALÁLÓ ELÉRHETŐSÉGE";
+"found_pet_detail_finder_name" = "Név";
+"found_pet_detail_finder_email" = "Email";
+"found_pet_detail_finder_phone" = "Telefon";
+"found_pet_detail_no_contact" = "A megtaláló még nem adott meg elérhetőséget.";
+"found_pet_detail_open_in_maps" = "Megnyitás térképen";
+
 // MARK: - Riasztás állapot és részletek (1. rész)
 "alert_status_missing" = "Eltűnt";
 "alert_status_found" = "Megtalált";

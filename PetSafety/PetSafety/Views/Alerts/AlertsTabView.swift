@@ -74,23 +74,7 @@ struct AlertsTabView: View {
                 }
             }
             .sheet(item: $selectedFoundReport) { report in
-                // Placeholder until chunk 5 lands — see FoundPetDetailView.
-                NavigationView {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(report.breed ?? String(localized: "found_pet_unknown_breed"))
-                            .font(.appFont(size: 22, weight: .bold))
-                        if let desc = report.description { Text(desc) }
-                        if let addr = report.foundAddress { Text(addr).foregroundColor(.mutedText) }
-                    }
-                    .padding(20)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button(String(localized: "common_done")) { selectedFoundReport = nil }
-                        }
-                    }
-                }
+                FoundPetDetailView(report: report)
             }
         }
         .navigationViewStyle(.stack)

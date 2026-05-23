@@ -844,6 +844,20 @@
 "found_pet_form_gps_unavailable" = "Couldn't get your location. Please type an address instead.";
 "found_pet_form_geocode_failed" = "Couldn't find that address on the map. Try a more specific one.";
 
+// MARK: - Found-pet detail sheet
+"found_pet_detail_title" = "Found pet";
+"found_pet_detail_breed" = "Breed";
+"found_pet_detail_color" = "Color";
+"found_pet_detail_found_at" = "Found";
+"found_pet_detail_address" = "Location";
+"found_pet_detail_distance" = "Distance";
+"found_pet_detail_finder_contact" = "FINDER CONTACT";
+"found_pet_detail_finder_name" = "Name";
+"found_pet_detail_finder_email" = "Email";
+"found_pet_detail_finder_phone" = "Phone";
+"found_pet_detail_no_contact" = "The finder hasn't shared a contact yet.";
+"found_pet_detail_open_in_maps" = "Open in maps";
+
 // MARK: - Alert Status & Details (Chunk 1)
 "alert_status_missing" = "Missing";
 "alert_status_found" = "Found";
