@@ -775,6 +775,32 @@
 "alerts_add_my_address" = "Cím hozzáadása";
 "alerts_no_missing_nearby" = "Nincsenek eltűnt riasztások a közelben";
 
+// MARK: - Elveszett és megtalált kisállatok tábla
+"lost_and_found_eyebrow" = "Riasztások";
+"lost_and_found_title" = "Riasztások";
+"lost_and_found_description" = "Az eltűnt és talált kisállatok a környékeden, és a saját eltűnési riasztásaid.";
+"lost_and_found_view_list" = "Lista";
+"lost_and_found_view_map" = "Térkép";
+"lost_and_found_search_placeholder" = "Keresés név, fajta vagy helyszín alapján…";
+"lost_and_found_filter_species_label" = "FAJ";
+"lost_and_found_species_all" = "Mind";
+"lost_and_found_species_dog" = "Kutyák";
+"lost_and_found_species_cat" = "Macskák";
+"lost_and_found_species_dog_singular" = "Kutya";
+"lost_and_found_species_cat_singular" = "Macska";
+"lost_and_found_species_other_singular" = "Egyéb";
+"lost_and_found_filter_status_label" = "ÁLLAPOT";
+"lost_and_found_status_all" = "Mind";
+"lost_and_found_status_missing" = "Eltűnt";
+"lost_and_found_status_community" = "Talált kisállat";
+"lost_and_found_cta_title" = "Találtál egy gazdátlan kisállatot?";
+"lost_and_found_cta_body" = "Tedd közzé itt, hogy mielőbb hazajuthasson.";
+"lost_and_found_legend_radius %lld" = "%lld km-es körzet";
+"lost_and_found_unknown_pet" = "Eltűnt kisállat";
+"found_pet_unknown_breed" = "Ismeretlen fajta";
+"found_pet_form_coming_soon" = "A talált kisállat bejelentő űrlap a következő frissítésben érkezik.";
+"common_done" = "Kész";
+
 // MARK: - Riasztás állapot és részletek (1. rész)
 "alert_status_missing" = "Eltűnt";
 "alert_status_found" = "Megtalált";

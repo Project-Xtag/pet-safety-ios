@@ -787,6 +787,32 @@
 "alerts_add_my_address" = "Add My Address";
 "alerts_no_missing_nearby" = "No missing pet alerts nearby";
 
+// MARK: - Lost & Found Board (redesign — community board)
+"lost_and_found_eyebrow" = "Alerts";
+"lost_and_found_title" = "Lost & Found";
+"lost_and_found_description" = "Missing and found pets in your area, and your own missing-pet alerts.";
+"lost_and_found_view_list" = "List";
+"lost_and_found_view_map" = "Map";
+"lost_and_found_search_placeholder" = "Search by name, breed or location…";
+"lost_and_found_filter_species_label" = "SPECIES";
+"lost_and_found_species_all" = "All";
+"lost_and_found_species_dog" = "Dogs";
+"lost_and_found_species_cat" = "Cats";
+"lost_and_found_species_dog_singular" = "Dog";
+"lost_and_found_species_cat_singular" = "Cat";
+"lost_and_found_species_other_singular" = "Other";
+"lost_and_found_filter_status_label" = "STATUS";
+"lost_and_found_status_all" = "All";
+"lost_and_found_status_missing" = "Missing";
+"lost_and_found_status_community" = "Found pet";
+"lost_and_found_cta_title" = "Found a stray pet?";
+"lost_and_found_cta_body" = "Post it here so it can find its way home sooner.";
+"lost_and_found_legend_radius %lld" = "%lld km radius";
+"lost_and_found_unknown_pet" = "Missing pet";
+"found_pet_unknown_breed" = "Unknown breed";
+"found_pet_form_coming_soon" = "The found-pet report form is coming in the next update.";
+"common_done" = "Done";
+
 // MARK: - Alert Status & Details (Chunk 1)
 "alert_status_missing" = "Missing";
 "alert_status_found" = "Found";
