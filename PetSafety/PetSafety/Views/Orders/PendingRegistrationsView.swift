@@ -3,6 +3,12 @@ import SwiftUI
 struct PendingRegistrationsView: View {
     @StateObject private var viewModel = PendingRegistrationsViewModel()
     @Environment(\.dismiss) private var dismiss
+    // Re-fetch on foreground so a tag the admin marked shipped while the
+    // app was backgrounded shows up the next time the user looks at the
+    // screen — without forcing them to pull-to-refresh. (We don't have
+    // an `order_shipped` SSE event, so foreground is the cheapest
+    // signal for "world might have changed.")
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         ZStack {
@@ -34,6 +40,11 @@ struct PendingRegistrationsView: View {
         }
         .refreshable {
             await viewModel.fetchPendingRegistrations()
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                Task { await viewModel.fetchPendingRegistrations() }
+            }
         }
         .overlay {
             if viewModel.isLoading && viewModel.registrations.isEmpty {
@@ -214,15 +225,10 @@ struct PendingRegistrationsView: View {
     }
 
     private func formatDate(_ dateString: String) -> String {
-        // 2026-05-05 fix: the previous implementation used a single
-        // `ISO8601DateFormatter` that rejected timestamps with
-        // fractional seconds (the backend emits both forms depending
-        // on the source row). On a parse failure we returned the raw
-        // ISO string — users saw "2026-05-04T17:31:42.123Z" verbatim.
-        // Try with-fractional-seconds first, fall back to plain
-        // RFC3339, and only last-resort show the raw string. Use
-        // .medium style with the user's current locale so HU sees
-        // "2026. máj. 5." instead of US-format "May 5, 2026".
+        // Backend emits ISO timestamps both with and without fractional
+        // seconds depending on the source row, so try the former first
+        // and fall back. Last-resort show the raw string rather than
+        // an empty cell — easier to debug than a silent blank.
         let withFractional = ISO8601DateFormatter()
         withFractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         let plain = ISO8601DateFormatter()
@@ -231,10 +237,14 @@ struct PendingRegistrationsView: View {
         let date = withFractional.date(from: dateString) ?? plain.date(from: dateString)
         guard let date else { return dateString }
 
+        // Fixed yyyy.MM.dd. format across every locale — unambiguous,
+        // sortable, matches the HU convention the product uses
+        // everywhere else (HU is our canonical locale). en_US_POSIX
+        // locks the format against the user's calendar/locale
+        // settings overriding the literal pattern.
         let displayFormatter = DateFormatter()
-        displayFormatter.locale = .current
-        displayFormatter.dateStyle = .medium
-        displayFormatter.timeStyle = .none
+        displayFormatter.locale = Locale(identifier: "en_US_POSIX")
+        displayFormatter.dateFormat = "yyyy.MM.dd."
         return displayFormatter.string(from: date)
     }
 }

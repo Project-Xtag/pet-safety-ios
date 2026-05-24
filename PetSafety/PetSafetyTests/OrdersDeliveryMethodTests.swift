@@ -111,7 +111,8 @@ struct CreateTagCheckoutRequestTests {
             countryCode: "HU",
             platform: "ios",
             deliveryMethod: nil,
-            postapointDetails: nil
+            postapointDetails: nil,
+            promoCode: nil
         )
         let dict = try encodeToDict(request)
 
@@ -127,7 +128,8 @@ struct CreateTagCheckoutRequestTests {
             countryCode: "HU",
             platform: "ios",
             deliveryMethod: "home_delivery",
-            postapointDetails: nil
+            postapointDetails: nil,
+            promoCode: nil
         )
         let dict = try encodeToDict(request)
 
@@ -141,7 +143,8 @@ struct CreateTagCheckoutRequestTests {
             countryCode: "HU",
             platform: "ios",
             deliveryMethod: "postapoint",
-            postapointDetails: PostaPointDetails(id: "pp-1", name: "Posta 1", address: "Test St")
+            postapointDetails: PostaPointDetails(id: "pp-1", name: "Posta 1", address: "Test St"),
+            promoCode: nil
         )
         let dict = try encodeToDict(request)
 
@@ -160,7 +163,8 @@ struct CreateTagCheckoutRequestTests {
             countryCode: "SK",
             platform: "ios",
             deliveryMethod: nil,
-            postapointDetails: nil
+            postapointDetails: nil,
+            promoCode: nil
         )
         let dict = try encodeToDict(request)
 

@@ -42,7 +42,8 @@ struct OrderFlowTests {
             countryCode: "HU",
             platform: "ios",
             deliveryMethod: "home_delivery",
-            postapointDetails: nil
+            postapointDetails: nil,
+            promoCode: nil
         )
 
         let data = try JSONEncoder().encode(request)
@@ -67,7 +68,8 @@ struct OrderFlowTests {
             countryCode: "HU",
             platform: "ios",
             deliveryMethod: "postapoint",
-            postapointDetails: postaPoint
+            postapointDetails: postaPoint,
+            promoCode: nil
         )
 
         let data = try JSONEncoder().encode(request)
@@ -90,7 +92,8 @@ struct OrderFlowTests {
             countryCode: "DE",
             platform: "ios",
             deliveryMethod: nil,
-            postapointDetails: nil
+            postapointDetails: nil,
+            promoCode: nil
         )
 
         let data = try JSONEncoder().encode(request)

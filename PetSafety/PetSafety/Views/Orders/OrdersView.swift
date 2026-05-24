@@ -3,6 +3,12 @@ import SwiftUI
 struct OrdersView: View {
     @StateObject private var viewModel = OrdersViewModel()
     @State private var selectedTab = 0
+    // Re-fetch orders on foreground so a status flip (e.g. admin
+    // marked the order shipped while the user had the app
+    // backgrounded) shows up the next time they look. The nested
+    // PendingRegistrationsView observes scenePhase too, so its list
+    // wakes up alongside this one.
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         VStack(spacing: 0) {
@@ -29,6 +35,11 @@ struct OrdersView: View {
         .navigationTitle(Text("profile_orders_invoices"))
         .task {
             await viewModel.fetchOrders()
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                Task { await viewModel.fetchOrders() }
+            }
         }
     }
 
@@ -145,12 +156,13 @@ struct OrderRowView: View {
             return dateString
         }
 
-        // Long date, locale-aware, no time. EN: "May 6, 2026".
-        // HU: "2026. május 6." — drops the previous "at HH:mm" tail
-        // that wasn't worth showing for an order timestamp.
+        // Fixed yyyy.MM.dd. across every locale — unambiguous,
+        // sortable, matches the HU convention the product uses
+        // everywhere else. en_US_POSIX locks the pattern against
+        // the user's calendar/locale settings overriding it.
         let displayFormatter = DateFormatter()
-        displayFormatter.dateStyle = .long
-        displayFormatter.timeStyle = .none
+        displayFormatter.locale = Locale(identifier: "en_US_POSIX")
+        displayFormatter.dateFormat = "yyyy.MM.dd."
         return displayFormatter.string(from: date)
     }
 }
@@ -271,9 +283,13 @@ struct OrderDetailView: View {
             return dateString
         }
 
+        // Same fixed yyyy.MM.dd. format as the orders list — no time
+        // shown. The detail view used to include HH:mm but the order
+        // timestamp is the placement moment, which isn't useful at
+        // minute granularity.
         let displayFormatter = DateFormatter()
-        displayFormatter.dateStyle = .long
-        displayFormatter.timeStyle = .short
+        displayFormatter.locale = Locale(identifier: "en_US_POSIX")
+        displayFormatter.dateFormat = "yyyy.MM.dd."
         return displayFormatter.string(from: date)
     }
 
