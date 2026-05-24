@@ -411,15 +411,24 @@ struct OrderReplacementTagView: View {
     }
 
     private var formattedShippingCost: String {
+        // 2026-05-25: switched from hardcoded `hu.home_delivery` to the
+        // method-aware lookup. The HU PostaPoint rate is different from
+        // home delivery; without this branch the order summary stayed
+        // on the home-delivery price even after the user picked a
+        // pickup point. Backend re-resolves the actual charged
+        // amount on /api/orders create from country + delivery method
+        // (resolveShippingCost) so the legacy `shippingCost` numeric
+        // is only used as a pre-shippingPrices-load fallback display.
         if isHungary, let hu = shippingPrices?.HU {
+            if deliveryMethod == "postapoint", let info = hu.postapoint {
+                return info.formattedPrice
+            }
             if let info = hu.home_delivery {
-                let priceInfo = ShippingPriceInfo(amount: shippingCost, currency: info.currency, label: "")
-                return priceInfo.formattedPrice
+                return info.formattedPrice
             }
         }
         if let defaultInfo = shippingPrices?.defaultShipping {
-            let priceInfo = ShippingPriceInfo(amount: shippingCost, currency: defaultInfo.currency, label: "")
-            return priceInfo.formattedPrice
+            return defaultInfo.formattedPrice
         }
         // Fallback when shippingPrices hasn't loaded yet — use the
         // backend-resolved currency from the eligibility response so HU
