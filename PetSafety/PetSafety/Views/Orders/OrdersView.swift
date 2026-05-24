@@ -58,26 +58,29 @@ struct OrdersView: View {
                 // no signal that anything was wrong and no way to
                 // retry short of backgrounding + foregrounding the
                 // app.
-                VStack(spacing: 16) {
-                    Image(systemName: "exclamationmark.triangle")
-                        .font(.system(size: 44))
-                        .foregroundColor(.secondary)
+                VStack(spacing: AppSpacing.lg) {
+                    // Tinted disc for the warning glyph — softer
+                    // than a raw triangle on a blank canvas.
+                    ZStack {
+                        Circle()
+                            .fill(Color.brandOrange.opacity(0.12))
+                            .frame(width: 72, height: 72)
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.appFont(size: 30, weight: .semibold))
+                            .foregroundColor(.brandOrangeDeep)
+                    }
                     Text(error)
                         .font(.appFont(.subheadline))
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.mutedText)
                         .multilineTextAlignment(.center)
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, AppSpacing.xl)
                     Button {
                         Task { await viewModel.fetchOrders() }
                     } label: {
                         Text("retry")
-                            .fontWeight(.semibold)
-                            .padding(.horizontal, 24)
-                            .padding(.vertical, 12)
-                            .background(Color.brandOrange)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
                     }
+                    .buttonStyle(PrimaryPillButtonStyle())
+                    .frame(maxWidth: 220)
                 }
                 .frame(maxWidth: .infinity, minHeight: 320)
                 .listRowSeparator(.hidden)

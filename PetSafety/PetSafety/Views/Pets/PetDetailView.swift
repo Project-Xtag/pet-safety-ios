@@ -40,27 +40,30 @@ struct PetDetailView: View {
                 }
                 .frame(height: horizontalSizeClass == .regular ? 400 : 300)
                 .frame(maxWidth: .infinity)
-                .background(Color(.systemGray6))
-                .cornerRadius(20)
+                .background(Color.cream)
+                .clipShape(RoundedRectangle(cornerRadius: AppRadius.xl, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: AppRadius.xl, style: .continuous)
+                        .stroke(Color.softBorder, lineWidth: 1)
+                )
+                .shadow(color: Color.black.opacity(0.05), radius: 18, x: 0, y: 8)
                 .padding(.horizontal)
 
                 // Pet Name
                 Text(pet.name)
-                    .font(.appFont(size: 32, weight: .bold))
+                    .font(.appFont(size: 34, weight: .bold))
+                    .foregroundColor(.ink)
 
-                // View Photos Button (under pet name)
+                // View Photos — refreshed to the new pill style.
+                // Brand gradient lifts the action above the cream
+                // info-cards below so the eye lands on it first.
                 NavigationLink(destination: PhotoGalleryView(pet: pet)) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: AppSpacing.sm) {
                         Image(systemName: "photo.on.rectangle")
                         Text(String(format: NSLocalizedString("view_pet_photos", comment: ""), pet.name))
                     }
-                    .font(.appFont(size: 16, weight: .semibold))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(Color.tealAccent)
-                    .cornerRadius(14)
                 }
+                .buttonStyle(PrimaryPillButtonStyle())
                 .padding(.horizontal)
 
                 // Mark as Lost/Found Buttons
@@ -351,21 +354,39 @@ struct InfoCard: View {
     let icon: String
 
     var body: some View {
-        HStack {
-            Label(title, systemImage: icon)
-                .font(.appFont(.subheadline))
-                .foregroundColor(.secondary)
-                .frame(width: 120, alignment: .leading)
+        HStack(spacing: AppSpacing.md) {
+            // Tinted icon disc, mirroring the QuickActionButton
+            // surface. Each row reads as a unit instead of a flat
+            // label/value pair on a gray plate.
+            ZStack {
+                Circle()
+                    .fill(Color.brandOrange.opacity(0.12))
+                    .frame(width: 36, height: 36)
+                Image(systemName: icon)
+                    .font(.appFont(size: 15, weight: .semibold))
+                    .foregroundColor(.brandOrangeDeep)
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.appFont(size: 12, weight: .semibold))
+                    .foregroundColor(.mutedText)
+                    .textCase(.uppercase)
+                    .tracking(0.8)
+                Text(value)
+                    .font(.appFont(size: 16, weight: .semibold))
+                    .foregroundColor(.ink)
+            }
 
             Spacer()
-
-            Text(value)
-                .font(.appFont(.body))
-                .fontWeight(.medium)
         }
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
+        .padding(AppSpacing.lg)
+        .background(Color.cream)
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+                .stroke(Color.softBorder, lineWidth: 1)
+        )
     }
 }
 
@@ -373,11 +394,16 @@ struct DestructiveButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.red.opacity(0.1))
-            .foregroundColor(.red)
-            .cornerRadius(10)
-            .fontWeight(.semibold)
+            .padding(.vertical, AppSpacing.lg)
+            .foregroundColor(.errorColor)
+            .font(.appFont(size: 15, weight: .semibold))
+            .background(
+                configuration.isPressed
+                    ? Color.errorColor.opacity(0.18)
+                    : Color.errorColor.opacity(0.10)
+            )
+            .clipShape(Capsule())
+            .overlay(Capsule().stroke(Color.errorColor.opacity(0.32), lineWidth: 1))
     }
 }
 
@@ -385,24 +411,33 @@ struct LostButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.orange.opacity(configuration.isPressed ? 0.7 : 1.0))
+            .padding(.vertical, AppSpacing.lg)
             .foregroundColor(.white)
-            .cornerRadius(10)
-            .fontWeight(.semibold)
-            .shadow(radius: 2)
+            .font(.appFont(size: 16, weight: .bold))
+            .background(
+                configuration.isPressed
+                    ? Color.errorColor.opacity(0.85)
+                    : Color.errorColor
+            )
+            .clipShape(Capsule())
+            .shadow(color: Color.errorColor.opacity(0.32), radius: 12, x: 0, y: 6)
     }
 }
 
 struct FoundButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.appFont(size: 16, weight: .semibold))
-            .foregroundColor(.white)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(Color.tealAccent.opacity(configuration.isPressed ? 0.8 : 1.0))
-            .cornerRadius(14)
+            .padding(.vertical, AppSpacing.lg)
+            .foregroundColor(.white)
+            .font(.appFont(size: 16, weight: .bold))
+            .background(
+                configuration.isPressed
+                    ? Color.successColor.opacity(0.82)
+                    : Color.successColor
+            )
+            .clipShape(Capsule())
+            .shadow(color: Color.successColor.opacity(0.32), radius: 12, x: 0, y: 6)
     }
 }
 

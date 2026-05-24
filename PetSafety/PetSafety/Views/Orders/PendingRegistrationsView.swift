@@ -70,26 +70,27 @@ struct PendingRegistrationsView: View {
     // bug. Showing the error + a Retry button distinguishes
     // "nothing to register" from "we couldn't ask the server."
     private func errorState(_ message: String) -> some View {
-        VStack(spacing: 16) {
-            Image(systemName: "exclamationmark.triangle")
-                .font(.system(size: 44))
-                .foregroundColor(.secondary)
+        VStack(spacing: AppSpacing.lg) {
+            ZStack {
+                Circle()
+                    .fill(Color.brandOrange.opacity(0.12))
+                    .frame(width: 72, height: 72)
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.appFont(size: 30, weight: .semibold))
+                    .foregroundColor(.brandOrangeDeep)
+            }
             Text(message)
                 .font(.appFont(.subheadline))
-                .foregroundColor(.secondary)
+                .foregroundColor(.mutedText)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 24)
+                .padding(.horizontal, AppSpacing.xl)
             Button {
                 Task { await viewModel.fetchPendingRegistrations() }
             } label: {
                 Text("retry")
-                    .fontWeight(.semibold)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 12)
-                    .background(Color.brandOrange)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
             }
+            .buttonStyle(PrimaryPillButtonStyle())
+            .frame(maxWidth: 220)
         }
         .frame(maxWidth: .infinity, minHeight: 320)
         .padding()
@@ -97,28 +98,29 @@ struct PendingRegistrationsView: View {
 
     // MARK: - Empty State
     private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "checkmark.circle.fill")
-                .font(.appFont(size: 60))
-                .foregroundColor(.green)
+        VStack(spacing: AppSpacing.lg) {
+            ZStack {
+                Circle()
+                    .fill(Color.successColor.opacity(0.18))
+                    .frame(width: 88, height: 88)
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.appFont(size: 44, weight: .semibold))
+                    .foregroundColor(.successColor)
+            }
             Text("all_caught_up")
-                .font(.appFont(.title2))
-                .fontWeight(.bold)
+                .font(.appFont(size: 22, weight: .bold))
+                .foregroundColor(.ink)
             Text("all_caught_up_description")
                 .font(.appFont(.body))
-                .foregroundColor(.secondary)
+                .foregroundColor(.mutedText)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
             NavigationLink(destination: OrderMoreTagsView()) {
                 Text("order_tags")
-                    .fontWeight(.semibold)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 12)
-                    .background(Color.brandOrange)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
             }
-            .padding(.top, 8)
+            .buttonStyle(PrimaryPillButtonStyle())
+            .frame(maxWidth: 220)
+            .padding(.top, AppSpacing.sm)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -188,28 +190,29 @@ struct PendingRegistrationsView: View {
                 // old "create profile first/while waiting" shortcuts
                 // are gone: there is no tagless pet-creation path.
                 NavigationLink(destination: QRScannerView()) {
-                    HStack {
+                    HStack(spacing: AppSpacing.sm) {
                         Image(systemName: "qrcode.viewfinder")
+                            .font(.appFont(size: 15, weight: .semibold))
                         Text("scan_tag_now")
+                            .font(.appFont(size: 15, weight: .bold))
                     }
-                    .font(.appFont(.subheadline))
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
-                    .background(Color.brandOrange)
                     .foregroundColor(.white)
-                    .cornerRadius(8)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, AppSpacing.md)
+                    .background(Color.brandGradient)
+                    .clipShape(Capsule())
+                    .shadow(color: Color.brandOrange.opacity(0.28), radius: 12, x: 0, y: 6)
                 }
             }
         }
-        .padding()
+        .padding(AppSpacing.lg)
         .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(isReady ? Color.green.opacity(0.05) : Color(.systemBackground))
+            RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+                .fill(isReady ? Color.successColor.opacity(0.08) : Color.cream)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(isReady ? Color.green.opacity(0.2) : Color.secondary.opacity(0.15), lineWidth: 1)
+            RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+                .stroke(isReady ? Color.successColor.opacity(0.32) : Color.softBorder, lineWidth: 1)
         )
     }
 

@@ -155,14 +155,15 @@ struct AlertsTabView: View {
             .textInputAutocapitalization(.never)
             .submitLabel(.search)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 14)
+        .padding(.horizontal, AppSpacing.lg)
+        .padding(.vertical, AppSpacing.md)
         .background(Color(UIColor.systemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.black.opacity(0.08), lineWidth: 1)
+            RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+                .stroke(Color.softBorder, lineWidth: 1)
         )
+        .shadow(color: Color.black.opacity(0.04), radius: 12, x: 0, y: 4)
     }
 
     // MARK: - Filter chips

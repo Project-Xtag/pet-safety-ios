@@ -316,12 +316,21 @@ struct CustomTabBar: View {
                 action: { selectedTab = 3 }
             )
         }
-        .padding(.horizontal, 8)
-        .padding(.top, 8)
-        .padding(.bottom, 24)
+        .padding(.horizontal, AppSpacing.md)
+        .padding(.top, AppSpacing.md)
+        .padding(.bottom, AppSpacing.xl)
         .background(
-            Color(UIColor.systemBackground)
-                .shadow(color: Color.black.opacity(0.08), radius: 20, x: 0, y: -5)
+            // Cream wash with a soft top border — softer than the
+            // flat system-background slab, matches the warm surface
+            // tone the rest of the refreshed UI uses.
+            Color.cream
+                .overlay(
+                    Rectangle()
+                        .fill(Color.softBorder)
+                        .frame(height: 1),
+                    alignment: .top
+                )
+                .shadow(color: Color.black.opacity(0.06), radius: 24, x: 0, y: -6)
         )
     }
 }
@@ -335,24 +344,32 @@ struct TabBarItem: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 4) {
-                Image(systemName: icon)
-                    .font(.appFont(size: 20))
+            VStack(spacing: AppSpacing.xs) {
+                // Pill background under the icon when selected —
+                // small surface with brand-orange gradient + glow.
+                // Matches the redesign7 tab-pill pattern.
+                ZStack {
+                    if isSelected {
+                        Capsule()
+                            .fill(Color.brandGradient)
+                            .frame(width: 56, height: 32)
+                            .shadow(color: Color.brandOrange.opacity(0.32), radius: 10, x: 0, y: 4)
+                    }
+                    Image(systemName: icon)
+                        .font(.appFont(size: 18, weight: .semibold))
+                        .foregroundColor(isSelected ? .white : .mutedText)
+                }
+                .frame(height: 32)
                 Text(title)
-                    .font(.appFont(size: 10, weight: .medium))
+                    .font(.appFont(size: 10, weight: .semibold))
+                    .foregroundColor(isSelected ? .ink : .mutedText)
             }
-            .foregroundColor(isSelected ? .brandOrange : .mutedText)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 8)
-            .padding(.horizontal, 4)
-            .background(
-                isSelected
-                    ? Color.peachBackground.opacity(0.8)
-                    : Color.clear
-            )
-            .cornerRadius(16)
-            .animation(.easeInOut(duration: 0.2), value: isSelected)
+            .padding(.vertical, 6)
+            .contentShape(Rectangle())
+            .animation(.spring(response: 0.32, dampingFraction: 0.78), value: isSelected)
         }
+        .buttonStyle(.plain)
     }
 }
 

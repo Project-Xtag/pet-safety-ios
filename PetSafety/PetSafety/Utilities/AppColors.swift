@@ -25,11 +25,54 @@ extension Color {
     // Primary brand color (Coral) - for CTAs, badges
     static var brandOrange: Color { Color("BrandColor") }
 
+    // 2026-05-24 redesign7-aligned tokens — warm cream surface,
+    // deeper brand-orange for gradient stops, soft ink text.
+    //
+    // `cream`, `ink`, `softBorder` are auto-generated from the
+    // asset catalog (Xcode 15+ emits a Color.<setName> for every
+    // ColorSet), so we don't redeclare them here. `brandOrangeDeep`
+    // is explicit because the asset is named `BrandColorDeep` and
+    // we want the consistent `brandOrange` / `brandOrangeDeep`
+    // naming pair instead of `brandColor` / `brandColorDeep`.
+    static var brandOrangeDeep: Color { Color("BrandColorDeep") }
+
+    // Brand gradient (warm-to-deep) for hero CTAs + section
+    // accents. Mirrors `linear-gradient(135deg, BRAND, BRAND_DEEP)`
+    // used across redesign7 web.
+    static var brandGradient: LinearGradient {
+        LinearGradient(
+            colors: [.brandOrange, .brandOrangeDeep],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
     // Error/Destructive color (#F75757)
     static var errorColor: Color { Color("ErrorColor") }
 
     // Success color - Sage (#A6C4B8)
     static var successColor: Color { Color("SuccessColor") }
+}
+
+// MARK: - Spacing + Radius scale (redesign7 parity)
+// Use these instead of magic numbers. The scale is the same set the
+// web app uses (4 / 8 / 12 / 16 / 24 / 32) so a card spaced "md"
+// here looks the same as the equivalent card on web.
+enum AppSpacing {
+    static let xs: CGFloat = 4
+    static let sm: CGFloat = 8
+    static let md: CGFloat = 12
+    static let lg: CGFloat = 16
+    static let xl: CGFloat = 24
+    static let xxl: CGFloat = 32
+}
+
+enum AppRadius {
+    static let sm: CGFloat = 10
+    static let md: CGFloat = 14
+    static let lg: CGFloat = 20   // card default
+    static let xl: CGFloat = 28   // hero card
+    static let pill: CGFloat = 999
 }
 
 // MARK: - Button Styles
@@ -111,5 +154,123 @@ struct PeachHeaderModifier: ViewModifier {
 extension View {
     func peachHeader() -> some View {
         modifier(PeachHeaderModifier())
+    }
+}
+
+// MARK: - Redesign7-aligned visual refresh (2026-05-24)
+
+/// Pill-shaped primary CTA. Brand-orange gradient fill, white text,
+/// generous vertical padding, soft warm shadow. Use for the single
+/// dominant action on a screen (continue, scan, activate, save).
+///
+/// Coexists with `BrandButtonStyle` — that one is square-cornered
+/// and used in legacy screens; this one is the new default for any
+/// surface refreshed against the redesign7 aesthetic.
+struct PrimaryPillButtonStyle: ButtonStyle {
+    var isDisabled: Bool = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .foregroundColor(.white)
+            .font(.appFont(size: 16, weight: .bold))
+            .background(
+                Group {
+                    if isDisabled {
+                        Color.brandOrange.opacity(0.45)
+                    } else if configuration.isPressed {
+                        Color.brandOrangeDeep
+                    } else {
+                        Color.brandGradient
+                    }
+                }
+            )
+            .clipShape(Capsule())
+            .shadow(
+                color: Color.brandOrange.opacity(isDisabled ? 0 : 0.32),
+                radius: 14,
+                x: 0,
+                y: 8
+            )
+            .scaleEffect(configuration.isPressed ? 0.985 : 1)
+            .animation(.spring(response: 0.28, dampingFraction: 0.85), value: configuration.isPressed)
+    }
+}
+
+/// Pill-shaped secondary CTA — outline on cream/white. Used next to
+/// a `PrimaryPillButtonStyle` for the less-prominent option.
+struct SecondaryPillButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .foregroundColor(.ink)
+            .font(.appFont(size: 16, weight: .semibold))
+            .background(
+                configuration.isPressed
+                    ? Color.softBorder
+                    : Color(UIColor.systemBackground)
+            )
+            .clipShape(Capsule())
+            .overlay(
+                Capsule().stroke(Color.softBorder, lineWidth: 1.5)
+            )
+            .scaleEffect(configuration.isPressed ? 0.985 : 1)
+            .animation(.spring(response: 0.28, dampingFraction: 0.85), value: configuration.isPressed)
+    }
+}
+
+/// Card surface for content sections — cream background, large
+/// rounded corners, subtle warm shadow. Matches the rounded-3xl
+/// border-stone-200 pattern used across redesign7 web.
+struct SoftCardModifier: ViewModifier {
+    var padding: CGFloat
+    var radius: CGFloat
+    func body(content: Content) -> some View {
+        content
+            .padding(padding)
+            .background(Color.cream)
+            .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: radius, style: .continuous)
+                    .stroke(Color.softBorder, lineWidth: 1)
+            )
+            .shadow(color: Color.black.opacity(0.04), radius: 18, x: 0, y: 6)
+    }
+}
+
+/// Elevated card — white surface (or system background in dark
+/// mode), the same rounded soft-shadow shape. Use for content the
+/// eye should land on first; cream cards sit "below" elevated ones
+/// in visual hierarchy.
+struct ElevatedCardModifier: ViewModifier {
+    var padding: CGFloat
+    var radius: CGFloat
+    func body(content: Content) -> some View {
+        content
+            .padding(padding)
+            .background(Color(UIColor.systemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: radius, style: .continuous)
+                    .stroke(Color.softBorder, lineWidth: 1)
+            )
+            .shadow(color: Color.black.opacity(0.06), radius: 22, x: 0, y: 10)
+    }
+}
+
+extension View {
+    /// Wrap content in a cream rounded card. Defaults match the
+    /// redesign7 large-card spec (20pt padding, 20pt corner). Pass
+    /// custom values for tighter / chunkier surfaces.
+    func softCard(padding: CGFloat = AppSpacing.xl, radius: CGFloat = AppRadius.lg) -> some View {
+        modifier(SoftCardModifier(padding: padding, radius: radius))
+    }
+
+    /// Wrap content in a white elevated card. Use sparingly — the
+    /// dominant card on a screen, not every section.
+    func elevatedCard(padding: CGFloat = AppSpacing.xl, radius: CGFloat = AppRadius.lg) -> some View {
+        modifier(ElevatedCardModifier(padding: padding, radius: radius))
     }
 }
