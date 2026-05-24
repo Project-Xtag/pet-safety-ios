@@ -922,10 +922,23 @@ class APIService {
         return try await performRequest(request, responseType: ScanResponse.self)
     }
 
-    func activateTag(qrCode: String, petId: String) async throws -> QRTag {
+    /// Activate a QR tag.
+    ///
+    /// Pass `petId` for an existing pet (replacement-tag flow, or
+    /// older clients whose wizard still updates-then-activates).
+    ///
+    /// Pass `petData` for the post-2026-05-24 first-tag flow: pets
+    /// are no longer auto-created at order payment, so the wizard
+    /// sends the full pet payload and the backend atomically creates
+    /// the pet AND activates the tag in one round-trip. Mirrors the
+    /// shape claimPromoTag has used since the promo flow shipped.
+    func activateTag(qrCode: String, petId: String? = nil, petData: CreatePetRequest? = nil) async throws -> QRTag {
+        precondition(petId != nil || petData != nil, "activateTag requires either petId or petData")
+
         struct ActivateRequest: Codable {
             let qrCode: String
-            let petId: String
+            let petId: String?
+            let petData: CreatePetRequest?
         }
 
         struct ActivateResponse: Codable {
@@ -936,7 +949,7 @@ class APIService {
         let request = try await buildRequest(
             endpoint: "/qr-tags/activate",
             method: "POST",
-            body: ActivateRequest(qrCode: qrCode, petId: petId),
+            body: ActivateRequest(qrCode: qrCode, petId: petId, petData: petData),
             requiresAuth: true
         )
         let response = try await performRequest(request, responseType: ActivateResponse.self)

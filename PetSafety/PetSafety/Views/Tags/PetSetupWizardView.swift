@@ -248,10 +248,13 @@ struct PetSetupWizardView: View {
     private var canProceed: Bool {
         switch step {
         case 1:
-            // Ordered: must pick a pet from the order. Promo: must type a name.
-            return mode == .promo
-                ? !petName.trimmingCharacters(in: .whitespaces).isEmpty
-                : selectedPetId != nil
+            // Both modes gate on having a pet name in hand: promo
+            // collects it by free text, ordered collects it by tapping
+            // a row in the picker (which fills petName). Post the
+            // 2026-05-24 revert we can no longer key off
+            // selectedPetId for the ordered branch because
+            // order_items.pet_id is NULL pre-activation.
+            return !petName.trimmingCharacters(in: .whitespaces).isEmpty
         case 3: return !species.isEmpty
         default: return true
         }
@@ -303,36 +306,77 @@ struct PetSetupWizardView: View {
         }
     }
 
-    /// Ordered flow: the pet already exists (auto-registered at order
-    /// time). Fill in the details, upload the photo, then activate the tag.
+    /// Ordered flow: post-2026-05-24, the pet does NOT exist yet —
+    /// pets are no longer auto-created at order payment. The wizard
+    /// sends the full pet payload to /qr-tags/activate, which
+    /// atomically creates the pet AND activates the tag in one
+    /// round-trip (same shape as commitPromo).
+    ///
+    /// Backwards-compat for older orders whose order_item still has
+    /// a pet_id (pre-revert placeholder that survived the cleanup
+    /// migration's safety filter — e.g. user added a photo): if
+    /// selectedPetId is set, fall back to the update-then-activate
+    /// path so the existing pet record is preserved.
     private func commitOrdered() async throws {
-        guard let petId = selectedPetId else { return }
-        if committedPetId != petId {
-            let request = UpdatePetRequest(
-                name: petName.trimmingCharacters(in: .whitespaces),
-                species: species.isEmpty ? nil : species,
-                breed: nilIfEmpty(breed),
-                color: nilIfEmpty(color),
-                weight: nil,
-                microchipNumber: nil,
-                medicalNotes: nil,
-                allergies: nilIfEmpty(allergies),
-                medications: nilIfEmpty(medications),
-                notes: nil,
-                uniqueFeatures: nilIfEmpty(uniqueFeatures),
-                sex: (sex.isEmpty || sex == "unknown") ? nil : sex,
-                isNeutered: nil,
-                isMissing: nil,
-                dateOfBirth: computeDateOfBirth(),
-                dobIsApproximate: computeDateOfBirth() != nil ? true : nil
-            )
-            _ = try await petsViewModel.updatePet(id: petId, updates: request)
-            committedPetId = petId
-            if let img = photoImage {
-                _ = try? await petsViewModel.uploadPhoto(for: petId, image: img)
+        if let petId = selectedPetId {
+            // Legacy path: pet already exists (typically because the
+            // user touched its profile, so the migration kept it).
+            // Update fields + activate tag against the existing pet.
+            if committedPetId != petId {
+                let request = UpdatePetRequest(
+                    name: petName.trimmingCharacters(in: .whitespaces),
+                    species: species.isEmpty ? nil : species,
+                    breed: nilIfEmpty(breed),
+                    color: nilIfEmpty(color),
+                    weight: nil,
+                    microchipNumber: nil,
+                    medicalNotes: nil,
+                    allergies: nilIfEmpty(allergies),
+                    medications: nilIfEmpty(medications),
+                    notes: nil,
+                    uniqueFeatures: nilIfEmpty(uniqueFeatures),
+                    sex: (sex.isEmpty || sex == "unknown") ? nil : sex,
+                    isNeutered: nil,
+                    isMissing: nil,
+                    dateOfBirth: computeDateOfBirth(),
+                    dobIsApproximate: computeDateOfBirth() != nil ? true : nil
+                )
+                _ = try await petsViewModel.updatePet(id: petId, updates: request)
+                committedPetId = petId
+                if let img = photoImage {
+                    _ = try? await petsViewModel.uploadPhoto(for: petId, image: img)
+                }
             }
+            try await scannerVM.activateTag(code: tagCode, petId: petId)
+            return
         }
-        try await scannerVM.activateTag(code: tagCode, petId: petId)
+
+        // Post-revert path: no pre-existing pet. One atomic call
+        // creates the pet and activates the tag.
+        guard committedPetId == nil else { return }
+        let petData = CreatePetRequest(
+            name: petName.trimmingCharacters(in: .whitespaces),
+            species: species.isEmpty ? "dog" : species,
+            breed: nilIfEmpty(breed),
+            color: nilIfEmpty(color),
+            weight: nil,
+            microchipNumber: nil,
+            medicalNotes: nil,
+            allergies: nilIfEmpty(allergies),
+            medications: nilIfEmpty(medications),
+            notes: nil,
+            uniqueFeatures: nilIfEmpty(uniqueFeatures),
+            sex: (sex.isEmpty || sex == "unknown") ? nil : sex,
+            isNeutered: nil,
+            dateOfBirth: computeDateOfBirth(),
+            dobIsApproximate: computeDateOfBirth() != nil ? true : nil
+        )
+        let tag = try await scannerVM.activateTagWithNewPet(code: tagCode, petData: petData)
+        let newPetId = tag.petId
+        committedPetId = newPetId
+        if let id = newPetId, let img = photoImage {
+            _ = try? await petsViewModel.uploadPhoto(for: id, image: img)
+        }
     }
 
     /// Promo flow: the pet does NOT exist yet. One atomic backend call
@@ -479,7 +523,13 @@ struct PetSetupWizardView: View {
             } else {
                 ForEach(orderItems) { item in
                     let name = item.petName.isEmpty ? "Kedvenc" : item.petName
-                    let selected = selectedPetId == item.petId
+                    // Selection key: petName, not petId. Post-2026-05-24
+                    // revert order_items.pet_id is NULL for all unactivated
+                    // items so `selectedPetId == item.petId` collapsed to
+                    // nil == nil and marked every row selected at once.
+                    // pet_name is deduped by the backend SQL
+                    // (DISTINCT ON pet_name) so it's a safe key here.
+                    let selected = !petName.isEmpty && petName == item.petName
                     Button {
                         selectedPetId = item.petId
                         petName = item.petName

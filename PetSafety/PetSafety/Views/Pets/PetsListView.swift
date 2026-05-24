@@ -404,22 +404,14 @@ struct PetCardView: View {
                         .background(Color.red)
                         .cornerRadius(8)
                         .padding(8)
-                    } else if pet.hasActiveTag == false {
-                        // "Tag on its way" — pet was auto-registered from a paid order,
-                        // physical tag hasn't been scanned/activated yet.
-                        HStack(spacing: 4) {
-                            Image(systemName: "shippingbox.fill")
-                                .font(.appFont(size: 10))
-                            Text("tag_pending_badge")
-                                .font(.appFont(size: 10, weight: .bold))
-                        }
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(Color.orange)
-                        .cornerRadius(8)
-                        .padding(8)
                     }
+                    // 2026-05-24: removed the "tag on its way" badge.
+                    // Pets are no longer auto-created at order payment
+                    // (backend revert), so a pet card on this screen
+                    // always represents a fully-set-up pet with an
+                    // active tag. Pending orders surface in the
+                    // Orders tab → Pending Registrations and start the
+                    // wizard from there.
                 }
                 .cornerRadius(16, corners: [.topLeft, .topRight])
 
