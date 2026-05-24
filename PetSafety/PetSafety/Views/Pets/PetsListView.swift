@@ -615,10 +615,12 @@ struct QuickActionButton: View {
                 }
 
                 Text(title)
-                    .font(.appFont(size: 12, weight: .semibold))
+                    .font(.appFont(size: 11, weight: .bold))
                     .foregroundColor(.ink)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
+                    .textCase(.uppercase)
+                    .tracking(0.8)
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, AppSpacing.lg)

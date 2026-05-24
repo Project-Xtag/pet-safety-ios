@@ -6,36 +6,36 @@ struct ErrorRetryView: View {
     let onRetry: () -> Void
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: AppSpacing.xl) {
             Spacer()
 
             ZStack {
                 Circle()
-                    .fill(Color(UIColor.systemGray6))
+                    .fill(Color.brandOrange.opacity(0.12))
                     .frame(width: 100, height: 100)
                 Image(systemName: "wifi.exclamationmark")
-                    .font(.appFont(size: 44))
-                    .foregroundColor(.brandOrange)
+                    .font(.appFont(size: 40, weight: .semibold))
+                    .foregroundColor(.brandOrangeDeep)
             }
 
             Text("something_went_wrong")
-                .font(.appFont(size: 20, weight: .bold))
-                .foregroundColor(.primary)
+                .font(.appFont(size: 22, weight: .bold))
+                .foregroundColor(.ink)
 
             Text(message)
                 .font(.appFont(size: 15))
                 .foregroundColor(.mutedText)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 32)
+                .padding(.horizontal, AppSpacing.xxl)
 
             Button(action: onRetry) {
-                HStack {
+                HStack(spacing: AppSpacing.sm) {
                     Image(systemName: "arrow.clockwise")
                     Text("try_again")
                 }
             }
-            .buttonStyle(BrandButtonStyle())
-            .padding(.horizontal, 40)
+            .buttonStyle(PrimaryPillButtonStyle())
+            .padding(.horizontal, AppSpacing.xxl + AppSpacing.sm)
 
             Spacer()
         }

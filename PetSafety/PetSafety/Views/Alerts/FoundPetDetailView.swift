@@ -123,9 +123,13 @@ struct FoundPetDetailView: View {
                 )
             }
         }
-        .padding(16)
-        .background(Color(UIColor.systemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .padding(AppSpacing.lg)
+        .background(Color.cream)
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+                .stroke(Color.softBorder, lineWidth: 1)
+        )
     }
 
     @ViewBuilder
@@ -178,7 +182,7 @@ struct FoundPetDetailView: View {
             }
             .frame(maxWidth: .infinity)
         }
-        .buttonStyle(BrandButtonStyle())
+        .buttonStyle(PrimaryPillButtonStyle())
     }
 
     private func metadataRow(icon: String, label: String, value: String) -> some View {

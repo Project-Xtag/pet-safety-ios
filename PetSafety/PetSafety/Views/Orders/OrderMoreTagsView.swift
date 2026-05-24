@@ -124,7 +124,7 @@ struct OrderMoreTagsView: View {
             Button(action: { dismiss() }) {
                 Text("done")
             }
-            .buttonStyle(BrandButtonStyle())
+            .buttonStyle(PrimaryPillButtonStyle())
             .padding(.horizontal, 32)
             .padding(.bottom, 40)
         }

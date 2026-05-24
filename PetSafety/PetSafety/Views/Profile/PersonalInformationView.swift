@@ -137,7 +137,7 @@ struct PersonalInformationView: View {
                             Spacer()
                         }
                     }
-                    .buttonStyle(BrandButtonStyle(isDisabled: isLoading || !hasChanges))
+                    .buttonStyle(PrimaryPillButtonStyle(isDisabled: isLoading || !hasChanges))
                     .disabled(isLoading || !hasChanges)
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
@@ -149,7 +149,7 @@ struct PersonalInformationView: View {
                             Spacer()
                         }
                     }
-                    .buttonStyle(SecondaryButtonStyle())
+                    .buttonStyle(SecondaryPillButtonStyle())
                     .disabled(isLoading)
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
@@ -196,7 +196,7 @@ struct PersonalInformationView: View {
                     Button(action: { startEditing() }) {
                         Text("edit_information")
                     }
-                    .buttonStyle(BrandButtonStyle())
+                    .buttonStyle(PrimaryPillButtonStyle())
                     .listRowInsets(EdgeInsets())
                     .listRowBackground(Color.clear)
                 }

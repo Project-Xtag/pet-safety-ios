@@ -75,12 +75,13 @@ struct MarkAsLostView: View {
             if let url = URL(string: "https://senra.pet/plans") {
                 Link(destination: url) {
                     Text("mark_lost_starter_upgrade_cta")
-                        .fontWeight(.semibold)
+                        .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.brandOrange)
+                        .padding(.vertical, AppSpacing.lg)
+                        .background(Color.brandGradient)
                         .foregroundColor(.white)
-                        .cornerRadius(12)
+                        .clipShape(Capsule())
+                        .shadow(color: Color.brandOrange.opacity(0.3), radius: 12, x: 0, y: 6)
                 }
             }
             Button(action: { dismiss() }) {

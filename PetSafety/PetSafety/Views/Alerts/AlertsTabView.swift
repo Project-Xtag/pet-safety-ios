@@ -658,7 +658,7 @@ struct AddressRequiredView: View {
                     Text("alerts_add_my_address").fontWeight(.semibold)
                 }
             }
-            .buttonStyle(BrandButtonStyle())
+            .buttonStyle(PrimaryPillButtonStyle())
             .padding(.horizontal, 48)
             .padding(.top, 8)
             Spacer()

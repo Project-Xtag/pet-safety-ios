@@ -127,8 +127,9 @@ struct AlertDetailView: View {
                     }
                 }
                 .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(12)
+                .background(Color.cream)
+                .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
+                .overlay(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous).stroke(Color.softBorder, lineWidth: 1))
                 .padding(.horizontal)
 
                 // Additional Info (moved before Last Seen Location)
@@ -143,8 +144,9 @@ struct AlertDetailView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(12)
+                    .background(Color.cream)
+                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
+                    .overlay(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous).stroke(Color.softBorder, lineWidth: 1))
                     .padding(.horizontal)
                 }
 
@@ -172,8 +174,9 @@ struct AlertDetailView: View {
                         }
                     }
                     .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(12)
+                    .background(Color.cream)
+                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
+                    .overlay(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous).stroke(Color.softBorder, lineWidth: 1))
                     .padding(.horizontal)
                     .task {
                         await reverseGeocodeCoordinate(coordinate)
@@ -191,8 +194,9 @@ struct AlertDetailView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(12)
+                    .background(Color.cream)
+                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
+                    .overlay(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous).stroke(Color.softBorder, lineWidth: 1))
                     .padding(.horizontal)
                 }
 
@@ -220,7 +224,7 @@ struct AlertDetailView: View {
                                     Text("edit_alert_title")
                                 }
                             }
-                            .buttonStyle(SecondaryButtonStyle())
+                            .buttonStyle(SecondaryPillButtonStyle())
 
                             Button(action: { showingMarkFoundConfirmation = true }) {
                                 HStack {
@@ -233,19 +237,19 @@ struct AlertDetailView: View {
                                     Text("mark_as_found")
                                 }
                             }
-                            .buttonStyle(PrimaryButtonStyle())
+                            .buttonStyle(PrimaryPillButtonStyle())
                             .disabled(isMarkingFound)
                         } else {
                             // Non-owners see "Report Sighting" and "Report Found" buttons
                             Button(action: { showingReportSighting = true }) {
                                 Label("report_a_sighting", systemImage: "eye.fill")
                             }
-                            .buttonStyle(SecondaryButtonStyle())
+                            .buttonStyle(SecondaryPillButtonStyle())
 
                             Button(action: { showingReportFound = true }) {
                                 Label("report_found", systemImage: "checkmark.circle.fill")
                             }
-                            .buttonStyle(PrimaryButtonStyle())
+                            .buttonStyle(PrimaryPillButtonStyle())
                         }
                     }
                     .padding(.horizontal)
@@ -452,8 +456,9 @@ struct SightingCard: View {
             }
         }
         .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
+        .background(Color.cream)
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous).stroke(Color.softBorder, lineWidth: 1))
         .padding(.horizontal)
     }
 

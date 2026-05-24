@@ -88,11 +88,11 @@ struct OfflineIndicator: View {
                                         .font(.appFont(.caption))
                                         .fontWeight(.medium)
                                 }
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 6)
-                                .background(Color.accentColor.opacity(0.1))
-                                .foregroundColor(.accentColor)
-                                .cornerRadius(8)
+                                .padding(.horizontal, AppSpacing.md)
+                                .padding(.vertical, AppSpacing.sm - 2)
+                                .background(Color.brandOrange.opacity(0.12))
+                                .foregroundColor(.brandOrangeDeep)
+                                .clipShape(Capsule())
                             }
                             .disabled(syncService.isSyncing)
                         }

@@ -39,25 +39,20 @@ struct WelcomeView: View {
                 .padding(.horizontal, 32)
 
                 // CTAs
-                VStack(spacing: 14) {
+                VStack(spacing: AppSpacing.md) {
                     Button(action: onScanTag) {
-                        HStack(spacing: 8) {
+                        HStack(spacing: AppSpacing.sm) {
                             Image(systemName: "qrcode.viewfinder")
                             Text("welcome_scan_first_tag")
-                                .fontWeight(.semibold)
                         }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color("TealAccent"))
-                        .foregroundColor(.white)
-                        .cornerRadius(14)
                     }
-                    .padding(.horizontal, 24)
+                    .buttonStyle(PrimaryPillButtonStyle())
+                    .padding(.horizontal, AppSpacing.xl)
 
                     Button(action: onExploreAccount) {
                         Text("welcome_explore_account")
-                            .font(.appFont(size: 15, weight: .medium))
-                            .foregroundColor(Color("TealAccent"))
+                            .font(.appFont(size: 15, weight: .semibold))
+                            .foregroundColor(.brandOrangeDeep)
                     }
                 }
 
@@ -75,31 +70,36 @@ private struct WelcomeStep: View {
     let icon: String
 
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: AppSpacing.lg) {
             ZStack {
                 Circle()
-                    .fill(Color("TealAccent"))
+                    .fill(Color.brandGradient)
                     .frame(width: 36, height: 36)
+                    .shadow(color: Color.brandOrange.opacity(0.32), radius: 6, x: 0, y: 3)
                 Text(number)
                     .font(.appFont(size: 16, weight: .bold))
                     .foregroundColor(.white)
             }
 
-            HStack(spacing: 10) {
+            HStack(spacing: AppSpacing.md) {
                 Image(systemName: icon)
-                    .font(.appFont(size: 18))
-                    .foregroundColor(Color("TealAccent"))
+                    .font(.appFont(size: 18, weight: .semibold))
+                    .foregroundColor(.brandOrangeDeep)
                     .frame(width: 24)
                 Text(text)
-                    .font(.appFont(size: 15))
-                    .foregroundColor(.primary)
+                    .font(.appFont(size: 15, weight: .medium))
+                    .foregroundColor(.ink)
             }
 
             Spacer()
         }
-        .padding(.vertical, 8)
-        .padding(.horizontal, 16)
-        .background(Color(UIColor.systemGray6))
-        .cornerRadius(12)
+        .padding(.vertical, AppSpacing.md)
+        .padding(.horizontal, AppSpacing.lg)
+        .background(Color.cream)
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+                .stroke(Color.softBorder, lineWidth: 1)
+        )
     }
 }
