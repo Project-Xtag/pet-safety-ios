@@ -1161,6 +1161,13 @@
 "all_caught_up" = "Minden naprakész!";
 "all_caught_up_description" = "Nincsenek függőben lévő biléta regisztrációk.";
 "order_tags" = "Biléta rendelése";
+
+// Kedvenceim — függőben lévő biléta CTA: a kedvencek kártyái fölött
+// jelenik meg, ha a felhasználónak van olyan bilétája, ami megérkezett,
+// de még nincs beolvasva. Megérintve nyílik a szkenner — nem kell
+// átnavigálni a Rendelések fülre.
+"my_pets_pending_tag_cta_title" = "Aktiváld a bilétád";
+"my_pets_pending_tag_cta_subtitle %d" = "%d biléta vár aktiválásra";
 "status_shipped" = "Feladva";
 "status_delivered" = "Kézbesítve";
 "status_processing" = "Feldolgozás alatt";

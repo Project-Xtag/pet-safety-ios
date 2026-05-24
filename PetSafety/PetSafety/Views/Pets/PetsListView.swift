@@ -6,6 +6,7 @@ struct PetsListView: View {
     var onExploreAccount: (() -> Void)?
 
     @StateObject private var viewModel = PetsViewModel()
+    @StateObject private var pendingVM = PendingRegistrationsViewModel()
     @State private var showingAddPet = false
     @State private var showingMarkLostSheet = false
     @State private var showingMarkFoundSheet = false
@@ -133,14 +134,21 @@ struct PetsListView: View {
         }
         .task {
             await viewModel.fetchPets()
+            await pendingVM.fetchPendingRegistrations()
         }
         .refreshable {
             await viewModel.fetchPets()
+            await pendingVM.fetchPendingRegistrations()
         }
         .onReceive(NotificationCenter.default.publisher(for: .tagActivated)) { _ in
-            // A tag was activated elsewhere — refresh so the "TAG ON ITS WAY"
-            // badge drops without requiring view-appear or pull-to-refresh.
-            Task { await viewModel.fetchPets() }
+            // A tag was activated elsewhere — refresh both the pet
+            // list (so the new pet appears) and the pending list (so
+            // the "register pending tag" CTA disappears or counts
+            // down) without requiring view-appear or pull-to-refresh.
+            Task {
+                await viewModel.fetchPets()
+                await pendingVM.fetchPendingRegistrations()
+            }
         }
         .task(id: searchText) {
             try? await Task.sleep(for: .milliseconds(300))
@@ -209,6 +217,38 @@ struct PetsListView: View {
                 }
             }
             .padding(.horizontal, 24)
+
+            // CTA for users with unscanned tags from a paid order —
+            // visible from My Pets so they don't have to dig into the
+            // Orders tab to find the wizard entry point. Hidden once
+            // every tag they bought has been activated.
+            if !pendingVM.readyToActivate.isEmpty {
+                Button {
+                    onScanTag?()
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "qrcode.viewfinder")
+                            .font(.appFont(size: 18, weight: .semibold))
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("my_pets_pending_tag_cta_title")
+                                .font(.appFont(size: 15, weight: .bold))
+                            Text("my_pets_pending_tag_cta_subtitle \(pendingVM.readyToActivate.count)")
+                                .font(.appFont(size: 12))
+                                .opacity(0.85)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.appFont(size: 14, weight: .semibold))
+                            .opacity(0.7)
+                    }
+                    .foregroundColor(.white)
+                    .padding(14)
+                    .background(Color.brandOrange)
+                    .cornerRadius(14)
+                }
+                .buttonStyle(.plain)
+                .padding(.horizontal, 24)
+            }
 
             // Search bar (only show when >4 pets)
             if viewModel.pets.count > 4 {

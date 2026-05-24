@@ -1164,6 +1164,12 @@
 "all_caught_up" = "All Caught Up!";
 "all_caught_up_description" = "You don't have any pending tag registrations.";
 "order_tags" = "Order Tags";
+
+// My Pets — pending-tag CTA shown above pet cards when the user has
+// unactivated tags from a paid order. Tapping opens the scanner so
+// they can finish registration without digging into the Orders tab.
+"my_pets_pending_tag_cta_title" = "Register your tag";
+"my_pets_pending_tag_cta_subtitle %d" = "%d tag ready to activate";
 "status_shipped" = "Shipped";
 "status_delivered" = "Delivered";
 "status_processing" = "Processing";

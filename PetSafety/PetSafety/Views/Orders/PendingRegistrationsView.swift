@@ -51,6 +51,12 @@ struct PendingRegistrationsView: View {
                 Task { await viewModel.fetchPendingRegistrations() }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .tagActivated)) { _ in
+            // Wizard just finished activating a tag — drop the
+            // newly-activated entry immediately instead of waiting
+            // for view re-appearance.
+            Task { await viewModel.fetchPendingRegistrations() }
+        }
         .overlay {
             if viewModel.isLoading && viewModel.registrations.isEmpty {
                 ProgressView()
