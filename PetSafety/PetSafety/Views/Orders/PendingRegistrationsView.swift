@@ -11,27 +11,32 @@ struct PendingRegistrationsView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
-        ZStack {
-            if viewModel.registrations.isEmpty && !viewModel.isLoading {
+        // Wrap every state branch in a ScrollView so `.refreshable`
+        // works in the empty- and error-state cases too — pull-to-
+        // refresh used to silently no-op on those non-scrollable
+        // containers, so a transient fetch failure stranded the user
+        // until they backgrounded the app.
+        ScrollView {
+            if let error = viewModel.errorMessage, viewModel.registrations.isEmpty {
+                errorState(error)
+            } else if viewModel.registrations.isEmpty && !viewModel.isLoading {
                 emptyState
             } else if !viewModel.registrations.isEmpty {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        // Ready to Activate Section
-                        if !viewModel.readyToActivate.isEmpty {
-                            readyToActivateSection
-                        }
-
-                        // Still Processing Section
-                        if !viewModel.stillProcessing.isEmpty {
-                            stillProcessingSection
-                        }
-
-                        // Help Section
-                        helpSection
+                VStack(alignment: .leading, spacing: 20) {
+                    // Ready to Activate Section
+                    if !viewModel.readyToActivate.isEmpty {
+                        readyToActivateSection
                     }
-                    .padding()
+
+                    // Still Processing Section
+                    if !viewModel.stillProcessing.isEmpty {
+                        stillProcessingSection
+                    }
+
+                    // Help Section
+                    helpSection
                 }
+                .padding()
             }
         }
         .navigationTitle(Text("pending_registrations_title"))
@@ -51,6 +56,37 @@ struct PendingRegistrationsView: View {
                 ProgressView()
             }
         }
+    }
+
+    // MARK: - Error State
+    // A transient fetch failure used to render as the success
+    // empty-state ("all caught up") — same shape as the orders tab
+    // bug. Showing the error + a Retry button distinguishes
+    // "nothing to register" from "we couldn't ask the server."
+    private func errorState(_ message: String) -> some View {
+        VStack(spacing: 16) {
+            Image(systemName: "exclamationmark.triangle")
+                .font(.system(size: 44))
+                .foregroundColor(.secondary)
+            Text(message)
+                .font(.appFont(.subheadline))
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
+            Button {
+                Task { await viewModel.fetchPendingRegistrations() }
+            } label: {
+                Text("retry")
+                    .fontWeight(.semibold)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 12)
+                    .background(Color.brandOrange)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 320)
+        .padding()
     }
 
     // MARK: - Empty State

@@ -44,30 +44,68 @@ struct OrdersView: View {
     }
 
     private var ordersContent: some View {
-        ZStack {
-            if viewModel.orders.isEmpty && !viewModel.isLoading {
+        // Three states share one container so `.refreshable` works in
+        // every branch — empty-state and error-state used to be plain
+        // VStacks where pull-to-refresh silently no-ops. The wrapping
+        // List + listRowSeparator(.hidden) trick keeps the empty UI
+        // visually centered while remaining a refreshable scroll view.
+        List {
+            if let error = viewModel.errorMessage, viewModel.orders.isEmpty {
+                // Error state. Previously the same case rendered as
+                // "no orders" — a transient 5xx or token-refresh race
+                // on the initial fetch silently looked identical to
+                // the legitimate empty state, leaving the user with
+                // no signal that anything was wrong and no way to
+                // retry short of backgrounding + foregrounding the
+                // app.
+                VStack(spacing: 16) {
+                    Image(systemName: "exclamationmark.triangle")
+                        .font(.system(size: 44))
+                        .foregroundColor(.secondary)
+                    Text(error)
+                        .font(.appFont(.subheadline))
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 24)
+                    Button {
+                        Task { await viewModel.fetchOrders() }
+                    } label: {
+                        Text("retry")
+                            .fontWeight(.semibold)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 12)
+                            .background(Color.brandOrange)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                }
+                .frame(maxWidth: .infinity, minHeight: 320)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+            } else if viewModel.orders.isEmpty && !viewModel.isLoading {
                 EmptyStateView(
                     icon: "cart.fill",
                     title: String(localized: "orders_no_orders"),
                     message: String(localized: "orders_no_orders_message")
                 )
+                .frame(maxWidth: .infinity, minHeight: 320)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
             } else {
-                List {
-                    ForEach(viewModel.orders) { order in
-                        NavigationLink(destination: OrderDetailView(order: order)) {
-                            OrderRowView(order: order)
-                        }
+                ForEach(viewModel.orders) { order in
+                    NavigationLink(destination: OrderDetailView(order: order)) {
+                        OrderRowView(order: order)
                     }
                 }
-                .listStyle(.inset)
-                .adaptiveList()
             }
         }
+        .listStyle(.inset)
+        .adaptiveList()
         .refreshable {
             await viewModel.fetchOrders()
         }
         .overlay {
-            if viewModel.isLoading {
+            if viewModel.isLoading && viewModel.orders.isEmpty {
                 ProgressView()
             }
         }
