@@ -1167,7 +1167,7 @@
 // de még nincs beolvasva. Megérintve nyílik a szkenner — nem kell
 // átnavigálni a Rendelések fülre.
 "my_pets_pending_tag_cta_title" = "Aktiváld a bilétád";
-"my_pets_pending_tag_cta_subtitle %d" = "%d biléta vár aktiválásra";
+"my_pets_pending_tag_cta_subtitle %lld" = "%lld biléta vár aktiválásra";
 "status_shipped" = "Feladva";
 "status_delivered" = "Kézbesítve";
 "status_processing" = "Feldolgozás alatt";

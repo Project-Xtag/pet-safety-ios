@@ -1169,7 +1169,7 @@
 // unactivated tags from a paid order. Tapping opens the scanner so
 // they can finish registration without digging into the Orders tab.
 "my_pets_pending_tag_cta_title" = "Register your tag";
-"my_pets_pending_tag_cta_subtitle %d" = "%d tag ready to activate";
+"my_pets_pending_tag_cta_subtitle %lld" = "%lld tag ready to activate";
 "status_shipped" = "Shipped";
 "status_delivered" = "Delivered";
 "status_processing" = "Processing";
