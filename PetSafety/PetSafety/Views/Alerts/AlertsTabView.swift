@@ -14,6 +14,12 @@ struct AlertsTabView: View {
     @State private var showAddressRequiredMessage = false
     @State private var showFoundForm = false
     @State private var selectedFoundReport: CommunityFoundPet?
+    // Compact = iPhone portrait + iPhone landscape on most devices; regular
+    // = iPad + larger iPhones in landscape. Used to gate the search bar +
+    // species filter on iPhone — the screen is too dense once you stack
+    // header + view-toggle + search + species + status + CTA above the
+    // list. iPad keeps the full filter set.
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     // Status pill colors — match the web exactly (#FF2D2D / #F59E0B) so a
     // user switching between the web app and the mobile app sees the same
@@ -36,13 +42,20 @@ struct AlertsTabView: View {
                                 .frame(minHeight: 400)
                         } else {
                             viewModeToggle
-                            searchBar
-                            filterChipsRow(
-                                title: String(localized: "lost_and_found_filter_species_label"),
-                                items: LostAndFoundViewModel.SpeciesFilter.allCases,
-                                labelFor: { speciesLabel($0) },
-                                selected: $viewModel.speciesFilter
-                            )
+                            // iPhone: drop the search bar + species filter
+                            // — the screen runs out of vertical room before
+                            // the list starts. Status filter stays because
+                            // it's the most-used cut (missing vs found).
+                            // iPad keeps the full filter set.
+                            if horizontalSizeClass == .regular {
+                                searchBar
+                                filterChipsRow(
+                                    title: String(localized: "lost_and_found_filter_species_label"),
+                                    items: LostAndFoundViewModel.SpeciesFilter.allCases,
+                                    labelFor: { speciesLabel($0) },
+                                    selected: $viewModel.speciesFilter
+                                )
+                            }
                             filterChipsRow(
                                 title: String(localized: "lost_and_found_filter_status_label"),
                                 items: LostAndFoundViewModel.StatusFilter.allCases,

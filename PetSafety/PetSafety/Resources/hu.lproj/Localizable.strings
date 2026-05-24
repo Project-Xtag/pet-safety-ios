@@ -331,6 +331,10 @@
 "profile_personal_info" = "Személyes adatok";
 "profile_address" = "Cím";
 "profile_contacts" = "Elérhetőségek";
+// Kapcsolódik egy elérhetőség mezőhöz a /profile/contacts oldalon —
+// szabályozza, hogy az adott mező megjelenik-e a nyilvános
+// kedvencprofilon, amit a megtaláló lát biléta beolvasás után.
+"contacts_show_on_tag" = "Megjelenítés a biléta profilon";
 "profile_privacy_mode" = "Adatvédelmi beállítások";
 "profile_notifications" = "Értesítések";
 "profile_billing" = "Számlázás";

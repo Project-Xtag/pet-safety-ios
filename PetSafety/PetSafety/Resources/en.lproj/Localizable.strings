@@ -332,6 +332,10 @@
 "profile_personal_info" = "Personal Information";
 "profile_address" = "Address";
 "profile_contacts" = "Contact Details";
+// Toggle next to each contact field in /profile/contacts —
+// controls whether that field appears on the public pet profile
+// page a finder sees after scanning a tag.
+"contacts_show_on_tag" = "Show on tag profile";
 "profile_privacy_mode" = "Privacy Mode";
 "profile_notifications" = "Notifications";
 "profile_billing" = "Billing";

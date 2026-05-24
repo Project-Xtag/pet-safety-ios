@@ -1069,10 +1069,17 @@ class APIService {
     }
 
     func getDeliveryPoints(zipCode: String) async throws -> [DeliveryPoint] {
+        // requiresAuth: true so the backend's optionalAuth middleware
+        // sees the bearer token and the apiRateLimiter keys this
+        // request to the user's bucket (300/15min) instead of the
+        // shared IP bucket. Without it, every NAT-mate browsing
+        // checkout shared one 300/15min budget on staging and the
+        // user got "couldn't find PostaPont" errors as a side effect
+        // of the 429 fail-closed path (audit 2026-05-25).
         let request = try await buildRequest(
             endpoint: "/orders/delivery-points?zipCode=\(zipCode)",
             method: "GET",
-            requiresAuth: false
+            requiresAuth: true
         )
         return try await performRequest(request, responseType: [DeliveryPoint].self)
     }
