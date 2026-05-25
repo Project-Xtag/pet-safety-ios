@@ -233,7 +233,7 @@ struct PetSetupWizardView: View {
                             .fontWeight(.bold)
                     }
                 }
-                .buttonStyle(TagPrimaryButtonStyle())
+                .buttonStyle(PrimaryPillButtonStyle())
                 .disabled(!canProceed || committing)
                 .opacity(canProceed ? 1.0 : 0.6)
             }
@@ -570,7 +570,7 @@ struct PetSetupWizardView: View {
             .multilineTextAlignment(.center)
             .padding()
             .frame(maxWidth: .infinity)
-            .background(Color.peachBackground)
+            .background(Color.cream)
             .cornerRadius(14)
     }
 
@@ -693,7 +693,7 @@ struct PetSetupWizardView: View {
             .font(.appFont(.subheadline))
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
-            .background(Color.peachBackground)
+            .background(Color.cream)
             .cornerRadius(14)
 
             // Primary CTA — open the scanner directly when the host
@@ -712,7 +712,7 @@ struct PetSetupWizardView: View {
                     Text("Következő biléta beolvasása").fontWeight(.bold)
                 }
             }
-            .buttonStyle(TagPrimaryButtonStyle())
+            .buttonStyle(PrimaryPillButtonStyle())
 
             Button { onDismiss() } label: {
                 Text("Később folytatom")
@@ -748,7 +748,7 @@ struct PetSetupWizardView: View {
                     Text("Elérhetőségek beállítása").fontWeight(.bold)
                 }
             }
-            .buttonStyle(TagPrimaryButtonStyle())
+            .buttonStyle(PrimaryPillButtonStyle())
 
             // Secondary: privacy settings.
             Button {
@@ -878,16 +878,3 @@ private struct FlowChips: View {
     }
 }
 
-// MARK: - Primary button style
-
-private struct TagPrimaryButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(configuration.isPressed ? Color("BrandColor").opacity(0.8) : Color("BrandColor"))
-            .foregroundColor(.white)
-            .cornerRadius(12)
-            .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
-    }
-}

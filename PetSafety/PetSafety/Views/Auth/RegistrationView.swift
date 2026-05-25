@@ -143,7 +143,7 @@ struct RegistrationView: View {
                                         Text("create_account")
                                     }
                                 }
-                                .buttonStyle(BrandButtonStyle(isDisabled: firstName.isEmpty || !isValidEmail))
+                                .buttonStyle(PrimaryPillButtonStyle(isDisabled: firstName.isEmpty || !isValidEmail))
                                 .disabled(firstName.isEmpty || !isValidEmail || authViewModel.isLoading)
                                 .padding(.top, 8)
                             }
@@ -184,7 +184,7 @@ struct RegistrationView: View {
                                         Text("verify_code")
                                     }
                                 }
-                                .buttonStyle(BrandButtonStyle(isDisabled: !InputValidators.isValidOTP(otpCode)))
+                                .buttonStyle(PrimaryPillButtonStyle(isDisabled: !InputValidators.isValidOTP(otpCode)))
                                 .disabled(!InputValidators.isValidOTP(otpCode) || authViewModel.isLoading)
 
                                 // Resend code

@@ -95,7 +95,7 @@ struct AuthenticationView: View {
                                         Text("send_login_code")
                                     }
                                 }
-                                .buttonStyle(BrandButtonStyle(isDisabled: !isValidEmail))
+                                .buttonStyle(PrimaryPillButtonStyle(isDisabled: !isValidEmail))
                                 .disabled(!isValidEmail || authViewModel.isLoading)
                                 .padding(.top, 8)
 
@@ -155,7 +155,7 @@ struct AuthenticationView: View {
                                         Text("verify_code")
                                     }
                                 }
-                                .buttonStyle(BrandButtonStyle(isDisabled: !InputValidators.isValidOTP(otpCode)))
+                                .buttonStyle(PrimaryPillButtonStyle(isDisabled: !InputValidators.isValidOTP(otpCode)))
                                 .disabled(!InputValidators.isValidOTP(otpCode) || authViewModel.isLoading)
 
                                 // Resend code
@@ -359,18 +359,6 @@ struct RoundedTextFieldStyle: TextFieldStyle {
             .padding()
             .background(Color(.systemGray6))
             .cornerRadius(10)
-    }
-}
-
-struct PrimaryButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(configuration.isPressed ? Color.brandOrange.opacity(0.8) : Color.brandOrange)
-            .foregroundColor(.white)
-            .cornerRadius(14)
-            .fontWeight(.semibold)
     }
 }
 

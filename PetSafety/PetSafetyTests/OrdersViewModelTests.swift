@@ -233,7 +233,8 @@ struct OrdersViewModelTests {
         #expect(point.name == "Test Point")
         #expect(point.address == nil)
         #expect(point.city == nil)
-        #expect(point.openingHours == nil)
+        #expect(point.type == nil)
+        #expect(point.distance == nil)
     }
 
     // MARK: - PostaPointDetails Encoding
