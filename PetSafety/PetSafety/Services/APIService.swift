@@ -50,6 +50,11 @@ enum APIError: Error, LocalizedError {
     /// on. Synthesised locally without ever hitting the network — mirrors
     /// the Android AppCheckInterceptor fail-closed behaviour (audit H47).
     case appCheckRequired
+    /// Backend rejected a tier-gated request (currently mark-missing) for a
+    /// starter user. Carries the server's localized error string so callers
+    /// can fall back to showing it, but the typical handler swaps the UI to
+    /// the upgrade prompt rather than displaying the message as a toast.
+    case paidPlanRequired(String)
 
     var errorDescription: String? {
         switch self {
@@ -69,6 +74,8 @@ enum APIError: Error, LocalizedError {
             return String(localized: "api_error_network \(error.localizedDescription)")
         case .appCheckRequired:
             return String(localized: "api_error_app_check_required")
+        case .paidPlanRequired(let message):
+            return message
         }
     }
 }
@@ -380,6 +387,12 @@ class APIService {
                 }
                 // Generic 403
                 if let errorResponse = try? decoder.decode(ErrorResponse.self, from: data) {
+                    // Tier-gated routes (currently /pets/:id/mark-missing) emit
+                    // a stable discriminator so callers can swap to the upgrade
+                    // UI instead of showing a generic error toast.
+                    if errorResponse.code == "PAID_PLAN_REQUIRED" {
+                        throw APIError.paidPlanRequired(errorResponse.error)
+                    }
                     throw APIError.serverError(errorResponse.error)
                 }
                 throw APIError.serverError("Access denied")

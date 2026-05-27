@@ -263,16 +263,20 @@ struct AlertsTabView: View {
                         .foregroundColor(.white)
                 }
                 VStack(alignment: .leading, spacing: 4) {
+                    // Fixed dark colors — the card background (foundAmberTint)
+                    // stays light-yellow in both light and dark mode, so
+                    // adaptive .primary / .mutedText render white-on-yellow
+                    // in dark mode and become illegible. Pin to dark tones.
                     Text("lost_and_found_cta_title")
                         .font(.appFont(size: 15, weight: .bold))
-                        .foregroundColor(.primary)
+                        .foregroundColor(.black)
                     Text("lost_and_found_cta_body")
                         .font(.appFont(size: 12))
-                        .foregroundColor(.mutedText)
+                        .foregroundColor(Color.black.opacity(0.65))
                         .multilineTextAlignment(.leading)
                 }
                 Spacer(minLength: 8)
-                Image(systemName: "chevron.right").foregroundColor(.mutedText)
+                Image(systemName: "chevron.right").foregroundColor(Color.black.opacity(0.55))
             }
             .padding(16)
             .background(Self.foundAmberTint)

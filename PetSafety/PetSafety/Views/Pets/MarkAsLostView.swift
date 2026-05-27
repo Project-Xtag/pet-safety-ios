@@ -33,6 +33,12 @@ struct MarkAsLostView: View {
     @State private var isGeocoding = false
     @State private var currentLocationAddress: String? = nil
     @State private var isReverseGeocodingCurrent = false
+    /// Set when the backend rejects mark-missing with PAID_PLAN_REQUIRED
+    /// even though our cached `isOnStarterPlan` said otherwise (stale tier
+    /// after a downgrade, or SubscriptionViewModel hadn't refreshed yet).
+    /// Forces the upgrade view so the user sees the right CTA, not a
+    /// generic 403 toast.
+    @State private var forcedStarter = false
 
     /// Formatted registered address from user profile
     private var registeredAddress: String? {
@@ -48,7 +54,7 @@ struct MarkAsLostView: View {
         // would still let them fill in a form whose submission either
         // bounced or, before the backend gate, leaked notifications. Show
         // an upgrade-only prompt with a single CTA so the intent is clear.
-        if subscriptionViewModel.isOnStarterPlan {
+        if subscriptionViewModel.isOnStarterPlan || forcedStarter {
             starterUpgradeView
         } else {
             markMissingForm
@@ -437,6 +443,15 @@ struct MarkAsLostView: View {
                 dismiss()
             } catch {
                 isGeocoding = false
+                if case APIError.paidPlanRequired = error {
+                    // Backend says this user can't mark missing — flip to
+                    // the upgrade view in-place rather than toasting the
+                    // raw 403 message, and refresh the subscription cache
+                    // so other surfaces (UpgradeBanner, plan badge) catch up.
+                    forcedStarter = true
+                    Task { await subscriptionViewModel.loadCurrentSubscription() }
+                    return
+                }
                 let nsError = error as NSError
                 if nsError.domain == "Offline" {
                     appState.showSuccess(nsError.localizedDescription)
