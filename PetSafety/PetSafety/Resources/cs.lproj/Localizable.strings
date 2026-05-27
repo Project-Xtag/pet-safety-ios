@@ -728,6 +728,8 @@
 
 // MARK: - Výběr plánu
 "plan_choose_title" = "Vyber si plán";
+"plan_starter_display_name" = "Startovací balíček";
+"plan_standard_display_name" = "Balíček pro mazlíčka";
 "plan_tag_activated" = "Známka aktivována!";
 "plan_choose_subtitle" = "Vyber plán pro odemčení všech funkcí";
 "plan_upgrade_title" = "Upgradovat plán";

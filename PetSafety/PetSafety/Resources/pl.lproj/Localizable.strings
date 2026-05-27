@@ -738,6 +738,8 @@
 
 // MARK: - Wybór planu
 "plan_choose_title" = "Wybierz swój plan";
+"plan_starter_display_name" = "Pakiet startowy";
+"plan_standard_display_name" = "Pakiet Pupil";
 "plan_load_failed" = "Nie udało się wczytać planów";
 "plan_feature_qr_tag" = "Nieśka QR dla twojego pupila";
 "plan_feature_scan_notif" = "Natychmiastowe powiadomienia o skanowaniu";

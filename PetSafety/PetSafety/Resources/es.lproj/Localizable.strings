@@ -728,6 +728,8 @@
 
 // MARK: - Selección de plan
 "plan_choose_title" = "Elige tu plan";
+"plan_starter_display_name" = "Pack Inicial";
+"plan_standard_display_name" = "Pack Mascota";
 "plan_tag_activated" = "Chapa activada!";
 "plan_choose_subtitle" = "Elige un plan para desbloquear todas las funciones";
 "plan_upgrade_title" = "Mejora tu plan";

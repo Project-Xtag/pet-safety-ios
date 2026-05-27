@@ -747,6 +747,8 @@
 
 // MARK: - Selezione del piano
 "plan_choose_title" = "Scegli il tuo piano";
+"plan_starter_display_name" = "Pacchetto base";
+"plan_standard_display_name" = "Pacchetto Pet";
 "plan_load_failed" = "Impossibile caricare i piani";
 "plan_feature_qr_tag" = "Medaglietta QR per il tuo animale di compagnia";
 "plan_feature_scan_notif" = "Notifiche istantanee alla scansione";

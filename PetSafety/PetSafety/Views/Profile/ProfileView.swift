@@ -159,7 +159,7 @@ struct ProfileView: View {
                         // The plan only means something once the user has a
                         // pet on an activated tag — until then, show nothing.
                         if petsViewModel.pets.contains(where: { $0.hasActiveTag == true }) {
-                            Text(subscriptionViewModel.currentPlanName.capitalized)
+                            Text(subscriptionViewModel.currentPlanDisplayName)
                                 .font(.appFont(size: 14))
                                 .foregroundColor(.mutedText)
                         }

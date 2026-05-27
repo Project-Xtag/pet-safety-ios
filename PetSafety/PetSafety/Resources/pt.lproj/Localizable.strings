@@ -728,6 +728,8 @@
 
 // MARK: - Seleção de plano
 "plan_choose_title" = "Escolha o seu plano";
+"plan_starter_display_name" = "Pack Inicial";
+"plan_standard_display_name" = "Pack Animal";
 "plan_tag_activated" = "Plaquinha ativada!";
 "plan_choose_subtitle" = "Escolha um plano para desbloquear todas as funcionalidades";
 "plan_upgrade_title" = "Melhore o seu plano";

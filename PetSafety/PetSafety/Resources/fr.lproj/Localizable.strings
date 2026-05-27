@@ -739,6 +739,8 @@
 
 // MARK: - Sélection du forfait
 "plan_choose_title" = "Choisis ton forfait";
+"plan_starter_display_name" = "Pack Découverte";
+"plan_standard_display_name" = "Pack Compagnon";
 "plan_load_failed" = "Impossible de charger les forfaits";
 "plan_feature_qr_tag" = "Médaille connectée QR pour ton animal de compagnie";
 "plan_feature_scan_notif" = "Notifications instantanées lors du scan";

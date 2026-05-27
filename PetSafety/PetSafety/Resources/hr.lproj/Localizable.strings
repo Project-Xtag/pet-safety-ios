@@ -742,6 +742,8 @@
 
 // MARK: - Plan Selection
 "plan_choose_title" = "Odaberi paket";
+"plan_starter_display_name" = "Početni paket";
+"plan_standard_display_name" = "Paket za ljubimca";
 "plan_tag_activated" = "Privjesak aktiviran!";
 "plan_choose_subtitle" = "Odaberi paket za pristup svim značajkama";
 "plan_upgrade_title" = "Nadogradi paket";

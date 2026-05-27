@@ -741,6 +741,8 @@
 
 // MARK: - Abonnementsvalg
 "plan_choose_title" = "Velg abonnementet ditt";
+"plan_starter_display_name" = "Startpakke";
+"plan_standard_display_name" = "Kjæledyrpakke";
 "plan_tag_activated" = "QR-brikke aktivert!";
 "plan_choose_subtitle" = "Velg et abonnement for å låse opp alle funksjoner";
 "plan_upgrade_title" = "Oppgrader abonnementet ditt";

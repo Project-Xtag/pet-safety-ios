@@ -749,6 +749,8 @@
 
 // MARK: - Plan Selection
 "plan_choose_title" = "Choose Your Plan";
+"plan_starter_display_name" = "Starter pack";
+"plan_standard_display_name" = "Pet pack";
 "plan_tag_activated" = "Tag Activated!";
 "plan_choose_subtitle" = "Choose a plan to unlock all features";
 "plan_upgrade_title" = "Upgrade Your Plan";

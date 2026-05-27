@@ -728,6 +728,8 @@
 
 // MARK: - Plan-Auswahl
 "plan_choose_title" = "Plan auswählen";
+"plan_starter_display_name" = "Starter-Paket";
+"plan_standard_display_name" = "Haustier-Paket";
 "plan_tag_activated" = "Marke aktiviert!";
 "plan_choose_subtitle" = "Wähle einen Plan, um alle Funktionen freizuschalten";
 "plan_upgrade_title" = "Plan upgraden";

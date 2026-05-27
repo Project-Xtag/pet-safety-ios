@@ -728,6 +728,8 @@
 
 // MARK: - Selectare plan
 "plan_choose_title" = "Alege planul";
+"plan_starter_display_name" = "Pachet de start";
+"plan_standard_display_name" = "Pachet animăluț";
 "plan_tag_activated" = "Plăcuță activată!";
 "plan_choose_subtitle" = "Alege un plan pentru a debloca toate funcțiile";
 "plan_upgrade_title" = "Îmbunătățește planul";
