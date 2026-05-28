@@ -3,6 +3,12 @@ import SwiftUI
 struct OrdersView: View {
     @StateObject private var viewModel = OrdersViewModel()
     @State private var selectedTab = 0
+    // Re-fetch orders on foreground so a status flip (e.g. admin
+    // marked the order shipped while the user had the app
+    // backgrounded) shows up the next time they look. The nested
+    // PendingRegistrationsView observes scenePhase too, so its list
+    // wakes up alongside this one.
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         VStack(spacing: 0) {
@@ -30,33 +36,79 @@ struct OrdersView: View {
         .task {
             await viewModel.fetchOrders()
         }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                Task { await viewModel.fetchOrders() }
+            }
+        }
     }
 
     private var ordersContent: some View {
-        ZStack {
-            if viewModel.orders.isEmpty && !viewModel.isLoading {
+        // Three states share one container so `.refreshable` works in
+        // every branch — empty-state and error-state used to be plain
+        // VStacks where pull-to-refresh silently no-ops. The wrapping
+        // List + listRowSeparator(.hidden) trick keeps the empty UI
+        // visually centered while remaining a refreshable scroll view.
+        List {
+            if let error = viewModel.errorMessage, viewModel.orders.isEmpty {
+                // Error state. Previously the same case rendered as
+                // "no orders" — a transient 5xx or token-refresh race
+                // on the initial fetch silently looked identical to
+                // the legitimate empty state, leaving the user with
+                // no signal that anything was wrong and no way to
+                // retry short of backgrounding + foregrounding the
+                // app.
+                VStack(spacing: AppSpacing.lg) {
+                    // Tinted disc for the warning glyph — softer
+                    // than a raw triangle on a blank canvas.
+                    ZStack {
+                        Circle()
+                            .fill(Color.brandOrange.opacity(0.12))
+                            .frame(width: 72, height: 72)
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.appFont(size: 30, weight: .semibold))
+                            .foregroundColor(.brandOrangeDeep)
+                    }
+                    Text(error)
+                        .font(.appFont(.subheadline))
+                        .foregroundColor(.mutedText)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, AppSpacing.xl)
+                    Button {
+                        Task { await viewModel.fetchOrders() }
+                    } label: {
+                        Text("retry")
+                    }
+                    .buttonStyle(PrimaryPillButtonStyle())
+                    .frame(maxWidth: 220)
+                }
+                .frame(maxWidth: .infinity, minHeight: 320)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+            } else if viewModel.orders.isEmpty && !viewModel.isLoading {
                 EmptyStateView(
                     icon: "cart.fill",
                     title: String(localized: "orders_no_orders"),
                     message: String(localized: "orders_no_orders_message")
                 )
+                .frame(maxWidth: .infinity, minHeight: 320)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
             } else {
-                List {
-                    ForEach(viewModel.orders) { order in
-                        NavigationLink(destination: OrderDetailView(order: order)) {
-                            OrderRowView(order: order)
-                        }
+                ForEach(viewModel.orders) { order in
+                    NavigationLink(destination: OrderDetailView(order: order)) {
+                        OrderRowView(order: order)
                     }
                 }
-                .listStyle(.inset)
-                .adaptiveList()
             }
         }
+        .listStyle(.inset)
+        .adaptiveList()
         .refreshable {
             await viewModel.fetchOrders()
         }
         .overlay {
-            if viewModel.isLoading {
+            if viewModel.isLoading && viewModel.orders.isEmpty {
                 ProgressView()
             }
         }
@@ -145,12 +197,13 @@ struct OrderRowView: View {
             return dateString
         }
 
-        // Long date, locale-aware, no time. EN: "May 6, 2026".
-        // HU: "2026. május 6." — drops the previous "at HH:mm" tail
-        // that wasn't worth showing for an order timestamp.
+        // Fixed yyyy.MM.dd. across every locale — unambiguous,
+        // sortable, matches the HU convention the product uses
+        // everywhere else. en_US_POSIX locks the pattern against
+        // the user's calendar/locale settings overriding it.
         let displayFormatter = DateFormatter()
-        displayFormatter.dateStyle = .long
-        displayFormatter.timeStyle = .none
+        displayFormatter.locale = Locale(identifier: "en_US_POSIX")
+        displayFormatter.dateFormat = "yyyy.MM.dd."
         return displayFormatter.string(from: date)
     }
 }
@@ -271,9 +324,13 @@ struct OrderDetailView: View {
             return dateString
         }
 
+        // Same fixed yyyy.MM.dd. format as the orders list — no time
+        // shown. The detail view used to include HH:mm but the order
+        // timestamp is the placement moment, which isn't useful at
+        // minute granularity.
         let displayFormatter = DateFormatter()
-        displayFormatter.dateStyle = .long
-        displayFormatter.timeStyle = .short
+        displayFormatter.locale = Locale(identifier: "en_US_POSIX")
+        displayFormatter.dateFormat = "yyyy.MM.dd."
         return displayFormatter.string(from: date)
     }
 

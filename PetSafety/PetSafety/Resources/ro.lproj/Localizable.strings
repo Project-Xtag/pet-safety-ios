@@ -492,9 +492,9 @@
 "help_faq_q9" = "Cum funcționează alertele de animale de companie pierdute?";
 "help_faq_a9" = "Când marchezi pisica sau câinele ca dispărut, se creează o alertă cu fotografia și datele animalului de companie tău. Utilizatorii SENRA într-o rază de 10 km sunt notificați imediat și animalul de companie tău apare pe harta 'Animale de companie Pierdute'. Veterinarii și adăposturile înregistrate în zona ta primesc de asemenea alerta.";
 "help_faq_q10" = "Cum comand un plăcuță inteligentă de înlocuire?";
-"help_faq_a10" = "Mergi la pagina 'Acasă/Contul Meu' și apasă 'Comandă Plăcuță inteligentă de Înlocuire'. Selectează care animal de companie are nevoie de un plăcuță inteligentă nou. Abonații Maximum și Standard pot solicita plăcuță inteligentăae de înlocuire gratuite, iar membrii Starter pot comanda înlocuiri pentru costul livrării.";
+"help_faq_a10" = "Mergi la pagina 'Acasă/Contul Meu' și apasă 'Comandă Plăcuță inteligentă de Înlocuire'. Selectează care animal de companie are nevoie de un plăcuță inteligentă nou. Abonații Kedvenc pot solicita plăcuță inteligentăae de înlocuire gratuite, iar membrii Starter pot comanda înlocuiri pentru costul livrării.";
 "help_faq_q11" = "Ce este programul de recomandare?";
-"help_faq_a11" = "În meniul de Recomandări din pagina Profilului tău, poți genera un cod personal de recomandare. Partajează-l cu prietenii și familia. Când cineva folosește codul tău și se abonează la un plan plătit (Standard sau Maximum), tu și prietenul tău primiți 2 luni gratuite.";
+"help_faq_a11" = "În meniul de Recomandări din pagina Profilului tău, poți genera un cod personal de recomandare. Partajează-l cu prietenii și familia. Când cineva folosește codul tău și se abonează la un plan plătit (Kedvenc), tu și prietenul tău primiți 2 luni gratuite.";
 "help_faq_q12" = "În ce țări livrați?";
 "help_faq_a12" = "Momentan livrăm în Ungaria, Slovacia, Cehia, Austria, România, Croația, Spania, Italia, Franța, Germania, Norvegia și Portugalia. Livrare internă în Ungaria: {{huPostapoint}} (PostaPont) sau {{huHome}} (livrare la domiciliu). Livrare internațională: {{intlPrice}} per comandă.";
 "help_faq_q13" = "Pot avea mai multe animale de companie pe un cont?";
@@ -718,7 +718,7 @@
 "contacts_no_type_added" = "Niciun %@ adăugat";
 
 // MARK: - Chei adiționale înlocuire plăcuță inteligentă
-"order_replace_upgrade_hint" = "Fă upgrade la Standard sau Maximum pentru înlocuiri gratuite";
+"order_replace_upgrade_hint" = "Fă upgrade la Kedvenc pentru înlocuiri gratuite";
 "order_replace_old_deactivated" = "Codul QR vechi va fi dezactivat când plasezi această comandă";
 "order_replace_delivery_time" = "Vei primi noua plăcuță inteligentă în 5-7 zile lucrătoare";
 "order_replace_scan_activate" = "După ce primești noua plăcuță inteligentă, trebuie să o scanezi pentru activare";
@@ -728,6 +728,8 @@
 
 // MARK: - Selectare plan
 "plan_choose_title" = "Alege planul";
+"plan_starter_display_name" = "Pachet de start";
+"plan_standard_display_name" = "Pachet animăluț";
 "plan_tag_activated" = "Plăcuță activată!";
 "plan_choose_subtitle" = "Alege un plan pentru a debloca toate funcțiile";
 "plan_upgrade_title" = "Îmbunătățește planul";
@@ -989,7 +991,7 @@
 "help_guide_materials_title" = "Materiale și durabilitate";
 "help_guide_materials_desc" = "Plăcuțele inteligente SENRA sunt fabricate din metal durabil și ușor, cu acoperire epoxidică pentru protecție suplimentară. Sunt rezistente la apă și UV, potrivite pentru orice condiții meteorologice. Nu se uzează în utilizarea zilnică. Plăcuțele inteligente sunt proiectate să se potrivească confortabil pe majoritatea zgărzilor și hamurilor.";
 "help_guide_emergency_title" = "Funcții de contact de urgență";
-"help_guide_emergency_desc" = "Când cineva scanează plăcuța inteligentă a animalului tău de companie, primești instantaneu o notificare push și un e-mail cu locația celui care l-a găsit. Membrii planurilor Standard și Maximum primesc și alerte SMS pentru un răspuns mai rapid. Dacă marchezi animalul de companie ca dispărut, o alertă comunitară este trimisă tuturor utilizatorilor SENRA într-o rază de 10 km, iar medicii veterinari și adăposturile înregistrate din zona ta sunt de asemenea notificate. Oricine din comunitate poate raporta observații cu locația și fotografii, ajutându-te să îți găsești animalul de companie.";
+"help_guide_emergency_desc" = "Când cineva scanează plăcuța inteligentă a animalului tău de companie, primești instantaneu o notificare push și un e-mail cu locația celui care l-a găsit. Membrii planurilor Kedvenc primesc și alerte SMS pentru un răspuns mai rapid. Dacă marchezi animalul de companie ca dispărut, o alertă comunitară este trimisă tuturor utilizatorilor SENRA într-o rază de 10 km, iar medicii veterinari și adăposturile înregistrate din zona ta sunt de asemenea notificate. Oricine din comunitate poate raporta observații cu locația și fotografii, ajutându-te să îți găsești animalul de companie.";
 "help_guide_profile_title" = "Gestionare profil";
 "help_guide_profile_desc" = "Profilul digital al animalului tău de companie este inima SENRA. Adaugă detaliile esențiale: numele este deja acolo, specia, rasa, vârsta și încarcă o fotografie de bună calitate. Poți adăuga și informații medicale, alergii, medicamente și trăsături distinctive. Când cineva scanează plăcuța inteligentă a animalului tău de companie, va vedea acest profil, așa că este important să fie actualizat. Profilul tău îi ajută pe cei care caută să recunoască animalul de companie și să știe ce să facă dacă îl găsesc.";
 "help_guide_missing_alerts_title" = "Alerte animale de companie dispărute și observări";
@@ -1306,7 +1308,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Alertele comunității necesită un abonament Senra.";
 "mark_lost_starter_upgrade_cta" = "Vezi planurile";
-"mark_lost_upgrade_prompt" = "Cu planul Starter animalul de companie tău va fi marcat ca dispărut, dar notificările către utilizatori, veterinari și adăposturi necesită un abonament Standard sau Maximum.";
+"mark_lost_upgrade_prompt" = "Cu planul Starter animalul de companie tău va fi marcat ca dispărut, dar notificările către utilizatori, veterinari și adăposturi necesită un abonament Kedvenc.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "ex. 3 ani, 6 luni (opțional)";
 "create_pet_profile" = "Creează profil";
@@ -1440,3 +1442,75 @@
 "order_promo_code_remove" = "Elimină";
 "order_promo_code_applied_free_shipping" = "Reducere aplicată — Livrare gratuită";
 "order_promo_code_invalid" = "Acest cod promoțional nu este valabil.";
+
+
+// 2026-05-25 cross-locale parity backfill
+"common_cancel" = "Anulează";
+"common_done" = "Gata";
+"found_pet_detail_address" = "Locație";
+"found_pet_detail_breed" = "Rasă";
+"found_pet_detail_color" = "Culoare";
+"found_pet_detail_distance" = "Distanță";
+"found_pet_detail_finder_contact" = "Contactul găsitorului";
+"found_pet_detail_finder_email" = "Email";
+"found_pet_detail_finder_name" = "Nume";
+"found_pet_detail_finder_phone" = "Telefon";
+"found_pet_detail_found_at" = "Găsit";
+"found_pet_detail_no_contact" = "Găsitorul nu a împărtășit încă un contact.";
+"found_pet_detail_open_in_maps" = "Deschide pe hartă";
+"found_pet_detail_title" = "Animal găsit";
+"found_pet_form_add_photo" = "Adaugă o fotografie";
+"found_pet_form_address_placeholder" = "Sau scrie adresa";
+"found_pet_form_breed_placeholder" = "Rasă (ex. teckel mix)";
+"found_pet_form_change_photo" = "Schimbă fotografia";
+"found_pet_form_color_placeholder" = "Culoare (ex. maro cu pieptul alb)";
+"found_pet_form_contact" = "Contactul tău (opțional)";
+"found_pet_form_details" = "Detalii";
+"found_pet_form_email_placeholder" = "Email";
+"found_pet_form_found_at" = "Când l-ai găsit?";
+"found_pet_form_location" = "Unde l-ai găsit?";
+"found_pet_form_location_hint" = "Este necesar GPS-ul sau o adresă.";
+"found_pet_form_name_placeholder" = "Numele tău";
+"found_pet_form_phone_placeholder" = "Telefon";
+"found_pet_form_photo" = "Fotografie (opțional)";
+"found_pet_form_photo_hint" = "O fotografie face mult mai ușor pentru proprietar să-și recunoască animalul de companie.";
+"found_pet_form_remove_photo" = "Elimină fotografia";
+"found_pet_form_sex" = "Sex";
+"found_pet_form_sex_female" = "Femelă";
+"found_pet_form_sex_male" = "Mascul";
+"found_pet_form_sex_unknown" = "Nu știu";
+"found_pet_form_share_contact" = "Împărtășesc datele mele de contact";
+"found_pet_form_species" = "Specie";
+"found_pet_form_submit" = "Trimite";
+"found_pet_form_title" = "Raportează un animal găsit";
+"found_pet_form_use_gps" = "Folosește locația mea";
+"found_pet_form_validation_evidence" = "Adaugă o fotografie sau o scurtă descriere, ca proprietarul să-și poată recunoaște animăluțul.";
+"found_pet_form_validation_location" = "Atinge „Folosește locația mea\" sau scrie o adresă.";
+"found_pet_unknown_breed" = "Rasă necunoscută";
+"lost_and_found_cta_body" = "Postează-l aici ca să poată ajunge mai repede acasă.";
+"lost_and_found_cta_title" = "Ai găsit un animal rătăcit?";
+"lost_and_found_description" = "Animale dispărute și găsite din zona ta, precum și propriile tale alerte de animal dispărut.";
+"lost_and_found_eyebrow" = "Alerte";
+"lost_and_found_filter_species_label" = "Specie";
+"lost_and_found_filter_status_label" = "Stare";
+"lost_and_found_legend_radius %lld" = "Rază de %lld km";
+"lost_and_found_search_placeholder" = "Caută după nume, rasă sau locație…";
+"lost_and_found_species_all" = "Toate";
+"lost_and_found_species_cat" = "Pisici";
+"lost_and_found_species_cat_singular" = "Pisică";
+"lost_and_found_species_dog" = "Câini";
+"lost_and_found_species_dog_singular" = "Câine";
+"lost_and_found_species_other_singular" = "Altele";
+"lost_and_found_status_all" = "Toate";
+"lost_and_found_status_community" = "Animal găsit";
+"lost_and_found_status_missing" = "Dispărut";
+"lost_and_found_title" = "Alerte";
+"lost_and_found_unknown_pet" = "Animal dispărut";
+"lost_and_found_view_list" = "Listă";
+"lost_and_found_view_map" = "Hartă";
+"my_pets_pending_tag_cta_title" = "Activează-ți medalionul";
+"contacts_show_on_tag" = "Afișează pe profilul medalionului";
+"found_pet_form_geocode_failed" = "Nu am găsit această adresă pe hartă. Încearcă una mai precisă.";
+"found_pet_form_gps_unavailable" = "Nu am putut obține locația ta. Te rugăm să scrii o adresă în schimb.";
+
+"my_pets_pending_tag_cta_subtitle %lld" = "%lld medalioane așteaptă activare";

@@ -1,159 +1,363 @@
 import SwiftUI
+import MapKit
 import CoreLocation
 
+/// Redesigned Lost & Found board — iOS counterpart of the web app's
+/// CommunityBoard.tsx. Shows missing-pet alerts AND community-submitted
+/// found-pet reports for the user's vicinity, with search + species +
+/// status filters and a list/map toggle. The "Találtál egy gazdátlan
+/// kisállatot?" CTA opens a sheet form (FoundPetFormView, chunk 4).
 struct AlertsTabView: View {
-    @StateObject private var viewModel = AlertsViewModel()
+    @StateObject private var viewModel = LostAndFoundViewModel()
     @StateObject private var locationManager = LocationManager()
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State private var selectedViewMode = 0
     @State private var showAddressRequiredMessage = false
+    @State private var showFoundForm = false
+    @State private var selectedFoundReport: CommunityFoundPet?
+    // Compact = iPhone portrait + iPhone landscape on most devices; regular
+    // = iPad + larger iPhones in landscape. Used to gate the search bar +
+    // species filter on iPhone — the screen is too dense once you stack
+    // header + view-toggle + search + species + status + CTA above the
+    // list. iPad keeps the full filter set.
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
+    // Status pill colors — match the web exactly (#FF2D2D / #F59E0B) so a
+    // user switching between the web app and the mobile app sees the same
+    // visual taxonomy. Defined inline rather than added to the asset
+    // catalog to keep this chunk a single-file change.
+    private static let missingRed = Color(red: 1.0, green: 0.176, blue: 0.176)
+    private static let foundAmber = Color(red: 0.96, green: 0.62, blue: 0.04)
+    private static let foundAmberTint = Color(red: 0.996, green: 0.953, blue: 0.78)
 
     var body: some View {
         NavigationView {
             ZStack {
-                Color(UIColor.systemGroupedBackground)
-                    .ignoresSafeArea()
+                Color(UIColor.systemGroupedBackground).ignoresSafeArea()
 
-                VStack(spacing: 0) {
-                    // Header
-                    headerSection
-
-                    // Content. `.frame(maxWidth/maxHeight: .infinity)` is
-                    // load-bearing — without `maxHeight: .infinity` the
-                    // inner VStack only takes its intrinsic size, which
-                    // means the List inside `contentView` ends up sized
-                    // to its content rather than filling the screen,
-                    // and rows below the fold are unreachable. Reported
-                    // 2026-05-05: "On the missing pets list screen the
-                    // scrolling is not working."
-                    VStack(spacing: 20) {
-                        // View Mode Segmented Control (List / Map)
-                        segmentedControl(
-                            options: [String(localized: "alerts_list"), String(localized: "alerts_map")],
-                            selection: $selectedViewMode
-                        )
-                        .padding(.horizontal, 24)
-
-                        // Content Area
+                ScrollView {
+                    VStack(spacing: 16) {
+                        headerSection
                         if showAddressRequiredMessage {
                             AddressRequiredView()
+                                .frame(minHeight: 400)
                         } else {
-                            contentView
+                            viewModeToggle
+                            // iPhone: drop the search bar + species filter
+                            // — the screen runs out of vertical room before
+                            // the list starts. Status filter stays because
+                            // it's the most-used cut (missing vs found).
+                            // iPad keeps the full filter set.
+                            if horizontalSizeClass == .regular {
+                                searchBar
+                                filterChipsRow(
+                                    title: String(localized: "lost_and_found_filter_species_label"),
+                                    items: LostAndFoundViewModel.SpeciesFilter.allCases,
+                                    labelFor: { speciesLabel($0) },
+                                    selected: $viewModel.speciesFilter
+                                )
+                            }
+                            filterChipsRow(
+                                title: String(localized: "lost_and_found_filter_status_label"),
+                                items: LostAndFoundViewModel.StatusFilter.allCases,
+                                labelFor: { statusLabel($0) },
+                                dotFor: { statusDot($0) },
+                                selected: $viewModel.statusFilter
+                            )
+                            foundCTACard
+                            if viewModel.isLoading && viewModel.filteredMissing.isEmpty && viewModel.filteredFound.isEmpty {
+                                ProgressView()
+                                    .frame(maxWidth: .infinity, minHeight: 200)
+                            } else if viewModel.view == .list {
+                                listContent
+                            } else {
+                                mapContent
+                            }
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.top, 24)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 32)
                 }
             }
             .navigationBarHidden(true)
-            .task {
-                await loadNearbyAlerts()
+            .task { await loadNearby() }
+            .refreshable { await loadNearby() }
+            .sheet(isPresented: $showFoundForm) {
+                FoundPetFormView { newReport in
+                    viewModel.prependLocalFoundReport(newReport)
+                }
             }
-            .refreshable {
-                await loadNearbyAlerts()
+            .sheet(item: $selectedFoundReport) { report in
+                FoundPetDetailView(report: report)
             }
         }
         .navigationViewStyle(.stack)
     }
 
-    // MARK: - Header Section
+    // MARK: - Header
+
     private var headerSection: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("alerts_missing_pets_title")
+        VStack(alignment: .leading, spacing: 6) {
+            Text("lost_and_found_eyebrow")
+                .font(.appFont(size: 11, weight: .bold))
+                .tracking(2.2)
+                .foregroundColor(.brandOrange)
+            Text("lost_and_found_title")
                 .font(.appFont(size: 28, weight: .bold))
                 .foregroundColor(.primary)
-                .padding(.horizontal, 24)
-                .padding(.top, 60)
-                .padding(.bottom, 24)
+            Text("lost_and_found_description")
+                .font(.appFont(size: 14))
+                .foregroundColor(.mutedText)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.peachBackground)
+        .padding(.top, 60)
     }
 
-    // MARK: - Segmented Control
-    private func segmentedControl(options: [String], selection: Binding<Int>) -> some View {
-        HStack(spacing: 0) {
-            ForEach(options.indices, id: \.self) { index in
-                Button(action: {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        selection.wrappedValue = index
+    // MARK: - View toggle (Lista / Térkép)
+
+    private var viewModeToggle: some View {
+        HStack(spacing: 4) {
+            toggleButton(
+                isActive: viewModel.view == .list,
+                systemImage: "square.grid.2x2",
+                label: String(localized: "lost_and_found_view_list")
+            ) { viewModel.view = .list }
+            toggleButton(
+                isActive: viewModel.view == .map,
+                systemImage: "map",
+                label: String(localized: "lost_and_found_view_map")
+            ) { viewModel.view = .map }
+        }
+        .padding(4)
+        .background(
+            RoundedRectangle(cornerRadius: 999)
+                .fill(Color(UIColor.systemBackground))
+                .shadow(color: Color.black.opacity(0.06), radius: 10, x: 0, y: 4)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 999)
+                .stroke(Color.black.opacity(0.06), lineWidth: 1)
+        )
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func toggleButton(isActive: Bool, systemImage: String, label: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 8) {
+                Image(systemName: systemImage)
+                Text(label)
+            }
+            .font(.appFont(size: 14, weight: .semibold))
+            .foregroundColor(isActive ? .white : .primary)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+            .background(isActive ? Color.brandOrange : Color.clear)
+            .clipShape(Capsule())
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - Search bar
+
+    private var searchBar: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "magnifyingglass").foregroundColor(.mutedText)
+            TextField(
+                String(localized: "lost_and_found_search_placeholder"),
+                text: $viewModel.query
+            )
+            .textInputAutocapitalization(.never)
+            .submitLabel(.search)
+        }
+        .padding(.horizontal, AppSpacing.lg)
+        .padding(.vertical, AppSpacing.md)
+        .background(Color(UIColor.systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+                .stroke(Color.softBorder, lineWidth: 1)
+        )
+        .shadow(color: Color.black.opacity(0.04), radius: 12, x: 0, y: 4)
+    }
+
+    // MARK: - Filter chips
+
+    private func filterChipsRow<F: Identifiable & Hashable>(
+        title: String,
+        items: [F],
+        labelFor: @escaping (F) -> String,
+        dotFor: @escaping (F) -> Color? = { _ in nil },
+        selected: Binding<F>
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.appFont(size: 11, weight: .bold))
+                .tracking(1.2)
+                .foregroundColor(.mutedText)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(items) { item in
+                        let isActive = item == selected.wrappedValue
+                        Button {
+                            selected.wrappedValue = item
+                        } label: {
+                            HStack(spacing: 6) {
+                                if let dot = dotFor(item) {
+                                    Circle()
+                                        .fill(isActive ? .white : dot)
+                                        .frame(width: 8, height: 8)
+                                }
+                                Text(labelFor(item))
+                            }
+                            .font(.appFont(size: 12, weight: .semibold))
+                            .foregroundColor(isActive ? .white : .primary)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(isActive ? Color.brandOrange : Color.clear)
+                            .overlay(
+                                Capsule()
+                                    .stroke(isActive ? Color.brandOrange : Color.black.opacity(0.15), lineWidth: 1)
+                            )
+                            .clipShape(Capsule())
+                        }
+                        .buttonStyle(.plain)
                     }
-                }) {
-                    Text(options[index])
-                        .font(.appFont(size: 14, weight: selection.wrappedValue == index ? .bold : .medium))
-                        .foregroundColor(selection.wrappedValue == index ? .white : .mutedText)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .background(
-                            selection.wrappedValue == index
-                                ? Color.brandOrange
-                                : Color.clear
-                        )
-                        .cornerRadius(14)
                 }
             }
         }
-        .padding(4)
-        .background(Color.black.opacity(0.05))
-        .cornerRadius(18)
     }
 
-    // MARK: - Content View
-    @ViewBuilder
-    private var contentView: some View {
-        if selectedViewMode == 0 {
-            // List View - Only show missing alerts
-            MissingAlertsView(viewModel: viewModel)
-        } else {
-            // Map View - real MapKit map
-            MissingAlertsMapView(
-                alerts: viewModel.missingAlerts,
-                userLocation: locationManager.location
+    private func speciesLabel(_ filter: LostAndFoundViewModel.SpeciesFilter) -> String {
+        switch filter {
+        case .all: return String(localized: "lost_and_found_species_all")
+        case .dog: return String(localized: "lost_and_found_species_dog")
+        case .cat: return String(localized: "lost_and_found_species_cat")
+        }
+    }
+
+    private func statusLabel(_ filter: LostAndFoundViewModel.StatusFilter) -> String {
+        switch filter {
+        case .all: return String(localized: "lost_and_found_status_all")
+        case .missing: return String(localized: "lost_and_found_status_missing")
+        case .community: return String(localized: "lost_and_found_status_community")
+        }
+    }
+
+    private func statusDot(_ filter: LostAndFoundViewModel.StatusFilter) -> Color? {
+        switch filter {
+        case .all: return nil
+        case .missing: return Self.missingRed
+        case .community: return Self.foundAmber
+        }
+    }
+
+    // MARK: - Found-pet CTA
+
+    private var foundCTACard: some View {
+        Button { showFoundForm = true } label: {
+            HStack(spacing: 12) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 14)
+                        .fill(Self.foundAmber)
+                        .frame(width: 44, height: 44)
+                    Image(systemName: "pawprint.fill")
+                        .foregroundColor(.white)
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    // Fixed dark colors — the card background (foundAmberTint)
+                    // stays light-yellow in both light and dark mode, so
+                    // adaptive .primary / .mutedText render white-on-yellow
+                    // in dark mode and become illegible. Pin to dark tones.
+                    Text("lost_and_found_cta_title")
+                        .font(.appFont(size: 15, weight: .bold))
+                        .foregroundColor(.black)
+                    Text("lost_and_found_cta_body")
+                        .font(.appFont(size: 12))
+                        .foregroundColor(Color.black.opacity(0.65))
+                        .multilineTextAlignment(.leading)
+                }
+                Spacer(minLength: 8)
+                Image(systemName: "chevron.right").foregroundColor(Color.black.opacity(0.55))
+            }
+            .padding(16)
+            .background(Self.foundAmberTint)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Self.foundAmber.opacity(0.44), lineWidth: 1)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - List mode
+
+    private var listContent: some View {
+        let missing = viewModel.filteredMissing
+        let found = viewModel.filteredFound
+        return Group {
+            if missing.isEmpty && found.isEmpty {
+                EmptyAlertsStateView(kind: .missing)
+                    .frame(minHeight: 320)
+            } else {
+                VStack(spacing: 12) {
+                    ForEach(missing) { alert in
+                        NavigationLink(destination: AlertDetailView(alert: alert)) {
+                            MissingPetAlertCard(alert: alert, missingColor: Self.missingRed)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    ForEach(found) { report in
+                        Button { selectedFoundReport = report } label: {
+                            CommunityFoundPetCard(report: report, amberColor: Self.foundAmber)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Map mode
+
+    private var mapContent: some View {
+        VStack(spacing: 12) {
+            LostAndFoundMapView(
+                missing: viewModel.filteredMissing,
+                found: viewModel.filteredFound,
+                searchCenter: viewModel.searchCenter,
+                notificationRadiusKm: viewModel.notificationRadiusKm,
+                missingColor: Self.missingRed,
+                foundColor: Self.foundAmber,
+                onSelectMissing: { _ in /* navigation handled via marker link */ },
+                onSelectFound: { selectedFoundReport = $0 }
+            )
+            .frame(height: 420)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            MapLegend(
+                missingColor: Self.missingRed,
+                foundColor: Self.foundAmber,
+                radiusKm: Int(viewModel.notificationRadiusKm)
             )
         }
     }
 
-    // MARK: - Helper Methods
-    private func loadNearbyAlerts() async {
-        locationManager.requestLocation()
+    // MARK: - Data loading (carried over from previous AlertsTabView)
 
-        // Start geocoding user's address in parallel as fallback
+    private func loadNearby() async {
+        locationManager.requestLocation()
         let currentUser = authViewModel.currentUser
         async let geocodedFallback = geocodeUserAddressFallback(currentUser)
-
-        // Wait for device location (up to 8s, polling every 200ms)
-        // iPad GPS can be slow, especially without cellular
         var attempts = 0
         while locationManager.location == nil && attempts < 40 {
             try? await Task.sleep(nanoseconds: 200_000_000)
             attempts += 1
         }
-
-        #if DEBUG
-        if let loc = locationManager.location {
-            print("📍 AlertsTab: Device location: \(loc.latitude), \(loc.longitude) (after \(attempts) attempts)")
-        } else {
-            print("📍 AlertsTab: No device location after \(attempts) attempts, trying fallback")
-        }
-        #endif
-
         if let location = locationManager.location {
             showAddressRequiredMessage = false
-            await viewModel.fetchNearbyAlerts(
-                latitude: location.latitude,
-                longitude: location.longitude,
-                radiusKm: 10
-            )
+            await viewModel.fetchNearby(latitude: location.latitude, longitude: location.longitude)
         } else if let coordinate = await geocodedFallback {
-            #if DEBUG
-            print("📍 AlertsTab: Using geocoded fallback: \(coordinate.latitude), \(coordinate.longitude)")
-            #endif
             showAddressRequiredMessage = false
-            await viewModel.fetchNearbyAlerts(
-                latitude: coordinate.latitude,
-                longitude: coordinate.longitude,
-                radiusKm: 10
-            )
+            await viewModel.fetchNearby(latitude: coordinate.latitude, longitude: coordinate.longitude)
         } else {
             showAddressRequiredMessage = true
         }
@@ -161,49 +365,243 @@ struct AlertsTabView: View {
 
     private func geocodeUserAddressFallback(_ user: User?) async -> CLLocationCoordinate2D? {
         guard let user = user else { return nil }
-        return await geocodeUserAddress(user: user)
-    }
-
-    private func geocodeUserAddress(user: User) async -> CLLocationCoordinate2D? {
-        let addressComponents = [
-            user.address,
-            user.city,
-            user.postalCode,
-            user.country
-        ].compactMap { $0 }.filter { !$0.isEmpty }
-
-        guard !addressComponents.isEmpty else {
+        let parts = [user.address, user.city, user.postalCode, user.country]
+            .compactMap { $0 }
+            .filter { !$0.isEmpty }
+        guard !parts.isEmpty else { return nil }
+        let geocoder = CLGeocoder()
+        do {
+            let placemarks = try await geocoder.geocodeAddressString(parts.joined(separator: ", "))
+            return placemarks.first?.location?.coordinate
+        } catch {
             return nil
         }
-
-        let addressString = addressComponents.joined(separator: ", ")
-        let geocoder = CLGeocoder()
-
-        do {
-            let placemarks = try await geocoder.geocodeAddressString(addressString)
-            if let location = placemarks.first?.location {
-                return location.coordinate
-            }
-        } catch {
-            #if DEBUG
-            print("Geocoding failed: \(error.localizedDescription)")
-            #endif
-        }
-
-        return nil
     }
 }
 
+// MARK: - Missing pet card
 
-// MARK: - Empty Alerts State
-//
-// 2026-05-05 copy update: the previous version interpolated an alert-type
-// noun into "Nincs %@ riasztás a közelben" — the noun was capitalised
-// ("Eltűnt") which produced ungrammatical Hungarian "Nincs Eltűnt
-// riasztás" (the second word should be lowercase mid-sentence). Splitting
-// into per-type keys lets each locale phrase the empty state naturally
-// without a placeholder (and incidentally also lets us update the
-// "közelben" → "környéken" wording for HU at the same time).
+private struct MissingPetAlertCard: View {
+    let alert: MissingPetAlert
+    let missingColor: Color
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ZStack(alignment: .topLeading) {
+                if let urlString = alert.pet?.profileImage, let url = URL(string: urlString) {
+                    CachedAsyncImage(url: url) { image in
+                        image.resizable().aspectRatio(contentMode: .fill)
+                    } placeholder: {
+                        Rectangle().fill(missingColor.opacity(0.15))
+                    }
+                } else {
+                    ZStack {
+                        Rectangle().fill(missingColor.opacity(0.15))
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 36))
+                            .foregroundColor(missingColor)
+                    }
+                }
+                statusBadge(text: String(localized: "lost_and_found_status_missing"), color: missingColor)
+                    .padding(10)
+            }
+            .frame(maxWidth: .infinity)
+            .aspectRatio(4/3, contentMode: .fit)
+            .clipped()
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(alert.pet?.name ?? String(localized: "lost_and_found_unknown_pet"))
+                    .font(.appFont(size: 16, weight: .bold))
+                    .foregroundColor(.primary)
+                if let breed = alert.pet?.breed, !breed.isEmpty {
+                    Text(breed).font(.appFont(size: 13)).foregroundColor(.mutedText)
+                }
+                if let address = alert.lastSeenLocation, !address.isEmpty {
+                    HStack(spacing: 4) {
+                        Image(systemName: "mappin.and.ellipse")
+                            .font(.system(size: 11))
+                            .foregroundColor(.mutedText)
+                        Text(address).font(.appFont(size: 12)).foregroundColor(.mutedText).lineLimit(1)
+                    }
+                }
+            }
+            .padding(16)
+        }
+        .background(Color(UIColor.systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.black.opacity(0.06), lineWidth: 1))
+    }
+}
+
+// MARK: - Found pet card
+
+private struct CommunityFoundPetCard: View {
+    let report: CommunityFoundPet
+    let amberColor: Color
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ZStack(alignment: .topLeading) {
+                if let urlString = report.photoUrl, let url = URL(string: urlString) {
+                    CachedAsyncImage(url: url) { image in
+                        image.resizable().aspectRatio(contentMode: .fill)
+                    } placeholder: {
+                        Rectangle().fill(amberColor.opacity(0.15))
+                    }
+                } else {
+                    ZStack {
+                        Rectangle().fill(amberColor.opacity(0.15))
+                        Image(systemName: "pawprint.fill")
+                            .font(.system(size: 36))
+                            .foregroundColor(amberColor)
+                    }
+                }
+                statusBadge(text: String(localized: "lost_and_found_status_community"), color: amberColor)
+                    .padding(10)
+            }
+            .frame(maxWidth: .infinity)
+            .aspectRatio(4/3, contentMode: .fit)
+            .clipped()
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(speciesLabel(report.species))
+                    .font(.appFont(size: 16, weight: .bold))
+                    .foregroundColor(.primary)
+                let subtitle = [report.breed, report.color].compactMap { $0 }.joined(separator: " · ")
+                if !subtitle.isEmpty {
+                    Text(subtitle).font(.appFont(size: 13)).foregroundColor(.mutedText)
+                }
+                if let address = report.foundAddress, !address.isEmpty {
+                    HStack(spacing: 4) {
+                        Image(systemName: "mappin.and.ellipse")
+                            .font(.system(size: 11))
+                            .foregroundColor(.mutedText)
+                        Text(address).font(.appFont(size: 12)).foregroundColor(.mutedText).lineLimit(1)
+                    }
+                }
+            }
+            .padding(16)
+        }
+        .background(Color(UIColor.systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.black.opacity(0.06), lineWidth: 1))
+    }
+
+    private func speciesLabel(_ species: CommunityFoundPet.Species) -> String {
+        switch species {
+        case .dog: return String(localized: "lost_and_found_species_dog_singular")
+        case .cat: return String(localized: "lost_and_found_species_cat_singular")
+        case .other: return String(localized: "lost_and_found_species_other_singular")
+        }
+    }
+}
+
+// MARK: - Shared status badge
+
+private func statusBadge(text: String, color: Color) -> some View {
+    Text(text)
+        .font(.appFont(size: 10, weight: .bold))
+        .tracking(1.2)
+        .textCase(.uppercase)
+        .foregroundColor(.white)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 4)
+        .background(color)
+        .clipShape(Capsule())
+}
+
+// MARK: - Map view + legend
+
+private struct LostAndFoundMapView: View {
+    let missing: [MissingPetAlert]
+    let found: [CommunityFoundPet]
+    let searchCenter: CLLocationCoordinate2D?
+    let notificationRadiusKm: Double
+    let missingColor: Color
+    let foundColor: Color
+    let onSelectMissing: (MissingPetAlert) -> Void
+    let onSelectFound: (CommunityFoundPet) -> Void
+
+    @State private var cameraPosition: MapCameraPosition = .automatic
+
+    var body: some View {
+        Map(position: $cameraPosition) {
+            // Notification radius ring, centred on the search location.
+            if let center = searchCenter {
+                MapCircle(center: center, radius: notificationRadiusKm * 1000)
+                    .foregroundStyle(Color(red: 0.22, green: 0.74, blue: 0.97).opacity(0.10))
+                    .stroke(Color(red: 0.22, green: 0.74, blue: 0.97), lineWidth: 1)
+            }
+            ForEach(missing) { alert in
+                if let coord = alert.coordinate {
+                    Annotation(alert.pet?.name ?? "", coordinate: coord) {
+                        Button { onSelectMissing(alert) } label: {
+                            markerCircle(color: missingColor, systemImage: "exclamationmark.triangle.fill")
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+            ForEach(found) { report in
+                let coord = CLLocationCoordinate2D(latitude: report.foundLatitude, longitude: report.foundLongitude)
+                Annotation(report.breed ?? "", coordinate: coord) {
+                    Button { onSelectFound(report) } label: {
+                        markerCircle(color: foundColor, systemImage: "pawprint.fill")
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+        .onAppear { centerOnSearchCenterIfNeeded() }
+        .onChange(of: searchCenter == nil ? "" : "\(searchCenter!.latitude),\(searchCenter!.longitude)") { _, _ in
+            centerOnSearchCenterIfNeeded()
+        }
+    }
+
+    private func centerOnSearchCenterIfNeeded() {
+        guard let center = searchCenter else { return }
+        let span = MKCoordinateSpan(latitudeDelta: 0.18, longitudeDelta: 0.18)
+        cameraPosition = .region(MKCoordinateRegion(center: center, span: span))
+    }
+
+    private func markerCircle(color: Color, systemImage: String) -> some View {
+        ZStack {
+            Circle().fill(.white).frame(width: 36, height: 36)
+                .overlay(Circle().stroke(color, lineWidth: 3))
+            Image(systemName: systemImage)
+                .font(.system(size: 14, weight: .bold))
+                .foregroundColor(color)
+        }
+        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+    }
+}
+
+private struct MapLegend: View {
+    let missingColor: Color
+    let foundColor: Color
+    let radiusKm: Int
+
+    var body: some View {
+        HStack(spacing: 16) {
+            legendItem(color: missingColor, label: String(localized: "lost_and_found_status_missing"))
+            legendItem(color: foundColor, label: String(localized: "lost_and_found_status_community"))
+            legendItem(color: Color(red: 0.22, green: 0.74, blue: 0.97), label: String(localized: "lost_and_found_legend_radius \(radiusKm)"))
+        }
+        .font(.appFont(size: 11))
+        .foregroundColor(.mutedText)
+        .frame(maxWidth: .infinity, alignment: .center)
+    }
+
+    private func legendItem(color: Color, label: String) -> some View {
+        HStack(spacing: 6) {
+            Circle().fill(color).frame(width: 8, height: 8)
+            Text(label)
+        }
+    }
+}
+
+// MARK: - Address-required placeholder (preserved from previous AlertsTabView)
+
 enum EmptyAlertsKind {
     case missing
     case found
@@ -229,110 +627,57 @@ struct EmptyAlertsStateView: View {
     var body: some View {
         VStack(spacing: 20) {
             Spacer()
-
             ZStack {
-                Circle()
-                    .fill(Color(UIColor.systemGray6))
-                    .frame(width: 96, height: 96)
+                Circle().fill(Color(UIColor.systemGray6)).frame(width: 96, height: 96)
                 Image(systemName: "checkmark.circle.fill")
                     .font(.appFont(size: 48))
                     .foregroundColor(.tealAccent)
             }
-
             VStack(spacing: 8) {
                 Text(String(localized: kind.titleKey))
                     .font(.appFont(size: 20, weight: .bold))
                     .foregroundColor(.primary)
-
                 Text(String(localized: kind.messageKey))
                     .font(.appFont(size: 14))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
             }
-
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
-// MARK: - Address Required View
 struct AddressRequiredView: View {
     var body: some View {
         VStack(spacing: 24) {
             Spacer()
-
             ZStack {
-                Circle()
-                    .fill(Color.brandOrange.opacity(0.1))
-                    .frame(width: 100, height: 100)
+                Circle().fill(Color.brandOrange.opacity(0.1)).frame(width: 100, height: 100)
                 Image(systemName: "location.slash.circle.fill")
                     .font(.appFont(size: 48))
                     .foregroundColor(.brandOrange)
             }
-
             VStack(spacing: 12) {
                 Text("alerts_location_required")
                     .font(.appFont(size: 20, weight: .bold))
                     .foregroundColor(.primary)
-
                 Text("alerts_location_required_message")
                     .font(.appFont(size: 15))
                     .foregroundColor(.mutedText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
             }
-
-            VStack(spacing: 16) {
-                VStack(alignment: .leading, spacing: 16) {
-                    HStack(spacing: 12) {
-                        ZStack {
-                            Circle()
-                                .fill(Color.tealAccent.opacity(0.1))
-                                .frame(width: 32, height: 32)
-                            Text("1")
-                                .font(.appFont(size: 14, weight: .bold))
-                                .foregroundColor(.tealAccent)
-                        }
-                        Text("alerts_enable_location")
-                            .font(.appFont(size: 14))
-                            .foregroundColor(.primary)
-                    }
-
-                    Text("alerts_or")
-                        .font(.appFont(size: 12, weight: .bold))
-                        .foregroundColor(.mutedText)
-                        .frame(maxWidth: .infinity, alignment: .center)
-
-                    HStack(spacing: 12) {
-                        ZStack {
-                            Circle()
-                                .fill(Color.tealAccent.opacity(0.1))
-                                .frame(width: 32, height: 32)
-                            Text("2")
-                                .font(.appFont(size: 14, weight: .bold))
-                                .foregroundColor(.tealAccent)
-                        }
-                        Text("alerts_add_address_profile")
-                            .font(.appFont(size: 14))
-                            .foregroundColor(.primary)
-                    }
+            NavigationLink(destination: AddressView()) {
+                HStack {
+                    Image(systemName: "house.fill")
+                    Text("alerts_add_my_address").fontWeight(.semibold)
                 }
-                .padding(.horizontal, 32)
-
-                NavigationLink(destination: AddressView()) {
-                    HStack {
-                        Image(systemName: "house.fill")
-                        Text("alerts_add_my_address")
-                            .fontWeight(.semibold)
-                    }
-                }
-                .buttonStyle(BrandButtonStyle())
-                .padding(.horizontal, 48)
-                .padding(.top, 8)
             }
-
+            .buttonStyle(PrimaryPillButtonStyle())
+            .padding(.horizontal, 48)
+            .padding(.top, 8)
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

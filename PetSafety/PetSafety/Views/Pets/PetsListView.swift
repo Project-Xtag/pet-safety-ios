@@ -6,6 +6,7 @@ struct PetsListView: View {
     var onExploreAccount: (() -> Void)?
 
     @StateObject private var viewModel = PetsViewModel()
+    @StateObject private var pendingVM = PendingRegistrationsViewModel()
     @State private var showingAddPet = false
     @State private var showingMarkLostSheet = false
     @State private var showingMarkFoundSheet = false
@@ -133,14 +134,21 @@ struct PetsListView: View {
         }
         .task {
             await viewModel.fetchPets()
+            await pendingVM.fetchPendingRegistrations()
         }
         .refreshable {
             await viewModel.fetchPets()
+            await pendingVM.fetchPendingRegistrations()
         }
         .onReceive(NotificationCenter.default.publisher(for: .tagActivated)) { _ in
-            // A tag was activated elsewhere — refresh so the "TAG ON ITS WAY"
-            // badge drops without requiring view-appear or pull-to-refresh.
-            Task { await viewModel.fetchPets() }
+            // A tag was activated elsewhere — refresh both the pet
+            // list (so the new pet appears) and the pending list (so
+            // the "register pending tag" CTA disappears or counts
+            // down) without requiring view-appear or pull-to-refresh.
+            Task {
+                await viewModel.fetchPets()
+                await pendingVM.fetchPendingRegistrations()
+            }
         }
         .task(id: searchText) {
             try? await Task.sleep(for: .milliseconds(300))
@@ -157,28 +165,38 @@ struct PetsListView: View {
 
     // MARK: - Header Section
     private var headerSection: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
+        HStack(alignment: .center) {
+            VStack(alignment: .leading, spacing: 2) {
                 if let firstName = authViewModel.currentUser?.firstName, !firstName.isEmpty {
                     Text("welcome_back_greeting")
-                        .font(.appFont(size: 14, weight: .medium))
+                        .font(.appFont(size: 13, weight: .semibold))
                         .foregroundColor(.mutedText)
+                        .textCase(.uppercase)
+                        .tracking(1.2)
                     Text(firstName)
-                        .font(.appFont(size: 24, weight: .bold))
-                        .foregroundColor(.primary)
+                        .font(.appFont(size: 30, weight: .bold))
+                        .foregroundColor(.ink)
                 } else {
                     Text("welcome_back_no_name")
-                        .font(.appFont(size: 24, weight: .bold))
-                        .foregroundColor(.primary)
+                        .font(.appFont(size: 30, weight: .bold))
+                        .foregroundColor(.ink)
                 }
             }
 
             Spacer()
 
+            // Notification bell with soft circular surface — the
+            // peach square felt heavy; a tactile pill matches the
+            // refreshed redesign7 chrome.
             Button { showingNotifications = true } label: {
                 Image(systemName: "bell.fill")
-                    .font(.appFont(size: 20))
-                    .foregroundColor(.brandOrange)
+                    .font(.appFont(size: 18, weight: .semibold))
+                    .foregroundColor(.brandOrangeDeep)
+                    .frame(width: 44, height: 44)
+                    .background(Color(UIColor.systemBackground))
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.softBorder, lineWidth: 1))
+                    .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 4)
             }
             .sheet(isPresented: $showingNotifications) {
                 NavigationView {
@@ -186,10 +204,10 @@ struct PetsListView: View {
                 }
             }
         }
-        .padding(.horizontal, 24)
-        .padding(.top, 16)
-        .padding(.bottom, 8)
-        .background(Color.peachBackground)
+        .padding(.horizontal, AppSpacing.xl)
+        .padding(.top, AppSpacing.lg)
+        .padding(.bottom, AppSpacing.md)
+        .background(Color.cream)
     }
 
     // MARK: - Pets Section
@@ -209,6 +227,46 @@ struct PetsListView: View {
                 }
             }
             .padding(.horizontal, 24)
+
+            // CTA for users with unscanned tags from a paid order —
+            // visible from My Pets so they don't have to dig into the
+            // Orders tab to find the wizard entry point. Hidden once
+            // every tag they bought has been activated.
+            if !pendingVM.readyToActivate.isEmpty {
+                Button {
+                    onScanTag?()
+                } label: {
+                    HStack(spacing: AppSpacing.md) {
+                        // QR icon on a glassy circle — gives the
+                        // CTA an iconographic anchor instead of a
+                        // bare symbol next to the text.
+                        Image(systemName: "qrcode.viewfinder")
+                            .font(.appFont(size: 18, weight: .semibold))
+                            .frame(width: 38, height: 38)
+                            .background(Color.white.opacity(0.18))
+                            .clipShape(Circle())
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("my_pets_pending_tag_cta_title")
+                                .font(.appFont(size: 16, weight: .bold))
+                            Text("my_pets_pending_tag_cta_subtitle \(pendingVM.readyToActivate.count)")
+                                .font(.appFont(size: 13, weight: .medium))
+                                .opacity(0.9)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.appFont(size: 14, weight: .bold))
+                            .opacity(0.75)
+                    }
+                    .foregroundColor(.white)
+                    .padding(.vertical, AppSpacing.md)
+                    .padding(.horizontal, AppSpacing.lg)
+                    .background(Color.brandGradient)
+                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous))
+                    .shadow(color: Color.brandOrange.opacity(0.28), radius: 18, x: 0, y: 10)
+                }
+                .buttonStyle(.plain)
+                .padding(.horizontal, AppSpacing.xl)
+            }
 
             // Search bar (only show when >4 pets)
             if viewModel.pets.count > 4 {
@@ -404,43 +462,35 @@ struct PetCardView: View {
                         .background(Color.red)
                         .cornerRadius(8)
                         .padding(8)
-                    } else if pet.hasActiveTag == false {
-                        // "Tag on its way" — pet was auto-registered from a paid order,
-                        // physical tag hasn't been scanned/activated yet.
-                        HStack(spacing: 4) {
-                            Image(systemName: "shippingbox.fill")
-                                .font(.appFont(size: 10))
-                            Text("tag_pending_badge")
-                                .font(.appFont(size: 10, weight: .bold))
-                        }
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(Color.orange)
-                        .cornerRadius(8)
-                        .padding(8)
                     }
+                    // 2026-05-24: removed the "tag on its way" badge.
+                    // Pets are no longer auto-created at order payment
+                    // (backend revert), so a pet card on this screen
+                    // always represents a fully-set-up pet with an
+                    // active tag. Pending orders surface in the
+                    // Orders tab → Pending Registrations and start the
+                    // wizard from there.
                 }
-                .cornerRadius(16, corners: [.topLeft, .topRight])
+                .cornerRadius(AppRadius.lg, corners: [.topLeft, .topRight])
 
-                // Pet Name
+                // Pet Name — softened ink + a touch more vertical
+                // breathing room so the card reads as one
+                // confident unit instead of a thumbnail + label.
                 Text(pet.name)
-                    .font(.appFont(size: 15, weight: .bold))
-                    .foregroundColor(pet.isMissing ? .red : .primary)
+                    .font(.appFont(size: 16, weight: .bold))
+                    .foregroundColor(pet.isMissing ? .red : .ink)
                     .lineLimit(1)
-                    .padding(.vertical, 12)
+                    .padding(.vertical, AppSpacing.md)
                     .frame(maxWidth: .infinity)
                     .background(Color(UIColor.systemBackground))
             }
             .background(Color(UIColor.systemBackground))
-            .cornerRadius(16)
-            .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 4)
+            .clipShape(RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous))
             .overlay(
-                pet.isMissing ?
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.red, lineWidth: 2)
-                    : nil
+                RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous)
+                    .stroke(pet.isMissing ? Color.red : Color.softBorder, lineWidth: pet.isMissing ? 2 : 1)
             )
+            .shadow(color: Color.black.opacity(0.06), radius: 14, x: 0, y: 6)
         }
         .buttonStyle(PlainButtonStyle())
     }
@@ -550,30 +600,39 @@ struct QuickActionButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 10) {
+            VStack(spacing: AppSpacing.md) {
+                // Bigger, more confident icon disc with a softer
+                // tint wash. Replaces the flat 10%-opacity ring
+                // with a feel that reads as a real button surface.
                 ZStack {
                     Circle()
-                        .fill(color.opacity(0.1))
-                        .frame(width: 48, height: 48)
+                        .fill(color.opacity(0.14))
+                        .frame(width: 56, height: 56)
                     Image(systemName: icon)
-                        .font(.appFont(size: 20))
+                        .font(.appFont(size: 22, weight: .semibold))
                         .foregroundColor(color)
                         .accessibilityLabel(title)
                 }
 
-                Text(title.uppercased())
+                Text(title)
                     .font(.appFont(size: 11, weight: .bold))
-                    .foregroundColor(.mutedText)
+                    .foregroundColor(.ink)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
-                    .tracking(0.5)
+                    .textCase(.uppercase)
+                    .tracking(0.8)
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
+            .padding(.vertical, AppSpacing.lg)
             .background(Color(UIColor.systemBackground))
-            .cornerRadius(20)
-            .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 4)
+            .clipShape(RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous)
+                    .stroke(Color.softBorder, lineWidth: 1)
+            )
+            .shadow(color: Color.black.opacity(0.05), radius: 14, x: 0, y: 6)
         }
+        .buttonStyle(.plain)
     }
 }
 

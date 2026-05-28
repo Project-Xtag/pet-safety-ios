@@ -332,6 +332,10 @@
 "profile_personal_info" = "Personal Information";
 "profile_address" = "Address";
 "profile_contacts" = "Contact Details";
+// Toggle next to each contact field in /profile/contacts —
+// controls whether that field appears on the public pet profile
+// page a finder sees after scanning a tag.
+"contacts_show_on_tag" = "Show on tag profile";
 "profile_privacy_mode" = "Privacy Mode";
 "profile_notifications" = "Notifications";
 "profile_billing" = "Billing";
@@ -494,9 +498,9 @@
 "help_faq_q9" = "How do missing pet alerts work?";
 "help_faq_a9" = "When you mark your cat or dog as missing, an alert is created with your pet's photo and details. SENRA users within 10 km are immediately notified about your missing pet, and your pet also appears on the 'Missing Pets' map. Vets and shelters registered in the SENRA system in your area also receive the alert. Anyone who scans your pet's tag can send you the location where they found them and their own contact details. They can also contact you directly if you've made your contact information public in your profile.";
 "help_faq_q10" = "How do I order a replacement tag?";
-"help_faq_a10" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Maximum and Standard plan subscribers can request free replacement tags, while Starter plan members can order replacements for the shipping cost.";
+"help_faq_a10" = "Go to the 'Home/My Account' page and tap 'Order Replacement Tag'. Select which pet needs a new tag. Pet pack subscribers can request free replacement tags, while Starter pack members can order replacements for the shipping cost.";
 "help_faq_q11" = "What is the referral programme?";
-"help_faq_a11" = "Choose your personal Referral Code from My Pets. Share it with friends and family. When someone uses your code and subscribes to a paid plan (Standard or Maximum), both you and your friend get 2 months free on your subscription. You can track your referrals and their status on the Referral Program page.";
+"help_faq_a11" = "Choose your personal Referral Code from My Pets. Share it with friends and family. When someone uses your code and subscribes to the Pet pack, both you and your friend get 2 months free on your subscription. You can track your referrals and their status on the Referral Program page.";
 "help_faq_q12" = "Which countries do you ship to?";
 "help_faq_a12" = "We currently ship to Hungary, Slovakia, Czech Republic, Austria, Romania, Croatia, Spain, Italy, France, Germany, Norway, and Portugal. Domestic shipping within Hungary: {{huPostapoint}} (PostaPont) or {{huHome}} (home delivery). International shipping: {{intlPrice}} per order.";
 "help_faq_q13" = "Can I have multiple pets on one account?";
@@ -547,9 +551,9 @@
 "help_guide_qr_tags_title" = "QR Code Pet Tags";
 "help_guide_qr_tags_desc" = "Each SENRA tag features a unique QR code that links to your pet's digital profile. Anyone who finds your pet can scan the code with their phone camera — no app download required. The scanner instantly sees your pet's photo, name, medical information, and your contact details. They can also share their GPS location with you so you know exactly where your pet is. Tags work with all modern smartphones.";
 "help_guide_materials_title" = "Tag Materials & Durability";
-"help_guide_materials_desc" = "SENRA tags are made from durable, lightweight metal with an epoxy coating for extra protection. They're waterproof and UV-resistant, suitable for all weather conditions. Tags attach securely to your pet's collar. If a tag becomes damaged or the QR code is no longer scannable, you can order a replacement from your Account page — free for Standard and Maximum plan members.";
+"help_guide_materials_desc" = "SENRA tags are made from durable, lightweight metal with an epoxy coating for extra protection. They're waterproof and UV-resistant, suitable for all weather conditions. Tags attach securely to your pet's collar. If a tag becomes damaged or the QR code is no longer scannable, you can order a replacement from your Account page — free for Pet pack members.";
 "help_guide_emergency_title" = "Emergency Contact & Alerts";
-"help_guide_emergency_desc" = "When someone scans your pet's tag, you receive an instant notification by email with the finder's location. Standard and Maximum plan members also receive SMS alerts for faster response. If you mark your pet as missing, a community alert is sent to all SENRA users within 10km, and registered vets and shelters in your area are also notified. Anyone in the community can report sightings with their location, building a trail to help you find your pet.";
+"help_guide_emergency_desc" = "When someone scans your pet's tag, you receive an instant notification by email with the finder's location. Pet pack members also receive SMS alerts for faster response. If you mark your pet as missing, a community alert is sent to all SENRA users within 10km, and registered vets and shelters in your area are also notified. Anyone in the community can report sightings with their location, building a trail to help you find your pet.";
 "help_guide_profile_title" = "Pet Profile Management";
 "help_guide_profile_desc" = "Your pet's digital profile is the heart of SENRA. Add essential details like name, species, breed, age, and a clear photo. You can also include medical information (allergies, medications, conditions), microchip number, and unique features that help identify your pet. Upload multiple photos to a gallery. All information can be updated at any time from the 'My Pets' section. You control which of your personal details (phone, email, address) are visible to people who scan the tag.";
 "help_guide_missing_alerts_title" = "Missing Pet Alerts & Sightings";
@@ -735,7 +739,7 @@
 "contacts_no_type_added" = "No %@ added";
 
 // MARK: - Additional Order Replacement Keys
-"order_replace_upgrade_hint" = "Upgrade to Standard or Maximum for free replacements";
+"order_replace_upgrade_hint" = "Upgrade to the Pet pack for free replacements";
 "order_replace_old_deactivated" = "Your old QR code will be deactivated when you place this order";
 "order_replace_delivery_time" = "You'll receive your new tag within 5-7 business days";
 "order_replace_scan_activate" = "Once you receive the new tag, you'll need to scan it to activate it";
@@ -745,6 +749,8 @@
 
 // MARK: - Plan Selection
 "plan_choose_title" = "Choose Your Plan";
+"plan_starter_display_name" = "Starter pack";
+"plan_standard_display_name" = "Pet pack";
 "plan_tag_activated" = "Tag Activated!";
 "plan_choose_subtitle" = "Choose a plan to unlock all features";
 "plan_upgrade_title" = "Upgrade Your Plan";
@@ -786,6 +792,77 @@
 "alerts_add_address_profile" = "Add your address in your profile";
 "alerts_add_my_address" = "Add My Address";
 "alerts_no_missing_nearby" = "No missing pet alerts nearby";
+
+// MARK: - Lost & Found Board (redesign — community board)
+"lost_and_found_eyebrow" = "Alerts";
+"lost_and_found_title" = "Lost & Found";
+"lost_and_found_description" = "Missing and found pets in your area, and your own missing-pet alerts.";
+"lost_and_found_view_list" = "List";
+"lost_and_found_view_map" = "Map";
+"lost_and_found_search_placeholder" = "Search by name, breed or location…";
+"lost_and_found_filter_species_label" = "SPECIES";
+"lost_and_found_species_all" = "All";
+"lost_and_found_species_dog" = "Dogs";
+"lost_and_found_species_cat" = "Cats";
+"lost_and_found_species_dog_singular" = "Dog";
+"lost_and_found_species_cat_singular" = "Cat";
+"lost_and_found_species_other_singular" = "Other";
+"lost_and_found_filter_status_label" = "STATUS";
+"lost_and_found_status_all" = "All";
+"lost_and_found_status_missing" = "Missing";
+"lost_and_found_status_community" = "Found pet";
+"lost_and_found_cta_title" = "Found a stray pet?";
+"lost_and_found_cta_body" = "Post it here so it can find its way home sooner.";
+"lost_and_found_legend_radius %lld" = "%lld km radius";
+"lost_and_found_unknown_pet" = "Missing pet";
+"found_pet_unknown_breed" = "Unknown breed";
+"common_done" = "Done";
+"common_cancel" = "Cancel";
+
+// MARK: - Found-pet report form
+"found_pet_form_title" = "Report a found pet";
+"found_pet_form_submit" = "Submit";
+"found_pet_form_species" = "Species";
+"found_pet_form_sex" = "Sex";
+"found_pet_form_sex_male" = "Male";
+"found_pet_form_sex_female" = "Female";
+"found_pet_form_sex_unknown" = "Don't know";
+"found_pet_form_details" = "Details";
+"found_pet_form_breed_placeholder" = "Breed (e.g. dachshund mix)";
+"found_pet_form_color_placeholder" = "Color (e.g. brown with white chest)";
+"found_pet_form_found_at" = "When did you find it?";
+"found_pet_form_location" = "Where did you find it?";
+"found_pet_form_use_gps" = "Use my location";
+"found_pet_form_address_placeholder" = "Or type the address";
+"found_pet_form_location_hint" = "Either GPS or an address is required.";
+"found_pet_form_photo" = "Photo (optional)";
+"found_pet_form_add_photo" = "Add photo";
+"found_pet_form_change_photo" = "Change photo";
+"found_pet_form_remove_photo" = "Remove photo";
+"found_pet_form_photo_hint" = "A photo makes it much easier for the owner to recognize their pet.";
+"found_pet_form_contact" = "Your contact (optional)";
+"found_pet_form_share_contact" = "Share my contact details";
+"found_pet_form_name_placeholder" = "Your name";
+"found_pet_form_email_placeholder" = "Email";
+"found_pet_form_phone_placeholder" = "Phone";
+"found_pet_form_validation_location" = "Tap \"Use my location\" or type an address.";
+"found_pet_form_validation_evidence" = "Add a photo or a short description so the owner can recognize the pet.";
+"found_pet_form_gps_unavailable" = "Couldn't get your location. Please type an address instead.";
+"found_pet_form_geocode_failed" = "Couldn't find that address on the map. Try a more specific one.";
+
+// MARK: - Found-pet detail sheet
+"found_pet_detail_title" = "Found pet";
+"found_pet_detail_breed" = "Breed";
+"found_pet_detail_color" = "Color";
+"found_pet_detail_found_at" = "Found";
+"found_pet_detail_address" = "Location";
+"found_pet_detail_distance" = "Distance";
+"found_pet_detail_finder_contact" = "FINDER CONTACT";
+"found_pet_detail_finder_name" = "Name";
+"found_pet_detail_finder_email" = "Email";
+"found_pet_detail_finder_phone" = "Phone";
+"found_pet_detail_no_contact" = "The finder hasn't shared a contact yet.";
+"found_pet_detail_open_in_maps" = "Open in maps";
 
 // MARK: - Alert Status & Details (Chunk 1)
 "alert_status_missing" = "Missing";
@@ -1045,7 +1122,7 @@
 // MARK: - Pet Form Additional
 "pet_limit_reached" = "Pet Limit Reached";
 "pet_limit_reached_info" = "You have reached the maximum number of pets for this account. Visit senra.pet for more information.";
-"upgrade_to_ultimate" = "Upgrade to Maximum";
+"upgrade_to_ultimate" = "Upgrade to the Pet pack";
 "keep_current_plan" = "Keep Current Plan";
 "pet_limit_upgrade_message %@ %lld %@ %@" = "Your %@ plan allows %lld pet. Upgrade to %@ for %@ to add up to 10 pets.";
 "pet_limit_upgrade_generic" = "Upgrade your plan to add more pets.";
@@ -1093,6 +1170,12 @@
 "all_caught_up" = "All Caught Up!";
 "all_caught_up_description" = "You don't have any pending tag registrations.";
 "order_tags" = "Order Tags";
+
+// My Pets — pending-tag CTA shown above pet cards when the user has
+// unactivated tags from a paid order. Tapping opens the scanner so
+// they can finish registration without digging into the Orders tab.
+"my_pets_pending_tag_cta_title" = "Register your tag";
+"my_pets_pending_tag_cta_subtitle %lld" = "%lld tag ready to activate";
 "status_shipped" = "Shipped";
 "status_delivered" = "Delivered";
 "status_processing" = "Processing";
@@ -1318,7 +1401,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Community alerts require a Senra subscription.";
 "mark_lost_starter_upgrade_cta" = "See plans";
-"mark_lost_upgrade_prompt" = "On Starter plan, your pet will be marked as missing but notifications to nearby users, vets, and shelters require a Standard or Maximum subscription.";
+"mark_lost_upgrade_prompt" = "On the Starter pack, your pet will be marked as missing but notifications to nearby users, vets, and shelters require a Pet pack subscription.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "e.g. 3 years, 6 months (optional)";
 "create_pet_profile" = "Create Pet Profile";

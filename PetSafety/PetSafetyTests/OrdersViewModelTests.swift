@@ -95,7 +95,8 @@ struct OrdersViewModelTests {
             countryCode: "HU",
             platform: "ios",
             deliveryMethod: "postapoint",
-            postapointDetails: postapoint
+            postapointDetails: postapoint,
+            promoCode: nil
         )
 
         let data = try JSONEncoder().encode(request)
@@ -117,7 +118,8 @@ struct OrdersViewModelTests {
             countryCode: "HU",
             platform: "ios",
             deliveryMethod: "home_delivery",
-            postapointDetails: nil
+            postapointDetails: nil,
+            promoCode: nil
         )
 
         let data = try JSONEncoder().encode(request)
@@ -231,7 +233,8 @@ struct OrdersViewModelTests {
         #expect(point.name == "Test Point")
         #expect(point.address == nil)
         #expect(point.city == nil)
-        #expect(point.openingHours == nil)
+        #expect(point.type == nil)
+        #expect(point.distance == nil)
     }
 
     // MARK: - PostaPointDetails Encoding

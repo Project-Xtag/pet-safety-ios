@@ -3,29 +3,40 @@ import SwiftUI
 struct PendingRegistrationsView: View {
     @StateObject private var viewModel = PendingRegistrationsViewModel()
     @Environment(\.dismiss) private var dismiss
+    // Re-fetch on foreground so a tag the admin marked shipped while the
+    // app was backgrounded shows up the next time the user looks at the
+    // screen — without forcing them to pull-to-refresh. (We don't have
+    // an `order_shipped` SSE event, so foreground is the cheapest
+    // signal for "world might have changed.")
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
-        ZStack {
-            if viewModel.registrations.isEmpty && !viewModel.isLoading {
+        // Wrap every state branch in a ScrollView so `.refreshable`
+        // works in the empty- and error-state cases too — pull-to-
+        // refresh used to silently no-op on those non-scrollable
+        // containers, so a transient fetch failure stranded the user
+        // until they backgrounded the app.
+        ScrollView {
+            if let error = viewModel.errorMessage, viewModel.registrations.isEmpty {
+                errorState(error)
+            } else if viewModel.registrations.isEmpty && !viewModel.isLoading {
                 emptyState
             } else if !viewModel.registrations.isEmpty {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        // Ready to Activate Section
-                        if !viewModel.readyToActivate.isEmpty {
-                            readyToActivateSection
-                        }
-
-                        // Still Processing Section
-                        if !viewModel.stillProcessing.isEmpty {
-                            stillProcessingSection
-                        }
-
-                        // Help Section
-                        helpSection
+                VStack(alignment: .leading, spacing: 20) {
+                    // Ready to Activate Section
+                    if !viewModel.readyToActivate.isEmpty {
+                        readyToActivateSection
                     }
-                    .padding()
+
+                    // Still Processing Section
+                    if !viewModel.stillProcessing.isEmpty {
+                        stillProcessingSection
+                    }
+
+                    // Help Section
+                    helpSection
                 }
+                .padding()
             }
         }
         .navigationTitle(Text("pending_registrations_title"))
@@ -35,6 +46,17 @@ struct PendingRegistrationsView: View {
         .refreshable {
             await viewModel.fetchPendingRegistrations()
         }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                Task { await viewModel.fetchPendingRegistrations() }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .tagActivated)) { _ in
+            // Wizard just finished activating a tag — drop the
+            // newly-activated entry immediately instead of waiting
+            // for view re-appearance.
+            Task { await viewModel.fetchPendingRegistrations() }
+        }
         .overlay {
             if viewModel.isLoading && viewModel.registrations.isEmpty {
                 ProgressView()
@@ -42,30 +64,63 @@ struct PendingRegistrationsView: View {
         }
     }
 
+    // MARK: - Error State
+    // A transient fetch failure used to render as the success
+    // empty-state ("all caught up") — same shape as the orders tab
+    // bug. Showing the error + a Retry button distinguishes
+    // "nothing to register" from "we couldn't ask the server."
+    private func errorState(_ message: String) -> some View {
+        VStack(spacing: AppSpacing.lg) {
+            ZStack {
+                Circle()
+                    .fill(Color.brandOrange.opacity(0.12))
+                    .frame(width: 72, height: 72)
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.appFont(size: 30, weight: .semibold))
+                    .foregroundColor(.brandOrangeDeep)
+            }
+            Text(message)
+                .font(.appFont(.subheadline))
+                .foregroundColor(.mutedText)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, AppSpacing.xl)
+            Button {
+                Task { await viewModel.fetchPendingRegistrations() }
+            } label: {
+                Text("retry")
+            }
+            .buttonStyle(PrimaryPillButtonStyle())
+            .frame(maxWidth: 220)
+        }
+        .frame(maxWidth: .infinity, minHeight: 320)
+        .padding()
+    }
+
     // MARK: - Empty State
     private var emptyState: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "checkmark.circle.fill")
-                .font(.appFont(size: 60))
-                .foregroundColor(.green)
+        VStack(spacing: AppSpacing.lg) {
+            ZStack {
+                Circle()
+                    .fill(Color.successColor.opacity(0.18))
+                    .frame(width: 88, height: 88)
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.appFont(size: 44, weight: .semibold))
+                    .foregroundColor(.successColor)
+            }
             Text("all_caught_up")
-                .font(.appFont(.title2))
-                .fontWeight(.bold)
+                .font(.appFont(size: 22, weight: .bold))
+                .foregroundColor(.ink)
             Text("all_caught_up_description")
                 .font(.appFont(.body))
-                .foregroundColor(.secondary)
+                .foregroundColor(.mutedText)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
             NavigationLink(destination: OrderMoreTagsView()) {
                 Text("order_tags")
-                    .fontWeight(.semibold)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 12)
-                    .background(Color.brandOrange)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
             }
-            .padding(.top, 8)
+            .buttonStyle(PrimaryPillButtonStyle())
+            .frame(maxWidth: 220)
+            .padding(.top, AppSpacing.sm)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -129,59 +184,35 @@ struct PendingRegistrationsView: View {
                 // via the status badge above + email updates from
                 // the carrier directly.
 
-                HStack(spacing: 12) {
-                    NavigationLink(destination: QRScannerView()) {
-                        HStack {
-                            Image(systemName: "qrcode.viewfinder")
-                            Text("scan_tag_now")
-                        }
-                        .font(.appFont(.subheadline))
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
-                        .background(Color.brandOrange)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                // A pet is only registered by activating its tag — the
+                // pet for this order already exists (auto-created at
+                // checkout) and is filled in by the scan wizard. The
+                // old "create profile first/while waiting" shortcuts
+                // are gone: there is no tagless pet-creation path.
+                NavigationLink(destination: QRScannerView()) {
+                    HStack(spacing: AppSpacing.sm) {
+                        Image(systemName: "qrcode.viewfinder")
+                            .font(.appFont(size: 15, weight: .semibold))
+                        Text("scan_tag_now")
+                            .font(.appFont(size: 15, weight: .bold))
                     }
-
-                    NavigationLink(destination: PetFormView(mode: .create)) {
-                        Text("create_profile_first")
-                            .font(.appFont(.subheadline))
-                            .fontWeight(.medium)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 10)
-                            .background(Color.clear)
-                            .foregroundColor(.primary)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
-                            )
-                    }
-                }
-            } else {
-                NavigationLink(destination: PetFormView(mode: .create)) {
-                    Text("create_profile_while_waiting")
-                        .font(.appFont(.subheadline))
-                        .fontWeight(.medium)
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 16)
-                        .background(Color.clear)
-                        .foregroundColor(.primary)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
-                        )
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, AppSpacing.md)
+                    .background(Color.brandGradient)
+                    .clipShape(Capsule())
+                    .shadow(color: Color.brandOrange.opacity(0.28), radius: 12, x: 0, y: 6)
                 }
             }
         }
-        .padding()
+        .padding(AppSpacing.lg)
         .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(isReady ? Color.green.opacity(0.05) : Color(.systemBackground))
+            RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+                .fill(isReady ? Color.successColor.opacity(0.08) : Color.cream)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(isReady ? Color.green.opacity(0.2) : Color.secondary.opacity(0.15), lineWidth: 1)
+            RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+                .stroke(isReady ? Color.successColor.opacity(0.32) : Color.softBorder, lineWidth: 1)
         )
     }
 
@@ -239,15 +270,10 @@ struct PendingRegistrationsView: View {
     }
 
     private func formatDate(_ dateString: String) -> String {
-        // 2026-05-05 fix: the previous implementation used a single
-        // `ISO8601DateFormatter` that rejected timestamps with
-        // fractional seconds (the backend emits both forms depending
-        // on the source row). On a parse failure we returned the raw
-        // ISO string — users saw "2026-05-04T17:31:42.123Z" verbatim.
-        // Try with-fractional-seconds first, fall back to plain
-        // RFC3339, and only last-resort show the raw string. Use
-        // .medium style with the user's current locale so HU sees
-        // "2026. máj. 5." instead of US-format "May 5, 2026".
+        // Backend emits ISO timestamps both with and without fractional
+        // seconds depending on the source row, so try the former first
+        // and fall back. Last-resort show the raw string rather than
+        // an empty cell — easier to debug than a silent blank.
         let withFractional = ISO8601DateFormatter()
         withFractional.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         let plain = ISO8601DateFormatter()
@@ -256,10 +282,14 @@ struct PendingRegistrationsView: View {
         let date = withFractional.date(from: dateString) ?? plain.date(from: dateString)
         guard let date else { return dateString }
 
+        // Fixed yyyy.MM.dd. format across every locale — unambiguous,
+        // sortable, matches the HU convention the product uses
+        // everywhere else (HU is our canonical locale). en_US_POSIX
+        // locks the format against the user's calendar/locale
+        // settings overriding the literal pattern.
         let displayFormatter = DateFormatter()
-        displayFormatter.locale = .current
-        displayFormatter.dateStyle = .medium
-        displayFormatter.timeStyle = .none
+        displayFormatter.locale = Locale(identifier: "en_US_POSIX")
+        displayFormatter.dateFormat = "yyyy.MM.dd."
         return displayFormatter.string(from: date)
     }
 }

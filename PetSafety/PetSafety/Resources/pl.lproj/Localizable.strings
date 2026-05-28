@@ -491,9 +491,9 @@
 "help_faq_q9" = "Jak działają alerty o zaginionych pupilach?";
 "help_faq_a9" = "Gdy oznaczysz kota lub psa jako zaginionego, tworzony jest alert ze zdjęciem i danymi pupila. Użytkownicy SENRA w promieniu 10 km są natychmiast powiadamiani, a pupil pojawia się na mapie 'Zaginione Pupile'. Weterynarze i schroniska zarejestrowane w systemie SENRA również otrzymują alert.";
 "help_faq_q10" = "Jak zamówić adresówkę zastępczą?";
-"help_faq_a10" = "Przejdź do 'Strona Główna/Moje Konto' i kliknij 'Zamów Plakietkę Zastępczą'. Subskrybenci Maximum i Standard mogą żądać bezpłatnych zamienników, członkowie Starter płacą koszt wysyłki.";
+"help_faq_a10" = "Przejdź do 'Strona Główna/Moje Konto' i kliknij 'Zamów Plakietkę Zastępczą'. Subskrybenci Kedvenc mogą żądać bezpłatnych zamienników, członkowie Starter płacą koszt wysyłki.";
 "help_faq_q11" = "Czym jest program poleceń?";
-"help_faq_a11" = "W menu Polecenia na stronie Profilu możesz wygenerować osobisty kod polecający. Podziel się nim z przyjaciółmi i rodziną. Gdy ktoś użyje Twojego kodu i wykupi płatny plan (Standard lub Maximum), Ty i Twój przyjaciel otrzymujecie 2 miesiące za darmo.";
+"help_faq_a11" = "W menu Polecenia na stronie Profilu możesz wygenerować osobisty kod polecający. Podziel się nim z przyjaciółmi i rodziną. Gdy ktoś użyje Twojego kodu i wykupi płatny plan (Kedvenc), Ty i Twój przyjaciel otrzymujecie 2 miesiące za darmo.";
 "help_faq_q12" = "Do jakich krajów wysyłacie?";
 "help_faq_a12" = "Obecnie wysyłamy do Węgier, Słowacji, Czech, Austrii, Rumunii, Chorwacji, Hiszpanii, Włoch, Francji, Niemiec, Norwegii i Portugalii. Wysyłka krajowa na Węgrzech: {{huPostapoint}} (PostaPont) lub {{huHome}} (dostawa do domu). Wysyłka międzynarodowa: {{intlPrice}} za zamówienie.";
 "help_faq_q13" = "Czy mogę mieć wiele pupili na jednym koncie?";
@@ -544,9 +544,9 @@
 "help_guide_qr_tags_title" = "Nieśki z kodem QR";
 "help_guide_qr_tags_desc" = "Każda nieśka SENRA zawiera unikalny kod QR prowadzący do cyfrowego profilu twojego pupila. Każdy, kto znajdzie twoje pupila, może zeskanować kod aparatem telefonu — bez konieczności pobierania aplikacji. Skaner natychmiast widzi zdjęcie, imię, informacje medyczne i twoje dane kontaktowe. Może też udostępnić swoją lokalizację GPS, dzięki czemu będziesz wiedział/a dokładnie, gdzie jest twoje pupila. Nieśki działają ze wszystkimi nowoczesnymi smartfonami.";
 "help_guide_materials_title" = "Materiały i trwałość nieśek";
-"help_guide_materials_desc" = "Nieśki SENRA są wykonane z trwałego, lekkiego metalu z powłoką epoksydową zapewniającą dodatkową ochronę. Są wodoodporne i odporne na UV, odpowiednie na każde warunki pogodowe. Kod QR jest wydrukowany tuszem odpornym na blaknięcie, aby pozostać czytelnym przez długi czas. Nieśki bezpiecznie mocują się do obroży pupila. Jeśli nieśka ulegnie uszkodzeniu lub kod QR przestanie się skanować, możesz zamówić zamiennik na stronie Konto — bezpłatnie dla członków planów Standard i Maximum.";
+"help_guide_materials_desc" = "Nieśki SENRA są wykonane z trwałego, lekkiego metalu z powłoką epoksydową zapewniającą dodatkową ochronę. Są wodoodporne i odporne na UV, odpowiednie na każde warunki pogodowe. Kod QR jest wydrukowany tuszem odpornym na blaknięcie, aby pozostać czytelnym przez długi czas. Nieśki bezpiecznie mocują się do obroży pupila. Jeśli nieśka ulegnie uszkodzeniu lub kod QR przestanie się skanować, możesz zamówić zamiennik na stronie Konto — bezpłatnie dla członków planów Kedvenc.";
 "help_guide_emergency_title" = "Kontakt alarmowy i alerty";
-"help_guide_emergency_desc" = "Gdy ktoś zeskanuje adresówkę twojego pupila, otrzymasz natychmiastowe powiadomienie e-mailem z lokalizacją znalazcy. Członkowie planów Standard i Maximum otrzymują też alerty SMS dla szybszej reakcji. Jeśli oznaczysz pupila jako zaginione, alert społecznościowy jest wysyłany do wszystkich użytkowników SENRA w promieniu 10km, a zarejestrowani weterynarze i schroniska w twoim rejonie są również powiadamiani. Każdy ze społeczności może zgłaszać spostrzeżenia z lokalizacją, budując ślad, który pomoże ci odnaleźć pupila.";
+"help_guide_emergency_desc" = "Gdy ktoś zeskanuje adresówkę twojego pupila, otrzymasz natychmiastowe powiadomienie e-mailem z lokalizacją znalazcy. Członkowie planów Kedvenc otrzymują też alerty SMS dla szybszej reakcji. Jeśli oznaczysz pupila jako zaginione, alert społecznościowy jest wysyłany do wszystkich użytkowników SENRA w promieniu 10km, a zarejestrowani weterynarze i schroniska w twoim rejonie są również powiadamiani. Każdy ze społeczności może zgłaszać spostrzeżenia z lokalizacją, budując ślad, który pomoże ci odnaleźć pupila.";
 "help_guide_profile_title" = "Zarządzanie profilem pupila";
 "help_guide_profile_desc" = "Cyfrowy profil twojego pupila to serce SENRA. Dodaj podstawowe dane: imię, gatunek, rasę, wiek i wyraźne zdjęcie. Możesz też podać informacje medyczne (alergie, leki, schorzenia), numer mikrochipa i cechy charakterystyczne ułatwiające identyfikację. Prześlij wiele zdjęć do galerii. Wszystkie informacje można aktualizować w dowolnym momencie w sekcji „Moje pupile”. Możesz kontrolować, które z twoich danych osobowych (telefon, e-mail, adres) są widoczne dla osób skanujących adresówkę.";
 "help_guide_missing_alerts_title" = "Alerty o zaginionych pupilach i spostrzeżenia";
@@ -728,7 +728,7 @@
 "contacts_no_type_added" = "Brak %@ dodanego/ej";
 
 // MARK: - Dodatkowe klucze zamówienia nieśki zamiennej
-"order_replace_upgrade_hint" = "Przejdź na plan Standard lub Maximum, aby uzyskać bezpłatne zamienniki";
+"order_replace_upgrade_hint" = "Przejdź na plan Kedvenc, aby uzyskać bezpłatne zamienniki";
 "order_replace_old_deactivated" = "Twój stary kod QR zostanie dezaktywowany po złożeniu zamówienia";
 "order_replace_delivery_time" = "Otrzymasz nową adresówkę w ciągu 5–7 dni roboczych";
 "order_replace_scan_activate" = "Po otrzymaniu nowej nieśki będziesz musiał/a ją zeskanować, aby ją aktywować";
@@ -738,6 +738,8 @@
 
 // MARK: - Wybór planu
 "plan_choose_title" = "Wybierz swój plan";
+"plan_starter_display_name" = "Pakiet startowy";
+"plan_standard_display_name" = "Pakiet Pupil";
 "plan_load_failed" = "Nie udało się wczytać planów";
 "plan_feature_qr_tag" = "Nieśka QR dla twojego pupila";
 "plan_feature_scan_notif" = "Natychmiastowe powiadomienia o skanowaniu";
@@ -1309,7 +1311,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Alerty społecznościowe wymagają subskrypcji Senra.";
 "mark_lost_starter_upgrade_cta" = "Zobacz plany";
-"mark_lost_upgrade_prompt" = "W planie Starter twoje pupila zostanie oznaczone jako zagubione, ale powiadomienia do użytkowników, weterynarzy i schronisk wymagają subskrypcji Standard lub Maximum.";
+"mark_lost_upgrade_prompt" = "W planie Starter twoje pupila zostanie oznaczone jako zagubione, ale powiadomienia do użytkowników, weterynarzy i schronisk wymagają subskrypcji Kedvenc.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "np. 3 lata, 6 miesięcy (opcjonalnie)";
 "create_pet_profile" = "Utwórz profil";
@@ -1443,3 +1445,75 @@
 "order_promo_code_remove" = "Usuń";
 "order_promo_code_applied_free_shipping" = "Zniżka aktywowana — Bezpłatna dostawa";
 "order_promo_code_invalid" = "Ten kod promocyjny jest nieprawidłowy.";
+
+
+// 2026-05-25 cross-locale parity backfill
+"common_cancel" = "Anuluj";
+"common_done" = "Gotowe";
+"found_pet_detail_address" = "Lokalizacja";
+"found_pet_detail_breed" = "Rasa";
+"found_pet_detail_color" = "Kolor";
+"found_pet_detail_distance" = "Odległość";
+"found_pet_detail_finder_contact" = "Kontakt do znalazcy";
+"found_pet_detail_finder_email" = "E-mail";
+"found_pet_detail_finder_name" = "Imię";
+"found_pet_detail_finder_phone" = "Telefon";
+"found_pet_detail_found_at" = "Znaleziono";
+"found_pet_detail_no_contact" = "Znalazca nie udostępnił jeszcze kontaktu.";
+"found_pet_detail_open_in_maps" = "Otwórz w mapach";
+"found_pet_detail_title" = "Znaleziony pupil";
+"found_pet_form_add_photo" = "Dodaj zdjęcie";
+"found_pet_form_address_placeholder" = "Albo wpisz adres";
+"found_pet_form_breed_placeholder" = "Rasa (np. mieszaniec jamnika)";
+"found_pet_form_change_photo" = "Zmień zdjęcie";
+"found_pet_form_color_placeholder" = "Kolor (np. brązowy z białą piersią)";
+"found_pet_form_contact" = "Twój kontakt (opcjonalnie)";
+"found_pet_form_details" = "Szczegóły";
+"found_pet_form_email_placeholder" = "E-mail";
+"found_pet_form_found_at" = "Kiedy go znalazłeś?";
+"found_pet_form_location" = "Gdzie go znalazłeś?";
+"found_pet_form_location_hint" = "Wymagany jest GPS albo adres.";
+"found_pet_form_name_placeholder" = "Twoje imię";
+"found_pet_form_phone_placeholder" = "Telefon";
+"found_pet_form_photo" = "Zdjęcie (opcjonalnie)";
+"found_pet_form_photo_hint" = "Ze zdjęciem właścicielowi dużo łatwiej rozpoznać swojego pupila.";
+"found_pet_form_remove_photo" = "Usuń zdjęcie";
+"found_pet_form_sex" = "Płeć";
+"found_pet_form_sex_female" = "Samica";
+"found_pet_form_sex_male" = "Samiec";
+"found_pet_form_sex_unknown" = "Nie wiem";
+"found_pet_form_share_contact" = "Udostępniam swoje dane kontaktowe";
+"found_pet_form_species" = "Gatunek";
+"found_pet_form_submit" = "Wyślij";
+"found_pet_form_title" = "Zgłoś znalezionego pupila";
+"found_pet_form_use_gps" = "Moja aktualna lokalizacja";
+"found_pet_form_validation_evidence" = "Dodaj zdjęcie albo krótki opis, żeby właściciel mógł rozpoznać pupila.";
+"found_pet_form_validation_location" = "Stuknij w „Moja aktualna lokalizacja\" albo wpisz adres.";
+"found_pet_unknown_breed" = "Nieznana rasa";
+"lost_and_found_cta_body" = "Zgłoś go tutaj, żeby szybciej wrócił do domu.";
+"lost_and_found_cta_title" = "Znalazłeś bezpańskiego pupila?";
+"lost_and_found_description" = "Zaginione i znalezione pupile w twojej okolicy oraz twoje własne zgłoszenia zaginięć.";
+"lost_and_found_eyebrow" = "Alerty";
+"lost_and_found_filter_species_label" = "Gatunek";
+"lost_and_found_filter_status_label" = "Status";
+"lost_and_found_legend_radius %lld" = "promień %lld km";
+"lost_and_found_search_placeholder" = "Szukaj po imieniu, rasie lub lokalizacji…";
+"lost_and_found_species_all" = "Wszystkie";
+"lost_and_found_species_cat" = "Koty";
+"lost_and_found_species_cat_singular" = "Kot";
+"lost_and_found_species_dog" = "Psy";
+"lost_and_found_species_dog_singular" = "Pies";
+"lost_and_found_species_other_singular" = "Inne";
+"lost_and_found_status_all" = "Wszystkie";
+"lost_and_found_status_community" = "Znaleziony pupil";
+"lost_and_found_status_missing" = "Zaginiony";
+"lost_and_found_title" = "Alerty";
+"lost_and_found_unknown_pet" = "Zaginiony pupil";
+"lost_and_found_view_list" = "Lista";
+"lost_and_found_view_map" = "Mapa";
+"my_pets_pending_tag_cta_title" = "Aktywuj swoją blaszkę";
+"contacts_show_on_tag" = "Pokaż w profilu blaszki";
+"found_pet_form_geocode_failed" = "Nie mogę znaleźć tego adresu na mapie. Spróbuj podać dokładniejszy.";
+"found_pet_form_gps_unavailable" = "Nie udało się pobrać twojej lokalizacji. Wpisz adres ręcznie.";
+
+"my_pets_pending_tag_cta_subtitle %lld" = "%lld blaszek czeka na aktywację";

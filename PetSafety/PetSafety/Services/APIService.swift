@@ -50,6 +50,11 @@ enum APIError: Error, LocalizedError {
     /// on. Synthesised locally without ever hitting the network — mirrors
     /// the Android AppCheckInterceptor fail-closed behaviour (audit H47).
     case appCheckRequired
+    /// Backend rejected a tier-gated request (currently mark-missing) for a
+    /// starter user. Carries the server's localized error string so callers
+    /// can fall back to showing it, but the typical handler swaps the UI to
+    /// the upgrade prompt rather than displaying the message as a toast.
+    case paidPlanRequired(String)
 
     var errorDescription: String? {
         switch self {
@@ -69,6 +74,8 @@ enum APIError: Error, LocalizedError {
             return String(localized: "api_error_network \(error.localizedDescription)")
         case .appCheckRequired:
             return String(localized: "api_error_app_check_required")
+        case .paidPlanRequired(let message):
+            return message
         }
     }
 }
@@ -380,6 +387,12 @@ class APIService {
                 }
                 // Generic 403
                 if let errorResponse = try? decoder.decode(ErrorResponse.self, from: data) {
+                    // Tier-gated routes (currently /pets/:id/mark-missing) emit
+                    // a stable discriminator so callers can swap to the upgrade
+                    // UI instead of showing a generic error toast.
+                    if errorResponse.code == "PAID_PLAN_REQUIRED" {
+                        throw APIError.paidPlanRequired(errorResponse.error)
+                    }
                     throw APIError.serverError(errorResponse.error)
                 }
                 throw APIError.serverError("Access denied")
@@ -848,6 +861,58 @@ class APIService {
         return response.sighting
     }
 
+    // MARK: - Community Found Pets
+
+    /// Fetch community-submitted found-pet reports within `radiusKm` of a point.
+    /// Public endpoint; mirrors the web Lost & Found board.
+    func getNearbyFoundPets(
+        latitude: Double,
+        longitude: Double,
+        radiusKm: Double = 25,
+        species: CommunityFoundPet.Species? = nil
+    ) async throws -> [CommunityFoundPet] {
+        struct NearbyFoundPetsResponse: Codable {
+            let reports: [CommunityFoundPet]
+            let count: Int
+        }
+
+        var endpoint = "/community/found-pets/nearby?lat=\(latitude)&lng=\(longitude)&radius=\(radiusKm)"
+        if let species {
+            endpoint += "&species=\(species.rawValue)"
+        }
+        let request = try await buildRequest(
+            endpoint: endpoint,
+            method: "GET",
+            requiresAuth: false
+        )
+        let response = try await performRequest(request, responseType: NearbyFoundPetsResponse.self)
+        return response.reports
+    }
+
+    /// Submit a community found-pet report. Public — anonymous reporters
+    /// allowed; logged-in users are matched by auth cookie/bearer if present.
+    /// Returns the created report plus a single-use manage token the caller
+    /// should persist (see `FoundPetManageTokenStore`) so the same device
+    /// can mark the report as reunited / remove it later without an account.
+    func createFoundPet(_ payload: CreateFoundPetRequest) async throws -> (report: CommunityFoundPet, manageToken: String) {
+        struct CreateFoundPetResponse: Codable {
+            let report: CommunityFoundPet
+            let manageToken: String
+        }
+
+        var request = try await buildRequest(
+            endpoint: "/community/found-pets",
+            method: "POST",
+            requiresAuth: false
+        )
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpBody = payload.multipartBody(boundary: boundary)
+
+        let response = try await performRequest(request, responseType: CreateFoundPetResponse.self)
+        return (response.report, response.manageToken)
+    }
+
     // MARK: - QR Tags
 
     /// Look up a QR tag by code to determine its status before deciding what to show
@@ -870,10 +935,23 @@ class APIService {
         return try await performRequest(request, responseType: ScanResponse.self)
     }
 
-    func activateTag(qrCode: String, petId: String) async throws -> QRTag {
+    /// Activate a QR tag.
+    ///
+    /// Pass `petId` for an existing pet (replacement-tag flow, or
+    /// older clients whose wizard still updates-then-activates).
+    ///
+    /// Pass `petData` for the post-2026-05-24 first-tag flow: pets
+    /// are no longer auto-created at order payment, so the wizard
+    /// sends the full pet payload and the backend atomically creates
+    /// the pet AND activates the tag in one round-trip. Mirrors the
+    /// shape claimPromoTag has used since the promo flow shipped.
+    func activateTag(qrCode: String, petId: String? = nil, petData: CreatePetRequest? = nil) async throws -> QRTag {
+        precondition(petId != nil || petData != nil, "activateTag requires either petId or petData")
+
         struct ActivateRequest: Codable {
             let qrCode: String
-            let petId: String
+            let petId: String?
+            let petData: CreatePetRequest?
         }
 
         struct ActivateResponse: Codable {
@@ -884,7 +962,7 @@ class APIService {
         let request = try await buildRequest(
             endpoint: "/qr-tags/activate",
             method: "POST",
-            body: ActivateRequest(qrCode: qrCode, petId: petId),
+            body: ActivateRequest(qrCode: qrCode, petId: petId, petData: petData),
             requiresAuth: true
         )
         let response = try await performRequest(request, responseType: ActivateResponse.self)
@@ -1004,10 +1082,17 @@ class APIService {
     }
 
     func getDeliveryPoints(zipCode: String) async throws -> [DeliveryPoint] {
+        // requiresAuth: true so the backend's optionalAuth middleware
+        // sees the bearer token and the apiRateLimiter keys this
+        // request to the user's bucket (300/15min) instead of the
+        // shared IP bucket. Without it, every NAT-mate browsing
+        // checkout shared one 300/15min budget on staging and the
+        // user got "couldn't find PostaPont" errors as a side effect
+        // of the 429 fail-closed path (audit 2026-05-25).
         let request = try await buildRequest(
             endpoint: "/orders/delivery-points?zipCode=\(zipCode)",
             method: "GET",
-            requiresAuth: false
+            requiresAuth: true
         )
         return try await performRequest(request, responseType: [DeliveryPoint].self)
     }

@@ -32,7 +32,8 @@ struct PaymentIntentTests {
             countryCode: "SK",
             platform: "ios",
             deliveryMethod: nil,
-            postapointDetails: nil
+            postapointDetails: nil,
+            promoCode: nil
         )
 
         let data = try JSONEncoder().encode(request)

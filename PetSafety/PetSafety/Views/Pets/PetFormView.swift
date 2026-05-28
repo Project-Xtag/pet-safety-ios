@@ -514,15 +514,10 @@ struct PetFormView: View {
                     onAllDone?() ?? dismiss()
                 } label: {
                     Text("go_to_home")
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color("BrandColor"))
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
                 }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 40)
+                .buttonStyle(PrimaryPillButtonStyle())
+                .padding(.horizontal, AppSpacing.xl)
+                .padding(.bottom, AppSpacing.xxl)
             }
         }
         .navigationTitle(Text("tag_activated"))
@@ -531,23 +526,30 @@ struct PetFormView: View {
 
     private func postSaveActionCard(icon: String, text: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            HStack(spacing: 14) {
-                Image(systemName: icon)
-                    .font(.appFont(size: 18))
-                    .foregroundColor(Color("BrandColor"))
-                    .frame(width: 24)
+            HStack(spacing: AppSpacing.md) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: AppRadius.sm, style: .continuous)
+                        .fill(Color.brandOrange.opacity(0.10))
+                        .frame(width: 36, height: 36)
+                    Image(systemName: icon)
+                        .font(.appFont(size: 16, weight: .semibold))
+                        .foregroundColor(.brandOrangeDeep)
+                }
                 Text(text)
-                    .font(.appFont(.subheadline))
-                    .fontWeight(.medium)
-                    .foregroundColor(.primary)
+                    .font(.appFont(size: 15, weight: .semibold))
+                    .foregroundColor(.ink)
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .font(.appFont(.caption))
-                    .foregroundColor(.secondary)
+                    .font(.appFont(size: 13, weight: .semibold))
+                    .foregroundColor(.mutedText)
             }
-            .padding()
-            .background(Color(UIColor.systemGray6))
-            .cornerRadius(12)
+            .padding(AppSpacing.lg)
+            .background(Color.cream)
+            .clipShape(RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+                    .stroke(Color.softBorder, lineWidth: 1)
+            )
         }
         .buttonStyle(PlainButtonStyle())
     }

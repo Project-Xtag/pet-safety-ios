@@ -492,9 +492,9 @@
 "help_faq_q9" = "Wie funktionieren Vermisst-Meldungen?";
 "help_faq_a9" = "Wenn du deine Katze oder deinen Hund als vermisst markierst, wird eine Meldung mit dem Foto und den Daten deines Haustieres erstellt. SENRA-Nutzer im Umkreis von 10 km werden sofort benachrichtigt, und dein Haustier erscheint auf der Karte 'Vermisste Haustiere'. Auch im SENRA-System registrierte Tierärzte und Tierheime in deiner Gegend erhalten die Meldung. Jeder, der die Haustiermarke deines Haustieres scannt, kann dir den Fundort und seine Kontaktdaten senden. Er kann dich auch direkt kontaktieren, wenn du deine Kontaktdaten in deinem Profil öffentlich gemacht hast.";
 "help_faq_q10" = "Wie bestelle ich eine Ersatzmarke?";
-"help_faq_a10" = "Gehe zur Seite 'Startseite/Mein Benutzerkonto' und tippe auf 'Ersatzmarke bestellen'. Wähle aus, welches Haustier eine neue Haustiermarke braucht. Maximum- und Standard-Abonnenten können kostenlose Ersatzmarken anfordern, während Starter-Mitglieder Ersatz für die Versandkosten bestellen können.";
+"help_faq_a10" = "Gehe zur Seite 'Startseite/Mein Benutzerkonto' und tippe auf 'Ersatzmarke bestellen'. Wähle aus, welches Haustier eine neue Haustiermarke braucht. Kedvenc-Abonnenten können kostenlose Ersatzmarken anfordern, während Starter-Mitglieder Ersatz für die Versandkosten bestellen können.";
 "help_faq_q11" = "Was ist das Empfehlungsprogramm?";
-"help_faq_a11" = "Im Empfehlungsmenü auf deiner Profilseite kannst du einen persönlichen Empfehlungscode generieren. Teile ihn mit Freunden und Familie. Wenn jemand deinen Code verwendet und ein bezahltes Abo (Standard oder Maximum) abschließt, erhalten du und dein Freund 2 Monate kostenlos. Du kannst deine Empfehlungen und deren Status auf der Empfehlungsseite verfolgen.";
+"help_faq_a11" = "Im Empfehlungsmenü auf deiner Profilseite kannst du einen persönlichen Empfehlungscode generieren. Teile ihn mit Freunden und Familie. Wenn jemand deinen Code verwendet und ein bezahltes Abo (Kedvenc) abschließt, erhalten du und dein Freund 2 Monate kostenlos. Du kannst deine Empfehlungen und deren Status auf der Empfehlungsseite verfolgen.";
 "help_faq_q12" = "In welche Länder liefert ihr?";
 "help_faq_a12" = "Wir liefern derzeit nach Ungarn, Slowakei, Tschechien, Österreich, Rumänien, Kroatien, Spanien, Italien, Frankreich, Deutschland, Norwegen und Portugal. Inlandsversand innerhalb Ungarns: {{huPostapoint}} (PostaPont) oder {{huHome}} (Hauszustellung). Internationaler Versand: {{intlPrice}} pro Bestellung.";
 "help_faq_q13" = "Kann ich mehrere Haustiere in einem Benutzerkonto haben?";
@@ -718,7 +718,7 @@
 "contacts_no_type_added" = "Keine %@ hinzugefügt";
 
 // MARK: - Zusätzliche Ersatz-Namensschild-Schlüssel
-"order_replace_upgrade_hint" = "Upgrade auf Standard oder Maximum für kostenlose Ersatz-Namensschilder";
+"order_replace_upgrade_hint" = "Upgrade auf Kedvenc für kostenlose Ersatz-Namensschilder";
 "order_replace_old_deactivated" = "dein alter QR-Code wird deaktiviert, sobald du diese Bestellung aufgeben";
 "order_replace_delivery_time" = "Du erhältst deine neue Haustiermarke innerhalb von 5–7 Werktagen";
 "order_replace_scan_activate" = "Sobald du die neue Haustiermarke erhältst, musst du sie zum Aktivieren scannen";
@@ -728,6 +728,8 @@
 
 // MARK: - Plan-Auswahl
 "plan_choose_title" = "Plan auswählen";
+"plan_starter_display_name" = "Starter-Paket";
+"plan_standard_display_name" = "Haustier-Paket";
 "plan_tag_activated" = "Marke aktiviert!";
 "plan_choose_subtitle" = "Wähle einen Plan, um alle Funktionen freizuschalten";
 "plan_upgrade_title" = "Plan upgraden";
@@ -989,7 +991,7 @@
 "help_guide_materials_title" = "Materialien & Haltbarkeit";
 "help_guide_materials_desc" = "SENRA Haustiermarken bestehen aus strapazierfähigem, leichtem Metall mit einer Epoxidbeschichtung für zusätzlichen Schutz. Sie sind wasserfest und UV-beständig, geeignet für alle Wetterbedingungen. Sie nutzen sich nicht bei täglichem Gebrauch ab. Die Marken sind so gestaltet, dass sie bequem an die meisten Halsbänder und Geschirre passen.";
 "help_guide_emergency_title" = "Notfallkontakt-Funktionen";
-"help_guide_emergency_desc" = "Wenn jemand die Haustiermarke deines Haustieres scannt, erhältst du sofort eine Push-Benachrichtigung und E-Mail mit dem Standort des Finders. Standard und Maximum Mitglieder erhalten auch SMS-Benachrichtigungen für schnellere Reaktion. Wenn du dein Haustier als vermisst markierst, wird eine Gemeinschaftswarnung an alle SENRA Nutzer im Umkreis von 10 km gesendet, und registrierte Tierärzte und Tierheime in deiner Nähe werden ebenfalls benachrichtigt. Jeder in der Gemeinschaft kann Sichtungen mit Standort und Fotos melden, um dir zu helfen, dein Haustier zu finden.";
+"help_guide_emergency_desc" = "Wenn jemand die Haustiermarke deines Haustieres scannt, erhältst du sofort eine Push-Benachrichtigung und E-Mail mit dem Standort des Finders. Kedvenc Mitglieder erhalten auch SMS-Benachrichtigungen für schnellere Reaktion. Wenn du dein Haustier als vermisst markierst, wird eine Gemeinschaftswarnung an alle SENRA Nutzer im Umkreis von 10 km gesendet, und registrierte Tierärzte und Tierheime in deiner Nähe werden ebenfalls benachrichtigt. Jeder in der Gemeinschaft kann Sichtungen mit Standort und Fotos melden, um dir zu helfen, dein Haustier zu finden.";
 "help_guide_profile_title" = "Profilverwaltung";
 "help_guide_profile_desc" = "Das digitale Profil deines Haustieres ist das Herzstück von SENRA. Gib die grundlegenden Daten ein: Name ist bereits vorhanden, Art, Rasse, Alter und lade ein gutes Foto hoch. Du kannst auch Gesundheitsinformationen, Allergien, Medikamente und besondere Erkennungsmerkmale angeben. Wenn jemand die Haustiermarke deines Haustieres scannt, sieht er dieses Profil, daher ist es wichtig, es aktuell zu halten. Dein Profil hilft Findern, dein Haustier zu erkennen und zu wissen, was zu tun ist.";
 "help_guide_missing_alerts_title" = "Vermisstmeldungen & Sichtungen";
@@ -1306,7 +1308,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Community-Warnungen erfordern ein Senra-Abonnement.";
 "mark_lost_starter_upgrade_cta" = "Pläne ansehen";
-"mark_lost_upgrade_prompt" = "Mit dem Starter-Plan wird dein Haustier als vermisst markiert, aber Benachrichtigungen an Nutzer, Tierärzte und Tierheime erfordern ein Standard- oder Maximum-Abo.";
+"mark_lost_upgrade_prompt" = "Mit dem Starter-Plan wird dein Haustier als vermisst markiert, aber Benachrichtigungen an Nutzer, Tierärzte und Tierheime erfordern ein Kedvenc-Abo.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "z.B. 3 Jahre, 6 Monate (optional)";
 "create_pet_profile" = "Profil erstellen";
@@ -1440,3 +1442,75 @@
 "order_promo_code_remove" = "Entfernen";
 "order_promo_code_applied_free_shipping" = "Rabatt aktiviert — Kostenloser Versand";
 "order_promo_code_invalid" = "Dieser Promo-Code ist nicht gültig.";
+
+
+// 2026-05-25 cross-locale parity backfill
+"common_cancel" = "Abbrechen";
+"common_done" = "Fertig";
+"found_pet_detail_address" = "Ort";
+"found_pet_detail_breed" = "Rasse";
+"found_pet_detail_color" = "Farbe";
+"found_pet_detail_distance" = "Entfernung";
+"found_pet_detail_finder_contact" = "Kontakt des Finders";
+"found_pet_detail_finder_email" = "E-Mail";
+"found_pet_detail_finder_name" = "Name";
+"found_pet_detail_finder_phone" = "Telefon";
+"found_pet_detail_found_at" = "Gefunden";
+"found_pet_detail_no_contact" = "Der Finder hat noch keine Kontaktdaten angegeben.";
+"found_pet_detail_open_in_maps" = "In Karten öffnen";
+"found_pet_detail_title" = "Gefundenes Haustier";
+"found_pet_form_add_photo" = "Foto hinzufügen";
+"found_pet_form_address_placeholder" = "Oder gib die Adresse ein";
+"found_pet_form_breed_placeholder" = "Rasse (z. B. Dackelmischling)";
+"found_pet_form_change_photo" = "Foto ändern";
+"found_pet_form_color_placeholder" = "Farbe (z. B. braun mit weißer Brust)";
+"found_pet_form_contact" = "Deine Kontaktdaten (optional)";
+"found_pet_form_details" = "Details";
+"found_pet_form_email_placeholder" = "E-Mail";
+"found_pet_form_found_at" = "Wann hast du es gefunden?";
+"found_pet_form_location" = "Wo hast du es gefunden?";
+"found_pet_form_location_hint" = "GPS oder eine Adresse ist erforderlich.";
+"found_pet_form_name_placeholder" = "Dein Name";
+"found_pet_form_phone_placeholder" = "Telefon";
+"found_pet_form_photo" = "Foto (optional)";
+"found_pet_form_photo_hint" = "Mit einem Foto kann der Besitzer sein Haustier viel leichter erkennen.";
+"found_pet_form_remove_photo" = "Foto entfernen";
+"found_pet_form_sex" = "Geschlecht";
+"found_pet_form_sex_female" = "Weiblich";
+"found_pet_form_sex_male" = "Männlich";
+"found_pet_form_sex_unknown" = "Weiß nicht";
+"found_pet_form_share_contact" = "Meine Kontaktdaten teilen";
+"found_pet_form_species" = "Tierart";
+"found_pet_form_submit" = "Absenden";
+"found_pet_form_title" = "Gefundenes Haustier melden";
+"found_pet_form_use_gps" = "Meinen Standort verwenden";
+"found_pet_form_validation_evidence" = "Füge ein Foto oder eine kurze Beschreibung hinzu, damit der Besitzer das Haustier erkennen kann.";
+"found_pet_form_validation_location" = "Tippe auf „Meinen Standort verwenden\" oder gib eine Adresse ein.";
+"found_pet_unknown_breed" = "Unbekannte Rasse";
+"lost_and_found_cta_body" = "Melde es hier, damit es schneller nach Hause findet.";
+"lost_and_found_cta_title" = "Hast du ein streunendes Haustier gefunden?";
+"lost_and_found_description" = "Vermisste und gefundene Haustiere in deiner Umgebung und deine eigenen Vermisstmeldungen.";
+"lost_and_found_eyebrow" = "Meldungen";
+"lost_and_found_filter_species_label" = "Tierart";
+"lost_and_found_filter_status_label" = "Status";
+"lost_and_found_legend_radius %lld" = "Umkreis von %lld km";
+"lost_and_found_search_placeholder" = "Suche nach Name, Rasse oder Ort…";
+"lost_and_found_species_all" = "Alle";
+"lost_and_found_species_cat" = "Katzen";
+"lost_and_found_species_cat_singular" = "Katze";
+"lost_and_found_species_dog" = "Hunde";
+"lost_and_found_species_dog_singular" = "Hund";
+"lost_and_found_species_other_singular" = "Sonstige";
+"lost_and_found_status_all" = "Alle";
+"lost_and_found_status_community" = "Gefundenes Haustier";
+"lost_and_found_status_missing" = "Vermisst";
+"lost_and_found_title" = "Meldungen";
+"lost_and_found_unknown_pet" = "Vermisstes Haustier";
+"lost_and_found_view_list" = "Liste";
+"lost_and_found_view_map" = "Karte";
+"my_pets_pending_tag_cta_title" = "Aktiviere deine Marke";
+"contacts_show_on_tag" = "Auf dem Markenprofil anzeigen";
+"found_pet_form_geocode_failed" = "Diese Adresse konnte auf der Karte nicht gefunden werden. Versuche es mit einer genaueren.";
+"found_pet_form_gps_unavailable" = "Dein Standort konnte nicht ermittelt werden. Bitte gib die Adresse manuell ein.";
+
+"my_pets_pending_tag_cta_subtitle %lld" = "%lld Marken warten auf Aktivierung";

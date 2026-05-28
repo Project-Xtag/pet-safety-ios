@@ -221,7 +221,13 @@ struct DeliveryPoint: Codable, Identifiable {
     let address: String?
     let city: String?
     let postcode: String?
-    let openingHours: String?
+    /// 'PP' for manned PostaPonts, 'CS' for parcel lockers (Csomagautomata).
+    /// Server-side filter returns both; clients can group or filter as needed.
+    let type: String?
+    /// Distance from the searched zip code in kilometres (≤ 10 km radius
+    /// per the backend filter). Null when the zip code couldn't be
+    /// geocoded — render without the distance label in that case.
+    let distance: Double?
 }
 
 struct TagCheckoutResponse: Codable {

@@ -206,6 +206,21 @@ class DeepLinkService: ObservableObject {
     /// - Just the code: PS-XXXXXXXX
     /// - Full URL: https://senra.pet/qr/PS-XXXXXXXX
     /// - Custom scheme: senra://tag/PS-XXXXXXXX
+    ///
+    /// Host whitelist mirrors the backend's qrCodeParser.ts KNOWN_HOSTS
+    /// and web's lib/extractTagCode.ts — staging hosts are
+    /// deliberately included because admin-generated staging QRs
+    /// encode `https://staging-app.senra.pet/t/<code>` and without
+    /// them every staging scan reads as "no tag for this QR code"
+    /// (the full URL gets sent verbatim and the backend qr_code
+    /// lookup misses).
+    static let knownTagHosts: Set<String> = [
+        "senra.pet",
+        "www.senra.pet",
+        "staging-app.senra.pet",
+        "staging.senra.pet",
+    ]
+
     static func extractTagCode(from scannedValue: String) -> String {
         let trimmed = scannedValue.trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -216,10 +231,10 @@ class DeepLinkService: ObservableObject {
         // (nanoid alphabet includes both cases) so we never fold it.
         if let url = URL(string: trimmed) {
             let scheme = url.scheme?.lowercased()
-            let host = url.host?.lowercased()
+            let host = url.host?.lowercased() ?? ""
 
-            // https://senra.pet/qr/{code}, https://senra.pet/t/{code}, or with country prefix
-            if (scheme == "https" || scheme == "http") && (host == "senra.pet" || host == "www.senra.pet") {
+            // https://<known-host>/qr/{code} or /t/{code}, with optional country prefix
+            if (scheme == "https" || scheme == "http") && knownTagHosts.contains(host) {
                 var pathComponents = url.pathComponents.filter { $0 != "/" }
                 // Strip country prefix
                 if let first = pathComponents.first, WebURLHelper.validCountryCodes.contains(first.lowercased()) {

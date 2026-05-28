@@ -14,6 +14,22 @@ class SubscriptionViewModel: ObservableObject {
         currentSubscription?.planName ?? "None"
     }
 
+    /// User-facing name for the current plan. Maps the backend slug
+    /// ("starter" / "standard") to the localized branded label
+    /// ("Induló csomag" / "Kedvenc csomag" in HU, "Starter pack" /
+    /// "Pet pack" in EN). Pre-fix the Profile view rendered the raw
+    /// slug `.capitalized`, so HU users saw "Standard" instead of
+    /// "Kedvenc csomag" while Android already mapped via string
+    /// resources. Falls back to the capitalized slug for legacy or
+    /// future plan names that don't have a translation yet.
+    var currentPlanDisplayName: String {
+        switch currentPlanName.lowercased() {
+        case "starter":  return String(localized: "plan_starter_display_name")
+        case "standard": return String(localized: "plan_standard_display_name")
+        default:         return currentPlanName.capitalized
+        }
+    }
+
     var hasActiveSubscription: Bool {
         currentSubscription?.isActive ?? false
     }

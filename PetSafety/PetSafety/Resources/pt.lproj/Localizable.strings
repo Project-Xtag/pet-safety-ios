@@ -492,9 +492,9 @@
 "help_faq_q9" = "Como funcionam os alertas de animais de estimação perdidos?";
 "help_faq_a9" = "Quando marcas o teu gato ou cão como perdido, é criado um alerta com a foto e dados do teu animal de estimação. Os utilizadores SENRA num raio de 10 km são imediatamente notificados e o teu animal de estimação aparece no mapa 'Animais de estimação Perdidos'. Veterinários e abrigos registados no sistema SENRA na tua zona também recebem o alerta.";
 "help_faq_q10" = "Como peço uma plaquinha inteligente de substituição?";
-"help_faq_a10" = "Vai à página 'Início/A Minha Conta' e toca em 'Pedir Plaquinha inteligente de Substituição'. Seleciona qual animal de estimação precisa de uma nova plaquinha inteligente. Os subscritores Maximum e Standard podem solicitar plaquinhas inteligentes de substituição gratuitas, enquanto os membros Starter podem pedir substituições pelo custo de envio.";
+"help_faq_a10" = "Vai à página 'Início/A Minha Conta' e toca em 'Pedir Plaquinha inteligente de Substituição'. Seleciona qual animal de estimação precisa de uma nova plaquinha inteligente. Os subscritores Kedvenc podem solicitar plaquinhas inteligentes de substituição gratuitas, enquanto os membros Starter podem pedir substituições pelo custo de envio.";
 "help_faq_q11" = "O que é o programa de referência?";
-"help_faq_a11" = "No menu de Referências na tua página de Perfil, podes gerar um código de referência pessoal. Partilha-o com amigos e família. Quando alguém usar o teu código e subscrever um plano pago (Standard ou Maximum), tu e o teu amigo recebem 2 meses grátis.";
+"help_faq_a11" = "No menu de Referências na tua página de Perfil, podes gerar um código de referência pessoal. Partilha-o com amigos e família. Quando alguém usar o teu código e subscrever um plano pago (Kedvenc), tu e o teu amigo recebem 2 meses grátis.";
 "help_faq_q12" = "Para que países enviam?";
 "help_faq_a12" = "Atualmente enviamos para Hungria, Eslováquia, República Checa, Áustria, Roménia, Croácia, Espanha, Itália, França, Alemanha, Noruega e Portugal. Envio nacional na Hungria: {{huPostapoint}} (PostaPont) ou {{huHome}} (entrega ao domicílio). Envio internacional: {{intlPrice}} por encomenda.";
 "help_faq_q13" = "Posso ter vários animais de estimação numa conta?";
@@ -718,7 +718,7 @@
 "contacts_no_type_added" = "Nenhum %@ adicionado";
 
 // MARK: - Chaves adicionais de substituição de encomenda
-"order_replace_upgrade_hint" = "Faça upgrade para Standard ou Maximum para substituições gratuitas";
+"order_replace_upgrade_hint" = "Faça upgrade para Kedvenc para substituições gratuitas";
 "order_replace_old_deactivated" = "O seu antigo código QR será desativado quando fizer esta encomenda";
 "order_replace_delivery_time" = "Receberá a sua nova plaquinha inteligente em 5-7 dias úteis";
 "order_replace_scan_activate" = "Assim que receber a nova plaquinha inteligente, deverá lê-la para a ativar";
@@ -728,6 +728,8 @@
 
 // MARK: - Seleção de plano
 "plan_choose_title" = "Escolha o seu plano";
+"plan_starter_display_name" = "Pack Inicial";
+"plan_standard_display_name" = "Pack Animal";
 "plan_tag_activated" = "Plaquinha ativada!";
 "plan_choose_subtitle" = "Escolha um plano para desbloquear todas as funcionalidades";
 "plan_upgrade_title" = "Melhore o seu plano";
@@ -987,9 +989,9 @@
 "help_guide_qr_tags_title" = "Plaquinhas inteligentes QR para animais de estimação";
 "help_guide_qr_tags_desc" = "Cada plaquinha inteligente SENRA tem um código QR único que se liga ao perfil digital do teu animal de estimação. Qualquer pessoa que encontre o teu animal de estimação pode ler o código com a câmara do telemóvel — não é necessário descarregar nenhuma aplicação. O leitor mostra instantaneamente a foto do teu animal de estimação, nome, informações médicas e os teus dados de contacto. Também podem partilhar a localização GPS contigo para saberes exatamente onde está o teu animal de estimação. As plaquinhas inteligentes funcionam com todos os smartphones modernos.";
 "help_guide_materials_title" = "Materiais e durabilidade";
-"help_guide_materials_desc" = "As plaquinhas inteligentes SENRA são feitas de metal durável e leve, com revestimento epóxi para proteção extra. São à prova de água e resistentes aos raios UV, adequadas para todas as condições meteorológicas. As plaquinhas inteligentes prendem-se de forma segura à coleira do teu animal de estimação. Se uma plaquinha inteligente ficar danificada ou o código QR já não for legível, podes encomendar uma substituição na tua página de Conta — grátis para membros dos planos Standard e Maximum.";
+"help_guide_materials_desc" = "As plaquinhas inteligentes SENRA são feitas de metal durável e leve, com revestimento epóxi para proteção extra. São à prova de água e resistentes aos raios UV, adequadas para todas as condições meteorológicas. As plaquinhas inteligentes prendem-se de forma segura à coleira do teu animal de estimação. Se uma plaquinha inteligente ficar danificada ou o código QR já não for legível, podes encomendar uma substituição na tua página de Conta — grátis para membros dos planos Kedvenc.";
 "help_guide_emergency_title" = "Funcionalidades de contacto de emergência";
-"help_guide_emergency_desc" = "Quando alguém lê a plaquinha inteligente do teu animal de estimação, recebes instantaneamente uma notificação push e um e-mail com a localização de quem o encontrou. Os membros dos planos Standard e Maximum também recebem alertas por SMS para uma resposta mais rápida. Se marcares o teu animal de estimação como desaparecido, é enviado um alerta comunitário a todos os utilizadores SENRA num raio de 10 km, e os veterinários e abrigos registados na tua área também são notificados. Qualquer pessoa na comunidade pode reportar avistamentos com a localização e fotos, ajudando-te a encontrar o teu animal de estimação.";
+"help_guide_emergency_desc" = "Quando alguém lê a plaquinha inteligente do teu animal de estimação, recebes instantaneamente uma notificação push e um e-mail com a localização de quem o encontrou. Os membros dos planos Kedvenc também recebem alertas por SMS para uma resposta mais rápida. Se marcares o teu animal de estimação como desaparecido, é enviado um alerta comunitário a todos os utilizadores SENRA num raio de 10 km, e os veterinários e abrigos registados na tua área também são notificados. Qualquer pessoa na comunidade pode reportar avistamentos com a localização e fotos, ajudando-te a encontrar o teu animal de estimação.";
 "help_guide_profile_title" = "Gestão de perfil";
 "help_guide_profile_desc" = "O perfil digital do teu animal de estimação é o coração da SENRA. Adiciona os dados essenciais: o nome já lá está, espécie, raça, idade e carrega uma foto de boa qualidade. Também podes incluir informações de saúde, alergias, medicamentos e características especiais que ajudem a identificar o teu animal de estimação. Quando alguém lê a plaquinha inteligente do teu animal de estimação, verá este perfil, por isso é importante que esteja atualizado. O teu perfil ajuda quem procura a reconhecer o teu animal de estimação e a saber o que fazer se o encontrar.";
 "help_guide_missing_alerts_title" = "Alertas de animais de estimação desaparecidos e avistamentos";
@@ -1306,7 +1308,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Os alertas da comunidade requerem uma subscrição Senra.";
 "mark_lost_starter_upgrade_cta" = "Ver planos";
-"mark_lost_upgrade_prompt" = "Com o plano Starter o teu animal de estimação será marcado como desaparecido, mas as notificações a utilizadores, veterinários e abrigos requerem uma subscrição Standard ou Maximum.";
+"mark_lost_upgrade_prompt" = "Com o plano Starter o teu animal de estimação será marcado como desaparecido, mas as notificações a utilizadores, veterinários e abrigos requerem uma subscrição Kedvenc.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "ex. 3 anos, 6 meses (opcional)";
 "create_pet_profile" = "Criar perfil";
@@ -1440,3 +1442,75 @@
 "order_promo_code_remove" = "Remover";
 "order_promo_code_applied_free_shipping" = "Desconto aplicado — Envio grátis";
 "order_promo_code_invalid" = "Este código promocional não é válido.";
+
+
+// 2026-05-25 cross-locale parity backfill
+"common_cancel" = "Cancelar";
+"common_done" = "Concluído";
+"found_pet_detail_address" = "Localização";
+"found_pet_detail_breed" = "Raça";
+"found_pet_detail_color" = "Cor";
+"found_pet_detail_distance" = "Distância";
+"found_pet_detail_finder_contact" = "Contacto de quem encontrou";
+"found_pet_detail_finder_email" = "Email";
+"found_pet_detail_finder_name" = "Nome";
+"found_pet_detail_finder_phone" = "Telefone";
+"found_pet_detail_found_at" = "Encontrado";
+"found_pet_detail_no_contact" = "Quem encontrou ainda não partilhou um contacto.";
+"found_pet_detail_open_in_maps" = "Abrir no mapa";
+"found_pet_detail_title" = "Animal encontrado";
+"found_pet_form_add_photo" = "Adicionar foto";
+"found_pet_form_address_placeholder" = "Ou escreve a morada";
+"found_pet_form_breed_placeholder" = "Raça (ex.: dachshund cruzado)";
+"found_pet_form_change_photo" = "Mudar foto";
+"found_pet_form_color_placeholder" = "Cor (ex.: castanho com peito branco)";
+"found_pet_form_contact" = "O teu contacto (opcional)";
+"found_pet_form_details" = "Detalhes";
+"found_pet_form_email_placeholder" = "Email";
+"found_pet_form_found_at" = "Quando o encontraste?";
+"found_pet_form_location" = "Onde o encontraste?";
+"found_pet_form_location_hint" = "É necessário GPS ou uma morada.";
+"found_pet_form_name_placeholder" = "O teu nome";
+"found_pet_form_phone_placeholder" = "Telefone";
+"found_pet_form_photo" = "Foto (opcional)";
+"found_pet_form_photo_hint" = "Com uma foto é muito mais fácil para o dono reconhecer o animal.";
+"found_pet_form_remove_photo" = "Remover foto";
+"found_pet_form_sex" = "Sexo";
+"found_pet_form_sex_female" = "Fêmea";
+"found_pet_form_sex_male" = "Macho";
+"found_pet_form_sex_unknown" = "Não sei";
+"found_pet_form_share_contact" = "Partilhar os meus contactos";
+"found_pet_form_species" = "Espécie";
+"found_pet_form_submit" = "Enviar";
+"found_pet_form_title" = "Reportar animal encontrado";
+"found_pet_form_use_gps" = "Usar a minha localização";
+"found_pet_form_validation_evidence" = "Adiciona uma foto ou uma breve descrição para o dono poder reconhecer o animal.";
+"found_pet_form_validation_location" = "Toca em \"Usar a minha localização\" ou escreve uma morada.";
+"found_pet_unknown_breed" = "Raça desconhecida";
+"lost_and_found_cta_body" = "Publica aqui para que possa voltar mais depressa para casa.";
+"lost_and_found_cta_title" = "Encontraste um animal perdido?";
+"lost_and_found_description" = "Animais desaparecidos e encontrados na tua zona, e os teus próprios alertas de desaparecimento.";
+"lost_and_found_eyebrow" = "Alertas";
+"lost_and_found_filter_species_label" = "Espécie";
+"lost_and_found_filter_status_label" = "Estado";
+"lost_and_found_legend_radius %lld" = "Raio de %lld km";
+"lost_and_found_search_placeholder" = "Pesquisar por nome, raça ou localização…";
+"lost_and_found_species_all" = "Todos";
+"lost_and_found_species_cat" = "Gatos";
+"lost_and_found_species_cat_singular" = "Gato";
+"lost_and_found_species_dog" = "Cães";
+"lost_and_found_species_dog_singular" = "Cão";
+"lost_and_found_species_other_singular" = "Outro";
+"lost_and_found_status_all" = "Todos";
+"lost_and_found_status_community" = "Animal encontrado";
+"lost_and_found_status_missing" = "Desaparecido";
+"lost_and_found_title" = "Alertas";
+"lost_and_found_unknown_pet" = "Animal desaparecido";
+"lost_and_found_view_list" = "Lista";
+"lost_and_found_view_map" = "Mapa";
+"my_pets_pending_tag_cta_title" = "Ativa a tua medalha";
+"contacts_show_on_tag" = "Mostrar no perfil da medalha";
+"found_pet_form_geocode_failed" = "Não foi possível encontrar essa morada no mapa. Tenta uma mais específica.";
+"found_pet_form_gps_unavailable" = "Não foi possível obter a tua localização. Por favor, escreve a morada manualmente.";
+
+"my_pets_pending_tag_cta_subtitle %lld" = "%lld medalhas prontas para ativar";

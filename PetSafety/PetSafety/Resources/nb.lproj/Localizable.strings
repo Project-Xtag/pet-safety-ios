@@ -492,9 +492,9 @@
 "help_faq_q9" = "Hvordan fungerer varsler om savnede kjæledyr?";
 "help_faq_a9" = "Når du merker katten eller hunden som savnet, opprettes et varsel med bilde og opplysninger. SENRA-brukere innen 10 km varsles umiddelbart og kjæledyret ditt vises på kartet 'Savnede Kjæledyr'. Veterinærer og krisesentre registrert i SENRA-systemet i ditt område mottar også varselet.";
 "help_faq_q10" = "Hvordan bestiller jeg et erstatningsmerke?";
-"help_faq_a10" = "Gå til 'Hjem/Min Konto' og trykk 'Bestill Erstatningsmerke'. Maximum- og Standard-abonnenter kan be om gratis erstatning, Starter-medlemmer betaler fraktkostnaden.";
+"help_faq_a10" = "Gå til 'Hjem/Min Konto' og trykk 'Bestill Erstatningsmerke'. Kedvenc-abonnenter kan be om gratis erstatning, Starter-medlemmer betaler fraktkostnaden.";
 "help_faq_q11" = "Hva er henvisningsprogrammet?";
-"help_faq_a11" = "I Henvisning-menyen på profilsiden din kan du generere en personlig henvisningskode. Del den med venner og familie. Når noen bruker koden din og abonnerer på en betalt plan (Standard eller Maximum), får du og vennen din 2 måneder gratis.";
+"help_faq_a11" = "I Henvisning-menyen på profilsiden din kan du generere en personlig henvisningskode. Del den med venner og familie. Når noen bruker koden din og abonnerer på en betalt plan (Kedvenc), får du og vennen din 2 måneder gratis.";
 "help_faq_q12" = "Hvilke land sender dere til?";
 "help_faq_a12" = "Vi sender for tiden til Ungarn, Slovakia, Tsjekkia, Østerrike, Romania, Kroatia, Spania, Italia, Frankrike, Tyskland, Norge og Portugal. Innenlands frakt i Ungarn: {{huPostapoint}} (PostaPont) eller {{huHome}} (hjemmelevering). Internasjonal frakt: {{intlPrice}} per bestilling.";
 "help_faq_q13" = "Kan jeg ha flere kjæledyr på én konto?";
@@ -546,9 +546,9 @@
 "help_guide_qr_tags_title" = "QR-brikker for kjæledyr";
 "help_guide_qr_tags_desc" = "Hver SENRA QR-brikke har en unik QR-kode som lenker til dyrets digitale profil. Alle som finner dyret ditt kan skanne koden med telefonkameraet – ingen app-nedlasting nødvendig. Skanneren ser umiddelbart dyrets bilde, navn, medisinsk informasjon og kontaktopplysningene dine. De kan også dele GPS-posisjonen sin med deg slik at du vet nøyaktig hvor dyret ditt er. QR-brikkene fungerer med alle moderne smarttelefoner.";
 "help_guide_materials_title" = "QR-brikkens materiale og holdbarhet";
-"help_guide_materials_desc" = "SENRA QR-brikker er laget av holdbart, lett metall med et epoksybelegg for ekstra beskyttelse. De er vanntette og UV-resistente, egnet for alle værforhold. QR-koden er trykt med blekkresistent blekk for å forbli skannbar over tid. QR-brikkene festes trygt til dyrets halsbånd. Hvis en QR-brikke blir skadet eller QR-koden ikke lenger lar seg skanne, kan du bestille erstatning fra kontosiden – gratis for Standard og Maximum.";
+"help_guide_materials_desc" = "SENRA QR-brikker er laget av holdbart, lett metall med et epoksybelegg for ekstra beskyttelse. De er vanntette og UV-resistente, egnet for alle værforhold. QR-koden er trykt med blekkresistent blekk for å forbli skannbar over tid. QR-brikkene festes trygt til dyrets halsbånd. Hvis en QR-brikke blir skadet eller QR-koden ikke lenger lar seg skanne, kan du bestille erstatning fra kontosiden – gratis for Kedvenc.";
 "help_guide_emergency_title" = "Nødkontakt og varsler";
-"help_guide_emergency_desc" = "Når noen skanner dyrets QR-brikke, mottar du et øyeblikkelig varsel på e-post med finnerens posisjon. Standard og Maximum mottar også SMS-varsler for raskere respons. Hvis du merker dyret ditt som savnet, sendes et fellesskapsvarsel til alle SENRA-brukere innen 10 km, og registrerte veterinærer og dyrevernorganisasjoner i ditt område varsles også. Alle i fellesskapet kan rapportere observasjoner med posisjonen sin, og skaper et spor for å hjelpe deg å finne dyret.";
+"help_guide_emergency_desc" = "Når noen skanner dyrets QR-brikke, mottar du et øyeblikkelig varsel på e-post med finnerens posisjon. Kedvenc mottar også SMS-varsler for raskere respons. Hvis du merker dyret ditt som savnet, sendes et fellesskapsvarsel til alle SENRA-brukere innen 10 km, og registrerte veterinærer og dyrevernorganisasjoner i ditt område varsles også. Alle i fellesskapet kan rapportere observasjoner med posisjonen sin, og skaper et spor for å hjelpe deg å finne dyret.";
 "help_guide_profile_title" = "Administrasjon av dyreprofil";
 "help_guide_profile_desc" = "Dyrets digitale profil er hjertet i SENRA. Legg til viktige detaljer som navn, art, rase, alder og et tydelig bilde. Du kan også inkludere medisinsk informasjon (allergier, medisiner, tilstander), mikrochipnummer og unike kjennetegn som hjelper med å identifisere dyret ditt. Last opp flere bilder til et galleri. All informasjon kan oppdateres når som helst fra seksjonen 'Dyrene mine'. Du kontrollerer hvilke av personopplysningene dine (telefon, e-post, adresse) som vises for folk som skanner QR-brikken.";
 "help_guide_missing_alerts_title" = "Savnet-varsler og observasjoner";
@@ -731,7 +731,7 @@
 "contacts_no_type_added" = "Ingen %@ lagt til";
 
 // MARK: - Ytterligere nøkler for erstatningsmerke
-"order_replace_upgrade_hint" = "Oppgrader til Standard eller Maximum for gratis erstatninger";
+"order_replace_upgrade_hint" = "Oppgrader til Kedvenc for gratis erstatninger";
 "order_replace_old_deactivated" = "Den gamle QR-koden deaktiveres når du legger inn denne bestillingen";
 "order_replace_delivery_time" = "Du mottar den nye QR-brikken innen 5–7 virkedager";
 "order_replace_scan_activate" = "Når du mottar den nye QR-brikken, må du skanne den for å aktivere den";
@@ -741,6 +741,8 @@
 
 // MARK: - Abonnementsvalg
 "plan_choose_title" = "Velg abonnementet ditt";
+"plan_starter_display_name" = "Startpakke";
+"plan_standard_display_name" = "Kjæledyrpakke";
 "plan_tag_activated" = "QR-brikke aktivert!";
 "plan_choose_subtitle" = "Velg et abonnement for å låse opp alle funksjoner";
 "plan_upgrade_title" = "Oppgrader abonnementet ditt";
@@ -1305,7 +1307,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Fellesskapsvarsler krever et Senra-abonnement.";
 "mark_lost_starter_upgrade_cta" = "Se abonnementer";
-"mark_lost_upgrade_prompt" = "Med Starter-planen blir kjæledyret ditt markert som savnet, men varsler til brukere, veterinærer og dyreinternat krever et Standard- eller Maximum-abonnement.";
+"mark_lost_upgrade_prompt" = "Med Starter-planen blir kjæledyret ditt markert som savnet, men varsler til brukere, veterinærer og dyreinternat krever et Kedvenc-abonnement.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "f.eks. 3 år, 6 måneder (valgfritt)";
 "create_pet_profile" = "Opprett profil";
@@ -1439,3 +1441,79 @@
 "order_promo_code_remove" = "Fjern";
 "order_promo_code_applied_free_shipping" = "Rabatt aktivert — Gratis frakt";
 "order_promo_code_invalid" = "Denne kampanjekoden er ikke gyldig.";
+
+
+// 2026-05-25 cross-locale parity backfill
+"common_cancel" = "Avbryt";
+"common_done" = "Ferdig";
+"found_pet_detail_address" = "Sted";
+"found_pet_detail_breed" = "Rase";
+"found_pet_detail_color" = "Farge";
+"found_pet_detail_distance" = "Avstand";
+"found_pet_detail_finder_contact" = "Kontaktinfo til finner";
+"found_pet_detail_finder_email" = "E-post";
+"found_pet_detail_finder_name" = "Navn";
+"found_pet_detail_finder_phone" = "Telefon";
+"found_pet_detail_found_at" = "Funnet";
+"found_pet_detail_no_contact" = "Finneren har ikke delt kontaktinfo ennå.";
+"found_pet_detail_open_in_maps" = "Åpne i kart";
+"found_pet_detail_title" = "Funnet kjæledyr";
+"found_pet_form_add_photo" = "Legg til bilde";
+"found_pet_form_address_placeholder" = "Eller skriv inn adressen";
+"found_pet_form_breed_placeholder" = "Rase (f.eks. dachshundblanding)";
+"found_pet_form_change_photo" = "Bytt bilde";
+"found_pet_form_color_placeholder" = "Farge (f.eks. brun med hvit bryst)";
+"found_pet_form_contact" = "Din kontaktinfo (valgfritt)";
+"found_pet_form_details" = "Detaljer";
+"found_pet_form_email_placeholder" = "E-post";
+"found_pet_form_found_at" = "Når fant du det?";
+"found_pet_form_location" = "Hvor fant du det?";
+"found_pet_form_location_hint" = "GPS eller adresse er påkrevd.";
+"found_pet_form_name_placeholder" = "Navnet ditt";
+"found_pet_form_phone_placeholder" = "Telefon";
+"found_pet_form_photo" = "Bilde (valgfritt)";
+"found_pet_form_photo_hint" = "Et bilde gjør det mye lettere for eieren å kjenne igjen kjæledyret sitt.";
+"found_pet_form_remove_photo" = "Fjern bilde";
+"found_pet_form_sex" = "Kjønn";
+"found_pet_form_sex_female" = "Hunn";
+"found_pet_form_sex_male" = "Hann";
+"found_pet_form_sex_unknown" = "Vet ikke";
+"found_pet_form_share_contact" = "Del kontaktinfoen min";
+"found_pet_form_species" = "Art";
+"found_pet_form_submit" = "Send inn";
+"found_pet_form_title" = "Meld inn funnet kjæledyr";
+"found_pet_form_use_gps" = "Bruk min posisjon";
+"found_pet_form_validation_evidence" = "Legg til et bilde eller en kort beskrivelse, så eieren kan kjenne igjen kjæledyret.";
+"found_pet_form_validation_location" = "Trykk på \"Bruk min posisjon\", eller skriv inn en adresse.";
+"found_pet_unknown_breed" = "Ukjent rase";
+"lost_and_found_cta_body" = "Legg det ut her, så det kan komme seg hjem raskere.";
+"lost_and_found_cta_title" = "Funnet et herreløst kjæledyr?";
+"lost_and_found_description" = "Savnede og funnede kjæledyr i området ditt, og dine egne savnetvarsler.";
+"lost_and_found_eyebrow" = "Varsler";
+"lost_and_found_filter_species_label" = "Art";
+"lost_and_found_filter_status_label" = "Status";
+"lost_and_found_legend_radius %lld" = "%lld km radius";
+"lost_and_found_search_placeholder" = "Søk etter navn, rase eller sted…";
+"lost_and_found_species_all" = "Alle";
+"lost_and_found_species_cat" = "Katter";
+"lost_and_found_species_cat_singular" = "Katt";
+"lost_and_found_species_dog" = "Hunder";
+"lost_and_found_species_dog_singular" = "Hund";
+"lost_and_found_species_other_singular" = "Annet";
+"lost_and_found_status_all" = "Alle";
+"lost_and_found_status_community" = "Funnet kjæledyr";
+"lost_and_found_status_missing" = "Savnet";
+"lost_and_found_title" = "Varsler";
+"lost_and_found_unknown_pet" = "Savnet kjæledyr";
+"lost_and_found_view_list" = "Liste";
+"lost_and_found_view_map" = "Kart";
+"my_pets_pending_tag_cta_title" = "Aktiver merket ditt";
+"contacts_show_on_tag" = "Vis på merkeprofilen";
+"found_pet_form_geocode_failed" = "Fant ikke denne adressen på kartet. Prøv en mer presis adresse.";
+"found_pet_form_gps_unavailable" = "Kunne ikke hente posisjonen din. Skriv inn en adresse i stedet.";
+"alerts_no_nearby_found_message" = "Det er ingen aktive varsler om funne kjæledyr i området ditt akkurat nå.";
+"alerts_no_nearby_found_title" = "Ingen varsler om funne kjæledyr i nærheten";
+"alerts_no_nearby_missing_message" = "Det er ingen aktive varsler om savnede kjæledyr i området ditt akkurat nå.";
+"alerts_no_nearby_missing_title" = "Ingen varsler om savnede kjæledyr i nærheten";
+
+"my_pets_pending_tag_cta_subtitle %lld" = "%lld merker venter på aktivering";

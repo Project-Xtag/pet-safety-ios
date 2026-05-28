@@ -492,9 +492,9 @@
 "help_faq_q9" = "Comment fonctionnent les alertes d'animaux de compagnie perdus ?";
 "help_faq_a9" = "Lorsque tu marques ton chat ou ton chien comme perdu, une alerte est créée avec la photo et les détails de ton animal de compagnie. Les utilisateurs SENRA dans un rayon de 10 km sont immédiatement notifiés et ton animal de compagnie apparaît sur la carte « Animaux de compagnie perdus ». Les vétérinaires et refuges enregistrés dans le système SENRA de ta région reçoivent également l'alerte.";
 "help_faq_q10" = "Comment commander une médaille connectée de remplacement ?";
-"help_faq_a10" = "Va à la page « Accueil / Mon compte » et appuie sur « Commander une médaille connectée de remplacement ». Sélectionne l'animal de compagnie qui a besoin d'une nouvelle médaille connectée. Les abonnés Maximum et Standard peuvent demander des remplacements gratuits, les membres Starter paient les frais de port.";
+"help_faq_a10" = "Va à la page « Accueil / Mon compte » et appuie sur « Commander une médaille connectée de remplacement ». Sélectionne l'animal de compagnie qui a besoin d'une nouvelle médaille connectée. Les abonnés Kedvenc peuvent demander des remplacements gratuits, les membres Starter paient les frais de port.";
 "help_faq_q11" = "Qu'est-ce que le programme de parrainage ?";
-"help_faq_a11" = "Dans le menu Parrainage sur ta page de Profil, tu peux générer un code de parrainage personnel. Partage-le avec tes amis et ta famille. Quand quelqu'un utilise ton code et s'abonne à un plan payant (Standard ou Maximum), toi et ton ami obtenez 2 mois gratuits.";
+"help_faq_a11" = "Dans le menu Parrainage sur ta page de Profil, tu peux générer un code de parrainage personnel. Partage-le avec tes amis et ta famille. Quand quelqu'un utilise ton code et s'abonne à un plan payant (Kedvenc), toi et ton ami obtenez 2 mois gratuits.";
 "help_faq_q12" = "Dans quels pays livrez-tu ?";
 "help_faq_a12" = "Nous livrons actuellement en Hongrie, Slovaquie, République tchèque, Autriche, Roumanie, Croatie, Espagne, Italie, France, Allemagne, Norvège et Portugal. Livraison nationale en Hongrie : {{huPostapoint}} (PostaPont) ou {{huHome}} (livraison à domicile). Livraison internationale : {{intlPrice}} par commande.";
 "help_faq_q13" = "Puis-je avoir plusieurs animaux de compagnie sur un seul compte ?";
@@ -545,9 +545,9 @@
 "help_guide_qr_tags_title" = "Médailles connectées QR pour animaux de compagnie";
 "help_guide_qr_tags_desc" = "Chaque médaille connectée SENRA présente un code QR unique qui renvoie au profil numérique de ton animal de compagnie. Toute personne qui trouve ton animal de compagnie peut scanner le code avec l'appareil photo de son téléphone — aucun téléchargement d'application nécessaire. Le scanner voit immédiatement la photo, le nom, les informations médicales de ton animal de compagnie et tes coordonnées. Il peut aussi partager sa position GPS avec toi pour que tu saches exactement où se trouve ton animal de compagnie. Les médailles connectées fonctionnent avec tous les smartphones modernes.";
 "help_guide_materials_title" = "Matériau et durabilité de la médaille connectée";
-"help_guide_materials_desc" = "Les médailles connectées SENRA sont fabriquées en métal léger et durable avec un revêtement époxy pour une protection supplémentaire. Elles sont imperméables et résistantes aux UV, adaptées à toutes les conditions météorologiques. Le code QR est imprimé avec une encre résistante à l'usure pour rester scannable dans le temps. Les médailles connectées s'attachent solidement au collier de ton animal de compagnie. Si une médaille connectée est endommagée ou si le code QR ne peut plus être scanné, tu peux commander un remplacement depuis la page Compte — gratuit pour les membres Standard et Maximum.";
+"help_guide_materials_desc" = "Les médailles connectées SENRA sont fabriquées en métal léger et durable avec un revêtement époxy pour une protection supplémentaire. Elles sont imperméables et résistantes aux UV, adaptées à toutes les conditions météorologiques. Le code QR est imprimé avec une encre résistante à l'usure pour rester scannable dans le temps. Les médailles connectées s'attachent solidement au collier de ton animal de compagnie. Si une médaille connectée est endommagée ou si le code QR ne peut plus être scanné, tu peux commander un remplacement depuis la page Compte — gratuit pour les membres Kedvenc.";
 "help_guide_emergency_title" = "Contact d'urgence et alertes";
-"help_guide_emergency_desc" = "Lorsque quelqu'un scanne la médaille connectée de ton animal de compagnie, tu reçois instantanément une notification par e-mail avec la position du découvreur. Les membres Standard et Maximum reçoivent aussi des alertes SMS pour une réaction plus rapide. Si tu marques ton animal de compagnie comme perdu, une alerte communautaire est envoyée à tous les utilisateurs SENRA dans un rayon de 10 km, et les vétérinaires et refuges enregistrés dans ta région sont également notifiés. Toute personne de la communauté peut signaler des observations avec sa position, créant une piste pour t'aider à retrouver ton animal de compagnie.";
+"help_guide_emergency_desc" = "Lorsque quelqu'un scanne la médaille connectée de ton animal de compagnie, tu reçois instantanément une notification par e-mail avec la position du découvreur. Les membres Kedvenc reçoivent aussi des alertes SMS pour une réaction plus rapide. Si tu marques ton animal de compagnie comme perdu, une alerte communautaire est envoyée à tous les utilisateurs SENRA dans un rayon de 10 km, et les vétérinaires et refuges enregistrés dans ta région sont également notifiés. Toute personne de la communauté peut signaler des observations avec sa position, créant une piste pour t'aider à retrouver ton animal de compagnie.";
 "help_guide_profile_title" = "Gestion du profil de l'animal de compagnie";
 "help_guide_profile_desc" = "Le profil numérique de ton animal de compagnie est le cœur de SENRA. Ajoute des informations essentielles comme le nom, l'espèce, la race, l'âge et une photo nette. Tu peux aussi inclure des informations médicales (allergies, médicaments, pathologies), le numéro de puce et les traits distinctifs qui aident à identifier ton animal de compagnie. Téléverse plusieurs photos dans une galerie. Toutes les informations peuvent être mises à jour à tout moment depuis la section « Mes animaux de compagnie ». Tu contrôles lesquelles de tes coordonnées personnelles (téléphone, e-mail, adresse) sont visibles pour les personnes qui scannent la médaille connectée.";
 "help_guide_missing_alerts_title" = "Alertes d'animaux disparus et observations";
@@ -729,7 +729,7 @@
 "contacts_no_type_added" = "Aucun(e) %@ ajouté(e)";
 
 // MARK: - Clés supplémentaires pour la commande de remplacement
-"order_replace_upgrade_hint" = "Passe au forfait Standard ou Maximum pour des remplacements gratuits";
+"order_replace_upgrade_hint" = "Passe au forfait Kedvenc pour des remplacements gratuits";
 "order_replace_old_deactivated" = "Ton ancien QR code sera désactivé lors de la commande";
 "order_replace_delivery_time" = "Tu recevras ta nouvelle médaille connectée sous 2–3 jours ouvrés";
 "order_replace_scan_activate" = "La médaille connectée est prête à l'emploi, tu n'as pas besoin de l'activer";
@@ -739,6 +739,8 @@
 
 // MARK: - Sélection du forfait
 "plan_choose_title" = "Choisis ton forfait";
+"plan_starter_display_name" = "Pack Découverte";
+"plan_standard_display_name" = "Pack Compagnon";
 "plan_load_failed" = "Impossible de charger les forfaits";
 "plan_feature_qr_tag" = "Médaille connectée QR pour ton animal de compagnie";
 "plan_feature_scan_notif" = "Notifications instantanées lors du scan";
@@ -1309,7 +1311,7 @@
 // MARK: - Starter Plan Notice
 "mark_lost_starter_notice" = "Les alertes communautaires nécessitent un abonnement Senra.";
 "mark_lost_starter_upgrade_cta" = "Voir les forfaits";
-"mark_lost_upgrade_prompt" = "Avec le plan Starter ton animal sera marqué comme disparu, mais les notifications aux utilisateurs, vétérinaires et refuges nécessitent un abonnement Standard ou Maximum.";
+"mark_lost_upgrade_prompt" = "Avec le plan Starter ton animal sera marqué comme disparu, mais les notifications aux utilisateurs, vétérinaires et refuges nécessitent un abonnement Kedvenc.";
 // MARK: - Localization Audit Fixes
 "age_optional" = "ex. 3 ans, 6 mois (facultatif)";
 "create_pet_profile" = "Créer profil";
@@ -1443,3 +1445,75 @@
 "order_promo_code_remove" = "Retirer";
 "order_promo_code_applied_free_shipping" = "Remise appliquée — Livraison gratuite";
 "order_promo_code_invalid" = "Ce code promo n'est pas valide.";
+
+
+// 2026-05-25 cross-locale parity backfill
+"common_cancel" = "Annuler";
+"common_done" = "Terminé";
+"found_pet_detail_address" = "Lieu";
+"found_pet_detail_breed" = "Race";
+"found_pet_detail_color" = "Couleur";
+"found_pet_detail_distance" = "Distance";
+"found_pet_detail_finder_contact" = "Coordonnées de la personne";
+"found_pet_detail_finder_email" = "E-mail";
+"found_pet_detail_finder_name" = "Nom";
+"found_pet_detail_finder_phone" = "Téléphone";
+"found_pet_detail_found_at" = "Trouvé le";
+"found_pet_detail_no_contact" = "La personne qui l\'a trouvé n\'a pas encore partagé ses coordonnées.";
+"found_pet_detail_open_in_maps" = "Ouvrir dans Plans";
+"found_pet_detail_title" = "Animal trouvé";
+"found_pet_form_add_photo" = "Ajouter une photo";
+"found_pet_form_address_placeholder" = "Ou saisis l\'adresse";
+"found_pet_form_breed_placeholder" = "Race (ex. croisé teckel)";
+"found_pet_form_change_photo" = "Changer la photo";
+"found_pet_form_color_placeholder" = "Couleur (ex. marron avec poitrail blanc)";
+"found_pet_form_contact" = "Tes coordonnées (facultatif)";
+"found_pet_form_details" = "Détails";
+"found_pet_form_email_placeholder" = "E-mail";
+"found_pet_form_found_at" = "Quand l\'as-tu trouvé ?";
+"found_pet_form_location" = "Où l\'as-tu trouvé ?";
+"found_pet_form_location_hint" = "Le GPS ou une adresse est requis.";
+"found_pet_form_name_placeholder" = "Ton nom";
+"found_pet_form_phone_placeholder" = "Téléphone";
+"found_pet_form_photo" = "Photo (facultatif)";
+"found_pet_form_photo_hint" = "Une photo permet au propriétaire de reconnaître bien plus facilement son animal.";
+"found_pet_form_remove_photo" = "Supprimer la photo";
+"found_pet_form_sex" = "Sexe";
+"found_pet_form_sex_female" = "Femelle";
+"found_pet_form_sex_male" = "Mâle";
+"found_pet_form_sex_unknown" = "Je ne sais pas";
+"found_pet_form_share_contact" = "Partager mes coordonnées";
+"found_pet_form_species" = "Espèce";
+"found_pet_form_submit" = "Envoyer";
+"found_pet_form_title" = "Signaler un animal trouvé";
+"found_pet_form_use_gps" = "Ma position actuelle";
+"found_pet_form_validation_evidence" = "Ajoute une photo ou une courte description pour que le propriétaire puisse reconnaître l\'animal.";
+"found_pet_form_validation_location" = "Appuie sur « Ma position actuelle » ou saisis une adresse.";
+"found_pet_unknown_breed" = "Race inconnue";
+"lost_and_found_cta_body" = "Publie-le ici pour qu\'il puisse rentrer chez lui au plus vite.";
+"lost_and_found_cta_title" = "Tu as trouvé un animal errant ?";
+"lost_and_found_description" = "Les animaux perdus et trouvés près de chez toi, ainsi que tes propres alertes de disparition.";
+"lost_and_found_eyebrow" = "Alertes";
+"lost_and_found_filter_species_label" = "Espèce";
+"lost_and_found_filter_status_label" = "Statut";
+"lost_and_found_legend_radius %lld" = "Rayon de %lld km";
+"lost_and_found_search_placeholder" = "Rechercher par nom, race ou lieu…";
+"lost_and_found_species_all" = "Tous";
+"lost_and_found_species_cat" = "Chats";
+"lost_and_found_species_cat_singular" = "Chat";
+"lost_and_found_species_dog" = "Chiens";
+"lost_and_found_species_dog_singular" = "Chien";
+"lost_and_found_species_other_singular" = "Autre";
+"lost_and_found_status_all" = "Tous";
+"lost_and_found_status_community" = "Animal trouvé";
+"lost_and_found_status_missing" = "Disparu";
+"lost_and_found_title" = "Alertes";
+"lost_and_found_unknown_pet" = "Animal disparu";
+"lost_and_found_view_list" = "Liste";
+"lost_and_found_view_map" = "Carte";
+"my_pets_pending_tag_cta_title" = "Active ta médaille";
+"contacts_show_on_tag" = "Afficher sur le profil de la médaille";
+"found_pet_form_geocode_failed" = "Impossible de trouver cette adresse sur la carte. Essaie d\'en saisir une plus précise.";
+"found_pet_form_gps_unavailable" = "Impossible d\'obtenir ta position. Saisis plutôt une adresse à la main.";
+
+"my_pets_pending_tag_cta_subtitle %lld" = "%lld médailles à activer";

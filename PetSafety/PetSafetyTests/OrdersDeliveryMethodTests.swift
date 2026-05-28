@@ -62,7 +62,8 @@ struct DeliveryPointTests {
             "address": "Petőfi S. u. 17-19",
             "city": "Budapest",
             "postcode": "1052",
-            "openingHours": "H-P: 8:00-18:00"
+            "type": "PP",
+            "distance": 1.4
         ]
         let point: DeliveryPoint = try decodeJSON(json)
 
@@ -71,7 +72,8 @@ struct DeliveryPointTests {
         #expect(point.address == "Petőfi S. u. 17-19")
         #expect(point.city == "Budapest")
         #expect(point.postcode == "1052")
-        #expect(point.openingHours == "H-P: 8:00-18:00")
+        #expect(point.type == "PP")
+        #expect(point.distance == 1.4)
     }
 
     @Test("DeliveryPoint decodes with missing optional fields")
@@ -87,7 +89,8 @@ struct DeliveryPointTests {
         #expect(point.address == nil)
         #expect(point.city == nil)
         #expect(point.postcode == nil)
-        #expect(point.openingHours == nil)
+        #expect(point.type == nil)
+        #expect(point.distance == nil)
     }
 
     @Test("DeliveryPoint conforms to Identifiable")
@@ -111,7 +114,8 @@ struct CreateTagCheckoutRequestTests {
             countryCode: "HU",
             platform: "ios",
             deliveryMethod: nil,
-            postapointDetails: nil
+            postapointDetails: nil,
+            promoCode: nil
         )
         let dict = try encodeToDict(request)
 
@@ -127,7 +131,8 @@ struct CreateTagCheckoutRequestTests {
             countryCode: "HU",
             platform: "ios",
             deliveryMethod: "home_delivery",
-            postapointDetails: nil
+            postapointDetails: nil,
+            promoCode: nil
         )
         let dict = try encodeToDict(request)
 
@@ -141,7 +146,8 @@ struct CreateTagCheckoutRequestTests {
             countryCode: "HU",
             platform: "ios",
             deliveryMethod: "postapoint",
-            postapointDetails: PostaPointDetails(id: "pp-1", name: "Posta 1", address: "Test St")
+            postapointDetails: PostaPointDetails(id: "pp-1", name: "Posta 1", address: "Test St"),
+            promoCode: nil
         )
         let dict = try encodeToDict(request)
 
@@ -160,7 +166,8 @@ struct CreateTagCheckoutRequestTests {
             countryCode: "SK",
             platform: "ios",
             deliveryMethod: nil,
-            postapointDetails: nil
+            postapointDetails: nil,
+            promoCode: nil
         )
         let dict = try encodeToDict(request)
 

@@ -4,6 +4,7 @@ import PhotosUI
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject private var subscriptionViewModel = SubscriptionViewModel()
+    @StateObject private var petsViewModel = PetsViewModel()
     @AppStorage("appearanceMode") private var appearanceMode: String = "system"
     @State private var showingLogoutAlert = false
     @State private var selectedPhoto: PhotosPickerItem?
@@ -42,6 +43,7 @@ struct ProfileView: View {
         }
         .task {
             await subscriptionViewModel.loadCurrentSubscription()
+            await petsViewModel.fetchPets()
         }
     }
 
@@ -154,16 +156,20 @@ struct ProfileView: View {
                                 .accessibilityAddTraits(.isHeader)
                         }
 
-                        Text(subscriptionViewModel.currentPlanName.capitalized)
-                            .font(.appFont(size: 14))
-                            .foregroundColor(.mutedText)
+                        // The plan only means something once the user has a
+                        // pet on an activated tag — until then, show nothing.
+                        if petsViewModel.pets.contains(where: { $0.hasActiveTag == true }) {
+                            Text(subscriptionViewModel.currentPlanDisplayName)
+                                .font(.appFont(size: 14))
+                                .foregroundColor(.mutedText)
+                        }
                     }
                 }
             }
             .padding(.bottom, 24)
         }
         .frame(maxWidth: .infinity)
-        .background(Color.peachBackground)
+        .background(Color.cream)
     }
 
     // MARK: - Menu Section
@@ -198,27 +204,26 @@ struct ProfileView: View {
             }
         }
         .background(Color(UIColor.systemBackground))
-        .cornerRadius(16)
-        .padding(.horizontal, 24)
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.lg, style: .continuous)
+                .stroke(Color.softBorder, lineWidth: 1)
+        )
+        .shadow(color: Color.black.opacity(0.05), radius: 14, x: 0, y: 6)
+        .padding(.horizontal, AppSpacing.xl)
     }
 
     // MARK: - Logout Section
     private var logoutSection: some View {
         Button(action: { showingLogoutAlert = true }) {
-            HStack(spacing: 12) {
+            HStack(spacing: AppSpacing.md) {
                 Image(systemName: "rectangle.portrait.and.arrow.right")
-                    .font(.appFont(size: 18))
+                    .font(.appFont(size: 17, weight: .semibold))
                 Text("profile_log_out")
-                    .font(.appFont(size: 16, weight: .semibold))
             }
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(Color.brandOrange)
-            .cornerRadius(16)
-            .shadow(color: Color.brandOrange.opacity(0.3), radius: 8, x: 0, y: 4)
         }
-        .padding(.horizontal, 24)
+        .buttonStyle(SecondaryPillButtonStyle())
+        .padding(.horizontal, AppSpacing.xl)
     }
 }
 
@@ -228,25 +233,32 @@ struct ProfileMenuRow: View {
     let title: String
 
     var body: some View {
-        HStack(spacing: 16) {
-            Image(systemName: icon)
-                .font(.appFont(size: 18))
-                .foregroundColor(.mutedText)
-                .frame(width: 24)
+        HStack(spacing: AppSpacing.lg) {
+            // Tinted square icon — softens the row-divider feel
+            // into something more tactile, lines up visually with
+            // the InfoCard discs on the pet detail screen.
+            ZStack {
+                RoundedRectangle(cornerRadius: AppRadius.sm, style: .continuous)
+                    .fill(Color.brandOrange.opacity(0.10))
+                    .frame(width: 36, height: 36)
+                Image(systemName: icon)
+                    .font(.appFont(size: 16, weight: .semibold))
+                    .foregroundColor(.brandOrangeDeep)
+            }
 
             Text(title)
-                .font(.appFont(size: 15, weight: .medium))
-                .foregroundColor(.primary)
+                .font(.appFont(size: 16, weight: .semibold))
+                .foregroundColor(.ink)
 
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.appFont(size: 14, weight: .medium))
-                .foregroundColor(Color(UIColor.systemGray3))
+                .font(.appFont(size: 13, weight: .semibold))
+                .foregroundColor(.mutedText)
                 .accessibilityHidden(true)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 16)
+        .padding(.horizontal, AppSpacing.lg)
+        .padding(.vertical, AppSpacing.lg)
         .background(Color(UIColor.systemBackground))
     }
 }
