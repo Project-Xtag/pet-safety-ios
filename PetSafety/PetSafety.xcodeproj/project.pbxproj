@@ -150,6 +150,7 @@
 				1DAD36892EB818CC001F54AA /* Sources */,
 				1DAD368A2EB818CC001F54AA /* Frameworks */,
 				1DAD368B2EB818CC001F54AA /* Resources */,
+				1DC0FFEE1DC0FFEE1DC0FFEE /* Upload dSYMs to Sentry */,
 			);
 			buildRules = (
 			);
@@ -295,6 +296,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1DC0FFEE1DC0FFEE1DC0FFEE /* Upload dSYMs to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload dSYMs to Sentry";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Sentry dSYM upload — symbolicates release crashes. No-op (exit 0) when\n# sentry-cli or a Sentry auth token is unavailable, so debug/local builds\n# never break. Org is on Sentry's EU region (de.sentry.io). Token comes\n# from SENTRY_AUTH_TOKEN or sentry-cli's ~/.sentryclirc.\nif ! command -v sentry-cli >/dev/null 2>&1; then echo \"warning: sentry-cli not installed — skipping Sentry dSYM upload\"; exit 0; fi\nif [ -z \"${SENTRY_AUTH_TOKEN:-}\" ] && [ ! -f \"$HOME/.sentryclirc\" ]; then echo \"warning: no Sentry auth — skipping dSYM upload\"; exit 0; fi\nexport SENTRY_ORG=pet-safety\nexport SENTRY_PROJECT=pet-safety-ios\nexport SENTRY_URL=https://de.sentry.io\nsentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" || echo \"warning: Sentry dSYM upload failed (non-fatal)\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1DAD36892EB818CC001F54AA /* Sources */ = {
