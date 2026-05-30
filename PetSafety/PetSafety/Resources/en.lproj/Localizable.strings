@@ -1527,3 +1527,14 @@
 "order_promo_code_remove" = "Remove";
 "order_promo_code_applied_free_shipping" = "Discount applied — Free shipping";
 "order_promo_code_invalid" = "This promo code isn't valid.";
+
+// MARK: - Vaccinations (Stage B)
+"vaccinations_title" = "Vaccinations";
+"vaccinations_section_empty" = "No vaccination records yet";
+"vaccinations_add_cta" = "Add vaccination record";
+"vaccinations_show_all" = "Show all (%lld)";
+"vaccinations_status_valid" = "Valid";
+"vaccinations_status_expiring" = "Expiring soon";
+"vaccinations_status_expired" = "Expired";
+"vaccinations_home_title" = "Vaccination reminders";
+"vaccinations_home_all_up_to_date" = "All vaccinations up to date";

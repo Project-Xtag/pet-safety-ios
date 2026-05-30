@@ -1525,3 +1525,14 @@
 "order_promo_code_remove" = "Eltávolítás";
 "order_promo_code_applied_free_shipping" = "Kedvezmény érvényesítve — Ingyenes szállítás";
 "order_promo_code_invalid" = "Ez a kuponkód nem érvényes.";
+
+// MARK: - Vaccinations (Stage B)
+"vaccinations_title" = "Oltások";
+"vaccinations_section_empty" = "Nincs még oltás rögzítve";
+"vaccinations_add_cta" = "Oltás hozzáadása";
+"vaccinations_show_all" = "Összes megtekintése (%lld)";
+"vaccinations_status_valid" = "Érvényes";
+"vaccinations_status_expiring" = "Hamarosan lejár";
+"vaccinations_status_expired" = "Lejárt";
+"vaccinations_home_title" = "Oltási emlékeztetők";
+"vaccinations_home_all_up_to_date" = "Minden oltás érvényes";

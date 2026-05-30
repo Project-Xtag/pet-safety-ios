@@ -1514,3 +1514,14 @@
 "found_pet_form_gps_unavailable" = "No se ha podido obtener tu ubicación. Por favor, escribe la dirección a mano.";
 
 "my_pets_pending_tag_cta_subtitle %lld" = "%lld placas listas para activar";
+
+// MARK: - Vaccinations (Stage B)
+"vaccinations_title" = "Vacunas";
+"vaccinations_section_empty" = "Aún no hay vacunas registradas";
+"vaccinations_add_cta" = "Añadir vacuna";
+"vaccinations_show_all" = "Ver todas (%lld)";
+"vaccinations_status_valid" = "Vigente";
+"vaccinations_status_expiring" = "Caduca pronto";
+"vaccinations_status_expired" = "Caducada";
+"vaccinations_home_title" = "Recordatorios de vacunación";
+"vaccinations_home_all_up_to_date" = "Todas las vacunas al día";

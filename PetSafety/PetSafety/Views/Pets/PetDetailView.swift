@@ -4,9 +4,11 @@ import UIKit
 struct PetDetailView: View {
     @State private var pet: Pet
     @StateObject private var viewModel = PetsViewModel()
+    @StateObject private var vaccinationsVM: VaccinationsViewModel
 
     init(pet: Pet) {
         _pet = State(initialValue: pet)
+        _vaccinationsVM = StateObject(wrappedValue: VaccinationsViewModel(petId: pet.id))
     }
     @StateObject private var alertsViewModel = AlertsViewModel()
     @StateObject private var successStoriesVM = SuccessStoriesViewModel()
@@ -20,6 +22,7 @@ struct PetDetailView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var subscriptionViewModel: SubscriptionViewModel
+    @EnvironmentObject var vaccinationGate: VaccinationGate
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
@@ -180,6 +183,16 @@ struct PetDetailView: View {
                     .padding(.horizontal)
                 }
 
+                // Vaccinations (Stage B) — gated section + add CTA. Conditional
+                // in THIS ViewBuilder so an off/unknown gate inserts nothing and
+                // leaves zero surface (no card, no add affordance); an empty
+                // custom view would still claim a VStack slot and leak spacing.
+                // `isOn` is true only on a definitive summary 200 (decision #2);
+                // emptiness here is a display concern, never a gate (decision #6).
+                if vaccinationGate.availability.isOn {
+                    VaccinationSummarySection(viewModel: vaccinationsVM)
+                }
+
                 // Additional Information
                 if pet.behaviorNotes != nil || pet.uniqueFeatures != nil {
                     VStack(alignment: .leading, spacing: 12) {
@@ -293,6 +306,25 @@ struct PetDetailView: View {
         .task {
             await successStoriesVM.fetchStoriesForPet(petId: pet.id)
             petSuccessStory = successStoriesVM.stories.first
+        }
+        // Self-heal the gate on this gated entry, not just the home landing: a
+        // VACCINATION_DUE deep-link can cold-launch straight into pet detail,
+        // bypassing PetsListView's `.task`, leaving the gate at `.unknown` and the
+        // section wrongly hidden. Idempotent; `resolve()` preserves an established
+        // `.on` on a transient blip and only flips to `.off` on a definitive 404.
+        .task {
+            await vaccinationGate.resolve()
+        }
+        // Load the per-pet vaccination list only once the gate is on. Keyed off
+        // `isOn` so it re-runs when the gate resolves `.unknown` → `.on` (incl. via
+        // the self-heal above) while this view is already on screen — and never
+        // fires a per-pet CRUD call for a feature-off user. `onDidMutate` is bound
+        // here: the single hook that keeps the home card in sync after a
+        // create/update/delete (no scattered `gate.refresh()` call sites).
+        .task(id: vaccinationGate.availability.isOn) {
+            guard vaccinationGate.availability.isOn else { return }
+            vaccinationsVM.onDidMutate = { Task { await vaccinationGate.refresh() } }
+            await vaccinationsVM.load()
         }
         .alert(String(localized: "remove_story_confirm_title"), isPresented: $showRemoveStoryConfirmation) {
             Button("cancel", role: .cancel) { }
@@ -473,4 +505,6 @@ struct FoundButtonStyle: ButtonStyle {
     }
     .environmentObject(AppState())
     .environmentObject(AuthViewModel())
+    .environmentObject(SubscriptionViewModel())
+    .environmentObject(VaccinationGate())
 }

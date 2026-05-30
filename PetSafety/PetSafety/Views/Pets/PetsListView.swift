@@ -18,6 +18,7 @@ struct PetsListView: View {
     @State private var debouncedSearchText = ""
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var vaccinationGate: VaccinationGate
 
     var hasMissingPets: Bool {
         viewModel.pets.contains(where: { $0.isMissing })
@@ -67,6 +68,19 @@ struct PetsListView: View {
 
                             // My Pets Section
                             petsSection
+
+                            // Vaccination summary (Stage B) — between Pets and
+                            // Quick Actions (roadmap §1.5). Conditional lives in
+                            // THIS ViewBuilder, not inside the card: an empty
+                            // custom view would still claim a VStack slot and
+                            // double the 24pt gap — a visible leak when the
+                            // feature is off. `showsHomeCard` is false for both
+                            // feature-off and on-but-empty, so the home stays
+                            // pixel-identical to today in those cases.
+                            if vaccinationGate.availability.showsHomeCard,
+                               let summary = vaccinationGate.availability.summary {
+                                VaccinationHomeSummarySection(summary: summary)
+                            }
 
                             // Quick Actions Section
                             quickActionsSection
@@ -136,9 +150,23 @@ struct PetsListView: View {
             await viewModel.fetchPets()
             await pendingVM.fetchPendingRegistrations()
         }
+        .task {
+            // Home landing re-resolve (#3): idempotent recovery from `.unknown`
+            // and the per-appear refresh of the gate. Separate `.task` so it runs
+            // concurrently with the pet fetch above rather than waiting on it.
+            // This is the single source of truth for the home card AND the gate's
+            // availability that every pet-detail section reads.
+            await vaccinationGate.resolve()
+        }
         .refreshable {
             await viewModel.fetchPets()
             await pendingVM.fetchPendingRegistrations()
+            // Re-resolve the gate on pull-to-refresh so the summary card reflects
+            // server-side changes (records added/removed on any pet) without an
+            // app relaunch. Same single source of truth as the landing `.task`.
+            // refresh() → resolve(): a summary 404 maps to `.off` definitively
+            // (branched first), only transient errors preserve an established `.on`.
+            await vaccinationGate.refresh()
         }
         .onReceive(NotificationCenter.default.publisher(for: .tagActivated)) { _ in
             // A tag was activated elsewhere — refresh both the pet
@@ -724,5 +752,6 @@ struct PetSelectionView: View {
         PetsListView()
             .environmentObject(AppState())
             .environmentObject(AuthViewModel())
+            .environmentObject(VaccinationGate())
     }
 }
