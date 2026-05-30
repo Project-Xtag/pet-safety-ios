@@ -15,7 +15,12 @@ class SSEService: NSObject, ObservableObject {
     @Published var lastEvent: String?
 
     // MARK: - Private Properties
-    private let baseURL = "https://api.senra.pet"
+    // Computed so it always reflects the active configuration (staging vs prod)
+    // — previously hardcoded to prod, which caused the staging build to open SSE
+    // against api.senra.pet, get permanent 401 on its staging token, and storm
+    // /auth/refresh until rate-limited. Mirrors how APIService reads
+    // ConfigurationManager.shared.apiBaseURL.
+    private var baseURL: String { ConfigurationManager.shared.sseBaseURL }
     private var urlSession: URLSession?
     private var dataTask: URLSessionDataTask?
     private var buffer = ""
