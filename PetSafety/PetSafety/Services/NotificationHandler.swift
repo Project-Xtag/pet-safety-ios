@@ -54,6 +54,8 @@ class NotificationHandler: ObservableObject {
             handleAlertConfirmation(userInfo)
         case "MULTIPLE_SIGHTINGS":
             handleMultipleSightings(userInfo)
+        case "VACCINATION_DUE":
+            handleVaccinationDueNotification(userInfo)
         default:
             // Unknown discriminator — usually means the backend rolled out a
             // new event type before the iOS app knows how to render it. The
@@ -257,6 +259,36 @@ class NotificationHandler: ObservableObject {
         )
     }
 
+    // MARK: - Vaccination Due
+
+    /// VACCINATION_DUE: a record is approaching (or past) its expiry. Payload
+    /// = {type, pet_id, vaccination_id, days_until, title, body}. Deep-link off
+    /// `pet_id` to that pet's vaccination list (a view observes
+    /// `.vaccinationDeepLink`). `vaccination_id` is forwarded so the list can
+    /// scroll to / highlight the specific record.
+    private func handleVaccinationDueNotification(_ userInfo: [AnyHashable: Any]) {
+        let petId = userInfo["pet_id"] as? String ?? ""
+        let vaccinationId = userInfo["vaccination_id"] as? String ?? ""
+
+        // Audit #69 parity: pet_id is the routing key. An empty id would deep
+        // link to the empty pet list, which a "vaccination due" reminder is
+        // not communicating — surface the malformed payload instead.
+        guard !petId.isEmpty else {
+            Self.captureMalformedPayload(reason: "missing_pet_id", type: "VACCINATION_DUE", userInfo: userInfo)
+            return
+        }
+
+        #if DEBUG
+        print("Vaccination due notification: petId=\(petId), vaccinationId=\(vaccinationId)")
+        #endif
+
+        NotificationCenter.default.post(
+            name: .vaccinationDeepLink,
+            object: nil,
+            userInfo: ["petId": petId, "vaccinationId": vaccinationId]
+        )
+    }
+
     // MARK: - Clear Pending Notification
 
     func clearPendingNotification() {
@@ -290,4 +322,8 @@ extension Notification.Name {
     static let navigateToAlert = Notification.Name("navigateToAlert")
     static let navigateToPet = Notification.Name("navigateToPet")
     static let navigateToScan = Notification.Name("navigateToScan")
+    /// Posted when a VACCINATION_DUE push is tapped. userInfo carries
+    /// `petId` (routing key) and `vaccinationId` (record to highlight). A pet
+    /// view observes this and opens the pet's vaccination list.
+    static let vaccinationDeepLink = Notification.Name("vaccinationDeepLink")
 }

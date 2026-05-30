@@ -43,6 +43,14 @@ enum APIError: Error, LocalizedError {
     case invalidResponse
     case unauthorized
     case serverError(String)
+    /// HTTP 404. Carries the server's (localized) message so callers that only
+    /// read `errorDescription` behave exactly as before. The vaccination UI
+    /// matches this **on the home-summary call only** to detect "feature off
+    /// for this user" (Stage B decision #2 — derive once from the first gated
+    /// call). A 404 from a per-id vaccination route is genuine
+    /// resource-not-found (ownership / deleted), NOT feature-off — callers must
+    /// not globally equate every vaccination 404 with the feature being off.
+    case notFound(String)
     case petLimitExceeded(SubscriptionLimitInfo)
     case decodingError
     case networkError(Error)
@@ -65,6 +73,8 @@ enum APIError: Error, LocalizedError {
         case .unauthorized:
             return String(localized: "api_error_unauthorized")
         case .serverError(let message):
+            return message
+        case .notFound(let message):
             return message
         case .petLimitExceeded:
             return String(localized: "api_error_pet_limit")
@@ -396,6 +406,17 @@ class APIService {
                     throw APIError.serverError(errorResponse.error)
                 }
                 throw APIError.serverError("Access denied")
+
+            case 404:
+                // Surfaced as a distinct case so feature-gated routes (notably
+                // the vaccination endpoints, which 404 when the flag is off)
+                // can be detected without string-matching the message. The
+                // message is preserved, so callers that only read
+                // `errorDescription` are unaffected.
+                if let errorResponse = try? decoder.decode(ErrorResponse.self, from: data) {
+                    throw APIError.notFound(errorResponse.error)
+                }
+                throw APIError.notFound("Not found")
 
             default:
                 // Capture 5xx server errors to Sentry
@@ -2060,6 +2081,147 @@ extension APIService {
             body: SupportRequest(category: category, subject: subject, message: message)
         )
         return try await performRequest(request, responseType: SupportResponse.self)
+    }
+}
+
+// MARK: - Vaccinations Extension
+//
+// Stage B (iOS) client for the Phase-1 vaccination API (locked A.3/A.4/A.5/A.7
+// contracts). Kept in this file — like the FCM / Support extensions above — so
+// it can reach the `private` `buildRequest` / `performRequest` helpers (which
+// give it the `{success, data}` unwrap, 401 auto-refresh, App Check and
+// Accept-Language for free).
+//
+// Feature gating: the auth'd routes return **404** when `vaccination.enabled`
+// is off for the user/country, surfacing as `APIError.notFound`. The
+// home-summary call is the single source of truth the UI uses to hide every
+// vaccination surface (Stage B decision #2). The public catalog endpoint is
+// NOT gated, so it never 404s on feature-off.
+extension APIService {
+
+    /// List a pet's vaccination records (active + expired). A 404 here is
+    /// ambiguous (feature off OR pet not owned/not found) — do NOT infer
+    /// feature-off from it; that inference is anchored to `fetchVaccinationSummary`.
+    func fetchVaccinations(petId: String) async throws -> [Vaccination] {
+        let request = try await buildRequest(endpoint: "/pets/\(petId)/vaccinations")
+        let response = try await performRequest(request, responseType: VaccinationsResponse.self)
+        return response.vaccinations
+    }
+
+    /// Fetch the species/country-filtered vaccine catalog. Public + locale-aware
+    /// (`display_name` / `description` resolved server-side from `Accept-Language`,
+    /// which `buildRequest` sets). Unsupported country → `[]`.
+    func fetchVaccineCatalog(species: String, country: String) async throws -> [VaccineCatalogEntry] {
+        let s = species.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? species
+        let c = country.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? country
+        let request = try await buildRequest(
+            endpoint: "/vaccines/catalog?species=\(s)&country=\(c)",
+            method: "GET",
+            requiresAuth: false
+        )
+        let response = try await performRequest(request, responseType: VaccineCatalogResponse.self)
+        return response.vaccines
+    }
+
+    /// Create a record. `vaccine_code` is required and opaque; omit `expires_at`
+    /// to let the server derive it from the catalog's `default_validity_months`.
+    func createVaccination(petId: String, body: CreateVaccinationRequest) async throws -> Vaccination {
+        let request = try await buildRequest(
+            endpoint: "/pets/\(petId)/vaccinations",
+            method: "POST",
+            body: body
+        )
+        let response = try await performRequest(request, responseType: VaccinationResponse.self)
+        return response.vaccination
+    }
+
+    /// Edit a record. `vaccine_code` is immutable server-side and intentionally
+    /// absent from `UpdateVaccinationRequest`; only non-nil fields are sent.
+    func updateVaccination(
+        petId: String,
+        vaccinationId: String,
+        body: UpdateVaccinationRequest
+    ) async throws -> Vaccination {
+        let request = try await buildRequest(
+            endpoint: "/pets/\(petId)/vaccinations/\(vaccinationId)",
+            method: "PUT",
+            body: body
+        )
+        let response = try await performRequest(request, responseType: VaccinationResponse.self)
+        return response.vaccination
+    }
+
+    /// Soft-delete a record. Response is `{success: true}` with no payload.
+    func deleteVaccination(petId: String, vaccinationId: String) async throws {
+        let request = try await buildRequest(
+            endpoint: "/pets/\(petId)/vaccinations/\(vaccinationId)",
+            method: "DELETE"
+        )
+        _ = try await performRequest(request, responseType: EmptyResponse.self)
+    }
+
+    /// Upload a certificate image for a record. **JPEG/PNG/WebP only** — HEIC
+    /// must be transcoded to JPEG client-side at pick time (Stage B decision #1)
+    /// or the backend returns 415. `mime` is the converted bytes' content type.
+    ///
+    /// Built via `buildRequest` (not the legacy `uploadPetPhoto` path) so the
+    /// request keeps App Check + Accept-Language; we only override Content-Type
+    /// to multipart and attach the body manually. Multipart field name is `file`.
+    /// Returns the stored `certificate_url`.
+    func uploadVaccinationCertificate(
+        petId: String,
+        vaccinationId: String,
+        data: Data,
+        mime: String
+    ) async throws -> String {
+        var request = try await buildRequest(
+            endpoint: "/pets/\(petId)/vaccinations/\(vaccinationId)/certificate",
+            method: "POST"
+        )
+
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        let filename = Self.vaccinationCertificateFilename(forMime: mime)
+        var body = Data()
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: \(mime)\r\n\r\n".data(using: .utf8)!)
+        body.append(data)
+        body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        request.httpBody = body
+
+        let response = try await performRequest(request, responseType: CertificateUploadResponse.self)
+        return response.certificateUrl
+    }
+
+    /// Remove a record's certificate image. Response is `{success: true}`.
+    func deleteVaccinationCertificate(petId: String, vaccinationId: String) async throws {
+        let request = try await buildRequest(
+            endpoint: "/pets/\(petId)/vaccinations/\(vaccinationId)/certificate",
+            method: "DELETE"
+        )
+        _ = try await performRequest(request, responseType: EmptyResponse.self)
+    }
+
+    /// Cross-pet home-screen summary. 404 → feature is off for this user (hide
+    /// all vaccination surfaces). 200 with zeroed counts → feature on, no
+    /// records yet (hide only the home card). See `VaccinationHomeSummary`.
+    func fetchVaccinationSummary() async throws -> VaccinationHomeSummary {
+        let request = try await buildRequest(endpoint: "/users/me/vaccinations/summary")
+        let response = try await performRequest(request, responseType: VaccinationSummaryResponse.self)
+        return response.summary
+    }
+
+    /// Map an accepted image MIME to a sensible upload filename. The backend
+    /// keys on the multipart Content-Type, not the filename, but a correct
+    /// extension keeps logs/storage tidy.
+    private static func vaccinationCertificateFilename(forMime mime: String) -> String {
+        switch mime.lowercased() {
+        case "image/png":  return "certificate.png"
+        case "image/webp": return "certificate.webp"
+        default:           return "certificate.jpg"   // image/jpeg + fallback
+        }
     }
 }
 
