@@ -85,12 +85,27 @@ struct PetSafetyApp: App {
                     options.enableCaptureFailedRequests = true
 
                     options.beforeSend = { event in
-                        if let exceptionValue = event.exceptions?.first?.value,
-                           exceptionValue.contains("unauthorized") || exceptionValue.contains("401") ||
+                        let firstException = event.exceptions?.first
+                        let exceptionType = firstException?.type ?? ""
+                        let exceptionValue = firstException?.value ?? ""
+
+                        // Drop expected HTTP auth/not-found responses — handled
+                        // in-app and not actionable crashes.
+                        if exceptionValue.contains("unauthorized") || exceptionValue.contains("401") ||
                            exceptionValue.contains("400") || exceptionValue.contains("404") ||
                            exceptionValue.contains("403") {
                             return nil
                         }
+
+                        // Drop URL-cancellation noise (NSURLErrorCancelled, -999).
+                        // Cancellations are intentional teardown — backgrounding,
+                        // SSE stream reconnects, superseded requests — never
+                        // actionable. Matched by numeric code so it stays
+                        // locale-independent (the localized description varies).
+                        if exceptionType.contains("NSURLErrorDomain") && exceptionValue.contains("-999") {
+                            return nil
+                        }
+
                         return event
                     }
                 }

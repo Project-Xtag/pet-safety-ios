@@ -551,6 +551,23 @@ extension SSEService: URLSessionDataDelegate {
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
+            // An intentional teardown surfaces here as NSURLErrorCancelled
+            // (-999): disconnect() cancels the task on background (after
+            // clearing shouldReconnect), and the watchdog cancels a stale
+            // task right before scheduling its own reconnect. That's expected
+            // lifecycle noise, not a failure — don't report it to Sentry,
+            // don't surface a user-facing error, and don't schedule a
+            // reconnect here (doing so would double-schedule the watchdog's).
+            if (error as? URLError)?.code == .cancelled {
+                #if DEBUG
+                print("🔌 SSEService: Connection cancelled (intentional teardown)")
+                #endif
+                DispatchQueue.main.async { [weak self] in
+                    self?.isConnected = false
+                }
+                return
+            }
+
             #if DEBUG
             print("❌ SSEService: Connection error: \(error.localizedDescription)")
             #endif
