@@ -28,8 +28,14 @@ struct VaccinationHomeSummary: Codable, Hashable {
 
     /// True when the feature is on but there's nothing to show on the home
     /// card (no records at all). Distinct from the 404 feature-off case.
+    ///
+    /// Keyed off `totalPetsWithVaccinations` (are there ANY records?), **never**
+    /// off `urgent`. An "all valid" user — records exist, none within 30 days —
+    /// must stay NON-empty so the home card still shows its "all up to date"
+    /// state (Stage B decision #6). Keying off `urgent.isEmpty` would silently
+    /// flip that case to hidden and half-collapse #6. Do not change this line.
     var isEmpty: Bool {
-        totalPetsWithVaccinations == 0 && urgent.isEmpty
+        totalPetsWithVaccinations == 0
     }
 
     struct UrgentVaccination: Codable, Identifiable, Hashable {
