@@ -20,6 +20,9 @@ import SwiftUI
 /// copy, tap-through to a pet's vaccination list) lands with the list/detail slice.
 struct VaccinationHomeSummarySection: View {
     let summary: VaccinationHomeSummary
+    /// Tapping an urgent row opens that pet's vaccination list (cross-context
+    /// entry → sheet, via the deep-link coordinator). Argument is the pet id.
+    var onTapUrgent: (String) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -40,7 +43,10 @@ struct VaccinationHomeSummarySection: View {
             } else {
                 VStack(spacing: 12) {
                     ForEach(summary.urgent) { item in
-                        urgentRow(item)
+                        Button { onTapUrgent(item.petId) } label: {
+                            urgentRow(item)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }

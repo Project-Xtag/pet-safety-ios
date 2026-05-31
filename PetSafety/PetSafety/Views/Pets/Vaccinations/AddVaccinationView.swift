@@ -236,9 +236,13 @@ struct AddVaccinationView: View {
                 let uploaded = await viewModel.uploadCertificate(
                     vaccinationId: created.id, data: data, mime: mime
                 )
-                if !uploaded {
+                if uploaded {
+                    appState.showSuccess(String(localized: "vaccinations_toast_added"))
+                } else {
                     appState.showError(String(localized: "vaccinations_saved_photo_failed"))
                 }
+            } else {
+                appState.showSuccess(String(localized: "vaccinations_toast_added"))
             }
             dismiss()
         }

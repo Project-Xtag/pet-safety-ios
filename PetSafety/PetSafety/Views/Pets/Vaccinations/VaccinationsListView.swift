@@ -100,7 +100,7 @@ struct VaccinationsListView: View {
 
     @ViewBuilder
     private func row(_ vaccination: Vaccination) -> some View {
-        // TODO(detail-slice): wrap in a NavigationLink to VaccinationDetailView.
+        NavigationLink(destination: VaccinationDetailView(viewModel: viewModel, vaccinationId: vaccination.id)) {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(vaccination.vaccineNameSnapshot)
@@ -125,6 +125,7 @@ struct VaccinationsListView: View {
             VaccinationStatusPill(status: vaccination.status)
         }
         .padding(.vertical, 4)
+        }
     }
 
     private var emptyState: some View {

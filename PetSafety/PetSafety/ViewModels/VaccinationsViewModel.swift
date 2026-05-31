@@ -156,6 +156,25 @@ final class VaccinationsViewModel: ObservableObject {
         }
     }
 
+    /// Remove a record's certificate image. Updates the local row from success
+    /// (clears the cert fields) so the change shows immediately; like
+    /// `uploadCertificate`, it does NOT fire `onDidMutate` (a cert doesn't affect
+    /// the home summary).
+    @discardableResult
+    func deleteCertificate(vaccinationId: String) async -> Bool {
+        inFlight = true
+        defer { inFlight = false }
+        do {
+            try await apiService.deleteVaccinationCertificate(petId: petId, vaccinationId: vaccinationId)
+            if let i = vaccinations.firstIndex(where: { $0.id == vaccinationId }) {
+                vaccinations[i] = vaccinations[i].withCertificate(url: nil, mime: nil)
+            }
+            return true
+        } catch {
+            return false
+        }
+    }
+
     /// Map a mutation error to a user-facing message. A 404 here is
     /// feature-off / not-found — never surface the server's localized 404 string
     /// (Stage B rule); everything else (notably a validation 400 such as the

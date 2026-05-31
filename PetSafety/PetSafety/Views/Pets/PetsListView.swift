@@ -13,12 +13,14 @@ struct PetsListView: View {
     @State private var showingPetSelection = false
     @State private var showingSuccessStories = false
     @State private var showingReferral = false
+    @State private var deepLinkPet: Pet?
     @State private var selectedPetForReplacement: Pet?
     @State private var searchText = ""
     @State private var debouncedSearchText = ""
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var vaccinationGate: VaccinationGate
+    @EnvironmentObject var vaccinationDeepLink: VaccinationDeepLinkCoordinator
 
     var hasMissingPets: Bool {
         viewModel.pets.contains(where: { $0.isMissing })
@@ -79,7 +81,9 @@ struct PetsListView: View {
                             // pixel-identical to today in those cases.
                             if vaccinationGate.availability.showsHomeCard,
                                let summary = vaccinationGate.availability.summary {
-                                VaccinationHomeSummarySection(summary: summary)
+                                VaccinationHomeSummarySection(summary: summary) { petId in
+                                    vaccinationDeepLink.request(petId: petId)
+                                }
                             }
 
                             // Quick Actions Section
@@ -149,6 +153,9 @@ struct PetsListView: View {
         .task {
             await viewModel.fetchPets()
             await pendingVM.fetchPendingRegistrations()
+            // Cold launch: a VACCINATION_DUE tap set the pending id before this
+            // view mounted; now that pets are loaded, resolve it.
+            consumeVaccinationDeepLink()
         }
         .task {
             // Home landing re-resolve (#3): idempotent recovery from `.unknown`
@@ -187,6 +194,38 @@ struct PetsListView: View {
                 ProgressView()
             }
         }
+        // Deep-link / home-tap entry into a pet's vaccination list — a sheet
+        // (cross-context, focused-task entry), distinct from the within-detail
+        // push. Owns its VM + binds gate.refresh (see VaccinationsDeepLinkSheet).
+        .sheet(item: $deepLinkPet) { pet in
+            VaccinationsDeepLinkSheet(pet: pet)
+                .environmentObject(authViewModel)
+                .environmentObject(appState)
+                .environmentObject(vaccinationGate)
+        }
+        // Warm: pending id set while mounted (home tap or a foreground push).
+        .onReceive(vaccinationDeepLink.$pendingPetId) { _ in
+            consumeVaccinationDeepLink()
+        }
+        // Cold/late: pending id set before pets finished loading — resolve once they do.
+        .onChange(of: viewModel.pets.count) { _, _ in
+            consumeVaccinationDeepLink()
+        }
+    }
+
+    /// Single consume point for the vaccination deep link / home-card tap. Runs
+    /// only once pets are loaded (so a cold-launch target resolves), clears the
+    /// pending id (consume exactly once), and no-ops gracefully if that pet is
+    /// gone between the request and now.
+    private func consumeVaccinationDeepLink() {
+        guard vaccinationDeepLink.pendingPetId != nil else { return }
+        guard !viewModel.pets.isEmpty else { return }   // pets not loaded yet — wait
+        let petId = vaccinationDeepLink.pendingPetId
+        vaccinationDeepLink.pendingPetId = nil           // consume exactly once
+        if let pet = viewModel.pets.first(where: { $0.id == petId }) {
+            deepLinkPet = pet
+        }
+        // else: pet gone between push and tap → graceful no-op
     }
 
     @State private var showingNotifications = false

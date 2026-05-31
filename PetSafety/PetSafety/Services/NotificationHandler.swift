@@ -287,6 +287,13 @@ class NotificationHandler: ObservableObject {
             object: nil,
             userInfo: ["petId": petId, "vaccinationId": vaccinationId]
         )
+
+        // Route to the pet's vaccination list via the coordinator (cold-launch
+        // safe — stored, not a fire-and-forget post a not-yet-mounted root would
+        // miss). PetsListView consumes it once pets are loaded.
+        Task { @MainActor in
+            VaccinationDeepLinkCoordinator.shared.request(petId: petId)
+        }
     }
 
     // MARK: - Clear Pending Notification

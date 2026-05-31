@@ -136,6 +136,7 @@ struct PetSafetyApp: App {
                     .environmentObject(subscriptionViewModel)
                     .environmentObject(notificationHandler)
                     .environmentObject(vaccinationGate)
+                    .environmentObject(VaccinationDeepLinkCoordinator.shared)
                     // Resolve the vaccination gate per auth session, keyed off the
                     // signed-in user's id. This covers all three transitions on one
                     // handset — the litmus walks two accounts back-to-back, where a
