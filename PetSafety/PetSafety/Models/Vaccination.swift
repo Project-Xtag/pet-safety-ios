@@ -118,6 +118,24 @@ enum VaccinationDate {
         return formatter.date(from: string)
     }
 
+    /// Localized, medium-style display string ("12 Jun 2026") for a "YYYY-MM-DD"
+    /// wire value. Formatted in UTC so the day shown matches the stored calendar
+    /// day regardless of device time zone (same reasoning as `formatter`). Falls
+    /// back to the raw string if it can't be parsed, and to "" if absent. The one
+    /// place a call site should turn an `administered_at` / `expires_at` into
+    /// user-facing text — don't build a `DateFormatter` at the row.
+    static func displayString(_ string: String?, locale: Locale = .current) -> String {
+        guard let string else { return "" }
+        guard let date = parse(string) else { return string }
+        let f = DateFormatter()
+        f.locale = locale
+        f.calendar = utcCalendar
+        f.timeZone = TimeZone(identifier: "UTC")!
+        f.dateStyle = .medium
+        f.timeStyle = .none
+        return f.string(from: date)
+    }
+
     /// Signed whole-day delta from today to the given expiry, computed in UTC
     /// to match the server. Negative = already past. nil when the string is
     /// absent / unparseable. Mirrors the backend's date arithmetic so a record

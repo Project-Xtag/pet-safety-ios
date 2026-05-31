@@ -1536,3 +1536,10 @@
 "vaccinations_status_expired" = "Lejárt";
 "vaccinations_home_title" = "Oltási emlékeztetők";
 "vaccinations_home_all_up_to_date" = "Minden oltás érvényes";
+"vaccinations_section_active" = "Aktív";
+"vaccinations_section_expired" = "Lejárt";
+"vaccinations_administered_value" = "Beadva: %@";
+"vaccinations_expires_value" = "Lejár: %@";
+"vaccinations_no_expiry" = "Nincs lejárati dátum";
+"vaccinations_load_failed" = "Az oltási feljegyzéseket nem sikerült betölteni";
+"vaccinations_disclaimer" = "Ez a feljegyzés személyes nyilvántartás céljából készült. Utazáshoz a hivatalos EU kisállatútlevelet használja, amelyet engedélyezett állatorvos állít ki.";

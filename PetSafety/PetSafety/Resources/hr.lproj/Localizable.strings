@@ -1531,3 +1531,10 @@
 "vaccinations_status_expired" = "Expired";
 "vaccinations_home_title" = "Vaccination reminders";
 "vaccinations_home_all_up_to_date" = "All vaccinations up to date";
+"vaccinations_section_active" = "Active";
+"vaccinations_section_expired" = "Expired";
+"vaccinations_administered_value" = "Administered: %@";
+"vaccinations_expires_value" = "Expires: %@";
+"vaccinations_no_expiry" = "No expiry date";
+"vaccinations_load_failed" = "Couldn't load vaccination records";
+"vaccinations_disclaimer" = "This is a personal health record, not an official document. For travel, use the official EU pet passport issued by an authorised veterinarian.";

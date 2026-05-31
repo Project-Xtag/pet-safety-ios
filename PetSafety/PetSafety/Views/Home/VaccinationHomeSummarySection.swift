@@ -69,7 +69,7 @@ struct VaccinationHomeSummarySection: View {
             }
             Spacer()
             // Server `status` consumed verbatim (never re-derived on summary rows).
-            VaccinationStatusLabel(status: item.status)
+            VaccinationStatusPill(status: item.status)
         }
     }
 

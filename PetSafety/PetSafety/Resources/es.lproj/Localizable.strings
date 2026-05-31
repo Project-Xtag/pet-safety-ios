@@ -1525,3 +1525,10 @@
 "vaccinations_status_expired" = "Caducada";
 "vaccinations_home_title" = "Recordatorios de vacunación";
 "vaccinations_home_all_up_to_date" = "Todas las vacunas al día";
+"vaccinations_section_active" = "Activas";
+"vaccinations_section_expired" = "Caducadas";
+"vaccinations_administered_value" = "Administrada: %@";
+"vaccinations_expires_value" = "Caduca: %@";
+"vaccinations_no_expiry" = "Sin fecha de caducidad";
+"vaccinations_load_failed" = "No se pudieron cargar los registros de vacunación";
+"vaccinations_disclaimer" = "Este registro es para uso personal y no constituye un documento veterinario oficial. Para viajes dentro de la UE o internacionales, solicite un Pasaporte de Mascota de la UE emitido por un veterinario autorizado.";

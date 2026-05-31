@@ -13,11 +13,10 @@ import SwiftUI
 /// `PetDetailView` (which owns the reliable, gate-keyed `.task`), so this view has
 /// no lifecycle of its own and no direct knowledge of the gate.
 ///
-/// Scope (this slice = gate proof): rows show the catalog snapshot name + an
-/// interim status label. The add CTA is present and tappable to satisfy the
-/// on-empty litmus (a flag-on user can reach "add a first record"); its
-/// destination — `AddVaccinationView` — is the next slice. The full list, detail,
-/// and reusable pill component also land then.
+/// Scope: rows show the catalog snapshot name + the reusable
+/// `VaccinationStatusPill`, and "Show all (N)" pushes the full
+/// `VaccinationsListView` (sharing this same VM). The add CTA's destination —
+/// `AddVaccinationView` — is the next slice (still inert here).
 struct VaccinationSummarySection: View {
     @ObservedObject var viewModel: VaccinationsViewModel
 
@@ -42,10 +41,13 @@ struct VaccinationSummarySection: View {
                         Spacer()
                         // CRUD list rows carry no server status → derive client-side
                         // (same <30-day boundary the server uses on summary rows).
-                        VaccinationStatusLabel(status: vaccination.status)
+                        VaccinationStatusPill(status: vaccination.status)
                     }
                 }
-                if viewModel.vaccinations.count > 3 {
+                // Always reachable when records exist (not only when > 3) so the
+                // full list — and, next slice, per-record detail/edit/delete — is
+                // accessible even with 1–3 records. Shares this VM instance.
+                NavigationLink(destination: VaccinationsListView(viewModel: viewModel)) {
                     Text(String(format: NSLocalizedString("vaccinations_show_all", comment: ""), viewModel.vaccinations.count))
                         .font(.appFont(.subheadline))
                         .foregroundColor(.brandOrange)
@@ -69,49 +71,5 @@ struct VaccinationSummarySection: View {
         .background(Color(.systemGray6))
         .cornerRadius(12)
         .padding(.horizontal)
-    }
-}
-
-/// Interim status indicator (icon + colored label) shared by the home card and
-/// the pet-detail section. Deliberately minimal — keeps the gate-proof slice
-/// walkable without pre-committing the pill's design.
-///
-/// TODO(list-slice): REPLACE with the reusable `VaccinationStatusPill` (capsule,
-/// full styling, status→label/colour mapping in ONE place) and delete this type.
-/// Do not let it ossify into a second, parallel status component.
-struct VaccinationStatusLabel: View {
-    let status: VaccinationStatus
-
-    var body: some View {
-        HStack(spacing: 4) {
-            Image(systemName: symbol)
-            Text(labelKey)
-        }
-        .font(.appFont(size: 13, weight: .semibold))
-        .foregroundColor(color)
-    }
-
-    private var symbol: String {
-        switch status {
-        case .valid: return "checkmark.circle.fill"
-        case .expiring: return "clock.fill"
-        case .expired: return "exclamationmark.triangle.fill"
-        }
-    }
-
-    private var color: Color {
-        switch status {
-        case .valid: return .green
-        case .expiring: return .orange
-        case .expired: return .red
-        }
-    }
-
-    private var labelKey: LocalizedStringKey {
-        switch status {
-        case .valid: return "vaccinations_status_valid"
-        case .expiring: return "vaccinations_status_expiring"
-        case .expired: return "vaccinations_status_expired"
-        }
     }
 }
