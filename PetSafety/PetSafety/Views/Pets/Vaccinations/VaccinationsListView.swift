@@ -14,6 +14,11 @@ import SwiftUI
 /// states this is a personal record, not an official travel document.
 struct VaccinationsListView: View {
     @ObservedObject var viewModel: VaccinationsViewModel
+    let species: String
+
+    @EnvironmentObject private var authViewModel: AuthViewModel
+    @EnvironmentObject private var appState: AppState
+    @State private var showingAddForm = false
 
     /// Active = not expired (valid + expiring), soonest expiry first (nil expiry
     /// last). Expired = most overdue first. Status is the client-derived
@@ -48,6 +53,12 @@ struct VaccinationsListView: View {
                 if viewModel.vaccinations.isEmpty && !viewModel.isLoading {
                     await viewModel.load()
                 }
+            }
+            // Sheets don't inherit EnvironmentObjects — re-inject what the form needs.
+            .sheet(isPresented: $showingAddForm) {
+                AddVaccinationView(viewModel: viewModel, species: species)
+                    .environmentObject(authViewModel)
+                    .environmentObject(appState)
             }
     }
 
@@ -144,9 +155,7 @@ struct VaccinationsListView: View {
     }
 
     private var addBar: some View {
-        Button(action: {
-            // TODO(next slice): present AddVaccinationView (the form).
-        }) {
+        Button(action: { showingAddForm = true }) {
             HStack(spacing: 8) {
                 Image(systemName: "plus.circle.fill")
                 Text("vaccinations_add_cta")

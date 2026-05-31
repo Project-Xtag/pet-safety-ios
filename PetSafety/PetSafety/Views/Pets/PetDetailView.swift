@@ -190,7 +190,7 @@ struct PetDetailView: View {
                 // `isOn` is true only on a definitive summary 200 (decision #2);
                 // emptiness here is a display concern, never a gate (decision #6).
                 if vaccinationGate.availability.isOn {
-                    VaccinationSummarySection(viewModel: vaccinationsVM)
+                    VaccinationSummarySection(viewModel: vaccinationsVM, species: pet.species)
                 }
 
                 // Additional Information

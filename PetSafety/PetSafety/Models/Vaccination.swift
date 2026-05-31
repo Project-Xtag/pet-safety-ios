@@ -63,6 +63,21 @@ struct Vaccination: Codable, Identifiable, Hashable {
     var daysUntilExpiry: Int? {
         VaccinationDate.daysUntil(expiresAt)
     }
+
+    /// A copy with the certificate fields replaced. Used after a successful cert
+    /// upload/removal so the row reflects it immediately (in the list / detail)
+    /// without a re-fetch — `VaccinationsViewModel.uploadCertificate`. Uses the
+    /// synthesized memberwise init; keep the argument order in sync with the
+    /// stored properties above.
+    func withCertificate(url: String?, mime: String?) -> Vaccination {
+        Vaccination(
+            id: id, petId: petId, vaccineCode: vaccineCode,
+            vaccineNameSnapshot: vaccineNameSnapshot, administeredAt: administeredAt,
+            expiresAt: expiresAt, batchNumber: batchNumber, vetName: vetName,
+            vetClinic: vetClinic, certificateUrl: url, certificateMime: mime,
+            notes: notes, createdAt: createdAt
+        )
+    }
 }
 
 /// Status of a vaccination record. Raw values match the server's strings on

@@ -22,6 +22,12 @@ final class VaccinationsViewModel: ObservableObject {
     @Published private(set) var isLoading = false
     @Published private(set) var loadFailed = false   // generic; localized copy lives in the view
     @Published private(set) var inFlight = false      // create/update/delete in progress
+    /// Localized, user-facing message for a failed mutation (create/update) — set
+    /// from the server's 400 (e.g. the rabies-floor `age_too_young`). Distinct
+    /// from `loadFailed`: a *load* 404 = feature-off/not-found and must NEVER
+    /// surface the server string, whereas a *create* 400 is a validation result
+    /// the server localized for the user. Settable so a form can clear it.
+    @Published var actionError: String?
 
     private let apiService = APIService.shared
     let petId: String
@@ -77,23 +83,28 @@ final class VaccinationsViewModel: ObservableObject {
     // keep the home card in sync (see review note — refresh ownership is the one
     // open question).
 
-    @discardableResult
-    func create(_ body: CreateVaccinationRequest) async -> Bool {
+    /// Returns the created record on success (so the caller can chain a
+    /// certificate upload against its id), nil on failure (with `actionError` set
+    /// to a user-facing message — the rabies-floor 400 surfaces here).
+    func create(_ body: CreateVaccinationRequest) async -> Vaccination? {
         inFlight = true
+        actionError = nil
         defer { inFlight = false }
         do {
             let created = try await apiService.createVaccination(petId: petId, body: body)
             vaccinations.insert(created, at: 0)
             onDidMutate?()
-            return true
+            return created
         } catch {
-            return false
+            actionError = Self.actionMessage(for: error)
+            return nil
         }
     }
 
     @discardableResult
     func update(id: String, _ body: UpdateVaccinationRequest) async -> Bool {
         inFlight = true
+        actionError = nil
         defer { inFlight = false }
         do {
             let updated = try await apiService.updateVaccination(petId: petId, vaccinationId: id, body: body)
@@ -103,6 +114,7 @@ final class VaccinationsViewModel: ObservableObject {
             onDidMutate?()
             return true
         } catch {
+            actionError = Self.actionMessage(for: error)
             return false
         }
     }
@@ -110,6 +122,7 @@ final class VaccinationsViewModel: ObservableObject {
     @discardableResult
     func delete(id: String) async -> Bool {
         inFlight = true
+        actionError = nil
         defer { inFlight = false }
         do {
             try await apiService.deleteVaccination(petId: petId, vaccinationId: id)
@@ -117,7 +130,38 @@ final class VaccinationsViewModel: ObservableObject {
             onDidMutate?()
             return true
         } catch {
+            actionError = Self.actionMessage(for: error)
             return false
         }
+    }
+
+    /// Upload a certificate image for a record. Updates the local row from the
+    /// response so the attachment shows immediately in the list/detail — and
+    /// deliberately does NOT fire `onDidMutate`: a certificate doesn't change the
+    /// home summary (expiry/status are untouched), so a refresh would be wasted.
+    @discardableResult
+    func uploadCertificate(vaccinationId: String, data: Data, mime: String) async -> Bool {
+        inFlight = true
+        defer { inFlight = false }
+        do {
+            let url = try await apiService.uploadVaccinationCertificate(
+                petId: petId, vaccinationId: vaccinationId, data: data, mime: mime
+            )
+            if let i = vaccinations.firstIndex(where: { $0.id == vaccinationId }) {
+                vaccinations[i] = vaccinations[i].withCertificate(url: url, mime: mime)
+            }
+            return true
+        } catch {
+            return false
+        }
+    }
+
+    /// Map a mutation error to a user-facing message. A 404 here is
+    /// feature-off / not-found — never surface the server's localized 404 string
+    /// (Stage B rule); everything else (notably a validation 400 such as the
+    /// rabies floor) carries the server's localized message, meant for the user.
+    private static func actionMessage(for error: Error) -> String {
+        if case APIError.notFound = error { return String(localized: "vaccinations_action_failed") }
+        return (error as? APIError)?.errorDescription ?? String(localized: "vaccinations_action_failed")
     }
 }
