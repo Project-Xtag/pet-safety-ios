@@ -1529,6 +1529,9 @@
 "vaccinations_status_valid" = "Valid";
 "vaccinations_status_expiring" = "Expiring soon";
 "vaccinations_status_expired" = "Expired";
+"vaccinations_mandatory" = "Required";
+"vaccinations_freetext_label" = "Vaccine name";
+"vaccinations_rabies_hint" = "A first or restarted rabies vaccination is valid for 6 months — check your vaccination booklet.";
 "vaccinations_home_title" = "Vaccination reminders";
 "vaccinations_home_all_up_to_date" = "All vaccinations up to date";
 "vaccinations_section_active" = "Active";

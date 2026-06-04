@@ -28,11 +28,11 @@ struct VaccinationModelTests {
         // GET /api/vaccines/catalog?species=dog&country=HU  (Accept-Language: hu)
         let json = """
         {"success":true,"data":{"vaccines":[
-          {"code":"rabies_dog_hu","display_name":"Veszettség elleni oltás","description":"Kötelező veszettség elleni védőoltás kutyák és macskák számára.","is_core":true,"default_validity_months":36,"min_age_weeks":12,"rabies_specific":true,"sort_order":10},
-          {"code":"dhpp_dog_hu","display_name":"DHPP kombinált oltás","description":"Kombinált oltás szopornyica, fertőző májgyulladás, parvovírus és parainfluenza ellen.","is_core":true,"default_validity_months":36,"min_age_weeks":6,"rabies_specific":false,"sort_order":20},
-          {"code":"dhppi_l4_dog_hu","display_name":"DHPPi + L4 oltás","description":"DHPP kombináció leptospirózis (4 törzs) elleni védelemmel; éves emlékeztető.","is_core":true,"default_validity_months":12,"min_age_weeks":6,"rabies_specific":false,"sort_order":30},
-          {"code":"bordetella_dog_hu","display_name":"Bordetella (kennelköhögés) elleni oltás","description":"Kennelköhögés elleni oltás; panzió vagy kutyaiskola előtt ajánlott.","is_core":false,"default_validity_months":12,"min_age_weeks":6,"rabies_specific":false,"sort_order":110},
-          {"code":"babesiosis_dog_hu","display_name":"Babéziózis elleni oltás","description":"Kullancs által terjesztett babéziózis (Babesia canis) elleni oltás.","is_core":false,"default_validity_months":12,"min_age_weeks":24,"rabies_specific":false,"sort_order":120}
+          {"code":"rabies_dog_hu","display_name":"Veszettség elleni oltás","description":"Kötelező veszettség elleni védőoltás kutyák és macskák számára.","is_core":true,"default_validity_months":36,"min_age_weeks":12,"rabies_specific":true,"is_mandatory":true,"is_freetext":false,"sort_order":10},
+          {"code":"dhpp_dog_hu","display_name":"DHPP kombinált oltás","description":"Kombinált oltás szopornyica, fertőző májgyulladás, parvovírus és parainfluenza ellen.","is_core":true,"default_validity_months":36,"min_age_weeks":6,"rabies_specific":false,"is_mandatory":false,"is_freetext":false,"sort_order":20},
+          {"code":"dhppi_l4_dog_hu","display_name":"DHPPi + L4 oltás","description":"DHPP kombináció leptospirózis (4 törzs) elleni védelemmel; éves emlékeztető.","is_core":true,"default_validity_months":12,"min_age_weeks":6,"rabies_specific":false,"is_mandatory":false,"is_freetext":false,"sort_order":30},
+          {"code":"bordetella_dog_hu","display_name":"Bordetella (kennelköhögés) elleni oltás","description":"Kennelköhögés elleni oltás; panzió vagy kutyaiskola előtt ajánlott.","is_core":false,"default_validity_months":12,"min_age_weeks":6,"rabies_specific":false,"is_mandatory":false,"is_freetext":false,"sort_order":110},
+          {"code":"babesiosis_dog_hu","display_name":"Babéziózis elleni oltás","description":"Kullancs által terjesztett babéziózis (Babesia canis) elleni oltás.","is_core":false,"default_validity_months":12,"min_age_weeks":24,"rabies_specific":false,"is_mandatory":false,"is_freetext":false,"sort_order":120}
         ]}}
         """.data(using: .utf8)!
 
@@ -45,6 +45,9 @@ struct VaccinationModelTests {
         #expect(rabies.displayName == "Veszettség elleni oltás")
         #expect(rabies.isCore == true)
         #expect(rabies.rabiesSpecific == true)
+        #expect(rabies.isMandatory == true)
+        #expect(rabies.isFreetext == false)
+        #expect(vaccines[1].isMandatory == false)   // dhpp not mandatory
         #expect(rabies.defaultValidityMonths == 36)
         #expect(rabies.minAgeWeeks == 12)
         #expect(rabies.sortOrder == 10)
@@ -78,8 +81,8 @@ struct VaccinationModelTests {
           "total_pets_with_vaccinations":2,
           "expired_count":1,"expiring_30d_count":1,"valid_count":4,
           "urgent":[
-            {"pet_id":"p1","pet_name":"Bela","pet_profile_image":"https://cdn/x.webp","vaccination_id":"v1","vaccine_name":"Veszettség","expires_at":"2026-05-20","days_until_expiry":-10,"status":"expired"},
-            {"pet_id":"p2","pet_name":"Cica","pet_profile_image":null,"vaccination_id":"v2","vaccine_name":"DHPP","expires_at":"2026-06-12","days_until_expiry":13,"status":"expiring"}
+            {"pet_id":"p1","pet_name":"Bela","pet_profile_image":"https://cdn/x.webp","vaccination_id":"v1","vaccine_name":"Veszettség","expires_at":"2026-05-20","days_until_expiry":-10,"status":"expired","is_mandatory":true},
+            {"pet_id":"p2","pet_name":"Cica","pet_profile_image":null,"vaccination_id":"v2","vaccine_name":"DHPP","expires_at":"2026-06-12","days_until_expiry":13,"status":"expiring","is_mandatory":false}
           ]
         }}}
         """.data(using: .utf8)!
@@ -113,7 +116,7 @@ struct VaccinationModelTests {
     @Test("Real-prod populated summary decodes verbatim")
     func realProdSummaryDecodes() throws {
         let json = """
-        {"success":true,"data":{"summary":{"total_pets_with_vaccinations":1,"expired_count":1,"expiring_30d_count":1,"valid_count":1,"urgent":[{"pet_id":"67cbc6ff-ee15-47f0-bdba-17448b4f979f","pet_name":"Max","pet_profile_image":"https://pet-safety-eu-images-7dbbf5fa.s3.eu-north-1.amazonaws.com/public/pets/67cbc6ff-ee15-47f0-bdba-17448b4f979f/1779112020625.webp","vaccination_id":"644f6b0f-970b-4c60-8b1a-6d2d4203adb7","vaccine_name":"Macska kombinált alapoltás (FPV/FHV/FCV)","expires_at":"2026-05-28","days_until_expiry":-2,"status":"expired"},{"pet_id":"67cbc6ff-ee15-47f0-bdba-17448b4f979f","pet_name":"Max","pet_profile_image":"https://pet-safety-eu-images-7dbbf5fa.s3.eu-north-1.amazonaws.com/public/pets/67cbc6ff-ee15-47f0-bdba-17448b4f979f/1779112020625.webp","vaccination_id":"69e0b423-1ba5-489a-b30a-9b162b2ef6bb","vaccine_name":"Macska kombinált alapoltás (FPV/FHV/FCV)","expires_at":"2026-06-06","days_until_expiry":7,"status":"expiring"}]}}}
+        {"success":true,"data":{"summary":{"total_pets_with_vaccinations":1,"expired_count":1,"expiring_30d_count":1,"valid_count":1,"urgent":[{"pet_id":"67cbc6ff-ee15-47f0-bdba-17448b4f979f","pet_name":"Max","pet_profile_image":"https://pet-safety-eu-images-7dbbf5fa.s3.eu-north-1.amazonaws.com/public/pets/67cbc6ff-ee15-47f0-bdba-17448b4f979f/1779112020625.webp","vaccination_id":"644f6b0f-970b-4c60-8b1a-6d2d4203adb7","vaccine_name":"Macska kombinált alapoltás (FPV/FHV/FCV)","expires_at":"2026-05-28","days_until_expiry":-2,"status":"expired","is_mandatory":false},{"pet_id":"67cbc6ff-ee15-47f0-bdba-17448b4f979f","pet_name":"Max","pet_profile_image":"https://pet-safety-eu-images-7dbbf5fa.s3.eu-north-1.amazonaws.com/public/pets/67cbc6ff-ee15-47f0-bdba-17448b4f979f/1779112020625.webp","vaccination_id":"69e0b423-1ba5-489a-b30a-9b162b2ef6bb","vaccine_name":"Macska kombinált alapoltás (FPV/FHV/FCV)","expires_at":"2026-06-06","days_until_expiry":7,"status":"expiring","is_mandatory":false}]}}}
         """.data(using: .utf8)!
 
         let summary = try #require(
@@ -138,7 +141,7 @@ struct VaccinationModelTests {
     @Test("Real-prod populated list decodes; rows carry no status (client derives)")
     func realProdListDecodes() throws {
         let json = """
-        {"success":true,"data":{"vaccinations":[{"id":"98982a38-24d4-4159-b376-9d366b38ad0c","pet_id":"67cbc6ff-ee15-47f0-bdba-17448b4f979f","vaccine_code":"feline_core_trio_cat_hu","vaccine_name_snapshot":"Macska kombinált alapoltás (FPV/FHV/FCV)","administered_at":"2026-05-30","expires_at":"2027-06-01","batch_number":null,"vet_name":null,"vet_clinic":null,"certificate_url":null,"certificate_mime":null,"notes":null,"created_at":"2026-05-30T14:03:26.674Z","updated_at":"2026-05-30T14:03:26.674Z"},{"id":"69e0b423-1ba5-489a-b30a-9b162b2ef6bb","pet_id":"67cbc6ff-ee15-47f0-bdba-17448b4f979f","vaccine_code":"feline_core_trio_cat_hu","vaccine_name_snapshot":"Macska kombinált alapoltás (FPV/FHV/FCV)","administered_at":"2026-05-30","expires_at":"2026-06-06","batch_number":"LOT-EXPIRING","vet_name":"Dr. Teszt","vet_clinic":"Teszt Klinika","certificate_url":"https://pet-safety-eu-images-7dbbf5fa.s3.eu-north-1.amazonaws.com/public/vaccinations/67cbc6ff-ee15-47f0-bdba-17448b4f979f/69e0b423-1ba5-489a-b30a-9b162b2ef6bb/1780149806865.webp","certificate_mime":"image/webp","notes":"expiring row","created_at":"2026-05-30T14:03:26.313Z","updated_at":"2026-05-30T14:03:26.952Z"},{"id":"644f6b0f-970b-4c60-8b1a-6d2d4203adb7","pet_id":"67cbc6ff-ee15-47f0-bdba-17448b4f979f","vaccine_code":"feline_core_trio_cat_hu","vaccine_name_snapshot":"Macska kombinált alapoltás (FPV/FHV/FCV)","administered_at":"2025-05-01","expires_at":"2026-05-28","batch_number":null,"vet_name":null,"vet_clinic":null,"certificate_url":null,"certificate_mime":null,"notes":null,"created_at":"2026-05-30T14:03:26.519Z","updated_at":"2026-05-30T14:03:26.519Z"}]}}
+        {"success":true,"data":{"vaccinations":[{"id":"98982a38-24d4-4159-b376-9d366b38ad0c","pet_id":"67cbc6ff-ee15-47f0-bdba-17448b4f979f","vaccine_code":"feline_core_trio_cat_hu","vaccine_name_snapshot":"Macska kombinált alapoltás (FPV/FHV/FCV)","administered_at":"2026-05-30","expires_at":"2027-06-01","batch_number":null,"vet_name":null,"vet_clinic":null,"certificate_url":null,"certificate_mime":null,"notes":null,"is_mandatory":false,"created_at":"2026-05-30T14:03:26.674Z","updated_at":"2026-05-30T14:03:26.674Z"},{"id":"69e0b423-1ba5-489a-b30a-9b162b2ef6bb","pet_id":"67cbc6ff-ee15-47f0-bdba-17448b4f979f","vaccine_code":"feline_core_trio_cat_hu","vaccine_name_snapshot":"Macska kombinált alapoltás (FPV/FHV/FCV)","administered_at":"2026-05-30","expires_at":"2026-06-06","batch_number":"LOT-EXPIRING","vet_name":"Dr. Teszt","vet_clinic":"Teszt Klinika","certificate_url":"https://pet-safety-eu-images-7dbbf5fa.s3.eu-north-1.amazonaws.com/public/vaccinations/67cbc6ff-ee15-47f0-bdba-17448b4f979f/69e0b423-1ba5-489a-b30a-9b162b2ef6bb/1780149806865.webp","certificate_mime":"image/webp","notes":"expiring row","is_mandatory":false,"created_at":"2026-05-30T14:03:26.313Z","updated_at":"2026-05-30T14:03:26.952Z"},{"id":"644f6b0f-970b-4c60-8b1a-6d2d4203adb7","pet_id":"67cbc6ff-ee15-47f0-bdba-17448b4f979f","vaccine_code":"feline_core_trio_cat_hu","vaccine_name_snapshot":"Macska kombinált alapoltás (FPV/FHV/FCV)","administered_at":"2025-05-01","expires_at":"2026-05-28","batch_number":null,"vet_name":null,"vet_clinic":null,"certificate_url":null,"certificate_mime":null,"notes":null,"is_mandatory":false,"created_at":"2026-05-30T14:03:26.519Z","updated_at":"2026-05-30T14:03:26.519Z"}]}}
         """.data(using: .utf8)!
 
         let rows = try #require(
@@ -190,7 +193,7 @@ struct VaccinationModelTests {
           "administered_at":"2026-01-15","expires_at":"2029-01-15",
           "batch_number":"LOT-42","vet_name":"Dr. Kovács","vet_clinic":"Állatklinika",
           "certificate_url":"https://cdn/cert.webp","certificate_mime":"image/webp",
-          "notes":"OK","created_at":"2026-05-30T08:03:00.000Z"
+          "notes":"OK","is_mandatory":true,"created_at":"2026-05-30T08:03:00.000Z"
         }}}
         """.data(using: .utf8)!
 
@@ -213,7 +216,7 @@ struct VaccinationModelTests {
           "vaccine_name_snapshot":"DHPP","administered_at":"2026-03-01",
           "expires_at":null,"batch_number":null,"vet_name":null,"vet_clinic":null,
           "certificate_url":null,"certificate_mime":null,"notes":null,
-          "created_at":"2026-05-30T08:03:00.000Z"
+          "is_mandatory":false,"created_at":"2026-05-30T08:03:00.000Z"
         }}}
         """.data(using: .utf8)!
 
@@ -276,7 +279,7 @@ struct VaccinationModelTests {
     @Test("CreateVaccinationRequest omits nil expires_at (server derives it)")
     func createRequestOmitsNilExpiry() throws {
         let req = CreateVaccinationRequest(
-            vaccineCode: "rabies_dog_hu", administeredAt: "2026-01-15",
+            vaccineCode: "rabies_dog_hu", vaccineName: nil, administeredAt: "2026-01-15",
             expiresAt: nil, batchNumber: nil, vetName: nil, vetClinic: nil, notes: nil
         )
         let obj = try encodeToObject(req)
@@ -284,6 +287,18 @@ struct VaccinationModelTests {
         #expect(obj["administered_at"] as? String == "2026-01-15")
         #expect(obj["expires_at"] == nil)        // omitted, not null
         #expect(obj["batch_number"] == nil)
+        #expect(obj["vaccine_name"] == nil)      // omitted when not an Egyéb pick
+    }
+
+    @Test("CreateVaccinationRequest carries vaccine_name only for an Egyéb pick")
+    func createRequestFreetextName() throws {
+        let req = CreateVaccinationRequest(
+            vaccineCode: "other_dog_hu", vaccineName: "Custom oltás", administeredAt: "2026-01-15",
+            expiresAt: nil, batchNumber: nil, vetName: nil, vetClinic: nil, notes: nil
+        )
+        let obj = try encodeToObject(req)
+        #expect(obj["vaccine_code"] as? String == "other_dog_hu")
+        #expect(obj["vaccine_name"] as? String == "Custom oltás")
     }
 
     @Test("UpdateVaccinationRequest never carries vaccine_code; omits nil fields")

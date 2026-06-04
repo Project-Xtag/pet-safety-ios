@@ -1534,6 +1534,9 @@
 "vaccinations_status_valid" = "Érvényes";
 "vaccinations_status_expiring" = "Hamarosan lejár";
 "vaccinations_status_expired" = "Lejárt";
+"vaccinations_mandatory" = "Kötelező";
+"vaccinations_freetext_label" = "Oltás neve";
+"vaccinations_rabies_hint" = "Az első vagy újrakezdett veszettség oltás 6 hónapig érvényes – ellenőrizd az oltási könyvet.";
 "vaccinations_home_title" = "Oltási emlékeztetők";
 "vaccinations_home_all_up_to_date" = "Minden oltás érvényes";
 "vaccinations_section_active" = "Aktív";

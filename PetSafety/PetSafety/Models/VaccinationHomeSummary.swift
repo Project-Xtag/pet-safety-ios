@@ -51,6 +51,9 @@ struct VaccinationHomeSummary: Codable, Hashable {
         /// for "N days overdue" copy (never render "expires in −3 days").
         let daysUntilExpiry: Int
         let status: VaccinationStatus
+        /// CURRENT catalog mandatory flag (COALESCE, false if code absent) —
+        /// drives the "Kötelező" pill on home urgent rows.
+        let isMandatory: Bool
 
         enum CodingKeys: String, CodingKey {
             case petId = "pet_id"
@@ -61,6 +64,7 @@ struct VaccinationHomeSummary: Codable, Hashable {
             case expiresAt = "expires_at"
             case daysUntilExpiry = "days_until_expiry"
             case status
+            case isMandatory = "is_mandatory"
         }
     }
 }

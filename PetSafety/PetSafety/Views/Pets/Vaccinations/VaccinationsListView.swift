@@ -122,7 +122,10 @@ struct VaccinationsListView: View {
                 }
             }
             Spacer()
-            VaccinationStatusPill(status: vaccination.status)
+            VStack(alignment: .trailing, spacing: 4) {
+                if vaccination.isMandatory { VaccinationMandatoryPill() }
+                VaccinationStatusPill(status: vaccination.status)
+            }
         }
         .padding(.vertical, 4)
         }

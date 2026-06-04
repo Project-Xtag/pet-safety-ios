@@ -53,7 +53,10 @@ struct VaccinationDetailView: View {
                         .font(.appFont(size: 16, weight: .semibold))
                         .foregroundColor(.ink)
                     Spacer()
-                    VaccinationStatusPill(status: v.status)
+                    VStack(alignment: .trailing, spacing: 4) {
+                        if v.isMandatory { VaccinationMandatoryPill() }
+                        VaccinationStatusPill(status: v.status)
+                    }
                 }
                 Text("vaccinations_change_vaccine_note")
                     .font(.appFont(.caption))
