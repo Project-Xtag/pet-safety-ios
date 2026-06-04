@@ -37,6 +37,8 @@ struct AddVaccinationView: View {
     @State private var vetName = ""
     @State private var vetClinic = ""
     @State private var notes = ""
+    // "Egyéb" free-text vaccine name — sent only when an is_freetext entry is picked.
+    @State private var freeText = ""
 
     // Encoded, upload-ready certificate bytes (nil until a valid image is picked).
     @State private var capturedData: Data?
@@ -48,6 +50,21 @@ struct AddVaccinationView: View {
 
     private var sortedCatalog: [VaccineCatalogEntry] {
         viewModel.catalog.sorted { $0.sortOrder < $1.sortOrder }
+    }
+
+    /// The picked catalog entry (nil until a vaccine is selected). Lets the form
+    /// read the entry's flags WITHOUT parsing the opaque code: isFreetext reveals
+    /// the name field, rabiesSpecific drives the first-shot/booster hint.
+    private var selectedEntry: VaccineCatalogEntry? {
+        guard let code = selectedCode else { return nil }
+        return viewModel.catalog.first { $0.code == code }
+    }
+    private var isFreetext: Bool { selectedEntry?.isFreetext ?? false }
+    private var isRabies: Bool { selectedEntry?.rabiesSpecific ?? false }
+
+    /// Freetext picked but no name typed → block Save (the server would 400).
+    private var freetextNameMissing: Bool {
+        isFreetext && freeText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
     var body: some View {
@@ -70,7 +87,7 @@ struct AddVaccinationView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("save") { submit() }
-                        .disabled(selectedCode == nil || viewModel.inFlight)
+                        .disabled(selectedCode == nil || freetextNameMissing || viewModel.inFlight)
                 }
             }
             .task { await loadCatalog() }
@@ -101,6 +118,24 @@ struct AddVaccinationView: View {
                     ForEach(sortedCatalog) { entry in
                         Text(entry.displayName).tag(Optional(entry.code))
                     }
+                }
+                // "Egyéb" free-text name — revealed when an is_freetext sentinel is
+                // picked. Sent as vaccine_name on create; the server freezes it as
+                // the snapshot (create-only — a typo is delete-and-re-add).
+                if isFreetext {
+                    TextField("vaccinations_freetext_label", text: $freeText)
+                }
+                // Rabies first-shot/booster hint — UI cue only (the server derives
+                // the +6/+12 validity). Shown for ANY rabies_specific vaccine
+                // (dog OR cat — the server derives it for both); never gated on
+                // species. The owner can override the expiry below for a restart.
+                if isRabies {
+                    // Blue info callout — matches the web rabies hint (#1d4ed8 on a
+                    // light-blue row), deliberately NOT the grey Kötelező-pill tone.
+                    Text("vaccinations_rabies_hint")
+                        .font(.appFont(.caption))
+                        .foregroundColor(Color(red: 0.114, green: 0.306, blue: 0.847))
+                        .listRowBackground(Color(red: 0.114, green: 0.306, blue: 0.847).opacity(0.08))
                 }
             }
 
@@ -219,6 +254,7 @@ struct AddVaccinationView: View {
         guard let code = selectedCode else { return }
         let body = CreateVaccinationRequest(
             vaccineCode: code,
+            vaccineName: isFreetext ? freeText.trimmingCharacters(in: .whitespacesAndNewlines) : nil,
             administeredAt: wireDate(administeredDate),
             expiresAt: hasExpiry ? wireDate(expiryDate) : nil,   // nil → server derives
             batchNumber: trimmedOrNil(batchNumber),

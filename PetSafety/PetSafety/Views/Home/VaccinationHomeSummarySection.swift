@@ -75,7 +75,10 @@ struct VaccinationHomeSummarySection: View {
             }
             Spacer()
             // Server `status` consumed verbatim (never re-derived on summary rows).
-            VaccinationStatusPill(status: item.status)
+            VStack(alignment: .trailing, spacing: 4) {
+                if item.isMandatory { VaccinationMandatoryPill() }
+                VaccinationStatusPill(status: item.status)
+            }
         }
     }
 

@@ -24,6 +24,10 @@ struct Vaccination: Codable, Identifiable, Hashable {
     let certificateUrl: String?
     let certificateMime: String?
     let notes: String?
+    /// CURRENT legal-mandatory fact, joined from the catalog at read time (NOT
+    /// snapshotted like the name) — reflects present law. Drives the "Kötelező"
+    /// pill. false when the code isn't in the catalog.
+    let isMandatory: Bool
     let createdAt: String
 
     enum CodingKeys: String, CodingKey {
@@ -39,6 +43,7 @@ struct Vaccination: Codable, Identifiable, Hashable {
         case certificateUrl = "certificate_url"
         case certificateMime = "certificate_mime"
         case notes
+        case isMandatory = "is_mandatory"
         case createdAt = "created_at"
     }
 
@@ -75,7 +80,7 @@ struct Vaccination: Codable, Identifiable, Hashable {
             vaccineNameSnapshot: vaccineNameSnapshot, administeredAt: administeredAt,
             expiresAt: expiresAt, batchNumber: batchNumber, vetName: vetName,
             vetClinic: vetClinic, certificateUrl: url, certificateMime: mime,
-            notes: notes, createdAt: createdAt
+            notes: notes, isMandatory: isMandatory, createdAt: createdAt
         )
     }
 }
@@ -171,6 +176,11 @@ enum VaccinationDate {
 /// absent field is sent as "not provided" (undefined) rather than explicit null.
 struct CreateVaccinationRequest: Codable {
     let vaccineCode: String
+    /// Free-text vaccine name — set ONLY when the picked catalog entry is an
+    /// "Egyéb" sentinel (is_freetext); the server freezes it as the snapshot and
+    /// ignores it otherwise. nil for every normal vaccine (synthesized Codable
+    /// omits nil). Not on UpdateVaccinationRequest — the snapshot is frozen.
+    let vaccineName: String?
     let administeredAt: String
     let expiresAt: String?
     let batchNumber: String?
@@ -180,6 +190,7 @@ struct CreateVaccinationRequest: Codable {
 
     enum CodingKeys: String, CodingKey {
         case vaccineCode = "vaccine_code"
+        case vaccineName = "vaccine_name"
         case administeredAt = "administered_at"
         case expiresAt = "expires_at"
         case batchNumber = "batch_number"

@@ -47,7 +47,12 @@ struct VaccinationSummarySection: View {
                         Spacer()
                         // CRUD list rows carry no server status → derive client-side
                         // (same <30-day boundary the server uses on summary rows).
-                        VaccinationStatusPill(status: vaccination.status)
+                        // Kötelező pill sits ALONGSIDE the status pill (a legal flag,
+                        // not a status) when the record's vaccine is mandatory.
+                        VStack(alignment: .trailing, spacing: 4) {
+                            if vaccination.isMandatory { VaccinationMandatoryPill() }
+                            VaccinationStatusPill(status: vaccination.status)
+                        }
                     }
                 }
                 // Always reachable when records exist (not only when > 3) so the

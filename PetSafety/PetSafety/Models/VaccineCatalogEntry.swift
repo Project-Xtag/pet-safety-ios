@@ -18,6 +18,12 @@ struct VaccineCatalogEntry: Codable, Identifiable, Hashable {
     let defaultValidityMonths: Int?
     let minAgeWeeks: Int?
     let rabiesSpecific: Bool
+    /// Legally mandatory (kötelező) — distinct from isCore (medical). Drives the
+    /// "Kötelező" pill; true only on rabies_dog_hu at launch.
+    let isMandatory: Bool
+    /// The "Egyéb" sentinel: the form reveals a free-text name field for this
+    /// entry and submits the typed name as `vaccine_name` on create.
+    let isFreetext: Bool
     let sortOrder: Int
 
     enum CodingKeys: String, CodingKey {
@@ -28,6 +34,8 @@ struct VaccineCatalogEntry: Codable, Identifiable, Hashable {
         case defaultValidityMonths = "default_validity_months"
         case minAgeWeeks = "min_age_weeks"
         case rabiesSpecific = "rabies_specific"
+        case isMandatory = "is_mandatory"
+        case isFreetext = "is_freetext"
         case sortOrder = "sort_order"
     }
 }

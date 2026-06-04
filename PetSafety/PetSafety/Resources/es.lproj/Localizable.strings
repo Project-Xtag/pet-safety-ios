@@ -1523,6 +1523,9 @@
 "vaccinations_status_valid" = "Vigente";
 "vaccinations_status_expiring" = "Caduca pronto";
 "vaccinations_status_expired" = "Caducada";
+"vaccinations_mandatory" = "Obligatoria";
+"vaccinations_freetext_label" = "Nombre de la vacuna";
+"vaccinations_rabies_hint" = "La primera vacuna antirrábica o la reiniciada es válida 6 meses; consulta la cartilla de vacunación.";
 "vaccinations_home_title" = "Recordatorios de vacunación";
 "vaccinations_home_all_up_to_date" = "Todas las vacunas al día";
 "vaccinations_section_active" = "Activas";
