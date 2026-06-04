@@ -21,6 +21,10 @@ struct PetSafetyApp: App {
     @StateObject private var appState = AppState()
     @StateObject private var subscriptionViewModel = SubscriptionViewModel()
     @StateObject private var notificationHandler = NotificationHandler.shared
+    // Single app-wide source of truth for vaccination feature availability
+    // (Stage B decision #2). Resolved per auth session — see the currentUser?.id
+    // onChange below and the home landing's `.task`.
+    @StateObject private var vaccinationGate = VaccinationGate()
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage("appearanceMode") private var appearanceMode: String = "system"
     @State private var showSplash = true
@@ -131,6 +135,24 @@ struct PetSafetyApp: App {
                     .environmentObject(appState)
                     .environmentObject(subscriptionViewModel)
                     .environmentObject(notificationHandler)
+                    .environmentObject(vaccinationGate)
+                    .environmentObject(VaccinationDeepLinkCoordinator.shared)
+                    // Resolve the vaccination gate per auth session, keyed off the
+                    // signed-in user's id. This covers all three transitions on one
+                    // handset — the litmus walks two accounts back-to-back, where a
+                    // sticky gate would let the second inherit the first's answer:
+                    //   • login        (nil → id)   reset() + resolve()
+                    //   • logout       (id → nil)   reset()
+                    //   • account swap (idA → idB)  reset() + resolve()
+                    // `reset()` first clears any prior-session residue so no stale
+                    // `.on` card flashes before the fresh resolve lands. The home
+                    // landing's `.task` re-resolve is the idempotent backstop.
+                    .onChange(of: authViewModel.currentUser?.id) { _, newId in
+                        vaccinationGate.reset()
+                        if newId != nil {
+                            Task { await vaccinationGate.resolve() }
+                        }
+                    }
                     .preferredColorScheme(
                         appearanceMode == "light" ? .light :
                         appearanceMode == "dark" ? .dark : nil
