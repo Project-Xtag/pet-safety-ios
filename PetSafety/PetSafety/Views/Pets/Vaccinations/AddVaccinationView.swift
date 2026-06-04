@@ -39,6 +39,8 @@ struct AddVaccinationView: View {
     @State private var notes = ""
     // "Egyéb" free-text vaccine name — sent only when an is_freetext entry is picked.
     @State private var freeText = ""
+    // Expansion state for the custom (capped + scrollable) vaccine dropdown.
+    @State private var vaccineListOpen = false
 
     // Encoded, upload-ready certificate bytes (nil until a valid image is picked).
     @State private var capturedData: Data?
@@ -65,6 +67,33 @@ struct AddVaccinationView: View {
     /// Freetext picked but no name typed → block Save (the server would 400).
     private var freetextNameMissing: Bool {
         isFreetext && freeText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    /// Real vaccines (scroll) vs the "Egyéb" freetext sentinel(s). The freetext
+    /// rows are PINNED below the scroll so they're always reachable — sort 999
+    /// would otherwise sit below the fold (the web scroll-fold lesson: pin Egyéb,
+    /// don't make the user scroll to it).
+    private var regularCatalog: [VaccineCatalogEntry] { sortedCatalog.filter { !$0.isFreetext } }
+    private var freetextCatalog: [VaccineCatalogEntry] { sortedCatalog.filter { $0.isFreetext } }
+
+    @ViewBuilder
+    private func vaccineRow(_ entry: VaccineCatalogEntry) -> some View {
+        Button {
+            selectedCode = entry.code
+            withAnimation(.easeInOut(duration: 0.15)) { vaccineListOpen = false }
+        } label: {
+            HStack(alignment: .top) {
+                Text(entry.displayName)   // \n → two lines for "Egyéb"
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                if entry.code == selectedCode {
+                    Image(systemName: "checkmark").foregroundColor(.accentColor)
+                }
+            }
+            .padding(.vertical, 8)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 
     var body: some View {
@@ -113,10 +142,46 @@ struct AddVaccinationView: View {
     private var form: some View {
         Form {
             Section {
-                Picker("vaccinations_form_vaccine", selection: $selectedCode) {
-                    Text("vaccinations_form_select").tag(String?.none)
-                    ForEach(sortedCatalog) { entry in
-                        Text(entry.displayName).tag(Optional(entry.code))
+                // Custom dropdown instead of a native Picker: the catalog list is long
+                // now, and the menu style runs off-screen while navigationLink takes
+                // the WHOLE screen. This caps the open list to ~5 rows and scrolls,
+                // and its rows render the server display_name verbatim — so the
+                // "Egyéb\n(add meg a nevét)" sentinel shows on two lines.
+                Button {
+                    withAnimation(.easeInOut(duration: 0.15)) { vaccineListOpen.toggle() }
+                } label: {
+                    HStack {
+                        Text("vaccinations_form_vaccine").foregroundColor(.primary)
+                        Spacer()
+                        Text(selectedEntry.map { $0.displayName.replacingOccurrences(of: "\n", with: " ") }
+                                ?? String(localized: "vaccinations_form_select"))
+                            .foregroundColor(selectedCode == nil ? .secondary : .primary)
+                            .lineLimit(1)
+                        Image(systemName: "chevron.up.chevron.down")
+                            .font(.caption).foregroundColor(.secondary)
+                    }
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+
+                if vaccineListOpen {
+                    VStack(spacing: 0) {
+                        // Real vaccines: scroll, capped to ~5 rows.
+                        ScrollView {
+                            VStack(spacing: 0) {
+                                ForEach(regularCatalog) { entry in
+                                    vaccineRow(entry)
+                                    if entry.id != regularCatalog.last?.id { Divider() }
+                                }
+                            }
+                        }
+                        .frame(maxHeight: 220)
+                        // "Egyéb" sentinel(s) PINNED below the scroll — always visible
+                        // (sort 999 would otherwise sit below the fold).
+                        ForEach(freetextCatalog) { entry in
+                            Divider()
+                            vaccineRow(entry)
+                        }
                     }
                 }
                 // "Egyéb" free-text name — revealed when an is_freetext sentinel is
