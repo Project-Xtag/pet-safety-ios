@@ -29,7 +29,7 @@
 "tab_account" = "Fiók";
 
 // MARK: - Hitelesítés
-"welcome_back" = "Üdv újra!";
+"welcome_back" = "Hello!";
 "welcome_new_user" = "Üdvözöl a SENRA!";
 "enter_email_subtitle" = "Add meg az email címed, hogy bejelentkezési kódot kapj.";
 "email_address" = "Email cím";
@@ -69,8 +69,8 @@
 // MARK: - Munkamenet
 
 // MARK: - Kezdőlap / Kedvencek listája
-"welcome_back_greeting" = "Üdv újra,";
-"welcome_back_no_name" = "Üdv újra!";
+"welcome_back_greeting" = "Hello,";
+"welcome_back_no_name" = "Hello!";
 "view_all" = "Összes megtekintése";
 "search_pets_hint" = "Keresés név, fajta, faj szerint…";
 "quick_actions" = "Gyors műveletek";
