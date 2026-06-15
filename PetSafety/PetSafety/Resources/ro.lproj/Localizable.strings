@@ -48,8 +48,8 @@
 "register" = "Înregistrare";
 "already_have_account" = "Ai deja cont?";
 "log_in" = "Autentificare";
-"terms_login_prefix" = "Prin autentificare, ești de acord cu ";
-"terms_and" = " și ";
+"terms_login_prefix" = "Prin autentificare, ești de acord cu";
+"terms_and" = " și";
 "terms_of_service" = "Termenii de utilizare";
 "privacy_policy" = "Politica de confidențialitate";
 "first_name" = "Prenume";
@@ -987,7 +987,7 @@
 "help_guide_qr_tags_title" = "Etichete QR pentru animale de companie";
 "help_guide_qr_tags_desc" = "Fiecare plăcuță inteligentă SENRA conține un cod QR unic care se conectează la profilul digital al animalului tău de companie. Oricine găsește animalul tău de companie poate scana codul cu camera telefonului — nu este nevoie de aplicație. Scanarea plăcuței inteligente îți trimite o notificare cu locația celui care a găsit-o (dacă o partajează). Poți activa plăcuțele inteligente prin aplicație și poți comanda oricând o plăcuță inteligentă de înlocuire dacă o pierzi sau se deteriorează.";
 "help_guide_materials_title" = "Materiale și durabilitate";
-"help_guide_materials_desc" = "Plăcuțele inteligente SENRA sunt fabricate din metal durabil și ușor, cu acoperire epoxidică pentru protecție suplimentară. Sunt rezistente la apă și UV, potrivite pentru orice condiții meteorologice. Nu se uzează în utilizarea zilnică. Plăcuțele inteligente sunt proiectate să se potrivească confortabil pe majoritatea zgărzilor și hamurilor.";
+"help_guide_materials_desc" = "Plăcuțele inteligente SENRA sunt fabricate din metal durabil și ușor, cu acoperire epoxidică pentru protecție suplimentară. Sunt rezistente la apă și UV, potrivite pentru orice condiții meteorologice. Plăcuțele inteligente se fixează sigur pe zgarda animalului de companie. Dacă o plăcuță inteligentă se deteriorează sau codul QR nu mai poate fi scanat, poți comanda un înlocuitor din pagina Contului — gratuit pentru membrii pachetului Pet.";
 "help_guide_emergency_title" = "Funcții de contact de urgență";
 "help_guide_emergency_desc" = "Când cineva scanează plăcuța inteligentă a animalului tău de companie, primești instantaneu o notificare push și un e-mail cu locația celui care l-a găsit. Membrii planurilor Kedvenc primesc și alerte SMS pentru un răspuns mai rapid. Dacă marchezi animalul de companie ca dispărut, o alertă comunitară este trimisă tuturor utilizatorilor SENRA într-o rază de 10 km, iar medicii veterinari și adăposturile înregistrate din zona ta sunt de asemenea notificate. Oricine din comunitate poate raporta observații cu locația și fotografii, ajutându-te să îți găsești animalul de companie.";
 "help_guide_profile_title" = "Gestionare profil";
@@ -1218,7 +1218,7 @@
 "breed_cat_havana_brown" = "Havana brown";
 "breed_cat_japanese_bobtail" = "Bobtail Japonez";
 "breed_cat_laperm" = "LaPerm";
-"breed_cat_american_wirehair" = "American Wirehair";
+"breed_cat_american_wirehair" = "American Wirehair cu păr sârmă";
 "breed_cat_european_burmese" = "Burmeză Europeană";
 "breed_cat_burmilla" = "Burmilla";
 "breed_cat_colorpoint_shorthair" = "Colorpoint cu păr scurt";
@@ -1418,7 +1418,7 @@
 "shelter_promo_claim_tag_button" = "Activează plăcuța inteligentă";
 "shelter_promo_name_label_required" = "Nume *";
 "shelter_promo_species_label_required" = "Specie *";
-"shelter_promo_select_placeholder" = "Selectează...";
+"shelter_promo_select_placeholder" = "Selectează…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Numele stăpânului";
@@ -1427,9 +1427,9 @@
 
 // MARK: - Success stories sharing
 "shared_via_pet_safety" = "Distribuit prin SENRA";
-"alert_geocode_failed_warning" = "Couldn't pinpoint that address — your alert will go out without a precise location. Try \"current location\" for better results.";
+"alert_geocode_failed_warning" = "Nu am putut localiza exact adresa — alerta va fi trimisă fără o locație precisă. Încearcă \"locația curentă\" pentru rezultate mai bune.";
 "api_error_app_check_required" = "App verification failed. Try reinstalling Senra if this persists.";
-"delete_confirm_type_delete" = "Type DELETE to confirm";
+"delete_confirm_type_delete" = "Tastează DELETE pentru a confirma";
 "type_delete_to_confirm" = "Type DELETE";
 "order_promo_code_title" = "Cod promoțional";
 "order_promo_code_label" = "Ai un cod promoțional?";
