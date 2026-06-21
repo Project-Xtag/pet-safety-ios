@@ -6,23 +6,30 @@ struct PetPublicProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var authViewModel: AuthViewModel
 
-    // Use owner info from pet if available (public scan), otherwise fall back to current user
-    // Respects privacy settings when showing current user's info
-    // All public phone numbers (primary + secondary, filtered by backend privacy settings)
+    // Use owner info from pet if available (public scan = already filtered by
+    // the backend), otherwise fall back to the current user's profile and apply
+    // the privacy flags client-side. The fallback must cover BOTH primary and
+    // secondary contacts: for the owner's own pet the authenticated pet object
+    // carries no owner_* fields, so without a secondary fallback a visible
+    // secondary email/phone would never appear in this preview even though it
+    // shows on the real public profile.
+    // All public phone numbers (primary + secondary, filtered by privacy settings)
     private var ownerPhones: [String] {
         var phones: [String] = []
         if let phone = pet.ownerPhone { phones.append(phone) }
         else if let user = authViewModel.currentUser, user.showPhonePublicly ?? true, let phone = user.phone { phones.append(phone) }
         if let phone = pet.ownerSecondaryPhone { phones.append(phone) }
+        else if let user = authViewModel.currentUser, user.showSecondaryPhonePublicly ?? false, let phone = user.secondaryPhone, !phone.isEmpty { phones.append(phone) }
         return phones
     }
 
-    // All public email addresses (primary + secondary, filtered by backend privacy settings)
+    // All public email addresses (primary + secondary, filtered by privacy settings)
     private var ownerEmails: [String] {
         var emails: [String] = []
         if let email = pet.ownerEmail { emails.append(email) }
         else if let user = authViewModel.currentUser, user.showEmailPublicly ?? true, !user.email.isEmpty { emails.append(user.email) }
         if let email = pet.ownerSecondaryEmail { emails.append(email) }
+        else if let user = authViewModel.currentUser, user.showSecondaryEmailPublicly ?? false, let email = user.secondaryEmail, !email.isEmpty { emails.append(email) }
         return emails
     }
 
