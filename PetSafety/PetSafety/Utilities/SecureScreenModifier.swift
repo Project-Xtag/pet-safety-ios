@@ -33,7 +33,15 @@ struct SecureScreenModifier: ViewModifier {
 }
 
 extension View {
+    /// Applies screen-capture protection (blur + overlay while recording/mirroring).
+    /// Disabled in DEBUG builds so product demos can be recorded; release builds
+    /// (App Store / TestFlight) keep the protection.
+    @ViewBuilder
     func secureScreen() -> some View {
+        #if DEBUG
+        self
+        #else
         modifier(SecureScreenModifier())
+        #endif
     }
 }
