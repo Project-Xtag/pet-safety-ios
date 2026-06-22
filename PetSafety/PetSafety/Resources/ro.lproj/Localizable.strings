@@ -48,8 +48,8 @@
 "register" = "Înregistrare";
 "already_have_account" = "Ai deja cont?";
 "log_in" = "Autentificare";
-"terms_login_prefix" = "Prin autentificare, ești de acord cu ";
-"terms_and" = " și ";
+"terms_login_prefix" = "Prin autentificare, ești de acord cu";
+"terms_and" = " și";
 "terms_of_service" = "Termenii de utilizare";
 "privacy_policy" = "Politica de confidențialitate";
 "first_name" = "Prenume";
@@ -987,7 +987,7 @@
 "help_guide_qr_tags_title" = "Etichete QR pentru animale de companie";
 "help_guide_qr_tags_desc" = "Fiecare plăcuță inteligentă SENRA conține un cod QR unic care se conectează la profilul digital al animalului tău de companie. Oricine găsește animalul tău de companie poate scana codul cu camera telefonului — nu este nevoie de aplicație. Scanarea plăcuței inteligente îți trimite o notificare cu locația celui care a găsit-o (dacă o partajează). Poți activa plăcuțele inteligente prin aplicație și poți comanda oricând o plăcuță inteligentă de înlocuire dacă o pierzi sau se deteriorează.";
 "help_guide_materials_title" = "Materiale și durabilitate";
-"help_guide_materials_desc" = "Plăcuțele inteligente SENRA sunt fabricate din metal durabil și ușor, cu acoperire epoxidică pentru protecție suplimentară. Sunt rezistente la apă și UV, potrivite pentru orice condiții meteorologice. Nu se uzează în utilizarea zilnică. Plăcuțele inteligente sunt proiectate să se potrivească confortabil pe majoritatea zgărzilor și hamurilor.";
+"help_guide_materials_desc" = "Plăcuțele inteligente SENRA sunt fabricate din metal durabil și ușor, cu acoperire epoxidică pentru protecție suplimentară. Sunt rezistente la apă și UV, potrivite pentru orice condiții meteorologice. Plăcuțele inteligente se fixează în siguranță pe zgarda animalului de companie. Dacă o plăcuță inteligentă se deteriorează sau codul QR nu mai poate fi scanat, poți comanda un înlocuitor din pagina Contului — gratuit pentru membrii pachetului Pet.";
 "help_guide_emergency_title" = "Funcții de contact de urgență";
 "help_guide_emergency_desc" = "Când cineva scanează plăcuța inteligentă a animalului tău de companie, primești instantaneu o notificare push și un e-mail cu locația celui care l-a găsit. Membrii planurilor Kedvenc primesc și alerte SMS pentru un răspuns mai rapid. Dacă marchezi animalul de companie ca dispărut, o alertă comunitară este trimisă tuturor utilizatorilor SENRA într-o rază de 10 km, iar medicii veterinari și adăposturile înregistrate din zona ta sunt de asemenea notificate. Oricine din comunitate poate raporta observații cu locația și fotografii, ajutându-te să îți găsești animalul de companie.";
 "help_guide_profile_title" = "Gestionare profil";
@@ -1165,7 +1165,7 @@
 "breed_dog_collie" = "Collie";
 "breed_dog_basset_hound" = "Basset hound";
 "breed_dog_rhodesian_ridgeback" = "Rhodesian ridgeback";
-"breed_dog_newfoundland" = "Newfoundland";
+"breed_dog_newfoundland" = "Newfoundlandi";
 "breed_dog_belgian_malinois" = "Ciobănesc Belgian Malinois";
 "breed_dog_bichon_frise" = "Bichon frise";
 "breed_dog_akita" = "Akita";
@@ -1186,7 +1186,7 @@
 "breed_cat_british_shorthair" = "Britanic cu păr scurt";
 "breed_cat_exotic_shorthair" = "Exotic cu păr scurt";
 "breed_cat_abyssinian" = "Abisinian";
-"breed_cat_scottish_fold" = "Scottish Fold";
+"breed_cat_scottish_fold" = "Skót lógófülű";
 "breed_cat_sphynx" = "Sfinx";
 "breed_cat_siamese" = "Siameză";
 "breed_cat_devon_rex" = "Devon rex";
@@ -1207,7 +1207,7 @@
 "breed_cat_manx" = "Manx";
 "breed_cat_selkirk_rex" = "Selkirk rex";
 "breed_cat_ragamuffin" = "RagaMuffin";
-"breed_cat_american_curl" = "American Curl";
+"breed_cat_american_curl" = "Amerikai göndörfülű";
 "breed_cat_chartreux" = "Chartreux";
 "breed_cat_bombay" = "Bombay";
 "breed_cat_egyptian_mau" = "Mau Egiptean";
@@ -1418,7 +1418,7 @@
 "shelter_promo_claim_tag_button" = "Activează plăcuța inteligentă";
 "shelter_promo_name_label_required" = "Nume *";
 "shelter_promo_species_label_required" = "Specie *";
-"shelter_promo_select_placeholder" = "Selectează...";
+"shelter_promo_select_placeholder" = "Selectează…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Numele stăpânului";
