@@ -191,6 +191,10 @@ struct ProfileView: View {
                 ProfileMenuRow(icon: "bag", title: NSLocalizedString("profile_orders_invoices", comment: ""))
             }
 
+            NavigationLink(destination: MyPetFriendlyPlacesView()) {
+                ProfileMenuRow(icon: "pawprint", title: NSLocalizedString("profile_my_pet_friendly_places", comment: ""))
+            }
+
             NavigationLink(destination: ContactSupportView()) {
                 ProfileMenuRow(icon: "envelope", title: NSLocalizedString("profile_contact_us", comment: ""))
             }

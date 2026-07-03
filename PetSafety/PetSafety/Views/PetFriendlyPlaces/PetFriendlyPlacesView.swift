@@ -4,12 +4,12 @@ import CoreLocation
 
 // MARK: - Per-category theme (the native CATEGORY_THEME; frame colors match the web hexes)
 
-private struct CategoryTheme {
+struct CategoryTheme {
     let color: Color
     let glyph: String
 }
 
-private func categoryTheme(_ category: PetFriendlyPlace.Category) -> CategoryTheme {
+func categoryTheme(_ category: PetFriendlyPlace.Category) -> CategoryTheme {
     switch category {
     case .cafeBar:    return .init(color: Color(red: 0.706, green: 0.333, blue: 0.122), glyph: "cup.and.saucer.fill")  // #B4551F
     case .restaurant: return .init(color: Color(red: 0.753, green: 0.224, blue: 0.169), glyph: "fork.knife")           // #C0392B
@@ -20,7 +20,7 @@ private func categoryTheme(_ category: PetFriendlyPlace.Category) -> CategoryThe
     }
 }
 
-private func categoryLabel(_ c: PetFriendlyPlace.Category) -> String {
+func categoryLabel(_ c: PetFriendlyPlace.Category) -> String {
     switch c {
     case .cafeBar:    return String(localized: "pet_friendly_category_cafe_bar")
     case .restaurant: return String(localized: "pet_friendly_category_restaurant")
@@ -28,6 +28,20 @@ private func categoryLabel(_ c: PetFriendlyPlace.Category) -> String {
     case .beach:      return String(localized: "pet_friendly_category_beach")
     case .other:      return String(localized: "pet_friendly_category_other")
     case .unknown:    return String(localized: "pet_friendly_category_other")
+    }
+}
+
+/// Owner-visible moderation status → badge style. EXHAUSTIVE over the Status enum (no
+/// `default`) so a new case must be handled here. `.unknown` (present-but-unrecognized)
+/// is its OWN grey state, distinct from `.pending`; a NIL status (a read shape that omits
+/// it) is handled at the call site as NO badge — never folded into `.pending`.
+struct StatusStyle { let label: String; let color: Color }
+func statusDisplay(_ status: PetFriendlyPlace.Status) -> StatusStyle {
+    switch status {
+    case .pending:  return StatusStyle(label: String(localized: "pet_friendly_status_pending"),  color: Color(red: 0.96, green: 0.62, blue: 0.04))
+    case .approved: return StatusStyle(label: String(localized: "pet_friendly_status_approved"), color: Color(red: 0.16, green: 0.66, blue: 0.33))
+    case .rejected: return StatusStyle(label: String(localized: "pet_friendly_status_rejected"), color: Color(red: 0.83, green: 0.24, blue: 0.24))
+    case .unknown:  return StatusStyle(label: String(localized: "pet_friendly_status_unknown"),  color: Color(red: 0.55, green: 0.55, blue: 0.58))
     }
 }
 
@@ -259,7 +273,7 @@ struct PetFriendlyPlacesView: View {
 
 // MARK: - Place card (list row)
 
-private struct PlaceCard: View {
+struct PlaceCard: View {
     let place: PetFriendlyPlace
 
     var body: some View {
@@ -277,7 +291,15 @@ private struct PlaceCard: View {
                     .font(.appFont(size: 12)).foregroundColor(.mutedText).lineLimit(1)
             }
             Spacer()
-            if let km = place.distanceKm {
+            // /mine rows carry `status` (badge); nearby rows carry `distanceKm`. A nil
+            // status falls through to distance — it is NEVER shown as pending.
+            if let status = place.status {
+                let s = statusDisplay(status)
+                Text(s.label)
+                    .font(.appFont(size: 11, weight: .bold)).foregroundColor(.white)
+                    .padding(.horizontal, 8).padding(.vertical, 4)
+                    .background(s.color).clipShape(Capsule())
+            } else if let km = place.distanceKm {
                 Text(String(format: "%.1f km", km)).font(.appFont(size: 12, weight: .semibold)).foregroundColor(.mutedText)
             }
         }
@@ -328,7 +350,7 @@ private struct PetFriendlyMapView: View {
 
 // MARK: - Detail sheet (off the loaded row; nil-safe; no getById)
 
-private struct PetFriendlyPlaceDetailSheet: View {
+struct PetFriendlyPlaceDetailSheet: View {
     let place: PetFriendlyPlace
     @Environment(\.dismiss) private var dismiss
     @State private var showMapPicker = false
@@ -345,7 +367,18 @@ private struct PetFriendlyPlaceDetailSheet: View {
                         }
                         VStack(alignment: .leading, spacing: 4) {
                             Text(place.name).font(.appFont(size: 20, weight: .bold)).foregroundColor(.primary)
-                            Text(categoryLabel(place.category)).font(.appFont(size: 13, weight: .semibold)).foregroundColor(theme.color)
+                            HStack(spacing: 8) {
+                                Text(categoryLabel(place.category)).font(.appFont(size: 13, weight: .semibold)).foregroundColor(theme.color)
+                                // Present only for owner (/mine) rows — shows the real
+                                // moderation status; nil (public read) shows nothing.
+                                if let status = place.status {
+                                    let s = statusDisplay(status)
+                                    Text(s.label)
+                                        .font(.appFont(size: 10, weight: .bold)).foregroundColor(.white)
+                                        .padding(.horizontal, 7).padding(.vertical, 3)
+                                        .background(s.color).clipShape(Capsule())
+                                }
+                            }
                         }
                     }
 
