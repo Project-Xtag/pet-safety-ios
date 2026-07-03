@@ -122,4 +122,22 @@ final class OfflineE2EMockAPIService: APIServiceProtocol {
     func reportSighting(alertId: String, sighting: ReportSightingRequest) async throws -> Sighting {
         throw APIError.serverError("Not implemented for test")
     }
+
+    // Pet Friendly Places — not exercised by this suite; present to satisfy the
+    // expanded APIServiceProtocol conformance (added in the M1 data layer).
+    func getNearbyPetFriendlyPlaces(latitude: Double, longitude: Double, radiusKm: Double, category: PetFriendlyPlace.Category?, market: String) async throws -> [PetFriendlyPlace] {
+        throw APIError.serverError("Not implemented for test")
+    }
+
+    func getPetFriendlyPlace(id: String, market: String) async throws -> PetFriendlyPlace {
+        throw APIError.serverError("Not implemented for test")
+    }
+
+    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> PetFriendlyPlace {
+        throw APIError.serverError("Not implemented for test")
+    }
+
+    func getMyPetFriendlyPlaces() async throws -> [PetFriendlyPlace] {
+        throw APIError.serverError("Not implemented for test")
+    }
 }

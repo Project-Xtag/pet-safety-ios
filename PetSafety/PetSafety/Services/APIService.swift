@@ -63,6 +63,16 @@ enum APIError: Error, LocalizedError {
     /// can fall back to showing it, but the typical handler swaps the UI to
     /// the upgrade prompt rather than displaying the message as a toast.
     case paidPlanRequired(String)
+    /// HTTP 409 from a pet-friendly submit — a proximity/name near-dupe (dedup B,
+    /// `existing` = the clashing place's name) OR the place_id 23505 backstop
+    /// (`existing` absent). The message is built client-side from `existing` presence;
+    /// the backend 409 `error` string is NEVER surfaced (its 23505 shape carries an
+    /// unfilled `{{name}}`), mirroring the web two-shape handling.
+    case duplicatePlace(existing: String?)
+    /// HTTP 422 from a pet-friendly submit/edit — the address didn't geocode. Carries
+    /// the backend's complete localized sentence (no placeholder); M3 pins it to the
+    /// address field.
+    case geocodeFailed(String)
 
     var errorDescription: String? {
         switch self {
@@ -86,6 +96,15 @@ enum APIError: Error, LocalizedError {
             return String(localized: "api_error_app_check_required")
         case .paidPlanRequired(let message):
             return message
+        case .duplicatePlace(let existing):
+            // Presence-branch (check b): named vs generic, both client-localized — never
+            // the backend 409 string. String values land in M4 (localization unit).
+            if let existing {
+                return String(localized: "pet_friendly_error_duplicate_named \(existing)")
+            }
+            return String(localized: "pet_friendly_error_duplicate_generic")
+        case .geocodeFailed(let message):
+            return message
         }
     }
 }
@@ -99,6 +118,11 @@ protocol APIServiceProtocol: AnyObject {
     func markPetFound(petId: String) async throws -> Pet
     func updatePet(id: String, _ request: UpdatePetRequest) async throws -> Pet
     func reportSighting(alertId: String, sighting: ReportSightingRequest) async throws -> Sighting
+    // Pet Friendly Places (Phase 1: create-only)
+    func getNearbyPetFriendlyPlaces(latitude: Double, longitude: Double, radiusKm: Double, category: PetFriendlyPlace.Category?, market: String) async throws -> [PetFriendlyPlace]
+    func getPetFriendlyPlace(id: String, market: String) async throws -> PetFriendlyPlace
+    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> PetFriendlyPlace
+    func getMyPetFriendlyPlaces() async throws -> [PetFriendlyPlace]
 }
 
 class APIService {
@@ -276,7 +300,8 @@ class APIService {
     private func performRequest<T: Decodable>(
         _ request: URLRequest,
         responseType: T.Type,
-        isRetryAfterRefresh: Bool = false
+        isRetryAfterRefresh: Bool = false,
+        enveloped: Bool = true
     ) async throws -> T {
         // Add Sentry breadcrumb for API request tracking
         if SentrySDK.isEnabled {
@@ -297,6 +322,24 @@ class APIService {
 
             switch httpResponse.statusCode {
             case 200...299:
+                // Flat, web-style `{ success, <key> }` responses (pet-friendly-places)
+                // have no ApiEnvelope `data` wrapper — decode the payload type directly.
+                // ASYMMETRY (deliberate): unlike the enveloped path we do NOT assert
+                // `success == true` — `T` is opaque here so its `success` field can't be
+                // read. Safe because these endpoints signal failure via HTTP status, never
+                // a 200 + `success:false`; if a future flat endpoint returns that shape,
+                // constrain `T` to a `success`-bearing protocol and guard on it here.
+                if !enveloped {
+                    do {
+                        return try decoder.decode(T.self, from: data)
+                    } catch {
+                        #if DEBUG
+                        print("❌ FLAT DECODING ERROR: \(error)")
+                        print("Response data as string: \(String(data: data, encoding: .utf8) ?? "Unable to decode")")
+                        #endif
+                        throw APIError.decodingError
+                    }
+                }
                 do {
                     let envelope = try decoder.decode(ApiEnvelope<T>.self, from: data)
                     if envelope.success {
@@ -374,7 +417,7 @@ class APIService {
                     retryRequest.setValue("Bearer \(newTokens.accessToken)", forHTTPHeaderField: "Authorization")
 
                     // Retry the original request once
-                    return try await performRequest(retryRequest, responseType: responseType, isRetryAfterRefresh: true)
+                    return try await performRequest(retryRequest, responseType: responseType, isRetryAfterRefresh: true, enveloped: enveloped)
                 } catch {
                     // Refresh failed — clear all tokens and throw unauthorized
                     authToken = nil
@@ -417,6 +460,24 @@ class APIService {
                     throw APIError.notFound(errorResponse.error)
                 }
                 throw APIError.notFound("Not found")
+
+            // Scoped to flat/pet-friendly callers (`where !enveloped`) so enveloped
+            // endpoints keep today's behaviour (409/422 → `default` → serverError).
+            case 409 where !enveloped:
+                // Two-shape (check b): dedup B carries `existing` (the clashing name);
+                // the 23505 backstop carries none. We read ONLY `existing` and rebuild
+                // the message client-side — the backend `error` (unfilled `{{name}}` in
+                // the backstop shape) is never surfaced.
+                let existing = (try? decoder.decode(DuplicatePlaceErrorResponse.self, from: data))?.existing
+                throw APIError.duplicatePlace(existing: existing)
+
+            case 422 where !enveloped:
+                // Geocode miss on submit/edit. The backend sentence is complete (no
+                // placeholder), so it is safe to surface directly.
+                if let errorResponse = try? decoder.decode(ErrorResponse.self, from: data) {
+                    throw APIError.geocodeFailed(errorResponse.error)
+                }
+                throw APIError.geocodeFailed(String(localized: "pet_friendly_error_geocode_failed"))
 
             default:
                 // Capture 5xx server errors to Sentry
@@ -934,6 +995,61 @@ class APIService {
         return (response.report, response.manageToken)
     }
 
+    // MARK: - Pet Friendly Places (Phase 1: create-only)
+
+    /// Nearby approved pet-friendly places within `radiusKm` of a point (PUBLIC).
+    /// `market` is the rollout-cohort country code for the `pet_friendly.enabled` flag
+    /// gate — the backend 404s when the feature is off for that market (distinct from
+    /// `200 { places: [] }` = "on, none nearby"). Flat response → `enveloped: false`.
+    func getNearbyPetFriendlyPlaces(
+        latitude: Double,
+        longitude: Double,
+        radiusKm: Double = 10,
+        category: PetFriendlyPlace.Category? = nil,
+        market: String
+    ) async throws -> [PetFriendlyPlace] {
+        var endpoint = "/pet-friendly-places?lat=\(latitude)&lng=\(longitude)&radiusKm=\(radiusKm)&market=\(market)"
+        if let category, category != .unknown {
+            endpoint += "&category=\(category.rawValue)"
+        }
+        let request = try await buildRequest(endpoint: endpoint, method: "GET", requiresAuth: false)
+        let response = try await performRequest(request, responseType: PetFriendlyPlacesResponse.self, enveloped: false)
+        return response.places
+    }
+
+    /// A single approved place by id (PUBLIC). Same `?market=` flag gate as the list
+    /// (requirePetFriendlyPublic gates detail too); 404 = missing/not-approved OR off.
+    func getPetFriendlyPlace(id: String, market: String) async throws -> PetFriendlyPlace {
+        let request = try await buildRequest(
+            endpoint: "/pet-friendly-places/\(id)?market=\(market)",
+            method: "GET",
+            requiresAuth: false
+        )
+        let response = try await performRequest(request, responseType: PetFriendlyPlaceResponse.self, enveloped: false)
+        return response.place
+    }
+
+    /// Submit a place (AUTHENTICATED). Lands `status = pending`. The flag gate derives
+    /// the user's country server-side, so NO `?market=`. 409 → `duplicatePlace`, 422 →
+    /// `geocodeFailed` (performRequest's `where !enveloped` branches).
+    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> PetFriendlyPlace {
+        let request = try await buildRequest(
+            endpoint: "/pet-friendly-places",
+            method: "POST",
+            body: payload,
+            requiresAuth: true
+        )
+        let response = try await performRequest(request, responseType: PetFriendlyPlaceResponse.self, enveloped: false)
+        return response.place
+    }
+
+    /// The caller's own submissions, all statuses (AUTHENTICATED). No `?market=`.
+    func getMyPetFriendlyPlaces() async throws -> [PetFriendlyPlace] {
+        let request = try await buildRequest(endpoint: "/pet-friendly-places/mine", method: "GET", requiresAuth: true)
+        let response = try await performRequest(request, responseType: PetFriendlyPlacesResponse.self, enveloped: false)
+        return response.places
+    }
+
     // MARK: - QR Tags
 
     /// Look up a QR tag by code to determine its status before deciding what to show
@@ -1221,6 +1337,13 @@ struct ErrorResponse: Codable {
     let error: String
     let code: String?
     let details: [String: JSONValue]?
+}
+
+/// 409 body from a pet-friendly submit. We read ONLY `existing` (the clashing place's
+/// name, present on the dedup-B shape, absent on the 23505 backstop) — the `error`
+/// string is intentionally ignored to avoid surfacing an unfilled `{{name}}`.
+struct DuplicatePlaceErrorResponse: Decodable {
+    let existing: String?
 }
 
 struct SubscriptionLimitResponse: Codable {
