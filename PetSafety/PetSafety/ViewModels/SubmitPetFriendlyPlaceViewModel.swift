@@ -43,6 +43,12 @@ final class SubmitPetFriendlyPlaceViewModel: ObservableObject {
         && !address.trimmed.isEmpty
     }
 
+    /// Clears the 409 result once its dialog is acknowledged (the View can't write a
+    /// `private(set)` property directly).
+    func acknowledgeDuplicate() {
+        duplicate = nil
+    }
+
     /// Submits and returns the created pending place, or nil on failure (state published).
     func submit() async -> PetFriendlyPlace? {
         formError = nil
