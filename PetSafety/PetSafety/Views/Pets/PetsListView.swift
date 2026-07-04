@@ -7,6 +7,7 @@ struct PetsListView: View {
 
     @StateObject private var viewModel = PetsViewModel()
     @StateObject private var pendingVM = PendingRegistrationsViewModel()
+    @Environment(\.scenePhase) private var scenePhase
     @State private var showingAddPet = false
     @State private var showingMarkLostSheet = false
     @State private var showingMarkFoundSheet = false
@@ -186,6 +187,15 @@ struct PetsListView: View {
             Task {
                 await viewModel.fetchPets()
                 await pendingVM.fetchPendingRegistrations()
+            }
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            // Re-fetch the pending-tag CTA on foreground so an admin
+            // order-cancel (or a shipped/refunded flip) reflects without a
+            // pull-to-refresh or view re-appear — matching the Orders/Pending
+            // screens and Android's on-resume refresh.
+            if newPhase == .active {
+                Task { await pendingVM.fetchPendingRegistrations() }
             }
         }
         .task(id: searchText) {
