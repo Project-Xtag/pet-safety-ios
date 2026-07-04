@@ -137,19 +137,30 @@ struct PrivacyModeView: View {
         .adaptiveList()
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            // Initialize from current user settings
-            if let user = authViewModel.currentUser {
-                showNamePublicly = user.showNamePublicly ?? true
-                showPhonePublicly = user.showPhonePublicly ?? true
-                showEmailPublicly = user.showEmailPublicly ?? true
-                showAddressPublicly = user.showAddressPublicly ?? true
-                showSecondaryPhonePublicly = user.showSecondaryPhonePublicly ?? false
-                showSecondaryEmailPublicly = user.showSecondaryEmailPublicly ?? false
-            }
-            // Defer so onChange handlers ignore the initial state setup
-            DispatchQueue.main.async {
-                didInitialize = true
-            }
+            syncFromCurrentUser()
+        }
+        // Re-sync when the profile changes elsewhere (e.g. a visibility flag
+        // toggled in Contact Settings) so the two screens never diverge.
+        .onReceive(authViewModel.$currentUser) { _ in
+            syncFromCurrentUser()
+        }
+    }
+
+    /// Load the toggle state from the current user. Guarded by `didInitialize`
+    /// so the assignments below don't re-fire the onChange handlers (which would
+    /// POST the value straight back to the server).
+    private func syncFromCurrentUser() {
+        guard let user = authViewModel.currentUser else { return }
+        didInitialize = false
+        showNamePublicly = user.showNamePublicly ?? true
+        showPhonePublicly = user.showPhonePublicly ?? true
+        showEmailPublicly = user.showEmailPublicly ?? true
+        showAddressPublicly = user.showAddressPublicly ?? true
+        showSecondaryPhonePublicly = user.showSecondaryPhonePublicly ?? false
+        showSecondaryEmailPublicly = user.showSecondaryEmailPublicly ?? false
+        // Defer so onChange handlers ignore this programmatic state setup.
+        DispatchQueue.main.async {
+            didInitialize = true
         }
     }
 

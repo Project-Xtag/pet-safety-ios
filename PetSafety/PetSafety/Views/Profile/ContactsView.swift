@@ -77,6 +77,11 @@ struct ContactsView: View {
         .onAppear {
             loadContactData()
         }
+        // Keep in sync when the profile changes elsewhere (e.g. visibility
+        // toggled in Privacy Settings), but never clobber an in-progress edit.
+        .onReceive(authViewModel.$currentUser) { _ in
+            if !isEditing { loadContactData() }
+        }
     }
 
     // MARK: - Display View
