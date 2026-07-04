@@ -37,6 +37,7 @@ struct AlertsTabView: View {
                 ScrollView {
                     VStack(spacing: 16) {
                         headerSection
+                        petFriendlyEntryLink
                         if showAddressRequiredMessage {
                             AddressRequiredView()
                                 .frame(minHeight: 400)
@@ -110,6 +111,33 @@ struct AlertsTabView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 60)
+    }
+
+    // MARK: - Pet Friendly Places entry (nested in the community area)
+
+    private var petFriendlyEntryLink: some View {
+        NavigationLink(destination: PetFriendlyPlacesView()) {
+            HStack(spacing: 12) {
+                Image(systemName: "pawprint.circle.fill")
+                    .font(.system(size: 24))
+                    .foregroundColor(.brandOrange)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(String(localized: "pet_friendly_entry_title"))
+                        .font(.appFont(size: 15, weight: .semibold))
+                        .foregroundColor(.primary)
+                    Text(String(localized: "pet_friendly_entry_subtitle"))
+                        .font(.appFont(size: 12))
+                        .foregroundColor(.mutedText)
+                }
+                Spacer()
+                Image(systemName: "chevron.right").foregroundColor(.mutedText)
+            }
+            .padding(16)
+            .background(Color(UIColor.systemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.black.opacity(0.06), lineWidth: 1))
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: - View toggle (Lista / Térkép)
