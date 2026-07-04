@@ -64,9 +64,18 @@ struct FoundPetFormView: View {
                     Section { Text(errorMessage).foregroundColor(.errorColor).font(.appFont(size: 13)) }
                 }
             }
-            .navigationTitle(String(localized: "found_pet_form_title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                // Custom principal title so the long HU title
+                // ("Talált kisállat bejelentése") wraps to two lines instead of
+                // being truncated by the system inline nav-bar title.
+                ToolbarItem(placement: .principal) {
+                    Text(String(localized: "found_pet_form_title"))
+                        .font(.appFont(.headline))
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
+                        .minimumScaleFactor(0.75)
+                }
                 ToolbarItem(placement: .cancellationAction) {
                     Button(String(localized: "common_cancel")) { dismiss() }
                         .disabled(isSubmitting)
