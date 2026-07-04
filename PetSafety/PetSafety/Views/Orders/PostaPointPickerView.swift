@@ -9,82 +9,93 @@ struct PostaPointPickerView: View {
     @State private var isSearching = false
     @State private var hasSearched = false
     @State private var errorMessage: String?
+    /// Once a point is chosen the search list collapses to just the confirmation
+    /// card; tapping it re-opens the search so the user can change the point.
+    /// Without this the full result list stayed open, forcing the user to scroll
+    /// past it to reach the continue button.
+    @State private var isChanging = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            // Selected point confirmation
-            if let point = selected {
-                HStack(spacing: 12) {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.tealAccent)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(point.name)
-                            .font(.appFont(.subheadline))
-                            .fontWeight(.semibold)
-                        if let address = point.address {
-                            Text(address)
-                                .font(.appFont(.caption))
-                                .foregroundColor(.secondary)
+            if let point = selected, !isChanging {
+                // Collapsed: show only the chosen point (tap to change).
+                Button(action: { isChanging = true }) {
+                    HStack(spacing: 12) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.tealAccent)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(point.name)
+                                .font(.appFont(.subheadline))
+                                .fontWeight(.semibold)
+                            if let address = point.address {
+                                Text(address)
+                                    .font(.appFont(.caption))
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        Spacer()
+                        Image(systemName: "pencil.circle")
+                            .foregroundColor(.tealAccent)
+                    }
+                    .padding(12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.tealAccent.opacity(0.1))
+                    .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.tealAccent, lineWidth: 1.5)
+                    )
+                }
+                .buttonStyle(.plain)
+            } else {
+                // Search bar
+                HStack(spacing: 8) {
+                    TextField(String(localized: "postapoint_zip_placeholder"), text: $zipCode)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.numberPad)
+                        .onSubmit {
+                            if zipCode.count >= 4 {
+                                searchPoints()
+                            }
+                        }
+
+                    Button(action: searchPoints) {
+                        if isSearching {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .frame(width: 20, height: 20)
+                        } else {
+                            Text("search")
                         }
                     }
+                    .disabled(zipCode.count < 4 || isSearching)
+                    .buttonStyle(.bordered)
                 }
-                .padding(12)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.tealAccent.opacity(0.1))
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.tealAccent, lineWidth: 1.5)
-                )
-            }
 
-            // Search bar
-            HStack(spacing: 8) {
-                TextField(String(localized: "postapoint_zip_placeholder"), text: $zipCode)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
-                    .onSubmit {
-                        if zipCode.count >= 4 {
-                            searchPoints()
-                        }
-                    }
-
-                Button(action: searchPoints) {
-                    if isSearching {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .frame(width: 20, height: 20)
-                    } else {
-                        Text("search")
-                    }
+                // Error message
+                if let error = errorMessage {
+                    Text(error)
+                        .font(.appFont(.caption))
+                        .foregroundColor(.red)
                 }
-                .disabled(zipCode.count < 4 || isSearching)
-                .buttonStyle(.bordered)
-            }
 
-            // Error message
-            if let error = errorMessage {
-                Text(error)
-                    .font(.appFont(.caption))
-                    .foregroundColor(.red)
-            }
+                // Results
+                if hasSearched && deliveryPoints.isEmpty && !isSearching {
+                    Text("postapoint_no_results")
+                        .font(.appFont(.caption))
+                        .foregroundColor(.secondary)
+                        .padding(.vertical, 4)
+                }
 
-            // Results
-            if hasSearched && deliveryPoints.isEmpty && !isSearching {
-                Text("postapoint_no_results")
-                    .font(.appFont(.caption))
-                    .foregroundColor(.secondary)
-                    .padding(.vertical, 4)
-            }
-
-            ForEach(deliveryPoints) { point in
-                Button(action: {
-                    onSelect(PostaPointDetails(
-                        id: point.id,
-                        name: point.name,
-                        address: point.address
-                    ))
-                }) {
+                ForEach(deliveryPoints) { point in
+                    Button(action: {
+                        onSelect(PostaPointDetails(
+                            id: point.id,
+                            name: point.name,
+                            address: point.address
+                        ))
+                        isChanging = false
+                    }) {
                     HStack(spacing: 12) {
                         Image(systemName: "mappin.circle.fill")
                             .foregroundColor(.brandOrange)
@@ -130,6 +141,7 @@ struct PostaPointPickerView: View {
                     )
                 }
                 .buttonStyle(.plain)
+                }
             }
         }
     }

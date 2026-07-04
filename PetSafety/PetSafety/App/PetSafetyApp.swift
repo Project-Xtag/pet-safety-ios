@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import UserNotifications
 import Sentry
 import os
 
@@ -180,6 +181,13 @@ struct PetSafetyApp: App {
                         handleDeepLink(url)
                     }
                     .onChange(of: scenePhase) { _, newPhase in
+                        if newPhase == .active {
+                            // Clear the app-icon notification badge on every
+                            // foreground. The badge is set by server pushes
+                            // (aps.badge) and nothing reset it before, so it
+                            // accumulated indefinitely on the home-screen icon.
+                            UNUserNotificationCenter.current().setBadgeCount(0)
+                        }
                         if newPhase == .active && authViewModel.isAuthenticated {
                             // Refresh user profile + subscription when app comes to foreground (debounce 60s)
                             let now = Date()
