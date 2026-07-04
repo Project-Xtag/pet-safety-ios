@@ -246,18 +246,19 @@ struct MyPetFriendlyPlacesViewModelTests {
 /// coord-required model throws on it. This is a live decode, not a pre-built object renamed.
 @Suite("Create-201 decode — coord-less body")
 struct SubmittedPetFriendlyPlaceDecodeTests {
-    // Exactly what the backend sends on 201: id/category/name/address/status, no lat/lng.
+    // Exactly what the backend sends on 201: the `{ success, data: { place } }` envelope
+    // with id/category/name/address/status and no lat/lng (routes.ts:218 RETURNING).
     private let coordlessBody = Data(#"""
-    {"success":true,"place":{"id":"p3","category":"cafe_bar","name":"New Cafe","address":"Z","status":"pending"}}
+    {"success":true,"data":{"place":{"id":"p3","category":"cafe_bar","name":"New Cafe","address":"Z","status":"pending"}}}
     """#.utf8)
 
     @Test("coord-less 201 decodes into the slim SubmittedPetFriendlyPlace")
     func slimDecodesCoordlessBody() throws {
         let response = try JSONDecoder().decode(SubmitPetFriendlyPlaceResponse.self, from: coordlessBody)
-        #expect(response.place.id == "p3")
-        #expect(response.place.category == .cafeBar)
-        #expect(response.place.status == .pending)
-        #expect(response.place.city == nil)
+        #expect(response.data.place.id == "p3")
+        #expect(response.data.place.category == .cafeBar)
+        #expect(response.data.place.status == .pending)
+        #expect(response.data.place.city == nil)
     }
 
     @Test("the SAME coord-less body throws against the coord-required PetFriendlyPlace")

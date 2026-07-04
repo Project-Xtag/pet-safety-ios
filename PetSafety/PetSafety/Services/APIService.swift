@@ -73,6 +73,10 @@ enum APIError: Error, LocalizedError {
     /// the backend's complete localized sentence (no placeholder); M3 pins it to the
     /// address field.
     case geocodeFailed(String)
+    /// HTTP 429 — a rate limiter rejected the request (e.g. the pet-friendly submit
+    /// daily cap). Surfaced as a distinct case so callers can show a prominent
+    /// "limit reached" popup instead of a generic error toast.
+    case rateLimited
 
     var errorDescription: String? {
         switch self {
@@ -90,6 +94,8 @@ enum APIError: Error, LocalizedError {
             return String(localized: "api_error_pet_limit")
         case .decodingError:
             return String(localized: "api_error_decoding")
+        case .rateLimited:
+            return String(localized: "pet_friendly_rate_limited_message")
         case .networkError(let error):
             return String(localized: "api_error_network \(error.localizedDescription)")
         case .appCheckRequired:
@@ -478,6 +484,11 @@ class APIService {
                     throw APIError.geocodeFailed(errorResponse.error)
                 }
                 throw APIError.geocodeFailed(String(localized: "pet_friendly_error_geocode_failed"))
+
+            case 429 where !enveloped:
+                // Rate limiter hit (e.g. the pet-friendly submit daily cap). Distinct case
+                // so callers show a prominent "limit reached" popup, not a generic toast.
+                throw APIError.rateLimited
 
             default:
                 // Capture 5xx server errors to Sentry
@@ -1014,7 +1025,7 @@ class APIService {
         }
         let request = try await buildRequest(endpoint: endpoint, method: "GET", requiresAuth: false)
         let response = try await performRequest(request, responseType: PetFriendlyPlacesResponse.self, enveloped: false)
-        return response.places
+        return response.data.places
     }
 
     /// A single approved place by id (PUBLIC). Same `?market=` flag gate as the list
@@ -1026,7 +1037,7 @@ class APIService {
             requiresAuth: false
         )
         let response = try await performRequest(request, responseType: PetFriendlyPlaceResponse.self, enveloped: false)
-        return response.place
+        return response.data.place
     }
 
     /// Submit a place (AUTHENTICATED). Lands `status = pending`. The flag gate derives
@@ -1043,14 +1054,14 @@ class APIService {
         // coord-required PetFriendlyPlace would throw keyNotFound here. Detail still uses the full
         // model (it returns coords). 409 → duplicatePlace / 422 → geocodeFailed via performRequest.
         let response = try await performRequest(request, responseType: SubmitPetFriendlyPlaceResponse.self, enveloped: false)
-        return response.place
+        return response.data.place
     }
 
     /// The caller's own submissions, all statuses (AUTHENTICATED). No `?market=`.
     func getMyPetFriendlyPlaces() async throws -> [PetFriendlyPlace] {
         let request = try await buildRequest(endpoint: "/pet-friendly-places/mine", method: "GET", requiresAuth: true)
         let response = try await performRequest(request, responseType: PetFriendlyPlacesResponse.self, enveloped: false)
-        return response.places
+        return response.data.places
     }
 
     // MARK: - QR Tags
