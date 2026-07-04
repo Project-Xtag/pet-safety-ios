@@ -91,6 +91,9 @@ struct PetsListView: View {
 
                             // Success Stories Section
                             successStoriesSection
+
+                            // Pet-Friendly Places Section
+                            petFriendlyPlacesSection
                         }
                         .padding(.bottom, 100)
                     }
@@ -451,6 +454,54 @@ struct PetsListView: View {
                             .font(.appFont(size: 14))
                             .foregroundColor(.mutedText)
                     }
+
+                    Spacer()
+
+                    // Chevron
+                    Image(systemName: "chevron.right")
+                        .font(.appFont(size: 14, weight: .semibold))
+                        .foregroundColor(.mutedText)
+                        .accessibilityHidden(true)
+                }
+                .padding(16)
+                .background(Color(UIColor.systemBackground))
+                .cornerRadius(16)
+                .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 4)
+            }
+            .buttonStyle(PlainButtonStyle())
+            .padding(.horizontal, 24)
+        }
+    }
+
+    // MARK: - Pet-Friendly Places Section
+    private var petFriendlyPlacesSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("pet_friendly_title")
+                .font(.appFont(size: 20, weight: .bold))
+                .foregroundColor(.primary)
+                .padding(.horizontal, 24)
+
+            // Discovery entry — pushes the nearby map/list onto the home nav stack
+            // (PetFriendlyPlacesView owns its own LocationManager + derives market
+            // from authViewModel, so no wiring is needed beyond the push).
+            NavigationLink(destination: PetFriendlyPlacesView()) {
+                HStack(spacing: 16) {
+                    // Icon
+                    ZStack {
+                        Circle()
+                            .fill(Color.brandOrange.opacity(0.15))
+                            .frame(width: 60, height: 60)
+                        Image(systemName: "pawprint.circle.fill")
+                            .font(.appFont(size: 30))
+                            .foregroundColor(.brandOrange)
+                            .accessibilityLabel(NSLocalizedString("pet_friendly_entry_title", comment: ""))
+                    }
+
+                    // Text
+                    Text("pet_friendly_entry_subtitle")
+                        .font(.appFont(size: 15, weight: .medium))
+                        .foregroundColor(.primary)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     Spacer()
 
