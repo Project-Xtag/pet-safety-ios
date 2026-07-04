@@ -87,20 +87,24 @@ struct PetFriendlyPlace: Codable, Identifiable, Hashable {
     }
 }
 
-/// Flat `{ success, places }` wrapper. Pet-friendly endpoints are web-style FLAT
-/// responses, NOT the `ApiEnvelope<T>` `{ data }` shape the mobile-era endpoints use —
-/// which is why the API methods pass `enveloped: false`. `places` is REQUIRED: a
-/// renamed/missing key fails decode and surfaces an error instead of a silent empty
-/// map — the mobile mirror of the web `|| []` un-mask.
+/// `{ success, data: { places } }` wrapper. Pet-friendly now uses the STANDARD app-wide
+/// `{ success, data }` envelope like every other endpoint — verified against prod
+/// 2026-07-04 (it originally shipped flat `{ success, places }`; the backend converged it
+/// onto the envelope). The methods stay on `enveloped: false` so create's typed 409/422
+/// handling (the `where !enveloped` branches) is preserved, and model the `data` wrapper
+/// here. `places` is REQUIRED inside `data`: a renamed/missing key fails decode and surfaces
+/// an error instead of a silent empty map — the mobile mirror of the web `|| []` un-mask.
 struct PetFriendlyPlacesResponse: Decodable {
     let success: Bool
-    let places: [PetFriendlyPlace]
+    let data: DataBlock
+    struct DataBlock: Decodable { let places: [PetFriendlyPlace] }
 }
 
-/// Flat `{ success, place }` wrapper for the id-detail read (returns full coords).
+/// `{ success, data: { place } }` wrapper for the id-detail read (returns full coords).
 struct PetFriendlyPlaceResponse: Decodable {
     let success: Bool
-    let place: PetFriendlyPlace
+    let data: DataBlock
+    struct DataBlock: Decodable { let place: PetFriendlyPlace }
 }
 
 /// The create-201 body's `place`. DELIBERATELY separate from `PetFriendlyPlace`: the backend's
@@ -128,8 +132,9 @@ struct SubmittedPetFriendlyPlace: Decodable, Equatable {
     let country: String?
 }
 
-/// Flat `{ success, place }` wrapper for the create 201. `place` is REQUIRED (same un-mask).
+/// `{ success, data: { place } }` wrapper for the create 201. `place` is REQUIRED (same un-mask).
 struct SubmitPetFriendlyPlaceResponse: Decodable {
     let success: Bool
-    let place: SubmittedPetFriendlyPlace
+    let data: DataBlock
+    struct DataBlock: Decodable { let place: SubmittedPetFriendlyPlace }
 }

@@ -1619,3 +1619,6 @@
 "pet_friendly_error_geocode_failed" = "We couldn't find that address. Please check it and try again.";
 "profile_my_pet_friendly_places" = "My pet-friendly places";
 "common_ok" = "OK";
+
+"pet_friendly_rate_limited_title" = "Daily limit reached";
+"pet_friendly_rate_limited_message" = "You've reached the daily submission limit. Please try again later.";

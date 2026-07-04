@@ -1598,7 +1598,7 @@
 "pet_friendly_status_rejected" = "Elutasítva";
 "pet_friendly_status_unknown" = "Ismeretlen";
 "pet_friendly_entry_title" = "Kisállatbarát helyek";
-"pet_friendly_entry_subtitle" = "Találj kávézókat, éttermeket és szállásokat, ahol a kisállatok is szívesen látottak.";
+"pet_friendly_entry_subtitle" = "Fedezz fel kisállatbarát kávézókat, éttermeket és szállásokat";
 "pet_friendly_mine_title" = "Beküldéseim";
 "pet_friendly_mine_empty" = "Még nem küldtél be helyet.";
 "pet_friendly_submit_cta_prompt" = "Ismersz egy kisállatbarát helyet?";
@@ -1627,3 +1627,6 @@
 "pet_friendly_error_geocode_failed" = "Nem találtuk meg ezt a címet. Ellenőrizd és próbáld újra.";
 "profile_my_pet_friendly_places" = "Kisállatbarát helyeim";
 "common_ok" = "OK";
+
+"pet_friendly_rate_limited_title" = "Napi limit elérve";
+"pet_friendly_rate_limited_message" = "Elérted a napi beküldési limitet. Kérlek, próbáld újra később.";
