@@ -46,7 +46,10 @@ struct SubmitPetFriendlyPlaceView: View {
                             }
                         }
                     }
-                    .disabled(!vm.canSubmit || vm.isSubmitting)
+                    // Not gated on `canSubmit` — a silently-disabled button reads as "Send does
+                    // nothing". Let `submit()` run and surface the specific reason (e.g. the
+                    // category-required guard) instead of a dead tap.
+                    .disabled(vm.isSubmitting)
                 }
             }
             .alert(
@@ -65,6 +68,17 @@ struct SubmitPetFriendlyPlaceView: View {
                 } else {
                     Text(String(localized: "pet_friendly_submit_duplicate_generic"))
                 }
+            }
+            .alert(
+                String(localized: "pet_friendly_rate_limited_title"),
+                isPresented: Binding(
+                    get: { vm.rateLimited },
+                    set: { if !$0 { vm.acknowledgeRateLimited() } }
+                )
+            ) {
+                Button(String(localized: "common_ok"), role: .cancel) {}
+            } message: {
+                Text(String(localized: "pet_friendly_rate_limited_message"))
             }
         }
     }
@@ -92,7 +106,7 @@ struct SubmitPetFriendlyPlaceView: View {
     private var addressSection: some View {
         Section(header: Text("pet_friendly_submit_address")) {
             TextField(String(localized: "pet_friendly_submit_address_placeholder"), text: $vm.address)
-                .textInputAutocapitalization(.words)
+                .textInputAutocapitalization(.sentences)
                 .onChange(of: vm.address) { _, v in if v.count > addressMax { vm.address = String(v.prefix(addressMax)) } }
             TextField(String(localized: "pet_friendly_submit_city_placeholder"), text: $vm.city)
                 .onChange(of: vm.city) { _, v in if v.count > cityMax { vm.city = String(v.prefix(cityMax)) } }

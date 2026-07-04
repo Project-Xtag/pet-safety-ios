@@ -21,6 +21,8 @@ final class SubmitPetFriendlyPlaceViewModel: ObservableObject {
     @Published private(set) var formError: String?
     @Published private(set) var addressError: String?
     @Published private(set) var duplicate: DuplicateMatch?
+    /// 429 daily-cap hit — drives a prominent "limit reached" popup, distinct from formError.
+    @Published private(set) var rateLimited = false
 
     /// 409 dedup result for the dialog. `existingName == nil` is the place_id 23505
     /// backstop shape (no name); the dialog shows generic copy in that case.
@@ -49,11 +51,17 @@ final class SubmitPetFriendlyPlaceViewModel: ObservableObject {
         duplicate = nil
     }
 
+    /// Clears the 429 popup once acknowledged (the View can't write a `private(set)` property).
+    func acknowledgeRateLimited() {
+        rateLimited = false
+    }
+
     /// Submits and returns the created pending place, or nil on failure (state published).
     func submit() async -> SubmittedPetFriendlyPlace? {
         formError = nil
         addressError = nil
         duplicate = nil
+        rateLimited = false
 
         guard let category, category != .unknown else {
             formError = String(localized: "pet_friendly_submit_error_category_required")
@@ -81,6 +89,9 @@ final class SubmitPetFriendlyPlaceViewModel: ObservableObject {
             return nil
         } catch APIError.geocodeFailed(let message) {
             addressError = message                                // distinct — address field
+            return nil
+        } catch APIError.rateLimited {
+            rateLimited = true                                    // distinct — daily-cap popup
             return nil
         } catch {
             formError = error.localizedDescription
