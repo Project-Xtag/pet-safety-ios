@@ -50,7 +50,7 @@ final class SubmitPetFriendlyPlaceViewModel: ObservableObject {
     }
 
     /// Submits and returns the created pending place, or nil on failure (state published).
-    func submit() async -> PetFriendlyPlace? {
+    func submit() async -> SubmittedPetFriendlyPlace? {
         formError = nil
         addressError = nil
         duplicate = nil

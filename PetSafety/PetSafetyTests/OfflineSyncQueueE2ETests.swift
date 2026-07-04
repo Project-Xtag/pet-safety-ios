@@ -133,7 +133,7 @@ final class OfflineE2EMockAPIService: APIServiceProtocol {
         throw APIError.serverError("Not implemented for test")
     }
 
-    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> PetFriendlyPlace {
+    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> SubmittedPetFriendlyPlace {
         throw APIError.serverError("Not implemented for test")
     }
 

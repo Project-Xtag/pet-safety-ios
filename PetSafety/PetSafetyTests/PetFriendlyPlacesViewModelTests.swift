@@ -8,7 +8,7 @@ import Foundation
 final class MockPetFriendlyAPIService: APIServiceProtocol {
     var nearbyResult: Result<[PetFriendlyPlace], Error> = .success([])
     var placeResult: Result<PetFriendlyPlace, Error> = .failure(APIError.notFound("stub"))
-    var createResult: Result<PetFriendlyPlace, Error> = .failure(APIError.serverError("stub"))
+    var createResult: Result<SubmittedPetFriendlyPlace, Error> = .failure(APIError.serverError("stub"))
     var mineResult: Result<[PetFriendlyPlace], Error> = .success([])
     private(set) var createdPayload: CreatePetFriendlyPlaceRequest?
 
@@ -18,7 +18,7 @@ final class MockPetFriendlyAPIService: APIServiceProtocol {
     func getPetFriendlyPlace(id: String, market: String) async throws -> PetFriendlyPlace {
         try placeResult.get()
     }
-    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> PetFriendlyPlace {
+    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> SubmittedPetFriendlyPlace {
         createdPayload = payload
         return try createResult.get()
     }
@@ -49,6 +49,20 @@ private func makePlace(
         latitude: 47.5, longitude: 19.05,
         introduction: nil, phone: nil, website: nil, city: nil, postcode: nil,
         country: nil, distanceKm: nil, status: status, createdAt: nil, updatedAt: nil
+    )
+}
+
+/// The create-201 shape (no coords) — mirrors the slim model the create path now returns.
+@MainActor
+private func makeSubmitted(
+    id: String = "p1",
+    category: PetFriendlyPlace.Category = .cafeBar,
+    name: String = "Kutya Kávézó",
+    status: PetFriendlyPlace.Status = .pending
+) -> SubmittedPetFriendlyPlace {
+    SubmittedPetFriendlyPlace(
+        id: id, category: category, name: name, address: "Fő utca 1", status: status,
+        introduction: nil, phone: nil, website: nil, city: nil, postcode: nil, country: nil
     )
 }
 
@@ -118,7 +132,7 @@ struct SubmitPetFriendlyPlaceViewModelTests {
     @Test("success returns the created place, clears error states, omits country")
     func submitSuccess() async {
         let mock = MockPetFriendlyAPIService()
-        mock.createResult = .success(makePlace(status: .pending))
+        mock.createResult = .success(makeSubmitted(status: .pending))
         let vm = filledVM(mock)
         let result = await vm.submit()
         #expect(result != nil)
@@ -224,5 +238,32 @@ struct MyPetFriendlyPlacesViewModelTests {
         await vm.load()
         #expect(vm.errorMessage != nil)
         #expect(vm.places.isEmpty)
+    }
+}
+
+/// The create-201 fix, proven against a REAL coord-less body (routes.ts:218 RETURNING omits
+/// lat/lng) — BOTH directions from the SAME JSON string: the slim model decodes it, and the
+/// coord-required model throws on it. This is a live decode, not a pre-built object renamed.
+@Suite("Create-201 decode — coord-less body")
+struct SubmittedPetFriendlyPlaceDecodeTests {
+    // Exactly what the backend sends on 201: id/category/name/address/status, no lat/lng.
+    private let coordlessBody = Data(#"""
+    {"success":true,"place":{"id":"p3","category":"cafe_bar","name":"New Cafe","address":"Z","status":"pending"}}
+    """#.utf8)
+
+    @Test("coord-less 201 decodes into the slim SubmittedPetFriendlyPlace")
+    func slimDecodesCoordlessBody() throws {
+        let response = try JSONDecoder().decode(SubmitPetFriendlyPlaceResponse.self, from: coordlessBody)
+        #expect(response.place.id == "p3")
+        #expect(response.place.category == .cafeBar)
+        #expect(response.place.status == .pending)
+        #expect(response.place.city == nil)
+    }
+
+    @Test("the SAME coord-less body throws against the coord-required PetFriendlyPlace")
+    func sharedModelThrowsOnCoordlessBody() {
+        #expect(throws: DecodingError.self) {
+            _ = try JSONDecoder().decode(PetFriendlyPlaceResponse.self, from: coordlessBody)
+        }
     }
 }

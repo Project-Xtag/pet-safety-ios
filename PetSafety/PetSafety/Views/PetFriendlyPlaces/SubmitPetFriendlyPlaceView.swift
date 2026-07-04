@@ -11,7 +11,7 @@ struct SubmitPetFriendlyPlaceView: View {
     @StateObject private var vm = SubmitPetFriendlyPlaceViewModel()
 
     /// Called with the created pending place so the caller can react (e.g. refresh /mine).
-    var onSubmitted: ((PetFriendlyPlace) -> Void)?
+    var onSubmitted: ((SubmittedPetFriendlyPlace) -> Void)?
 
     private let nameMax = 150, addressMax = 500, phoneMax = 32, websiteMax = 500
     private let cityMax = 120, postcodeMax = 20, introMax = 2000

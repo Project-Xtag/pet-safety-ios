@@ -121,7 +121,7 @@ protocol APIServiceProtocol: AnyObject {
     // Pet Friendly Places (Phase 1: create-only)
     func getNearbyPetFriendlyPlaces(latitude: Double, longitude: Double, radiusKm: Double, category: PetFriendlyPlace.Category?, market: String) async throws -> [PetFriendlyPlace]
     func getPetFriendlyPlace(id: String, market: String) async throws -> PetFriendlyPlace
-    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> PetFriendlyPlace
+    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> SubmittedPetFriendlyPlace
     func getMyPetFriendlyPlaces() async throws -> [PetFriendlyPlace]
 }
 
@@ -1032,14 +1032,17 @@ class APIService {
     /// Submit a place (AUTHENTICATED). Lands `status = pending`. The flag gate derives
     /// the user's country server-side, so NO `?market=`. 409 → `duplicatePlace`, 422 →
     /// `geocodeFailed` (performRequest's `where !enveloped` branches).
-    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> PetFriendlyPlace {
+    func createPetFriendlyPlace(_ payload: CreatePetFriendlyPlaceRequest) async throws -> SubmittedPetFriendlyPlace {
         let request = try await buildRequest(
             endpoint: "/pet-friendly-places",
             method: "POST",
             body: payload,
             requiresAuth: true
         )
-        let response = try await performRequest(request, responseType: PetFriendlyPlaceResponse.self, enveloped: false)
+        // The create-201 RETURNING omits lat/lng (routes.ts:218), so decode the SLIM model — the
+        // coord-required PetFriendlyPlace would throw keyNotFound here. Detail still uses the full
+        // model (it returns coords). 409 → duplicatePlace / 422 → geocodeFailed via performRequest.
+        let response = try await performRequest(request, responseType: SubmitPetFriendlyPlaceResponse.self, enveloped: false)
         return response.place
     }
 

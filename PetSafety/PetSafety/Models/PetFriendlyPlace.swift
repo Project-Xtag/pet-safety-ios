@@ -97,8 +97,39 @@ struct PetFriendlyPlacesResponse: Decodable {
     let places: [PetFriendlyPlace]
 }
 
-/// Flat `{ success, place }` wrapper (id-detail + create 201).
+/// Flat `{ success, place }` wrapper for the id-detail read (returns full coords).
 struct PetFriendlyPlaceResponse: Decodable {
     let success: Bool
     let place: PetFriendlyPlace
+}
+
+/// The create-201 body's `place`. DELIBERATELY separate from `PetFriendlyPlace`: the backend's
+/// `INSERT … RETURNING` (`petFriendlyPlace.routes.ts:218`) echoes only
+///   `id, category, name, introduction, phone, website, address, city, postcode, country, status`
+/// — NO lat/lng/timestamps — so decoding it into the coord-required `PetFriendlyPlace` throws
+/// (`keyNotFound` on `lat`). We only need it to confirm the pending submit (id/name/status), so we
+/// model exactly what the wire returns. `id`, `category`, `name`, `address`, `status` are NOT-NULL
+/// columns → non-optional; the rest nullable. Field names match the JSON keys, so no CodingKeys.
+///
+/// (This is the fix for the pre-existing latent throw: the old code reused `PetFriendlyPlace` here
+/// and would have failed decode on a real 201 — masked by the test mocks' pre-built objects.)
+struct SubmittedPetFriendlyPlace: Decodable, Equatable {
+    let id: String
+    let category: PetFriendlyPlace.Category
+    let name: String
+    let address: String
+    let status: PetFriendlyPlace.Status
+
+    let introduction: String?
+    let phone: String?
+    let website: String?
+    let city: String?
+    let postcode: String?
+    let country: String?
+}
+
+/// Flat `{ success, place }` wrapper for the create 201. `place` is REQUIRED (same un-mask).
+struct SubmitPetFriendlyPlaceResponse: Decodable {
+    let success: Bool
+    let place: SubmittedPetFriendlyPlace
 }
