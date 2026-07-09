@@ -1,0 +1,197 @@
+# Senra Mobile Redesign — Tracked Plan
+
+> **Home:** this doc lives in the **iOS repo** (`pet-safety-ios/`) as the reference platform, but it is **cross-cutting** and governs both `pet-safety-ios` and `pet-safety-android`. Android-specific refs are pathed from `pet-safety-android/`.
+> **Status:** Unit 0 complete (investigation + this doc). No feature code written, no branch created.
+
+---
+
+## 1. Purpose & current status
+
+Restructure the Senra mobile apps so that surfaces which are **already anonymous-capable server-side** (scan → public profile, found-stray report, community / lost-&-found reads, pet-friendly-places discovery) become reachable **without logging in**, behind a new logged-out **landing** screen. Fix the guest tag-ordering dead-end (mobile drops the `userId` the checkout needs) and correct inaccurate OTP copy.
+
+**Current status:** Phase 0 (read-only investigation) is **done** — findings in §5, gaps in §6. Nothing is built. Next unit is Phase 1 (shell + splash + landing), pending review of this doc.
+
+**Working model (two-seat):** CC investigates/builds/surfaces; chat reviews diffs byte-level; **Viktor owns all git**. One reviewed unit per commit. Unit N+1 does not start until unit N is reviewed, tested, and committed.
+
+---
+
+## 2. Scope
+
+### In scope
+- Guest/public pre-login access to surfaces that are **already anonymous-capable server-side**: scan → public profile, found-stray report, community / lost-&-found reads, pet-friendly-places discovery.
+- New **landing** screen (default logged-out state) + refreshed splash.
+- **Guest tag-ordering wiring:** capture `userId`/`email` from `createOrder` and thread into `CreateTagCheckoutRequest` on the **guest path only** (authed order path untouched).
+- **OTP copy fix** ("check your email for a code" is inaccurate — no code is sent until the user requests OTP at login).
+
+### Out of scope / deferred
+- **ANYTHING that reads, writes, or maps into the NAV / Számla invoicing flow.** Separate, parallel work. Invoicing gaps are **documented here (see §6), never actioned here.**
+- **Separate billing/shipping ADDRESS CAPTURE (Phase 4)** — DEFERRED until the invoicing work lands, because its only value is on the invoice, which is across the boundary.
+- **B2B invoicing identity** (future `orders.billing_info` column) — out.
+- Any net-new feature beyond access-restructuring.
+
+### Locked decisions
+- **Shell approach = Option A:** add a logged-out-default branch so a new `LandingView` becomes the default unauthenticated state, leaving `MainTabView` / `MainTabScaffold` untouched.
+  - iOS: near-drop-in at `ContentView.swift:15–33`, gated solely on `authViewModel.isAuthenticated`.
+  - Android: near-drop-in at `PetSafetyApp.kt:275–318` — a single `screenKey` `when`-block. Add a `"landing"` case; no nav-graph rewrite.
+- **Public surfaces gate at the ACTION level, not the screen level:** view public; actions like create-alert / submit-place / activate-tag prompt login at the point of action, reusing the existing deep-link-sheet pattern (iOS `ContentView.swift:53/:84`; Android the existing activation/login-prompt route).
+- **Small, independently testable chunks; one surface per chunk in Phase 2.**
+- **Logged-out affordances are strictly limited (Q1 — decided 2026-07-09):** an unregistered / logged-out finder gets exactly **two** actions and no others — (1) **Report a sighting** (the existing sighting flow) and (2) **Scan a tag** (the existing scan flow → the found pet's public profile page). No edit, no mark-found, no other owner/account actions are shown to logged-out users. On the missing-pet **alert detail** this means it renders as a public read exposing **only** those two actions; every `currentUser`-gated affordance is hidden when logged out.
+
+---
+
+## 3. Working discipline
+
+- Read-only tracing precedes every build unit; findings land here before code.
+- One surface per Phase-2 chunk; each chunk ships with tests (harness confirmed strong on both platforms — §5.5).
+- **iOS and Android ship the same UX iteration** unless explicitly scoped down (feature exists on both).
+- Invoicing findings are **documented in §6 and never actioned** in this workstream.
+- No guessing: inconclusive traces are marked "inconclusive" with what would resolve them.
+
+---
+
+## 4. Plan — phases & chunk skeleton
+
+> Phase 0 is complete, so most chunk internals below are now **specifiable** (see §5). Items still needing a decision are flagged and tracked in §7.
+
+### Phase 0 — Investigation ✅ (this unit)
+Auth-boundary trios (both platforms), public-surface dependency audit (both), design-token inventory (both), OTP copy audit, test-harness confirmation. → §5.
+
+### Phase 1 — Shell + splash + landing
+- **1.1 iOS shell/landing** — Add a logged-out-default branch to `ContentView.swift:15–33` (Option A): new `LandingView` as the default unauthenticated state; `AuthenticationView` reached from a landing CTA. Refresh `SplashScreenView.swift` **in place**. Reuse `WelcomeView.swift` structure + `PrimaryPillButtonStyle` + `LocalizedLogo` + `AppSpacing`/`AppColors` (§5.3).
+  - **Done-when (acceptance — mandatory before build sign-off):** default logged-out launch shows `LandingView`; **logout routes to `LandingView`** (not the old `AuthenticationView`, not a blank screen); **session-expiry routes to `LandingView`**. This is a behavioral change riding along with the gate edit and must be tested **explicitly**, because the iOS **optimistic** path (`checkAuthStatus` sets `isAuthenticated=true` on token presence, then `logout()` on a failed `getCurrentUser`) can bounce a user **mid-session** — that bounce must land on `LandingView`. Cover both the explicit-logout and the mid-session-expiry transitions with XCTest/UI test.
+- **1.2 Android shell/landing** — Add a `"landing"` case to the `PetSafetyApp.kt:275–318` `screenKey` `when`; **build a new Landing composable** (none exists). Refresh splash via the system SplashScreen theme (`themes.xml` `Theme.PetSafety.Splash`) and/or a new post-splash composable. Reuse `BrandButton`, `BrandCard`, `LocalizedLogo`, `DesignTokens`/`Color.kt` (§5.3).
+  - **Done-when (acceptance — mandatory before build sign-off):** default logged-out launch shows the new Landing; **logout routes to Landing** (not `AuthScreen`, not blank); **session-expiry routes to Landing** — today `TokenAuthenticator`'s one-shot expiry drives the non-dismissible "Session Expired" dialog + logout, so verify that after that path `screenKey` resolves to the new landing branch, **not** the old `"auth"`/`AuthScreen`. Cover both transitions with the Robolectric / `compose.ui.test` harness.
+- *Asymmetry:* iOS has `SplashScreenView` **and** `WelcomeView` to refresh in place; Android has **neither** a Compose splash nor a landing composable — both built new from shared tokens.
+
+### Phase 2 — Route public surfaces (one surface per chunk, ordered trivial→heavy)
+Each chunk = hoist the surface out of the authed shell + optionalize any soft `currentUser` read + gate authed actions at action level. Mirror on both platforms.
+- **2.1 Scan → public profile** — *Trivial.* iOS live views carry no `@EnvironmentObject`; `DeepLinkScannedPetView` already renders at `ContentView` level (works logged-out today). Android: hoist `QrScannerScreen`/`ScannedPetSheet`/`PublicPetProfileScreen` out of `MainTabScaffold`; make `PublicPetProfileScreen` take `currentUser: User?` (nullable) and drop its unused `appStateViewModel` param. **Side task:** delete/quarantine dead iOS `ScannedPetView` (§6-G7).
+- **2.2 Found-stray report** — *Trivial.* Both platforms auth-optional by design (anonymous manage token). Wire entry from landing/board.
+- **2.3 Lost & Found board** — *Light.* iOS `AlertsTabView`: optionalize the `currentUser` GPS-fallback geocode + rework the `AddressRequiredView` CTA. Android: render `LostAndFoundScreen` directly with a device `userLocation`, or drop the 2 unused VMs + optionalize the fallback in `AlertsTabScreen`. **Kill dormant legacy alerts views first** (§6-G6).
+- **2.3b Missing-pet alert detail (public read)** — Per the locked decision (§2), the detail (`AlertDetailView` / Android detail) renders publicly with **only Report-a-sighting + Scan-a-tag** for logged-out users; the `currentUser?.id` ownership branches (Edit, Mark-Found) are hidden when logged out. Split from 2.3 because those ownership branches must be optionalized. **Execution gated on Q2** — verify the existing sighting flow is anonymous-capable, else the backend `POST /alerts/{id}/sightings` needs `optionalAuth` first (a small backend check, tracked as Q2).
+- **2.4 Pet-friendly places discovery** — *Light read + one authed action.* Read is anonymous; derive `market` from `Locale.current.region`/device country. **Gate submit-place behind an action-level login prompt** (`createPetFriendlyPlace` is `requiresAuth:true`). **Parity note:** the two platforms derive `market` slightly differently today (iOS `Locale.current.region`; Android `currentUser.country ?? Locale`), so the **logged-out/anonymous path on both must fall back to the device locale identically** — a logged-out user in HU must get HU places on both apps (do not let one platform diverge to a hardcoded/empty market when `currentUser` is null).
+
+### Phase 3 — Guest-order wiring + copy fix
+- **3.1 iOS guest-order wiring** — Capture `userId` (+ `email`) from the `createOrder` response and add `user_id`/`email` to `CreateTagCheckoutRequest` (`Order.swift:194`), threaded on the **guest path only**. Mirrors web `GetYourTag.tsx:444→458`. Authed path untouched. No backend change (route is `optionalAuth`).
+- **3.2 Android guest-order wiring** — Same: `OrdersViewModel.createOrder` captures `response.userId`; extend `CreateTagCheckoutRequest` (`Requests.kt:279`) + `OrdersViewModel.createTagCheckout` signature; thread on guest path.
+- **3.3 OTP copy fix** — On mobile there is **no inaccurate string today** (§5.4); the fix is to ensure the guest-order success/account-created surface built in 3.1/3.2 uses **accurate** copy (never claims a code was emailed). Wording pending HU canonical (§7-Q3). Web inaccuracy + backend response message documented (§6-G4), out of mobile-build scope.
+
+### Phase 4 — DEFERRED
+Separate billing/shipping **address capture**. Blocked until invoicing work lands (its only value is on the invoice, across the boundary). Do not build here.
+
+---
+
+## 5. Current-state findings (Phase 0)
+
+### 5.1 Auth-boundary trio — iOS (reference) vs Android
+
+| Concern | iOS | Android |
+|---|---|---|
+| **Shell / gate** | `PetSafetyApp` → Splash → `ContentView` → `MainTabView`. Gate: `if authViewModel.isAuthenticated { MainTabView } else if showRegistration {…} else { AuthenticationView }` — `ContentView.swift:15–33`. | `MainActivity:50–68` → `PetSafetyApp` → `MainTabScaffold`. Gate: `screenKey` `when`-block `PetSafetyApp.kt:275–318` (`isAuthenticated→"main"`, `showOrderTagsScreen→"order_tags"`, `showRegisterScreen→"register"`, else `"auth"`=`AuthScreen`), via `AnimatedContent` crossfade. |
+| **Logged-out default** | `AuthenticationView` | `AuthScreen` (order-tags/register are toggled sub-branches) |
+| **Session store** | `AuthViewModel.isAuthenticated` (`@Published`), backed by Keychain (`KeychainService.isAuthenticated = exists(.authToken)`, `KeychainService.swift:231`). **Optimistic**: set true on token presence, then revalidated async via `getCurrentUser()`; failure → `logout()`. | `AuthTokenStore` (EncryptedSharedPreferences, AES256) is source of truth; `AuthRepository.isAuthenticated = authToken.map { !isNullOrBlank() }` (`AuthRepository.kt:44`); `AuthViewModel` mirrors. **Reactive, not optimistic-revalidate** — a failed `users/me` only logs; demotion happens **only** via a real 401. `AppStateViewModel` holds **no** auth. |
+| **Token attachment** | Central `buildRequest(requiresAuth: Bool = true)` (`APIService.swift:225–303`); `Bearer` attached only `if requiresAuth, let token`. **Per-call opt-out on 17 endpoints.** App Check header on all; 401 auto-refresh via `TokenRefreshCoordinator` actor. | **Global `AuthInterceptor`** (`AuthInterceptor.kt:12–33`) attaches `Bearer` to **ALL** requests whenever a token exists — **no per-call `requiresAuth`** (verified: no `@Header`/`requiresAuth` in `ApiService.kt`). 401 → OkHttp `TokenAuthenticator` (refresh + one-shot expiry dialog). Also unconditional `AppCheckInterceptor` (can fail-closed 503) + Remote-Config base-URL rewrite. |
+| **Token-less calls** | 17 endpoints pass `requiresAuth:false` (auth bootstrap, config, qr lookup/scan, share-location, community found-pets, pet-friendly reads, nearby alerts, vaccine catalog, guest order create/validate-promo/shipping-prices). | Same endpoints go through the shared client; anonymous = simply no stored token. **No client-side auth gate on the call** — the backend's `optionalAuth` decides. |
+
+**Key divergence for the redesign:** Android attaches the token to every request via one interceptor (no `requiresAuth` seam), so anonymous behavior is purely "no token present." Both platforms' gate is a single-branch decision → **Option A landing is near-drop-in on both.**
+
+**Reachability hazard (both):** most public-endpoint-backed screens live *inside* the authed shell (`MainTabView` / `MainTabScaffold`), so they're gated at the **navigation** level even though their endpoints need no token. Phase 2 = hoist them out.
+
+### 5.2 Public-surface dependency audit → Phase-2 chunk list
+
+Ground truth: **every public surface's own ViewModel is auth-free**, and every read works anonymously at the transport layer. Only soft, null-safe `currentUser` reads exist, all degrading gracefully.
+
+| Chunk | Surface | iOS status | Android status | Weight |
+|---|---|---|---|---|
+| 2.1 | Scan → public profile | `QRScannerView` (no env obj), `DeepLinkScannedPetView` (already renders at `ContentView` level, logged-out today), `ShareLocationView` — all anonymous | `QrScannerScreen` (appState snackbar param only), `ScannedPetSheet` (stateless), `PublicPetProfileScreen` (reads `currentUser` **null-safe** `:91,183`, + unused `appState` param) | **Trivial** |
+| 2.2 | Found-stray report | `FoundPetFormView` / `FoundPetDetailView` — no env obj, auth-optional, manage token | `FoundPetFormScreen` / `FoundPetDetailScreen` — VM injects repo + `FoundPetManageTokenStore`, no auth | **Trivial** |
+| 2.3 | Lost & Found board (LIVE) | `AlertsTabView` (`ContentView.swift:221/:272`) reads `authViewModel.currentUser` **only** for GPS-fallback geocode (soft); `LostAndFoundViewModel` fully auth-free. ⚠️ row → `AlertDetailView` has **hard** `currentUser?.id` ownership dep | `LostAndFoundScreen` + `LostAndFoundViewModel` fully public; wrapper `AlertsTabScreen` reads `currentUser` (fallback only) + instantiates **2 unused VMs** | **Light** (board) |
+| 2.4 | Pet-friendly places | `PetFriendlyPlacesView` reads `currentUser` for `market` (has `Locale` fallback) + geocode fallback; **submit-place = `createPetFriendlyPlace` `requiresAuth:true`** → action-level login | `PetFriendlyPlacesScreen` + VM auth-free; `market` derived caller-side from `currentUser.country ?? Locale`; submit-place is the authed action | **Light read + 1 authed action** |
+
+**Action-level login prompts belong on:** activate-tag / promo-claim (scanner) and submit-place (pet-friendly). iOS additionally: viewing the missing-pet **detail** (`AlertDetailView`) is authed today — scope decision in §7-Q1.
+
+### 5.3 Design-token / shared-component inventory (reuse, don't reinvent)
+
+**iOS** (`PetSafety/PetSafety/`):
+- Colors — `Utilities/AppColors.swift`: `brandOrange` (asset `BrandColor` #FF914D, :26), `brandOrangeDeep` (#E5662C, :37), `brandGradient` (:42–48), plus asset-catalog colors `cream`/`ink`/`softBorder`/`mutedText`/`tealAccent`/`peachBackground`/`goldenAccent`/`cardBackground`; `BackgroundColor` (splash bg).
+- Spacing/Radius — `AppSpacing` (:61–68), `AppRadius` (:70–76).
+- Type — `Font+App.swift`: `Font.appFont(size:weight:)` (Inter).
+- Components — `PrimaryPillButtonStyle` (**new default CTA**, AppColors.swift:169–199), `SecondaryPillButtonStyle`, `.softCard`/`.elevatedCard`, `BrandButtonStyle` (legacy), `Views/Components/CachedAsyncImage.swift`.
+- Logo — `Helpers/LocalizedLogo.swift` (`LogoNew_<CC>`, fallback `_EN`).
+- **Refresh in place:** `Views/SplashScreenView.swift` (splash) and `Views/Pets/WelcomeView.swift` (the existing landing pattern — mirror it).
+
+**Android** (`app/src/main/java/com/petsafety/app/`):
+- Colors — `ui/theme/Color.kt`: `BrandOrange` #FF914D (:21), `BrandOrangeDeep` #E5662C (:26), `Cream`/`Ink`/`SoftBorder`/`TealAccent`/`PeachBackground`/`GoldenAccent` + dark variants; `Theme.kt` `PetSafetyTheme`.
+- Type — `ui/theme/Type.kt` (Inter, phone/tablet/adaptive).
+- Tokens — `ui/theme/DesignTokens.kt`: `AppSpacing`, `AppRadius`, `brandGradient()`, `Modifier.softCard()/elevatedCard()`; `Shape.kt`; `WindowSizeUtils.kt` (`AdaptiveLayout`).
+- Components — `ui/components/`: `BrandButton` (primary gradient pill), `SecondaryButton`, `TealButton`, `BrandCard`, `BrandTextField`, `AdaptiveContainer`.
+- Logo — `util/LocalizedLogo.kt` (`R.drawable.logo_new_<cc>`).
+- **Build new:** no Compose splash (only system SplashScreen theme `themes.xml` `Theme.PetSafety.Splash`) and **no landing/welcome composable** — both created new from the above.
+
+### 5.4 OTP copy audit (⚠️ refines the seeded gap)
+
+**The inaccurate "check your email for a code" post-order copy does NOT exist on mobile.** It is **web-only**:
+- `tagme-now/src/pages/redesign7/GetYourTag.tsx:448` — hardcoded HU `defaultValue: "Fiók létrehozva. Ellenőrizd az e-mail fiókodat a megerősítő kódért."`
+- `tagme-now/src/i18n/locales/hu.json:351` — `"account_created": "Fiók létrehozva! Ellenőrizd az e-mailedet a további lépésekhez"`
+- (Origin also server-side: the `POST /orders` response `message` at `backend/src/routes/order.routes.ts:211–213` — "Account created. Please check your email for verification code.")
+
+On **iOS + Android**, every "code"/"verification" string found is **accurate login-OTP copy** — `verify_code`, `enter_email_subtitle` ("…receive a login code"), Android `code_sent_to_email` ("Code sent to %1$s"), FAQ `help_faq_a15`. None claims a code is emailed after ordering, because the mobile guest-order flow currently dies at checkout (§6-G5) and never reaches an account-created message.
+
+→ **On mobile the copy fix is latent, coupled to Phase 3** (nothing to edit until the success surface exists). **To-verify (§7-Q4):** whether Android's `createOrder` callback surfaces the backend English `message` (iOS discards it).
+
+### 5.5 Test-harness confirmation
+
+- **iOS** — XCTest. **43** test files in `PetSafety/PetSafetyTests/` + 3 UI tests (incl. `AccessibilityAuditTests`). Directly relevant precedents: `AuthViewModelTests`, `AlertsViewModelTests`, `OrdersViewModelTests`, `PetFriendlyPlacesViewModelTests`, `DeepLinkTests`, `LocalizationParityTests`.
+- **Android** — JUnit + **MockK + Turbine + Robolectric 4.14.1 + `compose.ui.test` (JVM)**; **59** unit tests in `app/src/test/` (incl. `AuthViewModelTest`, `AlertsViewModelTest`, `OrdersViewModelTest`, `PublicPetProfileViewModelTest`, `QrScannerViewModelTest`, `AppStateViewModelTest`, screen tests like `MarkAsMissingScreenTest`), + **2** Espresso instrumented tests in `androidTest/`.
+- **Verdict:** per-chunk "tested before we proceed" is concrete on both — ViewModel + Compose/SwiftUI-view unit tests. Instrumented/E2E is thin on Android (2), but unit coverage is the lever.
+
+---
+
+## 6. Gaps register — documented, NOT fixed
+
+> Invoicing items are **out of scope** for this workstream (§2). Recorded here only so they aren't lost; route any action to the separate invoicing work.
+
+- **G1 — Invoice mapper ignores `billing_address`** *(invoicing territory — document only).* The order invoice buyer is assembled from `orders.shipping_address` **exclusively**; `billing_address` is never read (`backend/src/services/invoicing/orderSourceAssembler.ts:61`, `:64–76`). Distinct B2C billing is captured but never invoiced. Confirmed this investigation.
+- **G2 — `orders.billing_address` is unstructured** *(invoicing territory).* `createOrderSchema` types it as free-form `z.record(z.string(), z.unknown()).nullish()` (`backend/src/routes/order.routes.ts:79`). Needs a structured shape before it could be safely mapped.
+- **G3 — B2B invoice branch awaits a future column** *(out of scope).* The mapper's B2B branch exists (`backend/src/services/invoicing/orderInvoiceMapper.ts:114–125`) but reads a future `orders.billing_info` (companyName/taxNumber), **distinct from `billing_address`**.
+- **G4 — Inaccurate "check your email for a code" copy** *(copy fix IN scope for mobile).* Guest order creates a **silent passwordless account** (`users.password_hash = null`, `backend/src/services/orderService.ts:180`); **no OTP is sent at order time** — "Account created silently … OTP will be sent on-demand when the user requests to log in" (`orderService.ts:192–194`). Inaccurate copy lives in **web** (`GetYourTag.tsx:448`, `hu.json:351`) and the **backend response message** (`order.routes.ts:211–213`); **mobile has none today** (§5.4). Mobile fix is Phase 3 (accurate copy on the new success surface).
+- **G5 — Guest tag-order dead-ends at checkout on mobile** *(fix IN scope — Phase 3).* Backend `POST /orders/create-checkout` is `optionalAuth` and accepts body `user_id`/`email` for unauthenticated checkout (`order.routes.ts:983–1008`), but **both mobile clients discard the `userId` from `createOrder` and their `CreateTagCheckoutRequest` has no `user_id`/`email` field** (`iOS Order.swift:194–210`; `Android Requests.kt:279–286`) → guest checkout 401s. Web threads it correctly (`GetYourTag.tsx:444→458`). Guest ends up **token-less with a real account**, OTP-in later (never auto-logged-in). `delivery-points` is also `optionalAuth` → **not** a guest wall (earlier assumption corrected).
+- **G6 — Dormant alerts/pricing screens** *(wiring hazard for Phase 2.3 — confirmed).*
+  - iOS: `AlertsListView`, `MissingAlertsView`, `FoundAlertsView`, `SuccessStoriesView`, **and** `SuccessStoriesTabView` — each referenced **only** in its own `#Preview`; all carry live `authViewModel`/`appState`/`currentUser` couplings. The LIVE board is `AlertsTabView`.
+  - Android: `AlertsScreens.kt` (`MissingAlertsScreen`/`FoundAlertsScreen`/`AlertDetailScreen`/`ReportSightingDialog`) and `PricingScreen.kt` — zero live nav references. The LIVE board is `LostAndFoundScreen`.
+  - **Must wire to the LIVE unified board; delete/quarantine the dead views so none is mistaken for it.**
+- **G7 — Dead iOS `ScannedPetView`** *(new, Phase-2.1 hazard).* `Views/QRScanner/QRScannerView.swift:299` — a parallel unused scan-result variant (fed by `ScanResponse`); only self-reference. Live scan-result path is `DeepLinkScannedPetView` (fed by `TagLookupPet`). Decide delete vs. adopt.
+- **G8 — Android `AlertsTabScreen` unused VMs** *(new, minor).* Instantiates `QrScannerViewModel` + `SuccessStoriesViewModel` that are never used; drop during Phase 2.3.
+- **G9 — iOS deep-nav gap** *(document; relevant if landing deep-links these on iOS).* `NotificationHandler` posts `navigateToAlert`/`navigateToPet`/`navigateToScan` but **no view consumes them** (Android does). If the landing/public flow ever relies on those routes on iOS, they'd be no-ops until wired.
+
+---
+
+## 7. Open questions / decisions pending
+
+- **Q1 — RESOLVED 2026-07-09 → promoted to Locked decisions (§2).** Logged-out finders get exactly **Report-a-sighting + Scan-a-tag** on the missing-pet detail and nothing else; the detail becomes a public read with owner actions hidden when logged out. Implemented as sub-chunk **2.3b** (§4). (Recorded as a decision in §2, not left as an open recommendation here.)
+- **Q2 — Report-a-sighting on a public alert detail:** if Q1=(a), is sighting-reporting anonymous-capable end-to-end (backend + client), or does it need an action-level login? Requires a short backend check (deferred until Q1 is decided).
+- **Q3 — Corrected OTP/account-created copy wording (HU canonical).** What should the Phase-3 success surface say? Must not claim a code was emailed. Needs the HU source string (HU is canonical) before EN + 12 locales are derived.
+- **Q4 — Does Android surface the backend order `message`?** To-verify: whether `OrdersViewModel.createOrder`'s callback displays the English `message` ("…check your email for verification code"). iOS discards its `createOrder` response, so iOS can't. Resolves whether any live mobile string needs correcting *before* Phase 3.
+- **Q5 — Landing entry points for public surfaces.** Which of scan / found-stray / board / places get first-class CTAs on the landing screen vs. reached deeper? UX decision for Phase 1/2 ordering.
+- **Q6 — RESOLVED 2026-07-09.** Single home at `pet-safety-ios/SENRA-MOBILE-REDESIGN.md` (per instruction). No mirror or symlink; Android refs are pathed from `pet-safety-android/` inside this doc.
+
+---
+
+## 8. Specifiable vs. blocked (Unit-0 close-out)
+
+**Now specifiable (Phase 0 resolved them):**
+- **Phase 1.1 / 1.2** (shell + splash + landing) — gate insertion points and reusable tokens/components fully mapped (§5.1, §5.3). iOS refreshes `SplashScreenView` + mirrors `WelcomeView`; Android builds both new.
+- **Phase 2.1 (scan)** and **2.2 (found-stray)** — trivial, no authed deps; concrete file targets listed (§5.2). Includes the G7/G8 cleanups.
+- **Phase 2.4 (pet-friendly)** — read decoupling + the single authed action (submit-place) are pinned; only the login-prompt UX detail remains (reuse deep-link-sheet pattern).
+- **Phase 3.1 / 3.2 (guest-order wiring)** — exact edits known: capture `userId`/`email` from `createOrder`, extend `CreateTagCheckoutRequest` (`Order.swift:194` / `Requests.kt:279`), thread on guest path; backend already supports it (G5). No backend change.
+
+**Still blocked / needs a decision before the chunk is final:**
+- **Phase 2.3 (board) + 2.3b (detail)** — board shell **and** the detail scope are now **specifiable** (Q1 resolved → §2; 2.3b = logged-out sees only Report-a-sighting + Scan-a-tag). Remaining prerequisite: **Q2** — verify the existing sighting flow is anonymous-capable, else `POST /alerts/{id}/sightings` needs `optionalAuth` before **2.3b executes** (the board list, 2.3, is unblocked). Dormant-view deletion (G6) is a prerequisite for both.
+- **Phase 3.3 (copy fix)** — blocked on **Q3** (HU canonical wording) and **Q4** (whether Android shows the backend message today).
+- **Phase 4** — deferred by scope (invoicing boundary); do not plan internals yet.
+
+---
+
+## Change log
+- **2026-07-09** — Unit 0: doc created; Phase 0 traces 0.1–0.5 run and recorded (§5); gaps register seeded + G6/G7/G8/G9 added from findings (§6); open questions Q1–Q6 opened (§7); specifiable/blocked close-out (§8). No feature code, no branch. Surfaced for review; not yet committed (Viktor owns git).
+- **2026-07-09 (rev 2, post-review)** — **Q1 resolved and promoted to Locked decisions (§2)**: logged-out finders get only Report-a-sighting + Scan-a-tag on the missing-pet detail; folded into §4 (2.3 + new sub-chunk 2.3b), §7-Q1 (marked resolved, recommendation removed), and §8. Added **logout/session-expiry → landing acceptance check** to the 1.1/1.2 done-definitions (§4), incl. the iOS mid-session optimistic-bounce case. Added **2.4 cross-platform `market` device-locale fallback parity note** (§4). **Q6 resolved** (single doc home, no mirror). No feature code, no branch. Re-surfaced for review; not committed.
