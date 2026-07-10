@@ -3,7 +3,7 @@
 > **Companion to** [`../SENRA-MOBILE-REDESIGN.md`](../SENRA-MOBILE-REDESIGN.md) (the tracked plan). Written against **rev-4**: Q5 = **Shape A** three-zone landing is locked (§2); this spec honors guardrails **G-a** (no "coming soon" placeholders) and **G-b** (reuse existing components / surface a gap — resolved below, no gap).
 > **Status:** SPEC ONLY — no feature code, no branch, no build. The build loop starts after chat review + Viktor approval.
 > **Scope guard:** never touches `MainTabView`/`MainTabScaffold` internals, the authed order path, or anything invoicing.
-> **Revisions:** 2026-07-10 (spec-tightening, post-review) — §C.0 recast as a stated release-coherence **dependency** (with a revisit-if-phased-rollout clause); §E C1/C2 add `backFromAuthReturnsToLanding` + an auth/register flag-interaction verify note.
+> **Revisions:** 2026-07-10 (spec-tightening) — §C.0 recast as a release-coherence **dependency** (revisit-if-phased clause); §E C1/C2 add `backFromAuthReturnsToLanding` + an auth/register flag-interaction verify note. · 2026-07-10 (§G cleanup) — §G's three confirmations all resolved (release-coherence→§C.0; subtitle→build `CommunityEntryCard`; splash→**split per platform**) and §G retitled "all resolved." · 2026-07-10 (§A.1 hedge removed) — firmed the C0-granularity sentence to match locked §G #3 (split per platform).
 
 ---
 
@@ -20,7 +20,7 @@ The rev-4 steer (1.1a/1.1b iOS, 1.2a/1.2b Android) is confirmed, with **one chan
 | **C3 — 1.1b** | iOS | Landing content: three zones + `CommunityEntryCard` + data-driven Community list | Iterative visual |
 | **C4 — 1.2b** | Android | Landing content: three zones + `CommunityEntryCard` + data-driven Community list | Iterative visual |
 
-**Splash decision — its own leading chunk (not folded into "a").** Rationale: splash is pure-visual, isolated, zero routing/auth surface, and the two platforms diverge (iOS refreshes `SplashScreenView` in place; Android has only the system SplashScreen theme). Making it the first chunk gives the safest possible warm-up, keeps the visual splash diff off the structural routing diff, and yields an easy first reviewed/committed unit. C0 may be committed as one small cross-platform unit or split per platform if chat prefers.
+**Splash decision — its own leading chunk (not folded into "a").** Rationale: splash is pure-visual, isolated, zero routing/auth surface, and the two platforms diverge (iOS refreshes `SplashScreenView` in place; Android has only the system SplashScreen theme). Making it the first chunk gives the safest possible warm-up, keeps the visual splash diff off the structural routing diff, and yields an easy first reviewed/committed unit. C0 is split per platform (decided — see §G #3): C0-iOS then C0-Android, committed as two separate units.
 
 ### A.2 Recommended build order — **layer-complete, iOS-leads-each-layer**
 `C0 → C1 (1.1a) → C2 (1.2a) → C3 (1.1b) → C4 (1.2b)`
@@ -221,9 +221,9 @@ Introduced in C3/C4; **HU is the canonical source** — derive EN + the other lo
 
 ---
 
-## G. Open confirmations for chat before build
-1. **C.0 release-coherence assumption** — confirm the redesign releases as a coherent whole (Zone-3 taps live via Phase 2) rather than shipping the landing to users chunk-by-chunk. The seam design depends on this.
-2. **iOS subtitle vs `ProfileMenuRow`** (B.4) — default is "keep subtitle, build `CommunityEntryCard`"; confirm you don't want subtitle-less menu-row reuse.
-3. **Splash as one chunk vs two** (A.1) — C0 committed once for both platforms, or split per platform.
+## G. Confirmations — all resolved
+1. **Release-coherence — RESOLVED (2026-07-10):** recorded as a **DEPENDENCY** in §C.0 — single coherent release; Zone-3 destinations live before any user sees the landing; revisit if the release model ever goes phased.
+2. **iOS subtitle vs `ProfileMenuRow` — RESOLVED:** keep the subtitle and build `CommunityEntryCard` (per §2's locked Shape A); no subtitle-less menu-row reuse. (B.4)
+3. **Splash granularity — RESOLVED:** **split per platform** — C0 is two separate per-platform build units / commits (**C0-iOS then C0-Android**), not one cross-platform commit. (A.1)
 
-Nothing here is inconclusive on inspection; these are product/process confirmations, not unknowns.
+No open items remain; these were product/process confirmations, all now decided.
