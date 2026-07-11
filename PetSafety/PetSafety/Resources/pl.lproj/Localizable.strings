@@ -608,6 +608,12 @@
 "order_more_pet_names_footer" = "Podaj imiona pupili, dla których chcesz nieśki. Każda nieśka zostanie grawerowana z imieniem pupila.";
 "order_more_add_another" = "Dodaj kolejne pupila";
 "order_more_your_info" = "Twoje dane";
+
+// MARK: - Billing (HU NAV invoice) + shipping-same-as-billing toggle
+// TODO(Viktor): canonical translation pending
+"order_billing_address" = "Billing Address";
+// TODO(Viktor): canonical translation pending
+"order_shipping_same_as_billing" = "Shipping address is the same as billing address";
 "order_more_shipping" = "Adres dostawy";
 "order_more_street" = "Ulica i numer domu";
 "order_more_line2" = "Mieszkanie, piętro itp. (opcjonalnie)";
