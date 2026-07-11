@@ -598,6 +598,12 @@
 "order_more_pet_names_footer" = "Introdu numele animalelor de companie pentru care vrei plăcuțe inteligente. Vom grava fiecare plăcuță inteligentă cu numele animalului de companie.";
 "order_more_add_another" = "Adaugă alt animal de companie";
 "order_more_your_info" = "Informațiile tale";
+
+// MARK: - Billing (HU NAV invoice) + shipping-same-as-billing toggle
+// TODO(Viktor): canonical translation pending
+"order_billing_address" = "Billing Address";
+// TODO(Viktor): canonical translation pending
+"order_shipping_same_as_billing" = "Shipping address is the same as billing address";
 "order_more_shipping" = "Adresă de livrare";
 "order_more_street" = "Stradă și număr";
 "order_more_line2" = "Etaj, apartament (opțional)";

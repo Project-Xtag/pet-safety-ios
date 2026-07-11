@@ -598,6 +598,12 @@
 "order_more_pet_names_footer" = "Introduce los nombres de las mascotas para las que quieres chapas inteligentes. Grabaremos cada chapa inteligente con el nombre.";
 "order_more_add_another" = "Añadir otra mascota";
 "order_more_your_info" = "Tu información";
+
+// MARK: - Billing (HU NAV invoice) + shipping-same-as-billing toggle
+// TODO(Viktor): canonical translation pending
+"order_billing_address" = "Billing Address";
+// TODO(Viktor): canonical translation pending
+"order_shipping_same_as_billing" = "Shipping address is the same as billing address";
 "order_more_shipping" = "Dirección de envío";
 "order_more_street" = "Calle y número";
 "order_more_line2" = "Piso, puerta (opcional)";

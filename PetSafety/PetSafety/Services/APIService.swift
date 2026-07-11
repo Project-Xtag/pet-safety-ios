@@ -1222,11 +1222,11 @@ class APIService {
         return try await performRequest(request, responseType: ReplacementEligibilityResponse.self)
     }
 
-    func createReplacementOrder(petId: String, shippingAddress: ShippingAddress, deliveryMethod: String? = nil, postapointDetails: PostaPointDetails? = nil) async throws -> ReplacementOrderResponse {
+    func createReplacementOrder(petId: String, shippingAddress: ShippingAddress, billingAddress: ShippingAddress? = nil, deliveryMethod: String? = nil, postapointDetails: PostaPointDetails? = nil) async throws -> ReplacementOrderResponse {
         let request = try await buildRequest(
             endpoint: "/orders/replacement/\(petId)",
             method: "POST",
-            body: CreateReplacementOrderRequest(shippingAddress: shippingAddress, deliveryMethod: deliveryMethod, postapointDetails: postapointDetails),
+            body: CreateReplacementOrderRequest(shippingAddress: shippingAddress, billingAddress: billingAddress, deliveryMethod: deliveryMethod, postapointDetails: postapointDetails),
             requiresAuth: true
         )
         return try await performRequest(request, responseType: ReplacementOrderResponse.self)
@@ -1538,6 +1538,9 @@ struct ShippingAddress: Codable {
 
 struct CreateReplacementOrderRequest: Codable {
     let shippingAddress: ShippingAddress
+    // Billing address (HU NAV invoice). Distinct from shipping when the
+    // buyer unticks "same as billing"; equals shippingAddress otherwise.
+    let billingAddress: ShippingAddress?
     var platform: String = "ios"
     let deliveryMethod: String?
     let postapointDetails: PostaPointDetails?

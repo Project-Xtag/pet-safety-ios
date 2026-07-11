@@ -609,6 +609,12 @@
 "order_more_pet_names_footer" = "Saisis les noms des animaux de compagnie pour lesquels tu veux des médailles connectées. Nous graverons chaque médaille connectée avec le nom.";
 "order_more_add_another" = "Ajouter un autre animal de compagnie";
 "order_more_your_info" = "Tes informations";
+
+// MARK: - Billing (HU NAV invoice) + shipping-same-as-billing toggle
+// TODO(Viktor): canonical translation pending
+"order_billing_address" = "Billing Address";
+// TODO(Viktor): canonical translation pending
+"order_shipping_same_as_billing" = "Shipping address is the same as billing address";
 "order_more_shipping" = "Adresse de livraison";
 "order_more_street" = "Adresse postale";
 "order_more_line2" = "Appartement, étage, etc. (Facultatif)";

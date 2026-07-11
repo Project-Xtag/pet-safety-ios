@@ -611,6 +611,12 @@
 "order_more_pet_names_footer" = "Skriv inn navnene på kjæledyrene du vil ha QR-brikker til.";
 "order_more_add_another" = "Legg til et dyr til";
 "order_more_your_info" = "Din informasjon";
+
+// MARK: - Billing (HU NAV invoice) + shipping-same-as-billing toggle
+// TODO(Viktor): canonical translation pending
+"order_billing_address" = "Billing Address";
+// TODO(Viktor): canonical translation pending
+"order_shipping_same_as_billing" = "Shipping address is the same as billing address";
 "order_more_shipping" = "Leveringsadresse";
 "order_more_street" = "Gateadresse";
 "order_more_line2" = "Leilighet, suite osv. (valgfritt)";
