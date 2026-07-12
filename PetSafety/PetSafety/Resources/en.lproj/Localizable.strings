@@ -615,10 +615,6 @@
 "order_more_pet_names_footer" = "Enter the names of pets you'd like tags for. We'll engrave each tag with the pet's name.";
 "order_more_add_another" = "Add Another Pet";
 "order_more_your_info" = "Your Information";
-
-// MARK: - Billing (HU NAV invoice) + shipping-same-as-billing toggle
-"order_billing_address" = "Billing Address";
-"order_shipping_same_as_billing" = "Shipping and billing address are the same";
 "order_more_shipping" = "Shipping Address";
 "order_more_street" = "Street Address";
 "order_more_line2" = "Apartment, suite, etc. (Optional)";

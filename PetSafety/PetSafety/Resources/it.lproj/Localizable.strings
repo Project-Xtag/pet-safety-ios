@@ -617,12 +617,6 @@
 "order_more_pet_names_footer" = "Inserisci i nomi degli animali di compagnia per cui vuoi le medagliette. Incideremo il nome di ogni animale di compagnia sulla rispettiva medaglietta.";
 "order_more_add_another" = "Aggiungi un altro animale di compagnia";
 "order_more_your_info" = "Ti tue informazioni";
-
-// MARK: - Billing (HU NAV invoice) + shipping-same-as-billing toggle
-// TODO(Viktor): canonical translation pending
-"order_billing_address" = "Billing Address";
-// TODO(Viktor): canonical translation pending
-"order_shipping_same_as_billing" = "Shipping address is the same as billing address";
 "order_more_shipping" = "Indirizzo di spedizione";
 "order_more_street" = "Via e numero civico";
 "order_more_line2" = "Appartamento, interno, ecc. (Opzionale)";

@@ -598,12 +598,6 @@
 "order_more_pet_names_footer" = "Gib die Namen der Haustiere ein, für die du Namensschilder möchten. Wir gravieren den Namen auf jeden Haustiermarke.";
 "order_more_add_another" = "Weiteres Haustier hinzufügen";
 "order_more_your_info" = "deine Informationen";
-
-// MARK: - Billing (HU NAV invoice) + shipping-same-as-billing toggle
-// TODO(Viktor): canonical translation pending
-"order_billing_address" = "Billing Address";
-// TODO(Viktor): canonical translation pending
-"order_shipping_same_as_billing" = "Shipping address is the same as billing address";
 "order_more_shipping" = "Lieferadresse";
 "order_more_street" = "Straße und Hausnummer";
 "order_more_line2" = "Stockwerk, Wohnung (optional)";

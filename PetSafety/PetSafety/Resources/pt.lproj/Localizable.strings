@@ -598,12 +598,6 @@
 "order_more_pet_names_footer" = "Introduza os nomes dos animais de estimação para os quais pretende plaquinhas inteligentes. Vamos gravar o nome em cada plaquinha inteligente.";
 "order_more_add_another" = "Adicionar outro animal de estimação";
 "order_more_your_info" = "A sua informação";
-
-// MARK: - Billing (HU NAV invoice) + shipping-same-as-billing toggle
-// TODO(Viktor): canonical translation pending
-"order_billing_address" = "Billing Address";
-// TODO(Viktor): canonical translation pending
-"order_shipping_same_as_billing" = "Shipping address is the same as billing address";
 "order_more_shipping" = "Morada de envio";
 "order_more_street" = "Rua e número";
 "order_more_line2" = "Andar, apartamento (opcional)";

@@ -24,18 +24,7 @@ struct OrderMoreTagsView: View {
     @State private var email = ""
     @State private var phone = ""
 
-    // Billing address (PRIMARY — carries the buyer identity for the HU NAV
-    // invoice / számla). Prefilled from the buyer's profile. When
-    // shippingSameAsBilling is ON (default) the ship-to mirrors billing;
-    // untick to reveal + collect a separate delivery address below.
-    @State private var billingStreet1 = ""
-    @State private var billingStreet2 = ""
-    @State private var billingCity = ""
-    @State private var billingPostCode = ""
-    @State private var shippingSameAsBilling = true
-
-    // Shipping address (separate ship-to — only collected when
-    // shippingSameAsBilling is OFF; otherwise mirrors the billing fields).
+    // Shipping address
     @State private var street1 = ""
     @State private var street2 = ""
     @State private var city = ""
@@ -162,17 +151,8 @@ struct OrderMoreTagsView: View {
                         // Contact Details
                         contactDetailsCard
 
-                        // Billing Address (PRIMARY — issued on the HU NAV
-                        // invoice). Also holds the shared country selector.
-                        billingAddressCard
-
-                        // Shipping-same-as-billing toggle (default ON)
-                        shippingSameAsBillingCard
-
-                        // Separate ship-to — revealed only when the toggle is OFF
-                        if !shippingSameAsBilling {
-                            shippingAddressCard
-                        }
+                        // Shipping Address
+                        shippingAddressCard
 
                         // Delivery Method (Hungary only)
                         if isHungary {
@@ -383,34 +363,28 @@ struct OrderMoreTagsView: View {
         }
     }
 
-    // Billing address is the PRIMARY, always-collected section — the tag
-    // számla (HU NAV invoice) is issued to it. The shared country selector
-    // lives here since billing is always visible; ship-to reuses the same
-    // country. The buyer name rides on the order's ownerName, so no gift
-    // recipient ever leaks into the billing identity.
-    private var billingAddressCard: some View {
-        SectionCard(title: String(localized: "order_billing_address"), icon: "creditcard.fill") {
-            TextField(String(localized: "order_more_street"), text: $billingStreet1)
+    private var shippingAddressCard: some View {
+        SectionCard(title: String(localized: "order_more_shipping"), icon: "house.fill") {
+            TextField(String(localized: "order_more_street"), text: $street1)
                 .textFieldStyle(BrandTextFieldStyle())
                 .textContentType(.streetAddressLine1)
 
-            TextField(String(localized: "order_more_line2"), text: $billingStreet2)
+            TextField(String(localized: "order_more_line2"), text: $street2)
                 .textFieldStyle(BrandTextFieldStyle())
                 .textContentType(.streetAddressLine2)
 
             HStack(spacing: 12) {
-                TextField(String(localized: "order_more_city"), text: $billingCity)
+                TextField(String(localized: "order_more_city"), text: $city)
                     .textFieldStyle(BrandTextFieldStyle())
                     .textContentType(.addressCity)
 
-                TextField(String(localized: "order_more_postal"), text: $billingPostCode)
+                TextField(String(localized: "order_more_postal"), text: $postCode)
                     .textFieldStyle(BrandTextFieldStyle())
                     .textContentType(.postalCode)
                     .autocapitalization(.allCharacters)
             }
 
-            // Country picker — shared by billing + shipping. Opens a sheet
-            // with the user's country at top.
+            // Country picker — opens sheet with user's country at top
             Button(action: { showingCountryPicker = true }) {
                 HStack(spacing: 10) {
                     Image(systemName: "globe")
@@ -457,48 +431,6 @@ struct OrderMoreTagsView: View {
                         }
                     }
                 }
-            }
-        }
-    }
-
-    // "Shipping address is the same as billing" — default ON. Untick to
-    // reveal the separate ship-to fields.
-    private var shippingSameAsBillingCard: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Toggle(isOn: $shippingSameAsBilling) {
-                Text("order_shipping_same_as_billing")
-                    .font(.appFont(size: 16, weight: .medium))
-            }
-            .tint(.brandOrange)
-        }
-        .padding(16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(UIColor.systemBackground))
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.06), radius: 8, x: 0, y: 4)
-    }
-
-    // Separate ship-to address — rendered only when the toggle is OFF. The
-    // country is inherited from the billing card's shared selector.
-    private var shippingAddressCard: some View {
-        SectionCard(title: String(localized: "order_more_shipping"), icon: "house.fill") {
-            TextField(String(localized: "order_more_street"), text: $street1)
-                .textFieldStyle(BrandTextFieldStyle())
-                .textContentType(.streetAddressLine1)
-
-            TextField(String(localized: "order_more_line2"), text: $street2)
-                .textFieldStyle(BrandTextFieldStyle())
-                .textContentType(.streetAddressLine2)
-
-            HStack(spacing: 12) {
-                TextField(String(localized: "order_more_city"), text: $city)
-                    .textFieldStyle(BrandTextFieldStyle())
-                    .textContentType(.addressCity)
-
-                TextField(String(localized: "order_more_postal"), text: $postCode)
-                    .textFieldStyle(BrandTextFieldStyle())
-                    .textContentType(.postalCode)
-                    .autocapitalization(.allCharacters)
             }
         }
     }
@@ -711,15 +643,12 @@ struct OrderMoreTagsView: View {
 
     private var isFormValid: Bool {
         let hasPetNames = isGift ? true : validPetCount > 0
-        // Billing is always required (invoice address). Shipping is only
-        // validated when it diverges from billing.
-        let billingOk = !billingStreet1.isEmpty && !billingCity.isEmpty && !billingPostCode.isEmpty
-        let shippingOk = shippingSameAsBilling || (!street1.isEmpty && !city.isEmpty && !postCode.isEmpty)
         return hasPetNames &&
             !ownerName.isEmpty &&
             InputValidators.isValidEmail(email) &&
-            billingOk &&
-            shippingOk &&
+            !street1.isEmpty &&
+            !city.isEmpty &&
+            !postCode.isEmpty &&
             !selectedCountryCode.isEmpty &&
             (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
     }
@@ -779,12 +708,9 @@ struct OrderMoreTagsView: View {
             if !formattedName.isEmpty {
                 ownerName = formattedName
             }
-            // Seed the PRIMARY billing address from the profile (the profile
-            // stores the account holder's single address). The separate
-            // ship-to stays empty until the buyer unticks "same as billing".
-            if let address = user.address { billingStreet1 = address }
-            if let userCity = user.city { billingCity = userCity }
-            if let postal = user.postalCode { billingPostCode = postal }
+            if let address = user.address { street1 = address }
+            if let userCity = user.city { city = userCity }
+            if let postal = user.postalCode { postCode = postal }
             // Resolve country: user profile value → locale detection
             let rawCountry = user.country ?? detectedCountry ?? ""
             if let match = SupportedCountries.find(rawCountry) {
@@ -814,22 +740,8 @@ struct OrderMoreTagsView: View {
                 let quantity = isGift ? giftQuantity : validPetCount
                 let validNames = petNames.filter { !$0.isEmpty }
 
-                // Step 1: Create order record (matches Android flow).
-                // Billing is the PRIMARY invoice address; ship-to mirrors it
-                // unless the buyer supplied a separate delivery address. The
-                // order's ownerName stays the buyer — a gift recipient never
-                // rides on the billing identity.
-                let billingAddr = AddressDetails(
-                    street1: billingStreet1,
-                    street2: billingStreet2.isEmpty ? nil : billingStreet2,
-                    city: billingCity,
-                    province: nil,
-                    postCode: billingPostCode,
-                    country: selectedCountryCode.uppercased(),
-                    phone: phone.isEmpty ? nil : phone
-                )
-
-                let shippingAddr = shippingSameAsBilling ? billingAddr : AddressDetails(
+                // Step 1: Create order record (matches Android flow)
+                let shippingAddr = AddressDetails(
                     street1: street1,
                     street2: street2.isEmpty ? nil : street2,
                     city: city,
@@ -844,7 +756,7 @@ struct OrderMoreTagsView: View {
                     ownerName: ownerName,
                     email: email,
                     shippingAddress: shippingAddr,
-                    billingAddress: billingAddr,
+                    billingAddress: nil,
                     paymentMethod: "card",
                     shippingCost: nil
                 )

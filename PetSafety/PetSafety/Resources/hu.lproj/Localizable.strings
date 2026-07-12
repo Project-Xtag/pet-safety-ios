@@ -603,10 +603,6 @@
 "order_more_pet_names_footer" = "Add meg azoknak a kedvenceknek a nevét, akiknek bilétát szeretnél!";
 "order_more_add_another" = "Újabb kedvenc";
 "order_more_your_info" = "Adataid";
-
-// MARK: - Számlázási cím + szállítás megegyezik kapcsoló
-"order_billing_address" = "Számlázási cím";
-"order_shipping_same_as_billing" = "A szállítási és a számlázási cím megegyezik.";
 "order_more_shipping" = "Szállítási cím";
 "order_more_street" = "Utca, házszám";
 "order_more_line2" = "Emelet, ajtó (opcionális)";

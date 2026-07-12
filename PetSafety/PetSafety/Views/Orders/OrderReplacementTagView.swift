@@ -20,18 +20,7 @@ struct OrderReplacementTagView: View {
     @State private var shippingCurrency: String = "EUR"
     @State private var planName: String = "starter"
 
-    // Billing address (PRIMARY — issued on the HU NAV invoice / számla).
-    // Prefilled from the buyer's profile. shippingSameAsBilling default ON →
-    // the replacement ships to the billing address unless the buyer unticks
-    // and enters a separate delivery address. A replacement is never a gift.
-    @State private var billingStreet1 = ""
-    @State private var billingStreet2 = ""
-    @State private var billingCity = ""
-    @State private var billingPostCode = ""
-    @State private var shippingSameAsBilling = true
-
-    // Shipping address fields (separate ship-to — only collected when
-    // shippingSameAsBilling is OFF; otherwise mirrors the billing fields).
+    // Shipping address fields
     @State private var street1 = ""
     @State private var street2 = ""
     @State private var city = ""
@@ -146,17 +135,8 @@ struct OrderReplacementTagView: View {
                         // Eligibility Info
                         eligibilityCard
 
-                        // Billing Address (PRIMARY — HU NAV invoice). Also
-                        // holds the shared country selector + phone.
-                        billingAddressCard
-
-                        // Shipping-same-as-billing toggle (default ON)
-                        shippingSameAsBillingCard
-
-                        // Separate ship-to — revealed only when the toggle is OFF
-                        if !shippingSameAsBilling {
-                            shippingAddressCard
-                        }
+                        // Shipping Address
+                        shippingAddressCard
 
                         // Delivery Method (Hungary only)
                         if isHungary {
@@ -315,31 +295,27 @@ struct OrderReplacementTagView: View {
         .cornerRadius(14)
     }
 
-    // Billing address is the PRIMARY, always-collected section — the
-    // replacement's számla (HU NAV invoice) is issued to it. The shared
-    // country selector + phone live here since billing is always visible.
-    private var billingAddressCard: some View {
-        ReplacementSectionCard(title: String(localized: "order_billing_address"), icon: "creditcard.fill") {
-            TextField(String(localized: "order_replace_street"), text: $billingStreet1)
+    private var shippingAddressCard: some View {
+        ReplacementSectionCard(title: String(localized: "order_replace_shipping"), icon: "house.fill") {
+            TextField(String(localized: "order_replace_street"), text: $street1)
                 .textFieldStyle(BrandTextFieldStyle())
                 .textContentType(.streetAddressLine1)
 
-            TextField(String(localized: "order_replace_line2"), text: $billingStreet2)
+            TextField(String(localized: "order_replace_line2"), text: $street2)
                 .textFieldStyle(BrandTextFieldStyle())
                 .textContentType(.streetAddressLine2)
 
             HStack(spacing: 12) {
-                TextField(String(localized: "order_replace_city"), text: $billingCity)
+                TextField(String(localized: "order_replace_city"), text: $city)
                     .textFieldStyle(BrandTextFieldStyle())
                     .textContentType(.addressCity)
 
-                TextField(String(localized: "order_replace_postal"), text: $billingPostCode)
+                TextField(String(localized: "order_replace_postal"), text: $postCode)
                     .textFieldStyle(BrandTextFieldStyle())
                     .textContentType(.postalCode)
                     .autocapitalization(.allCharacters)
             }
 
-            // Country picker — shared by billing + shipping.
             Button(action: { showingCountryPicker = true }) {
                 HStack(spacing: 10) {
                     Image(systemName: "globe")
@@ -395,48 +371,6 @@ struct OrderReplacementTagView: View {
         }
     }
 
-    // "Shipping address is the same as billing" — default ON. Untick to
-    // reveal the separate ship-to fields.
-    private var shippingSameAsBillingCard: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Toggle(isOn: $shippingSameAsBilling) {
-                Text("order_shipping_same_as_billing")
-                    .font(.appFont(size: 16, weight: .medium))
-            }
-            .tint(.brandOrange)
-        }
-        .padding(16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(UIColor.systemBackground))
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.06), radius: 8, x: 0, y: 4)
-    }
-
-    // Separate ship-to address — rendered only when the toggle is OFF. The
-    // country + phone are inherited from the billing card.
-    private var shippingAddressCard: some View {
-        ReplacementSectionCard(title: String(localized: "order_replace_shipping"), icon: "house.fill") {
-            TextField(String(localized: "order_replace_street"), text: $street1)
-                .textFieldStyle(BrandTextFieldStyle())
-                .textContentType(.streetAddressLine1)
-
-            TextField(String(localized: "order_replace_line2"), text: $street2)
-                .textFieldStyle(BrandTextFieldStyle())
-                .textContentType(.streetAddressLine2)
-
-            HStack(spacing: 12) {
-                TextField(String(localized: "order_replace_city"), text: $city)
-                    .textFieldStyle(BrandTextFieldStyle())
-                    .textContentType(.addressCity)
-
-                TextField(String(localized: "order_replace_postal"), text: $postCode)
-                    .textFieldStyle(BrandTextFieldStyle())
-                    .textContentType(.postalCode)
-                    .autocapitalization(.allCharacters)
-            }
-        }
-    }
-
     private var deliveryMethodCard: some View {
         ReplacementSectionCard(title: String(localized: "delivery_method_title"), icon: "truck.box.fill") {
             HStack(spacing: 10) {
@@ -472,12 +406,8 @@ struct OrderReplacementTagView: View {
     // MARK: - Helpers
 
     private var isFormValid: Bool {
-        // Billing is always required (invoice address); shipping only when
-        // it diverges from billing.
-        let billingOk = !billingStreet1.isEmpty && !billingCity.isEmpty && !billingPostCode.isEmpty
-        let shippingOk = shippingSameAsBilling || (!street1.isEmpty && !city.isEmpty && !postCode.isEmpty)
-        return billingOk && shippingOk && !selectedCountryCode.isEmpty &&
-            (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
+        !street1.isEmpty && !city.isEmpty && !postCode.isEmpty && !selectedCountryCode.isEmpty &&
+        (deliveryMethod != "postapoint" || selectedPostaPoint != nil)
     }
 
     private var formattedShippingCost: String {
@@ -555,12 +485,10 @@ struct OrderReplacementTagView: View {
         }
 
         await MainActor.run {
-            // Seed the PRIMARY billing address from the profile; the separate
-            // ship-to stays empty until the buyer unticks "same as billing".
-            if let address = user.address { billingStreet1 = address }
+            if let address = user.address { street1 = address }
             if let userPhone = user.phone { phone = userPhone }
-            if let userCity = user.city { billingCity = userCity }
-            if let postal = user.postalCode { billingPostCode = postal }
+            if let userCity = user.city { city = userCity }
+            if let postal = user.postalCode { postCode = postal }
             let rawCountry = user.country ?? detectedCountry ?? ""
             if let match = SupportedCountries.find(rawCountry) {
                 selectedCountryCode = match.code
@@ -609,19 +537,7 @@ struct OrderReplacementTagView: View {
         Task {
             isLoading = true
             do {
-                // Billing is the PRIMARY invoice address; ship-to mirrors it
-                // unless the buyer supplied a separate delivery address.
-                let billingAddress = ShippingAddress(
-                    street1: billingStreet1,
-                    street2: billingStreet2.isEmpty ? nil : billingStreet2,
-                    city: billingCity,
-                    province: nil,
-                    postCode: billingPostCode,
-                    country: selectedCountryCode,
-                    phone: phone.isEmpty ? nil : phone
-                )
-
-                let shippingAddress = shippingSameAsBilling ? billingAddress : ShippingAddress(
+                let shippingAddress = ShippingAddress(
                     street1: street1,
                     street2: street2.isEmpty ? nil : street2,
                     city: city,
@@ -634,7 +550,6 @@ struct OrderReplacementTagView: View {
                 let response = try await APIService.shared.createReplacementOrder(
                     petId: pet.id,
                     shippingAddress: shippingAddress,
-                    billingAddress: billingAddress,
                     deliveryMethod: isHungary ? deliveryMethod : nil,
                     postapointDetails: selectedPostaPoint
                 )
