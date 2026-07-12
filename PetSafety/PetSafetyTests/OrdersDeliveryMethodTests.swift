@@ -193,6 +193,7 @@ struct CreateReplacementOrderRequestTests {
                 country: "HU",
                 phone: nil
             ),
+            billingAddress: nil,
             deliveryMethod: "postapoint",
             postapointDetails: PostaPointDetails(id: "pp-5", name: "Point 5", address: "Address 5")
         )
@@ -217,6 +218,7 @@ struct CreateReplacementOrderRequestTests {
                 country: "AT",
                 phone: nil
             ),
+            billingAddress: nil,
             deliveryMethod: nil,
             postapointDetails: nil
         )
