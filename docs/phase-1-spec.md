@@ -144,47 +144,66 @@ Render: `communitySeed.forEach { CommunityEntryCard(it.icon, stringResource(it.t
 - **Done-when:** refreshed branded splash; existing splash→content handoff still fires; no routing/auth change; visual review approved.
 
 ### C1 — 1.1a iOS shell/routing (+ acceptance)
-- **Files:** `App/ContentView.swift` (gate `:15-33`); new `Views/Landing/LandingView.swift` (minimal scaffold: persistent Sign-in / Register CTAs + empty zone containers — enough to be the default + testable; **no "coming soon" text**, G-a).
-- **Precise edit:** make `LandingView` the default unauthenticated branch; `AuthenticationView` is now reached *from a landing CTA* via a new `@State showLogin`:
+- **Files:** `App/ContentView.swift` (gate — **re-confirmed `:16-33`**; `@State showRegistration` `:11`; `.animation(value: isAuthenticated)` `:38` + `value: showRegistration` `:39`; the spec's old `:15-33` was stale); **new `App/RootRoute.swift`** (the routing seam — below); new `Views/Landing/LandingView.swift` (minimal scaffold: persistent Sign-in / Register CTAs + empty zone containers; **no "coming soon"**, G-a). **⚠️ Spec amendment (2026-07-12, approved):** C1 adds `RootRoute.swift` because §9.1 (no ViewInspector) makes an inline `else if` chain over `@State` **not introspectable** — all four verbatim tests would be impossible. The seam extracts **branch selection only**; auth/session derivation is untouched.
+- **The seam (`App/RootRoute.swift`) — pure router + an unrepresentable-illegal-state overlay:**
   ```swift
-  if authViewModel.isAuthenticated { MainTabView() }
-  else if showRegistration { RegistrationView(onBackToLogin: …) }
-  else if showLogin { AuthenticationView(onNavigateToRegister: …) }
-  else { LandingView(onSignIn: { showLogin = true }, onRegister: { showRegistration = true }, …) }
+  enum RootRoute: Equatable { case main, register, login, landing }
+  enum AuthOverlay: Equatable { case none, login, register }   // both-true is UNREPRESENTABLE
+
+  static func resolve(isAuthenticated: Bool, overlay: AuthOverlay) -> RootRoute {
+      if isAuthenticated { return .main }
+      switch overlay { case .login: return .login; case .register: return .register; case .none: return .landing }
+  }
+
+  struct RootNavState: Equatable {                 // value type in @State — no ObservableObject/Combine
+      private(set) var overlay: AuthOverlay = .none
+      mutating func enterLogin()    { overlay = .login }
+      mutating func enterRegister() { overlay = .register }
+      mutating func dismissAuth()   { overlay = .none }
+  }
   ```
-- **Must NOT touch:** `MainTabView` internals; `AuthViewModel`/`KeychainService` gate logic; authed order path; invoicing. Keep the `.animation(value: isAuthenticated)` behavior.
-- **Tests (XCTest / UI):**
-  - `landingIsDefaultWhenLoggedOut` — no Keychain token → `ContentView` shows `LandingView`, not `AuthenticationView`.
-  - **[VERBATIM ACCEPTANCE — §4 1.1a]** `logoutRoutesToLanding` — from authed, `logout()` → `isAuthenticated=false` → lands on `LandingView` (not the old `AuthenticationView`, not blank).
-  - **[VERBATIM ACCEPTANCE — §4 1.1a]** `sessionExpiryRoutesToLanding` — the **iOS mid-session optimistic bounce**: `checkAuthStatus` sets `isAuthenticated=true` on token presence, then `getCurrentUser()` throws → `logout()` → must land on `LandingView`. Assert **both** the explicit-logout and the mid-session-expiry transitions.
-  - `landingSignInCTAOpensAuth`; `landingRegisterCTAOpensRegistration`.
-  - `backFromAuthReturnsToLanding` — from the auth screen (`showLogin == true`), dismissing / backing out **clears `showLogin`** and resolves back to `LandingView` — not a blank/stranded state, not auth-as-default. Assert the flag is cleared **and** the resolved state is `LandingView`.
-- **Must-verify:** the new `showLogin` flag's interaction with the existing `showRegistration` flag is exercised — no state where both an auth and a register overlay resolve ambiguously (they must be mutually exclusive; entering one clears/precludes the other).
+  `ContentView` computes `let route = RootRoute.resolve(isAuthenticated: authViewModel.isAuthenticated, overlay: nav.overlay)` and **`switch`es on `route`** (no inline `else if`). **`overlay` must reset to `.none` when `isAuthenticated` flips true** (see the stale-overlay test). **Collapse the animations:** replace the two `.animation(value:)` at `:38/:39` with a **single** `.animation(.easeInOut(duration: 0.3), value: route)` (one `Equatable` route → one transition).
+- **Must NOT touch:** `MainTabView` internals; `AuthViewModel`/`KeychainService` auth/session **derivation** (`isAuthenticated` still comes from `AuthViewModel`, untouched — the seam extracts *branch selection* only); authed order path; invoicing.
+- **Tests (Swift Testing; ViewInspector-free — assert on `resolve` + `RootNavState` + the existing `AuthViewModelTests` harness):**
+  - `landingIsDefaultWhenLoggedOut` — `resolve(isAuthenticated: false, overlay: .none) == .landing`.
+  - **[VERBATIM — §4 1.1a]** `logoutRoutesToLanding` — `logout()` → `isAuthenticated=false` (existing `AuthViewModelTests`), then `resolve(false, .none) == .landing`.
+  - **[VERBATIM — §4 1.1a]** `sessionExpiryRoutesToLanding` — drive the **mid-session bounce** in `AuthViewModelTests` (`checkAuthStatus` sets authed on token presence → throwing `getCurrentUser()` → `logout()`) → assert `isAuthenticated == false`, then `resolve(false, .none) == .landing`.
+  - `landingSignInCTAOpensAuth` (`enterLogin()` → `resolve(false, .login) == .login`); `landingRegisterCTAOpensRegistration` (`enterRegister()` → `.register`).
+  - **[VERBATIM — §4 1.1a]** `backFromAuthReturnsToLanding` — `dismissAuth()` → `resolve(false, .none) == .landing`.
+  - **Mutual exclusion (semantics guard):** `enterRegister()` then `enterLogin()` → `overlay == .login` (both-true is already unrepresentable by the type).
+  - **NEW — `staleOverlayDoesNotSurviveLogout`:** `enterRegister()` → authenticate (`isAuthenticated=true` ⇒ overlay resets `.none`) → `logout()` → `resolve == .landing`. *(The bug the inline chain hid: register→authed leaves the overlay set, so a later logout would route to `.register`, not `.landing`.)*
 - **Done-when:** default logged-out state is `LandingView`; both acceptance checks pass (logout + mid-session expiry → `LandingView`); Sign-in/Register CTAs route correctly; **back-from-auth returns to `LandingView`**; `MainTabView` untouched.
 
 ### C2 — 1.2a Android shell/routing (+ acceptance)
-- **Files:** `ui/PetSafetyApp.kt` — the `screenKey` `when`-block, **re-based post-C0 to `:294-299`** (⚠️ 2026-07-12: C0-Android wrapped the app in a splash gate `Crossfade (:283) → Box (:287) → Scaffold (:288)`, so the block moved down ~19 lines and is indented **two levels deeper** than the snippet below; the inner `AnimatedContent` `when (target)` that routes screens is at ~`:301-325`). **Treat the snippet as the _logical_ change, not a top-level paste.** Plus new `ui/screens/LandingScreen.kt` (scaffold, same minimal contents; no "coming soon").
-- **Precise edit:** add a `"landing"` case as the default; existing `"auth"`/`AuthScreen` now reached from a landing CTA via a new `showAuthScreen` flag (mirror of iOS); keep the `AnimatedContent` crossfade:
+- **Files:** `ui/PetSafetyApp.kt` — the `screenKey` `when`-block, **re-based post-C0 to `:294-299`** (⚠️ 2026-07-12: C0-Android wrapped the app in a splash gate `Crossfade (:283) → Box (:287) → Scaffold (:288)`, so the block moved down ~19 lines and is indented **two levels deeper** than the snippet below; the inner `AnimatedContent` `when (target)` that routes screens is at ~`:301-325`). **Treat the snippet as the _logical_ change, not a top-level paste.** Plus new `ui/screens/LandingScreen.kt` (scaffold, same minimal contents; no "coming soon") and **new `ui/RootRoute.kt`** (routing seam — mirror of iOS `RootRoute.swift`, §E C1; **spec amendment 2026-07-12, approved**).
+- **The seam (`ui/RootRoute.kt`) — pure router + a FOUR-state overlay (Android has an extra branch iOS lacks: the order path):**
   ```kotlin
-  val screenKey = when {
-      isAuthenticated       -> "main"
-      showOrderTagsScreen   -> "order_tags"
-      showRegisterScreen    -> "register"
-      showAuthScreen        -> "auth"
-      else                  -> "landing"
-  }
-  // Route the "landing" case in the INNER `AnimatedContent` `when (target)` (~:309):
-  // "landing" -> LandingScreen(onSignIn = { showAuthScreen = true }, onRegister = { showRegisterScreen = true }, …)
+  enum class RootRoute { MAIN, ORDER_TAGS, REGISTER, LOGIN, LANDING }
+  enum class AuthOverlay { NONE, LOGIN, REGISTER, ORDER_TAGS }   // both-true UNREPRESENTABLE
+
+  fun resolveRootRoute(isAuthenticated: Boolean, overlay: AuthOverlay): RootRoute =
+      if (isAuthenticated) RootRoute.MAIN
+      else when (overlay) {
+          AuthOverlay.LOGIN      -> RootRoute.LOGIN
+          AuthOverlay.REGISTER   -> RootRoute.REGISTER
+          AuthOverlay.ORDER_TAGS -> RootRoute.ORDER_TAGS
+          AuthOverlay.NONE       -> RootRoute.LANDING
+      }
+  // nav-state holds a single `overlay` (enterLogin/enterRegister/enterOrderTags/dismiss);
+  // reset to NONE when isAuthenticated flips true (stale-overlay test).
   ```
-- **⚠️ C0 interaction (2026-07-12):** the session-expiry dialog now lives **inside** the C0 gate (it surfaces after the splash drops), and the deep-link capture (`pendingQrCode → savedQrCode`) sits **above** the gate. `sessionExpiryRoutesToLanding` here leans on the dialog surfacing post-gate; keep it inside the gated content when adding the `"landing"` branch.
-- **Must NOT touch:** `MainTabScaffold` internals; `AuthViewModel`/`AuthTokenStore`/`AuthRepository.isAuthenticated` derivation; order path; invoicing.
-- **Tests (JUnit + Robolectric + `compose.ui.test`):**
-  - `landingIsDefaultWhenLoggedOut` — no token → `screenKey == "landing"`.
-  - **[VERBATIM ACCEPTANCE — §4 1.2a]** `logoutRoutesToLanding` — `logout()` → `screenKey` resolves to `"landing"`, not `"auth"`.
-  - **[VERBATIM ACCEPTANCE — §4 1.2a]** `sessionExpiryRoutesToLanding` — the `TokenAuthenticator` one-shot expiry drives the non-dismissible "Session Expired" dialog + logout; assert the post-expiry `screenKey` is `"landing"`, **not** `"auth"`/`AuthScreen`.
-  - `landingSignInOpensAuth`; `landingRegisterOpensRegister`.
-  - `backFromAuthReturnsToLanding` — from the auth screen (`showAuthScreen == true`), backing out **clears `showAuthScreen`** and `screenKey` resolves back to `"landing"` — not blank/stranded, not `"auth"`-as-default. Assert the flag is cleared **and** `screenKey == "landing"`.
-- **Must-verify:** the new `showAuthScreen` flag's interaction with the existing `showRegisterScreen` flag is exercised — no state where both `"auth"` and `"register"` resolve ambiguously (assert the `screenKey` `when` precedence + mutual clearing).
+  **⚠️ Android is NOT a 3-Bool mirror of iOS.** Today's `screenKey` is four branches / three flags (`showOrderTagsScreen`, `showRegisterScreen`, + the new `showAuthScreen`). The **order path becomes a first-class overlay state (`ORDER_TAGS`)** — NOT dropped, NOT a loose Bool bolted back on (which would reintroduce precedence in the chunk told "do not touch the order path"). `PetSafetyApp` computes `resolveRootRoute(...)` and drives the `AnimatedContent` on it. The order **flow** (OrderMoreTagsScreen, checkout) is untouched — only its branch *selection* moves into the enum.
+- **⚠️ C0 interaction (2026-07-12):** the session-expiry dialog now lives **inside** the C0 gate (it surfaces after the splash drops), and the deep-link capture (`pendingQrCode → savedQrCode`) sits **above** the gate. `sessionExpiryRoutesToLanding` here leans on the dialog surfacing post-gate; keep it inside the gated content when adding the `LANDING` branch.
+- **Must NOT touch:** `MainTabScaffold` internals; `AuthViewModel`/`AuthTokenStore`/`AuthRepository.isAuthenticated` **derivation**; the order **flow** (its selection moves into `AuthOverlay.ORDER_TAGS`, behavior unchanged); invoicing.
+- **Tests (JUnit + Robolectric; assert on `resolveRootRoute` + the nav-state — mirror of C1's five):**
+  - `landingIsDefaultWhenLoggedOut` — `resolveRootRoute(false, NONE) == LANDING`.
+  - **[VERBATIM — §4 1.2a]** `logoutRoutesToLanding` — post-`logout()` `isAuthenticated=false` → `resolveRootRoute(false, NONE) == LANDING`, not `LOGIN`.
+  - **[VERBATIM — §4 1.2a]** `sessionExpiryRoutesToLanding` — the `TokenAuthenticator` one-shot expiry → "Session Expired" dialog + logout → `isAuthenticated=false` → `resolveRootRoute(false, NONE) == LANDING`, **not** `LOGIN`.
+  - `landingSignInOpensAuth` (`enterLogin()` → `LOGIN`); `landingRegisterOpensRegister` (`enterRegister()` → `REGISTER`).
+  - **[VERBATIM — §4 1.2a]** `backFromAuthReturnsToLanding` — `dismiss()` → `resolveRootRoute(false, NONE) == LANDING`.
+  - **Mutual exclusion (semantics guard):** `enterRegister()` then `enterLogin()` → `overlay == LOGIN` (both-true unrepresentable by the type).
+  - **NEW — `staleOverlayDoesNotSurviveLogout`:** `enterRegister()` → authenticate (overlay resets `NONE`) → `logout()` → `resolveRootRoute == LANDING`.
+- **Must-verify:** `AuthOverlay.ORDER_TAGS` preserves the existing pre-auth order entry (from `AuthScreen`); `resolveRootRoute` + the nav-state are the sole routing authority (no leftover inline `when` over loose flags).
 - **Done-when:** default logged-out = `LandingScreen`; both acceptance checks pass; **back-from-auth returns to `"landing"`**; `MainTabScaffold` untouched.
 
 ### C3 — 1.1b iOS landing content (+ `CommunityEntryCard`)
