@@ -136,6 +136,7 @@ Render: `communitySeed.forEach { CommunityEntryCard(it.icon, stringResource(it.t
 ## E. Per-sub-chunk specs
 
 ### C0 — Splash refresh (both platforms, pure-visual)
+> **⚠️ Superseded during build (2026-07-12) — see master §9.5/§9.6.** C0 shipped as a **launch-screen + splash redesign**, not a pure-visual refresh: the launch screen / system splash is now **bare** (logo removed), and the splash is the **plain "X" mark** (`LaunchLogo` iOS / `splash_mark` Android) holding **2.0s** (not 0.8s). The "~0.8s handoff" and "localized-logo" contracts below were **deliberately superseded** (bare launch → the splash is the single branded moment; the mark is language-neutral and crisper). File sets grew accordingly (iOS `LaunchScreen.storyboard` + tests; Android `themes.xml`×2 + `SplashScreen.kt` + the `PetSafetyApp.kt` gate + `splash_mark` + tests).
 - **Files:** iOS `Views/SplashScreenView.swift`. Android `res/values/themes.xml` + `res/values-night/themes.xml` (`Theme.PetSafety.Splash`); optional new post-splash composable.
 - **Precise edit:** refresh the splash visual (gradient/animation/refined logo lockup) while **preserving the contracts**: iOS keeps the `~0.8s → onFinished()` handoff and `PetSafetyApp.showSplash` gate untouched; Android keeps `installSplashScreen()` in `MainActivity` and the `postSplashScreenTheme` handoff.
 - **Must NOT touch:** any routing/auth; `ContentView`/`PetSafetyApp` gate; `MainActivity` routing logic.
@@ -162,7 +163,7 @@ Render: `communitySeed.forEach { CommunityEntryCard(it.icon, stringResource(it.t
 - **Done-when:** default logged-out state is `LandingView`; both acceptance checks pass (logout + mid-session expiry → `LandingView`); Sign-in/Register CTAs route correctly; **back-from-auth returns to `LandingView`**; `MainTabView` untouched.
 
 ### C2 — 1.2a Android shell/routing (+ acceptance)
-- **Files:** `ui/PetSafetyApp.kt` (`screenKey` when-block `:275-318`); new `ui/screens/LandingScreen.kt` (scaffold, same minimal contents; no "coming soon").
+- **Files:** `ui/PetSafetyApp.kt` — the `screenKey` `when`-block, **re-based post-C0 to `:294-299`** (⚠️ 2026-07-12: C0-Android wrapped the app in a splash gate `Crossfade (:283) → Box (:287) → Scaffold (:288)`, so the block moved down ~19 lines and is indented **two levels deeper** than the snippet below; the inner `AnimatedContent` `when (target)` that routes screens is at ~`:301-325`). **Treat the snippet as the _logical_ change, not a top-level paste.** Plus new `ui/screens/LandingScreen.kt` (scaffold, same minimal contents; no "coming soon").
 - **Precise edit:** add a `"landing"` case as the default; existing `"auth"`/`AuthScreen` now reached from a landing CTA via a new `showAuthScreen` flag (mirror of iOS); keep the `AnimatedContent` crossfade:
   ```kotlin
   val screenKey = when {
@@ -172,8 +173,10 @@ Render: `communitySeed.forEach { CommunityEntryCard(it.icon, stringResource(it.t
       showAuthScreen        -> "auth"
       else                  -> "landing"
   }
+  // Route the "landing" case in the INNER `AnimatedContent` `when (target)` (~:309):
   // "landing" -> LandingScreen(onSignIn = { showAuthScreen = true }, onRegister = { showRegisterScreen = true }, …)
   ```
+- **⚠️ C0 interaction (2026-07-12):** the session-expiry dialog now lives **inside** the C0 gate (it surfaces after the splash drops), and the deep-link capture (`pendingQrCode → savedQrCode`) sits **above** the gate. `sessionExpiryRoutesToLanding` here leans on the dialog surfacing post-gate; keep it inside the gated content when adding the `"landing"` branch.
 - **Must NOT touch:** `MainTabScaffold` internals; `AuthViewModel`/`AuthTokenStore`/`AuthRepository.isAuthenticated` derivation; order path; invoicing.
 - **Tests (JUnit + Robolectric + `compose.ui.test`):**
   - `landingIsDefaultWhenLoggedOut` — no token → `screenKey == "landing"`.
