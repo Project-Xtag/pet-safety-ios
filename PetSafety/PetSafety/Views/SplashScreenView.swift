@@ -46,7 +46,7 @@ struct SplashScreenView: View {
             Image("LaunchLogo")
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: 240)   // square mark → strong centred presence; tune in visual QA
+                .frame(maxWidth: 200)   // pixel-native: LaunchLogo is authored at 200pt (240 upscaled ~20%)
                 .shadow(color: Color.brandOrange.opacity(0.10), radius: 24, x: 0, y: 8)
                 .opacity(appeared ? 1 : 0)
                 .scaleEffect(appeared ? 1 : 0.94)
@@ -63,7 +63,8 @@ struct SplashScreenView: View {
                 }
             }
 
-            // Handoff contract — unchanged: brief hold, then drop the splash.
+            // Handoff — same mechanism (fire onFinished after the hold); the hold
+            // itself is now `holdDuration` (2.0s), no longer the pre-refresh 0.8s.
             DispatchQueue.main.asyncAfter(deadline: .now() + Self.holdDuration) {
                 onFinished()
             }
