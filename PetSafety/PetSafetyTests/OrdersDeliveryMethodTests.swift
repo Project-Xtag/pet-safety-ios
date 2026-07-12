@@ -183,17 +183,21 @@ struct CreateReplacementOrderRequestTests {
 
     @Test("Request encodes with delivery method")
     func testEncodeWithDeliveryMethod() throws {
+        // C7 billing-primary: billing is ALWAYS collected, so a request carries it (here
+        // equal to shipping, the "same as billing" case). Never `billingAddress: nil` in a
+        // test — that models the pre-C7 "not collected" state C7 exists to eliminate.
+        let address = ShippingAddress(
+            street1: "Test St 1",
+            street2: nil,
+            city: "Budapest",
+            province: nil,
+            postCode: "1011",
+            country: "HU",
+            phone: nil
+        )
         let request = CreateReplacementOrderRequest(
-            shippingAddress: ShippingAddress(
-                street1: "Test St 1",
-                street2: nil,
-                city: "Budapest",
-                province: nil,
-                postCode: "1011",
-                country: "HU",
-                phone: nil
-            ),
-            billingAddress: nil,
+            shippingAddress: address,
+            billingAddress: address,
             deliveryMethod: "postapoint",
             postapointDetails: PostaPointDetails(id: "pp-5", name: "Point 5", address: "Address 5")
         )
@@ -208,17 +212,19 @@ struct CreateReplacementOrderRequestTests {
 
     @Test("Request encodes without delivery method (backward compat)")
     func testEncodeWithoutDeliveryMethod() throws {
+        // Billing collected (= shipping), same as above — not nil.
+        let address = ShippingAddress(
+            street1: "Main St",
+            street2: nil,
+            city: "Vienna",
+            province: nil,
+            postCode: "1010",
+            country: "AT",
+            phone: nil
+        )
         let request = CreateReplacementOrderRequest(
-            shippingAddress: ShippingAddress(
-                street1: "Main St",
-                street2: nil,
-                city: "Vienna",
-                province: nil,
-                postCode: "1010",
-                country: "AT",
-                phone: nil
-            ),
-            billingAddress: nil,
+            shippingAddress: address,
+            billingAddress: address,
             deliveryMethod: nil,
             postapointDetails: nil
         )
