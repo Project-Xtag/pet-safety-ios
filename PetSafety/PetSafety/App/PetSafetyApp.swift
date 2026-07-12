@@ -130,6 +130,15 @@ struct PetSafetyApp: App {
                         showSplash = false
                     }
                 }
+                // A cold-launch tag deep link can arrive *during* the splash, before
+                // ContentView (and its `.onOpenURL`) exists — so without this it lands in
+                // a hierarchy with no handler and is dropped. Capture it here into the
+                // shared DeepLinkService, whose pending state persists; ContentView reads
+                // it and presents on appear. Attached only while `showSplash`, so it can't
+                // double-handle with ContentView's own `.onOpenURL`.
+                .onOpenURL { url in
+                    _ = DeepLinkService.shared.handleURL(url)
+                }
             } else {
                 ContentView()
                     .environmentObject(authViewModel)
