@@ -48,8 +48,8 @@
 "register" = "Registar";
 "already_have_account" = "Já tem conta?";
 "log_in" = "Iniciar sessão";
-"terms_login_prefix" = "Ao iniciar sessão, aceita os nossos ";
-"terms_and" = " e ";
+"terms_login_prefix" = "Ao iniciar sessão, aceita os nossos";
+"terms_and" = " e";
 "terms_of_service" = "Termos de Serviço";
 "privacy_policy" = "Política de Privacidade";
 "first_name" = "Nome";
@@ -1418,7 +1418,7 @@
 "shelter_promo_claim_tag_button" = "Ativar plaquinha inteligente";
 "shelter_promo_name_label_required" = "Nome *";
 "shelter_promo_species_label_required" = "Espécie *";
-"shelter_promo_select_placeholder" = "Seleciona...";
+"shelter_promo_select_placeholder" = "Seleciona…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Nome do dono";

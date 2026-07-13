@@ -48,8 +48,8 @@
 "register" = "Registrer";
 "already_have_account" = "Har du allerede en konto?";
 "log_in" = "Logg inn";
-"terms_login_prefix" = "Ved å logge inn godtar du våre ";
-"terms_and" = " og ";
+"terms_login_prefix" = "Ved å logge inn godtar du våre";
+"terms_and" = " og";
 "terms_of_service" = "Brukervilkår";
 "privacy_policy" = "Personvernerklæring";
 "first_name" = "Fornavn";
@@ -1417,7 +1417,7 @@
 "shelter_promo_claim_tag_button" = "Aktiver QR-brikke";
 "shelter_promo_name_label_required" = "Navn *";
 "shelter_promo_species_label_required" = "Art *";
-"shelter_promo_select_placeholder" = "Velg...";
+"shelter_promo_select_placeholder" = "Velg…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Eiers navn";
