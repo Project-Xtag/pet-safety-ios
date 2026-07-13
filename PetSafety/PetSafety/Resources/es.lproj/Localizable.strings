@@ -48,8 +48,8 @@
 "register" = "Registrarse";
 "already_have_account" = "¿Ya tienes cuenta?";
 "log_in" = "Iniciar sesión";
-"terms_login_prefix" = "Al iniciar sesión, aceptas nuestros ";
-"terms_and" = " y ";
+"terms_login_prefix" = "Al iniciar sesión, aceptas nuestros";
+"terms_and" = " y";
 "terms_of_service" = "Términos de servicio";
 "privacy_policy" = "Política de privacidad";
 "first_name" = "Nombre";
@@ -1418,7 +1418,7 @@
 "shelter_promo_claim_tag_button" = "Activar chapa inteligente";
 "shelter_promo_name_label_required" = "Nombre *";
 "shelter_promo_species_label_required" = "Especie *";
-"shelter_promo_select_placeholder" = "Selecciona...";
+"shelter_promo_select_placeholder" = "Selecciona…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Nombre del dueño";

@@ -48,8 +48,8 @@
 "register" = "Înregistrare";
 "already_have_account" = "Ai deja cont?";
 "log_in" = "Autentificare";
-"terms_login_prefix" = "Prin autentificare, ești de acord cu ";
-"terms_and" = " și ";
+"terms_login_prefix" = "Prin autentificare, ești de acord cu";
+"terms_and" = " și";
 "terms_of_service" = "Termenii de utilizare";
 "privacy_policy" = "Politica de confidențialitate";
 "first_name" = "Prenume";
@@ -1418,7 +1418,7 @@
 "shelter_promo_claim_tag_button" = "Activează plăcuța inteligentă";
 "shelter_promo_name_label_required" = "Nume *";
 "shelter_promo_species_label_required" = "Specie *";
-"shelter_promo_select_placeholder" = "Selectează...";
+"shelter_promo_select_placeholder" = "Selectează…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Numele stăpânului";
