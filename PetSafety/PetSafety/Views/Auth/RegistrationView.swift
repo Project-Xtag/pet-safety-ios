@@ -15,6 +15,10 @@ struct RegistrationView: View {
     @State private var resendTimer: Timer?
 
     var onBackToLogin: () -> Void
+    /// Back to the landing surface. C1 makes registration an overlay above the
+    /// landing default, so it needs its own way out — mirrors AuthenticationView
+    /// (the lateral "Log in" button is a switch, not a back).
+    var onBack: (() -> Void)?
 
     private var isValidEmail: Bool {
         InputValidators.isValidEmail(email)
@@ -252,6 +256,19 @@ struct RegistrationView: View {
                     .padding(.top, 24)
                     .padding(.bottom, 40)
                 }
+            }
+        }
+        .overlay(alignment: .topLeading) {
+            if let onBack {
+                Button(action: onBack) {
+                    Image(systemName: "chevron.left")
+                        .font(.appFont(size: 18, weight: .semibold))
+                        .foregroundColor(.brandOrange)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .accessibilityLabel(Text("back"))
+                .padding(.leading, 8)
             }
         }
         .alert(String(format: NSLocalizedString("enable_biometric_type", comment: ""), authViewModel.biometricTypeName), isPresented: $showBiometricEnrollment) {

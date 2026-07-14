@@ -11,6 +11,9 @@ struct AuthenticationView: View {
     @State private var resendCooldown = 0
     @State private var resendTimer: Timer?
     var onNavigateToRegister: (() -> Void)?
+    /// Back to the landing surface. C1 makes login an overlay above the landing
+    /// default (no longer the root), so it needs an explicit way out.
+    var onBack: (() -> Void)?
 
     private var isValidEmail: Bool {
         InputValidators.isValidEmail(email)
@@ -248,6 +251,19 @@ struct AuthenticationView: View {
                     .padding(.top, 24)
                     .padding(.bottom, 40)
                 }
+            }
+        }
+        .overlay(alignment: .topLeading) {
+            if let onBack {
+                Button(action: onBack) {
+                    Image(systemName: "chevron.left")
+                        .font(.appFont(size: 18, weight: .semibold))
+                        .foregroundColor(.brandOrange)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .accessibilityLabel(Text("back"))
+                .padding(.leading, 8)
             }
         }
         .sheet(isPresented: $showOrderTagSheet) {

@@ -19,7 +19,36 @@ class AuthViewModel: ObservableObject {
     private let apiService = APIService.shared
     private let biometricService = BiometricService.shared
 
-    init() {
+    // MARK: - Test seams (C1)
+    // Each is a defaulted dependency/handle: production call sites pass nothing
+    // and production behavior is byte-identical. They inject *dependencies* and
+    // expose a task *handle* — `isAuthenticated`'s computation (the gate at :38
+    // and the `logout()` on fetch failure) is unchanged.
+
+    /// Stored-session probe for the auth gate. Default reads the keychain;
+    /// tests inject `{ true }` so the bounce runs without writing global
+    /// keychain state (which would race parallel suites — see RootRouteTests).
+    private let hasStoredToken: () -> Bool
+    /// The mid-session user fetch. Tests inject a throwing closure to drive the
+    /// expiry bounce in-process (no production network).
+    private let fetchCurrentUser: () async throws -> User
+    /// The post-auth SSE side-effect. Tests inject a no-op so the eager
+    /// `async let` doesn't open a real connection.
+    private let connectSSE: () -> Void
+    /// Handle to the `checkAuthStatus()` bounce so tests can await it
+    /// deterministically. Without it the bounce is an unstructured `Task` with
+    /// no completion signal — a testability gap that would otherwise force a
+    /// flaky poll.
+    private(set) var authCheckTask: Task<Void, Never>?
+
+    init(
+        hasStoredToken: @escaping () -> Bool = { KeychainService.shared.isAuthenticated },
+        fetchCurrentUser: @escaping () async throws -> User = { try await APIService.shared.getCurrentUser() },
+        connectSSE: @escaping () -> Void = { SSEService.shared.connect() }
+    ) {
+        self.hasStoredToken = hasStoredToken
+        self.fetchCurrentUser = fetchCurrentUser
+        self.connectSSE = connectSSE
         self.biometricEnabled = BiometricService.shared.isBiometricEnabled
         checkAuthStatus()
     }
@@ -35,16 +64,16 @@ class AuthViewModel: ObservableObject {
         }
 
         // Check if we have a valid token
-        if KeychainService.shared.isAuthenticated {
+        if hasStoredToken() {
             // Show authenticated UI immediately while background tasks run
             isAuthenticated = true
             authLog.notice("🔐 Token found, setting isAuthenticated = true")
 
-            Task {
+            authCheckTask = Task {
                 do {
                     // Fetch user data and connect SSE in parallel
-                    async let userFetch = apiService.getCurrentUser()
-                    async let sseConnect: Void = { SSEService.shared.connect() }()
+                    async let userFetch = fetchCurrentUser()
+                    async let sseConnect: Void = connectSSE()
 
                     currentUser = try await userFetch
                     _ = await sseConnect

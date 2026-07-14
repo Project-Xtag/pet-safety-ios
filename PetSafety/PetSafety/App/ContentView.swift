@@ -8,35 +8,48 @@ struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var appState: AppState
     @StateObject private var deepLinkService = DeepLinkService.shared
-    @State private var showRegistration = false
+    @State private var nav = RootNavState()
 
     var body: some View {
-        let _ = viewLog.notice("⏱️ ContentView.body evaluated — isAuth: \(authViewModel.isAuthenticated), biometric: \(authViewModel.showBiometricPrompt), reg: \(showRegistration)")
+        let route = RootRoute.resolve(isAuthenticated: authViewModel.isAuthenticated, overlay: nav.overlay)
+        let _ = viewLog.notice("⏱️ ContentView.body evaluated — isAuth: \(authViewModel.isAuthenticated), biometric: \(authViewModel.showBiometricPrompt), route: \(String(describing: route)), overlay: \(String(describing: nav.overlay))")
         Group {
-            if authViewModel.isAuthenticated {
+            switch route {
+            case .main:
                 MainTabView()
                     .transition(.opacity)
-            } else if showRegistration {
-                RegistrationView(onBackToLogin: {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        showRegistration = false
-                    }
-                })
+            case .register:
+                // "Already have an account? Log in" → the login surface (not
+                // landing), so RegistrationView.onBackToLogin stays truthful.
+                RegistrationView(
+                    onBackToLogin: { nav.enterLogin() },
+                    onBack: { nav.dismissAuth() }
+                )
                 .transition(.opacity)
-            } else {
-                AuthenticationView(onNavigateToRegister: {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        showRegistration = true
-                    }
-                })
+            case .login:
+                AuthenticationView(
+                    onNavigateToRegister: { nav.enterRegister() },
+                    onBack: { nav.dismissAuth() }
+                )
+                .transition(.opacity)
+            case .landing:
+                LandingView(
+                    onSignIn: { nav.enterLogin() },
+                    onRegister: { nav.enterRegister() }
+                )
                 .transition(.opacity)
             }
         }
         .onAppear {
             viewLog.notice("⏱️ ContentView.onAppear fired — UI is now visible")
         }
-        .animation(.easeInOut(duration: 0.3), value: authViewModel.isAuthenticated)
-        .animation(.easeInOut(duration: 0.3), value: showRegistration)
+        .onChange(of: authViewModel.isAuthenticated) { _, isAuth in
+            // Reset any pending logged-out overlay the moment a session becomes
+            // active, so a stale overlay can't survive and mis-route a later
+            // logout (§E C1 staleOverlayDoesNotSurviveLogout).
+            if isAuth { nav.authenticated() }
+        }
+        .animation(.easeInOut(duration: 0.3), value: route)
         .alert(appState.alertTitle, isPresented: $appState.showAlert) {
             Button("ok", role: .cancel) { }
         } message: {
