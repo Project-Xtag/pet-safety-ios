@@ -219,6 +219,14 @@ Render: `communitySeed.forEach { CommunityEntryCard(it.icon, stringResource(it.t
   - `communityCardTapEmitsDestination` — tapping card *i* invokes `onNavigate(destination_i)`.
   - `addingDescriptorRendersCardNoLayoutChange` — appending a 3rd descriptor renders a 3rd card (proves data-driven).
   - `zoneOneScanPresentsScanner`; `zoneOneFoundStrayPresentsForm`; `zoneTwoOrderPresentsOrder`.
+- **⚠️ Done-when ALSO requires a DEVICE-QA GATE (amended 2026-07-17, C3 build). The 381-green suite is NOT proof of this.** The scan handoff is a **presentation-timing** question — the `Group`/`ZStack` class (§9.8): it compiles, every test passes, and only hardware shows it. C3 presents the scanner as a modal from the landing, so a scan fires one of `ContentView`'s three container-level sheets (`:64`/`:80`/`:95`) **while that modal is up** — a conflict that does not exist today, because the scanner is a tab. `LandingView` dismisses on flag; whether the dismiss→present handshake is clean is unverifiable from source.
+  **Four outcomes × three assertions each. Real device, logged-out, cold-opened to the landing — the finder's actual context.**
+  Each outcome asserts, by eye: **(1) the scanner is fully GONE** *(a half-dismissed scanner peeking behind a sheet and a sheet-behind-scanner are distinct failure renders — only a look separates them)*; **(2) the CORRECT destination is up**; **(3) it is DISMISSIBLE**.
+  - **Active tag + pet** → `showScannedPetProfile` (`DeepLinkService.swift:170`) → public profile.
+  - **Tag exists, inactive / no pet** → `showTagActivation` (`:179`) → `DeepLinkLoginPromptView` when logged out (`ContentView.swift:73`).
+  - **🔴 Network error / failed lookup** → `showTagActivation` via the `:187` fallback. **FORCE IT** — airplane mode mid-scan, or a bad tag. Do **not** assume it behaves like the success path. It is the outcome nobody thinks to test **and it coincides with the real-world found-stray condition** (bad signal, outdoors). §10's *"merges cleanly so no one is forced to look"* hazard, aimed at the one flow the product exists for.
+  - **Promo-batch tag** → `showPromoClaimFlow` (`:165`).
+  A QA note saying *"scan works"* does not discharge this gate. It must say **which of the three assertions failed, per outcome, if any did**.
 - **Done-when:** three zones render per Shape A; `CommunityEntryCard` built from the B.1 primitives (G-b); Zone 1 + Zone 2 present live destinations; Zone-3 cards emit tested nav intents; **no "coming soon" (G-a)**; new strings localized (HU canonical).
 
 ### C4 — 1.2b Android landing content (+ `CommunityEntryCard`)
