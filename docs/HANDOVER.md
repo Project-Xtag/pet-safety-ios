@@ -1,6 +1,8 @@
 # Senra Mobile Redesign — Session Handover
 
-**Current chunk: C3** — iOS landing content (the three zones + the data-driven Community list).
+**Current chunk: C3 — BUILT, COMMITTED, NOT DEVICE-VERIFIED.** iOS landing content (three zones + the data-driven Community list): `bc8ccd7`, plus the scan-dismiss fix `1e70664`.
+
+**C3 is NOT done, and the next chunk is NOT C4.** What is owed is a look, not code: the §E C3 **device-QA gate** — four scan outcomes × three assertions — has **zero of four outcomes run**. The one device look so far was on `bc8ccd7` *before* `1e70664` existed; it hit the entry point ("Scan a tag" opened a camera with no way out but force-quitting) and **failed**, so no scan was ever reached. `1e70664` has never been on a device. **The gate must run in full on `1e70664` before C3 is called done or C4-Android starts** — a fix to a rendering bug is proven by a look, and the 381-green suite is explicitly not that proof (§9.13, §9.14).
 
 *(C0-iOS, C0-Android, C1-iOS, C2-Android: built, reviewed, committed, device-verified.)*
 
