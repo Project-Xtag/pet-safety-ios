@@ -119,12 +119,12 @@ data class CommunityEntry(
     val destination: CommunityDestination,
 )
 
-// Seed:
+// Seed (titles/subtitles REUSE existing Android keys; only community_lost_found_subtitle is minted — see §E C4):
 val communitySeed = listOf(
-    CommunityEntry("lost_and_found", Icons.Filled.Warning, R.string.community_lost_found_title,
+    CommunityEntry("lost_and_found", Icons.Filled.Warning, R.string.lost_and_found_title,
                    R.string.community_lost_found_subtitle, CommunityDestination.LOST_AND_FOUND),
-    CommunityEntry("pet_friendly", Icons.Filled.Place, R.string.community_pet_friendly_title,
-                   R.string.community_pet_friendly_subtitle, CommunityDestination.PET_FRIENDLY_PLACES),
+    CommunityEntry("pet_friendly", Icons.Filled.Place, R.string.pet_friendly_title,
+                   R.string.pet_friendly_entry_subtitle, CommunityDestination.PET_FRIENDLY_PLACES),
 )
 ```
 Render: `communitySeed.forEach { CommunityEntryCard(it.icon, stringResource(it.titleRes), stringResource(it.subtitleRes)) { onNavigate(it.destination) } }`.
@@ -230,28 +230,35 @@ Render: `communitySeed.forEach { CommunityEntryCard(it.icon, stringResource(it.t
 - **Done-when:** three zones render per Shape A; `CommunityEntryCard` built from the B.1 primitives (G-b); Zone 1 + Zone 2 present live destinations; Zone-3 cards emit tested nav intents; **no "coming soon" (G-a)**; new strings localized (HU canonical).
 
 ### C4 — 1.2b Android landing content (+ `CommunityEntryCard`)
-> **⚠️ AMENDED 2026-07-17 after the C3-iOS device gate. Two of the items below are iOS FINDINGS to VERIFY IN KOTLIN — NOT settled Android facts.** Android's presentation model is not SwiftUI's, so whether they transfer is decided by the C4 read plan's **Read A** (how Android presents a full-screen surface), not assumed:
-> - **G-scanfeedback (a full-screen presentation may occlude the host's overlays).** On iOS a `fullScreenCover` hid *both* the close affordance *and* the lookup spinner, which live on the host. **IF** Read A shows Android's presentation composites above the host the same way, C4 must carry **both** the close control **and** the lookup indicator into the presentation. **IF** Android presents via a nav destination (route push), the host may not be occluded and C4 inherits neither. Verify before building — do not port the iOS fix blind.
-> - **The `OrderMoreTagsView`-analogue (Zone 2's authed-dependency claim).** iOS's order surface declared two `@EnvironmentObject`s against a spec that said "no authed dependencies"; presenting it logged-out worked only because the site re-injected them. Compose has no `@EnvironmentObject` — the analogue is a Hilt scope or a passed VM. **Read B2/B4 decide** what Zone 2's order surface actually requires and whether the landing supplies it logged-out. Expect the "app-level `AppStateViewModel` only" claim below to be a hypothesis until proven.
-> - **G11's seeded-scan close is NOT in C4 — it is chunk C4b (ruled 2026-07-17, separate).** C4 is the clean mirror; C4b carries §6.11's landing seeded-scan surface with its own §E amendment and its own cold-kill device-QA (the simulator cannot do it), and it still has an unresolved camera-permission sub-decision (§6.11). **Trigger to reconsider bundling into C4:** *only if* Read A shows Android presents the scanner as a surface C4 builds anyway **and** Read B2 shows G11's close is a pure `LaunchedEffect(savedQrCode)` seeding of that same surface with no new permission complication — then it is a few lines on top of C4 and may fold in. Absent both, it stays C4b.
+> **✅ RESOLVED 2026-07-17 by the C4 read (Read A + B2/B3/B4), all two-ended against the Android tree (tip: android `3445784`).** The three "verify in Kotlin" items are now settled Android facts:
+> - **G-scanfeedback does NOT transfer.** Android's top-level presentation is an `AnimatedContent` composable-swap (`PetSafetyApp.kt:305-352`), not a cover, and the scanner owns its own feedback (`QrScannerViewModel:41`/`:35` → `QrScannerScreen:121`/`:337`/`:502`); the host `LoadingOverlay` is a **different** source (`appStateViewModel.isLoading`, `:62`), not tag lookup. **No host spinner to hide → the iOS carry-the-spinner fix must NOT be ported.**
+> - **The real inherited hazard is the C3 §9.14 dismiss-mirror** — *not* G-scanfeedback and *not* G-scanexit (`PendingRegistrationsView:192`, a separate pre-existing defect). `QrScannerScreen` has no logged-out exit (its only exit is the tab bar; params `:109-116` carry no `onClose`). C4 adds a close affordance **at the presentation site** — an overlay sibling, scanner internals byte-untouched — exactly as iOS `1e70664` did (`QRScannerView` untouched).
+> - **Zone-2 order-analogue does NOT transfer.** `OrderMoreTagsScreen(authViewModel: AuthViewModel? = null)` (`:96`) is built auth-optional (`authViewModel?.let` `:189`; `if (currentUser == null)` `:208`) and is already a live logged-out route (`RootRoute.ORDER_TAGS`, `PetSafetyApp:321-330`). Zone 2 is the simplest zone.
+> - **G11's seeded-scan close stays chunk C4b (confirmed):** trigger-half (a) met (C4 presents the scanner), (b) not met (the camera-permission prompt `QrScannerScreen:140-145` is §6.11's unresolved sub-decision).
 
-- **Files:** `ui/screens/LandingScreen.kt` (populate); new `ui/components/CommunityEntryCard.kt`; new `ui/screens/CommunityEntry.kt` (descriptor + enum + seed); `res/values*/strings.xml` (all locales, HU canonical).
+- **Files:** `ui/screens/LandingScreen.kt` (populate); new `ui/components/CommunityEntryCard.kt`; new `ui/screens/CommunityEntry.kt` (descriptor + enum + seed); `res/values*/strings.xml` (all locales, HU canonical); **`ui/PetSafetyApp.kt` — the `RootRoute.LANDING -> LandingScreen(…)` call site only (`:347-350`), additive: hoisted `onOrderTag`/`onNavigate` closures + the app-level `appStateViewModel` param the scanner needs. A seam per the 2026-07-14 refinement — touches nothing in `resolveRootRoute`, the `RootRoute` enum, or the `when`-block (review-seat grep-verifies this boundary on the diff). Pin-3 approved 2026-07-17.**
 - **Precise edit:**
-  - `CommunityEntryCard(icon, title, subtitle, onClick)` per B.2 (`BrandCard(onClick)` + the `PetFriendlyPlacesScreen.kt:404-422` row template).
-  - **Zone 1:** `BrandButton` "Scan a tag" (presents `QrScannerScreen`, passing app-level `AppStateViewModel`) + `SecondaryButton` "I found a stray" (presents `FoundPetFormScreen`).
-  - **Zone 2:** distinct Order CTA → the `showOrderTagsScreen` pre-auth branch.
-  - **Zone 3:** titled Community section + `communitySeed.forEach { CommunityEntryCard(…) { onNavigate(it.destination) } }`.
-- **Must NOT touch:** `PetsListScreen` (no dedup refactor — G10); the dormant `AlertsScreens.kt`/`PricingScreen.kt` (do not wire); `MainTabScaffold`.
+  - `CommunityEntryCard(icon, title, subtitle, onClick)` per B.2 (`BrandCard(onClick)` + the `PetFriendlyEntryCard` row template — `PetFriendlyPlacesScreen.kt:403`, leading `Place` icon `:416` / trailing `ChevronRight` `:421`; re-grounded by symbol from the stale `:404-422`).
+  - **Zone 1 scan:** local `showScanner` state → in-composition full-screen surface presenting `QrScannerScreen` (passing the app-level `AppStateViewModel`), with a **close overlay at the site** (§9.14 mirror) and `onNavigateToActivation` **bound** to route the logged-out `NeedsActivation` outcome to the found-stray form (`showScanner = false; showFoundStray = true`) per **G-landing-activation** (ruled 2026-07-17). This is a **context-dependent binding** of the same callback the tab uses for real activation — document it at the site AND in the CODEMAP so it is not mis-read (§3 `handleDeepLink`-is-two-functions hazard). Not a silent lambda.
+  - **Zone 1 found-stray:** local `showFoundStray` state → `FoundPetFormScreen(onDismiss = { showFoundStray = false })` (auth-optional — two-arg ctor `:487`; its own dismiss `:142`). *Base fix presents the form as-is; threading the scanned code into the form is a deferred enhancement — it touches the form signature + VM, out of this ruling's scope.*
+  - **Zone 2 order:** reuse `RootRoute.ORDER_TAGS` via a hoisted `onOrderTag → nav.enterOrderTags()`; the route's existing `onBack`/`onDone` return to the landing. **No new local order overlay** (keeps C2's single routing authority).
+  - **Zone 3 community:** hoisted `onNavigate(destination)`, emit-only; Phase-2 resolves the destinations.
+  - **Localization keys (grounded — supersedes the D.2 Android snippet + §F for C4):** mint **6** keys × 13 locales, HU canonical from the iOS source — `landing_scan_cta`, `landing_found_stray_cta`, `landing_order_cta`, `landing_order_subtitle`, `community_section_title`, `community_lost_found_subtitle`. **Reuse** existing Android keys — `lost_and_found_title` (`:363`), `pet_friendly_title` (`:1660`, the Android name; iOS's is `pet_friendly_entry_title`), `pet_friendly_entry_subtitle` (`:1661`), `log_in`/`register`. **Do NOT mint** the stale D.2 twins (`community_lost_found_title`, `community_pet_friendly_title`, `community_pet_friendly_subtitle`) — reconciles with §9.13's "6 new keys ×13, not 10." C4's Kotlin references the **Android** key names.
+- **Must NOT touch:** `QrScannerScreen` internals — **byte-untouched**: both the close affordance and the `NeedsActivation`→found-stray route are **call-site bindings** (the tab still uses the same callback for real activation). Plus the existing walls: `PetsListScreen` (no dedup refactor — G10), `MainTabScaffold`, the dormant `AlertsScreens.kt`/`PricingScreen.kt` (do not wire), and `resolveRootRoute`/the `RootRoute` enum/the `when`-block (the C2 routing authority — Pin-3's `PetSafetyApp` edit is a call-site seam only).
 - **Tests (`compose.ui.test` + JUnit):**
   - `communityListRendersSeededEntries`; `communityCardTapEmitsDestination`; `addingDescriptorRendersCard`.
   - `zoneOneScanPresentsScanner`; `zoneOneFoundStrayPresentsForm`; `zoneTwoOrderOpensOrder`.
-- **Done-when:** mirrors iOS C3; three zones; `CommunityEntryCard` from B.2 primitives; Zone 1/2 live; Zone-3 tested intents; no "coming soon"; localized (HU canonical).
+- **Done-when:** three zones render per Shape A; `CommunityEntryCard` from the B.2 primitives (G-b); Zone 1/2 live; Zone-3 cards emit tested nav intents; no "coming soon" (G-a); localized per the grounded key map above. **PLUS a DEVICE-QA GATE — logged-out, cold-opened to the landing (source and the suite cannot answer these, per Read A):**
+  - **Part A — compositing / feedback-visibility over the CameraX preview:** the close control (visible + tappable), the `ActiveWithPet` in-surface panel, the host `showError` snackbar (covering `NotFound`/`NotActivated`/`Error` — include **one forced failed-lookup**), and the camera-permission UI each **render visibly over the preview**. *(The snackbar is a host-level surface over a local scanner — Read A's flagged z-order, now live; grep `PreviewView.implementationMode` before QA to know whether it is a real hazard — PERFORMANCE/SurfaceView — or a formality — COMPATIBLE/TextureView.)*
+  - **Part B — `NeedsActivation` logged-out routing (G-landing-activation):** scan of a `NeedsActivation` tag → **scanner fully gone / found-stray form up / form dismissible** (the Android analogue of the iOS dismiss→present handshake; a two-`mutableStateOf`-write surface swap that only a look can prove has no both-visible / neither-visible frame — Rule 5).
+  - **`PromoClaimAvailable` is latent** (backend-gated, `QrTag.kt:35`, §9.15 Finding B) — **logged, not tested**; reopens only if promo tags ship.
 
 ---
 
-## F. New localization keys (HU canonical, full 12-locale)
-Introduced in C3/C4; **HU is the canonical source** — derive EN + the other locales after HU is confirmed. Keys:
-`landing_scan_cta`, `landing_found_stray_cta`, `landing_order_cta` (+ any Zone-2 supporting copy), `community_section_title`, `community_lost_found_title`, `community_lost_found_subtitle`, `community_pet_friendly_title`, `community_pet_friendly_subtitle`, `landing_sign_in`, `landing_register`.
+## F. New localization keys (HU canonical, full 13-locale)
+Introduced in C3/C4; **HU is the canonical source** — derive EN + the other locales after HU is confirmed. **Mint exactly these 6** (same key names on both platforms):
+`landing_scan_cta`, `landing_found_stray_cta`, `landing_order_cta`, `landing_order_subtitle`, `community_section_title`, `community_lost_found_subtitle`.
+**Do NOT mint** the card title/subtitle twins (`community_lost_found_title`, `community_pet_friendly_title`, `community_pet_friendly_subtitle`) or the sign-in/register twins (`landing_sign_in`, `landing_register`) — **reuse** the existing shipping keys instead. Exact reuse names differ per platform: see the §E C3 grounded map (iOS) and §E C4 (Android). This is the §9.13 ruling — "6 new keys ×13, not 10."
 *(Zero hardcoded English on any surface — these must ship localized. The account-created/OTP copy remains Q3/Phase-3.3, separate.)*
 
 ---
