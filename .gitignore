@@ -103,3 +103,17 @@ appcheck-debug-token.txt
 .env
 .env.local
 *.env
+
+# Senra — root landmines (PROTOCOL.md §5): loose artefacts that a stray
+# `git add -A` would otherwise land on a code branch.
+*.diff
+*.patch
+PetSafety/build-derived/
+.claude/
+CLAUDE-*.md
+CLAUDE_*.md
+Claude_*.md
+PLATFORM_AUDIT_REPORT.md
+NOTIFICATIONS_*
+SENRA_*.docx
+IMG_*.PNG
