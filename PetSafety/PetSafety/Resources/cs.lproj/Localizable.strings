@@ -1625,3 +1625,12 @@
 
 "pet_friendly_rate_limited_title" = "Daily limit reached";
 "pet_friendly_rate_limited_message" = "You've reached the daily submission limit. Please try again later.";
+
+
+/* MARK: - C3 landing content (1.1b). HU canonical. */
+"landing_scan_cta" = "Skenovat známku";
+"landing_found_stray_cta" = "Našel jsem zvíře";
+"landing_order_cta" = "Objednat známku";
+"landing_order_subtitle" = "Známka zdarma na obojek tvého mazlíčka – aby vždy našel cestu domů.";
+"community_section_title" = "Komunita";
+"community_lost_found_subtitle" = "Ztracená a nalezená zvířata ve tvém okolí";

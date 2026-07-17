@@ -1625,3 +1625,12 @@
 
 "pet_friendly_rate_limited_title" = "Daily limit reached";
 "pet_friendly_rate_limited_message" = "You've reached the daily submission limit. Please try again later.";
+
+
+/* MARK: - C3 landing content (1.1b). HU canonical. */
+"landing_scan_cta" = "Ler plaquinha";
+"landing_found_stray_cta" = "Encontrei um animal";
+"landing_order_cta" = "Pedir plaquinha";
+"landing_order_subtitle" = "Uma plaquinha grátis para a coleira do teu animal – para que encontre sempre o caminho de casa.";
+"community_section_title" = "Comunidade";
+"community_lost_found_subtitle" = "Animais desaparecidos e encontrados na tua zona";

@@ -35,7 +35,19 @@ struct ContentView: View {
             case .landing:
                 LandingView(
                     onSignIn: { nav.enterLogin() },
-                    onRegister: { nav.enterRegister() }
+                    onRegister: { nav.enterRegister() },
+                    // Zone-3 nav intent — the single explicit Phase-1 → Phase-2
+                    // dependency edge (spec §C.2). C3 emits the intent and tests
+                    // it; Phase 2 (2.3 board / 2.4 places read-decoupling) adds
+                    // the handler that resolves it. This is deliberately inert
+                    // today and it is NOT a dead CTA: spec §C.0's DEPENDENCY says
+                    // the landing is not released to users until those handlers
+                    // are live, so no finder ever taps this and gets nothing.
+                    // ⚠️ If the release model ever goes phased, §C.0 requires this
+                    // seam be revisited BEFORE the landing ships.
+                    onNavigate: { destination in
+                        viewLog.notice("Zone-3 intent emitted: \(String(describing: destination)) — handler lands in Phase 2 (§C.2)")
+                    }
                 )
                 .transition(.opacity)
             }

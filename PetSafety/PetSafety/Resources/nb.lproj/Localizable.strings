@@ -1628,3 +1628,12 @@
 
 "pet_friendly_rate_limited_title" = "Daily limit reached";
 "pet_friendly_rate_limited_message" = "You've reached the daily submission limit. Please try again later.";
+
+
+/* MARK: - C3 landing content (1.1b). HU canonical. */
+"landing_scan_cta" = "Skann brikke";
+"landing_found_stray_cta" = "Jeg har funnet et dyr";
+"landing_order_cta" = "Bestill brikke";
+"landing_order_subtitle" = "En gratis brikke til kjæledyrets halsbånd – så det alltid finner veien hjem.";
+"community_section_title" = "Fellesskap";
+"community_lost_found_subtitle" = "Savnede og funne kjæledyr i nærheten av deg";

@@ -1634,3 +1634,12 @@
 
 "pet_friendly_rate_limited_title" = "Napi limit elérve";
 "pet_friendly_rate_limited_message" = "Elérted a napi beküldési limitet. Kérlek, próbáld újra később.";
+
+
+/* MARK: - C3 landing content (1.1b). HU canonical. */
+"landing_scan_cta" = "Biléta beolvasás";
+"landing_found_stray_cta" = "Találtam egy kisállatot";
+"landing_order_cta" = "Biléta rendelés";
+"landing_order_subtitle" = "Ingyenes biléta a kedvenced nyakörvére – hogy mindig hazataláljon.";
+"community_section_title" = "Közösség";
+"community_lost_found_subtitle" = "Eltűnt és talált kisállatok a környékeden";

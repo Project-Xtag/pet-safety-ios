@@ -1625,3 +1625,12 @@
 
 "pet_friendly_rate_limited_title" = "Daily limit reached";
 "pet_friendly_rate_limited_message" = "You've reached the daily submission limit. Please try again later.";
+
+
+/* MARK: - C3 landing content (1.1b). HU canonical. */
+"landing_scan_cta" = "Escanear chapa";
+"landing_found_stray_cta" = "He encontrado un animal";
+"landing_order_cta" = "Pedir chapa";
+"landing_order_subtitle" = "Una chapa gratis para el collar de tu mascota, para que siempre encuentre el camino a casa.";
+"community_section_title" = "Comunidad";
+"community_lost_found_subtitle" = "Mascotas perdidas y encontradas en tu zona";
