@@ -88,16 +88,52 @@ struct LandingView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("BackgroundColor").ignoresSafeArea())
         .fullScreenCover(isPresented: $showScanner) {
-            NavigationStack {
+            // The close affordance is an OVERLAY, not a toolbar. Found on a
+            // physical device 2026-07-17: C3's first attempt put a chevron in a
+            // `NavigationStack`'s `.toolbar`, and it never rendered — the camera
+            // opened with no way out but force-quitting the app.
+            //
+            // Why, two-ended: `QRScannerView.swift:136` sets
+            // `.navigationBarHidden(true)` on its body's root `ZStack` (`:11-12`).
+            // A `.toolbar` attached from out here still resolves against the SAME
+            // navigation container, and `.navigationBarLeading` places items IN
+            // the bar that the child hides. The chevron was constructed and had
+            // nowhere to draw. Modifier order cannot fix it — "bar hidden" beats
+            // "bar has items" either way.
+            //
+            // ⚠️ That suppression is LOAD-BEARING for the other call sites and is
+            // NOT ours to remove: `QRScannerView` is a tab (`ContentView.swift:229`
+            // / `:282`), where a bar would be wrong. So the fix lives here, at the
+            // presentation site, and `QRScannerView` stays untouched. The
+            // `NavigationStack` is gone with the toolbar — nothing needs a bar.
+            //
+            // Two things a build success will NOT tell you, both device-QA:
+            // - **Z-order:** the button is the SECOND child of this `ZStack`, so it
+            //   composites ABOVE the camera. `QRScannerView`'s preview bleeds via
+            //   its own `.ignoresSafeArea()` (`:26`); this `ZStack` does not ignore
+            //   it, so the camera passes under while the button stays in the safe
+            //   area's top-leading corner.
+            // - **Safe area:** deliberately NO `.ignoresSafeArea()` here. On a
+            //   notched device the button must sit below the sensor housing, not
+            //   under it.
+            //
+            // Styling mirrors the torch button (`QRScannerView.swift:80-92`) — the
+            // shipping precedent for a control over this exact camera: same 50pt
+            // disc, same `black.opacity(0.6)` scrim for contrast against arbitrary
+            // camera content, same white glyph (G-b: compose from what ships).
+            ZStack(alignment: .topLeading) {
                 QRScannerView()
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button { showScanner = false } label: {
-                                Image(systemName: "chevron.left")
-                            }
-                            .accessibilityLabel(Text("back"))
-                        }
-                    }
+
+                Button { showScanner = false } label: {
+                    Image(systemName: "chevron.left")
+                        .font(.appFont(size: 22))
+                        .foregroundColor(.white)
+                        .frame(width: 50, height: 50)
+                        .background(Circle().fill(Color.black.opacity(0.6)))
+                }
+                .accessibilityLabel(Text("back"))
+                .padding(.leading, AppSpacing.xl)
+                .padding(.top, AppSpacing.sm)
             }
         }
         .sheet(isPresented: $showFoundStray) {
