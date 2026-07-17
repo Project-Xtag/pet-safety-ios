@@ -1,8 +1,10 @@
 # Senra Mobile Redesign — Session Handover
 
-**Current chunk: C3 — BUILT, COMMITTED, NOT DEVICE-VERIFIED.** iOS landing content (three zones + the data-driven Community list): `bc8ccd7`, plus the scan-dismiss fix `1e70664`.
+**Current chunk: C4-Android — iOS C3 is DONE (built, committed, DEVICE-VERIFIED).** iOS landing content: `bc8ccd7`, + scan-dismiss fix `1e70664`, + lookup-spinner fix `72d5a06`.
 
-**C3 is NOT done, and the next chunk is NOT C4.** What is owed is a look, not code: the §E C3 **device-QA gate** — four scan outcomes × three assertions — has **zero of four outcomes run**. The one device look so far was on `bc8ccd7` *before* `1e70664` existed; it hit the entry point ("Scan a tag" opened a camera with no way out but force-quitting) and **failed**, so no scan was ever reached. `1e70664` has never been on a device. **The gate must run in full on `1e70664` before C3 is called done or C4-Android starts** — a fix to a rendering bug is proven by a look, and the 381-green suite is explicitly not that proof (§9.13, §9.14).
+**C3 device-QA gate — passed on hardware (Viktor, iPhone iOS 26.5, 2026-07-17).** Of the four outcomes in §E C3's gate, **three are reachable from a scan and all three passed** — active-tag (`:170`), inactive-tag (`:179`), and the **forced network-error `:187`** path (airplane mode); the chevron draws over the camera preview and sits in the safe area; the lookup spinner now shows (it was occluded by the cover — `72d5a06`). **The fourth outcome, promo (`:165`), is NOT reachable from a scan** — shelter promos are checkout/registration codes, not scannable tags; the branch is latent, backend-gated on `can_claim_promo`, not dead (Finding B / [[G-scanfeedback]], §9.15).
+
+**Next: C4-Android**, the mirror of C3. It inherits **two** iOS truths the gate bought (§9.15): the overlay chevron works over the preview layer, **and** a `fullScreenCover` occludes the host's overlays — so Android's equivalent presentation must carry **both** the close affordance **and** the lookup indicator into the cover, or it ships the same two regressions iOS just paid to find.
 
 *(C0-iOS, C0-Android, C1-iOS, C2-Android: built, reviewed, committed, device-verified.)*
 
