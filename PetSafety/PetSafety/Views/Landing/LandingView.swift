@@ -134,6 +134,31 @@ struct LandingView: View {
                 .accessibilityLabel(Text("back"))
                 .padding(.leading, AppSpacing.xl)
                 .padding(.top, AppSpacing.sm)
+
+                // Lookup feedback. Found on a physical device 2026-07-17: after a
+                // scan the camera sat out of focus for a few seconds with nothing
+                // on screen, then the result appeared "suddenly."
+                //
+                // The feedback already EXISTS — `ContentView.swift:122-126` shows
+                // `LoadingView` while `deepLinkService.isLookingUpTag`. But that
+                // overlay is on ContentView's Group, and THIS scanner is a
+                // `fullScreenCover` presented ABOVE that Group, so the spinner drew
+                // *behind* the cover and was invisible. The tab path
+                // (`ContentView.swift:229`/`:282`) does not have this — there the
+                // scanner is inside the Group, under the overlay. C3's cover is what
+                // occluded it. Carrying the same LoadingView into the cover restores
+                // parity; the shared scan path and QRScannerView stay untouched.
+                //
+                // Reused, not reinvented (G-b): the SAME `LoadingView`
+                // (`ContentView.swift:401`) the tab path uses — a 0.3 black scrim +
+                // a white `systemBackground` card with a brand-orange spinner. It
+                // carries its own backing, so it reads against the live camera; a
+                // bare `ProgressView` would not. Topmost child, mirroring
+                // ContentView's `.overlay` z-order; its card centers (its own
+                // internal ZStack) so it never fights the top-leading chevron.
+                if deepLinkService.isLookingUpTag {
+                    LoadingView()
+                }
             }
         }
         .sheet(isPresented: $showFoundStray) {
