@@ -172,16 +172,63 @@ AND_HOLD=$(grep -o 'HOLD_DURATION_MS[^=]*= *[0-9_]*' "$AND/app/src/main/java/com
 # ─────────────────────────────────────────────────────────────
 head_ "7. Is the log behind the code?  (this is what 'no missed logs' means)"
 # C1 sat unlogged for two days. Under this check it could not have.
+#
+# Keys on CHUNK COMMITS, not on the branch tip.
+#
+# Why not the tip: §9 requires the plan be TRACKED on the build branch. Once it is,
+# logging the tip needs a commit on that branch — which MOVES the tip — so the new
+# tip is, by construction, absent from the file it just committed. The tip-keyed
+# version could therefore only go green on an UNCOMMITTED plan edit (it greps $PLAN
+# from the working tree, and §8 counts only '??', never a modified tracked file).
+# It passed most reliably when the log was not committed at all — the exact thing it
+# exists to prevent. Verified by experiment 2026-07-17, not by reading.
+#
+# A CHUNK is any non-merge commit on $BRANCH, not yet on origin/main, that TOUCHES
+# FEATURE SOURCE. Touching feature source is SUFFICIENT, not exclusive: a commit that
+# edits a source file AND the CODEMAP in one go is still a chunk and must still cite
+# itself. Mixed commits are not forbidden — they just have to log themselves. A commit
+# touching only docs/** or scripts/** is a log commit, not a chunk, and is ignored.
+# Merge commits are ignored: they carry no chunk of their own.
+#
+# EXPECTED: a transient RED between the chunk commit and its log commit. That is not a
+# defect — there genuinely IS an unlogged chunk on the branch at that moment, and this
+# check's one job is to force the pause. The loop is:
+#     chunk commit -> RED -> log commit -> GREEN -> next chunk
+# It now forces that honestly, instead of going green on a dirty working tree.
+#
+# Failures name the SHA and its subject, so the fix is "log this one", never
+# "something's unlogged somewhere".
 
 for repo in "$IOS" "$AND"; do
   [ -d "$repo/.git" ] || continue
   name=$(basename "$repo")
   git -C "$repo" rev-parse --verify "$BRANCH" >/dev/null 2>&1 || continue
-  TIP=$(git -C "$repo" rev-parse --short "$BRANCH")
-  if grep -q "$TIP" "$PLAN" 2>/dev/null; then
-    pass "$name tip $TIP is logged in the CODEMAP"
-  else
-    fail "$name tip $TIP has NO CODEMAP entry — the log is behind the code. Log it before the next chunk."
+  if ! git -C "$repo" rev-parse --verify origin/main >/dev/null 2>&1; then
+    warn "$name: no origin/main to compare against — fetch, then re-run §7"
+    continue
+  fi
+
+  # Feature source per platform. Keyed on the variable, not on the directory name,
+  # so a relocated checkout (IOS=/elsewhere) still classifies correctly.
+  if [ "$repo" = "$IOS" ]; then SRC='^PetSafety/'; else SRC='^app/src/'; fi
+
+  MISSING=0
+  CHUNKS=0
+  # No pipe into this loop: fail() increments RED in the current shell.
+  for c in $(git -C "$repo" rev-list --no-merges origin/main.."$BRANCH"); do
+    git -C "$repo" show --name-only --format='' "$c" | grep -qE "$SRC" || continue
+    CHUNKS=$((CHUNKS+1))
+    SHORT=$(git -C "$repo" rev-parse --short "$c")
+    if ! grep -q "$SHORT" "$PLAN" 2>/dev/null; then
+      fail "$name chunk $SHORT has NO CODEMAP entry — log it before the next chunk: $(git -C "$repo" log -1 --format='%s' "$c")"
+      MISSING=$((MISSING+1))
+    fi
+  done
+
+  if [ "$CHUNKS" -eq 0 ]; then
+    pass "$name: no unmerged chunk commits on $BRANCH — nothing to log"
+  elif [ "$MISSING" -eq 0 ]; then
+    pass "$name: all $CHUNKS chunk commit(s) on $BRANCH are logged in the CODEMAP"
   fi
 done
 
