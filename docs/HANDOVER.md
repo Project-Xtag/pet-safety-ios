@@ -1,9 +1,9 @@
 # Senra Mobile Redesign — Session Handover
 
-**Current chunk: C4-Android** — 1.2b landing content, the Android mirror of C3 (iOS landing content).
-**Status: not started.** A read plan exists (`docs/C4-READ-PLAN.md`) and has not been reviewed by the *incoming* review seat. No C4 code is written.
+**Current chunk: C4b-Android** — G11's seeded-scan close on the landing (§6-G11 / spec §E C4b).
+**Status: C4-Android is COMMITTED (`dfc8acc`, §9.16) — code-complete, NOT device-verified.** Its §E C4 device-QA gate (Part A/B/C) is owed on hardware, and the build surfaced a two-platform ship-blocker, [[G-landing-submit]]. Do not take this line's word for any of it — run the board.
 
-*(C0–C3 iOS and C0/C2 Android: built, reviewed, committed, logged. C3-iOS is device-verified — but do not take this line's word for it. The board derives it. Run the board.)*
+*(C0–C3 iOS and C0/C2/C4 Android: built, reviewed, committed, logged. Device-QA: C3-iOS verified; C4-Android owed. The board derives all of this — run it.)*
 
 ---
 
