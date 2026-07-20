@@ -1,6 +1,6 @@
 # Senra — Two-Seat Protocol
 
-**Home:** `pet-safety-ios/docs/PROTOCOL.md` (tracked on `main`; governs both repos).
+**Home:** `pet-safety-ios/docs/PROTOCOL.md` — governs both repos. Tracked on the active redesign branch; merges to `main` with it.
 **Both seats read this in full before doing anything.** It is short on purpose.
 
 > This file is the **sole owner** of: how the seats work, the rules, and the known hazards.
@@ -32,7 +32,7 @@ Nothing else goes on a board. There are no other boards.
 ## 2. The seats
 
 - **Viktor** — owns the product, the decisions, and **all git**, exclusively.
-- **CC (build seat)** — investigates, writes code, **surfaces the diff**, **stops**. Read-only git only: `status`, `log`, `show`, `diff`, `branch --list`, `reflog`, `merge-base`, `merge-tree`. **No commit, push, branch, merge, rebase, stash, reset.** Exceptions are per-command, explicit from Viktor, and recorded.
+- **CC (build seat)** — investigates, writes code, **surfaces the diff**, **stops**. Read-only git only: `status`, `log`, `show`, `diff`, `branch --list`, `reflog`, `merge-base`, `merge-tree`. **No commit, push, branch, merge, rebase, stash, reset.** Exceptions are per-command, explicit from Viktor, and recorded. **Credentials:** CC does not authenticate as Viktor by default; performing auth steps (entering an OTP, logging in on a device) requires the same per-command, explicit, recorded go as the git exceptions, and CC records that the session was cleared afterward. *(First exercised 2026-07-20, D.7a device run; codified after the fact.)*
 - **Claude in chat (review seat)** — byte-reviews every diff before anything is committed. Drafts CC's instructions. Does not write production code. May draft documentation.
 
 ### The loop
