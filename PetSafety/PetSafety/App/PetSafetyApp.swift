@@ -69,7 +69,14 @@ struct PetSafetyApp: App {
                 SentrySDK.start { options in
                     options.dsn = dsn
                     options.environment = {
-                        #if DEBUG
+                        // A build running on the simulator is never a real
+                        // production user (e.g. a Release-config build launched
+                        // in the simulator during local testing). Tag it
+                        // non-production so simulator noise doesn't pollute the
+                        // production environment in Sentry. Without the
+                        // simulator check a Release build on the sim evaluates
+                        // `#if DEBUG` as false and reports as "production".
+                        #if targetEnvironment(simulator) || DEBUG
                         return "development"
                         #else
                         return "production"
@@ -88,6 +95,16 @@ struct PetSafetyApp: App {
 
                     options.enableSwizzling = true
                     options.enableCaptureFailedRequests = true
+
+                    // App Hang detection is unreliable on the simulator: it runs
+                    // on the Mac, so debugger pauses, breakpoints, and host-CPU
+                    // contention register as multi-second "hangs" that don't
+                    // happen on a real device. Disable it there so local runs
+                    // don't emit false App Hang errors (see PET-SAFETY-IOS-12,
+                    // an "App Hang Non Fully Blocked" fired from a simulator).
+                    #if targetEnvironment(simulator)
+                    options.enableAppHangTracking = false
+                    #endif
 
                     options.beforeSend = { event in
                         let firstException = event.exceptions?.first
