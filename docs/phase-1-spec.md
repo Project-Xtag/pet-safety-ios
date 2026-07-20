@@ -324,7 +324,7 @@ Render: `communitySeed.forEach { CommunityEntryCard(it.icon, stringResource(it.t
 
 ---
 
-## The lifecycle question — RESOLVED 2026-07-20 (self-heal)
+#### The lifecycle question — RESOLVED 2026-07-20 (self-heal)
 
 **Does `QrScannerScreen` leave composition when the Scan tab is switched away from? — YES.**
 
