@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # senra-status.sh — v3. Derives the board instead of restating it.
 #
-# Home: pet-safety-ios/scripts/senra-status.sh (tracked on main).
+# Home: pet-safety-ios/scripts/senra-status.sh — tracked on the active redesign branch; merges to main with it.
 # Every ✅/❌ below is computed live from the repos, the server, and the code.
 # Nothing here is a claim you have to trust — it is a claim you can re-derive
 # in 20 seconds.
@@ -301,7 +301,6 @@ warn "RELEASE build: the whole suite is testDebugUnitTest. C1/C2 have never run 
 warn "Android crossfade handoff on a LOW-END device (C0's true gate moved first composition into the 400ms fade)"
 warn "Dark-mode mark strokes (the mark is not recolored for dark on either platform)"
 warn "Android system-splash icon suppression on Samsung / Xiaomi"
-warn "G11 camera premise UNVERIFIED — read QrScannerScreen.kt:140-155 before ruling on C4's permission prompt"
 
 # ─────────────────────────────────────────────────────────────
 echo

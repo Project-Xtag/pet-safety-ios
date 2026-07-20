@@ -117,3 +117,5 @@ PLATFORM_AUDIT_REPORT.md
 NOTIFICATIONS_*
 SENRA_*.docx
 IMG_*.PNG
+senra-findings-*.md
+docs/*-draft.md
