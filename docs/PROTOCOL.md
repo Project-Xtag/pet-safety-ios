@@ -176,6 +176,7 @@ Run it at the **start of every session** and **before every commit**.
 - **G-a:** no "coming soon" placeholders. **G-b:** compose from **existing named primitives**; if one doesn't fit → **surface a gap, don't invent a styled component.**
 - **All new strings localized, HU canonical, 13 locales. Zero hardcoded English.**
 - **⚠️ A scope guard that names a FILE does not guard a BEHAVIOR.** G12b forbade wiring `ScannedPetView`. Nobody wired it. **Logged-out delivery shipped on iOS anyway**, through a live component one branch over. Write guards against the **behavior**, and mechanise them in `senra-status.sh` where possible.
+- **⚠️ Corollary — defaulted params + a device-only behaviour = an unwired call site nothing catches.** When a chunk's new parameters are **defaulted** (so prior tests' shorter call sites still compile) *and* the behaviour they drive is device-only (no unit test), a version that never passes them **compiles, runs, and passes the whole existing suite** — those tests lean on the defaults — while the feature ships inert. No test, and no file-named guard, catches it. **Mechanise the *wiring* as a `senra-status.sh` grep** — a count of the behaviour (e.g. the seeded argument present at *both* call sites), written on **one line** so the grep proves *what it guards*, not just that a string exists — **and land the check *before* the chunk** so the board reads red-until-wired. §1: an item expressible as a check is not optional.
 
 ---
 

@@ -21,6 +21,7 @@ DL="${DL:-$HOME/senra-deeplink}"
 PLAN="$IOS/docs/SENRA-MOBILE-REDESIGN.md"
 BRANCH="${BRANCH:-feat/mobile-redesign-phase1}"
 APPKT="$AND/app/src/main/java/com/petsafety/app/ui/PetSafetyApp.kt"
+QRS="$AND/app/src/main/java/com/petsafety/app/ui/screens/QrScannerScreen.kt"
 
 RED=0
 pass()  { printf '  \033[32m✅\033[0m %s\n' "$1"; }
@@ -102,10 +103,10 @@ else
 fi
 
 # ─────────────────────────────────────────────────────────────
-head_ "5. Android C2 seam invariants"
+head_ "5. Android seam invariants"
 
 if [ ! -f "$APPKT" ]; then
-  warn "PetSafetyApp.kt not found — skipping C2 seam checks"
+  warn "PetSafetyApp.kt not found — skipping seam checks"
 else
   # G11: savedQrCode must be cleared in exactly ONE place (onQrCodeHandled).
   # A second clear site strands the logged-out pending scan that C4 is going to
@@ -143,6 +144,33 @@ else
       fail "$f is missing onBack or its chevron — the landing becomes a one-way door (the C1 dead-end)"
     fi
   done
+
+  # ── C4b (G11 seeded-scan close): behaviour guards no test can give (PROTOCOL §6) ──
+  # LandingScreen's pendingQrCode/onQrCodeHandled are DEFAULTED (so C2's two-arg
+  # routing test still compiles). A chunk whose LANDING arm never passes them
+  # compiles, runs, passes every test (RootRoutingComposeTest RELIES on the
+  # defaults), and the checks above stay green (they count the clear literal, 1
+  # either way). The wiring would be INERT with nothing to notice until a device
+  # gate. So grep the behaviour, not the file (G12b corollary).
+  SEED=$(grep -c 'pendingQrCode = savedQrCode' "$APPKT")
+  if [ "$SEED" -eq 2 ]; then
+    pass "pendingQrCode = savedQrCode wired at 2 sites (MAIN + LANDING) — C4b seeded scan LIVE"
+  else
+    fail "pendingQrCode = savedQrCode at $SEED site(s), expected 2 (MAIN + LANDING) — C4b INERT: the logged-out seeded scan is unwired and no test catches it. (RED until C4b is built — expected.)"
+  fi
+
+  if [ -f "$QRS" ]; then
+    # One-line grep of the whole guarded expression: proves the guard AND what it
+    # guards, not merely that 'pendingQrCode == null' exists somewhere (Rule 1).
+    GUARD=$(grep -c 'if (pendingQrCode == null) permissionLauncher.launch' "$QRS")
+    if [ "$GUARD" -eq 1 ]; then
+      pass "seeded-path permission guard present and guarding the launch — C4b carve-out #2"
+    else
+      fail "one-line guard 'if (pendingQrCode == null) permissionLauncher.launch' count=$GUARD, expected 1 — carve-out #2 gone; the gratuitous camera prompt returns on the seeded path. (RED until C4b is built — expected.)"
+    fi
+  else
+    warn "QrScannerScreen.kt not found — cannot check C4b carve-out #2"
+  fi
 fi
 
 # ─────────────────────────────────────────────────────────────
