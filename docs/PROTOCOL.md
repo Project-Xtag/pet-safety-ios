@@ -14,7 +14,7 @@
 | Fact | Sole owner |
 |---|---|
 | The plan, the locked decisions, the gaps register, the CODEMAP | `docs/SENRA-MOBILE-REDESIGN.md` |
-| The buildable chunk contract — files, edits, must-not-touch, named tests, done-when | `docs/phase-1-spec.md` |
+| The buildable chunk contract — files, edits, must-not-touch, named tests, done-when | `docs/phase-1-spec.md` (Phase 1) · `docs/phase-2-spec.md` (Phase 2 — created at scoping close, CC-authored; recorded 2026-07-21) |
 | How the seats work; the rules; the hazards | **this file** |
 | **The board** — what is done, what is red, what is owed | `scripts/senra-status.sh` — **derived, never written** |
 | Which chunk is live right now | `docs/HANDOVER.md` — contains **no facts**, only pointers |
@@ -43,7 +43,7 @@ Nothing else goes on a board. There are no other boards.
 4. Review seat hashes the artifact it received and **compares**. Mismatch → stop.
 5. Review → Viktor commits → **Viktor logs the commit in the CODEMAP** → next chunk.
 
-Step 5's logging is not optional. `senra-status.sh` fails the board if the branch tip has no CODEMAP entry.
+Step 5's logging is not optional. The board's §7 fails when the log is behind the code — §7 owns which commits it keys on; read the board, don't restate it here. *(This sentence used to say "the branch tip"; `16de442` changed the script to key on chunk commits and the restatement drifted — §1's prediction, inside the file that makes the rule.)*
 
 ---
 
