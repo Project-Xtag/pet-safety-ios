@@ -174,6 +174,73 @@ else
 fi
 
 # ─────────────────────────────────────────────────────────────
+head_ "5b. Landing device-bought behaviours (C3/C4/C4b) — guards on the files C5/C6 + Phase 2 edit"
+# Every green-expected literal below is PINNED in spec §E C5/C6 (Board guards
+# block): a rename false-reds BY DESIGN so check and contract cannot disagree.
+# Landed 2026-07-21, BEFORE C5 — these files are exactly what C5/C6 and the
+# Phase-2 destination chunks edit next.
+
+LSK="$AND/app/src/main/java/com/petsafety/app/ui/screens/LandingScreen.kt"
+LVW="$IOS/PetSafety/PetSafety/Views/Landing/LandingView.swift"
+CVW="$IOS/PetSafety/PetSafety/App/ContentView.swift"
+
+lguard() {
+  # $1 file, $2 fixed-string pattern, $3 expected count, $4 label
+  if [ ! -f "$1" ]; then warn "$4 — file not found"; return; fi
+  N=$(grep -cF "$2" "$1")
+  if [ "$N" -eq "$3" ]; then
+    pass "$4"
+  else
+    fail "$4 — count=$N, expected $3 (device-bought behaviour dropped or renamed; names pinned in spec §E C5/C6)"
+  fi
+}
+
+lguard "$LSK" 'BackHandler { showScanner = false }'                          1 "AND: scanner BackHandler (C4 FIX 2)"
+lguard "$LSK" 'BackHandler { showFoundStray = false }'                       1 "AND: found-stray BackHandler (C4 FIX 2)"
+lguard "$LSK" 'onTagNotUsable = { message -> reportPrompt = message }'       1 "AND: onTagNotUsable -> report card (C4 FIX 3)"
+lguard "$LSK" 'onNavigateToActivation = { reportPrompt = notLinkedMessage }' 1 "AND: onNavigateToActivation -> report card (C4 FIX 3)"
+lguard "$LSK" 'onClose = { showScanner = false }'                            1 "AND: close-overlay binding at the presentation site"
+lguard "$LSK" 'onClick = onClose'                                            1 "AND: close-overlay render end consumes onClose"
+lguard "$LSK" 'onDismissRequest = { reportPrompt = null }'                   1 "AND: report-card scrim dismiss"
+lguard "$LSK" 'TextButton(onClick = { reportPrompt = null })'                1 "AND: report-card Try Again dismiss"
+lguard "$LVW" 'Button { showScanner = false }'                               1 "iOS: scanner close overlay (C3 §9.14)"
+lguard "$LVW" 'if wants { showScanner = false }'                             1 "iOS: deep-link yield expression (§9.15)"
+
+# iOS three-flag coverage: the yield's source property must OR ALL THREE deep-link
+# flags (LandingView:66-70). Dropping one from the OR keeps the yield check green —
+# this catches the narrowing.
+if [ -f "$LVW" ]; then
+  FLAGS=$(grep -Ec 'showScannedPetProfile|showTagActivation|showPromoClaimFlow' "$LVW")
+  if [ "$FLAGS" -eq 3 ]; then
+    pass "iOS: deep-link yield observes all 3 flags (scanned/activation/promo)"
+  else
+    fail "iOS: deep-link flag reads count=$FLAGS, expected 3 — the yield's OR narrowed or widened (device-bought, §9.15)"
+  fi
+fi
+
+# ── Zone-3 ship-gate (plan §2: Zone 3 ships in v1) — RED UNTIL WIRED, by design ──
+# Whitespace-tolerant regex: an expected-0 check false-GREENS on a rename (the
+# unsafe direction). OBLIGATION: when phase-2-spec.md names the destination
+# handlers, RE-POINT both to positive handler greps (expect 1, red-until-wired)
+# — the obligation is recorded in spec §E C5/C6's Board-guards block.
+if [ -f "$APPKT" ]; then
+  DEADCTA=$(grep -Ec 'onNavigate *= *\{[[:space:]]*\}' "$APPKT")
+  if [ "$DEADCTA" -eq 0 ]; then
+    pass "AND: Zone-3 onNavigate is bound to a real handler"
+  else
+    fail "AND: Zone-3 onNavigate is a swallowed empty lambda — both community cards are LIVE DEAD CTAs. (RED until Phase 2 wires 2.3/2.4 — the plan §2 v1 ship-gate.)"
+  fi
+fi
+if [ -f "$CVW" ]; then
+  INERT=$(grep -Ec 'Zone-3 intent emitted|handler lands in Phase 2' "$CVW")
+  if [ "$INERT" -eq 0 ]; then
+    pass "iOS: Zone-3 onNavigate handler is live (inert marker gone)"
+  else
+    fail "iOS: Zone-3 onNavigate is the log-only inert closure — both community cards are LIVE DEAD CTAs. (RED until Phase 2 wires 2.3/2.4 — the plan §2 v1 ship-gate.)"
+  fi
+fi
+
+# ─────────────────────────────────────────────────────────────
 head_ "6. Declared contracts vs. the code (drift detector)"
 # v1 grepped PROSE that appeared ZERO times and false-fired against CORRECT code.
 # A check that cries wolf trains you to skim past red. Contracts are DECLARED in
