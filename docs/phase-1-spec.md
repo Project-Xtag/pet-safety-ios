@@ -22,6 +22,8 @@ The rev-4 steer (1.1a/1.1b iOS, 1.2a/1.2b Android) is confirmed, with **one chan
 
 **Splash decision — its own leading chunk (not folded into "a").** Rationale: splash is pure-visual, isolated, zero routing/auth surface, and the two platforms diverge (iOS refreshes `SplashScreenView` in place; Android has only the system SplashScreen theme). Making it the first chunk gives the safest possible warm-up, keeps the visual splash diff off the structural routing diff, and yields an easy first reviewed/committed unit. C0 is split per platform (decided — see §G #3): C0-iOS then C0-Android, committed as two separate units.
 
+**Chunk numbering after C4b (RULED 2026-07-21, Viktor): numbers follow build order.** **C5 (iOS) / C6 (Android) = G-landing-submit** — the found-pet submit confirmation at the landing's presentation sites (§6's gap row + the 2026-07-21 three-reads findings are the contract seed; §E entries owed). **F3 (landing restyle) renumbers to C7/C8 when specced** — DEFERRED behind the Phase-2 destinations (plan §2). F3 had no parked §E entry at ruling time (verified: zero `C5`/`C6`/`F3` matches in this file).
+
 ### A.2 Recommended build order — **layer-complete, iOS-leads-each-layer**
 `C0 → C1 (1.1a) → C2 (1.2a) → C3 (1.1b) → C4 (1.2b)`
 
@@ -333,6 +335,82 @@ Render: `communitySeed.forEach { CommunityEntryCard(it.icon, stringResource(it.t
 Therefore, on switching back to Scan: fresh composition → `hasPermission` is a fresh `remember { false }` (`:131` — plain `remember`, disposed either way) → `LaunchedEffect(Unit)` fires again → `pendingQrCode` is now `null` (cleared during the seeded visit) → the guard passes → an already-granted user gets the silent callback and their live preview back.
 
 **Consequence:** the authed wall is scoped to the single seeded visit and heals on the first tab round-trip or relaunch. **Ruling: accept and name it. No `checkSelfPermission` refine.** Confirmed on a device by **D.7b**'s self-heal look rather than left as inference.
+
+---
+
+### C5 / C6 — G-landing-submit: found-pet report confirmation (iOS then Android)
+
+> **PHASE-1-SHIP-BLOCKING, both platforms.** Surfaced 2026-07-18 by the C4-Android build (§9.16), confirmed identical on iOS (§9.13's `FoundPetFormView` presented bare from `LandingView`). **A logged-out finder submits a found-pet report and receives nothing** — the form dismisses to the landing with no feedback. The confirmation on the *existing* entry point was the **list-prepend**; the landing has no list, so the confirmation that exists everywhere else is simply absent — on the exact persona the logged-out landing exists for.
+>
+> **Three reads executed 2026-07-21 (CC), all clean.** They are what makes this specifiable as copy rather than as a behaviour change:
+> - **`onSubmitted` fires on SUCCESS ONLY, both platforms.** Android: `LaunchedEffect(state.submittedReport)` at `FoundPetFormScreen.kt:120-122`, and `submittedReport` is written at exactly one site (`:598-605`) inside `submit()`'s coroutine, only when `repository.create(...)` (`:583`) returns non-null; the failure path (`:607-608`) sets `_networkError` and never touches it. iOS: `FoundPetFormView.swift:328-331` — the `await createFoundPet(payload)` precedes `onSubmitted?(report)` (`:330`); a throw jumps to `catch` (`:332-334`), which sets `errorMessage` and neither fires the callback nor dismisses. **A failed submit cannot produce a success message.** This was the risk that would have made the fix bigger than copy.
+> - **iOS's delivery mechanism already exists** and is root-level (below).
+> - **The confirmation belongs at the two landing call sites, not in the form** (below).
+
+**Ruling — Viktor, 2026-07-21.**
+
+- **HU canonical string, verbatim:**
+
+```
+Köszönjük a segítséged! A bejelentést rögzítettük.
+```
+
+- **Acknowledge-required on BOTH platforms.** Not transient. **Rationale, on precedent:** C4 FIX 3 replaced *"a bare snackbar on a frozen camera"* with a card the finder must dismiss — same persona, same "did anything happen?" moment, and a submit is the higher-stakes of the two. A finder who submits and pockets the phone never sees a transient.
+
+**Files — iOS (C5):** `Views/Landing/LandingView.swift`; `Resources/*.lproj/Localizable.strings` ×13.
+**Files — Android (C6):** `ui/screens/LandingScreen.kt`; `res/values*/strings.xml` — **base + `values-en` + 13** (§9.16 caught this exact chunk a file short once).
+
+---
+
+#### Precise edit — iOS (C5)
+
+- **`LandingView.swift:167`** presents `FoundPetFormView()` **bare** inside `.sheet(isPresented: $showFoundStray)` — no closure bound at all, so `onSubmitted` is `nil`. **Bind it** at that presentation site, firing the confirmation.
+- **`appState` is already in scope** — `LandingView.swift:47` declares `@EnvironmentObject var appState: AppState`, and `:174` already re-injects it elsewhere. **No new injection, no new dependency.**
+- **`AppState.showSuccess(_:)`** (`PetSafetyApp.swift:348-352`) sets `alertTitle`, `alertMessage = ""`, `showAlert = true`; consumed by `.alert(appState.alertTitle, isPresented: $appState.showAlert)` at **`ContentView.swift:65-68`** — the same root that hosts the logged-out landing, **visible logged out**. It is an existing named primitive already used for checkout successes (`:244-250`). **Acknowledge-required by construction** — an alert with OK, not a snackbar. **G-b satisfied from shipping primitives; nothing is invented.**
+- **⚠️ Do NOT touch `FoundPetFormView`.** The authed site binds its own confirmation — `AlertsTabView.swift:85-87`, trailing-closure syntax (`FoundPetFormView { newReport in viewModel.prependLocalFoundReport(newReport) }`, which is why a `FoundPetFormView(` grep reads zero there, §9.13). A confirmation inside the form **double-confirms the authed path**.
+- **⚠️ Presentation-timing device look — the one thing source cannot answer.** `onSubmitted` fires at `:330` **before** `dismiss()` at `:331`, so `showAlert` flips while the sheet is still up. **Alert-under-dismissing-sheet is the `Group`/`ZStack` class** (PROTOCOL §7 / §9.8): it compiles, it passes, and only hardware shows whether the alert presents, is swallowed, or arrives late. *Hypothesis if it drops, labelled as such and NOT to be pre-emptively built: the fix would live at the presentation site (e.g. the sheet's `onDismiss`), **never** in the form.*
+
+#### Precise edit — Android (C6)
+
+- **`LandingScreen.kt:125-131`** binds `onSubmitted = { showFoundStray = false }` — dismiss-only. **Add the confirmation there.**
+- **Remove or update the in-code comment** at that site documenting the missing list-prepend equivalent. **Rule 3 inverted:** a satisfied to-do left in place is how the next session re-opens a closed question — the same call §E C4b made about the F2 to-do.
+- **⚠️ `appStateViewModel.showSuccess(...)` is a snackbar and is therefore INSUFFICIENT ALONE** under the acknowledge-required ruling. The two platforms' `showSuccess` idioms genuinely differ — iOS's is a modal alert, Android's is transient. **This is the one open construction question in the chunk.**
+- **Leading reuse candidate — to be read two-ended before it is chosen, not assumed:** the **C4 FIX 3 report card**, an `AlertDialog` already living in this same file (its `dismissButton` at `LandingScreen.kt:337-339`, per §E C4b). If it composes from a named primitive that can carry a success message, that is **G-b-compliant reuse on the same surface, by the same author, for the same persona**. **If it cannot, surface a gap — do not invent a styled component** (G-b). Report which.
+- **⚠️ Do NOT touch `FoundPetFormScreen`.** The authed site binds its own prepend — `LostAndFoundScreen.kt:188-191` (`onSubmitted = { vm.prependLocalFoundReport(it) }`).
+
+#### Localization
+
+- **Mint exactly one key.** Proposed `found_pet_reported_success` — **CC confirms against the existing naming convention** and reuses the app's shipping noun for a found-pet report rather than introducing new terminology.
+- **HU canonical (verbatim above) → EN derived → remaining 11 via `senra_translate.py`. No hand-written translations.**
+- **⚠️ The claim boundary carries into EN and into every locale.** An earlier candidate said the team is *"working hard to find the owner."* **The chosen string deliberately drops that** — nothing has been read about whether the system notifies or matches owners against missing alerts, and copy asserting something the system may not deliver is this project's recurring genre (`INGYENES`, [[G-scan-error-raw]]). The string claims **only that the report was received.** **Do not reintroduce the stronger claim during EN derivation or translation review.**
+- **⚠️ Register consistency (HU).** The chosen string uses the **informal** address (`segítséged`, te-form). If the app addresses users **formally** elsewhere (`segítségét`, ön-form), this reads as a register break — invisible to a non-native reviewer, jarring to a native one, and precisely the class §9.17 FIX 1 caught. **CC greps the shipping HU strings and reports which register dominates; Viktor rules.** Informal may well be deliberate — it suits a stranger doing a favour — but it should be a decision, not an accident.
+
+#### Must NOT touch
+
+**The device-bought behaviours in these two files, byte-intact:** the two `BackHandler` branches (C4 FIX 2), the report card and **both** its branches (FIX 3), `onTagNotUsable`, `onNavigateToActivation`, the close overlay at the presentation site, `ScannerSurface`, C4b's auto-present `LaunchedEffect`, and **`pendingQrCode`'s parameter name** (board §5's SEED check greps that literal — a rename false-reds as INERT).
+
+**Plus:** both form components; both authed call sites; `resolveRootRoute` / the `RootRoute` enum / `AuthOverlay` / the `when`-block; `MainTabView` / `MainTabScaffold`; `isAuthenticated`'s derivation; the scanner internals; invoicing (§6 hard boundary). **No new dependencies.**
+
+#### Tests
+
+- Every existing landing test passes or is explicitly re-pointed with a recorded reason.
+- **The confirmation is a presentation, and no test proves a surface appeared** — JVM binds neither CameraX nor Hilt; iOS is ViewInspector-free (§9.13 (1)). **No test may be named `…Presents…`** (§E C4's standing rule; this project has shipped that overclaim twice). If a closure-fired assertion is added, **state that it proves the closure, not the surface.**
+- Force the run (`--rerun-tasks`; read `index.html`, never the console) and grep the artifact for every named criterion, by name (Rule 6).
+
+#### Done-when
+
+1. A **logged-out** finder submits a found-pet report from the landing → the confirmation appears → **it requires acknowledgement** → the landing. Both platforms.
+2. String localized, **HU canonical**, base + `values-en` + 13 on Android, 13 `.lproj` on iOS. Zero hardcoded literals.
+3. **The authed path is unchanged** — its list-prepend remains its only confirmation. **Verify no double-confirm** on either platform.
+4. **⚠️ DEVICE LOOK, BOTH PLATFORMS (Rule 5 — no test can prove any of this).** iOS: the alert-under-dismissing-sheet timing (does it present at all, and is it legible over/after the sheet?). Android: the dialog appears after the form dismisses and is dismissible. **Plus the preservation check** — seeded auto-present, back-to-landing, the report card's both branches still work. *A confirmation that renders correctly and drops `BackHandler` passes every test in both repos.*
+
+#### Explicitly OUT
+
+[[G-foundform-error-raw]] (new row, §6 — different branch, different owner); [[G-session-loggedout]] (auth workstream); [[G-scan-error-raw]]; [[G-tab-scan-noparity]]; F3 (deferred); threading the scanned code into the form (deferred — touches the form signature + VM); any change to the authed confirmation.
+
+#### Sequence
+
+**Board guards land first** — they protect these same two files, and this chunk edits them. Then **C5 (iOS)** → surface diff + hash → byte-review → commit → CODEMAP. Then **C6 (Android)**.
 
 ---
 
