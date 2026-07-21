@@ -163,8 +163,14 @@ struct LandingView: View {
         }
         .sheet(isPresented: $showFoundStray) {
             // Provides its own NavigationView (FoundPetFormView.swift:51) and
-            // carries no @EnvironmentObject — present it bare.
-            FoundPetFormView()
+            // carries no @EnvironmentObject — present it bare. onSubmitted fires
+            // on SUCCESS ONLY (the form's submit awaits createFoundPet before
+            // invoking it), so this cannot confirm a failed submit. The authed
+            // site keeps its own list-prepend confirmation (AlertsTabView) —
+            // a confirmation inside the form would double-confirm that path.
+            FoundPetFormView { _ in
+                appState.showSuccess(String(localized: "found_pet_reported_success"))
+            }
         }
         .sheet(isPresented: $showOrderTags) {
             // NavigationView wrapper + both re-injections mirror
