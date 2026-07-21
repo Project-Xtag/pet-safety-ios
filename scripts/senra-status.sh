@@ -186,7 +186,10 @@ CVW="$IOS/PetSafety/PetSafety/App/ContentView.swift"
 
 lguard() {
   # $1 file, $2 fixed-string pattern, $3 expected count, $4 label
-  if [ ! -f "$1" ]; then warn "$4 — file not found"; return; fi
+  # Missing subject = FAIL, not warn: a §5b guard whose subject is absent is a
+  # failure, not a skip — otherwise a file move/rename/typo silently evaporates
+  # every guard at once, likeliest during exactly the work they exist for.
+  if [ ! -f "$1" ]; then fail "$4 — SUBJECT FILE MISSING ($1); absence is a defect in §5b, not a skip"; return; fi
   N=$(grep -cF "$2" "$1")
   if [ "$N" -eq "$3" ]; then
     pass "$4"
@@ -207,16 +210,13 @@ lguard "$LVW" 'Button { showScanner = false }'                               1 "
 lguard "$LVW" 'if wants { showScanner = false }'                             1 "iOS: deep-link yield expression (§9.15)"
 
 # iOS three-flag coverage: the yield's source property must OR ALL THREE deep-link
-# flags (LandingView:66-70). Dropping one from the OR keeps the yield check green —
-# this catches the narrowing.
-if [ -f "$LVW" ]; then
-  FLAGS=$(grep -Ec 'showScannedPetProfile|showTagActivation|showPromoClaimFlow' "$LVW")
-  if [ "$FLAGS" -eq 3 ]; then
-    pass "iOS: deep-link yield observes all 3 flags (scanned/activation/promo)"
-  else
-    fail "iOS: deep-link flag reads count=$FLAGS, expected 3 — the yield's OR narrowed or widened (device-bought, §9.15)"
-  fi
-fi
+# flags (LandingView:66-70). Pinned PER OR-MEMBER by line shape — the '|| deepLinkService.'
+# prefix can only match inside an OR chain, so each check reds if its member leaves
+# the OR even while the flag is still read elsewhere in the file. (A file-wide
+# aggregate count false-greens in exactly that case — review condition (c).)
+lguard "$LVW" 'deepLinkService.showScannedPetProfile'  1 "iOS: yield OR member 1 — showScannedPetProfile (§9.15)"
+lguard "$LVW" '|| deepLinkService.showTagActivation'   1 "iOS: yield OR member 2 — showTagActivation (§9.15)"
+lguard "$LVW" '|| deepLinkService.showPromoClaimFlow'  1 "iOS: yield OR member 3 — showPromoClaimFlow (§9.15)"
 
 # ── Zone-3 ship-gate (plan §2: Zone 3 ships in v1) — RED UNTIL WIRED, by design ──
 # Whitespace-tolerant regex: an expected-0 check false-GREENS on a rename (the
@@ -230,6 +230,8 @@ if [ -f "$APPKT" ]; then
   else
     fail "AND: Zone-3 onNavigate is a swallowed empty lambda — both community cards are LIVE DEAD CTAs. (RED until Phase 2 wires 2.3/2.4 — the plan §2 v1 ship-gate.)"
   fi
+else
+  fail "AND: Zone-3 ship-gate SUBJECT MISSING ($APPKT) — the gate must not evaporate silently; 6 expected reds reading as 4 would look like progress"
 fi
 if [ -f "$CVW" ]; then
   INERT=$(grep -Ec 'Zone-3 intent emitted|handler lands in Phase 2' "$CVW")
@@ -238,6 +240,8 @@ if [ -f "$CVW" ]; then
   else
     fail "iOS: Zone-3 onNavigate is the log-only inert closure — both community cards are LIVE DEAD CTAs. (RED until Phase 2 wires 2.3/2.4 — the plan §2 v1 ship-gate.)"
   fi
+else
+  fail "iOS: Zone-3 ship-gate SUBJECT MISSING ($CVW) — the gate must not evaporate silently; 6 expected reds reading as 4 would look like progress"
 fi
 
 # ─────────────────────────────────────────────────────────────
