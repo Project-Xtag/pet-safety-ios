@@ -22,7 +22,7 @@ The rev-4 steer (1.1a/1.1b iOS, 1.2a/1.2b Android) is confirmed, with **one chan
 
 **Splash decision — its own leading chunk (not folded into "a").** Rationale: splash is pure-visual, isolated, zero routing/auth surface, and the two platforms diverge (iOS refreshes `SplashScreenView` in place; Android has only the system SplashScreen theme). Making it the first chunk gives the safest possible warm-up, keeps the visual splash diff off the structural routing diff, and yields an easy first reviewed/committed unit. C0 is split per platform (decided — see §G #3): C0-iOS then C0-Android, committed as two separate units.
 
-**Chunk numbering after C4b (RULED 2026-07-21, Viktor): numbers follow build order.** **C5 (iOS) / C6 (Android) = G-landing-submit** — the found-pet submit confirmation at the landing's presentation sites (§6's gap row + the 2026-07-21 three-reads findings are the contract seed; §E entries owed). **F3 (landing restyle) renumbers to C7/C8 when specced** — DEFERRED behind the Phase-2 destinations (plan §2). F3 had no parked §E entry at ruling time (verified: zero `C5`/`C6`/`F3` matches in this file).
+**Chunk numbering after C4b (RULED 2026-07-21, Viktor): numbers follow build order.** **C5 (iOS) / C6 (Android) = G-landing-submit** — the found-pet submit confirmation at the landing's presentation sites (§6's gap row + the 2026-07-21 three-reads findings are the contract seed; the §E C5/C6 contract landed the same pass). **F3 (landing restyle) renumbers to C7/C8 when specced** — DEFERRED behind the Phase-2 destinations (plan §2). F3 had no parked §E entry at ruling time (verified: zero `C5`/`C6`/`F3` matches in this file).
 
 ### A.2 Recommended build order — **layer-complete, iOS-leads-each-layer**
 `C0 → C1 (1.1a) → C2 (1.2a) → C3 (1.1b) → C4 (1.2b)`
@@ -393,7 +393,7 @@ Köszönjük a segítséged! A bejelentést rögzítettük.
 
 #### Board guards (landed 2026-07-21, board §5b — BEFORE C5, protecting exactly the files this chunk edits)
 
-**Pinned literals — check and contract cannot disagree (the §E C4b `pendingQrCode` pattern). A rename of any of these false-reds §5b BY DESIGN; re-pin here and in the script together, never separately.** Android, `LandingScreen.kt`, each count == 1: `BackHandler { showScanner = false }` · `BackHandler { showFoundStray = false }` · `onTagNotUsable = { message -> reportPrompt = message }` · `onNavigateToActivation = { reportPrompt = notLinkedMessage }` · `onClose = { showScanner = false }` · `onClick = onClose` · `onDismissRequest = { reportPrompt = null }` · `TextButton(onClick = { reportPrompt = null })`. iOS, `LandingView.swift`: `Button { showScanner = false }` == 1 · `if wants { showScanner = false }` == 1 · the three deep-link flag reads `showScannedPetProfile|showTagActivation|showPromoClaimFlow` == 3 (guards the OR at `LandingView.swift:66-70` against narrowing — the yield check alone cannot catch it).
+**Pinned literals — check and contract cannot disagree (the §E C4b `pendingQrCode` pattern). A rename of any of these false-reds §5b BY DESIGN; re-pin here and in the script together, never separately.** Android, `LandingScreen.kt`, each count == 1: `BackHandler { showScanner = false }` · `BackHandler { showFoundStray = false }` · `onTagNotUsable = { message -> reportPrompt = message }` · `onNavigateToActivation = { reportPrompt = notLinkedMessage }` · `onClose = { showScanner = false }` · `onClick = onClose` · `onDismissRequest = { reportPrompt = null }` · `TextButton(onClick = { reportPrompt = null })`. iOS, `LandingView.swift`: `Button { showScanner = false }` == 1 · `if wants { showScanner = false }` == 1 · the yield's OR pinned **per member**: `deepLinkService.showScannedPetProfile` == 1, `|| deepLinkService.showTagActivation` == 1, `|| deepLinkService.showPromoClaimFlow` == 1 — the `||`-prefixed literals can only match inside the OR chain at `LandingView.swift:66-70`, so each reds if its member leaves the OR even while the flag is read elsewhere in the file; a file-wide aggregate count false-greens in exactly that case (review condition (c), re-scoped per-member 2026-07-21). **Member 1 is unprefixed and pinned at == 1: a future legitimate second read of `deepLinkService.showScannedPetProfile` in this file false-reds it in the SAFE direction — the response is to RE-PIN the expected count here and in §5b together, never to relax or delete the check.** **Two residuals, named so they aren't assumed away (2026-07-21; both fail safe):** (1) the `||` pins are **formatting-dependent** — they match only while `||` and the flag share a line, so a pure reformat of the OR chain (e.g. a trailing-`||` style pass) reds members 2–3 with zero behaviour change; the response is the same RE-PIN, not a relax — and C7/C8 restyles exactly this file. (2) The pins guard the OR-chain **shape file-wide**, not membership in that specific property: a member leaving the yield's OR while the same flag appears in another `||` expression elsewhere in the file would false-green. That requires a coincidence and is far narrower than the aggregate count's hole, but it is the honest description of what the check proves — re-read this when 2.3/2.4 touch deep-link state.
 
 **Zone-3 ship-gates (red-until-wired, whitespace-tolerant because expected-0 checks false-GREEN on renames — the unsafe direction):** `onNavigate *= *\{[[:space:]]*\}` in `PetSafetyApp.kt` == 0, and `Zone-3 intent emitted|handler lands in Phase 2` in `ContentView.swift` == 0. **OBLIGATION — recorded here so it is not forgotten: the moment `phase-2-spec.md` names the two destination handlers, both gates are RE-POINTED to positive assertions** (grep the named handler, expect 1, red-until-wired) — the d85e3d5 pattern correctly applied.
 
@@ -420,11 +420,156 @@ Köszönjük a segítséged! A bejelentést rögzítettük.
 
 ---
 
+### C7 / C8 — F3 landing restyle (iOS then Android) — **DEFERRED, not scheduled**
+
+> **DEFERRED by ruling 2026-07-21 (plan §2):** F3 builds only after Phase 2's 2.3/2.3b/2.4 destinations are live — vertical composition can't be designed against content still being wired. **Do not produce the read plan, and do not build, until the deferral is lifted.** Numbering per the §A.1 ruling: F3 = C7 (iOS) / C8 (Android); C5/C6 = G-landing-submit. *(Pasted 2026-07-21 from the F3 transfer artifact, hash `d2a9d1d3f00a`, verbatim except: the heading and the two Files labels renamed C5→C7 / C6→C8 per that ruling; the transfer's Part 3 board guards are SUPERSEDED by board §5b — landed `25b7057` with tighter full-expression predicates; the transfer's §2 amendment is HELD at the bottom of this section rather than applied, so plan §2 keeps describing the code.)*
+
+> **Provenance, stated because it changes what this chunk is.** F3 was a finding from the C4-Android device gate (moto e15, 2026-07-19). **Its text is lost** — it survived only as one line in `HANDOVER.md` (*"F3 — landing design (logo + vertical spacing), cross-platform, its own chunk"*), a file whose charter is to hold no facts; the full record was in `C4-DEVICE-QA-FINDINGS.md`, which has never existed anywhere on disk or in either history (§9.19). **F1 has no surviving trace at all.** So this chunk executes **Viktor's 2026-07-21 design brief**, not a recovered finding. The one grounded observation adjacent to F3 is §9.16's: the landing *"grew from a 2-button scaffold to a scrollable surface, pushing the persistent CTAs below the fold."*
+>
+> **Split per platform, two commits** (§G #3; every chunk since C0 has been single-platform). **iOS leads** per §A.2 — override to Android-first with one line if preferred, since the brief is authored in dp and the below-the-fold evidence is Android. Whichever leads, the second mirrors a proven pattern.
+>
+> **The governing constraint, Viktor 2026-07-21, verbatim:** *"There should be no change whatsoever other than a different style and re-ordering the cards. Every flow, gate etc. stays as is."* Where any item below appears to require a behavioural change, **that is a spec bug — surface and stop.**
+
+**Files — iOS (C7):** `Views/Landing/LandingView.swift`; `Views/Landing/CommunityEntryCard.swift`; `Resources/*.lproj/Localizable.strings` ×13. *(+ the asset catalog only if the mark is not already reachable — see Read 2.)*
+
+**Files — Android (C8):** `ui/screens/LandingScreen.kt`; `ui/components/CommunityEntryCard.kt`; `res/values*/strings.xml` — **base + `values-en` + 13** (§9.16 caught this exact chunk a file short once); `ui/theme/DesignTokens.kt` **only** for named tokens that do not exist (list every one added).
+
+---
+
+#### Precise edit — the seven items
+
+**1 — Header.** Brand mark centred at **52dp/52pt**, wordmark small and letterspaced beneath it, `Belépés` as a compact text link top-right (≥48dp touch target). Mark centred to match the splash mark position; **not** left-aligned.
+
+- **Mark = the existing `LaunchLogo` (iOS) / `splash_mark` (Android) asset.** Language-neutral, transparent, already proven at 200dp on both platforms (§9.6). **Reference it; do not edit any splash file.**
+- **Wordmark = the text `SENRA`**, letterspaced. **Not** `LogoNew_<CC>` / `logo_new_<cc>` — that is the *localized image lockup*, which most likely already contains the mark and would stack two marks. CC confirms what the lockup contains before ruling this out.
+- **Brand name is not localizable content.** To honour "no hardcoded string literals in composables" without minting 13 identical translations: Android `<string name="brand_wordmark" translatable="false">SENRA</string>` (the flag also keeps `senra_translate.py` off it); iOS a named constant, not an inline literal. **Zero new localized keys for the header.**
+- **`Belépés` reuses the shipping `log_in` key.** §F forbids minting `landing_sign_in`; §9.13 (4) records `LandingView.swift:32/:37` has used `log_in`/`register` since C1.
+- **Letterspacing:** if no token exists (iOS `Utilities/Font+App.swift`; Android `DesignTokens.kt`), that is a **G-b gap → add a *named* token and list it**, never a magic number at the call site.
+
+**2 — Scan is the only primary CTA.** Saturated brand fill, icon + title + one-line subtitle, radius **20**. Every other saturated full-width button on this screen goes away.
+
+- Title reuses `landing_scan_cta` (minted C3/C4).
+- **⚠️ The subtitle is the one likely new key.** §F minted `landing_order_subtitle` but **no `landing_scan_subtitle`**. If the copy does not already exist, mint **one** key — HU canonical (Viktor's native eye; §9.17 FIX 1 was a mistranslation only that caught) → EN → 11 via `senra_translate.py`. **No hand-written translations.**
+- **G-b:** compose from existing primitives — iOS `PrimaryPillButtonStyle` (`AppColors.swift:169-199`), Android `BrandButton` (`BrandButton.kt:42-98`) — plus tokens. A pill style may not express radius-20-with-subtitle; **if it cannot, say so and surface** rather than minting a styled component.
+
+**3 — Found-stray becomes a single-line row.** Icon, label, trailing chevron. White surface, hairline border, radius **16**. Reuses `landing_found_stray_cta`; **no new string**. Stops being a saturated button (iOS `SecondaryPillButtonStyle` `AppColors.swift:203-222`; Android `SecondaryButton` `BrandButton.kt:105-134`).
+
+- *Note, so nothing is invented:* this shape is `CommunityEntryCard`'s row minus the subtitle — but item 4 turns that card into a **vertical tile**, so the two genuinely diverge. **Do not force reuse, and do not mint a third row component.** If neither existing primitive fits, that is a G-b gap to surface.
+
+**4 — Community becomes a two-column tile row.** Under a small letterspaced `KÖZÖSSÉG` label: icon, count, label, sublabel. Equal width, **10** gap. **Restyle `CommunityEntryCard` in place** (row → tile). No new component, so G-b is satisfied with no gap.
+
+- **Blast radius must be confirmed, not assumed.** §B.3 says the card was built **standalone for the landing only** and Phase 1 deliberately did not refactor `PetsListView`/`PetsListScreen` to consume it (G10 deferred). **CC greps the callee's call sites** to confirm the landing is the sole consumer — enumerate the callee, not the name (Rule 1 corollary). If a second consumer exists, stop.
+- **⚠️ Zone 3 stays data-driven — this is locked in §2 and survives the restyle.** A rendered collection, *"not two hardcoded tiles"*; appending a third descriptor must render a third tile **with no layout edit** (it wraps to a second row). `addingDescriptorRendersCard` / `addingDescriptorRendersCardNoLayoutChange` **must still pass**. A two-column grid satisfies this; two hand-placed tiles does not.
+- **Re-ordering the cards = changing the order of the seed array**, nothing else.
+- **`community_section_title` already exists** (minted C3/C4). ⚠️ **Do not uppercase in code.** A programmatic upper-case transform is locale-dependent and mangles some locales. Either carry the casing in the string or apply a locale-aware style, and **report any locale whose uppercase form reads wrong**.
+- **Reused entry keys (grounded, §E C4 / §9.13 (4)):** Android `lost_and_found_title`, `community_lost_found_subtitle`, `pet_friendly_title`, `pet_friendly_entry_subtitle`. iOS uses `pet_friendly_entry_title` where Android uses `pet_friendly_title`. **Same strings, different key names per platform** — do not "harmonise" them here.
+- **Counts:** see *The one thing that isn't cosmetic*, below.
+
+**5 — Order-a-tag (Zone 2) demotes.** Tinted surface, `INGYENES` badge, body copy, text CTA with trailing arrow, no filled button. **This is the existing Zone-2 card restyled in place** (Viktor, 2026-07-21) — not a new surface.
+
+- **Wiring byte-untouched:** Android `onOrderTag → nav.enterOrderTags()` → `RootRoute.ORDER_TAGS`; iOS presents `OrderMoreTagsView`.
+- **⚠️ iOS crash risk — the highest-severity item in this chunk.** `OrderMoreTagsView.swift:5-6` declares **two `@EnvironmentObject`s** and **hard-crashes on render** if either is not re-injected at the presentation site (§9.13 (2), the re-injection contract — the spec's old "no authed dependencies" claim was false). Restyling this CTA **must not disturb the injection**. Two-ended cite required on the diff.
+- **`INGYENES` is existing shipping copy** (Viktor: *"we have the same text on the current card"*). **Grep for it and reuse its key.** Mint only if the badge word is a fragment of a longer sentence with no key of its own — and then the claim must not change: the tag is free, shipping is paid.
+  - *Out of scope, noted once:* whether a "free" claim with mandatory paid shipping needs different treatment across 13 EU markets is a **product/legal** question about copy that already ships. F3 restyles it; F3 does not adjudicate it. Worth a look sometime, by someone qualified — not this chunk, and not me.
+
+**6 — Login/Register leave the bottom.** `Belépés` moves to the header (item 1). `Regisztráció` is removed from the landing.
+
+- **⚠️ GATED ON READ 1. This item does not land until register-reachability comes back non-empty, two-ended.** The risk is not the published login screen — it is that C1/C2 made register an **overlay** reached by `enterRegister()` **from the landing**. If nothing inside `AuthenticationView`/`AuthScreen` reaches `AuthOverlay.REGISTER` / `RootRoute.REGISTER`, removing the landing button **orphans the state and makes registration unreachable for every new user**. Unit tests would stay green — the router half is untouched — so no test can catch this. *(2026-07-21 note, not a substitute for Read 1's two-ended re-run at build time: the Phase-2 scoping read found live cross-links on both platforms — `AuthenticationView(onNavigateToRegister:)` bound at `ContentView.swift:31`; `AuthScreen(onNavigateToRegister = { nav = nav.enterRegister() })` at `PetSafetyApp.kt:349`.)*
+- **Test consequence, handled deliberately:** `landingRegisterCTAOpensRegistration` (iOS) / `landingRegisterOpensRegister` (Android) lose their subject. The **router** assertion (`enterRegister()` → `.register` / `REGISTER`) stays valid and stays. The **CTA** test either moves to the login screen or is deleted **with the reason recorded in the CODEMAP**. A named acceptance test disappearing quietly is C2's 795-green-with-a-test-missing-by-name exactly.
+
+**7 — No elevation or shadow anywhere on this screen.** Hairline borders only.
+
+- **⚠️ Scope this to the landing, not to the shared primitive.** iOS `.elevatedCard()` (`AppColors.swift:247-261`) carries a soft shadow; Android `BrandCard` (`BrandCard.kt:30-56`) is a cream surface with **border + shadow**. **CC greps each primitive's call sites first.** If either is used outside the landing, changing it in place has blast radius beyond this chunk — use the shadowless sibling (iOS `.softCard()`, `AppColors.swift:227-241`) or a parameter, and **surface the choice**; do not silently restyle a shared primitive.
+
+**Spacing.** Screen padding **20**; card radius **16**; card padding **13**; gap primary↔action row **10**; between sections **20**; tile gap **10**; primary CTA radius **20**.
+
+- **⚠️ `13` is almost certainly not on the existing scale** (`AppSpacing` / `DesignTokens.kt` are likely 4/8/12/16/20/24). Per the brief: **add a named token and list it.** Never an inline literal.
+
+---
+
+#### The one thing that isn't cosmetic — counts
+
+The tiles are designed around a live number. **Do not add a network call.** CC reads whether a count is already available to this screen (e.g. on `AppStateViewModel`) and **reports which**.
+
+- **Not available (expected):** render icon + label + sublabel — **no number, no placeholder zero**. Layout must accept a number later **without re-layout**.
+- **Available:** a count of zero renders as `0`. Do not hide the tile, do not substitute an empty state.
+- **Forbidden twice over.** Viktor's instruction, *and* because a request fired from the **logged-out** landing is precisely the shape of **[[G-session-loggedout]]** — the Phase-1 ship-blocker where an unconditional cold-launch call 401s into a recurring "session expired" dialog on this exact surface.
+- **No location permission on this screen.** "Nearby" implies it; the brief forbids it.
+
+---
+
+#### Must NOT touch
+
+**The three device gates' output, byte-intact.** These live in the two files this chunk rewrites, and **the board catches only two of them** — everything else here would ship inert and green (PROTOCOL §6's defaulted-params corollary):
+
+- C4 **FIX 2** — `BackHandler` on **both** `when`-branches (system/edge-swipe back → landing, not app exit).
+- C4 **FIX 3** — the centred finder report card (`AlertDialog`) with **both** branches: "I found a pet" → form, "Try Again" → live scan.
+- `onTagNotUsable` (carve-out #1) and `onNavigateToActivation` (the G-landing-activation binding).
+- The **close overlay at the presentation site** (§9.14's dismiss-mirror — its absence is how C3 shipped a camera with no exit but force-quitting).
+- `ScannerSurface`; C4b's auto-present `LaunchedEffect`; the `pendingQrCode` / `onQrCodeHandled` threading.
+- **⚠️ `pendingQrCode`'s parameter name is PINNED** (§E C4b): board §5's SEED check greps that literal, so a rename **false-reds as INERT**. Do not rename.
+
+**Plus the standing walls:** `resolveRootRoute` / the `RootRoute` enum / `AuthOverlay` / the `when`-block (C2's single routing authority); `MainTabView` / `MainTabScaffold`; `QRScannerView` / `QrScannerScreen` internals; `isAuthenticated`'s derivation; splash files (**reference** the mark asset, never edit); deep-link / App Links / intent-filter handling; the navigation graph; every destination screen; `PetsListView` / `PetsListScreen` (G10 deferred); the dormant `AlertsScreens.kt` / `PricingScreen.kt`; invoicing (§6 hard boundary — a compile error there is not this chunk's to resolve). **No new dependencies. Wire nothing new — the destinations already exist.**
+
+---
+
+#### Tests
+
+- **Every existing landing test passes, or is explicitly re-pointed with a recorded reason.** Android: `RootRoutingComposeTest` (its `performScrollTo()` and real-button presses may need re-finding as the layout moves — §9.16), `landingSignInRecomposesToLogin`, `AuthBackAffordanceTest`, the three community tests. iOS: `LandingContentTests` (7).
+- **`addingDescriptorRendersCard*` is the data-driven guard** and must survive the grid change intact.
+- **No test may be named `…Presents…`** — §E C4's standing rule; this project has shipped that overclaim twice. State per test which assertion proves the **wiring** and which proves the **value**.
+- **Force the run** (`--rerun-tasks` on Android; read `index.html`, never the console) and **grep the artifact for every named criterion, by name** (Rule 6).
+
+---
+
+#### Done-when
+
+1. The seven items land, and **every flow, gate and destination behaves exactly as before** — the only changes are visual style and element order.
+2. Zero hardcoded colours; zero hardcoded string literals in composables **including content descriptions**.
+3. New strings (expected: `landing_scan_subtitle`, possibly the `INGYENES` fragment) HU canonical → EN → 11 via `senra_translate.py`. **No hand-written translations.** `brand_wordmark` is `translatable="false"` and mints nothing.
+4. **Width check reported:** 320dp × max font scale × all 13 locales. Anything wrapping past two lines is **reported, not fixed** by truncating or shrinking. Likely offenders per the brief: `Kisállatbarát hely` and its German equivalent — the half-width tile is the only change here that can genuinely break text.
+5. Touch targets ≥48dp, **including** the header link and the promo text CTA. Bottom **56dp** free of interactive content (a bottom bar must be addable later with no re-layout).
+6. Theme tokens added are **listed by name**; counts availability is **reported either way**.
+7. **⚠️ DEVICE LOOK, BOTH PLATFORMS (Rule 5 — no test can prove any of this).** §1: an item that cannot be a board check is a **DECISION**, resolved by visual QA sign-off (C0's precedent). Two halves, and the second is the one that matters:
+   - **The restyle renders correctly** — header mark centred and crisp at 52, tiles equal-width, hairlines visible, nothing clipped, bottom 56 clear.
+   - **The preserved behaviour still works** — seeded auto-present (C4b D.1), back-to-landing (FIX 2), the report card's **both** branches (FIX 3), the close overlay, found-stray present/dismiss. **A restyle that renders beautifully and drops `BackHandler` passes every test in both repos.**
+8. **§13 escalation, decided not drifted:** the standing row *"the mark is not recolored for dark on either platform"* has been splash-only. At 52dp on the primary logged-out surface, a dark-inked mark on a dark surface disappears. **Close it in F3's look, or defer it explicitly in writing.**
+
+---
+
+#### Explicitly OUT
+
+Counts network call; location permission; nav-graph or destination edits; splash-file edits; deep-link / App Links work; new dependencies; **[[G-landing-submit]]** (C5/C6 — its own chunk, specced above); **[[G-session-loggedout]]** (auth workstream); **[[G-scan-error-raw]]** (raw-error chunk); **[[G-tab-scan-noparity]]** (unassigned); G10 dedup.
+
+---
+
+#### CC's Rule 2 read plan — the reads this chunk cannot be built without
+
+Output the plan, **stop**, do not conclude before review. Re-ground every cite by symbol.
+
+1. **Register reachability, two-ended, both platforms.** The call site inside `AuthenticationView` / `AuthScreen` **and** what it routes into. **Item 6 is blocked until this returns non-empty.** A back chevron is not a register link.
+2. **The mark asset resolves from the landing's context.** §9.2 records the iOS **asset catalog is split**; confirm `LaunchLogo` is reachable where `LandingView` renders it. Android: confirm `splash_mark` is a normal drawable, not splash-theme-scoped.
+3. **What `LogoNew_<CC>` / `logo_new_<cc>` actually contains** — mark + wordmark, or wordmark alone. Decides whether the text wordmark is right (it almost certainly is).
+4. **Call sites of `CommunityEntryCard`, `BrandCard` / `.elevatedCard()`, `BrandButton` / `PrimaryPillButtonStyle`, `SecondaryButton` / `SecondaryPillButtonStyle`** — enumerate the **callee**, not the name. Anything with a consumer outside the landing is out of in-place-restyle bounds.
+5. **Counts availability** on the screen's existing state. Report which.
+6. **Token inventory** — spacing scale (is `13` on it?), radii, hairline border width, letterspacing. Everything absent becomes a **named** token, listed.
+7. **The `INGYENES` string's existing key**, and whether the badge word has one of its own.
+8. **The full preservation inventory in both landing files**, by symbol, so the diff can be checked against it line by line.
+
+---
+
+#### HELD §2 amendment — apply to plan §2 when this chunk lands, NOT before (preserved here so deleting the transfer artifact cannot lose it)
+
+> **Amended 2026-07-21 (F3, Viktor).** Zone 2 was locked as *"first-class, styled **distinctly** from the acute actions"*; F3 demotes it to a tinted surface with a text CTA, on the reasoning that one saturated primary (Scan) beats three competing fills on a finder-first surface. **Persistent Sign-in / Register** was locked as *"quiet, secondary, always reachable"* **on the landing**; F3 moves Sign-in to a header text link and **removes Register from the landing**, reachability preserved via the login screen — **verified two-ended before the item landed** (§E F3 Read 1). Shape A's three zones, the **data-driven** Zone-3 collection, **G-a** and **G-b** are unchanged. *Recorded as an amendment rather than an edit, so §2 keeps describing the code.*
+
+---
+
 ## F. New localization keys (HU canonical, full 13-locale)
 Introduced in C3/C4; **HU is the canonical source** — derive EN + the other locales after HU is confirmed. **Mint exactly these 6** (same key names on both platforms):
 `landing_scan_cta`, `landing_found_stray_cta`, `landing_order_cta`, `landing_order_subtitle`, `community_section_title`, `community_lost_found_subtitle`.
 **Do NOT mint** the card title/subtitle twins (`community_lost_found_title`, `community_pet_friendly_title`, `community_pet_friendly_subtitle`) or the sign-in/register twins (`landing_sign_in`, `landing_register`) — **reuse** the existing shipping keys instead. Exact reuse names differ per platform: see the §E C3 grounded map (iOS) and §E C4 (Android). This is the §9.13 ruling — "6 new keys ×13, not 10."
 *(Zero hardcoded English on any surface — these must ship localized. The account-created/OTP copy remains Q3/Phase-3.3, separate.)*
+*(2026-07-21: §E C5/C6 mints a 7th key — `found_pet_reported_success`, HU canonical, per its own Localization block — and C7/C8 may mint `landing_scan_subtitle` plus the non-localizable `brand_wordmark` when its deferral lifts. The "exactly these 6" above is C3/C4's historical scope; this section stays the index.)*
 
 ---
 
