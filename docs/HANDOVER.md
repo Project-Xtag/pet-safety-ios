@@ -1,11 +1,9 @@
 # Senra Mobile Redesign — Session Handover
 
-**Current chunk: C4b is CODE-COMPLETE and COMMITTED. It is NOT done.**
-The `D.1–D.7b` device gate in `phase-1-spec.md` §E C4b has **never run**. Board-green proves the wiring *exists*; it does not prove a logged-out finder sees a pet. C4 sat in exactly this state for two days — do not let "green" read as "done."
+**Current work: Phase-2 SCOPING — CC's Rule-2 read plan, then chunk contracts in `docs/phase-2-spec.md` (new owner file, CC-authored per PROTOCOL §1).** Zone 3 ships in v1 (plan §2, RULED 2026-07-21), so Phase 2's 2.1/2.2 remnants + 2.3 + 2.3b + 2.4 are mandatory v1 work on both platforms. **F3 is DEFERRED by the same ruling — stand down; nothing to build, nothing to read for it.**
+C4b is **DONE** — the `D.1–D.7b` device gate ran and **PASSED** 2026-07-21. The record is `docs/SENRA-MOBILE-REDESIGN.md` **§9.19** (run-granularity attestation; its caveats are named there, not here).
 
-**The next chunk has not been chosen.** Viktor sets the line below before anyone builds.
-
-> **NEXT CHUNK: ______** *(candidates: the C4b device gate first; then F3 landing design / Phase 2.1+2.2 / G-landing-submit)*
+> **NEXT CHUNK: the Phase-2 scoping read** *(set by Viktor 2026-07-21; build chunks follow from `phase-2-spec.md` once the read closes)*
 
 ---
 
@@ -47,7 +45,7 @@ You are **not** expected to remember anything — it is all in the repo.
 
 ---
 
-## What C4b left owed
+## What C4b left owed — **all three closed 2026-07-21; §9.19 owns the record**
 
 - **`D.1–D.7b` — the entire device gate.** Real device, cold-killed, logged out, real tag. D.7a's baseline already PASSED (2026-07-20, `am start`-fired, in-app chain only). **D.7b includes the self-heal round-trip look.**
 - **The `isNullOrBlank` / `== null` predicate split** between `LandingScreen`'s auto-present and `QrScannerScreen`'s guard — resolved in-chunk or logged as a gap. Check which; §E C4b's text says `!= null`.
@@ -60,7 +58,7 @@ You are **not** expected to remember anything — it is all in the repo.
 - **G-owner** — device-confirmed 2026-07-20. Board §3 red.
 - **G-scan-error-raw** — the scan Error path ships raw English exception text to every locale; breaks §6's zero-hardcoded-English boundary.
 - **G-deactivate-authz** — backend workstream. Do not fix from here.
-- **F3** — landing design (logo + vertical spacing), cross-platform, its own chunk.
+- **F3** — landing design (logo + vertical spacing), cross-platform, its own chunk. **DEFERRED by ruling 2026-07-21** (plan §2) — behind the Phase-2 destinations.
 - **§13's standing rows** — release under R8 (C1/C2 have never run under it; release is what ships), the delivery cold-start, dark-mode strokes, Samsung/Xiaomi splash.
 - **The deep-link merge hazard** — the fix merges *cleanly*, so nothing forces anyone to look. The merged pairing has never run on a device.
 
@@ -68,7 +66,7 @@ You are **not** expected to remember anything — it is all in the repo.
 
 - **Q6** — root-vs-`docs/` doc home. The branch half of G-home is closed; this is the remainder.
 - **Q3** — HU canonical wording for the guest-order success surface. §8 calls it the only open decision on the critical path, and it blocks all of Phase 3.3.
-- **Scope for v1** — whether Zone 3's community cards ship, or are hidden until Phase 2 completes. This decision moves roughly six chunk-equivalents on or off the critical path.
+- ~~**Scope for v1**~~ — **RULED 2026-07-21: Zone 3 ships in v1** (plan §2). The six chunk-equivalents are ON the critical path; F3 is deferred behind them.
 
 ---
 
