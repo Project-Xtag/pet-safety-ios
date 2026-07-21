@@ -391,6 +391,12 @@ Köszönjük a segítséged! A bejelentést rögzítettük.
 
 **Plus:** both form components; both authed call sites; `resolveRootRoute` / the `RootRoute` enum / `AuthOverlay` / the `when`-block; `MainTabView` / `MainTabScaffold`; `isAuthenticated`'s derivation; the scanner internals; invoicing (§6 hard boundary). **No new dependencies.**
 
+#### Board guards (landed 2026-07-21, board §5b — BEFORE C5, protecting exactly the files this chunk edits)
+
+**Pinned literals — check and contract cannot disagree (the §E C4b `pendingQrCode` pattern). A rename of any of these false-reds §5b BY DESIGN; re-pin here and in the script together, never separately.** Android, `LandingScreen.kt`, each count == 1: `BackHandler { showScanner = false }` · `BackHandler { showFoundStray = false }` · `onTagNotUsable = { message -> reportPrompt = message }` · `onNavigateToActivation = { reportPrompt = notLinkedMessage }` · `onClose = { showScanner = false }` · `onClick = onClose` · `onDismissRequest = { reportPrompt = null }` · `TextButton(onClick = { reportPrompt = null })`. iOS, `LandingView.swift`: `Button { showScanner = false }` == 1 · `if wants { showScanner = false }` == 1 · the three deep-link flag reads `showScannedPetProfile|showTagActivation|showPromoClaimFlow` == 3 (guards the OR at `LandingView.swift:66-70` against narrowing — the yield check alone cannot catch it).
+
+**Zone-3 ship-gates (red-until-wired, whitespace-tolerant because expected-0 checks false-GREEN on renames — the unsafe direction):** `onNavigate *= *\{[[:space:]]*\}` in `PetSafetyApp.kt` == 0, and `Zone-3 intent emitted|handler lands in Phase 2` in `ContentView.swift` == 0. **OBLIGATION — recorded here so it is not forgotten: the moment `phase-2-spec.md` names the two destination handlers, both gates are RE-POINTED to positive assertions** (grep the named handler, expect 1, red-until-wired) — the d85e3d5 pattern correctly applied.
+
 #### Tests
 
 - Every existing landing test passes or is explicitly re-pointed with a recorded reason.

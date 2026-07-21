@@ -37,7 +37,7 @@ You are **not** expected to remember anything — it is all in the repo.
 
 ## Verify before you trust this file
 
-- **Four product reds are expected and are not yours:** AASA `/*/t/*`, the www 301, the 2 `.onOpenURL` handlers, G-owner. **Any fifth red is new and must be explained before the next chunk.**
+- **Six expected reds, every one explained — the heuristic is "every red is explained," never the number:** the four product reds (AASA `/*/t/*`, the www 301, the 2 `.onOpenURL` handlers, G-owner) **plus the two Zone-3 ship-gates in board §5b** (Android `onNavigate` empty-lambda; iOS log-only inert handler) — red **by design** until Phase 2's 2.3/2.4 wire the destinations (plan §2: Zone 3 ships in v1; that wiring is their exit condition). **Any seventh red is new and must be explained before the next chunk.**
 - C4b's closure is logged — if either grep comes back empty, reconstruct before building and say so loudly:
   - `grep -n 'C4b' docs/SENRA-MOBILE-REDESIGN.md`
   - the Android chunk SHA and its CODEMAP entry, against `git log`
