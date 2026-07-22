@@ -1577,6 +1577,9 @@
 // MARK: - Pet Friendly Places
 "pet_friendly_title" = "Pet-friendly places";
 "pet_friendly_detail_title" = "Place";
+"pet_friendly_report_cta" = "Nahlásit";
+"pet_friendly_report_confirm" = "Nahlásit toto místo?";
+"pet_friendly_report_ack" = "Díky za nahlášení! Náš tým to brzy prověří.";
 "pet_friendly_directions" = "Get directions";
 "pet_friendly_empty" = "No pet-friendly places nearby yet.";
 "pet_friendly_not_in_region" = "This feature isn't available in your region yet.";

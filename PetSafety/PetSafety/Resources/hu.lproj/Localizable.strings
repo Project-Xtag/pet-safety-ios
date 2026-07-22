@@ -1586,6 +1586,9 @@
 // MARK: - Pet Friendly Places
 "pet_friendly_title" = "Kisállatbarát helyek";
 "pet_friendly_detail_title" = "Hely";
+"pet_friendly_report_cta" = "Jelentem";
+"pet_friendly_report_confirm" = "Jelented ezt a helyet?";
+"pet_friendly_report_ack" = "Köszönjük a jelentést. Csapatunk hamarosan átnézi a helyet.";
 "pet_friendly_directions" = "Útvonalterv";
 "pet_friendly_empty" = "Még nincs kisállatbarát hely a közelben.";
 "pet_friendly_not_in_region" = "Ez a szolgáltatás még nem érhető el a régiódban.";
