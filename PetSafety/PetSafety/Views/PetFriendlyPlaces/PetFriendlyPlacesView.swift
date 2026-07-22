@@ -361,7 +361,11 @@ struct PetFriendlyPlaceDetailSheet: View {
         NavigationView {
             ScrollView {
                 let theme = categoryTheme(place.category)
-                VStack(alignment: .leading, spacing: 16) {
+                // Centered card content (Viktor's ruling, 2026-07-22) — rows
+                // center as units, mirroring the Android detail sheet. The
+                // system alerts center themselves; their buttons stay
+                // system-standard (not restyleable, and Apple review expects it).
+                VStack(alignment: .center, spacing: 16) {
                     HStack(spacing: 14) {
                         ZStack {
                             Circle().fill(theme.color.opacity(0.14)).frame(width: 56, height: 56)
@@ -393,7 +397,9 @@ struct PetFriendlyPlaceDetailSheet: View {
                         detailLink(icon: "globe", text: website, url: URL(string: website))
                     }
                     if let intro = place.introduction, !intro.isEmpty {
-                        Text(intro).font(.appFont(size: 14)).foregroundColor(.primary).fixedSize(horizontal: false, vertical: true)
+                        Text(intro).font(.appFont(size: 14)).foregroundColor(.primary)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
 
                     Button { showMapPicker = true } label: {
