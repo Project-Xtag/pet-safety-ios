@@ -1591,6 +1591,7 @@
 "pet_friendly_report_cta" = "Report";
 "pet_friendly_report_confirm" = "Report this place?";
 "pet_friendly_report_ack" = "Thank you for the report. Our team will review this place shortly.";
+"found_pet_reported_success" = "Thank you for your help! Your report has been recorded.";
 "pet_friendly_directions" = "Get directions";
 "pet_friendly_empty" = "No pet-friendly places nearby yet.";
 "pet_friendly_not_in_region" = "This feature isn't available in your region yet.";

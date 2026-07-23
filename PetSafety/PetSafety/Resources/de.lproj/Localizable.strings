@@ -1580,6 +1580,7 @@
 "pet_friendly_report_cta" = "Melden";
 "pet_friendly_report_confirm" = "Diesen Ort melden?";
 "pet_friendly_report_ack" = "Danke für deine Meldung. Unser Team wird diesen Ort in Kürze überprüfen.";
+"found_pet_reported_success" = "Danke für deine Hilfe! Deine Meldung wurde erfasst.";
 "pet_friendly_directions" = "Get directions";
 "pet_friendly_empty" = "No pet-friendly places nearby yet.";
 "pet_friendly_not_in_region" = "This feature isn't available in your region yet.";

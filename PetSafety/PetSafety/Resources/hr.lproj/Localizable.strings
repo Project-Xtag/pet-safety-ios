@@ -1586,6 +1586,7 @@
 "pet_friendly_report_cta" = "Prijavi";
 "pet_friendly_report_confirm" = "Želiš prijaviti ovo mjesto?";
 "pet_friendly_report_ack" = "Hvala na prijavi. Naš tim će uskoro pregledati ovo mjesto.";
+"found_pet_reported_success" = "Hvala ti na pomoći! Tvoja prijava je zabilježena.";
 "pet_friendly_directions" = "Get directions";
 "pet_friendly_empty" = "No pet-friendly places nearby yet.";
 "pet_friendly_not_in_region" = "This feature isn't available in your region yet.";
