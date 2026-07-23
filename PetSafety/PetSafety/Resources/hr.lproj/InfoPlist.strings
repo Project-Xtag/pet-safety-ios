@@ -3,5 +3,5 @@
 "CFBundleDisplayName" = "SENRA";
 "NSCameraUsageDescription" = "Trebamo pristup tvojoj kameri za snimanje fotografija kućnog ljubimca i skeniranje QR kodova na privjescima.";
 "NSPhotoLibraryUsageDescription" = "Trebamo pristup tvojoj galeriji fotografija za odabir fotografija kućnog ljubimca.";
-"NSLocationWhenInUseUsageDescription" = "Trebamo tvoju lokaciju za pomoć u pronalaženju nestalih kućnih ljubimaca i prikaz obližnjih uzbuna.";
+"NSLocationWhenInUseUsageDescription" = "Trebamo pristup tvojoj lokaciji kako bismo ti pomogli pronaći nestale ljubimce, prikazali obavijesti u blizini i mjesta prilagođena ljubimcima u tvojoj okolici.";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Trebamo tvoju lokaciju za pomoć u pronalaženju nestalih kućnih ljubimaca i prikaz obližnjih uzbuna.";

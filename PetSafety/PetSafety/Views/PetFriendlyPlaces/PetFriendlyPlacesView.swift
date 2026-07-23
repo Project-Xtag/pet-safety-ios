@@ -60,7 +60,6 @@ struct PetFriendlyPlacesView: View {
     @State private var showSubmit = false
 
     private enum ViewMode { case list, map }
-    private static let budapest = CLLocationCoordinate2D(latitude: 47.4979, longitude: 19.0402)
 
     private var places: [PetFriendlyPlace] { viewModel.filteredPlaces }
 
@@ -220,7 +219,7 @@ struct PetFriendlyPlacesView: View {
     private var mapContent: some View {
         PetFriendlyMapView(
             places: places,
-            center: locationManager.location ?? Self.budapest,
+            center: locationManager.location ?? MapDefaults.defaultMapCenter,
             onSelect: { selectedPlace = $0 }
         )
         .frame(height: 420)
@@ -254,7 +253,7 @@ struct PetFriendlyPlacesView: View {
             attempts += 1
         }
         let fallbackCoord = await fallback
-        let coord = locationManager.location ?? fallbackCoord ?? Self.budapest
+        let coord = locationManager.location ?? fallbackCoord ?? MapDefaults.defaultMapCenter
         await viewModel.loadNearby(latitude: coord.latitude, longitude: coord.longitude, market: market)
     }
 

@@ -52,7 +52,7 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use Face ID to securely sign in to your account.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We use your location to show nearby missing pet alerts and help locate found pets.</string>
+	<string>We use your location to show nearby missing pet alerts, help locate found pets, and show pet-friendly places near you.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need photo library access to upload pet profile photos.</string>
 	<key>UIAppFonts</key>

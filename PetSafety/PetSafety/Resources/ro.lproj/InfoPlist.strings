@@ -3,5 +3,5 @@
 "CFBundleDisplayName" = "SENRA";
 "NSCameraUsageDescription" = "Avem nevoie de acces la camera ta pentru a face fotografii animalului tău de companie și pentru a scana codurile QR de pe plăcuțele inteligente de identificare.";
 "NSPhotoLibraryUsageDescription" = "Avem nevoie de acces la biblioteca ta foto pentru a selecta fotografii ale animalului tău de companie.";
-"NSLocationWhenInUseUsageDescription" = "Avem nevoie de locația ta pentru a ajuta la găsirea animalelor pierdute și pentru a afișa alertele din apropiere.";
+"NSLocationWhenInUseUsageDescription" = "Avem nevoie de locația ta pentru a te ajuta să găsești animale pierdute, pentru a-ți arăta alertele din apropiere și locurile pet-friendly din zona ta.";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Avem nevoie de locația ta pentru a ajuta la găsirea animalelor pierdute și pentru a afișa alertele din apropiere.";
