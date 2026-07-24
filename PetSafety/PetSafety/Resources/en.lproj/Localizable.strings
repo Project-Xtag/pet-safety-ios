@@ -1636,3 +1636,9 @@
 
 "pet_friendly_rate_limited_title" = "Daily limit reached";
 "pet_friendly_rate_limited_message" = "You've reached the daily submission limit. Please try again later.";
+
+// Pricing 2026-08 — post-first-pet subscribe interstitial (C4)
+"subscribe_interstitial_title" = "Turn on instant notifications";
+"subscribe_interstitial_body" = "With the Kedvenc plan we notify you the moment someone scans your pet's tag, the finder can share their location with you, and if your pet goes missing you can alert the SENRA community. 2750 Ft a month, cancel anytime.";
+"subscribe_interstitial_cta_subscribe" = "Subscribe";
+"subscribe_interstitial_cta_not_now" = "Not now";

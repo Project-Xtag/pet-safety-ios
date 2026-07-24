@@ -143,6 +143,25 @@ struct SubscriptionFeatures: Decodable {
 // MARK: - API Response Types
 struct MySubscriptionResponse: Decodable {
     let subscription: UserSubscription?
+    /// Pricing 2026-08 (INV-5): server-computed — the account was created
+    /// on or after the cutover. Nil when an older backend omits the field;
+    /// consumers must fail-safe (treat nil as "do not show").
+    let postCutoverAccount: Bool?
+    let limits: Limits?
+
+    struct Limits: Decodable {
+        let currentPetCount: Int?
+
+        enum CodingKeys: String, CodingKey {
+            case currentPetCount = "current_pet_count"
+        }
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case subscription
+        case postCutoverAccount = "post_cutover_account"
+        case limits
+    }
 }
 
 // MARK: - Referral
