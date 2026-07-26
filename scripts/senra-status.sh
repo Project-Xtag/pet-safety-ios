@@ -244,6 +244,30 @@ else
   fail "iOS: Zone-3 ship-gate SUBJECT MISSING ($CVW) — the gate must not evaporate silently; 6 expected reds reading as 4 would look like progress"
 fi
 
+# ── C2 routing seam — derivation guard (RULED 2026-07-26; PROTOCOL §6 owns the boundary) ──
+# Growth is additive (new AuthOverlay member + when arm + assigning binding =
+# the seam doing its job); derivation is untouchable. These pins make a rewrite
+# disguised as growth read RED here, not in review: the resolver has exactly one
+# app-wide definition and every PRE-EXISTING arm is still present. A Phase-2
+# chunk ADDING arms leaves all of these green. (lguard's fail text cites spec
+# §E C5/C6 generically; for THESE pins the owner is PROTOCOL §6's C2-seam entry.)
+RRKT="$AND/app/src/main/java/com/petsafety/app/ui/RootRoute.kt"
+if [ -d "$AND/app/src/main" ]; then
+  RESOLVER_DEFS=$(grep -rF 'fun resolveRootRoute' "$AND/app/src/main" | wc -l | tr -d ' ')
+  if [ "$RESOLVER_DEFS" -eq 1 ]; then
+    pass "AND: resolveRootRoute defined app-wide exactly once (C2 seam — derivation untouchable)"
+  else
+    fail "AND: resolveRootRoute definition count=$RESOLVER_DEFS, expected 1 app-wide — a second definition or a removal is a derivation change (PROTOCOL §6)"
+  fi
+else
+  fail "AND: C2-seam derivation guard SUBJECT MISSING ($AND/app/src/main) — the guard must not evaporate silently"
+fi
+lguard "$APPKT" 'RootRoute.MAIN -> MainTabScaffold'          1 "AND: root when arm MAIN present (C2 seam)"
+lguard "$APPKT" 'RootRoute.ORDER_TAGS -> OrderMoreTagsScreen' 1 "AND: root when arm ORDER_TAGS present (C2 seam)"
+lguard "$APPKT" 'RootRoute.REGISTER -> RegisterScreen'        1 "AND: root when arm REGISTER present (C2 seam)"
+lguard "$APPKT" 'RootRoute.LOGIN -> AuthScreen'               1 "AND: root when arm LOGIN present (C2 seam)"
+lguard "$APPKT" 'RootRoute.LANDING -> LandingScreen'          1 "AND: root when arm LANDING present (C2 seam)"
+
 # ─────────────────────────────────────────────────────────────
 head_ "6. Declared contracts vs. the code (drift detector)"
 # v1 grepped PROSE that appeared ZERO times and false-fired against CORRECT code.
