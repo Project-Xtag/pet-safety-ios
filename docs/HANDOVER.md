@@ -41,7 +41,7 @@ You are **not** expected to remember anything — it is all in the repo.
 
 ## Verify before you trust this file
 
-- **Expected reds — seven, every one explained:** the four product reds (AASA `/*/t/*`, the www 301, the 2 `.onOpenURL` handlers, G-owner), the two Zone-3 ship-gates in board §5b (red **by design** until 2.3/2.4 wire the destinations), and **§8 flagging untracked docs**. §8 clears when `PHASE2-READ-PLAN.md` is committed and `senra-doc-delta-2026-07-26.diff` is deleted — **the diff is review-cleared; delete it.** **The heuristic is "every red is explained," never a number to match.**
+- **Expected reds — the six standing, every one explained:** the four product reds (AASA `/*/t/*`, the www 301, the 2 `.onOpenURL` handlers, G-owner) and the two Zone-3 ship-gates in board §5b (red **by design** until 2.3/2.4 wire the destinations). **§8 additionally reds whenever a shuttle artifact or an uncommitted governing doc sits untracked — expected while a shuttle is in flight, cleared by commit or post-review deletion; a §8 red with no shuttle in flight is a real landmine.** **The heuristic is "every red is explained," never a number to match.**
 - **§7 is genuinely green on the committed tree** — all 9 iOS + 7 Android chunk commits logged. If it reddens, the log is behind the code.
 - C5/C6's closure is logged: `grep -n '4c00cf2\|7851b2f' docs/SENRA-MOBILE-REDESIGN.md`
 - Read A's findings survived: `grep -n 'READ-A FINDINGS' docs/PHASE2-READ-PLAN.md` — **if empty, Read A must be re-run; do not reconstruct it from this file or any summary.**
