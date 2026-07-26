@@ -1,8 +1,8 @@
 # Senra Mobile Redesign — Session Handover
 
-**Current work: the 2026-07-26 doc pass (this commit) logs C5/C6 + the two `pending` decode fixes in the CODEMAP, closing the four §7 reds.** C5 (iOS `4c00cf2`) and C6 (Android `7851b2f`) are **DONE** — committed, byte-reviewed, and the §E done-when-4 device gate **ATTESTED PASSED on both platforms** (attestation granularity; the 2026-07-26 change-log entry owns the record *and its caveats* — read it, not this line). **[[G-landing-submit]] is CLOSED.** The decode fixes (`ddfadf4` / `931b51b`) are non-redesign prod fixes riding the branch — **a Phase-1 revert must not revert them.**
+**Current work: the Phase-2 destinations read. Read A is CLOSED** — executed 2026-07-26, 2,031 lines across seven files, findings appended to `docs/PHASE2-READ-PLAN.md` and byte-reviewed at `19328828a520`. Reads B/C/D are **re-scoped but not executed**. Three review findings are open; none blocks reading, all three block contract-writing.
 
-> **NEXT CHUNK: the Phase-2 destinations read — 2.3 (Lost & Found board) / 2.3b (alert detail; Android is a BUILD, RULED 2026-07-21) / 2.4 (pet-friendly places, a ROUTING BUILD).** First deliverable is a **Rule-2 READ PLAN, then stop**; chunk contracts land in `docs/phase-2-spec.md` (PROTOCOL §1) when the read closes. These are the Zone-3 destinations — the two §5b ship-gates stay red until they wire (plan §2, Zone-3-ships-in-v1 ruling). *(Set by the 2026-07-26 doc pass; Viktor ratifies by committing it. The plan leaves no other front: F3/C7/C8 is deferred behind these; Phase 3.3 is Q3-blocked.)*
+> **NEXT: execute the re-scoped Reads B/C/D**, starting with iOS `RootRoute.swift` — it is small and it resolves the one HYPOTHESIS Read A carries, which decides the iOS shape. Chunk contracts land in `docs/phase-2-spec.md` (PROTOCOL §1) when the read closes; `PHASE2-READ-PLAN.md` deletes into it at that point. *(Set by the review seat 2026-07-26; Viktor ratifies by committing.)*
 
 ---
 
@@ -15,7 +15,8 @@ Every fact has exactly one owner. Restated facts drift and then contradict each 
 | Roles, the rules, the hazards, the hard boundaries | `docs/PROTOCOL.md` — **read in full, first** |
 | The plan, locked decisions, gaps register, CODEMAP | `docs/SENRA-MOBILE-REDESIGN.md` |
 | What C5/C6 were contracted to do (and their gate) | `docs/phase-1-spec.md` **§E C5/C6** |
-| The Phase-2 destination scopes the next read grounds | plan **§4 2.3 / 2.3b / 2.4** + §6 [[G-alert-detail-android]] |
+| The Phase-2 destination scopes | plan **§4 2.3 / 2.3b / 2.4** + §6 [[G-alert-detail-android]] |
+| **Read A's findings, the read ranges, the B/C/D re-scope** | `docs/PHASE2-READ-PLAN.md` — **§READ-A FINDINGS** |
 | **What is done, red, or owed right now** | `scripts/senra-status.sh` — **run it. Do not read a summary of it.** |
 
 ---
@@ -28,36 +29,53 @@ You are **not** expected to remember anything — it is all in the repo.
 2. Run `./scripts/senra-status.sh`. It supersedes anything this file claims.
 3. Identify your seat and do that seat's first moves.
 
-**CC (build seat):** read PROTOCOL → board → plan §4 2.3/2.3b/2.4 + §6's rows for them. First deliverable is a **READ PLAN** (Rule 2), then **stop**. Re-ground every `file:line` by symbol (`grep -n`) — never trust a number written in a doc, including this one. Git is read-only absent an explicit, recorded per-command go.
+**CC (build seat):** PROTOCOL → board → plan §4 2.3/2.3b/2.4 + §6's rows → `PHASE2-READ-PLAN.md` **including §READ-A FINDINGS**. Read A does not need re-running; **re-ground every `file:line` by symbol (`grep -n`) before relying on it** — the findings say so themselves. First deliverable is the re-scoped B/C/D read, then **stop**. Git is read-only absent an explicit, recorded per-command go.
 
-**Review seat (chat):** read PROTOCOL → board → §E C5/C6 → the 2026-07-26 change-log entries. Hash every artifact before reading it (Rule 7) — **a hash quoted in prose is not a hash; require the artifact itself.** Grep for every named acceptance criterion by name (Rule 6). Demand two-ended cites for wiring claims (Rule 1). Ask whether the evidence is even inside the change (Rule 8).
+**Review seat (chat):** PROTOCOL → board → §E C5/C6 → `PHASE2-READ-PLAN.md` → this file's open findings. Hash every artifact before reading it (Rule 7). Grep for every named acceptance criterion by name (Rule 6). Demand two-ended cites for wiring claims (Rule 1). Ask whether the evidence is even inside the change (Rule 8).
+
+**⚠️ Rule 7's live failure mode is the SHUTTLE, not either seat.** CC surfaces bytes to disk and quotes a hash; the review seat can only hash what actually reaches it. Four rounds ran half-satisfied — hash without artifact, artifact without hash, a hash CC declined to compute, then bytes that never got attached. **The artifact and its hash must arrive in the same message, or the comparison never happens.** For a chunk that is only new files, plain `shasum -a 256 <file>` is the artifact hash; the `git diff --no-index` wrapper adds nothing and is fragile to reproduce.
+
+**⚠️ A `--stat` is not a diff.** `338a7d1`'s plan half read `3+/1−` both before and after an added line was rewritten in place. An in-line amendment never moves the count. Only the diff shows it.
 
 ---
 
 ## Verify before you trust this file
 
-- **Expected reds after this doc pass: the four product reds** (AASA `/*/t/*`, the www 301, the 2 `.onOpenURL` handlers, G-owner) **plus the two Zone-3 ship-gates in board §5b** (Android `onNavigate` empty-lambda; iOS log-only inert handler — red **by design** until 2.3/2.4 wire the destinations). **The heuristic is "every red is explained," never a number to match. Any unexplained red is new and must be explained before the next chunk.**
-- C5/C6's closure is logged — if this grep comes back empty, reconstruct before building and say so loudly: `grep -n '4c00cf2\|7851b2f' docs/SENRA-MOBILE-REDESIGN.md`
-- **The §5b pinned-literal guards are green through C5/C6's edits of the guarded files.** If one goes red, a device-bought behaviour has been dropped — that is the whole point of them.
-- **Standing obligation (recorded in §E C5/C6's board-guards block): the moment `phase-2-spec.md` names the two Zone-3 destination handlers, both ship-gates are RE-POINTED to positive assertions** (grep the named handler, expect 1, red-until-wired).
+- **Expected reds — seven, every one explained:** the four product reds (AASA `/*/t/*`, the www 301, the 2 `.onOpenURL` handlers, G-owner), the two Zone-3 ship-gates in board §5b (red **by design** until 2.3/2.4 wire the destinations), and **§8 flagging untracked docs**. §8 clears when `PHASE2-READ-PLAN.md` is committed and `senra-doc-delta-2026-07-26.diff` is deleted — **the diff is review-cleared; delete it.** **The heuristic is "every red is explained," never a number to match.**
+- **§7 is genuinely green on the committed tree** — all 9 iOS + 7 Android chunk commits logged. If it reddens, the log is behind the code.
+- C5/C6's closure is logged: `grep -n '4c00cf2\|7851b2f' docs/SENRA-MOBILE-REDESIGN.md`
+- Read A's findings survived: `grep -n 'READ-A FINDINGS' docs/PHASE2-READ-PLAN.md` — **if empty, Read A must be re-run; do not reconstruct it from this file or any summary.**
+- **The §5b pinned-literal guards.** If one goes red, a device-bought behaviour has been dropped — that is the whole point of them.
+- **Standing obligation:** the moment `phase-2-spec.md` names the two Zone-3 destination handlers, both ship-gates **RE-POINT** to positive assertions (grep the named handler, expect 1, red-until-wired), landed **before** the wiring chunk.
+
+## Open review findings on the read plan — all three unresolved
+
+- **The iOS `RootRoute` claim contradicts itself.** §READ-A FINDINGS asserts in its VERIFIED section that iOS `RootRoute` has no order state, cited to `RootRoute.kt` — a **Kotlin** file — while the same section says anything about what iOS `RootRoute`/`RootNavState` holds is a guess until read. `handleDeepLink` is the standing precedent for same-named types across the two codebases. **Label it HYPOTHESIS or drop it; iOS `RootRoute.swift` decides it.**
+- **2.3b's navigation shape was never in Read A's frame.** Read A owns *landing → destination*; the alert detail is *board → detail*, one level deeper. Third root arm, or nested nav inside the board arm? Different blast radius, different re-point targets, different test strategy. `CommunityDestination` has two members; 2.3b is a third surface that is not one of them. **Settle it two-ended before contracts close.**
+- **`F3` names two different things in one document** — the G6 behavioral-guard read, and the deferred landing-restyle chunk in the same file's OUT list. Rename the read item.
 
 ## Must not be lost (owners named; this file only points)
 
 - **[[G-session-loggedout]]** — session-expiry dialog on the logged-out landing. **The remaining PHASE-1-SHIP-BLOCKER. Owner: auth workstream — nobody in this loop has worked it.**
 - **[[G-owner]]** — device-confirmed 2026-07-20. Board §3 red.
+- **The G6 behavioral guard** — recorded in the read plan's Reads F, unmechanised today. A guard naming a FILE does not guard a BEHAVIOR (PROTOCOL §6; the G12b precedent). 2.3b-Android **lifts** from `ReportSightingDialog`, one import away from **calling** it. The zero-external-callers check on `AlertsScreens.kt` lands **before** the 2.3b chunk, not before the read.
+- **The iOS root switch rides a `Group`** (`ContentView.swift:16`) — any new route arm inherits PROTOCOL §7's `Group`/`ZStack` class, which compiles, passes tests, and silently kills the animation. Device look, not a test.
 - **The error-genre chunk — RULED 2026-07-21, one chunk, owner unassigned:** [[G-scan-error-raw]] + [[G-foundform-error-raw]] + 2.4's ungated-submit 401. Should-fix-before-ship, not ship-blocking.
-- **[[G-tab-scan-noparity]]** and **[[G-alert-detail-android]]** — §6 rows feeding the Phase-2 read.
+- **[[G-tab-scan-noparity]]** and **[[G-alert-detail-android]]** — §6 rows feeding the remaining reads.
 - **[[G-deactivate-authz]]** — backend workstream. Do not fix from here.
 - **F3 → C7/C8** — DEFERRED behind the Phase-2 destinations (plan §2; §E C7/C8 pasted-and-held).
 - **§13's standing rows** — release under R8, the delivery cold-start, dark-mode strokes, Samsung/Xiaomi splash.
 - **The deep-link merge hazard** (board §10) — merges cleanly, so nothing forces a look; never device-run merged.
 - **The release-line merge notes** — the 2026-07-23 Fix 5 change-log entry owns them (the authed prepend removal meets C5/C6's untouched copy; the it/fr/cs/es synonym divergence on `found_pet_reported_success`). Read it the day the branches meet.
+- **One surface per chunk in Phase 2** (locked §2, restated in the read plan's spec-time note). This read feeds 2.3, 2.3b on two platforms (one a BUILD), and 2.4 — **the spec must not collapse them because they shared a read.**
 
 ## Open rulings Viktor owes
 
-- **Q6** — root-vs-`docs/` doc home. The branch half of G-home is closed; this is the remainder.
-- **Q3** — HU canonical wording for the guest-order success surface. §8 calls it the only open decision on the critical path, and it blocks all of Phase 3.3.
-- **HU register** — §E C5/C6 routed it to Viktor: the census says te-form dominates (157:5) and the shipped confirmation string is te-form. Rule "informal is deliberate" (or overrule) so a native-speaker reflex can't re-open it. Does not block anything.
+- **§E C5/C6's must-not-touch wall** — Read A reads the enum/resolver/`when`-block ban as that chunk's boundary, not a standing one, and the Android shape depends on it. Probably right, but reclassifying a recorded must-not-touch is a **DECISION** (PROTOCOL §1) and belongs in Locked decisions **before** the spec relies on it.
+- **HU register** — the census (te:ön = 157:5) is owned by the plan's 2026-07-26 C5/C6 entry. **A census is not a ruling.** Rule "informal is deliberate" (or overrule) so a native-speaker reflex cannot re-open it. Blocks nothing.
+- **Chunk numbers for the destination chunks** — §A.1: numbers follow build order, named at spec time (C7/C8 held by deferred F3).
+- **Q6** — root-vs-`docs/` doc home. §6's G-home row names the exact residual and the two ways to close it.
+- **Q3** — HU canonical wording for the guest-order success surface. Blocks all of Phase 3.3; not this read.
 
 ---
 
@@ -65,6 +83,6 @@ You are **not** expected to remember anything — it is all in the repo.
 
 Two commits, one pass: **chunk commit → §7 goes RED naming the SHA (transient, expected, documented) → doc-only CODEMAP commit citing it → §7 GREEN.**
 
-Viktor owns all git; CC executes only under an explicit, recorded per-command go. **Re-hash immediately before the chunk commit** so the committed tree is the reviewed tree — and re-hash again after *any* edit made between review and commit, however small. Use Rule 7's multi-file recipe if the chunk adds files; `git diff` alone omits them.
+Viktor owns all git; CC executes only under an explicit, recorded per-command go — **the record's home is the CODEMAP; the 2026-07-26 post-commit entry is the precedent.** **Re-hash immediately before the chunk commit** so the committed tree is the reviewed tree — and re-hash again after *any* edit made between review and commit, however small. **If bytes change after review, they go back to the review seat; a re-hash alone proves the tree matches itself, not that anyone read it.** Stage pathspec-limited; `git add -A` and `git commit -a` sweep tracked-modified files the landmines check does not catch.
 
 Update this file's current-chunk line. Then the next chunk.
