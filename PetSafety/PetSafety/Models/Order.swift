@@ -198,6 +198,11 @@ struct CreateTagCheckoutRequest: Codable {
     let deliveryMethod: String?
     let postapointDetails: PostaPointDetails?
     let promoCode: String?
+    // Guest checkout: without a Bearer token the backend rejects
+    // /orders/create-checkout unless user_id (returned by POST /orders)
+    // is in the body. email prefills Stripe's customer_email.
+    let userId: String?
+    let email: String?
 
     enum CodingKeys: String, CodingKey {
         case quantity
@@ -206,6 +211,8 @@ struct CreateTagCheckoutRequest: Codable {
         case deliveryMethod = "delivery_method"
         case postapointDetails = "postapoint_details"
         case promoCode = "promo_code"
+        case userId = "user_id"
+        case email
     }
 }
 
