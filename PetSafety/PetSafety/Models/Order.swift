@@ -201,8 +201,10 @@ struct CreateTagCheckoutRequest: Codable {
     // Guest checkout: without a Bearer token the backend rejects
     // /orders/create-checkout unless user_id (returned by POST /orders)
     // is in the body. email prefills Stripe's customer_email.
-    let userId: String?
-    let email: String?
+    // var + default (the Fix-9 CreateOrderRequest precedent) so the
+    // memberwise init keeps compiling at pre-existing call sites.
+    var userId: String? = nil
+    var email: String? = nil
 
     enum CodingKeys: String, CodingKey {
         case quantity
