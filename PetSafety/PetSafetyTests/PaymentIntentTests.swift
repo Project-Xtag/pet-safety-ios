@@ -33,7 +33,9 @@ struct PaymentIntentTests {
             platform: "ios",
             deliveryMethod: nil,
             postapointDetails: nil,
-            promoCode: nil
+            promoCode: nil,
+            userId: nil,
+            email: nil
         )
 
         let data = try JSONEncoder().encode(request)
@@ -42,5 +44,32 @@ struct PaymentIntentTests {
         #expect(dict["quantity"] as? Int == 2)
         #expect(dict["country_code"] as? String == "SK")
         #expect(dict["platform"] as? String == "ios")
+        // Guest-checkout fields: nil optionals must be OMITTED from the wire
+        // (absent user_id = the backend's unauthenticated-legacy path), and
+        // when present, userId must ride as snake_case user_id.
+        #expect(dict["user_id"] == nil)
+        #expect(dict["email"] == nil)
+    }
+
+    @Test("guest checkout fields encode as user_id / email when present")
+    func testGuestCheckoutFieldsEncoding() throws {
+        let request = CreateTagCheckoutRequest(
+            quantity: 1,
+            countryCode: "HU",
+            platform: "ios",
+            deliveryMethod: "postapoint",
+            postapointDetails: nil,
+            promoCode: nil,
+            userId: "9dd2f919-85a5-4eb9-a609-a30c645b4c61",
+            email: "buyer@example.com"
+        )
+
+        let data = try JSONEncoder().encode(request)
+        let dict = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+
+        #expect(dict["user_id"] as? String == "9dd2f919-85a5-4eb9-a609-a30c645b4c61")
+        #expect(dict["email"] as? String == "buyer@example.com")
+        #expect(dict["delivery_method"] as? String == "postapoint")
+        #expect(dict["userId"] == nil)
     }
 }
