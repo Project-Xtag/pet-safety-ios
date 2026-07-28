@@ -1301,7 +1301,9 @@ class APIService {
         countryCode: String? = nil,
         deliveryMethod: String? = nil,
         postapointDetails: PostaPointDetails? = nil,
-        promoCode: String? = nil
+        promoCode: String? = nil,
+        userId: String? = nil,
+        email: String? = nil
     ) async throws -> TagCheckoutData {
         #if DEBUG
         print("📡 API: Creating tag checkout for \(quantity) tags...")
@@ -1316,7 +1318,9 @@ class APIService {
                 platform: "ios",
                 deliveryMethod: deliveryMethod,
                 postapointDetails: postapointDetails,
-                promoCode: promoCode
+                promoCode: promoCode,
+                userId: userId,
+                email: email
             )
         )
         let response: TagCheckoutResponse = try await performRequest(request, responseType: TagCheckoutResponse.self)
