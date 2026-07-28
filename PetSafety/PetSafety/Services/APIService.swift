@@ -2075,6 +2075,14 @@ extension APIService {
         return response.subscription
     }
 
+    /// Full /my-subscription envelope — the pricing-2026-08 subscribe
+    /// interstitial needs `post_cutover_account` + `limits.current_pet_count`,
+    /// not just the subscription row.
+    func getMySubscriptionDetails() async throws -> MySubscriptionResponse {
+        let request = try await buildRequest(endpoint: "/subscriptions/my-subscription")
+        return try await performRequest(request, responseType: MySubscriptionResponse.self)
+    }
+
     /// Fetch the user's Stripe-billed invoices.
     /// Backend caps `limit` at 100; the default of 24 covers two years
     /// of monthly billing comfortably.

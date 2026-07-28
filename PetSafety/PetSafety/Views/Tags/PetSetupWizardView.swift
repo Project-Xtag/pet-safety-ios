@@ -45,6 +45,10 @@ struct PetSetupWizardView: View {
     @State private var step = 1
     @State private var loadingItems = true
     @State private var committing = false
+    // Pricing 2026-08 (C4): the post-first-pet forced subscribe choice.
+    // Presented as a fullScreenCover (no interactive dismissal) when
+    // SubscribeInterstitialDecision fires after a successful commit.
+    @State private var showSubscribeInterstitial = false
     @State private var committedPetId: String?
     @State private var selectedPetId: String?
     @State private var orderItems: [UnactivatedOrderItem] = []
@@ -147,6 +151,14 @@ struct PetSetupWizardView: View {
             }
         }
         .navigationViewStyle(.stack)
+        // Pricing 2026-08 (C4): fullScreenCover has no interactive dismissal
+        // — the forced choice holds by construction; the toolbar Cancel and
+        // the congrats exits behind it are unreachable until a choice is made.
+        .fullScreenCover(isPresented: $showSubscribeInterstitial) {
+            SubscribeInterstitialView {
+                showSubscribeInterstitial = false
+            }
+        }
     }
 
     // MARK: - Identity-lock notice (web parity)
@@ -283,12 +295,20 @@ struct PetSetupWizardView: View {
     private func commit() async {
         committing = true
         defer { committing = false }
+        // Pricing 2026-08 (C4): snapshot the account state BEFORE the commit
+        // — the 0→1 pet transition is what the interstitial keys on, and
+        // post-commit the count is already ≥1. A failed fetch yields nil,
+        // and every nil fail-safe-suppresses.
+        let preCommit = try? await APIService.shared.getMySubscriptionDetails()
         do {
+            let subscriptionAction: String?
             switch mode {
             case .ordered:
                 try await commitOrdered()
+                // Plain activation — no claim-promo subscription_action exists.
+                subscriptionAction = nil
             case .promo:
-                try await commitPromo()
+                subscriptionAction = try await commitPromo()
             }
             NotificationCenter.default.post(name: .tagActivated, object: nil)
             // Pull subscription state fresh so screens that gate on
@@ -301,6 +321,14 @@ struct PetSetupWizardView: View {
             // part of a multi-tag order.
             let next = (mode == .ordered && remainingAfterThis > 0) ? 11 : 12
             withAnimation { step = next }
+            if SubscribeInterstitialDecision.shouldShow(
+                postCutoverAccount: preCommit?.postCutoverAccount,
+                preCommitPetCount: preCommit?.limits?.currentPetCount,
+                planName: preCommit?.subscription?.planName,
+                subscriptionAction: subscriptionAction
+            ) {
+                showSubscribeInterstitial = true
+            }
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -384,8 +412,10 @@ struct PetSetupWizardView: View {
     /// applies any subscription trial baked into the batch. The photo
     /// uploads afterwards (failure is non-fatal, same as the ordered
     /// path — the user can add a photo later from the pet profile).
-    private func commitPromo() async throws {
-        guard committedPetId == nil else { return }
+    /// Returns the backend's subscription_action so the interstitial
+    /// decision can suppress on entitlement-granting claims.
+    private func commitPromo() async throws -> String? {
+        guard committedPetId == nil else { return nil }
         let petData = CreatePetRequest(
             name: petName.trimmingCharacters(in: .whitespaces),
             species: species.isEmpty ? "dog" : species,
@@ -410,6 +440,7 @@ struct PetSetupWizardView: View {
         if let petId, let img = photoImage {
             _ = try? await petsViewModel.uploadPhoto(for: petId, image: img)
         }
+        return response.subscriptionAction
     }
 
     private func computeDateOfBirth() -> String? {
