@@ -771,7 +771,13 @@ struct OrderMoreTagsView: View {
         }
 
         await MainActor.run {
-            email = user.email
+            // Guard like Android does (OrderMoreTagsScreen: fill only when
+            // blank): an unconditional overwrite let a Keychain-restored
+            // session silently stamp the OLD account's email over a guest
+            // order (2026-07-28 device pass) — the order, tag, and emails
+            // all attached to the wrong identity. Email is the attribution
+            // key; never overwrite what the buyer typed.
+            if email.isEmpty { email = user.email }
             if let userPhone = user.phone {
                 phone = userPhone
             }
