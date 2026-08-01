@@ -1,7 +1,23 @@
 # Web Handoff — API Contract (U1/U2/U3/U4)
 
-**Status: DRAFT for review. Freeze before any client is built against it.**
-Written 2026-07-30 by the review seat.
+**Status: FROZEN 2026-08-01.** §9's four open questions are closed (see §9); the host, the destination
+paths, and the redeem shape are all verified against running code rather than assumed. Clients may be
+built against this document.
+
+Written 2026-07-30 by the review seat; frozen after the 2026-08-01 verification pass.
+
+**What "frozen" binds** — §8's left column: the endpoint path and method, the request field names and
+`destination` values, that the response carries `url`, and fallback-on-any-failure. Everything in §8's
+right column stays free to change without a store cycle. **Changing anything in the left column after a
+client ships is a store cycle**, which is the entire reason this document exists.
+
+**Corrections made at freeze time, each against running code:**
+- §2 — two of four destination paths were wrong (`manage_subscription` is top-level; `orders` has no route)
+- §3 — `locale_hint` is language-only, never market
+- §4 — `POST /auth/login` named as the wrong precedent; the web user flow is OTP
+- §5 — device region banned in both clients' fallbacks; the "Android's host is done" claim corrected
+- §§10–11 — session establishment and the auth-boundary asymmetry, both added
+- **the prod host itself** — `app.senra.pet` does not exist
 
 ## Why this document exists
 
@@ -35,7 +51,7 @@ Content-Type: application/json
 **200**
 ```json
 {
-  "url": "https://app.senra.pet/hu/choose-plan?handoff=<opaque>",
+  "url": "https://senra.pet/hu/choose-plan?handoff=<opaque>",
   "expires_in": 90
 }
 ```
@@ -69,7 +85,9 @@ Reserved values must return `400` until implemented — not a redirect to `choos
 
 ## 3. URL construction — server-side, in one place
 
-**Host** — from environment config. `https://app.senra.pet` (prod), `https://staging-app.senra.pet` (staging). Never hardcoded in a client.
+**Host** — from environment config. **`https://senra.pet` (prod)**, `https://staging-app.senra.pet` (staging). Never hardcoded in a client.
+
+**⚠️ NOTE THE ASYMMETRY — it is not a typo.** Staging carries the `-app` prefix; **prod does not**. An earlier draft of this document specified `https://app.senra.pet` for prod. **That host does not exist**: zero DNS records of any type (A, AAAA, CNAME), and `terraform/frontend.tf:130` declares the distribution's aliases as exactly `["senra.pet", "www.senra.pet"]`. A U1 built to that draft would have returned a URL to a dead host — and because the whole contract rests on "the client opens whatever comes back", the client would have had no way to recover. Verified 2026-08-01: `senra.pet/hu/choose-plan` → 200, `app.senra.pet` → no resolution.
 
 **Country segment — always `hu`.**
 

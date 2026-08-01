@@ -94,6 +94,18 @@ Where exact bytes matter, use output that **cannot be rendered**: `grep -c`, `sh
 
 **⚠️ `e3b0c44298fc` IS THE EMPTY FILE.** That is the sha256 of zero bytes. If a hash starts `e3b0c442…`, the artifact is **empty** — the command produced nothing and the shell wrote an empty file anyway. It never means "no change". *Precedent 2026-08-01: `git show a085bf5:…CountryRoutes.tsx > out.tsx` in a checkout that had never fetched that ref produced a 0-byte file; the hash was computed, reported, and only caught because `e3b0c442` was recognised. Learn the prefix.* Corollary: hash the artifact **and** print `wc -c` beside it — a byte count of 0 cannot be misread.
 
+**⚠️ ENUMERATE THE CHUNKS — NEVER ASSUME WHICH ONE A SURFACE LIVES IN.** On a code-split build, greping the wrong artifact returns a confident zero. The rule is not "check the chunk instead of the index" — it is **list what was actually served, then pick by evidence.**
+
+*Precedents, all 2026-07/08 on tagme-now:* routed pages are `lazy()`-imported, so `index-*.js` carries **none** of their component code — a sweep of it returned 0 for every key and read as "already fixed". Then, having learned that, the home page was assumed to be inline because it is the index **route** — it has its own `Redesign7-*.js` chunk, and an `index-*.js` grep would have been a second false pass for the same reason. **Route position tells you nothing about chunk position.**
+
+Method: fetch the served HTML → read the real `index-*.js` name from it → grep *that* for `<Name>-[A-Za-z0-9_-]+\.js` → fetch each chunk → grep the chunk, **with a control that must hit**. And remember comments strip at build, so a key appearing only in a `/* … */` rationale greps 1 in source and 0 in the chunk.
+
+**⚠️ ON A VERSIONED API, `null`/`None` ON A LEGACY FIELD IS NOT A VALUE — IT IS AN ABSENCE.** Same shape as the two rules above: a definitive-looking negative that is really "this field no longer exists". Before acting on a falsy field, establish that the field is still *populated* by the API version you are talking to, and find what replaced it.
+
+*Precedent 2026-08-01, and it was one step from a wrong call on a live payment question:* a Stripe invoice returned **`paid: None`** while `status: "paid"`, `amount_paid: 59900`, `amount_remaining: 0`. The legacy `paid` boolean is gone from the current API version. Read alone and in a hurry, `paid: None` says "she never paid" — the opposite of the truth, and it would have justified closing a real dead letter as expected-behaviour. The same response had **`payment_intent: None`**, which had merely moved under the `payments` sub-object. The authoritative pair was `status` + `amount_remaining`, not the field with the obvious name.
+
+The general rule: **the obviously-named field is the one most likely to have been superseded.** Prefer the field the API version actually documents, and cross-check any negative against a second field that must agree.
+
 **⚠️ A NEGATIVE GREP NEEDS A POSITIVE CONTROL, IN THE SAME COMMAND.** A zero is a claim about the **pattern**, never about the tree. Run a second grep you *know* must hit; if the control also returns zero, the pattern is broken, not the code.
 
 The failure mode is usually **case**, and it is invisible: `grep -l "rateLimiter" middleware/` returns **0** on a directory whose file defines `createRateLimiter` and `authRateLimiter` — capital `R`, so the lowercase substring never appears. Reported as "no rate limiters exist"; there are 21. *Same session, three more: `grep "web-handoff"` (real zero, proven only once `handoff` alone returned 2 files), a JSONB predicate using `line1`/`postal_code` against a column whose keys are `street1`/`postCode` (0 matches across 80 rows, including a user with 26 shipped orders), and `grep -c` counting **lines** rather than occurrences in a minified bundle.*
@@ -171,6 +183,9 @@ Run it at the **start of every session** and **before every commit**.
 | **Xcode 16 `project.pbxproj` noise** — reorders, empty-`exceptions` removals. | **Benign.** Synchronized folders don't enumerate sources; a deletion there can't drop one. Discard freely. |
 | **Untracked files in the repo root** — loose `.diff`s, extracted doc copies, `build-derived/`. One `git add -A` and they land on a code branch. | `.gitignore` + the `landmines` check in `senra-status.sh`. |
 | **A hash of `e3b0c44298fc`** — the artifact is EMPTY (sha256 of zero bytes), usually an unfetched ref or a failed command whose `>` still created the file. | Rule 4. Print `wc -c` beside every hash; learn the prefix. |
+| **Assuming which bundle a surface is in** — routed pages are `lazy()`-chunked; even the index ROUTE has its own chunk. A grep of `index-*.js` returns a false zero. | Rule 4. Enumerate served chunks from the HTML, grep the chunk, always with a control. |
+| **PR numbers collide across repos** — `#113` is the backend postapoint backfill (HELD) *and* the tagme-now copy batch (MERGED). Same number, opposite status. | Always write `pet-safety-eu#113` / `tagme-now#113`. A bare `#113` is ambiguous. |
+| **A falsy legacy field on a versioned API** — Stripe `paid: None` alongside `status: "paid"`. Absence, not a value. | Rule 4. Cross-check against a field that must agree (`amount_remaining`); find what replaced it. |
 | **A grep returning 0 with no control** — case (`rateLimiter` vs `createRateLimiter`), wrong field names (`line1` vs `street1`), or `grep -c` counting lines not occurrences in minified output. | Rule 4. Run a control that must hit, in the same command. |
 | **`gh run watch` exits 0 on an already-completed FAILED run.** Its exit code reflects the watch, not the outcome. | Read the `conclusion` field: `gh run view <id> --json status,conclusion`. |
 
