@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # senra-status.sh — v3. Derives the board instead of restating it.
 #
-# Home: pet-safety-ios/scripts/senra-status.sh (tracked on main).
+# Home: pet-safety-ios/scripts/senra-status.sh — tracked on the active redesign branch; merges to main with it.
 # Every ✅/❌ below is computed live from the repos, the server, and the code.
 # Nothing here is a claim you have to trust — it is a claim you can re-derive
 # in 20 seconds.
@@ -21,6 +21,7 @@ DL="${DL:-$HOME/senra-deeplink}"
 PLAN="$IOS/docs/SENRA-MOBILE-REDESIGN.md"
 BRANCH="${BRANCH:-feat/mobile-redesign-phase1}"
 APPKT="$AND/app/src/main/java/com/petsafety/app/ui/PetSafetyApp.kt"
+QRS="$AND/app/src/main/java/com/petsafety/app/ui/screens/QrScannerScreen.kt"
 
 RED=0
 pass()  { printf '  \033[32m✅\033[0m %s\n' "$1"; }
@@ -102,10 +103,10 @@ else
 fi
 
 # ─────────────────────────────────────────────────────────────
-head_ "5. Android C2 seam invariants"
+head_ "5. Android seam invariants"
 
 if [ ! -f "$APPKT" ]; then
-  warn "PetSafetyApp.kt not found — skipping C2 seam checks"
+  warn "PetSafetyApp.kt not found — skipping seam checks"
 else
   # G11: savedQrCode must be cleared in exactly ONE place (onQrCodeHandled).
   # A second clear site strands the logged-out pending scan that C4 is going to
@@ -143,7 +144,129 @@ else
       fail "$f is missing onBack or its chevron — the landing becomes a one-way door (the C1 dead-end)"
     fi
   done
+
+  # ── C4b (G11 seeded-scan close): behaviour guards no test can give (PROTOCOL §6) ──
+  # LandingScreen's pendingQrCode/onQrCodeHandled are DEFAULTED (so C2's two-arg
+  # routing test still compiles). A chunk whose LANDING arm never passes them
+  # compiles, runs, passes every test (RootRoutingComposeTest RELIES on the
+  # defaults), and the checks above stay green (they count the clear literal, 1
+  # either way). The wiring would be INERT with nothing to notice until a device
+  # gate. So grep the behaviour, not the file (G12b corollary).
+  SEED=$(grep -c 'pendingQrCode = savedQrCode' "$APPKT")
+  if [ "$SEED" -eq 2 ]; then
+    pass "pendingQrCode = savedQrCode wired at 2 sites (MAIN + LANDING) — C4b seeded scan LIVE"
+  else
+    fail "pendingQrCode = savedQrCode at $SEED site(s), expected 2 (MAIN + LANDING) — C4b INERT: the logged-out seeded scan is unwired and no test catches it. (RED until C4b is built — expected.)"
+  fi
+
+  if [ -f "$QRS" ]; then
+    # One-line grep of the whole guarded expression: proves the guard AND what it
+    # guards, not merely that 'pendingQrCode == null' exists somewhere (Rule 1).
+    GUARD=$(grep -c 'if (pendingQrCode == null) permissionLauncher.launch' "$QRS")
+    if [ "$GUARD" -eq 1 ]; then
+      pass "seeded-path permission guard present and guarding the launch — C4b carve-out #2"
+    else
+      fail "one-line guard 'if (pendingQrCode == null) permissionLauncher.launch' count=$GUARD, expected 1 — carve-out #2 gone; the gratuitous camera prompt returns on the seeded path. (RED until C4b is built — expected.)"
+    fi
+  else
+    warn "QrScannerScreen.kt not found — cannot check C4b carve-out #2"
+  fi
 fi
+
+# ─────────────────────────────────────────────────────────────
+head_ "5b. Landing device-bought behaviours (C3/C4/C4b) — guards on the files C5/C6 + Phase 2 edit"
+# Every green-expected literal below is PINNED in spec §E C5/C6 (Board guards
+# block): a rename false-reds BY DESIGN so check and contract cannot disagree.
+# Landed 2026-07-21, BEFORE C5 — these files are exactly what C5/C6 and the
+# Phase-2 destination chunks edit next.
+
+LSK="$AND/app/src/main/java/com/petsafety/app/ui/screens/LandingScreen.kt"
+LVW="$IOS/PetSafety/PetSafety/Views/Landing/LandingView.swift"
+CVW="$IOS/PetSafety/PetSafety/App/ContentView.swift"
+
+lguard() {
+  # $1 file, $2 fixed-string pattern, $3 expected count, $4 label
+  # Missing subject = FAIL, not warn: a §5b guard whose subject is absent is a
+  # failure, not a skip — otherwise a file move/rename/typo silently evaporates
+  # every guard at once, likeliest during exactly the work they exist for.
+  if [ ! -f "$1" ]; then fail "$4 — SUBJECT FILE MISSING ($1); absence is a defect in §5b, not a skip"; return; fi
+  N=$(grep -cF "$2" "$1")
+  if [ "$N" -eq "$3" ]; then
+    pass "$4"
+  else
+    fail "$4 — count=$N, expected $3 (device-bought behaviour dropped or renamed; names pinned in spec §E C5/C6)"
+  fi
+}
+
+lguard "$LSK" 'BackHandler { showScanner = false }'                          1 "AND: scanner BackHandler (C4 FIX 2)"
+lguard "$LSK" 'BackHandler { showFoundStray = false }'                       1 "AND: found-stray BackHandler (C4 FIX 2)"
+lguard "$LSK" 'onTagNotUsable = { message -> reportPrompt = message }'       1 "AND: onTagNotUsable -> report card (C4 FIX 3)"
+lguard "$LSK" 'onNavigateToActivation = { reportPrompt = notLinkedMessage }' 1 "AND: onNavigateToActivation -> report card (C4 FIX 3)"
+lguard "$LSK" 'onClose = { showScanner = false }'                            1 "AND: close-overlay binding at the presentation site"
+lguard "$LSK" 'onClick = onClose'                                            1 "AND: close-overlay render end consumes onClose"
+lguard "$LSK" 'onDismissRequest = { reportPrompt = null }'                   1 "AND: report-card scrim dismiss"
+lguard "$LSK" 'TextButton(onClick = { reportPrompt = null })'                1 "AND: report-card Try Again dismiss"
+lguard "$LVW" 'Button { showScanner = false }'                               1 "iOS: scanner close overlay (C3 §9.14)"
+lguard "$LVW" 'if wants { showScanner = false }'                             1 "iOS: deep-link yield expression (§9.15)"
+
+# iOS three-flag coverage: the yield's source property must OR ALL THREE deep-link
+# flags (LandingView:66-70). Pinned PER OR-MEMBER by line shape — the '|| deepLinkService.'
+# prefix can only match inside an OR chain, so each check reds if its member leaves
+# the OR even while the flag is still read elsewhere in the file. (A file-wide
+# aggregate count false-greens in exactly that case — review condition (c).)
+lguard "$LVW" 'deepLinkService.showScannedPetProfile'  1 "iOS: yield OR member 1 — showScannedPetProfile (§9.15)"
+lguard "$LVW" '|| deepLinkService.showTagActivation'   1 "iOS: yield OR member 2 — showTagActivation (§9.15)"
+lguard "$LVW" '|| deepLinkService.showPromoClaimFlow'  1 "iOS: yield OR member 3 — showPromoClaimFlow (§9.15)"
+
+# ── Zone-3 ship-gate (plan §2: Zone 3 ships in v1) — RED UNTIL WIRED, by design ──
+# Whitespace-tolerant regex: an expected-0 check false-GREENS on a rename (the
+# unsafe direction). OBLIGATION: when phase-2-spec.md names the destination
+# handlers, RE-POINT both to positive handler greps (expect 1, red-until-wired)
+# — the obligation is recorded in spec §E C5/C6's Board-guards block.
+if [ -f "$APPKT" ]; then
+  DEADCTA=$(grep -Ec 'onNavigate *= *\{[[:space:]]*\}' "$APPKT")
+  if [ "$DEADCTA" -eq 0 ]; then
+    pass "AND: Zone-3 onNavigate is bound to a real handler"
+  else
+    fail "AND: Zone-3 onNavigate is a swallowed empty lambda — both community cards are LIVE DEAD CTAs. (RED until Phase 2 wires 2.3/2.4 — the plan §2 v1 ship-gate.)"
+  fi
+else
+  fail "AND: Zone-3 ship-gate SUBJECT MISSING ($APPKT) — the gate must not evaporate silently; 6 expected reds reading as 4 would look like progress"
+fi
+if [ -f "$CVW" ]; then
+  INERT=$(grep -Ec 'Zone-3 intent emitted|handler lands in Phase 2' "$CVW")
+  if [ "$INERT" -eq 0 ]; then
+    pass "iOS: Zone-3 onNavigate handler is live (inert marker gone)"
+  else
+    fail "iOS: Zone-3 onNavigate is the log-only inert closure — both community cards are LIVE DEAD CTAs. (RED until Phase 2 wires 2.3/2.4 — the plan §2 v1 ship-gate.)"
+  fi
+else
+  fail "iOS: Zone-3 ship-gate SUBJECT MISSING ($CVW) — the gate must not evaporate silently; 6 expected reds reading as 4 would look like progress"
+fi
+
+# ── C2 routing seam — derivation guard (RULED 2026-07-26; PROTOCOL §6 owns the boundary) ──
+# Growth is additive (new AuthOverlay member + when arm + assigning binding =
+# the seam doing its job); derivation is untouchable. These pins make a rewrite
+# disguised as growth read RED here, not in review: the resolver has exactly one
+# app-wide definition and every PRE-EXISTING arm is still present. A Phase-2
+# chunk ADDING arms leaves all of these green. (lguard's fail text cites spec
+# §E C5/C6 generically; for THESE pins the owner is PROTOCOL §6's C2-seam entry.)
+RRKT="$AND/app/src/main/java/com/petsafety/app/ui/RootRoute.kt"
+if [ -d "$AND/app/src/main" ]; then
+  RESOLVER_DEFS=$(grep -rF 'fun resolveRootRoute' "$AND/app/src/main" | wc -l | tr -d ' ')
+  if [ "$RESOLVER_DEFS" -eq 1 ]; then
+    pass "AND: resolveRootRoute defined app-wide exactly once (C2 seam — derivation untouchable)"
+  else
+    fail "AND: resolveRootRoute definition count=$RESOLVER_DEFS, expected 1 app-wide — a second definition or a removal is a derivation change (PROTOCOL §6)"
+  fi
+else
+  fail "AND: C2-seam derivation guard SUBJECT MISSING ($AND/app/src/main) — the guard must not evaporate silently"
+fi
+lguard "$APPKT" 'RootRoute.MAIN -> MainTabScaffold'          1 "AND: root when arm MAIN present (C2 seam)"
+lguard "$APPKT" 'RootRoute.ORDER_TAGS -> OrderMoreTagsScreen' 1 "AND: root when arm ORDER_TAGS present (C2 seam)"
+lguard "$APPKT" 'RootRoute.REGISTER -> RegisterScreen'        1 "AND: root when arm REGISTER present (C2 seam)"
+lguard "$APPKT" 'RootRoute.LOGIN -> AuthScreen'               1 "AND: root when arm LOGIN present (C2 seam)"
+lguard "$APPKT" 'RootRoute.LANDING -> LandingScreen'          1 "AND: root when arm LANDING present (C2 seam)"
 
 # ─────────────────────────────────────────────────────────────
 head_ "6. Declared contracts vs. the code (drift detector)"
@@ -172,16 +295,63 @@ AND_HOLD=$(grep -o 'HOLD_DURATION_MS[^=]*= *[0-9_]*' "$AND/app/src/main/java/com
 # ─────────────────────────────────────────────────────────────
 head_ "7. Is the log behind the code?  (this is what 'no missed logs' means)"
 # C1 sat unlogged for two days. Under this check it could not have.
+#
+# Keys on CHUNK COMMITS, not on the branch tip.
+#
+# Why not the tip: §9 requires the plan be TRACKED on the build branch. Once it is,
+# logging the tip needs a commit on that branch — which MOVES the tip — so the new
+# tip is, by construction, absent from the file it just committed. The tip-keyed
+# version could therefore only go green on an UNCOMMITTED plan edit (it greps $PLAN
+# from the working tree, and §8 counts only '??', never a modified tracked file).
+# It passed most reliably when the log was not committed at all — the exact thing it
+# exists to prevent. Verified by experiment 2026-07-17, not by reading.
+#
+# A CHUNK is any non-merge commit on $BRANCH, not yet on origin/main, that TOUCHES
+# FEATURE SOURCE. Touching feature source is SUFFICIENT, not exclusive: a commit that
+# edits a source file AND the CODEMAP in one go is still a chunk and must still cite
+# itself. Mixed commits are not forbidden — they just have to log themselves. A commit
+# touching only docs/** or scripts/** is a log commit, not a chunk, and is ignored.
+# Merge commits are ignored: they carry no chunk of their own.
+#
+# EXPECTED: a transient RED between the chunk commit and its log commit. That is not a
+# defect — there genuinely IS an unlogged chunk on the branch at that moment, and this
+# check's one job is to force the pause. The loop is:
+#     chunk commit -> RED -> log commit -> GREEN -> next chunk
+# It now forces that honestly, instead of going green on a dirty working tree.
+#
+# Failures name the SHA and its subject, so the fix is "log this one", never
+# "something's unlogged somewhere".
 
 for repo in "$IOS" "$AND"; do
   [ -d "$repo/.git" ] || continue
   name=$(basename "$repo")
   git -C "$repo" rev-parse --verify "$BRANCH" >/dev/null 2>&1 || continue
-  TIP=$(git -C "$repo" rev-parse --short "$BRANCH")
-  if grep -q "$TIP" "$PLAN" 2>/dev/null; then
-    pass "$name tip $TIP is logged in the CODEMAP"
-  else
-    fail "$name tip $TIP has NO CODEMAP entry — the log is behind the code. Log it before the next chunk."
+  if ! git -C "$repo" rev-parse --verify origin/main >/dev/null 2>&1; then
+    warn "$name: no origin/main to compare against — fetch, then re-run §7"
+    continue
+  fi
+
+  # Feature source per platform. Keyed on the variable, not on the directory name,
+  # so a relocated checkout (IOS=/elsewhere) still classifies correctly.
+  if [ "$repo" = "$IOS" ]; then SRC='^PetSafety/'; else SRC='^app/src/'; fi
+
+  MISSING=0
+  CHUNKS=0
+  # No pipe into this loop: fail() increments RED in the current shell.
+  for c in $(git -C "$repo" rev-list --no-merges origin/main.."$BRANCH"); do
+    git -C "$repo" show --name-only --format='' "$c" | grep -qE "$SRC" || continue
+    CHUNKS=$((CHUNKS+1))
+    SHORT=$(git -C "$repo" rev-parse --short "$c")
+    if ! grep -q "$SHORT" "$PLAN" 2>/dev/null; then
+      fail "$name chunk $SHORT has NO CODEMAP entry — log it before the next chunk: $(git -C "$repo" log -1 --format='%s' "$c")"
+      MISSING=$((MISSING+1))
+    fi
+  done
+
+  if [ "$CHUNKS" -eq 0 ]; then
+    pass "$name: no unmerged chunk commits on $BRANCH — nothing to log"
+  elif [ "$MISSING" -eq 0 ]; then
+    pass "$name: all $CHUNKS chunk commit(s) on $BRANCH are logged in the CODEMAP"
   fi
 done
 
@@ -254,7 +424,6 @@ warn "RELEASE build: the whole suite is testDebugUnitTest. C1/C2 have never run 
 warn "Android crossfade handoff on a LOW-END device (C0's true gate moved first composition into the 400ms fade)"
 warn "Dark-mode mark strokes (the mark is not recolored for dark on either platform)"
 warn "Android system-splash icon suppression on Samsung / Xiaomi"
-warn "G11 camera premise UNVERIFIED — read QrScannerScreen.kt:140-155 before ruling on C4's permission prompt"
 
 # ─────────────────────────────────────────────────────────────
 echo

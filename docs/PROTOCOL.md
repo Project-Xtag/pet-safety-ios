@@ -1,6 +1,6 @@
 # Senra — Two-Seat Protocol
 
-**Home:** `pet-safety-ios/docs/PROTOCOL.md` (tracked on `main`; governs both repos).
+**Home:** `pet-safety-ios/docs/PROTOCOL.md` — governs both repos. Tracked on the active redesign branch; merges to `main` with it.
 **Both seats read this in full before doing anything.** It is short on purpose.
 
 > This file is the **sole owner** of: how the seats work, the rules, and the known hazards.
@@ -14,7 +14,7 @@
 | Fact | Sole owner |
 |---|---|
 | The plan, the locked decisions, the gaps register, the CODEMAP | `docs/SENRA-MOBILE-REDESIGN.md` |
-| The buildable chunk contract — files, edits, must-not-touch, named tests, done-when | `docs/phase-1-spec.md` |
+| The buildable chunk contract — files, edits, must-not-touch, named tests, done-when | `docs/phase-1-spec.md` (Phase 1) · `docs/phase-2-spec.md` (Phase 2 — created at scoping close, CC-authored; recorded 2026-07-21) |
 | How the seats work; the rules; the hazards | **this file** |
 | **The board** — what is done, what is red, what is owed | `scripts/senra-status.sh` — **derived, never written** |
 | Which chunk is live right now | `docs/HANDOVER.md` — contains **no facts**, only pointers |
@@ -32,7 +32,7 @@ Nothing else goes on a board. There are no other boards.
 ## 2. The seats
 
 - **Viktor** — owns the product, the decisions, and **all git**, exclusively.
-- **CC (build seat)** — investigates, writes code, **surfaces the diff**, **stops**. Read-only git only: `status`, `log`, `show`, `diff`, `branch --list`, `reflog`, `merge-base`, `merge-tree`. **No commit, push, branch, merge, rebase, stash, reset.** Exceptions are per-command, explicit from Viktor, and recorded.
+- **CC (build seat)** — investigates, writes code, **surfaces the diff**, **stops**. Read-only git only: `status`, `log`, `show`, `diff`, `branch --list`, `reflog`, `merge-base`, `merge-tree`. **No commit, push, branch, merge, rebase, stash, reset.** Exceptions are per-command, explicit from Viktor, and recorded. **Credentials:** CC does not authenticate as Viktor by default; performing auth steps (entering an OTP, logging in on a device) requires the same per-command, explicit, recorded go as the git exceptions, and CC records that the session was cleared afterward. *(First exercised 2026-07-20, D.7a device run; codified after the fact.)*
 - **Claude in chat (review seat)** — byte-reviews every diff before anything is committed. Drafts CC's instructions. Does not write production code. May draft documentation.
 
 ### The loop
@@ -43,7 +43,7 @@ Nothing else goes on a board. There are no other boards.
 4. Review seat hashes the artifact it received and **compares**. Mismatch → stop.
 5. Review → Viktor commits → **Viktor logs the commit in the CODEMAP** → next chunk.
 
-Step 5's logging is not optional. `senra-status.sh` fails the board if the branch tip has no CODEMAP entry.
+Step 5's logging is not optional. The board's §7 fails when the log is behind the code — §7 owns which commits it keys on; read the board, don't restate it here. *(This sentence used to say "the branch tip"; `16de442` changed the script to key on chunk commits and the restatement drifted — §1's prediction, inside the file that makes the rule.)*
 
 ---
 
@@ -172,10 +172,12 @@ Run it at the **start of every session** and **before every commit**.
 - **INVOICING IS OFF-LIMITS.** A separate workstream owns NAV / Számlázz.hu. **Do not "helpfully" fix its compile errors.** *Precedent:* C0 was blocked by a stale invoicing test; the proposed fix — defaulting `CreateReplacementOrderRequest.billingAddress` to `nil` — would have silently removed the compile-time forcing function the billing-primary design depends on. Viktor fixed the *test*. **A compile error in invoicing code is not yours to resolve.**
 - **Do not touch the authenticated shell internals** — `MainTabView` (iOS) / `MainTabScaffold` (Android).
 - **Do not touch the derivation of `isAuthenticated`.** *Boundary refinement (approved 2026-07-14):* its **computation** is untouchable; **supplying a dependency through a defaulted parameter is a seam, not a derivation change.** Seams are approvable; derivation changes are not.
+- **The C2 routing seam — growth is additive; derivation is untouchable.** *(RULED 2026-07-26, mirroring the `isAuthenticated` entry; the chunk-scoping of §E walls is the plan's Locked decision of the same date.)* Adding an `AuthOverlay` member, its root `when` arm, and a call-site binding that **assigns** (`nav = nav.enterX()`) is the seam doing its job. Changing `resolveRootRoute`'s logic, the existing arms' behaviour, or the §5 invariants is a **derivation change and is not approvable**. Mechanised: the board's C2-seam derivation guard (single resolver definition + every pre-existing arm pinned) — a rewrite disguised as growth reads red there, not in review.
 - **Do not wire the dormant screens** — iOS `ScannedPetView`; Android `AlertsScreens.kt`, `PricingScreen.kt`.
 - **G-a:** no "coming soon" placeholders. **G-b:** compose from **existing named primitives**; if one doesn't fit → **surface a gap, don't invent a styled component.**
 - **All new strings localized, HU canonical, 13 locales. Zero hardcoded English.**
 - **⚠️ A scope guard that names a FILE does not guard a BEHAVIOR.** G12b forbade wiring `ScannedPetView`. Nobody wired it. **Logged-out delivery shipped on iOS anyway**, through a live component one branch over. Write guards against the **behavior**, and mechanise them in `senra-status.sh` where possible.
+- **⚠️ Corollary — defaulted params + a device-only behaviour = an unwired call site nothing catches.** When a chunk's new parameters are **defaulted** (so prior tests' shorter call sites still compile) *and* the behaviour they drive is device-only (no unit test), a version that never passes them **compiles, runs, and passes the whole existing suite** — those tests lean on the defaults — while the feature ships inert. No test, and no file-named guard, catches it. **Mechanise the *wiring* as a `senra-status.sh` grep** — a count of the behaviour (e.g. the seeded argument present at *both* call sites), written on **one line** so the grep proves *what it guards*, not just that a string exists — **and land the check *before* the chunk** so the board reads red-until-wired. §1: an item expressible as a check is not optional.
 
 ---
 
