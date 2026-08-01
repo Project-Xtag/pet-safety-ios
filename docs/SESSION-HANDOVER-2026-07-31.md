@@ -557,3 +557,12 @@ edits already known) · **3.3** copy fix, **blocked on Q3**.
   **Do not re-fix; it collides.**
 - `found_pet_reported_success` — it/fr/cs/es diverge synonymously between the two lines.
   **Pick one side wholesale, never hand-merge per locale.**
+- `CommunityFoundPet.Status.pending` — fixed INDEPENDENTLY on both lines, same day: `ddfadf4`
+  (redesign) and `bf16239` (release, on `integration/v2.2`). Verified 2026-08-01 to be twins —
+  identical hunks (`5056ddacd879` both) and identical resulting file (`e5c496075d5e` both).
+  **Do not re-fix; it collides. And do not assume `main` is clean — `origin/main` has
+  `case pending` = 0 (control: `case active` = 1, so that zero is real).** The CODEMAP's
+  2026-07-26 entry says "both sides carry the member, so the merge is trivial"; that is true of
+  the two *lines* and false of `main`, which receives the member only when the redesign branch
+  merges. Anything cut from `main` before then carries the decode defect: the create response
+  fails to decode after the 201, the finder sees an error, and each retry mints a duplicate report.
