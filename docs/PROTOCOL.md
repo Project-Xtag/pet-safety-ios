@@ -92,6 +92,12 @@ Where exact bytes matter, use output that **cannot be rendered**: `grep -c`, `sh
 
 *Broken by the **review** seat, not the build seat. It applies to everyone.*
 
+**⚠️ `e3b0c44298fc` IS THE EMPTY FILE.** That is the sha256 of zero bytes. If a hash starts `e3b0c442…`, the artifact is **empty** — the command produced nothing and the shell wrote an empty file anyway. It never means "no change". *Precedent 2026-08-01: `git show a085bf5:…CountryRoutes.tsx > out.tsx` in a checkout that had never fetched that ref produced a 0-byte file; the hash was computed, reported, and only caught because `e3b0c442` was recognised. Learn the prefix.* Corollary: hash the artifact **and** print `wc -c` beside it — a byte count of 0 cannot be misread.
+
+**⚠️ A NEGATIVE GREP NEEDS A POSITIVE CONTROL, IN THE SAME COMMAND.** A zero is a claim about the **pattern**, never about the tree. Run a second grep you *know* must hit; if the control also returns zero, the pattern is broken, not the code.
+
+The failure mode is usually **case**, and it is invisible: `grep -l "rateLimiter" middleware/` returns **0** on a directory whose file defines `createRateLimiter` and `authRateLimiter` — capital `R`, so the lowercase substring never appears. Reported as "no rate limiters exist"; there are 21. *Same session, three more: `grep "web-handoff"` (real zero, proven only once `handoff` alone returned 2 files), a JSONB predicate using `line1`/`postal_code` against a column whose keys are `street1`/`postCode` (0 matches across 80 rows, including a user with 26 shipped orders), and `grep -c` counting **lines** rather than occurrences in a minified bundle.*
+
 ### Rule 5 — A build is not a run, and a run is not a look
 
 `BUILD SUCCEEDED` proved nothing about the splash→content crossfade, which **a `Group` wrapper silently broke.** It compiled. It passed tests. Only a physical device caught it.
@@ -164,6 +170,9 @@ Run it at the **start of every session** and **before every commit**.
 | **zsh is not bash.** `#` is **not a comment** interactively, and `$VAR:P` is a **parameter modifier** — `$T:PetSafety/...` silently rewrites a hash into a path. | **One command per line. No inline comments.** Inline the value, don't interpolate before a `:`. |
 | **Xcode 16 `project.pbxproj` noise** — reorders, empty-`exceptions` removals. | **Benign.** Synchronized folders don't enumerate sources; a deletion there can't drop one. Discard freely. |
 | **Untracked files in the repo root** — loose `.diff`s, extracted doc copies, `build-derived/`. One `git add -A` and they land on a code branch. | `.gitignore` + the `landmines` check in `senra-status.sh`. |
+| **A hash of `e3b0c44298fc`** — the artifact is EMPTY (sha256 of zero bytes), usually an unfetched ref or a failed command whose `>` still created the file. | Rule 4. Print `wc -c` beside every hash; learn the prefix. |
+| **A grep returning 0 with no control** — case (`rateLimiter` vs `createRateLimiter`), wrong field names (`line1` vs `street1`), or `grep -c` counting lines not occurrences in minified output. | Rule 4. Run a control that must hit, in the same command. |
+| **`gh run watch` exits 0 on an already-completed FAILED run.** Its exit code reflects the watch, not the outcome. | Read the `conclusion` field: `gh run view <id> --json status,conclusion`. |
 
 ---
 
