@@ -79,7 +79,11 @@ This deliberately does **not** consult `users.country`. That column holds non-IS
 
 **Never** derive the segment from device region. Store availability fixes the market; device region is a *language* signal. Conflating the two is precisely the `/uk/` bug — a Hungarian customer on an English-region phone is an HU customer, not a UK one.
 
-**If mobile ever expands beyond HU**, this becomes a resolution chain (normalised `users.country` → `locale_hint` → `hu`). That is a server change requiring no store cycle — which is the entire reason the URL is built here rather than in the client.
+**If mobile ever expands beyond HU**, this becomes a resolution chain (normalised `users.country` → `hu`). That is a server change requiring no store cycle — which is the entire reason the URL is built here rather than in the client.
+
+**⚠️ `locale_hint` IS LANGUAGE-ONLY. IT MUST NEVER ENTER MARKET RESOLUTION.** An earlier draft of the sentence above put `locale_hint` in the market chain; that is the `/uk/` bug rebuilt on the server, where it would be harder to see. The market is fixed by store availability (`hu`); the language is a separate axis and is the *only* thing `locale_hint` may influence.
+
+The two are genuinely independent, and §9 proved it: `/hu/` **forces** Hungarian copy (`countries.ts:18` gives `hu` the `language: 'hu'`; `CountryContext.tsx:33-37` calls `changeLanguage(country.language)`), so an HU-market customer who reads English is shown a page they cannot read at the moment they are asked to pay. `locale_hint` exists to fix **that**, and nothing else. A server that reads `locale_hint` and changes the `{cc}` segment is reintroducing the defect this document was written to close.
 
 ## 4. Token
 
@@ -95,11 +99,17 @@ This deliberately does **not** consult `users.country`. That column holds non-IS
 ```
 POST /api/auth/web-handoff/redeem
 { "token": "<opaque>" }
-→ 200  { ...normal session response, same shape as login... }
+→ 200  { success, user, token, refreshToken }  + BOTH httpOnly cookies — see §10
 → 401  invalid, expired, or already used — indistinguishable by design
 ```
 
 Redeem is **unauthenticated** (the browser has no session — that is the entire point) and must be rate limited by IP.
+
+**⚠️ `POST /auth/login` IS THE WRONG PRECEDENT. DO NOT COPY IT.** It exists (`auth.routes.ts:162`) and it is tempting because of the name. But **tagme-now's user flow never calls it** — the web client's only `/auth/*` calls are `send-otp` (`api.ts:744`), `verify-otp` (`:762`), `refresh` (`:261`), `logout` (`:803`). Modelling redeem on `login` would produce a response the SPA's session layer does not consume.
+
+**The precedent is `verify-otp` (`auth.routes.ts:539`)** — it is what actually establishes a web user session. §10 has its exact shape and side effects. The same warning applies to `AdminAuthContext.tsx:73`, `PartnerPortalLogin.tsx:64` and `PartnerLogin.tsx:73`: those are the admin/partner/coop portals, token-only, and not the user flow.
+
+*(An earlier draft of this section said "same shape as login". That was wrong twice over — there is no user password login on the web, and the session is not token-only.)*
 
 ## 5. Client behaviour — the part that must be right first time
 
@@ -118,7 +128,11 @@ Redeem is **unauthenticated** (the browser has no session — that is the entire
 **The fallback URL needs BOTH fixes — environment host AND market pin.**
 
 - **Host.** ⚠ **Corrected 2026-08-01: "Android's is done" is true of the BRANCH and false of the FIELD.** The `WEB_BASE_URL` fix landed in `2635a62` (vc23), which was **never fielded**. The fielded build is `8260097` (vc22, tag `release/2.2.1-vc22`), where `WEB_BASE_URL` does not exist and the CTA hardcodes `https://senra.pet` at `PetSetupWizardScreen.kt:147`. **So BOTH clients are unconditionally prod in the field today.** iOS `4756295` (tag `release/2.2.1-build5`) has no build-type override at all — `WebURLHelper.swift:28`. On both platforms this is a **prerequisite for testing U4 at all**: a staging build's CTA cross-wires to prod and the handoff cannot be exercised in any safe environment. Do not plan U3 as "Android already has the host" — it does not.
-- **Market.** The fallback must be `{env-host}/hu/choose-plan`. **No device region anywhere in the client.** Miss this and the `/uk/` bug survives in exactly the path that fires when the handoff is unavailable — i.e. every launch between submission and U1 reaching prod, which is the whole point of shipping the client first.
+- **Market.** The fallback must be `{env-host}/hu/choose-plan`, hardcoded. **BANNED IN BOTH CLIENTS' FALLBACKS: any device-region signal, on either platform, in any form.** Concretely, the fallback must not read `Locale.current.region` (iOS), `Locale.getDefault().country` (Android), or route through `WebURLHelper.countryCode` / `WebUrlHelper.countryCode`, which are exactly those calls wrapped in a helper. The `/hu/` segment is a **literal**, not a lookup.
+
+  This is not a style preference — it is the whole defect. Today, **both fielded builds derive the market from device region**: iOS `WebURLHelper.swift:21` and Android `WebUrlHelper.kt:27-31` both end `?? "uk"` / `?: "uk"`, and both CTAs route through them. Production is only saved by a CloudFront Function 301-ing `/uk/* → /hu/*` (`terraform/frontend.tf:93-95`, "UK country removed"). **That redirect is infrastructure, not client correctness** — remove it while region-deriving binaries are fielded and the defect reopens instantly, with no client change.
+
+  The fallback is the path that fires whenever the handoff is unavailable — every launch between submission and U1 reaching prod. Putting a region lookup there rebuilds the bug in the one code path shipped specifically to be safe. **HU-region devices resolve correctly today** (`Locale` region `HU` → `hu`, byte-verified `0x48 0x55`, including `en_HU`), which is precisely why the defect is easy to miss in testing: it only appears on a device whose region is not Hungary.
 
 **Fix the helper, not the call site.** On iOS, `WebURLHelper.url(path:)` has one direct consumer (the interstitial CTA — the only money-path surface) plus seven legal links through its `termsURL`/`privacyURL` wrappers. The helper is **pre-existing and untouched since creation**, so its behaviour is already live in the store build and fixing it changes nothing for the worse. Scoping the fix to the call site would leave a known-wrong helper armed for whoever adds the next web link. Android's equivalent gets the same treatment.
 
