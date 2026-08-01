@@ -1,0 +1,261 @@
+# Web Handoff — API Contract (U1/U2/U3/U4)
+
+**Status: DRAFT for review. Freeze before any client is built against it.**
+Written 2026-07-30 by the review seat.
+
+## Why this document exists
+
+Mobile clients ship on a store cycle; the server does not. Anything a fielded client hardcodes is stuck until the next review. So the contract's single organising rule is:
+
+> **The client sends intent. The server returns a URL. The client opens whatever comes back.**
+
+Everything else — host, country segment, path, param name, token format — stays server-side and stays changeable.
+
+This dissolves two defects already found by construction:
+- the **host cross-wire** (clients built on `https://senra.pet` unconditionally, cross-wiring every staging QA session to prod), and
+- the **`/uk/` market bug** (country segment derived from *device region* via `regionToCountry`, defaulting to `uk`, so a Hungarian on an English-region phone lands on the UK site with EUR pricing and no Kedvenc csomag).
+
+Neither can recur once the server builds the URL.
+
+---
+
+## 1. Issue endpoint
+
+```
+POST /api/auth/web-handoff
+Authorization: Bearer <access token>          # required
+Content-Type: application/json
+
+{
+  "destination": "choose_plan",               # required, enum — see §2
+  "locale_hint": "en-US"                      # optional, advisory only
+}
+```
+
+**200**
+```json
+{
+  "url": "https://app.senra.pet/hu/choose-plan?handoff=<opaque>",
+  "expires_in": 90
+}
+```
+
+**Errors** — every one of them means the client falls back (§5), so none needs a distinct client behaviour:
+
+| Status | When |
+|---|---|
+| `400` | unknown `destination` — **fail loudly, never silently substitute a default** |
+| `401` | missing/invalid token |
+| `429` | rate limited |
+| `5xx` | anything else |
+
+## 2. `destination` enum — frozen from day one
+
+Adding a value later is a server change; a client *sending* a new value is a store cycle. So the enum is defined now even though only the first ships in v1.
+
+**CONFIRMED against `CountryRoutes.tsx` @ tagme-now `a085bf5` (sha256 `3ca143f5e2f1`, 290 lines), 2026-08-01. Two of the four draft paths were WRONG.**
+
+| Value | Path | Route line | Auth | v1? |
+|---|---|---|---|---|
+| `choose_plan` | `/{cc}/choose-plan` | 194 | **public** | **yes** |
+| `manage_subscription` | `/{cc}/manage-subscription` | 195 | **public** | reserved |
+| `orders` | *(no route exists)* | — | — | reserved, always `400` |
+| `account` | `/{cc}/account` | 205 | **protected** | reserved |
+
+- ~~`/{cc}/account/subscription`~~ → **`/{cc}/manage-subscription`**. It is a **top-level route, not nested under `account`.**
+- ~~`/{cc}/account/orders`~~ → **there is no orders route, and no orders page.** The only order-shaped pages are `OrderConfirmation` and `OrderReplacementTag`; neither is an order list. `orders` **stays in the v1 enum** and **always returns `400`** — per the rule below, that is exactly what "reserved" means, and keeping the value reserved now avoids a store cycle if an orders page is ever built.
+
+Reserved values must return `400` until implemented — not a redirect to `choose_plan`. A client landing somewhere it didn't ask for is worse than a client falling back.
+
+## 3. URL construction — server-side, in one place
+
+**Host** — from environment config. `https://app.senra.pet` (prod), `https://staging-app.senra.pet` (staging). Never hardcoded in a client.
+
+**Country segment — always `hu`.**
+
+The mobile apps are distributed in the **Hungarian store only**, and that is not planned to change. Every mobile user is therefore an HU-market customer by construction: HUF pricing, Kedvenc csomag, the HU catalog. There is no legitimate case where a mobile-originated handoff should land on another market's page.
+
+This deliberately does **not** consult `users.country`. That column holds non-ISO2-clean values in prod (the standing normalisation item), so reading it would add a failure mode to solve a problem that does not exist while mobile is HU-only.
+
+**Never** derive the segment from device region. Store availability fixes the market; device region is a *language* signal. Conflating the two is precisely the `/uk/` bug — a Hungarian customer on an English-region phone is an HU customer, not a UK one.
+
+**If mobile ever expands beyond HU**, this becomes a resolution chain (normalised `users.country` → `locale_hint` → `hu`). That is a server change requiring no store cycle — which is the entire reason the URL is built here rather than in the client.
+
+## 4. Token
+
+- **Opaque**, ≥128 bits of entropy, no user data encoded.
+- **Single-use.** Redeeming consumes it; a second redeem fails.
+- **TTL 90s.** Long enough for a browser cold start on a slow device, short enough that a leaked URL is dead on arrival.
+- **Redis-backed** (ElastiCache is already in the stack), keyed `webhandoff:{token}` → `user_id`, TTL as the expiry. Deletion on redeem gives single-use for free.
+- **Bound to `user_id` only.** Do not bind to device, IP, or UA — the redeeming client is a *different* client by design.
+- **Rate limit the issue endpoint** per user.
+
+### Redeem
+
+```
+POST /api/auth/web-handoff/redeem
+{ "token": "<opaque>" }
+→ 200  { ...normal session response, same shape as login... }
+→ 401  invalid, expired, or already used — indistinguishable by design
+```
+
+Redeem is **unauthenticated** (the browser has no session — that is the entire point) and must be rate limited by IP.
+
+## 5. Client behaviour — the part that must be right first time
+
+```
+1. POST /api/auth/web-handoff  { destination: "choose_plan" }
+2. 200 → open response.url in the external browser
+3. ANY failure → open the hardcoded fallback URL
+```
+
+**Failure means anything that isn't a 200 with a parseable `url`:** non-200, timeout, malformed body, network error.
+
+**Timeout budget: 3s.** Past that, fall back. A user waiting on a spinner is worse than a user logging in again.
+
+**The fallback must never be worse than today's behaviour** — that is what makes shipping the client before the server safe. Until U1 is deployed, every call 404s and every user gets exactly the current flow.
+
+**The fallback URL needs BOTH fixes — environment host AND market pin.**
+
+- **Host.** ⚠ **Corrected 2026-08-01: "Android's is done" is true of the BRANCH and false of the FIELD.** The `WEB_BASE_URL` fix landed in `2635a62` (vc23), which was **never fielded**. The fielded build is `8260097` (vc22, tag `release/2.2.1-vc22`), where `WEB_BASE_URL` does not exist and the CTA hardcodes `https://senra.pet` at `PetSetupWizardScreen.kt:147`. **So BOTH clients are unconditionally prod in the field today.** iOS `4756295` (tag `release/2.2.1-build5`) has no build-type override at all — `WebURLHelper.swift:28`. On both platforms this is a **prerequisite for testing U4 at all**: a staging build's CTA cross-wires to prod and the handoff cannot be exercised in any safe environment. Do not plan U3 as "Android already has the host" — it does not.
+- **Market.** The fallback must be `{env-host}/hu/choose-plan`. **No device region anywhere in the client.** Miss this and the `/uk/` bug survives in exactly the path that fires when the handoff is unavailable — i.e. every launch between submission and U1 reaching prod, which is the whole point of shipping the client first.
+
+**Fix the helper, not the call site.** On iOS, `WebURLHelper.url(path:)` has one direct consumer (the interstitial CTA — the only money-path surface) plus seven legal links through its `termsURL`/`privacyURL` wrappers. The helper is **pre-existing and untouched since creation**, so its behaviour is already live in the store build and fixing it changes nothing for the worse. Scoping the fix to the call site would leave a known-wrong helper armed for whoever adds the next web link. Android's equivalent gets the same treatment.
+
+*(Separate, pre-existing, not a release blocker: `RegistrationView` presents terms via that helper, so a non-HU-region device currently links to `senra.pet/uk/terms` at the moment a user agrees. Worth establishing what that URL returns — 404, the same terms in English, or a different UK-market document. Own it as its own item.)*
+
+**After U4, the helper is the fallback path only.** The interstitial no longer builds a URL; it calls the endpoint and opens what comes back. That is precisely why the fallback has to be correct rather than merely present.
+
+## 6. Web behaviour (U2)
+
+1. Route reads `?handoff=`.
+2. `POST` it to redeem.
+3. On success: establish the session, **`history.replaceState` to strip the param immediately**, render the destination.
+4. On failure: render the normal login page. No error detail — an expired token and a forged one look the same.
+5. Set `Referrer-Policy: no-referrer` on routes that can carry the param.
+
+## 7. Security notes
+
+A token in a URL is a bearer credential and leaks via browser history, referrer headers, and shared links. The defences are **short TTL, single-use, and immediate stripping** — all three, not any one.
+
+Precedent in this codebase: HMAC-signed opt-out links and SES invite links.
+
+Not in scope, deliberately: device binding (breaks by design), long-lived tokens, encoding user data in the token.
+
+## 8. Frozen once a client ships
+
+| Frozen | Free to change |
+|---|---|
+| Endpoint path + method | Host |
+| Request field names, `destination` values | Country-segment resolution |
+| That the response carries `url` | Path per destination |
+| Fallback-on-any-failure | Token format, TTL, param name |
+
+Everything in the right column is why the URL is server-built. Keep it that way.
+
+## 9. CLOSED 2026-08-01 — all four resolved
+
+**1. Destination paths — CONFIRMED, two were wrong.** See §2. `manage_subscription` is top-level; `orders` has no route.
+
+**2. Redeem response shape — the draft was WRONG.** tagme-now's session is **hybrid, not token-only**. See §10.
+
+**3. Does `/hu/` fix the language? — YES. They are NOT resolved separately.**
+`src/config/countries.ts:18` — `hu: { code: 'hu', …, language: 'hu', … }`
+`src/contexts/CountryContext.tsx:33-38` —
+```ts
+useEffect(() => {
+  if (i18n.language !== country.language) i18n.changeLanguage(country.language);
+}, [countryCode, country.language, i18n]);
+```
+The country segment **forces** the language. So a handoff to `/hu/choose-plan` renders **Hungarian copy regardless of the user's device language** — which is precisely the failure this question anticipated: an HU-market customer who reads English is shown a Hungarian page at the moment they are asked to pay.
+
+The `LanguageSwitcher` (`:20`) calls `changeLanguage` directly and will hold **until the next remount**, because the effect's deps (`countryCode`, `country.language`, `i18n`) do not change on a language switch. It is not a durable override.
+
+**⇒ `locale_hint` HAS a job.** It is the only way a handoff can express "HU market, English copy".
+
+**4. Does v1 send `locale_hint`? — NO, and that is deliberate.**
+Measured: `locale_hint` appears **0 times** in iOS `4756295`, Android `8260097`, and backend `33b59a0`. Controls hit (`locale` alone: 20 iOS files, 31 Android files), so these are real zeros.
+**Reserve the field in the schema now; v1 clients do not populate it.** The server must therefore treat absence as "no language preference" and fall back to the country's language — i.e. today's behaviour, unchanged. Adding the field to the schema now is what avoids a store cycle when the language question is actually addressed.
+
+
+---
+
+## 10. Session establishment — what redeem must actually do
+
+**Added 2026-08-01, replacing §4's "…normal session response, same shape as login". That phrase is wrong
+twice over: the web user flow has no password login, and the session is not token-only.**
+
+**There is no user password login on the web.** tagme-now's user auth is OTP-based — the only `/auth/*`
+calls in `src/lib/api.ts` @ `a085bf5` are `send-otp` (`:744`), `verify-otp` (`:762`), `refresh` (`:261`),
+`logout` (`:803`). The backend *does* expose `POST /auth/login` (`auth.routes.ts:162`) but the web client
+never calls it. **The precedent redeem must match is `verify-otp`, not `login`.**
+
+**What `verify-otp` does** (`auth.routes.ts:539`):
+```
+:656  await authService.storeRefreshToken(user.id, refreshToken, deviceInfo);  // DB side-effect
+:659  setAuthCookie(res, token);
+:660  setRefreshCookie(res, refreshToken);
+:662  res.json({ success: true,
+                 user: { id, email, role, first_name, last_name, country, preferred_language },
+                 token,        // "Still include token for mobile/API clients"
+                 refreshToken,
+                 isNewUser });
+```
+
+**The body token is a fallback, not a co-equal half.** `api.ts:774-777`:
+```ts
+// Store token for cross-origin scenarios where cookies may be blocked
+if (response.data?.token) localStorage.setItem('auth_token', response.data.token);
+```
+It is conditional and explicitly scoped to blocked-cookie cases. **Cookies are the primary mechanism.**
+Redeem should still return the token so the fallback works, but a redeem that returned *only* a token would
+be relying on the backstop.
+
+**Cookie attributes** — the call site is `src/utils/cookies.ts` (NOT `auth.routes.ts`, which imports it).
+Browsers ignore later clear/overwrite directives that disagree on `secure`/`sameSite`/`path`, so use
+`setAuthCookie()` + `setRefreshCookie()` rather than open-coding `res.cookie`:
+
+| Cookie | httpOnly | secure | sameSite | maxAge | path |
+|---|---|---|---|---|---|
+| `auth_token` | true | `!env.isDevelopment` | `'none'` when secure, else `'lax'` | 1 h | `/` |
+| `refresh_token` | true | **hardcoded `true`** | **`'strict'`** | 30 d | **`/api/auth/refresh`** |
+
+*(The 2026-05-26 audit finding was exactly an attribute drift — `auth_token` missing `Secure` on staging.)*
+
+**⇒ Redeem must: store a refresh token in the DB, set both cookies via the helpers, and return
+`{ success, user, token, refreshToken }`.** Do not copy `AdminAuthContext.tsx:73`,
+`PartnerPortalLogin.tsx:64` or `PartnerLogin.tsx:73` — those are admin/partner/coop portals, token-only,
+and not the user flow.
+
+## 11. The auth-boundary asymmetry — examined 2026-08-01, and it is already handled
+
+`choose-plan` (194), `manage-subscription` (195), `billing` (196) and `order-confirmation` (193) sit
+**outside** the `RedesignProtectedRoute` block (opens 204). `account` (205) and 19 others sit inside it.
+
+**This is deliberate, not an oversight.** `CountryRoutes.tsx:189-192`:
+> *"Post-Stripe / public-checkout landings. Public routes so they survive the full-page Stripe round-trip;
+> each page self-guards on the real auth session via RedesignProtectedRoute primitives where needed."*
+
+**And the guards exist.** Verified per page @ `a085bf5`:
+
+| Page | Guard |
+|---|---|
+| `redesign7/ChoosePlan.tsx` | `:88` `navigate("/login", { state: { returnTo: "/choose-plan" } })` · `:209` `if (!isAuthenticated) return null` |
+| `redesign7/ManageSubscription.tsx` | `:83-84` navigate to `/login` with `returnTo` |
+| `redesign7/Billing.tsx` | `:44-45` `navigate("/login", { state: { returnTo: "/billing" } })` |
+| `redesign7/Account.tsx` | `:156` `if (!user) return null` (also inside the protected block) |
+
+**So an earlier draft of this section was wrong.** It "ruled" that redeem failure must render login rather
+than the destination, and described a logged-out user stranded on the destination. That state cannot occur:
+every handoff destination already redirects to `/login` carrying a `returnTo`. §6 step 4 is satisfied by the
+pages themselves, not by anything U2 must add.
+
+**The rule that IS needed, and is not currently enforced anywhere:**
+
+> **A destination may only enter the enum if its page self-guards.** Confirm the guard by reading the page,
+> not by reading the route table — the route table says these pages are public and it is right.
+
+`order-confirmation` is the live counter-example: it **deliberately does not redirect**
+(`redesign7/OrderConfirmation.tsx:110` `if (!sessionId) return null`; `:227` offers `/login` as a *button*,
+not a redirect), because it is a post-Stripe landing a guest must be able to see. It is correctly **not** in
+the destination enum, and adding it would be a mistake.

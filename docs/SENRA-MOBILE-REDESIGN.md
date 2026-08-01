@@ -461,17 +461,33 @@ On **iOS + Android**, every "code"/"verification" string found is **accurate log
 - **Device end state:** app force-stopped; the authed session from Runs 3–4 was still live when this entry was drafted — *Viktor logged the device out 2026-07-21, before this entry was committed*; notification prompt still pending; two nonexistent-code seeded lookups ran on that session (reads; whether `lookupAndRoute`'s `repository.scanQr` fires on the NotFound path is unread — see [[G-owner]]'s mechanism, `QrScannerViewModel.kt:68-69`).
 - **STATUS: C4b DONE.** Ship-blockers remaining on this surface belong to other owners: [[G-landing-submit]] (both platforms), [[G-session-loggedout]] (auth).
 
+### 9.20 tagme-now — `src/pages/X.tsx` is DEAD CODE for 42 of 45 shadowed pages (standing fact, 2026-07-30)
+
+> **The one sentence:** on tagme-now, a page that exists at both `src/pages/X.tsx` and `src/pages/redesign7/X.tsx` is routed from the **redesign7** copy. The legacy twin is dead. **Three exceptions: `PublicPetProfile` routes LEGACY; `PrivacyPolicy` and `TermsConditions` route BOTH.** Editing `src/pages/X.tsx` for any other twin changes nothing a user can reach. This is [[G-guard]] in a third repo — the guard named a file, and the behaviour walked around it.
+
+- **Measured, not estimated** (`feat/pricing-2026-08`, 2026-07-30): 60 legacy pages, 59 redesign7 pages, **45 twins**. Routing resolved by parsing `src/components/CountryRoutes.tsx` + `src/App.tsx` for `lazy(() => import('@/pages/…'))` bound to a mounted `element={<X />}`: **42 → redesign7, 1 → legacy (`PublicPetProfile`), 2 → both (`PrivacyPolicy`, `TermsConditions`), 0 unrouted.**
+- **It has already cost three misses, all on one branch, all same-day (2026-07-30).** Cross-referencing every commit on `feat/pricing-2026-08` against the routed variant:
+  - `34e9506` "choose-plan shows only the Kedvenc csomag; **most-popular badge removed**" → edited `src/pages/ChoosePlan.tsx`. **The badge is still live** at `src/pages/redesign7/ChoosePlan.tsx:287`, which is what `/choose-plan` routes to.
+  - `0d44816` "trial-warning subscribe CTA points at choose-plan" → edited `src/pages/Account.tsx`. The routed `redesign7/Account.tsx` **has no trial warning at all** (0 hits for `trialDaysLeft` vs 8 on the dead twin), so the CTA is *absent*, not wrong. **`0d44816` is the B3 cutover artifact and its only functional change is inert** — its 13 locale additions land, its component change does not.
+  - `6f1ebe7` "remove compare/upgrade buttons" → edited `src/pages/Account.tsx`. No user-visible cost (the routed page uses its own `redesign7.account.*` namespace and never had those buttons), but the same omission. **The same commit handled `TagArrival` correctly on both twins**, which is what marks Account as an oversight rather than a policy.
+  - Clean by contrast: `2d79311` and `0625d53` both edited the **redesign7** ChoosePlan. That — not luck — is why the routed money page is correctly single-plan shaped.
+- **Why the suite did not catch it, and why "748 green" was worthless here.** Test imports split **18 legacy / 15 redesign7**, and `redesign7/ChoosePlan` + `redesign7/Account` have **zero** coverage. `34e9506` added "two new pins in `ChoosePlan.test.tsx` guard the single-card shape" — that file imports `@/pages/ChoosePlan` (`:67`), the dead one. **The new pins guard dead code.** Rule 6's precedent (795 green with the criterion absent) recurring in a third repo.
+- **A bundle grep is not a render proof.** Locale JSON is bundled whether or not any component references the key, so grepping the served bundle for a string proves it *shipped*, never that it *renders*. Card-count and element-level reads of the routed component are the real check.
+- **STATUS: standing fact, permanent.** Not a runbook item — the runbook is for one night, this is a property of the repo until the legacy pages are deleted. Mechanised in §10.
+
 ## 10. Machine-checked contracts
 
 > These are read by `scripts/senra-status.sh` §5 and compared **against the source**. Prose drifts silently; a declaration gets checked. **Change the code → change the line below, or the board goes red.**
 
 <!-- CONTRACT: ios.splash.holdDuration = 2.0 -->
 <!-- CONTRACT: android.splash.holdDurationMs = 2000 -->
+<!-- CONTRACT: web.legacyPageTestImports.allowedTwins = PublicPetProfile,PrivacyPolicy,TermsConditions -->
 
 | Contract | Value | Source of truth | Why it is pinned |
 |---|---|---|---|
 | `ios.splash.holdDuration` | `2.0` | `Views/SplashScreenView.swift` | C0 round 2 deliberately superseded the original `~0.8s → onFinished()` contract (Viktor's product call). The splash is now the app's single branded moment. **This is also the window in which cold-launch deep links were being dropped** — see §9.8. |
 | `android.splash.holdDurationMs` | `2000` | `ui/screens/SplashScreen.kt` (`HOLD_DURATION_MS`) | Cross-platform parity with the above. |
+| `web.legacyPageTestImports.allowedTwins` | `PublicPetProfile,PrivacyPolicy,TermsConditions` | tagme-now `src/tests/**` vs `src/components/CountryRoutes.tsx` | **No test may import `@/pages/X` when `X` has a routed `redesign7/X` twin.** Those three are the only legitimate cases (`PublicPetProfile` routes legacy; the other two route both). Any other legacy import means a test is pinning dead code — which is exactly how `34e9506`'s two new pins passed while the badge stayed live on `/choose-plan` (§9.20). The check must **name the offending import**, not just count: a bare count drifts as tests are added. |
 
 **Not yet mechanisable, and therefore still on the board as ⚠️, not ✅:** the merged `WindowGroup` crossfade (device), low-end first-composition-in-fade (device), dark-mode mark strokes (device), OEM splash-icon suppression (device), real-tag cold-launch delivery (device + a physical tag). **A build is not a run, and a run is not a look.**
 
