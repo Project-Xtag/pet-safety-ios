@@ -38,7 +38,7 @@ A report *about* a diff is not a diff. Clearance attaches to bytes actually rece
 |---|---|
 | `origin/main` | `950a03a` — `#117` merged and deployed 2026-07-30 16:24Z |
 | `#116` (cutover) | head `48a3d57`, MERGEABLE/CLEAN, one file: `20260801_04_standard_huf_2750.sql` |
-| `#113` (postapoint backfill) | **HELD** — no live population. See §6 |
+| `pet-safety-eu#113` (postapoint backfill) | **HELD** — no live population. See §6 |
 | Deploy run for `#117` | `30561289408`, exit 0, 2m6s |
 
 `#117` is **verified** in the strong sense: `resolvePickupPointType('118530')` returned `CS` on
@@ -91,7 +91,7 @@ affect release behaviour beyond the version identifiers."*
 **So the fielded vc22 carries everything substantive:**
 
 - **Fix 6** → tag ordering works on Android in the field.
-- **Fix 9** → delivery fields serialize. **`#113`'s hold is correct** (see §6).
+- **Fix 9** → delivery fields serialize. **`pet-safety-eu#113`'s hold is correct** (see §6).
 - **The interstitial** → Android arms at the flip, same as iOS. C4 should expect identical
   behaviour on both platforms, **including the `/uk/` market bug** — the region-derived market
   segment was never fixed on either.
@@ -245,6 +245,17 @@ No rush; do as one deliberate pass.
   arguably wrong for grandfathered 599 subscribers who read it. Qualify or gate; own web deploy.
 - **Orphaned keys sweep** — `choose_plan.most_popular`, `plans.most_popular`, `plans.tag_card_footnote`,
   and `redesign7.plans_page.subtitle` if the `Plans.tsx:9/:10` fallbacks are replaced with literals.
+  **Add `choose_plan.activating`, and read this before sweeping it.** Its live use is
+  `redesign7/ChoosePlan.tsx:308` (the Standard subscribe button's `loadingLabel`) — it is NOT orphaned.
+  But a second occurrence now exists **inside a comment** at `:282`, left there deliberately to record
+  why the tag card's inert copy was removed. **That inverts the usual grep trap:** comments are stripped
+  at build, so the served chunk greps **0** while the source greps **2**. A bundle-based sweep would call
+  the key dead; a source-based sweep would double-count it. Neither number is the answer — read the call
+  sites. The same hazard applies to any key named in a `/* … */` rationale, and this file now contains
+  several.
+  Also newly orphaned by the 2026-08-01 copy batch: **`plans.get_started` is no longer referenced from
+  `redesign7/ChoosePlan.tsx`** (the tag CTA that used it is gone) — it is still live on `/plans`, so it is
+  not orphaned globally, only on that page.
 - **`/plans` marketing claim** — whether the page should state that a subscription is required is a
   product decision, deferred deliberately. Not a defect fix.
 - Strip the 17 stale `STRIPE_PRICE_*` lines from prod `.env`.
@@ -314,7 +325,12 @@ Device pass both platforms → **tag before submitting** → submit → release.
 
 ---
 
-## 6. `#113` — held, with the reason
+## 6. `pet-safety-eu#113` — held, with the reason
+
+> **⚠️ PR NUMBERS COLLIDE ACROSS REPOS.** `#113` is **two different PRs with opposite status**:
+> `pet-safety-eu#113` is this one — the postapoint backfill, **still drafted and HELD**.
+> `tagme-now#113` is the 2026-08-01 HU copy batch, **merged and deployed** (`cefb43b`).
+> Always qualify repo-side. A bare `#113` in any note from this thread onward is ambiguous.
 
 Zero paid mismatches in the entire order history. The single pending mismatch
 (`ORD-20260723-23FDA613`) has `shipping_payment_status = failed` — nothing was charged, nothing
@@ -328,7 +344,7 @@ serializes delivery fields correctly and there is no ongoing population.
 The detector's all-time zero is consistent with the hold either way, so it was never the
 discriminator — `2635a62`'s diff was.
 
-**Do:** `gh pr ready --undo` on `#113` so it can't be merged by reflex during the window.
+**Do:** `gh pr ready --undo` on `pet-safety-eu#113` so it can't be merged by reflex during the window.
 **Decide after Phase C:** merge as defence-in-depth, or close.
 
 **If it is ever reviewed:** its test sits at `src/tests/webhookPostapointBackfill.test.ts`, while
@@ -461,7 +477,7 @@ tree is cosmetic.
 
 **Pricing workstream files** (untracked — fold into the same pass):
 - `#117` verified, with the observable and the `getDeliveryPoints` parity cite.
-- `#113` held, with the reason.
+- `pet-safety-eu#113` held, with the reason.
 - U5 shelved / `/uk/` redirect dropped / `locale_hint` dropped — each with its reason, or they
   resurface.
 - `HU → hu` verified byte-exact on both platforms (`0x48 0x55`).
@@ -494,7 +510,17 @@ tree is cosmetic.
   as inventory. Consequence: the 2.3 notice string is minted in HU alone.
 - **In-person tag collection no longer exists.** The footnote claiming it was false and live in
   prod; the render block was deleted (all languages at once) rather than the HU string reworded.
-- **`/plans` is the visual reference.** `/choose-plan`'s cards match it, not the other way round.
+- ~~**`/plans` is the visual reference.** `/choose-plan`'s cards match it, not the other way round.~~
+  **SUPERSEDED 2026-08-01 — the ruling is INVERTED and must not be re-applied.** `/choose-plan`'s tag
+  card no longer carries a CTA; `/plans` keeps its `PlanCta -> /get-your-tag`. The tag column therefore
+  ends on `Features`' `flex-1` whitespace while Standard ends on a filled button — **the exact asymmetry
+  the CTA was added to fix.** That is now intended.
+  **Why the parity argument retired:** `/plans` is marketing and `/choose-plan` is the money page. A
+  second exit to `/get-your-tag` on the subscribe flow competes with the subscribe action. The two pages
+  have different jobs, so visual parity between them was never the right goal — it was inferred from them
+  sharing a card component, not from a product decision.
+  **Do not "restore parity" on sight of the asymmetry.** If the whitespace reads badly, the fix is a
+  non-CTA filler in the tag column or a narrower grid — not another route out of the money page.
 
 ---
 
@@ -505,7 +531,7 @@ tree is cosmetic.
 | Before the window | Who is at the terminal for B1–B3 |
 | ASAP (not window-blocking) | `git log --oneline c8055f3..2635a62` → tag the real vc22 build point; delete `release/2.2.1-vc23` locally and on origin |
 | Post-Phase C | What's-next card: qualify or gate |
-| Post-Phase C | `#113`: merge as defence-in-depth, or close |
+| Post-Phase C | `pet-safety-eu#113`: merge as defence-in-depth, or close |
 | Post-Phase C | Should `/plans` state a subscription is required (product, not defect) |
 | Before 2.3 ships | `G-scanback-ios` — iOS gesture-exit parity: accept or fix |
 | Before Phase 2 spec | Ratify the B/C/D re-scope (proposed 2026-07-26, never reviewed) |
