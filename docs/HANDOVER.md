@@ -1,89 +1,190 @@
-# Senra Mobile Redesign — Session Handover
+# Senra — Session Handover
 
-**Current work: the Phase-2 destinations read. Read A is CLOSED** — executed 2026-07-26, 2,031 lines across seven files, findings appended to `docs/PHASE2-READ-PLAN.md` and byte-reviewed at `19328828a520`. Reads B/C/D are **re-scoped but not executed**. Three review findings are open; none blocks reading, all three block contract-writing.
+**This file points. It does not restate.** Every fact has exactly one owner; a restated fact drifts
+and then contradicts. **Where this file and an owner disagree, the owner wins and this file is the
+bug.**
 
-> **NEXT: execute the re-scoped Reads B/C/D**, starting with iOS `RootRoute.swift` — it is small and it resolves the one HYPOTHESIS Read A carries, which decides the iOS shape. Chunk contracts land in `docs/phase-2-spec.md` (PROTOCOL §1) when the read closes; `PHASE2-READ-PLAN.md` deletes into it at that point. *(Set by the review seat 2026-07-26; Viktor ratifies by committing.)*
+Program-scoped: all four repos, not just the mobile redesign. Undated by design — this file is
+rewritten in place, never dated and never forked. Supersedes `SESSION-HANDOVER-2026-08-01.md` and
+`SESSION-HANDOVER-2026-07-31.md`, both of which are deleted by the closeout ledger's §D.
+
+Current as of **2026-08-02**, end of the review session that cleared PR #46, PR #47, and migration
+`20260802_01`.
 
 ---
 
-## This file points. It does not restate.
+## Owners — read these, don't read summaries of them
 
-Every fact has exactly one owner. Restated facts drift and then contradict each other. **Where this file and an owner disagree, the owner wins and this file is the bug.**
-
-| You need | Owner — read this |
+| You need | Owner |
 |---|---|
 | Roles, the rules, the hazards, the hard boundaries | `docs/PROTOCOL.md` — **read in full, first** |
-| The plan, locked decisions, gaps register, CODEMAP | `docs/SENRA-MOBILE-REDESIGN.md` |
-| What C5/C6 were contracted to do (and their gate) | `docs/phase-1-spec.md` **§E C5/C6** |
-| The Phase-2 destination scopes | plan **§4 2.3 / 2.3b / 2.4** + §6 [[G-alert-detail-android]] |
-| **Read A's findings, the read ranges, the B/C/D re-scope** | `docs/PHASE2-READ-PLAN.md` — **§READ-A FINDINGS** |
-| **The web-handoff API contract B2 is built against — FROZEN** | `docs/WEB-HANDOFF-CONTRACT.md` — **build to it, do not amend it** |
-| **What is done, red, or owed right now** | `scripts/senra-status.sh` — **run it. Do not read a summary of it.** |
+| The redesign plan, locked decisions, gaps register, CODEMAP | `docs/SENRA-MOBILE-REDESIGN.md` |
+| The priority stack and open decisions | `docs/SENRA-WORKPLAN-2026-08-01.md` (→ `WORKPLAN.md` at Phase 2) |
+| The web-handoff contract — **FROZEN** | `docs/WEB-HANDOFF-CONTRACT.md` |
+| Phase-2 read scopes, Read A findings | `docs/PHASE2-READ-PLAN.md` — **§READ-A FINDINGS** |
+| C5/C6's contract and gate | `docs/phase-1-spec.md` **§E C5/C6** |
+| What is done, red, or owed right now | `scripts/senra-status.sh` — **run it. Do not read a summary of it.** |
+| The documentation closeout, phased | `DOCS-CLOSEOUT.md` (repo root, untracked, transitional) |
+
+There is **no monorepo for docs** — four repos only, and the monorepo's `docs/` is a stale archive.
 
 ---
 
-## If you are a fresh session with no memory, start here
+## Reference state — pinned. Do not infer state from a branch name.
 
-You are **not** expected to remember anything — it is all in the repo.
+### Cleared and final
 
-1. Read `docs/PROTOCOL.md` in full.
-2. Run `./scripts/senra-status.sh`. It supersedes anything this file claims.
-3. Identify your seat and do that seat's first moves.
+| Artifact | Hash | Size |
+|---|---|---|
+| `senra-status.sh` — **redesign line**, PR #46 @ `6632108` | `7dd21f156710` | 30,895 B / 531 L |
+| `senra-status.sh` — **docs line**, PR #47 @ `628b25e` | `e451a2820970` | 25,740 B / 445 L |
+| `senra-status.sh` — **#46 ⊕ #47 RESOLVED**, cleared, unmerged | `fd70647aeb4a` | 31,639 B / 540 L |
+| `WEB-HANDOFF-CONTRACT.md` — **FROZEN** | `fdf0d570c218` | 22,854 B / 323 L |
+| └ §8, the frozen surface | `86a1c13aaad5` | 383 B / 11 L |
+| `PROTOCOL.md` | `63603befd524` | 246 L |
+| `SENRA-MOBILE-REDESIGN.md` | `79402e281962` | 535 L |
+| `SENRA-WORKPLAN-2026-08-01.md` | `21162d0195e3` | 323 L |
+| `SESSION-HANDOVER-2026-08-01.md` | `7b7bb5538501` | 243 L |
+| `HANDOVER.md` (the version this replaces) | `b8d204cd1042` | 89 L |
+| Migration `20260802_01` v4 | `87e88be96acb` | 12,130 B / 202 L |
+| └ executable-only fingerprint | `7a50f3f135bc` | 56 L |
+| `DOCS-CLOSEOUT.md` | `8ccdf9f9ba91` | 24,670 B / 440 L |
 
-**CC (build seat):** PROTOCOL → board → plan §4 2.3/2.3b/2.4 + §6's rows → `PHASE2-READ-PLAN.md` **including §READ-A FINDINGS**. Read A does not need re-running; **re-ground every `file:line` by symbol (`grep -n`) before relying on it** — the findings say so themselves. First deliverable is the re-scoped B/C/D read, then **stop**. Git is read-only absent an explicit, recorded per-command go.
+**Historical, for merge work only:** `senra-status.sh` pre-image `203748cf8b57` (436 L); merge base
+`b0b076b` where it is 267 L (`6fa4ad359d8b`); contract pre-P1-1 `a6ce9dd2e930` (293 L); docs-line
+base `2bcc2ac` (PR #45).
 
-**Review seat (chat):** PROTOCOL → board → §E C5/C6 → `PHASE2-READ-PLAN.md` → this file's open findings. Hash every artifact before reading it (Rule 7). Grep for every named acceptance criterion by name (Rule 6). Demand two-ended cites for wiring claims (Rule 1). Ask whether the evidence is even inside the change (Rule 8).
+### Branches
 
-**⚠️ Rule 7's live failure mode is the SHUTTLE, not either seat.** CC surfaces bytes to disk and quotes a hash; the review seat can only hash what actually reaches it. Four rounds ran half-satisfied — hash without artifact, artifact without hash, a hash CC declined to compute, then bytes that never got attached. **The artifact and its hash must arrive in the same message, or the comparison never happens.** For a chunk that is only new files, plain `shasum -a 256 <file>` is the artifact hash; the `git diff --no-index` wrapper adds nothing and is fragile to reproduce.
+Three PRs stacked and unmerged: **#45** (08-01 docs) → **#47** (Phase 1 closeout, `df266fb` +
+`317cc10`), and **#46** (board guards) on the redesign line separately. pet-safety-eu `main` =
+`33b59a0` plus migration `20260802_01`.
 
-**⚠️ A `--stat` is not a diff.** `338a7d1`'s plan half read `3+/1−` both before and after an added line was rewritten in place. An in-line amendment never moves the count. Only the diff shows it.
+⚠ **#46 and #47 do not auto-merge.** Five files conflict. Four resolve to values already cleared
+(the redesign line never edited them — its copies are content-identical to the docs line's starting
+point). `senra-status.sh` was the only genuine one and **is already resolved and cleared at
+`fd70647aeb4a`**, reconstructed independently from both sides.
 
----
+**Build it with `git merge-file -p <ours> <base @2bcc2ac> <theirs>`, not by taking both conflict
+sides.** Concatenating sides duplicates the shared region: the conflict exists *because* both lines
+advanced the same content from an old base, so each side's block already contains that content.
+`rc=0` — there was never a semantic collision, only a textual one.
 
-## Verify before you trust this file
+⚠ **`fd70647aeb4a` is pinned to FILE CONTENT, not tip SHAs.** It is the union of `7dd21f156710`
+and `e451a2820970`. It is **void only if `senra-status.sh` changes at either end** — a commit
+touching the workplan, the ledger or any other file leaves it valid. Check the two hashes, not the
+branch names. A voided resolution reads exactly like a stale one; this is what distinguishes them.
 
-- **Expected reds — the six standing, every one explained:** the four product reds (AASA `/*/t/*`, the www 301, the 2 `.onOpenURL` handlers, G-owner) and the two Zone-3 ship-gates in board §5b (red **by design** until 2.3/2.4 wire the destinations). **§8 additionally reds whenever a shuttle artifact or an uncommitted governing doc sits untracked — expected while a shuttle is in flight, cleared by commit or post-review deletion; a §8 red with no shuttle in flight is a real landmine.** **The heuristic is "every red is explained," never a number to match.**
-- **§7 is genuinely green on the committed tree** — all 9 iOS + 7 Android chunk commits logged. If it reddens, the log is behind the code.
-- C5/C6's closure is logged: `grep -n '4c00cf2\|7851b2f' docs/SENRA-MOBILE-REDESIGN.md`
-- Read A's findings survived: `grep -n 'READ-A FINDINGS' docs/PHASE2-READ-PLAN.md` — **if empty, Read A must be re-run; do not reconstruct it from this file or any summary.**
-- **The §5b pinned-literal guards.** If one goes red, a device-bought behaviour has been dropped — that is the whole point of them.
-- **Standing obligation:** the moment `phase-2-spec.md` names the two Zone-3 destination handlers, both ship-gates **RE-POINT** to positive assertions (grep the named handler, expect 1, red-until-wired), landed **before** the wiring chunk.
-
-## Open review findings on the read plan — all three unresolved
-
-- **The iOS `RootRoute` claim contradicts itself.** §READ-A FINDINGS asserts in its VERIFIED section that iOS `RootRoute` has no order state, cited to `RootRoute.kt` — a **Kotlin** file — while the same section says anything about what iOS `RootRoute`/`RootNavState` holds is a guess until read. `handleDeepLink` is the standing precedent for same-named types across the two codebases. **Label it HYPOTHESIS or drop it; iOS `RootRoute.swift` decides it.**
-- **2.3b's navigation shape was never in Read A's frame.** Read A owns *landing → destination*; the alert detail is *board → detail*, one level deeper. Third root arm, or nested nav inside the board arm? Different blast radius, different re-point targets, different test strategy. `CommunityDestination` has two members; 2.3b is a third surface that is not one of them. **Settle it two-ended before contracts close.**
-- **`F3` names two different things in one document** — the G6 behavioral-guard read, and the deferred landing-restyle chunk in the same file's OUT list. Rename the read item.
-
-## Must not be lost (owners named; this file only points)
-
-- **[[G-session-loggedout]]** — session-expiry dialog on the logged-out landing. **The remaining PHASE-1-SHIP-BLOCKER. Owner: auth workstream — nobody in this loop has worked it.**
-- **[[G-owner]]** — device-confirmed 2026-07-20. Board §3 red.
-- **The G6 behavioral guard** — recorded in the read plan's Reads F, unmechanised today. A guard naming a FILE does not guard a BEHAVIOR (PROTOCOL §6; the G12b precedent). 2.3b-Android **lifts** from `ReportSightingDialog`, one import away from **calling** it. The zero-external-callers check on `AlertsScreens.kt` lands **before** the 2.3b chunk, not before the read.
-- **The iOS root switch rides a `Group`** (`ContentView.swift:16`) — any new route arm inherits PROTOCOL §7's `Group`/`ZStack` class, which compiles, passes tests, and silently kills the animation. Device look, not a test.
-- **The error-genre chunk — RULED 2026-07-21, one chunk, owner unassigned:** [[G-scan-error-raw]] + [[G-foundform-error-raw]] + 2.4's ungated-submit 401. Should-fix-before-ship, not ship-blocking.
-- **[[G-tab-scan-noparity]]** and **[[G-alert-detail-android]]** — §6 rows feeding the remaining reads.
-- **[[G-deactivate-authz]]** — backend workstream. Do not fix from here.
-- **F3 → C7/C8** — DEFERRED behind the Phase-2 destinations (plan §2; §E C7/C8 pasted-and-held).
-- **§13's standing rows** — release under R8, the delivery cold-start, dark-mode strokes, Samsung/Xiaomi splash.
-- **The deep-link merge hazard** (board §10) — merges cleanly, so nothing forces a look; never device-run merged.
-- **The release-line merge notes** — the 2026-07-23 Fix 5 change-log entry owns them (the authed prepend removal meets C5/C6's untouched copy; the it/fr/cs/es synonym divergence on `found_pet_reported_success`). Read it the day the branches meet.
-- **One surface per chunk in Phase 2** (locked §2, restated in the read plan's spec-time note). This read feeds 2.3, 2.3b on two platforms (one a BUILD), and 2.4 — **the spec must not collapse them because they shared a read.**
-
-## Open rulings Viktor owes
-
-- **§E C5/C6's must-not-touch wall** — Read A reads the enum/resolver/`when`-block ban as that chunk's boundary, not a standing one, and the Android shape depends on it. Probably right, but reclassifying a recorded must-not-touch is a **DECISION** (PROTOCOL §1) and belongs in Locked decisions **before** the spec relies on it.
-- **HU register** — the census (te:ön = 157:5) is owned by the plan's 2026-07-26 C5/C6 entry. **A census is not a ruling.** Rule "informal is deliberate" (or overrule) so a native-speaker reflex cannot re-open it. Blocks nothing.
-- **Chunk numbers for the destination chunks** — §A.1: numbers follow build order, named at spec time (C7/C8 held by deferred F3).
-- **Q6** — root-vs-`docs/` doc home. §6's G-home row names the exact residual and the two ways to close it.
-- **Q3** — HU canonical wording for the guest-order success surface. Blocks all of Phase 3.3; not this read.
+At merge time: §D's renames go **first** (do not resolve into a file scheduled for deletion), then
+diff the real merge output against `fd70647aeb4a` byte for byte. A cleared resolution nobody checks
+against the actual merge is a rehearsal.
 
 ---
 
-## When the next chunk lands
+## What is live right now
 
-Two commits, one pass: **chunk commit → §7 goes RED naming the SHA (transient, expected, documented) → doc-only CODEMAP commit citing it → §7 GREEN.**
+**B2 — the web-handoff subscribe flow, `pet-safety-eu`.** Read plan approved across six ranges;
+build not started at time of writing. Build to `fdf0d570c218` and **do not amend it**. Three things
+are settled and must not be re-derived:
 
-Viktor owns all git; CC executes only under an explicit, recorded per-command go — **the record's home is the CODEMAP; the 2026-07-26 post-commit entry is the precedent.** **Re-hash immediately before the chunk commit** so the committed tree is the reviewed tree — and re-hash again after *any* edit made between review and commit, however small. **If bytes change after review, they go back to the review seat; a re-hash alone proves the tree matches itself, not that anyone read it.** Stage pathspec-limited; `git add -A` and `git commit -a` sweep tracked-modified files the landmines check does not catch.
+- Prod host `senra.pet` is a literal. `app.senra.pet` has no DNS record; staging genuinely is
+  `staging-app.senra.pet` and the asymmetry is deliberate.
+- Market is pinned `hu`. **`locale_hint` is sent by v1 and is a language signal only** — accepted,
+  validated, never fed into market resolution. Ruled 2026-08-02; §9.4 carries the reasoning and the
+  retired evidence.
+- `orders` stays in the destination enum and always returns 400. "Reserved" means exactly that.
 
-Update this file's current-chunk line. Then the next chunk.
+U1/U2 ship independently and inert: until a client calls the endpoint every request 404s and users
+get today's flow.
+
+**Migration `20260802_01` is applied to prod** (2026-08-02 16:04:09Z, 7/7 attributed, 164 applied,
+new high-water mark). §D's column and index are live. **The forward path is open** — nothing writes
+`user_id` at issue time yet, so new invoices land NULL. `session.metadata.user_id` already exists at
+checkout; the assembler change is the fix and it is not written.
+
+---
+
+## Owed by Viktor. Neither seat can close these.
+
+| | |
+|---|---|
+| **E1** | §E C5/C6's must-not-touch wall — chunk boundary or standing? **Gates the Android Phase-2 shape; deadline is C1, before `phase-2-spec.md`.** Send `phase-1-spec.md` §E C5/C6 to the review seat as C1's first artifact |
+| **E2** | HU register — rule "informal is deliberate" or overrule |
+| **E3** | Migration `002` — ever real? Absent from the applied set *and* from `main` |
+| **E4** | Does a rolled-back transaction against prod count as a production action needing a recorded go? |
+| **E6** | pet-safety-eu#113 — merge or close |
+| **E7** | #66 — renumber `20260607_01` above **`20260802_01`** (the mark moved) |
+| | The §M merge resolutions, then Phase 2 of the closeout |
+| | All git operations; store console state; anything needing a device or browser; prod Stripe and Secrets Manager; könyvelő questions |
+
+---
+
+## Standing hazards that bit during this session
+
+Every one is in `PROTOCOL.md` §5 — this list is a pointer, not a copy. Read the owner.
+
+- **`e3b0c442…` fired three times in one day**, twice from `$VAR:path` parsing as a zsh parameter
+  modifier. Knowledge was not the gap; `gshow` is the mitigation, in `~/.zshrc`, and it returns
+  non-zero and prints nothing on a bad ref rather than a plausible hash for an empty file.
+- **A control must share the suspected defect.** A case-mismatched grep read 0 and so did a control
+  known to be present — *two zeros where one was impossible* is what localised the fault to the
+  pattern. `grep -c 'the'` proves the file is readable; it does not test the pattern.
+- **The SHUTTLE.** The artifact and its hash must arrive in the *same message*. Fired repeatedly,
+  including on the commit that promoted it.
+- **A count only verifies if the counting method travels with it.** Pin a fingerprint instead:
+  `grep -vE '^[[:space:]]*(--|#|$)' <file> | shasum -a 256`.
+- **`run-migrations.sh` has no `ON_ERROR_STOP`.** An aborted migration exits 0 and is recorded as
+  applied — the schema change rolls back, the version row lands, and it never re-runs. Apply
+  migrations manually with `-v ON_ERROR_STOP=1` and write the version row by hand until fixed.
+- **Mergeability is not clearance,** and clearance attaches to bytes. A branch gaining a commit
+  voids its review.
+
+---
+
+## First moves
+
+**CC (build seat):** `PROTOCOL.md` in full → run the board → the workplan's priority stack → this
+file's reference state. Re-ground every `file:line` by symbol (`grep -n`) before relying on it.
+Git is read-only absent an explicit, recorded per-command go; prod is Viktor's, rolled back or not.
+
+**Review seat (chat):** `PROTOCOL.md` → board → the ledger's §M if merges are in play. Hash every
+artifact before reading it. Demand the control on every reported negative, and ask whether the
+control shares the suspected defect. Nothing clears on a summary.
+
+**Both:** if a document and running code disagree, **the code wins and the document gets corrected
+in the same pass.**
+
+---
+
+## B2 read plan — surfaced under Rule 2, NEVER RATIFIED
+
+**This exists in no committed file.** It was produced in the 2026-08-02 review session and is
+reproduced here so it is not lost. **Write it into `WORKPLAN.md` §B2, or have the fresh session
+produce its own under Rule 2 and discard this.** Do not treat it as approved.
+
+Ref: pet-safety-eu `origin/main` `33b59a0`. Build to `fdf0d570c218`, do not amend it.
+
+1. `src/utils/cookies.ts:1-98` (`7eab63b653d0`) — **whole file.** Decides redeem's response shape.
+   `:68-79` `setRefreshCookie` is `sameSite:'strict'`, `path:'/api/auth/refresh'`; `:44`
+   `setAuthCookie` uses `getCookieOptions` (`:27`, none/lax, path `/`). Whether the strict path
+   survives the `senra.pet` → `api.senra.pet` hop decides if the body token is fallback or primary.
+2. `src/routes/auth.routes.ts:539-694` (`12b5a59951ac`) — verify-otp through refresh. **`:539` is
+   the precedent redeem must copy, NOT `:162` `/login`, which the web never calls.**
+3. `src/middleware/rateLimiter.ts:49-70, 226-260, 395-405, 437` (`048ac3d1c34a`). `:226`
+   `apiRateLimiter` and `:395` `paymentRateLimiter` are the ISSUE candidates; `:251`
+   `publicWriteRateLimiter` for REDEEM. **`:437` `adminRateLimiter` is a `next()` no-op — confirmed,
+   must not be composed by name.**
+4. `src/config/redis.ts:1-56` (`6eb8074c090f`). `:1` imports **ioredis**, `:41` exports the client —
+   so `set(k,v,'EX',90)`, not node-redis's options object.
+5. `src/routes/auth/twoFactor.routes.ts:1-20` + `src/app.ts:54,239` (`be2ee175f42b`). The sub-router
+   mount precedent, and whether `appCheckIfEnforced` applies to a route the web calls.
+6. tagme-now: the redesign7 route entry + `CountryContext:33-37`, `countries.ts:18`. U2 only.
+   **Unpinned — a locating hint, not a citation.** Range to be fixed by `grep -n` at read time.
+
+Settled and not to be re-derived: prod host `senra.pet` is a literal; market pinned `hu`;
+`locale_hint` accepted, validated, never fed into market resolution; `orders` stays in the enum and
+always 400s.
+
+## Append here as B2 proceeds
+
+*(Chunk, artifact hash, review status. Replace this section rather than adding a dated file.)*
