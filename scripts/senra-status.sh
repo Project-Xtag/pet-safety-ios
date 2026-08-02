@@ -285,25 +285,35 @@ lguard "$APPKT" 'RootRoute.LANDING -> LandingScreen'          1 "AND: root when 
 # in review. Measured 0/0/private at android 931b51b, so it lands GREEN — the plan's
 # "AlertsScreens.kt has 1 external caller" is stale (control: MainTabScaffold, 4 files).
 #
-# SCOPE IS app/src/main ONLY, AND THAT IS DELIBERATE — say it in the label so nobody
-# reads the green as "nothing references this anywhere". It is not true of the module:
-# app/src/test/java/com/petsafety/app/ui/screens/ReportSightingValidationTest.kt names
-# ReportSightingDialog and does readSource("AlertsScreens.kt"), reading the file as TEXT
-# to assert the validators are wired. That is a source-reading test, not a call, and
-# widening the scan to app/src would turn it into a permanent false RED. Wiring means
-# SHIPPED code, so main is the right frame — but the frame has to be stated.
+# SCOPE IS SPLIT, AND THE SPLIT IS THE POINT — the two mechanisms have different
+# false-positive exposure, so they get different frames.
 #
-# Consequence to accept knowingly: a test that genuinely CALLS one of these is invisible
-# here. It cannot ship a dormant screen to a user on its own, and ReportSightingDialog's
-# `private` pin below is what stops the call existing at all.
+#   * The two composables are scanned across ALL of app/src, TEST SOURCES INCLUDED.
+#     Measured at android 931b51b: MissingAlertsScreen and FoundAlertsScreen have
+#     test+androidTest = 0, so widening costs nothing today and closes the real
+#     resurrection path — a Compose test that RENDERS either screen re-animates a
+#     dormant surface, and under a main-only scan that reads green.
+#
+#   * ReportSightingDialog is NOT in the zero-callers check at all. It is guarded by
+#     the `private` pin below, a different mechanism, and that is where the only
+#     false-red risk lives: app/src/test/java/com/petsafety/app/ui/screens/
+#     ReportSightingValidationTest.kt names it and does readSource("AlertsScreens.kt"),
+#     reading the file as TEXT to assert the validators are wired. That is a
+#     source-reading test, not a call. Counting it as an external caller would be a
+#     permanent false RED — so it is not counted, because `private` already makes the
+#     call impossible.
+#
+# Earlier revision scanned main only for all three and justified it with the dialog's
+# test reference. That generalised one symbol's exposure across two that do not share
+# it, and left the composables' resurrection path green. Corrected in review.
 ALERTSKT="$AND/app/src/main/java/com/petsafety/app/ui/screens/AlertsScreens.kt"
-if [ -f "$ALERTSKT" ] && [ -d "$AND/app/src/main" ]; then
+if [ -f "$ALERTSKT" ] && [ -d "$AND/app/src" ]; then
   for sym in MissingAlertsScreen FoundAlertsScreen; do
-    EXT=$(grep -rF "$sym" "$AND/app/src/main" --include='*.kt' 2>/dev/null | grep -vc 'AlertsScreens\.kt')
+    EXT=$(grep -rF "$sym" "$AND/app/src" --include='*.kt' 2>/dev/null | grep -vc 'AlertsScreens\.kt')
     if [ "$EXT" -eq 0 ]; then
-      pass "AND: $sym has 0 external callers in app/src/main (F-G6 quarantine; test sources out of scope by design)"
+      pass "AND: $sym has 0 external callers across app/src incl. tests (F-G6 quarantine)"
     else
-      fail "AND: $sym has $EXT external reference(s) in app/src/main — AlertsScreens.kt is dormant under PROTOCOL §6; wiring it is a boundary breach, not a chunk"
+      fail "AND: $sym has $EXT external reference(s) in app/src — AlertsScreens.kt is dormant under PROTOCOL §6; wiring it, or rendering it from a test, is a boundary breach, not a chunk"
     fi
   done
   if grep -qE '^[[:space:]]*private fun ReportSightingDialog' "$ALERTSKT"; then
