@@ -284,14 +284,26 @@ lguard "$APPKT" 'RootRoute.LANDING -> LandingScreen'          1 "AND: root when 
 # This lands BEFORE the 2.3b chunk on purpose, so wiring reads RED here rather than
 # in review. Measured 0/0/private at android 931b51b, so it lands GREEN — the plan's
 # "AlertsScreens.kt has 1 external caller" is stale (control: MainTabScaffold, 4 files).
+#
+# SCOPE IS app/src/main ONLY, AND THAT IS DELIBERATE — say it in the label so nobody
+# reads the green as "nothing references this anywhere". It is not true of the module:
+# app/src/test/java/com/petsafety/app/ui/screens/ReportSightingValidationTest.kt names
+# ReportSightingDialog and does readSource("AlertsScreens.kt"), reading the file as TEXT
+# to assert the validators are wired. That is a source-reading test, not a call, and
+# widening the scan to app/src would turn it into a permanent false RED. Wiring means
+# SHIPPED code, so main is the right frame — but the frame has to be stated.
+#
+# Consequence to accept knowingly: a test that genuinely CALLS one of these is invisible
+# here. It cannot ship a dormant screen to a user on its own, and ReportSightingDialog's
+# `private` pin below is what stops the call existing at all.
 ALERTSKT="$AND/app/src/main/java/com/petsafety/app/ui/screens/AlertsScreens.kt"
 if [ -f "$ALERTSKT" ] && [ -d "$AND/app/src/main" ]; then
   for sym in MissingAlertsScreen FoundAlertsScreen; do
     EXT=$(grep -rF "$sym" "$AND/app/src/main" --include='*.kt' 2>/dev/null | grep -vc 'AlertsScreens\.kt')
     if [ "$EXT" -eq 0 ]; then
-      pass "AND: $sym has 0 external callers (F-G6 dormant-screen quarantine)"
+      pass "AND: $sym has 0 external callers in app/src/main (F-G6 quarantine; test sources out of scope by design)"
     else
-      fail "AND: $sym has $EXT external reference(s) — AlertsScreens.kt is dormant under PROTOCOL §6; wiring it is a boundary breach, not a chunk"
+      fail "AND: $sym has $EXT external reference(s) in app/src/main — AlertsScreens.kt is dormant under PROTOCOL §6; wiring it is a boundary breach, not a chunk"
     fi
   done
   if grep -qE '^[[:space:]]*private fun ReportSightingDialog' "$ALERTSKT"; then
