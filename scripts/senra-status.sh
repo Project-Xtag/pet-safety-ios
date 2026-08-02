@@ -325,20 +325,31 @@ check_contract() {
 # a renamed file or a renamed constant evaporates the drift check instead of failing
 # it, which is the §5b/lguard failure mode (:192) and the ship-gate one (:234) in a
 # third place. Absence is a defect here too, so say so out loud.
+# Exactly-one-match is part of the contract. Two matches concatenate into a
+# multi-line $X, which check_contract then compares against the single declared
+# value and reports as DRIFT — a confusing failure that points at the plan when the
+# defect is the pattern. Count with `grep -o | wc -l`, never `grep -c`, which counts
+# LINES not occurrences (that miscount has already burned a bundle grep here).
 IOS_SPLASH="$IOS/PetSafety/PetSafety/Views/SplashScreenView.swift"
-IOS_HOLD=$(grep -o 'holdDuration[^=]*= *[0-9.]*' "$IOS_SPLASH" 2>/dev/null | grep -o '[0-9.]*$')
-if [ -n "$IOS_HOLD" ]; then
-  check_contract "ios.splash.holdDuration" "$IOS_HOLD" "SplashScreenView.swift"
-else
+IOS_PAT='holdDuration[^=]*= *[0-9.]*'
+IOS_HITS=$(grep -o "$IOS_PAT" "$IOS_SPLASH" 2>/dev/null | wc -l | tr -d ' ')
+if [ "$IOS_HITS" -eq 1 ]; then
+  check_contract "ios.splash.holdDuration" "$(grep -o "$IOS_PAT" "$IOS_SPLASH" | grep -o '[0-9.]*$')" "SplashScreenView.swift"
+elif [ "$IOS_HITS" -eq 0 ]; then
   fail "ios.splash.holdDuration SUBJECT MISSING ($IOS_SPLASH, or the constant was renamed) — the drift check must not evaporate silently"
+else
+  fail "ios.splash.holdDuration AMBIGUOUS — $IOS_HITS matches in $IOS_SPLASH, need exactly 1. Narrow the pattern or pin the constant; do not let it read as DRIFT."
 fi
 
 AND_SPLASH="$AND/app/src/main/java/com/petsafety/app/ui/screens/SplashScreen.kt"
-AND_HOLD=$(grep -o 'HOLD_DURATION_MS[^=]*= *[0-9_]*' "$AND_SPLASH" 2>/dev/null | grep -o '[0-9_]*$' | tr -d '_')
-if [ -n "$AND_HOLD" ]; then
-  check_contract "android.splash.holdDurationMs" "$AND_HOLD" "SplashScreen.kt"
-else
+AND_PAT='HOLD_DURATION_MS[^=]*= *[0-9_]*'
+AND_HITS=$(grep -o "$AND_PAT" "$AND_SPLASH" 2>/dev/null | wc -l | tr -d ' ')
+if [ "$AND_HITS" -eq 1 ]; then
+  check_contract "android.splash.holdDurationMs" "$(grep -o "$AND_PAT" "$AND_SPLASH" | grep -o '[0-9_]*$' | tr -d '_')" "SplashScreen.kt"
+elif [ "$AND_HITS" -eq 0 ]; then
   fail "android.splash.holdDurationMs SUBJECT MISSING ($AND_SPLASH, or the constant was renamed) — the drift check must not evaporate silently"
+else
+  fail "android.splash.holdDurationMs AMBIGUOUS — $AND_HITS matches in $AND_SPLASH, need exactly 1. Narrow the pattern or pin the constant; do not let it read as DRIFT."
 fi
 
 # ─────────────────────────────────────────────────────────────
