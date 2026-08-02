@@ -116,7 +116,22 @@ U1/U2 ship independently and inert: until a client calls the endpoint every requ
 get today's flow.
 
 **Migration `20260802_01` is applied to prod** (2026-08-02 16:04:09Z, 7/7 attributed, 164 applied,
-new high-water mark). §D's column and index are live. **The forward path is open** — nothing writes
+new high-water mark) **and its source is committed — that hole is CLOSED.** It was applied manually,
+outside the runner, and for ~6 hours the schema change existed in prod with its source in no
+repository. It is now on pet-safety-eu `main` at `ca877a0` (PR #119), and the chain is verified end
+to end at one value:
+
+| Link | sha256 |
+|---|---|
+| Reviewed artifact (v4) | `87e88be96acb…587ed` |
+| Committed on `main`, from a fresh clone | `87e88be96acb…587ed` |
+| `schema_migrations.checksum` in prod | `87e88be96acb…587ed` |
+
+⚠ **Nothing validates that chain automatically** — the runner writes a checksum and never reads one
+back. If you need to know a migration's source still matches what was applied, verify it by hand:
+`gshow <ref> <path>` against `SELECT checksum FROM schema_migrations WHERE version=…`.
+
+§D's column and index are live. **The forward path is open** — nothing writes
 `user_id` at issue time yet, so new invoices land NULL. `session.metadata.user_id` already exists at
 checkout; the assembler change is the fix and it is not written.
 
@@ -152,8 +167,25 @@ Every one is in `PROTOCOL.md` §5 — this list is a pointer, not a copy. Read t
 - **A count only verifies if the counting method travels with it.** Pin a fingerprint instead:
   `grep -vE '^[[:space:]]*(--|#|$)' <file> | shasum -a 256`.
 - **`run-migrations.sh` has no `ON_ERROR_STOP`.** An aborted migration exits 0 and is recorded as
-  applied — the schema change rolls back, the version row lands, and it never re-runs. Apply
-  migrations manually with `-v ON_ERROR_STOP=1` and write the version row by hand until fixed.
+  applied — the schema change rolls back, the version row lands, and it never re-runs.
+  **⚠ AND THE RUNNER IS INVOKED BY CI, UNATTENDED — "apply migrations by hand" is NOT a gate that
+  exists.** Verified on `origin/main` 2026-08-03: `.github/workflows/deploy-backend.yml:219` and
+  `deploy-backend-staging.yml:125` both run `bash scripts/run-migrations.sh` as SSM Phase 2, and the
+  prod workflow triggers on **push to `main` touching `pet-safety-eu/backend/**`** — which every
+  migration does. So a migration merged to `main` is applied automatically, and if it aborts it is
+  recorded as applied with no human in the loop. Applying by hand protects only the migrations you
+  personally apply; it does not protect the pipeline, and a session inheriting that advice will
+  believe it is covered when it is not. **Fix owed** — `-v ON_ERROR_STOP=1` in the runner, its own PR
+  and its own session. Until it lands, treat every merge of a migration to `main` as an unattended
+  apply.
+  *(A checksum read-back is deliberately NOT bundled with that fix: 164 recorded checksums have never
+  been audited, so a mismatch cannot be distinguished from ordinary drift. Measure first, warn, then
+  enforce.)*
+- **Three copies of the deploy workflow exist and all three differ.** Only the repo-root
+  `.github/workflows/` is live. `pet-safety-eu/.github/workflows/deploy-backend.yml` and
+  `pet-safety-eu/backend/.github/workflows/deploy-backend.yml` are inert **and already drifted** —
+  the three hash `30247a49afd3` / `d1714894bd66` / `d96f47052942`. Read the wrong one and you are
+  describing a file nothing executes. **Always confirm you are in repo-root `.github/workflows/`.**
 - **Mergeability is not clearance,** and clearance attaches to bytes. A branch gaining a commit
   voids its review.
 
@@ -168,6 +200,23 @@ Git is read-only absent an explicit, recorded per-command go; prod is Viktor's, 
 **Review seat (chat):** `PROTOCOL.md` → board → the ledger's §M if merges are in play. Hash every
 artifact before reading it. Demand the control on every reported negative, and ask whether the
 control shares the suspected defect. Nothing clears on a summary.
+
+⚠ **PROPORTIONALITY — block only on what would ship wrong, corrupt data, or mislead a fresh
+session.** Everything else is noted **once, in one line**, and does not generate a round.
+
+**There is always another finding in any artifact.** The question is never whether one exists — one
+always does — but whether it justifies another exchange. A correct observation that changes no
+decision still costs a full round trip, and rounds are the scarce resource, not findings.
+
+*Recorded because this is the failure the rest of the protocol has no defence against.* Every other
+rule here makes review **stricter**; none of them says when to stop. On 2026-08-02 this loop found
+four things genuinely worth blocking on — the `locale_hint` reversal, the email-join backfill, the
+board's evaporating guards, and a migration applied with no source — and then ran several more
+rounds past them on wording, hash re-pins and counts that changed nothing. The work was correct; the
+rounds were not free.
+
+**Test before raising it: if this is wrong, does something ship broken, does data corrupt, or does
+the next session believe something false?** If none of the three, write the line and move on.
 
 **Both:** if a document and running code disagree, **the code wins and the document gets corrected
 in the same pass.**
