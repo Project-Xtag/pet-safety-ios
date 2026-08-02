@@ -131,18 +131,22 @@ copy, you have the wrong document.** They are enumerated in the workplan §B1; t
 
 | Document | Where | Committed? |
 |---|---|---|
-| `SENRA-WORKPLAN-2026-08-01.md` | local | **NO** |
-| `SESSION-HANDOVER-2026-08-01.md` (this) | local | **NO** |
+| `SENRA-WORKPLAN-2026-08-01.md` | pet-safety-ios `docs/` | **yes** — tracked 2026-08-02 (`2bcc2ac`, PR #45) |
+| `SESSION-HANDOVER-2026-08-01.md` (this) | pet-safety-ios `docs/` | **yes** — tracked 2026-08-02 (`2bcc2ac`, PR #45) |
 | `WEB-HANDOFF-CONTRACT.md` | pet-safety-ios `docs/` | yes, on `main` |
 | `PROTOCOL.md`, `CODEMAP`, `SENRA-MOBILE-REDESIGN.md`, `HANDOVER.md` | pet-safety-ios `docs/` | yes, current on `main` as of `5e27855` |
 | `SESSION-HANDOVER-2026-07-31.md` | pet-safety-ios `docs/` | yes |
 | `pricing-C9-cutover-runbook.md` | monorepo, untracked + hidden by `.git/info/exclude` | **NO** |
 | `PHASE2-READ-PLAN.md` | pet-safety-ios `docs/` | yes |
 
-**Standing risk:** the two documents at the top of this table are local-only. Until 2026-08-01 the
-governing docs on `main` were the 2026-07-17 versions — two weeks stale for the entire duration of the
-flip, with `senra-status.sh` on `main` missing every guard added since. PR #42/#44 fixed that. Do not
-let it recur.
+**Standing risk — CLOSED for these two, 2026-08-02.** The two documents at the top of this table were
+local-only; they are now tracked (`2bcc2ac`, PR #45). Until 2026-08-01 the governing docs on `main`
+were the 2026-07-17 versions — two weeks stale for the entire duration of the flip, with
+`senra-status.sh` on `main` missing every guard added since. PR #42/#44 fixed that; #45 stopped it
+recurring here. **The mechanism, not the memory, is what holds it closed:** board §9 is now a
+manifest — if a governing doc is not named in that list it is not governing, and a doc going
+untracked or off-branch reds a script that already runs at session start. Add a governing doc, add it
+to §9 in the same commit.
 
 There is **no monorepo for docs** — four repos only, and the monorepo's `docs/` is an archive of 74
 stale files.
