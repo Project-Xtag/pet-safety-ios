@@ -53,8 +53,10 @@ There is **no monorepo for docs** — four repos only, and the monorepo's `docs/
 | Artifact | Hash | Size |
 |---|---|---|
 | `senra-status.sh` — **redesign line**, PR #46 @ `6632108` | `7dd21f156710` | 30,895 B / 531 L |
-| `senra-status.sh` — **docs line**, PR #47 @ `628b25e` | `e451a2820970` | 25,740 B / 445 L |
-| `senra-status.sh` — **#46 ⊕ #47 RESOLVED**, cleared, unmerged | `fd70647aeb4a` | 31,639 B / 540 L |
+| `senra-status.sh` — docs line @ `628b25e` (now merged) | `e451a2820970` | 25,740 B / 445 L |
+| `senra-status.sh` — **`main`**, after #47 + #48 | `a1aeca162505` | 26,297 B / 451 L |
+| `senra-status.sh` — **#46 ⊕ `main` RESOLVED**, unmerged | `9e9c2fbf2b4c` | 32,196 B / 546 L |
+| ~~`senra-status.sh` — #46 ⊕ #47~~ | ~~`fd70647aeb4a`~~ | **VOID** — superseded when #48 changed `main` |
 | `WEB-HANDOFF-CONTRACT.md` — **FROZEN** | `fdf0d570c218` | 22,854 B / 323 L |
 | └ §8, the frozen surface | `86a1c13aaad5` | 383 B / 11 L |
 | `PROTOCOL.md` | `63603befd524` | 246 L |
@@ -79,20 +81,20 @@ Three PRs stacked and unmerged: **#45** (08-01 docs) → **#47** (Phase 1 closeo
 ⚠ **#46 and #47 do not auto-merge.** Five files conflict. Four resolve to values already cleared
 (the redesign line never edited them — its copies are content-identical to the docs line's starting
 point). `senra-status.sh` was the only genuine one and **is already resolved and cleared at
-`fd70647aeb4a`**, reconstructed independently from both sides.
+`9e9c2fbf2b4c`**, reconstructed independently from both sides.
 
 **Build it with `git merge-file -p <ours> <base @2bcc2ac> <theirs>`, not by taking both conflict
 sides.** Concatenating sides duplicates the shared region: the conflict exists *because* both lines
 advanced the same content from an old base, so each side's block already contains that content.
 `rc=0` — there was never a semantic collision, only a textual one.
 
-⚠ **`fd70647aeb4a` is pinned to FILE CONTENT, not tip SHAs.** It is the union of `7dd21f156710`
-and `e451a2820970`. It is **void only if `senra-status.sh` changes at either end** — a commit
+⚠ **`9e9c2fbf2b4c` is pinned to FILE CONTENT, not tip SHAs.** It is the union of `7dd21f156710`
+and `a1aeca162505`. It is **void only if `senra-status.sh` changes at either end** — a commit
 touching the workplan, the ledger or any other file leaves it valid. Check the two hashes, not the
 branch names. A voided resolution reads exactly like a stale one; this is what distinguishes them.
 
 At merge time: §D's renames go **first** (do not resolve into a file scheduled for deletion), then
-diff the real merge output against `fd70647aeb4a` byte for byte. A cleared resolution nobody checks
+diff the real merge output against `9e9c2fbf2b4c` byte for byte. A cleared resolution nobody checks
 against the actual merge is a rehearsal.
 
 ---
