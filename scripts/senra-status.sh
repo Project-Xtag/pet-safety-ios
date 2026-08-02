@@ -268,6 +268,41 @@ lguard "$APPKT" 'RootRoute.REGISTER -> RegisterScreen'        1 "AND: root when 
 lguard "$APPKT" 'RootRoute.LOGIN -> AuthScreen'               1 "AND: root when arm LOGIN present (C2 seam)"
 lguard "$APPKT" 'RootRoute.LANDING -> LandingScreen'          1 "AND: root when arm LANDING present (C2 seam)"
 
+# ── F-G6 — dormant-screen quarantine, keyed on SYMBOLS, not on the filename ──
+# PROTOCOL §6 forbids wiring AlertsScreens.kt. A guard that names the FILE guards
+# NOTHING: G12b forbade wiring ScannedPetView, nobody wired it, and logged-out
+# delivery shipped on iOS anyway through a live component one branch over. So pin the
+# symbols instead.
+#
+# Two things are guarded, because 2.3b-Android is the live hazard:
+#   1. The two non-private composables must have ZERO references outside their own
+#      file. They are the whole public surface of the quarantined screen.
+#   2. ReportSightingDialog must stay `private`. 2.3b LIFTS from it; the moment it
+#      loses `private` it is one import away from being CALLED, which is the lift
+#      quietly becoming a call — the exact G12b shape, one file over.
+#
+# This lands BEFORE the 2.3b chunk on purpose, so wiring reads RED here rather than
+# in review. Measured 0/0/private at android 931b51b, so it lands GREEN — the plan's
+# "AlertsScreens.kt has 1 external caller" is stale (control: MainTabScaffold, 4 files).
+ALERTSKT="$AND/app/src/main/java/com/petsafety/app/ui/screens/AlertsScreens.kt"
+if [ -f "$ALERTSKT" ] && [ -d "$AND/app/src/main" ]; then
+  for sym in MissingAlertsScreen FoundAlertsScreen; do
+    EXT=$(grep -rF "$sym" "$AND/app/src/main" --include='*.kt' 2>/dev/null | grep -vc 'AlertsScreens\.kt')
+    if [ "$EXT" -eq 0 ]; then
+      pass "AND: $sym has 0 external callers (F-G6 dormant-screen quarantine)"
+    else
+      fail "AND: $sym has $EXT external reference(s) — AlertsScreens.kt is dormant under PROTOCOL §6; wiring it is a boundary breach, not a chunk"
+    fi
+  done
+  if grep -qE '^[[:space:]]*private fun ReportSightingDialog' "$ALERTSKT"; then
+    pass "AND: ReportSightingDialog still private (F-G6 — 2.3b lifts from it, must never call it)"
+  else
+    fail "AND: ReportSightingDialog is no longer private — 2.3b can now CALL it instead of lifting from it (PROTOCOL §6, the G12b shape)"
+  fi
+else
+  fail "AND: F-G6 quarantine SUBJECT MISSING ($ALERTSKT) — the guard must not evaporate silently"
+fi
+
 # ─────────────────────────────────────────────────────────────
 head_ "6. Declared contracts vs. the code (drift detector)"
 # v1 grepped PROSE that appeared ZERO times and false-fired against CORRECT code.
@@ -286,11 +321,25 @@ check_contract() {
   fi
 }
 
-IOS_HOLD=$(grep -o 'holdDuration[^=]*= *[0-9.]*' "$IOS/PetSafety/PetSafety/Views/SplashScreenView.swift" 2>/dev/null | grep -o '[0-9.]*$')
-[ -n "$IOS_HOLD" ] && check_contract "ios.splash.holdDuration" "$IOS_HOLD" "SplashScreenView.swift"
+# A `[ -n "$X" ] && check_contract …` silently SKIPS when the grep finds nothing —
+# a renamed file or a renamed constant evaporates the drift check instead of failing
+# it, which is the §5b/lguard failure mode (:192) and the ship-gate one (:234) in a
+# third place. Absence is a defect here too, so say so out loud.
+IOS_SPLASH="$IOS/PetSafety/PetSafety/Views/SplashScreenView.swift"
+IOS_HOLD=$(grep -o 'holdDuration[^=]*= *[0-9.]*' "$IOS_SPLASH" 2>/dev/null | grep -o '[0-9.]*$')
+if [ -n "$IOS_HOLD" ]; then
+  check_contract "ios.splash.holdDuration" "$IOS_HOLD" "SplashScreenView.swift"
+else
+  fail "ios.splash.holdDuration SUBJECT MISSING ($IOS_SPLASH, or the constant was renamed) — the drift check must not evaporate silently"
+fi
 
-AND_HOLD=$(grep -o 'HOLD_DURATION_MS[^=]*= *[0-9_]*' "$AND/app/src/main/java/com/petsafety/app/ui/screens/SplashScreen.kt" 2>/dev/null | grep -o '[0-9_]*$' | tr -d '_')
-[ -n "$AND_HOLD" ] && check_contract "android.splash.holdDurationMs" "$AND_HOLD" "SplashScreen.kt"
+AND_SPLASH="$AND/app/src/main/java/com/petsafety/app/ui/screens/SplashScreen.kt"
+AND_HOLD=$(grep -o 'HOLD_DURATION_MS[^=]*= *[0-9_]*' "$AND_SPLASH" 2>/dev/null | grep -o '[0-9_]*$' | tr -d '_')
+if [ -n "$AND_HOLD" ]; then
+  check_contract "android.splash.holdDurationMs" "$AND_HOLD" "SplashScreen.kt"
+else
+  fail "android.splash.holdDurationMs SUBJECT MISSING ($AND_SPLASH, or the constant was renamed) — the drift check must not evaporate silently"
+fi
 
 # ─────────────────────────────────────────────────────────────
 head_ "7. Is the log behind the code?  (this is what 'no missed logs' means)"
@@ -307,10 +356,23 @@ head_ "7. Is the log behind the code?  (this is what 'no missed logs' means)"
 # exists to prevent. Verified by experiment 2026-07-17, not by reading.
 #
 # A CHUNK is any non-merge commit on $BRANCH, not yet on origin/main, that TOUCHES
-# FEATURE SOURCE. Touching feature source is SUFFICIENT, not exclusive: a commit that
-# edits a source file AND the CODEMAP in one go is still a chunk and must still cite
-# itself. Mixed commits are not forbidden — they just have to log themselves. A commit
-# touching only docs/** or scripts/** is a log commit, not a chunk, and is ignored.
+# FEATURE SOURCE.
+#
+# FEATURE SOURCE IS A POSITIVE ALLOWLIST — it is NOT "anything that is not docs".
+# The code below is the definition: iOS = paths matching ^PetSafety/ , Android =
+# paths matching ^app/src/ (the $SRC regex). A commit is a chunk only if at least one
+# of its paths matches that prefix. EVERYTHING else is a log commit and is ignored —
+# docs/**, scripts/**, and also .gitignore, CI workflows, Gradle files, *.pbxproj,
+# README, and anything at the repo root.
+#
+# Read as a denylist ("not docs/ and not scripts/") it OVER-COUNTS and reports a false
+# RED: a .gitignore-only commit gets classified as an unlogged chunk. That misreading
+# cost a review pass on 2026-08-02 — fd7b567 (.gitignore + docs/ + scripts/ only) was
+# reported as an unlogged 10th iOS chunk when the board correctly counted 9.
+#
+# Touching feature source is SUFFICIENT, not exclusive: a commit that edits a source
+# file AND the CODEMAP in one go is still a chunk and must still cite itself. Mixed
+# commits are not forbidden — they just have to log themselves.
 # Merge commits are ignored: they carry no chunk of their own.
 #
 # EXPECTED: a transient RED between the chunk commit and its log commit. That is not a
