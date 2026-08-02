@@ -53,7 +53,7 @@ The flow: register → subscribe → already logged in on the subscription page.
 
 ### B1 — Freeze the contract ✅ DONE
 
-`WEB-HANDOFF-CONTRACT.md` — **FROZEN 2026-08-01**, `a6ce9dd2e930`, 293 lines. Six corrections were
+`WEB-HANDOFF-CONTRACT.md` — **FROZEN 2026-08-01**, `fdf0d570c218`, 323 lines (re-pinned 2026-08-02 for the §9.4 `locale_hint` reversal; freeze intact — §8's binding surface unchanged, was `a6ce9dd2e930`/293). Six corrections were
 made at freeze, each against running code:
 
 - `manage_subscription` → **`/{cc}/manage-subscription`**, top-level and public — not nested under
@@ -68,11 +68,12 @@ made at freeze, each against running code:
   the body token is a documented cross-origin fallback. Redeem must store a refresh token in DB, set
   both cookies via `utils/cookies.ts`, and return `{success, user, token, refreshToken}`.
   `refresh_token` is `sameSite:'strict'`, `path:'/api/auth/refresh'`. **[was wrong]**
-- **`locale_hint` is NOT dropped.** `/hu/` forces Hungarian (`countries.ts:18` +
-  `CountryContext.tsx:33-37`), so an HU-market customer who reads English gets Hungarian copy at the
-  moment they pay. v1 **sends** it — reserving it in the schema alone buys nothing, because §8 freezes
-  request field names. It is a **language signal only and must never feed market resolution**; the
-  market stays pinned to `hu`. **[was wrong]**
+- **`locale_hint` is NOT dropped — v1 sends it.** **The contract owns this; do not restate it here
+  (PROTOCOL §1).** Ruling, evidence, freeze impact and the permitted language API are all in
+  `WEB-HANDOFF-CONTRACT.md` **§9.4** (the answer, reversed and re-evidenced 2026-08-02) and **§5**
+  (`Locale.current.language` / `Locale.getDefault().language` permitted; `.region` / `.country`
+  banned). One line only, because U1 depends on it: it is a **language signal and must never feed
+  market resolution** — the market stays the literal `hu`. **[was wrong]**
 - **Self-guard enum rule** replaces the draft's auth-boundary handling: a destination may only enter
   the enum if its page self-guards. `choose-plan`, `manage-subscription` and `billing` are outside
   `RedesignProtectedRoute` deliberately (they survive the Stripe round-trip) and each self-guards —

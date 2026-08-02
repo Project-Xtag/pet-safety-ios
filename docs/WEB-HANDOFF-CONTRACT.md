@@ -148,6 +148,15 @@ Redeem is **unauthenticated** (the browser has no session — that is the entire
 - **Host.** ⚠ **Corrected 2026-08-01: "Android's is done" is true of the BRANCH and false of the FIELD.** The `WEB_BASE_URL` fix landed in `2635a62` (vc23), which was **never fielded**. The fielded build is `8260097` (vc22, tag `release/2.2.1-vc22`), where `WEB_BASE_URL` does not exist and the CTA hardcodes `https://senra.pet` at `PetSetupWizardScreen.kt:147`. **So BOTH clients are unconditionally prod in the field today.** iOS `4756295` (tag `release/2.2.1-build5`) has no build-type override at all — `WebURLHelper.swift:28`. On both platforms this is a **prerequisite for testing U4 at all**: a staging build's CTA cross-wires to prod and the handoff cannot be exercised in any safe environment. Do not plan U3 as "Android already has the host" — it does not.
 - **Market.** The fallback must be `{env-host}/hu/choose-plan`, hardcoded. **BANNED IN BOTH CLIENTS' FALLBACKS: any device-region signal, on either platform, in any form.** Concretely, the fallback must not read `Locale.current.region` (iOS), `Locale.getDefault().country` (Android), or route through `WebURLHelper.countryCode` / `WebUrlHelper.countryCode`, which are exactly those calls wrapped in a helper. The `/hu/` segment is a **literal**, not a lookup.
 
+  **⚠️ THE PERMITTED LANGUAGE CALL, NAMED — because it is one word from the banned one.** Now that
+  §9.4 rules v1 **sends** `locale_hint`, U3/U4 must read a *language*, and the only calls allowed for
+  that are **`Locale.current.language` (iOS)** and **`Locale.getDefault().language` (Android)**.
+  Read them for `locale_hint` and **for nothing else**. The distinction is a single word —
+  `.language` is permitted, `.region` / `.country` are banned — so a reviewer scanning for
+  `Locale.current.` will see both and must check which member is being read. **`region`/`country`
+  anywhere in the URL-building path is the `/uk/` bug; `language` feeding `locale_hint` is the fix.**
+  Neither may reach market resolution: the market is the literal `hu`.
+
   This is not a style preference — it is the whole defect. Today, **both fielded builds derive the market from device region**: iOS `WebURLHelper.swift:21` and Android `WebUrlHelper.kt:27-31` both end `?? "uk"` / `?: "uk"`, and both CTAs route through them. Production is only saved by a CloudFront Function 301-ing `/uk/* → /hu/*` (`terraform/frontend.tf:93-95`, "UK country removed"). **That redirect is infrastructure, not client correctness** — remove it while region-deriving binaries are fielded and the defect reopens instantly, with no client change.
 
   The fallback is the path that fires whenever the handoff is unavailable — every launch between submission and U1 reaching prod. Putting a region lookup there rebuilds the bug in the one code path shipped specifically to be safe. **HU-region devices resolve correctly today** (`Locale` region `HU` → `hu`, byte-verified `0x48 0x55`, including `en_HU`), which is precisely why the defect is easy to miss in testing: it only appears on a device whose region is not Hungary.
@@ -205,9 +214,30 @@ The `LanguageSwitcher` (`:20`) calls `changeLanguage` directly and will hold **u
 
 **⇒ `locale_hint` HAS a job.** It is the only way a handoff can express "HU market, English copy".
 
-**4. Does v1 send `locale_hint`? — NO, and that is deliberate.**
-Measured: `locale_hint` appears **0 times** in iOS `4756295`, Android `8260097`, and backend `33b59a0`. Controls hit (`locale` alone: 20 iOS files, 31 Android files), so these are real zeros.
-**Reserve the field in the schema now; v1 clients do not populate it.** The server must therefore treat absence as "no language preference" and fall back to the country's language — i.e. today's behaviour, unchanged. Adding the field to the schema now is what avoids a store cycle when the language question is actually addressed.
+**4. Does v1 send `locale_hint`? — YES. RULED 2026-08-02, reversing the earlier "NO".**
+
+v1 **sends** `locale_hint`. The market stays pinned to `hu` as a literal; `locale_hint` is a language
+signal only and must never enter market resolution (§3, and the ⚠ above).
+
+**The old evidence line was wrong independently of the old answer, and that is why this needs saying
+twice.** It read: *"`locale_hint` appears 0 times in iOS `4756295`, Android `8260097`, backend
+`33b59a0`; controls hit."* The zeros were real and the controls did hit — but **none of those three
+builds calls this endpoint at all**, so the measurement could never have supported either answer. It
+measured the absence of a feature that had not been built. Left standing, a later reader re-derives
+the old ruling from evidence that still looks sound.
+
+**Reserving the field alone buys nothing**, which is the reason for the reversal: §8 freezes request
+field *names*, so a field reserved-but-never-populated cannot be populated later without the store
+cycle the reservation was supposed to avoid. v1 populating it now is what makes the reservation
+worth having.
+
+**FREEZE IMPACT: NONE. This does not amend the frozen contract.** §8 freezes the field *name*, and
+`locale_hint` is already in the schema — see §3's request body. A client populating a
+frozen-in optional field moves nothing in §8's left column: no endpoint path, no method, no field
+name, no `destination` value, no response shape. The binding surface is unchanged.
+
+Server behaviour is unchanged too: absence still means "no language preference" and still falls back
+to the country's language.
 
 
 ---

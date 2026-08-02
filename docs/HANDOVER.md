@@ -17,6 +17,7 @@ Every fact has exactly one owner. Restated facts drift and then contradict each 
 | What C5/C6 were contracted to do (and their gate) | `docs/phase-1-spec.md` **§E C5/C6** |
 | The Phase-2 destination scopes | plan **§4 2.3 / 2.3b / 2.4** + §6 [[G-alert-detail-android]] |
 | **Read A's findings, the read ranges, the B/C/D re-scope** | `docs/PHASE2-READ-PLAN.md` — **§READ-A FINDINGS** |
+| **The web-handoff API contract B2 is built against — FROZEN** | `docs/WEB-HANDOFF-CONTRACT.md` — **build to it, do not amend it** |
 | **What is done, red, or owed right now** | `scripts/senra-status.sh` — **run it. Do not read a summary of it.** |
 
 ---

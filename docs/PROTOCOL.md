@@ -122,6 +122,8 @@ Anything **visual, animated, timing-dependent, or structural in a `WindowGroup`*
 
 **And grep the artifact for every named acceptance criterion, by name.** C2's first artifact was **795 green with `backFromAuthReturnsToLanding` absent**, while the report asserted every decision honored. `grep -c` found it in seconds. **A verbatim criterion is worth exactly one grep. Run it every chunk.**
 
+**⚠️ THIS HALF IS THE REVIEW SEAT'S, NOT THE BOARD'S. RULED 2026-08-02 — see the plan's §2 Locked decisions.** Board §12 forces the re-run (`--rerun-tasks`) and nothing more: it keys on gradle's **exit code**, does not read the HTML report, and greps **no criterion and no test name** — including `backFromAuthReturnsToLanding`, the very miss this rule was written about. That is **correct** and §12 stays as-is: the criterion list lives in the chunk spec, which is prose, so the check is not derivable and is therefore a DECISION (§1), not a board row. **Consequence to hold: nothing mechanical will ever catch a named criterion going missing. Only the review seat running the grep will.**
+
 ### Rule 7 — The green light is a hash
 
 CC surfaces the artifact **and its hash**. The review seat hashes what it received. **Match → the thing reviewed is the thing being committed.** Mismatch → stop.
@@ -130,14 +132,19 @@ CC surfaces the artifact **and its hash**. The review seat hashes what it receiv
 git diff | shasum -a 256 | cut -c1-12
 ```
 
-**⚠️ That command omits new files.** Untracked files are invisible to `git diff`, so any chunk that adds files — every chunk so far — is **under-hashed**. Include them:
+**⚠️ That command omits new files.** Untracked files are invisible to `git diff`, so any chunk that adds files — every chunk so far — is **under-hashed**.
+
+**For a chunk that is only new files, hash the file. Plainly.**
 
 ```bash
-NEW="path/to/NewFileA.kt
-path/to/NewFileB.kt"
-( git diff; while read -r f; do git diff --no-index -- /dev/null "$f"; done <<< "$NEW" ) 2>/dev/null \
-  | shasum -a 256 | cut -c1-12
+shasum -a 256 <file> | cut -c1-12    # and print wc -c beside it
 ```
+
+*Promoted from HANDOVER 2026-08-02, and it OVERRULES the `git diff` -against-`/dev/null` wrapper this rule used to prescribe: the wrapper adds nothing over hashing the bytes and is fragile to reproduce, so the two seats computed different values from the same file. PROTOCOL §1 makes HANDOVER the bug when they disagree — here HANDOVER was right, so the refinement is promoted rather than deleted. **The wrapper is retired; do not reintroduce it.** For a MIXED chunk (edits **and** new files) hash the `git diff` and each new file separately, and send every value.*
+
+**⚠️ THE SHUTTLE IS RULE 7's LIVE FAILURE MODE, AND IT IS NEITHER SEAT'S CODE.** **The artifact and its hash must arrive in the SAME message, or the comparison never happens.** The review seat can only hash what actually reaches it; a hash quoted about bytes that stayed on CC's disk is not a verification, it is a claim. Four rounds once ran half-satisfied — hash without artifact, artifact without hash, a hash CC declined to compute, then bytes that never got attached.
+
+*Fired twice more on 2026-08-02, after that was written down: PR #46 was surfaced as `6ed67ce0a2ea / ffdf96b55d60` with no diff attached — the reviewer's words were "I can't hash what didn't reach me" — and a manifest listed a hash that had already been superseded. **A tool-call transcript is not delivery either**: if the bytes did not travel in the message the reviewer reads, they did not travel.*
 
 **Re-hash after any stash, pop, rebase, or checkout between review and commit.**
 
@@ -176,7 +183,7 @@ Run it at the **start of every session** and **before every commit**.
 | **Gradle cache replay.** `BUILD SUCCESSFUL`, `41 up-to-date`, zero tests run. | Rule 6. `--rerun-tasks`, read the HTML. |
 | **Commit IDs get misreported.** The docs tip was given as `5fc9a64`, `1eeb192`, and `7cc026a` in three consecutive messages. | Verify against `git log`. Never a summary — **including this document's**. |
 | **A clean build hides a broken `WindowGroup`.** `Group` vs `ZStack` killed the crossfade and compiled fine. | Rule 5. Device look. |
-| **`git diff` omits new files** → the hash under-covers the chunk. | Rule 7's multi-file recipe. |
+| **`git diff` omits new files** → the hash under-covers the chunk. | Rule 7: for new files, plain `shasum -a 256 <file>` with `wc -c`. The old wrapper is retired. |
 | **🔴 A stale APK survives a "fresh" install.** `lastUpdateTime` proves the *install* is fresh, **not that the APK is.** Debug and release share `applicationId` (only `staging` has a suffix) but are signed with **different keys** — a stale install can survive and relaunch, looking exactly like a code bug. | **When the device contradicts the source: `adb uninstall` + `./gradlew clean` BEFORE debugging a line.** |
 | **Wrong variant.** The suite runs `testDebugUnitTest`; Studio may be installing **release**, whose baseline-profile step fails for unrelated reasons. | Match the variant to the tests. |
 | **zsh is not bash.** `#` is **not a comment** interactively, and `$VAR:P` is a **parameter modifier** — `$T:PetSafety/...` silently rewrites a hash into a path. | **One command per line. No inline comments.** Inline the value, don't interpolate before a `:`. |
@@ -188,6 +195,9 @@ Run it at the **start of every session** and **before every commit**.
 | **A falsy legacy field on a versioned API** — Stripe `paid: None` alongside `status: "paid"`. Absence, not a value. | Rule 4. Cross-check against a field that must agree (`amount_remaining`); find what replaced it. |
 | **A grep returning 0 with no control** — case (`rateLimiter` vs `createRateLimiter`), wrong field names (`line1` vs `street1`), or `grep -c` counting lines not occurrences in minified output. | Rule 4. Run a control that must hit, in the same command. |
 | **`gh run watch` exits 0 on an already-completed FAILED run.** Its exit code reflects the watch, not the outcome. | Read the `conclusion` field: `gh run view <id> --json status,conclusion`. |
+| **A no-op cherry-pick ABORTS THE SEQUENCE** — every later commit then silently never applies, and nothing errors. | Check `git diff --name-only main..HEAD` **before** pushing. Empty is the tell. |
+| **A `--stat` is not a diff.** An in-line amendment never moves the counts: `338a7d1`'s plan half read `3+/1−` both before and after an added line was rewritten in place. | Read the diff. A `--stat` clears nothing. |
+| **A count only verifies if the counting method travels with it.** "73 executable lines unchanged" was unreproducible — two honest methods gave 56 and 73, because one counted blank lines and one did not. A bare number is not evidence; it is a number. | Send the command with the count. For a comments-only claim pin a fingerprint both seats can recompute: `grep -vE '^[[:space:]]*(--\|#\|$)' <file> \| shasum -a 256`. |
 
 ---
 

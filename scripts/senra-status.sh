@@ -372,8 +372,17 @@ done
 
 # ─────────────────────────────────────────────────────────────
 head_ "9. Doc home — the governing docs must be readable from the branch you build on"
+# THIS LIST IS THE MANIFEST: if a file is not named here, it is not governing. That is
+# the whole point — a governing doc going missing, untracked, or off-branch becomes a
+# red on a script already run at session start, instead of a discovery four turns into
+# a chat. Adding a doc to the project means adding it here in the same commit.
+#
+# WEB-HANDOFF-CONTRACT.md is frozen and B2 is built against it; PHASE2-READ-PLAN.md
+# carries Read A's findings and deletes into phase-2-spec.md when the read closes.
+# NOT listed, deliberately: phase-2-spec.md, which cannot be tracked before it exists —
+# the obligation at §5b's Zone-3 gate adds it here in the same edit that re-points them.
 
-for f in docs/SENRA-MOBILE-REDESIGN.md docs/phase-1-spec.md docs/PROTOCOL.md docs/HANDOVER.md scripts/senra-status.sh; do
+for f in docs/SENRA-MOBILE-REDESIGN.md docs/phase-1-spec.md docs/PROTOCOL.md docs/HANDOVER.md docs/WEB-HANDOFF-CONTRACT.md docs/PHASE2-READ-PLAN.md scripts/senra-status.sh; do
   if git -C "$IOS" ls-files --error-unmatch "$f" >/dev/null 2>&1; then
     pass "tracked: $f"
   else
