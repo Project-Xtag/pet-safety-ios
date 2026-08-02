@@ -23,7 +23,23 @@ Current as of **2026-08-02**, end of the review session that cleared PR #46, PR 
 | The web-handoff contract — **FROZEN** | `docs/WEB-HANDOFF-CONTRACT.md` |
 | Phase-2 read scopes, Read A findings | `docs/PHASE2-READ-PLAN.md` — **§READ-A FINDINGS** |
 | C5/C6's contract and gate | `docs/phase-1-spec.md` **§E C5/C6** |
-| What is done, red, or owed right now | `scripts/senra-status.sh` — **run it. Do not read a summary of it.** |
+| What is done, red, or owed right now | `scripts/senra-status.sh` — **run it. Do not read a summary of it.** ⚠ **branch-scoped — see below** |
+
+⚠ **THE BOARD IS BRANCH-SCOPED, AND YOU ARE PROBABLY ON `main`.**
+From **`main`** it reads **RED 10**. From **`feat/mobile-redesign-phase1`** it reads **RED 7**.
+Both are correct; neither is a regression.
+
+The extra four are `SUBJECT FILE MISSING` on iOS §5b — `LandingView.swift` and its siblings are
+Phase-1 chunk files that live on the redesign branch and are **unmerged**. §5b fails loudly on an
+absent subject *by design* (`lguard:192`): a guard that skips when its subject vanishes is a guard
+that evaporates during exactly the work it exists for.
+
+**So: do not "fix" those four, and do not raise them as a regression.** If you are on `main` and see
+10, that is the expected number. If you are on the build branch and see anything other than 7, that
+is real. The six standing reds are the same on both — AASA `/*/t/*`, the www 301, the two
+`.onOpenURL` handlers, G-owner, and the two Zone-3 ship-gates.
+
+**The heuristic is unchanged: every red is explained, never a number to match.**
 | The documentation closeout, phased | `DOCS-CLOSEOUT.md` (repo root, untracked, transitional) |
 
 There is **no monorepo for docs** — four repos only, and the monorepo's `docs/` is a stale archive.

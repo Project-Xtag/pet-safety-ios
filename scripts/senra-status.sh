@@ -189,7 +189,13 @@ lguard() {
   # Missing subject = FAIL, not warn: a §5b guard whose subject is absent is a
   # failure, not a skip — otherwise a file move/rename/typo silently evaporates
   # every guard at once, likeliest during exactly the work they exist for.
-  if [ ! -f "$1" ]; then fail "$4 — SUBJECT FILE MISSING ($1); absence is a defect in §5b, not a skip"; return; fi
+  # The message names the CAUSE, not just the symptom. §5b's subjects are Phase-1
+  # chunk files: on main and the docs line they are simply absent (unmerged), and
+  # four of these fire — which is why the board reads RED 10 there and RED 7 on the
+  # build branch. A fresh session lands on main, and a red it cannot explain gets
+  # either a false alarm or a "fix" to a guard that is working. The check stays
+  # loud; only the text changed.
+  if [ ! -f "$1" ]; then fail "$4 — SUBJECT FILE MISSING ($1); EXPECTED on main and the docs line (Phase-1 chunks unmerged); a REAL failure on feat/mobile-redesign-phase1. Absence is a defect in §5b, never a skip"; return; fi
   N=$(grep -cF "$2" "$1")
   if [ "$N" -eq "$3" ]; then
     pass "$4"
