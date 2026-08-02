@@ -95,7 +95,7 @@ The workplan is authoritative. In priority order:
 
 1. **B2 of the subscribe flow** — U1 (`POST /api/auth/web-handoff` + redeem) and U2. Ships
    independently and inert; until a client calls it, every request 404s and users get today's flow.
-   The contract is **FROZEN** (`a6ce9dd2e930`) — build to it, do not amend it.
+   The contract is **FROZEN** (`fdf0d570c218`, re-pinned 2026-08-02 — was `a6ce9dd2e930`) — build to it, do not amend it.
 2. **The invoices workstream (§D of the workplan)** — `user_id` + index + backfill on
    `szamla_invoices`, then swap the account list from Stripe receipts to számlák.
 3. **C1 of the redesign** — ratify the B/C/D re-scope (`PHASE2-READ-PLAN.md` line 108, still
@@ -109,7 +109,7 @@ registration to reach.
 
 ## §5 — The frozen contract
 
-`WEB-HANDOFF-CONTRACT.md`, **FROZEN 2026-08-01**, `a6ce9dd2e930`, 293 lines.
+`WEB-HANDOFF-CONTRACT.md`, **FROZEN 2026-08-01**, `fdf0d570c218`, 323 lines (re-pinned 2026-08-02; was `a6ce9dd2e930`/293).
 
 Freezing binds §8's left column: endpoint path and method, request field names, `destination` values,
 that the response carries `url`, and fallback-on-any-failure. Host, country-segment resolution,
@@ -120,9 +120,10 @@ copy, you have the wrong document.** They are enumerated in the workplan §B1; t
 
 - **Prod host is `senra.pet`.** `app.senra.pet` has no DNS record. Staging genuinely is
   `staging-app.senra.pet` — the asymmetry is deliberate, do not "fix" it.
-- **`locale_hint` is sent by v1** and is a **language signal only**. It must never feed market
-  resolution; the market stays pinned to `hu`. Putting it in a market-resolution chain rebuilds the
-  `/uk/` bug server-side where it is harder to see.
+- **`locale_hint` is sent by v1** — **owned by the contract's §9.4 and §5; this is a pointer, not a
+  restatement (PROTOCOL §1).** The one consequence worth carrying here: it is a **language signal
+  only** and must never feed market resolution, because putting it in a market-resolution chain
+  rebuilds the `/uk/` bug server-side where it is harder to see. The market stays the literal `hu`.
 
 ---
 
@@ -130,18 +131,22 @@ copy, you have the wrong document.** They are enumerated in the workplan §B1; t
 
 | Document | Where | Committed? |
 |---|---|---|
-| `SENRA-WORKPLAN-2026-08-01.md` | local | **NO** |
-| `SESSION-HANDOVER-2026-08-01.md` (this) | local | **NO** |
+| `SENRA-WORKPLAN-2026-08-01.md` | pet-safety-ios `docs/` | **yes** — tracked 2026-08-02 (`2bcc2ac`, PR #45) |
+| `SESSION-HANDOVER-2026-08-01.md` (this) | pet-safety-ios `docs/` | **yes** — tracked 2026-08-02 (`2bcc2ac`, PR #45) |
 | `WEB-HANDOFF-CONTRACT.md` | pet-safety-ios `docs/` | yes, on `main` |
 | `PROTOCOL.md`, `CODEMAP`, `SENRA-MOBILE-REDESIGN.md`, `HANDOVER.md` | pet-safety-ios `docs/` | yes, current on `main` as of `5e27855` |
 | `SESSION-HANDOVER-2026-07-31.md` | pet-safety-ios `docs/` | yes |
 | `pricing-C9-cutover-runbook.md` | monorepo, untracked + hidden by `.git/info/exclude` | **NO** |
 | `PHASE2-READ-PLAN.md` | pet-safety-ios `docs/` | yes |
 
-**Standing risk:** the two documents at the top of this table are local-only. Until 2026-08-01 the
-governing docs on `main` were the 2026-07-17 versions — two weeks stale for the entire duration of the
-flip, with `senra-status.sh` on `main` missing every guard added since. PR #42/#44 fixed that. Do not
-let it recur.
+**Standing risk — CLOSED for these two, 2026-08-02.** The two documents at the top of this table were
+local-only; they are now tracked (`2bcc2ac`, PR #45). Until 2026-08-01 the governing docs on `main`
+were the 2026-07-17 versions — two weeks stale for the entire duration of the flip, with
+`senra-status.sh` on `main` missing every guard added since. PR #42/#44 fixed that; #45 stopped it
+recurring here. **The mechanism, not the memory, is what holds it closed:** board §9 is now a
+manifest — if a governing doc is not named in that list it is not governing, and a doc going
+untracked or off-branch reds a script that already runs at session start. Add a governing doc, add it
+to §9 in the same commit.
 
 There is **no monorepo for docs** — four repos only, and the monorepo's `docs/` is an archive of 74
 stale files.
