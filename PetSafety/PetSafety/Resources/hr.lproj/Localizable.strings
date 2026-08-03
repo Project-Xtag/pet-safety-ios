@@ -51,8 +51,8 @@
 "register" = "Registracija";
 "already_have_account" = "Već imaš račun?";
 "log_in" = "Prijava";
-"terms_login_prefix" = "Prijavom prihvaćaš naše ";
-"terms_and" = " i ";
+"terms_login_prefix" = "Prijavom prihvaćaš naše";
+"terms_and" = " i";
 "terms_of_service" = "Uvjete korištenja";
 "privacy_policy" = "Pravila privatnosti";
 "first_name" = "Ime";
@@ -1424,7 +1424,7 @@
 "shelter_promo_claim_tag_button" = "Aktiviraj privjesak";
 "shelter_promo_name_label_required" = "Ime *";
 "shelter_promo_species_label_required" = "Vrsta *";
-"shelter_promo_select_placeholder" = "Odaberi...";
+"shelter_promo_select_placeholder" = "Odaberi…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Ime vlasnika";

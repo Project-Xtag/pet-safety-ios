@@ -48,8 +48,8 @@
 "register" = "S'inscrire";
 "already_have_account" = "Tu as déjà un compte ?";
 "log_in" = "Se connecter";
-"terms_login_prefix" = "En te connectant, tu acceptes nos ";
-"terms_and" = " et ";
+"terms_login_prefix" = "En te connectant, tu acceptes nos";
+"terms_and" = " et";
 "terms_of_service" = "Conditions d'utilisation";
 "privacy_policy" = "Politique de confidentialité";
 "first_name" = "Prénom";
@@ -1421,7 +1421,7 @@
 "shelter_promo_claim_tag_button" = "Activer la médaille connectée";
 "shelter_promo_name_label_required" = "Nom *";
 "shelter_promo_species_label_required" = "Espèce *";
-"shelter_promo_select_placeholder" = "Sélectionner...";
+"shelter_promo_select_placeholder" = "Sélectionner…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Nom du propriétaire";
