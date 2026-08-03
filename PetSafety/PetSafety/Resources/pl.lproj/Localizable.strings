@@ -48,8 +48,8 @@
 "register" = "Zarejestruj się";
 "already_have_account" = "Masz już konto?";
 "log_in" = "Zaloguj się";
-"terms_login_prefix" = "Logując się, akceptujesz nasze ";
-"terms_and" = " i ";
+"terms_login_prefix" = "Logując się, akceptujesz nasze";
+"terms_and" = " i";
 "terms_of_service" = "Warunki korzystania z usługi";
 "privacy_policy" = "Politykę prywatności";
 "first_name" = "Imię";
@@ -1421,7 +1421,7 @@
 "shelter_promo_claim_tag_button" = "Aktywuj zawieszkę";
 "shelter_promo_name_label_required" = "Imię *";
 "shelter_promo_species_label_required" = "Gatunek *";
-"shelter_promo_select_placeholder" = "Wybierz...";
+"shelter_promo_select_placeholder" = "Wybierz…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Imię właściciela";

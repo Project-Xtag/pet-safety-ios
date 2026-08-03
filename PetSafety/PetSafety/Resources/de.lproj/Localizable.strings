@@ -48,8 +48,8 @@
 "register" = "Registrieren";
 "already_have_account" = "du haben bereits ein Benutzerkonto?";
 "log_in" = "Einloggen";
-"terms_login_prefix" = "Mit dem Einloggen stimmen du unseren ";
-"terms_and" = " und ";
+"terms_login_prefix" = "Mit dem Einloggen stimmen du unseren";
+"terms_and" = " und";
 "terms_of_service" = "Nutzungsbedingungen";
 "privacy_policy" = "Datenschutzrichtlinie";
 "first_name" = "Vorname";
@@ -1418,7 +1418,7 @@
 "shelter_promo_claim_tag_button" = "Haustiermarke aktivieren";
 "shelter_promo_name_label_required" = "Name *";
 "shelter_promo_species_label_required" = "Tierart *";
-"shelter_promo_select_placeholder" = "Auswählen...";
+"shelter_promo_select_placeholder" = "Auswählen…";
 
 // MARK: - Order more tags placeholders
 "order_more_owner_name" = "Name des Besitzers";
