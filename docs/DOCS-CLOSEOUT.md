@@ -746,7 +746,7 @@ method with the count would not have saved it.
 **Not urgent:** §M already prescribes the correct comparison. **Urgent if** anyone writes a review
 step that verifies a revised artifact by comparing two diffs against a common ancestor.
 
-### D2 · The build tree serves STALE copies of two governing docs
+### D2 · The build tree serves STALE copies of three governing docs
 
 `feat/mobile-redesign-phase1`'s working tree carries these untracked, and they are **not** copies of
 what `main` serves:
@@ -755,8 +755,17 @@ what `main` serves:
 |---|---|---|
 | `docs/SENRA-WORKPLAN-2026-08-01.md` | `9463140e6be9` · 20,359 B | `21162d0195e3` · 20,627 B |
 | `docs/SESSION-HANDOVER-2026-08-01.md` | `89170a0b8c8b` · 12,615 B | `7b7bb5538501` · 13,374 B |
+| `docs/DOCS-CLOSEOUT.md` — **this file** | `2651ceb0b814` · 44,239 B | `4a6daa85e99b` · 48,963 B |
 
-Both are pre-merge drafts, both smaller than the tracked versions. **§8 sees them as untracked and
+⚠ **The third row is this ledger, and it was found the only way it could be — by running D2's own
+check before an edit, 2026-08-04.** The build tree is 72 lines behind `main`: it has the pre-P1-5 §9
+(five entries, no manifest comment), so a §D edit made there would have been written against a
+version of the board that no longer exists, and a reader checking §9's contents from the build tree
+gets the wrong answer with no signal that anything is wrong. **The file that prescribes this check
+was itself failing it.** That is not irony, it is the expected case: nothing exempts a doc from
+staleness because the doc is about staleness.
+
+All three are pre-merge drafts, all three smaller than the tracked versions. **§8 sees them as untracked and
 says nothing about them being *older than* what `main` holds** — which is the more dangerous half.
 The landmine row warns that `git add -A` sweeps stray files; here it would commit **older content
 over newer**.
@@ -771,8 +780,8 @@ no review ever covered — and A9 and trap 13 are line-specific findings against
 against `89170a0b8c8b`.
 
 ⚠ **So every remaining docs step verifies its pre-image against `origin/main` before editing** —
-`21162d0195e3` for the workplan, `7b7bb5538501` for the session handover — and edits from a worktree
-cut from `main`, not from the build tree. *(This is the blockage that stopped the Q6 edit on
+`21162d0195e3` for the workplan, `7b7bb5538501` for the session handover, `4a6daa85e99b` for this
+ledger — and edits from a worktree cut from `main`, not from the build tree. *(This is the blockage that stopped the Q6 edit on
 2026-08-03; it is now a known property of two more steps rather than a discovery.)*
 
 ---
