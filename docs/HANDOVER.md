@@ -40,7 +40,7 @@ is real. The six standing reds are the same on both — AASA `/*/t/*`, the www 3
 `.onOpenURL` handlers, G-owner, and the two Zone-3 ship-gates.
 
 **The heuristic is unchanged: every red is explained, never a number to match.**
-| The documentation closeout, phased | `DOCS-CLOSEOUT.md` (repo root, untracked, transitional) |
+| The documentation closeout, phased | `docs/DOCS-CLOSEOUT.md` — tracked, transitional; deleted at close |
 
 There is **no monorepo for docs** — four repos only, and the monorepo's `docs/` is a stale archive.
 
