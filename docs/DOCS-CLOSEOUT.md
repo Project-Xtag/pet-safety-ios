@@ -426,6 +426,7 @@ line that runs at session start.
 | Action | File | Why |
 |---|---|---|
 | **Merge → delete** | `SESSION-HANDOVER-2026-08-01.md` → `HANDOVER.md` | Two handovers is one too many; the day-stamped name is the drift engine |
+| **Merge → delete** | `SESSION-START.md` → `HANDOVER.md` (its §5–§7) | The file carries its own deletion instruction; this row is what makes that a **scheduled action rather than a hope**. **Remove its `senra-status.sh` §9 entry in the same edit** — same reasoning as §0 step 5, and it applies only if the file survived to the seam and reached the manifest at all |
 | **Rename** | `SENRA-WORKPLAN-2026-08-01.md` → `WORKPLAN.md` | Same |
 | **Add to §9** | `WORKPLAN.md`, `HANDOVER.md` | Completes P1-5's manifest |
 | **Delete** | `senra-status.md` | Stale at `203748cf8b57`; the board is now `7dd21f156710`. A rendering of a moving file is a second copy |
@@ -436,10 +437,23 @@ line that runs at session start.
 
 **Keep** `PHASE2-READ-PLAN.md` — it deletes into `phase-2-spec.md` when the read closes.
 
+⚠ **`SESSION-START.md` is undated on purpose, and that is precisely why it needs a row rather than a
+check.** The dated-filename check below is what catches a handover outliving its session; an undated
+name walks straight past it, so the only thing that will ever catch this file is the `test !` line.
+It is **rewritten in place and never forked per session** — a `SESSION-START-2026-08-11.md` is the
+drift engine returning under a name the check cannot see. It is tracked but **not governing** until
+the seam, the same window this ledger sits in: `git commit`-ing it did not add it to §9, because a
+§9 edit moves `senra-status.sh` on `main` and voids `9e9c2fbf2b4c` (see §M's shelf life). Both
+entries land in **one** board edit at the seam, alongside C6/C7 — and this row takes them both back
+out again.
+
 ```bash
 ls docs/ | grep -c '2026-0[78]-'                                # expect 0 — no dated filenames
 test -f docs/WORKPLAN.md && test -f docs/HANDOVER.md && echo OK
 test ! -f docs/senra-status.md && echo "senra-status.md gone"
+test ! -f docs/SESSION-START.md && echo "SESSION-START.md folded and gone"
+grep -c 'SESSION-START' scripts/senra-status.sh                 # expect 0 — no manifest entry outliving the file
+grep -c 'docs/HANDOVER.md' scripts/senra-status.sh              # CONTROL: expect >0 — §9 is still a manifest
 ```
 
 ## §M — the cross-branch merge. Five files, and the resolver picks bytes no review covered.
