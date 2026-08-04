@@ -31,7 +31,7 @@ Both are correct; neither is a regression.
 
 The extra four are `SUBJECT FILE MISSING` on iOS §5b — `LandingView.swift` and its siblings are
 Phase-1 chunk files that live on the redesign branch and are **unmerged**. §5b fails loudly on an
-absent subject *by design* (`lguard:192`): a guard that skips when its subject vanishes is a guard
+absent subject *by design* (`lguard`'s missing-subject `fail`): a guard that skips when its subject vanishes is a guard
 that evaporates during exactly the work it exists for.
 
 **So: do not "fix" those four, and do not raise them as a regression.** If you are on `main` and see
@@ -59,14 +59,39 @@ There is **no monorepo for docs** — four repos only, and the monorepo's `docs/
 | ~~`senra-status.sh` — #46 ⊕ #47~~ | ~~`fd70647aeb4a`~~ | **VOID** — superseded when #48 changed `main` |
 | `WEB-HANDOFF-CONTRACT.md` — **FROZEN** | `fdf0d570c218` | 22,854 B / 323 L |
 | └ §8, the frozen surface | `86a1c13aaad5` | 383 B / 11 L |
-| `PROTOCOL.md` | `63603befd524` | 246 L |
-| `SENRA-MOBILE-REDESIGN.md` | `79402e281962` | 535 L |
-| `SENRA-WORKPLAN-2026-08-01.md` | `21162d0195e3` | 323 L |
-| `SESSION-HANDOVER-2026-08-01.md` | `7b7bb5538501` | 243 L |
+| `PROTOCOL.md` | **derive** — `gshow origin/main docs/PROTOCOL.md` | |
+| `SENRA-MOBILE-REDESIGN.md` | **derive** | |
+| `SENRA-WORKPLAN-2026-08-01.md` | **derive** | |
+| `SESSION-HANDOVER-2026-08-01.md` | **derive** — see the note below | |
 | `HANDOVER.md` (the version this replaces) | `b8d204cd1042` | 89 L |
 | Migration `20260802_01` v4 | `87e88be96acb` | 12,130 B / 202 L |
 | └ executable-only fingerprint | `7a50f3f135bc` | 56 L |
-| `DOCS-CLOSEOUT.md` | `8ccdf9f9ba91` | 24,670 B / 440 L |
+
+**This table follows the pin rule** (`docs/DOCS-CLOSEOUT.md`): **a hash is written only for bytes that
+cannot move.** Everything else says **derive** and is re-derived at read time. Use `gshow`, which
+returns hash, bytes and lines together so a byte count cannot drift away from its hash:
+
+```bash
+gshow origin/main docs/PROTOCOL.md        # or: git show "origin/main:<path>" | shasum -a 256
+```
+
+**Three classes keep a hash, and they are not the same thing:**
+
+- **FROZEN** — `WEB-HANDOFF-CONTRACT.md` and its §8 surface. The pin *is* the assertion; P1-1's
+  freeze gate has nothing to check without it.
+- **SUPERSEDED or APPLIED** — the 89-line `HANDOVER.md` this replaces, the merged docs line's
+  `e451a2820970`, migration `20260802_01` and its fingerprint, and the Historical block below. Those
+  bytes were fixed by an event.
+- **§M's OPERANDS** — `7dd21f156710`, `a1aeca162505` and `9e9c2fbf2b4c`. **Exempt under §M — do not
+  convert them.** See `docs/DOCS-CLOSEOUT.md` §M, which owns the exemption and the reason.
+
+`SESSION-HANDOVER-2026-08-01.md` is DELETED-class **by intent and not yet by fact** — §D dissolves it
+into this file at the seam. Until that happens its bytes can still move, so it derives; it earns a
+pin only once someone needs to cite the exact bytes that were dissolved.
+
+`DOCS-CLOSEOUT.md`'s row is **gone**, not converted: it is now tracked at `docs/DOCS-CLOSEOUT.md`,
+so it is one `gshow` away and needed no row. Three different values for it were in circulation
+before it came out.
 
 **Historical, for merge work only:** `senra-status.sh` pre-image `203748cf8b57` (436 L); merge base
 `b0b076b` where it is 267 L (`6fa4ad359d8b`); contract pre-P1-1 `a6ce9dd2e930` (293 L); docs-line
