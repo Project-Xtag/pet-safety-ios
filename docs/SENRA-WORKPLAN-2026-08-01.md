@@ -8,7 +8,7 @@ been corrected and are marked **[was wrong]**.
 
 | Repo | Ref | Note |
 |---|---|---|
-| pet-safety-eu | `main` = `33b59a0` | post-flip |
+| pet-safety-eu | `main` = `218a2d2` — as of 2026-08-04; **re-derive, do not trust:** `git -C <eu> rev-parse origin/main` | post-flip |
 | pet-safety-eu | `docs/pricing-cutover-record` = `14a4b7a` | branch only, no PR |
 | tagme-now | `main` = `cefb43b` | copy batch deployed |
 | pet-safety-ios | `main` = `5e27855` | docs current |
@@ -114,6 +114,58 @@ Every primitive does.
 
 Both endpoints can be live long before any client calls them. Until then every call 404s and users get
 today's flow.
+
+#### B2 read plan — the three things that were NOT already written down
+
+*Surfaced under PROTOCOL Rule 2 in the 2026-08-02 review session, carried here 2026-08-04 so it stops
+living in a chat transcript. Items 2–5's conclusions were already in §B1 and the primitives table
+above and are deliberately not repeated (PROTOCOL §1). Item 1 — "does the strict-path cookie survive
+the `senra.pet` → `api.senra.pet` hop" — is **removed, not carried**: §B1 already rules it, and
+`HANDOVER.md`'s settled list now protects it.*
+
+**a. The read's provenance, re-grounded by symbol.** Ranges drift; symbols do not. All six re-ground
+against `origin/main` as of 2026-08-04:
+
+| File | Symbols that anchor it |
+|---|---|
+| `src/utils/cookies.ts` | `:27` `getCookieOptions`, `:44` `setAuthCookie`, `:68` `setRefreshCookie` |
+| `src/routes/auth.routes.ts` | `:539` `verify-otp`; `:162` `/login`; `:694` `refresh` |
+| `src/middleware/rateLimiter.ts` | `:49` factory, `:226` `apiRateLimiter`, `:251` `publicWriteRateLimiter`, `:395` `paymentRateLimiter`, `:437` `adminRateLimiter` |
+| `src/config/redis.ts` | `:1` `import Redis from 'ioredis'`, `:41` `export const redis` |
+| `src/routes/auth/twoFactor.routes.ts` + `src/app.ts` | `:54` import, `:239` mount |
+
+⚠ **The original read plan pinned five range hashes** — `7eab63b653d0`, `12b5a59951ac`,
+`048ac3d1c34a`, `6eb8074c090f`, `be2ee175f42b`. Only the first is reproducible: it is
+`cookies.ts` whole-file. **The other four are hashes of line ranges whose extraction method was never
+recorded**, so neither seat can recompute them — the ledger's own *"a count only verifies if the
+counting method travels with it"* row, applied to a hash. They are listed as provenance and **must
+not be used as a gate**. The symbol groundings above are the reproducible form.
+
+**b. OPEN QUESTION — does `appCheckIfEnforced` apply to a route the web calls?**
+`app.ts` mounts `authRoutes` behind it — ground by expression, not line:
+`app.use('/api/auth', appCheckIfEnforced, authRoutes)` — so `POST /api/auth/web-handoff` inherits App
+Check by construction, and `app.use('/api/auth/2fa', appCheckIfEnforced, twoFactorRoutes)` shows the
+sub-router precedent doing the same. Both verified present at pet-safety-eu `218a2d2`; note
+`const appCheckIfEnforced = appCheckMiddleware` is a direct alias, so whether it enforces is a
+config question, not a code one. **Redeem is called by a
+browser, which has no App Check token.** If enforcement is ever switched on, redeem 4xxs for every
+web client and the handoff dies silently — falling back to today's flow, which is safe but makes the
+feature permanently inert. Settle before U1: either mount redeem outside the enforced group, or
+confirm enforcement is off and record what turning it on would break.
+
+**c. U2's tagme-now entry — path corrected.** The read plan said `src/routes/CountryRoutes.tsx`;
+it is **`src/components/CountryRoutes.tsx`** (`3ca143f5e2f1`, 290 L — byte-identical from the frozen
+ref `a085bf5` to `main` `cefb43b`, so the contract's §2/§11 citations still hold). Route lines: 193
+`order-confirmation`, 194 `choose-plan`, 195 `manage-subscription`, 196 `billing`, 204
+`RedesignProtectedRoute` opens, 205 `account`. Language forcing: `src/config/countries.ts:18` gives
+`hu` `language: 'hu'`; `src/contexts/CountryContext.tsx:35` calls `changeLanguage`.
+
+**Still true at pet-safety-eu `ca877a0`, and re-verified at `218a2d2`:** `web.?handoff` = **0**
+across the backend `src` tree, controls `verify-otp` 7 files and `setAuthCookie` 2 files. Nothing to
+build against has moved. *(Derive, do not trust the count:
+`git grep -lE 'web.?handoff' <ref> -- ':(top)pet-safety-eu/backend/src' | wc -l` — the `:(top)` is
+load-bearing, the repo root is `Project-Xtag` and a bare pathspec silently returns 0, which reads
+identically to the claim being true.)*
 
 ### B3 — Client side, one cycle
 
@@ -298,6 +350,14 @@ These are in PROTOCOL; repeated here because every drift corrected today came fr
 ---
 
 ## Open decisions
+
+- **Post-shipping registration reminder — a surviving idea, not a branch.** `orders` has no
+  `registration_reminder_sent_at` on `main` (`grep -c` → 0) and no job sends one;
+  `recoveryEmails.routes.ts` is abandoned-cart at 3h on `shipping_payment_status='pending'`, which is
+  a different thing. The idea arrived inside pet-safety-eu`#66`, **closed 2026-08-04 as superseded** —
+  its activation half already ships as `activation_reminder_7day_sent_at` /
+  `activation_reminder_21day_sent_at` — so this half would otherwise have existed only in a closed PR.
+  Recorded here to decide on its own merits: one column, one query, one email.
 
 - Error-genre chunk: confirm pin-to-three + inventory the rest.
 - 2.1 rewrite (reference removal + guard retirement) and 2.3 (`AlertsScreens.kt` caller vs guard premise).
