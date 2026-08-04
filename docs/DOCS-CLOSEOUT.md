@@ -780,9 +780,22 @@ no review ever covered — and A9 and trap 13 are line-specific findings against
 against `89170a0b8c8b`.
 
 ⚠ **So every remaining docs step verifies its pre-image against `origin/main` before editing** —
-`21162d0195e3` for the workplan, `7b7bb5538501` for the session handover, `4a6daa85e99b` for this
-ledger — and edits from a worktree cut from `main`, not from the build tree. *(This is the blockage that stopped the Q6 edit on
+`21162d0195e3` for the workplan, `7b7bb5538501` for the session handover, and for this ledger
+**derive, do not pin**: `gshow origin/main docs/DOCS-CLOSEOUT.md` — and edits from a worktree cut from
+`main`, not from the build tree. *(This is the blockage that stopped the Q6 edit on
 2026-08-03; it is now a known property of two more steps rather than a discovery.)*
+
+⚠ **The third entry was a hash until this commit, and the hash was void by construction.** A pin
+naming the pre-image of a file that *the pinning commit itself changes* is stale the moment the
+branch lands: this commit rewrites the ledger, so any value written here would have directed the next
+editor at a superseded copy — in the row whose entire purpose is preventing stale-copy edits. The
+other two pins are sound and stay, because this commit does not touch those files; the defect is not
+"hashes are bad" but "a hash cannot pin a moving target from inside the thing that moves it." The
+`gshow` form is the one `HANDOVER.md:62` already uses for `PROTOCOL.md`, for this reason.
+
+This is the second instance of the sentence three paragraphs up — *nothing exempts a doc from
+staleness because the doc is about staleness* — one level higher: not the ledger's copy being stale,
+but the ledger's own staleness **rule** generating the staleness it exists to catch.
 
 ---
 
