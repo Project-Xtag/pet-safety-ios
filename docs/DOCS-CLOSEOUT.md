@@ -563,6 +563,18 @@ misreading the paragraph goes on to warn about.)* This is the single most losabl
 look voided six weeks out; it looks like a stale hash someone forgot to update, and the temptation is
 to "fix" the number rather than re-run the merge. **Re-derive; never re-type.**
 
+⚠ **§M's OPERANDS ARE EXEMPT FROM THE PIN RULE, and §M owns the exemption because §M is what
+breaks without it.** The resolution's inputs — `7dd21f156710` (#46, unmerged and still able to move)
+and `a1aeca162505` (`main`) — and its output `9e9c2fbf2b4c` are **operands of a comparison, not
+descriptions of state**. The shelf-life rule above works by checking them *against* current reality;
+converted to derivations they would compare `main` to `main` and could never fire. **A tripwire pin
+is supposed to go stale — going stale is the signal.** So: do not convert them to derivations, and
+do not "refresh" them to match current state either. Refreshing one is the same act as deleting the
+check, and it looks like tidying.
+
+*(`e451a2820970` is NOT among them. #47 is merged, so those bytes cannot move — it is SUPERSEDED,
+and it is an input to the **void** `fd70647aeb4a`, not a live end of anything.)*
+
 **The unit is FILE CONTENT, not tip SHAs** — corrected 2026-08-02 after an earlier draft of this rule
 said "if either tip moves". That was too strict and would force pointless rebuilds: the resolution is
 the union of `7dd21f156710` (PR #46) and **`a1aeca162505` — `main`'s copy, and `main` is the end that
@@ -688,6 +700,63 @@ Covered as a check in **C7**. Recorded here too because the mitigation currently
 **separately** still carries the superseded `20260801_04` high-water mark. §D dissolves that file
 **into** `HANDOVER.md`, so a closed-looking A9 carries both wrong lines into the surviving document.
 Line numbers deliberately not carried here — see the A9 row.
+
+---
+
+## §Deferred — real, and not owed by this closeout
+
+Findings that are correct and that nothing in the current sequence depends on. **This section exists
+because "deferred" with no written location is how owed work ends up living in a chat transcript** —
+the `Items 5, 7, 9, 12` failure, where four numbered items survived only in a conversation and could
+not be resolved from any governing file. Each entry says what it is, why it is not urgent, and what
+would make it urgent.
+
+### D1 · §M's byte-for-byte comparison is sound; verifying a REVISION by hunk count is not
+
+§M step 4 — diff the actual merge output against the reviewed resolution, byte for byte — is right
+and unchanged. The gap is elsewhere: when a reviewer verifies a **revision** of an artifact by
+diffing both versions against a shared pre-image, hunk structure is not a stable instrument.
+`diff` realigns interchangeable blank lines when total file length changes, so ranges shift and
+blocks split or merge with no content change at all.
+
+Measured on this file 2026-08-03. Two post-images differing **only** inside one code block gave 20
+vs 21 change blocks against the shared pre-image, with ranges moving throughout; a direct
+post-to-post diff showed exactly two blocks, 2 lines out and 12 in, and nothing else moved.
+
+**The two instruments that hold are the hash and the post-to-post diff.** A hunk count against a
+common ancestor is not one — and it is a harder case than the existing *"a count only verifies if
+the counting method travels with it"* row, because here the **same** method on the **same**
+pre-image yields different structure depending on unrelated text elsewhere in the file. Sending the
+method with the count would not have saved it.
+
+**Not urgent:** §M already prescribes the correct comparison. **Urgent if** anyone writes a review
+step that verifies a revised artifact by comparing two diffs against a common ancestor.
+
+### D2 · The build tree serves STALE copies of two governing docs
+
+`feat/mobile-redesign-phase1`'s working tree carries these untracked, and they are **not** copies of
+what `main` serves:
+
+| File | Working tree | `origin/main` |
+|---|---|---|
+| `docs/SENRA-WORKPLAN-2026-08-01.md` | `9463140e6be9` · 20,359 B | `21162d0195e3` · 20,627 B |
+| `docs/SESSION-HANDOVER-2026-08-01.md` | `89170a0b8c8b` · 12,615 B | `7b7bb5538501` · 13,374 B |
+
+Both are pre-merge drafts, both smaller than the tracked versions. **§8 sees them as untracked and
+says nothing about them being *older than* what `main` holds** — which is the more dangerous half.
+The landmine row warns that `git add -A` sweeps stray files; here it would commit **older content
+over newer**.
+
+**Not urgent in general:** §D renames one and dissolves the other at the seam, and `main` supersedes
+both. **Urgent for two specific steps**, and known in advance: the sequence's step 5 writes into the
+workplan and step 3 dissolves the session handover. Run from the build tree, each would edit a base
+no review ever covered — and A9 and trap 13 are line-specific findings against `7b7bb5538501`, not
+against `89170a0b8c8b`.
+
+⚠ **So every remaining docs step verifies its pre-image against `origin/main` before editing** —
+`21162d0195e3` for the workplan, `7b7bb5538501` for the session handover — and edits from a worktree
+cut from `main`, not from the build tree. *(This is the blockage that stopped the Q6 edit on
+2026-08-03; it is now a known property of two more steps rather than a discovery.)*
 
 ---
 
