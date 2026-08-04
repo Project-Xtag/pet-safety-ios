@@ -748,8 +748,11 @@ The landmine row warns that `git add -A` sweeps stray files; here it would commi
 over newer**.
 
 **Not urgent in general:** §D renames one and dissolves the other at the seam, and `main` supersedes
-both. **Urgent for two specific steps**, and known in advance: the sequence's step 5 writes into the
-workplan and step 3 dissolves the session handover. Run from the build tree, each would edit a base
+both. **Urgent for two specific steps**, and known in advance: the sequence's **step 5** writes into
+the workplan and **step 7's §D** dissolves the session handover. *(An earlier draft of this line said
+"step 3". Step 3 is the runner PR, which is in `pet-safety-eu` and which D2 does not gate at all;
+the dissolution is Phase 2 and lands at the seam, per §0. Recorded rather than silently fixed because
+the wrong number was acted on before it was caught.)* Run from the build tree, each would edit a base
 no review ever covered — and A9 and trap 13 are line-specific findings against `7b7bb5538501`, not
 against `89170a0b8c8b`.
 
