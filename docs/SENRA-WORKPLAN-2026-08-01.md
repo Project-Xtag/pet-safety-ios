@@ -368,16 +368,94 @@ These are in PROTOCOL; repeated here because every drift corrected today came fr
   mismatches ever, the one pending row was never charged, `#117` is deployed and verified, and the
   fielded Android carries Fix 9. If it merges it needs a rebase, a fresh byte review, and a check that
   its test file at `src/tests/` is inside the jest `roots` — otherwise it never executes.
-- `#66` renumber · `#103` rebase · `G-scanback-ios` · what's-next card · **Q3** · whether `/plans`
+- `#103` rebase · `G-scanback-ios` · what's-next card · **Q3** · whether `/plans`
   should state a subscription is required · chunk numbering and `G-home`'s doc home · owners for
   unassigned gaps.
+
+### Carried from the closeout ledger's §E — decisions no grep can close
+
+Absorbed here because the ledger is being deleted. E6 and E7 already had entries above and are not
+repeated. **E3 and E7 now also have tracked issues** — the ledger was never the place for work that
+GitHub can hold.
+
+| # | The decision owed | Why it does not close itself |
+|---|---|---|
+| **E1** | **§E C5/C6's must-not-touch wall — chunk boundary, or standing rule?** | Shapes Android Phase 2. **Deadline is C1, not B2** — must land before `phase-2-spec.md` relies on it. Does not have to ride any closeout. |
+| **E2** | **HU register — "informal is deliberate", or overrule it.** | Blocks nothing. But without a ruling on record, a native-speaker reflex reopens it forever. |
+| **E3** | **Migration `002` — was it ever real?** Absent from the applied set *and* from `main`. | On a set-membership runner a `002` file appearing later **will run**, against a schema ~164 migrations downstream. → pet-safety-eu**#128** |
+| **E4** | **Does a rolled-back transaction against prod count as a production action needing a recorded go?** `ROLLBACK` bounds persistence, not lock acquisition; `ALTER TABLE` takes ACCESS EXCLUSIVE either way. The 2026-08-02 dry run had no go; the v4 apply and the Stripe reads did. | It will recur. No longer blocking anything — `317cc10` rewrote E5's entry to carry an interim rule that holds if E4 is never written. |
+| **E5** | **CODEMAP entry for `20260802_01`** — the migration, the manual apply, the hand-written version row. | Record it before it is forgotten. This is the case that produced the "applied ≠ done" rule now in PROTOCOL §5. |
+
+⚠ **E7 changed under us and the entry above is the corrected one.** The ledger, `migrations/README.md:23`
+and the first draft of #129 all describe **#66 as open**; it was **closed 2026-08-04 12:19 as
+superseded**, unmerged. Its migration `20260607_01_onboarding_email_schedule.sql` still sits on
+`feat/onboarding-email-rework`, so the real question is whether that branch is dead — if it is, delete
+it and the renumber evaporates. A textbook correct-when-written claim, inherited by three documents on
+the same day it expired.
+
+### `web.legacyPageTestImports.allowedTwins` — move it or delete it. Do not grow the board.
+
+**The board's C6 check reds on this today, and the red is correct.** The key is declared in plan §10
+and consumed by nothing. It was already on the cleanup list as *"implement `legacyPageTestImports` in
+`senra-status.sh` — declared, never written"*; that line is now removed, because implementing it
+there is the wrong fix.
+
+`senra-status.sh` reads iOS, Android and the deep-link repo **by design**. Growing it a `TAGME` root
+to satisfy one orphaned web key is building infrastructure to answer a check. Two options only:
+
+- **Move it** to `tagme-now`'s own test suite, where a consumer can exist. The rule is real and
+  already written out at plan `:490` — *no test may import `@/pages/X` when `X` has a routed
+  `redesign7/X` twin*, with `PublicPetProfile` / `PrivacyPolicy` / `TermsConditions` the only
+  legitimate cases, and the check must **name** the offending import rather than count.
+- **Delete it** from plan §10 if nobody can say what it protects.
+
+PROTOCOL §1 routes an item that cannot be expressed as a check to *DECISION* or *NOT READY* — but a
+`CONTRACT` declaration exists only to be consumed, so for this construct the two options above are the
+whole set. A contract with no consumer and no board is a sentence.
+
+⚠ Worth noting what this is: **C6's first finding is this session's own defect**, surfaced by a check
+rather than by a person — a rule that lived in prose and never ran. Which is the thing the whole
+closeout has been deleting.
+
+### §D cleanup — checklist, not prose
+
+The ledger's §D, reduced to what is actually actionable. Ticked items are done.
+
+- [x] **Track `pricing-C9-cutover-runbook.md`** — was untracked *and* `.git/info/exclude`'d, so
+      invisible to `git status`, to `git add -A`, and to the landmines check. `git add -f`'d onto
+      pet-safety-eu `main` at `896318e`.
+- [x] **branch `docs/pricing-cutover-record` @ `14a4b7a`** — verified already pushed; it is a
+      decision (keep or fold), not a rescue.
+- [ ] **Delete `SESSION-HANDOVER-2026-08-01.md`** — **delete, do not merge into `HANDOVER.md`.** It
+      still lists `CODEMAP` as a peer file and still carries the superseded `20260801_04` high-water
+      mark; a merge drags both into the survivor. Diff first to confirm nothing unique is lost; if
+      something is, copy that one thing by hand.
+- [ ] **Delete `SESSION-HANDOVER-2026-07-31.md`** — superseded.
+- [ ] **Delete `SESSION-START.md`** — carries its own deletion instruction, and its §5 predicted
+      step 5's failure branch, which then happened and was fixed. Merged to `main` to preserve the
+      history; delete because it is finished. **Do not fold its §5–§7 into `HANDOVER.md`** — that is
+      the merge-vs-delete trap again.
+- [ ] **Cut `HANDOVER.md`'s PR-status paragraph and its board counts.** Both are transient state in a
+      governing document — the same drift engine as a dated filename. GitHub owns PR status; the board
+      owns counts. Keep the sentence that the board is branch-scoped and that counts differ by branch;
+      delete every specific number. *(Both were already wrong: the PR paragraph calls #45/#47 unmerged
+      when they merged 2026-08-02, and the counts say RED 10 / RED 7 when `main` now reads 12.)*
+- [ ] **Rename `SENRA-WORKPLAN-2026-08-01.md` → `WORKPLAN.md`**, and add it plus `HANDOVER.md` to
+      `senra-status.sh` §9.
+- [ ] **Delete `DOCS-CLOSEOUT.md`.** ⚠ It has **no §9 entry** — the manifest names seven files and the
+      ledger is not among them, so there is nothing to remove alongside it. §D's conditional clause
+      anticipated exactly this; the unconditional reading sends someone hunting an entry that never
+      existed.
+- [ ] **monorepo `docs/` (74 files)** — one pass: delete, or one README saying "archive, nothing here
+      is current".
+- **`senra-status.md` — nothing to do.** §D lists it for deletion; it does not exist on `main`, on
+  disk, or in the deletion history. Recorded so the next reader does not go looking.
 
 ## Cleanup — one deliberate pass, never piecemeal
 
 17 stale `STRIPE_PRICE_*` lines in prod `.env` (inert, SM wins; the watchdog asks for exactly this) ·
 `.env.pre-a3-7-revert` on the staging box · the 80 untracked backend files (hidden by
 `.git/info/exclude`, not gone) · confirm `PRICING_CUTOVER_OVERRIDE` was reverted on staging after A3 ·
-implement `legacyPageTestImports` in `senra-status.sh` (declared in CODEMAP §10, never written) ·
 fix `pricingCutover.ts:6-7`, which names a C7 registration-reminder job that was never built ·
 orphaned keys: `most_popular` ×3, `tag_card_footnote`, `plans.get_started` (orphaned on `/choose-plan`,
 live on `/plans`), `choose_plan.activating`, `redesign7.menu.*`.
