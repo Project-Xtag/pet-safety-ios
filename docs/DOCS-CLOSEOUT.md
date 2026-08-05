@@ -426,6 +426,7 @@ line that runs at session start.
 | Action | File | Why |
 |---|---|---|
 | **Merge → delete** | `SESSION-HANDOVER-2026-08-01.md` → `HANDOVER.md` | Two handovers is one too many; the day-stamped name is the drift engine |
+| **Merge → delete** | `SESSION-START.md` → `HANDOVER.md` (its §5–§7) | The file carries its own deletion instruction; this row is what makes that a **scheduled action rather than a hope**. **Remove its `senra-status.sh` §9 entry in the same edit** — same reasoning as §0 step 5, and it applies only if the file survived to the seam and reached the manifest at all |
 | **Rename** | `SENRA-WORKPLAN-2026-08-01.md` → `WORKPLAN.md` | Same |
 | **Add to §9** | `WORKPLAN.md`, `HANDOVER.md` | Completes P1-5's manifest |
 | **Delete** | `senra-status.md` | Stale at `203748cf8b57`; the board is now `7dd21f156710`. A rendering of a moving file is a second copy |
@@ -436,10 +437,23 @@ line that runs at session start.
 
 **Keep** `PHASE2-READ-PLAN.md` — it deletes into `phase-2-spec.md` when the read closes.
 
+⚠ **`SESSION-START.md` is undated on purpose, and that is precisely why it needs a row rather than a
+check.** The dated-filename check below is what catches a handover outliving its session; an undated
+name walks straight past it, so the only thing that will ever catch this file is the `test !` line.
+It is **rewritten in place and never forked per session** — a `SESSION-START-2026-08-11.md` is the
+drift engine returning under a name the check cannot see. It is tracked but **not governing** until
+the seam, the same window this ledger sits in: `git commit`-ing it did not add it to §9, because a
+§9 edit moves `senra-status.sh` on `main` and voids `9e9c2fbf2b4c` (see §M's shelf life). Both
+entries land in **one** board edit at the seam, alongside C6/C7 — and this row takes them both back
+out again.
+
 ```bash
 ls docs/ | grep -c '2026-0[78]-'                                # expect 0 — no dated filenames
 test -f docs/WORKPLAN.md && test -f docs/HANDOVER.md && echo OK
 test ! -f docs/senra-status.md && echo "senra-status.md gone"
+test ! -f docs/SESSION-START.md && echo "SESSION-START.md folded and gone"
+grep -c 'SESSION-START' scripts/senra-status.sh                 # expect 0 — no manifest entry outliving the file
+grep -c 'docs/HANDOVER.md' scripts/senra-status.sh              # CONTROL: expect >0 — §9 is still a manifest
 ```
 
 ## §M — the cross-branch merge. Five files, and the resolver picks bytes no review covered.
@@ -732,7 +746,7 @@ method with the count would not have saved it.
 **Not urgent:** §M already prescribes the correct comparison. **Urgent if** anyone writes a review
 step that verifies a revised artifact by comparing two diffs against a common ancestor.
 
-### D2 · The build tree serves STALE copies of two governing docs
+### D2 · The build tree serves STALE copies of three governing docs
 
 `feat/mobile-redesign-phase1`'s working tree carries these untracked, and they are **not** copies of
 what `main` serves:
@@ -741,8 +755,17 @@ what `main` serves:
 |---|---|---|
 | `docs/SENRA-WORKPLAN-2026-08-01.md` | `9463140e6be9` · 20,359 B | `21162d0195e3` · 20,627 B |
 | `docs/SESSION-HANDOVER-2026-08-01.md` | `89170a0b8c8b` · 12,615 B | `7b7bb5538501` · 13,374 B |
+| `docs/DOCS-CLOSEOUT.md` — **this file** | `2651ceb0b814` · 44,239 B | `4a6daa85e99b` · 48,963 B |
 
-Both are pre-merge drafts, both smaller than the tracked versions. **§8 sees them as untracked and
+⚠ **The third row is this ledger, and it was found the only way it could be — by running D2's own
+check before an edit, 2026-08-04.** The build tree is 72 lines behind `main`: it has the pre-P1-5 §9
+(five entries, no manifest comment), so a §D edit made there would have been written against a
+version of the board that no longer exists, and a reader checking §9's contents from the build tree
+gets the wrong answer with no signal that anything is wrong. **The file that prescribes this check
+was itself failing it.** That is not irony, it is the expected case: nothing exempts a doc from
+staleness because the doc is about staleness.
+
+All three are pre-merge drafts, all three smaller than the tracked versions. **§8 sees them as untracked and
 says nothing about them being *older than* what `main` holds** — which is the more dangerous half.
 The landmine row warns that `git add -A` sweeps stray files; here it would commit **older content
 over newer**.
@@ -757,9 +780,41 @@ no review ever covered — and A9 and trap 13 are line-specific findings against
 against `89170a0b8c8b`.
 
 ⚠ **So every remaining docs step verifies its pre-image against `origin/main` before editing** —
-`21162d0195e3` for the workplan, `7b7bb5538501` for the session handover — and edits from a worktree
-cut from `main`, not from the build tree. *(This is the blockage that stopped the Q6 edit on
-2026-08-03; it is now a known property of two more steps rather than a discovery.)*
+**derive all three, do not pin**:
+
+```
+gshow origin/main docs/SENRA-WORKPLAN-2026-08-01.md
+gshow origin/main docs/SESSION-HANDOVER-2026-08-01.md
+gshow origin/main docs/DOCS-CLOSEOUT.md
+```
+
+— and edits from a worktree cut from `main`, not from the build tree. *(This is the blockage that
+stopped the Q6 edit on 2026-08-03; it is now a known property of two more steps rather than a
+discovery.)*
+
+⚠ **All three entries were hashes, and all three were void — each on a different trigger.** A pin
+naming the pre-image of a file that something *already scheduled* will change is stale the moment
+that thing lands. The defect is not "hashes are bad"; it is that **a hash cannot pin a target the
+plan already intends to move**, and the three differ only in when the move happens:
+
+| Pin | Was | Void when |
+|---|---|---|
+| this ledger | `4a6daa85e99b` | **this commit's own branch merges** — commit 3 rewrites the ledger, so the pin was stale by construction, from inside the thing it pinned |
+| the workplan | `21162d0195e3` | **step 5 merges** — the workplan on `main` becomes `9ef151967792`, and the row would go on naming the pre-image |
+| the session handover | `7b7bb5538501` | **step 7's §D dissolves it** — the file is scheduled for deletion, so the pin outlives its subject |
+
+The ledger's was caught first only because its trigger was closest. The other two were not sound —
+they were *not yet triggered*, which reads identically until it doesn't. An earlier draft of this
+paragraph said the other two were sound and would stay; that was wrong for the workplan within a day.
+
+**Useful side effect: with no literal left in this row, merge order stops mattering.** While any pin
+was a hash, whichever branch merged second would falsify it; now neither can.
+
+The `gshow` form is the one `HANDOVER.md:62` already uses for `PROTOCOL.md`, for this reason.
+
+This is the second instance of the sentence three paragraphs up — *nothing exempts a doc from
+staleness because the doc is about staleness* — one level higher: not the ledger's copy being stale,
+but the ledger's own staleness **rule** generating the staleness it exists to catch.
 
 ---
 
