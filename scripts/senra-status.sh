@@ -274,6 +274,63 @@ lguard "$APPKT" 'RootRoute.REGISTER -> RegisterScreen'        1 "AND: root when 
 lguard "$APPKT" 'RootRoute.LOGIN -> AuthScreen'               1 "AND: root when arm LOGIN present (C2 seam)"
 lguard "$APPKT" 'RootRoute.LANDING -> LandingScreen'          1 "AND: root when arm LANDING present (C2 seam)"
 
+# ── F-G6 — dormant-screen quarantine, keyed on SYMBOLS, not on the filename ──
+# PROTOCOL §6 forbids wiring AlertsScreens.kt. A guard that names the FILE guards
+# NOTHING: G12b forbade wiring ScannedPetView, nobody wired it, and logged-out
+# delivery shipped on iOS anyway through a live component one branch over. So pin the
+# symbols instead.
+#
+# Two things are guarded, because 2.3b-Android is the live hazard:
+#   1. The two non-private composables must have ZERO references outside their own
+#      file. They are the whole public surface of the quarantined screen.
+#   2. ReportSightingDialog must stay `private`. 2.3b LIFTS from it; the moment it
+#      loses `private` it is one import away from being CALLED, which is the lift
+#      quietly becoming a call — the exact G12b shape, one file over.
+#
+# This lands BEFORE the 2.3b chunk on purpose, so wiring reads RED here rather than
+# in review. Measured 0/0/private at android 931b51b, so it lands GREEN — the plan's
+# "AlertsScreens.kt has 1 external caller" is stale (control: MainTabScaffold, 4 files).
+#
+# SCOPE IS SPLIT, AND THE SPLIT IS THE POINT — the two mechanisms have different
+# false-positive exposure, so they get different frames.
+#
+#   * The two composables are scanned across ALL of app/src, TEST SOURCES INCLUDED.
+#     Measured at android 931b51b: MissingAlertsScreen and FoundAlertsScreen have
+#     test+androidTest = 0, so widening costs nothing today and closes the real
+#     resurrection path — a Compose test that RENDERS either screen re-animates a
+#     dormant surface, and under a main-only scan that reads green.
+#
+#   * ReportSightingDialog is NOT in the zero-callers check at all. It is guarded by
+#     the `private` pin below, a different mechanism, and that is where the only
+#     false-red risk lives: app/src/test/java/com/petsafety/app/ui/screens/
+#     ReportSightingValidationTest.kt names it and does readSource("AlertsScreens.kt"),
+#     reading the file as TEXT to assert the validators are wired. That is a
+#     source-reading test, not a call. Counting it as an external caller would be a
+#     permanent false RED — so it is not counted, because `private` already makes the
+#     call impossible.
+#
+# Earlier revision scanned main only for all three and justified it with the dialog's
+# test reference. That generalised one symbol's exposure across two that do not share
+# it, and left the composables' resurrection path green. Corrected in review.
+ALERTSKT="$AND/app/src/main/java/com/petsafety/app/ui/screens/AlertsScreens.kt"
+if [ -f "$ALERTSKT" ] && [ -d "$AND/app/src" ]; then
+  for sym in MissingAlertsScreen FoundAlertsScreen; do
+    EXT=$(grep -rF "$sym" "$AND/app/src" --include='*.kt' 2>/dev/null | grep -vc 'AlertsScreens\.kt')
+    if [ "$EXT" -eq 0 ]; then
+      pass "AND: $sym has 0 external callers across app/src incl. tests (F-G6 quarantine)"
+    else
+      fail "AND: $sym has $EXT external reference(s) in app/src — AlertsScreens.kt is dormant under PROTOCOL §6; wiring it, or rendering it from a test, is a boundary breach, not a chunk"
+    fi
+  done
+  if grep -qE '^[[:space:]]*private fun ReportSightingDialog' "$ALERTSKT"; then
+    pass "AND: ReportSightingDialog still private (F-G6 — 2.3b lifts from it, must never call it)"
+  else
+    fail "AND: ReportSightingDialog is no longer private — 2.3b can now CALL it instead of lifting from it (PROTOCOL §6, the G12b shape)"
+  fi
+else
+  fail "AND: F-G6 quarantine SUBJECT MISSING ($ALERTSKT) — the guard must not evaporate silently"
+fi
+
 # ─────────────────────────────────────────────────────────────
 head_ "6. Declared contracts vs. the code (drift detector)"
 # v1 grepped PROSE that appeared ZERO times and false-fired against CORRECT code.
@@ -292,11 +349,71 @@ check_contract() {
   fi
 }
 
-IOS_HOLD=$(grep -o 'holdDuration[^=]*= *[0-9.]*' "$IOS/PetSafety/PetSafety/Views/SplashScreenView.swift" 2>/dev/null | grep -o '[0-9.]*$')
-[ -n "$IOS_HOLD" ] && check_contract "ios.splash.holdDuration" "$IOS_HOLD" "SplashScreenView.swift"
+# A `[ -n "$X" ] && check_contract …` silently SKIPS when the grep finds nothing —
+# a renamed file or a renamed constant evaporates the drift check instead of failing
+# it, which is the §5b/lguard failure mode (:192) and the ship-gate one (:234) in a
+# third place. Absence is a defect here too, so say so out loud.
+# Exactly-one-match is part of the contract. Two matches concatenate into a
+# multi-line $X, which check_contract then compares against the single declared
+# value and reports as DRIFT — a confusing failure that points at the plan when the
+# defect is the pattern. Count with `grep -o | wc -l`, never `grep -c`, which counts
+# LINES not occurrences (that miscount has already burned a bundle grep here).
+IOS_SPLASH="$IOS/PetSafety/PetSafety/Views/SplashScreenView.swift"
+IOS_PAT='holdDuration[^=]*= *[0-9.]*'
+IOS_HITS=$(grep -o "$IOS_PAT" "$IOS_SPLASH" 2>/dev/null | wc -l | tr -d ' ')
+if [ "$IOS_HITS" -eq 1 ]; then
+  check_contract "ios.splash.holdDuration" "$(grep -o "$IOS_PAT" "$IOS_SPLASH" | grep -o '[0-9.]*$')" "SplashScreenView.swift"
+elif [ "$IOS_HITS" -eq 0 ]; then
+  fail "ios.splash.holdDuration SUBJECT MISSING ($IOS_SPLASH, or the constant was renamed) — the drift check must not evaporate silently"
+else
+  fail "ios.splash.holdDuration AMBIGUOUS — $IOS_HITS matches in $IOS_SPLASH, need exactly 1. Narrow the pattern or pin the constant; do not let it read as DRIFT."
+fi
 
-AND_HOLD=$(grep -o 'HOLD_DURATION_MS[^=]*= *[0-9_]*' "$AND/app/src/main/java/com/petsafety/app/ui/screens/SplashScreen.kt" 2>/dev/null | grep -o '[0-9_]*$' | tr -d '_')
-[ -n "$AND_HOLD" ] && check_contract "android.splash.holdDurationMs" "$AND_HOLD" "SplashScreen.kt"
+AND_SPLASH="$AND/app/src/main/java/com/petsafety/app/ui/screens/SplashScreen.kt"
+AND_PAT='HOLD_DURATION_MS[^=]*= *[0-9_]*'
+AND_HITS=$(grep -o "$AND_PAT" "$AND_SPLASH" 2>/dev/null | wc -l | tr -d ' ')
+if [ "$AND_HITS" -eq 1 ]; then
+  check_contract "android.splash.holdDurationMs" "$(grep -o "$AND_PAT" "$AND_SPLASH" | grep -o '[0-9_]*$' | tr -d '_')" "SplashScreen.kt"
+elif [ "$AND_HITS" -eq 0 ]; then
+  fail "android.splash.holdDurationMs SUBJECT MISSING ($AND_SPLASH, or the constant was renamed) — the drift check must not evaporate silently"
+else
+  fail "android.splash.holdDurationMs AMBIGUOUS — $AND_HITS matches in $AND_SPLASH, need exactly 1. Narrow the pattern or pin the constant; do not let it read as DRIFT."
+fi
+
+# ── C6 — the inverse check. check_contract cannot perform it. ──
+# check_contract fails on an UNDECLARED key: code has a value, the plan does not
+# declare it. There is no inverse, so a key DECLARED in the plan with ZERO
+# consumers here reads all-green while being checked by nothing. The board cannot
+# report that gap about itself — §6 is structurally incapable of it, because it
+# only ever iterates over the checks that exist.
+#
+# The known instance, and why this check exists: the plan declares
+# web.legacyPageTestImports.allowedTwins in §10 with no consumer anywhere in this
+# script. It is a WEB contract, and this board reads $IOS/$AND/$DL only — so it
+# will red until either a consumer exists or the declaration moves to a board that
+# covers tagme-now. That red is CORRECT and is the finding, not a defect in C6.
+#
+# Enumerated from the plan, never from a hand-kept list here: a hand-kept list is a
+# second declaration, and this whole section exists because two declarations drift.
+DECLARED_KEYS=$(grep -o 'CONTRACT: *[^ =]*' "$PLAN" 2>/dev/null | sed 's/CONTRACT: *//' | sort -u)
+if [ -z "$DECLARED_KEYS" ]; then
+  fail "§6 inverse: no CONTRACT declarations found in $PLAN — either the plan moved or the pattern broke. A zero here is never 'all clear'."
+else
+  # Control: the matcher must reach the plan at all. A pattern that finds nothing
+  # and a plan with no contracts are the same output, which is the trap this whole
+  # session kept hitting.
+  KEYCOUNT=$(printf '%s\n' "$DECLARED_KEYS" | wc -l | tr -d ' ')
+  pass "§6 inverse: $KEYCOUNT contract key(s) declared in the plan (control — the matcher reaches $PLAN)"
+  for key in $DECLARED_KEYS; do
+    # A consumer is a check_contract call naming the key. Grep this script, not the
+    # plan: the question is whether anything CONSUMES the declaration.
+    if grep -q "check_contract \"$key\"" "$0" 2>/dev/null; then
+      pass "§6 inverse: $key has a consumer"
+    else
+      fail "§6 inverse: $key is DECLARED in the plan but NOTHING here consumes it — §6 reads green while checking nothing. Add a consumer, or move the declaration to a board that covers its repo."
+    fi
+  done
+fi
 
 # ─────────────────────────────────────────────────────────────
 head_ "7. Is the log behind the code?  (this is what 'no missed logs' means)"
@@ -313,10 +430,23 @@ head_ "7. Is the log behind the code?  (this is what 'no missed logs' means)"
 # exists to prevent. Verified by experiment 2026-07-17, not by reading.
 #
 # A CHUNK is any non-merge commit on $BRANCH, not yet on origin/main, that TOUCHES
-# FEATURE SOURCE. Touching feature source is SUFFICIENT, not exclusive: a commit that
-# edits a source file AND the CODEMAP in one go is still a chunk and must still cite
-# itself. Mixed commits are not forbidden — they just have to log themselves. A commit
-# touching only docs/** or scripts/** is a log commit, not a chunk, and is ignored.
+# FEATURE SOURCE.
+#
+# FEATURE SOURCE IS A POSITIVE ALLOWLIST — it is NOT "anything that is not docs".
+# The code below is the definition: iOS = paths matching ^PetSafety/ , Android =
+# paths matching ^app/src/ (the $SRC regex). A commit is a chunk only if at least one
+# of its paths matches that prefix. EVERYTHING else is a log commit and is ignored —
+# docs/**, scripts/**, and also .gitignore, CI workflows, Gradle files, *.pbxproj,
+# README, and anything at the repo root.
+#
+# Read as a denylist ("not docs/ and not scripts/") it OVER-COUNTS and reports a false
+# RED: a .gitignore-only commit gets classified as an unlogged chunk. That misreading
+# cost a review pass on 2026-08-02 — fd7b567 (.gitignore + docs/ + scripts/ only) was
+# reported as an unlogged 10th iOS chunk when the board correctly counted 9.
+#
+# Touching feature source is SUFFICIENT, not exclusive: a commit that edits a source
+# file AND the CODEMAP in one go is still a chunk and must still cite itself. Mixed
+# commits are not forbidden — they just have to log themselves.
 # Merge commits are ignored: they carry no chunk of their own.
 #
 # EXPECTED: a transient RED between the chunk commit and its log commit. That is not a
@@ -364,6 +494,17 @@ done
 # ─────────────────────────────────────────────────────────────
 head_ "8. Landmines — untracked files a 'git add -A' would sweep onto a code branch"
 
+# C7 — §8 counted only '^??' and was therefore BLIND to modified tracked files,
+# which are the more dangerous half: 'git commit -a' sweeps a ' M' file with no
+# 'git add' at all. Not hypothetical — on 2026-08-02 the rewritten HANDOVER.md sat
+# as ' M' in the feat/mobile-redesign-phase1 tree; §8 read its usual 3 untracked
+# files and said nothing. A 'git commit -a' there would have put a8e82562b99a on
+# the redesign line, converting §M's "HANDOVER.md IDENTICAL" into a genuine
+# three-way. It was caught by reading, not by the board.
+#
+# WARN, not fail, and that is deliberate: a dirty tracked file is normal mid-chunk,
+# so a red would cry wolf and train people to skim §8 — the exact failure mode §6's
+# v1 drift detector already demonstrated.
 for repo in "$IOS" "$AND"; do
   [ -d "$repo/.git" ] || continue
   name=$(basename "$repo")
@@ -373,6 +514,10 @@ for repo in "$IOS" "$AND"; do
     pass "$name: no untracked docs/diffs in the working tree"
   else
     fail "$name: $JUNK untracked doc/diff file(s) — 'git add -A' would commit them onto the code branch"
+  fi
+  MOD=$(git -C "$repo" status --porcelain 2>/dev/null | grep -c '^ M')
+  if [ "$MOD" -gt 0 ]; then
+    warn "$name: $MOD modified tracked file(s) — 'git commit -a' would sweep these; stage pathspec-limited"
   fi
 done
 
