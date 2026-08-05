@@ -780,18 +780,37 @@ no review ever covered — and A9 and trap 13 are line-specific findings against
 against `89170a0b8c8b`.
 
 ⚠ **So every remaining docs step verifies its pre-image against `origin/main` before editing** —
-`21162d0195e3` for the workplan, `7b7bb5538501` for the session handover, and for this ledger
-**derive, do not pin**: `gshow origin/main docs/DOCS-CLOSEOUT.md` — and edits from a worktree cut from
-`main`, not from the build tree. *(This is the blockage that stopped the Q6 edit on
-2026-08-03; it is now a known property of two more steps rather than a discovery.)*
+**derive all three, do not pin**:
 
-⚠ **The third entry was a hash until this commit, and the hash was void by construction.** A pin
-naming the pre-image of a file that *the pinning commit itself changes* is stale the moment the
-branch lands: this commit rewrites the ledger, so any value written here would have directed the next
-editor at a superseded copy — in the row whose entire purpose is preventing stale-copy edits. The
-other two pins are sound and stay, because this commit does not touch those files; the defect is not
-"hashes are bad" but "a hash cannot pin a moving target from inside the thing that moves it." The
-`gshow` form is the one `HANDOVER.md:62` already uses for `PROTOCOL.md`, for this reason.
+```
+gshow origin/main docs/SENRA-WORKPLAN-2026-08-01.md
+gshow origin/main docs/SESSION-HANDOVER-2026-08-01.md
+gshow origin/main docs/DOCS-CLOSEOUT.md
+```
+
+— and edits from a worktree cut from `main`, not from the build tree. *(This is the blockage that
+stopped the Q6 edit on 2026-08-03; it is now a known property of two more steps rather than a
+discovery.)*
+
+⚠ **All three entries were hashes, and all three were void — each on a different trigger.** A pin
+naming the pre-image of a file that something *already scheduled* will change is stale the moment
+that thing lands. The defect is not "hashes are bad"; it is that **a hash cannot pin a target the
+plan already intends to move**, and the three differ only in when the move happens:
+
+| Pin | Was | Void when |
+|---|---|---|
+| this ledger | `4a6daa85e99b` | **this commit's own branch merges** — commit 3 rewrites the ledger, so the pin was stale by construction, from inside the thing it pinned |
+| the workplan | `21162d0195e3` | **step 5 merges** — the workplan on `main` becomes `9ef151967792`, and the row would go on naming the pre-image |
+| the session handover | `7b7bb5538501` | **step 7's §D dissolves it** — the file is scheduled for deletion, so the pin outlives its subject |
+
+The ledger's was caught first only because its trigger was closest. The other two were not sound —
+they were *not yet triggered*, which reads identically until it doesn't. An earlier draft of this
+paragraph said the other two were sound and would stay; that was wrong for the workplan within a day.
+
+**Useful side effect: with no literal left in this row, merge order stops mattering.** While any pin
+was a hash, whichever branch merged second would falsify it; now neither can.
+
+The `gshow` form is the one `HANDOVER.md:62` already uses for `PROTOCOL.md`, for this reason.
 
 This is the second instance of the sentence three paragraphs up — *nothing exempts a doc from
 staleness because the doc is about staleness* — one level higher: not the ledger's copy being stale,
