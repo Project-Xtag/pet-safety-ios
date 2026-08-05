@@ -533,7 +533,7 @@ head_ "9. Doc home — the governing docs must be readable from the branch you b
 # NOT listed, deliberately: phase-2-spec.md, which cannot be tracked before it exists —
 # the obligation at §5b's Zone-3 gate adds it here in the same edit that re-points them.
 
-for f in docs/SENRA-MOBILE-REDESIGN.md docs/phase-1-spec.md docs/PROTOCOL.md docs/HANDOVER.md docs/WEB-HANDOFF-CONTRACT.md docs/PHASE2-READ-PLAN.md scripts/senra-status.sh; do
+for f in docs/SENRA-MOBILE-REDESIGN.md docs/phase-1-spec.md docs/PROTOCOL.md docs/HANDOVER.md docs/WORKPLAN.md docs/WEB-HANDOFF-CONTRACT.md docs/PHASE2-READ-PLAN.md scripts/senra-status.sh; do
   if git -C "$IOS" ls-files --error-unmatch "$f" >/dev/null 2>&1; then
     pass "tracked: $f"
   else

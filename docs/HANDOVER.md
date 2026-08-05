@@ -6,7 +6,8 @@ bug.**
 
 Program-scoped: all four repos, not just the mobile redesign. Undated by design — this file is
 rewritten in place, never dated and never forked. Supersedes `SESSION-HANDOVER-2026-08-01.md` and
-`SESSION-HANDOVER-2026-07-31.md`, both of which are deleted by the closeout ledger's §D.
+`SESSION-HANDOVER-2026-07-31.md`, both **deleted 2026-08-05** rather than merged, so their
+known-wrong lines could not ride into this file.
 
 Current as of **2026-08-02**, end of the review session that cleared PR #46, PR #47, and migration
 `20260802_01`.
@@ -19,7 +20,7 @@ Current as of **2026-08-02**, end of the review session that cleared PR #46, PR 
 |---|---|
 | Roles, the rules, the hazards, the hard boundaries | `docs/PROTOCOL.md` — **read in full, first** |
 | The redesign plan, locked decisions, gaps register, CODEMAP | `docs/SENRA-MOBILE-REDESIGN.md` |
-| The priority stack and open decisions | `docs/SENRA-WORKPLAN-2026-08-01.md` (→ `WORKPLAN.md` at Phase 2) |
+| The priority stack and open decisions | `docs/WORKPLAN.md` |
 | The web-handoff contract — **FROZEN** | `docs/WEB-HANDOFF-CONTRACT.md` |
 | Phase-2 read scopes, Read A findings | `docs/PHASE2-READ-PLAN.md` — **§READ-A FINDINGS** |
 | C5/C6's contract and gate | `docs/phase-1-spec.md` **§E C5/C6** |
@@ -38,7 +39,6 @@ not raise them as a regression.
 purpose — the board owns counts, this document owns the mechanism. A number in prose is stale the
 next time anything lands, and every count that used to sit in this paragraph was wrong within days.
 
-| The documentation closeout, phased | `docs/DOCS-CLOSEOUT.md` — tracked, transitional; deleted at close |
 
 There is **no monorepo for docs** — four repos only, and the monorepo's `docs/` is a stale archive.
 
@@ -59,14 +59,12 @@ There is **no monorepo for docs** — four repos only, and the monorepo's `docs/
 | └ §8, the frozen surface | `86a1c13aaad5` | 383 B / 11 L |
 | `PROTOCOL.md` | **derive** — `gshow origin/main docs/PROTOCOL.md` | |
 | `SENRA-MOBILE-REDESIGN.md` | **derive** | |
-| `SENRA-WORKPLAN-2026-08-01.md` | **derive** | |
-| `SESSION-HANDOVER-2026-08-01.md` | **derive** — see the note below | |
+| `WORKPLAN.md` | **derive** | |
 | `HANDOVER.md` (the version this replaces) | `b8d204cd1042` | 89 L |
 | Migration `20260802_01` v4 | `87e88be96acb` | 12,130 B / 202 L |
 | └ executable-only fingerprint | `7a50f3f135bc` | 56 L |
 
-**This table follows the pin rule** (`docs/DOCS-CLOSEOUT.md`): **a hash is written only for bytes that
-cannot move.** Everything else says **derive** and is re-derived at read time. Use `gshow`, which
+**This table follows the pin rule: a hash is written only for bytes that cannot move.** Everything else says **derive** and is re-derived at read time. Use `gshow`, which
 returns hash, bytes and lines together so a byte count cannot drift away from its hash:
 
 ```bash
@@ -80,16 +78,12 @@ gshow origin/main docs/PROTOCOL.md        # or: git show "origin/main:<path>" | 
 - **SUPERSEDED or APPLIED** — the 89-line `HANDOVER.md` this replaces, the merged docs line's
   `e451a2820970`, migration `20260802_01` and its fingerprint, and the Historical block below. Those
   bytes were fixed by an event.
-- **§M's OPERANDS** — `7dd21f156710`, `a1aeca162505` and `9e9c2fbf2b4c`. **Exempt under §M — do not
-  convert them.** See `docs/DOCS-CLOSEOUT.md` §M, which owns the exemption and the reason.
+- **§M's OPERANDS** — `7dd21f156710`, `a1aeca162505` and `9e9c2fbf2b4c`. **Exempt — do not convert them.**
+  They are the operands of a cross-branch merge resolution, pinned to file CONTENT rather than to tip
+  SHAs, so deriving them would destroy the thing they record. The merge itself closed 2026-08-05 when
+  #46's guards were folded onto `main`; the values are kept as the record of how it was verified.
 
-`SESSION-HANDOVER-2026-08-01.md` is DELETED-class **by intent and not yet by fact** — §D dissolves it
-into this file at the seam. Until that happens its bytes can still move, so it derives; it earns a
-pin only once someone needs to cite the exact bytes that were dissolved.
 
-`DOCS-CLOSEOUT.md`'s row is **gone**, not converted: it is now tracked at `docs/DOCS-CLOSEOUT.md`,
-so it is one `gshow` away and needed no row. Three different values for it were in circulation
-before it came out.
 
 **Historical, for merge work only:** `senra-status.sh` pre-image `203748cf8b57` (436 L); merge base
 `b0b076b` where it is 267 L (`6fa4ad359d8b`); contract pre-P1-1 `a6ce9dd2e930` (293 L); docs-line
@@ -164,15 +158,19 @@ checkout; the assembler change is the fix and it is not written.
 
 ## Owed by Viktor. Neither seat can close these.
 
+**The numbered decisions E1–E7 live in `docs/WORKPLAN.md`.** This file's own owner table says the
+workplan owns open decisions, and they are not restated here. E3 and E7 additionally have tracked
+issues — pet-safety-eu **#128** and **#129**.
+
+*(They were briefly in both documents. Four of the seven sat in this table and in the workplan at the
+same time, on 2026-08-05, put there by the same closeout that exists to stop exactly that. Caught by
+grepping the two files against each other before this commit — which is the only reason you are
+reading a pointer instead of a second copy.)*
+
+What is owed to the **seat boundary** rather than to a decision list, and stays here:
+
 | | |
 |---|---|
-| **E1** | §E C5/C6's must-not-touch wall — chunk boundary or standing? **Gates the Android Phase-2 shape; deadline is C1, before `phase-2-spec.md`.** Send `phase-1-spec.md` §E C5/C6 to the review seat as C1's first artifact |
-| **E2** | HU register — rule "informal is deliberate" or overrule |
-| **E3** | Migration `002` — ever real? Absent from the applied set *and* from `main` |
-| **E4** | Does a rolled-back transaction against prod count as a production action needing a recorded go? |
-| **E6** | pet-safety-eu#113 — merge or close |
-| **E7** | #66 — renumber `20260607_01` above **`20260802_01`** (the mark moved) |
-| | The §M merge resolutions, then Phase 2 of the closeout |
 | | All git operations; store console state; anything needing a device or browser; prod Stripe and Secrets Manager; könyvelő questions |
 
 ---

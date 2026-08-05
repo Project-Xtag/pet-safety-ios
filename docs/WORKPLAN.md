@@ -376,9 +376,12 @@ These are in PROTOCOL; repeated here because every drift corrected today came fr
 
 ### Carried from the closeout ledger's §E — decisions no grep can close
 
-Absorbed here because the ledger is being deleted. E6 and E7 already had entries above and are not
-repeated. **E3 and E7 now also have tracked issues** — the ledger was never the place for work that
-GitHub can hold.
+Absorbed here because the ledger is deleted. **This table is the only home for E1–E7** — `HANDOVER.md`
+used to carry a second copy of four of them and now points here instead. E3 and E7 also have tracked
+issues; the ledger was never the place for work GitHub can hold.
+
+E6 and E7 keep their detail in **Open decisions** above rather than in this table, but they are listed
+here so that searching for the label finds them — an entry nobody can grep for is the same as no entry.
 
 | # | The decision owed | Why it does not close itself |
 |---|---|---|
@@ -387,6 +390,8 @@ GitHub can hold.
 | **E3** | **Migration `002` — was it ever real?** Absent from the applied set *and* from `main`. | On a set-membership runner a `002` file appearing later **will run**, against a schema ~164 migrations downstream. → pet-safety-eu**#128** |
 | **E4** | **Does a rolled-back transaction against prod count as a production action needing a recorded go?** `ROLLBACK` bounds persistence, not lock acquisition; `ALTER TABLE` takes ACCESS EXCLUSIVE either way. The 2026-08-02 dry run had no go; the v4 apply and the Stripe reads did. | It will recur. No longer blocking anything — `317cc10` rewrote E5's entry to carry an interim rule that holds if E4 is never written. |
 | **E5** | **CODEMAP entry for `20260802_01`** — the migration, the manual apply, the hand-written version row. | Record it before it is forgotten. This is the case that produced the "applied ≠ done" rule now in PROTOCOL §5. |
+| **E6** | **pet-safety-eu#113 — merge as defence-in-depth, or close.** Detail in **Open decisions** above. | Evidence favours closing: zero paid mismatches ever, the one pending row was never charged, #117 is deployed and verified, and the fielded Android carries Fix 9. |
+| **E7** | **Renumber `20260607_01` above the current mark.** Detail in the migration-ordering row of **Standing hazards** above. | **#66 was closed 2026-08-04, unmerged** — so this only matters if `feat/onboarding-email-rework` is revived. Blocked on the prune fix either way. → pet-safety-eu**#129**, **#126** |
 
 ⚠ **E7 changed under us and the entry above is the corrected one.** The ledger, `migrations/README.md:23`
 and the first draft of #129 all describe **#66 as open**; it was **closed 2026-08-04 12:19 as
@@ -442,9 +447,9 @@ The ledger's §D, reduced to what is actually actionable. Ticked items are done.
       owns counts. Keep the sentence that the board is branch-scoped and that counts differ by branch;
       delete every specific number. *(Both were already wrong: the PR paragraph calls #45/#47 unmerged
       when they merged 2026-08-02, and the counts say RED 10 / RED 7 when `main` now reads 12.)*
-- [ ] **Rename `SENRA-WORKPLAN-2026-08-01.md` → `WORKPLAN.md`**, and add it plus `HANDOVER.md` to
+- [x] **Renamed `SENRA-WORKPLAN-2026-08-01.md` → `WORKPLAN.md`** 2026-08-05, and added it to
       `senra-status.sh` §9.
-- [ ] **Delete `DOCS-CLOSEOUT.md`.** ⚠ It has **no §9 entry** — the manifest names seven files and the
+- [x] **Deleted `DOCS-CLOSEOUT.md`** 2026-08-05. ⚠ It has **no §9 entry** — the manifest names seven files and the
       ledger is not among them, so there is nothing to remove alongside it. §D's conditional clause
       anticipated exactly this; the unconditional reading sends someone hunting an entry that never
       existed.
