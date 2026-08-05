@@ -198,6 +198,9 @@ Run it at the **start of every session** and **before every commit**.
 | **A no-op cherry-pick ABORTS THE SEQUENCE** — every later commit then silently never applies, and nothing errors. | Check `git diff --name-only main..HEAD` **before** pushing. Empty is the tell. |
 | **A `--stat` is not a diff.** An in-line amendment never moves the counts: `338a7d1`'s plan half read `3+/1−` both before and after an added line was rewritten in place. | Read the diff. A `--stat` clears nothing. |
 | **A count only verifies if the counting method travels with it.** "73 executable lines unchanged" was unreproducible — two honest methods gave 56 and 73, because one counted blank lines and one did not. A bare number is not evidence; it is a number. | Send the command with the count. For a comments-only claim pin a fingerprint both seats can recompute: `grep -vE '^[[:space:]]*(--\|#\|$)' <file> \| shasum -a 256`. |
+| **A matcher that cannot REACH its target.** Distinct from the row above, and the distinction is the whole point: there the matcher reads the right bytes and the pattern is wrong; here the pattern is fine and the bytes were never read. Both print the same `0`. Three instances on 2026-08-05 — a pathspec resolved against the wrong repo root (root is `Project-Xtag`, not `pet-safety-eu`); `~/.pm2/logs` under SSM, which runs as **root**, not `ubuntu`; and a line-anchored `grep` for a sentence that wraps across two lines. **The worst case was the first: the false zero and the true answer were the same number**, so nothing about the output looked wrong — only a control's arithmetically impossible zero exposed it. | The control rule above, **plus: never let a path resolve against the current directory.** Use `groot` below, which pins the repo root mechanically. For log paths, name the user explicitly rather than relying on `~`. For prose, strip newlines before matching (`tr '\n' ' '`) or match a fragment that cannot wrap. |
+| **A claim about ANOTHER repo that was true when written.** `appCheckMiddleware.ts` said *"Web doesn't have App Check yet"* — true on 2026-04-28 (`6cb4084`), false six days later when tagme-now shipped it (`ccb31fa`), unrevisited for three months. The B2 read plan then cited it, and the stale premise shaped a mount decision. A stale *same-repo* claim usually breaks something visible; a stale *cross-repo* claim breaks nothing locally and stays green until someone acts on it. | **A claim about another repo carries the date and ref it was verified at, or it is a memory, not a claim.** Re-derive against that repo before relying on it. Note that a stale *prescription* ages worse than a stale observation: the same docstring also prescribed reCAPTCHA **Enterprise** when what shipped was **v3**, so acting on it provisions the wrong thing. |
+| **A migration that is APPLIED but not COMMITTED.** `20260802_01` was applied to prod, recorded in `schema_migrations`, byte-reviewed, behaviour-reviewed, and written into both a CODEMAP entry and a handover — while existing on one laptop, in no repository, for six hours. Every one of those gates passed because **not one of them asked.** | **Done = applied ∧ version row ∧ source committed.** Anything less is a schema change with no source. Clearance covers what it covers. |
 
 ### `gshow` — the mitigation for the two rows above, mechanised
 
@@ -217,6 +220,46 @@ Two properties, and the second is the one that matters:
 - The byte count is structurally inseparable from the hash, so "print `wc -c` beside every hash" stops being a thing you remember to do.
 
 `gshow <ref> <path>` → `7dd21f156710  30895 bytes  531 lines`.
+
+### `groot` — same treatment for the repo-root row
+
+The matcher-reach row is new, and it arrived having already fired **three times in a single
+session**, each time caught only by a control rather than by care. That is the `gshow` situation
+exactly: the mitigation existed as a discipline, and a discipline is what failed. So it gets a
+wrapper rather than a fourth sentence telling people to be careful.
+
+```bash
+groot() {
+  local root
+  root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+    printf 'groot: not inside a git repository\n' >&2; return 1; }
+  git -C "$root" "$@"
+}
+```
+
+`groot <any git subcommand>` runs it from the repository root, so **every pathspec resolves against
+the root regardless of where you are standing.** It removes the class instead of warning about it.
+
+Measured against the instance that motivated it — standing in `Project-Xtag/pet-safety-eu`, whose
+root is `Project-Xtag`:
+
+```
+git   grep -l 'verify-otp' ca877a0 -- pet-safety-eu/backend/src   → 0    ← the false zero
+groot grep -l 'verify-otp' ca877a0 -- pet-safety-eu/backend/src   → 7    ← correct
+git   grep -l 'verify-otp' ca877a0 -- ':(top)pet-safety-eu/...'   → 7    ← what groot saves you remembering
+```
+
+Two properties, and the second is again the one that matters:
+
+- **The root is derived, never assumed.** `:(top)` works but has to be remembered at the moment of
+  writing the command — which is precisely when it is forgotten, because nothing looks wrong.
+- **Outside a repository it prints a message and returns 1** — it does not fall back to the current
+  directory and produce a plausible empty result. Same reasoning as `gshow`'s `|| return 1`: a wrong
+  answer invites a second look, a plausible one does not.
+
+**`groot` does not help when the path is not a git pathspec** — the SSM `~/.pm2/logs` instance was
+the same class with a different mechanism (wrong *user*, not wrong root). For those, name the
+absolute path and never rely on `~`.
 
 ---
 
