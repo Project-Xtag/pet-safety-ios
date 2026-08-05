@@ -100,8 +100,10 @@ base `2bcc2ac` (PR #45).
 ### Branches
 
 Three PRs stacked and unmerged: **#45** (08-01 docs) → **#47** (Phase 1 closeout, `df266fb` +
-`317cc10`), and **#46** (board guards) on the redesign line separately. pet-safety-eu `main` =
-`33b59a0` plus migration `20260802_01`.
+`317cc10`), and **#46** (board guards) on the redesign line separately. pet-safety-eu migration
+high-water mark is `20260802_01` (verified at `218a2d2`). **The eu `main` sha is not restated here** —
+the workplan's reference-state table owns it. Two documents carrying that sha is what produced the
+F2 drift; do not re-add it.
 
 ⚠ **#46 and #47 do not auto-merge.** Five files conflict. Four resolve to values already cleared
 (the redesign line never edited them — its copies are content-identical to the docs line's starting
@@ -127,7 +129,7 @@ against the actual merge is a rehearsal.
 ## What is live right now
 
 **B2 — the web-handoff subscribe flow, `pet-safety-eu`.** Read plan approved across six ranges;
-build not started at time of writing. Build to `fdf0d570c218` and **do not amend it**. Three things
+build not started at time of writing. Build to `fdf0d570c218` and **do not amend it**. Four things
 are settled and must not be re-derived:
 
 - Prod host `senra.pet` is a literal. `app.senra.pet` has no DNS record; staging genuinely is
@@ -136,6 +138,13 @@ are settled and must not be re-derived:
   validated, never fed into market resolution. Ruled 2026-08-02; §9.4 carries the reasoning and the
   retired evidence.
 - `orders` stays in the destination enum and always returns 400. "Reserved" means exactly that.
+- **Redeem shape: cookies are primary, the body token is a documented cross-origin fallback.**
+  `refresh_token` is `sameSite:'strict'`, `path:'/api/auth/refresh'`; `senra.pet` and `api.senra.pet`
+  are different origins but the same *site*, so it rides the handoff normally — flagged once as a
+  possible blocker and it is not one. Contract §10 owns the detail. *(Added 2026-08-04. This was
+  ruled at freeze and marked `[was wrong]` in the workplan's §B1, but was the one previously-wrong
+  ruling this list did not protect — so the B2 read plan re-opened it as an open question. A ruling
+  that has already been got wrong once is exactly the kind that needs to be on this list.)*
 
 U1/U2 ship independently and inert: until a client calls the endpoint every request 404s and users
 get today's flow.
@@ -247,35 +256,6 @@ the next session believe something false?** If none of the three, write the line
 in the same pass.**
 
 ---
-
-## B2 read plan — surfaced under Rule 2, NEVER RATIFIED
-
-**This exists in no committed file.** It was produced in the 2026-08-02 review session and is
-reproduced here so it is not lost. **Write it into `WORKPLAN.md` §B2, or have the fresh session
-produce its own under Rule 2 and discard this.** Do not treat it as approved.
-
-Ref: pet-safety-eu `origin/main` `33b59a0`. Build to `fdf0d570c218`, do not amend it.
-
-1. `src/utils/cookies.ts:1-98` (`7eab63b653d0`) — **whole file.** Decides redeem's response shape.
-   `:68-79` `setRefreshCookie` is `sameSite:'strict'`, `path:'/api/auth/refresh'`; `:44`
-   `setAuthCookie` uses `getCookieOptions` (`:27`, none/lax, path `/`). Whether the strict path
-   survives the `senra.pet` → `api.senra.pet` hop decides if the body token is fallback or primary.
-2. `src/routes/auth.routes.ts:539-694` (`12b5a59951ac`) — verify-otp through refresh. **`:539` is
-   the precedent redeem must copy, NOT `:162` `/login`, which the web never calls.**
-3. `src/middleware/rateLimiter.ts:49-70, 226-260, 395-405, 437` (`048ac3d1c34a`). `:226`
-   `apiRateLimiter` and `:395` `paymentRateLimiter` are the ISSUE candidates; `:251`
-   `publicWriteRateLimiter` for REDEEM. **`:437` `adminRateLimiter` is a `next()` no-op — confirmed,
-   must not be composed by name.**
-4. `src/config/redis.ts:1-56` (`6eb8074c090f`). `:1` imports **ioredis**, `:41` exports the client —
-   so `set(k,v,'EX',90)`, not node-redis's options object.
-5. `src/routes/auth/twoFactor.routes.ts:1-20` + `src/app.ts:54,239` (`be2ee175f42b`). The sub-router
-   mount precedent, and whether `appCheckIfEnforced` applies to a route the web calls.
-6. tagme-now: the redesign7 route entry + `CountryContext:33-37`, `countries.ts:18`. U2 only.
-   **Unpinned — a locating hint, not a citation.** Range to be fixed by `grep -n` at read time.
-
-Settled and not to be re-derived: prod host `senra.pet` is a literal; market pinned `hu`;
-`locale_hint` accepted, validated, never fed into market resolution; `orders` stays in the enum and
-always 400s.
 
 ## Append here as B2 proceeds
 
