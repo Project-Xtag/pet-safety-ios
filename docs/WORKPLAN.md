@@ -366,10 +366,42 @@ These are in PROTOCOL; repeated here because every drift corrected today came fr
 - Drop the unused `redis` dependency.
 - Delete `flip/sub-billing-prereq` (local-only, 0 ahead of main, zero overlap with U1's surface).
 - Ratify the B/C/D re-scope; ratify the 2.3 fold-in list.
-- pet-safety-eu`#113` — merge as defence-in-depth or close. Evidence favours closing: zero paid
-  mismatches ever, the one pending row was never charged, `#117` is deployed and verified, and the
-  fielded Android carries Fix 9. If it merges it needs a rebase, a fresh byte review, and a check that
-  its test file at `src/tests/` is inside the jest `roots` — otherwise it never executes.
+- pet-safety-eu`#113` — merge as defence-in-depth or close. **BLOCKED on one Stripe read; the previous
+  basis for closing was wrong in two places.** Full assessment on the PR, 2026-08-05.
+
+  ~~Evidence favours closing: zero paid mismatches ever, the one pending row was never charged, `#117`
+  is deployed and verified, and the fielded Android carries Fix 9. If it merges it needs a rebase, a
+  fresh byte review, and a check that its test file at `src/tests/` is inside the jest `roots` —
+  otherwise it never executes.~~
+
+  **Struck rather than rewritten, because the conclusion may still be right and the basis was not.**
+  Two of the four grounds hold: `#117` deployed `2026-07-30` and live 3 seconds after merge; the
+  fielded Android `8260097` (vc22) carries both `deliveryMethod` and `postapointDetails`. The other
+  two do not:
+
+  - **"Zero paid mismatches ever" was never established.** `detect-postapoint-mismatch.yml` has run
+    twelve times, gone green twelve times, and reported `checked=0` on **every one**. It scans a
+    3-day window; there have been zero live orders in three days, and every candidate row predates
+    2026-07-23 — four days before its first run. Its window has never overlapped the data. → filed as
+    pet-safety-eu**#130**.
+  - **The jest-`roots` caveat is false.** `roots: ['<rootDir>/src', …]` contains `src/tests/`, 69 test
+    files already run from there, `setupFilesAfterEnv` points into it, and the PR's own `unit-tests`
+    check passed.
+
+  **What actually decides it:** three `completed` orders with live sessions whose rows say
+  `home_delivery` — `ORD-20260716-1A5874C9`, `ORD-20260624-11F2F854`, `ORD-20260518-A4F5F26B`. Read
+  Stripe `metadata.delivery_method` on each. **Prod Stripe, so Viktor's.** Clean → closing is
+  well-founded. Dirty → a customer-facing billing and fulfilment error needing a data correction,
+  which is a different problem from this PR and does not wait on it.
+
+  *(All three rows carry `shipping_cost=2490.00`, the home rate, against `1490`/`1990` on completed
+  postapoint orders — suggestive, but the row is the artefact under suspicion, so it settles nothing.
+  The camelCase checkout bug having caused zero real overcharges is a genuine reason to expect clean;
+  it is not a reason to skip the read.)*
+
+  If it does merge: not on the current CI run — it passed against a `main` from 2026-07-27 and `main`
+  has moved 23 commits. The failing `qa` check is the translation sweep firing on `src/**.ts`, not a
+  defect in the fix.
 - `#103` rebase · `G-scanback-ios` · what's-next card · **Q3** · whether `/plans`
   should state a subscription is required · chunk numbering and `G-home`'s doc home · owners for
   unassigned gaps.
@@ -390,7 +422,7 @@ here so that searching for the label finds them — an entry nobody can grep for
 | **E3** | **Migration `002` — was it ever real?** Absent from the applied set *and* from `main`. | On a set-membership runner a `002` file appearing later **will run**, against a schema ~164 migrations downstream. → pet-safety-eu**#128** |
 | **E4** | **Does a rolled-back transaction against prod count as a production action needing a recorded go?** `ROLLBACK` bounds persistence, not lock acquisition; `ALTER TABLE` takes ACCESS EXCLUSIVE either way. The 2026-08-02 dry run had no go; the v4 apply and the Stripe reads did. | It will recur. No longer blocking anything — `317cc10` rewrote E5's entry to carry an interim rule that holds if E4 is never written. |
 | **E5** | **CODEMAP entry for `20260802_01`** — the migration, the manual apply, the hand-written version row. | Record it before it is forgotten. This is the case that produced the "applied ≠ done" rule now in PROTOCOL §5. |
-| **E6** | **pet-safety-eu#113 — merge as defence-in-depth, or close.** Detail in **Open decisions** above. | Evidence favours closing: zero paid mismatches ever, the one pending row was never charged, #117 is deployed and verified, and the fielded Android carries Fix 9. |
+| **E6** | **pet-safety-eu#113 — merge as defence-in-depth, or close.** Detail in **Open decisions** above. | **BLOCKED on one Stripe read** (three sessions, prod Stripe, Viktor's). The former basis — "evidence favours closing" — was wrong in two of four grounds: "zero paid mismatches ever" was never established (the detector reported `checked=0` on all twelve runs → **#130**), and the jest-`roots` caveat is false. Struck, not rewritten, in Open decisions. |
 | **E7** | **Renumber `20260607_01` above the current mark.** Detail in the migration-ordering row of **Standing hazards** above. | **#66 was closed 2026-08-04, unmerged** — so this only matters if `feat/onboarding-email-rework` is revived. Blocked on the prune fix either way. → pet-safety-eu**#129**, **#126** |
 
 ⚠ **E7 changed under us and the entry above is the corrected one.** The ledger, `migrations/README.md:23`
