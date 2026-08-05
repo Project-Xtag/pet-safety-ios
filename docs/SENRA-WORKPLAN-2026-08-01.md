@@ -288,10 +288,12 @@ This is forward-only and it is a read-path job, not an issuance one.
 - **Sztornó: both documents listed, adjacent.** This is free — `storno_invoice_number` / `storno_pdf` /
   `storno_issued_at` are nullable columns **on the original row**, not a separate row. One row renders
   as one or two entries, inherently adjacent.
-- **Add `user_id` + index to `szamla_invoices` and backfill.** The table currently has no `user_id`,
-  no `order_id`, no `subscription_id` — the only linkage is `business_key` holding the Stripe object id,
-  with no index for the reverse lookup. Seven rows to backfill; cheap now, expensive later. Migration
-  numbers above `20260801_04`.
+- ~~**Add `user_id` + index to `szamla_invoices` and backfill.**~~ **DONE 2026-08-02** as
+  `20260802_01_szamla_invoices_user_id.sql` — applied to prod 16:04:09Z, `user_id` (UUID, nullable,
+  `REFERENCES users(id) ON DELETE SET NULL`) plus `idx_szamla_invoices_user_id_issued_at`, all seven
+  rows attributed and verified programmatically (`declared_pairs 7, exact_match 7, mismatch 0`). The
+  CODEMAP entry in `SENRA-MOBILE-REDESIGN.md` is the record. *(This item read as pending, and asserted
+  "the table currently has no `user_id`", for three days after it shipped — corrected 2026-08-05.)*
 
 **Implementation notes:**
 
@@ -315,7 +317,7 @@ no archival path. ~2.7 MB at seven rows.
 | Dead-letter alerting | `dead_letter` is terminal and the job re-alerts **daily**, so Sentry counts grow indefinitely and do not indicate scale. A manually-issued számla is invisible to the job, so its op must be marked resolved or it alerts forever |
 | Stripe address snapshot | `customer_address` is snapshotted at **finalization** and never revisited. A later backfill cannot repair an already-finalised invoice |
 | Storno op naming | May fall outside the `%invoice%` op_type cut. Untested — nothing has been storned yet |
-| Migration ordering | `run-migrations.sh` checks an applied-version *set*, not a high-water mark. Five historical inversions exist. `#66` carries `20260607_01` and must be renumbered above `20260801_04` |
+| Migration ordering | `run-migrations.sh` checks an applied-version *set*, not a high-water mark. Five historical inversions exist. The mark is now **`20260802_01`**, not `20260801_04`. `#66` carries `20260607_01` — but **#66 was closed 2026-08-04, unmerged**, so the renumber only matters if `feat/onboarding-email-rework` is revived (pet-safety-eu**#129**). Re-derive the mark rather than trusting this row; and note the deploy does not prune, so a *rename* under the current deploy makes a migration run twice (pet-safety-eu**#126**) |
 | `redesign7.menu.*` | Menu labels are hardcoded literals with no locale entries — HU-only by construction, not by translation |
 
 ---

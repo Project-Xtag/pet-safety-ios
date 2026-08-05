@@ -25,21 +25,19 @@ Current as of **2026-08-02**, end of the review session that cleared PR #46, PR 
 | C5/C6's contract and gate | `docs/phase-1-spec.md` **§E C5/C6** |
 | What is done, red, or owed right now | `scripts/senra-status.sh` — **run it. Do not read a summary of it.** ⚠ **branch-scoped — see below** |
 
-⚠ **THE BOARD IS BRANCH-SCOPED, AND YOU ARE PROBABLY ON `main`.**
-From **`main`** it reads **RED 10**. From **`feat/mobile-redesign-phase1`** it reads **RED 7**.
-Both are correct; neither is a regression.
+⚠ **THE BOARD IS BRANCH-SCOPED, AND YOU ARE PROBABLY ON `main`.** It reads differently from `main`
+than from `feat/mobile-redesign-phase1`, and both readings are correct.
 
-The extra four are `SUBJECT FILE MISSING` on iOS §5b — `LandingView.swift` and its siblings are
+The difference is `SUBJECT FILE MISSING` on iOS §5b — `LandingView.swift` and its siblings are
 Phase-1 chunk files that live on the redesign branch and are **unmerged**. §5b fails loudly on an
-absent subject *by design* (`lguard`'s missing-subject `fail`): a guard that skips when its subject vanishes is a guard
-that evaporates during exactly the work it exists for.
+absent subject *by design* (`lguard`'s missing-subject `fail`): a guard that skips when its subject
+vanishes is a guard that evaporates during exactly the work it exists for. Do not "fix" those, and do
+not raise them as a regression.
 
-**So: do not "fix" those four, and do not raise them as a regression.** If you are on `main` and see
-10, that is the expected number. If you are on the build branch and see anything other than 7, that
-is real. The six standing reds are the same on both — AASA `/*/t/*`, the www 301, the two
-`.onOpenURL` handlers, G-owner, and the two Zone-3 ship-gates.
+**The heuristic: every red is explained, never a number to match.** No count is written here on
+purpose — the board owns counts, this document owns the mechanism. A number in prose is stale the
+next time anything lands, and every count that used to sit in this paragraph was wrong within days.
 
-**The heuristic is unchanged: every red is explained, never a number to match.**
 | The documentation closeout, phased | `docs/DOCS-CLOSEOUT.md` — tracked, transitional; deleted at close |
 
 There is **no monorepo for docs** — four repos only, and the monorepo's `docs/` is a stale archive.
@@ -99,30 +97,23 @@ base `2bcc2ac` (PR #45).
 
 ### Branches
 
-Three PRs stacked and unmerged: **#45** (08-01 docs) → **#47** (Phase 1 closeout, `df266fb` +
-`317cc10`), and **#46** (board guards) on the redesign line separately. pet-safety-eu migration
-high-water mark is `20260802_01` (verified at `218a2d2`). **The eu `main` sha is not restated here** —
-the workplan's reference-state table owns it. Two documents carrying that sha is what produced the
-F2 drift; do not re-add it.
+**GitHub owns PR status. This document does not restate it** — `gh pr list` is the answer, and every
+version of that list written here has been wrong within days. pet-safety-eu migration high-water mark
+is `20260802_01` (verified at `218a2d2`). **The eu `main` sha is not restated here either** — the
+workplan's reference-state table owns it. Two documents carrying one value is what produced the F2
+drift; do not re-add it.
 
-⚠ **#46 and #47 do not auto-merge.** Five files conflict. Four resolve to values already cleared
-(the redesign line never edited them — its copies are content-identical to the docs line's starting
-point). `senra-status.sh` was the only genuine one and **is already resolved and cleared at
-`9e9c2fbf2b4c`**, reconstructed independently from both sides.
+**The §M cross-branch merge is closed.** #45 and #47 merged 2026-08-02; #46 was closed 2026-08-05 —
+its four board guards were folded onto `main` directly at `2afb735`, because it targeted
+`feat/mobile-redesign-phase1` and the cleared resolution had been built for `#46 ⊕ main`, which was
+never the merge it would have performed. **A clearance for a merge that is not the merge is worthless
+even when its hashes still check out** — that is the durable lesson, and it is the reason this section
+survives at all.
 
-**Build it with `git merge-file -p <ours> <base @2bcc2ac> <theirs>`, not by taking both conflict
-sides.** Concatenating sides duplicates the shared region: the conflict exists *because* both lines
-advanced the same content from an old base, so each side's block already contains that content.
-`rc=0` — there was never a semantic collision, only a textual one.
-
-⚠ **`9e9c2fbf2b4c` is pinned to FILE CONTENT, not tip SHAs.** It is the union of `7dd21f156710`
-and `a1aeca162505`. It is **void only if `senra-status.sh` changes at either end** — a commit
-touching the workplan, the ledger or any other file leaves it valid. Check the two hashes, not the
-branch names. A voided resolution reads exactly like a stale one; this is what distinguishes them.
-
-At merge time: §D's renames go **first** (do not resolve into a file scheduled for deletion), then
-diff the real merge output against `9e9c2fbf2b4c` byte for byte. A cleared resolution nobody checks
-against the actual merge is a rehearsal.
+Recorded because it validated the method rather than because it is still owed: applying #46's diff to
+`main`'s `a1aeca162505` reproduced `9e9c2fbf2b4c` byte for byte — the resolution the review seat had
+cleared. It held; it simply described the fold rather than the PR. C6/C7 then moved the file past it
+deliberately in the same commit.
 
 ---
 
