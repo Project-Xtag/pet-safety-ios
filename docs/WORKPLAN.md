@@ -32,7 +32,7 @@ Window executed 2026-07-31 22:0x–22:3x UTC. Every step closed on a direct obse
 | C4 | PASS — interstitial fires for a new account, not for a pre-cutover one |
 | C5b | PASS — `199000`, `metadata.delivery_method = postapoint`, driven through the app's own `create-checkout` |
 | B4 | Clear — no session created pre-B1 and paid after |
-| C0 | **RETRY** — `checked=0`, examined zero rows, proves nothing |
+| C0 | **RETRY** — `checked=0`, examined zero rows, proves nothing. **The durable fix is pet-safety-eu#130** — `checked=0` must warn, not pass silently. Acceptance below is unchanged and still owns the criterion |
 
 **INV-1 confirmed twice**, and the second is the strong form: a pre-flip invoice finalised 599 on
 2026-07-06 collected on 2026-08-01 06:46 — 8¾ hours *after* the cutover — still at 599, through a
@@ -44,6 +44,13 @@ Secrets Manager swap and a backend restart.
 - **C6** — Sentry + Stripe dashboard, first 24h.
 - **C0 re-run — a trigger, not a date.** Fires when Android orders flow. Acceptance is
   `checked > 0 AND paid_mismatch = 0`. With current volume it will sit at `checked=0` indefinitely.
+  **Two known-positive rows now exist as its test** — `ORD-20260605-3C2C93A5` and
+  `ORD-20260723-23FDA613`, both session-`postapoint` against a `home_delivery` row, both outside the
+  detector's window. A run scoped to cover them satisfies the acceptance without waiting on Android
+  volume. → pet-safety-eu**#130** carries the fix; C0 keeps the criterion. *(These are one finding
+  recorded twice, six days apart. §E6 then cited the detector as proof of "zero paid mismatches"
+  while this row said it proves nothing — the same document disagreeing with itself, inside the
+  closeout that exists to stop that.)*
 
 ---
 
@@ -366,68 +373,33 @@ These are in PROTOCOL; repeated here because every drift corrected today came fr
 - Drop the unused `redis` dependency.
 - Delete `flip/sub-billing-prereq` (local-only, 0 ahead of main, zero overlap with U1's surface).
 - Ratify the B/C/D re-scope; ratify the 2.3 fold-in list.
-- pet-safety-eu`#113` — merge as defence-in-depth or close. **UNBLOCKED 2026-08-06 — Stripe read done,
-  and it cuts both ways.** Full evidence on the PR.
+- ~~pet-safety-eu`#113` — merge as defence-in-depth or close.~~ **RULED 2026-08-06: MERGED** as
+  `a2a92b8`, deployed and verified in `dist/` the same minute. The ruling and its reasoning are
+  recorded in `SENRA-MOBILE-REDESIGN.md` §2 Locked decisions, which is where E-items close.
 
-  **Zero paid mismatches, confirmed all time.** All three completed candidates read
-  `metadata.delivery_method=home_delivery` in Stripe, with no `postapoint_*` keys at all. No buyer
-  was ever charged a pickup rate and shipped home; **no billing correction is owed.**
+  **The evidence that decided it, kept because the first version of it was wrong.** Stripe read across
+  all 11 candidates: **zero paid mismatches, all time** — 3/3 completed are genuine home orders, so no
+  billing correction was ever owed. **But the defect fired twice** on unpaid orders
+  (`ORD-20260605-3C2C93A5`, `ORD-20260723-23FDA613`), which moved it from theoretical to demonstrated
+  and is what tipped the ruling to merge rather than close.
 
-  **But the defect is real and fired twice.** Reading all 11 candidates rather than only the three
-  found `ORD-20260605-3C2C93A5` and `ORD-20260723-23FDA613`: session metadata `postapoint` at
-  `199000`, row written `home_delivery`, `postapoint_details` NULL. Both unpaid — caught by the
-  buyer abandoning checkout, not by anything we built. Both predate the fielded client fix
-  (`8260097`, vc22, 2026-07-28); zero candidates after it, though only 2 live orders exist since.
+  **The hold was the cutover window, not the merits.** #113 was converted to draft 2026-07-31 22:13:17
+  UTC — 13 minutes after the price flip instant (22:00) and 10 minutes before #116 deployed (22:23) —
+  to keep the deck clear while the 599 → 2 750 cutover was in flight. That window closed the same
+  night. It is the only draft the repo has ever carried, which is why PROTOCOL §5 records this PR as
+  HELD.
 
-  **So the decision is a real trade, not the tidy-up E6 recorded.** Closing: no paid instance ever,
-  client fix fielded, population shrinking. Merging: the defect is demonstrated rather than
-  theoretical, and nothing detects a recurrence while **#130** is open.
 
-  ⚠ **`ORD-20260605-3C2C93A5` is a live demonstration of the row-corroboration trap** recorded in
-  `PROTOCOL.md` §5 one day earlier: its row says `shipping_cost=2490.00`, the home rate, while
-  Stripe was charging `1990.00`, the pickup rate. Treating the row's own cost as corroboration
-  would have given exactly the wrong answer on exactly the row where it mattered.
-
-  ~~Evidence favours closing: zero paid mismatches ever, the one pending row was never charged, `#117`
-  is deployed and verified, and the fielded Android carries Fix 9. If it merges it needs a rebase, a
-  fresh byte review, and a check that its test file at `src/tests/` is inside the jest `roots` —
-  otherwise it never executes.~~
-
-  **Struck rather than rewritten, because the conclusion may still be right and the basis was not.**
-  Two of the four grounds hold: `#117` deployed `2026-07-30` and live 3 seconds after merge; the
-  fielded Android `8260097` (vc22) carries both `deliveryMethod` and `postapointDetails`. The other
-  two do not:
-
-  - **"Zero paid mismatches ever" was never established.** `detect-postapoint-mismatch.yml` has run
-    twelve times, gone green twelve times, and reported `checked=0` on **every one**. It scans a
-    3-day window; there have been zero live orders in three days, and every candidate row predates
-    2026-07-23 — four days before its first run. Its window has never overlapped the data. → filed as
-    pet-safety-eu**#130**.
-  - **The jest-`roots` caveat is false.** `roots: ['<rootDir>/src', …]` contains `src/tests/`, 69 test
-    files already run from there, `setupFilesAfterEnv` points into it, and the PR's own `unit-tests`
-    check passed.
-
-  **What actually decides it:** three `completed` orders with live sessions whose rows say
-  `home_delivery` — `ORD-20260716-1A5874C9`, `ORD-20260624-11F2F854`, `ORD-20260518-A4F5F26B`. Read
-  Stripe `metadata.delivery_method` on each. **Prod Stripe, so Viktor's.** Clean → closing is
-  well-founded. Dirty → a customer-facing billing and fulfilment error needing a data correction,
-  which is a different problem from this PR and does not wait on it.
-
-  *(All three rows carry `shipping_cost=2490.00`, the home rate, against `1490`/`1990` on completed
-  postapoint orders — suggestive, but the row is the artefact under suspicion, so it settles nothing.
-  The camelCase checkout bug having caused zero real overcharges is a genuine reason to expect clean;
-  it is not a reason to skip the read.)*
-
-  If it does merge: not on the current CI run — it passed against a `main` from 2026-07-27 and `main`
-  has moved 23 commits. The failing `qa` check is the translation sweep firing on `src/**.ts`, not a
-  defect in the fix.
 - `#103` rebase · `G-scanback-ios` · what's-next card · **Q3** · whether `/plans`
   should state a subscription is required · chunk numbering and `G-home`'s doc home · owners for
   unassigned gaps.
 
 ### Carried from the closeout ledger's §E — decisions no grep can close
 
-Absorbed here because the ledger is deleted. **This table is the only home for E1–E7** — `HANDOVER.md`
+Absorbed here because the ledger is deleted. **They close by being recorded in
+`SENRA-MOBILE-REDESIGN.md` §2 Locked decisions** — that sentence came from the ledger's §E and was
+dropped when this table absorbed it; without it a reader knows a decision is owed but not what
+discharging one looks like. **This table is the only home for E1–E7** — `HANDOVER.md`
 used to carry a second copy of four of them and now points here instead. E3 and E7 also have tracked
 issues; the ledger was never the place for work GitHub can hold.
 
@@ -441,7 +413,7 @@ here so that searching for the label finds them — an entry nobody can grep for
 | **E3** | **Migration `002` — was it ever real?** Absent from the applied set *and* from `main`. | On a set-membership runner a `002` file appearing later **will run**, against a schema ~164 migrations downstream. → pet-safety-eu**#128** |
 | **E4** | **Does a rolled-back transaction against prod count as a production action needing a recorded go?** `ROLLBACK` bounds persistence, not lock acquisition; `ALTER TABLE` takes ACCESS EXCLUSIVE either way. The 2026-08-02 dry run had no go; the v4 apply and the Stripe reads did. | It will recur. No longer blocking anything — `317cc10` rewrote E5's entry to carry an interim rule that holds if E4 is never written. |
 | **E5** | **CODEMAP entry for `20260802_01`** — the migration, the manual apply, the hand-written version row. | Record it before it is forgotten. This is the case that produced the "applied ≠ done" rule now in PROTOCOL §5. |
-| **E6** | **pet-safety-eu#113 — merge as defence-in-depth, or close.** Detail in **Open decisions** above. | **UNBLOCKED 2026-08-06.** Stripe read done across all 11 candidates: **zero paid mismatches, all time** — 3/3 completed are genuine home orders, so no billing correction is owed. **But the defect fired twice** on unpaid orders (`ORD-20260605-3C2C93A5`, `ORD-20260723-23FDA613`), so this is a real trade rather than the tidy-up E6 first recorded. Nothing detects a recurrence while **#130** is open. Viktor's call. |
+| **E6** | ~~pet-safety-eu#113 — merge as defence-in-depth, or close.~~ **RULED 2026-08-06: MERGE.** Merged `a2a92b8`, deployed and verified on the box the same minute. Recorded in `SENRA-MOBILE-REDESIGN.md` §2. | **CLOSED.** |
 | **E7** | **Renumber `20260607_01` above the current mark.** Detail in the migration-ordering row of **Standing hazards** above. | **#66 was closed 2026-08-04, unmerged** — so this only matters if `feat/onboarding-email-rework` is revived. Blocked on the prune fix either way. → pet-safety-eu**#129**, **#126** |
 
 ⚠ **E7 changed under us and the entry above is the corrected one.** The ledger, `migrations/README.md:23`
