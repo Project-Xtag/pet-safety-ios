@@ -332,6 +332,38 @@ else
 fi
 
 # ─────────────────────────────────────────────────────────────
+head_ "5c. Chunk 1 — a 401 with no stored credentials is NOT an expiry"
+# LANDS BEFORE THE CHUNK: red-until-wired, by design (PROTOCOL §6 corollary).
+#
+# The defect: a user who has never logged in opens the app, Firebase mints an
+# FCM token, registerToken() fires unauthenticated, the 401 re-enters
+# TokenAuthenticator, and "session expired" is raised over the auth screen.
+# Fielded on vc22 and identical on main, so it is live, not a Phase-1 artifact.
+#
+# BOTH pins are one line each, so the grep proves WHAT IS GUARDED and not merely
+# that a name appears somewhere — `hasStoredToken` alone has 8 consumers and a
+# bare-name grep false-greens.
+#
+# WHY hasStoredToken() AND NOT refreshToken, and why not at the sink — the two
+# wrong answers this check exists to keep out:
+#   * At the SINK (AuthViewModel's emit): clearAndNotify() calls clearAllSync()
+#     BEFORE tryEmit, and clearAllSync commits the removal of the very key
+#     hasStoredToken() reads. At emit time it is false for GENUINE expiries too,
+#     so a sink gate silences every real one. Verified, not reasoned.
+#   * On refreshToken: an auth token can persist WITHOUT a refresh token —
+#     AuthRepository saves the refresh token conditionally (`?.let`) and
+#     Responses.kt models it `String? = null`. That state is a genuine dead
+#     session that MUST still report. Gating on refreshToken silences it.
+# The source gate reads the token STORE (disk), never session state: onNewToken
+# fires at cold launch before any in-memory auth flag hydrates, so gating on
+# that would silently stop push registration for legitimately logged-in users —
+# no dialog, no test, a non-event.
+TAKT="$AND/app/src/main/java/com/petsafety/app/data/network/TokenAuthenticator.kt"
+FCMR="$AND/app/src/main/java/com/petsafety/app/data/fcm/FCMRepository.kt"
+lguard "$TAKT" 'if (!tokenStore.hasStoredToken()) return null' 1 "AND: 401 sink guard — a never-authenticated 401 does not clear-and-notify"
+lguard "$FCMR" 'if (!tokenStore.hasStoredToken()) return' 1 "AND: FCM source gate — registration does not fire without stored credentials"
+
+# ─────────────────────────────────────────────────────────────
 head_ "6. Declared contracts vs. the code (drift detector)"
 # v1 grepped PROSE that appeared ZERO times and false-fired against CORRECT code.
 # A check that cries wolf trains you to skim past red. Contracts are DECLARED in
