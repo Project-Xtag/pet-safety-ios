@@ -366,8 +366,27 @@ These are in PROTOCOL; repeated here because every drift corrected today came fr
 - Drop the unused `redis` dependency.
 - Delete `flip/sub-billing-prereq` (local-only, 0 ahead of main, zero overlap with U1's surface).
 - Ratify the B/C/D re-scope; ratify the 2.3 fold-in list.
-- pet-safety-eu`#113` — merge as defence-in-depth or close. **BLOCKED on one Stripe read; the previous
-  basis for closing was wrong in two places.** Full assessment on the PR, 2026-08-05.
+- pet-safety-eu`#113` — merge as defence-in-depth or close. **UNBLOCKED 2026-08-06 — Stripe read done,
+  and it cuts both ways.** Full evidence on the PR.
+
+  **Zero paid mismatches, confirmed all time.** All three completed candidates read
+  `metadata.delivery_method=home_delivery` in Stripe, with no `postapoint_*` keys at all. No buyer
+  was ever charged a pickup rate and shipped home; **no billing correction is owed.**
+
+  **But the defect is real and fired twice.** Reading all 11 candidates rather than only the three
+  found `ORD-20260605-3C2C93A5` and `ORD-20260723-23FDA613`: session metadata `postapoint` at
+  `199000`, row written `home_delivery`, `postapoint_details` NULL. Both unpaid — caught by the
+  buyer abandoning checkout, not by anything we built. Both predate the fielded client fix
+  (`8260097`, vc22, 2026-07-28); zero candidates after it, though only 2 live orders exist since.
+
+  **So the decision is a real trade, not the tidy-up E6 recorded.** Closing: no paid instance ever,
+  client fix fielded, population shrinking. Merging: the defect is demonstrated rather than
+  theoretical, and nothing detects a recurrence while **#130** is open.
+
+  ⚠ **`ORD-20260605-3C2C93A5` is a live demonstration of the row-corroboration trap** recorded in
+  `PROTOCOL.md` §5 one day earlier: its row says `shipping_cost=2490.00`, the home rate, while
+  Stripe was charging `1990.00`, the pickup rate. Treating the row's own cost as corroboration
+  would have given exactly the wrong answer on exactly the row where it mattered.
 
   ~~Evidence favours closing: zero paid mismatches ever, the one pending row was never charged, `#117`
   is deployed and verified, and the fielded Android carries Fix 9. If it merges it needs a rebase, a
