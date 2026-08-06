@@ -119,3 +119,6 @@ SENRA_*.docx
 IMG_*.PNG
 senra-findings-*.md
 docs/*-draft.md
+# Extracted read-only copies of docs pulled off a ref (with their hash tables).
+# Never a source of truth — re-export from the ref instead of editing in place.
+exports/
