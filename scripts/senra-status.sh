@@ -19,9 +19,47 @@ AND="${AND:-$HOME/pet-safety-android}"
 DL="${DL:-$HOME/senra-deeplink}"
 
 PLAN="$IOS/docs/SENRA-MOBILE-REDESIGN.md"
-BRANCH="${BRANCH:-feat/mobile-redesign-phase1}"
+BRANCH="${BRANCH:-integration/v2.3}"
 APPKT="$AND/app/src/main/java/com/petsafety/app/ui/PetSafetyApp.kt"
 QRS="$AND/app/src/main/java/com/petsafety/app/ui/screens/QrScannerScreen.kt"
+
+# ─────────────────────────────────────────────────────────────
+# GATE — refuse to grade if we cannot establish WHICH LINE is being graded.
+#
+# The board is branch-scoped, and it mixes two sources: §5b/§6 and $PLAN read
+# the WORKING TREE, while §7 and §10 key on $BRANCH. When the checkout and
+# $BRANCH disagree the script still prints a full, confident board — for a
+# blend of two lines that describes neither.
+#
+# FIRED 2026-08-06, and it is the reason this gate exists. Chunk 998683b was
+# committed AND CODEMAP-logged on integration/v2.3, while $PLAN resolved to a
+# checkout still sitting on feat/mobile-redesign-phase1. §7 reported the chunk
+# UNLOGGED. A correct commit, a correct log entry, and a red board contradicting
+# both — and nothing in the output looked wrong. Same class as the repo-root
+# false zero that `groot` closes: the matcher reached a real file, just not the
+# one on the line under test.
+#
+# EXIT, never warn. A warning is skimmed; a number gets quoted. A board that
+# cannot say which line it is grading must refuse to grade.
+gate_branch() {
+  local repo="$1" name actual
+  name=$(basename "$repo")
+  if ! git -C "$repo" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    printf '\033[31mBOARD REFUSED\033[0m — %s is not a git checkout (%s).\n' "$name" "$repo" >&2
+    printf '  Cannot establish which line to grade. Fix the path or set IOS=/AND= explicitly.\n' >&2
+    exit 2
+  fi
+  actual=$(git -C "$repo" rev-parse --abbrev-ref HEAD 2>/dev/null)
+  if [ "$actual" != "$BRANCH" ]; then
+    printf '\033[31mBOARD REFUSED\033[0m — %s is on '"'"'%s'"'"', but BRANCH is '"'"'%s'"'"'.\n' "$name" "$actual" "$BRANCH" >&2
+    printf '  The board reads this working tree AND keys §7/§10 on $BRANCH. Grading a mix of two\n' >&2
+    printf '  lines yields a confident board for neither, so it will not run.\n' >&2
+    printf '  Either check %s out on %s, or re-run with BRANCH=%s.\n' "$name" "$BRANCH" "$actual" >&2
+    exit 2
+  fi
+}
+gate_branch "$IOS"
+gate_branch "$AND"
 
 RED=0
 pass()  { printf '  \033[32m✅\033[0m %s\n' "$1"; }
