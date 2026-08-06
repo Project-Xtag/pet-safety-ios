@@ -11,6 +11,9 @@ struct AlertsTabView: View {
     @StateObject private var viewModel = LostAndFoundViewModel()
     @StateObject private var locationManager = LocationManager()
     @EnvironmentObject var authViewModel: AuthViewModel
+    // Root-injected at PetSafetyApp (same chain authViewModel proves works
+    // here — this is a plain tab child, not a sheet, so no re-injection).
+    @EnvironmentObject var appState: AppState
     @State private var showAddressRequiredMessage = false
     @State private var showFoundForm = false
     @State private var selectedFoundReport: CommunityFoundPet?
@@ -82,8 +85,13 @@ struct AlertsTabView: View {
             .task { await loadNearby() }
             .refreshable { await loadNearby() }
             .sheet(isPresented: $showFoundForm) {
-                FoundPetFormView { newReport in
-                    viewModel.prependLocalFoundReport(newReport)
+                FoundPetFormView { _ in
+                    // Acknowledge-required confirmation (client-owned string;
+                    // the root-level alert at ContentView). Deliberately NO
+                    // local prepend: a fresh report is 'pending' until an admin
+                    // approves it, so the board shows server truth — this alert
+                    // is what tells the reporter it worked (Fix 5).
+                    appState.showSuccess(String(localized: "found_pet_reported_success"))
                 }
             }
             .sheet(item: $selectedFoundReport) { report in

@@ -3,5 +3,5 @@
 "CFBundleDisplayName" = "SENRA";
 "NSCameraUsageDescription" = "We need access to your camera to take photos of your pet and scan QR codes on pet tags.";
 "NSPhotoLibraryUsageDescription" = "We need access to your photo library to select and upload photos of your pet.";
-"NSLocationWhenInUseUsageDescription" = "We need your location to help find missing pets and show nearby alerts.";
+"NSLocationWhenInUseUsageDescription" = "We need your location to help find missing pets, show nearby alerts, and show pet-friendly places near you.";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "We need your location to help find missing pets and show nearby alerts.";

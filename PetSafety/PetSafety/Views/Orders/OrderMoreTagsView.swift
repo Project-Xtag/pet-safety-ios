@@ -771,7 +771,13 @@ struct OrderMoreTagsView: View {
         }
 
         await MainActor.run {
-            email = user.email
+            // Guard like Android does (OrderMoreTagsScreen: fill only when
+            // blank): an unconditional overwrite let a Keychain-restored
+            // session silently stamp the OLD account's email over a guest
+            // order (2026-07-28 device pass) — the order, tag, and emails
+            // all attached to the wrong identity. Email is the attribution
+            // key; never overwrite what the buyer typed.
+            if email.isEmpty { email = user.email }
             if let userPhone = user.phone {
                 phone = userPhone
             }
@@ -856,20 +862,25 @@ struct OrderMoreTagsView: View {
                 orderRequest.postapointDetails = selectedPostaPoint
                 orderRequest.locale = Locale.current.language.languageCode?.identifier
 
-                _ = try await APIService.shared.createOrder(orderRequest)
+                let orderResponse = try await APIService.shared.createOrder(orderRequest)
 
                 // Step 2: Create Stripe checkout session.
                 // Forward the typed code only when the user has clicked
                 // Apply and the backend confirmed validity. The same
                 // server-side check runs again at /create-checkout, so
                 // this is a UX-sync gate, not a trust boundary.
+                // user_id/email ride along for guest checkout — without a
+                // Bearer token the backend 401s create-checkout otherwise.
                 let trimmedPromo = promoCode.trimmingCharacters(in: .whitespacesAndNewlines)
+                let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
                 let checkout = try await APIService.shared.createTagCheckout(
                     quantity: quantity,
                     countryCode: selectedCountryCode.uppercased(),
                     deliveryMethod: isHungary ? deliveryMethod : nil,
                     postapointDetails: selectedPostaPoint,
-                    promoCode: (promoApplied && !trimmedPromo.isEmpty) ? trimmedPromo : nil
+                    promoCode: (promoApplied && !trimmedPromo.isEmpty) ? trimmedPromo : nil,
+                    userId: orderResponse.userId,
+                    email: trimmedEmail.isEmpty ? nil : trimmedEmail
                 )
 
                 if checkout.url.hasPrefix("senra://") {

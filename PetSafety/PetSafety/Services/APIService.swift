@@ -1057,6 +1057,28 @@ class APIService {
         return response.data.place
     }
 
+    /// Acknowledgement payload of POST /pet-friendly-places/:id/report. The
+    /// DEPLOYED stack wraps the body as {success, data:{message}} (the
+    /// response-envelope middleware) — the flat {success, message} shape in the
+    /// backend's unit tests never reaches production traffic. `message` stays
+    /// optional and the struct decodes only what it needs, so envelope drift
+    /// cannot throw (the 'pending' decode lesson, applied locally).
+    struct PetFriendlyReportAck: Decodable {
+        let message: String?
+    }
+
+    /// Report a venue for moderation (PUBLIC — the server is optionalAuth and
+    /// answers a constant envelope regardless of outcome). Callers show their
+    /// OWN acknowledgement string and treat `data.message` as advisory.
+    func reportPetFriendlyPlace(id: String) async throws {
+        let request = try await buildRequest(
+            endpoint: "/pet-friendly-places/\(id)/report",
+            method: "POST",
+            requiresAuth: false
+        )
+        _ = try await performRequest(request, responseType: PetFriendlyReportAck.self)
+    }
+
     /// The caller's own submissions, all statuses (AUTHENTICATED). No `?market=`.
     func getMyPetFriendlyPlaces() async throws -> [PetFriendlyPlace] {
         let request = try await buildRequest(endpoint: "/pet-friendly-places/mine", method: "GET", requiresAuth: true)
@@ -1279,7 +1301,9 @@ class APIService {
         countryCode: String? = nil,
         deliveryMethod: String? = nil,
         postapointDetails: PostaPointDetails? = nil,
-        promoCode: String? = nil
+        promoCode: String? = nil,
+        userId: String? = nil,
+        email: String? = nil
     ) async throws -> TagCheckoutData {
         #if DEBUG
         print("📡 API: Creating tag checkout for \(quantity) tags...")
@@ -1294,7 +1318,9 @@ class APIService {
                 platform: "ios",
                 deliveryMethod: deliveryMethod,
                 postapointDetails: postapointDetails,
-                promoCode: promoCode
+                promoCode: promoCode,
+                userId: userId,
+                email: email
             )
         )
         let response: TagCheckoutResponse = try await performRequest(request, responseType: TagCheckoutResponse.self)
@@ -2047,6 +2073,14 @@ extension APIService {
         let request = try await buildRequest(endpoint: "/subscriptions/my-subscription")
         let response = try await performRequest(request, responseType: MySubscriptionResponse.self)
         return response.subscription
+    }
+
+    /// Full /my-subscription envelope — the pricing-2026-08 subscribe
+    /// interstitial needs `post_cutover_account` + `limits.current_pet_count`,
+    /// not just the subscription row.
+    func getMySubscriptionDetails() async throws -> MySubscriptionResponse {
+        let request = try await buildRequest(endpoint: "/subscriptions/my-subscription")
+        return try await performRequest(request, responseType: MySubscriptionResponse.self)
     }
 
     /// Fetch the user's Stripe-billed invoices.

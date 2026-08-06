@@ -88,13 +88,29 @@ struct LocalizationParityTests {
         }
     }
 
+    /// Keys deliberately shipped in en + hu ONLY (ruled 2026-07-28: the app
+    /// is available in HU only, and the pricing-2026-08 subscribe
+    /// interstitial is HU-scoped). Mirrors the backend's HU_ONLY_PUBLIC_KEYS
+    /// allowlist pattern. Every key listed here MUST still exist in hu.lproj
+    /// (HU is canonical) — asserted below so the exemption cannot rot into
+    /// a key that is missing everywhere.
+    static let huOnlyKeys: Set<String> = [
+        "subscribe_interstitial_title",
+        "subscribe_interstitial_body",
+        "subscribe_interstitial_cta_subscribe",
+        "subscribe_interstitial_cta_not_now",
+    ]
+
     @Test("Every locale has all keys from en.lproj (no silent English fallback)")
     func testParityAgainstReference() throws {
         let referenceKeys = try Self.loadKeys(forLocale: "en")
 
         for locale in Self.supportedLocales where locale != "en" {
             let localeKeys = try Self.loadKeys(forLocale: locale)
-            let missing = referenceKeys.subtracting(localeKeys).sorted()
+            // hu gets NO exemption — it is the canonical locale and must
+            // carry the HU-only keys; everyone else may lack exactly those.
+            let exemptions: Set<String> = locale == "hu" ? [] : Self.huOnlyKeys
+            let missing = referenceKeys.subtracting(localeKeys).subtracting(exemptions).sorted()
             if !missing.isEmpty {
                 let firstTen: [String] = Array(missing.prefix(10))
                 let preview: String = firstTen.joined(separator: ", ")
@@ -103,5 +119,12 @@ struct LocalizationParityTests {
                 )
             }
         }
+    }
+
+    @Test("HU-only allowlisted keys actually exist in hu.lproj (exemption rot guard)")
+    func testHuOnlyKeysExistInHungarian() throws {
+        let huKeys = try Self.loadKeys(forLocale: "hu")
+        let missing = Self.huOnlyKeys.subtracting(huKeys).sorted()
+        #expect(missing.isEmpty, "hu.lproj lost allowlisted HU-only key(s): \(missing.joined(separator: ", "))")
     }
 }

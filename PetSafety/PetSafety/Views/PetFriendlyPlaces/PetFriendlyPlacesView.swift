@@ -60,7 +60,6 @@ struct PetFriendlyPlacesView: View {
     @State private var showSubmit = false
 
     private enum ViewMode { case list, map }
-    private static let budapest = CLLocationCoordinate2D(latitude: 47.4979, longitude: 19.0402)
 
     private var places: [PetFriendlyPlace] { viewModel.filteredPlaces }
 
@@ -220,7 +219,7 @@ struct PetFriendlyPlacesView: View {
     private var mapContent: some View {
         PetFriendlyMapView(
             places: places,
-            center: locationManager.location ?? Self.budapest,
+            center: locationManager.location ?? MapDefaults.defaultMapCenter,
             onSelect: { selectedPlace = $0 }
         )
         .frame(height: 420)
@@ -254,7 +253,7 @@ struct PetFriendlyPlacesView: View {
             attempts += 1
         }
         let fallbackCoord = await fallback
-        let coord = locationManager.location ?? fallbackCoord ?? Self.budapest
+        let coord = locationManager.location ?? fallbackCoord ?? MapDefaults.defaultMapCenter
         await viewModel.loadNearby(latitude: coord.latitude, longitude: coord.longitude, market: market)
     }
 
@@ -354,12 +353,18 @@ struct PetFriendlyPlaceDetailSheet: View {
     let place: PetFriendlyPlace
     @Environment(\.dismiss) private var dismiss
     @State private var showMapPicker = false
+    @State private var showReportConfirm = false
+    @State private var showReportAck = false
 
     var body: some View {
         NavigationView {
             ScrollView {
                 let theme = categoryTheme(place.category)
-                VStack(alignment: .leading, spacing: 16) {
+                // Centered card content (Viktor's ruling, 2026-07-22) — rows
+                // center as units, mirroring the Android detail sheet. The
+                // system alerts center themselves; their buttons stay
+                // system-standard (not restyleable, and Apple review expects it).
+                VStack(alignment: .center, spacing: 16) {
                     HStack(spacing: 14) {
                         ZStack {
                             Circle().fill(theme.color.opacity(0.14)).frame(width: 56, height: 56)
@@ -391,7 +396,9 @@ struct PetFriendlyPlaceDetailSheet: View {
                         detailLink(icon: "globe", text: website, url: URL(string: website))
                     }
                     if let intro = place.introduction, !intro.isEmpty {
-                        Text(intro).font(.appFont(size: 14)).foregroundColor(.primary).fixedSize(horizontal: false, vertical: true)
+                        Text(intro).font(.appFont(size: 14)).foregroundColor(.primary)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
 
                     Button { showMapPicker = true } label: {
@@ -408,8 +415,31 @@ struct PetFriendlyPlaceDetailSheet: View {
                     }
                     .buttonStyle(.plain)
                     .padding(.top, 4)
+
+                    // Store-review affordance: report this venue for moderation
+                    // (quiet text action, destructive tint — not a competing CTA).
+                    Button { showReportConfirm = true } label: {
+                        Text(String(localized: "pet_friendly_report_cta"))
+                            .font(.appFont(size: 14, weight: .semibold))
+                            .foregroundColor(.red)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.top, 2)
                 }
                 .padding(20)
+            }
+            // A real confirm step, not a bare fire — an accidental tap is recoverable.
+            .alert(String(localized: "pet_friendly_report_confirm"), isPresented: $showReportConfirm) {
+                Button(String(localized: "pet_friendly_report_cta"), role: .destructive) {
+                    Task { await report() }
+                }
+                Button(String(localized: "common_cancel"), role: .cancel) { }
+            }
+            // Acknowledge-required, CLIENT-owned string (the server's constant
+            // envelope message is advisory) — the C5/C6 confirmation pattern.
+            .alert(String(localized: "pet_friendly_report_ack"), isPresented: $showReportAck) {
+                Button(String(localized: "ok"), role: .cancel) { }
             }
             .navigationTitle(String(localized: "pet_friendly_detail_title"))
             .navigationBarTitleDisplayMode(.inline)
@@ -424,6 +454,16 @@ struct PetFriendlyPlaceDetailSheet: View {
                     petName: place.name
                 )
             }
+        }
+    }
+
+    private func report() async {
+        // Success-only acknowledgement (the C5/C6 law): a transport failure
+        // shows nothing — never confirm what didn't happen. The endpoint's
+        // constant envelope carries no outcome signal, so a completed call IS
+        // the trigger.
+        if (try? await APIService.shared.reportPetFriendlyPlace(id: place.id)) != nil {
+            showReportAck = true
         }
     }
 

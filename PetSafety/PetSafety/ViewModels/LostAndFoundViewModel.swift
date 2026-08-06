@@ -155,10 +155,4 @@ class LostAndFoundViewModel: ObservableObject {
         }
     }
 
-    /// Insert a freshly-created report at the top of the local feed so
-    /// the user sees their submission immediately, even before the
-    /// admin-approval / next refresh cycle.
-    func prependLocalFoundReport(_ report: CommunityFoundPet) {
-        foundReports.insert(report, at: 0)
-    }
 }

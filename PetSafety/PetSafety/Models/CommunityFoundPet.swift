@@ -40,6 +40,11 @@ struct CommunityFoundPet: Codable, Identifiable, Hashable {
     }
 
     enum Status: String, Codable, Hashable {
+        // Server-side moderation status since backend d4a52a2 (2026-05-20):
+        // every create lands 'pending' until an admin approves it. Missing
+        // here = the create response fails to decode AFTER the 201 (report
+        // created, finder shown a decode error, retry duplicates it).
+        case pending
         case active
         case reunited
         case expired

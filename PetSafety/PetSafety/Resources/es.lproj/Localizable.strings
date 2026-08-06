@@ -1577,6 +1577,10 @@
 // MARK: - Pet Friendly Places
 "pet_friendly_title" = "Pet-friendly places";
 "pet_friendly_detail_title" = "Place";
+"pet_friendly_report_cta" = "Reportar";
+"pet_friendly_report_confirm" = "¿Quieres reportar este lugar?";
+"pet_friendly_report_ack" = "Gracias por avisarnos. Nuestro equipo revisará este lugar en breve.";
+"found_pet_reported_success" = "¡Gracias por tu ayuda! Tu aviso ha quedado registrado.";
 "pet_friendly_directions" = "Get directions";
 "pet_friendly_empty" = "No pet-friendly places nearby yet.";
 "pet_friendly_not_in_region" = "This feature isn't available in your region yet.";
