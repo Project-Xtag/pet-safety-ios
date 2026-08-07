@@ -242,6 +242,54 @@ lguard() {
   fi
 }
 
+# lpin — like lguard, but the pattern must BE the line, not merely appear in it.
+#
+# lguard is `grep -cF`, a SUBSTRING match. That is correct for a pin naming a
+# FRAGMENT of a longer expression (most pins below), and wrong for a pin naming
+# a VALUE, because every value has infinitely many extensions containing it:
+# `= 3.0` matches `= 3.05`, `= 3.0e1` and `= 3.0 * 10` — the last two are 30.
+#
+# The rule this file used to state in a comment above the call site — "any
+# numeric pin needs a trailing character that cannot be extended" — was never
+# implemented, and cannot be: ` * 10` extends any terminator, including the
+# `L` suffix that Android's pin was said to be safe behind. PROTOCOL Rule 3
+# says a comment is not evidence, and that comment was the only place the rule
+# lived. This function is the rule, executable.
+#
+# Closure is exact equality on the whitespace-trimmed line. Deliberately no
+# regex: an anchored-regex variant pushes metacharacter escaping onto every
+# call site, and a mis-escaped pin reads GREEN — reintroducing the exact
+# failure mode this removes.
+#
+# ⚠️ ONLY for pins whose literal is the WHOLE line. A fragment pin must stay on
+# lguard; lpin would read 0 and redden the board against correct code.
+#
+# ⚠️ THE PATTERN REACHES awk THROUGH ENVIRON, NOT `-v`, AND THAT IS LOAD-BEARING.
+# `awk -v want='x\ny'` INTERPRETS the backslash: the variable arrives as 3
+# characters containing a real newline, not the 4 literal ones. Measured, and
+# measured against a real subject too — a Swift line `let s = "a\nb"` counts 0
+# under `-v` and 1 under ENVIRON. Neither pin below contains a backslash today,
+# so this is latent, and it fails RED (a mangled want cannot equal a real line),
+# which is the safe direction. But the first lpin on a Swift string literal or a
+# regex would redden the board against correct code and read as a real defect.
+# ENVIRON closes it by construction rather than by remembering.
+lpin() {
+  # $1 file, $2 exact line content (leading/trailing whitespace ignored), $3 expected count, $4 label
+  if [ ! -f "$1" ]; then fail "$4 — SUBJECT FILE MISSING ($1); absence is a defect in an exact-line pin, never a skip"; return; fi
+  N=$(lpin_want="$2" awk '
+    BEGIN { want = ENVIRON["lpin_want"] }
+    { line = $0
+      sub(/^[[:space:]]+/, "", line)
+      sub(/[[:space:]]+$/, "", line)
+      if (line == want) c++ }
+    END { print c+0 }' "$1")
+  if [ "$N" -eq "$3" ]; then
+    pass "$4"
+  else
+    fail "$4 — count=$N, expected $3 (exact-line pin: the value was edited, or the line was reshaped)"
+  fi
+}
+
 lguard "$LSK" 'BackHandler { showScanner = false }'                          1 "AND: scanner BackHandler (C4 FIX 2)"
 lguard "$LSK" 'BackHandler { showFoundStray = false }'                       1 "AND: found-stray BackHandler (C4 FIX 2)"
 lguard "$LSK" 'onTagNotUsable = { message -> reportPrompt = message }'       1 "AND: onTagNotUsable -> report card (C4 FIX 3)"
@@ -438,14 +486,108 @@ lguard "$ANDWEB" 'return "${BuildConfig.WEB_BASE_URL}/hu$clean"' 1 "AND: web hos
 # The three Android builders that bypassed the helper. #3 (PetFormScreen) is not
 # pinned: it already routes through WebUrlHelper.url(), so the helper pin covers
 # it — pinning it too would be a second declaration of the same fact.
-lguard "$PSWS"  'Uri.parse(WebUrlHelper.url("/choose-plan"))' 1 "AND: interstitial CTA routes through the helper (builder #1)"
+#
+# ⚠️ BUILDER #1 MOVED IN CHUNK 3, and this pin went RED on the board rather than
+# in a diff — worth recording, because it is the good case. Chunk 2 pinned the
+# CTA's own line (`Uri.parse(WebUrlHelper.url("/choose-plan"))` in
+# PetSetupWizardScreen); chunk 3 replaced that call with the handoff and demoted
+# the helper to the FALLBACK inside PetSetupViewModel. The chunk-2 requirement
+# is unchanged — a user who never reaches the server still lands on a
+# market-prefixed URL — so the pin follows the requirement to its new site
+# instead of being deleted as "superseded". Deleting it would have retired the
+# /uk/ guard on the exact path chunk 3 made more likely to be taken.
+PSVM="$AND/app/src/main/java/com/petsafety/app/ui/viewmodel/PetSetupViewModel.kt"
+lguard "$PSVM"  '?: WebUrlHelper.url("/choose-plan")' 1 "AND: interstitial CTA's fallback is market-prefixed (builder #1, moved by chunk 3)"
 lguard "$SUBVM" '_checkoutUrl.value = WebUrlHelper.url("/choose-plan")' 1 "AND: subscribe checkout URL routes through the helper (builder #2)"
-# ⚠️ builder #4 pins hostUrl(), NOT url(): /plans carries no country segment and
-# this chunk fixes its HOST only. Whether /plans should be market-prefixed is an
-# open question in the gaps register — the SPA router reads an unprefixed first
-# segment as the country code, so this URL may already land on the home page.
-# Pinning url() here would silently change the path shape under cover of a host fix.
-lguard "$MAMS"  'Uri.parse(WebUrlHelper.hostUrl("/plans"))' 1 "AND: upgrade CTA takes the build-config host, path shape unchanged (builder #4)"
+# ⚠️ builder #4 now pins url(), NOT hostUrl(). Chunk 2 fixed its HOST only and
+# left the path shape alone because whether /plans was market-neutral was an
+# open question. It is not: G-plans-unprefixed was CONFIRMED live 2026-08-07 —
+# a bare /plans landed on the HOME page. tagme-now f7e06cf redirects it, but a
+# client relying on that redirect is correct-by-infrastructure, the state §5:160
+# warns about. hostUrl() is deleted with its last caller.
+lguard "$MAMS"  'Uri.parse(WebUrlHelper.url("/plans"))' 1 "AND: upgrade CTA is market-prefixed, not infrastructure-rescued (builder #4)"
+
+# ─────────────────────────────────────────────────────────────
+head_ "5e. Chunk 3 — U3/U4: the client sends intent, the server returns a URL"
+# WEB-HANDOFF-CONTRACT.md §1/§5, FROZEN at fdf0d570c218.
+#
+# ⚠️ HONESTY NOTE ON red-until-wired. Chunks 1, 2 and 1b landed their pins
+# BEFORE the code and were observed RED. These did not — the code was written
+# first, so they have never been seen failing in the wild. The equivalent
+# evidence is the mutation run recorded in the CODEMAP: each pin was reverted
+# and observed to fail. That is weaker than having watched it red on a real
+# board, and it is written down rather than glossed.
+#
+# Four properties, pinned separately so a mutation of any one fails alone:
+#   TIMEOUT    — §5's 3s budget, imposed PER CALL. Both platforms inherit 30s
+#                (iOS CertificatePinningService, Android ApiClient:107-109), and
+#                the interstitial is a forced choice the user cannot escape, so
+#                inheriting would trap them for 30s on a payment path.
+#   VALIDATION — a 200 whose `url` is not absolute https is a FAILURE. Android's
+#                Uri.parse is lenient and would hand startActivity a useless Uri;
+#                iOS gets nil from URL(string:). Both require scheme + host.
+#   IN-FLIGHT  — §4 rate-limits the issue endpoint per user, so a double-tap
+#                burns a second token for a URL nobody opens. Pinned on the LOGIC
+#                guard, not the `.disabled` styling: styling is a suggestion.
+#   ENDPOINT   — §8 freezes the path and method. A rename is a store cycle.
+#
+# ⚠️ BOTH PLATFORMS NEED TWO TIMEOUT PINS, and this note used to say the
+# opposite. It argued iOS needed only ONE because `request.timeoutInterval = 3`
+# carried the value and the per-call imposition in a single expression. That
+# claim was false twice over: the pin was green while the app hung forever (the
+# hang is upstream of the request object), and `grep -cF` is a substring match,
+# so a pin ending `= 3` cannot even distinguish 3 from 30. The asymmetry it
+# defended was never real — it was a rationalisation of one pin's convenience.
+# A pin shaped to the mechanism rather than the requirement reads as coverage
+# while providing none.
+IOSAPI="$IOS/PetSafety/PetSafety/Services/APIService.swift"
+IOSINT="$IOS/PetSafety/PetSafety/Views/Tags/SubscribeInterstitialView.swift"
+ANDREPO="$AND/app/src/main/java/com/petsafety/app/data/repository/AuthRepository.kt"
+ANDAPI="$AND/app/src/main/java/com/petsafety/app/data/network/ApiService.kt"
+ANDVM="$AND/app/src/main/java/com/petsafety/app/ui/viewmodel/PetSetupViewModel.kt"
+
+# ⚠️ THIS PIN REPLACED `request.timeoutInterval = 3`, WHICH WAS GREEN ON CODE
+# THAT HUNG FOREVER. That pin expressed the mechanism (a timeout is set on the
+# request) and not the requirement (the budget covers the whole operation).
+# buildRequest awaits getAppCheckToken() BEFORE a request object exists, so a
+# hanging token fetch was entirely outside it — found on a device, with every
+# test and every pin green. Second mechanism-shaped pin in this chunk after the
+# Android wrapper pin; both were caught by something other than the board.
+#
+# The requirement IS expressible as one greppable line, but only because
+# performHandoff() is a single named function containing token acquisition,
+# send and validation. Pinning the wrapper alone would not say what is inside
+# it. If that function is ever split, this pin stops expressing the property
+# and must be reconsidered rather than mechanically updated.
+lguard "$IOSAPI"  'try await Self.withBudget(seconds: Self.handoffBudgetSeconds) { try await self.performHandoff(destination: destination) }' 1 "iOS: the budget wraps token acquisition AND send, not just the send"
+# ⚠️ VALUE PIN — lpin, not lguard. This pin was `= 3` under `grep -cF` and read
+# green against `= 30`; it was then "fixed" to `= 3.0`, which reads green
+# against `= 3.05`, `= 3.0e1` and `= 3.0 * 10`. Both spellings failed for the
+# same reason: a substring match cannot express a value. lpin matches the whole
+# trimmed line, so no extension of the literal satisfies it. Observed RED on
+# all four mutants before this was committed — the mutation log is in the
+# CODEMAP entry, because a pin nobody has watched fail is a pin nobody has tested.
+lpin "$IOSAPI"  'static let handoffBudgetSeconds: Double = 3.0' 1 "iOS: the budget VALUE is 3s (the wrapper pin alone survives a value edit)"
+lguard "$IOSAPI"  'url.scheme == "https",' 1 "iOS: a 200 whose url is not absolute https is a failure"
+lguard "$IOSAPI"  'guard let url = Self.usableHandoffURL(response.url) else {' 1 "iOS: the handoff response is validated before it is opened"
+lguard "$IOSAPI"  'endpoint: "/auth/web-handoff"' 1 "iOS: handoff endpoint path (§8 frozen)"
+lguard "$IOSINT"  'guard !isRedirecting else { return }' 1 "iOS: one handoff in flight at a time (§4 per-user rate limit)"
+# ⚠️ TWO pins, because one is not enough and the audit proved it. The wrapper
+# pin alone stays GREEN when the constant is edited to 30_000L — it pins that
+# a timeout EXISTS (implementation shape), not that it is the contract's 3s
+# (requirement). Only the unit test caught that mutation.
+#
+# ⚠️ AND THE "SAFE BY LUCK OF THE `_000L` SUFFIX" CLAIM WAS WRONG. It is true
+# that `= 3_000L` is not a substring of `= 30_000L` — the `= ` prefix stops
+# that one. It is not true that the suffix closes the class: `= 3_000L * 10`
+# CONTAINS `= 3_000L`, is valid Kotlin, and is 30 000 ms. Measured, not
+# reasoned. So Android carried the same defect as iOS and the note asserting
+# otherwise is what kept anyone from looking. Value pin moved to lpin.
+lguard "$ANDREPO" 'withTimeout(WEB_HANDOFF_TIMEOUT_MS)' 1 "AND: the budget is imposed PER CALL (OkHttp default is 30s)"
+lpin "$ANDREPO" 'const val WEB_HANDOFF_TIMEOUT_MS = 3_000L' 1 "AND: the budget VALUE is 3s — the wrapper pin alone survives a 30s edit"
+lguard "$ANDREPO" 'uri.scheme == "https" && !uri.host.isNullOrBlank()' 1 "AND: scheme AND host required — Uri.parse alone accepts a relative path"
+lguard "$ANDAPI"  '@POST("auth/web-handoff")' 1 "AND: handoff endpoint path (§8 frozen)"
+lguard "$ANDVM"   'if (_ui.value.redirectingToCheckout) return' 1 "AND: one handoff in flight at a time (§4 per-user rate limit)"
 
 # ─────────────────────────────────────────────────────────────
 head_ "6. Declared contracts vs. the code (drift detector)"
