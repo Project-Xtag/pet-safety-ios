@@ -6,6 +6,8 @@
 	<string>$(API_BASE_URL)</string>
 	<key>SSE_BASE_URL</key>
 	<string>$(SSE_BASE_URL)</string>
+	<key>WEB_BASE_URL</key>
+	<string>$(WEB_BASE_URL)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

@@ -2,6 +2,7 @@
 
 API_BASE_URL = https:/$()/staging.senra.pet/api
 SSE_BASE_URL = https:/$()/staging.senra.pet
+WEB_BASE_URL = https:/$()/staging-app.senra.pet
 APP_DISPLAY_NAME = SENRA Staging
 PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_BASE).staging
 SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) STAGING

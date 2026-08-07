@@ -402,6 +402,52 @@ lguard "$TAKT" 'if (!tokenStore.hasStoredToken()) return null' 1 "AND: 401 sink 
 lguard "$FCMR" 'if (!tokenStore.hasStoredToken()) return' 1 "AND: FCM source gate — registration does not fire without stored credentials"
 
 # ─────────────────────────────────────────────────────────────
+head_ "5d. Chunk 2 — web host from build config, market pinned to the /hu/ LITERAL"
+# LANDS BEFORE THE CHUNK: red-until-wired.
+#
+# WEB-HANDOFF-CONTRACT.md §3 and §5 own this. Two independent halves, pinned
+# separately so a mutation of either fails on its own:
+#   HOST   — never hardcoded in a client. Staging carries the `-app` prefix and
+#            prod does not; that asymmetry is deliberate (`app.senra.pet` has no
+#            DNS record of any type). A staging build on a prod host cross-wires
+#            QA to production, which is why this blocks testing the handoff at all.
+#   MARKET — the `/hu/` segment is a LITERAL, not a lookup. Deriving it from
+#            device region IS the `/uk/` bug: a Hungarian customer on an
+#            English-region phone is an HU customer, and the market sets pricing.
+#
+# ⚠️ WHY POSITIVE PINS AND NOT `grep -c 'Locale.current.region' == 0`. An
+# expected-zero check false-GREENS on a rename — the unsafe direction, and the
+# same reason the Zone-3 gate above uses a whitespace-tolerant regex. These pin
+# the built expression instead, so the check proves WHAT IS BUILT rather than
+# what is absent. One line each: a bare-name grep for `WEB_BASE_URL` or `hu`
+# would false-green on a comment or an unrelated locale string.
+#
+# ⚠️ HU-REGION DEVICES RESOLVE CORRECTLY TODAY, which is exactly why this defect
+# survives testing. It only appears on a device whose region is not Hungary, so
+# the device gate for this chunk MUST set a non-HU region on both platforms.
+IOSWEB="$IOS/PetSafety/PetSafety/Helpers/WebURLHelper.swift"
+ANDWEB="$AND/app/src/main/java/com/petsafety/app/util/WebUrlHelper.kt"
+PSWS="$AND/app/src/main/java/com/petsafety/app/ui/screens/PetSetupWizardScreen.kt"
+SUBVM="$AND/app/src/main/java/com/petsafety/app/ui/viewmodel/SubscriptionViewModel.kt"
+MAMS="$AND/app/src/main/java/com/petsafety/app/ui/screens/MarkAsMissingScreen.kt"
+
+lguard "$IOSWEB" 'ConfigurationManager.infoPlistURL("WEB_BASE_URL", fallback: "https://senra.pet", bundle: bundle)' 1 "iOS: web host from build config (mirrors apiBaseURL's mechanism)"
+lguard "$IOSWEB" 'URL(string: "\(host(bundle: bundle))/hu\(clean)")' 1 "iOS: market pinned to the /hu/ literal inside the helper"
+lguard "$ANDWEB" 'return "${BuildConfig.WEB_BASE_URL}/hu$clean"' 1 "AND: web host from build config AND /hu/ literal, one expression"
+
+# The three Android builders that bypassed the helper. #3 (PetFormScreen) is not
+# pinned: it already routes through WebUrlHelper.url(), so the helper pin covers
+# it — pinning it too would be a second declaration of the same fact.
+lguard "$PSWS"  'Uri.parse(WebUrlHelper.url("/choose-plan"))' 1 "AND: interstitial CTA routes through the helper (builder #1)"
+lguard "$SUBVM" '_checkoutUrl.value = WebUrlHelper.url("/choose-plan")' 1 "AND: subscribe checkout URL routes through the helper (builder #2)"
+# ⚠️ builder #4 pins hostUrl(), NOT url(): /plans carries no country segment and
+# this chunk fixes its HOST only. Whether /plans should be market-prefixed is an
+# open question in the gaps register — the SPA router reads an unprefixed first
+# segment as the country code, so this URL may already land on the home page.
+# Pinning url() here would silently change the path shape under cover of a host fix.
+lguard "$MAMS"  'Uri.parse(WebUrlHelper.hostUrl("/plans"))' 1 "AND: upgrade CTA takes the build-config host, path shape unchanged (builder #4)"
+
+# ─────────────────────────────────────────────────────────────
 head_ "6. Declared contracts vs. the code (drift detector)"
 # v1 grepped PROSE that appeared ZERO times and false-fired against CORRECT code.
 # A check that cries wolf trains you to skim past red. Contracts are DECLARED in
