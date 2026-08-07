@@ -124,90 +124,109 @@ struct PetSafetyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if showSplash {
-                SplashScreenView {
-                    withAnimation(.easeInOut(duration: 0.4)) {
-                        showSplash = false
-                    }
-                }
-            } else {
-                ContentView()
-                    .environmentObject(authViewModel)
-                    .environmentObject(appState)
-                    .environmentObject(subscriptionViewModel)
-                    .environmentObject(notificationHandler)
-                    .environmentObject(vaccinationGate)
-                    .environmentObject(VaccinationDeepLinkCoordinator.shared)
-                    // Resolve the vaccination gate per auth session, keyed off the
-                    // signed-in user's id. This covers all three transitions on one
-                    // handset — the litmus walks two accounts back-to-back, where a
-                    // sticky gate would let the second inherit the first's answer:
-                    //   • login        (nil → id)   reset() + resolve()
-                    //   • logout       (id → nil)   reset()
-                    //   • account swap (idA → idB)  reset() + resolve()
-                    // `reset()` first clears any prior-session residue so no stale
-                    // `.on` card flashes before the fresh resolve lands. The home
-                    // landing's `.task` re-resolve is the idempotent backstop.
-                    .onChange(of: authViewModel.currentUser?.id) { _, newId in
-                        vaccinationGate.reset()
-                        if newId != nil {
-                            Task { await vaccinationGate.resolve() }
+            // One deep-link handler for the whole scene, hosting BOTH the
+            // splash and the content so it is mounted from the first frame.
+            // Previously the only URL handler lived inside the `else` (content)
+            // branch, so a cold-launch link arriving during the splash had no
+            // handler and was dropped — the PR #39 bug. This rescues the Stripe
+            // checkout return too, which was dropped the same way.
+            //
+            // ZStack — a real layout container with stable identity — NOT Group
+            // (a type-erasing @ViewBuilder helper): the splash→content
+            // `.transition(.opacity)` + `withAnimation` ride on this container's
+            // identity, so both branches can coexist during the crossfade. A
+            // Group here silently breaks the launch animation. See the QA note:
+            // any change to this WindowGroup structure needs a device look.
+            ZStack {
+                if showSplash {
+                    SplashScreenView {
+                        withAnimation(.easeInOut(duration: 0.4)) {
+                            showSplash = false
                         }
                     }
-                    .preferredColorScheme(
-                        appearanceMode == "light" ? .light :
-                        appearanceMode == "dark" ? .dark : nil
-                    )
-                    .tint(Color(UIColor.darkGray)) // Dark gray for alert buttons
-                    .transition(.opacity)
-                    .sheet(isPresented: $notificationHandler.showMapPicker) {
-                        if let notification = notificationHandler.pendingScanNotification,
-                           let location = notification.location {
-                            MapAppPickerView(
-                                location: location,
-                                petName: notification.petName ?? "Pet"
-                            )
-                        }
-                    }
-                    .onReceive(NotificationCenter.default.publisher(for: .fcmTokenReceived)) { notification in
-                        // FCM token received - could update UI or trigger additional actions
-                        #if DEBUG
-                        if let token = notification.userInfo?["token"] as? String {
-                            print("App received FCM token: \(token.prefix(20))...")
-                        }
-                        #endif
-                    }
-                    .onOpenURL { url in
-                        handleDeepLink(url)
-                    }
-                    .onChange(of: scenePhase) { _, newPhase in
-                        if newPhase == .active {
-                            // Clear the app-icon notification badge on every
-                            // foreground. The badge is set by server pushes
-                            // (aps.badge) and nothing reset it before, so it
-                            // accumulated indefinitely on the home-screen icon.
-                            UNUserNotificationCenter.current().setBadgeCount(0)
-                        }
-                        if newPhase == .active && authViewModel.isAuthenticated {
-                            // Refresh user profile + subscription when app comes to foreground (debounce 60s)
-                            let now = Date()
-                            if now.timeIntervalSince(lastSubscriptionRefresh) > 60 {
-                                lastSubscriptionRefresh = now
-                                authViewModel.refreshCurrentUser()
-                                Task {
-                                    await subscriptionViewModel.loadCurrentSubscription()
-                                }
+                } else {
+                    ContentView()
+                        .environmentObject(authViewModel)
+                        .environmentObject(appState)
+                        .environmentObject(subscriptionViewModel)
+                        .environmentObject(notificationHandler)
+                        .environmentObject(vaccinationGate)
+                        .environmentObject(VaccinationDeepLinkCoordinator.shared)
+                        // Resolve the vaccination gate per auth session, keyed off the
+                        // signed-in user's id. This covers all three transitions on one
+                        // handset — the litmus walks two accounts back-to-back, where a
+                        // sticky gate would let the second inherit the first's answer:
+                        //   • login        (nil → id)   reset() + resolve()
+                        //   • logout       (id → nil)   reset()
+                        //   • account swap (idA → idB)  reset() + resolve()
+                        // `reset()` first clears any prior-session residue so no stale
+                        // `.on` card flashes before the fresh resolve lands. The home
+                        // landing's `.task` re-resolve is the idempotent backstop.
+                        .onChange(of: authViewModel.currentUser?.id) { _, newId in
+                            vaccinationGate.reset()
+                            if newId != nil {
+                                Task { await vaccinationGate.resolve() }
                             }
-
-                            // Re-attempt FCM token fetch + backend registration.
-                            // Idempotent: same token across launches; backend
-                            // dedupes by token string. Defends against cold-
-                            // launch races where Messaging.delegate never
-                            // delivered the token, OR a previous auth-time
-                            // register call failed silently.
-                            AppDelegate.fetchAndRegisterFCMToken()
                         }
-                    }
+                        .preferredColorScheme(
+                            appearanceMode == "light" ? .light :
+                            appearanceMode == "dark" ? .dark : nil
+                        )
+                        .tint(Color(UIColor.darkGray)) // Dark gray for alert buttons
+                        .transition(.opacity)
+                        .sheet(isPresented: $notificationHandler.showMapPicker) {
+                            if let notification = notificationHandler.pendingScanNotification,
+                               let location = notification.location {
+                                MapAppPickerView(
+                                    location: location,
+                                    petName: notification.petName ?? "Pet"
+                                )
+                            }
+                        }
+                        .onReceive(NotificationCenter.default.publisher(for: .fcmTokenReceived)) { notification in
+                            // FCM token received - could update UI or trigger additional actions
+                            #if DEBUG
+                            if let token = notification.userInfo?["token"] as? String {
+                                print("App received FCM token: \(token.prefix(20))...")
+                            }
+                            #endif
+                        }
+                        .onChange(of: scenePhase) { _, newPhase in
+                            if newPhase == .active {
+                                // Clear the app-icon notification badge on every
+                                // foreground. The badge is set by server pushes
+                                // (aps.badge) and nothing reset it before, so it
+                                // accumulated indefinitely on the home-screen icon.
+                                UNUserNotificationCenter.current().setBadgeCount(0)
+                            }
+                            if newPhase == .active && authViewModel.isAuthenticated {
+                                // Refresh user profile + subscription when app comes to foreground (debounce 60s)
+                                let now = Date()
+                                if now.timeIntervalSince(lastSubscriptionRefresh) > 60 {
+                                    lastSubscriptionRefresh = now
+                                    authViewModel.refreshCurrentUser()
+                                    Task {
+                                        await subscriptionViewModel.loadCurrentSubscription()
+                                    }
+                                }
+
+                                // Re-attempt FCM token fetch + backend registration.
+                                // Idempotent: same token across launches; backend
+                                // dedupes by token string. Defends against cold-
+                                // launch races where Messaging.delegate never
+                                // delivered the token, OR a previous auth-time
+                                // register call failed silently.
+                                AppDelegate.fetchAndRegisterFCMToken()
+                            }
+                        }
+                }
+            }
+            .onOpenURL { url in
+                // Feeds both handlers: the checkout-return (senra://checkout/*)
+                // and the tag/QR path. They are disjoint on url.host, so calling
+                // both for every URL is safe.
+                handleDeepLink(url)
+                _ = DeepLinkService.shared.handleURL(url)
             }
         }
     }

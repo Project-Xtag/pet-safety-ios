@@ -99,18 +99,6 @@ struct ContentView: View {
                 LoadingView()
             }
         }
-        .onOpenURL { url in
-            handleDeepLink(url)
-        }
-    }
-
-    private func handleDeepLink(_ url: URL) {
-        #if DEBUG
-        print("Received URL: \(url.absoluteString)")
-        #endif
-
-        // Let the DeepLinkService handle the URL
-        deepLinkService.handleURL(url)
     }
 }
 
