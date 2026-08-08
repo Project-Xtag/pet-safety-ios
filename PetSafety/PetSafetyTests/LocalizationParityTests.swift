@@ -99,6 +99,11 @@ struct LocalizationParityTests {
         "subscribe_interstitial_body",
         "subscribe_interstitial_cta_subscribe",
         "subscribe_interstitial_cta_not_now",
+        // U4's pre-redirect notice — fifth key of the same HU-scoped surface.
+        // WORKPLAN §B3 rules it HU-only; PROTOCOL §6's 13-locale rule is
+        // satisfied through this allowlist rather than waived, and the rot
+        // guard below still requires it in hu.lproj.
+        "subscribe_interstitial_redirect_notice",
     ]
 
     @Test("Every locale has all keys from en.lproj (no silent English fallback)")

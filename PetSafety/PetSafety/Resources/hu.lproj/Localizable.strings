@@ -1644,3 +1644,4 @@
 "subscribe_interstitial_body" = "A Kedvenc csomaggal azonnal értesítünk, ha valaki beolvassa kedvenced bilétáját, a megtaláló megoszthatja veled a helyzetét, és eltűnés esetén riaszthatod a SENRA közösséget. Havi 2750 Ft, bármikor lemondható.";
 "subscribe_interstitial_cta_subscribe" = "Előfizetek";
 "subscribe_interstitial_cta_not_now" = "Most inkább nem";
+"subscribe_interstitial_redirect_notice" = "Most átirányítunk a SENRA weboldalára, ahol elő tudsz fizetni a Kedvenc csomagra.";

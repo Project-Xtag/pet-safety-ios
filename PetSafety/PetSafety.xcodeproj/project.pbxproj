@@ -45,8 +45,8 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				"Resources/GoogleService-Info.plist",
 				"Resources/GoogleService-Info-Staging.plist",
+				"Resources/GoogleService-Info.plist",
 			);
 			target = 1DAD368C2EB818CC001F54AA /* PetSafety */;
 		};
@@ -63,15 +63,11 @@
 		};
 		1DAD369D2EB818CC001F54AA /* PetSafetyTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = PetSafetyTests;
 			sourceTree = "<group>";
 		};
 		1DAD36A72EB818CC001F54AA /* PetSafetyUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = PetSafetyUITests;
 			sourceTree = "<group>";
 		};

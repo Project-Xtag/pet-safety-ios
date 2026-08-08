@@ -1040,6 +1040,214 @@ class APIService {
         return response.data.place
     }
 
+    // MARK: - Web handoff (U4)
+
+    /// §5's budget. One value, one owner.
+    static let handoffBudgetSeconds: Double = 3.0
+
+    /// Exchanges intent for a server-built URL. `WEB-HANDOFF-CONTRACT.md` §1/§5.
+    ///
+    /// The contract's organising rule is *"the client sends intent, the server
+    /// returns a URL, the client opens whatever comes back"* — so this returns
+    /// the URL and deliberately parses no meaning out of it.
+    ///
+    /// **Every failure is the same failure: the caller falls back.** Non-200,
+    /// timeout, network error, malformed body — and, explicitly, a **200 whose
+    /// `url` is not an absolute https URL**. §5 arguably covers that last case
+    /// under "malformed body", and "arguably" is why it is written down here.
+    func webHandoff(destination: WebHandoffDestination = .choosePlan) async throws -> URL {
+        try await Self.withBudget(seconds: Self.handoffBudgetSeconds) { try await self.performHandoff(destination: destination) }
+    }
+
+    /// Races `work` against the budget and throws whichever finishes first.
+    ///
+    /// ⚠️ **This exists because `URLRequest.timeoutInterval` alone was NOT the
+    /// budget.** `buildRequest` awaits `ConfigurationManager.getAppCheckToken()`
+    /// → `AppCheck.appCheck().token(...)`, a network call with **no timeout of
+    /// its own**, and that happens *before* a request object exists to set
+    /// `timeoutInterval` on. With no route to Firebase the token fetch hung
+    /// forever, so the interstitial — a forced choice with no dismissal gesture
+    /// — trapped the user permanently on a payment path. Found on a physical
+    /// device 2026-08-07; every unit test and every board pin was green.
+    ///
+    /// Android was never exposed: its `withTimeout` wraps the whole Retrofit
+    /// call, so `AppCheckInterceptor` runs *inside* the budget. This restores
+    /// that property on iOS.
+    ///
+    /// Deliberately scoped to this one call rather than bounding
+    /// `getAppCheckToken()` itself, which would change behaviour for every
+    /// authenticated request in the app — same defect class, far larger blast
+    /// radius, and its own device pass.
+    ///
+    /// # ⚠️ NOT CANCELLABLE BY ITS CALLER
+    ///
+    /// Cancelling the task that awaits this has **no effect**. It is bounded at
+    /// `seconds` and that bound is the only thing that ends it.
+    ///
+    /// Why: both racers are unstructured `Task { }`. An unstructured task
+    /// inherits priority, actor context and task-locals — it does **not**
+    /// inherit cancellation. So nothing propagates into the sleeper, and the
+    /// work is abandoned rather than cancelled by design.
+    ///
+    /// Measured, not reasoned: cancelling the caller 300 ms in returns after
+    /// **3.0095 s** with `URLError(.timedOut)`, never a `CancellationError`.
+    /// An earlier version of this function had a cancellation arm on the
+    /// sleeper whose comment claimed it reported caller-cancellation
+    /// faithfully; the arm was unreachable and the comment described behaviour
+    /// this function does not have.
+    ///
+    /// **Harmless on today's only caller, and harmless because of the SURFACE,
+    /// not because of this code.** The subscribe interstitial is a
+    /// `fullScreenCover` — a forced choice with no interactive dismissal, both
+    /// CTAs `.disabled` while in flight — and its `startHandoff` is itself an
+    /// unstructured `Task { }` that would not be cancelled either. **A future
+    /// caller on a dismissable surface inherits this silently**, which is why
+    /// it is stated here rather than left to be rediscovered. If a caller ever
+    /// needs cancellability, wrap the continuation in
+    /// `withTaskCancellationHandler` and cancel both tasks through the gate —
+    /// do not assume it already works.
+    static func withBudget<T: Sendable>(
+        seconds: Double,
+        _ work: @escaping @Sendable () async throws -> T
+    ) async throws -> T {
+        // ⚠️ NOT a task group, and the reason is measured rather than argued.
+        //
+        // This was `withThrowingTaskGroup` with a work child and a sleeper
+        // child. A task group CANNOT return until every child has finished:
+        // `cancelAll()` REQUESTS cancellation, it cannot force completion. So
+        // the sleeper's throw unblocked `group.next()`, and then the group's
+        // implicit await at scope exit blocked on the work child anyway.
+        //
+        // That is invisible whenever the work is cancellation-aware, which is
+        // why every test passed: `Task.sleep` throws the instant it is
+        // cancelled, so the child completed and the budget looked sound. The
+        // real work is `getAppCheckToken()` → `AppCheck.appCheck().token(...)`,
+        // a Firebase completion-handler bridged into async, and an ObjC
+        // completion-handler bridge is not cancellation-aware.
+        //
+        // Measured, same `withBudget`, two stand-ins:
+        //     Task.sleep (cancellable)                  -> returns at 3.024s
+        //     a continuation never resumed (not)        -> ran to the test's
+        //                                                  60s time limit
+        // The budget was inert against the exact defect it was built for —
+        // the chunk's own lesson one level down: the mechanism was present and
+        // its SUFFICIENCY was what went untested.
+        //
+        // So the work runs UNSTRUCTURED and is ABANDONED at the budget. The
+        // cost is a leaked token fetch that completes into nothing. That is the
+        // correct trade on a forced-choice payment surface with no dismissal
+        // gesture: a leak is invisible, a hang is a screen the user cannot
+        // leave. Cancellation is still requested — it works when the work
+        // happens to be cancellation-aware — but nothing DEPENDS on it.
+        let gate = BudgetGate()
+        let budgetNanoseconds = UInt64(seconds * 1_000_000_000)
+
+        return try await withCheckedThrowingContinuation { continuation in
+            let workTask = Task {
+                do {
+                    let value = try await work()
+                    if gate.claim() { continuation.resume(returning: value) }
+                } catch {
+                    if gate.claim() { continuation.resume(throwing: error) }
+                }
+            }
+
+            Task {
+                // `try?`, and the absence of a cancellation arm here, is the
+                // honest shape — see "NOT CANCELLABLE BY ITS CALLER" above.
+                // Nothing cancels this task, so this sleep can only complete.
+                try? await Task.sleep(nanoseconds: budgetNanoseconds)
+                if gate.claim() {
+                    continuation.resume(throwing: APIError.networkError(URLError(.timedOut)))
+                }
+                // Best-effort: works if the work happens to be
+                // cancellation-aware, a no-op if not. The abandonment above is
+                // what makes the budget hold either way.
+                workTask.cancel()
+            }
+        }
+    }
+
+    /// Resume-once guard for ``withBudget``'s race.
+    ///
+    /// Both racers can finish in the same instant, and resuming a checked
+    /// continuation twice is a **crash**, not a warning. `claim()` is the only
+    /// thing that decides a winner.
+    private final class BudgetGate: @unchecked Sendable {
+        private let lock = NSLock()
+        private var claimed = false
+
+        func claim() -> Bool {
+            lock.lock()
+            defer { lock.unlock() }
+            if claimed { return false }
+            claimed = true
+            return true
+        }
+    }
+
+    /// The whole operation the budget wraps: token acquisition, send, and
+    /// validation. Kept as one named function so the budget's coverage is a
+    /// single greppable expression at the call site above — the property that
+    /// matters is *what is inside the budget*, and a pin on the wrapper alone
+    /// would not express it.
+    private func performHandoff(destination: WebHandoffDestination) async throws -> URL {
+        var request = try await buildRequest(
+            endpoint: "/auth/web-handoff",
+            method: "POST",
+            body: WebHandoffRequest(destination: destination.rawValue, localeHint: Self.localeHint()),
+            requiresAuth: true
+        )
+
+        // Still set, and still useful: it bounds the SEND specifically, and the
+        // shared pinned session is 30s. It is no longer the only bound.
+        request.timeoutInterval = Self.handoffBudgetSeconds
+
+        let response = try await performRequest(
+            request,
+            responseType: WebHandoffResponse.self,
+            enveloped: false
+        )
+
+        guard let url = Self.usableHandoffURL(response.url) else {
+            throw APIError.invalidURL
+        }
+        return url
+    }
+
+    /// §5 — is this 200's `url` actually openable?
+    ///
+    /// ⚠️ Not merely "does it parse". A relative path parses fine, and on
+    /// Android `Uri.parse` is lenient enough to hand `startActivity` a useless
+    /// Uri that no-ops or throws at the user. Both platforms therefore require
+    /// scheme https AND a non-empty host, so the rule does not depend on one
+    /// platform's type system being stricter than the other's.
+    ///
+    /// Extracted as a static so it is unit-testable. The transport is NOT
+    /// reachable from tests — `CertificatePinningService.pinnedSession` is a
+    /// custom URLSession whose configuration never sets `protocolClasses`, and
+    /// a probe confirmed `URLProtocol.registerClass` does not intercept it
+    /// (measured 2026-08-07, not assumed). Without this extraction the rule
+    /// would have no test on iOS at all.
+    static func usableHandoffURL(_ raw: String) -> URL? {
+        guard let url = URL(string: raw),
+              url.scheme == "https",
+              let host = url.host, !host.isEmpty
+        else { return nil }
+        return url
+    }
+
+    /// §3/§9.4 — the language signal for `locale_hint`, and nothing else.
+    ///
+    /// Reuses the read `buildRequest` already performs for `Accept-Language`,
+    /// so no fresh `Locale` access appears near URL-building code. Normalised
+    /// to the **language subtag**: `.language.languageCode` cannot carry a
+    /// region, which keeps §3's ban structural rather than conventional.
+    /// `.region` / `.country` are banned here and are one word away.
+    static func localeHint() -> String? {
+        Locale.current.language.languageCode?.identifier
+    }
+
     /// Submit a place (AUTHENTICATED). Lands `status = pending`. The flag gate derives
     /// the user's country server-side, so NO `?market=`. 409 → `duplicatePlace`, 422 →
     /// `geocodeFailed` (performRequest's `where !enveloped` branches).
