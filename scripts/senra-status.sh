@@ -588,6 +588,22 @@ lpin "$ANDREPO" 'const val WEB_HANDOFF_TIMEOUT_MS = 3_000L' 1 "AND: the budget V
 lguard "$ANDREPO" 'uri.scheme == "https" && !uri.host.isNullOrBlank()' 1 "AND: scheme AND host required — Uri.parse alone accepts a relative path"
 lguard "$ANDAPI"  '@POST("auth/web-handoff")' 1 "AND: handoff endpoint path (§8 frozen)"
 lguard "$ANDVM"   'if (_ui.value.redirectingToCheckout) return' 1 "AND: one handoff in flight at a time (§4 per-user rate limit)"
+# ⚠️ EXACT-LINE PIN, and the reason is a defect that shipped past a review.
+#
+# This line was `BackHandler(enabled = !isRedirecting) { onNotNow() }` under a
+# comment asserting that back could not tear the surface down mid-handoff. In
+# Compose, `enabled = false` does NOT swallow back — it means "this callback
+# does not handle back", so the dispatcher passes the event UP to the nav host,
+# which popped the wizard. The pop then cancelled viewModelScope, the
+# repository's `catch (e: Exception)` swallowed the CancellationException
+# (it IS an Exception), the caller's `?: fallback` produced a URL, and since
+# `onResolved(url)` has no suspension point nothing re-checked cancellation —
+# so a browser opened over whatever screen the user had backed into. Dismiss
+# ordering A's failure mode, on a payment path, reached by gesture.
+#
+# lguard cannot hold this: `enabled = true` is a substring of nothing useful,
+# and the whole point is that the ENTIRE line must be this and not a variant.
+lpin "$PSWS" 'BackHandler(enabled = true) { if (!isRedirecting) onNotNow() }' 1 "AND: back is always consumed and does nothing mid-handoff (never enabled = !isRedirecting)"
 
 # ─────────────────────────────────────────────────────────────
 head_ "6. Declared contracts vs. the code (drift detector)"
