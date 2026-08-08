@@ -390,9 +390,16 @@ These are in PROTOCOL; repeated here because every drift corrected today came fr
   HELD.
 
 
-- `#103` rebase · `G-scanback-ios` · what's-next card · **Q3** · whether `/plans`
+- `#103` rebase · what's-next card · **Q3** · whether `/plans`
   should state a subscription is required · chunk numbering and `G-home`'s doc home · owners for
   unassigned gaps.
+
+  *(**`G-scanback-ios` removed from this list 2026-08-08** — it is not an open 2.3 decision. Its
+  subject, `LandingView.swift`, does not exist on `integration/v2.3` at all, so there is no surface
+  on the shipping branch to rule about; it is gated by the redesign merge. Re-scoped to the Phase-1 /
+  redesign track and the reason is recorded in `SENRA-MOBILE-REDESIGN.md` §6, which owns the register
+  — see also that file's 2026-08-08 Locked decision that **2.3 is closed to new findings**, of which
+  this re-scope is the first application.)*
 
 ### Carried from the closeout ledger's §E — decisions no grep can close
 

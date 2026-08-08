@@ -39,6 +39,34 @@ not raise them as a regression.
 purpose — the board owns counts, this document owns the mechanism. A number in prose is stale the
 next time anything lands, and every count that used to sit in this paragraph was wrong within days.
 
+### Attributing the reds on `integration/v2.3` — the mechanism, so nobody re-derives it for a day
+
+**Most of the board's red is not 2.3's.** It is the redesign branch being unmerged, reported honestly
+by guards that refuse to skip. A fresh session lands on a large red count, assumes 2.3 is in trouble,
+and spends a day discovering otherwise. Three buckets, and the *rule for sorting* is what matters —
+**deliberately no totals here**, per the paragraph above:
+
+| Bucket | How to recognise it | What closes it |
+|---|---|---|
+| **Unmerged redesign line** | §5b in full; the §5 Android seam invariants; both §6 splash subjects | the `feat/mobile-redesign-phase1` merge |
+| **Unmerged deep-link fix** | §2's `.onOpenURL` count | the `fix/deeplink-root-handler` merge (§10 warns it merges *cleanly*, so nobody is forced to look) |
+| **Genuinely independent** | §1 AASA (server-side), §3 `G-owner`, §6's `allowedTwins` inverse | its own work; these are the only ones that are actually owed |
+
+**Sort them yourself rather than trusting this table — the test is one command per red, and it
+discriminates:**
+
+```bash
+git -C <repo> ls-tree -r --name-only integration/v2.3 -- <subject>   # 0 => the surface is not on this branch
+git -C <repo> ls-tree -r --name-only feat/mobile-redesign-phase1 -- <subject>   # 1 => it is on the redesign line
+```
+
+⚠️ **A present file is not a present subject.** `SplashScreenView.swift` exists on `integration/v2.3`
+and the board still reports its contract subject missing — the v2.3 copy is the *pre-redesign* file
+(25 lines, a hardcoded `0.8`, and the very comment PROTOCOL Rule 3 cites as its precedent), with
+**zero** `holdDuration` hits against four on the redesign line. So grep the **constant**, with a
+control in the same command, not just the path. Same shape as §5b's C2-seam arms, which read
+`count=0` on a file that exists because `RootRoute` itself is redesign-only.
+
 
 There is **no monorepo for docs** — four repos only, and the monorepo's `docs/` is a stale archive.
 
